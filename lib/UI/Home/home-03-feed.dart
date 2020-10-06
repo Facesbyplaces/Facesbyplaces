@@ -9,10 +9,7 @@ class HomeFeed extends StatelessWidget{
     return Stack(
       children: [
 
-        Container(
-
-        ),
-
+        Container(),
 
         Padding(
           padding: EdgeInsets.only(left: 20.0, right: 20.0),
