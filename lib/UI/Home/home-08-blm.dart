@@ -15,7 +15,7 @@ class HomeBLM extends StatelessWidget{
           height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 19),
             child: ListView.separated(
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: state.length,
               itemBuilder: (context, index){
 
                 return MiscJoinButton(index: index, tab: 2,);
