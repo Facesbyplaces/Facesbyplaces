@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'home-06-suggested.dart';
+import 'home-07-nearby.dart';
+import 'home-08-blm.dart';
 
 class HomePost extends StatelessWidget{
 
@@ -19,13 +21,58 @@ class HomePost extends StatelessWidget{
           children: [
 
             Container(
-              // padding: EdgeInsets.only(top: 10.0),
               color: Color(0xffffffff),
               alignment: Alignment.center,
               child: MiscTabs(),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+            BlocBuilder<HomeUpdateToggleFeed, int>(
+              builder: (context, state){
+                return ((){
+                  switch(state){
+                    case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                    case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                    case 2: return 
+                    Container(
+                      height: SizeConfig.blockSizeVertical * 5,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                            Icon(Icons.location_pin, color: Color(0xff979797),),
+
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                            Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                          ],
+                        ),
+                      ),
+                    ); break;
+                    case 3: return 
+                    Container(
+                      height: SizeConfig.blockSizeVertical * 5,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          children: [
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                            Icon(Icons.location_pin, color: Color(0xff979797),),
+
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                            Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                          ],
+                        ),
+                      ),
+                    );
+                    break;
+                  }
+                }());
+              },
+            ),
 
             BlocBuilder<HomeUpdateToggleFeed, int>(
               builder: (context, state){
@@ -33,8 +80,9 @@ class HomePost extends StatelessWidget{
                   switch(state){
                     case 0: return HomePostExtended(); break;
                     case 1: return HomeSuggested(); break;
-                    case 2: return Container(color: Colors.blue,); break;
-                    case 3: return Container(color: Colors.green,); break;
+                    case 2: return HomeNearby(); break;
+                    case 3: return HomeBLM(); break;
+                    
                   }
                 }());
               },
@@ -53,7 +101,7 @@ class HomePostExtended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 13),
+      height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 16),
       child: ListView(
         padding: EdgeInsets.only(left: 10.0, right: 10.0),
         shrinkWrap: true,

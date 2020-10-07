@@ -50,32 +50,3 @@ class BlocUpdateButtonText extends Cubit<int>{
   void remove() => emit(state - 1);
   void reset() => emit(0);
 }
-
-// class BlocSetProfilePicture extends Cubit<File>{
-
-//   File _newImage;
-
-//   BlocSetProfilePicture() : super(null);
-
-//   Future getImage() async{
-//     File _image;
-//     final _picker = ImagePicker();
-//     final pickedFile = await _picker.getImage(source: ImageSource.gallery);
-
-//     if(pickedFile != null){
-//       _image = File(pickedFile.path);
-//     }
-    
-//     // return _image;
-//     _newImage = _image;
-//   }
-
-//   File setImage(){
-//     getImage();
-//     return _newImage;
-//   }
-
-//   void setProfile() => emit(setImage());
-  
-// }
-

@@ -19,6 +19,15 @@ class HomeScreen extends StatelessWidget{
           BlocProvider<HomeUpdateToggleFeed>(
             create: (context) => HomeUpdateToggleFeed(),
           ),
+          BlocProvider<HomeUpdateListSuggested>(
+            create: (context) => HomeUpdateListSuggested(),
+          ),
+          BlocProvider<HomeUpdateListNearby>(
+            create: (context) => HomeUpdateListNearby(),
+          ),
+          BlocProvider<HomeUpdateListBLM>(
+            create: (context) => HomeUpdateListBLM(),
+          ),
         ],
       child: HomeScreenExtended(),
       ),

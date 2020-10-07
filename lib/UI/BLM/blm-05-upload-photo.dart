@@ -190,22 +190,13 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                     onPressed: (){
 
                       if(_image != null){
-                        // Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => DashboardVolunteer()));
-                        // Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => HomeScreen()));
-                        // MaterialPageRoute(builder: null)
-                        // Navigator.pushAndRemoveUntil(context, newRoute, (route) => false)
                         context.bloc<UpdateCubit>().reset();
                         context.bloc<UpdateCubitBLM>().reset();
                         context.bloc<BlocShowMessage>().reset();
                         context.bloc<BlocUpdateButtonText>().reset();
                         
-                        // Route newRoute = MaterialPageRoute(builder: (context) => HomeScreen());
                         Route newRoute = PageRouteBuilder(pageBuilder: (__, _, ___) => HomeScreen());
-                        // PageRouteBuilder(pageBuilder: (__, _, ___) => DashboardCharity()
-                        // Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => DashboardCharity()));
                         Navigator.pushReplacement(context, newRoute);
-                        // Navigator.push(context, newRoute);
-                        // Navigator.pushAndRemoveUntil(context, newRoute, (route) => false)
                         
                       }else{
                         context.bloc<BlocShowMessage>().showMessage();

@@ -39,6 +39,9 @@ class HomePage extends StatelessWidget{
         BlocProvider<BlocUpdateButtonText>(
           create: (context) => BlocUpdateButtonText(),
         ),
+        BlocProvider<UpdateCubitRegular>(
+          create: (context) => UpdateCubitRegular(),
+        ),
       ],
       child: FacesByPlacesHome(),
     );

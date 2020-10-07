@@ -71,7 +71,6 @@ class BLMVerifyEmail extends StatelessWidget{
                 alignment: Alignment.centerLeft,
                 child: IconButton(
                   onPressed: (){
-                    // context.bloc<UpdateCubit>().backward();
                     context.bloc<UpdateCubitBLM>().backward();
                     context.bloc<BlocUpdateButtonText>().reset();
                     context.bloc<BlocShowMessage>().reset();
