@@ -328,6 +328,8 @@ class HomeMemorialProfile extends StatelessWidget{
 
                       Container(height: SizeConfig.blockSizeVertical * 1, color: Color(0xffeeeeee),),
 
+                      
+
                     ],
                   ),
                 ),
