@@ -28,6 +28,9 @@ class HomeScreen extends StatelessWidget{
           BlocProvider<HomeUpdateListBLM>(
             create: (context) => HomeUpdateListBLM(),
           ),
+          // BlocProvider<HomeUpdateMemorial>(
+          //   create: (context) => HomeUpdateMemorial(),
+          // ),
         ],
       child: HomeScreenExtended(),
       ),

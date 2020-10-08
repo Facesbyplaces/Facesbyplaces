@@ -132,3 +132,11 @@ class HomeUpdateListBLM extends Cubit<List<bool>>{
   void updateList(int number) => emit(changeState(number));
 
 }
+
+// class HomeUpdateMemorial extends Cubit<int>{
+
+//   HomeUpdateMemorial() : super(0);
+
+//   void modify(int number) => emit(number);
+
+// }
