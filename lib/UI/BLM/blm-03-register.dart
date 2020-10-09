@@ -7,17 +7,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BLMRegister extends StatelessWidget{
 
-  final GlobalKey<MiscInputFieldState> _key1 = GlobalKey();
-  final GlobalKey<MiscInputFieldState> _key2 = GlobalKey();
-  final GlobalKey<MiscInputFieldState> _key3 = GlobalKey();
-  final GlobalKey<MiscInputFieldState> _key4 = GlobalKey();
-  final GlobalKey<MiscInputFieldState> _key5 = GlobalKey();
-  final GlobalKey<MiscInputFieldState> _key6 = GlobalKey();
+  static final GlobalKey<MiscInputFieldState> _key1 = GlobalKey<MiscInputFieldState>();
+  static final GlobalKey<MiscInputFieldState> _key2 = GlobalKey<MiscInputFieldState>();
+  static final GlobalKey<MiscInputFieldState> _key3 = GlobalKey<MiscInputFieldState>();
+  static final GlobalKey<MiscInputFieldState> _key4 = GlobalKey<MiscInputFieldState>();
+  static final GlobalKey<MiscInputFieldState> _key5 = GlobalKey<MiscInputFieldState>();
+  static final GlobalKey<MiscInputFieldState> _key6 = GlobalKey<MiscInputFieldState>();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Stack(
+    return SingleChildScrollView(
+      child: Stack(
       children: [
 
         Container(
@@ -136,6 +137,7 @@ class BLMRegister extends StatelessWidget{
           ),
         ),        
       ],
+    ),
     );
   }
 }

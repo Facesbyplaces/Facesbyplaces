@@ -133,10 +133,9 @@ class HomeUpdateListBLM extends Cubit<List<bool>>{
 
 }
 
-// class HomeUpdateMemorial extends Cubit<int>{
+class HomeUploadBackgroundColor extends Cubit<int>{
 
-//   HomeUpdateMemorial() : super(0);
+  HomeUploadBackgroundColor() : super(0);
 
-//   void modify(int number) => emit(number);
-
-// }
+  void modify(int number) => emit(number);
+}

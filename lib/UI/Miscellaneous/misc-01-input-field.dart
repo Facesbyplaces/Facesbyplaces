@@ -157,3 +157,86 @@ class MiscInputFieldOTPState extends State<MiscInputFieldOTP> {
     );
   }
 }
+
+class MiscInputFieldCreateMemorial extends StatefulWidget {
+  final String hintText;
+  final bool obscureText;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final bool includeSuffixIcon;
+  
+  MiscInputFieldCreateMemorial({Key key, this.hintText, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon}) : super(key: key);
+
+  @override
+  MiscInputFieldCreateMemorialState createState() => MiscInputFieldCreateMemorialState(hintText: hintText, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon);
+}
+
+class MiscInputFieldCreateMemorialState extends State<MiscInputFieldCreateMemorial> {
+  final String hintText;
+  final bool obscureText;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final bool includeSuffixIcon;
+  
+  MiscInputFieldCreateMemorialState({this.hintText, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon});
+
+  TextEditingController controller = TextEditingController();
+  bool obscure;
+  
+  void initState(){
+    super.initState();
+    obscure = obscureText;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return TextFormField(
+      controller: controller,
+      obscureText: obscure,
+      keyboardType: type,
+      maxLines: maxLines,
+      readOnly: readOnly,
+      cursorColor: Color(0xff000000),
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: hintText,
+        labelStyle: TextStyle(
+          fontSize: SizeConfig.safeBlockHorizontal * 4,
+          fontWeight: FontWeight.w400,
+          color: Color(0xff000000).withOpacity(.5),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+        suffixIcon: ((){
+          if(includeSuffixIcon){
+            if(obscure){
+              return IconButton(
+                onPressed: (){
+                  setState(() {
+                    obscure = !obscure;
+                  });
+                },
+                icon: Icon(Icons.visibility_off, color: Color(0xff000000).withOpacity(0.3), size: SizeConfig.blockSizeVertical * 4,),
+              );
+            }else{
+              return IconButton(
+                onPressed: (){
+                  setState(() {
+                    obscure = !obscure;
+                  });
+                },
+                icon: Icon(Icons.visibility, color: Color(0xff000000).withOpacity(0.3), size: SizeConfig.blockSizeVertical * 4,),
+              );
+            }
+          }
+        }()),
+      ),
+    );
+  }
+}

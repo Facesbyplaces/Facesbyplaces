@@ -14,9 +14,7 @@ class HomePost extends StatelessWidget{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Stack(
-      
       children: [
-
         Column(
           children: [
 

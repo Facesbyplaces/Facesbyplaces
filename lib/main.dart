@@ -54,40 +54,90 @@ class FacesByPlacesHome extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Scaffold(
-      body: Container(
-        child: BlocBuilder<UpdateCubit, int>(
-          builder: (context, state){
-            return ((){
-              switch(state){
-                case 0: return UIGetStarted(); break;
-                case 1: return UILogin01(); break;
-                case 2: return BlocBuilder<UpdateCubitBLM, int>(
-                  builder: (context, state){
-                    return ((){
-                      switch(state){
-                        case 0: return BLMJoin(); break;
-                        case 1: return BLMLogin(); break;
-                        case 2: return BLMRegister(); break;
-                        case 3: return BLMVerifyEmail(); break;
-                        case 4: return BLMUploadPhoto(); break;
-                        default: return BLMJoin(); break;
-                      }
-                    }());
-                  },
-                ); break;
-                case 3: return BlocBuilder<UpdateCubitRegular, int>(
-                  builder: (context, state){
-                    return ((){
-                      switch(state){
-                        case 0: return RegularTest(); break;
-                      }
-                    }());
-                  },
-                ); break;
-              }
-            }());
-          },
+    return WillPopScope(
+      onWillPop: () async{
+        return Navigator.canPop(context);
+      },
+      child: GestureDetector(
+        onTap: (){
+          FocusNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: Scaffold(
+          body: Container(
+            child: BlocBuilder<UpdateCubit, int>(
+              builder: (context, state){
+                return ((){
+                  switch(state){
+                    case 0: return UIGetStarted(); break;
+                    case 1: return UILogin01(); break;
+                    case 2: return BlocBuilder<UpdateCubitBLM, int>(
+                      builder: (context, state){
+                        return ((){
+                          switch(state){
+                            case 0: return BLMJoin(); break;
+                            case 1: return BLMLogin(); break;
+                            case 2: return BLMRegister(); break;
+                            case 3: return BLMVerifyEmail(); break;
+                            case 4: return BLMUploadPhoto(); break;
+                            default: return BLMJoin(); break;
+                          }
+                        }());
+                      },
+                    ); break;
+                    case 3: return BlocBuilder<UpdateCubitRegular, int>(
+                      builder: (context, state){
+                        return ((){
+                          switch(state){
+                            case 0: return RegularTest(); break;
+                          }
+                        }());
+                      },
+                    ); break;
+                  }
+                }());
+              },
+            ),
+          ),
+          // body: SingleChildScrollView(
+          //   child: Container(
+          //     child: BlocBuilder<UpdateCubit, int>(
+          //       builder: (context, state){
+          //         return ((){
+          //           switch(state){
+          //             case 0: return UIGetStarted(); break;
+          //             case 1: return UILogin01(); break;
+          //             case 2: return BlocBuilder<UpdateCubitBLM, int>(
+          //               builder: (context, state){
+          //                 return ((){
+          //                   switch(state){
+          //                     case 0: return BLMJoin(); break;
+          //                     case 1: return BLMLogin(); break;
+          //                     case 2: return BLMRegister(); break;
+          //                     case 3: return BLMVerifyEmail(); break;
+          //                     case 4: return BLMUploadPhoto(); break;
+          //                     default: return BLMJoin(); break;
+          //                   }
+          //                 }());
+          //               },
+          //             ); break;
+          //             case 3: return BlocBuilder<UpdateCubitRegular, int>(
+          //               builder: (context, state){
+          //                 return ((){
+          //                   switch(state){
+          //                     case 0: return RegularTest(); break;
+          //                   }
+          //                 }());
+          //               },
+          //             ); break;
+          //           }
+          //         }());
+          //       },
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );

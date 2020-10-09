@@ -170,7 +170,14 @@ class MiscAppBar2 extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return AppBar(
-      leading: Builder(builder: (context) => IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){},)),
+      leading: Builder(
+        builder: (context) => IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+          onPressed: (){
+            context.bloc<HomeUpdateCubit>().modify(0);
+          },
+        ),
+      ),
       title: TextFormField(
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(15.0),
@@ -194,6 +201,41 @@ class MiscAppBar2 extends StatelessWidget implements PreferredSizeWidget{
             borderSide: BorderSide(color: Color(0xffffffff)),
             borderRadius: BorderRadius.all(Radius.circular(25)),
           ),
+        ),
+      ),
+      backgroundColor: Color(0xff04ECFF),
+      centerTitle: true,
+    );
+  }
+
+  @override
+  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
+}
+
+class MiscAppBar3 extends StatelessWidget implements PreferredSizeWidget{
+
+  final AppBar appBar;
+  final int position;
+
+  const MiscAppBar3({this.appBar, this.position});
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return AppBar(
+      leading: Builder(
+        builder: (context) => IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+          onPressed: (){
+            context.bloc<HomeUpdateCubit>().modify(position);
+          },
+        ),
+      ),
+      title: Text('Cry out for the Victims',
+        style: TextStyle(
+          fontSize: SizeConfig.safeBlockHorizontal * 5,
+          fontWeight: FontWeight.bold,
+          color: Color(0xffffffff),
         ),
       ),
       backgroundColor: Color(0xff04ECFF),
