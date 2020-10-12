@@ -48,6 +48,15 @@ class HomeUpdateToggle extends Cubit<List<bool>>{
 
 }
 
+class HomeUpdateMemorialToggle extends Cubit<int>{
+
+  HomeUpdateMemorialToggle() : super(0);
+
+  void updateToggle(int index) => emit(index);
+
+}
+
+
 class HomeUpdateToggleFeed extends Cubit<int>{
 
   HomeUpdateToggleFeed() : super(0);

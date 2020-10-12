@@ -112,6 +112,58 @@ class MiscTabs extends StatelessWidget {
   }
 }
 
+class MiscMemorialSettings extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return BlocBuilder<HomeUpdateMemorialToggle, int>(
+      builder: (context, state){
+        return Container(
+          // alignment: Alignment.center,
+          alignment: Alignment.centerLeft,
+          width: SizeConfig.screenWidth,
+          height: SizeConfig.blockSizeVertical * 8,
+
+          child: DefaultTabController(
+            length: 2,
+            child: TabBar(
+              isScrollable: true,
+              labelColor: Color(0xff04ECFF),
+              unselectedLabelColor: Color(0xff000000),
+              indicatorColor: Color(0xff04ECFF),
+              onTap: (int number){
+                context.bloc<HomeUpdateMemorialToggle>().updateToggle(number);
+                print('The value is ${context.bloc<HomeUpdateMemorialToggle>().state}');
+              },
+              tabs: [
+
+                Center(
+                  child: Text('Page',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+
+                Center(child: Text('Privacy',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 
 class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Widget appBar;
@@ -239,6 +291,47 @@ class MiscAppBar3 extends StatelessWidget implements PreferredSizeWidget{
         ),
       ),
       backgroundColor: Color(0xff04ECFF),
+      centerTitle: true,
+    );
+  }
+
+  @override
+  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
+}
+
+class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
+
+  final AppBar appBar;
+  final int position;
+  final String title;
+  final List<Widget> actions;
+  final Color color;
+  final Color backgroundColor;
+
+  const MiscAppBarTemplate({this.appBar, this.position, this.title, this.actions, this.backgroundColor, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return AppBar(
+      leading: Builder(
+        builder: (context) => IconButton(
+          icon: Icon(Icons.arrow_back, color: color,), 
+          onPressed: (){
+            context.bloc<HomeUpdateCubit>().modify(position);
+            context.bloc<HomeUpdateMemorialToggle>().updateToggle(0);
+          },
+        ),
+      ),
+      title: Text(title,
+        style: TextStyle(
+          fontSize: SizeConfig.safeBlockHorizontal * 5,
+          fontWeight: FontWeight.bold,
+          color: color,
+        ),
+      ),
+      actions: actions,
+      backgroundColor: backgroundColor,
       centerTitle: true,
     );
   }
@@ -377,6 +470,35 @@ class MiscJoinButton extends StatelessWidget{
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MiscToggleSwitch extends StatefulWidget {
+
+  @override
+  _MiscToggleSwitchState createState() => _MiscToggleSwitchState();
+}
+
+class _MiscToggleSwitchState extends State<MiscToggleSwitch> {
+  bool isSwitched = false;
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return Padding(
+      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Switch(
+        value: isSwitched,
+        onChanged: (value){
+          setState(() {
+            isSwitched = value;
+            print('isSwitched is $isSwitched');
+          });
+        },
+        activeColor: Color(0xff2F353D),
+        activeTrackColor: Color(0xff3498DB),
       ),
     );
   }

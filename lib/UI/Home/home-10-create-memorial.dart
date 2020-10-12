@@ -312,7 +312,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
               MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<HomeUpdateCubit>().modify(3);
+                  context.bloc<HomeUpdateCubit>().modify(7);
                 },
                 child: Text('Speak Out',
                   style: TextStyle(

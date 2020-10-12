@@ -9,6 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home-04-search.dart';
 import 'home-05-post.dart';
 import 'home-10-create-memorial.dart';
+import 'home-11-profile.dart';
+import 'home-12-memorial-settings.dart';
+import 'home-13-create-post.dart';
 
 class HomeScreenExtended extends StatelessWidget{
 
@@ -39,6 +42,9 @@ class HomeScreenExtended extends StatelessWidget{
                     case 4: return MiscAppBar3(appBar: AppBar(), position: 0,); break;
                     case 5: return MiscAppBar3(appBar: AppBar(), position: 4,); break;
                     case 6: return MiscAppBar3(appBar: AppBar(), position: 5,); break;
+                    case 7: return Container(height: 0,); break;
+                    case 8: return MiscAppBarTemplate(appBar: AppBar(), position: 7, title: 'Memorial Settings', actions: [], backgroundColor: Color(0xff04ECFF), color: Color(0xffffffff),); break;
+                    case 9: return MiscAppBarTemplate(appBar: AppBar(), position: 7, title: 'Create Post', actions: [GestureDetector(onTap: (){context.bloc<HomeUpdateCubit>().modify(7);}, child: Padding(padding: EdgeInsets.only(right: 20.0), child: Center(child: Text('Post', style: TextStyle(color: Color(0xffffffff), fontSize: SizeConfig.safeBlockHorizontal * 5,),))),)], backgroundColor: Color(0xff04ECFF), color: Color(0xffffffff),); break;
                   }
                 }());
               },
@@ -67,6 +73,9 @@ class HomeScreenExtended extends StatelessWidget{
                       case 4: return HomeCreateMemorial(); break;
                       case 5: return HomeCreateMemorial2(); break;
                       case 6: return HomeCreateMemorial3(); break;
+                      case 7: return HomeProfile(); break;
+                      case 8: return HomeMemorialSettings(); break;
+                      case 9: return HomeCreatePost(); break;
                     }
                   }());
                 },
@@ -85,6 +94,9 @@ class HomeScreenExtended extends StatelessWidget{
                   case 4: return Container(height: 0,); break;
                   case 5: return Container(height: 0,); break;
                   case 6: return Container(height: 0,); break;
+                  case 7: return Container(height: 0,); break;
+                  case 8: return Container(height: 0,); break;
+                  case 9: return Container(height: 0,); break;
                 }
               }());
             },
