@@ -45,6 +45,7 @@ class HomeUpdateToggle extends Cubit<List<bool>>{
   }
 
   void updateToggle(int index) => emit(changeToggle(index));
+  void reset() => emit([true, false, false, false]);
 
 }
 
@@ -116,6 +117,31 @@ class HomeUpdateListNearby extends Cubit<List<bool>>{
 
 }
 
+
+class HomeUpdateManageMemorials extends Cubit<List<bool>>{
+
+  HomeUpdateManageMemorials() : super([false, false, false, false, false, false, false, false, false, false,]);
+
+  List<bool> changeState(int number){
+    List<bool> newList = [false, false, false, false, false, false, false, false, false, false,];
+
+    for(int h = 0; h < state.length; h++){
+      newList[h] = state[h];
+    }
+
+
+    for(int i = 0; i < state.length; i++){
+      if(i == number){
+        newList[i] = !newList[i];
+      }
+    }
+
+    return newList;
+  }
+
+  void updateList(int number) => emit(changeState(number));
+
+}
 
 class HomeUpdateListBLM extends Cubit<List<bool>>{
 

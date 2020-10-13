@@ -35,6 +35,14 @@ class MiscBottomSheet extends StatelessWidget {
             ],
             onPressed: (int index){
               context.bloc<HomeUpdateToggle>().updateToggle(index);
+
+              switch(index){
+                case 0: context.bloc<HomeUpdateCubit>().modify(0); break;
+                case 1: context.bloc<HomeUpdateCubit>().modify(10); break;
+                case 2: context.bloc<HomeUpdateCubit>().modify(2); break;
+                case 3: context.bloc<HomeUpdateCubit>().modify(11); break;
+              }
+
             },
             isSelected: context.bloc<HomeUpdateToggle>().state,
           ),
@@ -267,21 +275,26 @@ class MiscAppBar2 extends StatelessWidget implements PreferredSizeWidget{
 class MiscAppBar3 extends StatelessWidget implements PreferredSizeWidget{
 
   final AppBar appBar;
-  final int position;
+  // final int position;
+  final Widget leading;
 
-  const MiscAppBar3({this.appBar, this.position});
+  // const MiscAppBar3({this.appBar, this.position});
+  const MiscAppBar3({this.appBar, this.leading});
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return AppBar(
+      // leading: Builder(
+      //   builder: (context) => IconButton(
+      //     icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+      //     onPressed: () {
+      //       context.bloc<HomeUpdateCubit>().modify(position);
+      //     },
+      //   ),
+      // ),
       leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-          onPressed: (){
-            context.bloc<HomeUpdateCubit>().modify(position);
-          },
-        ),
+        builder: (context) => leading,
       ),
       title: Text('Cry out for the Victims',
         style: TextStyle(
@@ -320,12 +333,15 @@ class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
           onPressed: (){
             context.bloc<HomeUpdateCubit>().modify(position);
             context.bloc<HomeUpdateMemorialToggle>().updateToggle(0);
+            context.bloc<HomeUpdateToggle>().reset();
           },
         ),
       ),
       title: Text(title,
+        maxLines: 2,
+        textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 5,
+          fontSize: SizeConfig.safeBlockHorizontal * 4,
           fontWeight: FontWeight.bold,
           color: color,
         ),
@@ -438,6 +454,141 @@ class MiscJoinButton extends StatelessWidget{
                           );
                         }else{
                           return Text('Join',
+                            style: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            ),
+                          );
+                        }
+                      }()),
+                      height: SizeConfig.blockSizeVertical * 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        side: ((){
+                          if(value == true){
+                            return BorderSide(color: Color(0xff04ECFF));
+                          }else{
+                            return BorderSide(color: Color(0xff4EC9D4));
+                          }
+                        }())
+                      ),
+                      color: ((){
+                        if(value == true){
+                          return Color(0xff04ECFF);
+                        }else{
+                          return Color(0xffffffff);
+                        }
+                      }()),
+                    );  
+
+                }()),
+
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MiscManageButton extends StatelessWidget{
+
+  final int index;
+  final int tab;
+
+  MiscManageButton({this.index, this.tab});
+
+  @override
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return GestureDetector(
+      onTap: (){
+        // print('lkjasdfoiuweqroiu');
+        // context.bloc<HomeUpdateCubit>().modify(3);
+        // context.bloc<HomeUpdateMemorial>().modify(0);
+      },
+      child: Container(
+        height: SizeConfig.blockSizeVertical * 15,
+        color: Color(0xffffffff),
+        child: Row(
+          children: [
+            Expanded(
+              child: CircleAvatar(
+                maxRadius: SizeConfig.blockSizeVertical * 5,
+                backgroundImage: AssetImage('assets/icons/profile1.png'),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Memorial',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Memorial',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontWeight: FontWeight.w200,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(right: 15.0),
+                child: ((){
+                  bool value;
+
+                  switch(tab){
+                    case 0: value = context.bloc<HomeUpdateListSuggested>().state[index]; break;
+                    case 1: value = context.bloc<HomeUpdateListNearby>().state[index]; break;
+                    case 2: value = context.bloc<HomeUpdateListBLM>().state[index]; break;
+                  }
+
+                  return MaterialButton(
+                      elevation: 0,
+                      padding: EdgeInsets.zero,
+
+                      textColor: ((){
+                        if(value == true){
+                          return Color(0xffffffff);
+                        }else{
+                          return Color(0xff4EC9D4);
+                        }
+                      }()),
+                      splashColor: Color(0xff4EC9D4),
+                      onPressed: (){
+                        switch(tab){
+                          case 0: context.bloc<HomeUpdateListSuggested>().updateList(index); break;
+                          case 1: context.bloc<HomeUpdateListNearby>().updateList(index); break;
+                          case 2: context.bloc<HomeUpdateListBLM>().updateList(index); break;
+                        }
+                      },
+                      child: ((){
+                        if(value == true){
+                          return Text('Leave',
+                            style: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            ),
+                          );
+                        }else{
+                          return Text('Manage',
                             style: TextStyle(
                               fontSize: SizeConfig.safeBlockHorizontal * 4,
                             ),

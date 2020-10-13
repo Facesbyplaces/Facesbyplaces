@@ -8,6 +8,17 @@ import 'home-06-suggested.dart';
 import 'home-07-nearby.dart';
 import 'home-08-blm.dart';
 
+import 'package:flutter_share/flutter_share.dart';
+
+Future<void> share() async {
+  await FlutterShare.share(
+    title: 'Example share',
+    text: 'Example share text',
+    linkUrl: 'https://flutter.dev/',
+    chooserTitle: 'Example Chooser Title'
+  );
+}
+
 class HomePost extends StatelessWidget{
 
   @override
@@ -163,9 +174,10 @@ class HomePostExtended extends StatelessWidget {
                             child: IconButton(
                               alignment: Alignment.centerRight,
                               padding: EdgeInsets.zero,
-                              onPressed: (){
+                              // onPressed: () async{
                                 
-                              },
+                              // },
+                              onPressed: share,
                               icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
                             ),
                           ),

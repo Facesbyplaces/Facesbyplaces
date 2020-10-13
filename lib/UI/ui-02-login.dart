@@ -185,7 +185,7 @@ class UILogin01 extends StatelessWidget {
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = (){
-                          context.bloc<UpdateCubit>().forwardTimes(4);
+                          context.bloc<UpdateCubit>().modify(3);
                         }
                     ),
 

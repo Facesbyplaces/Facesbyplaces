@@ -34,6 +34,9 @@ class HomeScreen extends StatelessWidget{
           BlocProvider<HomeUpdateMemorialToggle>(
             create: (context) => HomeUpdateMemorialToggle(),
           ),
+          BlocProvider<HomeUpdateManageMemorials>(
+            create: (context) => HomeUpdateManageMemorials(),
+          ),
         ],
       child: HomeScreenExtended(),
       ),

@@ -32,7 +32,9 @@ class BLMJoin extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      context.bloc<UpdateCubitBLM>().backward();
+                      // UpdateCubit
+                      context.bloc<UpdateCubit>().modify(1);
+                      context.bloc<UpdateCubitBLM>().reset();
                     },
                     icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),
                   ),

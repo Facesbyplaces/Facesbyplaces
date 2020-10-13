@@ -92,6 +92,7 @@ class FacesByPlacesHome extends StatelessWidget{
                         return ((){
                           switch(state){
                             case 0: return RegularTest(); break;
+                            case 1: return RegularTest(); break;
                           }
                         }());
                       },

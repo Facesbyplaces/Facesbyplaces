@@ -8,6 +8,7 @@ class UpdateCubit extends Cubit<int>{
   void backward() => emit(state - 1);
   void forwardTimes(int number) => emit(state + number);
   void backwardTimes(int number) => emit(state - number);
+  void modify(int number) => emit(number);
   void reset() => emit(0);
 }
 
@@ -19,6 +20,7 @@ class UpdateCubitBLM extends Cubit<int>{
   void backward() => emit(state - 1);
   void forwardTimes(int number) => emit(state + number);
   void backwardTimes(int number) => emit(state - number);
+  void modify(int number) => emit(number);
   void reset() => emit(0);
 }
 
