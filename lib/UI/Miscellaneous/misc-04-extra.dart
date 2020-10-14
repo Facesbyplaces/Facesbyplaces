@@ -10,7 +10,7 @@ class MiscBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BlocBuilder<HomeUpdateToggle, List<bool>>(
+    return BlocBuilder<BlocHomeUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
           height: SizeConfig.blockSizeVertical * 10,
@@ -34,17 +34,15 @@ class MiscBottomSheet extends StatelessWidget {
 
             ],
             onPressed: (int index){
-              context.bloc<HomeUpdateToggle>().updateToggle(index);
-
+              context.bloc<BlocHomeUpdateToggle>().updateToggle(index);
               switch(index){
-                case 0: context.bloc<HomeUpdateCubit>().modify(0); break;
-                case 1: context.bloc<HomeUpdateCubit>().modify(10); break;
-                case 2: context.bloc<HomeUpdateCubit>().modify(2); break;
-                case 3: context.bloc<HomeUpdateCubit>().modify(11); break;
+                case 0: context.bloc<BlocHomeUpdateCubit>().modify(0); break;
+                case 1: context.bloc<BlocHomeUpdateCubit>().modify(10); break;
+                case 2: context.bloc<BlocHomeUpdateCubit>().modify(2); break;
+                case 3: context.bloc<BlocHomeUpdateCubit>().modify(11); break;
               }
-
             },
-            isSelected: context.bloc<HomeUpdateToggle>().state,
+            isSelected: context.bloc<BlocHomeUpdateToggle>().state,
           ),
         );
       },
@@ -57,7 +55,7 @@ class MiscTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BlocBuilder<HomeUpdateToggleFeed, int>(
+    return BlocBuilder<BlocHomeUpdateToggleFeed, int>(
       builder: (context, state){
         return Container(
           alignment: Alignment.center,
@@ -72,7 +70,7 @@ class MiscTabs extends StatelessWidget {
               unselectedLabelColor: Color(0xff000000),
               indicatorColor: Color(0xff04ECFF),
               onTap: (int number){
-                context.bloc<HomeUpdateToggleFeed>().updateToggle(number);
+                context.bloc<BlocHomeUpdateToggleFeed>().updateToggle(number);
               },
               tabs: [
 
@@ -113,7 +111,6 @@ class MiscTabs extends StatelessWidget {
               ],
             ),
           ),
-
         );
       },
     );
@@ -125,10 +122,9 @@ class MiscMemorialSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BlocBuilder<HomeUpdateMemorialToggle, int>(
+    return BlocBuilder<BlocHomeUpdateMemorialToggle, int>(
       builder: (context, state){
         return Container(
-          // alignment: Alignment.center,
           alignment: Alignment.centerLeft,
           width: SizeConfig.screenWidth,
           height: SizeConfig.blockSizeVertical * 8,
@@ -141,8 +137,7 @@ class MiscMemorialSettings extends StatelessWidget {
               unselectedLabelColor: Color(0xff000000),
               indicatorColor: Color(0xff04ECFF),
               onTap: (int number){
-                context.bloc<HomeUpdateMemorialToggle>().updateToggle(number);
-                print('The value is ${context.bloc<HomeUpdateMemorialToggle>().state}');
+                context.bloc<BlocHomeUpdateMemorialToggle>().updateToggle(number);
               },
               tabs: [
 
@@ -174,8 +169,8 @@ class MiscMemorialSettings extends StatelessWidget {
 
 
 class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
-  final Widget appBar;
 
+  final Widget appBar;
   const MiscMainAppBar({this.appBar});
 
   @override
@@ -189,163 +184,25 @@ class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
 
 }
 
-class MiscAppBar1 extends StatelessWidget implements PreferredSizeWidget{
-
-  final AppBar appBar;
-
-  const MiscAppBar1({this.appBar});
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return AppBar(
-      leading: Builder(builder: (context) => IconButton(icon: Image.asset('assets/icons/profile1.png'), onPressed: (){},)),
-      title: Text('FacesByPlaces.com',
-        style: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 4,
-          color: Color(0xffffffff),
-        ),
-      ),
-      backgroundColor: Color(0xff4EC9D4),
-      centerTitle: true,
-      actions: [
-        IconButton(icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), onPressed: (){
-          context.bloc<HomeUpdateCubit>().modify(1);
-        },)
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
-}
-
-class MiscAppBar2 extends StatelessWidget implements PreferredSizeWidget{
-
-  final AppBar appBar;
-
-  const MiscAppBar2({this.appBar});
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return AppBar(
-      leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-          onPressed: (){
-            context.bloc<HomeUpdateCubit>().modify(0);
-          },
-        ),
-      ),
-      title: TextFormField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(15.0),
-          filled: true,
-          fillColor: Color(0xffffffff),
-          focusColor: Color(0xffffffff),
-          hintText: 'Search a Post',
-          hintStyle: TextStyle(
-            fontSize: SizeConfig.safeBlockHorizontal * 4,
-          ),
-          prefixIcon: Icon(Icons.search, color: Colors.grey),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffffffff)),
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-          ),
-          enabledBorder:  OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffffffff)),
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-          ),
-          focusedBorder:  OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffffffff)),
-            borderRadius: BorderRadius.all(Radius.circular(25)),
-          ),
-        ),
-      ),
-      backgroundColor: Color(0xff04ECFF),
-      centerTitle: true,
-    );
-  }
-
-  @override
-  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
-}
-
-class MiscAppBar3 extends StatelessWidget implements PreferredSizeWidget{
-
-  final AppBar appBar;
-  // final int position;
-  final Widget leading;
-
-  // const MiscAppBar3({this.appBar, this.position});
-  const MiscAppBar3({this.appBar, this.leading});
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return AppBar(
-      // leading: Builder(
-      //   builder: (context) => IconButton(
-      //     icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-      //     onPressed: () {
-      //       context.bloc<HomeUpdateCubit>().modify(position);
-      //     },
-      //   ),
-      // ),
-      leading: Builder(
-        builder: (context) => leading,
-      ),
-      title: Text('Cry out for the Victims',
-        style: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 5,
-          fontWeight: FontWeight.bold,
-          color: Color(0xffffffff),
-        ),
-      ),
-      backgroundColor: Color(0xff04ECFF),
-      centerTitle: true,
-    );
-  }
-
-  @override
-  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
-}
-
 class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
 
   final AppBar appBar;
-  final int position;
-  final String title;
+  final Widget title;
   final List<Widget> actions;
   final Color color;
   final Color backgroundColor;
+  final Widget leading;
 
-  const MiscAppBarTemplate({this.appBar, this.position, this.title, this.actions, this.backgroundColor, this.color});
+  const MiscAppBarTemplate({this.appBar, this.title, this.actions, this.backgroundColor, this.color, this.leading});
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return AppBar(
       leading: Builder(
-        builder: (context) => IconButton(
-          icon: Icon(Icons.arrow_back, color: color,), 
-          onPressed: (){
-            context.bloc<HomeUpdateCubit>().modify(position);
-            context.bloc<HomeUpdateMemorialToggle>().updateToggle(0);
-            context.bloc<HomeUpdateToggle>().reset();
-          },
-        ),
+        builder: (context) => leading,
       ),
-      title: Text(title,
-        maxLines: 2,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 4,
-          fontWeight: FontWeight.bold,
-          color: color,
-        ),
-      ),
+      title: title,
       actions: actions,
       backgroundColor: backgroundColor,
       centerTitle: true,
@@ -368,9 +225,7 @@ class MiscJoinButton extends StatelessWidget{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        // print('lkjasdfoiuweqroiu');
-        context.bloc<HomeUpdateCubit>().modify(3);
-        // context.bloc<HomeUpdateMemorial>().modify(0);
+        context.bloc<BlocHomeUpdateCubit>().modify(3);
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
@@ -421,67 +276,66 @@ class MiscJoinButton extends StatelessWidget{
                   bool value;
 
                   switch(tab){
-                    case 0: value = context.bloc<HomeUpdateListSuggested>().state[index]; break;
-                    case 1: value = context.bloc<HomeUpdateListNearby>().state[index]; break;
-                    case 2: value = context.bloc<HomeUpdateListBLM>().state[index]; break;
+                    case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
+                    case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
+                    case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
                   }
 
                   return MaterialButton(
-                      elevation: 0,
-                      padding: EdgeInsets.zero,
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
 
-                      textColor: ((){
+                    textColor: ((){
+                      if(value == true){
+                        return Color(0xffffffff);
+                      }else{
+                        return Color(0xff4EC9D4);
+                      }
+                    }()),
+                    splashColor: Color(0xff4EC9D4),
+                    onPressed: (){
+                      switch(tab){
+                        case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
+                        case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
+                        case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
+                      }
+                    },
+                    child: ((){
+                      if(value == true){
+                        return Text('Leave',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
+                        );
+                      }else{
+                        return Text('Join',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
+                        );
+                      }
+                    }()),
+                    height: SizeConfig.blockSizeVertical * 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      side: ((){
                         if(value == true){
-                          return Color(0xffffffff);
+                          return BorderSide(color: Color(0xff04ECFF));
                         }else{
-                          return Color(0xff4EC9D4);
+                          return BorderSide(color: Color(0xff4EC9D4));
                         }
-                      }()),
-                      splashColor: Color(0xff4EC9D4),
-                      onPressed: (){
-                        switch(tab){
-                          case 0: context.bloc<HomeUpdateListSuggested>().updateList(index); break;
-                          case 1: context.bloc<HomeUpdateListNearby>().updateList(index); break;
-                          case 2: context.bloc<HomeUpdateListBLM>().updateList(index); break;
-                        }
-                      },
-                      child: ((){
-                        if(value == true){
-                          return Text('Leave',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            ),
-                          );
-                        }else{
-                          return Text('Join',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            ),
-                          );
-                        }
-                      }()),
-                      height: SizeConfig.blockSizeVertical * 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        side: ((){
-                          if(value == true){
-                            return BorderSide(color: Color(0xff04ECFF));
-                          }else{
-                            return BorderSide(color: Color(0xff4EC9D4));
-                          }
-                        }())
-                      ),
-                      color: ((){
-                        if(value == true){
-                          return Color(0xff04ECFF);
-                        }else{
-                          return Color(0xffffffff);
-                        }
-                      }()),
-                    );  
+                      }())
+                    ),
+                    color: ((){
+                      if(value == true){
+                        return Color(0xff04ECFF);
+                      }else{
+                        return Color(0xffffffff);
+                      }
+                    }()),
+                  );  
 
                 }()),
-
               ),
             ),
           ],
@@ -502,11 +356,7 @@ class MiscManageButton extends StatelessWidget{
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return GestureDetector(
-      onTap: (){
-        // print('lkjasdfoiuweqroiu');
-        // context.bloc<HomeUpdateCubit>().modify(3);
-        // context.bloc<HomeUpdateMemorial>().modify(0);
-      },
+      onTap: (){},
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
         color: Color(0xffffffff),
@@ -556,67 +406,66 @@ class MiscManageButton extends StatelessWidget{
                   bool value;
 
                   switch(tab){
-                    case 0: value = context.bloc<HomeUpdateListSuggested>().state[index]; break;
-                    case 1: value = context.bloc<HomeUpdateListNearby>().state[index]; break;
-                    case 2: value = context.bloc<HomeUpdateListBLM>().state[index]; break;
+                    case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
+                    case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
+                    case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
                   }
 
                   return MaterialButton(
-                      elevation: 0,
-                      padding: EdgeInsets.zero,
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
 
-                      textColor: ((){
+                    textColor: ((){
+                      if(value == true){
+                        return Color(0xffffffff);
+                      }else{
+                        return Color(0xff4EC9D4);
+                      }
+                    }()),
+                    splashColor: Color(0xff4EC9D4),
+                    onPressed: (){
+                      switch(tab){
+                        case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
+                        case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
+                        case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
+                      }
+                    },
+                    child: ((){
+                      if(value == true){
+                        return Text('Leave',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
+                        );
+                      }else{
+                        return Text('Manage',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
+                        );
+                      }
+                    }()),
+                    height: SizeConfig.blockSizeVertical * 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      side: ((){
                         if(value == true){
-                          return Color(0xffffffff);
+                          return BorderSide(color: Color(0xff04ECFF));
                         }else{
-                          return Color(0xff4EC9D4);
+                          return BorderSide(color: Color(0xff4EC9D4));
                         }
-                      }()),
-                      splashColor: Color(0xff4EC9D4),
-                      onPressed: (){
-                        switch(tab){
-                          case 0: context.bloc<HomeUpdateListSuggested>().updateList(index); break;
-                          case 1: context.bloc<HomeUpdateListNearby>().updateList(index); break;
-                          case 2: context.bloc<HomeUpdateListBLM>().updateList(index); break;
-                        }
-                      },
-                      child: ((){
-                        if(value == true){
-                          return Text('Leave',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            ),
-                          );
-                        }else{
-                          return Text('Manage',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            ),
-                          );
-                        }
-                      }()),
-                      height: SizeConfig.blockSizeVertical * 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        side: ((){
-                          if(value == true){
-                            return BorderSide(color: Color(0xff04ECFF));
-                          }else{
-                            return BorderSide(color: Color(0xff4EC9D4));
-                          }
-                        }())
-                      ),
-                      color: ((){
-                        if(value == true){
-                          return Color(0xff04ECFF);
-                        }else{
-                          return Color(0xffffffff);
-                        }
-                      }()),
-                    );  
+                      }())
+                    ),
+                    color: ((){
+                      if(value == true){
+                        return Color(0xff04ECFF);
+                      }else{
+                        return Color(0xffffffff);
+                      }
+                    }()),
+                  );  
 
                 }()),
-
               ),
             ),
           ],
@@ -645,7 +494,6 @@ class _MiscToggleSwitchState extends State<MiscToggleSwitch> {
         onChanged: (value){
           setState(() {
             isSwitched = value;
-            print('isSwitched is $isSwitched');
           });
         },
         activeColor: Color(0xff2F353D),

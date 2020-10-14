@@ -11,9 +11,7 @@ class UILogin01 extends StatelessWidget {
     return Stack(
       children: [
 
-        Container(
-          color: Color(0xffffffff),
-        ),
+        Container(color: Color(0xffffffff),),
 
         Padding(
           padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -63,7 +61,7 @@ class UILogin01 extends StatelessWidget {
               MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<UpdateCubit>().forward();
+                  context.bloc<BlocUpdateCubit>().modify(2);
                 },
                 minWidth: SizeConfig.screenWidth / 1.5,
                 height: SizeConfig.blockSizeVertical * 10,
@@ -119,10 +117,9 @@ class UILogin01 extends StatelessWidget {
               SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
               MaterialButton(
-                
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<UpdateCubit>().forwardTimes(2);
+                  context.bloc<BlocUpdateCubit>().modify(3);
                 },
                 minWidth: SizeConfig.screenWidth / 1.5,
                 height: SizeConfig.blockSizeVertical * 10,
@@ -184,15 +181,13 @@ class UILogin01 extends StatelessWidget {
                         color: Color(0xff04ECFF),
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = (){
-                          context.bloc<UpdateCubit>().modify(3);
-                        }
+                      ..onTap = (){
+                        context.bloc<BlocUpdateCubit>().modify(4);
+                      }
                     ),
-
                   ],
                 ),
               ),
-              
             ],
           ),
         ),

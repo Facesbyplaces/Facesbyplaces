@@ -26,80 +26,81 @@ class HomePost extends StatelessWidget{
     SizeConfig.init(context);
     return Stack(
       children: [
-        Column(
-          children: [
+        Container(),
 
-            Container(
-              color: Color(0xffffffff),
-              alignment: Alignment.center,
-              child: MiscTabs(),
-            ),
+        SingleChildScrollView(
+          child: Column(
+            children: [
 
-            BlocBuilder<HomeUpdateToggleFeed, int>(
-              builder: (context, state){
-                return ((){
-                  switch(state){
-                    case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                    case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                    case 2: return 
-                    Container(
-                      height: SizeConfig.blockSizeVertical * 5,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+              Container(
+                color: Color(0xffffffff),
+                alignment: Alignment.center,
+                child: MiscTabs(),
+              ),
 
-                            Icon(Icons.location_pin, color: Color(0xff979797),),
+              BlocBuilder<BlocHomeUpdateToggleFeed, int>(
+                builder: (context, state){
+                  return ((){
+                    switch(state){
+                      case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                      case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                      case 2: return 
+                      Container(
+                        height: SizeConfig.blockSizeVertical * 5,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                              Icon(Icons.location_pin, color: Color(0xff979797),),
 
-                            Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
-                          ],
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                              Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                            ],
+                          ),
                         ),
-                      ),
-                    ); break;
-                    case 3: return 
-                    Container(
-                      height: SizeConfig.blockSizeVertical * 5,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: [
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                      ); break;
+                      case 3: return 
+                      Container(
+                        height: SizeConfig.blockSizeVertical * 5,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                            Icon(Icons.location_pin, color: Color(0xff979797),),
+                              Icon(Icons.location_pin, color: Color(0xff979797),),
 
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                            Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
-                          ],
+                              Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                    break;
-                  }
-                }());
-              },
-            ),
+                      );
+                      break;
+                    }
+                  }());
+                },
+              ),
 
-            BlocBuilder<HomeUpdateToggleFeed, int>(
-              builder: (context, state){
-                return ((){
-                  switch(state){
-                    case 0: return HomePostExtended(); break;
-                    case 1: return HomeSuggested(); break;
-                    case 2: return HomeNearby(); break;
-                    case 3: return HomeBLM(); break;
-                    
-                  }
-                }());
-              },
-            ),
-
-          ],
+              BlocBuilder<BlocHomeUpdateToggleFeed, int>(
+                builder: (context, state){
+                  return ((){
+                    switch(state){
+                      case 0: return HomePostExtended(); break;
+                      case 1: return HomeSuggested(); break;
+                      case 2: return HomeNearby(); break;
+                      case 3: return HomeBLM(); break;
+                    }
+                  }());
+                },
+              ),
+            ],
+          ),
         ),
-        
       ],
     );
   }
@@ -174,9 +175,6 @@ class HomePostExtended extends StatelessWidget {
                             child: IconButton(
                               alignment: Alignment.centerRight,
                               padding: EdgeInsets.zero,
-                              // onPressed: () async{
-                                
-                              // },
                               onPressed: share,
                               icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
                             ),
@@ -361,7 +359,6 @@ class HomePostExtended extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(height: SizeConfig.blockSizeVertical * 2,),
             ],
           );

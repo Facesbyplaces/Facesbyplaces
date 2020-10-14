@@ -13,7 +13,7 @@ class HomeManage extends StatelessWidget{
         children: [
         Container(
           height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 13),
-          child: BlocBuilder<HomeUpdateListSuggested, List<bool>>(
+          child: BlocBuilder<BlocHomeUpdateListSuggested, List<bool>>(
             builder: (context, state){
               return Container(
                 child: ListView.separated(

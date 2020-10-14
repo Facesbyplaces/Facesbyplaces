@@ -34,8 +34,7 @@ class HomeMemorialProfile extends StatelessWidget{
                     alignment: Alignment.topLeft,
                     child: IconButton(
                       onPressed: (){
-                        // context.bloc<UpdateCubitBLM>().backward();
-                        context.bloc<HomeUpdateCubit>().modify(2);
+                        context.bloc<BlocHomeUpdateCubit>().modify(2);
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
                     ),
@@ -374,7 +373,6 @@ class HomeMemorialProfile extends StatelessWidget{
                             return Container(
                               width: SizeConfig.blockSizeVertical * 10,
                               decoration: BoxDecoration(
-                                // color: Colors.red,
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
                                   image: AssetImage(images[index]),
@@ -516,7 +514,6 @@ class HomeMemorialProfile extends StatelessWidget{
                                       child: Row(
                                         children: [
                                           Icon(Icons.place, color: Color(0xff2ECC71),),
-
                                           Text(
                                             'Golden New Cemetery',
                                             style: TextStyle(
@@ -550,7 +547,6 @@ class HomeMemorialProfile extends StatelessWidget{
                           Container(
                             width: SizeConfig.screenWidth,
                             alignment: Alignment.centerRight,
-
                             child: Container(
                               width: SizeConfig.blockSizeHorizontal * 38,
                               child: Row(

@@ -5,7 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BLMRegister extends StatelessWidget{
+class RegularRegister extends StatelessWidget{
 
   static final GlobalKey<MiscInputFieldState> _key1 = GlobalKey<MiscInputFieldState>();
   static final GlobalKey<MiscInputFieldState> _key2 = GlobalKey<MiscInputFieldState>();
@@ -22,6 +22,7 @@ class BLMRegister extends StatelessWidget{
         children: [
 
           Container(
+            height: SizeConfig.screenHeight,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -31,12 +32,13 @@ class BLMRegister extends StatelessWidget{
             ),
           ),
 
+
           Container(
             height: SizeConfig.screenHeight / 6,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/icons/background-blm.png'),
+                image: AssetImage('assets/icons/regular-background.png'),
               ),
             ),
           ),
@@ -52,7 +54,7 @@ class BLMRegister extends StatelessWidget{
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      context.bloc<BlocUpdateCubitBLM>().modify(1);
+                      context.bloc<UpdateCubitRegular>().modify(0);
                     },
                     icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5),
                   ),
@@ -68,7 +70,7 @@ class BLMRegister extends StatelessWidget{
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                MiscInputField(key: _key3, hintText: 'Mobile #', obscureText: false, type: TextInputType.phone, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
+                MiscInputField(key: _key3, hintText: 'Mobile #', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -103,7 +105,7 @@ class BLMRegister extends StatelessWidget{
                   minWidth: SizeConfig.screenWidth / 2,
                   height: SizeConfig.blockSizeVertical * 7,
                   shape: StadiumBorder(),
-                  color: Color(0xff000000),
+                  color: Color(0xff4EC9D4),
                 ),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 3,),
@@ -127,7 +129,7 @@ class BLMRegister extends StatelessWidget{
                         ),
                         recognizer: TapGestureRecognizer()
                         ..onTap = (){
-                          context.bloc<BlocUpdateCubitBLM>().modify(2);
+                          
                         }
                       ),
                     ],

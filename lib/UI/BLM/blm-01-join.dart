@@ -32,9 +32,8 @@ class BLMJoin extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      // UpdateCubit
-                      context.bloc<UpdateCubit>().modify(1);
-                      context.bloc<UpdateCubitBLM>().reset();
+                      context.bloc<BlocUpdateCubit>().modify(1);
+                      context.bloc<BlocUpdateCubitBLM>().modify(0); // RESETS THE UPDATE CUBIT BACK TO ZERO
                     },
                     icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),
                   ),
@@ -89,11 +88,191 @@ class BLMJoin extends StatelessWidget {
                   ),
                 ),
 
+                SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+                Container(
+                  width: SizeConfig.screenWidth,
+                  child: Stack(
+                    children: [
+                      Transform.rotate(
+                        angle: 75,
+                        child: Container(
+                          height: SizeConfig.blockSizeVertical * 15,
+                          width: SizeConfig.blockSizeVertical * 15,
+                          color: Color(0xffF4F3EB),
+                          child: Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Transform.rotate(
+                              angle: 25,
+                              child: Image.asset('assets/icons/blm-image2.png'),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        left: SizeConfig.blockSizeHorizontal * 30,
+                        child: Transform.rotate(
+                          angle: 101,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        right: 20,
+                        child: Transform.rotate(
+                          angle: 101,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        right: 20,
+                        child: Transform.rotate(
+                          angle: 101,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        top: SizeConfig.blockSizeHorizontal * 25,
+                        child: Transform.rotate(
+                          angle: 101,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        top: SizeConfig.blockSizeHorizontal * 25,
+                        right: 0,
+                        child: Transform.rotate(
+                          angle: 6,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        child: Transform.rotate(
+                          angle: 0,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        bottom: 0,
+                        left: SizeConfig.blockSizeHorizontal * 30,
+                        child: Transform.rotate(
+                          angle: 101,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Positioned(
+                        right: 10,
+                        bottom: 0,
+                        child: Transform.rotate(
+                          angle: 101,
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 15,
+                            width: SizeConfig.blockSizeVertical * 15,
+                            color: Color(0xffF4F3EB),
+                            child: Padding(
+                              padding: EdgeInsets.all(5.0),
+                              child: Transform.rotate(
+                                angle: 25,
+                                child: Image.asset('assets/icons/blm-image2.png'),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 40, width: SizeConfig.blockSizeVertical * 20,),),
+
+                    ],
+                  ),
+                ),
+
                 SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 15,),),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 20,),
 
                 Center(
                   child: Text('Remembering the Victims', 
@@ -110,7 +289,7 @@ class BLMJoin extends StatelessWidget {
                 MaterialButton(
                   padding: EdgeInsets.zero,
                   onPressed: (){
-                    context.bloc<UpdateCubitBLM>().forward();
+                    context.bloc<BlocUpdateCubitBLM>().modify(1);
                   },
                   child: Text('Join',
                     style: TextStyle(
@@ -124,7 +303,6 @@ class BLMJoin extends StatelessWidget {
                   shape: StadiumBorder(),
                   color: Color(0xff4EC9D4),
                 ),
-                
               ],
             ),
           ),

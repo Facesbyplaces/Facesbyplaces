@@ -57,7 +57,7 @@ class HomeCreateMemorial extends StatelessWidget{
               MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<HomeUpdateCubit>().modify(5);
+                  context.bloc<BlocHomeUpdateCubit>().modify(5);
                 },
                 child: Text('Next',
                   style: TextStyle(
@@ -154,7 +154,7 @@ class HomeCreateMemorial2 extends StatelessWidget{
               MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<HomeUpdateCubit>().modify(6);
+                  context.bloc<BlocHomeUpdateCubit>().modify(6);
                 },
                 child: Text('Next',
                   style: TextStyle(
@@ -274,7 +274,6 @@ class HomeCreateMemorial3 extends StatelessWidget{
               SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
               Container(
-                // width: SizeConfig.screenWidth,
                 height: SizeConfig.blockSizeVertical * 12,
                 child: ListView.separated(
                   shrinkWrap: true,
@@ -312,7 +311,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
               MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<HomeUpdateCubit>().modify(7);
+                  context.bloc<BlocHomeUpdateCubit>().modify(7);
                 },
                 child: Text('Speak Out',
                   style: TextStyle(

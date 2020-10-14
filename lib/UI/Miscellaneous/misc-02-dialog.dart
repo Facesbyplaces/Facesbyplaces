@@ -97,3 +97,82 @@ class UploadFrom extends StatelessWidget{
     );
   }
 }
+
+class DeletePageDialog extends StatelessWidget{
+
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5))
+      ),
+      child: Container(
+        height: SizeConfig.screenHeight / 4,
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Text('Confirm Delete',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff000000),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Text('Are you sure you want to delete "Mark Jacksons Memorial"?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: (){
+                        print('Successfully deleted!');
+                        Navigator.pop(context);
+                      },
+                      child: Text('Yes',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xffFF0000),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: (){
+                        print('Cancelled!');
+                        Navigator.pop(context);
+                      },
+                      child: Text('No',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff04ECFF),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

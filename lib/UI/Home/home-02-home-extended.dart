@@ -14,6 +14,7 @@ import 'home-11-profile.dart';
 import 'home-12-memorial-settings.dart';
 import 'home-13-create-post.dart';
 import 'home-14-memorial-list.dart';
+import 'home-16-page-details.dart';
 
 class HomeScreenExtended extends StatelessWidget{
 
@@ -32,28 +33,7 @@ class HomeScreenExtended extends StatelessWidget{
           }
         },
         child: Scaffold(
-          appBar: MiscMainAppBar(
-            appBar: BlocBuilder<HomeUpdateCubit, int>(
-              builder: (context, state){
-                return ((){
-                  switch(state){
-                    case 0: return MiscAppBar1(appBar: AppBar(),); break;
-                    case 1: return MiscAppBar2(appBar: AppBar(),); break;
-                    case 2: return MiscAppBar2(appBar: AppBar(),); break;
-                    case 3: return Container(height: 0,); break;
-                    case 4: return MiscAppBar3(appBar: AppBar(), leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: () {context.bloc<HomeUpdateCubit>().modify(0);},),); break;
-                    case 5: return MiscAppBar3(appBar: AppBar(), leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: () {context.bloc<HomeUpdateCubit>().modify(4);},),); break;
-                    case 6: return MiscAppBar3(appBar: AppBar(), leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: () {context.bloc<HomeUpdateCubit>().modify(5);},),); break; 
-                    case 7: return Container(height: 0,); break;
-                    case 8: return MiscAppBarTemplate(appBar: AppBar(), position: 7, title: 'Memorial Settings', actions: [], backgroundColor: Color(0xff04ECFF), color: Color(0xffffffff),); break;
-                    case 9: return MiscAppBarTemplate(appBar: AppBar(), position: 7, title: 'Create Post', actions: [GestureDetector(onTap: (){context.bloc<HomeUpdateCubit>().modify(7);}, child: Padding(padding: EdgeInsets.only(right: 20.0), child: Center(child: Text('Post', style: TextStyle(color: Color(0xffffffff), fontSize: SizeConfig.safeBlockHorizontal * 5,),))),)], backgroundColor: Color(0xff04ECFF), color: Color(0xffffffff),); break;
-                    case 10: return MiscAppBarTemplate(appBar: AppBar(), position: 0, title: 'FacesByPlaces.com', actions: [GestureDetector(onTap: (){context.bloc<HomeUpdateCubit>().modify(7);}, child: Padding(padding: EdgeInsets.only(right: 20.0), child: Center(child: Icon(Icons.search, color: Color(0xffffffff),))),)], backgroundColor: Color(0xff04ECFF), color: Color(0xffffffff),); break;
-                    case 11: return MiscAppBarTemplate(appBar: AppBar(), position: 0, title: 'Keeping a friend or family member legacy alive', actions: [GestureDetector(onTap: (){context.bloc<HomeUpdateCubit>().modify(7);}, child: Padding(padding: EdgeInsets.only(right: 20.0), child: Center(child: Icon(Icons.search, color: Color(0xffffffff),))),)], backgroundColor: Color(0xff04ECFF), color: Color(0xffffffff),); break;
-                  }
-                }());
-              },
-            ),
-          ),
+          appBar: MiscMainAppBar(appBar: displayAppBar(),),
 
           body: Container(
             decoration: BoxDecoration(
@@ -64,7 +44,7 @@ class HomeScreenExtended extends StatelessWidget{
               ),
             ),
 
-            child: BlocBuilder<HomeUpdateCubit, int>(
+            child: BlocBuilder<BlocHomeUpdateCubit, int>(
               builder: (context, state){
                 return ((){
                   switch(state){
@@ -80,13 +60,15 @@ class HomeScreenExtended extends StatelessWidget{
                     case 9: return HomeCreatePost(); break;
                     case 10: return HomeManage(); break;
                     case 11: return HomeNotifications(); break;
+                    case 12: return HomePageDetails(); break;
+                    case 13: return HomeCreateMemorial3(); break;
                   }
                 }());
               },
             ),
           ),
 
-          bottomSheet: BlocBuilder<HomeUpdateCubit, int>(
+          bottomSheet: BlocBuilder<BlocHomeUpdateCubit, int>(
             builder: (context, state){
               return ((){
                 switch(state){
@@ -102,6 +84,8 @@ class HomeScreenExtended extends StatelessWidget{
                   case 9: return Container(height: 0,); break;
                   case 10: return MiscBottomSheet(); break;
                   case 11: return MiscBottomSheet(); break;
+                  case 12: return Container(height: 0,); break;
+                  case 13: return Container(height: 0,); break;
                 }
               }());
             },
@@ -109,6 +93,407 @@ class HomeScreenExtended extends StatelessWidget{
 
         ),
       ),
+    );
+  }
+
+  displayAppBar(){
+    return BlocBuilder<BlocHomeUpdateCubit, int>(
+      builder: (context, state){
+        return ((){
+          switch(state){
+            case 0: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: Text('FacesByPlaces.com',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Image.asset('assets/icons/profile1.png'),
+                  onPressed: (){},
+                ),
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.search, 
+                      color: Color(0xffffffff), 
+                      size: SizeConfig.blockSizeVertical * 4,
+                    ), 
+                    onPressed: (){
+                      context.bloc<BlocHomeUpdateCubit>().modify(1);
+                    },
+                  ),
+                ], 
+                backgroundColor: Color(0xff4EC9D4), 
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 1: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(15.0),
+                    filled: true,
+                    fillColor: Color(0xffffffff),
+                    focusColor: Color(0xffffffff),
+                    hintText: 'Search a Post',
+                    hintStyle: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    ),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                    enabledBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                    focusedBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(0);
+                  },
+                ),
+                actions: [], 
+                backgroundColor: Color(0xff04ECFF),
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 2: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(15.0),
+                    filled: true,
+                    fillColor: Color(0xffffffff),
+                    focusColor: Color(0xffffffff),
+                    hintText: 'Search a Post',
+                    hintStyle: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    ),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                    enabledBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                    focusedBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(0);
+                    context.bloc<BlocHomeUpdateToggle>().reset();
+                  },
+                ),
+                actions: [], 
+                backgroundColor: Color(0xff04ECFF),
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 3: return Container(height: 0,); break;
+            case 4: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back, 
+                    color: Color(0xffffffff),
+                  ), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(0);
+                  },
+                ),
+                title: Text('Cry out for the Victims',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                actions: [], 
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 5: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back, 
+                    color: Color(0xffffffff),
+                  ), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(4);
+                  },
+                ),
+                title: Text('Cry out for the Victims',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                actions: [], 
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 6: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back, 
+                    color: Color(0xffffffff),
+                  ), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(5);
+                  },
+                ),
+                title: Text('Cry out for the Victims',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                actions: [], 
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 7: return Container(height: 0,); break;
+            case 8: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateMemorialToggle>().updateToggle(0);
+                    context.bloc<BlocHomeUpdateCubit>().modify(7);
+                  },
+                ),
+                title: Text('Memorial Settings',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                actions: [], 
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 9: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: Text('Create Post',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(0);
+                    // context.bloc<BlocHomeUpdateMemorialToggle>().updateToggle(0);
+                    context.bloc<BlocHomeUpdateToggle>().reset();
+                  },
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: (){
+                      context.bloc<BlocHomeUpdateCubit>().modify(7);
+                    }, 
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0), 
+                      child: Center(
+                        child: Text('Post', 
+                        style: TextStyle(
+                          color: Color(0xffffffff), 
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,),
+                        ),
+                      ),
+                    ),
+                  ),
+                ], 
+                backgroundColor: Color(0xff04ECFF),
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 10: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: Text('FacesByPlaces.com',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Image.asset('assets/icons/profile1.png'),
+                  onPressed: (){},
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: (){
+                      context.bloc<BlocHomeUpdateCubit>().modify(7);
+                    }, 
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0), 
+                      child: Center(
+                        child: Icon(
+                          Icons.search, 
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                    ),
+                  ),
+                ], 
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              ); 
+            break;
+            case 11: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: Text('Keeping a friend or family member legacy alive',
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(0);
+                    // context.bloc<BlocHomeUpdateMemorialToggle>().updateToggle(0);
+                    context.bloc<BlocHomeUpdateToggle>().reset();
+                  },
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: (){
+                      context.bloc<BlocHomeUpdateCubit>().modify(7);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0), 
+                      child: Center(
+                        child: Icon(
+                          Icons.search, 
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              );
+            break;
+            case 12: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: Text('Memorial Settings',
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(8);
+                    // context.bloc<BlocHomeUpdateMemorialToggle>().updateToggle(0);
+                    context.bloc<BlocHomeUpdateToggle>().reset();
+                  },
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: (){
+                      // context.bloc<BlocHomeUpdateCubit>().modify(7);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0), 
+                      child: Center(
+                        child: Icon(
+                          Icons.check,
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              );
+            break;
+            case 13: return 
+              MiscAppBarTemplate(
+                appBar: AppBar(), 
+                title: Text('Page Image',
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){
+                    context.bloc<BlocHomeUpdateCubit>().modify(8);
+                    context.bloc<BlocHomeUpdateToggle>().reset();
+                  },
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: (){
+                      // context.bloc<BlocHomeUpdateCubit>().modify(7);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0), 
+                      child: Center(
+                        child: Icon(
+                          Icons.check,
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                backgroundColor: Color(0xff04ECFF), 
+                color: Color(0xffffffff),
+              );
+            break;
+          }
+        }());
+      },
     );
   }
 }

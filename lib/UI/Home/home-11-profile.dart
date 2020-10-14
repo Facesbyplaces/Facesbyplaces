@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeProfile extends StatelessWidget{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
-
   final AppBar appBar = AppBar();
 
   @override
@@ -116,7 +115,7 @@ class HomeProfile extends StatelessWidget{
                                 child: MaterialButton(
                                   padding: EdgeInsets.zero,
                                   onPressed: (){
-                                    context.bloc<HomeUpdateCubit>().modify(8);
+                                    context.bloc<BlocHomeUpdateCubit>().modify(8);
                                   },
                                   child: Text('Manage',
                                     style: TextStyle(
@@ -344,14 +343,12 @@ class HomeProfile extends StatelessWidget{
                             return Container(
                               width: SizeConfig.blockSizeVertical * 13,
                               decoration: BoxDecoration(
-                                // color: Colors.red,
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
                                   image: AssetImage(images[index]),
                                 ),
                               ),
                             );
-                            // return Container();
                           }, 
                           separatorBuilder: (context, index){
                             return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
@@ -605,7 +602,6 @@ class HomeProfile extends StatelessWidget{
                               ],
                             ),
                           ),
-
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                         ],
                       ),
@@ -624,7 +620,7 @@ class HomeProfile extends StatelessWidget{
                       padding: EdgeInsets.only(left: 20.0),
                       child: GestureDetector(
                         onTap: (){
-                          context.bloc<HomeUpdateCubit>().modify(2);
+                          context.bloc<BlocHomeUpdateCubit>().modify(2);
                         },
                         child: Row(
                           children: [
@@ -647,7 +643,7 @@ class HomeProfile extends StatelessWidget{
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: (){
-                          context.bloc<HomeUpdateCubit>().modify(9);
+                          context.bloc<BlocHomeUpdateCubit>().modify(9);
                         },
                         child: Text('Create Post',
                           style: TextStyle(

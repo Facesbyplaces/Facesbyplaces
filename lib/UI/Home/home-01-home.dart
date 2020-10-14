@@ -10,32 +10,26 @@ class HomeScreen extends StatelessWidget{
     return MaterialApp(
       home: MultiBlocProvider(
         providers: [
-          BlocProvider<HomeUpdateCubit>(
-            create: (context) => HomeUpdateCubit(),
+          BlocProvider<BlocHomeUpdateCubit>(
+            create: (context) => BlocHomeUpdateCubit(),
           ),
-          BlocProvider<HomeUpdateToggle>(
-            create: (context) => HomeUpdateToggle(),
+          BlocProvider<BlocHomeUpdateToggle>(
+            create: (context) => BlocHomeUpdateToggle(),
           ),
-          BlocProvider<HomeUpdateToggleFeed>(
-            create: (context) => HomeUpdateToggleFeed(),
+          BlocProvider<BlocHomeUpdateToggleFeed>(
+            create: (context) => BlocHomeUpdateToggleFeed(),
           ),
-          BlocProvider<HomeUpdateListSuggested>(
-            create: (context) => HomeUpdateListSuggested(),
+          BlocProvider<BlocHomeUpdateListSuggested>(
+            create: (context) => BlocHomeUpdateListSuggested(),
           ),
-          BlocProvider<HomeUpdateListNearby>(
-            create: (context) => HomeUpdateListNearby(),
+          BlocProvider<BlocHomeUpdateListNearby>(
+            create: (context) => BlocHomeUpdateListNearby(),
           ),
-          BlocProvider<HomeUpdateListBLM>(
-            create: (context) => HomeUpdateListBLM(),
+          BlocProvider<BlocHomeUpdateListBLM>(
+            create: (context) => BlocHomeUpdateListBLM(),
           ),
-          BlocProvider<HomeUploadBackgroundColor>(
-            create: (context) => HomeUploadBackgroundColor(),
-          ),
-          BlocProvider<HomeUpdateMemorialToggle>(
-            create: (context) => HomeUpdateMemorialToggle(),
-          ),
-          BlocProvider<HomeUpdateManageMemorials>(
-            create: (context) => HomeUpdateManageMemorials(),
+          BlocProvider<BlocHomeUpdateMemorialToggle>(
+            create: (context) => BlocHomeUpdateMemorialToggle(),
           ),
         ],
       child: HomeScreenExtended(),

@@ -60,7 +60,7 @@ class UIGetStarted extends StatelessWidget {
 
             MaterialButton(
               onPressed: (){
-                context.bloc<UpdateCubit>().forward();
+                context.bloc<BlocUpdateCubit>().modify(1);
               },
               minWidth: SizeConfig.screenWidth / 1.5,
               height: SizeConfig.blockSizeVertical * 7,
@@ -73,7 +73,6 @@ class UIGetStarted extends StatelessWidget {
               shape: StadiumBorder(),
               color: Color(0xff04ECFF),
             ),
-            
           ],
         ),
       ],

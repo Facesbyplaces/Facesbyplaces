@@ -9,7 +9,7 @@ class HomeNearby extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BlocBuilder<HomeUpdateListNearby, List<bool>>(
+    return BlocBuilder<BlocHomeUpdateListNearby, List<bool>>(
       builder: (context, state){
         return Container(
           height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 19),
@@ -17,9 +17,7 @@ class HomeNearby extends StatelessWidget{
               shrinkWrap: true,
               itemCount: state.length,
               itemBuilder: (context, index){
-
                 return MiscJoinButton(index: index, tab: 1,);
-
               },
               separatorBuilder: (context, index){
                 return Divider(height: 1, color: Colors.grey,);

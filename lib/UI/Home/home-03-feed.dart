@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/misc-04-extra.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -83,7 +82,7 @@ class HomeFeed extends StatelessWidget{
               MaterialButton(
                 padding: EdgeInsets.zero,
                 onPressed: (){
-                  context.bloc<HomeUpdateCubit>().modify(4);
+                  context.bloc<BlocHomeUpdateCubit>().modify(4);
                 },
                 child: Text('Create',
                   style: TextStyle(
@@ -97,15 +96,9 @@ class HomeFeed extends StatelessWidget{
                 shape: StadiumBorder(),
                 color: Color(0xff000000),
               ),
-
-              // MiscBottomSheet(),
-
             ],
           ),
         ),
-
-        
-
       ],
     );
   }

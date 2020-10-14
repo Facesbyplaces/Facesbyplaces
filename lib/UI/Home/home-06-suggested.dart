@@ -9,7 +9,7 @@ class HomeSuggested extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BlocBuilder<HomeUpdateListSuggested, List<bool>>(
+    return BlocBuilder<BlocHomeUpdateListSuggested, List<bool>>(
       builder: (context, state){
         return Container(
           height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 16),
@@ -17,9 +17,7 @@ class HomeSuggested extends StatelessWidget{
               shrinkWrap: true,
               itemCount: state.length,
               itemBuilder: (context, index){
-
                 return MiscJoinButton(index: index, tab: 0,);
-                
               },
               separatorBuilder: (context, index){
                 return Divider(height: 1, color: Colors.grey,);

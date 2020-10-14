@@ -24,7 +24,7 @@ class HomeSearch extends StatelessWidget{
 
                 GestureDetector(
                   onTap: (){
-                    context.bloc<HomeUpdateCubit>().modify(2);
+                    context.bloc<BlocHomeUpdateCubit>().modify(2);
                   },
                   child: Center(
                     child: CircleAvatar(
@@ -47,13 +47,11 @@ class HomeSearch extends StatelessWidget{
                       color: Color(0xff000000),
                     ),
                   )
-                ),
-                
+                ),      
               ],
             ),
           ),
         ),
-        
       ],
     );
   }

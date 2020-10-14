@@ -1,5 +1,3 @@
-
-
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
@@ -72,7 +70,7 @@ class BLMVerifyEmail extends StatelessWidget{
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      context.bloc<UpdateCubitBLM>().backward();
+                      context.bloc<BlocUpdateCubitBLM>().modify(2);
                       context.bloc<BlocUpdateButtonText>().reset();
                       context.bloc<BlocShowMessage>().reset();
                     },
@@ -111,21 +109,15 @@ class BLMVerifyEmail extends StatelessWidget{
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: MiscInputFieldOTP(key: _key1,),
-                      ),
+                      Expanded(child: MiscInputFieldOTP(key: _key1,),),
 
                       SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                      Expanded(
-                        child: MiscInputFieldOTP(key: _key2,),
-                      ),
+                      Expanded(child: MiscInputFieldOTP(key: _key2,),),
 
                       SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                      Expanded(
-                        child: MiscInputFieldOTP(key: _key3,),
-                      ),
+                      Expanded(child: MiscInputFieldOTP(key: _key3,),),
                     ],
                   ),
                 ),
@@ -174,11 +166,9 @@ class BLMVerifyEmail extends StatelessWidget{
                       });
                     }else{
                       context.bloc<BlocShowMessage>().reset();
-                      // context.bloc<UpdateCubit>().forward();
-                      context.bloc<UpdateCubitBLM>().forward();
+                      context.bloc<BlocUpdateCubitBLM>().modify(4);
                       context.bloc<BlocUpdateButtonText>().reset();
                     }
-
                   },
 
                   child: BlocBuilder<BlocUpdateButtonText, int>(
@@ -200,7 +190,6 @@ class BLMVerifyEmail extends StatelessWidget{
                       );
                     },
                   ),
-
                   minWidth: SizeConfig.screenWidth / 2,
                   height: SizeConfig.blockSizeVertical * 7,
                   shape: StadiumBorder(),

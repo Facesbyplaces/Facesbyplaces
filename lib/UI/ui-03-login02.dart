@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BLMLogin extends StatelessWidget {
+class UILogin02 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,8 @@ class BLMLogin extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      context.bloc<BlocUpdateCubitBLM>().modify(0);
+                      context.bloc<BlocUpdateCubit>().modify(1);
+                      context.bloc<UpdateCubitRegular>().modify(0);
                     },
                     icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),
                   ),
@@ -227,7 +228,7 @@ class BLMLogin extends StatelessWidget {
                         ),
                         recognizer: TapGestureRecognizer()
                         ..onTap = (){
-                          context.bloc<BlocUpdateCubitBLM>().modify(2);
+                          // context.bloc<BlocUpdateCubitBLM>().modify(2);
                         }
                       ),
                     ],

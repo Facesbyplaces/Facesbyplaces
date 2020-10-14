@@ -190,8 +190,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                     onPressed: (){
 
                       if(_image != null){
-                        context.bloc<UpdateCubit>().reset();
-                        context.bloc<UpdateCubitBLM>().reset();
+                        context.bloc<BlocUpdateCubit>().modify(0); // RESETS THE UPDATE CUBIT TO ZERO
+                        context.bloc<BlocUpdateCubitBLM>().modify(0); // RESETS THE UPDATE CUBIT BLM TO ZERO
                         context.bloc<BlocShowMessage>().reset();
                         context.bloc<BlocUpdateButtonText>().reset();
                         

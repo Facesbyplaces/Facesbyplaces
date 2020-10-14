@@ -146,7 +146,6 @@ class HomeCreatePost extends StatelessWidget{
             ],
           ),
         ),
-
       ],
     );
   }
