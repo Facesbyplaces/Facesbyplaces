@@ -8,7 +8,10 @@ import 'UI/BLM/blm-02-login.dart';
 import 'UI/BLM/blm-04-verify-email.dart';
 import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/Regular/regular-01-join.dart';
-import 'UI/Regular/regular-02-register.dart';
+import 'UI/Regular/regular-02-login.dart';
+import 'UI/Regular/regular-03-register.dart';
+import 'UI/Regular/regular-04-verify-email.dart';
+import 'UI/Regular/regular-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
 import 'UI/ui-03-login02.dart';
@@ -92,8 +95,11 @@ class FacesByPlacesHome extends StatelessWidget{
                       builder: (context, state){
                         return ((){
                           switch(state){
-                            case 0: return RegularLogin(); break;
-                            case 1: return RegularRegister(); break;
+                            case 0: return RegularJoin(); break;
+                            case 1: return RegularLogin(); break;
+                            case 2: return RegularRegister(); break;
+                            case 3: return RegularVerifyEmail(); break;
+                            case 4: return RegularUploadPhoto(); break;
                           }
                         }());
                       },

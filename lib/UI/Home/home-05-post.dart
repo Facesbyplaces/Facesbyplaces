@@ -133,8 +133,13 @@ class HomePostExtended extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: CircleAvatar(
-                              backgroundImage: AssetImage('assets/icons/profile1.png'),
+                            child: GestureDetector(
+                              onTap: (){
+                                context.bloc<BlocHomeUpdateCubit>().modify(14);
+                              },
+                              child: CircleAvatar(
+                                backgroundImage: AssetImage('assets/icons/profile1.png'),
+                              ),
                             ),
                           ),
                           Expanded(

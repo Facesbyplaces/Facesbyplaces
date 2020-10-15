@@ -54,7 +54,7 @@ class RegularRegister extends StatelessWidget{
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      context.bloc<UpdateCubitRegular>().modify(0);
+                      context.bloc<UpdateCubitRegular>().modify(1);
                     },
                     icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5),
                   ),
@@ -92,7 +92,7 @@ class RegularRegister extends StatelessWidget{
                     if(_key1.currentState.controller.text != '' && _key2.currentState.controller.text != '' && _key3.currentState.controller.text != '' &&
                       _key4.currentState.controller.text != '' && _key5.currentState.controller.text != '' && _key6.currentState.controller.text != ''
                     ){
-                      context.bloc<BlocUpdateCubitBLM>().modify(3);
+                      context.bloc<UpdateCubitRegular>().modify(3);
                     }
                   },
                   child: Text('Next',
@@ -105,7 +105,7 @@ class RegularRegister extends StatelessWidget{
                   minWidth: SizeConfig.screenWidth / 2,
                   height: SizeConfig.blockSizeVertical * 7,
                   shape: StadiumBorder(),
-                  color: Color(0xff4EC9D4),
+                  color: Color(0xff04ECFF),
                 ),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 3,),
@@ -129,7 +129,7 @@ class RegularRegister extends StatelessWidget{
                         ),
                         recognizer: TapGestureRecognizer()
                         ..onTap = (){
-                          
+                          context.bloc<UpdateCubitRegular>().modify(1);
                         }
                       ),
                     ],

@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeProfile extends StatelessWidget{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
-  final AppBar appBar = AppBar();
 
   @override
   Widget build(BuildContext context) {

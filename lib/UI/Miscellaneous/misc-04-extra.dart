@@ -167,6 +167,58 @@ class MiscMemorialSettings extends StatelessWidget {
   }
 }
 
+class MiscUserProfileTabs extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return Container(
+      alignment: Alignment.center,
+      width: SizeConfig.screenWidth,
+      height: SizeConfig.blockSizeVertical * 8,
+      child: DefaultTabController(
+        length: 2,
+        child: TabBar(
+          isScrollable: true,
+          labelColor: Color(0xff04ECFF),
+          unselectedLabelColor: Color(0xffCDEAEC),
+          indicatorColor: Color(0xff04ECFF),
+          onTap: (int number){
+            context.bloc<BlocUserProfileTabs>().updateToggle(number);
+          },
+          tabs: [
+
+            Container(
+              width: SizeConfig.screenWidth / 2.5,
+              child: Center(
+                child: Text('Post',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+
+            Container(
+              width: SizeConfig.screenWidth / 2.5,
+              child: Center(
+                child: Text('Memorials',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
 
@@ -405,11 +457,11 @@ class MiscManageButton extends StatelessWidget{
                 child: ((){
                   bool value;
 
-                  switch(tab){
-                    case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
-                    case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
-                    case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
-                  }
+                  // switch(tab){
+                  //   case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
+                  //   case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
+                  //   case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
+                  // }
 
                   return MaterialButton(
                     elevation: 0,
@@ -424,11 +476,11 @@ class MiscManageButton extends StatelessWidget{
                     }()),
                     splashColor: Color(0xff4EC9D4),
                     onPressed: (){
-                      switch(tab){
-                        case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
-                        case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
-                        case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
-                      }
+                      // switch(tab){
+                      //   case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
+                      //   case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
+                      //   case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
+                      // }
                     },
                     child: ((){
                       if(value == true){
@@ -439,6 +491,136 @@ class MiscManageButton extends StatelessWidget{
                         );
                       }else{
                         return Text('Manage',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
+                        );
+                      }
+                    }()),
+                    height: SizeConfig.blockSizeVertical * 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      side: ((){
+                        if(value == true){
+                          return BorderSide(color: Color(0xff04ECFF));
+                        }else{
+                          return BorderSide(color: Color(0xff4EC9D4));
+                        }
+                      }())
+                    ),
+                    color: ((){
+                      if(value == true){
+                        return Color(0xff04ECFF);
+                      }else{
+                        return Color(0xffffffff);
+                      }
+                    }()),
+                  );  
+
+                }()),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MiscUserProfileDraggableTabs extends StatelessWidget{
+
+  final int index;
+  final int tab;
+
+  MiscUserProfileDraggableTabs({this.index, this.tab});
+
+  @override
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return GestureDetector(
+      onTap: (){},
+      child: Container(
+        height: SizeConfig.blockSizeVertical * 15,
+        color: Color(0xffffffff),
+        child: Row(
+          children: [
+            Expanded(
+              child: CircleAvatar(
+                maxRadius: SizeConfig.blockSizeVertical * 5,
+                backgroundImage: AssetImage('assets/icons/profile1.png'),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Memorial',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Memorial',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontWeight: FontWeight.w200,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.only(right: 15.0),
+                child: ((){
+                  bool value;
+
+                  // switch(tab){
+                  //   case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
+                  //   case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
+                  //   case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
+                  // }
+
+                  return MaterialButton(
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
+
+                    textColor: ((){
+                      if(value == true){
+                        return Color(0xffffffff);
+                      }else{
+                        return Color(0xff4EC9D4);
+                      }
+                    }()),
+                    splashColor: Color(0xff4EC9D4),
+                    onPressed: (){
+                      // switch(tab){
+                      //   case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
+                      //   case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
+                      //   case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
+                      // }
+                    },
+                    child: ((){
+                      if(value == true){
+                        return Text('Leave',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          ),
+                        );
+                      }else{
+                        return Text('Join',
                           style: TextStyle(
                             fontSize: SizeConfig.safeBlockHorizontal * 4,
                           ),

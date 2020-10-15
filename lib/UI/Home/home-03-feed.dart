@@ -13,8 +13,8 @@ class HomeFeed extends StatelessWidget{
 
         Container(),
 
-        Padding(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+        Container(
+          // padding: EdgeInsets.only(left: 20.0, right: 20.0),
           child: Column(
             children: [
 
@@ -51,7 +51,74 @@ class HomeFeed extends StatelessWidget{
 
               SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-              Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+              // Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+
+              Container(
+                width: SizeConfig.screenWidth,
+                // color: Colors.red,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 0,
+                      top: SizeConfig.blockSizeVertical * 5,
+                      child: CircleAvatar(
+                        radius: SizeConfig.blockSizeVertical * 10,
+                        backgroundColor: Color(0xff000000),
+                        child: CircleAvatar(
+                          radius: SizeConfig.blockSizeVertical * 9.5,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage('assets/icons/blm-image5.png'),
+                        ),
+                      ),
+                    ),
+
+                    Positioned(
+                      right: 0,
+                      top: SizeConfig.blockSizeVertical * 5,
+                      child: CircleAvatar(
+                        radius: SizeConfig.blockSizeVertical * 10,
+                        backgroundColor: Color(0xff04ECFF),
+                        child: CircleAvatar(
+                          radius: SizeConfig.blockSizeVertical * 9.5,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage('assets/icons/blm-image5.png'),
+                        ),
+                      ),
+                    ),
+
+                    Positioned(
+                      left: SizeConfig.blockSizeHorizontal * 12,
+                      top: SizeConfig.blockSizeVertical * 4,
+                      child: CircleAvatar(
+                        radius: SizeConfig.blockSizeVertical * 11,
+                        backgroundColor: Color(0xff000000),
+                        child: CircleAvatar(
+                          radius: SizeConfig.blockSizeVertical * 10.5,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage('assets/icons/blm-image5.png'),
+                        ),
+                      ),
+                    ),
+
+                    Positioned(
+                      right: SizeConfig.blockSizeHorizontal * 12,
+                      top: SizeConfig.blockSizeVertical * 4,
+                      child: CircleAvatar(
+                        radius: SizeConfig.blockSizeVertical * 11,
+                        backgroundColor: Color(0xff04ECFF),
+                        child: CircleAvatar(
+                          radius: SizeConfig.blockSizeVertical * 10.5,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage('assets/icons/blm-image5.png'),
+                        ),
+                      ),
+                    ),
+
+                    Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+                  ],
+                ),
+              ),
+              
 
               SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -67,12 +134,15 @@ class HomeFeed extends StatelessWidget{
 
               SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-              Center(
-                child: Text('Create or join the memorial pages of other users to get started',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    color: Color(0xff000000),
+              Padding(
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Center(
+                  child: Text('Create or join the memorial pages of other users to get started',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      color: Color(0xff000000),
+                    ),
                   ),
                 ),
               ),

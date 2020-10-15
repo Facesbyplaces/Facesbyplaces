@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RegularLogin extends StatelessWidget {
+class RegularJoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class RegularLogin extends StatelessWidget {
                   minWidth: SizeConfig.screenWidth / 2,
                   height: SizeConfig.blockSizeVertical * 7,
                   shape: StadiumBorder(),
-                  color: Color(0xff4EC9D4),
+                  color: Color(0xff04ECFF),
                 ),
               ],
             ),

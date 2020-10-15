@@ -15,6 +15,7 @@ import 'home-12-memorial-settings.dart';
 import 'home-13-create-post.dart';
 import 'home-14-memorial-list.dart';
 import 'home-16-page-details.dart';
+import 'home-17-user-profile.dart';
 
 class HomeScreenExtended extends StatelessWidget{
 
@@ -62,6 +63,7 @@ class HomeScreenExtended extends StatelessWidget{
                     case 11: return HomeNotifications(); break;
                     case 12: return HomePageDetails(); break;
                     case 13: return HomeCreateMemorial3(); break;
+                    case 14: return HomeUserProfile(); break;
                   }
                 }());
               },
@@ -86,6 +88,7 @@ class HomeScreenExtended extends StatelessWidget{
                   case 11: return MiscBottomSheet(); break;
                   case 12: return Container(height: 0,); break;
                   case 13: return Container(height: 0,); break;
+                  case 14: return Container(height: 0,); break;
                 }
               }());
             },
@@ -202,6 +205,8 @@ class HomeScreenExtended extends StatelessWidget{
                   onPressed: (){
                     context.bloc<BlocHomeUpdateCubit>().modify(0);
                     context.bloc<BlocHomeUpdateToggle>().reset();
+                    context.bloc<BlocHomeUpdateToggleFeed>().updateToggle(0);
+                    // BlocHomeUpdateToggleFeed
                   },
                 ),
                 actions: [], 
@@ -491,6 +496,7 @@ class HomeScreenExtended extends StatelessWidget{
                 color: Color(0xffffffff),
               );
             break;
+            case 14: return Container(height: 0,); break;
           }
         }());
       },
