@@ -39,12 +39,6 @@ class BlocHomeUpdateToggleFeed extends Cubit<int>{
   void updateToggle(int index) => emit(index);
 }
 
-class BlocUserProfileTabs extends Cubit<int>{
-
-  BlocUserProfileTabs() : super(0);
-  void updateToggle(int index) => emit(index);
-}
-
 class BlocHomeUpdateListSuggested extends Cubit<List<bool>>{
 
   BlocHomeUpdateListSuggested() : super([false, false, false, false, false, false, false, false, false, false,]);

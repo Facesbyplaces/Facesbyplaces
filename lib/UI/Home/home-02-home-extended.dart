@@ -16,6 +16,7 @@ import 'home-13-create-post.dart';
 import 'home-14-memorial-list.dart';
 import 'home-16-page-details.dart';
 import 'home-17-user-profile.dart';
+import 'home-18-user-details.dart';
 
 class HomeScreenExtended extends StatelessWidget{
 
@@ -64,6 +65,7 @@ class HomeScreenExtended extends StatelessWidget{
                     case 12: return HomePageDetails(); break;
                     case 13: return HomeCreateMemorial3(); break;
                     case 14: return HomeUserProfile(); break;
+                    case 15: return HomeUserProfileDetails(); break;
                   }
                 }());
               },
@@ -89,6 +91,7 @@ class HomeScreenExtended extends StatelessWidget{
                   case 12: return Container(height: 0,); break;
                   case 13: return Container(height: 0,); break;
                   case 14: return Container(height: 0,); break;
+                  case 15: return Container(height: 0,); break;
                 }
               }());
             },
@@ -497,6 +500,7 @@ class HomeScreenExtended extends StatelessWidget{
               );
             break;
             case 14: return Container(height: 0,); break;
+            case 15: return Container(height: 0,); break;
           }
         }());
       },

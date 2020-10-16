@@ -2,33 +2,11 @@ import 'dart:ui';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-05-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-06-custom-drawings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CurvePainter extends CustomPainter{
-
-  @override
-  void paint(Canvas canvas, Size size){
-    var paint = Paint();
-    paint.color = Color(0xff04ECFF);
-    paint.style = PaintingStyle.fill;
-
-    var path = Path();
-
-    path.moveTo(0, size.height * 0.75);
-    path.quadraticBezierTo(size.width / 2, size.height * 1.2, size.width, size.height * 0.75);
-    path.lineTo(size.width, 0);
-    path.lineTo(0, 0);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate){
-    return true;
-  }
-}
 
 class HomeUserProfile extends StatefulWidget{
 
@@ -38,16 +16,6 @@ class HomeUserProfile extends StatefulWidget{
 
 class HomeUserProfileState extends State<HomeUserProfile>{
 
-  double height;
-  Offset position;
-
-  @override
-  void initState(){
-    super.initState();
-    height = SizeConfig.screenHeight;
-    position = Offset(0.0, height - 100);
-  }
-  
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -62,11 +30,8 @@ class HomeUserProfileState extends State<HomeUserProfile>{
               color: Color(0xffffffff),
             ),
 
-
-
             Container(
               height: SizeConfig.screenHeight / 2.5,
-              // color: Colors.red,
               child: Stack(
                 children: [
 
@@ -149,12 +114,17 @@ class HomeUserProfileState extends State<HomeUserProfile>{
 
                     SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                    Center(
-                      child: Text('About',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff04ECFF),
+                    GestureDetector(
+                      onTap: (){
+                        context.bloc<BlocHomeUpdateCubit>().modify(15);
+                      },
+                      child: Center(
+                        child: Text('About',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff04ECFF),
+                          ),
                         ),
                       ),
                     ),
@@ -328,21 +298,7 @@ class HomeUserProfileState extends State<HomeUserProfile>{
               ),
             ),
 
-            Positioned(
-              left: position.dx,
-              top: position.dy + SizeConfig.blockSizeVertical * 10,
-              child: Draggable(
-                feedback: MiscDraggableMain(newHeight: SizeConfig.screenHeight - position.dy,),
-                onDraggableCanceled: (Velocity velocity, Offset offset){
-                  setState(() {
-                    position = offset;
-                  });
-                },
-                child: MiscDraggableMain(newHeight: SizeConfig.screenHeight - position.dy,),
-                childWhenDragging: Container(),
-                axis: Axis.vertical,
-              ),
-            ),
+            MiscUserProfileDraggableSwitchTabs(),
 
           ],
         ),

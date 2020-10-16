@@ -167,58 +167,6 @@ class MiscMemorialSettings extends StatelessWidget {
   }
 }
 
-class MiscUserProfileTabs extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return Container(
-      alignment: Alignment.center,
-      width: SizeConfig.screenWidth,
-      height: SizeConfig.blockSizeVertical * 8,
-      child: DefaultTabController(
-        length: 2,
-        child: TabBar(
-          isScrollable: true,
-          labelColor: Color(0xff04ECFF),
-          unselectedLabelColor: Color(0xffCDEAEC),
-          indicatorColor: Color(0xff04ECFF),
-          onTap: (int number){
-            context.bloc<BlocUserProfileTabs>().updateToggle(number);
-          },
-          tabs: [
-
-            Container(
-              width: SizeConfig.screenWidth / 2.5,
-              child: Center(
-                child: Text('Post',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-
-            Container(
-              width: SizeConfig.screenWidth / 2.5,
-              child: Center(
-                child: Text('Memorials',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 
 class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
 
@@ -527,12 +475,12 @@ class MiscManageButton extends StatelessWidget{
   }
 }
 
-class MiscUserProfileDraggableTabs extends StatelessWidget{
+class MiscUserProfileDraggableTabsList extends StatelessWidget{
 
   final int index;
   final int tab;
 
-  MiscUserProfileDraggableTabs({this.index, this.tab});
+  MiscUserProfileDraggableTabsList({this.index, this.tab});
 
   @override
   Widget build(BuildContext context){
