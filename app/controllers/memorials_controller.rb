@@ -71,6 +71,13 @@ class MemorialsController < ApplicationController
         end
     end
 
+    def delete
+        memorial = Memorial.find(memorial_id)
+        memorial.destroy()
+        
+        render json: {status: "deleted"}
+    end
+
     private
     def memorial_params
         params.require(:memorial).permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, imagesOrVideos: [])

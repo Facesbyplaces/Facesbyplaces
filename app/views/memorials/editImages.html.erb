@@ -1,3 +1,5 @@
+<%= link_to 'Destroy', memorialdelete_url(6), method: :delete, data: { confirm: 'Are you sure?' } %>
+
 <%= form_with(url: memorialUpdateImages_url, method: 'post' ) do |f| %>
     <%= f.hidden_field :_method, value: 'put' %>
 
