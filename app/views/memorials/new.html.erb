@@ -17,6 +17,15 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
 
+    <%= f.label :backgroundImage %>
+    <%= f.file_field :backgroundImage %>
+
+    <%= f.label :profileImage %>
+    <%= f.file_field :profileImage %>
+
+    <%= f.label :imagesOrVideos %>
+    <%= f.file_field :imagesOrVideos, multiple: true %>
+
     <%= label_tag :relationship %>
     <%= text_field_tag :relationship %>
 

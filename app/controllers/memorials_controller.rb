@@ -1,7 +1,15 @@
 class MemorialsController < ApplicationController
     
     def index
-        render json: {id: user_id()}
+        memorials = Memorial.all()
+        # memorialsWithImages = memorials.collect do |memorial|
+        #     {
+        #         memorial: memorial,
+        #         backgroundImage: memorial.backgroundImage.url,
+        #         profileImage: memorial.profileImage.url
+        #     }
+        # end
+        render json: memorials
     end
 
     def new
@@ -21,7 +29,7 @@ class MemorialsController < ApplicationController
                             )
             # check if relationship is saved properly
             if relationship.save 
-                render json: {memorial: memorial}
+                render json: memorial
             else
                 render json: {status: 'Error saving relationship'}
             end
@@ -32,7 +40,7 @@ class MemorialsController < ApplicationController
 
     private
     def memorial_params
-        params.require(:memorial).permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description)
+        params.require(:memorial).permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
     def user_id
