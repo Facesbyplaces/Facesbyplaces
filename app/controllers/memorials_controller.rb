@@ -1,0 +1,2 @@
+class MemorialsController < ApplicationController
+end
