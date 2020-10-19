@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_034510) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["memorial_id"], name: "index_memorial_user_relationships_on_memorial_id"
-    t.index ["user_id"], name: "index_memorial_user_relationships_on_user_id"
   end
 
   create_table "memorials", force: :cascade do |t|
@@ -35,5 +34,4 @@ ActiveRecord::Schema.define(version: 2020_10_19_034510) do
   end
 
   add_foreign_key "memorial_user_relationships", "memorials"
-  add_foreign_key "memorial_user_relationships", "users"
 end
