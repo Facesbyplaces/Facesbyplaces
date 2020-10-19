@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class BlocUpdateCubit extends Cubit<int>{
 
@@ -32,4 +35,24 @@ class BlocUpdateButtonText extends Cubit<int>{
   void add() => emit(state + 1);
   void remove() => emit(state - 1);
   void reset() => emit(0);
+}
+
+
+class BlocUpdateProfilePicture extends Cubit<Future<File>>{
+
+  Future<File> getImage() async{
+    File _image;
+    final _picker = ImagePicker();
+    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+
+    if(pickedFile != null){
+      _image = File(pickedFile.path);
+    }
+
+    return _image;
+  }
+
+  BlocUpdateProfilePicture() : super(null);
+
+  void updateImage() => emit(getImage());
 }
