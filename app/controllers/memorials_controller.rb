@@ -38,8 +38,8 @@ class MemorialsController < ApplicationController
     end
 
     def editDetails
-        @memorial = Memorial.find(memorial_id)
-        # # render memorial page that be editted
+        memorial = Memorial.find(memorial_id)
+        # # render memorial details that be editted
         # render json: memorial
     end
 
@@ -48,6 +48,23 @@ class MemorialsController < ApplicationController
         
         # check if memorial is updated successfully
         if memorial.update(memorial_details_params)
+            render json: memorial, status: 'updated'
+        else
+            render json: {status: 'Error'}
+        end
+    end
+
+    def editImages
+        memorial = Memorial.find(memorial_id)
+        # # render memorial images that be editted
+        # render json: memorial
+    end
+
+    def updateImages
+        memorial = Memorial.find(memorial_id)
+        
+        # check if memorial is updated successfully
+        if memorial.update(memorial_images_params)
             render json: memorial, status: 'updated'
         else
             render json: {status: 'Error'}
@@ -69,5 +86,9 @@ class MemorialsController < ApplicationController
 
     def memorial_details_params
         params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description)
+    end
+
+    def memorial_images_params
+        params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
 end

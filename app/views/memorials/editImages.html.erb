@@ -1,0 +1,14 @@
+<%= form_with(url: memorialUpdateImages_url, method: 'post' ) do |f| %>
+    <%= f.hidden_field :_method, value: 'put' %>
+
+    <%= f.label :backgroundImage %>
+    <%= f.file_field :backgroundImage %>
+
+    <%= f.label :profileImage %>
+    <%= f.file_field :profileImage %>
+
+    <%= f.label :imagesOrVideos %>
+    <%= f.file_field :imagesOrVideos, multiple: true %>
+
+    <%= f.submit %>
+<% end %>
