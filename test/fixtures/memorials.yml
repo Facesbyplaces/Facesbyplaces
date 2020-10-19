@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  birthplace: MyString
+  dob: 2020-10-19 11:40:04
+  rip: 2020-10-19 11:40:04
+  cemetery: MyString
+  country: MyString
+  name: MyString
+  description: MyText
+
+two:
+  birthplace: MyString
+  dob: 2020-10-19 11:40:04
+  rip: 2020-10-19 11:40:04
+  cemetery: MyString
+  country: MyString
+  name: MyString
+  description: MyText
