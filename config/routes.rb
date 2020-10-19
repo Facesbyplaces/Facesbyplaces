@@ -1,17 +1,15 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-=======
   default_url_options :host => "http://localhost:3000"
 
   # memorial controller
     # All memorials
     get 'memorials', to: 'memorials#index'
     # Show memorial
-    get 'memorials/:id', to: 'memorials#show'
+    get 'memorials/:id/show', to: 'memorials#show'
     
     # New Memorial
     get 'memorials/new', to: 'memorials#new'
@@ -27,5 +25,4 @@ Rails.application.routes.draw do
 
     # Delete memorial
     delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
->>>>>>> badd1e326e30faf02b1c8b67c03c8aa04c9a274d
 end

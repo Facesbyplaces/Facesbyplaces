@@ -18,8 +18,11 @@ class MemorialsController < ApplicationController
     def create
         # create new memorial page
         memorial = Memorial.new(memorial_params)
-        # check if memorial is saved properly
-        if memorial.save 
+        # check if the params sent is valid or not
+        check = params_presence(params[:memorial])
+        if check == true
+            # save memorial
+            memorial.save 
             # add relationship of the current user (user that created the memorial page) to the relatioship table
             relationship = MemorialUserRelationship.new(
                                 user_id: user_id(),
@@ -33,7 +36,7 @@ class MemorialsController < ApplicationController
                 render json: {status: 'Error saving relationship'}
             end
         else
-            render json: {status: "Error saving memorial"}
+            render json: {status: "#{check} is empty"}
         end
     end
 
@@ -46,11 +49,13 @@ class MemorialsController < ApplicationController
     def updateDetails
         memorial = Memorial.find(memorial_id)
         
-        # check if memorial is updated successfully
-        if memorial.update(memorial_details_params)
+        # check if data sent is empty or not
+        check = params_presence(params)
+        if check == true
+            memorial.update(memorial_details_params)
             render json: memorial, status: 'updated'
         else
-            render json: {status: 'Error'}
+            render json: {status: "#{check} is empty"}
         end
     end
 
@@ -97,5 +102,17 @@ class MemorialsController < ApplicationController
 
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
+    end
+
+    def params_presence(data)
+        list = ['description', 'backgroundImage', 'imagesOrVideos', 'profileImage']
+        data.each do |key, datum|
+            if !list.include?(key)
+                if datum == ""
+                    return key
+                end
+            end
+        end
+        return true
     end
 end
