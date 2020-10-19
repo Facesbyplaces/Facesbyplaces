@@ -2,14 +2,13 @@ class MemorialsController < ApplicationController
     
     def index
         memorials = Memorial.all()
-        # memorialsWithImages = memorials.collect do |memorial|
-        #     {
-        #         memorial: memorial,
-        #         backgroundImage: memorial.backgroundImage.url,
-        #         profileImage: memorial.profileImage.url
-        #     }
-        # end
         render json: memorials
+    end
+
+    def show
+        memorial = Memorial.find(memorial_id)
+        relationship = memorial.memorialUserRelationships.where(user_id: user_id).first.relationship
+        render json: memorial
     end
 
     def new
@@ -29,12 +28,29 @@ class MemorialsController < ApplicationController
                             )
             # check if relationship is saved properly
             if relationship.save 
-                render json: memorial
+                render json: memorial, status: :created
             else
                 render json: {status: 'Error saving relationship'}
             end
         else
             render json: {status: "Error saving memorial"}
+        end
+    end
+
+    def editDetails
+        @memorial = Memorial.find(memorial_id)
+        # # render memorial page that be editted
+        # render json: memorial
+    end
+
+    def updateDetails
+        memorial = Memorial.find(memorial_id)
+        
+        # check if memorial is updated successfully
+        if memorial.update(memorial_details_params)
+            render json: memorial, status: 'updated'
+        else
+            render json: {status: 'Error'}
         end
     end
 
@@ -45,5 +61,13 @@ class MemorialsController < ApplicationController
 
     def user_id
         1
+    end
+
+    def memorial_id
+        params[:id]
+    end
+
+    def memorial_details_params
+        params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description)
     end
 end
