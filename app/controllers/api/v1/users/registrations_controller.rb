@@ -8,6 +8,10 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
     "ENTER"
     super do |resource|
        logger.info ">>>Error: #{resource.errors.full_messages}"
+        @user = resource
+        code = [rand(0..9), rand(0..9), rand(0..9)]
+        @user.verification_code = code
+        @user.save!
     end
   end
 

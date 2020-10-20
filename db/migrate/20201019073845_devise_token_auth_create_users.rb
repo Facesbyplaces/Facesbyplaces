@@ -35,6 +35,10 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :username
 
+      ## Verification Code
+      t.string :verification_code
+      t.boolean :is_verified, :default => false
+
       ## Tokens
       t.text :tokens
 
