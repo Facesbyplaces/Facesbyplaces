@@ -1,4 +1,5 @@
 class MemorialsController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, :with => :known_error
     
     def index
         memorials = Memorial.all()
@@ -42,8 +43,8 @@ class MemorialsController < ApplicationController
 
     def editDetails
         memorial = Memorial.find(memorial_id)
-        # # render memorial details that be editted
-        # render json: memorial
+        # render memorial details that be editted
+        render json: memorial
     end
 
     def updateDetails
@@ -53,16 +54,17 @@ class MemorialsController < ApplicationController
         check = params_presence(params)
         if check == true
             memorial.update(memorial_details_params)
-            render json: memorial, status: 'updated'
+
+            redirect_to memorialShow_path(memorial.id)
         else
-            render json: {status: "#{check} is empty"}
+            return render json: {error: "#{check} is empty"}
         end
     end
 
     def editImages
         memorial = Memorial.find(memorial_id)
-        # # render memorial images that be editted
-        # render json: memorial
+        # render memorial images that be editted
+        render json: memorial
     end
 
     def updateImages
@@ -70,9 +72,9 @@ class MemorialsController < ApplicationController
         
         # check if memorial is updated successfully
         if memorial.update(memorial_images_params)
-            render json: memorial, status: 'updated'
+            redirect_to memorialShow_path(memorial.id)
         else
-            render json: {status: 'Error'}
+            return render json: {status: 'Error'}
         end
     end
 
@@ -114,5 +116,9 @@ class MemorialsController < ApplicationController
             end
         end
         return true
+    end
+
+    def known_error(exception)
+        return render json: {errors: exception}
     end
 end

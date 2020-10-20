@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # All memorials
     get 'memorials', to: 'memorials#index'
     # Show memorial
-    get 'memorials/:id/show', to: 'memorials#show'
+    get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
     
     # New Memorial
     get 'memorials/new', to: 'memorials#new'
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     # Memorial details
     get 'memorials/:id/editDetails', to: 'memorials#editDetails'
-    put 'memorials/:id', to: 'memorials#updateDetails', as: 'memorialEditDetails'
+    put 'memorials/:id(.:format)', to: 'memorials#updateDetails', as: 'memorialEditDetails'
 
     # Memorial images
     get 'memorials/:id/editImages', to: 'memorials#editImages'
