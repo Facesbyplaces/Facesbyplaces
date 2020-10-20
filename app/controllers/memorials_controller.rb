@@ -1,5 +1,4 @@
 class MemorialsController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, :with => :known_error
     
     def index
         memorials = Memorial.all()
@@ -116,9 +115,5 @@ class MemorialsController < ApplicationController
             end
         end
         return true
-    end
-
-    def known_error(exception)
-        return render json: {errors: exception}
     end
 end

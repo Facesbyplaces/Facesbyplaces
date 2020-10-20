@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_19_073845) do
+ActiveRecord::Schema.define(version: 2020_10_20_065928) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 2020_10_19_073845) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "memorial_id", null: false
+    t.text "body"
+    t.string "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.index ["memorial_id"], name: "index_posts_on_memorial_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -82,4 +94,5 @@ ActiveRecord::Schema.define(version: 2020_10_19_073845) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "memorial_user_relationships", "memorials"
+  add_foreign_key "posts", "memorials"
 end

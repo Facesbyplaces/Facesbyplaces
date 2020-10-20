@@ -25,4 +25,16 @@ Rails.application.routes.draw do
 
     # Delete memorial
     delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
+
+  # post controller
+    # Create Post
+    post 'posts', to: 'posts#create'
+    # Show Post
+    get 'posts/:id', to: 'posts#show'
+
+  # search controller
+    scope 'search' do
+      # search post
+      get 'posts', to: 'search'
+    end
 end
