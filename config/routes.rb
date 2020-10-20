@@ -34,7 +34,9 @@ Rails.application.routes.draw do
 
   # search controller
     scope 'search' do
-      # search post
-      get 'posts', to: 'search'
+      # search posts
+      get 'posts', to: 'search#posts'
+      # search memorials
+      get 'memorials', to: 'search#memorials'
     end
 end
