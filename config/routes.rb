@@ -3,14 +3,17 @@ Rails.application.routes.draw do
     registrations: 'api/v1/users/registrations'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+<<<<<<< HEAD
   
+=======
+>>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
   default_url_options :host => "http://localhost:3000"
 
   # memorial controller
     # All memorials
     get 'memorials', to: 'memorials#index'
     # Show memorial
-    get 'memorials/:id', to: 'memorials#show'
+    get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
     
     # New Memorial
     get 'memorials/new', to: 'memorials#new'
@@ -18,7 +21,7 @@ Rails.application.routes.draw do
 
     # Memorial details
     get 'memorials/:id/editDetails', to: 'memorials#editDetails'
-    put 'memorials/:id', to: 'memorials#updateDetails', as: 'memorialEditDetails'
+    put 'memorials/:id(.:format)', to: 'memorials#updateDetails', as: 'memorialEditDetails'
 
     # Memorial images
     get 'memorials/:id/editImages', to: 'memorials#editImages'
@@ -26,4 +29,21 @@ Rails.application.routes.draw do
 
     # Delete memorial
     delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
+<<<<<<< HEAD
+=======
+
+  # post controller
+    # Create Post
+    post 'posts', to: 'posts#create'
+    # Show Post
+    get 'posts/:id', to: 'posts#show'
+
+  # search controller
+    scope 'search' do
+      # search posts
+      get 'posts', to: 'search#posts'
+      # search memorials
+      get 'memorials', to: 'search#memorials'
+    end
+>>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
 end
