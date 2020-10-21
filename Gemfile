@@ -57,8 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'devise_token_auth'
 gem 'rack-cors'
-<<<<<<< HEAD
 gem 'devise-async'
-=======
 gem 'active_model_serializers'
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
+gem 'pagy'
+gem 'pager_api'

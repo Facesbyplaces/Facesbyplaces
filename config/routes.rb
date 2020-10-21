@@ -3,10 +3,7 @@ Rails.application.routes.draw do
     registrations: 'api/v1/users/registrations'
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-<<<<<<< HEAD
   
-=======
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
   default_url_options :host => "http://localhost:3000"
 
   # memorial controller
@@ -29,8 +26,6 @@ Rails.application.routes.draw do
 
     # Delete memorial
     delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
-<<<<<<< HEAD
-=======
 
   # post controller
     # Create Post
@@ -45,5 +40,4 @@ Rails.application.routes.draw do
       # search memorials
       get 'memorials', to: 'search#memorials'
     end
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
 end

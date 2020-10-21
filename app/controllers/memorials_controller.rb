@@ -2,7 +2,7 @@ class MemorialsController < ApplicationController
     
     def index
         memorials = Memorial.all()
-        render json: memorials
+        paginate memorials, per_page: numberOfPage
     end
 
     def show
