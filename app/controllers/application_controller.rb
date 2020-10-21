@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
         def numberOfPage
                 2
         end
+
+        def user_id
+            User.first.id
+        end
 end

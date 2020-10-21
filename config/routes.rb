@@ -10,10 +10,9 @@ Rails.application.routes.draw do
     # All memorials
     get 'memorials', to: 'memorials#index'
     # Show memorial
-    get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
+    get 'memorials/:id', to: 'memorials#show', as: 'memorialShow'
     
     # New Memorial
-    get 'memorials/new', to: 'memorials#new'
     post 'memorials', to: 'memorials#create'
 
     # Memorial details

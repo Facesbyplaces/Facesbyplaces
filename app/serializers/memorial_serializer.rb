@@ -1,6 +1,6 @@
 class MemorialSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, :imagesOrVideos, :relationship
+  attributes :id, :birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :user
 
   def backgroundImage
     if object.backgroundImage.attached?
@@ -39,6 +39,6 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def user_id
-    1
+    object.user_id
   end
 end

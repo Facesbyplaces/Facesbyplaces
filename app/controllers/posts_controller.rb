@@ -5,7 +5,7 @@ class PostsController < ApplicationController
         post.user_id = user_id
 
         if post.save
-            render json: post, status: :created
+            ender json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
             render json: {errors: post.errors}
         end
@@ -14,16 +14,12 @@ class PostsController < ApplicationController
     def show
         post = Post.find(params[:id])
 
-        render json: post
+        render json: {post: PostSerializer.new( post ).attributes}
     end
 
     private
 
     def post_params
         params.require(:post).permit(:memorial_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
-    end
-
-    def user_id
-        1
     end
 end

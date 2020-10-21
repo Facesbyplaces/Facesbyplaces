@@ -8,11 +8,7 @@ class MemorialsController < ApplicationController
     def show
         memorial = Memorial.find(memorial_id)
         relationship = memorial.memorialUserRelationships.where(user_id: user_id).first.relationship
-        render json: memorial
-    end
-
-    def new
-        @memorial = Memorial.new()
+        render json: {memorial: MemorialSerializer.new( memorial ).attributes}
     end
 
     def create
@@ -21,6 +17,8 @@ class MemorialsController < ApplicationController
         # check if the params sent is valid or not
         check = params_presence(params[:memorial])
         if check == true
+            # save user who created this memorial
+            memorial.user_id = user_id
             # save memorial
             memorial.save 
             # add relationship of the current user (user that created the memorial page) to the relatioship table
@@ -31,7 +29,7 @@ class MemorialsController < ApplicationController
                             )
             # check if relationship is saved properly
             if relationship.save 
-                render json: memorial, status: :created
+                render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
             else
                 render json: {status: 'Error saving relationship'}
             end
@@ -54,7 +52,7 @@ class MemorialsController < ApplicationController
         if check == true
             memorial.update(memorial_details_params)
 
-            redirect_to memorialShow_path(memorial.id)
+            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
@@ -71,7 +69,7 @@ class MemorialsController < ApplicationController
         
         # check if memorial is updated successfully
         if memorial.update(memorial_images_params)
-            redirect_to memorialShow_path(memorial.id)
+            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated images"}
         else
             return render json: {status: 'Error'}
         end
@@ -87,10 +85,6 @@ class MemorialsController < ApplicationController
     private
     def memorial_params
         params.require(:memorial).permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, imagesOrVideos: [])
-    end
-
-    def user_id
-        1
     end
 
     def memorial_id

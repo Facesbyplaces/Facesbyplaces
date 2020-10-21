@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_10_19_073845) do
-=======
-ActiveRecord::Schema.define(version: 2020_10_20_065928) do
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
+ActiveRecord::Schema.define(version: 2020_10_21_071953) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,12 +34,13 @@ ActiveRecord::Schema.define(version: 2020_10_20_065928) do
   end
 
   create_table "memorial_user_relationships", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.integer "memorial_id", null: false
     t.string "relationship"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
     t.index ["memorial_id"], name: "index_memorial_user_relationships_on_memorial_id"
+    t.index ["user_id"], name: "index_memorial_user_relationships_on_user_id"
   end
 
   create_table "memorials", force: :cascade do |t|
@@ -56,12 +53,11 @@ ActiveRecord::Schema.define(version: 2020_10_20_065928) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_memorials_on_user_id"
   end
 
-<<<<<<< HEAD
-=======
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "memorial_id", null: false
     t.text "body"
     t.string "location"
@@ -69,10 +65,11 @@ ActiveRecord::Schema.define(version: 2020_10_20_065928) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "latitude"
     t.float "longitude"
+    t.integer "user_id", null: false
     t.index ["memorial_id"], name: "index_posts_on_memorial_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -90,11 +87,6 @@ ActiveRecord::Schema.define(version: 2020_10_20_065928) do
     t.string "phone_number"
     t.string "email"
     t.string "username"
-<<<<<<< HEAD
-    t.string "verification_code"
-    t.boolean "is_verified", default: false
-=======
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -106,8 +98,8 @@ ActiveRecord::Schema.define(version: 2020_10_20_065928) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "memorial_user_relationships", "memorials"
-<<<<<<< HEAD
-=======
+  add_foreign_key "memorial_user_relationships", "users"
+  add_foreign_key "memorials", "users"
   add_foreign_key "posts", "memorials"
->>>>>>> 5941d4c1a4701145a4d164f389a51e686ef48ea2
+  add_foreign_key "posts", "users"
 end
