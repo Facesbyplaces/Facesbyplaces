@@ -45,4 +45,28 @@ Rails.application.routes.draw do
       # search memorials
       get 'memorials', to: 'search#memorials'
     end
+  
+  # admin controller
+    scope '/admin' do
+      # all users
+      get 'users', to: 'admin#allUsers'
+      # view user
+      get 'users/:id', to: 'admin#showUser'
+      # search user
+      get 'search/user', to: 'admin#searchUser'
+
+      # view post
+      get 'posts/:id', to: 'admin#showPost'
+      # remove post
+      delete 'posts/:id', to: 'admin#deletePost'
+      # search post
+      get 'search/post', to: 'admin#searchPost'
+
+      # view memorial
+      get 'memorials/:id', to: 'admin#showMemorial'
+      # remove memorial
+      delete 'memorials/:id', to: 'admin#deleteMemorial'
+      # search memorial
+      get 'search/memorial', to: 'admin#searchMemorial'
+    end
 end
