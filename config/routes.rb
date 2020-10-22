@@ -4,15 +4,27 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      namespace :users do 
+        resources :verify
+        resources :users, only: [:index]
+      end
+    end
+  end
+  
+
+
   default_url_options :host => "http://localhost:3000"
 
   # memorial controller
     # All memorials
     get 'memorials', to: 'memorials#index'
     # Show memorial
-    get 'memorials/:id', to: 'memorials#show', as: 'memorialShow'
+    get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
     
     # New Memorial
+    get 'memorials/new', to: 'memorials#new'
     post 'memorials', to: 'memorials#create'
 
     # Memorial details
