@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :users do 
         resources :verify
-        resources :users, only: [:index]
+        resources :users, only: [:index, :edit, :update]
+        resources :image_upload, only: [:create]
       end
     end
   end

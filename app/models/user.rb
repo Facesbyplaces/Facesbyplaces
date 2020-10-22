@@ -8,13 +8,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :async, :confirmable
   include DeviseTokenAuth::Concerns::User
-<<<<<<< HEAD
-
-  
-
-=======
   
   has_many :memorials
   has_many :posts
->>>>>>> 47079c7e5cf6082eed6dafc92383945187ef4be2
 end
