@@ -1,13 +1,8 @@
 class MemorialsController < ApplicationController
-    
-    def index
-        memorials = Memorial.all()
-        paginate memorials, per_page: numberOfPage
-    end
 
     def show
         memorial = Memorial.find(memorial_id)
-        relationship = memorial.memorialUserRelationships.where(user_id: user_id).first.relationship
+        
         render json: {memorial: MemorialSerializer.new( memorial ).attributes}
     end
 
@@ -18,7 +13,7 @@ class MemorialsController < ApplicationController
         check = params_presence(params[:memorial])
         if check == true
             # save user who created this memorial
-            memorial.user_id = user_id
+            memorial.user_id = user_id()
             # save memorial
             memorial.save 
             # add relationship of the current user (user that created the memorial page) to the relatioship table

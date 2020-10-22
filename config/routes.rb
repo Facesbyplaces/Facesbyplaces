@@ -17,9 +17,15 @@ Rails.application.routes.draw do
 
   default_url_options :host => "http://localhost:3000"
 
+  # main pages controller
+    # user's feed
+    get 'feed', to: 'mainpages#feed'
+    # user's memorials
+    get 'memorials', to: 'mainpages#memorials'
+    # user's memorials
+    get 'posts', to: 'mainpages#posts'
+
   # memorial controller
-    # All memorials
-    get 'memorials', to: 'memorials#index'
     # Show memorial
     get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
     
@@ -50,5 +56,29 @@ Rails.application.routes.draw do
       get 'posts', to: 'search#posts'
       # search memorials
       get 'memorials', to: 'search#memorials'
+    end
+  
+  # admin controller
+    scope '/admin' do
+      # all users
+      get 'users', to: 'admin#allUsers'
+      # view user
+      get 'users/:id', to: 'admin#showUser'
+      # search user
+      get 'search/user', to: 'admin#searchUser'
+
+      # view post
+      get 'posts/:id', to: 'admin#showPost'
+      # remove post
+      delete 'posts/:id', to: 'admin#deletePost'
+      # search post
+      get 'search/post', to: 'admin#searchPost'
+
+      # view memorial
+      get 'memorials/:id', to: 'admin#showMemorial'
+      # remove memorial
+      delete 'memorials/:id', to: 'admin#deleteMemorial'
+      # search memorial
+      get 'search/memorial', to: 'admin#searchMemorial'
     end
 end

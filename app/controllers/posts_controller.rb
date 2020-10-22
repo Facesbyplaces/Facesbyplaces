@@ -2,10 +2,10 @@ class PostsController < ApplicationController
 
     def create
         post = Post.new(post_params)
-        post.user_id = user_id
+        post.user_id = user_id()
 
         if post.save
-            ender json: {post: PostSerializer.new( post ).attributes, status: :created}
+            render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
             render json: {errors: post.errors}
         end
