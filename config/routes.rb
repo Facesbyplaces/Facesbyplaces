@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   
   default_url_options :host => "http://localhost:3000"
 
+  # main pages controller
+    # user's feed
+    get 'feed', to: 'mainpages#feed'
+    # user's memorials
+    get 'memorials', to: 'mainpages#memorials'
+    # user's memorials
+    get 'posts', to: 'mainpages#posts'
+
   # memorial controller
-    # All memorials
-    get 'memorials', to: 'memorials#index'
     # Show memorial
     get 'memorials/:id', to: 'memorials#show', as: 'memorialShow'
     
