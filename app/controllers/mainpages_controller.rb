@@ -16,7 +16,16 @@ class MainpagesController < ApplicationController
         # Friends memorials
         memorialsFriends = Memorial.where(user_id: user_id()).joins(:memorialUserRelationships).where("memorial_user_relationships.relationship = 'Friends'")
         
-        render json: {family: memorialsFamily, friends: memorialsFriends}
+        render json: {
+            family: ActiveModel::SerializableResource.new(
+                        memorialsFamily, 
+                        each_serializer: MemorialSerializer
+                    ), 
+            friends: ActiveModel::SerializableResource.new(
+                        memorialsFriends, 
+                        each_serializer: MemorialSerializer
+                    )
+        }
     end
 
     # user's posts
