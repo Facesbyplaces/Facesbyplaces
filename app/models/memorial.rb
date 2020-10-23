@@ -1,6 +1,7 @@
 class Memorial < ApplicationRecord
     has_many :memorialUserRelationships, dependent: :destroy
     has_many :posts, dependent: :destroy
+    has_many :report
     belongs_to :user
 
     # media upload for creating memorial

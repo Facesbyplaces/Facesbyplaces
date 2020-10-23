@@ -1,0 +1,21 @@
+if current_administrator.present?
+  json = {
+    paginations: {
+      is_last_page: !@pagy.next.present?,
+      count: @pagy.count,
+      url: memorials_:userId(_url(start: params[:start].to_i + 10, length: 10),
+      page: @pagy.page
+    },
+    users: 
+      @users.map{|d| {
+        id:           d.id, 
+        first_name:   d.first_name,
+        last_name:    d.last_name,
+        memorials:    d.memorials
+        date_created: d.created_at.strftime("%-m/%-d/%y")
+      }},
+    status: 200
+  }
+end
+
+json

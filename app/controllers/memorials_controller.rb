@@ -1,5 +1,11 @@
 class MemorialsController < ApplicationController
 
+    def index
+        memorials = Memorial.where(user_id: user_id())
+        
+        paginate memorials, per_page: numberOfPage
+    end
+
     def show
         memorial = Memorial.find(memorial_id)
         

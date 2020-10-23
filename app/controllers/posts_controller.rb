@@ -1,5 +1,11 @@
 class PostsController < ApplicationController
 
+    def index  
+        posts = Post.where(user_id: user_id())
+        
+        paginate posts, per_page: numberOfPage
+    end
+
     def create
         post = Post.new(post_params)
         post.user_id = user_id()
