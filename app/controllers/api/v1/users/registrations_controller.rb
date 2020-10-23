@@ -12,7 +12,11 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         code = rand(0..999)
         @user.verification_code = code
         @user.save!
+
+        # Tell the UserMailer to send a welcome email after save
+        VerificationMailer.verify_email(@user).deliver_now
     end
+      
   end
 
 end

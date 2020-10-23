@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :users do 
-        resources :verify
-        resources :users, only: [:index, :edit, :update]
+        resources :verify, only: [:create]
+        resources :users
         resources :image_upload, only: [:create]
+      end
+      namespace :reports do 
+        resources :report, only: [:create]
       end
     end
   end
@@ -27,6 +30,9 @@ Rails.application.routes.draw do
     get 'posts', to: 'mainpages#posts'
 
   # memorial controller
+    # Index memorial
+    get 'memorials/:userId', to: 'memorials#index', as: 'memorialIndex'
+
     # Show memorial
     get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
     
@@ -46,6 +52,8 @@ Rails.application.routes.draw do
     delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
 
   # post controller
+    # Post Index
+    get 'posts/:userId', to: 'posts#index', as: 'postsIndex' 
     # Create Post
     post 'posts', to: 'posts#create'
     # Show Post
