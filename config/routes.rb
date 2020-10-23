@@ -44,6 +44,25 @@ Rails.application.routes.draw do
 
     # Delete memorial
     delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
+  
+  # blm controller
+    # Show memorial
+    get 'blm/:id/show', to: 'blm#show', as: 'blmShow'
+    
+    # New Memorial
+    get 'blm/new', to: 'blm#new'
+    post 'blm', to: 'blm#create'
+
+    # Memorial details
+    get 'blm/:id/editDetails', to: 'blm#editDetails'
+    put 'blm/:id(.:format)', to: 'blm#updateDetails', as: 'blmEditDetails'
+
+    # Memorial images
+    get 'blm/:id/editImages', to: 'blm#editImages'
+    put 'blm/:id/images', to: 'blm#updateImages', as: 'blmUpdateImages'
+
+    # Delete memorial
+    delete 'blm/:id', to: 'blm#delete', as: 'blmdelete'
 
   # post controller
     # Create Post
