@@ -10,10 +10,13 @@ class MainpagesController < ApplicationController
 
     # user's memorials
     def memorials
-        # memorials they own
-        memorials = Memorial.where(user_id: user_id())
+        # Family memorials
+        memorialsFamily = Memorial.where(user_id: user_id()).joins(:memorialUserRelationships).where("memorial_user_relationships.relationship = 'Brother'")
 
-        paginate memorials, per_page: numberOfPage
+        # Friends memorials
+        memorialsFriends = Memorial.where(user_id: user_id()).joins(:memorialUserRelationships).where("memorial_user_relationships.relationship = 'Friends'")
+        
+        render json: {family: memorialsFamily, friends: memorialsFriends}
     end
 
     # user's posts

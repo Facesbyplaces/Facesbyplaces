@@ -18,6 +18,16 @@ class AdminController < ApplicationController
         render json: users
     end
 
+    def contactUser
+        message = params[:message]
+        userEmail = User.find(params[:id]).email
+        subject = params[:subject]
+
+        ContactUserMailer.with(message: message, email: userEmail, subject: subject).contact_user.deliver_later
+
+        render json: {status: "Email Sent"}
+    end
+
     def showPost
         post = Post.find(params[:id])
 

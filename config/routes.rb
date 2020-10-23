@@ -81,5 +81,8 @@ Rails.application.routes.draw do
       delete 'memorials/:id', to: 'admin#deleteMemorial'
       # search memorial
       get 'search/memorial', to: 'admin#searchMemorial'
+
+      # contact user
+      post 'contact', to: 'admin#contactUser'
     end
 end
