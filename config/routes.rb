@@ -56,7 +56,6 @@ Rails.application.routes.draw do
     get 'blm/:id/show', to: 'blm#show', as: 'blmShow'
     
     # New Memorial
-    get 'blm/new', to: 'blm#new'
     post 'blm', to: 'blm#create'
 
     # Memorial details

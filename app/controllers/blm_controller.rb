@@ -1,97 +1,85 @@
 class BlmController < ApplicationController
 
     def show
-        memorial = Blm.find(params[:id])
+        blm = Blm.find(params[:id])
         
-        render json: {memorial: MemorialSerializer.new( memorial ).attributes}
+        render json: {blm: BlmSerializer.new( blm ).attributes}
     end
 
     def create
         # create new memorial page
-        memorial = Blm.new(memorial_params)
+        blm = Blm.new(blm_params)
         # check if the params sent is valid or not
-        check = params_presence(params[:memorial])
+        check = params_presence(params[:blm])
         if check == true
-            # save user who created this memorial
-            memorial.user_id = user_id()
             # save memorial
-            memorial.save 
-            # add relationship of the current user (user that created the memorial page) to the relatioship table
-            relationship = MemorialUserRelationship.new(
-                                user_id: user_id(),
-                                memorial: memorial,
-                                relationship: params[:relationship]
-                            )
-            # check if relationship is saved properly
-            if relationship.save 
-                render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
-            else
-                render json: {status: 'Error saving relationship'}
-            end
+            blm.save 
+            render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
         else
             render json: {status: "#{check} is empty"}
         end
     end
 
     def editDetails
-        memorial = Blm.find(params[:id])
+        blm = Blm.find(params[:id])
         # render memorial details that be editted
-        render json: memorial
+        render json: {blm: BlmSerializer.new( blm ).attributes}
     end
 
     def updateDetails
-        memorial = Blm.find(params[:id])
+        blm = Blm.find(params[:id])
         
         # check if data sent is empty or not
         check = params_presence(params)
         if check == true
-            memorial.update(memorial_details_params)
+            blm.update(blm_details_params)
 
-            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
+            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
     end
 
     def editImages
-        memorial = Blm.find(params[:id])
+        blm = Blm.find(params[:id])
         # render memorial images that be editted
-        render json: memorial
+        render json: {blm: BlmSerializer.new( blm ).attributes}
     end
 
     def updateImages
-        memorial = Blm.find(params[:id])
+        blm = Blm.find(params[:id])
         
         # check if memorial is updated successfully
-        if memorial.update(memorial_images_params)
-            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated images"}
+        if blm.update(blm_images_params)
+            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated images"}
         else
             return render json: {status: 'Error'}
         end
     end
 
     def delete
-        memorial = Blm.find(params[:id])
-        memorial.destroy()
+        blm = Blm.find(params[:id])
+        blm.destroy()
         
         render json: {status: "deleted"}
     end
 
     private
-    def memorial_params
-        params.require(:memorial).permit(:location, :dob, :rip, :precinct, :state :country, :name, :description, :backgroundImage, :profileImage, imagesOrVideos: [])
+    def blm_params
+        params.require(:blm).permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country,  :backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
-    def memorial_details_params
-        params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description)
+    def blm_details_params
+        params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country)
     end
 
-    def memorial_images_params
+    def blm_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
     def params_presence(data)
-        list = ['description', 'backgroundImage', 'imagesOrVideos', 'profileImage']
+        # list of optional parameters
+        list = ['description', 'backgroundImage', 'imagesOrVideos', 'profileImage', 'precinct']
         data.each do |key, datum|
             if !list.include?(key)
                 if datum == ""
