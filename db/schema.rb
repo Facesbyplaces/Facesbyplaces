@@ -46,16 +46,6 @@ ActiveRecord::Schema.define(version: 2020_10_24_091716) do
     t.text "description"
   end
 
-  create_table "memorial_user_relationships", force: :cascade do |t|
-    t.integer "memorial_id", null: false
-    t.string "relationship"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.index ["memorial_id"], name: "index_memorial_user_relationships_on_memorial_id"
-    t.index ["user_id"], name: "index_memorial_user_relationships_on_user_id"
-  end
-
   create_table "memorials", force: :cascade do |t|
     t.string "birthplace"
     t.datetime "dob"
@@ -110,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_10_24_091716) do
     t.string "phone_number"
     t.string "email"
     t.string "username"
+    t.string "verification_code"
+    t.boolean "is_verified", default: false
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -121,8 +113,6 @@ ActiveRecord::Schema.define(version: 2020_10_24_091716) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "memorial_user_relationships", "memorials"
-  add_foreign_key "memorial_user_relationships", "users"
   add_foreign_key "memorials", "users"
   add_foreign_key "posts", "memorials"
   add_foreign_key "posts", "users"
