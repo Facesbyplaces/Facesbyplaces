@@ -1,6 +1,6 @@
 class BlmSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :imagesOrVideos
+  attributes :id, :name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :imagesOrVideos, :relationship
 
   def backgroundImage
     if object.backgroundImage.attached?
@@ -26,7 +26,7 @@ class BlmSerializer < ActiveModel::Serializer
 
   # relationship
   def relationship
-    object.memorialUserRelationships.where(user_id: user_id).first.relationship
+    object.relationships.where(user: user()).first.relationship
   end
 
   private
@@ -38,7 +38,7 @@ class BlmSerializer < ActiveModel::Serializer
     return sendImages
   end
 
-  def user_id
-    object.user_id
+  def user
+    object.user
   end
 end

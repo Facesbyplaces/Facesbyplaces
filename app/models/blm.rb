@@ -7,6 +7,10 @@ class Blm < ApplicationRecord
   # Page Owner
   has_one :pageowner, as: :page, dependent: :destroy
 
+  # Relationship of pages and users
+  has_many :relationships, as: :page, dependent: :destroy
+
+
   # Current User for Serializer
   def user
     User.first

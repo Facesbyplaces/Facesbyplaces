@@ -14,9 +14,14 @@ class BlmController < ApplicationController
         if check == true
             # save blm
             blm.save 
+
             # save the owner of the user
             pageowner = Pageowner.new(user: user())
             blm.pageowner = pageowner
+
+            # save relationship of the user to the page
+            relationship = blm.relationships.new(user: user(), relationship: params[:relationship])
+            relationship.save 
             
             render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
         else
