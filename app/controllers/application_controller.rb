@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
                 2
         end
 
-        def user_id
-            User.first.id
+        def user
+            User.first
         end
 end

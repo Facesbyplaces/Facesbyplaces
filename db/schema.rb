@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_091716) do
+ActiveRecord::Schema.define(version: 2020_10_24_133834) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2020_10_24_091716) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_memorials_on_user_id"
+  end
+
+  create_table "pageowners", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "page_type", null: false
+    t.integer "page_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_pageowners_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -114,6 +124,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_091716) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "memorials", "users"
+  add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "memorials"
   add_foreign_key "posts", "users"
 end

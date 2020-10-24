@@ -7,13 +7,17 @@ class BlmController < ApplicationController
     end
 
     def create
-        # create new memorial page
+        # create new blm page
         blm = Blm.new(blm_params)
         # check if the params sent is valid or not
         check = params_presence(params[:blm])
         if check == true
-            # save memorial
+            # save blm
             blm.save 
+            # save the owner of the user
+            pageowner = Pageowner.new(user: user())
+            blm.pageowner = pageowner
+            
             render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
         else
             render json: {status: "#{check} is empty"}

@@ -4,5 +4,11 @@ class Blm < ApplicationRecord
   has_one_attached :profileImage
   has_many_attached :imagesOrVideos
 
-  
+  # Page Owner
+  has_one :pageowner, as: :page, dependent: :destroy
+
+  # Current User for Serializer
+  def user
+    User.first
+  end
 end
