@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
     def create
         post = Post.new(post_params)
-        post.user_id = user_id()
+        post.user = user()
 
         if post.save
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
@@ -26,6 +26,6 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:memorial_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
+        params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
     end
 end

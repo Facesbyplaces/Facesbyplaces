@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_164956) do
+ActiveRecord::Schema.define(version: 2020_10_25_064738) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 2020_10_24_164956) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "memorial_id", null: false
     t.text "body"
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
@@ -79,7 +78,9 @@ ActiveRecord::Schema.define(version: 2020_10_24_164956) do
     t.float "latitude"
     t.float "longitude"
     t.integer "user_id", null: false
-    t.index ["memorial_id"], name: "index_posts_on_memorial_id"
+    t.string "page_type", null: false
+    t.integer "page_id", null: false
+    t.index ["page_type", "page_id"], name: "index_posts_on_page_type_and_page_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -136,7 +137,6 @@ ActiveRecord::Schema.define(version: 2020_10_24_164956) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "memorials", "users"
   add_foreign_key "pageowners", "users"
-  add_foreign_key "posts", "memorials"
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users"
 end
