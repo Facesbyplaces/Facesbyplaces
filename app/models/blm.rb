@@ -13,9 +13,4 @@ class Blm < ApplicationRecord
   # Posts of this page
   has_many :posts, as: :page, dependent: :destroy
 
-
-  # Current User for Serializer
-  def user
-    User.first
-  end
 end

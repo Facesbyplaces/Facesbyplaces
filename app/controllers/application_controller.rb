@@ -23,4 +23,17 @@ class ApplicationController < ActionController::Base
         def user
             User.first
         end
+
+        def params_presence(data)
+            # list of optional parameters
+            list = ['description', 'backgroundImage', 'imagesOrVideos', 'profileImage', 'precinct']
+            data.each do |key, datum|
+                if !list.include?(key)
+                    if datum == ""
+                        return key
+                    end
+                end
+            end
+            return true
+        end
 end

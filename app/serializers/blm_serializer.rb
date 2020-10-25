@@ -1,6 +1,6 @@
 class BlmSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :imagesOrVideos, :relationship
+  attributes :id, :name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :user
 
   def backgroundImage
     if object.backgroundImage.attached?

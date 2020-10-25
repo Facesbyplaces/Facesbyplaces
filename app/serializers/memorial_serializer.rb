@@ -26,7 +26,7 @@ class MemorialSerializer < ActiveModel::Serializer
 
   # relationship
   def relationship
-    object.memorialUserRelationships.where(user_id: user_id).first.relationship
+    object.relationships.where(user: user()).first.relationship
   end
 
   private
@@ -38,7 +38,7 @@ class MemorialSerializer < ActiveModel::Serializer
     return sendImages
   end
 
-  def user_id
-    object.user_id
+  def user
+    object.user
   end
 end
