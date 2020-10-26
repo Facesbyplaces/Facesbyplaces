@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
     def posts
-        posts = Post.joins(:memorial).where('memorials.name LIKE :search or memorials.country LIKE :search or memorials.cemetery LIKE :search or posts.body LIKE :search or posts.location LIKE :search', search: params[:keywords]).select('posts.*')
+        posts = Post.joins(:page)
         
         paginate posts, per_page: numberOfPage
     end

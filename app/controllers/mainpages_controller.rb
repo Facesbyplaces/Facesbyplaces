@@ -33,7 +33,7 @@ class MainpagesController < ApplicationController
     # user's posts
     def posts
         # Posts that they created or owned
-        posts = Post.where(user_id: user_id())
+        posts = Post.where(user: user())
         
         paginate posts, per_page: numberOfPage
     end
