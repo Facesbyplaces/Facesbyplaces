@@ -3,28 +3,30 @@ class MainpagesController < ApplicationController
     # user's feed
     def feed
         # posts of the memorial that they own
-        posts = Post.joins(:memorial).where("memorials.user_id = #{user_id()}")
+        posts = Post.where("user_id = #{user().id}")
         
         paginate posts, per_page: numberOfPage
     end
 
     # user's memorials
     def memorials
-        # Family memorials
-        memorialsFamily = Memorial.joins(:relationships).where("relationships.user_id = #{user().id}").where("relationships.relationship = 'Brother'")
+        # Family
+        family = Relationship.where(user: user()).where("relationship = 'Brother' or relationship = 'Sister' or relationship = 'Father' or relationship = 'Mother' or relationship = 'Uncle' or relationship = 'Family'")
+        family = ActiveModel::SerializableResource.new(
+                    family, 
+                    each_serializer: RelationshipSerializer
+                )
 
-        # Friends memorials
-        memorialsFriends = Memorial.joins(:relationships).where("relationships.user_id = #{user().id}").where("relationships.relationship = 'Friends'")
-        
+        # Friends
+        friends = Relationship.where(user: user()).where("relationship = 'Friends'")
+        friends = ActiveModel::SerializableResource.new(
+                friends, 
+                    each_serializer: RelationshipSerializer
+                )
+
         render json: {
-            family: ActiveModel::SerializableResource.new(
-                        memorialsFamily, 
-                        each_serializer: MemorialSerializer
-                    ), 
-            friends: ActiveModel::SerializableResource.new(
-                        memorialsFriends, 
-                        each_serializer: MemorialSerializer
-                    )
+            family: family, 
+            friends: friends
         }
     end
 

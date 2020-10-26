@@ -16,4 +16,9 @@ class Memorial < ApplicationRecord
     # Posts of this page
     has_many :posts, as: :page, dependent: :destroy
     
+    # page name
+    def page_name
+        "memorial"
+    end
+    
 end
