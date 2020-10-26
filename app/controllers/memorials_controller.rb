@@ -1,11 +1,5 @@
 class MemorialsController < ApplicationController
 
-    def index
-        memorials = Memorial.where(user: user())
-        
-        paginate memorials, per_page: numberOfPage
-    end
-
     def show
         memorial = Memorial.find(params[:id])
         
@@ -81,7 +75,7 @@ class MemorialsController < ApplicationController
 
     private
     def memorial_params
-        params.require(:memorial).permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, imagesOrVideos: [])
+        params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
     def memorial_details_params

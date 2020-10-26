@@ -11,10 +11,10 @@ class MainpagesController < ApplicationController
     # user's memorials
     def memorials
         # Family memorials
-        memorialsFamily = Memorial.where(user_id: user_id()).joins(:memorialUserRelationships).where("memorial_user_relationships.relationship = 'Brother'")
+        memorialsFamily = Memorial.joins(:relationships).where("relationships.user_id = #{user().id}").where("relationships.relationship = 'Brother'")
 
         # Friends memorials
-        memorialsFriends = Memorial.where(user_id: user_id()).joins(:memorialUserRelationships).where("memorial_user_relationships.relationship = 'Friends'")
+        memorialsFriends = Memorial.joins(:relationships).where("relationships.user_id = #{user().id}").where("relationships.relationship = 'Friends'")
         
         render json: {
             family: ActiveModel::SerializableResource.new(

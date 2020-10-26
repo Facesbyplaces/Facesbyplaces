@@ -30,14 +30,11 @@ Rails.application.routes.draw do
     get 'posts', to: 'mainpages#posts'
 
   # memorial controller
-    # Index memorial
-    get 'memorials', to: 'memorials#index', as: 'memorialIndex'
 
     # Show memorial
     get 'memorials/:id', to: 'memorials#show', as: 'memorialShow'
     
     # New Memorial
-    get 'memorials/new', to: 'memorials#new'
     post 'memorials', to: 'memorials#create'
 
     # Memorial details
