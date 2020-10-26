@@ -1,18 +1,16 @@
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BLMRegister extends StatelessWidget{
 
-  static final GlobalKey<MiscInputFieldState> _key1 = GlobalKey<MiscInputFieldState>();
-  static final GlobalKey<MiscInputFieldState> _key2 = GlobalKey<MiscInputFieldState>();
-  static final GlobalKey<MiscInputFieldState> _key3 = GlobalKey<MiscInputFieldState>();
-  static final GlobalKey<MiscInputFieldState> _key4 = GlobalKey<MiscInputFieldState>();
-  static final GlobalKey<MiscInputFieldState> _key5 = GlobalKey<MiscInputFieldState>();
-  static final GlobalKey<MiscInputFieldState> _key6 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldState> _key1 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldState> _key2 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldState> _key3 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldState> _key4 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldState> _key5 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldState> _key6 = GlobalKey<MiscInputFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,6 @@ class BLMRegister extends StatelessWidget{
                     alignment: Alignment.centerLeft,
                     child: IconButton(
                       onPressed: (){
-                        // context.bloc<BlocUpdateCubitBLM>().modify(1);
                         Navigator.pop(context);
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5),
@@ -91,8 +88,7 @@ class BLMRegister extends StatelessWidget{
                       if(_key1.currentState.controller.text != '' && _key2.currentState.controller.text != '' && _key3.currentState.controller.text != '' &&
                         _key4.currentState.controller.text != '' && _key5.currentState.controller.text != '' && _key6.currentState.controller.text != ''
                       ){
-                        // context.bloc<BlocUpdateCubitBLM>().modify(3);
-                        Navigator.pushNamed(context, 'blm-04-verify-email');
+                        Navigator.pushNamed(context, 'blm/blm-04-verify-email');
                       }
                     },
                     child: Text('Next',
@@ -129,8 +125,7 @@ class BLMRegister extends StatelessWidget{
                           ),
                           recognizer: TapGestureRecognizer()
                           ..onTap = (){
-                            // context.bloc<BlocUpdateCubitBLM>().modify(2);
-                            // Navigator.pushNamed(context, 'blm-04-verify-email');
+                            Navigator.pushNamed(context, 'blm/blm-02-login');
                           }
                         ),
                       ],

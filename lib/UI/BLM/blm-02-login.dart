@@ -1,8 +1,6 @@
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BLMLogin extends StatelessWidget {
 
@@ -34,7 +32,6 @@ class BLMLogin extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: IconButton(
                       onPressed: (){
-                        // context.bloc<BlocUpdateCubitBLM>().modify(0);
                         Navigator.pop(context);
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),
@@ -229,7 +226,7 @@ class BLMLogin extends StatelessWidget {
                           ),
                           recognizer: TapGestureRecognizer()
                           ..onTap = (){
-                            Navigator.pushNamed(context, 'blm-03-register');
+                            Navigator.pushNamed(context, 'blm/blm-03-register');
                           }
                         ),
                       ],

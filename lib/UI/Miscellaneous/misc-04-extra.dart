@@ -3,7 +3,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'misc-03-icons.dart';
 
 class MiscBottomSheet extends StatelessWidget {
 
@@ -13,36 +12,85 @@ class MiscBottomSheet extends StatelessWidget {
     return BlocBuilder<BlocHomeUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
-          height: SizeConfig.blockSizeVertical * 10,
-          alignment: Alignment.center,
-          width: SizeConfig.screenWidth,
-          child: ToggleButtons(
-            borderWidth: 0,
-            renderBorder: false,
-            selectedColor: Color(0xff04ECFF),
-            fillColor: Colors.transparent,
-            color: Color(0xffB1B1B1),
-            children: [
+          child: Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            alignment: Alignment.center,
+            width: SizeConfig.screenWidth,
+            child: ToggleButtons(
+              borderWidth: 0,
+              renderBorder: false,
+              selectedColor: Color(0xff04ECFF),
+              fillColor: Colors.transparent,
+              color: Color(0xffB1B1B1),
+              children: [
 
-              MiscIconToggle(icon: MdiIcons.fire, text: 'Feed',),
+                Container(
+                  width: SizeConfig.screenWidth / 4,
+                  child: Column(
+                    children: [
+                      Icon(MdiIcons.fire, size: SizeConfig.blockSizeVertical * 4,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      Text('Feed', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    ],
+                  ),
+                ),
 
-              MiscIconToggle(icon: MdiIcons.graveStone, text: 'Memorials',),
+                Container(
+                  width: SizeConfig.screenWidth / 4,
+                  child: Column(
+                    children: [
+                      Icon(MdiIcons.graveStone, size: SizeConfig.blockSizeVertical * 4,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      Text('Memorials', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    ],
+                  ),
+                ),
 
-              MiscIconToggle(icon: MdiIcons.post, text: 'Post',),
+                Container(
+                  width: SizeConfig.screenWidth / 4,
+                  child: Column(
+                    children: [
+                      Icon(MdiIcons.post, size: SizeConfig.blockSizeVertical * 4,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    ],
+                  ),
+                ),
 
-              MiscIconToggle(icon: MdiIcons.heart, text: 'Notification',),
+                Container(
+                  width: SizeConfig.screenWidth / 4,
+                  child: Column(
+                    children: [
+                      Icon(MdiIcons.heart, size: SizeConfig.blockSizeVertical * 4,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      Text('Notification', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    ],
+                  ),
+                ),
 
+              ],
+              onPressed: (int index){
+                context.bloc<BlocHomeUpdateToggle>().updateToggle(index);
+                switch(index){
+                  case 0: context.bloc<BlocHomeUpdateCubit>().modify(0); break;
+                  case 1: context.bloc<BlocHomeUpdateCubit>().modify(1); break;
+                  case 2: context.bloc<BlocHomeUpdateCubit>().modify(2); break;
+                  case 3: context.bloc<BlocHomeUpdateCubit>().modify(3); break;
+                }
+              },
+              isSelected: context.bloc<BlocHomeUpdateToggle>().state,
+            ),
+            color: Color(0xffffffff),
+          ),
+        decoration: BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 5,
+                spreadRadius: 1,
+                offset: Offset(0, 0)
+              ),
             ],
-            onPressed: (int index){
-              context.bloc<BlocHomeUpdateToggle>().updateToggle(index);
-              switch(index){
-                case 0: context.bloc<BlocHomeUpdateCubit>().modify(0); break;
-                case 1: context.bloc<BlocHomeUpdateCubit>().modify(10); break;
-                case 2: context.bloc<BlocHomeUpdateCubit>().modify(2); break;
-                case 3: context.bloc<BlocHomeUpdateCubit>().modify(11); break;
-              }
-            },
-            isSelected: context.bloc<BlocHomeUpdateToggle>().state,
           ),
         );
       },
@@ -225,7 +273,8 @@ class MiscJoinButton extends StatelessWidget{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        context.bloc<BlocHomeUpdateCubit>().modify(3);
+        // context.bloc<BlocHomeUpdateCubit>().modify(3);
+        Navigator.pushNamed(context, 'home/home-06-memorial');
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,

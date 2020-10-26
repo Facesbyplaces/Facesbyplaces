@@ -12,17 +12,16 @@ class HomeNearby extends StatelessWidget{
     return BlocBuilder<BlocHomeUpdateListNearby, List<bool>>(
       builder: (context, state){
         return Container(
-          height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 19),
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: state.length,
-              itemBuilder: (context, index){
-                return MiscJoinButton(index: index, tab: 1,);
-              },
-              separatorBuilder: (context, index){
-                return Divider(height: 1, color: Colors.grey,);
-              },
-            ),
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemCount: state.length,
+            itemBuilder: (context, index){
+              return MiscJoinButton(index: index, tab: 1,);
+            },
+            separatorBuilder: (context, index){
+              return Divider(height: 1, color: Colors.grey,);
+            },
+          ),
         );
       },
     );

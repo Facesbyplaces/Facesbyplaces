@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/misc-04-extra.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeManage extends StatelessWidget{
+class HomeManageTab extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {

@@ -33,9 +33,11 @@ class MiscUserProfileDraggableSwitchTabsState extends State<MiscUserProfileDragg
       child: Draggable(
         feedback: draggable(),
         onDraggableCanceled: (Velocity velocity, Offset offset){
-          setState(() {
-            position = offset;
-          });
+          if(offset.dy > 10 && offset.dy < (SizeConfig.screenHeight - 100)){
+            setState(() {
+              position = offset;
+            });
+          }
         },
         child: draggable(),
         childWhenDragging: Container(),

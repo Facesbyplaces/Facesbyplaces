@@ -1,7 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegularJoin extends StatelessWidget {
 
@@ -33,8 +31,7 @@ class RegularJoin extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: IconButton(
                     onPressed: (){
-                      context.bloc<BlocUpdateCubit>().modify(1);
-                      context.bloc<UpdateCubitRegular>().modify(0); // RESETS THE UPDATE CUBIT BACK TO ZERO
+                      Navigator.pop(context);
                     },
                     icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),
                   ),
@@ -59,7 +56,7 @@ class RegularJoin extends StatelessWidget {
                 MaterialButton(
                   padding: EdgeInsets.zero,
                   onPressed: (){
-                    context.bloc<UpdateCubitRegular>().modify(1);
+                    Navigator.pushNamed(context, 'regular/regular-02-login');
                   },
                   child: Text('Next',
                     style: TextStyle(

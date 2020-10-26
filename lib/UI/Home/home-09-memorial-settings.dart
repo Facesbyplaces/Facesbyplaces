@@ -11,14 +11,30 @@ class HomeMemorialSettings extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Stack(
-      children: [
-        Container(),
-
-        ListView(
-          shrinkWrap: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BlocHomeUpdateMemorialToggle>(
+          create: (context) => BlocHomeUpdateMemorialToggle(),
+        ),
+      ],
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+            onPressed: (){
+              Navigator.pop(context);
+            },
+          ),
+          title: Text('Memorial Settings',
+            style: TextStyle(
+              fontSize: SizeConfig.safeBlockHorizontal * 4,
+              color: Color(0xffffffff),
+            ),
+          ),
+          backgroundColor: Color(0xff04ECFF), 
+        ),
+        body: Column(
           children: [
-
             Container(
               color: Color(0xffECF0F1),
               alignment: Alignment.centerLeft,
@@ -26,20 +42,22 @@ class HomeMemorialSettings extends StatelessWidget{
               child: MiscMemorialSettings(),
             ),
 
-            BlocBuilder<BlocHomeUpdateMemorialToggle, int>(
-              builder: (context, state){
-                return ((){
-                  switch(state){
-                    case 0: return HomeMemorialSettingsPage(); break;
-                    case 1: return HomeMemorialSettingsPrivacy(); break;
-                  }
-                }());
-              },
+            Expanded(
+              child: BlocBuilder<BlocHomeUpdateMemorialToggle, int>(
+                builder: (context, state){
+                  return ((){
+                    switch(state){
+                      case 0: return HomeMemorialSettingsPage(); break;
+                      case 1: return HomeMemorialSettingsPrivacy(); break;
+                    }
+                  }());
+                },
+              ),
             ),
 
           ],
         ),
-      ],
+      ),
     );
   }
 }
@@ -49,295 +67,289 @@ class HomeMemorialSettingsPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Stack(
+    return ListView(
+      shrinkWrap: true,
       children: [
-        ListView(
-          shrinkWrap: true,
-          children: [
 
-            GestureDetector(
-              onTap: (){
-                context.bloc<BlocHomeUpdateCubit>().modify(12);
-              },
-              child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                color: Color(0xffffffff),
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text('Page Details',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
-                        ),
+        GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, 'home/home-11-page-details');
+          },
+          child: Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            color: Color(0xffffffff),
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text('Page Details',
+                      style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff000000),
                       ),
                     ),
-
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Update page details',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xffBDC3C7),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
 
-            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-            GestureDetector(
-              onTap: (){
-                context.bloc<BlocHomeUpdateCubit>().modify(13);
-              },
-              child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                color: Color(0xffffffff),
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text('Page Image',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
-                        ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Update page details',
+                      style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xffBDC3C7),
                       ),
                     ),
-
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Update Page image and background image',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xffBDC3C7),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-
-            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              color: Color(0xffffffff),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Admins',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Add or remove admins of this page',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xffBDC3C7),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              color: Color(0xffffffff),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Family',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Add or remove family of this page',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xffBDC3C7),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              color: Color(0xffffffff),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Friends',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Add or remove friends of this page',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xffBDC3C7),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              color: Color(0xffffffff),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Paypal',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Manage cards that receives the memorial gifts.',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xffBDC3C7),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-            GestureDetector(
-              onTap: () async{
-                await showDialog(context: (context), builder: (build) => DeletePageDialog());
-              },
-              child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                color: Color(0xffffffff),
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text('Delete Page',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Completely remove the page. This is irreversible',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xffBDC3C7),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              child: Image.asset('assets/icons/logo.png'),
-            ),
-
-            // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-          ],
+          ),
         ),
+
+        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+        GestureDetector(
+          onTap: (){
+            Navigator.pushNamed(context, 'home/home-07-03-create-memorial');
+          },
+          child: Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            color: Color(0xffffffff),
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text('Page Image',
+                      style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Update Page image and background image',
+                      style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xffBDC3C7),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+        Container(
+          height: SizeConfig.blockSizeVertical * 10,
+          color: Color(0xffffffff),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text('Admins',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Add or remove admins of this page',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xffBDC3C7),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+        Container(
+          height: SizeConfig.blockSizeVertical * 10,
+          color: Color(0xffffffff),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text('Family',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Add or remove family of this page',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xffBDC3C7),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+        Container(
+          height: SizeConfig.blockSizeVertical * 10,
+          color: Color(0xffffffff),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text('Friends',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Add or remove friends of this page',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xffBDC3C7),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+        Container(
+          height: SizeConfig.blockSizeVertical * 10,
+          color: Color(0xffffffff),
+          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text('Paypal',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff000000),
+                    ),
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Manage cards that receives the memorial gifts.',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xffBDC3C7),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+        GestureDetector(
+          onTap: () async{
+            await showDialog(context: (context), builder: (build) => DeletePageDialog());
+          },
+          child: Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            color: Color(0xffffffff),
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text('Delete Page',
+                      style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Completely remove the page. This is irreversible',
+                      style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xffBDC3C7),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+        Container(
+          height: SizeConfig.blockSizeVertical * 10,
+          child: Image.asset('assets/icons/logo.png'),
+        ),
+
       ],
     );
   }
