@@ -2,10 +2,10 @@
 
 one:
   user: one
-  memorial: one
-  relationship: MyString
+  page: one
+  page_type: Page
 
 two:
   user: two
-  memorial: two
-  relationship: MyString
+  page: two
+  page_type: Page

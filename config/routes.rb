@@ -31,10 +31,10 @@ Rails.application.routes.draw do
 
   # memorial controller
     # Index memorial
-    get 'memorials/:userId', to: 'memorials#index', as: 'memorialIndex'
+    get 'memorials', to: 'memorials#index', as: 'memorialIndex'
 
     # Show memorial
-    get 'memorials/:id/show', to: 'memorials#show', as: 'memorialShow'
+    get 'memorials/:id', to: 'memorials#show', as: 'memorialShow'
     
     # New Memorial
     get 'memorials/new', to: 'memorials#new'
@@ -53,10 +53,9 @@ Rails.application.routes.draw do
   
   # blm controller
     # Show memorial
-    get 'blm/:id/show', to: 'blm#show', as: 'blmShow'
+    get 'blm/:id', to: 'blm#show', as: 'blmShow'
     
     # New Memorial
-    get 'blm/new', to: 'blm#new'
     post 'blm', to: 'blm#create'
 
     # Memorial details

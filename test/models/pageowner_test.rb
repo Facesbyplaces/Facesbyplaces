@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MemorialUserRelationshipTest < ActiveSupport::TestCase
+class PageownerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
