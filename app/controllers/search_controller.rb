@@ -1,6 +1,8 @@
 class SearchController < ApplicationController
     def posts
-        posts = Post.joins(:page)
+        posts = Post.joins("INNER JOIN memorials ON memorials.id = posts.page_id AND posts.page_type = 'Memorial'")
+                    # .joins("INNER JOIN blms ON blms.id = posts.page_id AND posts.page_type = 'Blm'")
+                    .where("memorials.name LIKE :search", search: params[:keywords])
         
         paginate posts, per_page: numberOfPage
     end
