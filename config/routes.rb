@@ -99,13 +99,16 @@ Rails.application.routes.draw do
       get 'search/post', to: 'admin#searchPost'
 
       # view memorial
-      get 'memorials/:id', to: 'admin#showMemorial'
+      get 'memorials/:id/:page', to: 'admin#showMemorial'
       # remove memorial
-      delete 'memorials/:id', to: 'admin#deleteMemorial'
+      delete 'memorials/:id/:page', to: 'admin#deleteMemorial'
       # search memorial
       get 'search/memorial', to: 'admin#searchMemorial'
 
       # contact user
       post 'contact', to: 'admin#contactUser'
+
+      # all reports
+      get 'reports', to: 'admin#allReports'
     end
 end
