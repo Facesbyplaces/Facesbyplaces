@@ -1,141 +1,151 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class BLMRegister extends StatelessWidget{
 
-  final GlobalKey<MiscInputFieldState> _key1 = GlobalKey<MiscInputFieldState>();
-  final GlobalKey<MiscInputFieldState> _key2 = GlobalKey<MiscInputFieldState>();
-  final GlobalKey<MiscInputFieldState> _key3 = GlobalKey<MiscInputFieldState>();
-  final GlobalKey<MiscInputFieldState> _key4 = GlobalKey<MiscInputFieldState>();
-  final GlobalKey<MiscInputFieldState> _key5 = GlobalKey<MiscInputFieldState>();
-  final GlobalKey<MiscInputFieldState> _key6 = GlobalKey<MiscInputFieldState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      body: Stack(
-          children: [
+    return WillPopScope(
+      onWillPop: () async{
+        return Navigator.canPop(context);
+      },
+      child: GestureDetector(
+        onTap: (){
+          FocusNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: Scaffold(
+          body: Stack(
+            children: [
 
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/icons/background2.png'),
-                  colorFilter: ColorFilter.srgbToLinearGamma(),
-                ),
-              ),
-            ),
+              Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
 
-            Container(
-              height: SizeConfig.screenHeight / 6,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/icons/background-blm.png'),
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
+              Column(
                 children: [
+                  Container(height: SizeConfig.screenHeight / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background-blm.png'),),),),
+                  Expanded(child: Container(),),
+                ],
+              ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+              Column(
+                children: [
+                  SizedBox(height: SizeConfig.screenHeight / 6),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: (){
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5),
-                    ),
-                  ),
+                  Expanded(
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        
+                        Padding(
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Column(
+                            children: [
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                              MiscInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                              
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              
+                              MiscInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
-                  MiscInputField(key: _key1, hintText: 'Your Name', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-                  
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-                  
-                  MiscInputField(key: _key2, hintText: 'Last Name', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              MiscInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
-                  MiscInputField(key: _key3, hintText: 'Mobile #', obscureText: false, type: TextInputType.phone, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              MiscInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
-                  MiscInputField(key: _key4, hintText: 'Email Address', obscureText: false, type: TextInputType.emailAddress, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              MiscInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
-                  MiscInputField(key: _key5, hintText: 'Username', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              MiscInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
-                  MiscInputField(key: _key6, hintText: 'Password', obscureText: true, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: true,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-                  
-                  MaterialButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: (){
-                      if(_key1.currentState.controller.text != '' && _key2.currentState.controller.text != '' && _key3.currentState.controller.text != '' &&
-                        _key4.currentState.controller.text != '' && _key5.currentState.controller.text != '' && _key6.currentState.controller.text != ''
-                      ){
-                        Navigator.pushNamed(context, 'blm/blm-04-verify-email');
-                      }
-                    },
-                    child: Text('Next',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffffffff),
-                      ),
-                    ),
-                    minWidth: SizeConfig.screenWidth / 2,
-                    height: SizeConfig.blockSizeVertical * 7,
-                    shape: StadiumBorder(),
-                    color: Color(0xff000000),
-                  ),
+                              MiscButtonTemplate(
+                                buttonText: 'Next', 
+                                buttonTextStyle: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                                  fontWeight: FontWeight.bold, 
+                                  color: Color(0xffffffff),
+                                ), 
+                                onPressed: (){
+                                  if(_key1.currentState.controller.text != '' || _key2.currentState.controller.text != '' || _key3.currentState.controller.text != '' ||
+                                    _key4.currentState.controller.text != '' || _key5.currentState.controller.text != '' || _key6.currentState.controller.text != ''
+                                  ){
+                                    Navigator.pushNamed(context, 'blm/blm-04-verify-email');
+                                  }
+                                }, 
+                                width: SizeConfig.screenWidth / 2, 
+                                height: SizeConfig.blockSizeVertical * 8, 
+                                buttonColor: Color(0xff000000),
+                              ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                  RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Already have an account? ', 
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            color: Color(0xff000000),
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Already have an account? ', 
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                        color: Color(0xff000000),
+                                      ),
+                                    ),
+
+                                    TextSpan(
+                                      text: 'Login', 
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                        color: Color(0xff04ECFF),
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                      ..onTap = (){
+                                        Navigator.pushNamed(context, 'blm/blm-02-login');
+                                      }
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              
+                            ],
                           ),
-                        ),
-
-                        TextSpan(
-                          text: 'Login', 
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            color: Color(0xff04ECFF),
-                          ),
-                          recognizer: TapGestureRecognizer()
-                          ..onTap = (){
-                            Navigator.pushNamed(context, 'blm/blm-02-login');
-                          }
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-            ),        
-          ],
+
+              Column(
+                children: [
+                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  Align(alignment: Alignment.topLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),),),
+                ],
+              ),
+
+            ],
+          ),
         ),
+      ),
     );
   }
 }

@@ -1,97 +1,96 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:flutter/material.dart';
 
 class HomeCreateMemorial extends StatelessWidget{
 
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key1 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key2 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key3 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key4 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key5 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key6 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key7 = GlobalKey<MiscInputFieldCreateMemorialState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key7 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back, 
-            color: Color(0xffffffff),
-          ), 
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Cry out for the Victims',
-          style: TextStyle(
-            fontSize: SizeConfig.safeBlockHorizontal * 4,
-            fontWeight: FontWeight.bold,
-            color: Color(0xffffffff),
-          ),
-        ),
-        backgroundColor: Color(0xff04ECFF), 
-      ),
-      body: Stack(
-        children: [
-
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                MiscInputFieldCreateMemorial(key: _key1, hintText: 'Relationship', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MiscInputFieldCreateMemorial(key: _key2, hintText: 'Location of the incident', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MiscInputFieldCreateMemorial(key: _key3, hintText: 'Precinct / Station House (Optional)', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MiscInputFieldCreateMemorial(key: _key4, hintText: 'DOB', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MiscInputFieldCreateMemorial(key: _key5, hintText: 'RIP', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MiscInputFieldCreateMemorial(key: _key6, hintText: 'Country', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MiscInputFieldCreateMemorial(key: _key7, hintText: 'State', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                MaterialButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: (){
-                    Navigator.pushNamed(context, 'home/home-07-02-create-memorial');
-                  },
-                  child: Text('Next',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xffffffff),
-                    ),
-                  ),
-                  minWidth: SizeConfig.screenWidth / 2,
-                  height: SizeConfig.blockSizeVertical * 7,
-                  shape: StadiumBorder(),
-                  color: Color(0xff2F353D),
-                ),
-              ],
+    return WillPopScope(
+      onWillPop: () async{
+        return Navigator.canPop(context);
+      },
+      child: GestureDetector(
+        onTap: (){
+          FocusNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back, 
+                color: Color(0xffffffff),
+              ), 
+              onPressed: (){
+                Navigator.pop(context);
+              },
             ),
+            title: Text('Cry out for the Victims',
+              style: TextStyle(
+                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffffffff),
+              ),
+            ),
+            backgroundColor: Color(0xff04ECFF), 
           ),
-        ],
+          body: Stack(
+            children: [
+
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    MiscInputFieldTemplate(key: _key1, labelText: 'Relationship'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldTemplate(key: _key2, labelText: 'Location of the incident'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldTemplate(key: _key3, labelText: 'Precinct / Station House (Optional)'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldTemplate(key: _key4, labelText: 'DOB'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldTemplate(key: _key5, labelText: 'RIP'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldTemplate(key: _key6, labelText: 'Country'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldTemplate(key: _key7, labelText: 'State'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                    MiscButtonTemplate(onPressed: (){Navigator.pushNamed(context, 'home/home-07-02-create-memorial');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8),
+
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -99,116 +98,76 @@ class HomeCreateMemorial extends StatelessWidget{
 
 class HomeCreateMemorial2 extends StatelessWidget{
 
-  static final GlobalKey<MiscInputFieldCreateMemorialState> _key1 = GlobalKey<MiscInputFieldCreateMemorialState>();
-  static final TextEditingController _controller1 = TextEditingController();
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscInputFieldMultiTextTemplateState>();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back, 
-            color: Color(0xffffffff),
-          ), 
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Cry out for the Victims',
-          style: TextStyle(
-            fontSize: SizeConfig.safeBlockHorizontal * 4,
-            fontWeight: FontWeight.bold,
-            color: Color(0xffffffff),
-          ),
-        ),
-        backgroundColor: Color(0xff04ECFF), 
-      ),
-      body: Stack(
-        children: [
-
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                MiscInputFieldCreateMemorial(key: _key1, hintText: 'Name of your Memorial Page', obscureText: false, type: TextInputType.text, maxLines: 1, readOnly: false, includeSuffixIcon: false,),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                Text('Share your Story',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff000000),
-                  ),
-                ),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                TextFormField(
-                  controller: _controller1,
-                  cursorColor: Color(0xff000000),
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                    fillColor: Color(0xffffffff),
-                    filled: true,
-                    alignLabelWithHint: true,
-                    labelStyle: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff000000).withOpacity(.5),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xff000000),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xff000000),
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                Text('Describe the events that happened to your love one.',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff000000),
-                  ),
-                ),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 10,),
-
-                MaterialButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: (){
-                    Navigator.pushNamed(context, 'home/home-07-03-create-memorial');
-                  },
-                  child: Text('Next',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xffffffff),
-                    ),
-                  ),
-                  minWidth: SizeConfig.screenWidth / 2,
-                  height: SizeConfig.blockSizeVertical * 7,
-                  shape: StadiumBorder(),
-                  color: Color(0xff2F353D),
-                ),
-
-              ],
+    return WillPopScope(
+      onWillPop: () async{
+        return Navigator.canPop(context);
+      },
+      child: GestureDetector(
+        onTap: (){
+          FocusNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back, 
+                color: Color(0xffffffff),
+              ), 
+              onPressed: (){
+                Navigator.pop(context);
+              },
             ),
+            title: Text('Cry out for the Victims',
+              style: TextStyle(
+                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                fontWeight: FontWeight.bold,
+                color: Color(0xffffffff),
+              ),
+            ),
+            backgroundColor: Color(0xff04ECFF), 
           ),
-        ],
+          body: Stack(
+            children: [
+
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+
+                    MiscInputFieldTemplate(key: _key1, labelText: 'Name of your Memorial Page'),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                    Text('Share your Story', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    MiscInputFieldMultiTextTemplate(key: _key2,),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                    Text('Describe the events that happened to your love one.',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+
+                    SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+                    MiscButtonTemplate(onPressed: (){Navigator.pushNamed(context, 'home/home-07-03-create-memorial');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8),
+
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -243,7 +202,6 @@ class HomeCreateMemorial3 extends StatelessWidget{
       ),
       body: Stack(
         children: [
-          Container(),
 
           Container(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -253,13 +211,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                Text('Upload or Select an Image',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff000000),
-                  ),
-                ),
+                Text('Upload or Select an Image', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -310,23 +262,11 @@ class HomeCreateMemorial3 extends StatelessWidget{
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                Text('Upload the best photo of the person in the memorial page.',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 3,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff000000),
-                  ),
-                ),
+                Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                Text('Choose Background',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff000000),
-                  ),
-                ),
+                Text('Choose Background', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -355,33 +295,11 @@ class HomeCreateMemorial3 extends StatelessWidget{
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                Text('Upload your own or select from the pre-mades.',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 3,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff000000),
-                  ),
-                ),
+                Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                MaterialButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: (){
-                    Navigator.pushNamed(context, 'home/home-08-profile');
-                  },
-                  child: Text('Speak Out',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xffffffff),
-                    ),
-                  ),
-                  minWidth: SizeConfig.screenWidth / 2,
-                  height: SizeConfig.blockSizeVertical * 7,
-                  shape: StadiumBorder(),
-                  color: Color(0xff2F353D),
-                ),
+                MiscButtonTemplate(onPressed: (){Navigator.pushNamed(context, 'home/home-08-profile');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8),
 
               ],
             ),

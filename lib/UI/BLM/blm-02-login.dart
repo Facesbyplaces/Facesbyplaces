@@ -1,8 +1,14 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class BLMLogin extends StatelessWidget {
+
+  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +17,7 @@ class BLMLogin extends StatelessWidget {
       body: Stack(
         children: [
 
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/icons/background2.png'),
-              ),
-            ),
-          ),
+          MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
           SingleChildScrollView(
             child: Padding(
@@ -28,101 +27,25 @@ class BLMLogin extends StatelessWidget {
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: (){
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),
-                    ),
-                  ),
+                  Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                  Container(
-                    padding: EdgeInsets.only(left: 20.0),
-                    alignment: Alignment.centerLeft,
-                    child: Text('Login', 
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 8,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff000000)
-                      ),
-                    ),
-                  ),
+                  Container(padding: EdgeInsets.only(left: 20.0), alignment: Alignment.centerLeft, child: Text('Login', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
                   Padding(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+
                     child: Row(
                       children: [
-                        Expanded(
-                          child: MaterialButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: (){},
-                            minWidth: SizeConfig.screenWidth / 1.5,
-                            height: SizeConfig.blockSizeVertical * 8,
-                            shape: StadiumBorder(),
-                            color: Color(0xff3A559F),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: SizeConfig.blockSizeVertical * 5,
-                                    child: Image.asset('assets/icons/facebook.png'),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 5),
-                                    child: Text('Facebook',
-                                      style: TextStyle(
-                                        color: Color(0xffffffff)
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8,),),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 
                         Expanded(
-                          child: MaterialButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: (){},
-                            minWidth: SizeConfig.screenWidth / 1.5,
-                            height: SizeConfig.blockSizeVertical * 8,
-                            shape: StadiumBorder(),
-                            color: Color(0xffF5F5F5),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    height: SizeConfig.blockSizeVertical * 5,
-                                    child: Image.asset('assets/icons/google.png'),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 10,),
-                                    child: Text('Google',
-                                      style: TextStyle(
-                                        color: Color(0xff000000)
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          child: MiscButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8, image: 'assets/icons/google.png'),
                         ),
                       ],
                     ),
@@ -130,79 +53,23 @@ class BLMLogin extends StatelessWidget {
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                  Center(
-                    child: Text('or log in with email', 
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff000000)
-                      ),
-                    ),
-                  ),
+                  Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: TextFormField(
-                      cursorColor: Color(0xff000000),
-                      decoration: InputDecoration(
-                        hintText: 'Email Address',
-                        hintStyle: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ),
+                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: TextFormField(
-                      obscureText: true,
-                      cursorColor: Color(0xff000000),
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ),
-                  ),
+                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Forgot Password?',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
+                  Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: TextStyle(decoration: TextDecoration.underline, fontSize: SizeConfig.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w400,),),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                  MaterialButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: (){},
-                    child: Text('Login',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xffffffff),
-                      ),
-                    ),
-                    minWidth: SizeConfig.screenWidth / 2,
-                    height: SizeConfig.blockSizeVertical * 8,
-                    shape: StadiumBorder(),
-                    color: Color(0xff4EC9D4),
-                  ),
+                  MiscButtonTemplate(buttonText: 'Login', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){Navigator.pushReplacementNamed(context, 'home/');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff4EC9D4),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -232,6 +99,7 @@ class BLMLogin extends StatelessWidget {
                       ],
                     ),
                   ),
+                  
                 ],
               ),
             ),
