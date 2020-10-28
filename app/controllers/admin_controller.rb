@@ -42,8 +42,10 @@ class AdminController < ApplicationController
     end
 
     def searchPost
-        posts = Post.joins(:memorial).where('memorials.name LIKE :search or memorials.country LIKE :search or memorials.cemetery LIKE :search or posts.body LIKE :search or posts.location LIKE :search', search: params[:keywords]).select('posts.*')
-
+        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type")
+                    .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
+                    .select("posts.*")
+        
         paginate posts, per_page: numberOfPage
     end
     
@@ -51,19 +53,16 @@ class AdminController < ApplicationController
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
 
         if memorial
-            if params[:page] == "Blm"
-                render json: BlmSerializer.new( memorial.page ).attributes
-            else
-                render json: MemorialSerializer.new( memorial.page ).attributes
-            end
+            render json: memorial
         else
             render json: {errors: "Page not found"}
         end
     end
 
     def searchMemorial
-        memorials = Memorial.where('name LIKE :search or country LIKE :search or cemetery LIKE :search', search: params[:keywords])
-        
+        memorials = Pageowner.joins("INNER JOIN #{pages_sql} ON pages.id = pageowners.page_id AND pageowners.page_type = pages.object_type")
+                            .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
+                            
         paginate memorials, per_page: numberOfPage
     end
 
@@ -75,5 +74,17 @@ class AdminController < ApplicationController
         else
             render json: {status: "page not found"}
         end
+    end
+
+    def allReports
+        reports = Report.all 
+
+        paginate reports, per_page: numberOfPage
+    end
+
+    def showReport
+        report = Report.find(params[:id])
+
+        render json: report
     end
 end

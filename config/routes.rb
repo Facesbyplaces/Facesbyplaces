@@ -117,5 +117,7 @@ Rails.application.routes.draw do
 
       # all reports
       get 'reports', to: 'admin#allReports'
+      # show report
+      get 'reports/:id', to: 'admin#showReport'
     end
 end
