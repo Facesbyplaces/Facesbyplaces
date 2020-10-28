@@ -36,4 +36,12 @@ class ApplicationController < ActionController::Base
             end
             return true
         end
+        
+        def pages_sql
+            "(
+                SELECT id, 'Memorial' AS object_type, name, country, description FROM memorials
+                UNION
+                SELECT id, 'Blm' AS object_type, name, country, description FROM blms
+            ) AS pages"
+        end
 end
