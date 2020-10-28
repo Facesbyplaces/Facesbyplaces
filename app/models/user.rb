@@ -11,5 +11,5 @@ class User < ActiveRecord::Base
   
   has_many :memorials
   has_many :posts
-  has_many :report
+  has_many :shares
 end

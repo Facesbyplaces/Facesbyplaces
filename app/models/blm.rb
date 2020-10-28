@@ -13,6 +13,9 @@ class Blm < ApplicationRecord
   # Posts of this page
   has_many :posts, as: :page, dependent: :destroy
 
+  #Reports of this page
+  has_many :reports, as: :page, dependent: :destroy
+
   # page name
   def page_name
       "blm"
