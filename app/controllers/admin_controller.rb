@@ -75,4 +75,16 @@ class AdminController < ApplicationController
             render json: {status: "page not found"}
         end
     end
+
+    def allReports
+        reports = Report.all 
+
+        paginate reports, per_page: numberOfPage
+    end
+
+    def showReport
+        report = Report.find(params[:id])
+
+        render json: report
+    end
 end
