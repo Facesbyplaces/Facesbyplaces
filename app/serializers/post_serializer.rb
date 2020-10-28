@@ -8,6 +8,20 @@ class PostSerializer < ActiveModel::Serializer
     end
   end
 
+  def page
+    if object.page.page_name == "blm" # BLM pages
+      ActiveModel::SerializableResource.new(
+        object.page, 
+        each_serializer: BlmSerializer
+      )
+    else  # Memorial pages
+      ActiveModel::SerializableResource.new(
+        object.page, 
+        each_serializer: MemorialSerializer
+      )
+    end
+  end
+
   private
   def getImage(images)
     sendImages = []

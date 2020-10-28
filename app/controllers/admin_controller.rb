@@ -48,9 +48,17 @@ class AdminController < ApplicationController
     end
     
     def showMemorial
-        memorial = Memorial.find(params[:id])
+        memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
 
-        render json: memorial
+        if memorial
+            if params[:page] == "Blm"
+                render json: BlmSerializer.new( memorial.page ).attributes
+            else
+                render json: MemorialSerializer.new( memorial.page ).attributes
+            end
+        else
+            render json: {errors: "Page not found"}
+        end
     end
 
     def searchMemorial
@@ -60,9 +68,12 @@ class AdminController < ApplicationController
     end
 
     def deleteMemorial
-        memorial = Memorial.find(params[:id])
-        memorial.destroy 
-
-        render json: {status: :deleted}
+        memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
+        if memorial
+            memorial.page.destroy 
+            render json: {status: :deleted}
+        else
+            render json: {status: "page not found"}
+        end
     end
 end
