@@ -1,20 +1,9 @@
-import 'dart:ui';
-import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-05-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-06-custom-drawings.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-
-class HomeUserProfileDetails extends StatefulWidget{
-
-  @override
-  HomeUserProfileDetailsState createState() => HomeUserProfileDetailsState();
-}
-
-class HomeUserProfileDetailsState extends State<HomeUserProfileDetails>{
+class HomeUserProfileDetails extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +15,14 @@ class HomeUserProfileDetailsState extends State<HomeUserProfileDetails>{
           Stack(
             children: [
 
-              Container(
-                height: SizeConfig.screenHeight,
-                color: Color(0xffECF0F1),
-              ),
+              Container(height: SizeConfig.screenHeight, color: Color(0xffECF0F1),),
 
               Container(
                 height: SizeConfig.screenHeight / 2.5,
                 child: Stack(
                   children: [
 
-                    CustomPaint(
-                      size: Size.infinite,
-                      painter: CurvePainter(),
-                    ),
+                    CustomPaint(size: Size.infinite, painter: CurvePainter(),),
 
                     Positioned(
                       top: SizeConfig.blockSizeVertical * 8,
@@ -63,7 +46,7 @@ class HomeUserProfileDetailsState extends State<HomeUserProfileDetails>{
                         alignment: Alignment.centerLeft,
                           child: IconButton(
                           onPressed: (){
-                            context.bloc<BlocHomeUpdateCubit>().modify(14);
+                            Navigator.pop(context);
                           },
                           icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                         ),

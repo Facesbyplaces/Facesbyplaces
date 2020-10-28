@@ -1,14 +1,12 @@
-import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-04-extra.dart';
-import 'package:flutter/material.dart';
+import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter/material.dart';
 import 'home-05-02-suggested.dart';
 import 'home-05-03-nearby.dart';
 import 'home-05-04-blm.dart';
-
-import 'package:flutter_share/flutter_share.dart';
 
 Future<void> share() async {
   await FlutterShare.share(
@@ -68,20 +66,14 @@ class HomePost extends StatelessWidget{
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-            onPressed: (){
-              Navigator.pop(context);
-            },
+            onPressed: (){Navigator.pop(context);},
           ),
           backgroundColor: Color(0xff04ECFF),
         ),
         body: Column(
           children: [
 
-            Container(
-              color: Color(0xffffffff),
-              alignment: Alignment.center,
-              child: MiscTabs(),
-            ),
+            MiscTabs(),
 
             Container(
               child: BlocBuilder<BlocHomeUpdateToggleFeed, int>(
@@ -125,8 +117,7 @@ class HomePost extends StatelessWidget{
                             ],
                           ),
                         ),
-                      );
-                      break;
+                      ); break;
                     }
                   }());
                 },
@@ -170,10 +161,7 @@ class HomePostExtended extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10.0),
               height: SizeConfig.blockSizeVertical * 60,
-              decoration: BoxDecoration(
-                color: Color(0xffffffff),
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
+              decoration: BoxDecoration(color: Color(0xffffffff), borderRadius: BorderRadius.all(Radius.circular(15),),),
               child: Column(
                 children: [
                   Expanded(
@@ -181,12 +169,9 @@ class HomePostExtended extends StatelessWidget {
                       children: [
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){
-                              Navigator.pushNamed(context, 'home/home-12-memorial-list');
-                            },
-                            child: CircleAvatar(
-                              backgroundImage: AssetImage('assets/icons/profile1.png'),
-                            ),
+                            onTap: (){Navigator.pushNamed(context, 'home/home-12-memorial-list');},
+
+                            child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
                           ),
                         ),
                         Expanded(
@@ -196,28 +181,10 @@ class HomePostExtended extends StatelessWidget {
                             child: Column(
                               children: [
                                 Expanded(
-                                  child: Align(
-                                    alignment: Alignment.bottomLeft,
-                                    child: Text('Black Lives Matter',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff000000),
-                                      ),
-                                    ),
-                                  ),
+                                  child: Align(alignment: Alignment.bottomLeft,child: Text('Black Lives Matter', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
                                 ),
                                 Expanded(
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text('an hour ago',
-                                      style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xffaaaaaa)
-                                      ),
-                                    ),
-                                  ),
+                                  child: Align(alignment: Alignment.topLeft, child: Text('an hour ago', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w400, color: Color(0xffaaaaaa),),),),
                                 ),
                               ],
                             ),
@@ -363,12 +330,7 @@ class HomePostExtended extends StatelessWidget {
 
                                 SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                Text('24.3K',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
+                                Text('24.3K', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                               ],
                             ),
                           ),
@@ -385,12 +347,7 @@ class HomePostExtended extends StatelessWidget {
 
                                 SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                Text('14.3K',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
+                                Text('14.3K', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                               ],
                             ),
                           ),
@@ -399,10 +356,7 @@ class HomePostExtended extends StatelessWidget {
                           flex: 2,
                           child: GestureDetector(
                             onTap: (){},
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),
-                            ),
+                            child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
                           ),
                         ),
                       ],

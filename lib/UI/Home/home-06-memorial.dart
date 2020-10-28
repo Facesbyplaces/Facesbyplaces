@@ -15,31 +15,21 @@ class HomeMemorialProfile extends StatelessWidget{
           Stack(
             children: [
               
-              Container(
-                height: SizeConfig.screenHeight / 3,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('assets/icons/background3.png'),
-                  ),
-                ),
-              ),
+              Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background3.png'),),),),
 
               Column(
                 children: [
-                  Container(height: SizeConfig.screenHeight / 3.5, color: Colors.transparent,
-
+                  Container(
+                    height: SizeConfig.screenHeight / 3.5,
+                    color: Colors.transparent,
                     child: Container(
                       padding: EdgeInsets.only(left: 20.0, top: 20.0),
                       alignment: Alignment.topLeft,
                       child: IconButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
+                        onPressed: (){Navigator.pop(context);},
                         icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
                       ),
                     ),
-
                   ), // INVISIBLE SPACE ABOVE THE BACKGROUND
 
                   Container(
@@ -52,15 +42,7 @@ class HomeMemorialProfile extends StatelessWidget{
                       children: [
                         SizedBox(height: SizeConfig.blockSizeVertical * 12,),
 
-                        Center(
-                          child: Text('Karen Cruz',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 5,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                        ),
+                        Center(child: Text('Karen Cruz', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 

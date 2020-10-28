@@ -1,6 +1,8 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-12-appbar.dart';
 import 'package:flutter/material.dart';
 
 class HomeCreateMemorial extends StatelessWidget{
@@ -28,27 +30,11 @@ class HomeCreateMemorial extends StatelessWidget{
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back, 
-                color: Color(0xffffffff),
-              ), 
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-            title: Text('Cry out for the Victims',
-              style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
-                fontWeight: FontWeight.bold,
-                color: Color(0xffffffff),
-              ),
-            ),
-            backgroundColor: Color(0xff04ECFF), 
-          ),
+          appBar: MiscAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
           body: Stack(
             children: [
+
+              MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
               Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -88,6 +74,7 @@ class HomeCreateMemorial extends StatelessWidget{
                   ],
                 ),
               ),
+
             ],
           ),
         ),
@@ -116,27 +103,11 @@ class HomeCreateMemorial2 extends StatelessWidget{
           }
         },
         child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back, 
-                color: Color(0xffffffff),
-              ), 
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
-            title: Text('Cry out for the Victims',
-              style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
-                fontWeight: FontWeight.bold,
-                color: Color(0xffffffff),
-              ),
-            ),
-            backgroundColor: Color(0xff04ECFF), 
-          ),
+          appBar: MiscAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
           body: Stack(
             children: [
+
+              MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
               Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -181,27 +152,11 @@ class HomeCreateMemorial3 extends StatelessWidget{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back, 
-            color: Color(0xffffffff),
-          ), 
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Cry out for the Victims',
-          style: TextStyle(
-            fontSize: SizeConfig.safeBlockHorizontal * 4,
-            fontWeight: FontWeight.bold,
-            color: Color(0xffffffff),
-          ),
-        ),
-        backgroundColor: Color(0xff04ECFF), 
-      ),
+      appBar: MiscAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
       body: Stack(
         children: [
+
+          MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
           Container(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),

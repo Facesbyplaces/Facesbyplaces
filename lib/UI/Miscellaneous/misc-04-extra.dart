@@ -12,77 +12,76 @@ class MiscBottomSheet extends StatelessWidget {
     return BlocBuilder<BlocHomeUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
-          child: Container(
-            height: SizeConfig.blockSizeVertical * 10,
-            alignment: Alignment.center,
-            width: SizeConfig.screenWidth,
-            child: ToggleButtons(
-              borderWidth: 0,
-              renderBorder: false,
-              selectedColor: Color(0xff04ECFF),
-              fillColor: Colors.transparent,
-              color: Color(0xffB1B1B1),
-              children: [
+          height: SizeConfig.blockSizeVertical * 10,
+          alignment: Alignment.center,
+          width: SizeConfig.screenWidth,
+          child: ToggleButtons(
+            borderWidth: 0,
+            renderBorder: false,
+            selectedColor: Color(0xff04ECFF),
+            fillColor: Colors.transparent,
+            color: Color(0xffB1B1B1),
+            children: [
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.fire, size: SizeConfig.blockSizeVertical * 4,),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Feed', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
-                    ],
-                  ),
+              Container(
+                width: SizeConfig.screenWidth / 4,
+                child: Column(
+                  children: [
+                    Icon(MdiIcons.fire, size: SizeConfig.blockSizeVertical * 4,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                    Text('Feed', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                  ],
                 ),
+              ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.graveStone, size: SizeConfig.blockSizeVertical * 4,),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Memorials', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
-                    ],
-                  ),
+              Container(
+                width: SizeConfig.screenWidth / 4,
+                child: Column(
+                  children: [
+                    Icon(MdiIcons.graveStone, size: SizeConfig.blockSizeVertical * 4,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                    Text('Memorials', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                  ],
                 ),
+              ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.post, size: SizeConfig.blockSizeVertical * 4,),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
-                    ],
-                  ),
+              Container(
+                width: SizeConfig.screenWidth / 4,
+                child: Column(
+                  children: [
+                    Icon(MdiIcons.post, size: SizeConfig.blockSizeVertical * 4,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                    Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                  ],
                 ),
+              ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.heart, size: SizeConfig.blockSizeVertical * 4,),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Notification', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
-                    ],
-                  ),
+              Container(
+                width: SizeConfig.screenWidth / 4,
+                child: Column(
+                  children: [
+                    Icon(MdiIcons.heart, size: SizeConfig.blockSizeVertical * 4,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                    Text('Notification', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                  ],
                 ),
+              ),
 
-              ],
-              onPressed: (int index){
-                context.bloc<BlocHomeUpdateToggle>().updateToggle(index);
-                switch(index){
-                  case 0: context.bloc<BlocHomeUpdateCubit>().modify(0); break;
-                  case 1: context.bloc<BlocHomeUpdateCubit>().modify(1); break;
-                  case 2: context.bloc<BlocHomeUpdateCubit>().modify(2); break;
-                  case 3: context.bloc<BlocHomeUpdateCubit>().modify(3); break;
-                }
-              },
-              isSelected: context.bloc<BlocHomeUpdateToggle>().state,
-            ),
-            color: Color(0xffffffff),
+            ],
+            onPressed: (int index){
+              context.bloc<BlocHomeUpdateToggle>().updateToggle(index);
+              switch(index){
+                case 0: context.bloc<BlocHomeUpdateCubit>().modify(0); break;
+                case 1: context.bloc<BlocHomeUpdateCubit>().modify(1); break;
+                case 2: context.bloc<BlocHomeUpdateCubit>().modify(2); break;
+                case 3: context.bloc<BlocHomeUpdateCubit>().modify(3); break;
+              }
+            },
+            isSelected: context.bloc<BlocHomeUpdateToggle>().state,
           ),
-        decoration: BoxDecoration(
+          
+          decoration: BoxDecoration(
+            color: Color(0xffffffff),
             boxShadow: <BoxShadow>[
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -109,7 +108,7 @@ class MiscTabs extends StatelessWidget {
           alignment: Alignment.center,
           width: SizeConfig.screenWidth,
           height: SizeConfig.blockSizeVertical * 8,
-
+          color: Color(0xffffffff),
           child: DefaultTabController(
             length: 4,
             child: TabBar(
@@ -232,34 +231,34 @@ class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
 
 }
 
-class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
+// class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
 
-  final AppBar appBar;
-  final Widget title;
-  final List<Widget> actions;
-  final Color color;
-  final Color backgroundColor;
-  final Widget leading;
+//   final AppBar appBar;
+//   final Widget title;
+//   final List<Widget> actions;
+//   final Color color;
+//   final Color backgroundColor;
+//   final Widget leading;
 
-  const MiscAppBarTemplate({this.appBar, this.title, this.actions, this.backgroundColor, this.color, this.leading});
+//   const MiscAppBarTemplate({this.appBar, this.title, this.actions, this.backgroundColor, this.color, this.leading});
 
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return AppBar(
-      leading: Builder(
-        builder: (context) => leading,
-      ),
-      title: title,
-      actions: actions,
-      backgroundColor: backgroundColor,
-      centerTitle: true,
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     SizeConfig.init(context);
+//     return AppBar(
+//       leading: Builder(
+//         builder: (context) => leading,
+//       ),
+//       title: title,
+//       actions: actions,
+//       backgroundColor: backgroundColor,
+//       centerTitle: true,
+//     );
+//   }
 
-  @override
-  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
-}
+//   @override
+//   Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
+// }
 
 class MiscJoinButton extends StatelessWidget{
 
@@ -654,13 +653,13 @@ class MiscUserProfileDraggableTabsList extends StatelessWidget{
   }
 }
 
-class MiscToggleSwitch extends StatefulWidget {
+class MiscToggleSwitchTemplate extends StatefulWidget {
 
   @override
-  _MiscToggleSwitchState createState() => _MiscToggleSwitchState();
+  MiscToggleSwitchTemplateState createState() => MiscToggleSwitchTemplateState();
 }
 
-class _MiscToggleSwitchState extends State<MiscToggleSwitch> {
+class MiscToggleSwitchTemplateState extends State<MiscToggleSwitchTemplate> {
   bool isSwitched = false;
 
   @override

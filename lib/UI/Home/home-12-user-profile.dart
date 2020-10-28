@@ -5,14 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/misc-06-custom-drawings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
-class HomeUserProfile extends StatefulWidget{
-
-  @override
-  HomeUserProfileState createState() => HomeUserProfileState();
-}
-
-class HomeUserProfileState extends State<HomeUserProfile>{
+class HomeUserProfile extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -21,29 +14,16 @@ class HomeUserProfileState extends State<HomeUserProfile>{
       body: Stack(
         children: [
 
-          Container(
-            height: SizeConfig.screenHeight,
-            color: Color(0xffffffff),
-          ),
+          Container(height: SizeConfig.screenHeight, color: Color(0xffffffff),),
 
           Container(
             height: SizeConfig.screenHeight / 2.5,
             child: Stack(
               children: [
 
-                CustomPaint(
-                  size: Size.infinite,
-                  painter: CurvePainter(),
-                ),
+                CustomPaint(size: Size.infinite, painter: CurvePainter(),),
+                Positioned(top: SizeConfig.blockSizeVertical * 8, left: SizeConfig.screenWidth / 4.2, child: CircleAvatar(radius: SizeConfig.blockSizeVertical * 15, backgroundImage: AssetImage('assets/icons/profile1.png'),),),
 
-                Positioned(
-                  top: SizeConfig.blockSizeVertical * 8,
-                  left: SizeConfig.screenWidth / 4.2,
-                  child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 15,
-                    backgroundImage: AssetImage('assets/icons/profile1.png'),
-                  ),
-                ),
               ],
             ),
           ),

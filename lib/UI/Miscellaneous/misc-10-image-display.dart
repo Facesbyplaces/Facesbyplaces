@@ -25,5 +25,31 @@ class MiscImageDisplayTemplate extends StatelessWidget{
   }
 }
 
+class MiscImageDisplayFeedTemplate extends StatelessWidget{
 
+  final String image;
+  final double backSize;
+  final double frontSize;
+  final Color backgroundColor;
 
+  MiscImageDisplayFeedTemplate({
+    this.image = 'assets/icons/blm-image5.png',
+    this.backSize = 20,
+    this.frontSize = 15,
+    this.backgroundColor = const Color(0xff000000),
+  });
+
+  @override
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return CircleAvatar(
+      radius: backSize,
+      backgroundColor: backgroundColor,
+      child: CircleAvatar(
+        radius: frontSize,
+        backgroundColor: Colors.transparent,
+        backgroundImage: AssetImage(image),
+      ),
+    );
+  }
+}

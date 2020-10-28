@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 import 'misc-04-extra.dart';
-
+import 'misc-07-button.dart';
 
 class MiscUserProfileDraggableSwitchTabs extends StatefulWidget {
 
@@ -483,13 +483,9 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
       child: Draggable(
         feedback: draggable(),
         onDraggableCanceled: (Velocity velocity, Offset offset){
-          if(position.dy > 350.0){
+          if(offset.dy > 10 && offset.dy < (SizeConfig.screenHeight - 100)){
             setState(() {
               position = offset;
-            });
-          }else{
-            setState(() {
-              position = Offset(0.0, height - 100);
             });
           }
         },
@@ -509,15 +505,17 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         decoration: BoxDecoration(
           color: Color(0xffffffff),
-          // color: Colors.red,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(100)),
         ),
         child: Column(
           children: [
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-            Expanded(
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, 'home/home-14-user-update-details');
+              },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
                 color: Color(0xffffffff),
@@ -557,152 +555,133 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                color: Color(0xffffffff),
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text('Password',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
+
+            Container(
+              height: SizeConfig.blockSizeVertical * 10,
+              color: Color(0xffffffff),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Password',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff000000),
                         ),
                       ),
                     ),
+                  ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Change your login password',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xffBDC3C7),
-                          ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Change your login password',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xffBDC3C7),
                         ),
                       ),
                     ),
+                  ),
 
-                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
-                  ],
-                ),
+                  Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                ],
               ),
             ),
-            Expanded(
-              child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                color: Color(0xffffffff),
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text('Other Info',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
+
+            Container(
+              height: SizeConfig.blockSizeVertical * 10,
+              color: Color(0xffffffff),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Other Info',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff000000),
                         ),
                       ),
                     ),
+                  ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Optional informations you can share',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xffBDC3C7),
-                          ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Optional informations you can share',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xffBDC3C7),
                         ),
                       ),
                     ),
+                  ),
 
-                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
-                  ],
-                ),
+                  Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                ],
               ),
             ),
-            Expanded(
-              child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                color: Color(0xffffffff),
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text('Privacy Settings',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
+
+            Container(
+              height: SizeConfig.blockSizeVertical * 10,
+              color: Color(0xffffffff),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text('Privacy Settings',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff000000),
                         ),
                       ),
                     ),
+                  ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('Control what others see',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xffBDC3C7),
-                          ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text('Control what others see',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xffBDC3C7),
                         ),
                       ),
                     ),
+                  ),
 
-                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),),
-                  ]
-                ),
+                  Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),),
+                ]
               ),
             ),
-            Expanded(
-              child: Container(),
-            ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            Expanded(child: Container(),),
 
-            MaterialButton(
-              padding: EdgeInsets.zero,
-              onPressed: (){
-                
-              },
-              child: Text('Logout',
-                style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 5,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xffffffff),
-                ),
-              ),
-              minWidth: SizeConfig.screenWidth / 2,
-              height: SizeConfig.blockSizeVertical * 7,
-              shape: StadiumBorder(),
-              color: Color(0xff04ECFF),
-            ),
+            MiscButtonTemplate(buttonText: 'Logout', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff04ECFF),),
 
+            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+            
+            Text('V.1.1.0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            Expanded(child: Container(),),
 
           ],
         ),
