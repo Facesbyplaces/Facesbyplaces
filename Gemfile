@@ -64,6 +64,9 @@ gem 'active_model_serializers'
 gem 'pagy'
 gem 'pager_api'
 
+# Social Share 
+gem 'social-share-button'
+
 # Use Omniauth Facebook plugin
 gem 'omniauth-facebook', '~> 4.0'
 

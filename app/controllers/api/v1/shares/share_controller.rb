@@ -10,7 +10,7 @@ class Api::V1::Shares::ShareController < ApplicationController
             page_type:      @share.page_type,
             page_id:        @share.page_id,
             user_id:        @share.user_id,  
-            post_id:           @share.post_id,
+            post_id:        @share.post_id,
             description:    @share.description,
             status: 200}, status: 200
     end
