@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
     def index  
-        posts = Post.where(user_id: user_id())
+        posts = Post.where(user_id: user)
         
         paginate posts, per_page: numberOfPage
     end

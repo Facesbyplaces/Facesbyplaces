@@ -14,12 +14,19 @@ Rails.application.routes.draw do
       namespace :reports do 
         resources :report, only: [:create]
       end
+      namespace :shares do 
+        resources :share, only: [:create, :index]
+      end
     end
   end
   
 
 
   default_url_options :host => "http://localhost:3000"
+
+  # shares controller
+    #user's shares
+    get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
 
   # main pages controller
     # user's feed
