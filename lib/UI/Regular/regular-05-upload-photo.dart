@@ -111,7 +111,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                               ),
                               Expanded(
                                 child: Center(
-                                  child: Text('Select a photo',
+                                  child: Text('Add a photo',
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
                                       fontWeight: FontWeight.w300,
@@ -163,6 +163,43 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                       );
                     }
                   ),
+
+                  Expanded(child: Container(),),
+
+                  RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Connect / ', 
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff888888),
+                          ),
+                        ),
+
+                        TextSpan(
+                          text: 'Remember / ',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff888888),
+                          ),
+                        ),
+
+                        TextSpan(
+                          text: 'Honor',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff888888),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                 ],
               ),

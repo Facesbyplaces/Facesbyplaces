@@ -1,12 +1,12 @@
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-09-message.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BLMVerifyEmail extends StatelessWidget{
 
@@ -41,7 +41,10 @@ class BLMVerifyEmail extends StatelessWidget{
             body: Stack(
               children: [
 
-                MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                SingleChildScrollView(
+                  physics: NeverScrollableScrollPhysics(),
+                  child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                ),
 
                 BlocBuilder<BlocShowMessage, bool>(
                   builder: (context, state){
@@ -125,8 +128,7 @@ class BLMVerifyEmail extends StatelessWidget{
                                   decoration: TextDecoration.underline,
                                 ),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = (){
-                                  }
+                                  ..onTap = (){}
                               ),
                             ],
                           ),
@@ -136,40 +138,74 @@ class BLMVerifyEmail extends StatelessWidget{
 
                         BlocBuilder<BlocUpdateButtonText, int>(
                           builder: (context, state){
-                            return state == 3
-                            ? MiscButtonTemplate(
-                              buttonText: 'Sign Up', 
-                              buttonTextStyle: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                                fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
-                              ), 
-                              onPressed: (){
-                                Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                                Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
-                              }, 
-                              width: SizeConfig.screenWidth / 2, 
-                              height: SizeConfig.blockSizeVertical * 8, 
-                              buttonColor: Color(0xff04ECFF),
-                            ) : MiscButtonTemplate(
-                              buttonText: 'Next', 
-                              buttonTextStyle: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                                fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
-                              ), 
-                              onPressed: (){
+                            return 
+
+
+                          MiscButtonTemplate(
+                            // buttonText: 'Sign Up', 
+                            buttonText: state == 3
+                            ? 'Sign Up'
+                            : 'Next',
+                            buttonTextStyle: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                              fontWeight: FontWeight.bold, 
+                              color: Color(0xffffffff),
+                            ), 
+                            onPressed: (){
+                              // Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
+                              // Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
+
+                              if(state != 3){
                                 context.bloc<BlocShowMessage>().showMessage();
                                 Duration duration = Duration(seconds: 2);
 
                                 Future.delayed(duration, (){
                                   context.bloc<BlocShowMessage>().showMessage();
                                 });
-                              }, 
-                              width: SizeConfig.screenWidth / 2, 
-                              height: SizeConfig.blockSizeVertical * 8, 
-                              buttonColor: Color(0xff000000),
-                            );
+                              }else{
+                                Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
+                                Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
+                              }
+                            }, 
+                            width: SizeConfig.screenWidth / 2, 
+                            height: SizeConfig.blockSizeVertical * 8, 
+                            buttonColor: Color(0xff000000),
+                          );
+
+
+                            // ? MiscButtonTemplate(
+                            //   buttonText: 'Sign Up', 
+                            //   buttonTextStyle: TextStyle(
+                            //     fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            //     fontWeight: FontWeight.bold, 
+                            //     color: Color(0xffffffff),
+                            //   ), 
+                            //   onPressed: (){
+                            //     Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
+                            //     Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
+                            //   }, 
+                            //   width: SizeConfig.screenWidth / 2, 
+                            //   height: SizeConfig.blockSizeVertical * 8, 
+                            //   buttonColor: Color(0xff04ECFF),
+                            // ) : MiscButtonTemplate(
+                            //   buttonText: 'Next', 
+                            //   buttonTextStyle: TextStyle(
+                            //     fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            //     fontWeight: FontWeight.bold, 
+                            //     color: Color(0xffffffff),
+                            //   ), 
+                            //   onPressed: (){
+                            //     context.bloc<BlocShowMessage>().showMessage();
+                            //     Duration duration = Duration(seconds: 2);
+
+                            //     Future.delayed(duration, (){
+                            //       context.bloc<BlocShowMessage>().showMessage();
+                            //     });
+                            //   }, 
+                            //   width: SizeConfig.screenWidth / 2, 
+                            //   height: SizeConfig.blockSizeVertical * 8, 
+                            //   buttonColor: Color(0xff000000),
+                            // );
                           }
                         ),
 

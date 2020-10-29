@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:flutter/gestures.dart';
@@ -25,13 +26,13 @@ class RegularLogin extends StatelessWidget {
           }
         },
         child: Scaffold(
-          body: Stack(
-            children: [
+          body: SingleChildScrollView(
+            child: Stack(
+              children: [
 
-              MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
 
-              SingleChildScrollView(
-                child: Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Column(
                     children: [
@@ -79,7 +80,31 @@ class RegularLogin extends StatelessWidget {
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                      MiscButtonTemplate(buttonText: 'Login', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){Navigator.pushReplacementNamed(context, 'home/');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff4EC9D4),),
+                      MiscButtonTemplate(
+                        buttonText: 'Login', 
+                        buttonTextStyle: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xffffffff),
+                        ), 
+                        onPressed: () async{
+                          
+                          bool validEmail = false;
+                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
+
+                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                          }else if(!validEmail){
+                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                          }else{
+                            Navigator.pushReplacementNamed(context, 'home/');
+                          }
+                          
+                        }, 
+                        width: SizeConfig.screenWidth / 2, 
+                        height: SizeConfig.blockSizeVertical * 8, 
+                        buttonColor: Color(0xff4EC9D4),
+                      ),
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -113,9 +138,9 @@ class RegularLogin extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

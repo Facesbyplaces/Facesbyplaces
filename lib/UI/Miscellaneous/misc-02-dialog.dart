@@ -98,7 +98,7 @@ class UploadFrom extends StatelessWidget{
   }
 }
 
-class DeletePageDialog extends StatelessWidget{
+class MiscDeletePageDialog extends StatelessWidget{
 
   Widget build(BuildContext context){
     SizeConfig.init(context);
@@ -177,34 +177,25 @@ class DeletePageDialog extends StatelessWidget{
   }
 }
 
-class AlertUserDialogConfirmation extends StatelessWidget{
+class MiscAlertDialog extends StatelessWidget{
 
   final String title;
   final String content;
-  final String confirm_1;
-  final String confirm_2;
-  final TextStyle titleStyle;
-  final TextStyle contentStyle;
-  final TextStyle confirmStyle_1;
-  final TextStyle confirmStyle_2;
+  final String confirmText;
+  final Color color;
 
-  AlertUserDialogConfirmation({
-    this.title, 
-    this.content, 
-    this.confirm_1, // YES
-    this.confirm_2, // NO
-    this.titleStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color(0xff000000),), 
-    this.contentStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),),
-    this.confirmStyle_1 = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffFF0000),),
-    this.confirmStyle_2 = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),
+  MiscAlertDialog({
+    this.title = '',
+    this.content = '',
+    this.confirmText = 'OK',
+    this.color = Colors.red,
   });
 
-  @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Dialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(5))
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5))
       ),
       child: Container(
         height: SizeConfig.screenHeight / 4,
@@ -212,46 +203,45 @@ class AlertUserDialogConfirmation extends StatelessWidget{
         child: Column(
           children: [
             Expanded(
-              child: Center(
+              child: Align(
+                alignment: Alignment.centerLeft,
                 child: Text(title,
-                  style: titleStyle,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                  ),
                 ),
               ),
             ),
             Expanded(
-              child: Text(content,
-                textAlign: TextAlign.center,
-                style: contentStyle,
+              child: Center(
+                child: Text(content,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff000000),
+                  ),
+                ),
               ),
             ),
             Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: (){
-                        print('Successfully deleted!');
-                        Navigator.pop(context);
-                      },
-                      child: Text(confirm_1,
-                        textAlign: TextAlign.center,
-                        style: confirmStyle_1,
-                      ),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(confirmText,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      fontWeight: FontWeight.bold,
+                      color: color,
                     ),
                   ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: (){
-                        print('Cancelled!');
-                        Navigator.pop(context);
-                      },
-                      child: Text(confirm_2,
-                        textAlign: TextAlign.center,
-                        style: confirmStyle_2,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ],
@@ -260,3 +250,89 @@ class AlertUserDialogConfirmation extends StatelessWidget{
     );
   }
 }
+
+
+// class AlertUserDialogConfirmation extends StatelessWidget{
+
+//   final String title;
+//   final String content;
+//   final String confirm_1;
+//   final String confirm_2;
+//   final TextStyle titleStyle;
+//   final TextStyle contentStyle;
+//   final TextStyle confirmStyle_1;
+//   final TextStyle confirmStyle_2;
+
+//   AlertUserDialogConfirmation({
+//     this.title, 
+//     this.content, 
+//     this.confirm_1, // YES
+//     this.confirm_2, // NO
+//     this.titleStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color(0xff000000),), 
+//     this.contentStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000),),
+//     this.confirmStyle_1 = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffFF0000),),
+//     this.confirmStyle_2 = const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),
+//   });
+
+//   @override
+//   Widget build(BuildContext context){
+//     SizeConfig.init(context);
+//     return Dialog(
+//       shape: const RoundedRectangleBorder(
+//         borderRadius: const BorderRadius.all(Radius.circular(5))
+//       ),
+//       child: Container(
+//         height: SizeConfig.screenHeight / 4,
+//         padding: EdgeInsets.all(20.0),
+//         child: Column(
+//           children: [
+//             Expanded(
+//               child: Center(
+//                 child: Text(title,
+//                   style: titleStyle,
+//                 ),
+//               ),
+//             ),
+//             Expanded(
+//               child: Text(content,
+//                 textAlign: TextAlign.center,
+//                 style: contentStyle,
+//               ),
+//             ),
+//             Expanded(
+//               child: Row(
+//                 children: [
+//                   Expanded(
+//                     child: GestureDetector(
+//                       onTap: (){
+//                         print('Successfully deleted!');
+//                         Navigator.pop(context);
+//                       },
+//                       child: Text(confirm_1,
+//                         textAlign: TextAlign.center,
+//                         style: confirmStyle_1,
+//                       ),
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: GestureDetector(
+//                       onTap: (){
+//                         print('Cancelled!');
+//                         Navigator.pop(context);
+//                       },
+//                       child: Text(confirm_2,
+//                         textAlign: TextAlign.center,
+//                         style: confirmStyle_2,
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+

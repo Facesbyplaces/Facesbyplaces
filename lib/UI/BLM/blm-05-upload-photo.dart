@@ -138,7 +138,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                       return MiscButtonTemplate(
                         buttonText: state == 1
                         ? 'Sign Up'
-                        : 'Next',
+                        : 'Speak Now',
                         buttonTextStyle: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 5, 
                           fontWeight: FontWeight.bold, 
@@ -160,7 +160,9 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                         }, 
                         width: SizeConfig.screenWidth / 2, 
                         height: SizeConfig.blockSizeVertical * 8, 
-                        buttonColor: Color(0xff04ECFF),
+                        buttonColor: state == 1
+                        ? Color(0xff04ECFF)
+                        : Color(0xff000000),
                       );
                     }
                   ),

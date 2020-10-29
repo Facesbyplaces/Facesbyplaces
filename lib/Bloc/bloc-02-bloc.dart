@@ -111,3 +111,10 @@ class BlocHomeUpdateListBLM extends Cubit<List<bool>>{
 
   void updateList(int number) => emit(changeState(number));
 }
+
+
+class BlocHomeStoryType extends Cubit<int>{
+
+  BlocHomeStoryType() : super(0);
+  void updateToggle(int index) => emit(index);
+}

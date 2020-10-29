@@ -41,7 +41,7 @@ class RegularVerifyEmail extends StatelessWidget{
             body: Stack(
               children: [
 
-                MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                 BlocBuilder<BlocShowMessage, bool>(
                   builder: (context, state){
@@ -136,41 +136,33 @@ class RegularVerifyEmail extends StatelessWidget{
 
                         BlocBuilder<BlocUpdateButtonText, int>(
                           builder: (context, state){
-                            return state == 3
-                            ? MiscButtonTemplate(
-                              buttonText: 'Sign Up', 
+                            return MiscButtonTemplate(
+                              buttonText: state != 3
+                              ? 'Next'
+                              : 'Sign Up',
                               buttonTextStyle: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 5, 
                                 fontWeight: FontWeight.bold, 
                                 color: Color(0xffffffff),
                               ), 
                               onPressed: (){
-                                Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                                Navigator.pushNamed(context, 'regular/regular-05-upload-photo'); 
-                              }, 
-                              width: SizeConfig.screenWidth / 2, 
-                              height: SizeConfig.blockSizeVertical * 8, 
-                              buttonColor: Color(0xff04ECFF),
-                            ) : MiscButtonTemplate(
-                              buttonText: 'Next', 
-                              buttonTextStyle: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                                fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
-                              ), 
-                              onPressed: (){
-                                context.bloc<BlocShowMessage>().showMessage();
-                                Duration duration = Duration(seconds: 2);
-
-                                Future.delayed(duration, (){
+                                if(state != 3){
                                   context.bloc<BlocShowMessage>().showMessage();
-                                });
+                                  Duration duration = Duration(seconds: 2);
+
+                                  Future.delayed(duration, (){
+                                    context.bloc<BlocShowMessage>().showMessage();
+                                  });
+                                }else{
+                                  Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
+                                  Navigator.pushNamed(context, 'regular/regular-05-upload-photo'); 
+                                }
                               }, 
                               width: SizeConfig.screenWidth / 2, 
-                              height: SizeConfig.blockSizeVertical * 8, 
-                              buttonColor: Color(0xff000000),
+                              height: SizeConfig.blockSizeVertical * 8,
+                              buttonColor: Color(0xff04ECFF),
                             );
-                          }
+                          },
                         ),
 
                       ],

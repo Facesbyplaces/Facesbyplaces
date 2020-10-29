@@ -25,13 +25,15 @@ class RegularJoin extends StatelessWidget {
 
                 Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 40, width: SizeConfig.blockSizeVertical * 20,),),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 25,),
+                Expanded(child: Container(),),
 
                 Center(child: Text('All Lives Matter', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xffffffff),),),),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
                 MiscButtonTemplate(buttonText: 'Next', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){Navigator.pushNamed(context, 'regular/regular-02-login');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff04ECFF),),
+
+                Expanded(child: Container(),),
 
               ],
             ),

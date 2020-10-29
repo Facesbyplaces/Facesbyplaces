@@ -3,6 +3,8 @@ import 'Miscellaneous/misc-07-button.dart';
 import 'Miscellaneous/misc-08-background.dart';
 import 'package:flutter/material.dart';
 
+const double pi = 3.1415926535897932;
+
 class UIGetStarted extends StatelessWidget {
 
   @override
@@ -13,6 +15,384 @@ class UIGetStarted extends StatelessWidget {
         children: [
 
           MiscBackgroundTemplate(),
+
+          Container(
+            height: SizeConfig.screenHeight / 2,
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 0,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image3.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    color: Color(0xffffffff),
+                    height: (SizeConfig.screenHeight / 2) / 4,
+                    child: Image.asset('assets/icons/frontpage-image5.png'),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    color: Color(0xffffffff),
+                    height: (SizeConfig.screenHeight / 2) / 4,
+                    child: Image.asset('assets/icons/frontpage-image7.png'),
+                  ),
+                ),
+
+
+
+                Positioned(
+                  left: SizeConfig.screenWidth / 7.5,
+                  child: Transform.rotate(
+                    angle: pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image3.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  left: SizeConfig.screenWidth / 7.5,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  left: SizeConfig.screenWidth / 7.5,
+                  child: Transform.rotate(
+                    angle: pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: SizeConfig.screenWidth / 7.5,
+                  child: Transform.rotate(
+                    angle: -pi / 80,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image5.png'),
+                    ),
+                  ),
+                ),
+
+
+
+                Positioned(
+                  left: SizeConfig.screenWidth / 3.5,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  left: SizeConfig.screenWidth / 3.5,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image5.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  left: SizeConfig.screenWidth / 3.5,
+                  child: Transform.rotate(
+                    angle: pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image3.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: SizeConfig.screenWidth / 3.5,
+                  child: Transform.rotate(
+                    angle: pi / 45,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+
+
+
+                Positioned(
+                  right: SizeConfig.screenWidth / 3,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  right: SizeConfig.screenWidth / 3,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  right: SizeConfig.screenWidth / 3,
+                  child: Transform.rotate(
+                    angle: pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image5.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: SizeConfig.screenWidth / 3,
+                  child: Transform.rotate(
+                    angle: pi / 50,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+
+
+
+                Positioned(
+                  right: SizeConfig.screenWidth / 4.5,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image3.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  right: SizeConfig.screenWidth / 4.5,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  right: SizeConfig.screenWidth / 4.5,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image5.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: SizeConfig.screenWidth / 4.5,
+                  child: Transform.rotate(
+                    angle: -pi / 50,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+
+
+
+                Positioned(
+                  right: SizeConfig.screenWidth / 10,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  right: SizeConfig.screenWidth / 10,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image5.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  right: SizeConfig.screenWidth / 10,
+                  child: Transform.rotate(
+                    angle: -pi / 12,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image3.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: SizeConfig.screenWidth / 10,
+                  child: Transform.rotate(
+                    angle: pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+
+
+
+
+                Positioned(
+                  right: -20,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: (SizeConfig.screenHeight / 2) / 4,
+                  right: -20,
+                  child: Transform.rotate(
+                    angle: -pi / 30,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image7.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: (SizeConfig.screenHeight / 2) / 4,
+                  right: -20,
+                  child: Transform.rotate(
+                    angle: -pi / 12,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image4.png'),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: -20,
+                  child: Transform.rotate(
+                    angle: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(5),
+                      color: Color(0xffffffff),
+                      height: (SizeConfig.screenHeight / 2) / 4,
+                      child: Image.asset('assets/icons/frontpage-image5.png'),
+                    ),
+                  ),
+                ),
+
+
+
+              ],
+            ),
+          ),
 
           Column(
             children: [

@@ -353,17 +353,21 @@ class MiscInputFieldMultiTextTemplate extends StatefulWidget{
   final TextStyle labelTextStyle;
   final TextInputType type;
   final int maxLines;
+  final bool readOnly;
+  final Color backgroundColor;
 
   MiscInputFieldMultiTextTemplate({
     Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
     this.type = TextInputType.text, 
-    this.maxLines = 10, 
+    this.maxLines = 10,
+    this.readOnly = false,
+    this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
   
 
-  MiscInputFieldMultiTextTemplateState createState() => MiscInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines);
+  MiscInputFieldMultiTextTemplateState createState() => MiscInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
 }
 
 
@@ -372,8 +376,10 @@ class MiscInputFieldMultiTextTemplateState extends State<MiscInputFieldMultiText
   final TextStyle labelTextStyle;
   final TextInputType type;
   final int maxLines;
+  final bool readOnly;
+  final Color backgroundColor;
 
-  MiscInputFieldMultiTextTemplateState({this.labelText, this.labelTextStyle, this.type, this.maxLines});
+  MiscInputFieldMultiTextTemplateState({this.labelText, this.labelTextStyle, this.type, this.maxLines, this.readOnly, this.backgroundColor});
 
   TextEditingController controller = TextEditingController();
 
@@ -385,8 +391,9 @@ class MiscInputFieldMultiTextTemplateState extends State<MiscInputFieldMultiText
       cursorColor: Color(0xff000000),
       maxLines: maxLines,
       keyboardType: type,
+      readOnly: readOnly,
       decoration: InputDecoration(
-        fillColor: Color(0xffffffff),
+        fillColor: backgroundColor,
         filled: true,
         alignLabelWithHint: true,
         labelText: labelText,

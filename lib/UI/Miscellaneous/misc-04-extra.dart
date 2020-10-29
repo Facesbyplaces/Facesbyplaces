@@ -680,3 +680,63 @@ class MiscToggleSwitchTemplateState extends State<MiscToggleSwitchTemplate> {
     );
   }
 }
+
+
+
+class MiscStoryType extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return BlocBuilder<BlocHomeStoryType, int>(
+      builder: (context, state){
+        return Container(
+          height: SizeConfig.blockSizeVertical * 8,
+          child: DefaultTabController(
+            length: 3,
+            child: TabBar(
+              isScrollable: false,
+              labelColor: Color(0xff04ECFF),
+              unselectedLabelColor: Color(0xff000000),
+              indicatorColor: Colors.transparent,
+              onTap: (int number){
+                print('The value of number is $number');
+                context.bloc<BlocHomeStoryType>().updateToggle(number);
+              },
+              tabs: [
+
+                Center(
+                  child: Text('Text',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+
+                Center(child: 
+                  Text('Video',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+
+                Center(
+                  child: Text('Slide',
+                    style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        );
+      }
+    );
+  }
+}
