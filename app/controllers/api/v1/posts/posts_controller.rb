@@ -1,5 +1,4 @@
-class PostsController < ApplicationController
-    before_action :authenticate_user!
+class Api::V1::Posts::PostsController < ApplicationController
 
     def index  
         posts = Post.where(:user_id => current_user.id)

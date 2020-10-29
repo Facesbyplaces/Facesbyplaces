@@ -1,4 +1,4 @@
-class MemorialsController < ApplicationController
+class Api::V1::Pages::MemorialsController < ApplicationController
 
     before_action :authenticate_user!
 
