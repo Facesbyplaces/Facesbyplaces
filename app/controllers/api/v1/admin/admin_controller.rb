@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class Api::V1::Admin::AdminController < ApplicationController
 
     def allUsers
         users = User.all 

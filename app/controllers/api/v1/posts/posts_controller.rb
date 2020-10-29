@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Api::V1::Posts::PostsController < ApplicationController
 
     def index  
         posts = Post.where(user_id: user)

@@ -1,4 +1,4 @@
-class MainpagesController < ApplicationController
+class Api::V1::Mainpages::MainpagesController < ApplicationController
 
     # user's feed
     def feed

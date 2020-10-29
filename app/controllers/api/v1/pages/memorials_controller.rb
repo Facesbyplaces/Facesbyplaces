@@ -1,4 +1,4 @@
-class MemorialsController < ApplicationController
+class Api::V1::Pages::MemorialsController < ApplicationController
 
     def show
         memorial = Memorial.find(params[:id])

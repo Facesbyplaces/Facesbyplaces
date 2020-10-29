@@ -1,4 +1,4 @@
-class BlmController < ApplicationController
+class Api::V1::Pages::BlmController < ApplicationController
 
     def show
         blm = Blm.find(params[:id])
