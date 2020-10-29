@@ -20,31 +20,37 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find(params[:id])
-        @user.update(update_params)
 
-        render json: {
-            success: true, 
-            first_name: @user.first_name, 
-            last_name: @user.last_name, 
-            phone_number: @user.phone_number,
-            email: @user.email,
-            username: @user.username,
-            image: @user.image,
-            status: 200}, status: 200
+        if current_user.present?
+            @user = User.find(params[:id])
+            @user.update(update_params)
+
+            render json: {
+                success: true, 
+                first_name: @user.first_name, 
+                last_name: @user.last_name, 
+                phone_number: @user.phone_number,
+                email: @user.email,
+                username: @user.username,
+                image: @user.image,
+                status: 200}, status: 200
+        end
+
     end
 
     def show
-        @user = User.find(params[:id])
+        if current_user.present?
+            @user = User.find(params[:id])
 
-        render json: {
-            success: true, 
-            first_name: @user.first_name, 
-            last_name: @user.last_name, 
-            phone_number: @user.phone_number,
-            email: @user.email,
-            username: @user.username,
-            image: @user.image,
-            status: 200}, status: 200
+            render json: {
+                success: true, 
+                first_name: @user.first_name, 
+                last_name: @user.last_name, 
+                phone_number: @user.phone_number,
+                email: @user.email,
+                username: @user.username,
+                image: @user.image,
+                status: 200}, status: 200
+        end
     end
 end

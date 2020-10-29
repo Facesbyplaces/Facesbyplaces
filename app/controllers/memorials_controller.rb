@@ -1,5 +1,7 @@
 class MemorialsController < ApplicationController
 
+    before_action :authenticate_user!
+
     def show
         memorial = Memorial.find(params[:id])
         
