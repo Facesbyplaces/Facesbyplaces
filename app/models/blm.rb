@@ -20,6 +20,8 @@ class Blm < ApplicationRecord
   has_many :followers, as: :page, dependent: :destroy
   has_many :users, through: :followers
 
+  resourcify
+
   # page name
   def page_name
       "blm"

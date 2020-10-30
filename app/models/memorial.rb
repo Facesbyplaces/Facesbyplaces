@@ -1,6 +1,4 @@
 class Memorial < ApplicationRecord
-    # belongs_to :user
-
     # media upload for creating memorial
     has_one_attached :backgroundImage
     has_one_attached :profileImage
@@ -21,6 +19,8 @@ class Memorial < ApplicationRecord
     # Followers of this page
     has_many :followers, as: :page, dependent: :destroy
     has_many :users, through: :followers
+
+    resourcify
 
     # page name
     def page_name

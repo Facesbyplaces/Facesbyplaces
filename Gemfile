@@ -63,6 +63,8 @@ gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'pagy'
 gem 'pager_api'
+gem 'cancancan'
+gem 'rolify'
 
 # Social Share 
 gem 'social-share-button'
