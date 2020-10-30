@@ -5,16 +5,25 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   end
 
   def create
-    "ENTER"
-    super do |resource|
-       logger.info ">>>Error: #{resource.errors.full_messages}"
-        @user = resource
-        code = rand(0..999)
-        @user.verification_code = code
-        @user.save!
 
-        # Tell the UserMailer to send a welcome email after save
-        VerificationMailer.verify_email(@user).deliver_now
+    if guest?
+
+      @user = guest_user
+      session[:userid] = @user.id
+      session[:guest_user_id] = nil
+      redirect_to user_path(@user)
+    else
+      "ENTER"
+      super do |resource|
+        logger.info ">>>Error: #{resource.errors.full_messages}"
+          @user = resource
+          code = rand(100..999)
+          @user.verification_code = code
+          @user.save!
+
+          # Tell the UserMailer to send a welcome email after save
+          VerificationMailer.verify_email(@user).deliver_now
+      end
     end
       
   end
