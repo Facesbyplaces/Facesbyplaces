@@ -12,7 +12,7 @@ class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
   MiscAppBarTemplate({
     this.appBar,
     this.backgroundColor = const Color(0xff04ECFF),
-    this.leadingIcon = const Icon(Icons.arrow_back, color: Color(0xffffffff),),
+    this.leadingIcon = const Icon(Icons.arrow_back),
     this.leadingAction,
     this.title = const Text('Cry out for the Victims', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xffffffff),),),
     this.actions,

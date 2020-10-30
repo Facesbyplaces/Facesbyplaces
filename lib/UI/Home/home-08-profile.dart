@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-14-post-display.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
@@ -342,10 +342,9 @@ class HomeProfile extends StatelessWidget{
 
                         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-
                         Container(
                           padding: EdgeInsets.all(10.0),
-                          color: Color(0xffeeeeee),
+                          color: Color(0xffffffff),
                           child: Column(
                             children: [
                               MiscPostDisplayTemplate(),

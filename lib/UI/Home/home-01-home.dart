@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'home-02-home-extended.dart';
 import 'home-04-search.dart';
 import 'home-05-01-post.dart';
@@ -11,6 +10,10 @@ import 'home-11-page-details.dart';
 import 'home-12-user-profile.dart';
 import 'home-13-user-details.dart';
 import 'home-14-user-update-details.dart';
+import 'package:flutter/material.dart';
+
+import 'home-15-change-password.dart';
+import 'home-16-other-details.dart';
 
 class HomeScreen extends StatelessWidget{
 
@@ -34,6 +37,9 @@ class HomeScreen extends StatelessWidget{
         'home/home-12-memorial-list': (BuildContext context) => HomeUserProfile(),
         'home/home-13-user-details': (BuildContext context) => HomeUserProfileDetails(),
         'home/home-14-user-update-details': (BuildContext context) => HomeUserUpdateDetails(),
+        'home/home-15-change-password': (BuildContext context) => HomeUserChangePassword(),
+        'home/home-16-other-details': (BuildContext context) => HomeUserOtherDetails(), 
+        
       },
     );
   }

@@ -11,7 +11,18 @@ class MiscPostDisplayTemplate extends StatelessWidget{
         Container(
           padding: EdgeInsets.all(10.0),
           height: SizeConfig.blockSizeVertical * 60,
-          decoration: BoxDecoration(color: Color(0xffffffff), borderRadius: BorderRadius.all(Radius.circular(15),),),
+          decoration: BoxDecoration(
+            color: Color(0xffffffff),
+            borderRadius: BorderRadius.all(Radius.circular(15),),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(0, 0)
+              ),
+            ],
+          ),
           child: Column(
             children: [
               Expanded(

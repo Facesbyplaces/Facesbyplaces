@@ -1,8 +1,8 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -106,7 +106,7 @@ class RegularLogin extends StatelessWidget {
                         buttonColor: Color(0xff4EC9D4),
                       ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
                       RichText(
                         text: TextSpan(
@@ -130,6 +130,41 @@ class RegularLogin extends StatelessWidget {
                               ..onTap = (){
                                 Navigator.pushNamed(context, 'regular/regular-03-register');
                               }
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+
+                      RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Connect    /    ', 
+                              style: TextStyle(
+                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xff888888),
+                              ),
+                            ),
+
+                            TextSpan(
+                              text: 'Remember    /    ',
+                              style: TextStyle(
+                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xff888888),
+                              ),
+                            ),
+
+                            TextSpan(
+                              text: 'Honor',
+                              style: TextStyle(
+                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xff888888),
+                              ),
                             ),
                           ],
                         ),

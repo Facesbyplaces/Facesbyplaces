@@ -118,3 +118,9 @@ class BlocHomeStoryType extends Cubit<int>{
   BlocHomeStoryType() : super(0);
   void updateToggle(int index) => emit(index);
 }
+
+class BlocHomeBackgroundImage extends Cubit<int>{
+
+  BlocHomeBackgroundImage() : super(0);
+  void updateToggle(int index) => emit(index);
+}

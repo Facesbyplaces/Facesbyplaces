@@ -1,6 +1,6 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-12-appbar.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class HomePageDetails extends StatelessWidget{

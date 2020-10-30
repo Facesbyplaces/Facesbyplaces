@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'UI/BLM/blm-01-join.dart';
-import 'UI/BLM/blm-02-login.dart';
-import 'UI/BLM/blm-03-register.dart';
-import 'UI/BLM/blm-04-verify-email.dart';
-import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
 import 'UI/Regular/regular-04-verify-email.dart';
 import 'UI/Regular/regular-05-upload-photo.dart';
+import 'UI/BLM/blm-01-join.dart';
+import 'UI/BLM/blm-02-login.dart';
+import 'UI/BLM/blm-03-register.dart';
+import 'UI/BLM/blm-04-verify-email.dart';
+import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/Home/home-01-home.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
 
 void main(){
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
       title: 'Faces by Places',

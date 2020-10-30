@@ -1,9 +1,9 @@
-import 'dart:ui';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-05-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-06-custom-drawings.dart';
-import 'package:flutter/material.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class HomeUserProfile extends StatelessWidget{
 

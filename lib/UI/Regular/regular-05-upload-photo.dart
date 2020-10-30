@@ -1,12 +1,12 @@
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-09-message.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:io';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'dart:io';
 
 class RegularUploadPhoto extends StatefulWidget{
 
@@ -16,14 +16,24 @@ class RegularUploadPhoto extends StatefulWidget{
 class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
   File _image;
-  final _picker = ImagePicker();
+  final picker = ImagePicker();
 
   Future getImage() async{
-    final pickedFile = await _picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     if(pickedFile != null){
       setState(() {
         _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future openCamera() async{
+    final profilePicture = await picker.getImage(source: ImageSource.camera);
+
+    if(profilePicture != null){
+      setState(() {
+        _image = File(profilePicture.path);
       });
     }
   }
@@ -76,7 +86,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                             choice = 0;
                           }else{
                             if(choice == 1){
-                              // .....
+                              await openCamera();
                             }else{
                               await getImage();
                             }

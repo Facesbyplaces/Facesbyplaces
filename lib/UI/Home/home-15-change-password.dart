@@ -4,13 +4,10 @@ import 'package:facesbyplaces/UI/Miscellaneous/misc-12-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserUpdateDetails extends StatelessWidget{
+class HomeUserChangePassword extends StatelessWidget{
 
   final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,7 @@ class HomeUserUpdateDetails extends StatelessWidget{
         child: Scaffold(
           appBar: MiscAppBarTemplate(
             appBar: AppBar(), 
-            title: Text('Account Details', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Change Password', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
             leadingAction: (){Navigator.pop(context);},
           ),
           body: SingleChildScrollView(
@@ -39,23 +36,11 @@ class HomeUserUpdateDetails extends StatelessWidget{
               child: Column(
                 children: [
 
-                  MiscInputFieldTemplate(key: _key1, labelText: 'First Name'),
+                  MiscInputFieldTemplate(key: _key1, labelText: 'Current Password', obscureText: true,),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  MiscInputFieldTemplate(key: _key2, labelText: 'Last Name'),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                  MiscInputFieldTemplate(key: _key3, labelText: 'Email Address'),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                  MiscInputFieldTemplate(key: _key4, labelText: 'Mobile Number'),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                  MiscInputFieldTemplate(key: _key5, labelText: 'Security Question'),
+                  MiscInputFieldTemplate(key: _key2, labelText: 'New Password', obscureText: true,),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -63,7 +48,7 @@ class HomeUserUpdateDetails extends StatelessWidget{
 
                   MiscButtonTemplate(buttonText: 'Update', onPressed: (){Navigator.pushNamed(context, 'home/home-13-user-details');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff04ECFF),),
 
-                  Expanded(child: Container(),),
+                  SizedBox(height: SizeConfig.blockSizeVertical * 20,),
 
                 ],
               ),

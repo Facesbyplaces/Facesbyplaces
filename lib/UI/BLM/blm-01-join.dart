@@ -1,7 +1,7 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-10-image-display.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class BLMJoin extends StatelessWidget {

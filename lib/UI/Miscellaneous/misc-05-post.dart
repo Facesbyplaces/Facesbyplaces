@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import '../ui-01-get-started.dart';
 import 'misc-04-extra.dart';
 import 'misc-07-button.dart';
 
@@ -121,7 +122,6 @@ class MiscUserProfileDraggableSwitchTabsState extends State<MiscUserProfileDragg
               ),
             ),
 
-
             SizedBox(height: SizeConfig.blockSizeVertical * 10,),
             
           ],
@@ -158,7 +158,6 @@ class MiscDraggablePost extends StatelessWidget{
                         Expanded(
                           child: GestureDetector(
                             onTap: (){
-                              // context.bloc<BlocHomeUpdateCubit>().modify(14);
                             },
                             child: CircleAvatar(
                               backgroundImage: AssetImage('assets/icons/profile1.png'),
@@ -402,51 +401,49 @@ class MiscDraggableMemorials extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return ListView.separated(
-        shrinkWrap: true,
-        itemCount: 5,
-
-        itemBuilder: (context, index){
-          if(index == 0){
-            return Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              color: Color(0xffeeeeee),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Owned',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff000000),
-                  ),
+      shrinkWrap: true,
+      itemCount: 5,
+      itemBuilder: (context, index){
+        if(index == 0){
+          return Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            color: Color(0xffffffff),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Owned',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000),
                 ),
               ),
-            );
-          }else if(index == 3){
-            return Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              color: Color(0xffeeeeee),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Followed',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff000000),
-                  ),
+            ),
+          );
+        }else if(index == 3){
+          return Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            color: Color(0xffffffff),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Followed',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000),
                 ),
               ),
-            );
-          }else{
-            return MiscUserProfileDraggableTabsList(index: index, tab: 0,);
-          }
-          
-        },
-        separatorBuilder: (context, index){
-          return Divider(height: 1, color: Colors.grey,);
-        },
-      // ),
+            ),
+          );
+        }else{
+          return MiscUserProfileDraggableTabsList(index: index, tab: 0,);
+        }
+        
+      },
+      separatorBuilder: (context, index){
+        return Divider(height: 1, color: Colors.grey,);
+      },
     );
   }
 }
@@ -556,81 +553,91 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
               ),
             ),
 
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              color: Color(0xffffffff),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Password',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, 'home/home-15-change-password');
+              },
+              child: Container(
+                height: SizeConfig.blockSizeVertical * 10,
+                color: Color(0xffffffff),
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text('Password',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff000000),
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Change your login password',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xffBDC3C7),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text('Change your login password',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xffBDC3C7),
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
-                ],
+                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                  ],
+                ),
               ),
             ),
 
-            Container(
-              height: SizeConfig.blockSizeVertical * 10,
-              color: Color(0xffffffff),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Text('Other Info',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff000000),
+            GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, 'home/home-16-other-details');
+              },
+              child: Container(
+                height: SizeConfig.blockSizeVertical * 10,
+                color: Color(0xffffffff),
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text('Other Info',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff000000),
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text('Optional informations you can share',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xffBDC3C7),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text('Optional informations you can share',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xffBDC3C7),
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
-                ],
+                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                  ],
+                ),
               ),
             ),
 
@@ -675,7 +682,19 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
 
             Expanded(child: Container(),),
 
-            MiscButtonTemplate(buttonText: 'Logout', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff04ECFF),),
+            MiscButtonTemplate(
+              buttonText: 'Logout',
+              buttonTextStyle: TextStyle(
+                fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                fontWeight: FontWeight.bold, color: Color(0xffffffff),
+              ), 
+              onPressed: (){
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+              }, 
+              width: SizeConfig.screenWidth / 2, 
+              height: SizeConfig.blockSizeVertical * 8, 
+              buttonColor: Color(0xff04ECFF),
+            ),
 
             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
             

@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

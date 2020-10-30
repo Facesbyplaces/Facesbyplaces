@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/misc-12-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserUpdateDetails extends StatelessWidget{
+class HomeUserOtherDetails extends StatelessWidget{
 
   final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
   final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
@@ -39,23 +39,23 @@ class HomeUserUpdateDetails extends StatelessWidget{
               child: Column(
                 children: [
 
-                  MiscInputFieldTemplate(key: _key1, labelText: 'First Name'),
+                  MiscInputFieldTemplate(key: _key1, labelText: 'Birthdate'),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  MiscInputFieldTemplate(key: _key2, labelText: 'Last Name'),
+                  MiscInputFieldTemplate(key: _key2, labelText: 'Birthplace'),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  MiscInputFieldTemplate(key: _key3, labelText: 'Email Address'),
+                  MiscInputFieldTemplate(key: _key3, labelText: 'Home Address'),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  MiscInputFieldTemplate(key: _key4, labelText: 'Mobile Number'),
+                  MiscInputFieldTemplate(key: _key4, labelText: 'Email'),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  MiscInputFieldTemplate(key: _key5, labelText: 'Security Question'),
+                  MiscInputFieldTemplate(key: _key5, labelText: 'Contact Number'),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
