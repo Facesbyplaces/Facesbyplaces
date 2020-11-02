@@ -124,18 +124,35 @@ class RegularLogin extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xff85DBF1),
+                                color: Color(0xff4EC9D4),
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
                                 Navigator.pushNamed(context, 'regular/regular-03-register');
                               }
                             ),
+
                           ],
                         ),
                       ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushReplacementNamed(context, 'home/');
+                        },
+                        child: Text('Sign in as Guest',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff4EC9D4),
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                       RichText(
                         text: TextSpan(

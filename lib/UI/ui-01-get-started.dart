@@ -423,7 +423,20 @@ class UIGetStarted extends StatelessWidget {
 
               SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-              MiscButtonTemplate(buttonText: 'Get Started', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){Navigator.pushNamed(context, 'ui-02-login');}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff04ECFF),),
+              MiscButtonTemplate(
+                buttonText: 'Get Started', 
+                buttonTextStyle: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                  fontWeight: FontWeight.bold, 
+                  color: Color(0xffffffff),
+                ), 
+                onPressed: (){
+                  Navigator.pushNamed(context, 'ui-02-login');
+                }, 
+                width: SizeConfig.screenWidth / 1.5, 
+                height: SizeConfig.blockSizeVertical * 8, 
+                buttonColor: Color(0xff04ECFF),
+              ),
 
             ],
           ),

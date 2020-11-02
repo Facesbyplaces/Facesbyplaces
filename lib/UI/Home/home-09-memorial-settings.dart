@@ -78,7 +78,7 @@ class HomeMemorialSettingsPage extends StatelessWidget{
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-        MiscSettingDetailTemplate(onTap: ()async{await showDialog(context: (context), builder: (build) => MiscDeletePageDialog());}, titleDetail: 'Delete Page', contentDetail: 'Completely remove the page. This is irreversible'),
+        MiscSettingDetailTemplate(onTap: ()async{await showDialog(context: (context), builder: (build) => MiscConfirmDialog());}, titleDetail: 'Delete Page', contentDetail: 'Completely remove the page. This is irreversible'),
 
         SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 

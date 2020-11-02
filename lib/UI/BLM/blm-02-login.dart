@@ -123,7 +123,7 @@ class BLMLogin extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xff85DBF1),
+                                color: Color(0xff4EC9D4),
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
@@ -131,6 +131,22 @@ class BLMLogin extends StatelessWidget {
                               }
                             ),
                           ],
+                        ),
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushReplacementNamed(context, 'home/');
+                        },
+                        child: Text('Sign in as Guest',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff4EC9D4),
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                       

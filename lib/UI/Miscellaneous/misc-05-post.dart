@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
 import 'package:flutter/material.dart';
 import '../ui-01-get-started.dart';
 import 'misc-04-extra.dart';
@@ -688,8 +689,14 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
                 fontSize: SizeConfig.safeBlockHorizontal * 5, 
                 fontWeight: FontWeight.bold, color: Color(0xffffffff),
               ), 
-              onPressed: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+              onPressed: () async{
+
+                bool logoutResult = await showDialog(context: (context), builder: (build) => MiscConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+
+                if(logoutResult){
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+                }
+
               }, 
               width: SizeConfig.screenWidth / 2, 
               height: SizeConfig.blockSizeVertical * 8, 
