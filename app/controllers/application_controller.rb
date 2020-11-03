@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
         rescue_from ActiveRecord::RecordNotFound, :with => :known_error
         rescue_from Pagy::OverflowError, :with => :lastPage
 
+        rescue_from CanCan::AccessDenied do |exception|
+            render json: {status: exception.message}
+        end
         # # if user is logged in, return current_user, else return guest_user
         # def current_or_guest_user
         #     if current_user

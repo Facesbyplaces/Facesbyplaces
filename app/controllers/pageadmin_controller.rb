@@ -1,2 +1,0 @@
-class PageadminController < ApplicationController
-end

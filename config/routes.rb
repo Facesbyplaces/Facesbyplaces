@@ -64,11 +64,11 @@ Rails.application.routes.draw do
       end
       namespace :posts do
         # Post Index
-        get 'posts/:userId', to: 'posts#index', as: 'postsIndex' 
+        get '/:userId', to: 'posts#index', as: 'postsIndex' 
         # Create Post
-        post 'posts', to: 'posts#create'
+        post '/', to: 'posts#create'
         # Show Post
-        get 'posts/:id', to: 'posts#show'
+        get '/:id', to: 'posts#show'
       end
       namespace :admin do
         # all users
@@ -109,6 +109,16 @@ Rails.application.routes.draw do
       namespace :followers do
         post '/', to: 'followers#follow'
         delete '/', to: 'followers#unfollow'
+      end
+      namespace :pageadmin do
+        post '/', to: 'pageadmin#addAdmin'
+        delete '/', to: 'pageadmin#removeAdmin'
+        
+        post 'addFamily', to: 'pageadmin#addFamily'
+        delete 'removeFamily/:id', to: 'pageadmin#removeFamily'
+        
+        post 'addFriend', to: 'pageadmin#addFriend'
+        delete 'removeFriend/:id', to: 'pageadmin#removeFriend'
       end
     end
   end
