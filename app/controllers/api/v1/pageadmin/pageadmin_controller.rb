@@ -1,4 +1,4 @@
-class PageadminController < ApplicationController
+class Api::V1::Pageadmin::PageadminController < ApplicationController
     before_action :set_up, except: [:removeFamily, :removeFriend]
 
     def addAdmin
