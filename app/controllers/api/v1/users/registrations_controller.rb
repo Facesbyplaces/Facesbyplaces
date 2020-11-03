@@ -5,27 +5,29 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   end
 
   def create
+    @user = sign_up_params ? User.new(sign_up_params) : User.new_guest
+    
+      current_user.move_to(@user) if current_user && current_user.guest?
+      session[:user_id] = @user.id
+      if params[:guest] != true
+        super do |resource|
+          logger.info ">>>Error: #{resource.errors.full_messages}"
+            @user = resource
+            code = rand(100..999)
+            @user.verification_code = code
+            @user.save!
 
-    if guest?
-
-      @user = guest_user
-      session[:userid] = @user.id
-      session[:guest_user_id] = nil
-      redirect_to user_path(@user)
-    else
-      "ENTER"
-      super do |resource|
-        logger.info ">>>Error: #{resource.errors.full_messages}"
-          @user = resource
-          code = rand(100..999)
-          @user.verification_code = code
-          @user.save!
-
-          # Tell the UserMailer to send a welcome email after save
-          VerificationMailer.verify_email(@user).deliver_now
+            # Tell the UserMailer to send a code to verify email after save
+            VerificationMailer.verify_email(@user).deliver_now
+        end
+      else
+        render json: {
+        success: true,
+        user_id:        @user.id,
+        guest:          @user.guest,
+        status: 200}, status: 200
       end
-    end
-      
+
   end
 
 end
