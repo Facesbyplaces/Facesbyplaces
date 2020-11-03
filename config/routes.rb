@@ -120,5 +120,12 @@ Rails.application.routes.draw do
   # shares controller
     #user's shares
     get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
+
+  # page admin
+    post 'pageadmin', to: 'pageadmin#addAdmin'
+    delete 'pageadmin', to: 'pageadmin#removeAdmin'
+    
+    post 'addFamily', to: 'pageadmin#addFamily'
+    delete 'removeFamily', to: 'pageadmin#removeFamily'
   
  end
