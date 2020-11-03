@@ -106,6 +106,10 @@ Rails.application.routes.draw do
         # search memorials
         get 'memorials', to: 'search#memorials'
       end
+      namespace :followers do
+        post '/', to: 'followers#follow'
+        delete '/', to: 'followers#unfollow'
+      end
     end
   end
   

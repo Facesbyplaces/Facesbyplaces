@@ -1,0 +1,2 @@
+class PageadminController < ApplicationController
+end
