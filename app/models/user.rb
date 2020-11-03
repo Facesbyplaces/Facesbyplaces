@@ -1,21 +1,12 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
   rolify
-=======
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
->>>>>>> 26afe749c1b9fd49095153f558a4ed7172ad484b
->>>>>>> 8f127c999b3df3f42d47539db7f9686325e728c4
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
 
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
