@@ -1,5 +1,5 @@
 class PageadminController < ApplicationController
-    before_action :set_up
+    before_action :set_up, except: [:removeFamily, :removeFriend]
 
     def addAdmin
         # Add page admin rights to the user
@@ -21,7 +21,7 @@ class PageadminController < ApplicationController
             family = @page.relationships.new(relationship: params[:relationship], user: @user)
             # save relationship
             if family.save 
-                render json: {status: "Added Successfuly"}
+                render json: {status: "Added Successfuly", relationship_id: family.id}
             else
                 render json: {status: "Error"}
             end
@@ -31,7 +31,13 @@ class PageadminController < ApplicationController
     end
 
     def removeFamily
-        
+        if user().has_role? :pageadmin, @page
+            family = Relationship.find(params[:id])
+            family.destroy 
+            render json: {status: "Deleted Successfully"}
+        else
+            render json: {status: "Access Denied"}
+        end
     end
 
     def addFriend
@@ -40,7 +46,7 @@ class PageadminController < ApplicationController
             friend = @page.relationships.new(relationship: params[:relationship], user: @user)
             # save relationship
             if friend.save 
-                render json: {status: "Added Successfuly"}
+                render json: {status: "Added Successfuly", relationship_id: family.id}
             else
                 render json: {status: "Error"}
             end
@@ -50,7 +56,13 @@ class PageadminController < ApplicationController
     end
 
     def removeFriend
-        
+        if user().has_role? :pageadmin, @page
+            friend = Relationship.find(params[:id])
+            friend.destroy 
+            render json: {status: "Deleted Successfully"}
+        else
+            render json: {status: "Access Denied"}
+        end
     end
 
     private

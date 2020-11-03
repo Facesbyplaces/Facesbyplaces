@@ -126,6 +126,9 @@ Rails.application.routes.draw do
     delete 'pageadmin', to: 'pageadmin#removeAdmin'
     
     post 'addFamily', to: 'pageadmin#addFamily'
-    delete 'removeFamily', to: 'pageadmin#removeFamily'
+    delete 'removeFamily/:id', to: 'pageadmin#removeFamily'
+    
+    post 'addFriend', to: 'pageadmin#addFriend'
+    delete 'removeFriend/:id', to: 'pageadmin#removeFriend'
   
  end
