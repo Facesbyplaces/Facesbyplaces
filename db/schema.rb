@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_10_30_025135) do
-=======
 ActiveRecord::Schema.define(version: 2020_10_30_063930) do
->>>>>>> 8f127c999b3df3f42d47539db7f9686325e728c4
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -70,16 +66,6 @@ ActiveRecord::Schema.define(version: 2020_10_30_063930) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "page_admins", force: :cascade do |t|
-    t.string "page_type", null: false
-    t.integer "page_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["page_type", "page_id"], name: "index_page_admins_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_page_admins_on_user_id"
   end
 
   create_table "pageowners", force: :cascade do |t|
@@ -182,7 +168,7 @@ ActiveRecord::Schema.define(version: 2020_10_30_063930) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
-    t.boolean "guest"
+    t.boolean "guest", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -199,7 +185,6 @@ ActiveRecord::Schema.define(version: 2020_10_30_063930) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "followers", "users"
-  add_foreign_key "page_admins", "users"
   add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users"
