@@ -30,8 +30,9 @@ class HomeUserChangePassword extends StatelessWidget{
             leadingAction: (){Navigator.pop(context);},
           ),
           body: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
             child: Container(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(20.0),
               height: SizeConfig.screenHeight,
               child: Column(
                 children: [
@@ -46,7 +47,20 @@ class HomeUserChangePassword extends StatelessWidget{
 
                   Expanded(child: Container(),),
 
-                  MiscButtonTemplate(buttonText: 'Update', onPressed: (){Navigator.pushNamed(context, 'home/home-13-user-details');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff04ECFF),),
+                  MiscButtonTemplate(
+                    buttonText: 'Update',
+                    buttonTextStyle: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                      fontWeight: FontWeight.bold, 
+                      color: Color(0xffffffff),
+                    ),
+                    onPressed: (){
+                      Navigator.pushNamed(context, '/home/home-13-user-details');
+                    }, 
+                    width: SizeConfig.screenWidth / 2, 
+                    height: SizeConfig.blockSizeVertical * 7, 
+                    buttonColor: Color(0xff04ECFF),
+                  ),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 20,),
 

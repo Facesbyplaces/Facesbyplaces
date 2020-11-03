@@ -29,7 +29,7 @@ class HomeCreatePost extends StatelessWidget{
             actions: [
               GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, 'home/home-08-profile');
+                  Navigator.pushNamedAndRemoveUntil(context, '/home/home-08-profile', ModalRoute.withName('/home/'));
                 }, 
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.0), 
@@ -45,6 +45,7 @@ class HomeCreatePost extends StatelessWidget{
             ],
           ),
           body: ListView(
+            physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             children: [
 

@@ -73,7 +73,7 @@ class HomeFeedTab extends StatelessWidget{
 
         SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-        MiscButtonTemplate(buttonText: 'Create', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){Navigator.pushNamed(context, 'home/home-07-01-create-memorial');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8, buttonColor: Color(0xff000000),),
+        MiscButtonTemplate(buttonText: 'Create', buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),), onPressed: (){Navigator.pushNamed(context, '/home/home-07-01-create-memorial');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 7, buttonColor: Color(0xff000000),),
         
       ],
     );

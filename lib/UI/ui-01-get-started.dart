@@ -431,10 +431,10 @@ class UIGetStarted extends StatelessWidget {
                   color: Color(0xffffffff),
                 ), 
                 onPressed: (){
-                  Navigator.pushNamed(context, 'ui-02-login');
+                  Navigator.pushNamed(context, '/ui-02-login');
                 }, 
                 width: SizeConfig.screenWidth / 1.5, 
-                height: SizeConfig.blockSizeVertical * 8, 
+                height: SizeConfig.blockSizeVertical * 7, 
                 buttonColor: Color(0xff04ECFF),
               ),
 

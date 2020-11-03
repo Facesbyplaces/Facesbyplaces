@@ -34,11 +34,11 @@ class UILogin01 extends StatelessWidget {
 
             MiscButtonIconTemplate(
               buttonText: 'Speak for a loved one killed by law enforcement', 
-              onPressed: (){Navigator.pushNamed(context, 'blm/blm-01-join');},
+              onPressed: (){Navigator.pushNamed(context, '/blm/blm-01-join');},
               width: SizeConfig.screenWidth / 1.5,
-              height: SizeConfig.blockSizeVertical * 10,
+              height: SizeConfig.blockSizeVertical * 9,
               buttonColor: Color(0xffF2F2F2),
-              image: Image.asset('assets/icons/fist.png'),
+              image: Container(height: SizeConfig.blockSizeVertical * 5, child: Image.asset('assets/icons/fist.png'),),
             ),
 
             SizedBox(height: SizeConfig.blockSizeVertical * 3,),
@@ -49,15 +49,15 @@ class UILogin01 extends StatelessWidget {
 
             MiscButtonIconTemplate(
               buttonText: 'Speak for a loved one killed by law enforcement', 
-              onPressed: (){Navigator.pushNamed(context, 'regular/regular-01-join');},
+              onPressed: (){Navigator.pushNamed(context, '/regular/regular-01-join');},
               width: SizeConfig.screenWidth / 1.5,
-              height: SizeConfig.blockSizeVertical * 10,
+              height: SizeConfig.blockSizeVertical * 9,
               buttonColor: Color(0xffE6FDFF),
               backgroundColor: Color(0xff04ECFF),
-              image: Icon(Icons.favorite, size: SizeConfig.blockSizeVertical * 7, color: Color(0xffffffff),),
+              image: Icon(Icons.favorite, size: SizeConfig.blockSizeVertical * 5, color: Color(0xffffffff),),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
             RichText(
               text: TextSpan(
@@ -78,7 +78,7 @@ class UILogin01 extends StatelessWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                     ..onTap = (){
-                      Navigator.pushNamed(context, 'regular/regular-02-login');
+                      Navigator.pushNamed(context, '/regular/regular-02-login');
                     }
                   ),
                 ],

@@ -12,6 +12,7 @@ class HomeBLM extends StatelessWidget{
     return BlocBuilder<BlocHomeUpdateListBLM, List<bool>>(
       builder: (context, state){
         return ListView.separated(
+          physics: ClampingScrollPhysics(),
           shrinkWrap: true,
           itemCount: state.length,
           itemBuilder: (context, index){

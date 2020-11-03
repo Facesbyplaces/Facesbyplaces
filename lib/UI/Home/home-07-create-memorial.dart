@@ -46,6 +46,7 @@ class HomeCreateMemorial extends StatelessWidget{
               Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
+                  physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   children: [
                     MiscInputFieldTemplate(key: _key1, labelText: 'Relationship'),
@@ -83,12 +84,12 @@ class HomeCreateMemorial extends StatelessWidget{
                         _key5.currentState.controller.text == '' || _key6.currentState.controller.text == '' || _key7.currentState.controller.text == ''){
                           await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                         }else{
-                          Navigator.pushNamed(context, 'home/home-07-02-create-memorial');
+                          Navigator.pushNamed(context, '/home/home-07-02-create-memorial');
                         }
 
                       }, 
                       width: SizeConfig.screenWidth / 2, 
-                      height: SizeConfig.blockSizeVertical * 8
+                      height: SizeConfig.blockSizeVertical * 7
                     ),
 
                   ],
@@ -146,6 +147,7 @@ class HomeCreateMemorial2 extends StatelessWidget{
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
+                    physics: ClampingScrollPhysics(),
                     shrinkWrap: true,
                     children: [
 
@@ -257,11 +259,11 @@ class HomeCreateMemorial2 extends StatelessWidget{
                           if(_key1.currentState.controller.text == ''){
                             await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                           }else{
-                            Navigator.pushNamed(context, 'home/home-07-03-create-memorial');
+                            Navigator.pushNamed(context, '/home/home-07-03-create-memorial');
                           }
                         }, 
                         width: SizeConfig.screenWidth / 2, 
-                        height: SizeConfig.blockSizeVertical * 8,
+                        height: SizeConfig.blockSizeVertical * 7,
                       ),
 
                     ],
@@ -299,6 +301,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
             Container(
               padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: ListView(
+                physics: ClampingScrollPhysics(),
                 shrinkWrap: true,
                 children: [
 
@@ -319,13 +322,17 @@ class HomeCreateMemorial3 extends StatelessWidget{
                     ),
                     child: Stack(
                       children: [
+
                         Center(
                           child: CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 7,
                             backgroundColor: Color(0xffffffff),
-                            child: Container(
-                              height: SizeConfig.blockSizeVertical * 13,
-                              child: Image.asset('assets/icons/profile1.png'),
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: CircleAvatar(
+                                radius: SizeConfig.blockSizeVertical * 7,
+                                backgroundImage: AssetImage('assets/icons/profile1.png'),
+                              ),
                             ),
                           ),
                         ),
@@ -336,7 +343,11 @@ class HomeCreateMemorial3 extends StatelessWidget{
                           child: CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 3,
                             backgroundColor: Color(0xffffffff),
-                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5,),
+                            child: CircleAvatar(
+                              radius: SizeConfig.blockSizeVertical * 3,
+                              backgroundColor: Colors.transparent,
+                              child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
+                            ),
                           ),
                         ),
 
@@ -346,9 +357,10 @@ class HomeCreateMemorial3 extends StatelessWidget{
                           child: CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 3,
                             backgroundColor: Color(0xffffffff),
-                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5,),
+                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
                           ),
                         ),
+
                       ],
                     ),
                   ),
@@ -368,6 +380,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
                       return Container(
                         height: SizeConfig.blockSizeVertical * 12,
                         child: ListView.separated(
+                          physics: ClampingScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index){
@@ -450,7 +463,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                  MiscButtonTemplate(onPressed: (){Navigator.pushNamed(context, 'home/home-08-profile');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 8),
+                  MiscButtonTemplate(onPressed: (){Navigator.pushNamed(context, '/home/home-08-profile');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 7),
 
                 ],
               ),

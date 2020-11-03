@@ -157,7 +157,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           if(_image != null){
                             context.bloc<BlocShowMessage>().reset();
                             context.bloc<BlocUpdateButtonText>().reset();
-                            Navigator.pushReplacementNamed(context, 'home/');
+                            Navigator.pushReplacementNamed(context, '/home/');
                           }else{
                             context.bloc<BlocShowMessage>().showMessage();
                             Duration duration = Duration(seconds: 2);
@@ -168,7 +168,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           }
                         }, 
                         width: SizeConfig.screenWidth / 2, 
-                        height: SizeConfig.blockSizeVertical * 8, 
+                        height: SizeConfig.blockSizeVertical * 7, 
                         buttonColor: Color(0xff04ECFF),
                       );
                     }

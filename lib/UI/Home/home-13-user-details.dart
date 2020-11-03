@@ -43,7 +43,7 @@ class HomeUserProfileDetails extends StatelessWidget{
                     alignment: Alignment.centerLeft,
                       child: IconButton(
                       onPressed: (){
-                        Navigator.pop(context);
+                        Navigator.pushNamedAndRemoveUntil(context, '/home/home-12-memorial-list', ModalRoute.withName('/home/home-12-memorial-list'));
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                     ),

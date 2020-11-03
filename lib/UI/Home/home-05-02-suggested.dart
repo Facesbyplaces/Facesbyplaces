@@ -12,6 +12,7 @@ class HomeSuggested extends StatelessWidget{
     return BlocBuilder<BlocHomeUpdateListSuggested, List<bool>>(
       builder: (context, state){
         return ListView.separated(
+          physics: ClampingScrollPhysics(),
           shrinkWrap: true,
           itemCount: state.length,
           itemBuilder: (context, index){

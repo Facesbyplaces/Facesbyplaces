@@ -5,6 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegularLogin extends StatelessWidget {
 
@@ -27,13 +28,15 @@ class RegularLogin extends StatelessWidget {
         },
         child: Scaffold(
           body: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
             child: Stack(
               children: [
 
                 Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
 
-                Padding(
+                Container(
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  height: SizeConfig.screenHeight,
                   child: Column(
                     children: [
 
@@ -43,7 +46,7 @@ class RegularLogin extends StatelessWidget {
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                      Container(padding: EdgeInsets.only(left: 20.0), alignment: Alignment.centerLeft, child: Text('Login', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                      Container(padding: EdgeInsets.only(left: 20.0), alignment: Alignment.centerLeft, child: Text('Login', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 7, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
@@ -51,12 +54,12 @@ class RegularLogin extends StatelessWidget {
                         padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                         child: Row(
                           children: [
-                            Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8,),),
+                            Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 
                             Expanded(
-                              child: MiscButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8, image: 'assets/icons/google.png'),
+                              child: MiscButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),
                             ),
                           ],
                         ),
@@ -78,7 +81,7 @@ class RegularLogin extends StatelessWidget {
 
                       Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: TextStyle(decoration: TextDecoration.underline, fontSize: SizeConfig.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w400,),),),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                      Expanded(child: Container(),),
 
                       MiscButtonTemplate(
                         buttonText: 'Login', 
@@ -97,16 +100,16 @@ class RegularLogin extends StatelessWidget {
                           }else if(!validEmail){
                             await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                           }else{
-                            Navigator.pushReplacementNamed(context, 'home/');
+                            Navigator.pushReplacementNamed(context, '/home/');
                           }
                           
                         }, 
                         width: SizeConfig.screenWidth / 2, 
-                        height: SizeConfig.blockSizeVertical * 8, 
+                        height: SizeConfig.blockSizeVertical * 7, 
                         buttonColor: Color(0xff4EC9D4),
                       ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
                       RichText(
                         text: TextSpan(
@@ -128,7 +131,7 @@ class RegularLogin extends StatelessWidget {
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
-                                Navigator.pushNamed(context, 'regular/regular-03-register');
+                                Navigator.pushNamed(context, '/regular/regular-03-register');
                               }
                             ),
 
@@ -140,7 +143,7 @@ class RegularLogin extends StatelessWidget {
 
                       GestureDetector(
                         onTap: (){
-                          Navigator.pushReplacementNamed(context, 'home/');
+                          Navigator.pushReplacementNamed(context, '/home/');
                         },
                         child: Text('Sign in as Guest',
                           style: TextStyle(
@@ -187,6 +190,8 @@ class RegularLogin extends StatelessWidget {
                         ),
                       ),
 
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      
                     ],
                   ),
                 ),
@@ -199,3 +204,4 @@ class RegularLogin extends StatelessWidget {
     );
   }
 }
+

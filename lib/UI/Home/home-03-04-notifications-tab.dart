@@ -11,6 +11,7 @@ class HomeNotificationsTab extends StatelessWidget{
       height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 13),
       color: Color(0xffffffff),
       child: ListView(
+        physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         children: [
 

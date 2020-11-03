@@ -51,14 +51,15 @@ class HomeMemorialSettingsPage extends StatelessWidget{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return ListView(
+      physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       children: [
 
-        MiscSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, 'home/home-11-page-details');},),
+        MiscSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, '/home/home-11-page-details');},),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-        MiscSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, 'home/home-07-03-create-memorial');}, titleDetail: 'Page Image', contentDetail: 'Update Page image and background image'),
+        MiscSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, '/home/home-07-03-create-memorial');}, titleDetail: 'Page Image', contentDetail: 'Update Page image and background image'),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
@@ -84,6 +85,8 @@ class HomeMemorialSettingsPage extends StatelessWidget{
 
         Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
 
+        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
       ],
     );
   }
@@ -95,6 +98,7 @@ class HomeMemorialSettingsPrivacy extends StatelessWidget{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return ListView(
+      physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       children: [
 
@@ -160,7 +164,7 @@ class HomeMemorialSettingsPrivacy extends StatelessWidget{
 
         Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
       ],
     );

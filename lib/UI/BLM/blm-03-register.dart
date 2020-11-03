@@ -45,11 +45,11 @@ class BLMRegister extends StatelessWidget{
                   SizedBox(height: SizeConfig.screenHeight / 6,),
 
                   Expanded(
-                    child: ListView(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                      children: [
-                        Column(
+                    child: Container(
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                        child: Column(
                           children: [
                       
                             MiscInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
@@ -74,7 +74,7 @@ class BLMRegister extends StatelessWidget{
 
                             MiscInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                            SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
                             MiscButtonTemplate(
                               buttonText: 'Next', 
@@ -93,11 +93,11 @@ class BLMRegister extends StatelessWidget{
                                 }else if(!validEmail){
                                   await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                                 }else{
-                                  Navigator.pushNamed(context, 'blm/blm-04-verify-email');
+                                  Navigator.pushNamed(context, '/blm/blm-04-verify-email');
                                 }
                               }, 
                               width: SizeConfig.screenWidth / 2, 
-                              height: SizeConfig.blockSizeVertical * 8, 
+                              height: SizeConfig.blockSizeVertical * 7, 
                               buttonColor: Color(0xff000000),
                             ),
 
@@ -122,7 +122,7 @@ class BLMRegister extends StatelessWidget{
                                     ),
                                     recognizer: TapGestureRecognizer()
                                     ..onTap = (){
-                                      Navigator.pushNamed(context, 'blm/blm-02-login');
+                                      Navigator.pushNamed(context, '/blm/blm-02-login');
                                     }
                                   ),
                                 ],
@@ -131,9 +131,10 @@ class BLMRegister extends StatelessWidget{
 
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
+                  
                 ],
               ),
 

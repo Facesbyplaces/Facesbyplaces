@@ -22,7 +22,12 @@ class HomeUserProfile extends StatelessWidget{
               children: [
 
                 CustomPaint(size: Size.infinite, painter: CurvePainter(),),
-                Positioned(top: SizeConfig.blockSizeVertical * 8, left: SizeConfig.screenWidth / 4.2, child: CircleAvatar(radius: SizeConfig.blockSizeVertical * 15, backgroundImage: AssetImage('assets/icons/profile1.png'),),),
+
+                Container(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  alignment: Alignment.bottomCenter,
+                  child: CircleAvatar(radius: SizeConfig.blockSizeVertical * 15, backgroundImage: AssetImage('assets/icons/profile1.png'),)
+                ),
 
               ],
             ),
@@ -92,7 +97,7 @@ class HomeUserProfile extends StatelessWidget{
 
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushNamed(context, 'home/home-13-user-details');
+                      Navigator.pushNamed(context, '/home/home-13-user-details');
                     },
                     child: Center(
                       child: Text('About',

@@ -5,139 +5,13 @@ import '../ui-01-get-started.dart';
 import 'misc-04-extra.dart';
 import 'misc-07-button.dart';
 
-class MiscUserProfileDraggableSwitchTabs extends StatefulWidget {
-
-  @override
-  MiscUserProfileDraggableSwitchTabsState createState() => MiscUserProfileDraggableSwitchTabsState();
-}
-
-class MiscUserProfileDraggableSwitchTabsState extends State<MiscUserProfileDraggableSwitchTabs> {
-
-  double height;
-  Offset position;
-  int currentIndex = 0;
-  List<Widget> children;
-
-  @override
-  void initState(){
-    super.initState();
-    height = SizeConfig.screenHeight;
-    position = Offset(0.0, height - 100);
-    children = [MiscDraggablePost(), MiscDraggableMemorials()];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return Positioned(
-      left: position.dx,
-      top: position.dy + SizeConfig.blockSizeVertical * 10,
-      child: Draggable(
-        feedback: draggable(),
-        onDraggableCanceled: (Velocity velocity, Offset offset){
-          if(offset.dy > 10 && offset.dy < (SizeConfig.screenHeight - 100)){
-            setState(() {
-              position = offset;
-            });
-          }
-        },
-        child: draggable(),
-        childWhenDragging: Container(),
-        axis: Axis.vertical,
-      ),
-    );
-  }
-
-  draggable(){
-    return Material(
-      child: Container(
-        width: SizeConfig.screenWidth,
-        decoration: BoxDecoration(
-          color: Color(0xffffffff),
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25),),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Color(0xffaaaaaa),
-              offset: Offset(0, 0),
-              blurRadius: 5.0
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-
-            Container(
-              alignment: Alignment.center,
-              width: SizeConfig.screenWidth,
-              height: SizeConfig.blockSizeVertical * 8,
-              child: DefaultTabController(
-                length: 2,
-                initialIndex: currentIndex,
-                child: TabBar(
-                  isScrollable: false,
-                  labelColor: Color(0xff04ECFF),
-                  unselectedLabelColor: Color(0xffCDEAEC),
-                  indicatorColor: Color(0xff04ECFF),
-                  onTap: (int number){
-                    setState(() {
-                      currentIndex = number;
-                    });
-                  },
-                  tabs: [
-
-                    Container(
-                      width: SizeConfig.screenWidth / 2.5,
-                      child: Center(
-                        child: Text('Post',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Container(
-                      width: SizeConfig.screenWidth / 2.5,
-                      child: Center(
-                        child: Text('Memorials',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
-
-            Container(
-              width: SizeConfig.screenWidth,
-              height: (SizeConfig.screenHeight - position.dy) - 100,
-              child: IndexedStack(
-                index: currentIndex,
-                children: children,
-              ),
-            ),
-
-            SizedBox(height: SizeConfig.blockSizeVertical * 10,),
-            
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class MiscDraggablePost extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return ListView.builder(
+      physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       itemCount: 5,
@@ -395,13 +269,12 @@ class MiscDraggablePost extends StatelessWidget{
   }
 }
 
-
-
 class MiscDraggableMemorials extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
     return ListView.separated(
+      physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       itemCount: 5,
       itemBuilder: (context, index){
@@ -512,7 +385,7 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, 'home/home-14-user-update-details');
+                Navigator.pushNamed(context, '/home/home-14-user-update-details');
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -556,7 +429,7 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, 'home/home-15-change-password');
+                Navigator.pushNamed(context, '/home/home-15-change-password');
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -600,7 +473,7 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, 'home/home-16-other-details');
+                Navigator.pushNamed(context, '/home/home-16-other-details');
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -687,7 +560,8 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
               buttonText: 'Logout',
               buttonTextStyle: TextStyle(
                 fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                fontWeight: FontWeight.bold, color: Color(0xffffffff),
+                fontWeight: FontWeight.bold, 
+                color: Color(0xffffffff),
               ), 
               onPressed: () async{
 
@@ -699,7 +573,7 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
 
               }, 
               width: SizeConfig.screenWidth / 2, 
-              height: SizeConfig.blockSizeVertical * 8, 
+              height: SizeConfig.blockSizeVertical * 7, 
               buttonColor: Color(0xff04ECFF),
             ),
 
@@ -709,6 +583,134 @@ class MiscUserProfileDetailsDraggableState extends State<MiscUserProfileDetailsD
 
             Expanded(child: Container(),),
 
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class MiscUserProfileDraggableSwitchTabs extends StatefulWidget {
+
+  @override
+  MiscUserProfileDraggableSwitchTabsState createState() => MiscUserProfileDraggableSwitchTabsState();
+}
+
+class MiscUserProfileDraggableSwitchTabsState extends State<MiscUserProfileDraggableSwitchTabs> {
+
+  double height;
+  Offset position;
+  int currentIndex = 0;
+  List<Widget> children;
+
+  @override
+  void initState(){
+    super.initState();
+    height = SizeConfig.screenHeight;
+    position = Offset(0.0, height - 100);
+    children = [MiscDraggablePost(), MiscDraggableMemorials()];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return Positioned(
+      left: position.dx,
+      top: position.dy - SizeConfig.blockSizeVertical * 10,
+      child: Draggable(
+        feedback: draggable(),
+        onDraggableCanceled: (Velocity velocity, Offset offset){
+          if(offset.dy > 100 && offset.dy < (SizeConfig.screenHeight - 100)){
+            setState(() {
+              position = offset;
+            });
+          }
+        },
+        child: draggable(),
+        childWhenDragging: Container(),
+        axis: Axis.vertical,
+      ),
+    );
+  }
+
+  draggable(){
+    return Material(
+      child: Container(
+        width: SizeConfig.screenWidth,
+        decoration: BoxDecoration(
+          color: Color(0xffffffff),
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25),),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Color(0xffaaaaaa),
+              offset: Offset(0, 0),
+              blurRadius: 5.0
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+
+            Container(
+              alignment: Alignment.center,
+              width: SizeConfig.screenWidth,
+              height: SizeConfig.blockSizeVertical * 8,
+              child: DefaultTabController(
+                length: 2,
+                initialIndex: currentIndex,
+                child: TabBar(
+                  isScrollable: false,
+                  labelColor: Color(0xff04ECFF),
+                  unselectedLabelColor: Color(0xffCDEAEC),
+                  indicatorColor: Color(0xff04ECFF),
+                  onTap: (int number){
+                    setState(() {
+                      currentIndex = number;
+                    });
+                  },
+                  tabs: [
+
+                    Container(
+                      width: SizeConfig.screenWidth / 2.5,
+                      child: Center(
+                        child: Text('Post',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Container(
+                      width: SizeConfig.screenWidth / 2.5,
+                      child: Center(
+                        child: Text('Memorials',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
+
+            Container(
+              width: SizeConfig.screenWidth,
+              height: (SizeConfig.screenHeight - position.dy),
+              child: IndexedStack(
+                index: currentIndex,
+                children: children,
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+            
           ],
         ),
       ),

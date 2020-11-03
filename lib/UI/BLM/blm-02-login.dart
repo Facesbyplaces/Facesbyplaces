@@ -27,13 +27,15 @@ class BLMLogin extends StatelessWidget {
         },
         child: Scaffold(
           body: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
             child: Stack(
               children: [
 
                 Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
 
-                Padding(
+                Container(
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  height: SizeConfig.screenHeight,
                   child: Column(
                     children: [
 
@@ -52,13 +54,11 @@ class BLMLogin extends StatelessWidget {
 
                         child: Row(
                           children: [
-                            Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8,),),
+                            Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 
-                            Expanded(
-                              child: MiscButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 8, image: 'assets/icons/google.png'),
-                            ),
+                            Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),),
                           ],
                         ),
                       ),
@@ -79,7 +79,9 @@ class BLMLogin extends StatelessWidget {
 
                       Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: TextStyle(decoration: TextDecoration.underline, fontSize: SizeConfig.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w400,),),),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                      // SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+                      Expanded(child: Container(),),
 
                       MiscButtonTemplate(
                         buttonText: 'Login', 
@@ -97,11 +99,11 @@ class BLMLogin extends StatelessWidget {
                           }else if(!validEmail){
                             await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                           }else{
-                            Navigator.pushReplacementNamed(context, 'home/');
+                            Navigator.pushReplacementNamed(context, '/home/');
                           }
                         }, 
                         width: SizeConfig.screenWidth / 2, 
-                        height: SizeConfig.blockSizeVertical * 8, 
+                        height: SizeConfig.blockSizeVertical * 7, 
                         buttonColor: Color(0xff4EC9D4),
                       ),
 
@@ -127,7 +129,7 @@ class BLMLogin extends StatelessWidget {
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
-                                Navigator.pushNamed(context, 'blm/blm-03-register');
+                                Navigator.pushNamed(context, '/blm/blm-03-register');
                               }
                             ),
                           ],
@@ -138,7 +140,7 @@ class BLMLogin extends StatelessWidget {
 
                       GestureDetector(
                         onTap: (){
-                          Navigator.pushReplacementNamed(context, 'home/');
+                          Navigator.pushReplacementNamed(context, '/home/');
                         },
                         child: Text('Sign in as Guest',
                           style: TextStyle(
@@ -149,6 +151,8 @@ class BLMLogin extends StatelessWidget {
                           ),
                         ),
                       ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                       
                     ],
                   ),

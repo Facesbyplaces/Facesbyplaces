@@ -12,6 +12,7 @@ class HomeNearby extends StatelessWidget{
     return BlocBuilder<BlocHomeUpdateListNearby, List<bool>>(
       builder: (context, state){
         return ListView.separated(
+          physics: ClampingScrollPhysics(),
           shrinkWrap: true,
           itemCount: state.length,
           itemBuilder: (context, index){

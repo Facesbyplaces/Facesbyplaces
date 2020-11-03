@@ -214,52 +214,6 @@ class MiscMemorialSettings extends StatelessWidget {
   }
 }
 
-
-class MiscMainAppBar extends StatelessWidget implements PreferredSizeWidget{
-
-  final Widget appBar;
-  const MiscMainAppBar({this.appBar});
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return appBar;
-  }
-
-  @override
-  Size get preferredSize => new Size.fromHeight(AppBar().preferredSize.height);
-
-}
-
-// class MiscAppBarTemplate extends StatelessWidget implements PreferredSizeWidget{
-
-//   final AppBar appBar;
-//   final Widget title;
-//   final List<Widget> actions;
-//   final Color color;
-//   final Color backgroundColor;
-//   final Widget leading;
-
-//   const MiscAppBarTemplate({this.appBar, this.title, this.actions, this.backgroundColor, this.color, this.leading});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     return AppBar(
-//       leading: Builder(
-//         builder: (context) => leading,
-//       ),
-//       title: title,
-//       actions: actions,
-//       backgroundColor: backgroundColor,
-//       centerTitle: true,
-//     );
-//   }
-
-//   @override
-//   Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
-// }
-
 class MiscJoinButton extends StatelessWidget{
 
   final int index;
@@ -272,8 +226,7 @@ class MiscJoinButton extends StatelessWidget{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        // context.bloc<BlocHomeUpdateCubit>().modify(3);
-        Navigator.pushNamed(context, 'home/home-06-memorial');
+        Navigator.pushNamed(context, '/home/home-06-memorial');
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
@@ -452,13 +405,7 @@ class MiscManageButton extends StatelessWidget{
                 padding: EdgeInsets.only(right: 15.0),
                 child: ((){
                   bool value;
-
-                  // switch(tab){
-                  //   case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
-                  //   case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
-                  //   case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
-                  // }
-
+                  
                   return MaterialButton(
                     elevation: 0,
                     padding: EdgeInsets.zero,
@@ -472,11 +419,7 @@ class MiscManageButton extends StatelessWidget{
                     }()),
                     splashColor: Color(0xff4EC9D4),
                     onPressed: (){
-                      // switch(tab){
-                      //   case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
-                      //   case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
-                      //   case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
-                      // }
+
                     },
                     child: ((){
                       if(value == true){
@@ -582,13 +525,7 @@ class MiscUserProfileDraggableTabsList extends StatelessWidget{
                 padding: EdgeInsets.only(right: 15.0),
                 child: ((){
                   bool value;
-
-                  // switch(tab){
-                  //   case 0: value = context.bloc<BlocHomeUpdateListSuggested>().state[index]; break;
-                  //   case 1: value = context.bloc<BlocHomeUpdateListNearby>().state[index]; break;
-                  //   case 2: value = context.bloc<BlocHomeUpdateListBLM>().state[index]; break;
-                  // }
-
+                  
                   return MaterialButton(
                     elevation: 0,
                     padding: EdgeInsets.zero,
@@ -602,11 +539,7 @@ class MiscUserProfileDraggableTabsList extends StatelessWidget{
                     }()),
                     splashColor: Color(0xff4EC9D4),
                     onPressed: (){
-                      // switch(tab){
-                      //   case 0: context.bloc<BlocHomeUpdateListSuggested>().updateList(index); break;
-                      //   case 1: context.bloc<BlocHomeUpdateListNearby>().updateList(index); break;
-                      //   case 2: context.bloc<BlocHomeUpdateListBLM>().updateList(index); break;
-                      // }
+
                     },
                     child: ((){
                       if(value == true){
@@ -681,8 +614,6 @@ class MiscToggleSwitchTemplateState extends State<MiscToggleSwitchTemplate> {
   }
 }
 
-
-
 class MiscStoryType extends StatelessWidget {
 
   @override
@@ -700,7 +631,6 @@ class MiscStoryType extends StatelessWidget {
               unselectedLabelColor: Color(0xff000000),
               indicatorColor: Colors.transparent,
               onTap: (int number){
-                print('The value of number is $number');
                 context.bloc<BlocHomeStoryType>().updateToggle(number);
               },
               tabs: [

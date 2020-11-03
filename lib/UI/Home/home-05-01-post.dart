@@ -22,127 +22,140 @@ class HomePost extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<BlocHomeUpdateToggleFeed>(
-          create: (context) => BlocHomeUpdateToggleFeed(),
-        ),
-        BlocProvider<BlocHomeUpdateListSuggested>(
-          create: (context) => BlocHomeUpdateListSuggested(),
-        ),
-        BlocProvider<BlocHomeUpdateListNearby>(
-          create: (context) => BlocHomeUpdateListNearby(),
-        ),
-        BlocProvider<BlocHomeUpdateListBLM>(
-          create: (context) => BlocHomeUpdateListBLM(),
-        ),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: TextFormField(
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(15.0),
-              filled: true,
-              fillColor: Color(0xffffffff),
-              focusColor: Color(0xffffffff),
-              hintText: 'Search a Post',
-              hintStyle: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
+    return WillPopScope(
+        onWillPop: () async{
+          return Navigator.canPop(context);
+        },
+        child: GestureDetector(
+          onTap: (){
+            FocusNode currentFocus = FocusScope.of(context);
+            if(!currentFocus.hasPrimaryFocus){
+              currentFocus.unfocus();
+            }
+          },
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<BlocHomeUpdateToggleFeed>(
+                create: (context) => BlocHomeUpdateToggleFeed(),
               ),
-              prefixIcon: Icon(Icons.search, color: Colors.grey),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffffffff)),
-                borderRadius: BorderRadius.all(Radius.circular(25)),
+              BlocProvider<BlocHomeUpdateListSuggested>(
+                create: (context) => BlocHomeUpdateListSuggested(),
               ),
-              enabledBorder:  OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffffffff)),
-                borderRadius: BorderRadius.all(Radius.circular(25)),
+              BlocProvider<BlocHomeUpdateListNearby>(
+                create: (context) => BlocHomeUpdateListNearby(),
               ),
-              focusedBorder:  OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffffffff)),
-                borderRadius: BorderRadius.all(Radius.circular(25)),
+              BlocProvider<BlocHomeUpdateListBLM>(
+                create: (context) => BlocHomeUpdateListBLM(),
+              ),
+            ],
+            child: Scaffold(
+              appBar: AppBar(
+                title: TextFormField(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(15.0),
+                    filled: true,
+                    fillColor: Color(0xffffffff),
+                    focusColor: Color(0xffffffff),
+                    hintText: 'Search a Post',
+                    hintStyle: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    ),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                    enabledBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                    focusedBorder:  OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xffffffff)),
+                      borderRadius: BorderRadius.all(Radius.circular(25)),
+                    ),
+                  ),
+                ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                  onPressed: (){Navigator.pop(context);},
+                ),
+                backgroundColor: Color(0xff04ECFF),
+              ),
+              body: Column(
+                children: [
+
+                  MiscTabs(),
+
+                  Container(
+                    child: BlocBuilder<BlocHomeUpdateToggleFeed, int>(
+                      builder: (context, state){
+                        return ((){
+                          switch(state){
+                            case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                            case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                            case 2: return 
+                            Container(
+                              height: SizeConfig.blockSizeVertical * 5,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                    Icon(Icons.location_pin, color: Color(0xff979797),),
+
+                                    SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                    Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                                  ],
+                                ),
+                              ),
+                            ); break;
+                            case 3: return 
+                            Container(
+                              height: SizeConfig.blockSizeVertical * 5,
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  children: [
+                                    SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                    Icon(Icons.location_pin, color: Color(0xff979797),),
+
+                                    SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                    Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                                  ],
+                                ),
+                              ),
+                            ); break;
+                          }
+                        }());
+                      },
+                    ),
+                  ),
+
+                  Expanded(
+                    child: BlocBuilder<BlocHomeUpdateToggleFeed, int>(
+                      builder: (context, state){
+                        return ((){
+                          switch(state){
+                            case 0: return HomePostExtended(); break;
+                            case 1: return HomeSuggested(); break;
+                            case 2: return HomeNearby(); break;
+                            case 3: return HomeBLM(); break;
+                          }
+                        }());
+                      },
+                    ),
+                  ),
+
+                ],
               ),
             ),
           ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-            onPressed: (){Navigator.pop(context);},
-          ),
-          backgroundColor: Color(0xff04ECFF),
         ),
-        body: Column(
-          children: [
-
-            MiscTabs(),
-
-            Container(
-              child: BlocBuilder<BlocHomeUpdateToggleFeed, int>(
-                builder: (context, state){
-                  return ((){
-                    switch(state){
-                      case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                      case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                      case 2: return 
-                      Container(
-                        height: SizeConfig.blockSizeVertical * 5,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              Icon(Icons.location_pin, color: Color(0xff979797),),
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
-                            ],
-                          ),
-                        ),
-                      ); break;
-                      case 3: return 
-                      Container(
-                        height: SizeConfig.blockSizeVertical * 5,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              Icon(Icons.location_pin, color: Color(0xff979797),),
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
-                            ],
-                          ),
-                        ),
-                      ); break;
-                    }
-                  }());
-                },
-              ),
-            ),
-
-            Expanded(
-              child: BlocBuilder<BlocHomeUpdateToggleFeed, int>(
-                builder: (context, state){
-                  return ((){
-                    switch(state){
-                      case 0: return HomePostExtended(); break;
-                      case 1: return HomeSuggested(); break;
-                      case 2: return HomeNearby(); break;
-                      case 3: return HomeBLM(); break;
-                    }
-                  }());
-                },
-              ),
-            ),
-
-          ],
-        ),
-      ),
-    );
+      );
   }
 }
 
@@ -152,6 +165,7 @@ class HomePostExtended extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return ListView.builder(
+      physics: ClampingScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
       itemCount: 5,
@@ -169,7 +183,7 @@ class HomePostExtended extends StatelessWidget {
                       children: [
                         Expanded(
                           child: GestureDetector(
-                            onTap: (){Navigator.pushNamed(context, 'home/home-12-memorial-list');},
+                            onTap: (){Navigator.pushNamed(context, '/home/home-12-memorial-list');},
 
                             child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
                           ),

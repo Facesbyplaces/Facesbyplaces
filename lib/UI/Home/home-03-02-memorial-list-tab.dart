@@ -14,6 +14,7 @@ class HomeManageTab extends StatelessWidget{
       child: BlocBuilder<BlocHomeUpdateListSuggested, List<bool>>(
         builder: (context, state){
           return ListView.separated(
+            physics: ClampingScrollPhysics(),
             shrinkWrap: true,
             itemCount: state.length,
             itemBuilder: (context, index){

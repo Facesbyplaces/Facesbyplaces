@@ -56,6 +56,7 @@ class BLMVerifyEmail extends StatelessWidget{
 
 
                 SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
                   child: Padding(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Column(
@@ -138,74 +139,32 @@ class BLMVerifyEmail extends StatelessWidget{
 
                         BlocBuilder<BlocUpdateButtonText, int>(
                           builder: (context, state){
-                            return 
-
-
-                          MiscButtonTemplate(
-                            // buttonText: 'Sign Up', 
-                            buttonText: state == 3
-                            ? 'Sign Up'
-                            : 'Next',
-                            buttonTextStyle: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                              fontWeight: FontWeight.bold, 
-                              color: Color(0xffffffff),
-                            ), 
-                            onPressed: (){
-                              // Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                              // Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
-
-                              if(state != 3){
-                                context.bloc<BlocShowMessage>().showMessage();
-                                Duration duration = Duration(seconds: 2);
-
-                                Future.delayed(duration, (){
+                            return MiscButtonTemplate(
+                              buttonText: state == 3
+                              ? 'Sign Up'
+                              : 'Next',
+                              buttonTextStyle: TextStyle(
+                                fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                                fontWeight: FontWeight.bold, 
+                                color: Color(0xffffffff),
+                              ), 
+                              onPressed: (){
+                                if(state != 3){
                                   context.bloc<BlocShowMessage>().showMessage();
-                                });
-                              }else{
-                                Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                                Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
-                              }
-                            }, 
-                            width: SizeConfig.screenWidth / 2, 
-                            height: SizeConfig.blockSizeVertical * 8, 
-                            buttonColor: Color(0xff000000),
-                          );
+                                  Duration duration = Duration(seconds: 2);
 
-
-                            // ? MiscButtonTemplate(
-                            //   buttonText: 'Sign Up', 
-                            //   buttonTextStyle: TextStyle(
-                            //     fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                            //     fontWeight: FontWeight.bold, 
-                            //     color: Color(0xffffffff),
-                            //   ), 
-                            //   onPressed: (){
-                            //     Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                            //     Navigator.pushNamed(context, 'blm/blm-05-upload-photo'); 
-                            //   }, 
-                            //   width: SizeConfig.screenWidth / 2, 
-                            //   height: SizeConfig.blockSizeVertical * 8, 
-                            //   buttonColor: Color(0xff04ECFF),
-                            // ) : MiscButtonTemplate(
-                            //   buttonText: 'Next', 
-                            //   buttonTextStyle: TextStyle(
-                            //     fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                            //     fontWeight: FontWeight.bold, 
-                            //     color: Color(0xffffffff),
-                            //   ), 
-                            //   onPressed: (){
-                            //     context.bloc<BlocShowMessage>().showMessage();
-                            //     Duration duration = Duration(seconds: 2);
-
-                            //     Future.delayed(duration, (){
-                            //       context.bloc<BlocShowMessage>().showMessage();
-                            //     });
-                            //   }, 
-                            //   width: SizeConfig.screenWidth / 2, 
-                            //   height: SizeConfig.blockSizeVertical * 8, 
-                            //   buttonColor: Color(0xff000000),
-                            // );
+                                  Future.delayed(duration, (){
+                                    context.bloc<BlocShowMessage>().showMessage();
+                                  });
+                                }else{
+                                  Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
+                                  Navigator.pushNamed(context, '/blm/blm-05-upload-photo'); 
+                                }
+                              }, 
+                              width: SizeConfig.screenWidth / 2, 
+                              height: SizeConfig.blockSizeVertical * 7, 
+                              buttonColor: Color(0xff000000),
+                            );
                           }
                         ),
 

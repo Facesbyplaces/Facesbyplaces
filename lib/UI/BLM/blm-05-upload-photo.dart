@@ -160,7 +160,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                           if(_image != null){
                             context.bloc<BlocShowMessage>().reset();
                             context.bloc<BlocUpdateButtonText>().reset();
-                            Navigator.pushReplacementNamed(context, 'home/');
+                            Navigator.pushReplacementNamed(context, '/home/');
                           }else{
                             context.bloc<BlocShowMessage>().showMessage();
                             Duration duration = Duration(seconds: 2);
@@ -171,7 +171,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                           }
                         }, 
                         width: SizeConfig.screenWidth / 2, 
-                        height: SizeConfig.blockSizeVertical * 8, 
+                        height: SizeConfig.blockSizeVertical * 7, 
                         buttonColor: state == 1
                         ? Color(0xff04ECFF)
                         : Color(0xff000000),

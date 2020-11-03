@@ -34,7 +34,7 @@ class HomePageDetails extends StatelessWidget{
             actions: [
               GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, 'home/home-09-memorial-settings');
+                  Navigator.pushNamed(context, '/home/home-09-memorial-settings');
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.0), 
@@ -54,6 +54,7 @@ class HomePageDetails extends StatelessWidget{
               Container(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
+                  physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   children: [
 

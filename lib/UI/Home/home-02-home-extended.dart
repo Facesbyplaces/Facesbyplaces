@@ -53,7 +53,7 @@ class HomeScreenExtended extends StatelessWidget{
               actions: [
                 IconButton(icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), 
                 onPressed: (){
-                  Navigator.pushNamed(context, 'home/home-04-search');},
+                  Navigator.pushNamed(context, '/home/home-04-search');},
                 ),
               ],
 
@@ -107,7 +107,7 @@ class HomeScreenExtended extends StatelessWidget{
 
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushNamed(context, 'home/home-07-01-create-memorial');
+                        Navigator.pushNamed(context, '/home/home-07-01-create-memorial');
                       },
                       child: Text('Create Memorial Page', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                     ),
@@ -120,7 +120,7 @@ class HomeScreenExtended extends StatelessWidget{
 
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushNamed(context, 'home/home-13-user-details');
+                        Navigator.pushNamed(context, '/home/home-13-user-details');
                       },
                       child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                     ),

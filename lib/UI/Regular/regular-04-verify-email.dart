@@ -53,6 +53,7 @@ class RegularVerifyEmail extends StatelessWidget{
 
 
                 SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
                   child: Padding(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0),
                     child: Column(
@@ -155,11 +156,11 @@ class RegularVerifyEmail extends StatelessWidget{
                                   });
                                 }else{
                                   Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                                  Navigator.pushNamed(context, 'regular/regular-05-upload-photo'); 
+                                  Navigator.pushNamed(context, '/regular/regular-05-upload-photo'); 
                                 }
                               }, 
                               width: SizeConfig.screenWidth / 2, 
-                              height: SizeConfig.blockSizeVertical * 8,
+                              height: SizeConfig.blockSizeVertical * 7,
                               buttonColor: Color(0xff04ECFF),
                             );
                           },

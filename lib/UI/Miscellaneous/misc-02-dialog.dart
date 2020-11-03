@@ -1,46 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class ShowDialog extends StatelessWidget{
-
-  final String title;
-  final String content;
-  final Color color;
-
-  ShowDialog({this.title , this.content, this.color});
-
-  Widget build(BuildContext context){
-    SizeConfig.init(context);
-    return AlertDialog(
-      title: Text(title,
-        style: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 4,
-          color: color,
-        ),
-      ),
-      content: Text(content,
-        style: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 4,
-        ),
-      ),
-      actions: <Widget>[
-        FlatButton(
-          onPressed: (){
-            Navigator.pop(context, false);
-          }, 
-          child: Text("OK", 
-            style: TextStyle(
-              fontSize: SizeConfig.safeBlockHorizontal * 3,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class UploadFrom extends StatelessWidget{
 
   Widget build(BuildContext context){
@@ -97,7 +57,6 @@ class UploadFrom extends StatelessWidget{
     );
   }
 }
-
 
 class MiscAlertDialog extends StatelessWidget{
 
@@ -238,7 +197,6 @@ class MiscConfirmDialog extends StatelessWidget{
                         style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 5,
                           fontWeight: FontWeight.bold,
-                          // color: Color(0xffFF0000),
                           color: confirmColor_1,
                         ),
                       ),
@@ -254,7 +212,6 @@ class MiscConfirmDialog extends StatelessWidget{
                         style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 5,
                           fontWeight: FontWeight.bold,
-                          // color: Color(0xff04ECFF),
                           color: confirmColor_2,
                         ),
                       ),

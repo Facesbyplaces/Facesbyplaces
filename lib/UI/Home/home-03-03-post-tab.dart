@@ -19,6 +19,7 @@ class HomePostTab extends StatelessWidget {
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: ListView.builder(
+        physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         padding: EdgeInsets.all(10.0),
         itemCount: 5,
@@ -37,7 +38,10 @@ class HomePostTab extends StatelessWidget {
                           Expanded(
                             child: GestureDetector(
                               onTap: (){
-                                Navigator.pushNamed(context, 'home/home-14-memorial-list');
+                                // Navigator.pushNamed(context, '/home/home-14-memorial-list');
+                                Navigator.pushNamed(context, '/home/home-12-memorial-list');
+                                
+                                
                               },
                               child: CircleAvatar(
                                 backgroundImage: AssetImage('assets/icons/profile1.png'),

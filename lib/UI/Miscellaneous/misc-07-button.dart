@@ -70,12 +70,9 @@ class MiscButtonIconTemplate extends StatelessWidget{
           Align(
             alignment: Alignment.centerLeft,
             child: CircleAvatar(
-              maxRadius: SizeConfig.blockSizeVertical * 5,
+              radius: SizeConfig.blockSizeVertical * 4.5,
               backgroundColor: backgroundColor,
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: image,
-              ),
+              child: Center(child: image,),
             ),
           ),
           Expanded(
