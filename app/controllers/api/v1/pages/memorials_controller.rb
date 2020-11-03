@@ -1,5 +1,5 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
-
+    before_action :authorize, except: [:create, :show]
     before_action :authenticate_user!
 
     def show
@@ -24,6 +24,9 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             # save relationship of the user to the page
             relationship = memorial.relationships.new(user: user(), relationship: params[:relationship])
             relationship.save 
+
+            # Make the user as admin of the 
+            user().add_role "pageadmin", memorial
 
             render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
         else
@@ -86,5 +89,13 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
+    end
+
+    def authorize
+        memorial = Memorial.find(params[:id])
+
+        if !user().has_role? :pageadmin, memorial 
+            return render json: {status: "Access Denied"}
+        end
     end
 end

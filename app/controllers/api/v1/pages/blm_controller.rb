@@ -1,4 +1,5 @@
 class Api::V1::Pages::BlmController < ApplicationController
+    before_action :authorize, except: [:create, :show]
 
     def show
         blm = Blm.find(params[:id])
@@ -22,6 +23,9 @@ class Api::V1::Pages::BlmController < ApplicationController
             # save relationship of the user to the page
             relationship = blm.relationships.new(user: user(), relationship: params[:relationship])
             relationship.save 
+
+            # Make the user as admin of the 
+            user().add_role "pageadmin", blm
             
             render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
         else
@@ -85,4 +89,13 @@ class Api::V1::Pages::BlmController < ApplicationController
     def blm_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
+
+    def authorize
+        blm = Blm.find(params[:id])
+
+        if !user().has_role? :pageadmin, blm 
+            return render json: {status: "Access Denied"}
+        end
+    end
+    
 end
