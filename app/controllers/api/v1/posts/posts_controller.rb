@@ -25,6 +25,12 @@ class Api::V1::Posts::PostsController < ApplicationController
         render json: {post: PostSerializer.new( post ).attributes}
     end
 
+    def pagePosts
+        posts = Post.where(page_type: params[:page_type], page_id: params[:page_id]).order(created_at: :desc)
+
+        paginate posts, per_page: numberOfPage
+    end
+
     private
 
     def post_params

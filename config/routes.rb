@@ -69,6 +69,8 @@ Rails.application.routes.draw do
         post '/', to: 'posts#create'
         # Show Post
         get '/:id', to: 'posts#show'
+        # Posts of the page
+        get '/:page_type/:page_id', to: 'posts#pagePosts'
       end
       namespace :admin do
         # all users

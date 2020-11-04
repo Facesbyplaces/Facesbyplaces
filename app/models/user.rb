@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :pages
   has_many :posts
   has_many :shares
+  has_many :followers
 
   def self.new_guest
       new { |u| u.guest = true }
