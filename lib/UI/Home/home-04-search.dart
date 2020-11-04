@@ -49,8 +49,10 @@ class HomeSearch extends StatelessWidget{
           ),
           body: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            child: Container(
+              decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              height: SizeConfig.screenHeight,
               child: Column(
                 children: [
 

@@ -403,7 +403,7 @@ class UIGetStarted extends StatelessWidget {
 
               SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-              Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),),),
+              Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6, fontWeight: FontWeight.bold, color: Color(0xff04ECFF),),),),
 
               SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 

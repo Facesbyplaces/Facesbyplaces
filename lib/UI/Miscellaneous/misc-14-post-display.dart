@@ -1,6 +1,8 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
+import 'misc-15-dropdown.dart';
+
 class MiscPostDisplayTemplate extends StatelessWidget{
 
   @override
@@ -28,13 +30,8 @@ class MiscPostDisplayTemplate extends StatelessWidget{
               Expanded(
                 child: Row(
                   children: [
+                    CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
                     Expanded(
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/icons/profile1.png'),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 5,
                       child: Padding(
                         padding: EdgeInsets.only(left: 10.0),
                         child: Column(
@@ -67,16 +64,7 @@ class MiscPostDisplayTemplate extends StatelessWidget{
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: IconButton(
-                        alignment: Alignment.centerRight,
-                        padding: EdgeInsets.zero,
-                        onPressed: (){
-                          
-                        },
-                        icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
-                      ),
-                    ),
+                    MiscDropDownTemplate(),
                   ],
                 ),
               ),

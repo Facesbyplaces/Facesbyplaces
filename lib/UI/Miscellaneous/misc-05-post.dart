@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../ui-01-get-started.dart';
 import 'misc-04-extra.dart';
 import 'misc-07-button.dart';
+import 'misc-15-dropdown.dart';
 
 class MiscDraggablePost extends StatelessWidget{
 
@@ -30,13 +31,11 @@ class MiscDraggablePost extends StatelessWidget{
                   Expanded(
                     child: Row(
                       children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: (){
-                            },
-                            child: CircleAvatar(
-                              backgroundImage: AssetImage('assets/icons/profile1.png'),
-                            ),
+                        GestureDetector(
+                          onTap: (){
+                          },
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage('assets/icons/profile1.png'),
                           ),
                         ),
                         Expanded(
@@ -73,14 +72,16 @@ class MiscDraggablePost extends StatelessWidget{
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: IconButton(
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.zero,
-                            onPressed: (){},
-                            icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
-                          ),
-                        ),
+                        MiscDropDownTemplate(),
+                        // Expanded(
+                        //   child: IconButton(
+                        //     alignment: Alignment.centerRight,
+                        //     padding: EdgeInsets.zero,
+                        //     onPressed: (){},
+                        //     icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
+                        //   ),
+                        // ),
+                        
                       ],
                     ),
                   ),

@@ -1,21 +1,12 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-04-extra.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-15-dropdown.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'home-05-02-suggested.dart';
 import 'home-05-03-nearby.dart';
 import 'home-05-04-blm.dart';
-
-Future<void> share() async {
-  await FlutterShare.share(
-    title: 'Example share',
-    text: 'Example share text',
-    linkUrl: 'https://flutter.dev/',
-    chooserTitle: 'Example Chooser Title'
-  );
-}
 
 class HomePost extends StatelessWidget{
 
@@ -23,65 +14,67 @@ class HomePost extends StatelessWidget{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return WillPopScope(
-        onWillPop: () async{
-          return Navigator.canPop(context);
+      onWillPop: () async{
+        return Navigator.canPop(context);
+      },
+      child: GestureDetector(
+        onTap: (){
+          FocusNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
         },
-        child: GestureDetector(
-          onTap: (){
-            FocusNode currentFocus = FocusScope.of(context);
-            if(!currentFocus.hasPrimaryFocus){
-              currentFocus.unfocus();
-            }
-          },
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<BlocHomeUpdateToggleFeed>(
-                create: (context) => BlocHomeUpdateToggleFeed(),
-              ),
-              BlocProvider<BlocHomeUpdateListSuggested>(
-                create: (context) => BlocHomeUpdateListSuggested(),
-              ),
-              BlocProvider<BlocHomeUpdateListNearby>(
-                create: (context) => BlocHomeUpdateListNearby(),
-              ),
-              BlocProvider<BlocHomeUpdateListBLM>(
-                create: (context) => BlocHomeUpdateListBLM(),
-              ),
-            ],
-            child: Scaffold(
-              appBar: AppBar(
-                title: TextFormField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(15.0),
-                    filled: true,
-                    fillColor: Color(0xffffffff),
-                    focusColor: Color(0xffffffff),
-                    hintText: 'Search a Post',
-                    hintStyle: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    ),
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffffffff)),
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                    ),
-                    enabledBorder:  OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffffffff)),
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                    ),
-                    focusedBorder:  OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffffffff)),
-                      borderRadius: BorderRadius.all(Radius.circular(25)),
-                    ),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<BlocHomeUpdateToggleFeed>(
+              create: (context) => BlocHomeUpdateToggleFeed(),
+            ),
+            BlocProvider<BlocHomeUpdateListSuggested>(
+              create: (context) => BlocHomeUpdateListSuggested(),
+            ),
+            BlocProvider<BlocHomeUpdateListNearby>(
+              create: (context) => BlocHomeUpdateListNearby(),
+            ),
+            BlocProvider<BlocHomeUpdateListBLM>(
+              create: (context) => BlocHomeUpdateListBLM(),
+            ),
+          ],
+          child: Scaffold(
+            appBar: AppBar(
+              title: TextFormField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(15.0),
+                  filled: true,
+                  fillColor: Color(0xffffffff),
+                  focusColor: Color(0xffffffff),
+                  hintText: 'Search a Post',
+                  hintStyle: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  ),
+                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xffffffff)),
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  enabledBorder:  OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xffffffff)),
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  focusedBorder:  OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xffffffff)),
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
                   ),
                 ),
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-                  onPressed: (){Navigator.pop(context);},
-                ),
-                backgroundColor: Color(0xff04ECFF),
               ),
-              body: Column(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                onPressed: (){Navigator.pop(context);},
+              ),
+              backgroundColor: Color(0xff04ECFF),
+            ),
+            body: Container(
+              decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+              child: Column(
                 children: [
 
                   MiscTabs(),
@@ -155,7 +148,8 @@ class HomePost extends StatelessWidget{
             ),
           ),
         ),
-      );
+      ),
+    );
   }
 }
 
@@ -181,15 +175,11 @@ class HomePostExtended extends StatelessWidget {
                   Expanded(
                     child: Row(
                       children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: (){Navigator.pushNamed(context, '/home/home-12-memorial-list');},
-
-                            child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
-                          ),
+                        GestureDetector(
+                          onTap: (){Navigator.pushNamed(context, '/home/home-12-user-profile');},
+                          child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
                         ),
                         Expanded(
-                          flex: 5,
                           child: Padding(
                             padding: EdgeInsets.only(left: 10.0),
                             child: Column(
@@ -204,14 +194,7 @@ class HomePostExtended extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: IconButton(
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.zero,
-                            onPressed: share,
-                            icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
-                          ),
-                        ),
+                        MiscDropDownTemplate(),
                       ],
                     ),
                   ),

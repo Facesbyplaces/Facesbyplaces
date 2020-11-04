@@ -73,7 +73,7 @@ class RegularRegister extends StatelessWidget{
 
                           MiscInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
                           MiscButtonTemplate(
                             buttonText: 'Next', 

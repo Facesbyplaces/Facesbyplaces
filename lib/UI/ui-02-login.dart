@@ -18,9 +18,9 @@ class UILogin01 extends StatelessWidget {
 
             Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 30,),),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-            Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),
+            Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
             SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -59,6 +59,8 @@ class UILogin01 extends StatelessWidget {
 
             SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
+            Expanded(child: Container(),),
+
             RichText(
               text: TextSpan(
                 children: <TextSpan>[
@@ -84,6 +86,8 @@ class UILogin01 extends StatelessWidget {
                 ],
               ),
             ),
+
+            Expanded(child: Container(),),
 
           ],
         ),

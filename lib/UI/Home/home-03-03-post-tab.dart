@@ -1,15 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/misc-15-dropdown.dart';
 import 'package:flutter/material.dart';
-
-Future<void> share() async {
-  await FlutterShare.share(
-    title: 'Example share',
-    text: 'Example share text',
-    linkUrl: 'https://flutter.dev/',
-    chooserTitle: 'Example Chooser Title'
-  );
-}
 
 class HomePostTab extends StatelessWidget {
 
@@ -20,7 +11,6 @@ class HomePostTab extends StatelessWidget {
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
         padding: EdgeInsets.all(10.0),
         itemCount: 5,
         itemBuilder: (context, index){
@@ -35,17 +25,12 @@ class HomePostTab extends StatelessWidget {
                     Expanded(
                       child: Row(
                         children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: (){
-                                // Navigator.pushNamed(context, '/home/home-14-memorial-list');
-                                Navigator.pushNamed(context, '/home/home-12-memorial-list');
-                                
-                                
-                              },
-                              child: CircleAvatar(
-                                backgroundImage: AssetImage('assets/icons/profile1.png'),
-                              ),
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.pushNamed(context, '/home/home-12-memorial-list');
+                            },
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage('assets/icons/profile1.png'),
                             ),
                           ),
                           Expanded(
@@ -81,14 +66,7 @@ class HomePostTab extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: IconButton(
-                              alignment: Alignment.centerRight,
-                              padding: EdgeInsets.zero,
-                              onPressed: share,
-                              icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
-                            ),
-                          ),
+                          MiscDropDownTemplate(),
                         ],
                       ),
                     ),

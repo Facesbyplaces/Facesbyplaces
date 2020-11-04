@@ -1,3 +1,4 @@
+import 'UI/Home/home-17-report-user.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
@@ -57,11 +58,12 @@ void main(){
         '/home/home-09-memorial-settings': (BuildContext context) => HomeMemorialSettings(),
         '/home/home-10-create-post': (BuildContext context) => HomeCreatePost(),
         '/home/home-11-page-details': (BuildContext context) => HomePageDetails(),
-        '/home/home-12-memorial-list': (BuildContext context) => HomeUserProfile(),
+        '/home/home-12-user-profile': (BuildContext context) => HomeUserProfile(),
         '/home/home-13-user-details': (BuildContext context) => HomeUserProfileDetails(),
         '/home/home-14-user-update-details': (BuildContext context) => HomeUserUpdateDetails(),
         '/home/home-15-change-password': (BuildContext context) => HomeUserChangePassword(),
-        '/home/home-16-other-details': (BuildContext context) => HomeUserOtherDetails(), 
+        '/home/home-16-other-details': (BuildContext context) => HomeUserOtherDetails(),
+        '/home/home-17-report-user': (BuildContext context) => HomeReportUser(),
       },
     ),
   );

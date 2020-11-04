@@ -61,7 +61,6 @@ class HomeFeedTab extends StatelessWidget{
             ],
           ),
         ),
-        
 
         SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 

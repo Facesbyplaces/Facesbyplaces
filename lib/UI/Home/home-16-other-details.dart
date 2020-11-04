@@ -70,7 +70,7 @@ class HomeUserOtherDetails extends StatelessWidget{
                       color: Color(0xffffffff),
                     ),
                     onPressed: (){
-                      Navigator.pushNamed(context, '/home/home-13-user-details');
+                      Navigator.popAndPushNamed(context, '/home/home-13-user-details');
                     }, 
                     width: SizeConfig.screenWidth / 2, 
                     height: SizeConfig.blockSizeVertical * 7, 

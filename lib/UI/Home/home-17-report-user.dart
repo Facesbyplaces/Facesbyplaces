@@ -4,10 +4,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/misc-12-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserChangePassword extends StatelessWidget{
+class HomeReportUser extends StatelessWidget{
 
   final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class HomeUserChangePassword extends StatelessWidget{
         child: Scaffold(
           appBar: MiscAppBarTemplate(
             appBar: AppBar(), 
-            title: Text('Change Password', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Report', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
             leadingAction: (){Navigator.pop(context);},
           ),
           body: SingleChildScrollView(
@@ -37,32 +36,30 @@ class HomeUserChangePassword extends StatelessWidget{
               child: Column(
                 children: [
 
-                  MiscInputFieldTemplate(key: _key1, labelText: 'Current Password', obscureText: true,),
+                  Align(alignment: Alignment.centerLeft, child: Text('Inform us about what happened.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                  MiscInputFieldTemplate(key: _key2, labelText: 'New Password', obscureText: true,),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  MiscInputFieldMultiTextTemplate(key: _key1,),
 
                   Expanded(child: Container(),),
 
                   MiscButtonTemplate(
-                    buttonText: 'Update',
+                    buttonText: 'Report', 
                     buttonTextStyle: TextStyle(
                       fontSize: SizeConfig.safeBlockHorizontal * 4, 
                       fontWeight: FontWeight.bold, 
                       color: Color(0xffffffff),
                     ),
                     onPressed: (){
-                      Navigator.popAndPushNamed(context, '/home/home-13-user-details');
+                      Navigator.popAndPushNamed(context, '/home/');
                     }, 
                     width: SizeConfig.screenWidth / 2, 
                     height: SizeConfig.blockSizeVertical * 7, 
                     buttonColor: Color(0xff04ECFF),
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 20,),
+                  Expanded(child: Container(),),
 
                 ],
               ),
