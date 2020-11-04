@@ -67,6 +67,12 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
     end
 
+    def deletePost
+        post = Post.find(params[:post_id])
+        post.destroy 
+        render json: {status: :deleted}
+    end
+
     private
     def set_up
         # Page where the admin is added
