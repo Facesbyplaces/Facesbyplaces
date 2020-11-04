@@ -119,6 +119,9 @@ Rails.application.routes.draw do
         
         post 'addFriend', to: 'pageadmin#addFriend'
         delete 'removeFriend/:id', to: 'pageadmin#removeFriend'
+
+        get 'editPost/:post_id/:page_type/:page_id', to: 'pageadmin#editPost'
+        put 'updatePost', to: 'pageadmin#updatePost'
       end
     end
   end
