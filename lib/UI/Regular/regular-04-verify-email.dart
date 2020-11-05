@@ -156,7 +156,9 @@ class RegularVerifyEmail extends StatelessWidget{
                                   });
                                 }else{
                                   Navigator.pop(context); context.bloc<BlocUpdateButtonText>().reset();
-                                  Navigator.pushNamed(context, '/regular/regular-05-upload-photo'); 
+                                  // Navigator.pushNamed(context, '/regular/regular-05-upload-photo'); 
+
+                                  
                                 }
                               }, 
                               width: SizeConfig.screenWidth / 2, 

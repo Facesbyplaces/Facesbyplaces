@@ -96,7 +96,8 @@ class MiscAlertDialog extends StatelessWidget{
               ),
             ),
             Expanded(
-              child: Center(
+              child: Align(
+                alignment: Alignment.centerLeft,
                 child: Text(content,
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -110,7 +111,7 @@ class MiscAlertDialog extends StatelessWidget{
             Expanded(
               child: GestureDetector(
                 onTap: (){
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
                 child: Align(
                   alignment: Alignment.centerRight,
