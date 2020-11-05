@@ -69,6 +69,8 @@ Rails.application.routes.draw do
         post '/', to: 'posts#create'
         # Show Post
         get '/:id', to: 'posts#show'
+        # Posts of the page
+        get '/:page_type/:page_id', to: 'posts#pagePosts'
       end
       namespace :admin do
         # all users
@@ -119,6 +121,10 @@ Rails.application.routes.draw do
         
         post 'addFriend', to: 'pageadmin#addFriend'
         delete 'removeFriend/:id', to: 'pageadmin#removeFriend'
+
+        get 'editPost/:post_id/:page_type/:page_id', to: 'pageadmin#editPost'
+        put 'updatePost', to: 'pageadmin#updatePost'
+        delete 'deletePost/:post_id/:page_type/:page_id', to: 'pageadmin#deletePost'
       end
     end
   end

@@ -1,5 +1,5 @@
 class Api::V1::Pageadmin::PageadminController < ApplicationController
-    before_action :set_up, except: [:removeFamily, :removeFriend]
+    before_action :set_up
 
     def addAdmin
         # Add page admin rights to the user
@@ -16,53 +16,61 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
     def addFamily
-        if user().has_role? :pageadmin, @page
-            # add new relationship to the page
-            family = @page.relationships.new(relationship: params[:relationship], user: @user)
-            # save relationship
-            if family.save 
-                render json: {status: "Added Successfuly", relationship_id: family.id}
-            else
-                render json: {status: "Error"}
-            end
+        # add new relationship to the page
+        family = @page.relationships.new(relationship: params[:relationship], user: @user)
+        # save relationship
+        if family.save 
+            render json: {status: "Added Successfuly", relationship_id: family.id}
         else
-            render json: {status: "Access Denied"}
+            render json: {status: "Error"}
         end
     end
 
     def removeFamily
-        if user().has_role? :pageadmin, @page
-            family = Relationship.find(params[:id])
-            family.destroy 
-            render json: {status: "Deleted Successfully"}
-        else
-            render json: {status: "Access Denied"}
-        end
+        family = Relationship.find(params[:id])
+        family.destroy 
+        render json: {status: "Deleted Successfully"}
     end
 
     def addFriend
-        if user().has_role? :pageadmin, @page
-            # add new relationship to the page
-            friend = @page.relationships.new(relationship: params[:relationship], user: @user)
-            # save relationship
-            if friend.save 
-                render json: {status: "Added Successfuly", relationship_id: family.id}
-            else
-                render json: {status: "Error"}
-            end
+        # add new relationship to the page
+        friend = @page.relationships.new(relationship: params[:relationship], user: @user)
+        # save relationship
+        if friend.save 
+            render json: {status: "Added Successfuly", relationship_id: family.id}
         else
-            render json: {status: "Access Denied"}
+            render json: {status: "Error"}
         end
     end
 
     def removeFriend
-        if user().has_role? :pageadmin, @page
-            friend = Relationship.find(params[:id])
-            friend.destroy 
-            render json: {status: "Deleted Successfully"}
+        friend = Relationship.find(params[:id])
+        friend.destroy 
+        render json: {status: "Deleted Successfully"}
+    end
+
+    def editPost
+        post = Post.find(params[:post_id])
+
+        render json: post
+    end
+
+    def updatePost
+        post = Post.find(params[:post_id])
+        post_creator = post.user
+        
+        if post.update(post_params)
+            post.user = post_creator
+            render json: {post: PostSerializer.new( post ).attributes, status: :updated}
         else
-            render json: {status: "Access Denied"}
+            render json: {errors: post.errors}
         end
+    end
+
+    def deletePost
+        post = Post.find(params[:post_id])
+        post.destroy 
+        render json: {status: :deleted}
     end
 
     private
@@ -77,6 +85,16 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
 
         # Find the user 
-        @user = User.find(params[:id])
+        if params[:id]
+            @user = User.find(params[:user_id])
+        end
+
+        if !user().has_role? :pageadmin, @page 
+            return render json: {status: "Access Denied"}
+        end
+    end
+
+    def post_params
+        params.permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
     end
 end

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :pages
   has_many :posts
   has_many :shares
+  has_many :followers
 
   def self.create_from_provider_data(provider_data)
     where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do |user|

@@ -1,6 +1,6 @@
 class Api::V1::Posts::PostsController < ApplicationController
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
 
     def index  
         posts = Post.where(:user_id => current_user.id)
@@ -23,6 +23,12 @@ class Api::V1::Posts::PostsController < ApplicationController
         post = Post.find(params[:id])
 
         render json: {post: PostSerializer.new( post ).attributes}
+    end
+
+    def pagePosts
+        posts = Post.where(page_type: params[:page_type], page_id: params[:page_id]).order(created_at: :desc)
+
+        paginate posts, per_page: numberOfPage
     end
 
     private
