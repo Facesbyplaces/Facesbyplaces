@@ -275,7 +275,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  activerecord-session_store (~> 1.0)
+  activerecord-session_store
   bootsnap (>= 1.4.2)
   byebug
   cancancan
@@ -285,8 +285,9 @@ DEPENDENCIES
   dotenv (~> 2.2.1)
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  omniauth-facebook (~> 4.0)
-  omniauth-google-oauth2 (~> 0.4.1)
+  omniauth
+  omniauth-facebook
+  omniauth-google-oauth2
   pager_api
   pagy
   puma (~> 4.1)
