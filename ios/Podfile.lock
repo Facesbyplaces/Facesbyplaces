@@ -10,6 +10,8 @@ PODS:
     - Flutter
     - libPhoneNumber-iOS
   - libPhoneNumber-iOS (0.9.15)
+  - shared_preferences (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
@@ -17,6 +19,7 @@ DEPENDENCIES:
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
   trunk:
@@ -33,6 +36,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker/ios"
   libphonenumber:
     :path: ".symlinks/plugins/libphonenumber/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
 
 SPEC CHECKSUMS:
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
@@ -41,7 +46,8 @@ SPEC CHECKSUMS:
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
 
-PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+PODFILE CHECKSUM: 4ea0b88a7e2511a26c6d4d5589996dab2cb094e9
 
 COCOAPODS: 1.9.3
