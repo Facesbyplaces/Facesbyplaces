@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   belongs_to        :user
   has_many_attached :imagesOrVideos
   has_many          :report
+  has_many          :comments
+  has_many          :postslikes
 
   # validation
   validates :body, presence: true

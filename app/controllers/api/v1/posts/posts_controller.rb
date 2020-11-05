@@ -31,6 +31,18 @@ class Api::V1::Posts::PostsController < ApplicationController
         paginate posts, per_page: numberOfPage
     end
 
+    def like
+        like = Postslike.new(post_id: params[:post_id], user_id: user().id)
+        like.save 
+        render json: {status: "Liked Post"}
+    end
+
+    def unlike
+        unlike = Postslike.where("post_id = #{params[:post_id]} AND user_id = #{user().id}").first
+        unlike.destroy 
+        render json: {status: "Unliked Post"}
+    end
+
     private
 
     def post_params

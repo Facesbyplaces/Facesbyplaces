@@ -70,7 +70,11 @@ Rails.application.routes.draw do
         # Show Post
         get '/:id', to: 'posts#show'
         # Posts of the page
-        get '/:page_type/:page_id', to: 'posts#pagePosts'
+        get '/page/:page_type/:page_id', to: 'posts#pagePosts'
+        # Like Post
+        get '/like/:post_id', to: 'posts#like'
+        # Unlike Post
+        get '/unlike/:post_id', to: 'posts#unlike'
       end
       namespace :admin do
         # all users
