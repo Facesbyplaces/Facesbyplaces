@@ -31,4 +31,8 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
               end
   end
 
+  def new
+
+  end
+
 end

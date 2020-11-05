@@ -58,6 +58,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Newly added
 gem 'devise'
+gem 'omniauth'
 gem 'devise_token_auth'
 gem 'rack-cors'
 gem 'active_model_serializers'
@@ -70,10 +71,8 @@ gem 'rolify'
 gem 'social-share-button'
 
 # Use Omniauth Facebook plugin
-gem 'omniauth-facebook', '~> 4.0'
-
+gem 'omniauth-facebook'
 # Use Omniauth Google plugin
-gem 'omniauth-google-oauth2', '~> 0.4.1'
-
+gem 'omniauth-google-oauth2'
 # Use ActiveRecord Sessions
-gem 'activerecord-session_store', '~> 1.0'
+gem 'activerecord-session_store'
