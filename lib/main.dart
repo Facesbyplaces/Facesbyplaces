@@ -1,3 +1,7 @@
+import 'UI/Home/Regular/home-01-regular-home.dart';
+import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
+import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
+import 'UI/Home/Regular/home-04-03-regular-create-memorial.dart';
 import 'UI/Home/home-17-report-user.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
@@ -64,6 +68,11 @@ void main(){
         '/home/home-15-change-password': (BuildContext context) => HomeUserChangePassword(),
         '/home/home-16-other-details': (BuildContext context) => HomeUserOtherDetails(),
         '/home/home-17-report-user': (BuildContext context) => HomeReportUser(),
+
+        '/home/regular': (BuildContext context) => HomeRegularScreen(),
+        '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial(),
+        '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
+        '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
       },
     ),
   );

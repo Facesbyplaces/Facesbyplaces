@@ -1,15 +1,14 @@
 import 'package:facesbyplaces/API/Regular/api-01-regular-login.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RegularLogin extends StatelessWidget {
 
@@ -21,9 +20,7 @@ class RegularLogin extends StatelessWidget {
     SizeConfig.init(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BlocShowLoading>(
-          create: (BuildContext context) => BlocShowLoading(),
-        ),
+        BlocProvider<BlocShowLoading>(create: (BuildContext context) => BlocShowLoading(),),
       ],
       child: WillPopScope(
         onWillPop: () async{
@@ -38,9 +35,9 @@ class RegularLogin extends StatelessWidget {
           },
           child: Scaffold(
             body: BlocBuilder<BlocShowLoading, bool>(
-              builder: (context, state){
+              builder: (context, loading){
                 return ((){
-                  switch(state){
+                  switch(loading){
                     case false: return SingleChildScrollView(
                       physics: ClampingScrollPhysics(),
                       child: Stack(
@@ -110,19 +107,18 @@ class RegularLogin extends StatelessWidget {
                                     validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
 
                                     if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                                      await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                      await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                                     }else if(!validEmail){
-                                      await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                      await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                                     }else{
                                       context.bloc<BlocShowLoading>().modify(true);
                                       bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
                                       context.bloc<BlocShowLoading>().modify(false);
 
                                       if(result){
-                                        await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Success', content: 'Successfully logged in.', color: Colors.green,));
-                                        Navigator.pushReplacementNamed(context, '/home/');
+                                        Navigator.pushReplacementNamed(context, '/home/regular');
                                       }else{
-                                        await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
                                       }
                                     }
                                     
