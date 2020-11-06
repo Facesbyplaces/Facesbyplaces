@@ -75,6 +75,15 @@ Rails.application.routes.draw do
         get '/like/:post_id', to: 'posts#like'
         # Unlike Post
         get '/unlike/:post_id', to: 'posts#unlike'
+        # Add Comment to Post
+        post '/comment', to: 'comments#addComment'
+        # Add Reply to Comment
+        post '/reply', to: 'comments#addReply'
+        # Like Comment or Reply
+        get '/likeComment/:commentable_type/:commentable_id', to: 'comments#like'
+        # Unlike Comment or Reply
+        get '/unlikeComment/:commentable_type/:commentable_id', to: 'comments#unlike'
+        # Report a Comment or Reply
       end
       namespace :admin do
         # all users
