@@ -20,9 +20,7 @@ class BLMLogin extends StatelessWidget {
     SizeConfig.init(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BlocShowLoading>(
-          create: (BuildContext context) => BlocShowLoading(),
-        ),
+        BlocProvider<BlocShowLoading>(create: (BuildContext context) => BlocShowLoading(),),
       ], 
       child: WillPopScope(
         onWillPop: () async{
@@ -37,9 +35,9 @@ class BLMLogin extends StatelessWidget {
           },
           child: Scaffold(
             body: BlocBuilder<BlocShowLoading, bool>(
-              builder: (context, state){
+              builder: (context, loading){
                 return ((){
-                  switch(state){
+                  switch(loading){
                     case false: return SingleChildScrollView(
                       physics: ClampingScrollPhysics(),
                       child: Stack(
@@ -119,11 +117,7 @@ class BLMLogin extends StatelessWidget {
                                       context.bloc<BlocShowLoading>().modify(false);
 
                                       if(result){
-                                        
-                                        await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Success', content: 'Successfully logged in.', color: Colors.green,));
-
                                         Navigator.pushReplacementNamed(context, '/home/');
-
                                       }else{
                                         await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
                                       }
@@ -167,7 +161,8 @@ class BLMLogin extends StatelessWidget {
 
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.pushReplacementNamed(context, '/home/');
+                                    // Navigator.pushReplacementNamed(context, '/home/');
+                                    Navigator.pushReplacementNamed(context, '/home/blm');
                                   },
                                   child: Text('Sign in as Guest',
                                     style: TextStyle(

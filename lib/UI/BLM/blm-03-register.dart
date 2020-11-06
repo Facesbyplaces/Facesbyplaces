@@ -24,9 +24,7 @@ class BLMRegister extends StatelessWidget{
     SizeConfig.init(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BlocShowLoading>(
-          create: (BuildContext context) => BlocShowLoading(),
-        ),
+        BlocProvider<BlocShowLoading>(create: (BuildContext context) => BlocShowLoading(),),
       ], 
       child: WillPopScope(
         onWillPop: () async{
@@ -41,16 +39,13 @@ class BLMRegister extends StatelessWidget{
           },
           child: Scaffold(
             body: BlocBuilder<BlocShowLoading, bool>(
-              builder: (context, state){
+              builder: (context, loading){
                 return ((){
-                  switch(state){
+                  switch(loading){
                     case false: return Stack(
                       children: [
 
-                        SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
-                          child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
-                        ),
+                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                         Container(height: SizeConfig.screenHeight / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background-blm.png'),),),),
 
@@ -122,7 +117,6 @@ class BLMRegister extends StatelessWidget{
                                             context.bloc<BlocShowLoading>().modify(false);
 
                                             if(result){
-                                              await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Success', content: 'Successfully created an account.', color: Colors.green,));
                                               Navigator.pushNamed(context, '/blm/blm-04-verify-email');
                                             }else{
                                               await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));

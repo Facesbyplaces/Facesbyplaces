@@ -24,9 +24,7 @@ class RegularRegister extends StatelessWidget{
     SizeConfig.init(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BlocShowLoading>(
-          create: (BuildContext context) => BlocShowLoading(),
-        ),
+        BlocProvider<BlocShowLoading>(create: (BuildContext context) => BlocShowLoading(),),
       ],
       child: WillPopScope(
         onWillPop: () async{
@@ -41,16 +39,13 @@ class RegularRegister extends StatelessWidget{
           },
           child: Scaffold(
             body: BlocBuilder<BlocShowLoading, bool>(
-              builder: (context, state){
+              builder: (context, loading){
                 return ((){
-                  switch(state){
+                  switch(loading){
                     case false: return Stack(
                       children: [
 
-                        SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
-                          child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
-                        ),
+                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                         Container(height: SizeConfig.screenHeight / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-background.png'),),),),
 
@@ -91,20 +86,16 @@ class RegularRegister extends StatelessWidget{
 
                                     MiscButtonTemplate(
                                       buttonText: 'Next', 
-                                      buttonTextStyle: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                                        fontWeight: FontWeight.bold, 
-                                        color: Color(0xffffffff),
-                                      ), 
+                                      buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                                       onPressed: () async{
                                         bool validEmail = false;
                                         validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState.controller.text );
 
                                         if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' ||
                                           _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
-                                          await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                          await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                                         }else if(!validEmail){
-                                          await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                          await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                                         }else{
                                           APIRegularAccountRegistration account = APIRegularAccountRegistration(
                                             firstName: _key1.currentState.controller.text, 
@@ -120,10 +111,9 @@ class RegularRegister extends StatelessWidget{
                                           context.bloc<BlocShowLoading>().modify(false);
 
                                           if(result){
-                                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Success', content: 'Successfully created an account.', color: Colors.green,));
                                             Navigator.pushNamed(context, '/regular/regular-04-verify-email');
                                           }else{
-                                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                            await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                           }
                                         }
 
