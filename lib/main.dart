@@ -2,6 +2,9 @@ import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-04-03-regular-create-memorial.dart';
+import 'UI/Home/Regular/home-05-regular-search.dart';
+import 'UI/Home/Regular/home-06-regular-post.dart';
+import 'UI/Home/Regular/home-08-regular-memorial-profile.dart';
 import 'UI/Home/home-17-report-user.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
@@ -73,6 +76,10 @@ void main(){
         '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial(),
         '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
         '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
+        '/home/regular/home-05-regular-search': (BuildContext context) => HomeRegularSearch(),
+        '/home/regular/home-06-regular-post': (BuildContext context) => HomeRegularPost(),
+        '/home/regular/home-08-regular-memorial-profile': (BuildContext context) => HomeRegularProfile(),
+
       },
     ),
   );
