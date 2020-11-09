@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_064243) do
+ActiveRecord::Schema.define(version: 2020_11_09_092947) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(version: 2020_11_06_064243) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "page_admins", force: :cascade do |t|
+    t.string "page_type", null: false
+    t.integer "page_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["page_type", "page_id"], name: "index_page_admins_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_page_admins_on_user_id"
   end
 
   create_table "pageowners", force: :cascade do |t|
@@ -184,6 +194,15 @@ ActiveRecord::Schema.define(version: 2020_11_06_064243) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tagpeople", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_tagpeople_on_post_id"
+    t.index ["user_id"], name: "index_tagpeople_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -227,6 +246,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_064243) do
   add_foreign_key "comments", "users"
   add_foreign_key "commentslikes", "users"
   add_foreign_key "followers", "users"
+  add_foreign_key "page_admins", "users"
   add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "postslikes", "posts"
@@ -234,4 +254,6 @@ ActiveRecord::Schema.define(version: 2020_11_06_064243) do
   add_foreign_key "relationships", "users"
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "users"
+  add_foreign_key "tagpeople", "posts"
+  add_foreign_key "tagpeople", "users"
 end

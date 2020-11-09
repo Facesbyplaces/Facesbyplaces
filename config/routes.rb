@@ -64,7 +64,7 @@ Rails.application.routes.draw do
       end
       namespace :posts do
         # Post Index
-        get '/:userId', to: 'posts#index', as: 'postsIndex' 
+        get '/', to: 'posts#index', as: 'postsIndex' 
         # Create Post
         post '/', to: 'posts#create'
         # Show Post

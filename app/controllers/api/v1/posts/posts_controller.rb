@@ -13,6 +13,16 @@ class Api::V1::Posts::PostsController < ApplicationController
         post.user = user()
 
         if post.save
+            # check if there are people that have been tagged
+            if params[:tag_people]
+                people = params[:tag_people]
+                # save tagged people to database
+                people.each do |person|
+                    tag = Tagperson.new(post_id: post.id, user_id: person)
+                    tag.save
+                end
+            end
+
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
             render json: {errors: post.errors}

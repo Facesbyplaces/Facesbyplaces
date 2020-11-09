@@ -1,4 +1,5 @@
 class Api::V1::Admin::AdminController < ApplicationController
+    before_action :admin_only
 
     def allUsers
         users = User.all 
@@ -86,5 +87,12 @@ class Api::V1::Admin::AdminController < ApplicationController
         report = Report.find(params[:id])
 
         render json: report
+    end
+
+    private
+    def admin_only
+        if !user().has_role? :admin 
+            return render json: {status: "Access Denied"}
+        end
     end
 end
