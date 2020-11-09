@@ -24,7 +24,7 @@ class MiscRegularManageMemorialTab extends StatelessWidget{
               color: Color(0xffffffff),
               child: Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(left: 10.0), child: CircleAvatar(maxRadius: SizeConfig.blockSizeVertical * 5, backgroundImage: AssetImage('assets/icons/profile1.png'),),),
+                  Padding(padding: EdgeInsets.only(left: 10.0), child: CircleAvatar(maxRadius: SizeConfig.blockSizeVertical * 5, backgroundImage: AssetImage('assets/icons/profile2.png'),),),
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(left: 20.0, right: 20.0),

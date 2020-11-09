@@ -73,7 +73,6 @@ class HomeRegularCreateMemorial extends StatelessWidget{
                       Expanded(child: Container(),),
 
                       MiscRegularButtonTemplate(
-                        buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
 
                           if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 

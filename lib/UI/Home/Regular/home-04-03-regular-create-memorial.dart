@@ -1,11 +1,9 @@
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-12-appbar.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-02-bloc.dart';
+import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-
 
 class HomeRegularCreateMemorial3 extends StatelessWidget{
 
@@ -16,97 +14,101 @@ class HomeRegularCreateMemorial3 extends StatelessWidget{
     SizeConfig.init(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<BlocHomeBackgroundImage>(
-          create: (context) => BlocHomeBackgroundImage(),
+        BlocProvider<BlocHomeRegularBackgroundImage>(
+          create: (context) => BlocHomeRegularBackgroundImage(),
         ),
       ],
       child: Scaffold(
-        appBar: MiscAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
-        body: Stack(
-          children: [
+        appBar: AppBar(
+          title: Text('Create a Memorial Page for friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+          centerTitle: true,
+          backgroundColor: Color(0xff04ECFF),
+        ),
+        body: BlocBuilder<BlocHomeRegularBackgroundImage, int>(
+          builder: (context, chooseBackgroundImage){
+            return Stack(
+              children: [
 
-            MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              child: ListView(
-                physics: ClampingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  child: ListView(
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  Text('Upload or Select an Image', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
+                      Text('Upload or Select an Image', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  Container(
-                    height: SizeConfig.blockSizeVertical * 25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/icons/upload_background.png'),
-                      ),
-                    ),
-                    child: Stack(
-                      children: [
+                      Container(
+                        height: SizeConfig.blockSizeVertical * 25,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/icons/upload_background.png'),
+                          ),
+                        ),
+                        child: Stack(
+                          children: [
 
-                        Center(
-                          child: CircleAvatar(
-                            radius: SizeConfig.blockSizeVertical * 7,
-                            backgroundColor: Color(0xffffffff),
-                            child: Padding(
-                              padding: EdgeInsets.all(5),
+                            Center(
                               child: CircleAvatar(
                                 radius: SizeConfig.blockSizeVertical * 7,
-                                backgroundImage: AssetImage('assets/icons/profile1.png'),
+                                backgroundColor: Color(0xffffffff),
+                                child: Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: CircleAvatar(
+                                    radius: SizeConfig.blockSizeVertical * 7,
+                                    backgroundImage: AssetImage('assets/icons/profile1.png'),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
 
-                        Positioned(
-                          bottom: SizeConfig.blockSizeVertical * 5,
-                          left: SizeConfig.screenWidth / 2,
-                          child: CircleAvatar(
-                            radius: SizeConfig.blockSizeVertical * 3,
-                            backgroundColor: Color(0xffffffff),
-                            child: CircleAvatar(
-                              radius: SizeConfig.blockSizeVertical * 3,
-                              backgroundColor: Colors.transparent,
-                              child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
+                            Positioned(
+                              bottom: SizeConfig.blockSizeVertical * 5,
+                              left: SizeConfig.screenWidth / 2,
+                              child: CircleAvatar(
+                                radius: SizeConfig.blockSizeVertical * 3,
+                                backgroundColor: Color(0xffffffff),
+                                child: CircleAvatar(
+                                  radius: SizeConfig.blockSizeVertical * 3,
+                                  backgroundColor: Colors.transparent,
+                                  child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
+                                ),
+                              ),
                             ),
-                          ),
+
+                            Positioned(
+                              top: SizeConfig.blockSizeVertical * 1,
+                              right: SizeConfig.blockSizeVertical * 1,
+                              child: CircleAvatar(
+                                radius: SizeConfig.blockSizeVertical * 3,
+                                backgroundColor: Color(0xffffffff),
+                                child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
+                              ),
+                            ),
+
+                          ],
                         ),
+                      ),
 
-                        Positioned(
-                          top: SizeConfig.blockSizeVertical * 1,
-                          right: SizeConfig.blockSizeVertical * 1,
-                          child: CircleAvatar(
-                            radius: SizeConfig.blockSizeVertical * 3,
-                            backgroundColor: Color(0xffffffff),
-                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
-                          ),
-                        ),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                      ],
-                    ),
-                  ),
+                      Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                  Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                      Text('Choose Background', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                  Text('Choose Background', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                  BlocBuilder<BlocHomeBackgroundImage, int>(
-                    builder: (context, state){
-                      return Container(
+                      Container(
                         height: SizeConfig.blockSizeVertical * 12,
                         child: ListView.separated(
                           physics: ClampingScrollPhysics(),
@@ -117,7 +119,7 @@ class HomeRegularCreateMemorial3 extends StatelessWidget{
                               if(index == 4){
                                 return GestureDetector(
                                   onTap: (){
-                                    context.bloc<BlocHomeBackgroundImage>().updateToggle(index);
+                                    context.bloc<BlocHomeRegularBackgroundImage>().updateToggle(index);
                                   },
                                   child: Container(
                                     width: SizeConfig.blockSizeVertical * 12,
@@ -133,9 +135,9 @@ class HomeRegularCreateMemorial3 extends StatelessWidget{
                               }else{
                                 return GestureDetector(
                                   onTap: (){
-                                    context.bloc<BlocHomeBackgroundImage>().updateToggle(index);
+                                    context.bloc<BlocHomeRegularBackgroundImage>().updateToggle(index);
                                   },
-                                  child: state == index
+                                  child: chooseBackgroundImage == index
                                   ? Container(
                                     padding: EdgeInsets.all(5),
                                     width: SizeConfig.blockSizeVertical * 12,
@@ -182,22 +184,22 @@ class HomeRegularCreateMemorial3 extends StatelessWidget{
                           },
                           itemCount: 5,
                         ),
-                      );
-                    }
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                      Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+                      MiscRegularButtonTemplate(onPressed: (){Navigator.pushNamedAndRemoveUntil(context, '/home/regular/home-08-regular-memorial-profile', ModalRoute.withName('/home/regular'));}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 7),
+
+                    ],
                   ),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                  Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 10,),
-
-                  MiscButtonTemplate(onPressed: (){Navigator.pushNamed(context, '/home/home-08-profile');}, width: SizeConfig.screenWidth / 2, height: SizeConfig.blockSizeVertical * 7),
-
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

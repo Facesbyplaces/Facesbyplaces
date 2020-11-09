@@ -38,7 +38,6 @@ class HomeRegularScreenExtended extends StatelessWidget{
             }
           },
           child: Scaffold(
-            backgroundColor: Color(0xffffffff),
             appBar: AppBar(
               backgroundColor: Color(0xff4EC9D4),
               leading: Builder(
@@ -53,7 +52,7 @@ class HomeRegularScreenExtended extends StatelessWidget{
               ),
               title: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),), 
               actions: [
-                IconButton(icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), onPressed: (){},),
+                IconButton(icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), onPressed: (){Navigator.pushNamed(context, '/home/regular/home-05-regular-search');},),
               ],
 
             ),

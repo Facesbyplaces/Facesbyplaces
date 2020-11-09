@@ -23,7 +23,6 @@ class HomeRegularManageTab extends StatelessWidget{
                 return Container(
                   height: SizeConfig.blockSizeVertical * 10,
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  color: Color(0xffeeeeee).withOpacity(.5),
                   child: Row(
                     children: [
                       Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
@@ -35,7 +34,6 @@ class HomeRegularManageTab extends StatelessWidget{
                 return Container(
                   height: SizeConfig.blockSizeVertical * 10,
                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  color: Color(0xffeeeeee).withOpacity(.5),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text('My Friends',
@@ -52,7 +50,7 @@ class HomeRegularManageTab extends StatelessWidget{
               }
             },
             separatorBuilder: (context, index){
-              return Divider(height: 1, color: Colors.grey,);
+              return Divider(height: 1, color: Color(0xffcccccc),);
             },
           );
         }

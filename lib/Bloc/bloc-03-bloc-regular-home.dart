@@ -26,6 +26,27 @@ class BlocHomeRegularUpdateToggle extends Cubit<List<bool>>{
   void reset() => emit([true, false, false, false]);
 }
 
+class BlocHomeRegularStoryType extends Cubit<int>{
+
+  BlocHomeRegularStoryType() : super(0);
+  void updateToggle(int index) => emit(index);
+}
+
+class BlocHomeRegularBackgroundImage extends Cubit<int>{
+
+  BlocHomeRegularBackgroundImage() : super(0);
+  void updateToggle(int index) => emit(index);
+}
+
+
+
+
+class BlocHomeRegularUpdateToggleFeed extends Cubit<int>{
+
+  BlocHomeRegularUpdateToggleFeed() : super(0);
+  void updateToggle(int index) => emit(index);
+}
+
 class BlocHomeRegularUpdateListSuggested extends Cubit<List<bool>>{
 
   BlocHomeRegularUpdateListSuggested() : super([false, false, false, false, false, false, false, false, false, false,]);
@@ -50,8 +71,50 @@ class BlocHomeRegularUpdateListSuggested extends Cubit<List<bool>>{
   void updateList(int number) => emit(changeState(number));
 }
 
-class BlocHomeRegularStoryType extends Cubit<int>{
+class BlocHomeRegularUpdateListNearby extends Cubit<List<bool>>{
 
-  BlocHomeRegularStoryType() : super(0);
-  void updateToggle(int index) => emit(index);
+  BlocHomeRegularUpdateListNearby() : super([false, false, false, false, false, false, false, false, false, false,]);
+
+  List<bool> changeState(int number){
+    List<bool> newList = [false, false, false, false, false, false, false, false, false, false,];
+
+    for(int h = 0; h < state.length; h++){
+      newList[h] = state[h];
+    }
+
+
+    for(int i = 0; i < state.length; i++){
+      if(i == number){
+        newList[i] = !newList[i];
+      }
+    }
+
+    return newList;
+  }
+
+  void updateList(int number) => emit(changeState(number));
+}
+
+class BlocHomeRegularUpdateListBLM extends Cubit<List<bool>>{
+
+  BlocHomeRegularUpdateListBLM() : super([false, false, false, false, false, false, false, false, false, false,]);
+
+  List<bool> changeState(int number){
+    List<bool> newList = [false, false, false, false, false, false, false, false, false, false,];
+
+    for(int h = 0; h < state.length; h++){
+      newList[h] = state[h];
+    }
+
+
+    for(int i = 0; i < state.length; i++){
+      if(i == number){
+        newList[i] = !newList[i];
+      }
+    }
+
+    return newList;
+  }
+
+  void updateList(int number) => emit(changeState(number));
 }

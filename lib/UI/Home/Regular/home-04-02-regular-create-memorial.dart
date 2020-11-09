@@ -156,6 +156,7 @@ class HomeRegularCreateMemorial2 extends StatelessWidget{
                           SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
                           MiscRegularButtonTemplate(
+                            buttonColor: Color(0xff04ECFF),
                             onPressed: () async{
                               if(_key1.currentState.controller.text == ''){
                                 await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);

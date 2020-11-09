@@ -16,7 +16,7 @@ class MiscRegularButtonTemplate extends StatelessWidget{
     this.onPressed,
     this.width,
     this.height,
-    this.buttonColor = const Color(0xff2F353D),
+    this.buttonColor = const Color(0xff04ECFF),
   });
 
   @override
