@@ -1,7 +1,47 @@
 class MemorialSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :birthplace, :dob, :rip, :cemetery, :country, :name, :description, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :user
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator
 
+  def details
+    case object.privacy
+    when "public"
+      {
+        description:    object.description,
+        birthplace:     object.birthplace,
+        dob:            object.dob,
+        rip:            object.rip,
+        cemetery:       object.cemetery,
+        country:        object.country
+      }
+    when "followers"
+      if object.followers.where(user_id: object.current_user.id).first || object.relationships.where(user_id: object.current_user.id).first 
+        {
+          description:    object.description,
+          birthplace:     object.birthplace,
+          dob:            object.dob,
+          rip:            object.rip,
+          cemetery:       object.cemetery,
+          country:        object.country
+        }
+      end
+    when "familyOrFriends"
+      if object.relationships.where(user_id: object.current_user.id).first 
+        {
+          description:    object.description,
+          birthplace:     object.birthplace,
+          dob:            object.dob,
+          rip:            object.rip,
+          cemetery:       object.cemetery,
+          country:        object.country
+        }
+      end
+    end
+  end
+
+  def page_creator
+    object.pageowner.user
+  end
+  
   def backgroundImage
     if object.backgroundImage.attached?
       {
@@ -26,7 +66,9 @@ class MemorialSerializer < ActiveModel::Serializer
 
   # relationship
   def relationship
-    object.relationships.where(user: user()).first.relationship
+    if object.relationships.where(user: object.current_user).first
+      object.relationships.where(user: object.current_user).first.relationship
+    end
   end
 
   private

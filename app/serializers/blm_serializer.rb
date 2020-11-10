@@ -1,7 +1,50 @@
 class BlmSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :description, :location, :precinct, :dob, :rip, :state, :country, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :user
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator
 
+  def details
+    case object.privacy
+    when "public"
+      {
+        description:  object.description,
+        location:     object.location,
+        precinct:     object.precinct,
+        dob:          object.dob,
+        rip:          object.rip,
+        state:        object.state,
+        country:      object.country
+      }
+    when "followers"
+      if object.followers.where(user_id: object.current_user.id).first || object.relationships.where(user_id: object.current_user.id).first 
+        {
+          description:  object.description,
+          location:     object.location,
+          precinct:     object.precinct,
+          dob:          object.dob,
+          rip:          object.rip,
+          state:        object.state,
+          country:      object.country
+        }
+      end
+    when "familyOrFriends"
+      if object.relationships.where(user_id: object.current_user.id).first 
+        {
+          description:  object.description,
+          location:     object.location,
+          precinct:     object.precinct,
+          dob:          object.dob,
+          rip:          object.rip,
+          state:        object.state,
+          country:      object.country
+        }
+      end
+    end
+  end
+
+  def page_creator
+    object.pageowner.user
+  end
+  
   def backgroundImage
     if object.backgroundImage.attached?
       {
@@ -26,7 +69,7 @@ class BlmSerializer < ActiveModel::Serializer
 
   # relationship
   def relationship
-    object.relationships.where(user: user()).first.relationship
+    object.relationships.where(user: object.current_user).first.relationship
   end
 
   private

@@ -13,6 +13,9 @@ class Api::V1::Pages::BlmController < ApplicationController
         # check if the params sent is valid or not
         check = params_presence(params[:blm])
         if check == true
+            # set privacy to public
+            blm.privacy = "public"
+
             # save blm
             blm.save 
 
@@ -75,6 +78,12 @@ class Api::V1::Pages::BlmController < ApplicationController
         blm.destroy()
         
         render json: {status: "deleted"}
+    end
+
+    def setPrivacy
+        blm = Blm.find(params[:id])
+        blm.update(privacy: params[:privacy])
+        render json: {status: :success}
     end
 
     private

@@ -26,5 +26,4 @@ class Blm < ApplicationRecord
   def page_name
       "blm"
   end
-
 end

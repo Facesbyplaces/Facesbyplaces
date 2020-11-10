@@ -43,6 +43,9 @@ Rails.application.routes.draw do
 
           # Delete memorial
           delete 'memorials/:id', to: 'memorials#delete', as: 'memorialdelete'
+
+          # Set privacy
+          get 'memorials/privacy/:privacy/:id', to: 'memorials#setPrivacy'
         
         # blm controller
           # Show memorial
@@ -61,6 +64,9 @@ Rails.application.routes.draw do
 
           # Delete memorial
           delete 'blm/:id', to: 'blm#delete', as: 'blmdelete'
+
+          # Set privacy
+          get 'blm/privacy/:privacy/:id', to: 'blm#setPrivacy'
       end
       namespace :posts do
         # Post Index

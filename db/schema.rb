@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_092947) do
+ActiveRecord::Schema.define(version: 2020_11_10_030900) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_092947) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.text "description"
+    t.string "privacy"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -86,16 +87,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_092947) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "page_admins", force: :cascade do |t|
-    t.string "page_type", null: false
-    t.integer "page_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["page_type", "page_id"], name: "index_page_admins_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_page_admins_on_user_id"
+    t.string "privacy"
   end
 
   create_table "pageowners", force: :cascade do |t|
@@ -246,7 +238,6 @@ ActiveRecord::Schema.define(version: 2020_11_09_092947) do
   add_foreign_key "comments", "users"
   add_foreign_key "commentslikes", "users"
   add_foreign_key "followers", "users"
-  add_foreign_key "page_admins", "users"
   add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "postslikes", "posts"

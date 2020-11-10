@@ -1,5 +1,5 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     before_action :authorize, except: [:create, :show]
 
     def show
@@ -14,6 +14,9 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         # check if the params sent is valid or not
         check = params_presence(params[:memorial])
         if check == true
+            # set privacy to public
+            memorial.privacy = "public"
+
             # save memorial
             memorial.save 
 
@@ -76,6 +79,12 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         memorial.destroy()
         
         render json: {status: "deleted"}
+    end
+
+    def setPrivacy
+        memorial = Memorial.find(params[:id])
+        memorial.update(privacy: params[:privacy])
+        render json: {status: :success}
     end
 
     private
