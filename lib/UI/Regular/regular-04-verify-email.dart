@@ -1,21 +1,21 @@
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/API/Regular/api-03-regular-verify-email.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-09-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RegularVerifyEmail extends StatelessWidget{
 
-  final GlobalKey<MiscInputFieldOTPState> _key1 = GlobalKey();
-  final GlobalKey<MiscInputFieldOTPState> _key2 = GlobalKey();
-  final GlobalKey<MiscInputFieldOTPState> _key3 = GlobalKey();
+  final GlobalKey<MiscRegularInputFieldOTPState> _key1 = GlobalKey();
+  final GlobalKey<MiscRegularInputFieldOTPState> _key2 = GlobalKey();
+  final GlobalKey<MiscRegularInputFieldOTPState> _key3 = GlobalKey();
   
   @override
   Widget build(BuildContext context) {
@@ -49,9 +49,9 @@ class RegularVerifyEmail extends StatelessWidget{
                             case false: return Stack(
                               children: [
 
-                                SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                                SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-                                ((){ return showMessage ? MiscMessageTemplate() : Container(); }()),
+                                ((){ return showMessage ? MiscRegularMessageTemplate() : Container(); }()),
 
                                 SingleChildScrollView(
                                   physics: ClampingScrollPhysics(),
@@ -78,15 +78,15 @@ class RegularVerifyEmail extends StatelessWidget{
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: Row(
                                             children: [
-                                              Expanded(child: MiscInputFieldOTP(key: _key1,),),
+                                              Expanded(child: MiscRegularInputFieldOTP(key: _key1,),),
 
                                               SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                                              Expanded(child: MiscInputFieldOTP(key: _key2,),),
+                                              Expanded(child: MiscRegularInputFieldOTP(key: _key2,),),
 
                                               SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                                              Expanded(child: MiscInputFieldOTP(key: _key3,),),
+                                              Expanded(child: MiscRegularInputFieldOTP(key: _key3,),),
                                             ],
                                           ),
                                         ),
@@ -122,7 +122,7 @@ class RegularVerifyEmail extends StatelessWidget{
 
                                         SizedBox(height: SizeConfig.blockSizeVertical * 15,),
 
-                                        MiscButtonTemplate(
+                                        MiscRegularButtonTemplate(
                                           buttonText: textNumber != 3 ? 'Next' : 'Sign Up',
                                           buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                                           onPressed: () async{
@@ -144,7 +144,7 @@ class RegularVerifyEmail extends StatelessWidget{
                                               if(result){
                                                 Navigator.pushNamed(context, '/regular/regular-05-upload-photo');
                                               }else{
-                                                await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
                                               }
                                               
                                             }

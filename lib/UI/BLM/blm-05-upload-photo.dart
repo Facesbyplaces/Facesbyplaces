@@ -1,11 +1,11 @@
-import 'package:facesbyplaces/API/BLM/api-04-blm-upload-photo.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-09-message.dart';
+import 'package:facesbyplaces/API/BLM/api-04-blm-upload-photo.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -65,7 +65,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                         case false: return Stack(
                           children: [
 
-                            ((){ return showMessage ? MiscMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
+                            ((){ return showMessage ? MiscBLMMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
 
                             Padding(
                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -84,7 +84,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                         onTap: () async{
                                           context.bloc<BlocUpdateButtonText>().add();
 
-                                          var choice = await showDialog(context: (context), builder: (build) => UploadFrom());
+                                          var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog());
 
                                           if(choice == null){
                                             choice = 0;
@@ -146,7 +146,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
                                   SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                                  MiscButtonTemplate(
+                                  MiscBLMButtonTemplate(
                                     buttonText: textNumber == 1 ? 'Sign Up' : 'Speak Now',
                                     buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                                     onPressed: () async{
@@ -161,7 +161,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                           // Navigator.pushReplacementNamed(context, '/home/');
                                           Navigator.pushReplacementNamed(context, '/home/blm');
                                         }else{
-                                          await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
                                         }
                                       }else{
                                         context.bloc<BlocShowMessage>().showMessage();

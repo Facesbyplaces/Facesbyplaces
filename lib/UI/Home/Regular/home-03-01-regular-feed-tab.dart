@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-10-image-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-blm-image-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
@@ -36,25 +36,25 @@ class HomeRegularFeedTab extends StatelessWidget{
               Positioned(
                 left: 0,
                 top: SizeConfig.blockSizeVertical * 8,
-                child: MiscImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
+                child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
               ),
 
               Positioned(
                 right: 0,
                 top: SizeConfig.blockSizeVertical * 8,
-                child: MiscImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
+                child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
               ),
 
               Positioned(
                 left: SizeConfig.blockSizeHorizontal * 12,
                 top: SizeConfig.blockSizeVertical * 6,
-                child: MiscImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
+                child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
               ),
 
               Positioned(
                 right: SizeConfig.blockSizeHorizontal * 12,
                 top: SizeConfig.blockSizeVertical * 6,
-                child: MiscImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
+                child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
               ),
 
               Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
@@ -72,7 +72,7 @@ class HomeRegularFeedTab extends StatelessWidget{
 
         SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-        MiscButtonTemplate(
+        MiscRegularButtonTemplate(
           buttonText: 'Create', 
           buttonTextStyle: TextStyle(
             fontSize: SizeConfig.safeBlockHorizontal * 5, 

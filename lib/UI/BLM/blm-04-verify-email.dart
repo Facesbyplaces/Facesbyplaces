@@ -1,8 +1,8 @@
-import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-09-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-03-blm-verify-email.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
@@ -13,9 +13,9 @@ import 'package:flutter/material.dart';
 
 class BLMVerifyEmail extends StatelessWidget{
 
-  final GlobalKey<MiscInputFieldOTPState> _key1 = GlobalKey();
-  final GlobalKey<MiscInputFieldOTPState> _key2 = GlobalKey();
-  final GlobalKey<MiscInputFieldOTPState> _key3 = GlobalKey();
+  final GlobalKey<MiscBLMInputFieldOTPState> _key1 = GlobalKey();
+  final GlobalKey<MiscBLMInputFieldOTPState> _key2 = GlobalKey();
+  final GlobalKey<MiscBLMInputFieldOTPState> _key3 = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +49,9 @@ class BLMVerifyEmail extends StatelessWidget{
                             case false: return Stack(
                               children: [
 
-                                SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                                SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-                                ((){ return showMessage ? MiscMessageTemplate() : Container(); }()),
+                                ((){ return showMessage ? MiscBLMMessageTemplate() : Container(); }()),
 
                                 SingleChildScrollView(
                                   physics: ClampingScrollPhysics(),
@@ -78,15 +78,15 @@ class BLMVerifyEmail extends StatelessWidget{
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: Row(
                                             children: [
-                                              Expanded(child: MiscInputFieldOTP(key: _key1,),),
+                                              Expanded(child: MiscBLMInputFieldOTP(key: _key1,),),
 
                                               SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                                              Expanded(child: MiscInputFieldOTP(key: _key2,),),
+                                              Expanded(child: MiscBLMInputFieldOTP(key: _key2,),),
 
                                               SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                                              Expanded(child: MiscInputFieldOTP(key: _key3,),),
+                                              Expanded(child: MiscBLMInputFieldOTP(key: _key3,),),
                                             ],
                                           ),
                                         ),
@@ -122,7 +122,7 @@ class BLMVerifyEmail extends StatelessWidget{
 
                                         SizedBox(height: SizeConfig.blockSizeVertical * 15,),
 
-                                        MiscButtonTemplate(
+                                        MiscBLMButtonTemplate(
                                           buttonText: textNumber == 3
                                           ? 'Sign Up'
                                           : 'Next',
@@ -145,7 +145,7 @@ class BLMVerifyEmail extends StatelessWidget{
                                               if(result){
                                                 Navigator.pushNamed(context, '/blm/blm-05-upload-photo'); 
                                               }else{
-                                                await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                               }
 
                                             }

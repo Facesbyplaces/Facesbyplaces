@@ -1,4 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -148,6 +150,177 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
             color: Color(0xff000000),
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    );
+  }
+}
+
+
+class MiscRegularInputFieldDropDown extends StatefulWidget{
+
+  MiscRegularInputFieldDropDown({Key key}) : super(key: key);
+
+  @override
+  MiscRegularInputFieldDropDownState createState() => MiscRegularInputFieldDropDownState();
+}
+
+class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDropDown>{
+
+  List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
+  String currentSelection = 'Father';
+
+  @override
+  Widget build(BuildContext context){
+    return InputDecorator(
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: 'Relationship',
+        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: currentSelection,
+          isDense: true,
+          onChanged: (String newValue) {
+            setState(() {
+              currentSelection = newValue;
+            });
+          },
+          items: relationship.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class MiscRegularInputFieldDropDownUser extends StatefulWidget{
+
+  MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
+
+  @override
+  MiscRegularInputFieldDropDownUserState createState() => MiscRegularInputFieldDropDownUserState();
+}
+
+class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
+
+  List<String> relationship = ['Richard Nedd Memories', 'Default'];
+  String currentSelection = 'Richard Nedd Memories';
+
+  @override
+  Widget build(BuildContext context){
+    return InputDecorator(
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: 'Relationship',
+        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide.none,
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: currentSelection,
+          isDense: true,
+          onChanged: (String newValue) {
+            setState(() {
+              currentSelection = newValue;
+            });
+          },
+          items: relationship.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+
+class MiscRegularInputFieldOTP extends StatefulWidget {  
+  MiscRegularInputFieldOTP({Key key}) : super(key: key);
+
+  @override
+  MiscRegularInputFieldOTPState createState() => MiscRegularInputFieldOTPState();
+}
+
+class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
+
+  TextEditingController controller = TextEditingController();
+  bool readOnly;
+  bool checker;
+
+  @override
+  void initState(){
+    super.initState();
+    checker = false;
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLength: 1,
+      maxLengthEnforced: true,
+      cursorColor: Color(0xff000000),
+      controller: controller,
+      textAlign: TextAlign.center,
+      keyboardType: TextInputType.number,
+      onChanged: (value){
+        if(!checker){
+          if(value.length == 1){
+            context.bloc<BlocUpdateButtonText>().add();
+            setState(() {
+              checker = true;
+            });
+          }
+        }else{
+          if(value.length == 0){
+            context.bloc<BlocUpdateButtonText>().remove();
+            setState(() {
+              checker = false;
+            });
+          }
+        }
+      },
+      style: TextStyle(
+        fontSize: SizeConfig.safeBlockHorizontal * 15,
+        fontWeight: FontWeight.bold,
+        color: Color(0xff000000)
+      ),
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        counterText: '',
+        labelStyle: TextStyle(
+          fontSize: SizeConfig.safeBlockHorizontal * 4,
+          fontWeight: FontWeight.w400,
+          color: Color(0xff000000).withOpacity(.5),
+        ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
         ),
       ),
     );

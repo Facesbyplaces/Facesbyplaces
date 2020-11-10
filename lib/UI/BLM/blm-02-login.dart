@@ -1,19 +1,19 @@
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-01-blm-login.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class BLMLogin extends StatelessWidget {
 
-  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class BLMLogin extends StatelessWidget {
                       child: Stack(
                         children: [
 
-                          Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                          Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
 
                           Container(
                             padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -66,11 +66,11 @@ class BLMLogin extends StatelessWidget {
 
                                   child: Row(
                                     children: [
-                                      Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
+                                      Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
 
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 
-                                      Expanded(child: MiscButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),),
+                                      Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),),
                                     ],
                                   ),
                                 ),
@@ -81,11 +81,11 @@ class BLMLogin extends StatelessWidget {
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
+                                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
+                                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -93,7 +93,7 @@ class BLMLogin extends StatelessWidget {
 
                                 Expanded(child: Container(),),
 
-                                MiscButtonTemplate(
+                                MiscBLMButtonTemplate(
                                   buttonText: 'Login', 
                                   buttonTextStyle: TextStyle(
                                     fontSize: SizeConfig.safeBlockHorizontal * 5, 
@@ -105,9 +105,9 @@ class BLMLogin extends StatelessWidget {
                                     validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
 
                                     if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                                      await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                                     }else if(!validEmail){
-                                      await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                                     }else{
 
                                       context.bloc<BlocShowLoading>().modify(true);
@@ -117,9 +117,9 @@ class BLMLogin extends StatelessWidget {
                                       context.bloc<BlocShowLoading>().modify(false);
 
                                       if(result){
-                                        Navigator.pushReplacementNamed(context, '/home/');
+                                        Navigator.pushReplacementNamed(context, '/home/blm');
                                       }else{
-                                        await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
                                       }
                                     }
                                   }, 

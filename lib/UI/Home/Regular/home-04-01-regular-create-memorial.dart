@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularCreateMemorial extends StatelessWidget{
 
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -37,7 +37,7 @@ class HomeRegularCreateMemorial extends StatelessWidget{
           body: Stack(
             children: [
 
-              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
               SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
@@ -46,7 +46,8 @@ class HomeRegularCreateMemorial extends StatelessWidget{
                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: Column(
                     children: [
-                      MiscRegularInputFieldTemplate(key: _key1, labelText: 'Relationship'),
+
+                      MiscRegularInputFieldDropDown(key: _key1,),
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -75,9 +76,9 @@ class HomeRegularCreateMemorial extends StatelessWidget{
                       MiscRegularButtonTemplate(
                         onPressed: () async{
 
-                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 
+                          if(_key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 
                           _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
-                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                            await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                           }else{
                             Navigator.pushNamed(context, '/home/regular/home-04-02-regular-create-memorial');
                           }

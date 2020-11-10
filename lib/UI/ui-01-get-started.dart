@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'Miscellaneous/misc-07-button.dart';
-import 'Miscellaneous/misc-08-background.dart';
+import 'Miscellaneous/Start/misc-02-start-background.dart';
+import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'package:flutter/material.dart';
 
 const double pi = 3.1415926535897932;
@@ -14,7 +14,7 @@ class UIGetStarted extends StatelessWidget {
       body: Stack(
         children: [
 
-          MiscBackgroundTemplate(),
+          MiscStartBackgroundTemplate(),
 
           Container(
             height: SizeConfig.screenHeight / 2,
@@ -117,8 +117,6 @@ class UIGetStarted extends StatelessWidget {
                   ),
                 ),
 
-
-
                 Positioned(
                   left: SizeConfig.screenWidth / 3.5,
                   child: Transform.rotate(
@@ -170,8 +168,6 @@ class UIGetStarted extends StatelessWidget {
                     ),
                   ),
                 ),
-
-
 
                 Positioned(
                   right: SizeConfig.screenWidth / 3,
@@ -225,8 +221,6 @@ class UIGetStarted extends StatelessWidget {
                   ),
                 ),
 
-
-
                 Positioned(
                   right: SizeConfig.screenWidth / 4.5,
                   child: Transform.rotate(
@@ -278,8 +272,6 @@ class UIGetStarted extends StatelessWidget {
                     ),
                   ),
                 ),
-
-
 
                 Positioned(
                   right: SizeConfig.screenWidth / 10,
@@ -333,9 +325,6 @@ class UIGetStarted extends StatelessWidget {
                   ),
                 ),
 
-
-
-
                 Positioned(
                   right: -20,
                   child: Transform.rotate(
@@ -388,8 +377,6 @@ class UIGetStarted extends StatelessWidget {
                   ),
                 ),
 
-
-
               ],
             ),
           ),
@@ -423,7 +410,7 @@ class UIGetStarted extends StatelessWidget {
 
               SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-              MiscButtonTemplate(
+              MiscStartButtonTemplate(
                 buttonText: 'Get Started', 
                 buttonTextStyle: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4, 
