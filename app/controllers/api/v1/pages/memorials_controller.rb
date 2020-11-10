@@ -1,5 +1,5 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
     before_action :authorize, except: [:create, :show]
 
     def show
