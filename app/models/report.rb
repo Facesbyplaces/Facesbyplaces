@@ -1,5 +1,3 @@
 class Report < ApplicationRecord
-    belongs_to :page, polymorphic: true
-    belongs_to :user
-    belongs_to :post
+    belongs_to :reportable, polymorphic: true
 end

@@ -10,6 +10,9 @@ class Post < ApplicationRecord
   has_many :tagpeople
   has_many :users, through: :tagpeople
 
+  # Report
+  has_many :reports, as: :reportable, dependent: :destroy
+
   # validation
   validates :body, presence: true
   validates :location, presence: true

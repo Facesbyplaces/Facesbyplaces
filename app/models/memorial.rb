@@ -13,12 +13,12 @@ class Memorial < ApplicationRecord
     # Posts of this page
     has_many :posts, as: :page, dependent: :destroy
 
-    # Reports of this page
-    has_many :reports, as: :page, dependent: :destroy
-
     # Followers of this page
     has_many :followers, as: :page, dependent: :destroy
     has_many :users, through: :followers
+
+    # Report
+    has_many :reports, as: :reportable, dependent: :destroy
 
     resourcify
 
