@@ -1,6 +1,6 @@
+import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-home.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home-03-01-regular-feed-tab.dart';

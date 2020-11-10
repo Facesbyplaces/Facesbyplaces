@@ -1,6 +1,5 @@
-
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-misc.dart';
+import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';

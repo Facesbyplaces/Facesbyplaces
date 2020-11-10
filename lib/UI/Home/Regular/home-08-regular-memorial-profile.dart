@@ -52,7 +52,7 @@ class HomeRegularProfile extends StatelessWidget{
                           alignment: Alignment.topRight,
                           child: GestureDetector(
                             onTap: (){
-                              // Navigator.pushNamed(context, '/home/home-10-create-post');
+                              Navigator.pushNamed(context, 'home/regular/home-09-regular-create-post');
                             },
                             child: Text('Create Post',
                               style: TextStyle(

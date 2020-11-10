@@ -1,8 +1,8 @@
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/API/Regular/api-04-regular-upload-photo.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-09-message.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
@@ -68,7 +68,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                         case false: return Stack(
                           children: [
 
-                            ((){ return showMessage ? MiscMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
+                            ((){ return showMessage ? MiscRegularMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
 
                             Padding(
                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -85,7 +85,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     onTap: () async{
                                       context.bloc<BlocUpdateButtonText>().add();
 
-                                      var choice = await showDialog(context: (context), builder: (build) => UploadFrom());
+                                      var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
 
                                       if(choice == null){
                                         choice = 0;
@@ -145,7 +145,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
                                   SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                                  MiscButtonTemplate(
+                                  MiscRegularButtonTemplate(
                                     buttonText: textNumber == 1
                                     ? 'Sign Up'
                                     : 'Next',
@@ -165,7 +165,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                         if(result){
                                           Navigator.pushReplacementNamed(context, '/home/');
                                         }else{
-                                          await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
                                         }
 
                                       }else{

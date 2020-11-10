@@ -1,23 +1,23 @@
 import 'package:facesbyplaces/API/Regular/api-02-regular-registration.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RegularRegister extends StatelessWidget{
 
-  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class RegularRegister extends StatelessWidget{
                     case false: return Stack(
                       children: [
 
-                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                         Container(height: SizeConfig.screenHeight / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-background.png'),),),),
 
@@ -60,31 +60,31 @@ class RegularRegister extends StatelessWidget{
                                 child: Column(
                                   children: [
 
-                                    MiscInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                    MiscRegularInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
                                     
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                     
-                                    MiscInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                    MiscRegularInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                    MiscInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                    MiscRegularInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                    MiscInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                    MiscRegularInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                    MiscInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                    MiscRegularInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                    MiscInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
+                                    MiscRegularInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                                    MiscButtonTemplate(
+                                    MiscRegularButtonTemplate(
                                       buttonText: 'Next', 
                                       buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
                                       onPressed: () async{
@@ -93,9 +93,9 @@ class RegularRegister extends StatelessWidget{
 
                                         if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' ||
                                           _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
-                                          await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                          await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                                         }else if(!validEmail){
-                                          await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                          await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                                         }else{
                                           APIRegularAccountRegistration account = APIRegularAccountRegistration(
                                             firstName: _key1.currentState.controller.text, 
@@ -113,7 +113,7 @@ class RegularRegister extends StatelessWidget{
                                           if(result){
                                             Navigator.pushNamed(context, '/regular/regular-04-verify-email');
                                           }else{
-                                            await showDialog(context: context, builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                            await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                           }
                                         }
 

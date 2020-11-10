@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'Miscellaneous/misc-07-button.dart';
+import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,7 @@ class UILogin01 extends StatelessWidget {
 
             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-            MiscButtonIconTemplate(
+            MiscStartButtonIconTemplate(
               buttonText: 'Speak for a loved one killed by law enforcement', 
               onPressed: (){Navigator.pushNamed(context, '/blm/blm-01-join');},
               width: SizeConfig.screenWidth / 1.5,
@@ -47,7 +47,7 @@ class UILogin01 extends StatelessWidget {
 
             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-            MiscButtonIconTemplate(
+            MiscStartButtonIconTemplate(
               buttonText: 'Speak for a loved one killed by law enforcement', 
               onPressed: (){Navigator.pushNamed(context, '/regular/regular-01-join');},
               width: SizeConfig.screenWidth / 1.5,

@@ -1,6 +1,64 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
+class MiscRegularUploadFromDialog extends StatelessWidget{
+
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5))
+      ),
+      child: Container(
+        height: SizeConfig.screenHeight / 4,
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text('Upload From',
+              style: TextStyle(
+                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                fontWeight: FontWeight.w200,
+                color: Color(0xff000000),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 1);
+              },
+              child: Text('Camera',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 2);
+              },
+              child: Text('Gallery',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 class MiscRegularAlertDialog extends StatelessWidget{
 
   final String title;

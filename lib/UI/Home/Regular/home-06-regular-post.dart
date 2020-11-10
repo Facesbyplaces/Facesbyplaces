@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-toggle-tabs.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-home.dart';
+import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home-07-01-regular-post-extended.dart';
 import 'home-07-02-regular-suggested.dart';
@@ -40,7 +40,6 @@ class HomeRegularPost extends StatelessWidget{
             ),
           ],
           child: Scaffold(
-            // backgroundColor: Color(0xffeeeeee),
             appBar: AppBar(
               title: TextFormField(
                 decoration: InputDecoration(
@@ -83,23 +82,6 @@ class HomeRegularPost extends StatelessWidget{
                     Container(
                       child: ((){
                         switch(togglePost){
-                          // case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                          // case 0: return Container(
-                          //   height: SizeConfig.blockSizeVertical * 2,
-                          //   decoration: BoxDecoration(
-                          //     // color: Color(0xffffffff),
-                          //     color: Colors.transparent,
-                          //     borderRadius: BorderRadius.all(Radius.circular(15),),
-                          //     boxShadow: <BoxShadow>[
-                          //       BoxShadow(
-                          //         color: Colors.grey.withOpacity(0.5),
-                          //         spreadRadius: 1,
-                          //         blurRadius: 5,
-                          //         offset: Offset(0, 0)
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ); break;
                           case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
                           case 2: return 
                           Container(

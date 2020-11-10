@@ -1,23 +1,23 @@
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-02-blm-registration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-01-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-02-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-07-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/misc-08-background.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class BLMRegister extends StatelessWidget{
 
-  final GlobalKey<MiscInputFieldTemplateState> _key1 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key2 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key3 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key4 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key5 = GlobalKey<MiscInputFieldTemplateState>();
-  final GlobalKey<MiscInputFieldTemplateState> _key6 = GlobalKey<MiscInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class BLMRegister extends StatelessWidget{
                     case false: return Stack(
                       children: [
 
-                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
                         Container(height: SizeConfig.screenHeight / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background-blm.png'),),),),
 
@@ -61,31 +61,31 @@ class BLMRegister extends StatelessWidget{
                                   child: Column(
                                     children: [
                                 
-                                      MiscInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                      MiscBLMInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
                                       
                                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                       
-                                      MiscInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                      MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                      MiscInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                      MiscBLMInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                      MiscInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                      MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                      MiscInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                                      MiscBLMInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                      MiscInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
+                                      MiscBLMInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
 
                                       SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                                      MiscButtonTemplate(
+                                      MiscBLMButtonTemplate(
                                         buttonText: 'Next', 
                                         buttonTextStyle: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 5, 
@@ -98,9 +98,9 @@ class BLMRegister extends StatelessWidget{
 
                                           if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' ||
                                             _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
-                                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                            await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                                           }else if(!validEmail){
-                                            await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                            await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
                                           }else{
 
                                             APIBLMAccountRegistration account = APIBLMAccountRegistration(
@@ -119,7 +119,7 @@ class BLMRegister extends StatelessWidget{
                                             if(result){
                                               Navigator.pushNamed(context, '/blm/blm-04-verify-email');
                                             }else{
-                                              await showDialog(context: (context), builder: (build) => MiscAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                              await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                             }
                                           }
                                         }, 
