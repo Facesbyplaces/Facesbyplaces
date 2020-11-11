@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ignore: one
+  ignore_type: Ignore
+  user: one
+
+two:
+  ignore: two
+  ignore_type: Ignore
+  user: two

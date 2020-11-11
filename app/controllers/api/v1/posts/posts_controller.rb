@@ -1,5 +1,4 @@
 class Api::V1::Posts::PostsController < ApplicationController
-
     before_action :authenticate_user!
 
     def index  
@@ -23,6 +22,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 end
             end
 
+            NotificationBroadcastJob.perform_later(post)
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
             render json: {errors: post.errors}

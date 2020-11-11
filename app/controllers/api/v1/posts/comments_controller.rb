@@ -3,6 +3,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
         comment = Comment.new(comment_params)
         comment.user = user()
         if comment.save
+            NotificationBroadcastJob.perform_later(comment)
             render json: {status: "Added Comment"}
         else
             render json: {status: "Error"}
@@ -13,6 +14,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
         reply = Reply.new(reply_params)
         reply.user = user()
         if reply.save 
+            NotificationBroadcastJob.perform_later(reply)
             render json: {status: "Added Reply"}
         else
             render json: {status: "Error"}

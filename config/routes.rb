@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
+  # Action Cable
+  mount ActionCable.server => '/cable'
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       namespace :users do 
@@ -144,6 +147,14 @@ Rails.application.routes.draw do
         get 'editPost/:post_id/:page_type/:page_id', to: 'pageadmin#editPost'
         put 'updatePost', to: 'pageadmin#updatePost'
         delete 'deletePost/:post_id/:page_type/:page_id', to: 'pageadmin#deletePost'
+      end
+      namespace :notifications do
+        # ignore lists of notifications
+        get 'ignore/:ignore_type/:ignore_id', to: 'notifsettings#create'
+        delete 'ignore/:ignore_id', to: 'notifsettings#delete'
+
+        # lists of notifications
+        get '/', to: 'notifsettings#index'
       end
     end
   end

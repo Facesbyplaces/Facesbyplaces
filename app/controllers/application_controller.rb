@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
         end
 
         def user
-            current_user
+            User.first
         end
 
         def params_presence(data)

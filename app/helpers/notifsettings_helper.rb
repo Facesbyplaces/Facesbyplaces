@@ -1,0 +1,2 @@
+module NotifsettingsHelper
+end

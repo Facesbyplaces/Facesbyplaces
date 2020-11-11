@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_194826) do
+ActiveRecord::Schema.define(version: 2020_11_11_034711) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,26 @@ ActiveRecord::Schema.define(version: 2020_11_10_194826) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "notify_type", null: false
+    t.integer "notify_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notify_type", "notify_id"], name: "index_notifications_on_notify_type_and_notify_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "notifsettings", force: :cascade do |t|
+    t.string "ignore_type", null: false
+    t.integer "ignore_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ignore_type", "ignore_id"], name: "index_notifsettings_on_ignore_type_and_ignore_id"
+    t.index ["user_id"], name: "index_notifsettings_on_user_id"
   end
 
   create_table "pageowners", force: :cascade do |t|
@@ -236,6 +256,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_194826) do
   add_foreign_key "comments", "users"
   add_foreign_key "commentslikes", "users"
   add_foreign_key "followers", "users"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifsettings", "users"
   add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "postslikes", "posts"
