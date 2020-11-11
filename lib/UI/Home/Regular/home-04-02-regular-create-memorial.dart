@@ -40,6 +40,7 @@ class HomeRegularCreateMemorial2 extends StatelessWidget{
               title: Text('Create a Memorial Page for friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
               centerTitle: true,
               backgroundColor: Color(0xff04ECFF),
+              leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             ),
             body: BlocBuilder<BlocHomeRegularStoryType, int>(
               builder: (context, storyType){
@@ -52,7 +53,6 @@ class HomeRegularCreateMemorial2 extends StatelessWidget{
                       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                       child: ListView(
                         physics: ClampingScrollPhysics(),
-                        shrinkWrap: true,
                         children: [
 
                           MiscRegularInputFieldTemplate(key: _key1, labelText: 'Name of your Memorial Page'),

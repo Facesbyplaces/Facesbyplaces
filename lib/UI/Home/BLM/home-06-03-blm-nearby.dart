@@ -4,7 +4,7 @@ import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class HomeNearby extends StatelessWidget{
+class HomeBLMNearby extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,6 @@ class HomeNearby extends StatelessWidget{
       builder: (context, state){
         return ListView.separated(
           physics: ClampingScrollPhysics(),
-          shrinkWrap: true,
           itemCount: state.length,
           itemBuilder: (context, index){
             return MiscBLMJoinButton(index: index, tab: 1,);

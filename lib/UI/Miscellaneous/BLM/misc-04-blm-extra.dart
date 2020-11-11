@@ -9,7 +9,7 @@ class MiscBLMBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BlocBuilder<BlocHomeUpdateToggle, List<bool>>(
+    return BlocBuilder<BlocHomeBLMUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
           height: SizeConfig.blockSizeVertical * 10,
@@ -69,7 +69,7 @@ class MiscBLMBottomSheet extends StatelessWidget {
 
             ],
             onPressed: (int index){
-              context.bloc<BlocHomeUpdateToggle>().updateToggle(index);
+              context.bloc<BlocHomeBLMUpdateToggle>().updateToggle(index);
               switch(index){
                 case 0: context.bloc<BlocHomeBLMToggleBottom>().modify(0); break;
                 case 1: context.bloc<BlocHomeBLMToggleBottom>().modify(1); break;
@@ -77,7 +77,7 @@ class MiscBLMBottomSheet extends StatelessWidget {
                 case 3: context.bloc<BlocHomeBLMToggleBottom>().modify(3); break;
               }
             },
-            isSelected: context.bloc<BlocHomeUpdateToggle>().state,
+            isSelected: context.bloc<BlocHomeBLMUpdateToggle>().state,
           ),
           
           decoration: BoxDecoration(
@@ -226,7 +226,7 @@ class MiscBLMJoinButton extends StatelessWidget{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, '/home/home-06-memorial');
+        Navigator.pushNamed(context, '/home/blm/home-08-blm-memorial');
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,

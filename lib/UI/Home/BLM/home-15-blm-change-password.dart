@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserChangePassword extends StatelessWidget{
+class HomeBLMUserChangePassword extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();

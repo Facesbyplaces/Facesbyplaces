@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserOtherDetails extends StatelessWidget{
+class HomeBLMUserOtherDetails extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -29,7 +29,7 @@ class HomeUserOtherDetails extends StatelessWidget{
         child: Scaffold(
           appBar: MiscBLMAppBarTemplate(
             appBar: AppBar(), 
-            title: Text('Account Details', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Other Details', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
             leadingAction: (){Navigator.pop(context);},
           ),
           body: SingleChildScrollView(

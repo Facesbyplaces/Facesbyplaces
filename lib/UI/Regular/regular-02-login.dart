@@ -162,7 +162,7 @@ class RegularLogin extends StatelessWidget {
 
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.pushReplacementNamed(context, '/home/');
+                                    Navigator.pushReplacementNamed(context, '/home/regular');
                                   },
                                   child: Text('Sign in as Guest',
                                     style: TextStyle(

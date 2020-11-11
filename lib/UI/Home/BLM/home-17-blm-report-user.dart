@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeReportUser extends StatelessWidget{
+class HomeBLMReportUser extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
 

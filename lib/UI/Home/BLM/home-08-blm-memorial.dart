@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeMemorialProfile extends StatelessWidget{
+class HomeBLMMemorialProfile extends StatelessWidget{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
 

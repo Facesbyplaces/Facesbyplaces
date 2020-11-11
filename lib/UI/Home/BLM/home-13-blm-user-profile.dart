@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-class HomeUserProfile extends StatelessWidget{
+class HomeBLMUserProfile extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {

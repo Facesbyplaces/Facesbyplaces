@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomePageDetails extends StatelessWidget{
+class HomeBLMPageDetails extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -55,7 +55,6 @@ class HomePageDetails extends StatelessWidget{
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: ListView(
                   physics: ClampingScrollPhysics(),
-                  shrinkWrap: true,
                   children: [
 
                     MiscBLMInputFieldTemplate(key: _key1, labelText: 'Page Name'),

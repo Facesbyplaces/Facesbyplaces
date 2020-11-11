@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class HomeCreateMemorial3 extends StatelessWidget{
+class HomeBLMCreateMemorial3 extends StatelessWidget{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
 
@@ -26,10 +26,6 @@ class HomeCreateMemorial3 extends StatelessWidget{
           create: (context) => BlocShowLoading(),
         ),
       ],
-      // child: Scaffold(
-      //   appBar: MiscBLMAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
-      //   body: ,
-      // ),
       child: BlocBuilder<BlocShowLoading, bool>(
         builder: (context, loading){
           return ((){
@@ -45,7 +41,6 @@ class HomeCreateMemorial3 extends StatelessWidget{
                       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                       child: ListView(
                         physics: ClampingScrollPhysics(),
-                        shrinkWrap: true,
                         children: [
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
@@ -124,7 +119,6 @@ class HomeCreateMemorial3 extends StatelessWidget{
                                 height: SizeConfig.blockSizeVertical * 12,
                                 child: ListView.separated(
                                   physics: ClampingScrollPhysics(),
-                                  shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index){
                                     return ((){
@@ -164,6 +158,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(10),
                                                 image: DecorationImage(
+                                                  fit: BoxFit.cover,
                                                   image: AssetImage(images[index]),
                                                 ),
                                               ),
@@ -182,6 +177,7 @@ class HomeCreateMemorial3 extends StatelessWidget{
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(10),
                                                 image: DecorationImage(
+                                                  fit: BoxFit.cover,
                                                   image: AssetImage(images[index]),
                                                 ),
                                               ),
@@ -208,23 +204,17 @@ class HomeCreateMemorial3 extends StatelessWidget{
 
                           MiscBLMButtonTemplate(
                             onPressed: () async{
-                            // Navigator.pushNamed(context, '/home/blm/home-12-blm-profile');
-                            // apiBLMCreateMemorial
 
-                              // await apiBLMCreateMemorial();
+                              context.bloc<BlocShowLoading>().modify(true);
+                              bool result = await apiBLMCreateMemorial();
+                              context.bloc<BlocShowLoading>().modify(false);
 
-
-                                context.bloc<BlocShowLoading>().modify(true);
-
-                                bool result = await apiBLMCreateMemorial();
-
-                                context.bloc<BlocShowLoading>().modify(false);
-
-                                if(result){
-                                  Navigator.pushReplacementNamed(context, '/home/blm/home-12-blm-profile');
-                                }else{
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
-                                }
+                              if(result){
+                                Navigator.pushReplacementNamed(context, '/home/blm/home-12-blm-profile');
+                              }else{
+                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                              }
+                                
                             }, 
                             width: SizeConfig.screenWidth / 2, 
                             height: SizeConfig.blockSizeVertical * 7,

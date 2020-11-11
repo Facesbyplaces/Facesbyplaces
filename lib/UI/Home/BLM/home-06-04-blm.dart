@@ -4,7 +4,7 @@ import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLM extends StatelessWidget{
+class HomeBLMBLM extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {

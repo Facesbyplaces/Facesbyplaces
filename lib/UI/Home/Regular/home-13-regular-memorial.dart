@@ -1,70 +1,33 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularProfile extends StatelessWidget{
+class HomeRegularMemorialProfile extends StatelessWidget{
 
-  final List<String> images = ['assets/icons/regular-image1.png', 'assets/icons/regular-image2.png', 'assets/icons/regular-image3.png', 'assets/icons/regular-image4.png'];
+  final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      backgroundColor: Color(0xffeeeeee),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Stack(
           children: [
             
-            Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-image1.png'),),),),
+            Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background3.png'),),),),
 
             Column(
               children: [
                 Container(
                   height: SizeConfig.screenHeight / 3.5,
-                  padding: EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.topCenter,
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-                                Text('Back',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xffffffff),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.pushNamed(context, 'home/regular/home-09-regular-create-post');
-                            },
-                            child: Text('Create Post',
-                              style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  color: Colors.transparent,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20.0, top: 20.0),
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                      onPressed: (){Navigator.pop(context);},
+                      icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
+                    ),
                   ),
                 ), // INVISIBLE SPACE ABOVE THE BACKGROUND
 
@@ -78,7 +41,7 @@ class HomeRegularProfile extends StatelessWidget{
                     children: [
                       SizedBox(height: SizeConfig.blockSizeVertical * 12,),
 
-                      Center(child: Text('Sara Rosario Suarez', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                      Center(child: Text('Karen Cruz', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -114,25 +77,13 @@ class HomeRegularProfile extends StatelessWidget{
 
                       Container(
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: Stack(
-                          children: [
-                            Container(
-                              height: SizeConfig.blockSizeHorizontal * 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage('assets/icons/regular-image4.png'),
-                                ),
-                              ),
-                            ),
-
-                            Positioned(
-                              top: SizeConfig.blockSizeVertical * 7,
-                              left: SizeConfig.screenWidth / 2.8,
-                              child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
-                            ),
-                          ],
+                        child: Text('John was a US military personnel. We had always wished he did not take on being a military, but it was his dream so we had to let him do it. '
+                        'He was awarded 5 times during his service. He\'s a good son and father to his son and daughter. Rest in peace John.',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff000000),
+                          ),
                         ),
                       ),
 
@@ -141,7 +92,16 @@ class HomeRegularProfile extends StatelessWidget{
                       Container(
                         child: Row(
                           children: [
-                            Expanded(child: Container(),),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: (){},
+                                child: CircleAvatar(
+                                  radius: SizeConfig.blockSizeVertical * 3,
+                                  backgroundColor: Color(0xffE67E22),
+                                  child: Icon(Icons.card_giftcard, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 3,),
+                                ),
+                              ),
+                            ),
                             Expanded(
                               flex: 2,
                               child: Padding(
@@ -151,7 +111,7 @@ class HomeRegularProfile extends StatelessWidget{
                                   onPressed: (){
                                     
                                   },
-                                  child: Text('Manage',
+                                  child: Text('Join',
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 5,
                                       fontWeight: FontWeight.bold,
@@ -199,7 +159,7 @@ class HomeRegularProfile extends StatelessWidget{
                               ],
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             Row(
                               children: [
@@ -214,7 +174,7 @@ class HomeRegularProfile extends StatelessWidget{
                               ],
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             Row(
                               children: [
@@ -229,7 +189,7 @@ class HomeRegularProfile extends StatelessWidget{
                               ],
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             Row(
                               children: [
@@ -244,7 +204,7 @@ class HomeRegularProfile extends StatelessWidget{
                               ],
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             Row(
                               children: [
@@ -371,10 +331,8 @@ class HomeRegularProfile extends StatelessWidget{
 
                       Column(
                         children: [
-                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
                           Container(
-                            padding: EdgeInsets.only(left: 20.0),
+                            padding: EdgeInsets.only(left: 20.0, top: 10.0,),
                             alignment: Alignment.centerLeft,
                             child: Text('Post',
                               style: TextStyle(
@@ -384,87 +342,223 @@ class HomeRegularProfile extends StatelessWidget{
                               ),
                             ),
                           ),
-
-                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                          Container(
-                            width: SizeConfig.screenWidth,
-                            height: SizeConfig.blockSizeVertical * 12,
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            child: ListView.separated(
-                              physics: ClampingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index){
-                                return Container(
-                                  width: SizeConfig.blockSizeVertical * 12,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(images[index]),
-                                    ),
-                                  ),
-                                );
-                              }, 
-                              separatorBuilder: (context, index){
-                                return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
-                              },
-                              itemCount: 4,
-                            ),
-                          ),
-
-                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
                         ],
                       ),
 
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
                       Container(
-                        padding: EdgeInsets.all(10.0),
-                        color: Color(0xffeeeeee),
-                        child: Column(
-                          children: [
-                            MiscRegularPost(
-                              contents: [
-                                Container(
-                                  height: SizeConfig.blockSizeHorizontal * 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage('assets/icons/regular-image4.png'),
-                                    ),
-                                  ),
+                        width: SizeConfig.screenWidth,
+                        height: SizeConfig.blockSizeVertical * 12,
+                        padding: EdgeInsets.only(left: 20.0, bottom: 20.0),
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index){
+                            return Container(
+                              width: SizeConfig.blockSizeVertical * 10,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage(images[index]),
                                 ),
-                              ],
-                            ),
-
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                            MiscRegularPost(
-                              contents: [
-                                Container(
-                                  height: SizeConfig.blockSizeHorizontal * 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage('assets/icons/regular-image2.png'),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                          ],
+                              ),
+                            );
+                          }, 
+                          separatorBuilder: (context, index){
+                            return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                          },
+                          itemCount: 4,
                         ),
+                      ),
+
+                      Container(height: SizeConfig.blockSizeVertical * 1, color: Color(0xffeeeeee),),
+
+                      Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                            decoration: BoxDecoration(
+                              color: Color(0xffffffff),
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: SizeConfig.blockSizeVertical * 5,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: CircleAvatar(
+                                            backgroundImage: AssetImage('assets/icons/profile2.png'),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 5,
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              child: Align(
+                                                alignment: Alignment.bottomLeft,
+                                                child: Text('Cristel Jane & Family',
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xff000000),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text('30 minutes ago',
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Color(0xffaaaaaa)
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: IconButton(
+                                          alignment: Alignment.centerRight,
+                                          padding: EdgeInsets.zero,
+                                          onPressed: (){
+                                            
+                                          },
+                                          icon: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                                Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: RichText(
+                                        maxLines: 4,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.left,
+                                        text: TextSpan(
+                                          text: 'Visiting Christel\'s resting place.Hope you\'re doing good their bestfriend.',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: RichText(
+                                        maxLines: 1,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.left,
+                                        text: TextSpan(
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: 'with ',
+                                              style: TextStyle(
+                                                fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                                fontWeight: FontWeight.w300,
+                                                color: Color(0xffaaaaaa),
+                                              ),
+                                            ),
+
+                                            TextSpan(
+                                              text: 'Daniel Denneson & Freya Jackson',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xff000000),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.place, color: Color(0xff2ECC71),),
+                                          Text(
+                                            'Golden New Cemetery',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                    Container(
+                                      height: SizeConfig.blockSizeVertical * 50,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage('assets/icons/profile_post5.png'),
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          ),
+
+                          Container(
+                            width: SizeConfig.screenWidth,
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              width: SizeConfig.blockSizeHorizontal * 38,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.favorite, color: Color(0xffE74C3C),),
+
+                                  Text('14.5K'),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                  Icon(Icons.mode_comment_outlined, color: Color(0xff000000),),
+
+                                  Text('1.8K'),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                        ],
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-
-            
 
             Positioned(
               top: SizeConfig.screenHeight / 5,
@@ -473,21 +567,22 @@ class HomeRegularProfile extends StatelessWidget{
                 width: SizeConfig.screenWidth,
                 child: Row(
                   children: [
-                    Expanded(child: Container(),),
+                    Expanded(
+                      child: Container(),
+                    ),
                     Expanded(
                       child: CircleAvatar(
-                        radius: SizeConfig.blockSizeVertical * 12,
+                        radius: SizeConfig.blockSizeVertical * 10,
                         backgroundColor: Color(0xff04ECFF),
-                        child: Padding(
-                          padding: EdgeInsets.all(5),
-                            child: CircleAvatar(
-                            radius: SizeConfig.blockSizeVertical * 12,
-                            backgroundImage: AssetImage('assets/icons/profile2.png'),
-                          ),
+                        child: Container(
+                          height: SizeConfig.blockSizeVertical * 17,
+                          child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
                         ),
                       ),
                     ),
-                    Expanded(child: Container(),),
+                    Expanded(
+                      child: Container(),
+                    ),
                   ],
                 ),
               ),

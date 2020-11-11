@@ -1,3 +1,4 @@
+// import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
@@ -68,7 +69,7 @@ class MiscRegularBottomSheet extends StatelessWidget {
               ),
 
             ],
-            onPressed: (int index){
+            onPressed: (int index) async{
               context.bloc<BlocHomeRegularUpdateToggle>().updateToggle(index);
               switch(index){
                 case 0: context.bloc<BlocHomeRegularUpdateCubit>().modify(0); break;

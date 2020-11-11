@@ -7,7 +7,7 @@ import 'home-10-02-blm-memorial-settings-extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class HomeMemorialSettings extends StatelessWidget{
+class HomeBLMMemorialSettings extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
@@ -29,8 +29,8 @@ class HomeMemorialSettings extends StatelessWidget{
                 builder: (context, state){
                   return ((){
                     switch(state){
-                      case 0: return HomeMemorialSettingsPage(); break;
-                      case 1: return HomeMemorialSettingsPrivacy(); break;
+                      case 0: return HomeBLMMemorialSettingsPage(); break;
+                      case 1: return HomeBLMMemorialSettingsPrivacy(); break;
                     }
                   }());
                 },

@@ -133,3 +133,98 @@ class MiscRegularAlertDialog extends StatelessWidget{
     );
   }
 }
+
+
+class MiscRegularConfirmDialog extends StatelessWidget{
+
+  final String title;
+  final String content;
+  final String confirm_1;
+  final String confirm_2;
+  final Color confirmColor_1;
+  final Color confirmColor_2;
+
+  MiscRegularConfirmDialog({
+    this.title = 'Confirm Delete',
+    this.content = 'Are you sure you want to delete "Mark Jacksons Memorial"?',
+    this.confirm_1 = 'Yes',
+    this.confirm_2 = 'No',
+    this.confirmColor_1 = const Color(0xffFF0000),
+    this.confirmColor_2 = const Color(0xff04ECFF),
+  });
+
+
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5))
+      ),
+      child: Container(
+        height: SizeConfig.screenHeight / 4,
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Text(title,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff000000),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Text(content,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context, true);
+                      },
+                      child: Text(confirm_1,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,
+                          fontWeight: FontWeight.bold,
+                          color: confirmColor_1,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context, false);
+                      },
+                      child: Text(confirm_2,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5,
+                          fontWeight: FontWeight.bold,
+                          color: confirmColor_2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

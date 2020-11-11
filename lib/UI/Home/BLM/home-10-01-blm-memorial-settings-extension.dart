@@ -3,21 +3,20 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeMemorialSettingsPage extends StatelessWidget{
+class HomeBLMMemorialSettingsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return ListView(
       physics: ClampingScrollPhysics(),
-      shrinkWrap: true,
       children: [
 
         MiscBLMSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, '/home/blm/home-11-blm-page-details');},),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, '/home/blm/home-07-03-blm-create-memorial');}, titleDetail: 'Page Image', contentDetail: 'Update Page image and background image'),
+        MiscBLMSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, '/home/regular/home-04-03-regular-create-memorial');}, titleDetail: 'Page Image', contentDetail: 'Update Page image and background image'),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 

@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeSearch extends StatelessWidget{
+class HomeBLMSearch extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
