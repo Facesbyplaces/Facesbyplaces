@@ -38,7 +38,7 @@ class HomeRegularPostExtended extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            Navigator.pushNamed(context, '/home/home-12-user-profile');
+                            Navigator.pushNamed(context, 'home/regular/home-14-regular-user-profile');
                           },
                           child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile2.png'),),
                         ),

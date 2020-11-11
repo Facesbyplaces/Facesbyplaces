@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeMemorialSettingsPrivacy extends StatelessWidget{
+class HomeBLMMemorialSettingsPrivacy extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {

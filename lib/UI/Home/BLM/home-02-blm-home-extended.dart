@@ -9,7 +9,7 @@ import 'home-03-02-blm-memorial-list-tab.dart';
 import 'package:flutter/material.dart';
 import 'home-03-03-blm-post-tab.dart';
 
-class HomeScreenExtended extends StatelessWidget{
+class HomeBLMScreenExtended extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HomeScreenExtended extends StatelessWidget{
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocHomeBLMToggleBottom>(create: (context) => BlocHomeBLMToggleBottom(),),
-        BlocProvider<BlocHomeUpdateToggle>(create: (context) => BlocHomeUpdateToggle(),),
+        BlocProvider<BlocHomeBLMUpdateToggle>(create: (context) => BlocHomeBLMUpdateToggle(),),
         BlocProvider<BlocHomeBLMUpdateListSuggested>(create: (context) => BlocHomeBLMUpdateListSuggested(),),
       ],
       child: WillPopScope(
@@ -56,10 +56,10 @@ class HomeScreenExtended extends StatelessWidget{
                   decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
                   child: ((){
                     switch(toggleBottom){
-                      case 0: return HomeFeedTab(); break;
-                      case 1: return HomeManageTab(); break;
-                      case 2: return HomePostTab(); break;
-                      case 3: return HomeNotificationsTab(); break;
+                      case 0: return HomeBLMFeedTab(); break;
+                      case 1: return HomeBLMManageTab(); break;
+                      case 2: return HomeBLMPostTab(); break;
+                      case 3: return HomeBLMNotificationsTab(); break;
                     }
                   }()),
                 );

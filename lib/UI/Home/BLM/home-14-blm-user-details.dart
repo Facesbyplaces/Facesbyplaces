@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserProfileDetails extends StatelessWidget{
+class HomeBLMUserProfileDetails extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {

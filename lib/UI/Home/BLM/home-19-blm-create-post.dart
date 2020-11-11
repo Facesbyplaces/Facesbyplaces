@@ -1,9 +1,8 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeCreatePost extends StatelessWidget{
+class HomeBLMCreatePost extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
 

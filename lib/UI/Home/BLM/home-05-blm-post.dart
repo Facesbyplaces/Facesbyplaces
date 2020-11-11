@@ -8,7 +8,7 @@ import 'home-06-02-blm-suggested.dart';
 import 'home-06-03-blm-nearby.dart';
 import 'home-06-04-blm.dart';
 
-class HomePost extends StatelessWidget{
+class HomeBLMPost extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +133,10 @@ class HomePost extends StatelessWidget{
                       builder: (context, state){
                         return ((){
                           switch(state){
-                            case 0: return HomePostExtended(); break;
-                            case 1: return HomeSuggested(); break;
-                            case 2: return HomeNearby(); break;
-                            case 3: return HomeBLM(); break;
+                            case 0: return HomeBLMPostExtended(); break;
+                            case 1: return HomeBLMSuggested(); break;
+                            case 2: return HomeBLMNearby(); break;
+                            case 3: return HomeBLMBLM(); break;
                           }
                         }());
                       },

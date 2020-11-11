@@ -118,3 +118,9 @@ class BlocHomeRegularUpdateListBLM extends Cubit<List<bool>>{
 
   void updateList(int number) => emit(changeState(number));
 }
+
+class BlocHomeRegularUpdateMemorialToggle extends Cubit<int>{
+
+  BlocHomeRegularUpdateMemorialToggle() : super(0);
+  void updateToggle(int index) => emit(index);
+}

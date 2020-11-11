@@ -33,6 +33,7 @@ class HomeRegularCreateMemorial extends StatelessWidget{
             title: Text('Create a Memorial Page for friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
             centerTitle: true,
             backgroundColor: Color(0xff04ECFF),
+            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
           body: Stack(
             children: [

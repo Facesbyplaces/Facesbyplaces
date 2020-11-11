@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-image-display.dar
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeFeedTab extends StatelessWidget{
+class HomeBLMFeedTab extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {

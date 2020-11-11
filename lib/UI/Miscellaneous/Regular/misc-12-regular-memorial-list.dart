@@ -31,7 +31,9 @@ class MiscManageMemoriaWithButton extends StatelessWidget{
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial');
+      },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
         color: Color(0xffffffff),

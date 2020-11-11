@@ -6,9 +6,9 @@ class BlocHomeBLMToggleBottom extends Cubit<int>{
   void modify(int number) => emit(number);
 }
 
-class BlocHomeUpdateToggle extends Cubit<List<bool>>{
+class BlocHomeBLMUpdateToggle extends Cubit<List<bool>>{
 
-  BlocHomeUpdateToggle() : super([true, false, false, false]);
+  BlocHomeBLMUpdateToggle() : super([true, false, false, false]);
 
   List<bool> changeToggle(int index){
     List<bool> newList = [true, false, false, false];

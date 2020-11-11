@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 
-class HomeCreateMemorial2 extends StatelessWidget{
+class HomeBLMCreateMemorial2 extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscBLMInputFieldMultiTextTemplateState>();
@@ -54,7 +54,6 @@ class HomeCreateMemorial2 extends StatelessWidget{
                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   child: ListView(
                     physics: ClampingScrollPhysics(),
-                    shrinkWrap: true,
                     children: [
 
                       MiscBLMInputFieldTemplate(key: _key1, labelText: 'Name of your Memorial Page'),

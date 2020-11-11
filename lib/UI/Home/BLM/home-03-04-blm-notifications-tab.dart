@@ -2,7 +2,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-notification-disp
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeNotificationsTab extends StatelessWidget{
+class HomeBLMNotificationsTab extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,6 @@ class HomeNotificationsTab extends StatelessWidget{
       color: Color(0xffffffff),
       child: ListView(
         physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
         children: [
 
           MiscBLMNotificationDisplayTemplate(

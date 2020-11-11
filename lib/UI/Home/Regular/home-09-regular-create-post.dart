@@ -26,6 +26,7 @@ class HomeRegularCreatePost extends StatelessWidget{
             title: Text('Create Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
             centerTitle: true,
             backgroundColor: Color(0xff04ECFF),
+            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             actions: [
               GestureDetector(
                 onTap: (){
