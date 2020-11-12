@@ -129,6 +129,10 @@ Rails.application.routes.draw do
         get 'posts', to: 'search#posts'
         # search memorials
         get 'memorials', to: 'search#memorials'
+        # search users
+        get 'users', to: 'search#users'
+        # search followers
+        get 'followers/:page_type/:page_id', to: 'search#followers'
       end
       namespace :followers do
         post '/', to: 'followers#follow'

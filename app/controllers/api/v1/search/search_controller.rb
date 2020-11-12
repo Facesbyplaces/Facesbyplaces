@@ -13,4 +13,24 @@ class Api::V1::Search::SearchController < ApplicationController
                             
         paginate memorials, per_page: numberOfPage
     end
+
+    def users
+        users = User.where("first_name LIKE :search or last_name LIKE :search or email LIKE :search or username LIKE :search", search: params[:keywords])
+
+        paginate users, per_page: numberOfPage
+    end
+
+    def followers
+        case params[:page_type]
+        when "Blm"
+            page = Blm.find(params[:page_id])
+        when "Memorial"
+            page = Memorial.find(params[:page_id])
+        end 
+
+        # get the followers of the page (users are the followers of the page)
+        followers = page.users.where("first_name LIKE :search or last_name LIKE :search or email LIKE :search or username LIKE :search", search: params[:keywords])
+
+        paginate followers, per_page: numberOfPage
+    end
 end
