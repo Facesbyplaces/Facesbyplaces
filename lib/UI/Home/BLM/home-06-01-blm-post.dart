@@ -119,10 +119,8 @@ class HomeBLMPostExtended extends StatelessWidget {
                     ],
                   ),
                 ),
-
               ],
             ),
-
             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
           ],
         );

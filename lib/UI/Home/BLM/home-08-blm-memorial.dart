@@ -331,8 +331,10 @@ class HomeBLMMemorialProfile extends StatelessWidget{
 
                       Column(
                         children: [
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
                           Container(
-                            padding: EdgeInsets.only(left: 20.0, top: 10.0,),
+                            padding: EdgeInsets.only(left: 20.0),
                             alignment: Alignment.centerLeft,
                             child: Text('Post',
                               style: TextStyle(
@@ -342,34 +344,36 @@ class HomeBLMMemorialProfile extends StatelessWidget{
                               ),
                             ),
                           ),
+
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                          Container(
+                            width: SizeConfig.screenWidth,
+                            height: SizeConfig.blockSizeVertical * 12,
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: ListView.separated(
+                              physics: ClampingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index){
+                                return Container(
+                                  width: SizeConfig.blockSizeVertical * 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(images[index]),
+                                    ),
+                                  ),
+                                );
+                              }, 
+                              separatorBuilder: (context, index){
+                                return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                              },
+                              itemCount: 4,
+                            ),
+                          ),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                         ],
-                      ),
-
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                      Container(
-                        width: SizeConfig.screenWidth,
-                        height: SizeConfig.blockSizeVertical * 12,
-                        padding: EdgeInsets.only(left: 20.0, bottom: 20.0),
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index){
-                            return Container(
-                              width: SizeConfig.blockSizeVertical * 10,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage(images[index]),
-                                ),
-                              ),
-                            );
-                          }, 
-                          separatorBuilder: (context, index){
-                            return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
-                          },
-                          itemCount: 4,
-                        ),
                       ),
 
                       Container(height: SizeConfig.blockSizeVertical * 1, color: Color(0xffeeeeee),),

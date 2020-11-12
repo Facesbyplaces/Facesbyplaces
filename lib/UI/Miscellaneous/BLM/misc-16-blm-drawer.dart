@@ -1,7 +1,16 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
+
 class MiscBLMDrawer extends StatelessWidget{
+// class MiscBLMDrawer extends StatefulWidget{
+//   MiscBLMDrawer({Key key}) : super(key: key);
+
+
+//   MiscBLMDrawerState createState() => MiscBLMDrawerState(key: key);
+// }
+
+// class MiscBLMDrawerState extends State<MiscBLMDrawer>{
 
   @override
   Widget build(BuildContext context){
@@ -38,7 +47,9 @@ class MiscBLMDrawer extends StatelessWidget{
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, '/home/home-07-01-create-memorial');
+                // key.currentState.close();
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/home/blm/home-07-01-blm-create-memorial');
               },
               child: Text('Create Memorial Page', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
             ),
@@ -51,7 +62,9 @@ class MiscBLMDrawer extends StatelessWidget{
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, '/home/home-13-user-details');
+                // key.currentState.close();
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/home/blm/home-14-blm-user-details');
               },
               child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
             ),

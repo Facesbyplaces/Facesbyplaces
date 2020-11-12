@@ -43,7 +43,9 @@ class HomeBLMUserProfile extends StatelessWidget{
                     alignment: Alignment.centerLeft,
                       child: IconButton(
                       onPressed: (){
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                        Navigator.popUntil(context, ModalRoute.withName('/home/blm'));
+                        // print('adsflijasdflkj');
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                     ),

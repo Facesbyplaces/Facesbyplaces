@@ -2,7 +2,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +30,17 @@ class HomeBLMCreateMemorial extends StatelessWidget{
           }
         },
         child: Scaffold(
-          appBar: MiscBLMAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
+          appBar: AppBar(
+            backgroundColor: Color(0xff04ECFF),
+            title: Text('Cry out for the Victims', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+            centerTitle: true,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+              onPressed: (){
+                Navigator.popUntil(context, ModalRoute.withName('/home/blm'),);
+              }
+            ),
+          ),
           body: Stack(
             children: [
 

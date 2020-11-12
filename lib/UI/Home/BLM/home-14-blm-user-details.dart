@@ -43,7 +43,9 @@ class HomeBLMUserProfileDetails extends StatelessWidget{
                     alignment: Alignment.centerLeft,
                       child: IconButton(
                       onPressed: (){
-                        Navigator.of(context).pushNamedAndRemoveUntil('/home/blm/home-13-blm-user-profile', ModalRoute.withName('/home/blm/home-05-blm-post'));
+                        // Navigator.of(context).pushNamedAndRemoveUntil('/home/blm/home-13-blm-user-profile', ModalRoute.withName('/home/blm/home-05-blm-post'));
+                        Navigator.of(context).pushNamedAndRemoveUntil('/home/blm/home-13-blm-user-profile', ModalRoute.withName('/home/blm'));
+                        // Navigator.pop(context);
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                     ),

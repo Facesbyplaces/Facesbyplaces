@@ -1,9 +1,7 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-17-regular-custom-drawings.dart';
-import 'package:flutter/rendering.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class HomeRegularUserProfile extends StatelessWidget{
 
@@ -43,7 +41,7 @@ class HomeRegularUserProfile extends StatelessWidget{
                     alignment: Alignment.centerLeft,
                       child: IconButton(
                       onPressed: (){
-                        Navigator.pop(context);
+                        Navigator.popUntil(context, ModalRoute.withName('/home/regular'));
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                     ),

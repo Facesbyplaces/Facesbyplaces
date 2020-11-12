@@ -1,12 +1,12 @@
-import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-drawer.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'home-03-01-regular-feed-tab.dart';
 import 'home-03-02-regular-memorial-list-tab.dart';
 import 'home-03-03-regular-post-tab.dart';
 import 'home-03-04-regular-notifications-tab.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularScreenExtended extends StatelessWidget{

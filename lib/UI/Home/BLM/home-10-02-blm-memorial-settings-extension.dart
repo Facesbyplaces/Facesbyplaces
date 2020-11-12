@@ -12,7 +12,11 @@ class HomeBLMMemorialSettingsPrivacy extends StatelessWidget{
       physics: ClampingScrollPhysics(),
       children: [
 
-        MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Customize shown info', contentDetail: 'Customize what others see on your page'),
+        MiscBLMSettingDetailTemplate(
+          onTap: (){}, 
+          titleDetail: 'Customize shown info', 
+          contentDetail: 'Customize what others see on your page',
+        ),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 

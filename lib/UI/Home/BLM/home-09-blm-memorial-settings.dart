@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-extra.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -17,12 +18,24 @@ class HomeBLMMemorialSettings extends StatelessWidget{
         BlocProvider<BlocHomeBLMUpdateMemorialToggle>(
           create: (context) => BlocHomeBLMUpdateMemorialToggle(),
         ),
+        BlocProvider<BlocShowLoading>(
+          create: (context) => BlocShowLoading(),
+        ),
       ],
       child: Scaffold(
         appBar: MiscBLMAppBarTemplate(appBar: AppBar(), title:  Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),), leadingAction: (){Navigator.pop(context);},),
         body: Column(
           children: [
-            Container(color: Color(0xffECF0F1), alignment: Alignment.centerLeft, padding: EdgeInsets.only(left: 10.0, right: 10.0), child: MiscBLMMemorialSettings(),),
+            BlocBuilder<BlocShowLoading, bool>(
+              builder: (context, loading){
+                return ((){
+                  switch(loading){
+                    case false: return Container(color: Color(0xffECF0F1), alignment: Alignment.centerLeft, padding: EdgeInsets.only(left: 10.0, right: 10.0), child: MiscBLMMemorialSettings(),); break;
+                    case true: return Container(height: 0,);
+                  }
+                }());
+              },
+            ),
 
             Expanded(
               child: BlocBuilder<BlocHomeBLMUpdateMemorialToggle, int>(

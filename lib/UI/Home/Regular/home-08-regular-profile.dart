@@ -412,9 +412,7 @@ class HomeRegularProfile extends StatelessWidget{
                               itemCount: 4,
                             ),
                           ),
-
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
                         ],
                       ),
 
@@ -454,7 +452,6 @@ class HomeRegularProfile extends StatelessWidget{
                                 ),
                               ],
                             ),
-
                           ],
                         ),
                       ),
@@ -463,8 +460,6 @@ class HomeRegularProfile extends StatelessWidget{
                 ),
               ],
             ),
-
-            
 
             Positioned(
               top: SizeConfig.screenHeight / 5,
