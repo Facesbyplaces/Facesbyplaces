@@ -1,6 +1,12 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/API/Regular/api-09-regular-create-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+
 
 class HomeRegularCreatePost extends StatelessWidget{
 
@@ -21,128 +27,150 @@ class HomeRegularCreatePost extends StatelessWidget{
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Create Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
-            centerTitle: true,
-            backgroundColor: Color(0xff04ECFF),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-            actions: [
-              GestureDetector(
-                onTap: (){
-                  Navigator.popAndPushNamed(context, '/home/regular');
-                }, 
-                child: Padding(
-                  padding: EdgeInsets.only(right: 20.0), 
-                  child: Center(
-                    child: Text('Post', 
-                    style: TextStyle(
-                      color: Color(0xffffffff), 
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          body: ListView(
-            physics: ClampingScrollPhysics(),
-            children: [
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<BlocShowLoading>(create: (context) => BlocShowLoading(),)
+          ],
+          child: BlocBuilder<BlocShowLoading, bool>(
+            builder: (context, loading){
+              return ((){
+                switch(loading){
+                  case false: return Scaffold(
+                    appBar: AppBar(
+                      title: Text('Create Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+                      centerTitle: true,
+                      backgroundColor: Color(0xff04ECFF),
+                      leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                      actions: [
+                        GestureDetector(
+                          onTap: () async{
+                            
+                            context.bloc<BlocShowLoading>().modify(true);
+                            bool result = await apiRegularHomeCreatePost();
+                            context.bloc<BlocShowLoading>().modify(false);
 
-              Container(
-                height: SizeConfig.blockSizeVertical * 10,
-                
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                      child: CircleAvatar(
-                        radius: SizeConfig.blockSizeVertical * 3,
-                        child: Container(
-                          height: SizeConfig.blockSizeVertical * 17,
-                          child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
+                            if(result){
+                              Navigator.popAndPushNamed(context, '/home/regular');
+                            }else{
+                              await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                            }
+                          }, 
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 20.0), 
+                            child: Center(
+                              child: Text('Post', 
+                              style: TextStyle(
+                                color: Color(0xffffffff), 
+                                fontSize: SizeConfig.safeBlockHorizontal * 5,),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 20.0,),
-                        child: MiscRegularInputFieldDropDownUser(key: _key2,),
-                      ),
-                    ),
-                  ],
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xffffffff),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: Offset(0, 0)
-                    ),
-                  ],
-                ),
-              ),
+                    body: ListView(
+                      physics: ClampingScrollPhysics(),
+                      children: [
 
-              Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscRegularInputFieldTemplate(key: _key1, labelText: 'Speak out...', maxLines: 10),),
-
-              Container(height: SizeConfig.blockSizeVertical * 25, child: Image.asset('assets/icons/upload_background.png', fit: BoxFit.cover),),
-
-              Container(
-                height: SizeConfig.blockSizeVertical * 20,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                        color: Color(0xffffffff),
-                        child: Row(
-                          children: [
-                            Expanded(child: Text('Add a location'),),
-                            Icon(Icons.place, color: Color(0xff4EC9D4),)
-                          ],
+                        Container(
+                          height: SizeConfig.blockSizeVertical * 10,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                                child: CircleAvatar(
+                                  radius: SizeConfig.blockSizeVertical * 3,
+                                  child: Container(
+                                    height: SizeConfig.blockSizeVertical * 17,
+                                    child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 20.0,),
+                                  child: MiscRegularInputFieldDropDownUser(key: _key2,),
+                                ),
+                              ),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xffffffff),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 5,
+                                offset: Offset(0, 0)
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
 
-                    Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+                        Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscRegularInputFieldTemplate(key: _key1, labelText: 'Speak out...', maxLines: 10),),
 
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                        color: Color(0xffffffff),
-                        child: Row(
-                          children: [
-                            Expanded(child: Text('Tag a person you are with'),),
-                            Icon(Icons.person, color: Color(0xff4EC9D4),)
-                          ],
+                        Container(height: SizeConfig.blockSizeVertical * 25, child: Image.asset('assets/icons/upload_background.png', fit: BoxFit.cover),),
+
+                        Container(
+                          height: SizeConfig.blockSizeVertical * 20,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                                  color: Color(0xffffffff),
+                                  child: Row(
+                                    children: [
+                                      Expanded(child: Text('Add a location'),),
+                                      Icon(Icons.place, color: Color(0xff4EC9D4),)
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                                  color: Color(0xffffffff),
+                                  child: Row(
+                                    children: [
+                                      Expanded(child: Text('Tag a person you are with'),),
+                                      Icon(Icons.person, color: Color(0xff4EC9D4),)
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                                  color: Color(0xffffffff),
+                                  child: Row(
+                                    children: [
+                                      Expanded(child: Text('Upload a Video / Image'),),
+                                      Icon(Icons.image, color: Color(0xff4EC9D4),)
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                            ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-
-                    Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
-
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                        color: Color(0xffffffff),
-                        child: Row(
-                          children: [
-                            Expanded(child: Text('Upload a Video / Image'),),
-                            Icon(Icons.image, color: Color(0xff4EC9D4),)
-                          ],
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-
-            ],
+                  ); break;
+                  case true: return Scaffold(body: Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),)),); break;
+                }
+              }());
+            }
           ),
         ),
+        // child: 
       ),
     );
   }

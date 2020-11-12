@@ -68,7 +68,9 @@ class HomeBLMPost extends StatelessWidget{
               ),
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-                onPressed: (){Navigator.pop(context);},
+                onPressed: (){
+                  Navigator.pop(context);
+                },
               ),
               backgroundColor: Color(0xff04ECFF),
             ),

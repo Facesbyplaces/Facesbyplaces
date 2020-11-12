@@ -1,6 +1,12 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/API/Regular/api-08-regular-update-page-details.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomeRegularPageDetails extends StatelessWidget{
 
@@ -25,66 +31,110 @@ class HomeRegularPageDetails extends StatelessWidget{
             currentFocus.unfocus();
           }
         },
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
-            title: Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
-            centerTitle: true,
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-            actions: [
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, 'home/regular/home-10-regular-memorial-settings');
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(right: 20.0), 
-                  child: Center(
-                    child: Icon(
-                      Icons.check,
-                      color: Color(0xffffffff),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<BlocShowLoading>(create: (context) => BlocShowLoading(),)
+          ],
+          child: BlocBuilder<BlocShowLoading, bool>(
+            builder: (context, loading){
+              return ((){
+                switch(loading){
+                  case false: return Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: Color(0xff04ECFF),
+                      title: Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+                      centerTitle: true,
+                      leading: IconButton(
+                        icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                      ),
+                      actions: [
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, 'home/regular/home-10-regular-memorial-settings');
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 20.0), 
+                            child: Center(
+                              child: Icon(
+                                Icons.check,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          body: Stack(
-            children: [
+                    body: Stack(
+                      children: [
 
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                child: ListView(
-                  physics: ClampingScrollPhysics(),
-                  children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                          child: ListView(
+                            physics: ClampingScrollPhysics(),
+                            children: [
 
-                    MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name'),
+                              MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name'),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                    MiscRegularInputFieldTemplate(key: _key2, labelText: 'Relationship'),
+                              MiscRegularInputFieldTemplate(key: _key2, labelText: 'Relationship'),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                    MiscRegularInputFieldTemplate(key: _key3, labelText: 'DOB'),
+                              MiscRegularInputFieldTemplate(key: _key3, labelText: 'DOB'),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                    MiscRegularInputFieldTemplate(key: _key4, labelText: 'RIP'),
+                              MiscRegularInputFieldTemplate(key: _key4, labelText: 'RIP'),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                    MiscRegularInputFieldTemplate(key: _key5, labelText: 'DOB'),
+                              MiscRegularInputFieldTemplate(key: _key5, labelText: 'DOB'),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                    MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery'),
+                              MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery'),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                  ],
-                ),
-              ),
-            ],
+                              MiscRegularButtonTemplate(
+                                buttonText: 'Update', 
+                                buttonTextStyle: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                                  fontWeight: FontWeight.bold, 
+                                  color: Color(0xffffffff),
+                                ),
+                                onPressed: () async{
+
+                                  context.bloc<BlocShowLoading>().modify(true);
+                                  bool result = await apiRegularHomeUpdatePageDetails();
+                                  context.bloc<BlocShowLoading>().modify(false);
+
+                                  if(result){
+                                    Navigator.popUntil(context, ModalRoute.withName('home/regular/home-10-regular-memorial-settings'));
+                                  }else{
+                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                  }
+
+                                }, 
+                                width: SizeConfig.screenWidth / 2, 
+                                height: SizeConfig.blockSizeVertical * 7, 
+                                buttonColor: Color(0xff04ECFF),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ); break;
+                  case true: return Scaffold(body: Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),)),); break;
+                }
+              }());
+            },
           ),
         ),
       ),

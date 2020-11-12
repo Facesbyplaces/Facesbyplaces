@@ -3,9 +3,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-16-regular-setting-d
 import 'package:facesbyplaces/API/Regular/api-05-regular-delete-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomeRegularMemorialSettingsPage extends StatelessWidget{
 
@@ -20,11 +20,21 @@ class HomeRegularMemorialSettingsPage extends StatelessWidget{
               physics: ClampingScrollPhysics(),
               children: [
 
-                MiscRegularSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, 'home/regular/home-12-regular-page-details');},),
+                MiscRegularSettingDetailTemplate(
+                  onTap: (){
+                    Navigator.pushNamed(context, 'home/regular/home-12-regular-page-details');
+                  },
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscRegularSettingDetailTemplate(onTap: (){Navigator.pushNamed(context, '/home/regular/home-04-03-regular-create-memorial');}, titleDetail: 'Page Image', contentDetail: 'Update Page image and background image'),
+                MiscRegularSettingDetailTemplate(
+                  onTap: (){
+                    Navigator.pushNamed(context, '/home/regular/home-04-03-regular-create-memorial');
+                  }, 
+                  titleDetail: 'Page Image', 
+                  contentDetail: 'Update Page image and background image',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 

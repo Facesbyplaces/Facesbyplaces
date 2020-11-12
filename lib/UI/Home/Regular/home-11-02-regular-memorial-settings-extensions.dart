@@ -12,7 +12,13 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
       physics: ClampingScrollPhysics(),
       children: [
 
-        MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Customize shown info', contentDetail: 'Customize what others see on your page'),
+        MiscRegularSettingDetailTemplate(
+          onTap: (){
+
+          }, 
+          titleDetail: 'Customize shown info', 
+          contentDetail: 'Customize what others see on your page',
+        ),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
@@ -23,7 +29,13 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
             children: [
               Expanded(
                 flex: 2,
-                child: MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Family', contentDetail: 'Show or hide family details'),
+                child: MiscRegularSettingDetailTemplate(
+                  onTap: (){
+
+                  }, 
+                  titleDetail: 'Hide Family', 
+                  contentDetail: 'Show or hide family details',
+                ),
               ),
               Expanded(
                 child: MiscRegularToggleSwitchTemplate(),
@@ -41,7 +53,13 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
             children: [
               Expanded(
                 flex: 2,
-                child: MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Friends', contentDetail: 'Show or hide friends details'),
+                child: MiscRegularSettingDetailTemplate(
+                  onTap: (){
+
+                  }, 
+                  titleDetail: 'Hide Friends', 
+                  contentDetail: 'Show or hide friends details',
+                ),
               ),
               Expanded(
                 child: MiscRegularToggleSwitchTemplate(),
@@ -59,7 +77,13 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
             children: [
               Expanded(
                 flex: 2,
-                child: MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Followers', contentDetail: 'Show or hide your followers'),
+                child: MiscRegularSettingDetailTemplate(
+                  onTap: (){
+
+                  }, 
+                  titleDetail: 'Hide Followers', 
+                  contentDetail: 'Show or hide your followers',
+                ),
               ),
               Expanded(
                 child: MiscRegularToggleSwitchTemplate(),

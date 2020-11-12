@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-image-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularFeedTab extends StatelessWidget{
 

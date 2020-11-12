@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-post-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
 
 class HomeBLMProfile extends StatelessWidget{
 
@@ -303,8 +302,10 @@ class HomeBLMProfile extends StatelessWidget{
 
                       Column(
                         children: [
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
                           Container(
-                            padding: EdgeInsets.only(left: 20.0, top: 10.0,),
+                            padding: EdgeInsets.only(left: 20.0),
                             alignment: Alignment.centerLeft,
                             child: Text('Post',
                               style: TextStyle(
@@ -314,35 +315,80 @@ class HomeBLMProfile extends StatelessWidget{
                               ),
                             ),
                           ),
+
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                          Container(
+                            width: SizeConfig.screenWidth,
+                            height: SizeConfig.blockSizeVertical * 12,
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: ListView.separated(
+                              physics: ClampingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index){
+                                return Container(
+                                  width: SizeConfig.blockSizeVertical * 12,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(images[index]),
+                                    ),
+                                  ),
+                                );
+                              }, 
+                              separatorBuilder: (context, index){
+                                return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                              },
+                              itemCount: 4,
+                            ),
+                          ),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                         ],
                       ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      // Column(
+                      //   children: [
+                      //     Container(
+                      //       padding: EdgeInsets.only(left: 20.0, top: 10.0,),
+                      //       alignment: Alignment.centerLeft,
+                      //       child: Text('Post',
+                      //         style: TextStyle(
+                      //           fontSize: SizeConfig.safeBlockHorizontal * 5,
+                      //           fontWeight: FontWeight.bold,
+                      //           color: Color(0xff000000),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
 
-                      Container(
-                        width: SizeConfig.screenWidth,
-                        height: SizeConfig.blockSizeVertical * 15,
-                        padding: EdgeInsets.only(left: 20.0, bottom: 20.0),
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index){
-                            return Container(
-                              width: SizeConfig.blockSizeVertical * 13,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage(images[index]),
-                                ),
-                              ),
-                            );
-                          }, 
-                          separatorBuilder: (context, index){
-                            return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
-                          },
-                          itemCount: 4,
-                        ),
-                      ),
+                      // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                      // Container(
+                      //   width: SizeConfig.screenWidth,
+                      //   height: SizeConfig.blockSizeVertical * 15,
+                      //   padding: EdgeInsets.only(left: 20.0, bottom: 20.0),
+                      //   child: ListView.separated(
+                      //     shrinkWrap: true,
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemBuilder: (context, index){
+                      //       return Container(
+                      //         width: SizeConfig.blockSizeVertical * 13,
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(10),
+                      //           image: DecorationImage(
+                      //             image: AssetImage(images[index]),
+                      //           ),
+                      //         ),
+                      //       );
+                      //     }, 
+                      //     separatorBuilder: (context, index){
+                      //       return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                      //     },
+                      //     itemCount: 4,
+                      //   ),
+                      // ),
 
                       Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 

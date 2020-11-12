@@ -46,8 +46,12 @@ class HomeBLMScreenExtended extends StatelessWidget{
               ),
               title: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),), 
               actions: [
-                IconButton(icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), 
-                onPressed: (){Navigator.pushNamed(context, '/home/blm/home-04-blm-search');},),
+                IconButton(
+                  icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), 
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/home/blm/home-04-blm-search');
+                  },
+                ),
               ],
             ),
             body: BlocBuilder<BlocHomeBLMToggleBottom, int>(

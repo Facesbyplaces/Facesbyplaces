@@ -30,7 +30,8 @@ class MiscRegularDrawer extends StatelessWidget {
 
             GestureDetector(
               onTap: (){
-                // Navigator.pushNamed(context, '/home/home-07-01-create-memorial');
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/home/regular/home-04-01-regular-create-memorial');
               },
               child: Text('Create Memorial Page', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
             ),
@@ -43,7 +44,8 @@ class MiscRegularDrawer extends StatelessWidget {
 
             GestureDetector(
               onTap: (){
-                // Navigator.pushNamed(context, '/home/home-13-user-details');
+                Navigator.pop(context);
+                Navigator.pushNamed(context, 'home/regular/home-15-regular-user-details');
               },
               child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
             ),

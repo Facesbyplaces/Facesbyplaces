@@ -1,14 +1,13 @@
-import 'package:facesbyplaces/API/BLM/api-05-blm-create-memorial.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-appbar.dart';
+import 'package:facesbyplaces/API/BLM/api-05-blm-create-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomeBLMCreateMemorial3 extends StatelessWidget{
 
@@ -31,7 +30,12 @@ class HomeBLMCreateMemorial3 extends StatelessWidget{
           return ((){
             switch(loading){
               case false: return Scaffold(
-                appBar: MiscBLMAppBarTemplate(appBar: AppBar(), leadingAction: (){Navigator.pop(context);},),
+                appBar: AppBar(
+                  backgroundColor: Color(0xff04ECFF),
+                  title: Text('Cry out for the Victims', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+                  centerTitle: true,
+                  leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);}),
+                ),
                 body: Stack(
                   children: [
 
