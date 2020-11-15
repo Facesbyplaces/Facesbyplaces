@@ -27,6 +27,8 @@ Rails.application.routes.draw do
         get 'memorials', to: 'mainpages#memorials'
         # user's memorials
         get 'posts', to: 'mainpages#posts'
+        # user's notifications
+        get 'notifications', to: 'mainpages#notifications'
       end
       namespace :pages do
         # memorial controller
@@ -156,9 +158,6 @@ Rails.application.routes.draw do
         # ignore lists of notifications
         get 'ignore/:ignore_type/:ignore_id', to: 'notifsettings#create'
         delete 'ignore/:ignore_id', to: 'notifsettings#delete'
-
-        # lists of notifications
-        get '/', to: 'notifsettings#index'
       end
     end
   end

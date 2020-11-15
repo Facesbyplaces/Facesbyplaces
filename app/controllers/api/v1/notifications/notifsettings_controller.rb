@@ -16,14 +16,6 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
         ignore.destroy 
         render json: {status: "Success"}
     end
-
-    # List of Notifications
-    def index
-        notifs = user().notifications.order(created_at: :desc)
-
-        paginate notifs, per_page: numberOfPage
-    end
-    
     
     private
     def ignore_params

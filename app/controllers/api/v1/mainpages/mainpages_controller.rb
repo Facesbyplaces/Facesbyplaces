@@ -4,6 +4,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     def feed
         posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type")
                     .joins("INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = posts.page_type AND followers.page_id = posts.page_id")
+                    .order(created_at: :desc)
                     .select("posts.*")
         
         paginate posts, per_page: numberOfPage
@@ -34,8 +35,16 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's posts
     def posts
         # Posts that they created or owned
-        posts = Post.where(user: user())
+        posts = Post.where(user: user()).order(created_at: :desc)
         
         paginate posts, per_page: numberOfPage
     end
+
+    # user's notifications
+    def notifications
+        notifs = user().notifications.order(created_at: :desc)
+
+        paginate notifs, per_page: numberOfPage
+    end
+    
 end

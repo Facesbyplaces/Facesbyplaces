@@ -3,6 +3,6 @@ class ApplicationRecord < ActiveRecord::Base
   
   # current user for the serializer
   def current_user
-      User.find(2)
+      User.first
   end
 end
