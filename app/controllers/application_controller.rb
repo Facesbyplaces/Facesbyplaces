@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+        before_action :set_current_user
         include DeviseTokenAuth::Concerns::SetUserByToken
 
         protect_from_forgery with: :null_session 
@@ -70,7 +71,7 @@ class ApplicationController < ActionController::Base
         end
 
         def user
-            User.first
+            User.find(current_user.id)
         end
 
         def params_presence(data)
@@ -92,5 +93,9 @@ class ApplicationController < ActionController::Base
                 UNION
                 SELECT id, 'Blm' AS object_type, name, country, description FROM blms
             ) AS pages"
+        end
+        
+        def set_current_user
+            User.current = current_user
         end
 end

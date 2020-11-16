@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many          :postslikes
 
   # tagging people
-  has_many :tagpeople
+  has_many :tagpeople, dependent: :destroy
   has_many :users, through: :tagpeople
 
   # Report

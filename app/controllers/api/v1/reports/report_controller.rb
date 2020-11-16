@@ -1,4 +1,5 @@
 class Api::V1::Reports::ReportController < ApplicationController
+    before_action :authenticate_user!
 
     def create
         @report = Report.new(report_params)

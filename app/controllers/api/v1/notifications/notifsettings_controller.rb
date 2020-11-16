@@ -1,4 +1,5 @@
 class Api::V1::Notifications::NotifsettingsController < ApplicationController
+    before_action :authenticate_user!
     
     # Add pages or posts to ignore in notifs
     def create

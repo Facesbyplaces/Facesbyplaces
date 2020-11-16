@@ -1,4 +1,6 @@
 class Api::V1::Followers::FollowersController < ApplicationController
+    before_action :authenticate_user!
+    
     def follow
         follower = Follower.new(follower_params)
         follower.user = user()

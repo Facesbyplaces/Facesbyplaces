@@ -1,4 +1,6 @@
 class Api::V1::Posts::CommentsController < ApplicationController
+    before_action :authenticate_user!
+
     def addComment
         comment = Comment.new(comment_params)
         comment.user = user()
