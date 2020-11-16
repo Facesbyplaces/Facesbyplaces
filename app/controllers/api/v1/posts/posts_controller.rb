@@ -22,7 +22,11 @@ class Api::V1::Posts::PostsController < ApplicationController
                 end
             end
 
-            NotificationBroadcastJob.perform_later(post)
+            # Add to notification
+            (post.page.users.uniq - [user()]).each do |user|
+                Notification.create(recipient: user, actor: user(), action: "New post in #{post.page.name}", url: "posts/#{post.id}", read: false)
+            end
+
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
             render json: {errors: post.errors}

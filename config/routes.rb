@@ -79,7 +79,7 @@ Rails.application.routes.draw do
         # Create Post
         post '/', to: 'posts#create'
         # Show Post
-        get '/:id', to: 'posts#show'
+        get '/:id', to: 'posts#show', as: "show_post"
         # Posts of the page
         get '/page/:page_type/:page_id', to: 'posts#pagePosts'
         # Like Post

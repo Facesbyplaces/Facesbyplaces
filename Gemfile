@@ -77,6 +77,6 @@ gem 'activerecord-session_store'
 
 # DATABASE
   # For development
-  # gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 1.4'
   # For production
   gem 'pg'
