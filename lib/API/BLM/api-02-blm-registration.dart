@@ -2,8 +2,12 @@ import 'package:http/http.dart' as http;
 
 Future<bool> apiBLMRegistration(APIBLMAccountRegistration account) async{
 
+  print('The first name is ${account.firstName}');
+
   final http.Response response = await http.post(
-    'https://01244d89dd6fd9fd5dae11b6ec419531.m.pipedream.net',
+    // 'https://01244d89dd6fd9fd5dae11b6ec419531.m.pipedream.net',
+    'http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}',
+    // http://fbp.dev1.koda.ws/auth?first_name=Marlon&last_name=Marcuelo&phone_number=1234567890&email=marcuelo2@gmail.com&username=marlon&password=marcuelo2
     headers: <String, String>{
       'Content-Type': 'application/json',
     }
