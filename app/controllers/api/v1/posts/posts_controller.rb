@@ -20,11 +20,21 @@ class Api::V1::Posts::PostsController < ApplicationController
                     tag = Tagperson.new(post_id: post.id, user_id: person)
                     tag.save
                 end
-            end
-
-            # Add to notification
-            (post.page.users.uniq - [user()]).each do |user|
-                Notification.create(recipient: user, actor: user(), action: "New post in #{post.page.name}", url: "posts/#{post.id}", read: false)
+                
+                # Add to notification
+                (post.page.users.uniq - [user()]).each do |user|
+                    # check if the user is in the tag people
+                    if people.include?("#{user.id}")
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                    else
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                    end
+                end
+            else
+                # Add to notification
+                (post.page.users.uniq - [user()]).each do |user|
+                    Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                end
             end
 
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
