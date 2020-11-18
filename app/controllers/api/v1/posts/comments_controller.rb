@@ -6,16 +6,32 @@ class Api::V1::Posts::CommentsController < ApplicationController
         comment.user = user()
         if comment.save
             # Add to notification
-            (comment.post.page.users.uniq - [user()]).each do |user|
-                # check if user owns the post
-                if user == comment.post.user 
-                    Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
-                elsif comment.post.tagpeople.where(user_id: user.id).first
-                    Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
-                else
-                    Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                # For followers
+                (comment.post.page.users.uniq - [user()]).each do |user|
+                    # check if user owns the post
+                    if user == comment.post.user 
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                    elsif comment.post.tagpeople.where(user_id: user.id).first
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                    else
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                    end
                 end
-            end
+
+                # For families and friends
+                (comment.post.page.relationships).each do |relationship|
+                    if !relationship.user == user()
+                        user = relationship.user
+                        # check if user owns the post
+                        if user == comment.post.user 
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                        elsif comment.post.tagpeople.where(user_id: user.id).first
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                        end
+                    end
+                end
 
             render json: {status: "Added Comment"}
         else
