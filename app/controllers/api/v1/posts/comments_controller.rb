@@ -44,16 +44,21 @@ class Api::V1::Posts::CommentsController < ApplicationController
         reply.user = user()
         if reply.save 
             # Add to notification
-            if reply.comment.users.count == 0
+            if reply.comment.replies.count == 1
                 if user() != reply.comment.user
                     Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
                 end
             else
-                (reply.comment.users.uniq - [user()]).each do |user|
-                    if reply.comment.user == user
-                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
-                    else
-                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", url: "posts/#{reply.comment.post.id}", read: false)
+                users = reply.comment.users.uniq - [user()]
+                if users.count == 0
+                    Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                else
+                    users.each do |user|
+                        if reply.comment.user == user
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        end
                     end
                 end
             end
