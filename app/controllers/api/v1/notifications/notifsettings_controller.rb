@@ -17,6 +17,24 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
         ignore.destroy 
         render json: {status: "Success"}
     end
+
+    # Mark Notifications as read
+    def read
+        unreadNotifs = user.notifications.where(read: false)
+
+        unreadNotifs.each do |unreadNotif|
+            unreadNotif.update(read: true)
+        end
+
+        render json: {status: :success}
+    end
+
+    # Number of unread notifications
+    def numOfUnread
+        number_of_unread_notifs = user().notifications.where(read: false).count
+
+        render json: {number_of_unread_notifs: number_of_unread_notifs}
+    end
     
     private
     def ignore_params

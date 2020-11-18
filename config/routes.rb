@@ -159,6 +159,12 @@ Rails.application.routes.draw do
         # ignore lists of notifications
         get 'ignore/:ignore_type/:ignore_id', to: 'notifsettings#create'
         delete 'ignore/:ignore_id', to: 'notifsettings#delete'
+
+        # read all notifications
+        get 'read', to: 'notifsettings#read'
+
+        # number of unread notifications
+        get 'numOfUnread', to: 'notifsettings#numOfUnread'
       end
     end
   end

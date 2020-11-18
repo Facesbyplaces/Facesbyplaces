@@ -8,20 +8,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
             # Add to notification
                 # For followers
                 (comment.post.page.users.uniq - [user()]).each do |user|
-                    # check if user owns the post
-                    if user == comment.post.user 
-                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
-                    elsif comment.post.tagpeople.where(user_id: user.id).first
-                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
-                    else
-                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
-                    end
-                end
-
-                # For families and friends
-                (comment.post.page.relationships).each do |relationship|
-                    if !relationship.user == user()
-                        user = relationship.user
+                    if user.notifsettings.where(ignore_type: 'Post', ignore_id: comment.post.id).count == 0
                         # check if user owns the post
                         if user == comment.post.user 
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
@@ -29,6 +16,23 @@ class Api::V1::Posts::CommentsController < ApplicationController
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
                         else
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                        end
+                    end
+                end
+
+                # For families and friends
+                (comment.post.page.relationships).each do |relationship|
+                    if relationship.user.notifsettings.where(ignore_type: 'Post', ignore_id: comment.post.id).count == 0
+                        if !relationship.user == user()
+                            user = relationship.user
+                            # check if user owns the post
+                            if user == comment.post.user 
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                            elsif comment.post.tagpeople.where(user_id: user.id).first
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                            else
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                            end
                         end
                     end
                 end
@@ -46,18 +50,24 @@ class Api::V1::Posts::CommentsController < ApplicationController
             # Add to notification
             if reply.comment.replies.count == 1
                 if user() != reply.comment.user
-                    Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                    if reply.comment.user.notifsettings.where(ignore_type: 'Post', ignore_id: reply.comment.post.id).count == 0
+                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                    end
                 end
             else
                 users = reply.comment.users.uniq - [user()]
                 if users.count == 0
-                    Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                    if reply.comment.user.notifsettings.where(ignore_type: 'Post', ignore_id: reply.comment.post.id).count == 0
+                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                    end
                 else
                     users.each do |user|
-                        if reply.comment.user == user
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
-                        else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        if user.notifsettings.where(ignore_type: 'Post', ignore_id: reply.comment.post.id).count == 0
+                            if reply.comment.user == user
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                            else
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", url: "posts/#{reply.comment.post.id}", read: false)
+                            end
                         end
                     end
                 end

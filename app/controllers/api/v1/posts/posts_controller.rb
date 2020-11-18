@@ -52,7 +52,9 @@ class Api::V1::Posts::PostsController < ApplicationController
                     # For families and friends
                     (post.page.relationships).each do |relationship|
                         if !relationship.user == user()
-                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            if relationship.user.notifsettings.where(ignore_type: "Post", ignore_id: post.id).count == 0
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            end
                         end
                     end
             end
