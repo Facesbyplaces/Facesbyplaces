@@ -14,7 +14,7 @@ class MemorialSerializer < ActiveModel::Serializer
         country:        object.country
       }
     when "followers"
-      if object.followers.where(user_id: object.current_user.id).first || object.relationships.where(user_id: object.current_user.id).first 
+      if object.followers.where(user_id: object.currentUser.id).first || object.relationships.where(user_id: object.currentUser.id).first 
         {
           description:    object.description,
           birthplace:     object.birthplace,
@@ -25,7 +25,7 @@ class MemorialSerializer < ActiveModel::Serializer
         }
       end
     when "familyOrFriends"
-      if object.relationships.where(user_id: object.current_user.id).first 
+      if object.relationships.where(user_id: object.currentUser.id).first 
         {
           description:    object.description,
           birthplace:     object.birthplace,
@@ -66,8 +66,8 @@ class MemorialSerializer < ActiveModel::Serializer
 
   # relationship
   def relationship
-    if object.relationships.where(user: object.current_user).first
-      object.relationships.where(user: object.current_user).first.relationship
+    if object.relationships.where(user: object.currentUser).first
+      object.relationships.where(user: object.currentUser).first.relationship
     end
   end
 

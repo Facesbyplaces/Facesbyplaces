@@ -9,6 +9,7 @@ class Blm < ApplicationRecord
 
   # Relationship of pages and users
   has_many :relationships, as: :page, dependent: :destroy
+  has_many :familiesAndFriends, foreign_key: "user_id", class_name: "Relationship"
 
   # Posts of this page
   has_many :posts, as: :page, dependent: :destroy

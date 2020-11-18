@@ -6,9 +6,32 @@ class Api::V1::Posts::CommentsController < ApplicationController
         comment.user = user()
         if comment.save
             # Add to notification
-            (comment.post.page.users.uniq - [user()]).each do |user|
-                Notification.create(recipient: user, actor: user(), action: "New post in #{post.page.name}", url: "posts/#{post.id}", read: false)
-            end
+                # For followers
+                (comment.post.page.users.uniq - [user()]).each do |user|
+                    # check if user owns the post
+                    if user == comment.post.user 
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                    elsif comment.post.tagpeople.where(user_id: user.id).first
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                    else
+                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                    end
+                end
+
+                # For families and friends
+                (comment.post.page.relationships).each do |relationship|
+                    if !relationship.user == user()
+                        user = relationship.user
+                        # check if user owns the post
+                        if user == comment.post.user 
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                        elsif comment.post.tagpeople.where(user_id: user.id).first
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                        end
+                    end
+                end
 
             render json: {status: "Added Comment"}
         else
@@ -21,8 +44,23 @@ class Api::V1::Posts::CommentsController < ApplicationController
         reply.user = user()
         if reply.save 
             # Add to notification
-            (reply.comment.post.page.users.uniq - [user()]).each do |user|
-                Notification.create(recipient: user, actor: user(), action: "New post in #{post.page.name}", url: "posts/#{post.id}", read: false)
+            if reply.comment.replies.count == 1
+                if user() != reply.comment.user
+                    Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                end
+            else
+                users = reply.comment.users.uniq - [user()]
+                if users.count == 0
+                    Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                else
+                    users.each do |user|
+                        if reply.comment.user == user
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        end
+                    end
+                end
             end
 
             render json: {status: "Added Reply"}

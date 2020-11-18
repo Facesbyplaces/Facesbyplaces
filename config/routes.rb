@@ -165,8 +165,9 @@ Rails.application.routes.draw do
   end
   
 
-
+  
   default_url_options :host => "http://localhost:3000"
+  # default_url_options :host => "http://fbp.dev1.koda.ws"
 
   # shares controller
     #user's shares
