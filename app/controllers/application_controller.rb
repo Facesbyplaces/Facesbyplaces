@@ -57,6 +57,11 @@ class ApplicationController < ActionController::Base
         #     session[:guest_user_id] = u.id
         #     u
         # end
+
+        # def verify
+        #     user = User.find(current_user.id)
+        #     flash[:error] = "You must be logged in to access this section" unless user.is_verified?
+        # end
         
         def known_error(exception)
                 return render json: {errors: exception}
