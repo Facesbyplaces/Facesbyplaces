@@ -134,9 +134,10 @@ class RegularVerifyEmail extends StatelessWidget{
                                                 context.bloc<BlocShowMessage>().showMessage();
                                               });
                                             }else{
+                                              String verifyCode = _key1.currentState.controller.text.toString() + _key2.currentState.controller.text.toString() + _key3.currentState.controller.text.toString();
 
                                               context.bloc<BlocShowLoading>().modify(true);
-                                              bool result = await apiRegularVerifyEmail();
+                                              bool result = await apiRegularVerifyEmail(verifyCode);
                                               context.bloc<BlocShowLoading>().modify(false);
 
                                               context.bloc<BlocUpdateButtonText>().reset();

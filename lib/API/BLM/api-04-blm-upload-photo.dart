@@ -1,33 +1,30 @@
-import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart' as dio;
 
-Future<bool> apiBLMUploadPhoto() async{
+Future<bool> apiBLMUploadPhoto(dynamic image) async{
 
-  final http.Response response = await http.post(
-    'https://01244d89dd6fd9fd5dae11b6ec419531.m.pipedream.net',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
+  bool result = false;
+  final sharedPrefs = await SharedPreferences.getInstance();
+  int prefsUserID = sharedPrefs.getInt('blm-user-id');
+
+  try{
+    var dioRequest = dio.Dio();
+    final formData = dio.FormData.fromMap({'user_id': prefsUserID});
+    var file = await dio.MultipartFile.fromFile(image.path, filename: image.path);
+    formData.files.add(MapEntry('image', file));
+
+    var response = await dioRequest.post('http://chipin.dev1.koda.ws/api/v1/auth', data: formData);
+
+    if(response.statusCode == 200){
+      sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+      sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      sharedPrefs.setBool('blm-user-session', true);
+      sharedPrefs.remove('blm-user-verify');
+      result = true;
     }
-  );
-
-  print('The response status is ${response.statusCode}');
-  print('The response status is ${response.body}');
-
-  if(response.statusCode == 200){
-      // var value = json.decode(response.body);
-      // var user = value['user'];
-      // var userId = user['id'];
-      // var userEmail = user['email'];
-
-      // final sharedPrefs = await SharedPreferences.getInstance();
-
-      // sharedPrefs.setInt('blm-user-id', userId);
-      // sharedPrefs.setString('blm-user-email', userEmail);
-      // sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-      // sharedPrefs.setString('blm-uid', response.headers['uid']);    
-      // sharedPrefs.setString('blm-client', response.headers['client']);
-      // sharedPrefs.setBool('blm-session', true);
-    return true;
-  }else{
-    return false;
+  }catch(e){
+    result = false;
   }
+  return result;
 }

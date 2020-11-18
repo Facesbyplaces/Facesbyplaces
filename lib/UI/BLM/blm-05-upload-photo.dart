@@ -152,13 +152,12 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                     onPressed: () async{
                                       if(_image != null){
                                         context.bloc<BlocShowLoading>().modify(true);
-                                        bool result = await apiBLMUploadPhoto();
+                                        bool result = await apiBLMUploadPhoto(_image);
                                         context.bloc<BlocShowLoading>().modify(false);
 
                                         context.bloc<BlocUpdateButtonText>().reset();
 
                                         if(result){
-                                          // Navigator.pushReplacementNamed(context, '/home/');
                                           Navigator.pushReplacementNamed(context, '/home/blm');
                                         }else{
                                           await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
