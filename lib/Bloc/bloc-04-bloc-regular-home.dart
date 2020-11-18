@@ -124,3 +124,15 @@ class BlocHomeRegularUpdateMemorialToggle extends Cubit<int>{
   BlocHomeRegularUpdateMemorialToggle() : super(0);
   void updateToggle(int index) => emit(index);
 }
+
+// class BlocHomeRegularCreateMemorial extends Cubit<APIRegularCreateMemorial>{
+
+//   BlocHomeRegularCreateMemorial() : super(memorial);
+//   // void updateToggle(int index) => emit(index);
+// }
+
+class BlocHomeRegularCreateMemorial extends Cubit<int>{
+
+  BlocHomeRegularCreateMemorial() : super(0);
+  void modify(int number) => emit(number);
+}

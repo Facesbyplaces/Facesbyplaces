@@ -157,13 +157,13 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     onPressed: () async{
                                       if(_image != null){
                                         context.bloc<BlocShowLoading>().modify(true);
-                                        bool result = await apiRegularUploadPhoto();
+                                        bool result = await apiRegularUploadPhoto(_image);
                                         context.bloc<BlocShowLoading>().modify(false);
 
                                         context.bloc<BlocUpdateButtonText>().reset();
 
                                         if(result){
-                                          Navigator.pushReplacementNamed(context, '/home/');
+                                          Navigator.pushReplacementNamed(context, '/home/regular');
                                         }else{
                                           await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
                                         }

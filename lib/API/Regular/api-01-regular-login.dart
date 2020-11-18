@@ -1,5 +1,6 @@
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Future<bool> apiRegularLogin(String email, String password) async{
 
@@ -10,17 +11,22 @@ Future<bool> apiRegularLogin(String email, String password) async{
     }
   );
 
-  print('The headers is ${response.headers}');
-  print('The response status is ${response.statusCode}');
-  print('The response status is ${response.body}');
+  // print('The headers in regular is ${response.headers}');
+  // print('The response in regular status is ${response.statusCode}');
+  // print('The response in regular status is ${response.body}');
 
   if(response.statusCode == 200){
+    var value = json.decode(response.body);
+    var user = value['data'];
+    int userId = user['id'];
 
-      final sharedPrefs = await SharedPreferences.getInstance();
-      sharedPrefs.setString('regular-access-token', response.headers['access-token']);
-      sharedPrefs.setString('regular-uid', response.headers['uid']);    
-      sharedPrefs.setString('regular-client', response.headers['client']);
-      sharedPrefs.setBool('regular-session', true);
+    final sharedPrefs = await SharedPreferences.getInstance();
+
+    sharedPrefs.setInt('regular-user-id', userId);
+    sharedPrefs.setString('regular-access-token', response.headers['access-token']);
+    sharedPrefs.setString('regular-uid', response.headers['uid']);    
+    sharedPrefs.setString('regular-client', response.headers['client']);
+    sharedPrefs.setBool('regular-user-session', true);
     return true;
   }else{
     return false;

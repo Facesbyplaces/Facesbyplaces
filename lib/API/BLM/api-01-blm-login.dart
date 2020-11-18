@@ -1,4 +1,6 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Future<bool> apiBLMLogin(String email, String password) async{
 
@@ -9,25 +11,18 @@ Future<bool> apiBLMLogin(String email, String password) async{
     }
   );
 
-  print('The headers is ${response.headers}');
-  print('The response status in login blm is ${response.statusCode}');
-  print('The response status in login blm is ${response.body}');
-
-
   if(response.statusCode == 200){
-      // var value = json.decode(response.body);
-      // var user = value['user'];
-      // var userId = user['id'];
-      // var userEmail = user['email'];
+    var value = json.decode(response.body);
+    var user = value['data'];
+    int userId = user['id'];
 
-      // final sharedPrefs = await SharedPreferences.getInstance();
+    final sharedPrefs = await SharedPreferences.getInstance();
 
-      // sharedPrefs.setInt('blm-user-id', userId);
-      // sharedPrefs.setString('blm-user-email', userEmail);
-      // sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-      // sharedPrefs.setString('blm-uid', response.headers['uid']);    
-      // sharedPrefs.setString('blm-client', response.headers['client']);
-      // sharedPrefs.setBool('blm-session', true);
+    sharedPrefs.setInt('blm-user-id', userId);
+    sharedPrefs.setString('blm-access-token', response.headers['access-token']);
+    sharedPrefs.setString('blm-uid', response.headers['uid']);    
+    sharedPrefs.setString('blm-client', response.headers['client']);
+    sharedPrefs.setBool('blm-user-session', true);
     return true;
   }else{
     return false;
