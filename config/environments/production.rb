@@ -109,4 +109,21 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.action_mailer.default_url_options = { :host => 'http://fbp.dev1.koda.ws/' }
+  config.action_mailer.default_options = { from: 'facesbyplaces.mailer@gmail.com' }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'facesbyplaces.mailer@gmail.com',
+    password:             'MVW@3Rk#SjN$X46q',
+    authentication:       'plain'
+  }  
+end
+
+
 end

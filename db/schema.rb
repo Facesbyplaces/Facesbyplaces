@@ -110,16 +110,6 @@ ActiveRecord::Schema.define(version: 2020_11_16_194250) do
     t.index ["user_id"], name: "index_notifsettings_on_user_id"
   end
 
-  create_table "page_admins", force: :cascade do |t|
-    t.string "page_type", null: false
-    t.integer "page_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["page_type", "page_id"], name: "index_page_admins_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_page_admins_on_user_id"
-  end
-
   create_table "pageowners", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "page_type", null: false
@@ -246,7 +236,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_194250) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
-    t.boolean "guest"
+    t.boolean "guest", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -267,7 +257,6 @@ ActiveRecord::Schema.define(version: 2020_11_16_194250) do
   add_foreign_key "commentslikes", "users"
   add_foreign_key "followers", "users"
   add_foreign_key "notifsettings", "users"
-  add_foreign_key "page_admins", "users"
   add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "postslikes", "posts"

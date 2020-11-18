@@ -1,6 +1,6 @@
 class Api::V1::Users::UsersController < ApplicationController
 
-    before_action :authenticate_user!
+    # before_action :authenticate_user! unless @user.guest?
 
     def edit
         @user = User.find(params[:id])
@@ -39,9 +39,8 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        if current_user.present?
-            @user = User.find(params[:id])
-
+        @user = User.find(params[:id])
+        if current_user.present? || @user.guest?
             render json: {
                 success: true, 
                 first_name: @user.first_name, 
