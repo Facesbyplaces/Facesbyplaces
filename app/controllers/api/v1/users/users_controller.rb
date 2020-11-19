@@ -1,6 +1,6 @@
 class Api::V1::Users::UsersController < ApplicationController
 
-    # before_action :authenticate_user! unless @user.guest?
+    before_action :authenticate_user!
     
     def edit
         @user = User.find(params[:id])
