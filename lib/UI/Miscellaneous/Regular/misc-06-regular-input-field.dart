@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -317,6 +318,49 @@ class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
             color: Color(0xff000000),
           ),
         ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
+  final String labelText;
+  final DateTimePickerType dateTimePickerType;
+
+  MiscRegularInputFieldDateTimeTemplate({Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date}) : super(key: key);
+
+  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType);
+}
+
+
+class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
+  final String labelText;
+  final DateTimePickerType dateTimePickerType;
+
+  MiscRegularInputFieldDateTimeTemplateState({this.labelText = '', this.dateTimePickerType});
+
+  TextEditingController controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return DateTimePicker(
+      type: dateTimePickerType,
+      controller: controller,
+      cursorColor: Color(0xff000000),
+      firstDate: DateTime(1000),
+      lastDate: DateTime.now(),
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: labelText,
+        labelStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey,),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff000000),

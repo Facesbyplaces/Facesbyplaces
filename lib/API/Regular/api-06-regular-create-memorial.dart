@@ -9,11 +9,6 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The memorial is ${memorial.birthPlace}');
-  print('The memorial is ${memorial.backgroundImage}');
-  print('The memorial is ${memorial.profileImage}');
-  print('The memorial is ${memorial.imageOrVideos}');
-
   try{
     var dioRequest = dio.Dio();
 
@@ -40,8 +35,8 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
       formData.files.add(MapEntry('memorial[profileImage]', file));
     }
     
-    if(memorial.imageOrVideos != null){
-      var file = await dio.MultipartFile.fromFile(memorial.imageOrVideos.path, filename: memorial.imageOrVideos.path);
+    if(memorial.imagesOrVideos != null){
+      var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos.path, filename: memorial.imagesOrVideos.path);
       formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
     }
 
@@ -55,12 +50,13 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
       ),  
     );
 
+    print('The status code in regular memorial is ${response.statusCode}');
+    print('The status data in regular memorial is ${response.data}');
+
     if(response.statusCode == 200){
       sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
       sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setBool('regular-user-session', true);
-      sharedPrefs.remove('regular-user-verify');
       result = true;
     }
   }catch(e){
@@ -82,9 +78,19 @@ class APIRegularCreateMemorial{
   String relationship;
   dynamic backgroundImage;
   dynamic profileImage;
-  dynamic imageOrVideos;
+  dynamic imagesOrVideos;
   
-  APIRegularCreateMemorial({this.memorialName, this.birthPlace, this.dob, this.rip, this.cemetery, this.country, this.description, this.relationship});
+  APIRegularCreateMemorial({
+    this.memorialName, 
+    this.birthPlace, 
+    this.dob, 
+    this.rip, 
+    this.cemetery, 
+    this.country, 
+    this.description, 
+    this.relationship, 
+    this.backgroundImage, 
+    this.profileImage, 
+    this.imagesOrVideos
+  });
 }
-
-APIRegularCreateMemorial memorial = APIRegularCreateMemorial();

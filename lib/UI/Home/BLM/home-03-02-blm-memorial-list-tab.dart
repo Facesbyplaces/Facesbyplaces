@@ -11,55 +11,117 @@ class HomeBLMManageTab extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return FutureBuilder<bool>(
+    return FutureBuilder<APIBLMCreateMemorialMain>(
       future: apiBLMHomeMemorialsTab(),
       builder: (context, memorialsTab){
         if(memorialsTab.hasData){
           return Container(
             height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
             child: BlocBuilder<BlocHomeBLMUpdateListSuggested, List<bool>>(
-              builder: (context, state){
-                return ListView.separated(
-                  physics: ClampingScrollPhysics(),
-                  itemCount: state.length,
-                  itemBuilder: (context, index){
+              builder: (context, listSuggested){
 
-                    if(index == 0){
-                      return Container(
-                        height: SizeConfig.blockSizeVertical * 10,
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        color: Color(0xffeeeeee),
-                        child: Row(
-                          children: [
-                            Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
-                            Expanded(child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
-                          ],
-                        ),
-                      );
-                    }else if(index == 3){
-                      return Container(
-                        height: SizeConfig.blockSizeVertical * 10,
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        color: Color(0xffeeeeee),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('My Friends',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff000000),
-                            ),
+                return Column(
+                  children: [
+                    Container(
+                      height: SizeConfig.blockSizeVertical * 10,
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      color: Color(0xffeeeeee),
+                      child: Row(
+                        children: [
+                          Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                          Expanded(child: GestureDetector(onTap: (){Navigator.pushNamed(context, '/home/blm/home-07-01-blm-create-memorial');}, child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),)),
+                        ],
+                      ),
+                    ),
+
+                    Expanded(
+                      child: ListView.separated(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: memorialsTab.data.familyMemorialList.length,
+                        itemBuilder: (context, index){
+                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.familyMemorialList[index].page.id, memorialName: memorialsTab.data.familyMemorialList[index].page.name, description: memorialsTab.data.familyMemorialList[index].page.details.description,);
+                        },
+                        separatorBuilder: (context, index){
+                          return Divider(height: 1, color: Colors.grey,);
+                        },
+                      ),
+                    ),
+
+                    Container(
+                      height: SizeConfig.blockSizeVertical * 10,
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      color: Color(0xffeeeeee),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('My Friends',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff000000),
                           ),
                         ),
-                      );
-                    }else{
-                      return MiscBLMManageMemorialTab(index: index, tab: 0,);
-                    }
-                  },
-                  separatorBuilder: (context, index){
-                    return Divider(height: 1, color: Colors.grey,);
-                  },
+                      ),
+                    ),
+
+                    Expanded(
+                      child: ListView.separated(
+                        physics: ClampingScrollPhysics(),
+                        itemCount: memorialsTab.data.friendsMemorialList.length,
+                        itemBuilder: (context, index){
+                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.friendsMemorialList[index].page.id, memorialName: memorialsTab.data.friendsMemorialList[index].page.name, description: memorialsTab.data.friendsMemorialList[index].page.details.description,);
+                        },
+                        separatorBuilder: (context, index){
+                          return Divider(height: 1, color: Colors.grey,);
+                        },
+                      ),
+                    ),
+
+
+                  ],
                 );
+
+
+                // return ListView.separated(
+                //   physics: ClampingScrollPhysics(),
+                //   itemCount: state.length,
+                //   itemBuilder: (context, index){
+
+                //     if(index == 0){
+                //       return Container(
+                //         height: SizeConfig.blockSizeVertical * 10,
+                //         padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                //         color: Color(0xffeeeeee),
+                //         child: Row(
+                //           children: [
+                //             Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                //             Expanded(child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                //           ],
+                //         ),
+                //       );
+                //     }else if(index == 3){
+                //       return Container(
+                //         height: SizeConfig.blockSizeVertical * 10,
+                //         padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                //         color: Color(0xffeeeeee),
+                //         child: Align(
+                //           alignment: Alignment.centerLeft,
+                //           child: Text('My Friends',
+                //             style: TextStyle(
+                //               fontSize: SizeConfig.safeBlockHorizontal * 4,
+                //               fontWeight: FontWeight.bold,
+                //               color: Color(0xff000000),
+                //             ),
+                //           ),
+                //         ),
+                //       );
+                //     }else{
+                //       return MiscBLMManageMemorialTab(index: index, tab: 0,);
+                //     }
+                //   },
+                //   separatorBuilder: (context, index){
+                //     return Divider(height: 1, color: Colors.grey,);
+                //   },
+                // );
               }
             ),
           );
