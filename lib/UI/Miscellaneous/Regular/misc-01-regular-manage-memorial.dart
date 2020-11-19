@@ -18,7 +18,9 @@ class MiscRegularManageMemorialTab extends StatelessWidget{
       child: BlocBuilder<BlocMiscRegularManageMemorialButton, bool>(
         builder: (context, manageButton){
           return GestureDetector(
-            onTap: (){},
+            onTap: (){
+              Navigator.pushNamed(context, '/home/regular/home-08-regular-memorial-profile');
+            },
             child: Container(
               height: SizeConfig.blockSizeVertical * 15,
               color: Color(0xffffffff),

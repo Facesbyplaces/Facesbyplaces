@@ -124,3 +124,15 @@ class BlocHomeBLMBackgroundImage extends Cubit<int>{
   BlocHomeBLMBackgroundImage() : super(0);
   void updateToggle(int index) => emit(index);
 }
+
+class BlocBLMBLMCreateMemorial extends Cubit<int>{
+
+  BlocBLMBLMCreateMemorial() : super(0);
+  void modify(int number) => emit(number);
+}
+
+class BlocHomeBLMDonate extends Cubit<int>{
+
+  BlocHomeBLMDonate() : super(0);
+  void modify(int number) => emit(number);
+}

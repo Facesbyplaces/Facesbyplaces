@@ -12,6 +12,10 @@ PODS:
   - libPhoneNumber-iOS (0.9.15)
   - shared_preferences (0.0.1):
     - Flutter
+  - Stripe (19.4.0)
+  - stripe_payment (1.0.0):
+    - Flutter
+    - Stripe (>= 19.0.1)
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
@@ -20,10 +24,12 @@ DEPENDENCIES:
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - stripe_payment (from `.symlinks/plugins/stripe_payment/ios`)
 
 SPEC REPOS:
   trunk:
     - libPhoneNumber-iOS
+    - Stripe
 
 EXTERNAL SOURCES:
   camera:
@@ -38,6 +44,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/libphonenumber/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  stripe_payment:
+    :path: ".symlinks/plugins/stripe_payment/ios"
 
 SPEC CHECKSUMS:
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
@@ -47,7 +55,9 @@ SPEC CHECKSUMS:
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  Stripe: 92f1c73a9dbd3c54277ed06a1fea6e08f20414c6
+  stripe_payment: ad86f099179edb7b9fe12b9b62ac3746d5e56802
 
-PODFILE CHECKSUM: 4ea0b88a7e2511a26c6d4d5589996dab2cb094e9
+PODFILE CHECKSUM: 2b3ae1ac85206853680968b3222ea3779afd8b61
 
 COCOAPODS: 1.9.3

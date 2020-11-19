@@ -37,6 +37,8 @@ dependencies:
   shared_preferences: ^0.5.12+4
   flutter_spinkit: ^4.1.2+1
   dio: ^3.0.10
+  date_time_picker: ^1.1.0
+  stripe_payment: ^1.0.8
 
 dev_dependencies:
   flutter_test:

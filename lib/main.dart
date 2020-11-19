@@ -1,7 +1,8 @@
+import 'UI/Home/BLM/home-20-blm-donate.dart';
 import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
-import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
-import 'UI/Home/Regular/home-04-03-regular-create-memorial.dart';
+// import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
+// import 'UI/Home/Regular/home-04-03-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-05-regular-search.dart';
 import 'UI/Home/Regular/home-06-regular-post.dart';
 import 'UI/Home/Regular/home-08-regular-profile.dart';
@@ -11,8 +12,8 @@ import 'UI/Home/BLM/home-01-blm-home.dart';
 import 'UI/Home/BLM/home-04-blm-search.dart';
 import 'UI/Home/BLM/home-05-blm-post.dart';
 import 'UI/Home/BLM/home-07-01-blm-create-memorial.dart';
-import 'UI/Home/BLM/home-07-02-blm-create-memorial.dart';
-import 'UI/Home/BLM/home-07-03-blm-create-memorial.dart';
+// import 'UI/Home/BLM/home-07-02-blm-create-memorial.dart';
+// import 'UI/Home/BLM/home-07-03-blm-create-memorial.dart';
 import 'UI/Home/BLM/home-08-blm-memorial.dart';
 import 'UI/Home/BLM/home-09-blm-memorial-settings.dart';
 import 'UI/Home/BLM/home-11-blm-page-details.dart';
@@ -52,6 +53,10 @@ void main(){
       title: 'Faces by Places',
       home: UIGetStarted(),
       initialRoute: '/',
+      theme: ThemeData(
+        accentColor: Colors.red,
+        cardColor: Colors.purple,
+      ),
       routes: <String, WidgetBuilder>{
         '/ui-02-login': (BuildContext context) => UILogin01(),
 
@@ -71,8 +76,8 @@ void main(){
         '/home/blm/home-04-blm-search': (BuildContext context) => HomeBLMSearch(),
         '/home/blm/home-05-blm-post': (BuildContext context) => HomeBLMPost(),
         '/home/blm/home-07-01-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial(),
-        '/home/blm/home-07-02-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial2(),
-        '/home/blm/home-07-03-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial3(),
+        // '/home/blm/home-07-02-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial2(),
+        // '/home/blm/home-07-03-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial3(),
         '/home/blm/home-08-blm-memorial': (BuildContext context) => HomeBLMMemorialProfile(),
         '/home/blm/home-09-blm-memorial-settings': (BuildContext context) => HomeBLMMemorialSettings(),
         '/home/blm/home-11-blm-page-details': (BuildContext context) => HomeBLMPageDetails(),
@@ -84,11 +89,14 @@ void main(){
         '/home/blm/home-17-blm-report-user': (BuildContext context) => HomeBLMReportUser(),
         '/home/blm/home-18-blm-user-update-details': (BuildContext context) => HomeBLMUserUpdateDetails(),
         '/home/blm/home-19-blm-create-post': (BuildContext context) => HomeBLMCreatePost(),
+        '/home/blm/home-20-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
+
+        
 
         '/home/regular': (BuildContext context) => HomeRegularScreen(),
         '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial(),
-        '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
-        '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
+        // '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
+        // '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
         '/home/regular/home-05-regular-search': (BuildContext context) => HomeRegularSearch(),
         '/home/regular/home-06-regular-post': (BuildContext context) => HomeRegularPost(),
         '/home/regular/home-08-regular-memorial-profile': (BuildContext context) => HomeRegularProfile(),

@@ -1,142 +1,15 @@
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
-// import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter/material.dart';
-
-// class HomeRegularCreateMemorial extends StatelessWidget{
-
-//   final GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
-//   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-//   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
-//   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
-//   final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
-//   final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     return WillPopScope(
-//       onWillPop: () async{
-//         return Navigator.canPop(context);
-//       },
-//       child: GestureDetector(
-//         onTap: (){
-//           FocusNode currentFocus = FocusScope.of(context);
-//           if(!currentFocus.hasPrimaryFocus){
-//             currentFocus.unfocus();
-//           }
-//         },
-//         child: Scaffold(
-//           appBar: AppBar(
-//             title: Text('Create a Memorial Page for friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
-//             centerTitle: true,
-//             backgroundColor: Color(0xff04ECFF),
-//             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.popUntil(context, ModalRoute.withName('/home/regular'));}),
-//           ),
-//           body: Stack(
-//             children: [
-
-//               SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
-
-//               SingleChildScrollView(
-//                 physics: ClampingScrollPhysics(),
-//                 child: Container(
-//                   height: SizeConfig.screenHeight,
-//                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-//                   child: Column(
-//                     children: [
-
-//                       MiscRegularInputFieldDropDown(key: _key1,),
-
-//                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                       MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace'),
-
-//                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                       MiscRegularInputFieldTemplate(key: _key3, labelText: 'DOB'),
-
-//                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                       MiscRegularInputFieldTemplate(key: _key4, labelText: 'RIP'),
-
-//                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                       MiscRegularInputFieldTemplate(key: _key5, labelText: 'Cemetery'),
-
-//                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                       MiscRegularInputFieldTemplate(key: _key6, labelText: 'Country'),
-
-//                       SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-//                       Expanded(child: Container(),),
-
-//                       MiscRegularButtonTemplate(
-//                         onPressed: () async{
-
-//                           // memorial.relationship = _key1.currentState.currentSelection;
-//                           // memorial.birthPlace = _key2.currentState.controller.text;
-//                           // memorial.dob = _key3.currentState.controller.text;
-//                           // memorial.rip = _key4.currentState.controller.text;
-//                           // memorial.cemetery = _key5.currentState.controller.text;
-//                           // memorial.country = _key6.currentState.controller.text;
-
-//                           // print('The relationship is ${memorial.relationship}');
-//                           // print('The birthPlace is ${memorial.birthPlace}');
-//                           // print('The dob is ${memorial.dob}');
-//                           // print('The rip is ${memorial.rip}');
-//                           // print('The cemetery is ${memorial.cemetery}');
-//                           // print('The country is ${memorial.country}');
-
-//                           // if(_key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 
-//                           // _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
-//                           //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
-//                           // }else{
-//                           //   Navigator.pushNamed(context, '/home/regular/home-04-02-regular-create-memorial');
-//                           // }
-
-//                         }, 
-//                         width: SizeConfig.screenWidth, 
-//                         height: SizeConfig.blockSizeVertical * 7
-//                       ),
-
-//                       Expanded(child: Container(),),
-
-//                     ],
-//                   ),
-//                 ),
-//               ),
-
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-// ================================================================================================================================================================================
-
-
-
 import 'package:facesbyplaces/API/Regular/api-06-regular-create-memorial.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-extra.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
+import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-// import 'home-04-02-regular-create-memorial.dart';
-// import 'home-04-03-regular-create-memorial.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularCreateMemorial extends StatelessWidget{
 
@@ -158,23 +31,23 @@ class HomeRegularCreateMemorial extends StatelessWidget{
           create: (context) => BlocShowLoading(),
         ),
       ],
-      child: HomeRegularCreateMemorial1()
+      child: HomeRegularCreateMemorialExtended()
     );
   }
 }
 
 
-class HomeRegularCreateMemorial1 extends StatefulWidget{
+class HomeRegularCreateMemorialExtended extends StatefulWidget{
 
-  HomeRegularCreateMemorial1State createState() => HomeRegularCreateMemorial1State();
+  HomeRegularCreateMemorialExtendedState createState() => HomeRegularCreateMemorialExtendedState();
 }
 
-class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
+class HomeRegularCreateMemorialExtendedState extends State<HomeRegularCreateMemorialExtended>{
 
   GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key3 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
+  GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key4 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key7 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -187,6 +60,15 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
   void initState(){
     super.initState();
     children = [createMemorial1(), createMemorial2(), createMemorial3()];
+  }
+
+  String convertDate(String input){
+    DateTime dateTime = DateTime.parse(input);
+
+    final y = dateTime.year.toString().padLeft(4, '0');
+    final m = dateTime.month.toString().padLeft(2, '0');
+    final d = dateTime.day.toString().padLeft(2, '0');
+    return '$d/$m/$y';
   }
 
   @override
@@ -253,11 +135,11 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                MiscRegularInputFieldTemplate(key: _key3, labelText: 'DOB'),
+                MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB'),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                MiscRegularInputFieldTemplate(key: _key4, labelText: 'RIP'),
+                MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP'),
 
                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -274,12 +156,13 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                 MiscRegularButtonTemplate(
                   onPressed: () async{
 
+                    // print('The dob is ${_key3.currentState.controller.text}');
+                    // print('The converted date is ${convertDate(_key3.currentState.controller.text)}');
+
                     if(_key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 
                     _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
                       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                     }else{
-                      print('The value is ${_key2.currentState.controller.text}');
-                      // Navigator.pushNamed(context, '/home/regular/home-04-02-regular-create-memorial');
                       context.bloc<BlocHomeRegularCreateMemorial>().modify(1);
                     }
 
@@ -415,14 +298,9 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                   MiscRegularButtonTemplate(
                     buttonColor: Color(0xff04ECFF),
                     onPressed: () async{
-                      // memorial.memorialName = _key1.currentState.controller.text;
-                      // memorial.description = _key2.currentState.controller.text;
-
                       if(_key7.currentState.controller.text == ''){
                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                       }else{
-                        // Navigator.pushNamed(context, '/home/regular/home-04-03-regular-create-memorial');
-                        print('The value is ${_key2.currentState.controller.text}');
                         context.bloc<BlocHomeRegularCreateMemorial>().modify(2);
                       }
                     }, 
@@ -621,8 +499,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           APIRegularCreateMemorial newMemorial = APIRegularCreateMemorial(
                             memorialName: _key7.currentState.controller.text,
                             birthPlace: _key2.currentState.controller.text,
-                            dob: _key3.currentState.controller.text,
-                            rip: _key4.currentState.controller.text,
+                            dob: convertDate(_key3.currentState.controller.text),
+                            rip: convertDate(_key4.currentState.controller.text),
                             cemetery: _key5.currentState.controller.text,
                             country: _key6.currentState.controller.text,
                             description: _key8.currentState.controller.text,
@@ -634,6 +512,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           context.bloc<BlocShowLoading>().modify(false);
 
                           if(result){
+                            context.bloc<BlocHomeRegularCreateMemorial>().modify(0);
                             Navigator.pushReplacementNamed(context, '/home/regular/home-08-regular-memorial-profile');
                           }else{
                             await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
