@@ -52,12 +52,4 @@ class Api::V1::Users::UsersController < ApplicationController
                 status: 200}, status: 200
         end
     end
-
-    private
-
-    def verify
-        unless is_verified?
-            flash[:error] = "You must verify email to continue."
-        end
-    end
 end
