@@ -21,7 +21,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                 )
 
         # Friends
-        friends = Relationship.where(user: user()).where("relationship = 'Friends'")
+        friends = Relationship.where(user: user()).where("relationship = 'Friend'")
         friends = ActiveModel::SerializableResource.new(
                 friends, 
                     each_serializer: RelationshipSerializer

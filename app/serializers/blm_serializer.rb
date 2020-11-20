@@ -1,6 +1,6 @@
 class BlmSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :privacy
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :privacy, :manage
 
   def details
     case object.privacy
@@ -38,6 +38,14 @@ class BlmSerializer < ActiveModel::Serializer
           country:      object.country
         }
       end
+    end
+  end
+
+  def manage
+    if object.currentUser.has_role? :pageadmin, object 
+      return true
+    else
+      return false 
     end
   end
 
@@ -81,9 +89,5 @@ class BlmSerializer < ActiveModel::Serializer
       sendImages.push(rails_blob_url(image))
     end
     return sendImages
-  end
-
-  def user
-    object.user
   end
 end

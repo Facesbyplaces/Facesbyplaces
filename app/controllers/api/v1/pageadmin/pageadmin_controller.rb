@@ -23,7 +23,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         if family.save 
             render json: {status: "Added Successfuly", relationship_id: family.id}
         else
-            render json: {status: "Error"}
+            render json: {status: family.errors}
         end
     end
 
@@ -38,9 +38,9 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         friend = @page.relationships.new(relationship: params[:relationship], user: @user)
         # save relationship
         if friend.save 
-            render json: {status: "Added Successfuly", relationship_id: family.id}
+            render json: {status: "Added Successfuly", relationship_id: friend.id}
         else
-            render json: {status: "Error"}
+            render json: {status: friend.errors}
         end
     end
 
@@ -86,7 +86,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
 
         # Find the user 
-        if params[:id]
+        if params[:user_id]
             @user = User.find(params[:user_id])
         end
 

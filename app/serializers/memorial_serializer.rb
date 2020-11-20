@@ -1,6 +1,6 @@
 class MemorialSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :manage
 
   def details
     case object.privacy
@@ -35,6 +35,14 @@ class MemorialSerializer < ActiveModel::Serializer
           country:        object.country
         }
       end
+    end
+  end
+
+  def manage
+    if object.currentUser.has_role? :pageadmin, object 
+      return true
+    else
+      return false 
     end
   end
 
@@ -78,9 +86,5 @@ class MemorialSerializer < ActiveModel::Serializer
       sendImages.push(rails_blob_url(image))
     end
     return sendImages
-  end
-
-  def user
-    object.user
   end
 end
