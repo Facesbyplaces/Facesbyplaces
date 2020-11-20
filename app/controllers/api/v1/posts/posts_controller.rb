@@ -1,5 +1,6 @@
 class Api::V1::Posts::PostsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show, :pagePosts]
+    before_action :set_up, only: [:create]
 
     def index  
         posts = Post.where(:user_id => current_user.id)
@@ -93,5 +94,19 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     def post_params
         params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
+    end
+
+    def set_up
+        # find page
+        case params[:post][:page_type]
+        when "Blm"
+            page = Blm.find(params[:post][:page_id])
+        when "Memorial"
+            page = Memorial.find(params[:post][:page_id])
+        end
+
+        if !user().has_role? :pageadmin, page 
+            return render json: {status: "Access Denied"}
+        end
     end
 end
