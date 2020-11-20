@@ -1,5 +1,5 @@
 class Api::V1::Pages::BlmController < ApplicationController
-    before_action :authenticate_user!, except: [:index]
+    before_action :authenticate_user!, except: [:show]
     before_action :authorize, except: [:create, :show]
 
     def show
