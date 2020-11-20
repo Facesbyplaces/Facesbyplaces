@@ -122,6 +122,7 @@ class BLMRegister extends StatelessWidget{
                                               await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                             }
                                           }
+
                                         }, 
                                         width: SizeConfig.screenWidth / 2, 
                                         height: SizeConfig.blockSizeVertical * 7, 

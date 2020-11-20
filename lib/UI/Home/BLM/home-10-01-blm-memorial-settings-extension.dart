@@ -30,7 +30,8 @@ class HomeBLMMemorialSettingsPage extends StatelessWidget{
 
                 MiscBLMSettingDetailTemplate(
                   onTap: (){
-                    Navigator.pushNamed(context, '/home/blm/home-07-03-blm-create-memorial');
+                    // Navigator.pushNamed(context, '/home/blm/home-07-03-blm-create-memorial');
+                    Navigator.pushNamed(context, '/home/blm/home-21-blm-memorial-page-image');
                   }, 
                   titleDetail: 'Page Image', 
                   contentDetail: 'Update Page image and background image',

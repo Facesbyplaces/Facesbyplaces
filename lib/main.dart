@@ -1,4 +1,5 @@
 import 'UI/Home/BLM/home-20-blm-donate.dart';
+import 'UI/Home/BLM/home-21-blm-memorial-page-image.dart';
 import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
 // import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
@@ -90,6 +91,7 @@ void main(){
         '/home/blm/home-18-blm-user-update-details': (BuildContext context) => HomeBLMUserUpdateDetails(),
         '/home/blm/home-19-blm-create-post': (BuildContext context) => HomeBLMCreatePost(),
         '/home/blm/home-20-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
+        '/home/blm/home-21-blm-memorial-page-image': (BuildContext context) => HomeBLMMemorialPageImage(),
 
         
 
