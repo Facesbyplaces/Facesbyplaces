@@ -51,13 +51,13 @@ Future<bool> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
       ),  
     );
 
-    print('The status code in blm memorial is ${response.statusCode}');
-    print('The status data in blm memorial is ${response.data}');
+    // print('The status code in blm memorial is ${response.statusCode}');
+    // print('The status data in blm memorial is ${response.data}');
 
     if(response.statusCode == 200){
-      sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+      // sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       result = true;
     }
   }catch(e){

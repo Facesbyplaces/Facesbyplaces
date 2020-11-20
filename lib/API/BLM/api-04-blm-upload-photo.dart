@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 
 Future<bool> apiBLMUploadPhoto(dynamic image) async{
 
@@ -8,12 +8,13 @@ Future<bool> apiBLMUploadPhoto(dynamic image) async{
   int prefsUserID = sharedPrefs.getInt('blm-user-id');
 
   try{
-    var dioRequest = dio.Dio();
-    final formData = dio.FormData.fromMap({'user_id': prefsUserID});
-    var file = await dio.MultipartFile.fromFile(image.path, filename: image.path);
-    formData.files.add(MapEntry('image', file));
+    var dioRequest = Dio();
+    final formData = FormData.fromMap({
+      'user_id': prefsUserID,
+      'image': await MultipartFile.fromFile(image.path, filename: image.path),
+    });
 
-    var response = await dioRequest.post('http://chipin.dev1.koda.ws/api/v1/auth', data: formData);
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData);
 
     if(response.statusCode == 200){
       sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
@@ -24,6 +25,7 @@ Future<bool> apiBLMUploadPhoto(dynamic image) async{
       result = true;
     }
   }catch(e){
+    print('The e is $e');
     result = false;
   }
   return result;

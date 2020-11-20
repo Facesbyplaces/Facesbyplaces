@@ -94,7 +94,9 @@ class HomeBLMMemorialProfile extends StatelessWidget{
                           children: [
                             Expanded(
                               child: GestureDetector(
-                                onTap: (){},
+                                onTap: (){
+                                  Navigator.pushNamed(context, '/home/blm/home-20-blm-donate');
+                                },
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 3,
                                   backgroundColor: Color(0xffE67E22),

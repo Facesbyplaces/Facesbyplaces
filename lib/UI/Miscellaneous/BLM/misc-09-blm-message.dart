@@ -37,3 +37,51 @@ class MiscBLMMessageTemplate extends StatelessWidget{
   }
 }
 
+class MiscBLMErrorMessageTemplate extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      height: SizeConfig.screenHeight,
+      child: Column(
+        children: [
+          Expanded(child: Container(),),
+
+          Center(child: Icon(Icons.error_outline_rounded, color: Colors.red, size: SizeConfig.blockSizeVertical * 15,),),
+
+          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+          Center(
+            child: Text('Something went wrong. Please try again.', 
+            textAlign: TextAlign.center, 
+              style: TextStyle(
+                fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                color: Color(0xff000000),
+              ),
+            ),
+          ),
+
+          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+          GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.directions_walk_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5,),
+
+                SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
+
+                Text('Go back'),
+              ],
+            ),
+          ),
+
+          Expanded(child: Container(),),
+        ],
+      ),
+    );
+  }
+}

@@ -70,12 +70,7 @@ class HomeBLMFeedTab extends StatelessWidget{
 
               SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushNamed(context, '/home/blm/home-20-blm-donate');
-                },
-                child: Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
-              ),
+              Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
 
               SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 

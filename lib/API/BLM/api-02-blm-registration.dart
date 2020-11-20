@@ -10,7 +10,7 @@ Future<bool> apiBLMRegistration(APIBLMAccountRegistration account) async{
       'Content-Type': 'application/json',
     }
   );
-
+  
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     var user = value['data'];

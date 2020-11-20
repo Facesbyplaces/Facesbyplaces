@@ -86,6 +86,7 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
   MiscBLMInputFieldTemplate({
     Key key,
@@ -95,11 +96,12 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
     this.type = TextInputType.text, 
     this.maxLines = 1, 
     this.readOnly = false,
-    this.includeSuffixIcon = false, 
+    this.includeSuffixIcon = false,
+    this.displayText = '',
   }) : super(key: key);
   
 
-  MiscBLMInputFieldTemplateState createState() => MiscBLMInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon);
+  MiscBLMInputFieldTemplateState createState() => MiscBLMInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
 
 
@@ -111,10 +113,16 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
-  MiscBLMInputFieldTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon});
+  MiscBLMInputFieldTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller;
+
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -235,16 +243,32 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
 
 class MiscBLMInputFieldDropDown extends StatefulWidget{
 
-  MiscBLMInputFieldDropDown({Key key}) : super(key: key);
+  final String displayText;
+
+  MiscBLMInputFieldDropDown({
+    Key key,
+    this.displayText = 'Father',
+  }) : super(key: key);
 
   @override
-  MiscBLMInputFieldDropDownState createState() => MiscBLMInputFieldDropDownState();
+  MiscBLMInputFieldDropDownState createState() => MiscBLMInputFieldDropDownState(displayText: displayText);
 }
 
 class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 
+  final String displayText;
+
+  MiscBLMInputFieldDropDownState({this.displayText});
+
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
-  String currentSelection = 'Father';
+  // String currentSelection = 'Father';
+
+  String currentSelection;
+
+  void initState(){
+    super.initState();
+    currentSelection = displayText;
+  }
 
   @override
   Widget build(BuildContext context){
@@ -283,20 +307,27 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
   final String labelText;
   final DateTimePickerType dateTimePickerType;
+  final String displayText;
 
-  MiscBLMInputFieldDateTimeTemplate({Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date}) : super(key: key);
+  MiscBLMInputFieldDateTimeTemplate({Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
-  MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType);
+  MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
 
 
 class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDateTimeTemplate>{
   final String labelText;
   final DateTimePickerType dateTimePickerType;
+  final String displayText;
 
-  MiscBLMInputFieldDateTimeTemplateState({this.labelText = '', this.dateTimePickerType});
+  MiscBLMInputFieldDateTimeTemplateState({this.labelText, this.dateTimePickerType, this.displayText});
 
   TextEditingController controller = TextEditingController();
+
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowMemorialMain> apiBLMShowMemorial() async{
+Future<APIBLMShowMemorialMain> apiRegularShowMemorial() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
@@ -11,8 +11,7 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial() async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
-    'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
+    'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -20,9 +19,6 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial() async{
       'client': getClient,
     }
   );
-  
-  // print('The response status in show memorial is ${response.statusCode}');
-  // print('The response status in show memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -40,7 +36,7 @@ class APIBLMShowMemorialMain{
 
   factory APIBLMShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialMain(
-      memorial: APIBLMShowMemorialExtended.fromJson(parsedJson['blm']),
+      memorial: APIBLMShowMemorialExtended.fromJson(parsedJson['memorial']),
     );
   }
 }
@@ -75,23 +71,21 @@ class APIBLMShowMemorialExtended{
 
 class APIBLMShowMemorialExtendedDetails{
   String description;
-  String location;
-  String precinct;
+  String birthPlace;
   String dob;
   String rip;
-  String state;
+  String cemetery;
   String country;
 
-  APIBLMShowMemorialExtendedDetails({this.description, this.location, this.precinct, this.dob, this.rip, this.state, this.country});
+  APIBLMShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialExtendedDetails(
       description: parsedJson['description'],
-      location: parsedJson['location'],
-      precinct: parsedJson['precinct'],
+      birthPlace: parsedJson['birthplace'],
       dob: parsedJson['dob'],
       rip: parsedJson['rip'],
-      state: parsedJson['state'],
+      cemetery: parsedJson['cemetery'],
       country: parsedJson['country'],
     );
   }

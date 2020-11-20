@@ -154,17 +154,19 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                               ),
                             );
 
+                            print('The paymentResult is $paymentResult');
+
                               // tokenId = paymentResult.tokenId;
 
-                              await StripePayment.completeNativePayRequest();
+                            await StripePayment.completeNativePayRequest();
 
-                              var paymentMethod = await StripePayment.createPaymentMethod(
-                                PaymentMethodRequest(
-                                  card: CreditCard(
-                                    token: paymentResult.tokenId,
-                                  ),
-                                ),
-                              );
+                              // var paymentMethod = await StripePayment.createPaymentMethod(
+                              //   PaymentMethodRequest(
+                              //     card: CreditCard(
+                              //       token: paymentResult.tokenId,
+                              //     ),
+                              //   ),
+                              // );
 
                               // if(intentApiResult != 'Failed'){
                               //   var paymentIntent = await StripePayment.confirmPaymentIntent(

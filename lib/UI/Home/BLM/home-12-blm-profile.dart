@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-post-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class HomeBLMProfile extends StatelessWidget{
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIBLMShowMemorialMain>(
-          future: apiBLMHShowMemorial(),
+          future: apiBLMShowMemorial(),
           builder: (context, profile){
             if(profile.hasData){
               return Stack(
@@ -495,7 +496,7 @@ class HomeBLMProfile extends StatelessWidget{
                 ],
               );
             }else if(profile.hasError){
-              return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
+              return MiscBLMErrorMessageTemplate();
             }else{
               return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
             }

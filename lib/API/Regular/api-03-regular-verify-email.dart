@@ -13,9 +13,6 @@ Future<bool> apiRegularVerifyEmail(String verificationCode) async{
     }
   );
 
-  // print('The response in regular status is ${response.statusCode}');
-  // print('The response in regular status is ${response.body}');
-
   if(response.statusCode == 200){
     sharedPrefs.setString('regular-access-token', response.headers['access-token']);
     sharedPrefs.setString('regular-uid', response.headers['uid']);    

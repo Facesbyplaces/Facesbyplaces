@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Future<APIBLMCreateMemorialMain> apiBLMHomeMemorialsTab() async{
 
@@ -20,18 +19,10 @@ Future<APIBLMCreateMemorialMain> apiBLMHomeMemorialsTab() async{
     }
   );
   
-  print('The response status in memorial is ${response.statusCode}');
-  print('The response status in memorial is ${response.body}');
-  print('The response headers in memorial is ${response.headers}');
+  // print('The response status in memorial is ${response.statusCode}');
+  // print('The response status in memorial is ${response.body}');
 
   if(response.statusCode == 200){
-
-    if(response.headers['access-token'] != null && response.headers['uid'] != null && response.headers['client'] != null){
-      sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-      sharedPrefs.setString('blm-uid', response.headers['uid']);    
-      sharedPrefs.setString('blm-client', response.headers['client']);
-    }
-
     var newValue = json.decode(response.body);
     return APIBLMCreateMemorialMain.fromJson(newValue);
   }else{

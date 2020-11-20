@@ -11,13 +11,9 @@ Future<bool> apiBLMLogin(String email, String password) async{
     }
   );
 
-  print('The response status in login is ${response.statusCode}');
-  print('The response status in login is ${response.body}');
-  print('The response headers in login is ${response.headers}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    var user = value['data'];
+    var user = value['user'];
     int userId = user['id'];
 
     final sharedPrefs = await SharedPreferences.getInstance();
@@ -28,13 +24,6 @@ Future<bool> apiBLMLogin(String email, String password) async{
     sharedPrefs.setString('blm-client', response.headers['client']);
     sharedPrefs.setBool('blm-user-session', true);
 
-    var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-    var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-    var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
-    print('The accessToken is $getAccessToken');
-    print('The UID is $getUID');
-    print('The client is $getClient');
     return true;
   }else{
     return false;

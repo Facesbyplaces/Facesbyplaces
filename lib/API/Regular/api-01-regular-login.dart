@@ -11,13 +11,9 @@ Future<bool> apiRegularLogin(String email, String password) async{
     }
   );
 
-  // print('The headers in regular is ${response.headers}');
-  // print('The response in regular status is ${response.statusCode}');
-  // print('The response in regular status is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    var user = value['data'];
+    var user = value['user'];
     int userId = user['id'];
 
     final sharedPrefs = await SharedPreferences.getInstance();
