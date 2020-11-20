@@ -39,11 +39,14 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def manage
-    if object.currentUser.has_role? :pageadmin, object 
-      return true
-    else
+    if object.currentUser == nil
       return false 
     end
+    if object.currentUser.has_role? :pageadmin, object 
+      return true
+    end
+    
+    return false 
   end
 
   def page_creator
