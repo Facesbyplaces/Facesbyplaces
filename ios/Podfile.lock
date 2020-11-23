@@ -16,6 +16,8 @@ PODS:
   - stripe_payment (1.0.0):
     - Flutter
     - Stripe (>= 19.0.1)
+  - video_player (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
@@ -25,6 +27,7 @@ DEPENDENCIES:
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - stripe_payment (from `.symlinks/plugins/stripe_payment/ios`)
+  - video_player (from `.symlinks/plugins/video_player/ios`)
 
 SPEC REPOS:
   trunk:
@@ -46,6 +49,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences/ios"
   stripe_payment:
     :path: ".symlinks/plugins/stripe_payment/ios"
+  video_player:
+    :path: ".symlinks/plugins/video_player/ios"
 
 SPEC CHECKSUMS:
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
@@ -57,6 +62,7 @@ SPEC CHECKSUMS:
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   Stripe: 92f1c73a9dbd3c54277ed06a1fea6e08f20414c6
   stripe_payment: ad86f099179edb7b9fe12b9b62ac3746d5e56802
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
 
 PODFILE CHECKSUM: 2b3ae1ac85206853680968b3222ea3779afd8b61
 

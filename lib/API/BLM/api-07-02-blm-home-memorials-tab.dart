@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMCreateMemorialMain> apiBLMHomeMemorialsTab() async{
+Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -11,6 +11,7 @@ Future<APIBLMCreateMemorialMain> apiBLMHomeMemorialsTab() async{
 
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials',
+    // 'http://fbp.dev1.koda.ws/api/v1/mainpages/blm',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,33 +20,33 @@ Future<APIBLMCreateMemorialMain> apiBLMHomeMemorialsTab() async{
     }
   );
   
-  // print('The response status in memorial is ${response.statusCode}');
-  // print('The response status in memorial is ${response.body}');
+  print('The response status in memorial is ${response.statusCode}');
+  print('The response status in memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIBLMCreateMemorialMain.fromJson(newValue);
+    return APIBLMHomeTabMemorialMain.fromJson(newValue);
   }else{
     throw Exception('Failed to get the events');
   }
 }
 
-class APIBLMCreateMemorialMain{
+class APIBLMHomeTabMemorialMain{
 
-  List<APIBLMCreateMemorialExtended> familyMemorialList;
-  List<APIBLMCreateMemorialExtended> friendsMemorialList;
+  List<APIBLMHomeTabMemorialExtended> familyMemorialList;
+  List<APIBLMHomeTabMemorialExtended> friendsMemorialList;
 
-  APIBLMCreateMemorialMain({this.familyMemorialList, this.friendsMemorialList});
+  APIBLMHomeTabMemorialMain({this.familyMemorialList, this.friendsMemorialList});
 
-  factory APIBLMCreateMemorialMain.fromJson(Map<String, dynamic> parsedJson){
+  factory APIBLMHomeTabMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     
     var familyList = parsedJson['family'] as List;
     var friendsList = parsedJson['friends'] as List;
     
-    List<APIBLMCreateMemorialExtended> familyMemorials = familyList.map((e) => APIBLMCreateMemorialExtended.fromJson(e)).toList();
-    List<APIBLMCreateMemorialExtended> friendsMemorials = friendsList.map((e) => APIBLMCreateMemorialExtended.fromJson(e)).toList();
+    List<APIBLMHomeTabMemorialExtended> familyMemorials = familyList.map((e) => APIBLMHomeTabMemorialExtended.fromJson(e)).toList();
+    List<APIBLMHomeTabMemorialExtended> friendsMemorials = friendsList.map((e) => APIBLMHomeTabMemorialExtended.fromJson(e)).toList();
 
-    return APIBLMCreateMemorialMain(
+    return APIBLMHomeTabMemorialMain(
       familyMemorialList: familyMemorials,
       friendsMemorialList: friendsMemorials,
     );
@@ -53,48 +54,48 @@ class APIBLMCreateMemorialMain{
 }
 
 
-class APIBLMCreateMemorialExtended{
+class APIBLMHomeTabMemorialExtended{
   int id;
-  APIBLMCreateMemorialExtendedPage page;
+  APIBLMHomeTabMemorialExtendedPage page;
 
-  APIBLMCreateMemorialExtended({this.id, this.page});
+  APIBLMHomeTabMemorialExtended({this.id, this.page});
 
-  factory APIBLMCreateMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMCreateMemorialExtended(
+  factory APIBLMHomeTabMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMHomeTabMemorialExtended(
       id: parsedJson['id'],
-      page: APIBLMCreateMemorialExtendedPage.fromJson(parsedJson['page']),
+      page: APIBLMHomeTabMemorialExtendedPage.fromJson(parsedJson['page']),
     );
   }
 }
 
-class APIBLMCreateMemorialExtendedPage{
+class APIBLMHomeTabMemorialExtendedPage{
   int id;
   String name;
-  APIBLMCreateMemorialExtendedPageDetails details;
+  APIBLMHomeTabMemorialExtendedPageDetails details;
   dynamic backgroundImage;
   dynamic profileImage;
   dynamic imagesOrVideos;
   String relationship;
-  APIBLMCreateMemorialExtendedPageCreator pageCreator;
+  APIBLMHomeTabMemorialExtendedPageCreator pageCreator;
 
-  APIBLMCreateMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIBLMHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
 
-  factory APIBLMCreateMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMCreateMemorialExtendedPage(
+  factory APIBLMHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMHomeTabMemorialExtendedPage(
       id: parsedJson['id'],
       name: parsedJson['name'],
-      details: APIBLMCreateMemorialExtendedPageDetails.fromJson(parsedJson['details']),
+      details: APIBLMHomeTabMemorialExtendedPageDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
-      pageCreator: APIBLMCreateMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      pageCreator: APIBLMHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       
     );
   }
 }
 
-class APIBLMCreateMemorialExtendedPageDetails{
+class APIBLMHomeTabMemorialExtendedPageDetails{
   String description;
   String birthPlace;
   String dob;
@@ -102,10 +103,10 @@ class APIBLMCreateMemorialExtendedPageDetails{
   String cemetery;
   String country;
 
-  APIBLMCreateMemorialExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIBLMHomeTabMemorialExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
-  factory APIBLMCreateMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMCreateMemorialExtendedPageDetails(
+  factory APIBLMHomeTabMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMHomeTabMemorialExtendedPageDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
       dob: parsedJson['dob'],
@@ -116,7 +117,7 @@ class APIBLMCreateMemorialExtendedPageDetails{
   }
 }
 
-class APIBLMCreateMemorialExtendedPageCreator{
+class APIBLMHomeTabMemorialExtendedPageCreator{
   int id;
   String firstName;
   String lastName;
@@ -125,10 +126,10 @@ class APIBLMCreateMemorialExtendedPageCreator{
   String userName;
   dynamic image;
 
-  APIBLMCreateMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMHomeTabMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
-  factory APIBLMCreateMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMCreateMemorialExtendedPageCreator(
+  factory APIBLMHomeTabMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMHomeTabMemorialExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
