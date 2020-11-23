@@ -54,6 +54,9 @@ Rails.application.routes.draw do
 
           # Set privacy
           get 'memorials/privacy/:privacy/:id', to: 'memorials#setPrivacy'
+
+          # Set relationship
+          post 'memorials/relationship', to: 'memorials#setRelationship'
         
         # blm controller
           # Show memorial
@@ -75,6 +78,9 @@ Rails.application.routes.draw do
 
           # Set privacy
           get 'blm/privacy/:privacy/:id', to: 'blm#setPrivacy'
+
+          # Set relationship
+          post 'blm/relationship', to: 'blm#setRelationship'
       end
       namespace :posts do
         # Post Index

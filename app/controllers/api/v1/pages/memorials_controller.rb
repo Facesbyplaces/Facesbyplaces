@@ -1,6 +1,6 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
-    before_action :authorize, except: [:create, :show]
+    before_action :authorize, except: [:create, :show, :setRelationship]
 
     def show
         memorial = Memorial.find(params[:id])
@@ -49,7 +49,11 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         # check if data sent is empty or not
         check = params_presence(params)
         if check == true
+            # Update memorial details
             memorial.update(memorial_details_params)
+
+            # Update relationship of the current page admin to the page
+            memorial.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
 
             return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
         else
@@ -85,6 +89,18 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         memorial = Memorial.find(params[:id])
         memorial.update(privacy: params[:privacy])
         render json: {status: :success}
+    end
+
+    def setRelationship   # for friends and families
+        memorial = Memorial.find(params[:id])
+
+        if memorial.relationships.where(user_id: user().id).first
+            memorial.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
+
+            render json: {status: :success}
+        else
+            render json: {status: "You're not part of the family or friends"}
+        end
     end
 
     private
