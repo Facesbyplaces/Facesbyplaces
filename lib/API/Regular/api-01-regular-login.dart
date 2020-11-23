@@ -11,6 +11,9 @@ Future<bool> apiRegularLogin(String email, String password) async{
     }
   );
 
+  print('The status code on regular login is ${response.statusCode}');
+  print('The status body on regular login is ${response.body}');
+
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     var user = value['user'];
@@ -23,6 +26,11 @@ Future<bool> apiRegularLogin(String email, String password) async{
     sharedPrefs.setString('regular-uid', response.headers['uid']);    
     sharedPrefs.setString('regular-client', response.headers['client']);
     sharedPrefs.setBool('regular-user-session', true);
+
+    print('The access token is ${response.headers['access-token']}');
+    print('The uid is ${response.headers['uid']}');
+    print('The client is ${response.headers['client']}');
+
     return true;
   }else{
     return false;

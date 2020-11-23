@@ -1,31 +1,27 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 Future<bool> apiRegularHomeNotificationsTab() async{
 
-  final http.Response response = await http.post(
-    'https://01244d89dd6fd9fd5dae11b6ec419531.m.pipedream.net',
+  final sharedPrefs = await SharedPreferences.getInstance();
+  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
+      'access-token': getAccessToken,
+      'uid': getUID,
+      'client': getClient,
     }
   );
 
-  print('The response status is ${response.statusCode}');
-  print('The response status is ${response.body}');
+  print('The response status in notifications is ${response.statusCode}');
+  // print('The response status in notifications is ${response.body}');
 
   if(response.statusCode == 200){
-      // var value = json.decode(response.body);
-      // var user = value['user'];
-      // var userId = user['id'];
-      // var userEmail = user['email'];
-
-      // final sharedPrefs = await SharedPreferences.getInstance();
-
-      // sharedPrefs.setInt('blm-user-id', userId);
-      // sharedPrefs.setString('blm-user-email', userEmail);
-      // sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-      // sharedPrefs.setString('blm-uid', response.headers['uid']);    
-      // sharedPrefs.setString('blm-client', response.headers['client']);
-      // sharedPrefs.setBool('blm-session', true);
     return true;
   }else{
     return false;

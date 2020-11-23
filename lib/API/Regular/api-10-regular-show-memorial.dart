@@ -2,13 +2,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowMemorialMain> apiRegularShowMemorial() async{
+Future<APIRegularShowMemorialMain> apiRegularShowMemorial() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
-  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
@@ -22,54 +22,54 @@ Future<APIBLMShowMemorialMain> apiRegularShowMemorial() async{
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIBLMShowMemorialMain.fromJson(newValue);
+    return APIRegularShowMemorialMain.fromJson(newValue);
   }else{
     throw Exception('Failed to get the events');
   }
 }
 
-class APIBLMShowMemorialMain{
+class APIRegularShowMemorialMain{
 
-  APIBLMShowMemorialExtended memorial;
+  APIRegularShowMemorialExtended memorial;
 
-  APIBLMShowMemorialMain({this.memorial});
+  APIRegularShowMemorialMain({this.memorial});
 
-  factory APIBLMShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowMemorialMain(
-      memorial: APIBLMShowMemorialExtended.fromJson(parsedJson['memorial']),
+  factory APIRegularShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowMemorialMain(
+      memorial: APIRegularShowMemorialExtended.fromJson(parsedJson['memorial']),
     );
   }
 }
 
 
-class APIBLMShowMemorialExtended{
+class APIRegularShowMemorialExtended{
   int id;
   String name;
-  APIBLMShowMemorialExtendedDetails details;
+  APIRegularShowMemorialExtendedDetails details;
   dynamic backgroundImage;
   dynamic profileImage;
   dynamic imagesOrVideos;
   String relationship;
-  APIBLMShowMemorialExtendedPageCreator pageCreator;
+  APIRegularShowMemorialExtendedPageCreator pageCreator;
 
-  APIBLMShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
 
-  factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowMemorialExtended(
+  factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowMemorialExtended(
       id: parsedJson['id'],
       name: parsedJson['name'],
-      details: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
+      details: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
-      pageCreator: APIBLMShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator'])
+      pageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator'])
     );
   }
 }
 
 
-class APIBLMShowMemorialExtendedDetails{
+class APIRegularShowMemorialExtendedDetails{
   String description;
   String birthPlace;
   String dob;
@@ -77,10 +77,10 @@ class APIBLMShowMemorialExtendedDetails{
   String cemetery;
   String country;
 
-  APIBLMShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
-  factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowMemorialExtendedDetails(
+  factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowMemorialExtendedDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
       dob: parsedJson['dob'],
@@ -91,7 +91,7 @@ class APIBLMShowMemorialExtendedDetails{
   }
 }
 
-class APIBLMShowMemorialExtendedPageCreator{
+class APIRegularShowMemorialExtendedPageCreator{
   int id;
   String firstName;
   String lastName;
@@ -100,10 +100,10 @@ class APIBLMShowMemorialExtendedPageCreator{
   String userName;
   dynamic image;
 
-  APIBLMShowMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularShowMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
-  factory APIBLMShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowMemorialExtendedPageCreator(
+  factory APIRegularShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowMemorialExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],

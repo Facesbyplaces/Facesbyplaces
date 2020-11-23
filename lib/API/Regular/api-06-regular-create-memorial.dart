@@ -1,13 +1,24 @@
+
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
+import 'dart:convert';
 
 Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
+  
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+
+  print('The access token in create memorial is $getAccessToken');
+  print('The uid in create memorial is $getUID');
+  print('The client in create memorial  is $getClient');
+
+  print('The memorial name is ${memorial.memorialName}');
+  print('The memorial name is ${memorial.birthPlace}');
 
   try{
     var dioRequest = dio.Dio();
@@ -50,13 +61,23 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
       ),  
     );
 
-    print('The status code in regular memorial is ${response.statusCode}');
-    print('The status data in regular memorial is ${response.data}');
+    print('The status code in regular create memorial is ${response.statusCode}');
+    print('The status data in regular create memorial is ${response.data}');
 
     if(response.statusCode == 200){
-      sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // var value = json.decode(response.data);
+      // var user = value['memorial'];
+      // int userId = user['id'];
+
+      var value = GetMemorialIdMain(memorial: response.data);
+
+      print('The memorial userId ${value.memorial.id}');
+
+      // int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
+
+      // sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+      // sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       result = true;
     }
   }catch(e){
@@ -66,6 +87,34 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
 
   return result;
 }
+
+class GetMemorialIdMain{
+
+  GetMemorialIdExtended memorial;
+
+  GetMemorialIdMain({this.memorial});
+
+  factory GetMemorialIdMain.fromJson(Map<String, dynamic> parsedJson){
+
+    return GetMemorialIdMain(
+      memorial: GetMemorialIdExtended.fromJson(parsedJson['memorial']),
+    );
+  }
+}
+
+
+class GetMemorialIdExtended{
+  dynamic id;
+
+  GetMemorialIdExtended({this.id});
+
+  factory GetMemorialIdExtended.fromJson(Map<String, dynamic> parsedJson){
+    return GetMemorialIdExtended(
+      id: parsedJson['id'],
+    );
+  }
+}
+
 
 class APIRegularCreateMemorial{
   String memorialName;

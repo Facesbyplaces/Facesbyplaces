@@ -12,7 +12,7 @@ class HomeBLMManageTab extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return FutureBuilder<APIBLMCreateMemorialMain>(
+    return FutureBuilder<APIBLMHomeTabMemorialMain>(
       future: apiBLMHomeMemorialsTab(),
       builder: (context, memorialsTab){
         if(memorialsTab.hasData){
