@@ -1,6 +1,6 @@
 class MemorialSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :manage
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :manage, :famOrFriends, :follower
 
   def details
     case object.privacy
@@ -80,6 +80,28 @@ class MemorialSerializer < ActiveModel::Serializer
     if object.relationships.where(user: object.currentUser).first
       object.relationships.where(user: object.currentUser).first.relationship
     end
+  end
+
+  def famOrFriends
+    if object.currentUser == nil
+      return false 
+    end
+    if object.relationships.where(user_id: object.currentUser.id).first
+      return true
+    end
+    
+    return false 
+  end
+
+  def follower
+    if object.currentUser == nil
+      return false 
+    end
+    if object.relationships.where(user_id: object.currentUser.id).first
+      return true
+    end
+    
+    return false 
   end
 
   private
