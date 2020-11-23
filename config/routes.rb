@@ -56,6 +56,9 @@ Rails.application.routes.draw do
 
           # Set privacy
           get 'memorials/privacy/:privacy/:id', to: 'memorials#setPrivacy'
+
+          # Set relationship
+          post 'memorials/relationship', to: 'memorials#setRelationship'
         
         # blm controller
           # Show memorial
@@ -78,8 +81,13 @@ Rails.application.routes.draw do
           # Set privacy
           get 'blm/privacy/:privacy/:id', to: 'blm#setPrivacy'
 
+<<<<<<< HEAD
           #Set Account ID Stripe
           resources :payment_intent, only: [:create]
+=======
+          # Set relationship
+          post 'blm/relationship', to: 'blm#setRelationship'
+>>>>>>> f5078c0c0450ca966e2057b975b4a81f9e1e2082
       end
       namespace :posts do
         # Post Index

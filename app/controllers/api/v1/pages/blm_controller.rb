@@ -1,6 +1,6 @@
 class Api::V1::Pages::BlmController < ApplicationController
-    before_action :authenticate_user!, except: [:index]
-    before_action :authorize, except: [:create, :show]
+    before_action :authenticate_user!, except: [:show]
+    before_action :authorize, except: [:create, :show, :setRelationship]
 
     def show
         blm = Blm.find(params[:id])
@@ -49,7 +49,11 @@ class Api::V1::Pages::BlmController < ApplicationController
         # check if data sent is empty or not
         check = params_presence(params)
         if check == true
+            # Update blm details
             blm.update(blm_details_params)
+
+            # Update relationship of the current page admin to the page
+            blm.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
 
             return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
         else
@@ -85,6 +89,18 @@ class Api::V1::Pages::BlmController < ApplicationController
         blm = Blm.find(params[:id])
         blm.update(privacy: params[:privacy])
         render json: {status: :success}
+    end
+
+    def setRelationship   # for friends and families
+        blm = Blm.find(params[:id])
+
+        if blm.relationships.where(user_id: user().id).first
+            blm.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
+
+            render json: {status: :success}
+        else
+            render json: {status: "You're not part of the family or friends"}
+        end
     end
 
     private
