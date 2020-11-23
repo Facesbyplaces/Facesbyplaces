@@ -6,6 +6,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         render json: {
           success: true,
           user:  {
+            account_type: user.account_type,
             id: user.id,
             email: user.email,
             username: user.username.to_s,
