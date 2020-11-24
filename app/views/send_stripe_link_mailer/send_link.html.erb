@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Faces By Places, <%= @user.username %></h1>
+    <br>
+    <br>
+    <p>
+      You have successfully created a Memorial!
+    </p>
+    <br>
+    <p>
+      To be able to receive donations from loved ones, register your own stripe account using this link <b>https://dashboard.stripe.com/oauth/authorize?redirect_uri=<%=@redirect_uri%>&client_id=<%=@client_id%>&state=memorial_<%=@memorial%>&response_type=code&scope=read_write"></b> 
+    </p>
+    <br>
+    <p> The link above will expire within 7 days. This process is optional. If you do not wish to continue, please ignore this message. </p>
+    <br>
+    <br>
+      <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
+

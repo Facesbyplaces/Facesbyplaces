@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+
+      #Set Account ID Stripe
+      post 'payment_intent', to: 'payment_intent#set_payment_intent'
+      get 'stripe_connect', to: 'stripe_connect#success_stripe_connect'
+      
       namespace :users do 
         resources :verify, only: [:create]
         resources :users
@@ -81,13 +86,8 @@ Rails.application.routes.draw do
           # Set privacy
           get 'blm/privacy/:privacy/:id', to: 'blm#setPrivacy'
 
-<<<<<<< HEAD
-          #Set Account ID Stripe
-          resources :payment_intent, only: [:create]
-=======
           # Set relationship
           post 'blm/relationship', to: 'blm#setRelationship'
->>>>>>> f5078c0c0450ca966e2057b975b4a81f9e1e2082
       end
       namespace :posts do
         # Post Index
