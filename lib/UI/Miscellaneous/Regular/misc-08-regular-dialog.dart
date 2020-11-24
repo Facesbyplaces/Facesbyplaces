@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 class MiscRegularUploadFromDialog extends StatelessWidget{
 
+  final String choice_1;
+  final String choice_2;
+
+  MiscRegularUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
+
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Dialog(
@@ -28,7 +33,7 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
               onTap: (){
                 Navigator.pop(context, 1);
               },
-              child: Text('Camera',
+              child: Text(choice_1,
                 style: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                   fontWeight: FontWeight.w400,
@@ -43,7 +48,7 @@ class MiscRegularUploadFromDialog extends StatelessWidget{
               onTap: (){
                 Navigator.pop(context, 2);
               },
-              child: Text('Gallery',
+              child: Text(choice_2,
                 style: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                   fontWeight: FontWeight.w400,

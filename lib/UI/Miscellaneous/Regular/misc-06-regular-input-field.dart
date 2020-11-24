@@ -58,32 +58,22 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
         labelStyle: labelTextStyle,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
+            // color: Colors.transparent,
             color: Color(0xff000000),
           ),
         ),
-        // suffixIcon: ((){
-        //   if(includeSuffixIcon){
-        //     if(obscure){
-        //       return IconButton(
-        //         onPressed: (){
-        //           setState(() {
-        //             obscure = !obscure;
-        //           });
-        //         },
-        //         icon: Icon(Icons.visibility_off, color: Color(0xff000000).withOpacity(0.3), size: SizeConfig.blockSizeVertical * 4,),
-        //       );
-        //     }else{
-        //       return IconButton(
-        //         onPressed: (){
-        //           setState(() {
-        //             obscure = !obscure;
-        //           });
-        //         },
-        //         icon: Icon(Icons.visibility, color: Color(0xff000000).withOpacity(0.3), size: SizeConfig.blockSizeVertical * 4,),
-        //       );
-        //     }
-        //   }
-        // }()),
+        // border: UnderlineInputBorder(
+        //   borderSide: BorderSide(
+        //     // color: Colors.transparent,
+        //     color: Color(0xff000000),
+        //   ),
+        // ),
+        // enabledBorder: UnderlineInputBorder(
+        //   borderSide: BorderSide(
+        //     // color: Colors.transparent,
+        //     color: Color(0xff000000),
+        //   ),
+        // ),
       ),
     );
   }
@@ -157,6 +147,82 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
   }
 }
 
+class MiscRegularInputFieldMultiTextPostTemplate extends StatefulWidget{
+  final String labelText;
+  final TextStyle labelTextStyle;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final Color backgroundColor;
+
+  MiscRegularInputFieldMultiTextPostTemplate({
+    Key key,
+    this.labelText = '',
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.type = TextInputType.text, 
+    this.maxLines = 10,
+    this.readOnly = false,
+    this.backgroundColor = const Color(0xffffffff),
+  }) : super(key: key);
+  
+
+  MiscRegularInputFieldMultiTextPostTemplateState createState() => MiscRegularInputFieldMultiTextPostTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
+}
+
+
+class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularInputFieldMultiTextPostTemplate>{
+  final String labelText;
+  final TextStyle labelTextStyle;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final Color backgroundColor;
+
+  MiscRegularInputFieldMultiTextPostTemplateState({this.labelText, this.labelTextStyle, this.type, this.maxLines, this.readOnly, this.backgroundColor});
+
+  TextEditingController controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return TextFormField(
+      controller: controller,
+      cursorColor: Color(0xff000000),
+      maxLines: maxLines,
+      keyboardType: type,
+      readOnly: readOnly,
+      decoration: InputDecoration(
+        fillColor: backgroundColor,
+        // filled: true,
+        alignLabelWithHint: true,
+        labelText: labelText,
+        labelStyle: labelTextStyle,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            // color: Color(0xff000000),
+            color: Colors.transparent,
+          ),
+          // borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            // color: Color(0xff000000),
+            color: Colors.transparent,
+          ),
+          // borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
+    );
+  }
+}
+
+
 
 class MiscRegularInputFieldDropDown extends StatefulWidget{
 
@@ -205,6 +271,63 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
   }
 }
 
+// class MiscRegularInputFieldDropDownUser extends StatefulWidget{
+
+//   MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
+
+//   @override
+//   MiscRegularInputFieldDropDownUserState createState() => MiscRegularInputFieldDropDownUserState();
+// }
+
+// class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
+
+//   List<String> relationship = ['Richard Nedd Memories', 'Default'];
+//   String currentSelection = 'Richard Nedd Memories';
+
+//   @override
+//   Widget build(BuildContext context){
+//     return InputDecorator(
+//       decoration: InputDecoration(
+//         alignLabelWithHint: true,
+//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+//         focusedBorder: UnderlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//         border: UnderlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//       ),
+//       child: DropdownButtonHideUnderline(
+//         child: DropdownButton<String>(
+//           value: currentSelection,
+//           isDense: true,
+//           onChanged: (String newValue) {
+//             setState(() {
+//               currentSelection = newValue;
+//             });
+//           },
+//           items: relationship.map((String value) {
+//             return DropdownMenuItem<String>(
+//               value: value,
+//               child: Text(value),
+//             );
+//           }).toList(),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+class RelationshipItem{
+
+  final String name;
+  final String image;
+  
+  const RelationshipItem({this.name, this.image});
+}
+
+
 class MiscRegularInputFieldDropDownUser extends StatefulWidget{
 
   MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
@@ -215,15 +338,25 @@ class MiscRegularInputFieldDropDownUser extends StatefulWidget{
 
 class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
 
-  List<String> relationship = ['Richard Nedd Memories', 'Default'];
-  String currentSelection = 'Richard Nedd Memories';
+  // List<String> relationship = ['Richard Nedd Memories', 'Default'];
+  // String currentSelection = 'Richard Nedd Memories';
+
+  List<RelationshipItem> relationship = [
+    const RelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
+    const RelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
+  ];
+
+  RelationshipItem currentSelection = const RelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
+
+
+
+  
 
   @override
   Widget build(BuildContext context){
     return InputDecorator(
       decoration: InputDecoration(
         alignLabelWithHint: true,
-        labelText: 'Relationship',
         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide.none,
@@ -233,21 +366,65 @@ class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputField
         ),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
+        child: DropdownButton<RelationshipItem>(
+          // selectedItemBuilder: (BuildContext context) {
+          //   return relationship.map<Widget>((RelationshipItem item) {
+          //     // return Text(item);
+          //     return Row(
+          //       children: [
+          //         CircleAvatar(backgroundImage: AssetImage(item.image),),
+
+          //         SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+          //         Text(item.name),
+          //       ],
+          //     );
+          //   }).toList();
+          // },
           value: currentSelection,
           isDense: true,
-          onChanged: (String newValue) {
+          onChanged: (RelationshipItem newValue) {
             setState(() {
               currentSelection = newValue;
             });
           },
-          items: relationship.map((String value) {
-            return DropdownMenuItem<String>(
+          items: relationship.map((RelationshipItem value) {
+            return DropdownMenuItem<RelationshipItem>(
               value: value,
-              child: Text(value),
+              child: Row(
+                children: [
+                  CircleAvatar(backgroundImage: AssetImage(value.image),),
+
+                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                  Text(value.name),
+                ],
+              ),
             );
           }).toList(),
         ),
+
+        // child: DropdownButton<String>(
+        //   value: currentSelection,
+        //   isDense: true,
+        //   onChanged: (String newValue) {
+        //     setState(() {
+        //       currentSelection = newValue;
+        //     });
+        //   },
+        //   items: relationship.map((String value) {
+        //     return DropdownMenuItem<String>(
+        //       value: value,
+        //       child: Row(
+        //         children: [
+        //           CircleAvatar(backgroundImage: AssetImage('assets/icons/profile2.png'),),
+
+        //           Text(value),
+        //         ],
+        //       ),
+        //     );
+        //   }).toList(),
+        // ),
       ),
     );
   }

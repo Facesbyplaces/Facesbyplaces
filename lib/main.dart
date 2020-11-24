@@ -5,6 +5,8 @@ import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-05-regular-search.dart';
 import 'UI/Home/Regular/home-06-regular-post.dart';
 import 'UI/Home/Regular/home-08-regular-profile.dart';
+import 'UI/Home/Regular/home-09-02-regular-create-post.dart';
+import 'UI/Home/Regular/home-09-03-regular-create-post.dart';
 import 'UI/Home/Regular/home-09-regular-create-post.dart';
 import 'UI/Home/Regular/home-10-regular-memorial-settings.dart';
 import 'UI/Home/BLM/home-01-blm-home.dart';
@@ -89,6 +91,7 @@ void main(){
         '/home/blm/home-19-blm-create-post': (BuildContext context) => HomeBLMCreatePost(),
         '/home/blm/home-20-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
         '/home/blm/home-21-blm-memorial-page-image': (BuildContext context) => HomeBLMMemorialPageImage(),
+        // HomeRegularCreatePostSearch
 
         
 
@@ -100,6 +103,8 @@ void main(){
         '/home/regular/home-06-regular-post': (BuildContext context) => HomeRegularPost(),
         '/home/regular/home-08-regular-memorial-profile': (BuildContext context) => HomeRegularProfile(),
         'home/regular/home-09-regular-create-post': (BuildContext context) => HomeRegularCreatePost(),
+        'home/regular/home-09-02-regular-create-post': (BuildContext context) => HomeRegularCreatePostSearch(),
+        'home/regular/home-09-03-regular-create-post': (BuildContext context) => HomeRegularCreatePostSearchUser(),
         'home/regular/home-10-regular-memorial-settings': (BuildContext context) => HomeRegularMemorialSettings(),
         'home/regular/home-12-regular-page-details': (BuildContext context) => HomeRegularPageDetails(),
         'home/regular/home-13-regular-memorial': (BuildContext context) => HomeRegularMemorialProfile(),

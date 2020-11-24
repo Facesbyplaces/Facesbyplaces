@@ -19,7 +19,7 @@ Future<bool> apiRegularHomeNotificationsTab() async{
   );
 
   print('The response status in notifications is ${response.statusCode}');
-  // print('The response status in notifications is ${response.body}');
+  print('The response status in notifications is ${response.body}');
 
   if(response.statusCode == 200){
     return true;
