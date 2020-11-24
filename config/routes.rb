@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
-    omniauth_callbacks: 'omniauth'
+    # omniauth_callbacks: 'omniauth'
   }
+
+  # devise_for :users, controllers: { omniauth_callbacks: 'omniauth'}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   # Action Cable
@@ -79,8 +81,13 @@ Rails.application.routes.draw do
           # Set privacy
           get 'blm/privacy/:privacy/:id', to: 'blm#setPrivacy'
 
+<<<<<<< HEAD
+          #Set Account ID Stripe
+          resources :payment_intent, only: [:create]
+=======
           # Set relationship
           post 'blm/relationship', to: 'blm#setRelationship'
+>>>>>>> f5078c0c0450ca966e2057b975b4a81f9e1e2082
       end
       namespace :posts do
         # Post Index
