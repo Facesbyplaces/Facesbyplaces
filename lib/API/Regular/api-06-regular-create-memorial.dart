@@ -1,9 +1,6 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
-import 'dart:convert';
 
 Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
   bool result = false;
@@ -53,7 +50,7 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
       options: Options(
-        headers: <String, dynamic>{
+        headers: <String, String>{
           'access-token': getAccessToken,
           'uid': getUID,
           'client': getClient,
@@ -62,22 +59,13 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
     );
 
     print('The status code in regular create memorial is ${response.statusCode}');
-    print('The status data in regular create memorial is ${response.data}');
 
     if(response.statusCode == 200){
-      // var value = json.decode(response.data);
-      // var user = value['memorial'];
-      // int userId = user['id'];
+      var value = response.data;
+      var user = value['memorial'];
+      int userId = user['id'];
+      sharedPrefs.setInt('regular-user-memorial-id', userId);
 
-      var value = GetMemorialIdMain(memorial: response.data);
-
-      print('The memorial userId ${value.memorial.id}');
-
-      // int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
-
-      // sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      // sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       result = true;
     }
   }catch(e){
@@ -87,34 +75,6 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
 
   return result;
 }
-
-class GetMemorialIdMain{
-
-  GetMemorialIdExtended memorial;
-
-  GetMemorialIdMain({this.memorial});
-
-  factory GetMemorialIdMain.fromJson(Map<String, dynamic> parsedJson){
-
-    return GetMemorialIdMain(
-      memorial: GetMemorialIdExtended.fromJson(parsedJson['memorial']),
-    );
-  }
-}
-
-
-class GetMemorialIdExtended{
-  dynamic id;
-
-  GetMemorialIdExtended({this.id});
-
-  factory GetMemorialIdExtended.fromJson(Map<String, dynamic> parsedJson){
-    return GetMemorialIdExtended(
-      id: parsedJson['id'],
-    );
-  }
-}
-
 
 class APIRegularCreateMemorial{
   String memorialName;
