@@ -1,4 +1,7 @@
 class Api::V1::Users::VerifyController < ApplicationController
+
+    before_action :authenticate_user!
+
     def verify_code_params
         params.permit(:verification_code, :user_id)
     end
