@@ -100,7 +100,7 @@ class BlmSerializer < ActiveModel::Serializer
     if object.currentUser == nil
       return false 
     end
-    if object.relationships.where(user_id: object.currentUser.id).first
+    if object.users.where(id: object.currentUser.id).first
       return true
     end
     

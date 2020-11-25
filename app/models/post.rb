@@ -2,9 +2,8 @@ class Post < ApplicationRecord
   belongs_to        :page, polymorphic: true
   belongs_to        :user
   has_many_attached :imagesOrVideos
-  has_many          :report
-  has_many          :comments
-  has_many          :postslikes
+  has_many          :comments, dependent: :destroy
+  has_many          :postslikes, dependent: :destroy
 
   # tagging people
   has_many :tagpeople, dependent: :destroy
