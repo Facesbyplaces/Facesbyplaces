@@ -14,7 +14,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's memorials
     def memorials
         # Family
-        family = Relationship.where(user: user()).where("relationship = 'Brother' or relationship = 'Sister' or relationship = 'Father' or relationship = 'Mother' or relationship = 'Uncle' or relationship = 'Family'")
+        family = Relationship.where(user: user()).where("relationship = 'Father' or relationship = 'Mother' or relationship = 'Brother' or relationship = 'Sister' or relationship = 'Uncle' or relationship = 'Aunt' or relationship = 'Grandmother' or relationship = 'Grandfather'")
         family = ActiveModel::SerializableResource.new(
                     family, 
                     each_serializer: RelationshipSerializer

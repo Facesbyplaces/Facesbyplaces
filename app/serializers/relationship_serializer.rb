@@ -1,5 +1,5 @@
 class RelationshipSerializer < ActiveModel::Serializer
-  attributes :id, :page
+  attributes :page, :page_type
 
   def page
     if object.page.page_name == "blm" # BLM pages
