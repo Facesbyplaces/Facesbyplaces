@@ -13,6 +13,7 @@ class HomeBLMPost extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    final value = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

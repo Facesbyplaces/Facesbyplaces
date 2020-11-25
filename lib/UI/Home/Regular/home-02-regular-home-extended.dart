@@ -1,7 +1,7 @@
-import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
-import 'package:facesbyplaces/API/Regular/api-07-02-regular-home-memorials-tab.dart';
-import 'package:facesbyplaces/API/Regular/api-07-03-regular-home-post-tab.dart';
-import 'package:facesbyplaces/API/Regular/api-07-04-regular-home-notifications-tab.dart';
+// import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
+// import 'package:facesbyplaces/API/Regular/api-07-02-regular-home-memorials-tab.dart';
+// import 'package:facesbyplaces/API/Regular/api-07-03-regular-home-post-tab.dart';
+// import 'package:facesbyplaces/API/Regular/api-07-04-regular-home-notifications-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-drawer.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -13,8 +13,6 @@ import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-// class HomeRegularScreenExtended extends StatelessWidget{
-
 class HomeRegularScreenExtended extends StatefulWidget{
 
   @override
@@ -22,14 +20,6 @@ class HomeRegularScreenExtended extends StatefulWidget{
 }
 
 class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
-
-  void initState(){
-    super.initState();
-    apiRegularHomeFeedTab();
-    apiRegularHomeMemorialsTab();
-    apiRegularHomePostTab();
-    apiRegularHomeNotificationsTab();
-  }
 
   @override
   Widget build(BuildContext context) {

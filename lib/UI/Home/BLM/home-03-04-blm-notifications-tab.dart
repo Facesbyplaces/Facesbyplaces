@@ -4,7 +4,17 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMNotificationsTab extends StatelessWidget{
+class HomeBLMNotificationsTab extends StatefulWidget{
+
+  HomeBLMNotificationsTabState createState() => HomeBLMNotificationsTabState();
+}
+
+class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
+
+  void initState(){
+    super.initState();
+    apiBLMHomeNotificationsTab();
+  }
 
   @override
   Widget build(BuildContext context) {

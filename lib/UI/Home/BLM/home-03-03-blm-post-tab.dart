@@ -4,7 +4,17 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMPostTab extends StatelessWidget {
+class HomeBLMPostTab extends StatefulWidget{
+
+  HomeBLMPostTabState createState() => HomeBLMPostTabState();
+}
+
+class HomeBLMPostTabState extends State<HomeBLMPostTab>{
+
+  void initState(){
+    super.initState();
+    apiBLMHomePostTab();
+  }
 
   @override
   Widget build(BuildContext context) {
