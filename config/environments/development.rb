@@ -72,5 +72,9 @@ Rails.application.configure do
     user_name:            'facesbyplaces.mailer@gmail.com',
     password:             'MVW@3Rk#SjN$X46q',
     authentication:       'plain'
-  }  
+  }
+  
+  # Stripe
+  # config.stripe.secret_key = Rails.application.credentials.stripe[:development][:secret_key]
+  # config.stripe.publishable_key = Rails.application.credentials.stripe[:development][:publishable_key]
 end

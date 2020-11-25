@@ -65,6 +65,7 @@ gem 'pagy'
 gem 'pager_api'
 gem 'cancancan'
 gem 'rolify'
+gem 'stripe'
 
 # Social Share 
 gem 'social-share-button'

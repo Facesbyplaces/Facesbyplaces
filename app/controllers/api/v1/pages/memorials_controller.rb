@@ -11,6 +11,10 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def create
         # create new memorial page
         memorial = Memorial.new(memorial_params)
+
+        # get user for sending links to their email.
+        # @user = User.find(params[:user_id])
+
         # check if the params sent is valid or not
         check = params_presence(params[:memorial])
         if check == true
@@ -18,7 +22,12 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             memorial.privacy = "public"
 
             # save memorial
-            memorial.save 
+            memorial.save
+            
+            # Tell the Mailer to send link to register stripe user account after save
+            redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+            client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+            SendStripeLinkMailer.send_link(redirect_uri, client_id, current_user, memorial.id).deliver_now
 
             # save the owner of the user
             pageowner = Pageowner.new(user: user())
