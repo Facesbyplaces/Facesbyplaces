@@ -4,7 +4,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's feed
     def feed
         posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type")
-                    .joins("INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = posts.page_type AND followers.page_id = posts.page_id")
+                    .joins("INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = posts.page_type AND followers.page_id = posts.page_id OR posts.user_id = #{user().id}")
                     .order(created_at: :desc)
                     .select("posts.*")
         

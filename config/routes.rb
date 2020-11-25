@@ -86,6 +86,9 @@ Rails.application.routes.draw do
           # Set privacy
           get 'blm/privacy/:privacy/:id', to: 'blm#setPrivacy'
 
+          #Set Account ID Stripe
+          resources :payment_intent, only: [:create]
+          
           # Set relationship
           post 'blm/relationship', to: 'blm#setRelationship'
       end
@@ -110,7 +113,6 @@ Rails.application.routes.draw do
         get '/likeComment/:commentable_type/:commentable_id', to: 'comments#like'
         # Unlike Comment or Reply
         get '/unlikeComment/:commentable_type/:commentable_id', to: 'comments#unlike'
-        # Report a Comment or Reply
       end
       namespace :admin do
         # all users
