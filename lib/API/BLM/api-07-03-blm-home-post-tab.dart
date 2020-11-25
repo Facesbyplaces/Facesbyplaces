@@ -19,7 +19,7 @@ Future<bool> apiBLMHomePostTab() async{
   );
 
   print('The response status in blm post is ${response.statusCode}');
-  print('The response status in blm post is ${response.body}');
+  // print('The response status in blm post is ${response.body}');
 
   if(response.statusCode == 200){
     return true;

@@ -6,7 +6,17 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularManageTab extends StatelessWidget{
+class HomeRegularManageTab extends StatefulWidget{
+
+  HomeRegularManageTabState createState() => HomeRegularManageTabState();
+}
+
+class HomeRegularManageTabState extends State<HomeRegularManageTab>{
+
+  void initState(){
+    super.initState();
+    apiRegularHomeMemorialsTab();
+  }
 
   @override
   Widget build(BuildContext context) {

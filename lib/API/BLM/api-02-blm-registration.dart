@@ -5,7 +5,7 @@ import 'dart:convert';
 Future<bool> apiBLMRegistration(APIBLMAccountRegistration account) async{
 
   final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}',
+    'http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }

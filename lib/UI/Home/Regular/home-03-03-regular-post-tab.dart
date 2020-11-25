@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/API/Regular/api-07-03-regular-home-post-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +82,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             ),
           );
         }else if(postTab.hasError){
-          return MiscRegularErrorMessageTemplate();
+          // return MiscRegularErrorMessageTemplate();
+          return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
         }else{
           return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
         }
