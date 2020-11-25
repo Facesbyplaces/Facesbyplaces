@@ -37,9 +37,9 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     end
                 end
 
-            render json: {status: "Added Comment"}
+            render json: {status: :success}
         else
-            render json: {status: "Error"}
+            render json: {status: comment.errors}
         end
     end
     
@@ -73,9 +73,9 @@ class Api::V1::Posts::CommentsController < ApplicationController
                 end
             end
 
-            render json: {status: "Added Reply"}
+            render json: {status: :success}
         else
-            render json: {status: "Error"}
+            render json: {status: comment.errors}
         end
     end
 
@@ -83,13 +83,13 @@ class Api::V1::Posts::CommentsController < ApplicationController
         like = Commentslike.new(comment_like_params)
         like.user = user()
         like.save 
-        render json: {status: "Liked Comment"}
+        render json: {status: :success}
     end
     
     def unlike
         unlike = Commentslike.where("commentable_type = '#{params[:commentable_type]}' AND commentable_id = #{params[:commentable_id]} AND user_id = #{user().id}").first 
         unlike.destroy 
-        render json: {status: "Unliked Comment"}
+        render json: {status: :success}
     end
     
     
