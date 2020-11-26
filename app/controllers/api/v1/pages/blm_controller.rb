@@ -25,6 +25,11 @@ class Api::V1::Pages::BlmController < ApplicationController
             pageowner = Pageowner.new(user: user())
             blm.pageowner = pageowner
 
+            # Tell the Mailer to send link to register stripe user account after save
+            redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+            client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+            SendStripeLinkMailer.send_link(redirect_uri, client_id, current_user, blm.id).deliver_now
+
             # save relationship of the user to the page
             relationship = blm.relationships.new(user: user(), relationship: params[:relationship])
             relationship.save 

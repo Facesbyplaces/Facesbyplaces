@@ -5,8 +5,10 @@ class Api::V1::StripeConnectController < ApplicationController
           grant_type: 'authorization_code',
           code: params[:code],
         })
-    
+        
         memorial = Memorial.find_by(id: params[:state].split("_")[1])
         memorial.update stripe_connect_account_id: response.stripe_user_id
+
+        render json: {success: true, message: "Stripe Successfully Connected!", status: 200}, status: 200
     end
 end
