@@ -8,7 +8,8 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     .order(created_at: :desc)
                     .select("posts.*")
         
-        paginate posts, per_page: numberOfPage
+        pagy =  pagy(posts)
+        render json: pagy
     end
 
     # user's memorials
