@@ -1,6 +1,7 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
     before_action :authorize, except: [:create, :show, :setRelationship]
+    before_action :verify_user_account_type, except: [:show]
 
     def show
         memorial = Memorial.find(params[:id])
@@ -113,6 +114,12 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     private
+    def verify_user_account_type
+        if user.account_type == 1
+            render json: {status: "Oops! Looks like your account is not registered as All Lives Matter account. Register to continue."}
+        end
+    end
+    
     def memorial_params
         params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, imagesOrVideos: [])
     end

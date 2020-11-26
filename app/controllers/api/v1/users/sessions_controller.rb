@@ -23,8 +23,17 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def create
       user = User.find_by(email: params[:email])
-      if user.is_verified?
-          super
+      account_type = params[:account_type].to_i
+      puts user.account_type.class
+      puts account_type.class
+      if user.account_type == account_type && user.is_verified?
+        super
+      elsif user.account_type != account_type
+        if account_type == 1
+          render json: { message: "BLM account not found. Register to login to the page.", }
+        elsif account_type == 2
+          render json: { message: "ALM account not found. Register to login to the page.", }
+        end
       else
          render json: {
             message: "Verify email to login to the app.",
