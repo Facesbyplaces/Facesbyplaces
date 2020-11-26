@@ -14,25 +14,47 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's memorials
     def memorials
         # Family
-        family = Relationship.where(user: user()).where("relationship = 'Father' or relationship = 'Mother' or relationship = 'Brother' or relationship = 'Sister' or relationship = 'Uncle' or relationship = 'Aunt' or relationship = 'Grandmother' or relationship = 'Grandfather'")
-        family = ActiveModel::SerializableResource.new(
-                    family, 
-                    each_serializer: RelationshipSerializer
-                )
+            blmFamily = Blm.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Father' or relationships.relationship = 'Mother' or relationships.relationship = 'Brother' or relationships.relationship = 'Sister' or relationships.relationship = 'Uncle' or relationships.relationship = 'Aunt' or relationships.relationship = 'Grandmother' or relationships.relationship = 'Grandfather'")
 
+            blmFamily = ActiveModel::SerializableResource.new(
+                            blmFamily, 
+                            each_serializer: BlmSerializer
+                        )
+
+            memorialFamily = Memorial.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Father' or relationships.relationship = 'Mother' or relationships.relationship = 'Brother' or relationships.relationship = 'Sister' or relationships.relationship = 'Uncle' or relationships.relationship = 'Aunt' or relationships.relationship = 'Grandmother' or relationships.relationship = 'Grandfather'")
+
+            memorialFamily = ActiveModel::SerializableResource.new(
+                            memorialFamily, 
+                            each_serializer: MemorialSerializer
+                        )
+                        
         # Friends
-        friends = Relationship.where(user: user()).where("relationship = 'Friend'")
-        friends = ActiveModel::SerializableResource.new(
-                friends, 
-                    each_serializer: RelationshipSerializer
-                )
+            blmFriends = Blm.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Friend'")
+            
+            blmFriends = ActiveModel::SerializableResource.new(
+                            blmFriends, 
+                            each_serializer: BlmSerializer
+                        )
+
+            memorialFriends = Memorial.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Friend'")
+
+            memorialFriends = ActiveModel::SerializableResource.new(
+                                memorialFriends, 
+                                each_serializer: MemorialSerializer
+                            )
 
         render json: {
-            family: family, 
-            friends: friends
+            family: {
+                blm: blmFamily,
+                memorial: memorialFamily
+            }, 
+            friends: {
+                blm: blmFriends,
+                memorial: memorialFriends
+            }
         }
     end
-
+    
     # user's posts
     def posts
         # Posts that they created or owned
