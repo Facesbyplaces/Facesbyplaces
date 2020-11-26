@@ -6,9 +6,15 @@ class Api::V1::StripeConnectController < ApplicationController
           code: params[:code],
         })
         
-        memorial = Memorial.find_by(id: params[:state].split("_")[1])
-        memorial.update stripe_connect_account_id: response.stripe_user_id
+        if params[:state].split("_")[0] == "blm"
+          memorial = Blm.find_by(id: params[:state].split("_")[1])
+          memorial.update stripe_connect_account_id: response.stripe_user_id
+        elsif params[:state].split("_")[0] == "memorial"
+          memorial = Memorial.find_by(id: params[:state].split("_")[1])
+          memorial.update stripe_connect_account_id: response.stripe_user_id
+        end
 
         render json: {success: true, message: "Stripe Successfully Connected!", status: 200}, status: 200
     end
+
 end

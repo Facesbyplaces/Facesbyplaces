@@ -1,7 +1,12 @@
 class Api::V1::PaymentIntentController < ApplicationController
     
     def set_payment_intent
-        @memorial = Memorial.find(params[:memorial_id])
+        if params[:memorial_id].present?
+          @memorial = Memorial.find(params[:memorial_id])
+        elsif params[:blm_id].present?
+          @memorial = Blm.find(params[:blm_id])
+        end
+
         @amount = (params[:amount].to_i * 100).to_i
         puts @amount
         payment_intent = Stripe::PaymentIntent.create({
