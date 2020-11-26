@@ -54,7 +54,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
             }
         }
     end
-2
+    
     # user's posts
     def posts
         # Posts that they created or owned
