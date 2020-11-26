@@ -24,8 +24,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def create
       user = User.find_by(email: params[:email])
       account_type = params[:account_type].to_i
-      puts user.account_type.class
-      puts account_type.class
+  
       if user.account_type == account_type && user.is_verified?
         super
       elsif user.account_type != account_type
