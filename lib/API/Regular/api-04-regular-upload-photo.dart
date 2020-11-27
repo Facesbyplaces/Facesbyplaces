@@ -28,8 +28,8 @@ Future<bool> apiRegularUploadPhoto(dynamic image) async{
     );
 
     print('The status code on regular upload photo is ${response.statusCode}');
-    print('The status body on regular upload photo is ${response.data}');
-    print('The headers in upload photo is ${response.headers}');
+    // print('The status body on regular upload photo is ${response.data}');
+    // print('The headers in upload photo is ${response.headers}');
 
     if(response.statusCode == 200){
       sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));

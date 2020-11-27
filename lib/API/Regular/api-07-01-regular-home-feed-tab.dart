@@ -32,7 +32,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
     var newValue = json.decode(response.body);
     return APIRegularHomeTabFeedMain.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Failed to get the feed');
   }
 }
 

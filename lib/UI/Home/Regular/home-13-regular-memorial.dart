@@ -257,72 +257,87 @@ class HomeRegularMemorialProfile extends StatelessWidget{
                               ),
                             ),
                             Expanded(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                },
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                  Text('526',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff000000),
+                                    Text('526',
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff000000),
+                                      ),
                                     ),
-                                  ),
 
-                                  Text('Family',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xffaaaaaa),
+                                    Text('Family',
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xffaaaaaa),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             Expanded(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                },
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                  Text('526',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff000000),
+                                    Text('526',
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff000000),
+                                      ),
                                     ),
-                                  ),
 
-                                  Text('Friends',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xffaaaaaa),
+                                    Text('Friends',
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xffaaaaaa),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             Expanded(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                },
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                  Text('14.4K',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff000000),
+                                    Text('14.4K',
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xff000000),
+                                      ),
                                     ),
-                                  ),
 
-                                  Text('Followers',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xffaaaaaa),
+                                    Text('Followers',
+                                      style: TextStyle(
+                                        fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xffaaaaaa),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ],

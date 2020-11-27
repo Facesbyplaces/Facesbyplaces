@@ -4,9 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-01-blm-login.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -18,175 +16,159 @@ class BLMLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<BlocShowLoading>(create: (BuildContext context) => BlocShowLoading(),),
-      ], 
-      child: WillPopScope(
-        onWillPop: () async{
-          return Navigator.canPop(context);
+    return WillPopScope(
+      onWillPop: () async{
+        return Navigator.canPop(context);
+      },
+      child: GestureDetector(
+        onTap: (){
+          FocusNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
         },
-        child: GestureDetector(
-          onTap: (){
-            FocusNode currentFocus = FocusScope.of(context);
-            if(!currentFocus.hasPrimaryFocus){
-              currentFocus.unfocus();
-            }
-          },
-          child: Scaffold(
-            body: BlocBuilder<BlocShowLoading, bool>(
-              builder: (context, loading){
-                return ((){
-                  switch(loading){
-                    case false: return SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      child: Stack(
-                        children: [
+        child: Scaffold(
+          body: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Stack(
+              children: [
 
-                          Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+                Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
 
-                          Container(
-                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            height: SizeConfig.screenHeight,
-                            child: Column(
-                              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  height: SizeConfig.screenHeight,
+                  child: Column(
+                    children: [
 
-                                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                                Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),),),
+                      Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5),),),
 
-                                SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                                Container(padding: EdgeInsets.only(left: 20.0), alignment: Alignment.centerLeft, child: Text('Login', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                      Container(padding: EdgeInsets.only(left: 20.0), alignment: Alignment.centerLeft, child: Text('Login', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                                SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                      SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
-                                Padding(
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
 
-                                  child: Row(
-                                    children: [
-                                      Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
+                        child: Row(
+                          children: [
+                            Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
 
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 
-                                      Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),),
-                                    ],
-                                  ),
-                                ),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                                Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                                Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: TextStyle(decoration: TextDecoration.underline, fontSize: SizeConfig.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w400,),),),
-
-                                Expanded(child: Container(),),
-
-                                MiscBLMButtonTemplate(
-                                  buttonText: 'Login', 
-                                  buttonTextStyle: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                                    fontWeight: FontWeight.bold, 
-                                    color: Color(0xffffffff),
-                                  ), 
-                                  onPressed: () async{
-                                    bool validEmail = false;
-                                    validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
-
-                                    if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
-                                    }else if(!validEmail){
-                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
-                                    }else{
-
-                                      context.bloc<BlocShowLoading>().modify(true);
-
-                                      bool result = await apiBLMLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
-
-                                      context.bloc<BlocShowLoading>().modify(false);
-
-                                      if(result){
-                                        Navigator.pushReplacementNamed(context, '/home/blm');
-                                      }else{
-                                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
-                                      }
-                                    }
-                                  }, 
-                                  width: SizeConfig.screenWidth / 2, 
-                                  height: SizeConfig.blockSizeVertical * 7, 
-                                  buttonColor: Color(0xff4EC9D4),
-                                ),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                                RichText(
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'Don\'t have an Account? ', 
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                          color: Color(0xff000000),
-                                        ),
-                                      ),
-
-                                      TextSpan(
-                                        text: 'Sign Up', 
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff4EC9D4),
-                                        ),
-                                        recognizer: TapGestureRecognizer()
-                                        ..onTap = (){
-                                          Navigator.pushNamed(context, '/blm/blm-03-register');
-                                        }
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                GestureDetector(
-                                  onTap: (){
-                                    // Navigator.pushReplacementNamed(context, '/home/');
-                                    Navigator.pushReplacementNamed(context, '/home/blm');
-                                  },
-                                  child: Text('Sign in as Guest',
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff4EC9D4),
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ),
-
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-                                
-                              ],
-                            ),
-                          ),
-
-                        ],
+                            Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),),
+                          ],
+                        ),
                       ),
-                    ); break;
-                    case true: return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),)); break;
-                  }
-                }());
-              }
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                      Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                      Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                      Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                      Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: TextStyle(decoration: TextDecoration.underline, fontSize: SizeConfig.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w400,),),),
+
+                      Expanded(child: Container(),),
+
+                      MiscBLMButtonTemplate(
+                        buttonText: 'Login', 
+                        buttonTextStyle: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xffffffff),
+                        ), 
+                        onPressed: () async{
+                          bool validEmail = false;
+                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
+
+                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                            await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                          }else if(!validEmail){
+                            await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                          }else{
+
+                            context.showLoaderOverlay();
+                            bool result = await apiBLMLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                            context.hideLoaderOverlay();
+
+                            if(result){
+                              Navigator.pushReplacementNamed(context, '/home/blm');
+                            }else{
+                              await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                            }
+                          }
+                        }, 
+                        width: SizeConfig.screenWidth / 2, 
+                        height: SizeConfig.blockSizeVertical * 7, 
+                        buttonColor: Color(0xff4EC9D4),
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                      RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Don\'t have an Account? ', 
+                              style: TextStyle(
+                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+
+                            TextSpan(
+                              text: 'Sign Up', 
+                              style: TextStyle(
+                                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff4EC9D4),
+                              ),
+                              recognizer: TapGestureRecognizer()
+                              ..onTap = (){
+                                Navigator.pushNamed(context, '/blm/blm-03-register');
+                              }
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                      GestureDetector(
+                        onTap: (){
+                          // Navigator.pushReplacementNamed(context, '/home/');
+                          Navigator.pushReplacementNamed(context, '/home/blm');
+                        },
+                        child: Text('Sign in as Guest',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff4EC9D4),
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      
+                    ],
+                  ),
+                ),
+
+              ],
             ),
           ),
         ),

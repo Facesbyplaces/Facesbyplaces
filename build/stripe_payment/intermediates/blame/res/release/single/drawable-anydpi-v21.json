@@ -1,0 +1,90 @@
+[
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_amex.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_amex.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_unknown.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_unknown.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/design_ic_visibility.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/drawable-anydpi-v21/design_ic_visibility.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_diners.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_diners.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_jcb.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_jcb.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_error_amex.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_error_amex.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_mastercard.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_mastercard.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_checkmark.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_checkmark.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_error.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_error.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_checkmark_tinted.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_checkmark_tinted.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_jcb_template_32.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_jcb_template_32.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/design_ic_visibility_off.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/drawable-anydpi-v21/design_ic_visibility_off.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_diners_template_32.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_diners_template_32.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_cvc.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_cvc.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_discover_template_32.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_discover_template_32.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_visa.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_visa.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_discover.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_discover.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_amex_template_32.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_amex_template_32.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_add_black_32dp.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_add_black_32dp.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_mastercard_template_32.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_mastercard_template_32.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_visa_template_32.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_visa_template_32.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/drawable-anydpi-v21/ic_cvc_amex.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-anydpi-v21/ic_cvc_amex.xml"
+    }
+]

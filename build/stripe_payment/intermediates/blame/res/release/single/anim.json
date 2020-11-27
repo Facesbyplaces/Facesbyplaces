@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/design_snackbar_out.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_slide_out_top.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_tooltip_exit.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_tooltip_exit.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_slide_in_top.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/anim/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_tooltip_enter.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_tooltip_enter.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_popup_exit.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_popup_enter.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/anim/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_fade_in.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/design_snackbar_in.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/res/merged/release/anim/abc_fade_out.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d8e69336e21c6a428e8a9e9d99518477/appcompat-1.0.0/res/anim/abc_fade_out.xml"
+    }
+]

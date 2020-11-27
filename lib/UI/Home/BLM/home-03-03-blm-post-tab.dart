@@ -19,126 +19,60 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return FutureBuilder<bool>(
+    return FutureBuilder<APIBLMHomeTabPostMain>(
       future: apiBLMHomePostTab(),
       builder: (context, postTab){
         if(postTab.hasData){
           return Container(
             height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
-            child: ListView.builder(
+            child: ListView.separated(
               physics: ClampingScrollPhysics(),
               padding: EdgeInsets.all(10.0),
-              itemCount: 5,
+              itemCount: postTab.data.familyMemorialList.length,
+              separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
               itemBuilder: (context, index){
                 return Column(
                   children: [
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
                     MiscBLMPost(
                       contents: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: RichText(
-                            maxLines: 4,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              text: 'He was someone who was easy to go with. We had a lot of memories together. '
-                              'We\'ve been travelling all around the world together ever since we graduated college. We will surely miss you Will ❤️❤️❤️',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: RichText(
-                            maxLines: 1,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'with ',
+                        Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: RichText(
+                                maxLines: 4,
+                                overflow: TextOverflow.clip,
+                                textAlign: TextAlign.left,
+                                text: TextSpan(
+                                  text: postTab.data.familyMemorialList[index].body,
                                   style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 3,
                                     fontWeight: FontWeight.w300,
-                                    color: Color(0xffaaaaaa),
-                                  ),
-                                ),
-
-                                TextSpan(
-                                  text: 'William Shaw & John Howard',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
                                     color: Color(0xff000000),
                                   ),
                                 ),
-                              ],
+                              ),
+                            ),
+
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                          ],
+                        ),
+
+
+                        postTab.data.familyMemorialList[index].imagesOrVideos != null
+                        ? Container(
+                          height: SizeConfig.blockSizeHorizontal * 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(postTab.data.familyMemorialList[index].imagesOrVideos[0]),
                             ),
                           ),
-                        ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                        Container(
-                          height: SizeConfig.blockSizeVertical * 25,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage('assets/icons/blm2.png',),
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                              
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage('assets/icons/blm3.png',),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                    Expanded(
-                                      child: Stack(
-                                        children: [
-                                          Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Color(0xff888888),),),
-
-                                          Align(child: Text('+4', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 7, color: Color(0xffffffff),),),),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        )
+                        : Container(height: 0,),
                       ],
                     ),
+
                     SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                   ],
                 );

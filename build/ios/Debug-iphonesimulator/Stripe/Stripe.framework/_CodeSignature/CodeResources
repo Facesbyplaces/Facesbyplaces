@@ -702,7 +702,7 @@
 		</data>
 		<key>Stripe.bundle/Assets.car</key>
 		<data>
-		jCMSbJKFWSWhYlDOpT0cbmNQYwA=
+		nyPlRssbNOopbU2XYgMbckWXs6s=
 		</data>
 		<key>Stripe.bundle/Info.plist</key>
 		<data>
@@ -710,7 +710,7 @@
 		</data>
 		<key>Stripe.bundle/_CodeSignature/CodeDirectory</key>
 		<data>
-		zpiKxWRgF1TbD8HAeVnsZcTMeYo=
+		qDK8l1fUka032OHw1oGghQDJqpw=
 		</data>
 		<key>Stripe.bundle/_CodeSignature/CodeRequirements</key>
 		<data>
@@ -718,11 +718,11 @@
 		</data>
 		<key>Stripe.bundle/_CodeSignature/CodeRequirements-1</key>
 		<data>
-		DyLG0f3Wy+9CAl+QVOvx/yY9EPg=
+		LFRkIV1U2D3ARxkmNbqVRfMGE98=
 		</data>
 		<key>Stripe.bundle/_CodeSignature/CodeResources</key>
 		<data>
-		Z0V/Cyjsl9ANapfRaGt4/t2JtIE=
+		nuqFwX+L8sp1SOmCt/d2PO+Bm/4=
 		</data>
 		<key>Stripe.bundle/_CodeSignature/CodeSignature</key>
 		<data>
@@ -3716,11 +3716,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			jCMSbJKFWSWhYlDOpT0cbmNQYwA=
+			nyPlRssbNOopbU2XYgMbckWXs6s=
 			</data>
 			<key>hash2</key>
 			<data>
-			ywLcyvKd9HizbrIdCKGEJRwtHT7eb15r+pavYfin5gk=
+			oY8VbIBsYxoHU5cHNOs7/auKtTjfdiqgV9XGlUuxhpM=
 			</data>
 		</dict>
 		<key>Stripe.bundle/Info.plist</key>
@@ -3738,11 +3738,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zpiKxWRgF1TbD8HAeVnsZcTMeYo=
+			qDK8l1fUka032OHw1oGghQDJqpw=
 			</data>
 			<key>hash2</key>
 			<data>
-			8+6HBavoydXpVVBU4Oj0/We72dut+Q4FGUfaZpIsWQ4=
+			e5oSJpOqDo016ky0mxbks9cRw7mmYfmQMGA+jjv9h9U=
 			</data>
 		</dict>
 		<key>Stripe.bundle/_CodeSignature/CodeRequirements</key>
@@ -3760,22 +3760,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DyLG0f3Wy+9CAl+QVOvx/yY9EPg=
+			LFRkIV1U2D3ARxkmNbqVRfMGE98=
 			</data>
 			<key>hash2</key>
 			<data>
-			wRLoK4GZQhwigfU58S4faI9/QXR/JSB/YyKsTB/kuqE=
+			sosZsaN9nGvgXypLttaVDiNKy59/DzCV0JqeYhoUGik=
 			</data>
 		</dict>
 		<key>Stripe.bundle/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Z0V/Cyjsl9ANapfRaGt4/t2JtIE=
+			nuqFwX+L8sp1SOmCt/d2PO+Bm/4=
 			</data>
 			<key>hash2</key>
 			<data>
-			AlvhNa40tf377vieBFamUUxmr2O7ao/SsA3+TnR2AvM=
+			jUR66mPU2wL/i6shiIKfbpjCGxIDCxEG98Vly16d96s=
 			</data>
 		</dict>
 		<key>Stripe.bundle/_CodeSignature/CodeSignature</key>

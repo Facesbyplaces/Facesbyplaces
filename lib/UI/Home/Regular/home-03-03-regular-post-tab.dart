@@ -82,7 +82,6 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             ),
           );
         }else if(postTab.hasError){
-          // return MiscRegularErrorMessageTemplate();
           return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
         }else{
           return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);

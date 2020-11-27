@@ -432,13 +432,18 @@ class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputField
 
 
 class MiscRegularInputFieldOTP extends StatefulWidget {  
-  MiscRegularInputFieldOTP({Key key}) : super(key: key);
+  final FocusScopeNode node;
+
+  MiscRegularInputFieldOTP({Key key, this.node}) : super(key: key);
 
   @override
-  MiscRegularInputFieldOTPState createState() => MiscRegularInputFieldOTPState();
+  MiscRegularInputFieldOTPState createState() => MiscRegularInputFieldOTPState(node: node);
 }
 
 class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
+  final FocusScopeNode node;
+
+  MiscRegularInputFieldOTPState({this.node});
 
   TextEditingController controller = TextEditingController();
   bool readOnly;
@@ -453,6 +458,7 @@ class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
 
   @override
   Widget build(BuildContext context) {
+    // final node = FocusScope.of(context);
     return TextFormField(
       maxLength: 1,
       maxLengthEnforced: true,
@@ -460,6 +466,10 @@ class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
       controller: controller,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.number,
+      onEditingComplete: () => node.nextFocus(),
+      // onEditingComplete: (){
+      //   node.focusNode.nextFocus();
+      // },
       onChanged: (value){
         if(!checker){
           if(value.length == 1){

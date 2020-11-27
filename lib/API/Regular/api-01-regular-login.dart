@@ -5,7 +5,7 @@ import 'dart:convert';
 Future<bool> apiRegularLogin(String email, String password) async{
 
   final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password',
+    'http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password&account_type=2',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }
@@ -26,10 +26,6 @@ Future<bool> apiRegularLogin(String email, String password) async{
     sharedPrefs.setString('regular-uid', response.headers['uid']);    
     sharedPrefs.setString('regular-client', response.headers['client']);
     sharedPrefs.setBool('regular-user-session', true);
-
-    print('The access token is ${response.headers['access-token']}');
-    print('The uid is ${response.headers['uid']}');
-    print('The client is ${response.headers['client']}');
 
     return true;
   }else{
