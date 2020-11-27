@@ -8,7 +8,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     .order(created_at: :desc)
                     .select("posts.*")
         
-        pagy =  pagy(posts)
+        # pagy =  pagy(posts)
         
         paginate posts, per_page: numberOfPage
     end

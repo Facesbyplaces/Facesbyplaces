@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
   
-  has_many :pages
-  has_many :posts
-  has_many :shares
+  # has_many :pages
+  has_many :posts, dependent: :destroy
+  has_many :shares, dependent: :destroy
   has_many :followers, dependent: :destroy
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
   has_many :notifsettings, dependent: :destroy

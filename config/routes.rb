@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'logins/new'
-  get 'logins/create'
-  get 'logins/failure'
+  
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
