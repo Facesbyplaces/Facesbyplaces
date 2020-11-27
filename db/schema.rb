@@ -91,9 +91,9 @@ ActiveRecord::Schema.define(version: 2020_11_26_101849) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
-    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
+    t.string "stripe_connect_account_id"
   end
 
   create_table "notifications", force: :cascade do |t|

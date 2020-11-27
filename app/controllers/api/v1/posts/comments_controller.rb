@@ -83,6 +83,18 @@ class Api::V1::Posts::CommentsController < ApplicationController
         like = Commentslike.new(comment_like_params)
         like.user = user()
         like.save 
+
+        # Notification
+        if like.commentable_type == "Comment"
+            if like.commentable.user != user()
+                Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", url: "posts/#{like.commentable.post.id}", read: false)
+            end
+        else
+            if like.commentable.user != user()
+                Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", url: "posts/#{like.commentable.comment.post.id}", read: false)
+            end
+        end
+
         render json: {status: :success}
     end
     
