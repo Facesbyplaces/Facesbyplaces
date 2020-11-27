@@ -1,8 +1,7 @@
-import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-image-display.dart';
+import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
@@ -166,10 +165,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               ),
             );
           }
-
         }else if(feedTab.hasError){
           return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
-          // return MiscRegularErrorMessageTemplate();
         }else{
           return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
         }

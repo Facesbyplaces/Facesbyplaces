@@ -21,7 +21,7 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab() async{
   );
   
   print('The response status in blm memorial is ${response.statusCode}');
-  // print('The response status in blm memorial is ${response.body}');
+  print('The response status in blm memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

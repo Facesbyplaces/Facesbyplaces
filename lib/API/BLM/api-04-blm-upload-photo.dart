@@ -16,6 +16,9 @@ Future<bool> apiBLMUploadPhoto(dynamic image) async{
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData);
 
+    print('The status code on blm verify email is ${response.statusCode}');
+    print('The status body on blm verify email is ${response.data}');
+
     if(response.statusCode == 200){
       sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    

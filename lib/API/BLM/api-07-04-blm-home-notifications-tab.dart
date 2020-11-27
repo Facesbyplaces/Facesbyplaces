@@ -1,7 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-Future<bool> apiBLMHomeNotificationsTab() async{
+Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -19,11 +20,57 @@ Future<bool> apiBLMHomeNotificationsTab() async{
   );
 
   print('The response status in blm notification is ${response.statusCode}');
-  // print('The response status in blm notification is ${response.body}');
+  print('The response status in blm notification is ${response.body}');
+
 
   if(response.statusCode == 200){
-    return true;
+    var newValue = json.decode(response.body);
+    return APIBLMHomeTabNotificationMain.fromJson(newValue);
   }else{
-    return false;
+    throw Exception('Failed to get the notifications');
+  }
+}
+
+
+class APIBLMHomeTabNotificationMain{
+
+  List<APIBLMHomeTabNotificationExtended> notification;
+
+  APIBLMHomeTabNotificationMain({this.notification});
+
+  factory APIBLMHomeTabNotificationMain.fromJson(List<dynamic> parsedJson){
+    List<APIBLMHomeTabNotificationExtended> newNotification = parsedJson.map((e) => APIBLMHomeTabNotificationExtended.fromJson(e)).toList();
+
+    return APIBLMHomeTabNotificationMain(
+      notification: newNotification,
+    );
+  }
+}
+
+
+class APIBLMHomeTabNotificationExtended{
+  int id;
+  String createdAt;
+  String updatedAt;
+  int recipientId;
+  int actorId;
+  bool read;
+  String action;
+  String url;
+
+  APIBLMHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.read, this.action, this.url});
+
+  factory APIBLMHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
+
+    return APIBLMHomeTabNotificationExtended(
+      id: parsedJson['id'],
+      createdAt: parsedJson['created_at'],
+      updatedAt: parsedJson['updated_at'],
+      recipientId: parsedJson['recipient_id'],
+      actorId: parsedJson['actor_id'],
+      read: parsedJson['read'],
+      action: parsedJson['action'],
+      url: parsedJson['url'],
+    );
   }
 }

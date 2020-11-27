@@ -1,4 +1,3 @@
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/API/Regular/api-10-regular-show-memorial.dart';
 import 'package:facesbyplaces/API/Regular/api-12-regular-show-profile-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -6,8 +5,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-// class HomeRegularProfile extends StatelessWidget{
 
 class HomeRegularProfile extends StatefulWidget{
 
@@ -172,7 +169,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: (){
-                                          Navigator.pushNamed(context, 'home/regular/home-10-regular-memorial-settings');
+                                          Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
@@ -318,26 +315,32 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        // Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                        print('lkjasdflkj');
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('526',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text('526',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Family',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Family',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Expanded(
@@ -439,90 +442,74 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ],
                             ),
                             
-                            // apiRegularProfilePost(),
-
-                            // FutureBuilder<APIRegularHomeProfilePostMain>(
-                            //   future: apiRegularProfilePost(),
-                            //   builder: (context, profilePost){
-                            //     if(profilePost.hasData){
-                            //       return ;
-                            //     }else if(profilePost.hasError){
-                            //       return Container(height: 0,);
-                            //     }else{
-                            //       return  Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),));
-                            //     }
-                            //   },
-                            // ),    
-
-                                Container(
-                                  height: SizeConfig.screenHeight,
-                                  // padding: EdgeInsets.all(10.0),
-                                  color: Color(0xffeeeeee),
-                                  child: FutureBuilder<APIRegularHomeProfilePostMain>(
-                                    future: apiRegularProfilePost(),
-                                    builder: (context, profilePost){
-                                      if(profilePost.hasData){
-                                        return ListView.separated(
-                                          physics: ClampingScrollPhysics(),
-                                          padding: EdgeInsets.all(10.0),
-                                          itemCount: profilePost.data.familyMemorialList.length,
-                                          separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
-                                          itemBuilder: (context, index){
-                                            return Column(
-                                              children: [
-                                                MiscRegularPost(
-                                                  contents: [
-                                                    Column(
-                                                      children: [
-                                                        Align(
-                                                          alignment: Alignment.topLeft,
-                                                          child: RichText(
-                                                            maxLines: 4,
-                                                            overflow: TextOverflow.clip,
-                                                            textAlign: TextAlign.left,
-                                                            text: TextSpan(
-                                                              text: profilePost.data.familyMemorialList[index].body,
-                                                              style: TextStyle(
-                                                                fontWeight: FontWeight.w300,
-                                                                color: Color(0xff000000),
-                                                              ),
-                                                            ),
+                            Container(
+                              height: SizeConfig.screenHeight,
+                              color: Color(0xffeeeeee),
+                              child: FutureBuilder<APIRegularHomeProfilePostMain>(
+                                future: apiRegularProfilePost(),
+                                builder: (context, profilePost){
+                                  if(profilePost.hasData){
+                                    return ListView.separated(
+                                      physics: ClampingScrollPhysics(),
+                                      padding: EdgeInsets.all(10.0),
+                                      itemCount: profilePost.data.familyMemorialList.length,
+                                      separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
+                                      itemBuilder: (context, index){
+                                        return Column(
+                                          children: [
+                                            MiscRegularPost(
+                                              contents: [
+                                                Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment: Alignment.topLeft,
+                                                      child: RichText(
+                                                        maxLines: 4,
+                                                        overflow: TextOverflow.clip,
+                                                        textAlign: TextAlign.left,
+                                                        text: TextSpan(
+                                                          text: profilePost.data.familyMemorialList[index].body,
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.w300,
+                                                            color: Color(0xff000000),
                                                           ),
                                                         ),
-
-                                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                                      ],
+                                                      ),
                                                     ),
 
-
-                                                    profilePost.data.familyMemorialList[index].imagesOrVideos != null
-                                                    ? Container(
-                                                      height: SizeConfig.blockSizeHorizontal * 50,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: NetworkImage(profilePost.data.familyMemorialList[index].imagesOrVideos[0]),
-                                                        ),
-                                                      ),
-                                                    )
-                                                    : Container(height: 0,),
+                                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                                   ],
                                                 ),
 
-                                                SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                                profilePost.data.familyMemorialList[index].imagesOrVideos != null
+                                                ? Container(
+                                                  height: SizeConfig.blockSizeHorizontal * 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: NetworkImage(profilePost.data.familyMemorialList[index].imagesOrVideos[0]),
+                                                    ),
+                                                  ),
+                                                )
+                                                : Container(height: 0,),
                                               ],
-                                            );
-                                          }
+                                            ),
+
+                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                          ],
                                         );
-                                      }else if(profilePost.hasError){
-                                        return Container(height: 0,);
-                                      }else{
-                                        return  Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),));
                                       }
-                                    },
-                                  ),
-                                ),   
+                                    );
+                                  }else if(profilePost.hasError){
+                                    return Container(height: 0,);
+                                  }else{
+                                    return  Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),));
+                                  }
+                                },
+                              ),
+                            ),   
 
                           ],
                         ),

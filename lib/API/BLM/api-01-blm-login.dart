@@ -5,11 +5,14 @@ import 'dart:convert';
 Future<bool> apiBLMLogin(String email, String password) async{
 
   final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password',
+    'http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password&account_type=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }
   );
+
+  print('The status code on blm login is ${response.statusCode}');
+  print('The status body on blm login is ${response.body}');
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);

@@ -2,15 +2,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
+Future<APIRegularSearchPostMain> apiRegularSearchPosts(String keywords) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
+  // int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=1',
+    // 'http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=1',
+    'http://fbp.dev1.koda.ws/api/v1/search/posts?page=1&keywords=$keywords',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,8 +21,8 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
     }
   );
 
-  print('The response status in regular feed is ${response.statusCode}');
-  print('The response status in regular feed is ${response.body}');
+  print('The response status in search profile is ${response.statusCode}');
+  print('The response status in search profile is ${response.body}');
 
   // if(response.statusCode == 200){
   //   return true;
@@ -30,7 +32,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIRegularHomeTabFeedMain.fromJson(newValue);
+    return APIRegularSearchPostMain.fromJson(newValue);
   }else{
     throw Exception('Failed to get the feed');
   }
@@ -38,34 +40,34 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
 
 
 
-class APIRegularHomeTabFeedMain{
+class APIRegularSearchPostMain{
 
-  List<APIRegularHomeTabFeedExtended> familyMemorialList;
+  List<APIRegularSearchPostExtended> familyMemorialList;
 
-  APIRegularHomeTabFeedMain({this.familyMemorialList});
+  APIRegularSearchPostMain({this.familyMemorialList});
 
-  factory APIRegularHomeTabFeedMain.fromJson(List<dynamic> parsedJson){
-    List<APIRegularHomeTabFeedExtended> familyMemorials = parsedJson.map((e) => APIRegularHomeTabFeedExtended.fromJson(e)).toList();
+  factory APIRegularSearchPostMain.fromJson(List<dynamic> parsedJson){
+    List<APIRegularSearchPostExtended> familyMemorials = parsedJson.map((e) => APIRegularSearchPostExtended.fromJson(e)).toList();
 
-    return APIRegularHomeTabFeedMain(
+    return APIRegularSearchPostMain(
       familyMemorialList: familyMemorials,
     );
   }
 }
 
 
-class APIRegularHomeTabFeedExtended{
+class APIRegularSearchPostExtended{
   int id;
-  APIRegularHomeTabFeedExtendedPage page;
+  APIRegularSearchPostExtendedPage page;
   String body;
   String location;
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
 
-  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
+  APIRegularSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
 
-  factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
+  factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
     List<dynamic> newList;
 
@@ -74,9 +76,9 @@ class APIRegularHomeTabFeedExtended{
       newList = List<dynamic>.from(list);
     }
     
-    return APIRegularHomeTabFeedExtended(
+    return APIRegularSearchPostExtended(
       id: parsedJson['id'],
-      page: APIRegularHomeTabFeedExtendedPage.fromJson(parsedJson['page']),
+      page: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
       body: parsedJson['body'],
       location: parsedJson['location'],
       latitude: parsedJson['latitude'],
@@ -86,34 +88,34 @@ class APIRegularHomeTabFeedExtended{
   }
 }
 
-class APIRegularHomeTabFeedExtendedPage{
+class APIRegularSearchPostExtendedPage{
   int id;
   String name;
-  APIRegularHomeTabFeedExtendedPageDetails details;
+  APIRegularRegularPostExtendedPageDetails details;
   dynamic backgroundImage;
   dynamic profileImage;
   dynamic imagesOrVideos;
   String relationship;
-  APIRegularHomeTabFeedExtendedPageCreator pageCreator;
+  APIRegularHomeTabPostExtendedPageCreator pageCreator;
 
-  APIRegularHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
 
-  factory APIRegularHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabFeedExtendedPage(
+  factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchPostExtendedPage(
       id: parsedJson['id'],
       name: parsedJson['name'],
-      details: APIRegularHomeTabFeedExtendedPageDetails.fromJson(parsedJson['details']),
+      details: APIRegularRegularPostExtendedPageDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
-      pageCreator: APIRegularHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       
     );
   }
 }
 
-class APIRegularHomeTabFeedExtendedPageDetails{
+class APIRegularRegularPostExtendedPageDetails{
   String description;
   String birthPlace;
   String dob;
@@ -121,10 +123,10 @@ class APIRegularHomeTabFeedExtendedPageDetails{
   String cemetery;
   String country;
 
-  APIRegularHomeTabFeedExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularRegularPostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
-  factory APIRegularHomeTabFeedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabFeedExtendedPageDetails(
+  factory APIRegularRegularPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularRegularPostExtendedPageDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
       dob: parsedJson['dob'],
@@ -135,7 +137,7 @@ class APIRegularHomeTabFeedExtendedPageDetails{
   }
 }
 
-class APIRegularHomeTabFeedExtendedPageCreator{
+class APIRegularHomeTabPostExtendedPageCreator{
   int id;
   String firstName;
   String lastName;
@@ -144,10 +146,10 @@ class APIRegularHomeTabFeedExtendedPageCreator{
   String userName;
   dynamic image;
 
-  APIRegularHomeTabFeedExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularHomeTabPostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
-  factory APIRegularHomeTabFeedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabFeedExtendedPageCreator(
+  factory APIRegularHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularHomeTabPostExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
