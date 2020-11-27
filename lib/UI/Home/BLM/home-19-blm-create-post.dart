@@ -1,15 +1,59 @@
 import 'package:facesbyplaces/API/BLM/api-09-blm-create-post.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:io';
 
-class HomeBLMCreatePost extends StatelessWidget{
 
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
+class HomeBLMCreatePost extends StatefulWidget{
+
+  @override
+  HomeBLMCreatePostState createState() => HomeBLMCreatePostState();
+}
+
+class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
+
+  final GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState>();
+  final GlobalKey<MiscBLMInputFieldDropDownUserState> _key2 = GlobalKey<MiscBLMInputFieldDropDownUserState>();
+
+  File imageFile;
+  File videoFile;
+  final picker = ImagePicker();
+  VideoPlayerController videoPlayerController;
+
+  Future getImage() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    if(pickedFile != null){
+      setState(() {
+        imageFile = File(pickedFile.path);
+        videoFile = null;
+      });
+    }
+  }
+
+  Future getVideo() async{
+    final pickedFile = await picker.getVideo(source: ImageSource.gallery);
+
+    if(pickedFile != null){
+      setState(() {
+        videoFile = File(pickedFile.path);
+        imageFile = null;
+        videoPlayerController = VideoPlayerController.file(videoFile)
+        ..initialize().then((_){
+          setState(() {
+            videoPlayerController.play();
+          });
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,24 +79,34 @@ class HomeBLMCreatePost extends StatelessWidget{
                 switch(loading){
                   case false: return Scaffold(
                     appBar: AppBar(
+                      title: Text('Create Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+                      centerTitle: true,
                       backgroundColor: Color(0xff04ECFF),
-                      leading: Builder(
-                        builder: (context){
-                          return IconButton(
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff),),
-                            onPressed: (){
-                              Navigator.popAndPushNamed(context, '/home/blm');
-                            },
-                          );
-                        },
-                      ),
-                      title: Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),), 
+                      leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                       actions: [
                         GestureDetector(
                           onTap: () async{
 
+                            File newFile;
+
+                            if(imageFile != null){
+                              newFile = imageFile;
+                            }else if(videoFile != null){
+                              newFile = videoFile;
+                            }
+
+                            APIBLMCreatePost post = APIBLMCreatePost(
+                              pageType: 'Blm',
+                              postBody: _key1.currentState.controller.text,
+                              location: 'Bacolod',
+                              imagesOrVideos: newFile,
+                              latitude: '0.2323232',
+                              longitude: '0.2323232',
+                              tagPeople: '2'
+                            );
+                            
                             context.bloc<BlocShowLoading>().modify(true);
-                            bool result = await apiBLMHomeCreatePost();
+                            bool result = await apiBLMHomeCreatePost(post);
                             context.bloc<BlocShowLoading>().modify(false);
 
                             if(result){
@@ -74,129 +128,144 @@ class HomeBLMCreatePost extends StatelessWidget{
                         ),
                       ],
                     ),
-                    body: ListView(
+                    body: SingleChildScrollView(
                       physics: ClampingScrollPhysics(),
-                      children: [
+                      child: Container(
+                        height: SizeConfig.screenHeight - kToolbarHeight,
+                        child: Column(
+                          children: [
 
-                        Container(
-                          height: SizeConfig.blockSizeVertical * 10,
-                          
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: CircleAvatar(
-                                  radius: SizeConfig.blockSizeVertical * 3,
-                                  child: Container(
-                                    height: SizeConfig.blockSizeVertical * 17,
-                                    child: Image.asset('assets/icons/profile1.png', fit: BoxFit.cover,),
+                            Container(
+                              child: MiscBLMInputFieldDropDownUser(key: _key2,),
+                              decoration: BoxDecoration(
+                                color: Color(0xffffffff),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 0)
                                   ),
-                                ),
+                                ],
                               ),
-                              Expanded(
-                                flex: 3,
-                                child: Text('Richard Nedd Memories',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff000000),
+                            ),
+
+                            Expanded(child: Padding(padding: EdgeInsets.all(20.0), child: MiscBLMInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 20),),),
+
+                            Container(
+                              child: ((){
+                                if(imageFile != null){
+                                  return Container(height: SizeConfig.blockSizeVertical * 25, width: SizeConfig.screenWidth, padding: EdgeInsets.only(left: 20.0, right: 20.0,), child: Image.asset(imageFile.path, fit: BoxFit.cover),);
+                                }else if(videoFile != null){
+                                  return Container(
+                                    height: SizeConfig.blockSizeVertical * 25, 
+                                    width: SizeConfig.screenWidth, 
+                                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        if(videoPlayerController.value.isPlaying){
+                                          videoPlayerController.pause();
+                                        }else{
+                                          videoPlayerController.play();
+                                        }
+                                        
+                                      },
+                                      onDoubleTap: () async{
+                                        await getVideo();
+                                      },
+                                      child: AspectRatio(
+                                        aspectRatio: videoPlayerController.value.aspectRatio,
+                                        child: VideoPlayer(videoPlayerController),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }()),
+                            ),
+
+                            Container(
+                              padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                              height: SizeConfig.blockSizeVertical * 20,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () async{
+                                        var result = await Navigator.pushNamed(context, '/home/blm/home-19-02-blm-create-post');
+
+                                        print('The result is $result');
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text('Add a location'),),
+                                            Icon(Icons.place, color: Color(0xff4EC9D4),)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: IconButton(
-                                    onPressed: (){},
-                                    icon: Icon(Icons.arrow_drop_down, color: Color(0xff000000),),
+
+                                  Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () async{
+                                        
+                                        var result = await Navigator.pushNamed(context, '/home/blm/home-19-03-blm-create-post');
+
+                                        print('The result is $result');
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text('Tag a person you are with'),),
+                                            Icon(Icons.person, color: Color(0xff4EC9D4),)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+
+                                  Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () async{
+
+                                        var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
+
+                                        if(choice == null){
+                                          choice = 0;
+                                        }else{
+                                          if(choice == 1){
+                                            await getImage();
+                                          }else{
+                                            await getVideo();
+                                          }
+                                        }
+                                      },
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Row(
+                                          children: [
+                                            Expanded(child: Text('Upload a Video / Image'),),
+                                            Icon(Icons.image, color: Color(0xff4EC9D4),)
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
-                            ],
-                          ),
-                          decoration: BoxDecoration(
-                            color: Color(0xffffffff),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 5,
-                                offset: Offset(0, 0)
-                              ),
-                            ],
-                          ),
+                            ),
+                            
+                          ],
                         ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                        Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key1, labelText: 'Speak out...', maxLines: 10),),
-
-                        Container(height: SizeConfig.blockSizeVertical * 25, child: Image.asset('assets/icons/upload_background.png', fit: BoxFit.cover),),
-
-                        Container(
-                          height: SizeConfig.blockSizeVertical * 20,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  color: Color(0xffffffff),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text('Add a location'),
-                                      ),
-                                      Expanded(
-                                        child: Icon(Icons.place, color: Color(0xff4EC9D4),)
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
-
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  color: Color(0xffffffff),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text('Tag a person you are with'),
-                                      ),
-                                      Expanded(
-                                        child: Icon(Icons.person, color: Color(0xff4EC9D4),)
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                              Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
-
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  color: Color(0xffffffff),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Text('Upload a Video / Image'),
-                                      ),
-                                      Expanded(
-                                        child: Icon(Icons.image, color: Color(0xff4EC9D4),)
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ); break;
                   case true: return Scaffold(body: Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),)),); break;

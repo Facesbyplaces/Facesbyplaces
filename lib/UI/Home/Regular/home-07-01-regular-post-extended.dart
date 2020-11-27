@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/API/Regular/api-13-01-regular-search-suggested.dart';
+import 'package:facesbyplaces/API/Regular/api-13-01-regular-search-posts.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -21,7 +21,7 @@ class HomeRegularPostExtendedState extends State<HomeRegularPostExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final ScreenArguments newValue = ModalRoute.of(context).settings.arguments;
+    final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
     return FutureBuilder<APIRegularSearchPostMain>(
       future: apiRegularSearchPosts(newValue.title),
       builder: (context, searchPost){

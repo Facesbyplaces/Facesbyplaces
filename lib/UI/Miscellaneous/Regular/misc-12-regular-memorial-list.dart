@@ -1,9 +1,10 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class MiscManageMemoriaWithButton extends StatelessWidget{
+class MiscRegularManageMemoriaWithButton extends StatelessWidget{
 
   final int index;
   final int tab;
@@ -14,8 +15,9 @@ class MiscManageMemoriaWithButton extends StatelessWidget{
   final String backTextButton;
   final Color frontTextColorButton;
   final Color backTextColorButton;
+  final int memorialId;
 
-  MiscManageMemoriaWithButton({
+  MiscRegularManageMemoriaWithButton({
     this.index, 
     this.tab,
     this.iconImage = 'assets/icons/profile1.png',
@@ -25,13 +27,17 @@ class MiscManageMemoriaWithButton extends StatelessWidget{
     this.backTextButton = 'Join',
     this.frontTextColorButton = const Color(0xffffffff),
     this.backTextColorButton = const Color(0xff4EC9D4),
+    this.memorialId,
   });
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return GestureDetector(
-      onTap: (){
+      onTap: () async{
+        final sharedPrefs = await SharedPreferences.getInstance();
+        sharedPrefs.setInt('regular-user-memorial-id', memorialId);
+
         Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial');
       },
       child: Container(

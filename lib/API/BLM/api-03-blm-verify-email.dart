@@ -17,9 +17,6 @@ Future<bool> apiBLMVerifyEmail(String verificationCode) async{
   print('The status body on blm verify email is ${response.body}');
 
   if(response.statusCode == 200){
-    sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-    sharedPrefs.setString('blm-uid', response.headers['uid']);    
-    sharedPrefs.setString('blm-client', response.headers['client']);
     return true;
   }else{
     return false;

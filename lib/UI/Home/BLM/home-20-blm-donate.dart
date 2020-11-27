@@ -1,11 +1,11 @@
-import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+
+import 'package:facesbyplaces/API/Regular/api-15-regular-donation-payment-intent.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-
-// class HomeBLMUserDonate extends StatelessWidget{
 
 class HomeBLMUserDonate extends StatefulWidget{
 
@@ -55,7 +55,16 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       children: [
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        Center(child: Text('Send a Gift', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),),),
+                        Row(
+                          children: [
+                            Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xff000000),), onPressed: (){Navigator.pop(context);},)),),
+
+                            Text('Send a Gift', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),),
+
+                            Expanded(child: Container(),)
+
+                          ],
+                        ),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -119,16 +128,18 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                           buttonText: 'Send Gift',
                           onPressed: () async{
 
+                            int amount = 0;
+
                             var paymentResult = await StripePayment.paymentRequestWithNativePay(
                               androidPayOptions: AndroidPayPaymentRequest(
                                 totalPrice: ((){
                                   switch(donateToggle){
-                                    case 0: return '0.99'; break;
-                                    case 1: return '5.00'; break;
-                                    case 2: return '15.00'; break;
-                                    case 3: return '25.00'; break;
-                                    case 4: return '50.00'; break;
-                                    case 5: return '100.00'; break;
+                                    case 0: amount = 1; return '0.99'; break;
+                                    case 1: amount = 5; return '5.00'; break;
+                                    case 2: amount = 15; return '15.00'; break;
+                                    case 3: amount = 25; return '25.00'; break;
+                                    case 4: amount = 50; return '50.00'; break;
+                                    case 5: amount = 100; return '100.00'; break;
                                   }
                                 }()),
                                 currencyCode: 'USD',
@@ -141,12 +152,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                                     label: 'Test',
                                     amount: ((){
                                       switch(donateToggle){
-                                        case 0: return '0.99'; break;
-                                        case 1: return '5.00'; break;
-                                        case 2: return '15.00'; break;
-                                        case 3: return '25.00'; break;
-                                        case 4: return '50.00'; break;
-                                        case 5: return '100.00'; break;
+                                        case 0: amount = 1; return '0.99'; break;
+                                        case 1: amount = 5; return '5.00'; break;
+                                        case 2: amount = 15; return '15.00'; break;
+                                        case 3: amount = 25; return '25.00'; break;
+                                        case 4: amount = 50; return '50.00'; break;
+                                        case 5: amount = 100; return '100.00'; break;
                                       }
                                     }()),
                                   )
@@ -160,26 +171,32 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                             await StripePayment.completeNativePayRequest();
 
-                              // var paymentMethod = await StripePayment.createPaymentMethod(
-                              //   PaymentMethodRequest(
-                              //     card: CreditCard(
-                              //       token: paymentResult.tokenId,
-                              //     ),
-                              //   ),
-                              // );
+                            var paymentMethod = await StripePayment.createPaymentMethod(
+                              PaymentMethodRequest(
+                                card: CreditCard(
+                                  token: paymentResult.tokenId,
+                                ),
+                              ),
+                            );
 
-                              // if(intentApiResult != 'Failed'){
-                              //   var paymentIntent = await StripePayment.confirmPaymentIntent(
-                              //     PaymentIntent(
-                              //       clientSecret: intentApiResult,
-                              //       paymentMethodId: paymentMethod.id,
-                              //     ),
-                              //   );
+                            print('The amount chosen is $amount');
 
-                              //   await apiRegularPaymentDonation(state[0], amount.toString(), paymentIntent.paymentIntentId);
-                              //   context.bloc<BlocRegularDonationData>().modify(['', '']);
+                            var intentApiResult = await apiRegularDonate(amount);
 
-                              // }
+                            if(intentApiResult != 'Failed'){
+                              var paymentIntent = await StripePayment.confirmPaymentIntent(
+                                PaymentIntent(
+                                  clientSecret: intentApiResult,
+                                  paymentMethodId: paymentMethod.id,
+                                ),
+                              );
+
+                              print('The paymentIntent is ${paymentIntent.paymentIntentId}');
+
+                              // await apiRegularPaymentDonation(state[0], amount.toString(), paymentIntent.paymentIntentId);
+                              // context.bloc<BlocRegularDonationData>().modify(['', '']);
+
+                            }
 
                             // ((){
                             //   switch(donateToggle){

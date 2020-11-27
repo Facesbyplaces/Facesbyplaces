@@ -2,11 +2,11 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'home-07-01-regular-post-extended.dart';
 import 'package:flutter/material.dart';
 
-class ScreenArguments {
+class RegularArguments {
   final String title;
   final int tab;
 
-  ScreenArguments(this.title, this.tab);
+  RegularArguments(this.title, this.tab);
 }
 
 
@@ -30,7 +30,7 @@ class HomeRegularSearch extends StatelessWidget{
           appBar: AppBar(
             title: TextFormField(
               onFieldSubmitted: (String value){
-                Navigator.pushNamed(context, '/home/regular/home-06-regular-post', arguments: ScreenArguments(value, 0));
+                Navigator.pushNamed(context, '/home/regular/home-06-regular-post', arguments: RegularArguments(value, 0));
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),

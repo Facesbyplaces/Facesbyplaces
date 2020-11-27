@@ -47,11 +47,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
     print('The status code in regular create post is ${response.data}');
 
     if(response.statusCode == 200){
-      // var value = response.data;
-      // var user = value['memorial'];
-      // int userId = user['id'];
-      // sharedPrefs.setInt('regular-user-memorial-id', userId);
-
       result = true;
     }
   }catch(e){

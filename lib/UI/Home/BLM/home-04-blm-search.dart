@@ -1,6 +1,14 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
+class BLMArguments {
+  final String title;
+  final int tab;
+
+  BLMArguments(this.title, this.tab);
+}
+
+
 class HomeBLMSearch extends StatelessWidget{
 
   @override
@@ -21,7 +29,8 @@ class HomeBLMSearch extends StatelessWidget{
           appBar: AppBar(
             title: TextFormField(
               onFieldSubmitted: (String value){
-                Navigator.pushNamed(context, '/home/blm/home-05-blm-post');
+                // Navigator.pushNamed(context, '/home/blm/home-05-blm-post');
+                Navigator.pushNamed(context, '/home/blm/home-05-blm-post', arguments: BLMArguments(value, 0));
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),

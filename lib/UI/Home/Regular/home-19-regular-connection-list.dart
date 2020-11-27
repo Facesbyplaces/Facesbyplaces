@@ -3,7 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'home-20-01-regular-connection-list-family.dart';
 import 'home-20-02-regular-connection-list-friends.dart';
-import 'home-20-03-regular-connection-list-friends.dart';
+import 'home-20-03-regular-connection-list-followers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +37,7 @@ class HomeRegularConnectionList extends StatelessWidget{
                   filled: true,
                   fillColor: Color(0xffffffff),
                   focusColor: Color(0xffffffff),
-                  hintText: 'Search a Post',
+                  hintText: 'Search Family',
                   hintStyle: TextStyle(
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                   ),

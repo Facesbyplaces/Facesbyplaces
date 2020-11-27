@@ -6,6 +6,9 @@ Future<bool> apiBLMUploadPhoto(dynamic image) async{
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('blm-user-id');
+  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
     var dioRequest = Dio();
@@ -14,7 +17,15 @@ Future<bool> apiBLMUploadPhoto(dynamic image) async{
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData);
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+      options: Options(
+        headers: <String, String>{
+          'access-token': getAccessToken,
+          'uid': getUID,
+          'client': getClient,
+        }
+      ),
+    );
 
     print('The status code on blm verify email is ${response.statusCode}');
     print('The status body on blm verify email is ${response.data}');

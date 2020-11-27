@@ -130,3 +130,9 @@ class BlocHomeRegularCreateMemorial extends Cubit<int>{
   BlocHomeRegularCreateMemorial() : super(0);
   void modify(int number) => emit(number);
 }
+
+class BlocHomeRegularDonate extends Cubit<int>{
+
+  BlocHomeRegularDonate() : super(0);
+  void modify(int number) => emit(number);
+}

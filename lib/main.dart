@@ -1,8 +1,12 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
+import 'UI/Home/BLM/home-19-02-blm-create-post.dart';
+import 'UI/Home/BLM/home-19-03-regular-create-post.dart';
 import 'UI/Home/BLM/home-20-blm-donate.dart';
 import 'UI/Home/BLM/home-21-blm-memorial-page-image.dart';
+import 'UI/Home/BLM/home-22-blm-connection-list.dart';
+import 'UI/Home/BLM/home-24-blm-report.dart';
 import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-05-regular-search.dart';
@@ -35,6 +39,8 @@ import 'UI/Home/Regular/home-16-regular-user-update-details.dart';
 import 'UI/Home/Regular/home-17-regular-change-password.dart';
 import 'UI/Home/Regular/home-18-regular-other-details.dart';
 import 'UI/Home/Regular/home-19-regular-connection-list.dart';
+import 'UI/Home/Regular/home-21-regular-report.dart';
+import 'UI/Home/Regular/home-22-regular-donate.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
@@ -95,8 +101,14 @@ void main(){
           '/home/blm/home-17-blm-report-user': (BuildContext context) => HomeBLMReportUser(),
           '/home/blm/home-18-blm-user-update-details': (BuildContext context) => HomeBLMUserUpdateDetails(),
           '/home/blm/home-19-blm-create-post': (BuildContext context) => HomeBLMCreatePost(),
+          '/home/blm/home-19-02-blm-create-post': (BuildContext context) => HomeBLMCreatePostSearch(),
+          '/home/blm/home-19-03-regular-create-post': (BuildContext context) => HomeBLMCreatePostSearchUser(),
           '/home/blm/home-20-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
           '/home/blm/home-21-blm-memorial-page-image': (BuildContext context) => HomeBLMMemorialPageImage(),
+          '/home/blm/home-22-blm-connection-list': (BuildContext context) => HomeBLMConnectionList(),
+          '/home/blm/home-24-blm-report': (BuildContext context) => HomeBLMReport(),
+          '/home/blm/home-25-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
+
           
 
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
@@ -116,6 +128,8 @@ void main(){
           'home/regular/home-17-regular-change-password': (BuildContext context) => HomeRegularUserChangePassword(),
           'home/regular/home-18-regular-other-details': (BuildContext context) => HomeRegularUserOtherDetails(),
           'home/regular/home-19-regular-connection-list': (BuildContext context) => HomeRegularConnectionList(),
+          'home/regular/home-21-regular-report': (BuildContext context) => HomeRegularReport(),
+          'home/regular/home-22-regular-donate': (BuildContext context) => HomeRegularUserDonate(),
 
         },
       ),

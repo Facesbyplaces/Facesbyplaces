@@ -10,8 +10,6 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial() async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  
-
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     headers: <String, String>{
@@ -21,6 +19,9 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial() async{
       'client': getClient,
     }
   );
+
+  print('The status code of show memorial is ${response.statusCode}');
+  print('The status body of show memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -53,8 +54,11 @@ class APIRegularShowMemorialExtended{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularShowMemorialExtendedPageCreator pageCreator;
+  bool manage;
+  bool famOrFriends;
+  bool follower;
 
-  APIRegularShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowMemorialExtended(
@@ -65,7 +69,10 @@ class APIRegularShowMemorialExtended{
       profileImage: parsedJson['profileImage'],
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
-      pageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator'])
+      pageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
     );
   }
 }

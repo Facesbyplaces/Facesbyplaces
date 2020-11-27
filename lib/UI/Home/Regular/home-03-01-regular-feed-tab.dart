@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-image-display.dart';
@@ -119,6 +120,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   return Column(
                     children: [
                       MiscRegularPost(
+                        userId: feedTab.data.familyMemorialList[index].page.id,
+                        postId: feedTab.data.familyMemorialList[index].id,
                         contents: [
                           Column(
                             children: [
@@ -142,16 +145,16 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             ],
                           ),
 
-
                           feedTab.data.familyMemorialList[index].imagesOrVideos != null
                           ? Container(
                             height: SizeConfig.blockSizeHorizontal * 50,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(feedTab.data.familyMemorialList[index].imagesOrVideos[0]),
-                              ),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: feedTab.data.familyMemorialList[index].imagesOrVideos[0],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
                             ),
                           )
                           : Container(height: 0,),

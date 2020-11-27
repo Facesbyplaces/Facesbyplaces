@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/API/Regular/api-07-03-regular-home-post-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +36,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                 return Column(
                   children: [
                     MiscRegularPost(
+                      userId: postTab.data.familyMemorialList[index].page.id,
+                      postId: postTab.data.familyMemorialList[index].id,
                       contents: [
                         Column(
                           children: [
@@ -59,16 +61,16 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                           ],
                         ),
 
-
                         postTab.data.familyMemorialList[index].imagesOrVideos != null
                         ? Container(
                           height: SizeConfig.blockSizeHorizontal * 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(postTab.data.familyMemorialList[index].imagesOrVideos[0]),
-                            ),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: postTab.data.familyMemorialList[index].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
                           ),
                         )
                         : Container(height: 0,),
