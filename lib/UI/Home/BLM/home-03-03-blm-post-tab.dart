@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/API/BLM/api-07-03-blm-home-post-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -34,6 +35,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 return Column(
                   children: [
                     MiscBLMPost(
+                      userId: postTab.data.familyMemorialList[index].page.id,
+                      postId: postTab.data.familyMemorialList[index].id,
                       contents: [
                         Column(
                           children: [
@@ -63,10 +66,11 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                           height: SizeConfig.blockSizeHorizontal * 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(postTab.data.familyMemorialList[index].imagesOrVideos[0]),
-                            ),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: postTab.data.familyMemorialList[index].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
                           ),
                         )
                         : Container(height: 0,),

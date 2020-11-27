@@ -271,60 +271,12 @@ class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDrop
   }
 }
 
-// class MiscRegularInputFieldDropDownUser extends StatefulWidget{
-
-//   MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
-
-//   @override
-//   MiscRegularInputFieldDropDownUserState createState() => MiscRegularInputFieldDropDownUserState();
-// }
-
-// class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
-
-//   List<String> relationship = ['Richard Nedd Memories', 'Default'];
-//   String currentSelection = 'Richard Nedd Memories';
-
-//   @override
-//   Widget build(BuildContext context){
-//     return InputDecorator(
-//       decoration: InputDecoration(
-//         alignLabelWithHint: true,
-//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-//         focusedBorder: UnderlineInputBorder(
-//           borderSide: BorderSide.none,
-//         ),
-//         border: UnderlineInputBorder(
-//           borderSide: BorderSide.none,
-//         ),
-//       ),
-//       child: DropdownButtonHideUnderline(
-//         child: DropdownButton<String>(
-//           value: currentSelection,
-//           isDense: true,
-//           onChanged: (String newValue) {
-//             setState(() {
-//               currentSelection = newValue;
-//             });
-//           },
-//           items: relationship.map((String value) {
-//             return DropdownMenuItem<String>(
-//               value: value,
-//               child: Text(value),
-//             );
-//           }).toList(),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-class RelationshipItem{
+class RegularRelationshipItem{
 
   final String name;
   final String image;
   
-  const RelationshipItem({this.name, this.image});
+  const RegularRelationshipItem({this.name, this.image});
 }
 
 
@@ -338,19 +290,12 @@ class MiscRegularInputFieldDropDownUser extends StatefulWidget{
 
 class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
 
-  // List<String> relationship = ['Richard Nedd Memories', 'Default'];
-  // String currentSelection = 'Richard Nedd Memories';
-
-  List<RelationshipItem> relationship = [
-    const RelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-    const RelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
+  List<RegularRelationshipItem> relationship = [
+    const RegularRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
+    const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
   ];
 
-  RelationshipItem currentSelection = const RelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
-
-
-
-  
+  RegularRelationshipItem currentSelection = const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
 
   @override
   Widget build(BuildContext context){
@@ -366,7 +311,7 @@ class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputField
         ),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<RelationshipItem>(
+        child: DropdownButton<RegularRelationshipItem>(
           // selectedItemBuilder: (BuildContext context) {
           //   return relationship.map<Widget>((RelationshipItem item) {
           //     // return Text(item);
@@ -383,13 +328,13 @@ class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputField
           // },
           value: currentSelection,
           isDense: true,
-          onChanged: (RelationshipItem newValue) {
+          onChanged: (RegularRelationshipItem newValue) {
             setState(() {
               currentSelection = newValue;
             });
           },
-          items: relationship.map((RelationshipItem value) {
-            return DropdownMenuItem<RelationshipItem>(
+          items: relationship.map((RegularRelationshipItem value) {
+            return DropdownMenuItem<RegularRelationshipItem>(
               value: value,
               child: Row(
                 children: [

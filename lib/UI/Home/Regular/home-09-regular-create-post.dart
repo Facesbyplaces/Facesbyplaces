@@ -24,7 +24,7 @@ class HomeRegularCreatePost extends StatefulWidget{
 class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
-  final GlobalKey<MiscRegularInputFieldDropDownState> _key2 = GlobalKey<MiscRegularInputFieldDropDownState>();
+  final GlobalKey<MiscRegularInputFieldDropDownUserState> _key2 = GlobalKey<MiscRegularInputFieldDropDownUserState>();
 
   File imageFile;
   File videoFile;

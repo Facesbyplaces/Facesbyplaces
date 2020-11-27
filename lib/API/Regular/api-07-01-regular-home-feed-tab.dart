@@ -22,12 +22,6 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
   print('The response status in regular feed is ${response.statusCode}');
   print('The response status in regular feed is ${response.body}');
 
-  // if(response.statusCode == 200){
-  //   return true;
-  // }else{
-  //   return false;
-  // }
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularHomeTabFeedMain.fromJson(newValue);

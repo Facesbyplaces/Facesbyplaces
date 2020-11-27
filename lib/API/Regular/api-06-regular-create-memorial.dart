@@ -10,13 +10,6 @@ Future<bool> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token in create memorial is $getAccessToken');
-  print('The uid in create memorial is $getUID');
-  print('The client in create memorial  is $getClient');
-
-  print('The memorial name is ${memorial.memorialName}');
-  print('The memorial name is ${memorial.birthPlace}');
-
   try{
     var dioRequest = dio.Dio();
 

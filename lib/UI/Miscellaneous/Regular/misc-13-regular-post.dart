@@ -9,8 +9,10 @@ import 'misc-09-regular-extra.dart';
 class MiscRegularPost extends StatelessWidget{
 
   final List<Widget> contents;
+  final int userId;
+  final int postId;
 
-  MiscRegularPost({this.contents});
+  MiscRegularPost({this.contents, this.userId, this.postId,});
 
   @override
   Widget build(BuildContext context){
@@ -74,7 +76,7 @@ class MiscRegularPost extends StatelessWidget{
                     ),
                   ),
                 ),
-                MiscRegularDropDownTemplate(),
+                MiscRegularDropDownTemplate(userId: userId, postId: postId,),
               ],
             ),
           ),

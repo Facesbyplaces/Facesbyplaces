@@ -48,7 +48,7 @@ class HomeBLMPost extends StatelessWidget{
                   filled: true,
                   fillColor: Color(0xffffffff),
                   focusColor: Color(0xffffffff),
-                  hintText: 'Search a Post',
+                  hintText: 'Search Family',
                   hintStyle: TextStyle(
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                   ),

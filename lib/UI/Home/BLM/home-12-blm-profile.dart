@@ -1,13 +1,29 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
+import 'package:facesbyplaces/API/BLM/api-15-blm-show-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-post-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/material.dart';
 
-class HomeBLMProfile extends StatelessWidget{
+class HomeBLMProfile extends StatefulWidget{
+
+  HomeBLMProfileState createState() => HomeBLMProfileState();
+}
+
+class HomeBLMProfileState extends State<HomeBLMProfile>{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+
+  String convertDate(String input){
+    DateTime dateTime = DateTime.parse(input);
+
+    final y = dateTime.year.toString().padLeft(4, '0');
+    final m = dateTime.month.toString().padLeft(2, '0');
+    final d = dateTime.day.toString().padLeft(2, '0');
+    return '$d/$m/$y';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +165,7 @@ class HomeBLMProfile extends StatelessWidget{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('New York',
+                                      Text(profile.data.memorial.details.country,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -164,7 +180,7 @@ class HomeBLMProfile extends StatelessWidget{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('4/23/1995',
+                                      Text(convertDate(profile.data.memorial.details.dob),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -179,7 +195,7 @@ class HomeBLMProfile extends StatelessWidget{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('5/14/2019',
+                                      Text(convertDate(profile.data.memorial.details.rip),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -354,58 +370,80 @@ class HomeBLMProfile extends StatelessWidget{
                               ],
                             ),
 
-                            // Column(
-                            //   children: [
-                            //     Container(
-                            //       padding: EdgeInsets.only(left: 20.0, top: 10.0,),
-                            //       alignment: Alignment.centerLeft,
-                            //       child: Text('Post',
-                            //         style: TextStyle(
-                            //           fontSize: SizeConfig.safeBlockHorizontal * 5,
-                            //           fontWeight: FontWeight.bold,
-                            //           color: Color(0xff000000),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-
-                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
                             // Container(
-                            //   width: SizeConfig.screenWidth,
-                            //   height: SizeConfig.blockSizeVertical * 15,
-                            //   padding: EdgeInsets.only(left: 20.0, bottom: 20.0),
-                            //   child: ListView.separated(
-                            //     shrinkWrap: true,
-                            //     scrollDirection: Axis.horizontal,
-                            //     itemBuilder: (context, index){
-                            //       return Container(
-                            //         width: SizeConfig.blockSizeVertical * 13,
-                            //         decoration: BoxDecoration(
-                            //           borderRadius: BorderRadius.circular(10),
-                            //           image: DecorationImage(
-                            //             image: AssetImage(images[index]),
-                            //           ),
-                            //         ),
-                            //       );
-                            //     }, 
-                            //     separatorBuilder: (context, index){
-                            //       return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
-                            //     },
-                            //     itemCount: 4,
+                            //   padding: EdgeInsets.all(10.0),
+                            //   color: Color(0xffffffff),
+                            //   child: Column(
+                            //     children: [
+                            //       MiscBLMPostDisplayTemplate(),
+                            //     ],
                             //   ),
                             // ),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: FutureBuilder<APIBLMHomeProfilePostMain>(
+                                future: apiBLMProfilePost(),
+                                builder: (context, profilePost){
+                                  if(profilePost.hasData){
+                                    return Column(
+                                      children: List.generate(profilePost.data.familyMemorialList.length, (index) => 
+                                        Column(
+                                          children: [
+                                            MiscBLMPost(
+                                              contents: [
+                                                Column(
+                                                  children: [
+                                                    Align(
+                                                      alignment: Alignment.topLeft,
+                                                      child: RichText(
+                                                        maxLines: 4,
+                                                        overflow: TextOverflow.clip,
+                                                        textAlign: TextAlign.left,
+                                                        text: TextSpan(
+                                                          text: profilePost.data.familyMemorialList[index].body,
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.w300,
+                                                            color: Color(0xff000000),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
 
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              color: Color(0xffffffff),
-                              child: Column(
-                                children: [
-                                  MiscBLMPostDisplayTemplate(),
-                                ],
+                                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                                  ],
+                                                ),
+
+                                                profilePost.data.familyMemorialList[index].imagesOrVideos != null
+                                                ? Container(
+                                                  height: SizeConfig.blockSizeHorizontal * 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: profilePost.data.familyMemorialList[index].imagesOrVideos[0],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                                  ),
+                                                )
+                                                : Container(height: 0,),
+                                              ],
+                                            ),
+
+                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                          ],
+                                        ),                                      
+                                      ),
+                                    );
+                                  }else if(profilePost.hasError){
+                                    return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
+                                  }else{
+                                    return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+                                  }
+                                },
                               ),
                             ),
                             

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/API/Regular/api-10-regular-show-memorial.dart';
 import 'package:facesbyplaces/API/Regular/api-12-regular-show-profile-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -22,6 +23,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     apiRegularProfilePost();
   }
 
+  String convertDate(String input){
+    DateTime dateTime = DateTime.parse(input);
+
+    final y = dateTime.year.toString().padLeft(4, '0');
+    final m = dateTime.month.toString().padLeft(2, '0');
+    final d = dateTime.day.toString().padLeft(2, '0');
+    return '$d/$m/$y';
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -35,8 +45,18 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
             if(showProfile.hasData){
               return Stack(
                 children: [
-                  
-                  Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/regular-image1.png'),),),),
+
+                  Container(
+                    height: SizeConfig.screenHeight / 3, 
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover, 
+                        image: showProfile.data.memorial.backgroundImage != null
+                        ? NetworkImage(showProfile.data.memorial.backgroundImage)
+                        : AssetImage('assets/icons/regular-image1.png'),
+                      ),
+                    ),
+                  ),
 
                   Column(
                     children: [
@@ -132,29 +152,46 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                            Container(
-                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    height: SizeConfig.blockSizeHorizontal * 40,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage('assets/icons/regular-image4.png'),
-                                      ),
+                            ((){
+                              if(showProfile.data.memorial.details.description != ''){
+                                return Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                  child: Text(showProfile.data.memorial.details.description,
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xff000000),
                                     ),
                                   ),
+                                );
+                              }else if(showProfile.data.memorial.imagesOrVideos != null){
+                                return Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: SizeConfig.blockSizeHorizontal * 40,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage('assets/icons/regular-image4.png'),
+                                          ),
+                                        ),
+                                      ),
 
-                                  Positioned(
-                                    top: SizeConfig.blockSizeVertical * 7,
-                                    left: SizeConfig.screenWidth / 2.8,
-                                    child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                                      Positioned(
+                                        top: SizeConfig.blockSizeVertical * 7,
+                                        left: SizeConfig.screenWidth / 2.8,
+                                        child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
+                                );
+                              }else{
+                                return Container(height: 0,);
+                              }
+                            }()),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -169,9 +206,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: (){
-                                          Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                          // Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                          Navigator.pushNamed(context, 'home/regular/home-10-regular-memorial-settings');
                                         },
-                                        child: Text('Manage',
+                                        child: Text(
+                                          showProfile.data.memorial.manage
+                                          ? 'Manage'
+                                          : 'Settings',
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 5,
                                             fontWeight: FontWeight.bold,
@@ -181,7 +222,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         minWidth: SizeConfig.screenWidth / 2,
                                         height: SizeConfig.blockSizeVertical * 7,
                                         shape: StadiumBorder(),
-                                        color: Color(0xff04ECFF),
+                                        // color: Color(0xff04ECFF),
+                                        color: showProfile.data.memorial.manage
+                                        ? Color(0xff04ECFF)
+                                        : Color(0xff888888),
                                       ),
                                     ),
                                   ),
@@ -225,7 +269,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('New York',
+                                      Text(showProfile.data.memorial.details.birthPlace,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -240,7 +284,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('4/23/1995',
+                                      Text(convertDate(showProfile.data.memorial.details.dob),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -255,7 +299,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('5/14/2019',
+                                      Text(convertDate(showProfile.data.memorial.details.rip),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -272,7 +316,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       GestureDetector(
                                         onTap: (){},
-                                        child: Text('New Town Cemetery',
+                                        child: Text(showProfile.data.memorial.details.cemetery,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             color: Color(0xff3498DB),
@@ -317,8 +361,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        // Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
-                                        print('lkjasdflkj');
+                                        Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
                                       },
                                       child: Column(
                                         children: [
@@ -344,49 +387,59 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('526',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text('526',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Friends',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Friends',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, 'home/regular/home-19-regular-connection-list');
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('14.4K',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text('14.4K',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Followers',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Followers',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -441,21 +494,18 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                               ],
                             ),
-                            
-                            Container(
-                              height: SizeConfig.screenHeight,
-                              color: Color(0xffeeeeee),
+
+                            Container(height: SizeConfig.blockSizeVertical * 1, color: Color(0xffeeeeee),),
+
+                            Padding(
+                              padding: EdgeInsets.all(20.0),
                               child: FutureBuilder<APIRegularHomeProfilePostMain>(
                                 future: apiRegularProfilePost(),
                                 builder: (context, profilePost){
                                   if(profilePost.hasData){
-                                    return ListView.separated(
-                                      physics: ClampingScrollPhysics(),
-                                      padding: EdgeInsets.all(10.0),
-                                      itemCount: profilePost.data.familyMemorialList.length,
-                                      separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
-                                      itemBuilder: (context, index){
-                                        return Column(
+                                    return Column(
+                                      children: List.generate(profilePost.data.familyMemorialList.length, (index) => 
+                                        Column(
                                           children: [
                                             MiscRegularPost(
                                               contents: [
@@ -481,16 +531,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   ],
                                                 ),
 
-
                                                 profilePost.data.familyMemorialList[index].imagesOrVideos != null
                                                 ? Container(
                                                   height: SizeConfig.blockSizeHorizontal * 50,
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(profilePost.data.familyMemorialList[index].imagesOrVideos[0]),
-                                                    ),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: profilePost.data.familyMemorialList[index].imagesOrVideos[0],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Icon(Icons.error),
                                                   ),
                                                 )
                                                 : Container(height: 0,),
@@ -498,18 +548,19 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             ),
 
                                             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
                                           ],
-                                        );
-                                      }
+                                        ),                                      
+                                      ),
                                     );
                                   }else if(profilePost.hasError){
-                                    return Container(height: 0,);
+                                    return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
                                   }else{
-                                    return  Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),));
+                                    return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
                                   }
                                 },
                               ),
-                            ),   
+                            ),
 
                           ],
                         ),
@@ -533,7 +584,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 padding: EdgeInsets.all(5),
                                   child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
-                                  backgroundImage: AssetImage('assets/icons/profile2.png'),
+                                  backgroundColor: Color(0xff888888),
+                                  backgroundImage: showProfile.data.memorial.profileImage != null
+                                  ? NetworkImage(showProfile.data.memorial.profileImage)
+                                  : AssetImage('assets/icons/graveyard.png'),
                                 ),
                               ),
                             ),

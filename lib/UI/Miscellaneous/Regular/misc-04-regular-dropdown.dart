@@ -4,7 +4,19 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
+class RegularReportID{
+  int userId;
+  int postId;
+
+  RegularReportID({this.userId, this.postId});
+}
+
 class MiscRegularDropDownTemplate extends StatelessWidget{
+
+  final int userId;
+  final int postId;
+
+  MiscRegularDropDownTemplate({this.userId, this.postId});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +51,8 @@ class MiscRegularDropDownTemplate extends StatelessWidget{
                   chooserTitle: 'Example Chooser Title'
                 );
               }else if(dropDownList == 'Report'){
-                print('Report');
+                // print('Report');
+                Navigator.pushNamed(context, 'home/regular/home-21-regular-report', arguments: RegularReportID(userId: userId, postId: postId));
               }
             },
             // onChanged: (String val) async{

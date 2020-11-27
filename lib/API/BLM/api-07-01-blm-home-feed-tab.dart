@@ -9,6 +9,10 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab() async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('The access token $getAccessToken');
+  print('The UID $getUID');
+  print('The client $getClient');
+
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=1',
     headers: <String, String>{
@@ -29,8 +33,6 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab() async{
     throw Exception('Failed to get the feed');
   }
 }
-
-
 
 class APIBLMHomeTabFeedMain{
 

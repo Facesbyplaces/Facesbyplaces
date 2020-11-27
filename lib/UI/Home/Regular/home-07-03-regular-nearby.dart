@@ -22,7 +22,7 @@ class HomeRegularNearbyState extends State<HomeRegularNearby>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final ScreenArguments newValue = ModalRoute.of(context).settings.arguments;
+    final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
     return FutureBuilder<APIRegularSearchMemorialMain>(
       future: apiRegularSearchMemorials(newValue.title),
       builder: (context, memorialNearby){
@@ -33,7 +33,7 @@ class HomeRegularNearbyState extends State<HomeRegularNearby>{
                 physics: ClampingScrollPhysics(),
                 itemCount: memorialNearby.data.familyMemorialList.length,
                 itemBuilder: (context, index){
-                  return MiscManageMemoriaWithButton(index: index, tab: 2, title: memorialNearby.data.familyMemorialList[index].page.name, content: memorialNearby.data.familyMemorialList[index].page.details.description,);
+                  return MiscRegularManageMemoriaWithButton(index: index, tab: 2, title: memorialNearby.data.familyMemorialList[index].page.name, content: memorialNearby.data.familyMemorialList[index].page.details.description, memorialId: memorialNearby.data.familyMemorialList[index].id);
                 },
                 separatorBuilder: (context, index){
                   return Divider(height: 1, color: Colors.grey,);

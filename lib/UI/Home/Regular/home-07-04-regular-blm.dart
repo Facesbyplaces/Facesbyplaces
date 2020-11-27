@@ -22,7 +22,7 @@ class HomeRegularBLMState extends State<HomeRegularBLM>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final ScreenArguments newValue = ModalRoute.of(context).settings.arguments;
+    final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
     return FutureBuilder<APIRegularSearchMemorialMain>(
       future: apiRegularSearchMemorials(newValue.title),
       builder: (context, memorialBLM){
@@ -33,7 +33,7 @@ class HomeRegularBLMState extends State<HomeRegularBLM>{
                 physics: ClampingScrollPhysics(),
                 itemCount: memorialBLM.data.familyMemorialList.length,
                 itemBuilder: (context, index){
-                  return MiscManageMemoriaWithButton(index: index, tab: 3, title: memorialBLM.data.familyMemorialList[index].page.name, content: memorialBLM.data.familyMemorialList[index].page.details.description,);
+                  return MiscRegularManageMemoriaWithButton(index: index, tab: 3, title: memorialBLM.data.familyMemorialList[index].page.name, content: memorialBLM.data.familyMemorialList[index].page.details.description, memorialId: memorialBLM.data.familyMemorialList[index].id);
                 },
                 separatorBuilder: (context, index){
                   return Divider(height: 1, color: Colors.grey,);

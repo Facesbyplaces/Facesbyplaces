@@ -47,9 +47,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                     Expanded(
                       child: ListView.separated(
                         physics: ClampingScrollPhysics(),
-                        itemCount: memorialsTab.data.familyMemorialList.length,
+                        itemCount: memorialsTab.data.familyMemorialList.blm.length,
                         itemBuilder: (context, index){
-                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.familyMemorialList[index].page.id, memorialName: memorialsTab.data.familyMemorialList[index].page.name, description: memorialsTab.data.familyMemorialList[index].page.details.description,);
+                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.familyMemorialList.blm[index].id, memorialName: memorialsTab.data.familyMemorialList.blm[index].name, description: memorialsTab.data.familyMemorialList.blm[index].details.description,);
                         },
                         separatorBuilder: (context, index){
                           return Divider(height: 1, color: Colors.grey,);
@@ -76,9 +76,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                     Expanded(
                       child: ListView.separated(
                         physics: ClampingScrollPhysics(),
-                        itemCount: memorialsTab.data.friendsMemorialList.length,
+                        itemCount: memorialsTab.data.friendsMemorialList.blm.length,
                         itemBuilder: (context, index){
-                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.friendsMemorialList[index].page.id, memorialName: memorialsTab.data.friendsMemorialList[index].page.name, description: memorialsTab.data.friendsMemorialList[index].page.details.description,);
+                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.friendsMemorialList.blm[index].id, memorialName: memorialsTab.data.friendsMemorialList.blm[index].name, description: memorialsTab.data.friendsMemorialList.blm[index].details.description,);
                         },
                         separatorBuilder: (context, index){
                           return Divider(height: 1, color: Colors.grey,);

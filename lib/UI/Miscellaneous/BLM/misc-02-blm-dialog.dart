@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 
 class MiscBLMUploadFromDialog extends StatelessWidget{
 
+  final String choice_1;
+  final String choice_2;
+
+  MiscBLMUploadFromDialog({this.choice_1 = 'Camera', this.choice_2 = 'Gallery'});
+
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return Dialog(
