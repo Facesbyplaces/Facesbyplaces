@@ -9,7 +9,8 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     .select("posts.*")
         
         pagy =  pagy(posts)
-        render json: pagy
+        
+        paginate posts, per_page: numberOfPage
     end
 
     # user's memorials
