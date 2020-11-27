@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   get   '/login', :to => 'logins#new', :as => :login
-  match '/auth/:provider/callback', :to => 'logins#create', :via => [:get, :post]
-  match '/auth/failure', :to => 'logins#failure', :via => [:get, :post]
+  match '/auth/login/:provider/callback', :to => 'logins#create', :via => [:get, :post]
+  match '/auth/login/failure', :to => 'logins#failure', :via => [:get, :post]
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
