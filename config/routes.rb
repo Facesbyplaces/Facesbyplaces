@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
+  get 'logins/new'
+  get 'logins/create'
+  get 'logins/failure'
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
-    # omniauth_callbacks: 'omniauth'
   }
-
-  # devise_for :users, controllers: { omniauth_callbacks: 'omniauth'}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
-  # Action Cable
-  mount ActionCable.server => '/cable'
+
+  get   '/login', :to => 'logins#new', :as => :login
+  match '/auth/:provider/callback', :to => 'logins#create', :via => [:get, :post]
+  match '/auth/failure', :to => 'logins#failure', :via => [:get, :post]
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -20,7 +21,6 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
-        resources :users
         resources :image_upload, only: [:create]
         resources :create_account_user, only: [:create]
       end

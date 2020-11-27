@@ -2,11 +2,14 @@
 
 class User < ActiveRecord::Base
   rolify
+
+  has_many :authorizations
+  validates :email, :presence => true
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+         :recoverable, :rememberable, :omniauthable, omniauth_providers: %i[:facebook, :google_oauth2]
   
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
