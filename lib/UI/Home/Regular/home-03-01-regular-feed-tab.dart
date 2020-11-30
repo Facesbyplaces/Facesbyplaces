@@ -122,6 +122,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                       MiscRegularPost(
                         userId: feedTab.data.familyMemorialList[index].page.id,
                         postId: feedTab.data.familyMemorialList[index].id,
+                        memorialId: feedTab.data.familyMemorialList[index].page.id,
                         contents: [
                           Column(
                             children: [

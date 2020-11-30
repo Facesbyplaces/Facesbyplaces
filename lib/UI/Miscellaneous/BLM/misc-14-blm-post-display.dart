@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'misc-15-blm-dropdown.dart';
 
 class MiscBLMPostDisplayTemplate extends StatelessWidget{
@@ -196,7 +197,7 @@ class MiscBLMPostDisplayTemplate extends StatelessWidget{
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                            Text('24.3K',
+                            Text('0',
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 color: Color(0xff000000),
@@ -218,7 +219,7 @@ class MiscBLMPostDisplayTemplate extends StatelessWidget{
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                            Text('14.3K',
+                            Text('0',
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 color: Color(0xff000000),
@@ -231,7 +232,14 @@ class MiscBLMPostDisplayTemplate extends StatelessWidget{
                     Expanded(
                       flex: 2,
                       child: GestureDetector(
-                        onTap: (){},
+                        onTap: () async{
+                          await FlutterShare.share(
+                            title: 'Share',
+                            text: 'Share the link',
+                            linkUrl: 'https://flutter.dev/',
+                            chooserTitle: 'Share link'
+                          );
+                        },
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),

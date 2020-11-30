@@ -7,12 +7,13 @@ import 'package:facesbyplaces/API/BLM/api-02-blm-registration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BLMRegister extends StatelessWidget{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key3 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key6 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -51,15 +52,15 @@ class BLMRegister extends StatelessWidget{
                         child: Column(
                           children: [
                       
-                            MiscBLMInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                            MiscBLMInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
                             
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                             
-                            MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                            MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                            MiscBLMInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                            MiscBLMPhoneNumberTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -91,6 +92,8 @@ class BLMRegister extends StatelessWidget{
                                   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                                 }else if(!validEmail){
                                   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                }else if(!_key3.currentState.valid){
+                                  await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid phone number. Please try again.', confirmText: 'OK',),);
                                 }else{
 
                                   APIBLMAccountRegistration account = APIBLMAccountRegistration(
@@ -107,7 +110,9 @@ class BLMRegister extends StatelessWidget{
                                   context.hideLoaderOverlay();
 
                                   if(result == 'Success'){
-                                    Navigator.pushNamed(context, '/blm/blm-04-verify-email');
+                                    final sharedPrefs = await SharedPreferences.getInstance();
+                                    String verificationCode = sharedPrefs.getString('blm-verification-code');
+                                    Navigator.pushNamed(context, '/blm/blm-04-verify-email', arguments: verificationCode);
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
                                   }

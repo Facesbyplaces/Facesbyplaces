@@ -6,7 +6,7 @@ Future<bool> apiBLMHomeCreatePost(APIBLMCreatePost post) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
-  int prefsUserID = sharedPrefs.getInt('blm-user-id');
+  int prefsUserID = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';

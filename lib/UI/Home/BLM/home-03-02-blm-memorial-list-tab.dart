@@ -44,7 +44,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                       ),
                     ),
 
-                    Expanded(
+                    memorialsTab.data.familyMemorialList.blm.length != 0
+                    ? Expanded(
                       child: ListView.separated(
                         physics: ClampingScrollPhysics(),
                         itemCount: memorialsTab.data.familyMemorialList.blm.length,
@@ -55,6 +56,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                           return Divider(height: 1, color: Colors.grey,);
                         },
                       ),
+                    )
+                    : Expanded(
+                      child: Center(child: Text('Family memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
                     ),
 
                     Container(
@@ -73,7 +77,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                       ),
                     ),
 
-                    Expanded(
+                    memorialsTab.data.friendsMemorialList.blm.length != 0
+                    ? Expanded(
                       child: ListView.separated(
                         physics: ClampingScrollPhysics(),
                         itemCount: memorialsTab.data.friendsMemorialList.blm.length,
@@ -84,7 +89,11 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                           return Divider(height: 1, color: Colors.grey,);
                         },
                       ),
+                    )
+                    : Expanded(
+                      child: Center(child: Text('Friends memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
                     ),
+                    
                   ],
                 );
               }

@@ -119,6 +119,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                   return Column(
                     children: [
                       MiscBLMPost(
+                        userId: feedTab.data.familyMemorialList[index].page.id,
+                        postId: feedTab.data.familyMemorialList[index].id,
+                        memorialId: feedTab.data.familyMemorialList[index].page.id,
                         contents: [
                           Column(
                             children: [

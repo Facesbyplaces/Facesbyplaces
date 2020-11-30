@@ -62,10 +62,13 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
   List<Widget> children;
   VideoPlayerController videoPlayerController;
   List<File> slideImages = [];
+  List<Widget> stories;
+  String backgroundImage;
 
   void initState(){
     super.initState();
     children = [createMemorial1(), createMemorial2(), createMemorial3()];
+    stories = [shareStory1(), shareStory2(), shareStory3()];
   }
   
   String convertDate(String input){
@@ -79,6 +82,7 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
 
   File videoFile;
   File imageFile;
+  File backgroundFile;
   final picker = ImagePicker();
 
   Future getVideo() async{
@@ -97,21 +101,16 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
     }
   }
 
-  // Future getSlideImage() async{
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-  //   if(pickedFile != null){
-  //     setState(() {
-  //       imageFile = File(pickedFile.path);
-  //       // slideImages.add(imageFile);
-  //     });
-  //   }
-  // }
-
   Future<File> getSlideImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     return imageFile = File(pickedFile.path);
   }
+
+  Future<File> getImage() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    return backgroundFile = File(pickedFile.path);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +220,7 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
     );
   }
 
-  Widget createMemorial2(){
+  createMemorial2(){
     return BlocBuilder<BlocHomeBLMStoryType, int>(
       builder: (context, storyType){
         return Stack(
@@ -252,159 +251,11 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                     ],
                   ),
 
-                  ((){
-                    switch(storyType){
-                      case 0: return MiscBLMInputFieldMultiTextTemplate(key: _key9,); break;
-                      case 1: return GestureDetector(
-                        onTap: () async{
-                          await getVideo();
-                        },
-                        child: Container(
-                          height: SizeConfig.blockSizeVertical * 34.5,
-                          decoration: BoxDecoration(
-                            color: Color(0xffcccccc),
-                            border: Border.all(color: Color(0xff000000),),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child: videoFile == null 
-                          ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
-                          : GestureDetector(
-                            onTap: (){
-                              if(videoPlayerController.value.isPlaying){
-                                videoPlayerController.pause();
-                              }else{
-                                videoPlayerController.play();
-                              }
-                              
-                            },
-                            onDoubleTap: () async{
-                              await getVideo();
-                            },
-                            child: AspectRatio(
-                              aspectRatio: videoPlayerController.value.aspectRatio,
-                              child: VideoPlayer(videoPlayerController),
-                            ),
-                          ),
-                        ),
-                      ); break;
-                      case 2: return Column(
-                        children: [
-                          Container(
-                            height: SizeConfig.blockSizeVertical * 32,
-                            child: Container(
-                              height: SizeConfig.blockSizeVertical * 12,
-                              child: GridView.count(
-                                physics: ClampingScrollPhysics(),
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 4,
-                                mainAxisSpacing: 4,
-                                children: List.generate(slideImages.length + 1, (index){
-                                  return ((){
-                                    if(index == slideImages.length){
-                                      return GestureDetector(
-                                        onTap: () async{
-                                          // await getSlideImage();
-                                          File newFile = await getSlideImage();
-
-                                          setState(() {
-                                            slideImages.add(newFile);
-                                          });
-                                        },
-                                        child: Container(
-                                          width: SizeConfig.blockSizeVertical * 10,
-                                          child: Icon(Icons.add_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 7,),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            color: Color(0xffcccccc),
-                                            border: Border.all(color: Color(0xff000000),),
-                                          ),
-                                        ),
-                                      );
-
-                                    }else{
-                                      return Container(
-                                        width: SizeConfig.blockSizeVertical * 10,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Color(0xffcccccc),
-                                          border: Border.all(color: Color(0xff000000),),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(slideImages[index].path),
-                                          ),
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Center(
-                                              child: CircleAvatar(
-                                                radius: SizeConfig.blockSizeVertical * 3,
-                                                backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  index.toString(),
-                                                  style: TextStyle(
-                                                    fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xffffffff),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }
-
-                                    // if(index == images.length){
-                                    //   return Container(
-                                    //     width: SizeConfig.blockSizeVertical * 10,
-                                    //     child: Icon(Icons.add_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 7,),
-                                    //     decoration: BoxDecoration(
-                                    //       borderRadius: BorderRadius.circular(10),
-                                    //       color: Color(0xffcccccc),
-                                    //       border: Border.all(color: Color(0xff000000),),
-                                    //     ),
-                                    //   );
-                                    // }else{
-                                    //   return Container(
-                                    //     width: SizeConfig.blockSizeVertical * 10,
-                                    //     decoration: BoxDecoration(
-                                    //       borderRadius: BorderRadius.circular(10),
-                                    //       color: Color(0xffcccccc),
-                                    //       border: Border.all(color: Color(0xff000000),),
-                                    //       image: DecorationImage(
-                                    //         image: AssetImage(images[index]),
-                                    //       ),
-                                    //     ),
-                                    //     child: Stack(
-                                    //       children: [
-                                    //         Center(
-                                    //           child: CircleAvatar(
-                                    //             radius: SizeConfig.blockSizeVertical * 3,
-                                    //             backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                    //             child: Text(
-                                    //               index.toString(),
-                                    //               style: TextStyle(
-                                    //                 fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                    //                 fontWeight: FontWeight.bold,
-                                    //                 color: Color(0xffffffff),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //         ),
-                                    //       ],
-                                    //     ),
-                                    //   );
-                                    // }
-                                  }());
-                                }),
-                              ),
-                            ),
-                          ),
-                          Text('Drag & drop to rearrange images.',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,fontWeight: FontWeight.w300, color: Color(0xff000000),),),
-                        ],
-                      ); break;
-                    }
-                  }()),
+                  IndexedStack(
+                    index: storyType,
+                    children: stories,
+                    sizing: StackFit.expand,
+                  ),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -463,7 +314,11 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage('assets/icons/upload_background.png'),
+                                // image: AssetImage('assets/icons/upload_background.png'),
+                                // image: AssetImage(backgroundFile.path),
+                                image: backgroundFile != null
+                                ? AssetImage(backgroundFile.path)
+                                : AssetImage('assets/icons/profile_post1.png'),
                               ),
                             ),
                             child: Stack(
@@ -530,8 +385,10 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                                 return ((){
                                   if(index == 4){
                                     return GestureDetector(
-                                      onTap: (){
+                                      onTap: () async{
                                         context.bloc<BlocHomeBLMBackgroundImage>().updateToggle(index);
+
+                                        await getImage();
                                       },
                                       child: Container(
                                         width: SizeConfig.blockSizeVertical * 12,
@@ -548,6 +405,10 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                                     return GestureDetector(
                                       onTap: (){
                                         context.bloc<BlocHomeBLMBackgroundImage>().updateToggle(index);
+
+                                        setState(() {
+                                          backgroundImage = backgroundImages[index];
+                                        });
                                       },
                                       child: backgroundImageToggle == index
                                       ? Container(
@@ -609,8 +470,6 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                           MiscBLMButtonTemplate(
                             onPressed: () async{
 
-                              print('hehehehe');
-
                               APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
                                 relationship: _key1.currentState.currentSelection,
                                 locationOfIncident: _key2.currentState.controller.text,
@@ -650,6 +509,166 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
           }
         );
       },
+    );
+  }
+
+  shareStory1(){
+    return MiscBLMInputFieldMultiTextTemplate(key: _key9,);
+  }
+
+  shareStory2(){
+    return Container(
+      width: SizeConfig.screenWidth,
+      child: GestureDetector(
+        onTap: () async{
+          await getVideo();
+        },
+        child: Container(
+          height: SizeConfig.blockSizeVertical * 34.5,
+          decoration: BoxDecoration(
+            color: Color(0xffcccccc),
+            border: Border.all(color: Color(0xff000000),),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: videoFile == null 
+          ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
+          : GestureDetector(
+            onTap: (){
+              if(videoPlayerController.value.isPlaying){
+                videoPlayerController.pause();
+              }else{
+                videoPlayerController.play();
+              }
+              
+            },
+            onDoubleTap: () async{
+              await getVideo();
+            },
+            child: AspectRatio(
+              aspectRatio: videoPlayerController.value.aspectRatio,
+              child: VideoPlayer(videoPlayerController),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  shareStory3(){
+    return Column(
+      children: [
+        Container(
+          height: SizeConfig.blockSizeVertical * 32,
+          width: SizeConfig.screenWidth,
+          child: Container(
+            height: SizeConfig.blockSizeVertical * 12,
+            child: GridView.count(
+              physics: ClampingScrollPhysics(),
+              crossAxisCount: 4,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
+              children: List.generate(slideImages.length + 1, (index){
+                return ((){
+                  if(index == slideImages.length){
+                    return GestureDetector(
+                      onTap: () async{
+                        File newFile = await getSlideImage();
+
+                        setState(() {
+                          slideImages.add(newFile);
+                        });
+                      },
+                      child: Container(
+                        width: SizeConfig.blockSizeVertical * 10,
+                        child: Icon(Icons.add_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 7,),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xffcccccc),
+                          border: Border.all(color: Color(0xff000000),),
+                        ),
+                      ),
+                    );
+                  }else{
+                    return Container(
+                      width: SizeConfig.blockSizeVertical * 10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xffcccccc),
+                        border: Border.all(color: Color(0xff000000),),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(slideImages[index].path),
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: CircleAvatar(
+                              radius: SizeConfig.blockSizeVertical * 3,
+                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                              child: Text(
+                                index.toString(),
+                                style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffffffff),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  // if(index == images.length){
+                  //   return Container(
+                  //     width: SizeConfig.blockSizeVertical * 10,
+                  //     child: Icon(Icons.add_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 7,),
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       color: Color(0xffcccccc),
+                  //       border: Border.all(color: Color(0xff000000),),
+                  //     ),
+                  //   );
+                  // }else{
+                  //   return Container(
+                  //     width: SizeConfig.blockSizeVertical * 10,
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       color: Color(0xffcccccc),
+                  //       border: Border.all(color: Color(0xff000000),),
+                  //       image: DecorationImage(
+                  //         image: AssetImage(images[index]),
+                  //       ),
+                  //     ),
+                  //     child: Stack(
+                  //       children: [
+                  //         Center(
+                  //           child: CircleAvatar(
+                  //             radius: SizeConfig.blockSizeVertical * 3,
+                  //             backgroundColor: Color(0xffffffff).withOpacity(.5),
+                  //             child: Text(
+                  //               index.toString(),
+                  //               style: TextStyle(
+                  //                 fontSize: SizeConfig.safeBlockHorizontal * 7,
+                  //                 fontWeight: FontWeight.bold,
+                  //                 color: Color(0xffffffff),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   );
+                  // }
+                }());
+              }),
+            ),
+          ),
+        ),
+        Text('Drag & drop to rearrange images.',style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+      ],
     );
   }
 }

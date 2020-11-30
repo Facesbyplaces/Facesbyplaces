@@ -29,7 +29,6 @@ class HomeBLMSearch extends StatelessWidget{
           appBar: AppBar(
             title: TextFormField(
               onFieldSubmitted: (String value){
-                // Navigator.pushNamed(context, '/home/blm/home-05-blm-post');
                 Navigator.pushNamed(context, '/home/blm/home-05-blm-post', arguments: BLMArguments(value, 0));
               },
               decoration: InputDecoration(
@@ -37,7 +36,7 @@ class HomeBLMSearch extends StatelessWidget{
                 filled: true,
                 fillColor: Color(0xffffffff),
                 focusColor: Color(0xffffffff),
-                hintText: 'Search a Post',
+                hintText: 'Search a Memorial',
                 hintStyle: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                 ),

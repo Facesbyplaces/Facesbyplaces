@@ -11,7 +11,7 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost() async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/page/blm/$memorialId',
+    'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

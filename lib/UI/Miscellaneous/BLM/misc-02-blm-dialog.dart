@@ -33,7 +33,7 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               onTap: (){
                 Navigator.pop(context, 1);
               },
-              child: Text('Camera',
+              child: Text(choice_1,
                 style: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                   fontWeight: FontWeight.w400,
@@ -48,7 +48,7 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               onTap: (){
                 Navigator.pop(context, 2);
               },
-              child: Text('Gallery',
+              child: Text(choice_2,
                 style: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                   fontWeight: FontWeight.w400,

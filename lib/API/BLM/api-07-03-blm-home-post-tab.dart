@@ -5,9 +5,9 @@ import 'dart:convert';
 Future<APIBLMHomeTabPostMain> apiBLMHomePostTab() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=1',

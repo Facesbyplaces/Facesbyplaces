@@ -1,5 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-02-blm-dialog.dart';
 import 'misc-04-blm-extra.dart';
@@ -723,8 +725,9 @@ class MiscBLMPost extends StatelessWidget{
   final List<Widget> contents;
   final int userId;
   final int postId;
+  final int memorialId;
 
-  MiscBLMPost({this.contents, this.userId, this.postId,});
+  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId});
 
   @override
   Widget build(BuildContext context){
@@ -749,7 +752,12 @@ class MiscBLMPost extends StatelessWidget{
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () async{
+                    print('The memorialId is $memorialId');
+
+                    final sharedPrefs = await SharedPreferences.getInstance();
+                    sharedPrefs.setInt('blm-user-memorial-id', memorialId);
+
                     Navigator.pushNamed(context, '/home/blm/home-13-blm-user-profile');
                   },
                   child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
@@ -812,7 +820,7 @@ class MiscBLMPost extends StatelessWidget{
 
                       SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                      Text('24.3K', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                      Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                     ],
                   ),
                 ),
@@ -827,13 +835,20 @@ class MiscBLMPost extends StatelessWidget{
 
                       SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                      Text('14.3K', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                      Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                     ],
                   ),
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: (){},
+                    onTap: () async{
+                      await FlutterShare.share(
+                        title: 'Share',
+                        text: 'Share the link',
+                        linkUrl: 'https://flutter.dev/',
+                        chooserTitle: 'Share link'
+                      );
+                    },
                     child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
                   ),
                 ),
