@@ -80,28 +80,39 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def like
-        like = Commentslike.new(comment_like_params)
-        like.user = user()
-        like.save 
+        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
+            like = Commentslike.new(comment_like_params)
+            like.user = user()
+            like.save 
 
-        # Notification
-        if like.commentable_type == "Comment"
-            if like.commentable.user != user()
-                Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", url: "posts/#{like.commentable.post.id}", read: false)
+            # Notification
+            if like.commentable_type == "Comment"
+                if like.commentable.user != user()
+                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", url: "posts/#{like.commentable.post.id}", read: false)
+                end
+            else
+                if like.commentable.user != user()
+                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", url: "posts/#{like.commentable.comment.post.id}", read: false)
+                end
             end
+
+            render json: {}, status: 200
         else
-            if like.commentable.user != user()
-                Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", url: "posts/#{like.commentable.comment.post.id}", read: false)
-            end
+            render json: {}, status: 409
         end
-
-        render json: {status: :success}
     end
     
     def unlike
-        unlike = Commentslike.where("commentable_type = '#{params[:commentable_type]}' AND commentable_id = #{params[:commentable_id]} AND user_id = #{user().id}").first 
-        unlike.destroy 
-        render json: {status: :success}
+        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
+            unlike = Commentslike.where("commentable_type = '#{params[:commentable_type]}' AND commentable_id = #{params[:commentable_id]} AND user_id = #{user().id}").first 
+             if unlike.destroy 
+                render json: {}, status: 200
+             else
+                render json: {}, status: 500
+             end
+        else
+            render json: {}, status: 404
+        end
     end
     
     

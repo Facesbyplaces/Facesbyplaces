@@ -19,7 +19,9 @@ class Api::V1::Posts::PostsController < ApplicationController
                 # save tagged people to database
                 people.each do |person|
                     tag = Tagperson.new(post_id: post.id, user_id: person)
-                    tag.save
+                    if !tag.save
+                        return render json: {errors: tag.errors}, status: 500
+                    end
                 end
                 
                 # Add to notification
@@ -62,7 +64,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
-            render json: {errors: post.errors}
+            render json: {errors: post.errors}, status: 500
         end
     end
 
@@ -79,15 +81,29 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def like
-        like = Postslike.new(post_id: params[:post_id], user_id: user().id)
-        like.save 
-        render json: {status: "Liked Post"}
+        if Postslike.where(user: user(), post_id: params[:post_id]).first == nil
+            like = Postslike.new(post_id: params[:post_id], user_id: user().id)
+            if like.save 
+                render json: {}, status: 200
+            else
+                render json: {errors: like.errors}, status: 500
+            end
+        else
+            render json: {}, status: 409
+        end
     end
 
     def unlike
-        unlike = Postslike.where("post_id = #{params[:post_id]} AND user_id = #{user().id}").first
-        unlike.destroy 
-        render json: {status: "Unliked Post"}
+        if Postslike.where(user: user(), post_id: params[:post_id]).first != nil
+            unlike = Postslike.where("post_id = #{params[:post_id]} AND user_id = #{user().id}").first
+            if unlike.destroy 
+                render json: {status: "Unliked Post"}
+            else
+                render json: {errors: unlike.errors}, status: 500
+            end
+        else
+            render json: {}, status: 404
+        end
     end
 
     private

@@ -93,7 +93,7 @@ class Api::V1::Admin::AdminController < ApplicationController
     private
     def admin_only
         if !user().has_role? :admin 
-            return render json: {status: "Access Denied"}
+            return render json: {}, status: 401
         end
     end
 end
