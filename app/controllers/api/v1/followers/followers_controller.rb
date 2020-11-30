@@ -7,7 +7,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
         if follower.save 
             render json: {status: "Success"}
         else
-            render json: {status: "Error"}
+            render json: {}, status: 500
         end
     end
 

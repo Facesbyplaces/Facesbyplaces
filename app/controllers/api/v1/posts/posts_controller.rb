@@ -106,7 +106,7 @@ class Api::V1::Posts::PostsController < ApplicationController
         end
 
         if !user().has_role? :pageadmin, page 
-            return render json: {status: "Access Denied"}
+            return render json: {}, status: 401
         end
     end
 end
