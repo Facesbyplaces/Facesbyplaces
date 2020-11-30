@@ -44,7 +44,21 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
                       ),
                     ),
 
-                    Expanded(
+                    // Expanded(
+                    //   child: ListView.separated(
+                    //     physics: ClampingScrollPhysics(),
+                    //     itemCount: memorialsTab.data.familyMemorialList.memorial.length,
+                    //     itemBuilder: (context, index){
+                    //       return MiscRegularManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.familyMemorialList.memorial[index].id, memorialName: memorialsTab.data.familyMemorialList.memorial[index].name, description: memorialsTab.data.familyMemorialList.memorial[index].details.description);
+                    //     },
+                    //     separatorBuilder: (context, index){
+                    //       return Divider(height: 1, color: Colors.grey,);
+                    //     },
+                    //   ),
+                    // ),
+
+                    memorialsTab.data.familyMemorialList.memorial.length != 0
+                    ? Expanded(
                       child: ListView.separated(
                         physics: ClampingScrollPhysics(),
                         itemCount: memorialsTab.data.familyMemorialList.memorial.length,
@@ -55,6 +69,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
                           return Divider(height: 1, color: Colors.grey,);
                         },
                       ),
+                    )
+                    : Expanded(
+                      child: Center(child: Text('Family memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
                     ),
 
                     Container(
@@ -73,7 +90,8 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
                       ),
                     ),
 
-                    Expanded(
+                    memorialsTab.data.friendsMemorialList.memorial.length != 0
+                    ? Expanded(
                       child: ListView.separated(
                         physics: ClampingScrollPhysics(),
                         itemCount: memorialsTab.data.friendsMemorialList.memorial.length,
@@ -84,7 +102,12 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
                           return Divider(height: 1, color: Colors.grey,);
                         },
                       ),
+                    )
+                    : Expanded(
+                      child: Center(child: Text('Friends memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
                     ),
+
+                    
                   ],
                 );
               }

@@ -94,20 +94,61 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                            Container(
-                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                              child: Stack(
-                                children: [
-                                  Image.asset('assets/icons/upload_background.png'),
+                            // Container(
+                            //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            //   child: Stack(
+                            //     children: [
+                            //       Image.asset('assets/icons/upload_background.png'),
 
-                                  Positioned(
-                                    top: SizeConfig.blockSizeVertical * 7,
-                                    left: SizeConfig.screenWidth / 2.8,
-                                    child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                            //       Positioned(
+                            //         top: SizeConfig.blockSizeVertical * 7,
+                            //         left: SizeConfig.screenWidth / 2.8,
+                            //         child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+
+                            ((){
+                              if(profile.data.memorial.details.description != ''){
+                                return Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                  child: Text(profile.data.memorial.details.description,
+                                    style: TextStyle(
+                                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                      fontWeight: FontWeight.w300,
+                                      color: Color(0xff000000),
+                                    ),
                                   ),
-                                ],
-                              ),
-                            ),
+                                );
+                              }else if(profile.data.memorial.imagesOrVideos != null){
+                                return Container(
+                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: SizeConfig.blockSizeHorizontal * 40,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage('assets/icons/regular-image4.png'),
+                                          ),
+                                        ),
+                                      ),
+
+                                      Positioned(
+                                        top: SizeConfig.blockSizeVertical * 7,
+                                        left: SizeConfig.screenWidth / 2.8,
+                                        child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }else{
+                                return Container(height: 0,);
+                              }
+                            }()),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -393,6 +434,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                         Column(
                                           children: [
                                             MiscBLMPost(
+                                              userId: profilePost.data.familyMemorialList[index].page.id,
+                                              postId: profilePost.data.familyMemorialList[index].id,
+                                              memorialId: profilePost.data.familyMemorialList[index].page.id,
                                               contents: [
                                                 Column(
                                                   children: [

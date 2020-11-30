@@ -27,20 +27,24 @@ class HomeBLMSuggestedState extends State<HomeBLMSuggested>{
       future: apiBLMSearchMemorials(newValue.title),
       builder: (context, memorialSuggested){
         if(memorialSuggested.hasData){
-          return BlocBuilder<BlocHomeBLMUpdateListSuggested, List<bool>>(
-            builder: (context, state){
-              return ListView.separated(
-                physics: ClampingScrollPhysics(),
-                itemCount: memorialSuggested.data.familyMemorialList.length,
-                itemBuilder: (context, index){
-                  return MiscBLMManageMemoriaWithButton(index: index, tab: 1, title: memorialSuggested.data.familyMemorialList[index].page.name, content: memorialSuggested.data.familyMemorialList[index].page.details.description, memorialId: memorialSuggested.data.familyMemorialList[index].id);
-                },
-                separatorBuilder: (context, index){
-                  return Divider(height: 1, color: Colors.grey,);
-                },
-              );
-            },
-          );
+          if(memorialSuggested.data.familyMemorialList.length != 0){
+            return BlocBuilder<BlocHomeBLMUpdateListSuggested, List<bool>>(
+              builder: (context, state){
+                return ListView.separated(
+                  physics: ClampingScrollPhysics(),
+                  itemCount: memorialSuggested.data.familyMemorialList.length,
+                  itemBuilder: (context, index){
+                    return MiscBLMManageMemoriaWithButton(index: index, tab: 1, title: memorialSuggested.data.familyMemorialList[index].page.name, content: memorialSuggested.data.familyMemorialList[index].page.details.description, memorialId: memorialSuggested.data.familyMemorialList[index].id);
+                  },
+                  separatorBuilder: (context, index){
+                    return Divider(height: 1, color: Colors.grey,);
+                  },
+                );
+              },
+            );
+          }else{
+            return Center(child: Text('Suggested memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),));
+          }
         }else if(memorialSuggested.hasError){
           return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
         }else{

@@ -23,45 +23,49 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       future: apiBLMHomeNotificationsTab(),
       builder: (context, notificationsTab){
         if(notificationsTab.hasData){
-          return Container(
-            height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 13),
-            color: Color(0xffffffff),
-            child: ListView.separated(
-              physics: ClampingScrollPhysics(),
-              itemCount: notificationsTab.data.notification.length,
-              itemBuilder: (context, index){
-                return MiscBLMNotificationDisplayTemplate(
-                  content: [
-                    TextSpan(
-                      text: '${notificationsTab.data.notification[index].action}\n',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff000000),
+          if(notificationsTab.data.notification.length != 0){
+            return Container(
+              height: SizeConfig.screenHeight - (AppBar().preferredSize.height + SizeConfig.blockSizeVertical * 13),
+              color: Color(0xffffffff),
+              child: ListView.separated(
+                physics: ClampingScrollPhysics(),
+                itemCount: notificationsTab.data.notification.length,
+                itemBuilder: (context, index){
+                  return MiscBLMNotificationDisplayTemplate(
+                    content: [
+                      TextSpan(
+                        text: '${notificationsTab.data.notification[index].action}\n',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xff000000),
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: '30 mins ago',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
+                      TextSpan(
+                        text: '30 mins ago',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xff888888),
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: '\n',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
+                      TextSpan(
+                        text: '\n',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 3,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xff888888),
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              }, 
-              separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
-            ),
-          );
+                    ],
+                  );
+                }, 
+                separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
+              ),
+            );
+          }else{
+            return Center(child: Text('Notification is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),));
+          }
         }else if(notificationsTab.hasError){
           return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
         }else{

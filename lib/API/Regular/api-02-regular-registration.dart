@@ -21,10 +21,12 @@ Future<String> apiRegularRegistration(APIRegularAccountRegistration account) asy
       var value = json.decode(response.body);
       var user = value['data'];
       int userId = user['id'];
+      String verificationCode = user['verification_code'];
 
       final sharedPrefs = await SharedPreferences.getInstance();
 
       sharedPrefs.setInt('regular-user-id', userId);
+      sharedPrefs.setString('regular-verification-code', verificationCode);
       sharedPrefs.setString('regular-access-token', response.headers['access-token']);
       sharedPrefs.setString('regular-uid', response.headers['uid']);    
       sharedPrefs.setString('regular-client', response.headers['client']);

@@ -45,10 +45,10 @@ class MiscRegularDropDownTemplate extends StatelessWidget{
               dropDownList = listValue;
               if(dropDownList == 'Share'){
                 await FlutterShare.share(
-                  title: 'Example share',
-                  text: 'Example share text',
+                  title: 'Share',
+                  text: 'Share the link',
                   linkUrl: 'https://flutter.dev/',
-                  chooserTitle: 'Example Chooser Title'
+                  chooserTitle: 'Share link'
                 );
               }else if(dropDownList == 'Report'){
                 // print('Report');

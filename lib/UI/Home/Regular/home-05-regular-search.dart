@@ -37,7 +37,7 @@ class HomeRegularSearch extends StatelessWidget{
                 filled: true,
                 fillColor: Color(0xffffffff),
                 focusColor: Color(0xffffffff),
-                hintText: 'Search a Post',
+                hintText: 'Search a Memorial',
                 hintStyle: TextStyle(
                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                 ),

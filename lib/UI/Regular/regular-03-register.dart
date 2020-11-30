@@ -4,6 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/API/Regular/api-02-regular-registration.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class RegularRegister extends StatelessWidget{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key3 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -50,15 +51,15 @@ class RegularRegister extends StatelessWidget{
                       child: Column(
                         children: [
 
-                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
                           
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                           
-                          MiscRegularInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                          MiscRegularInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                          MiscRegularInputFieldTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                          
+                          MiscRegularPhoneNumberTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -81,11 +82,13 @@ class RegularRegister extends StatelessWidget{
                               bool validEmail = false;
                               validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState.controller.text );
 
-                              if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' ||
+                              if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' ||
                                 _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
                                 await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                               }else if(!validEmail){
                                 await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                              }else if(!_key3.currentState.valid){
+                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid phone number. Please try again.', confirmText: 'OK',),);
                               }else{
                                 APIRegularAccountRegistration account = APIRegularAccountRegistration(
                                   firstName: _key1.currentState.controller.text, 
@@ -101,7 +104,9 @@ class RegularRegister extends StatelessWidget{
                                 context.hideLoaderOverlay();
 
                                 if(result == 'Success'){
-                                  Navigator.pushNamed(context, '/regular/regular-04-verify-email');
+                                  final sharedPrefs = await SharedPreferences.getInstance();
+                                  String verificationCode = sharedPrefs.getString('regular-verification-code');
+                                  Navigator.pushNamed(context, '/regular/regular-04-verify-email', arguments: verificationCode);
                                 }else{
                                   await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: result));
                                 }

@@ -23,6 +23,8 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    String verificationCode = ModalRoute.of(context).settings.arguments;
+    controller.text = verificationCode;
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocUpdateButtonText>(create: (context) => BlocUpdateButtonText(),),

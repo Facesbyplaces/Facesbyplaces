@@ -11,7 +11,9 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial() async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+    // 'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+    'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
+    // 'http://fbp.dev1.koda.ws/api/v1/pages/blm/19',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -20,8 +22,8 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial() async{
     }
   );
 
-  print('The status code of show memorial is ${response.statusCode}');
-  print('The status body of show memorial is ${response.body}');
+  print('The status code of show memorial heheh is ${response.statusCode}');
+  print('The status body of show memorial heheh is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -39,7 +41,7 @@ class APIBLMShowMemorialMain{
 
   factory APIBLMShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialMain(
-      memorial: APIBLMShowMemorialExtended.fromJson(parsedJson['memorial']),
+      memorial: APIBLMShowMemorialExtended.fromJson(parsedJson['blm']),
     );
   }
 }

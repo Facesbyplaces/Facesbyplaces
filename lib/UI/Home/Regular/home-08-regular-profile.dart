@@ -508,6 +508,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         Column(
                                           children: [
                                             MiscRegularPost(
+                                              userId: profilePost.data.familyMemorialList[index].page.id,
+                                              postId: profilePost.data.familyMemorialList[index].id,
+                                              memorialId: profilePost.data.familyMemorialList[index].page.id,
                                               contents: [
                                                 Column(
                                                   children: [
@@ -550,7 +553,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                                           ],
-                                        ),                                      
+                                        ),
                                       ),
                                     );
                                   }else if(profilePost.hasError){
@@ -611,86 +614,3 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     );
   }
 }
-
-
-                //                               return Column(
-                //   children: [
-                //     MiscRegularPost(
-                //       contents: [
-                //         Column(
-                //           children: [
-                //             Align(
-                //               alignment: Alignment.topLeft,
-                //               child: RichText(
-                //                 maxLines: 4,
-                //                 overflow: TextOverflow.clip,
-                //                 textAlign: TextAlign.left,
-                //                 text: TextSpan(
-                //                   text: postTab.data.familyMemorialList[index].body,
-                //                   style: TextStyle(
-                //                     fontWeight: FontWeight.w300,
-                //                     color: Color(0xff000000),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-
-                //             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                //           ],
-                //         ),
-
-
-                //         postTab.data.familyMemorialList[index].imagesOrVideos != null
-                //         ? Container(
-                //           height: SizeConfig.blockSizeHorizontal * 50,
-                //           decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                //             image: DecorationImage(
-                //               fit: BoxFit.cover,
-                //               image: NetworkImage(postTab.data.familyMemorialList[index].imagesOrVideos[0]),
-                //             ),
-                //           ),
-                //         )
-                //         : Container(height: 0,),
-                //       ],
-                //     ),
-
-                //     SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                //   ],
-                // );
-                              
-                              // child: Column(
-                              //   children: [
-                              //     MiscRegularPost(
-                              //       contents: [
-                              //         Container(
-                              //           height: SizeConfig.blockSizeHorizontal * 50,
-                              //           decoration: BoxDecoration(
-                              //             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              //             image: DecorationImage(
-                              //               fit: BoxFit.cover,
-                              //               image: AssetImage('assets/icons/regular-image4.png'),
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-
-                              //     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                              //     MiscRegularPost(
-                              //       contents: [
-                              //         Container(
-                              //           height: SizeConfig.blockSizeHorizontal * 50,
-                              //           decoration: BoxDecoration(
-                              //             borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                              //             image: DecorationImage(
-                              //               fit: BoxFit.cover,
-                              //               image: AssetImage('assets/icons/regular-image2.png'),
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ),
-                              //   ],
-                              // ),

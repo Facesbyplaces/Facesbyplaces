@@ -26,6 +26,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   File videoFile;
   final picker = ImagePicker();
   VideoPlayerController videoPlayerController;
+  String location = '';
+  String person = '';
 
   Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -98,11 +100,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                             APIBLMCreatePost post = APIBLMCreatePost(
                               pageType: 'Blm',
                               postBody: _key1.currentState.controller.text,
-                              location: 'Bacolod',
+                              location: location,
                               imagesOrVideos: newFile,
                               latitude: '0.2323232',
                               longitude: '0.2323232',
-                              tagPeople: '2'
+                              tagPeople: '1'
                             );
                             
                             context.bloc<BlocShowLoading>().modify(true);
@@ -183,6 +185,36 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               }()),
                             ),
 
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                            Container(
+                              child: Row(
+                                children: [
+                                  location != ''
+                                  ? Text('at')
+                                  : Text(''),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  Text(location, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  person != ''
+                                  ? Text('with')
+                                  : Text(''),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  Text(person, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
+                                ],
+                              ), 
+                              padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                              alignment: Alignment.centerLeft,
+                            ),
+
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
                             Container(
                               padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                               height: SizeConfig.blockSizeVertical * 20,
@@ -193,7 +225,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                       onTap: () async{
                                         var result = await Navigator.pushNamed(context, '/home/blm/home-19-02-blm-create-post');
 
-                                        print('The result is $result');
+                                        location = result.toString();
                                       },
                                       child: Container(
                                         color: Colors.transparent,
@@ -215,7 +247,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                         
                                         var result = await Navigator.pushNamed(context, '/home/blm/home-19-03-blm-create-post');
 
-                                        print('The result is $result');
+                                        person = result.toString();
                                       },
                                       child: Container(
                                         color: Colors.transparent,

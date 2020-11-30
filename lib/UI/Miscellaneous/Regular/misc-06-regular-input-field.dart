@@ -3,6 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
   final String labelText;
@@ -79,6 +80,72 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   }
 }
 
+class MiscRegularPhoneNumberTemplate extends StatefulWidget{
+  final String labelText;
+  final TextStyle labelTextStyle;
+  final bool obscureText;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final bool includeSuffixIcon;
+
+  MiscRegularPhoneNumberTemplate({
+    Key key,
+    this.labelText = '',
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.obscureText = false, 
+    this.type = TextInputType.text, 
+    this.maxLines = 1, 
+    this.readOnly = false,
+    this.includeSuffixIcon = false, 
+  }) : super(key: key);
+  
+
+  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon);
+}
+
+
+class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTemplate>{
+  final String labelText;
+  final TextStyle labelTextStyle;
+  final bool obscureText;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final bool includeSuffixIcon;
+
+  MiscRegularPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon});
+
+  TextEditingController controller = TextEditingController();
+  bool valid = false;
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return InternationalPhoneNumberInput(
+      selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+      textFieldController: controller,
+      onInputChanged: (PhoneNumber number){
+        print(number.phoneNumber);
+      },
+      onInputValidated: (bool value) {
+        setState(() {
+          valid = value;
+        });
+      },
+      inputDecoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: labelText,
+        labelStyle: labelTextStyle,
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
   final String labelText;

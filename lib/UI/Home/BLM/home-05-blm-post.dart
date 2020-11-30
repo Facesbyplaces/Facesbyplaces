@@ -48,7 +48,7 @@ class HomeBLMPost extends StatelessWidget{
                   filled: true,
                   fillColor: Color(0xffffffff),
                   focusColor: Color(0xffffffff),
-                  hintText: 'Search Family',
+                  hintText: 'Search Memorial',
                   hintStyle: TextStyle(
                     fontSize: SizeConfig.safeBlockHorizontal * 4,
                   ),
