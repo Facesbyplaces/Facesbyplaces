@@ -1,6 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :page, :body, :location, :latitude, :longitude, :imagesOrVideos, :user, :tag_people
+  attributes :id, :page, :body, :location, :latitude, :longitude, :imagesOrVideos, :user, :tag_people, :created_at
 
   def imagesOrVideos
     if object.imagesOrVideos.attached?

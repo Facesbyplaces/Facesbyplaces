@@ -29,6 +29,15 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     def memorials
         # Family
             blmFamily = Blm.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Father' or relationships.relationship = 'Mother' or relationships.relationship = 'Brother' or relationships.relationship = 'Sister' or relationships.relationship = 'Uncle' or relationships.relationship = 'Aunt' or relationships.relationship = 'Grandmother' or relationships.relationship = 'Grandfather'")
+            blmFamily = blmFamily.page(params[:page]).per(numberOfPage)
+
+            if blmFamily.total_count == 0 || (blmFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
+                blmFamilyItemsRemaining = 0
+            elsif blmFamily.total_count < numberOfPage
+                blmFamilyItemsRemaining = blmFamily.total 
+            else
+                blmFamilyItemsRemaining = blmFamily.total_count - (params[:page].to_i * numberOfPage)
+            end
 
             blmFamily = ActiveModel::SerializableResource.new(
                             blmFamily, 
@@ -36,6 +45,15 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         )
 
             memorialFamily = Memorial.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Father' or relationships.relationship = 'Mother' or relationships.relationship = 'Brother' or relationships.relationship = 'Sister' or relationships.relationship = 'Uncle' or relationships.relationship = 'Aunt' or relationships.relationship = 'Grandmother' or relationships.relationship = 'Grandfather'")
+            memorialFamily = memorialFamily.page(params[:page]).per(numberOfPage)
+
+            if memorialFamily.total_count == 0 || (memorialFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
+                memorialFamilyItemsRemaining = 0
+            elsif memorialFamily.total_count < numberOfPage
+                memorialFamilyItemsRemaining = memorialFamily.total 
+            else
+                memorialFamilyItemsRemaining = memorialFamily.total_count - (params[:page].to_i * numberOfPage)
+            end
 
             memorialFamily = ActiveModel::SerializableResource.new(
                             memorialFamily, 
@@ -44,6 +62,15 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         
         # Friends
             blmFriends = Blm.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Friend'")
+            blmFriends = blmFriends.page(params[:page]).per(numberOfPage)
+
+            if blmFriends.total_count == 0 || (blmFriends.total_count - (params[:page].to_i * numberOfPage)) < 0
+                blmFriendsItemsRemaining = 0
+            elsif blmFriends.total_count < numberOfPage
+                blmFriendsItemsRemaining = blmFriends.total 
+            else
+                blmFriendsItemsRemaining = blmFriends.total_count - (params[:page].to_i * numberOfPage)
+            end
             
             blmFriends = ActiveModel::SerializableResource.new(
                             blmFriends, 
@@ -51,6 +78,15 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         )
 
             memorialFriends = Memorial.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Friend'")
+            memorialFriends = memorialFriends.page(params[:page]).per(numberOfPage)
+
+            if memorialFriends.total_count == 0 || (memorialFriends.total_count - (params[:page].to_i * numberOfPage)) < 0
+                memorialFriendsItemsRemaining = 0
+            elsif memorialFriends.total_count < numberOfPage
+                memorialFriendsItemsRemaining = memorialFriends.total 
+            else
+                memorialFriendsItemsRemaining = memorialFriends.total_count - (params[:page].to_i * numberOfPage)
+            end
 
             memorialFriends = ActiveModel::SerializableResource.new(
                                 memorialFriends, 
@@ -59,11 +95,15 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
 
         render json: {
             family: {
+                blmFamilyItemsRemaining: blmFamilyItemsRemaining,
                 blm: blmFamily,
+                memorialFamilyItemsRemaining: memorialFamilyItemsRemaining,
                 memorial: memorialFamily
             }, 
             friends: {
+                blmFriendsItemsRemaining: blmFriendsItemsRemaining,
                 blm: blmFriends,
+                memorialFriendsItemsRemaining: memorialFriendsItemsRemaining,
                 memorial: memorialFriends
             }
         }
