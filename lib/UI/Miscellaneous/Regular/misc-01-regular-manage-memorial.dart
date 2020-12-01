@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -34,10 +34,10 @@ class MiscRegularManageMemorialTab extends StatelessWidget{
 
               // print('The memorialId is $memorialId');
 
-              final sharedPrefs = await SharedPreferences.getInstance();
-              sharedPrefs.setInt('regular-user-memorial-id', memorialId);
+              // final sharedPrefs = await SharedPreferences.getInstance();
+              // sharedPrefs.setInt('regular-user-memorial-id', memorialId);
 
-              Navigator.pushNamed(context, '/home/regular/home-08-regular-memorial-profile');
+              Navigator.pushNamed(context, '/home/regular/home-08-regular-memorial-profile', arguments: memorialId);
             },
             child: Container(
               height: SizeConfig.blockSizeVertical * 15,

@@ -37,8 +37,9 @@ class APIRegularHomeTabNotificationMain{
 
   APIRegularHomeTabNotificationMain({this.notification});
 
-  factory APIRegularHomeTabNotificationMain.fromJson(List<dynamic> parsedJson){
-    List<APIRegularHomeTabNotificationExtended> newNotification = parsedJson.map((e) => APIRegularHomeTabNotificationExtended.fromJson(e)).toList();
+  factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic>  parsedJson){
+    var newList = parsedJson['notifs'] as List;
+    List<APIRegularHomeTabNotificationExtended> newNotification = newList.map((i) => APIRegularHomeTabNotificationExtended.fromJson(i)).toList();
 
     return APIRegularHomeTabNotificationMain(
       notification: newNotification,

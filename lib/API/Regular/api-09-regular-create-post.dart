@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 
-Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
+Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post, int memorialId) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
-  int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
+  // int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabPostMain> apiRegularHomePostTab() async{
+Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -10,7 +10,7 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab() async{
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=1',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,13 +32,14 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab() async{
 
 
 class APIRegularHomeTabPostMain{
-
+  int itemsRemaining;
   List<APIRegularHomeTabPostExtended> familyMemorialList;
 
   APIRegularHomeTabPostMain({this.familyMemorialList});
 
-  factory APIRegularHomeTabPostMain.fromJson(List<dynamic> parsedJson){
-    List<APIRegularHomeTabPostExtended> familyMemorials = parsedJson.map((e) => APIRegularHomeTabPostExtended.fromJson(e)).toList();
+  factory APIRegularHomeTabPostMain.fromJson(Map<String, dynamic> parsedJson){
+    var newList = parsedJson['posts'] as List;
+    List<APIRegularHomeTabPostExtended> familyMemorials = newList.map((i) => APIRegularHomeTabPostExtended.fromJson(i)).toList();
 
     return APIRegularHomeTabPostMain(
       familyMemorialList: familyMemorials,

@@ -5,6 +5,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomeRegularProfile extends StatefulWidget{
@@ -17,11 +18,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
   final List<String> images = ['assets/icons/regular-image1.png', 'assets/icons/regular-image2.png', 'assets/icons/regular-image3.png', 'assets/icons/regular-image4.png'];
 
-  void initState(){
-    super.initState();
-    apiRegularShowMemorial();
-    apiRegularProfilePost();
-  }
+  // void initState(){
+  //   super.initState();
+  //   apiRegularShowMemorial(0);
+  //   apiRegularProfilePost(0);
+  // }
 
   String convertDate(String input){
     DateTime dateTime = DateTime.parse(input);
@@ -35,12 +36,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    int memorialId = ModalRoute.of(context).settings.arguments;
+    print('The profile memorial id $memorialId');
     return Scaffold(
       backgroundColor: Color(0xffeeeeee),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIRegularShowMemorialMain>(
-          future: apiRegularShowMemorial(),
+          future: apiRegularShowMemorial(memorialId),
           builder: (context, showProfile){
             if(showProfile.hasData){
               return Stack(
@@ -92,7 +95,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 alignment: Alignment.topRight,
                                 child: GestureDetector(
                                   onTap: (){
-                                    Navigator.pushNamed(context, 'home/regular/home-09-regular-create-post');
+                                    Navigator.pushNamed(context, 'home/regular/home-09-regular-create-post', arguments: memorialId);
                                   },
                                   child: Text('Create Post',
                                     style: TextStyle(
@@ -231,7 +234,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   ),
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: (){},
+                                      onTap: () async{
+                                        await FlutterShare.share(
+                                          title: 'Share',
+                                          text: 'Share the link',
+                                          linkUrl: 'https://flutter.dev/',
+                                          chooserTitle: 'Share link'
+                                        );
+                                      },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,
                                         backgroundColor: Color(0xff3498DB),
@@ -340,7 +350,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       children: [
                                         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('26',
+                                        Text('0',
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 5,
                                             fontWeight: FontWeight.bold,
@@ -367,7 +377,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('526',
+                                          Text('0',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -395,7 +405,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('526',
+                                          Text('0',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -423,7 +433,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('14.4K',
+                                          Text('0',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -500,7 +510,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                             Padding(
                               padding: EdgeInsets.all(20.0),
                               child: FutureBuilder<APIRegularHomeProfilePostMain>(
-                                future: apiRegularProfilePost(),
+                                future: apiRegularProfilePost(memorialId),
                                 builder: (context, profilePost){
                                   if(profilePost.hasData){
                                     return Column(
@@ -511,6 +521,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                               userId: profilePost.data.familyMemorialList[index].page.id,
                                               postId: profilePost.data.familyMemorialList[index].id,
                                               memorialId: profilePost.data.familyMemorialList[index].page.id,
+                                              memorialName: profilePost.data.familyMemorialList[index].page.name,
+                                              profileImage: profilePost.data.familyMemorialList[index].page.profileImage,
                                               contents: [
                                                 Column(
                                                   children: [

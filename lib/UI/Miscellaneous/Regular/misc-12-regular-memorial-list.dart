@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +7,9 @@ class MiscRegularManageMemoriaWithButton extends StatelessWidget{
 
   final int index;
   final int tab;
-  final String iconImage;
-  final String title;
-  final String content;
+  final String profileImage;
+  final String memorialName;
+  final String memorialDescription;
   final String frontTextButton;
   final String backTextButton;
   final Color frontTextColorButton;
@@ -20,9 +19,9 @@ class MiscRegularManageMemoriaWithButton extends StatelessWidget{
   MiscRegularManageMemoriaWithButton({
     this.index, 
     this.tab,
-    this.iconImage = 'assets/icons/profile1.png',
-    this.title = 'Memorial',
-    this.content = 'Memorial content',
+    this.profileImage,
+    this.memorialName,
+    this.memorialDescription,
     this.frontTextButton = 'Leave', 
     this.backTextButton = 'Join',
     this.frontTextColorButton = const Color(0xffffffff),
@@ -35,10 +34,12 @@ class MiscRegularManageMemoriaWithButton extends StatelessWidget{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-        final sharedPrefs = await SharedPreferences.getInstance();
-        sharedPrefs.setInt('regular-user-memorial-id', memorialId);
+        print('The memorial in with button is $memorialId');
+        print('lkjasdflkj');
+        // final sharedPrefs = await SharedPreferences.getInstance();
+        // sharedPrefs.setInt('regular-user-memorial-id', memorialId);
 
-        Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial');
+        Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial', arguments: memorialId);
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
@@ -46,10 +47,11 @@ class MiscRegularManageMemoriaWithButton extends StatelessWidget{
         child: Row(
           children: [
             Expanded(
-              child: CircleAvatar(
-                maxRadius: SizeConfig.blockSizeVertical * 5,
-                backgroundImage: AssetImage(iconImage),
-              ),
+              // child: CircleAvatar(
+              //   maxRadius: SizeConfig.blockSizeVertical * 5,
+              //   backgroundImage: AssetImage(iconImage),
+              // ),
+              child: CircleAvatar(maxRadius: SizeConfig.blockSizeVertical * 5, backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
             ),
             Expanded(
               flex: 2,
@@ -58,7 +60,7 @@ class MiscRegularManageMemoriaWithButton extends StatelessWidget{
                   Expanded(
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(title,
+                      child: Text(memorialName,
                         style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 4,
                           fontWeight: FontWeight.bold,
@@ -70,7 +72,7 @@ class MiscRegularManageMemoriaWithButton extends StatelessWidget{
                   Expanded(
                     child: Align(
                       alignment: Alignment.topLeft,
-                      child: Text(content,
+                      child: Text(memorialDescription,
                         style: TextStyle(
                           fontSize: SizeConfig.safeBlockHorizontal * 3,
                           fontWeight: FontWeight.w200,

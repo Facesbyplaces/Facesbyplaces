@@ -1,37 +1,58 @@
+import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeProfilePostMain> apiRegularProfilePost() async{
+Future<APIRegularHomeProfilePostMain> apiRegularProfilePost(int memorialId) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
+  // int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=1',
-    // 'http://fbp.dev1.koda.ws/api/v1/posts/$memorialId',
+  AsyncMemoizer memoizer = AsyncMemoizer();
 
-    'http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
+  var value = await memoizer.runOnce(() async{
+    final http.Response response = await http.get(
+      // 'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=1',
+      // 'http://fbp.dev1.koda.ws/api/v1/posts/$memorialId',
+
+      'http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    print('The response status in profile posts is ${response.statusCode}');
+    print('The response status in profile posts is ${response.body}');
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      return APIRegularHomeProfilePostMain.fromJson(newValue);
+    }else{
+      throw Exception('Failed to get the post');
     }
-  );
+  });
 
-  print('The response status in profile posts is ${response.statusCode}');
-  print('The response status in profile posts is ${response.body}');
+  // final http.Response response = await http.get(
+  //   // 'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=1',
+  //   // 'http://fbp.dev1.koda.ws/api/v1/posts/$memorialId',
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularHomeProfilePostMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the post');
-  }
+  //   'http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId',
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  return value;
+
 }
 
 

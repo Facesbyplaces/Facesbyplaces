@@ -156,13 +156,14 @@ Future<APIBLMHomeTabPostMain> apiBLMHomePostTab() async{
 
 
 class APIBLMHomeTabPostMain{
-
+  int itemsRemaining;
   List<APIBLMHomeTabPostExtended> familyMemorialList;
 
   APIBLMHomeTabPostMain({this.familyMemorialList});
 
-  factory APIBLMHomeTabPostMain.fromJson(List<dynamic> parsedJson){
-    List<APIBLMHomeTabPostExtended> familyMemorials = parsedJson.map((e) => APIBLMHomeTabPostExtended.fromJson(e)).toList();
+  factory APIBLMHomeTabPostMain.fromJson(Map<String, dynamic> parsedJson){
+    var newList = parsedJson['posts'] as List;
+    List<APIBLMHomeTabPostExtended> familyMemorials = newList.map((i) => APIBLMHomeTabPostExtended.fromJson(i)).toList();
 
     return APIBLMHomeTabPostMain(
       familyMemorialList: familyMemorials,

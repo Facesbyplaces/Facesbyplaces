@@ -176,10 +176,12 @@ class MiscBLMManageMemoriaWithButton extends StatelessWidget{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-        final sharedPrefs = await SharedPreferences.getInstance();
-        sharedPrefs.setInt('blm-user-memorial-id', memorialId);
+        print('The memorial id in manage is $memorialId');
 
-        Navigator.pushNamed(context, '/home/blm/home-08-blm-memorial');
+        // final sharedPrefs = await SharedPreferences.getInstance();
+        // sharedPrefs.setInt('blm-user-memorial-id', memorialId);
+
+        Navigator.pushNamed(context, '/home/blm/home-08-blm-memorial', arguments: memorialId);
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,

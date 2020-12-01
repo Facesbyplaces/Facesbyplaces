@@ -123,6 +123,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                         userId: feedTab.data.familyMemorialList[index].page.id,
                         postId: feedTab.data.familyMemorialList[index].id,
                         memorialId: feedTab.data.familyMemorialList[index].page.id,
+                        memorialName: feedTab.data.familyMemorialList[index].page.name,
+                        profileImage: feedTab.data.familyMemorialList[index].page.profileImage,
                         contents: [
                           Column(
                             children: [

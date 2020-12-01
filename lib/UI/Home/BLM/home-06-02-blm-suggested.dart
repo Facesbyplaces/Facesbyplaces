@@ -34,7 +34,7 @@ class HomeBLMSuggestedState extends State<HomeBLMSuggested>{
                   physics: ClampingScrollPhysics(),
                   itemCount: memorialSuggested.data.familyMemorialList.length,
                   itemBuilder: (context, index){
-                    return MiscBLMManageMemoriaWithButton(index: index, tab: 1, title: memorialSuggested.data.familyMemorialList[index].page.name, content: memorialSuggested.data.familyMemorialList[index].page.details.description, memorialId: memorialSuggested.data.familyMemorialList[index].id);
+                    return MiscBLMManageMemoriaWithButton(index: index, tab: 1, title: memorialSuggested.data.familyMemorialList[index].page.name, content: memorialSuggested.data.familyMemorialList[index].page.details.description, memorialId: memorialSuggested.data.familyMemorialList[index].page.id);
                   },
                   separatorBuilder: (context, index){
                     return Divider(height: 1, color: Colors.grey,);

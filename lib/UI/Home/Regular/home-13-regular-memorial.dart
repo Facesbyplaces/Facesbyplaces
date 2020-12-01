@@ -1,3 +1,5 @@
+import 'package:async/async.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/API/Regular/api-10-regular-show-memorial.dart';
 import 'package:facesbyplaces/API/Regular/api-12-regular-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/api-16-regular-follow-page.dart';
@@ -5,6 +7,7 @@ import 'package:facesbyplaces/API/Regular/api-17-regular-unfollow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +20,21 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
 
-  void initState(){
-    super.initState();
-    apiRegularShowMemorial();
-    apiRegularProfilePost();
-  }
+  // Future showMemorial;
+  // Future showProfilePost;
+
+  // AsyncMemoizer showMemorial;
+  // AsyncMemoizer showProfilePost;
+
+  // void initState(){
+  //   super.initState();
+  //   // showMemorial = apiRegularShowMemorial(76);
+  //   // showProfilePost = apiRegularProfilePost();
+  //   showMemorial = AsyncMemoizer();
+  //   showProfilePost = AsyncMemoizer();
+  // }
+
+  bool join = false;
 
   String convertDate(String input){
     DateTime dateTime = DateTime.parse(input);
@@ -35,11 +48,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    int memorialId = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIRegularShowMemorialMain>(
-          future: apiRegularShowMemorial(),
+          future: apiRegularShowMemorial(memorialId),
           builder: (context, showProfile){
             if(showProfile.hasData){
               return Stack(
@@ -194,11 +208,20 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                             result = await apiRegularFollowPage(showProfile.data.memorial.id);
                                           }
 
+                                          // if(join){
+                                          //   result = await apiRegularUnfollowPage(showProfile.data.memorial.id);
+                                          // }else{
+                                          //   result = await apiRegularFollowPage(showProfile.data.memorial.id);
+                                          // }
+
                                           print('The value is $result');
                                           
                                         },
                                         child: Text(
-                                          showProfile.data.memorial.follower
+                                          // showProfile.data.memorial.follower
+                                          // ? 'Unjoin'
+                                          // : 'Join',
+                                          join
                                           ? 'Unjoin'
                                           : 'Join',
                                           style: TextStyle(
@@ -218,7 +241,14 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   ),
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: (){},
+                                      onTap: () async{
+                                        await FlutterShare.share(
+                                          title: 'Share',
+                                          text: 'Share the link',
+                                          linkUrl: 'https://flutter.dev/',
+                                          chooserTitle: 'Share link'
+                                        );
+                                      },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,
                                         backgroundColor: Color(0xff3498DB),
@@ -327,7 +357,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       children: [
                                         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('26',
+                                        Text('0',
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 5,
                                             fontWeight: FontWeight.bold,
@@ -354,7 +384,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('526',
+                                          Text('0',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -382,7 +412,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('526',
+                                          Text('0',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -410,7 +440,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('14.4K',
+                                          Text('0',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -487,7 +517,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             Padding(
                               padding: EdgeInsets.all(20.0),
                               child: FutureBuilder<APIRegularHomeProfilePostMain>(
-                                future: apiRegularProfilePost(),
+                                future: apiRegularProfilePost(memorialId),
+                                // future: showProfilePost,
                                 builder: (context, profilePost){
                                   if(profilePost.hasData){
                                     return Column(
@@ -498,6 +529,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                               userId: profilePost.data.familyMemorialList[index].page.id,
                                               postId: profilePost.data.familyMemorialList[index].id,
                                               memorialId: profilePost.data.familyMemorialList[index].page.id,
+                                              memorialName: profilePost.data.familyMemorialList[index].page.name,
+                                              profileImage: profilePost.data.familyMemorialList[index].page.profileImage,
                                               contents: [
                                                 Column(
                                                   children: [
@@ -522,15 +555,29 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 ),
 
 
+                                                // profilePost.data.familyMemorialList[index].imagesOrVideos != null
+                                                // ? Container(
+                                                //   height: SizeConfig.blockSizeHorizontal * 50,
+                                                //   decoration: BoxDecoration(
+                                                //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                //     image: DecorationImage(
+                                                //       fit: BoxFit.cover,
+                                                //       image: NetworkImage(profilePost.data.familyMemorialList[index].imagesOrVideos[0]),
+                                                //     ),
+                                                //   ),
+                                                // )
+                                                // : Container(height: 0,),
+
                                                 profilePost.data.familyMemorialList[index].imagesOrVideos != null
                                                 ? Container(
                                                   height: SizeConfig.blockSizeHorizontal * 50,
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: NetworkImage(profilePost.data.familyMemorialList[index].imagesOrVideos[0]),
-                                                    ),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: profilePost.data.familyMemorialList[index].imagesOrVideos[0],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Icon(Icons.error),
                                                   ),
                                                 )
                                                 : Container(height: 0,),
@@ -567,12 +614,27 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                         children: [
                           Expanded(child: Container(),),
                           Expanded(
+                            // child: CircleAvatar(
+                            //   radius: SizeConfig.blockSizeVertical * 10,
+                            //   backgroundColor: Color(0xff04ECFF),
+                            //   child: Container(
+                            //     height: SizeConfig.blockSizeVertical * 17,
+                            //     child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
+                            //   ),
+                            // ),
+
                             child: CircleAvatar(
-                              radius: SizeConfig.blockSizeVertical * 10,
+                              radius: SizeConfig.blockSizeVertical * 12,
                               backgroundColor: Color(0xff04ECFF),
-                              child: Container(
-                                height: SizeConfig.blockSizeVertical * 17,
-                                child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
+                              child: Padding(
+                                padding: EdgeInsets.all(5),
+                                  child: CircleAvatar(
+                                  radius: SizeConfig.blockSizeVertical * 12,
+                                  backgroundColor: Color(0xff888888),
+                                  backgroundImage: showProfile.data.memorial.profileImage != null
+                                  ? NetworkImage(showProfile.data.memorial.profileImage)
+                                  : AssetImage('assets/icons/graveyard.png'),
+                                ),
                               ),
                             ),
                           ),
