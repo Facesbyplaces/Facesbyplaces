@@ -8,9 +8,21 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     .order(created_at: :desc)
                     .select("posts.*")
         
-        # pagy =  pagy(posts)
-        
-        paginate posts, per_page: numberOfPage
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            itemsremaining = posts.total 
+        else
+            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        posts: ActiveModel::SerializableResource.new(
+                            posts, 
+                            each_serializer: PostSerializer
+                        )
+                    }
     end
 
     # user's memorials
@@ -62,14 +74,39 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         # Posts that they created or owned
         posts = Post.where(user: user()).order(created_at: :desc)
         
-        paginate posts, per_page: numberOfPage
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            itemsremaining = posts.total 
+        else
+            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        posts: ActiveModel::SerializableResource.new(
+                            posts, 
+                            each_serializer: PostSerializer
+                        )
+                    }
     end
 
     # user's notifications
     def notifications
         notifs = user().notifications.order(created_at: :desc)
+        
+        notifs = notifs.page(params[:page]).per(numberOfPage)
+        if notifs.total_count == 0 || (notifs.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif notifs.total_count < numberOfPage
+            itemsremaining = notifs.total 
+        else
+            itemsremaining = notifs.total_count - (params[:page].to_i * numberOfPage)
+        end
 
-        paginate notifs, per_page: numberOfPage
+        render json: {  itemsremaining:  itemsremaining,
+                        notifs: notifs
+                    }
     end
     
 end
