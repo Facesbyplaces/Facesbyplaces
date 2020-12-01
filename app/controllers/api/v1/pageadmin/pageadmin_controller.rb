@@ -67,12 +67,6 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
     end
 
-    def removeFamily
-        family = Relationship.find(params[:id])
-        family.destroy 
-        render json: {status: "Deleted Successfully"}
-    end
-
     def addFriend
         # check if relationship already exists
         if @page.relationships.where(user: @user).first == nil
@@ -89,10 +83,17 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
     end
 
-    def removeFriend
-        friend = Relationship.find(params[:id])
-        friend.destroy 
-        render json: {status: "Deleted Successfully"}
+    def removeFamilyorFriend
+        # check if relation exist or not
+        if @page.relationships.where(user: @user).first != nil
+            if @page.relationships.where(user: @user).first.destroy 
+                render json: {status: "Deleted Successfully"}
+            else
+                render json: {}, status: 500
+            end
+        else
+            render json: {}, status: 404
+        end
     end
 
     def editPost
