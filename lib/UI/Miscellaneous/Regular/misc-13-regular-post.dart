@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-04-regular-dropdown.dart';
 import 'misc-07-regular-button.dart';
@@ -14,8 +14,10 @@ class MiscRegularPost extends StatelessWidget{
   final int userId;
   final int postId;
   final int memorialId;
+  final dynamic profileImage;
+  final String memorialName;
 
-  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId});
+  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = ''});
 
   @override
   Widget build(BuildContext context){
@@ -41,16 +43,15 @@ class MiscRegularPost extends StatelessWidget{
               children: [
                 GestureDetector(
                   onTap: () async{
-                    print('The memorialId is $memorialId');
+                    // print('The memorialId is $memorialId');
 
-                    final sharedPrefs = await SharedPreferences.getInstance();
-                    sharedPrefs.setInt('regular-user-memorial-id', memorialId);
+                    // final sharedPrefs = await SharedPreferences.getInstance();
+                    // sharedPrefs.setInt('regular-user-memorial-id', memorialId);
 
-                    Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial');
-
+                    Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial', arguments: memorialId);
 
                   },
-                  child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile2.png'),),
+                  child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
                 ),
                 Expanded(
                   child: Container(
@@ -59,7 +60,7 @@ class MiscRegularPost extends StatelessWidget{
                       children: [
                         Expanded(
                           child: Align(alignment: Alignment.bottomLeft,
-                            child: Text('Sara Rosario Suarez Sara Rosario Suarez',
+                            child: Text(memorialName,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 4,

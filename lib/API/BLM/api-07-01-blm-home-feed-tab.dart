@@ -35,13 +35,14 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab() async{
 }
 
 class APIBLMHomeTabFeedMain{
-
+  int itemsRemaining;
   List<APIBLMHomeTabFeedExtended> familyMemorialList;
 
   APIBLMHomeTabFeedMain({this.familyMemorialList});
 
-  factory APIBLMHomeTabFeedMain.fromJson(List<dynamic> parsedJson){
-    List<APIBLMHomeTabFeedExtended> familyMemorials = parsedJson.map((e) => APIBLMHomeTabFeedExtended.fromJson(e)).toList();
+  factory APIBLMHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
+    var newList = parsedJson['posts'] as List;
+    List<APIBLMHomeTabFeedExtended> familyMemorials = newList.map((i) => APIBLMHomeTabFeedExtended.fromJson(i)).toList();
 
     return APIBLMHomeTabFeedMain(
       familyMemorialList: familyMemorials,

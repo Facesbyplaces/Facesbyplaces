@@ -40,6 +40,8 @@ class HomeRegularPostExtendedState extends State<HomeRegularPostExtended>{
                       userId: searchPost.data.familyMemorialList[index].page.id,
                       postId: searchPost.data.familyMemorialList[index].id,
                       memorialId: searchPost.data.familyMemorialList[index].page.id,
+                      memorialName: searchPost.data.familyMemorialList[index].page.name,
+                      profileImage: searchPost.data.familyMemorialList[index].page.profileImage,
                       contents: [
                         Column(
                           children: [

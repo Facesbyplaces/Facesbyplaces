@@ -30,6 +30,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   File videoFile;
   final picker = ImagePicker();
   VideoPlayerController videoPlayerController;
+  String location = '';
+  String person = '';
 
   Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -62,6 +64,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    int memorialId = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -104,15 +107,15 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             APIRegularCreatePost post = APIRegularCreatePost(
                               pageType: 'Memorial',
                               postBody: _key1.currentState.controller.text,
-                              location: 'Bacolod',
+                              location: location,
                               imagesOrVideos: newFile,
                               latitude: '0.2323232',
                               longitude: '0.2323232',
-                              tagPeople: '2'
+                              tagPeople: '1'
                             );
                             
                             context.bloc<BlocShowLoading>().modify(true);
-                            bool result = await apiRegularHomeCreatePost(post);
+                            bool result = await apiRegularHomeCreatePost(post, memorialId);
                             context.bloc<BlocShowLoading>().modify(false);
 
                             if(result){
@@ -164,6 +167,36 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             // ? Container(height: 0,)
                             // : Container(height: SizeConfig.blockSizeVertical * 25, width: SizeConfig.screenWidth, padding: EdgeInsets.only(left: 20.0, right: 20.0,), child: Image.asset(imageFile.path, fit: BoxFit.cover),),
 
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                            Container(
+                              child: Row(
+                                children: [
+                                  location != ''
+                                  ? Text('at')
+                                  : Text(''),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  Text(location, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  person != ''
+                                  ? Text('with')
+                                  : Text(''),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  Text(person, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
+                                ],
+                              ), 
+                              padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                              alignment: Alignment.centerLeft,
+                            ),
+
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
                             Container(
                               child: ((){
                                 if(imageFile != null){
@@ -205,7 +238,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       onTap: () async{
                                         var result = await Navigator.pushNamed(context, 'home/regular/home-09-02-regular-create-post');
 
-                                        print('The result is $result');
+                                        location = result.toString();
                                       },
                                       child: Container(
                                         color: Colors.transparent,
@@ -226,8 +259,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       onTap: () async{
                                         
                                         var result = await Navigator.pushNamed(context, 'home/regular/home-09-03-regular-create-post');
-
-                                        print('The result is $result');
+                                        person = result.toString();
                                       },
                                       child: Container(
                                         color: Colors.transparent,

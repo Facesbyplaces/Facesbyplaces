@@ -4,6 +4,7 @@ import 'package:facesbyplaces/API/BLM/api-15-blm-show-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -183,7 +184,14 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   ),
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: (){},
+                                      onTap: () async{
+                                        await FlutterShare.share(
+                                          title: 'Share',
+                                          text: 'Share the link',
+                                          linkUrl: 'https://flutter.dev/',
+                                          chooserTitle: 'Share link'
+                                        );
+                                      },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,
                                         backgroundColor: Color(0xff3498DB),
