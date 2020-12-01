@@ -1,6 +1,6 @@
 class Api::V1::Pages::BlmController < ApplicationController
     before_action :authenticate_user!, except: [:show]
-    before_action :authorize, except: [:create, :show, :setRelationship]
+    before_action :authorize, except: [:create, :show, :setRelationship, :leaveBLM]
     before_action :verify_user_account_type, except: [:show]
 
     def show
@@ -106,6 +106,36 @@ class Api::V1::Pages::BlmController < ApplicationController
             render json: {status: :success}
         else
             render json: {status: "You're not part of the family or friends"}
+        end
+    end
+
+    def leaveBLM        # leave blm page for family and friends
+        blm = Blm.find(params[:id])
+        if blm.relationships.where(user: user()).first != nil
+            # check if the user is a pageadmin
+            if user().has_role? :pageadmin, blm
+                if User.with_role(:pageadmin, blm).count != 1
+                    # remove user from the page
+                    if blm.relationships.where(user: user()).first.destroy 
+                        # remove role as a page admin
+                        user().remove_role :pageadmin, blm
+                        render json: {}, status: 200
+                    else
+                        render json: {}, status: 500
+                    end
+                else
+                    render json: {}, status: 406
+                end
+            else
+                # remove user from the page
+                if blm.relationships.where(user: user()).first.destroy 
+                    render json: {}, status: 200
+                else
+                    render json: {}, status: 500
+                end
+            end
+        else
+            render json: {}, status: 404
         end
     end
 

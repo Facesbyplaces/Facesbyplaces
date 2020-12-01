@@ -1,6 +1,6 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
-    before_action :authorize, except: [:create, :show, :setRelationship]
+    before_action :authorize, except: [:create, :show, :setRelationship, :leaveMemorial]
     before_action :verify_user_account_type, except: [:show]
 
     def show
@@ -110,6 +110,36 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             render json: {status: :success}
         else
             render json: {status: "You're not part of the family or friends"}
+        end
+    end
+
+    def leaveMemorial       # leave memorial page for family and friends
+        memorial = Memorial.find(params[:id])
+        if memorial.relationships.where(user: user()).first != nil
+            # check if the user is a pageadmin
+            if user().has_role? :pageadmin, memorial
+                if User.with_role(:pageadmin, memorial).count != 1
+                    # remove user from the page
+                    if memorial.relationships.where(user: user()).first.destroy 
+                        # remove role as a page admin
+                        user().remove_role :pageadmin, memorial
+                        render json: {}, status: 200
+                    else
+                        render json: {}, status: 500
+                    end
+                else
+                    render json: {}, status: 406
+                end
+            else
+                # remove user from the page
+                if memorial.relationships.where(user: user()).first.destroy 
+                    render json: {}, status: 200
+                else
+                    render json: {}, status: 500
+                end
+            end
+        else
+            render json: {}, status: 404
         end
     end
 

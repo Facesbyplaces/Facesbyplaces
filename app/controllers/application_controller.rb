@@ -65,11 +65,11 @@ class ApplicationController < ActionController::Base
         # end
         
         def known_error(exception)
-                return render json: {errors: exception}
+                return render json: {errors: exception}, status: 404
         end
 
         def lastPage
-              return render json: {errors: 'Page not Found'}  
+              return render json: {errors: 'Page not Found'}, status: 404
         end
 
         def numberOfPage

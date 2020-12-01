@@ -62,6 +62,9 @@ Rails.application.routes.draw do
 
           # Set relationship
           post 'memorials/relationship', to: 'memorials#setRelationship'
+
+          # Leave blm
+          delete 'memorials/:id/relationship/leave', to: 'memorials#leaveMemorial'
         
         # blm controller
           # Show memorial
@@ -89,6 +92,9 @@ Rails.application.routes.draw do
           
           # Set relationship
           post 'blm/relationship', to: 'blm#setRelationship'
+
+          # Leave blm
+          delete 'blm/:id/relationship/leave', to: 'blm#leaveBLM'
       end
       namespace :posts do
         # Post Index
