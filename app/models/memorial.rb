@@ -22,6 +22,10 @@ class Memorial < ApplicationRecord
 
     resourcify
 
+    # geocdoe
+    geocoded_by :cemetery
+    after_validation :geocode, if: :cemetery_changed?
+
     # page name
     def page_name
         "memorial"

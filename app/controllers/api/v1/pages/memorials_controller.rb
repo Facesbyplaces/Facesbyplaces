@@ -151,7 +151,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
     
     def memorial_params
-        params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, imagesOrVideos: [])
+        params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end
 
     def memorial_details_params

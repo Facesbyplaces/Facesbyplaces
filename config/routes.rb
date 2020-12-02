@@ -157,6 +157,8 @@ Rails.application.routes.draw do
         get 'users', to: 'search#users'
         # search followers
         get 'followers/:page_type/:page_id', to: 'search#followers'
+        # search nearby
+        get 'nearby', to: 'search#nearby'
       end
       namespace :followers do
         post '/', to: 'followers#follow'
