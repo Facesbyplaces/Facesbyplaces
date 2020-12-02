@@ -145,18 +145,62 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def familyIndex
         memorial = Memorial.find(params[:id])
+
+        family = memorial.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
+        if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif family.total_count < numberOfPage
+            itemsremaining = family.total 
+        else
+            itemsremaining = family.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {
+            itemsremaining: itemsremaining,
+            family: ActiveModel::SerializableResource.new(
+                        family, 
+                        each_serializer: RelationshipSerializer
+                    )
+        }
     end
 
     def friendsIndex
         memorial = Memorial.find(params[:id])
+
+        friends = memorial.relationships.where(relationship: 'Friend').page(params[:page]).per(numberOfPage)
+        if friends.total_count == 0 || (friends.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif friends.total_count < numberOfPage
+            itemsremaining = friends.total 
+        else
+            itemsremaining = friends.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {
+            itemsremaining: itemsremaining,
+            friends: ActiveModel::SerializableResource.new(
+                        friends, 
+                        each_serializer: RelationshipSerializer
+                    )
+        }
     end
 
     def followersIndex
         memorial = Memorial.find(params[:id])
 
         followers = memorial.users.page(params[:page]).per(numberOfPage)
+        if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif followers.total_count < numberOfPage
+            itemsremaining = followers.total 
+        else
+            itemsremaining = followers.total_count - (params[:page].to_i * numberOfPage)
+        end
 
-        render json: followers
+        render json: {
+            itemsremaining: itemsremaining,
+            followers: followers
+        }
     end
 
     private
