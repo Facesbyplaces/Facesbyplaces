@@ -1,4 +1,4 @@
-class OmniauthController < ApplicationController
+class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
     # facebook callback
     def facebook
         @user = User.create_from_provider_data(request.env['omniauth.auth'])
@@ -12,6 +12,7 @@ class OmniauthController < ApplicationController
     
     #google callback
     def google_oauth2
+        puts hi
         # You need to implement the method below in your model (e.g. app/models/user.rb)
         @user = User.from_omniauth(request.env['omniauth.auth'])
   
@@ -27,5 +28,4 @@ class OmniauthController < ApplicationController
         flash[:error] = "There was a problem signing you in. Please register or try signing in later."
         redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
-
 end

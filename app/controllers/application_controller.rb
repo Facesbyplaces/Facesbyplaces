@@ -102,6 +102,6 @@ class ApplicationController < ActionController::Base
         end
         
         def set_current_user
-            User.current = current_user
+            User.current.present? ? User.current = current_user : ""
         end
 end
