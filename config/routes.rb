@@ -6,10 +6,6 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  get   '/login', :to => 'logins#new', :as => :login
-  match '/auth/login/:provider/callback', :to => 'logins#create', :via => [:get, :post]
-  match '/auth/login/failure', :to => 'logins#failure', :via => [:get, :post]
-
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
 
@@ -19,8 +15,9 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
-        resources :image_upload, only: [:create]
+        resources :image_upload, only: [:update]
         resources :create_account_user, only: [:create]
+        resources :image_show, only: [:index]
       end
       namespace :reports do 
         resources :report, only: [:create]
