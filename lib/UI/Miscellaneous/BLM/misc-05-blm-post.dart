@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-02-blm-dialog.dart';
 import 'misc-04-blm-extra.dart';
@@ -726,8 +725,11 @@ class MiscBLMPost extends StatelessWidget{
   final int userId;
   final int postId;
   final int memorialId;
+  final dynamic profileImage;
+  final String memorialName;
+  final String timeCreated;
 
-  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId});
+  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = ''});
 
   @override
   Widget build(BuildContext context){
@@ -755,12 +757,12 @@ class MiscBLMPost extends StatelessWidget{
                   onTap: () async{
                     print('The memorialId is $memorialId');
 
-                    final sharedPrefs = await SharedPreferences.getInstance();
-                    sharedPrefs.setInt('blm-user-memorial-id', memorialId);
+                    // Navigator.pushNamed(context, '/home/blm/home-13-blm-user-profile');
 
-                    Navigator.pushNamed(context, '/home/blm/home-13-blm-user-profile');
+                    Navigator.pushNamed(context, '/home/blm/home-08-blm-memorial', arguments: memorialId);
+                    
                   },
-                  child: CircleAvatar(backgroundImage: AssetImage('assets/icons/profile1.png'),),
+                  child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
                 ),
                 Expanded(
                   child: Container(
@@ -769,7 +771,7 @@ class MiscBLMPost extends StatelessWidget{
                       children: [
                         Expanded(
                           child: Align(alignment: Alignment.bottomLeft,
-                            child: Text('Black Lives Matter',
+                            child: Text(memorialName,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -782,7 +784,7 @@ class MiscBLMPost extends StatelessWidget{
                         Expanded(
                           child: Align(
                             alignment: Alignment.topLeft,
-                            child: Text('an hour ago',
+                            child: Text(timeCreated,
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 3,

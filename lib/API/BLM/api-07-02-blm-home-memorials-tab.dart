@@ -9,8 +9,12 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab() async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('the access token is $getAccessToken');
+  print('the uid is $getUID');
+  print('the client is $getClient');
+
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -49,11 +53,14 @@ class APIBLMHomeTabMemorialMain{
 }
 
 class APIBLMHomeTabMemorialExtended{
-
+  int blmFamilyItemsRemaining;
+  int memorialFamilyItemsRemaining;
+  int blmFriendsItemsRemaining;
+  int memorialFriendsItemsRemaining;
   List<APIBLMHomeTabMemorialExtendedPage> blm;
   List<APIBLMHomeTabMemorialExtendedPage> memorial;
 
-  APIBLMHomeTabMemorialExtended({this.blm, this.memorial});
+  APIBLMHomeTabMemorialExtended({this.blm, this.memorial, this.blmFamilyItemsRemaining, this.memorialFamilyItemsRemaining, this.blmFriendsItemsRemaining, this.memorialFriendsItemsRemaining});
 
   factory APIBLMHomeTabMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -66,6 +73,10 @@ class APIBLMHomeTabMemorialExtended{
     return APIBLMHomeTabMemorialExtended(
       blm: newBLMList,
       memorial: newMemorialList,
+      blmFamilyItemsRemaining: parsedJson['blmFamilyItemsRemaining'],
+      memorialFamilyItemsRemaining: parsedJson['memorialFamilyItemsRemaining'],
+      blmFriendsItemsRemaining: parsedJson['blmFriendsItemsRemaining'],
+      memorialFriendsItemsRemaining: parsedJson['memorialFriendsItemsRemaining']
     );
   }
 }

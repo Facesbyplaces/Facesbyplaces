@@ -1,34 +1,42 @@
+import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeProfilePostMain> apiBLMProfilePost() async{
+Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
+  // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
+  AsyncMemoizer memoizer = AsyncMemoizer();
+
+  var value = await memoizer.runOnce(() async{
+    final http.Response response = await http.get(
+      'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    print('The response status in profile posts is ${response.statusCode}');
+    print('The response status in profile posts is ${response.body}');
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      return APIBLMHomeProfilePostMain.fromJson(newValue);
+    }else{
+      throw Exception('Failed to get the post');
     }
-  );
+  });
 
-  print('The response status in profile posts is ${response.statusCode}');
-  print('The response status in profile posts is ${response.body}');
+  return value;
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMHomeProfilePostMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the post');
-  }
 }
 
 
@@ -56,8 +64,9 @@ class APIBLMHomeProfilePostExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  String createAt;
 
-  APIBLMHomeProfilePostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
+  APIBLMHomeProfilePostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
 
   factory APIBLMHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -76,6 +85,7 @@ class APIBLMHomeProfilePostExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
+      createAt: parsedJson['created_at'],
     );
   }
 }

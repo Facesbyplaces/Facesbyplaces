@@ -57,8 +57,9 @@ class APIBLMSearchPostExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  String createAt;
 
-  APIBLMSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
+  APIBLMSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -77,6 +78,7 @@ class APIBLMSearchPostExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
+      createAt: parsedJson['created_at'],
     );
   }
 }

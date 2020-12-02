@@ -1,36 +1,43 @@
+import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowMemorialMain> apiBLMShowMemorial() async{
+Future<APIBLMShowMemorialMain> apiBLMShowMemorial(int memorialId) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
+  // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
-    'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
-    // 'http://fbp.dev1.koda.ws/api/v1/pages/blm/19',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
+  AsyncMemoizer memoizer = AsyncMemoizer();
+
+  var value = await memoizer.runOnce(() async{
+    final http.Response response = await http.get(
+      // 'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+      'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
+      // 'http://fbp.dev1.koda.ws/api/v1/pages/blm/19',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    print('The status code of show memorial heheh is ${response.statusCode}');
+    print('The status body of show memorial heheh is ${response.body}');
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      return APIBLMShowMemorialMain.fromJson(newValue);
+    }else{
+      throw Exception('Failed to get the events');
     }
-  );
+  });
 
-  print('The status code of show memorial heheh is ${response.statusCode}');
-  print('The status body of show memorial heheh is ${response.body}');
-
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowMemorialMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the events');
-  }
+  return value;
 }
 
 class APIBLMShowMemorialMain{
@@ -59,8 +66,12 @@ class APIBLMShowMemorialExtended{
   bool manage;
   bool famOrFriends;
   bool follower;
+  int postsCount;
+  int familyCount;
+  int friendsCount;
+  int followersCount;
 
-  APIBLMShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower});
+  APIBLMShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.postsCount, this.familyCount, this.friendsCount, this.followersCount});
 
   factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialExtended(
@@ -75,28 +86,43 @@ class APIBLMShowMemorialExtended{
       manage: parsedJson['manage'],
       famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],
+      postsCount: parsedJson['postsCount'],
+      familyCount: parsedJson['familyCount'],
+      friendsCount: parsedJson['friendsCount'],
+      followersCount: parsedJson['followersCount'],
     );
   }
 }
 
 
 class APIBLMShowMemorialExtendedDetails{
+  // String description;
+  // String birthPlace;
+  // String dob;
+  // String rip;
+  // String cemetery;
+  // String country;
+
+  // APIBLMShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+
   String description;
-  String birthPlace;
+  String location;
+  String precinct;
   String dob;
   String rip;
-  String cemetery;
+  String state;
   String country;
 
-  APIBLMShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIBLMShowMemorialExtendedDetails({this.description, this.location, this.precinct, this.dob, this.rip, this.state, this.country});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialExtendedDetails(
       description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
+      location: parsedJson['location'],
+      precinct: parsedJson['precinct'],
       dob: parsedJson['dob'],
       rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
+      state: parsedJson['state'],
       country: parsedJson['country'],
     );
   }
@@ -111,7 +137,7 @@ class APIBLMShowMemorialExtendedPageCreator{
   String userName;
   dynamic image;
 
-  APIBLMShowMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMShowMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image,});
 
   factory APIBLMShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialExtendedPageCreator(
@@ -121,7 +147,7 @@ class APIBLMShowMemorialExtendedPageCreator{
       phoneNumber: parsedJson['phone_number'],
       email: parsedJson['email'],
       userName: parsedJson['username'],
-      image: parsedJson['image']
+      image: parsedJson['image'],
     );
   }
 }

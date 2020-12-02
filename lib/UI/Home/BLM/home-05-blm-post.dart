@@ -43,6 +43,9 @@ class HomeBLMPost extends StatelessWidget{
           child: Scaffold(
             appBar: AppBar(
               title: TextFormField(
+                onChanged: (search){
+
+                },
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(15.0),
                   filled: true,

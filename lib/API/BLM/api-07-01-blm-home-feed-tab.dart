@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab() async{
+Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -14,7 +14,8 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab() async{
   print('The client $getClient');
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=1',
+    // 'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=1',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -38,7 +39,7 @@ class APIBLMHomeTabFeedMain{
   int itemsRemaining;
   List<APIBLMHomeTabFeedExtended> familyMemorialList;
 
-  APIBLMHomeTabFeedMain({this.familyMemorialList});
+  APIBLMHomeTabFeedMain({this.familyMemorialList, this.itemsRemaining});
 
   factory APIBLMHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -46,6 +47,7 @@ class APIBLMHomeTabFeedMain{
 
     return APIBLMHomeTabFeedMain(
       familyMemorialList: familyMemorials,
+      itemsRemaining: parsedJson['itemsremaining'],
     );
   }
 }
@@ -59,8 +61,9 @@ class APIBLMHomeTabFeedExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  String createAt;
 
-  APIBLMHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
+  APIBLMHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -79,6 +82,7 @@ class APIBLMHomeTabFeedExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
+      createAt: parsedJson['created_at'],
     );
   }
 }

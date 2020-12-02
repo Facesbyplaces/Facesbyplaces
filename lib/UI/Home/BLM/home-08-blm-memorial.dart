@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
-import 'package:facesbyplaces/API/BLM/api-15-blm-show-memorial.dart';
+import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/api-17-blm-follow-page.dart';
 import 'package:facesbyplaces/API/BLM/api-18-blm-unfollow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -17,11 +17,12 @@ class HomeBLMMemorialProfile extends StatefulWidget{
 class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  final dataKey = new GlobalKey();
 
   void initState(){
     super.initState();
-    apiBLMShowMemorial();
-    apiBLMProfilePost();
+    // apiBLMShowMemorial();
+    // apiBLMProfilePost();
   }
 
   String convertDate(String input){
@@ -36,11 +37,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    int memorialId = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIBLMShowMemorialMain>(
-          future: apiBLMShowMemorial(),
+          future: apiBLMShowMemorial(memorialId),
           builder: (context, showProfile){
             if(showProfile.hasData){
               return Stack(
@@ -262,7 +264,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(showProfile.data.memorial.details.birthPlace,
+                                      Text(showProfile.data.memorial.details.precinct,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -309,7 +311,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       GestureDetector(
                                         onTap: (){},
-                                        child: Text(showProfile.data.memorial.details.cemetery,
+                                        child: Text(showProfile.data.memorial.details.location,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             color: Color(0xff3498DB),
@@ -318,6 +320,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       ),
                                     ],
                                   ),
+                                  
                                 ],
                               ),
                             ),
@@ -329,26 +332,31 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Scrollable.ensureVisible(dataKey.currentContext);
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('26',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text('26',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Post',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Post',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Expanded(
@@ -446,6 +454,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                                 Container(
+                                  key: dataKey,
                                   padding: EdgeInsets.only(left: 20.0),
                                   alignment: Alignment.centerLeft,
                                   child: Text('Post',
@@ -493,7 +502,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                             Padding(
                               padding: EdgeInsets.all(20.0),
                               child: FutureBuilder<APIBLMHomeProfilePostMain>(
-                                future: apiBLMProfilePost(),
+                                future: apiBLMProfilePost(memorialId),
                                 builder: (context, profilePost){
                                   if(profilePost.hasData){
                                     return Column(
@@ -504,6 +513,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                               userId: profilePost.data.familyMemorialList[index].page.id,
                                               postId: profilePost.data.familyMemorialList[index].id,
                                               memorialId: profilePost.data.familyMemorialList[index].page.id,
+                                              memorialName: profilePost.data.familyMemorialList[index].page.name,
+                                              timeCreated: convertDate(profilePost.data.familyMemorialList[index].createAt),
                                               contents: [
                                                 Column(
                                                   children: [
@@ -564,29 +575,29 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                     ],
                   ),
 
-                  Positioned(
-                    top: SizeConfig.screenHeight / 5,
-                    child: Container(
-                      height: SizeConfig.blockSizeVertical * 18,
-                      width: SizeConfig.screenWidth,
-                      child: Row(
-                        children: [
-                          Expanded(child: Container(),),
-                          Expanded(
-                            child: CircleAvatar(
-                              radius: SizeConfig.blockSizeVertical * 10,
-                              backgroundColor: Color(0xff04ECFF),
-                              child: Container(
-                                height: SizeConfig.blockSizeVertical * 17,
-                                child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
-                              ),
-                            ),
-                          ),
-                          Expanded(child: Container(),),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Positioned(
+                  //   top: SizeConfig.screenHeight / 5,
+                  //   child: Container(
+                  //     height: SizeConfig.blockSizeVertical * 18,
+                  //     width: SizeConfig.screenWidth,
+                  //     child: Row(
+                  //       children: [
+                  //         Expanded(child: Container(),),
+                  //         Expanded(
+                  //           child: CircleAvatar(
+                  //             radius: SizeConfig.blockSizeVertical * 10,
+                  //             backgroundColor: Color(0xff04ECFF),
+                  //             child: Container(
+                  //               height: SizeConfig.blockSizeVertical * 17,
+                  //               child: Image.asset('assets/icons/profile2.png', fit: BoxFit.cover,),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //         Expanded(child: Container(),),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
 
                 ],
               );

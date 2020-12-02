@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'UI/Home/BLM/home-01-blm-home.dart';
 import 'UI/Home/BLM/home-04-blm-search.dart';
 import 'UI/Home/BLM/home-05-blm-post.dart';
@@ -54,17 +56,33 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-void main(){
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  final sharedPrefs = await SharedPreferences.getInstance();
+  final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
+  final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
+
   runApp(
     GlobalLoaderOverlay(
       useDefaultLoading: false,
-      overlayWidget: Center(
-        child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
+      overlayWidget: Container(
+        color: Colors.grey,
+        child: Center(
+          child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
+        ),
       ),
       child: MaterialApp(
         title: 'Faces by Places',
-        home: UIGetStarted(),
+        home: ((){
+          if(blmSession){
+            return HomeBLMScreen();
+          }else if(regularSession){
+            return HomeRegularScreen();
+          }else{
+            return UIGetStarted();
+          }
+        }()),
         initialRoute: '/',
         theme: ThemeData(
           accentColor: Colors.red,

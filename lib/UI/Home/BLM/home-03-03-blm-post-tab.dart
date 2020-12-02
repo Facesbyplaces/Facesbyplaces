@@ -17,6 +17,15 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
     apiBLMHomePostTab();
   }
 
+  String convertDate(String input){
+    DateTime dateTime = DateTime.parse(input);
+
+    final y = dateTime.year.toString().padLeft(4, '0');
+    final m = dateTime.month.toString().padLeft(2, '0');
+    final d = dateTime.day.toString().padLeft(2, '0');
+    return '$d/$m/$y';
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -39,6 +48,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                         userId: postTab.data.familyMemorialList[index].page.id,
                         postId: postTab.data.familyMemorialList[index].id,
                         memorialId: postTab.data.familyMemorialList[index].page.id,
+                        memorialName: postTab.data.familyMemorialList[index].page.name,
+                        timeCreated: convertDate(postTab.data.familyMemorialList[index].createAt),
                         contents: [
                           Column(
                             children: [
