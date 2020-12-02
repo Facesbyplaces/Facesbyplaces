@@ -1,7 +1,7 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
     before_action :authenticate_user!, except: [:show]
-    before_action :authorize, except: [:create, :show, :setRelationship, :leaveMemorial]
-    before_action :verify_user_account_type, except: [:show]
+    before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
+    before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
 
     def show
         memorial = Memorial.find(params[:id])
@@ -141,6 +141,22 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         else
             render json: {}, status: 404
         end
+    end
+
+    def familyIndex
+        memorial = Memorial.find(params[:id])
+    end
+
+    def friendsIndex
+        memorial = Memorial.find(params[:id])
+    end
+
+    def followersIndex
+        memorial = Memorial.find(params[:id])
+
+        followers = memorial.users.page(params[:page]).per(numberOfPage)
+
+        render json: followers
     end
 
     private

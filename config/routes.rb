@@ -65,6 +65,15 @@ Rails.application.routes.draw do
 
           # Leave blm
           delete 'memorials/:id/relationship/leave', to: 'memorials#leaveMemorial'
+
+          # family Index
+          get 'memorials/:id/family/index', to: 'memorials#familyIndex'
+
+          # friends Index
+          get 'memorials/:id/friends/index', to: 'memorials#friendsIndex'
+
+          # followers Index
+          get 'memorials/:id/followers/index', to: 'memorials#followersIndex'
         
         # blm controller
           # Show memorial
@@ -95,6 +104,15 @@ Rails.application.routes.draw do
 
           # Leave blm
           delete 'blm/:id/relationship/leave', to: 'blm#leaveBLM'
+
+          # family Index
+          get 'blm/:id/family/index', to: 'blm#familyIndex'
+
+          # friends Index
+          get 'blm/:id/friends/index', to: 'blm#friendsIndex'
+
+          # followers Index
+          get 'blm/:id/followers/index', to: 'blm#followersIndex'
       end
       namespace :posts do
         # Post Index

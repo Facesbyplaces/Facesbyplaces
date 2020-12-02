@@ -1,7 +1,7 @@
 class Api::V1::Pages::BlmController < ApplicationController
     before_action :authenticate_user!, except: [:show]
-    before_action :authorize, except: [:create, :show, :setRelationship, :leaveBLM]
-    before_action :verify_user_account_type, except: [:show]
+    before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
+    before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
 
     def show
         blm = Blm.find(params[:id])
@@ -137,6 +137,30 @@ class Api::V1::Pages::BlmController < ApplicationController
         else
             render json: {}, status: 404
         end
+    end
+
+    def familyIndex
+        blm = Blm.find(params[:id])
+
+        family = blm.relationships.where("relationship != 'Friend'").page(params[:page]).per(numberOfPage)
+
+        render json: family
+    end
+
+    def friendsIndex
+        blm = Blm.find(params[:id])
+
+        friends = blm.relationships.where(relationship: 'Friend').page(params[:page]).per(numberOfPage)
+
+        render json: friends
+    end
+
+    def followersIndex
+        blm = Blm.find(params[:id])
+
+        followers = blm.users.page(params[:page]).per(numberOfPage)
+
+        render json: followers
     end
 
     private

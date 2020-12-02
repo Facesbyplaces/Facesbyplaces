@@ -1,6 +1,6 @@
 class BlmSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :privacy, :manage, :famOrFriends, :follower, :familyCount, :friendsCount, :postsCount, :followersCount
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :privacy, :manage, :famOrFriends, :follower, :familyCount, :friendsCount, :postsCount, :followersCount, :page_type
 
   def details
     case object.privacy
@@ -92,6 +92,10 @@ class BlmSerializer < ActiveModel::Serializer
 
   def followersCount
     object.followers.count
+  end
+
+  def page_type
+    "Blm"
   end
 
   def relationship
