@@ -2,7 +2,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
     before_action :authenticate_user!
     
     def follow
-        if Follower.where(user: user(), page_type: params[:follower][:page_type], page_id: params[:follower][:page_id]).first == nil
+        if Follower.where(user: user(), page_type: params[:follower][:page_type], page_id: params[:follower][:page_id]).first == nil && Relationship.where(page_type: params[:follower][:page_type], page_id: params[:follower][:page_id], user: user()).first == nil
             follower = Follower.new(follower_params)
             follower.user = user()
             if follower.save 

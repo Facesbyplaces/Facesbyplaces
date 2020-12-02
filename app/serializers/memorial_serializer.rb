@@ -1,6 +1,6 @@
 class MemorialSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :manage, :famOrFriends, :follower, :familyCount, :friendsCount, :postsCount
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :manage, :famOrFriends, :follower, :familyCount, :friendsCount, :postsCount, :followersCount
 
   def details
     case object.privacy
@@ -113,6 +113,10 @@ class MemorialSerializer < ActiveModel::Serializer
     end
     
     return false 
+  end
+
+  def followersCount
+    object.followers.count
   end
 
   private

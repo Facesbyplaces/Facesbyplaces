@@ -53,7 +53,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def addFamily
         # check if relationship already exists
-        if @page.relationships.where(user: @user).first == nil
+        if @page.relationships.where(user: @user).first == nil && Follower.where(user: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
             # add new relationship to the page
             family = @page.relationships.new(relationship: params[:relationship], user: @user)
             # save relationship
@@ -69,7 +69,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def addFriend
         # check if relationship already exists
-        if @page.relationships.where(user: @user).first == nil
+        if @page.relationships.where(user: @user).first == nil && Follower.where(user: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
             # add new relationship to the page
             friend = @page.relationships.new(relationship: params[:relationship], user: @user)
             # save relationship
