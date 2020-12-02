@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
-import 'package:facesbyplaces/API/BLM/api-15-blm-show-memorial.dart';
+import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -16,6 +16,8 @@ class HomeBLMProfile extends StatefulWidget{
 class HomeBLMProfileState extends State<HomeBLMProfile>{
 
   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  final dataKey = new GlobalKey();
+
 
   String convertDate(String input){
     DateTime dateTime = DateTime.parse(input);
@@ -29,17 +31,29 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    int memorialId = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIBLMShowMemorialMain>(
-          future: apiBLMShowMemorial(),
+          future: apiBLMShowMemorial(memorialId),
           builder: (context, profile){
             if(profile.hasData){
               return Stack(
                 children: [
 
-                  Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background4.png'),),),),
+                  // Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background4.png'),),),),
+                  Container(
+                    height: SizeConfig.screenHeight / 3, 
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover, 
+                        image: profile.data.memorial.backgroundImage != null
+                        ? NetworkImage(profile.data.memorial.backgroundImage)
+                        : AssetImage('assets/icons/background3.png'),
+                      ),
+                    ),
+                  ),
 
                   Column(
                     children: [
@@ -264,104 +278,124 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Scrollable.ensureVisible(dataKey.currentContext);
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('26',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text(profile.data.memorial.postsCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Post',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Post',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   
                                   Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
 
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('526',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text(profile.data.memorial.familyCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Family',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Family',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
 
                                   Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
 
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('526',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text(profile.data.memorial.friendsCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Friends',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Friends',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
 
                                   Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
 
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('14.4K',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text(profile.data.memorial.followersCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Joined',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Joined',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -377,6 +411,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                                 Container(
+                                  key: dataKey,
                                   padding: EdgeInsets.only(left: 20.0),
                                   alignment: Alignment.centerLeft,
                                   child: Text('Post',
@@ -434,7 +469,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                             Padding(
                               padding: EdgeInsets.all(20.0),
                               child: FutureBuilder<APIBLMHomeProfilePostMain>(
-                                future: apiBLMProfilePost(),
+                                future: apiBLMProfilePost(memorialId),
                                 builder: (context, profilePost){
                                   if(profilePost.hasData){
                                     return Column(
@@ -445,6 +480,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                               userId: profilePost.data.familyMemorialList[index].page.id,
                                               postId: profilePost.data.familyMemorialList[index].id,
                                               memorialId: profilePost.data.familyMemorialList[index].page.id,
+                                              memorialName: profilePost.data.familyMemorialList[index].page.name,
+                                              timeCreated: convertDate(profilePost.data.familyMemorialList[index].createAt),
                                               contents: [
                                                 Column(
                                                   children: [

@@ -38,8 +38,10 @@ class APIBLMHomeTabNotificationMain{
 
   APIBLMHomeTabNotificationMain({this.notification});
 
-  factory APIBLMHomeTabNotificationMain.fromJson(List<dynamic> parsedJson){
-    List<APIBLMHomeTabNotificationExtended> newNotification = parsedJson.map((e) => APIBLMHomeTabNotificationExtended.fromJson(e)).toList();
+  factory APIBLMHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
+
+    var newList = parsedJson['notifs'] as List;
+    List<APIBLMHomeTabNotificationExtended> newNotification = newList.map((i) => APIBLMHomeTabNotificationExtended.fromJson(i)).toList();
 
     return APIBLMHomeTabNotificationMain(
       notification: newNotification,

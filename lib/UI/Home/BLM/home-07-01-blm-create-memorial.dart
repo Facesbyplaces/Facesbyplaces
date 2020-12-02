@@ -65,6 +65,7 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
   List<Widget> stories;
   String backgroundImage;
 
+
   void initState(){
     super.initState();
     children = [createMemorial1(), createMemorial2(), createMemorial3()];
@@ -83,6 +84,7 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
   File videoFile;
   File imageFile;
   File backgroundFile;
+  File profileImage;
   final picker = ImagePicker();
 
   Future getVideo() async{
@@ -106,9 +108,29 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
     return imageFile = File(pickedFile.path);
   }
 
-  Future<File> getImage() async{
+  // Future<File> getImage() async{
+  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  //   return backgroundFile = File(pickedFile.path);
+  // }
+
+  Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    return backgroundFile = File(pickedFile.path);
+    // return backgroundFile = File(pickedFile.path);
+    if(pickedFile != null){
+      setState(() {
+        backgroundFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future getProfileImage() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    // return backgroundFile = File(pickedFile.path);
+    if(pickedFile != null){
+      setState(() {
+        profileImage = File(pickedFile.path);
+      });
+    }
   }
 
 
@@ -324,19 +346,30 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                             child: Stack(
                               children: [
 
-                                Center(
-                                  child: CircleAvatar(
-                                    radius: SizeConfig.blockSizeVertical * 7,
-                                    backgroundColor: Color(0xffffffff),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: CircleAvatar(
-                                        radius: SizeConfig.blockSizeVertical * 7,
-                                        backgroundImage: AssetImage('assets/icons/profile1.png'),
+                                GestureDetector(
+                                  onTap: () async{
+                                    print('asdflkj');
+                                    await getProfileImage();
+                                  },
+                                  child: Center(
+                                    child: CircleAvatar(
+                                      radius: SizeConfig.blockSizeVertical * 7,
+                                      backgroundColor: Color(0xffffffff),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: CircleAvatar(
+                                          radius: SizeConfig.blockSizeVertical * 7,
+                                          // backgroundImage: AssetImage('assets/icons/profile1.png'),
+                                          backgroundImage: profileImage != null
+                                          ? AssetImage(profileImage.path)
+                                          : AssetImage('assets/icons/profile1.png'),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
+
+                                // getProfileImage
 
                                 Positioned(
                                   bottom: SizeConfig.blockSizeVertical * 5,
@@ -389,6 +422,9 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                                         context.bloc<BlocHomeBLMBackgroundImage>().updateToggle(index);
 
                                         await getImage();
+                                        // backgroundFile = await getImage();
+
+                                        print('The background file is ${backgroundFile.path}');
                                       },
                                       child: Container(
                                         width: SizeConfig.blockSizeVertical * 12,
@@ -479,7 +515,10 @@ class HomeBLMCreateMemorialExtendedState extends State<HomeBLMCreateMemorialExte
                                 country: _key6.currentState.controller.text,
                                 state: _key7.currentState.controller.text,
                                 memorialName: _key8.currentState.controller.text,
-                                description: _key9.currentState.controller.text,  
+                                description: _key9.currentState.controller.text,
+                                backgroundImage: backgroundFile,
+                                profileImage: profileImage,
+                                imagesOrVideos: images
                               );
 
                               context.bloc<BlocShowLoading>().modify(true);

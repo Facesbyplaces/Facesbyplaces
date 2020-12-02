@@ -1,3 +1,5 @@
+import 'package:facesbyplaces/API/BLM/api-20-blm-logout.dart';
+import 'package:facesbyplaces/API/Regular/api-18-regular-logout.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +74,10 @@ class MiscBLMDrawer extends StatelessWidget{
             SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
             GestureDetector(
-              onTap: (){
+              onTap: () async{
+
+                apiRegularLogout();
+                apiBLMLogout();
 
                 Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
                 

@@ -1,10 +1,8 @@
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter/material.dart';
 
 class MiscBLMManageMemorialTab extends StatelessWidget{
 
@@ -36,10 +34,7 @@ class MiscBLMManageMemorialTab extends StatelessWidget{
 
               print('The memorialId is $memorialId');
 
-              final sharedPrefs = await SharedPreferences.getInstance();
-              sharedPrefs.setInt('blm-user-memorial-id', memorialId);
-
-              Navigator.pushNamed(context, '/home/blm/home-12-blm-profile');
+              Navigator.pushNamed(context, '/home/blm/home-12-blm-profile', arguments: memorialId);
             },
             child: Container(
               height: SizeConfig.blockSizeVertical * 15,
