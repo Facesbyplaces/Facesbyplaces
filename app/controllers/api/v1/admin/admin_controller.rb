@@ -1,11 +1,22 @@
 class Api::V1::Admin::AdminController < ApplicationController
     before_action :authenticate_user!
-    before_action :admin_only
+    # before_action :admin_only
 
     def allUsers
         users = User.all 
 
-        paginate users, per_page: numberOfPage
+        users = users.page(params[:page]).per(numberOfPage)
+        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif users.total_count < numberOfPage
+            itemsremaining = users.total 
+        else
+            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        users: users
+                    }
     end
 
     def showUser
@@ -17,7 +28,18 @@ class Api::V1::Admin::AdminController < ApplicationController
     def searchUser
         users = User.where('username LIKE :search or email LIKE :search or first_name LIKE :search or last_name LIKE :search', search: params[:keywords])
 
-        render json: users
+        users = users.page(params[:page]).per(numberOfPage)
+        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif users.total_count < numberOfPage
+            itemsremaining = users.total 
+        else
+            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        users: users
+                    }
     end
 
     def contactUser
@@ -46,9 +68,22 @@ class Api::V1::Admin::AdminController < ApplicationController
     def searchPost
         posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type")
                     .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
-                    .select("posts.*")
         
-        paginate posts, per_page: numberOfPage
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            itemsremaining = posts.total_count 
+        else
+            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        posts: ActiveModel::SerializableResource.new(
+                            posts, 
+                            each_serializer: PostSerializer
+                        )
+                    }
     end
     
     def showMemorial
@@ -65,7 +100,21 @@ class Api::V1::Admin::AdminController < ApplicationController
         memorials = Pageowner.joins("INNER JOIN #{pages_sql} ON pages.id = pageowners.page_id AND pageowners.page_type = pages.object_type")
                             .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
                             
-        paginate memorials, per_page: numberOfPage
+        memorials = memorials.page(params[:page]).per(numberOfPage)
+        if memorials.total_count == 0 || (memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif memorials.total_count < numberOfPage
+            itemsremaining = memorials.total_count 
+        else
+            itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        memorials: ActiveModel::SerializableResource.new(
+                            memorials, 
+                            each_serializer: PageownerSerializer
+                        )
+                    }
     end
 
     def deleteMemorial
@@ -80,8 +129,19 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def allReports
         reports = Report.all 
+                            
+        reports = reports.page(params[:page]).per(numberOfPage)
+        if reports.total_count == 0 || (reports.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif reports.total_count < numberOfPage
+            itemsremaining = reports.total_count 
+        else
+            itemsremaining = reports.total_count - (params[:page].to_i * numberOfPage)
+        end
 
-        paginate reports, per_page: numberOfPage
+        render json: {  itemsremaining:  itemsremaining,
+                        reports: reports
+                    }
     end
 
     def showReport

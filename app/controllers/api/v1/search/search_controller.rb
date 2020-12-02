@@ -4,20 +4,59 @@ class Api::V1::Search::SearchController < ApplicationController
                     .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
                     .select("posts.*")
         
-        paginate posts, per_page: numberOfPage
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            itemsremaining = posts.total_count 
+        else
+            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        posts: ActiveModel::SerializableResource.new(
+                            posts, 
+                            each_serializer: PostSerializer
+                        )
+                    }
     end
 
     def memorials
         memorials = Pageowner.joins("INNER JOIN #{pages_sql} ON pages.id = pageowners.page_id AND pageowners.page_type = pages.object_type")
                             .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
                             
-        paginate memorials, per_page: numberOfPage
+        memorials = memorials.page(params[:page]).per(numberOfPage)
+        if memorials.total_count == 0 || (memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif memorials.total_count < numberOfPage
+            itemsremaining = memorials.total_count 
+        else
+            itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        memorials: ActiveModel::SerializableResource.new(
+                            memorials, 
+                            each_serializer: PageownerSerializer
+                        )
+                    }
     end
 
     def users
         users = User.where("first_name LIKE :search or last_name LIKE :search or email LIKE :search or username LIKE :search", search: params[:keywords])
 
-        paginate users, per_page: numberOfPage
+        users = users.page(params[:page]).per(numberOfPage)
+        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif users.total_count < numberOfPage
+            itemsremaining = users.total_count 
+        else
+            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        users: users
+                    }
     end
 
     def followers
@@ -31,7 +70,18 @@ class Api::V1::Search::SearchController < ApplicationController
         # get the followers of the page (users are the followers of the page)
         followers = page.users.where("first_name LIKE :search or last_name LIKE :search or email LIKE :search or username LIKE :search", search: params[:keywords])
 
-        paginate followers, per_page: numberOfPage
+        followers = followers.page(params[:page]).per(numberOfPage)
+        if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif followers.total_count < numberOfPage
+            itemsremaining = followers.total_count 
+        else
+            itemsremaining = followers.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        followers: followers
+                    }
     end
 
     def nearby
@@ -46,7 +96,7 @@ class Api::V1::Search::SearchController < ApplicationController
         if blm.total_count == 0 || (blm.total_count - (params[:page].to_i * numberOfPage)) < 0
             blmitemsremaining = 0
         elsif blm.total_count < numberOfPage
-            blmitemsremaining = blm.total 
+            blmitemsremaining = blm.total_count 
         else
             blmitemsremaining = blm.total_count - (params[:page].to_i * numberOfPage)
         end

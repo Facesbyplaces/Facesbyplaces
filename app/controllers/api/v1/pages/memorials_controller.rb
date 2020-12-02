@@ -150,7 +150,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif family.total_count < numberOfPage
-            itemsremaining = family.total 
+            itemsremaining = family.total_count 
         else
             itemsremaining = family.total_count - (params[:page].to_i * numberOfPage)
         end
@@ -171,7 +171,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         if friends.total_count == 0 || (friends.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif friends.total_count < numberOfPage
-            itemsremaining = friends.total 
+            itemsremaining = friends.total_count 
         else
             itemsremaining = friends.total_count - (params[:page].to_i * numberOfPage)
         end
@@ -192,7 +192,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif followers.total_count < numberOfPage
-            itemsremaining = followers.total 
+            itemsremaining = followers.total_count 
         else
             itemsremaining = followers.total_count - (params[:page].to_i * numberOfPage)
         end

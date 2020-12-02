@@ -12,7 +12,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total 
+            itemsremaining = posts.total_count 
         else
             itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
         end
@@ -34,7 +34,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
             if blmFamily.total_count == 0 || (blmFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
                 blmFamilyItemsRemaining = 0
             elsif blmFamily.total_count < numberOfPage
-                blmFamilyItemsRemaining = blmFamily.total 
+                blmFamilyItemsRemaining = blmFamily.total_count 
             else
                 blmFamilyItemsRemaining = blmFamily.total_count - (params[:page].to_i * numberOfPage)
             end
@@ -118,7 +118,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif posts.total_count < numberOfPage
-            itemsremaining = posts.total 
+            itemsremaining = posts.total_count 
         else
             itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
         end
@@ -139,7 +139,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         if notifs.total_count == 0 || (notifs.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif notifs.total_count < numberOfPage
-            itemsremaining = notifs.total 
+            itemsremaining = notifs.total_count 
         else
             itemsremaining = notifs.total_count - (params[:page].to_i * numberOfPage)
         end
