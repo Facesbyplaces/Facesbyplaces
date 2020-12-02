@@ -26,6 +26,10 @@ class Blm < ApplicationRecord
 
   resourcify
 
+  # geocdoe
+  geocoded_by :location
+  after_validation :geocode, if: :location_changed?
+
   # page name
   def page_name
       "blm"

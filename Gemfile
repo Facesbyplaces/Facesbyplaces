@@ -66,6 +66,7 @@ gem 'cancancan'
 gem 'rolify'
 gem 'stripe'
 gem 'kaminari'
+gem 'geocoder'
 
 # Social Share 
 gem 'social-share-button'

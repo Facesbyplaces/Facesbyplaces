@@ -33,4 +33,46 @@ class Api::V1::Search::SearchController < ApplicationController
 
         paginate followers, per_page: numberOfPage
     end
+
+    def nearby
+        lon = params[:longitude].to_f
+        lat = params[:latitude].to_f
+
+        user_location = Geocoder.search([lat,lon])
+
+        blm = Blm.near([lat,lon], 50)
+        
+        blm = blm.page(params[:page]).per(numberOfPage)
+        if blm.total_count == 0 || (blm.total_count - (params[:page].to_i * numberOfPage)) < 0
+            blmitemsremaining = 0
+        elsif blm.total_count < numberOfPage
+            blmitemsremaining = blm.total 
+        else
+            blmitemsremaining = blm.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        memorial = Memorial.near([lat,lon], 50)
+        
+        memorial = memorial.page(params[:page]).per(numberOfPage)
+        if memorial.total_count == 0 || (memorial.total_count - (params[:page].to_i * numberOfPage)) < 0
+            memorialitemsremaining = 0
+        elsif memorial.total_count < numberOfPage
+            memorialitemsremaining = memorial.total 
+        else
+            memorialitemsremaining = memorial.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {
+            blmItemsRemaining: blmitemsremaining,
+            blm: ActiveModel::SerializableResource.new(
+                    blm, 
+                    each_serializer: BlmSerializer
+                ),
+            memorialItemsRemaining: memorialitemsremaining,
+            memorial: ActiveModel::SerializableResource.new(
+                memorial, 
+                    each_serializer: MemorialSerializer
+                )
+        }
+    end
 end
