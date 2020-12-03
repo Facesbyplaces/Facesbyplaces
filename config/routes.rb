@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         resources :verify, only: [:create]
         resources :image_upload, only: [:update]
         resources :create_account_user, only: [:create]
-        resources :image_show, only: [:index]
+        resources :image_show, only: [:show]
       end
       namespace :reports do 
         resources :report, only: [:create]
