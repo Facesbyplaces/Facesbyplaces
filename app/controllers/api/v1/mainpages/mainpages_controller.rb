@@ -148,5 +148,9 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         notifs: notifs
                     }
     end
+
+    def numberOfPage
+        1
+    end
     
 end

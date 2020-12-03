@@ -16,4 +16,8 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validates :location, presence: true
 
+  # Search
+  include PgSearch::Model
+  pg_search_scope :search_post, against: :body
+  
 end

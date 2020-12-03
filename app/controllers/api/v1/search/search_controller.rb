@@ -4,7 +4,7 @@ class Api::V1::Search::SearchController < ApplicationController
         #             .where("lower(pages.name) LIKE :search OR lower(pages.country) LIKE :search OR lower(pages.description) LIKE :search OR lower(posts.body) LIKE :search", search: params[:keywords].downcase)
         #             .select("posts.*")
         
-        posts = Post.where(Post.arel_table["body"].matches("%#{params[:keywords]}%"))
+        posts = Post.search_post(params[:keywords])
         
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0

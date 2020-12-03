@@ -67,6 +67,7 @@ gem 'rolify'
 gem 'stripe'
 gem 'kaminari'
 gem 'geocoder'
+gem 'pg_search', '~> 2.3', '>= 2.3.2'
 
 # Social Share 
 gem 'social-share-button'
