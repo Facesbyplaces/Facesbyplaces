@@ -39,11 +39,10 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def manage
-    if object.currentUser == nil
-      return false 
-    end
-    if object.currentUser.has_role? :pageadmin, object 
-      return true
+    if object.currentUser
+      if object.currentUser.has_role? :pageadmin, object 
+        return true
+      end
     end
     
     return false 
@@ -105,11 +104,10 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def follower
-    if object.currentUser == nil
-      return false 
-    end
-    if object.users.where(id: object.currentUser.id).first
-      return true
+    if object.currentUser
+      if object.users.where(id: object.currentUser.id).first
+        return true
+      end
     end
     
     return false 
