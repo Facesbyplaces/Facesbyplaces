@@ -5,11 +5,11 @@ class Api::V1::Users::ImageUploadController < ApplicationController
     end
 
     def update
-        @user = User.find_by(id: params[:id])
+        @user = User.find(params[:id])
 
         if image_upload_params[:id].to_i === @user.id
             @user.update(image: image_upload_params[:image])
-            render json: {success: true, message: "Successfully Uploaded Image", status: 200}, status: 200      
+            render json: {success: true, message: "Successfully Uploaded Image", status: 200}, status: 200 
         elsif @user.errors.present?
             render json: {success: false, errors: @user.errors.full_messages, status: 404}, status: 200
         end

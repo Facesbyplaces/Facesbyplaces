@@ -6,7 +6,6 @@ class Api::V1::Users::ImageShowController < ApplicationController
     end
 
     def index
-        # @user = User.find(params[:id])
         render json: {
             success: true, 
             user: {
