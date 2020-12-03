@@ -1,7 +1,9 @@
-import 'package:facesbyplaces/API/BLM/api-20-blm-logout.dart';
 import 'package:facesbyplaces/API/Regular/api-18-regular-logout.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import '../../ui-01-get-started.dart';
+import 'misc-08-regular-dialog.dart';
 
 class MiscRegularDrawer extends StatelessWidget {
 
@@ -57,10 +59,16 @@ class MiscRegularDrawer extends StatelessWidget {
             GestureDetector(
               onTap: () async{
 
-                await apiRegularLogout();
-                await apiBLMLogout();
+                context.showLoaderOverlay();
+                bool result = await apiRegularLogout();
+                context.hideLoaderOverlay();
 
-                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                if(result){
+                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                }else{
+                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                }
                 
               },
               child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),

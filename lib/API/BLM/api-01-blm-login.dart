@@ -18,6 +18,7 @@ Future<bool> apiBLMLogin(String email, String password) async{
     var value = json.decode(response.body);
     var user = value['user'];
     int userId = user['id'];
+    print('The userId is $userId');
 
     final sharedPrefs = await SharedPreferences.getInstance();
 

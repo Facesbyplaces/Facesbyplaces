@@ -502,7 +502,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                             Padding(
                               padding: EdgeInsets.all(20.0),
                               child: FutureBuilder<APIBLMHomeProfilePostMain>(
-                                future: apiBLMProfilePost(memorialId),
+                                future: apiBLMProfilePost(memorialId, 1),
                                 builder: (context, profilePost){
                                   if(profilePost.hasData){
                                     return Column(

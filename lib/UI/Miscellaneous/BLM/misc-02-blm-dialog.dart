@@ -88,8 +88,19 @@ class MiscBLMAlertDialog extends StatelessWidget{
         padding: EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Expanded(
-              child: Align(
+            // Expanded(
+            //   child: Align(
+            //     alignment: Alignment.centerLeft,
+            //     child: Text(title,
+            //       style: TextStyle(
+            //         fontSize: SizeConfig.safeBlockHorizontal * 5,
+            //         fontWeight: FontWeight.bold,
+            //         color: color,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Align(
                 alignment: Alignment.centerLeft,
                 child: Text(title,
                   style: TextStyle(
@@ -99,7 +110,7 @@ class MiscBLMAlertDialog extends StatelessWidget{
                   ),
                 ),
               ),
-            ),
+            
             Expanded(
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -113,8 +124,7 @@ class MiscBLMAlertDialog extends StatelessWidget{
                 ),
               ),
             ),
-            Expanded(
-              child: GestureDetector(
+            GestureDetector(
                 onTap: (){
                   Navigator.pop(context, true);
                 },
@@ -130,7 +140,24 @@ class MiscBLMAlertDialog extends StatelessWidget{
                   ),
                 ),
               ),
-            ),
+            // Expanded(
+            //   child: GestureDetector(
+            //     onTap: (){
+            //       Navigator.pop(context, true);
+            //     },
+            //     child: Align(
+            //       alignment: Alignment.centerRight,
+            //       child: Text(confirmText,
+            //         textAlign: TextAlign.center,
+            //         style: TextStyle(
+            //           fontSize: SizeConfig.safeBlockHorizontal * 4,
+            //           fontWeight: FontWeight.bold,
+            //           color: color,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

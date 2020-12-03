@@ -21,6 +21,10 @@ import 'UI/Home/BLM/home-20-blm-donate.dart';
 import 'UI/Home/BLM/home-21-blm-memorial-page-image.dart';
 import 'UI/Home/BLM/home-22-blm-connection-list.dart';
 import 'UI/Home/BLM/home-24-blm-report.dart';
+import 'UI/Home/BLM/home-26-blm-page-managers.dart';
+import 'UI/Home/BLM/home-27-blm-page-family.dart';
+import 'UI/Home/BLM/home-28-blm-page-friends.dart';
+import 'UI/Home/BLM/home-29-blm-search-user.dart';
 import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-05-regular-search.dart';
@@ -126,6 +130,10 @@ void main() async{
           '/home/blm/home-22-blm-connection-list': (BuildContext context) => HomeBLMConnectionList(),
           '/home/blm/home-24-blm-report': (BuildContext context) => HomeBLMReport(),
           '/home/blm/home-25-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
+          '/home/blm/home-26-blm-page-managers': (BuildContext context) => HomeBLMPageManagers(),
+          '/home/blm/home-27-blm-page-family': (BuildContext context) => HomeBLMPageFamily(),
+          '/home/blm/home-28-blm-page-friends': (BuildContext context) => HomeBLMPageFriends(),
+          '/home/blm/home-29-blm-search-user': (BuildContext context) => HomeBLMSearchUser(),
 
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
           '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial(),

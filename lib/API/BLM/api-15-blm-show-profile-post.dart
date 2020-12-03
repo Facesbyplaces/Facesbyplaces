@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId) async{
+Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;

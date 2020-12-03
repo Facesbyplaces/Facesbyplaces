@@ -16,8 +16,9 @@ class MiscRegularPost extends StatelessWidget{
   final int memorialId;
   final dynamic profileImage;
   final String memorialName;
+  final String timeCreated;
 
-  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = ''});
+  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = ''});
 
   @override
   Widget build(BuildContext context){
@@ -73,7 +74,7 @@ class MiscRegularPost extends StatelessWidget{
                         Expanded(
                           child: Align(
                             alignment: Alignment.topLeft,
-                            child: Text('an hour ago',
+                            child: Text(timeCreated,
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: SizeConfig.safeBlockHorizontal * 3,
