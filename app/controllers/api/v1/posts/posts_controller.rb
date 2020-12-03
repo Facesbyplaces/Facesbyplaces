@@ -77,7 +77,21 @@ class Api::V1::Posts::PostsController < ApplicationController
     def pagePosts
         posts = Post.where(page_type: params[:page_type], page_id: params[:page_id]).order(created_at: :desc)
 
-        paginate posts, per_page: numberOfPage
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            itemsremaining = posts.total_count 
+        else
+            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        posts: ActiveModel::SerializableResource.new(
+                            posts, 
+                            each_serializer: PostSerializer
+                        )
+                    }
     end
 
     def like
