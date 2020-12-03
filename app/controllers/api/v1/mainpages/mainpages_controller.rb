@@ -7,7 +7,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     .joins("INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = posts.page_type AND followers.page_id = posts.page_id OR posts.user_id = #{user().id}")
                     .order(created_at: :desc)
                     .select("posts.*")
-        numberOfPage = 1
+                    
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
