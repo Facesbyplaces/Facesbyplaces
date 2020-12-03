@@ -8,7 +8,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     .order(created_at: :desc)
                     .select("posts.*")
         
-        posts = posts.page(params[:page]).per(numberOfPage)
+        posts = posts.page(params[:page]).per(1)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif posts.total_count < numberOfPage
