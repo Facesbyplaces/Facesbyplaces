@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :followers, dependent: :destroy
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
   has_many :notifsettings, dependent: :destroy
+  has_one :image
 
   def self.create_from_provider_data(provider_data)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
