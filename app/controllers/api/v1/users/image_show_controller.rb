@@ -5,14 +5,14 @@ class Api::V1::Users::ImageShowController < ApplicationController
         params.permit(:id)
     end
 
-    def show
-        @user = User.find(params[:id])
+    def index
+        # @user = User.find(params[:id])
         render json: {
             success: true, 
             user: {
-                first_name: @user.first_name.to_s,
-                last_name: @user.last_name.to_s,
-                image: @user.image.present? ? (request.base_url+url_for(@user.image)) : "",
+                first_name: user.first_name.to_s,
+                last_name: user.last_name.to_s,
+                image: user.image.present? ? (request.base_url+url_for(user.image)) : "",
             }, 
             status: 200
         }, status: 200      
