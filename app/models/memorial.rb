@@ -26,6 +26,10 @@ class Memorial < ApplicationRecord
     geocoded_by :cemetery
     after_validation :geocode, if: :cemetery_changed?
 
+    # Search
+    include PgSearch::Model
+    multisearchable against: [:name, :cemetery, :birthplace, :country]
+
     # page name
     def page_name
         "memorial"

@@ -16,23 +16,55 @@ class Post < ApplicationRecord
   validates :body, presence: true
   validates :location, presence: true
 
-  # # Search
-  # include PgSearch::Model
-  # pg_search_scope :search_post,
-  #                   against: [:body],
-  #                   using: {tsearch: {dictionary: "english"}},
-  #                   associated_against: {user: :name, notes:[:title, :content]}
-  
-  # scope :with_invites_and_access, lambda{ |keywords|
-  #   joins("LEFT OUTER JOIN blms ON blms.id = posts.page_id AND posts.page_type = 'Blm'").where('blms.name = :search OR blms.location = :search OR blms.precinct = :search OR blms.state = :search OR blms.country = :search', search: keywords)
-  # }
+  # Search
+  include PgSearch::Model
+  multisearchable against: [:body, :page_name, :page_location, :page_precinct, :page_state, :page_country, :page_cemetery, :page_birthplace]
 
-  # def self.text_search(query)
-  #   if query.present?
-  #     search(query).with_invites_and_access(query)
-  #   else
-  #     scoped
-  #   end
-  # end
-  
+  def page_name
+    self.page.name
+  end
+
+  def page_location
+    if self.page_type == 'Blm'
+      self.page.location
+    else
+      ""
+    end
+  end
+
+  def page_precinct
+    if self.page_type == 'Blm'
+      self.page.precinct
+    else
+      ""
+    end
+  end
+
+  def page_state
+    if self.page_type == 'Blm'
+      self.page.state
+    else
+      ""
+    end
+  end
+
+  def page_country
+    self.page.country
+  end
+
+  def page_cemetery
+    if self.page_type == 'Memorial'
+      self.page.cemetery
+    else
+      ""
+    end
+  end
+
+  def page_birthplace
+    if self.page_type == 'Memorial'
+      self.page.birthplace
+    else
+      ""
+    end
+  end
 end

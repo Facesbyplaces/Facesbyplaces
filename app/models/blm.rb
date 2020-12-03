@@ -30,6 +30,10 @@ class Blm < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :location_changed?
 
+  # Search
+  include PgSearch::Model
+  multisearchable against: [:name, :location, :precinct, :state, :country]
+
   # page name
   def page_name
       "blm"
