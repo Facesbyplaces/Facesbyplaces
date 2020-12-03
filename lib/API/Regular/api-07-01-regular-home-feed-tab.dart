@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
+Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -10,7 +10,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab() async{
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=1',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -57,8 +57,9 @@ class APIRegularHomeTabFeedExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  String createAt;
 
-  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
+  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -77,6 +78,7 @@ class APIRegularHomeTabFeedExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
+      createAt: parsedJson['created_at'],
     );
   }
 }

@@ -10,14 +10,18 @@ Future<bool> apiRegularUploadPhoto(dynamic image) async{
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('hehehe');
+  print('The prefsUserId is $prefsUserID');
+
   try{
     var dioRequest = Dio();
     final formData = FormData.fromMap({
-      'user_id': prefsUserID,
+      'id': prefsUserID,
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+    // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload/', data: formData,
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload/:id', data: formData,
       options: Options(
         headers: <String, String>{
           'access-token': getAccessToken,
@@ -25,7 +29,11 @@ Future<bool> apiRegularUploadPhoto(dynamic image) async{
           'client': getClient,
         }
       ),
+      // queryParameters: {
+      //   'id': prefsUserID
+      // },
     );
+    
 
     print('The status code on regular upload photo is ${response.statusCode}');
     // print('The status body on regular upload photo is ${response.data}');

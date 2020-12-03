@@ -1,10 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-image-display.dart';
 import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -14,169 +11,144 @@ class HomeRegularFeedTab extends StatefulWidget{
 
 class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
+  int page = 1;
+  int itemRemaining = 1;
+  List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  List<Widget> feeds = [];
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+
   void initState(){
     super.initState();
-    apiRegularHomeFeedTab();
+    onLoading();
   }
+
+  String convertDate(String input){
+    DateTime dateTime = DateTime.parse(input);
+
+    final y = dateTime.year.toString().padLeft(4, '0');
+    final m = dateTime.month.toString().padLeft(2, '0');
+    final d = dateTime.day.toString().padLeft(2, '0');
+    return '$d/$m/$y';
+  }
+
+  void onRefresh() async{
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading() async{
+    if(itemRemaining != 0){
+      var newValue = await apiRegularHomeFeedTab(page);
+      itemRemaining = newValue.itemsRemaining;
+      feeds.add(Column(
+        children: [
+          MiscRegularPost(
+            userId: newValue.familyMemorialList[0].page.id,
+            postId: newValue.familyMemorialList[0].id,
+            memorialId: newValue.familyMemorialList[0].page.id,
+            memorialName: newValue.familyMemorialList[0].page.name,
+            profileImage: newValue.familyMemorialList[0].page.profileImage,
+            timeCreated: convertDate(newValue.familyMemorialList[0].createAt),
+            contents: [
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: RichText(
+                      maxLines: 4,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.left,
+                      text: TextSpan(
+                        text: newValue.familyMemorialList[0].body,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                ],
+              ),
+
+
+              newValue.familyMemorialList[0].imagesOrVideos != null
+              ? Container(
+                height: SizeConfig.blockSizeHorizontal * 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(newValue.familyMemorialList[0].imagesOrVideos[0]),
+                  ),
+                ),
+              )
+              : Container(height: 0,),
+            ],
+          ),
+
+          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+        ],
+      ));
+      if(mounted)
+      setState(() {});
+      
+      refreshController.loadComplete();
+    }else{
+      refreshController.loadNoData();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return FutureBuilder<APIRegularHomeTabFeedMain>(
-      future: apiRegularHomeFeedTab(),
-      builder: (context, feedTab){
-        if(feedTab.hasData){
-          if(feedTab.data.familyMemorialList.length == 0){
-            return Column(
-              children: [
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                Align(
-                  alignment: Alignment.center,
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                        TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                      ],
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 3,),
-
-                Container(
-                  width: SizeConfig.screenWidth,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: SizeConfig.blockSizeVertical * 8,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
-                      ),
-
-                      Positioned(
-                        right: 0,
-                        top: SizeConfig.blockSizeVertical * 8,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
-                      ),
-
-                      Positioned(
-                        left: SizeConfig.blockSizeHorizontal * 12,
-                        top: SizeConfig.blockSizeVertical * 6,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
-                      ),
-
-                      Positioned(
-                        right: SizeConfig.blockSizeHorizontal * 12,
-                        top: SizeConfig.blockSizeVertical * 6,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
-                      ),
-
-                      Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),),
-
-                SizedBox(height: SizeConfig.blockSizeVertical * 3,),
-
-                MiscRegularButtonTemplate(
-                  buttonText: 'Create', 
-                  buttonTextStyle: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                    fontWeight: FontWeight.bold, 
-                    color: Color(0xffffffff),
-                  ), 
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/home/regular/home-04-01-regular-create-memorial');
-                  }, 
-                  width: SizeConfig.screenWidth / 2, 
-                  height: SizeConfig.blockSizeVertical * 7, 
-                  buttonColor: Color(0xff04ECFF),
-                ),
-                
-              ],
-            );
-          }else{
+    return Container(
+      height: SizeConfig.screenHeight,
+      child: SmartRefresher(
+        enablePullDown: false,
+        enablePullUp: true,
+        header: MaterialClassicHeader(),
+        footer: CustomFooter(
+          loadStyle: LoadStyle.ShowWhenLoading,
+          builder: (BuildContext context, LoadStatus mode){
+            Widget body ;
+            if(mode == LoadStatus.idle){
+              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+            }
+            else if(mode == LoadStatus.loading){
+              body =  CircularProgressIndicator();
+            }
+            else if(mode == LoadStatus.failed){
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+            }
+            else if(mode == LoadStatus.canLoading){
+              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              page++;
+            }
+            else{
+              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+            }
             return Container(
-              height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
-              child: ListView.separated(
-                physics: ClampingScrollPhysics(),
-                padding: EdgeInsets.all(10.0),
-                itemCount: feedTab.data.familyMemorialList.length,
-                separatorBuilder: (context, index) => Divider(height: 0, color: Colors.transparent),
-                itemBuilder: (context, index){
-                  return Column(
-                    children: [
-                      MiscRegularPost(
-                        userId: feedTab.data.familyMemorialList[index].page.id,
-                        postId: feedTab.data.familyMemorialList[index].id,
-                        memorialId: feedTab.data.familyMemorialList[index].page.id,
-                        memorialName: feedTab.data.familyMemorialList[index].page.name,
-                        profileImage: feedTab.data.familyMemorialList[index].page.profileImage,
-                        contents: [
-                          Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: RichText(
-                                  maxLines: 4,
-                                  overflow: TextOverflow.clip,
-                                  textAlign: TextAlign.left,
-                                  text: TextSpan(
-                                    text: feedTab.data.familyMemorialList[index].body,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xff000000),
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                            ],
-                          ),
-
-                          feedTab.data.familyMemorialList[index].imagesOrVideos != null
-                          ? Container(
-                            height: SizeConfig.blockSizeHorizontal * 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: feedTab.data.familyMemorialList[index].imagesOrVideos[0],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Icon(Icons.error),
-                            ),
-                          )
-                          : Container(height: 0,),
-                        ],
-                      ),
-
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                    ],
-                  );
-                }
-              ),
+              height: 55.0,
+              child: Center(child:body),
             );
-          }
-        }else if(feedTab.hasError){
-          return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
-        }else{
-          return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-        }
-      },
+          },
+        ),
+        controller: refreshController,
+        onRefresh: onRefresh,
+        onLoading: onLoading,
+        child: ListView.separated(
+          padding: EdgeInsets.all(10.0),
+          shrinkWrap: true,
+          itemBuilder: (c, i) => feeds[i],
+          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          itemCount: feeds.length,
+        ),
+      )
     );
   }
 }
+
+

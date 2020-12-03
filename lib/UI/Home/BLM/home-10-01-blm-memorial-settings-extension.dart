@@ -39,15 +39,30 @@ class HomeBLMMemorialSettingsPage extends StatelessWidget{
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Admins', contentDetail: 'Add or remove admins of this page'),
+                MiscBLMSettingDetailTemplate(onTap: (){
+                  Navigator.pushNamed(context, '/home/blm/home-26-blm-page-managers');
+                }, 
+                  titleDetail: 'Admins', 
+                  contentDetail: 'Add or remove admins of this page',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Family', contentDetail: 'Add or remove family of this page'),
+                MiscBLMSettingDetailTemplate(onTap: (){
+                  Navigator.pushNamed(context, '/home/blm/home-27-blm-page-family');
+                }, 
+                  titleDetail: 'Family', 
+                  contentDetail: 'Add or remove family of this page',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Friends', contentDetail: 'Add or remove friends of this page'),
+                MiscBLMSettingDetailTemplate(onTap: (){
+                  Navigator.pushNamed(context, '/home/blm/home-28-blm-page-friends');
+                }, 
+                  titleDetail: 'Friends', 
+                  contentDetail: 'Add or remove friends of this page',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
