@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_12_03_112528) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-=======
-ActiveRecord::Schema.define(version: 2020_12_03_112333) do
->>>>>>> 9a9ece0f42cfb791426f2c4447e00f0a781d4f30
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +31,14 @@ ActiveRecord::Schema.define(version: 2020_12_03_112333) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "authorizations", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "blms", force: :cascade do |t|
@@ -105,9 +106,9 @@ ActiveRecord::Schema.define(version: 2020_12_03_112333) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
-    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
+    t.string "stripe_connect_account_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -143,7 +144,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_112333) do
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
     t.string "searchable_type"
-    t.bigint "searchable_id"
+    t.integer "searchable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
