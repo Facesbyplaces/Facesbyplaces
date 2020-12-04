@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_12_03_112231) do
+=======
+ActiveRecord::Schema.define(version: 2020_12_03_162947) do
+>>>>>>> 892aa4b94ddee32ccb0f32f5bfc3694991b529f9
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +37,14 @@ ActiveRecord::Schema.define(version: 2020_12_03_112231) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "authorizations", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "blms", force: :cascade do |t|
     t.string "location"
     t.string "precinct"
@@ -48,6 +60,9 @@ ActiveRecord::Schema.define(version: 2020_12_03_112231) do
     t.float "longitude"
     t.float "latitude"
     t.string "stripe_connect_account_id"
+    t.boolean "hideFamily"
+    t.boolean "hideFriends"
+    t.boolean "hideFollowers"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -91,9 +106,12 @@ ActiveRecord::Schema.define(version: 2020_12_03_112231) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
-    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
+    t.string "stripe_connect_account_id"
+    t.boolean "hideFamily"
+    t.boolean "hideFriends"
+    t.boolean "hideFollowers"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -124,6 +142,15 @@ ActiveRecord::Schema.define(version: 2020_12_03_112231) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
     t.index ["user_id"], name: "index_pageowners_on_user_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.integer "searchable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
   create_table "posts", force: :cascade do |t|

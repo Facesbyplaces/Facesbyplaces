@@ -17,14 +17,12 @@ class Api::V1::Pages::BlmController < ApplicationController
         if check == true
             # set privacy to public
             blm.privacy = "public"
+            blm.hideFamily = false
+            blm.hideFriends = false
+            blm.hideFollowers = false
 
             # save blm
             blm.save 
-
-            # Tell the Mailer to send link to register stripe user account after save
-            redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
-            client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
-            SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, current_user, blm.id).deliver_now
 
             # save the owner of the user
             pageowner = Pageowner.new(user: user())
@@ -36,6 +34,11 @@ class Api::V1::Pages::BlmController < ApplicationController
 
             # Make the user as admin of the 
             user().add_role "pageadmin", blm
+
+            # Tell the Mailer to send link to register stripe user account after save
+            redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+            client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+            SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, current_user, blm.id).deliver_now
             
             render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
         else

@@ -120,6 +120,57 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         render json: {status: :deleted}
     end
 
+    def unhideOrHideFamily
+        case params[:page_type]
+        when 'Blm'
+            page = Blm.find(params[:page_id])
+        when 'Memorial'
+            page = Memorial.find(params[:page_id])
+        end
+
+        if page.hideFamily 
+            page.update(hideFamily: false)
+        else
+            page.update(hideFamily: true)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def unhideOrHideFriends
+        case params[:page_type]
+        when 'Blm'
+            page = Blm.find(params[:page_id])
+        when 'Memorial'
+            page = Memorial.find(params[:page_id])
+        end
+
+        if page.hideFriends 
+            page.update(hideFriends: false)
+        else
+            page.update(hideFriends: true)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def unhideOrHideFollowers
+        case params[:page_type]
+        when 'Blm'
+            page = Blm.find(params[:page_id])
+        when 'Memorial'
+            page = Memorial.find(params[:page_id])
+        end
+
+        if page.hideFollowers
+            page.update(hideFollowers: false)
+        else
+            page.update(hideFollowers: true)
+        end
+
+        render json: {}, status: 200
+    end
+
     private
     def set_up
         # Page where the admin is added

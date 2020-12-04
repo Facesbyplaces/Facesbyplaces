@@ -1,6 +1,6 @@
 class BlmSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :privacy, :manage, :famOrFriends, :follower, :familyCount, :friendsCount, :postsCount, :followersCount, :page_type
+  attributes :id, :name, :details, :backgroundImage, :profileImage, :imagesOrVideos, :relationship, :page_creator, :privacy, :manage, :famOrFriends, :follower, :familyCount, :friendsCount, :postsCount, :followersCount, :page_type, :hideFamily, :hideFriends, :hideFollowers
 
   def details
     case object.privacy
@@ -42,11 +42,10 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def manage
-    if object.currentUser == nil
-      return false 
-    end
-    if object.currentUser.has_role? :pageadmin, object 
-      return true
+    if object.currentUser
+      if object.currentUser.has_role? :pageadmin, object 
+        return true
+      end
     end
     
     return false 
@@ -116,11 +115,10 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def follower
-    if object.currentUser == nil
-      return false 
-    end
-    if object.users.where(id: object.currentUser.id).first
-      return true
+    if object.currentUser
+      if object.users.where(id: object.currentUser.id).first
+        return true
+      end
     end
     
     return false 
