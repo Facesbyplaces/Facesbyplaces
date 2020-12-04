@@ -1,6 +1,6 @@
 class Api::V1::Admin::AdminController < ApplicationController
     before_action :authenticate_user!
-    # before_action :admin_only
+    before_action :admin_only
 
     def allUsers
         users = User.all 
@@ -66,8 +66,9 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     def searchPost
-        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type")
-                    .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
+        postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
+
+        posts = Post.where(id: postsId)
         
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -97,9 +98,8 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     def searchMemorial
-        memorials = Pageowner.joins("INNER JOIN #{pages_sql} ON pages.id = pageowners.page_id AND pageowners.page_type = pages.object_type")
-                            .where("pages.name LIKE :search or pages.country LIKE :search or pages.description LIKE :search", search: params[:keywords])
-                            
+        memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
+        
         memorials = memorials.page(params[:page]).per(numberOfPage)
         if memorials.total_count == 0 || (memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
@@ -109,11 +109,24 @@ class Api::V1::Admin::AdminController < ApplicationController
             itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
         end
 
+        memorials = memorials.collect do |memorial|
+            if memorial.searchable_type == 'Blm'
+                memorial = Blm.find(memorial.searchable_id)
+                ActiveModel::SerializableResource.new(
+                    memorial, 
+                    each_serializer: BlmSerializer
+                )
+            else
+                memorial = Memorial.find(memorial.searchable_id)
+                ActiveModel::SerializableResource.new(
+                    memorial, 
+                    each_serializer: MemorialSerializer
+                )
+            end
+        end
+
         render json: {  itemsremaining:  itemsremaining,
-                        memorials: ActiveModel::SerializableResource.new(
-                            memorials, 
-                            each_serializer: PageownerSerializer
-                        )
+                        memorials: memorials
                     }
     end
 

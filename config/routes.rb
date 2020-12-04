@@ -35,6 +35,8 @@ Rails.application.routes.draw do
         get 'posts', to: 'mainpages#posts'
         # user's notifications
         get 'notifications', to: 'mainpages#notifications'
+        # user's notifications
+        get 'suggested', to: 'mainpages#suggested'
       end
       namespace :pages do
         # memorial controller

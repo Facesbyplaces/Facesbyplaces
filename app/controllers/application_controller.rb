@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
         protect_from_forgery with: :null_session 
 
         rescue_from ActiveRecord::RecordNotFound, :with => :known_error
-        rescue_from Pagy::OverflowError, :with => :lastPage
-        include Pagy::Backend
 
         rescue_from CanCan::AccessDenied do |exception|
             render json: {status: exception.message}
@@ -68,10 +66,6 @@ class ApplicationController < ActionController::Base
                 return render json: {errors: exception}, status: 404
         end
 
-        def lastPage
-              return render json: {errors: 'Page not Found'}, status: 404
-        end
-
         def numberOfPage
                 2
         end
@@ -99,6 +93,14 @@ class ApplicationController < ActionController::Base
                 UNION
                 SELECT id, 'Blm' AS object_type, name, country, description FROM blms
             ) AS pages"
+        end
+        
+        def suggested_sql
+            "(
+                SELECT id, page_type, page_id, user_id FROM relationships
+                UNION
+                SELECT id, page_type, page_id, user_id FROM followers
+            ) AS relationship_followers"
         end
         
         def set_current_user

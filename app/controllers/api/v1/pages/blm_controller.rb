@@ -6,6 +6,10 @@ class Api::V1::Pages::BlmController < ApplicationController
     def show
         blm = Blm.find(params[:id])
         
+        # add count to view of page
+        page = Pageowner.where(page_type: 'Blm', page_id: blm.id).first
+        page.update(view: (page.view + 1))
+        
         render json: {blm: BlmSerializer.new( blm ).attributes}
     end
 
@@ -25,7 +29,7 @@ class Api::V1::Pages::BlmController < ApplicationController
             blm.save 
 
             # save the owner of the user
-            pageowner = Pageowner.new(user: user())
+            pageowner = Pageowner.new(user: user(), view: 0)
             blm.pageowner = pageowner
 
             # save relationship of the user to the page

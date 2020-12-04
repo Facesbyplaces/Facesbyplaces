@@ -6,6 +6,10 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def show
         memorial = Memorial.find(params[:id])
         
+        # add count to view of page
+        page = Pageowner.where(page_type: 'Memorial', page_id: memorial.id).first
+        page.update(view: (page.view + 1))
+        
         render json: {memorial: MemorialSerializer.new( memorial ).attributes}
     end
 
@@ -29,7 +33,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             memorial.save
 
             # save the owner of the user
-            pageowner = Pageowner.new(user: user())
+            pageowner = Pageowner.new(user: user(), view: 0)
             memorial.pageowner = pageowner
 
             # save relationship of the user to the page

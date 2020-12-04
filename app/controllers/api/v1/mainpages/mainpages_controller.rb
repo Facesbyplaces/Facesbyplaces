@@ -149,6 +149,31 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                     }
     end
 
+    def suggested
+        # get all the pages in descending order based on their view count
+        pages = Pageowner.joins("LEFT OUTER JOIN #{suggested_sql()} ON relationship_followers.page_type = pageowners.page_type AND relationship_followers.page_id = relationship_followers.page_id AND relationship_followers.user_id != #{user().id}")
+                        .order(view: :desc)
+
+        pages = pages.page(params[:page]).per(numberOfPage)
+
+        if pages.total_count == 0 || (pages.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsRemaining = 0
+        elsif pages.total_count < numberOfPage
+            itemsRemaining = pages.total_count 
+        else
+            itemsRemaining = pages.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {
+            itemsRemaining: itemsRemaining,
+            pages: ActiveModel::SerializableResource.new(
+                        pages, 
+                        each_serializer: PageownerSerializer
+                    )
+        }
+    end
+
+    private
     def numberOfPage
         1
     end
