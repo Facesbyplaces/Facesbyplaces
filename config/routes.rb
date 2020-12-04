@@ -127,6 +127,9 @@ Rails.application.routes.draw do
         get '/like/:post_id', to: 'posts#like'
         # Unlike Post
         get '/unlike/:post_id', to: 'posts#unlike'
+        # List of pages that the user can post in
+        get '/listPages/show', to: 'posts#listOfPages'
+
         # Add Comment to Post
         post '/comment', to: 'comments#addComment'
         # Add Reply to Comment
@@ -135,8 +138,10 @@ Rails.application.routes.draw do
         get '/likeComment/:commentable_type/:commentable_id', to: 'comments#like'
         # Unlike Comment or Reply
         get '/unlikeComment/:commentable_type/:commentable_id', to: 'comments#unlike'
-        # List of pages that the user can post in
-        get '/listPages/show', to: 'posts#listOfPages'
+        # Comments index
+        get '/index/comments/:id', to: 'comments#commentsIndex'
+        # Replies index
+        get '/index/replies/:id', to: 'comments#repliesIndex'
       end
       namespace :admin do
         # all users

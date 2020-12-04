@@ -116,10 +116,40 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def commentsIndex
-        
+        post = Post.find(params[:id])
+        comments = post.comments 
+
+        comments = comments.page(params[:page]).per(numberOfPage)
+        if comments.total_count == 0 || (comments.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif comments.total_count < numberOfPage
+            itemsremaining = comments.total_count 
+        else
+            itemsremaining = comments.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        comments: comments
+                    }
     end
     
-    
+    def repliesIndex
+        comment = Comment.find(params[:id])
+        replies = comment.replies 
+
+        replies = replies.page(params[:page]).per(numberOfPage)
+        if replies.total_count == 0 || (replies.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif replies.total_count < numberOfPage
+            itemsremaining = replies.total_count 
+        else
+            itemsremaining = replies.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        replies: replies
+                    }
+    end
 
     private
     def comment_params
