@@ -151,8 +151,30 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
 
     def suggested
         # get all the pages in descending order based on their view count
-        pages = Pageowner.joins("LEFT OUTER JOIN #{suggested_sql()} ON relationship_followers.page_type = pageowners.page_type AND relationship_followers.page_id = relationship_followers.page_id AND relationship_followers.user_id != #{user().id}")
-                        .order(view: :desc)
+        followers_page_type = user().followers.pluck("page_type")
+        followers_page_id = user().followers.pluck("page_id")
+        relationships_page_type = user().relationships.pluck("page_type")
+        relationships_page_id = user().relationships.pluck("page_id")
+
+        if followers_page_type.count != 0 && relationships_page_type.count != 0
+
+            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
+                            .where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
+                            .order(view: :desc)
+
+        elsif followers_page_type.count != 0
+
+            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
+                            .order(view: :desc)
+
+        elsif relationships_page_type.count != 0
+
+            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
+                            .order(view: :desc)
+                            
+        else
+            pages = Pageowner.order(view: :desc)
+        end
 
         pages = pages.page(params[:page]).per(numberOfPage)
 

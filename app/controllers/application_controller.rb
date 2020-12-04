@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
         end
 
         def numberOfPage
-                2
+            10
         end
 
         def user
