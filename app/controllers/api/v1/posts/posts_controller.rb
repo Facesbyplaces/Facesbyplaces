@@ -120,6 +120,21 @@ class Api::V1::Posts::PostsController < ApplicationController
         end
     end
 
+    # pages that the user can manage
+    def listOfPages
+        pagesId = user().roles.joins("INNER JOIN blms ON roles.resource_id = blms.id").select('blms.id')
+
+        pages = pagesId.collect do |page|
+            page = Blm.find(page.id)
+            ActiveModel::SerializableResource.new(
+                page, 
+                each_serializer: BlmSerializer
+            )
+        end
+
+        render json: { pages: pages }
+    end
+
     private
 
     def post_params

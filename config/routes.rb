@@ -135,6 +135,8 @@ Rails.application.routes.draw do
         get '/likeComment/:commentable_type/:commentable_id', to: 'comments#like'
         # Unlike Comment or Reply
         get '/unlikeComment/:commentable_type/:commentable_id', to: 'comments#unlike'
+        # List of pages that the user can post in
+        get '/listPages/show', to: 'posts#listOfPages'
       end
       namespace :admin do
         # all users

@@ -114,6 +114,10 @@ class Api::V1::Posts::CommentsController < ApplicationController
             render json: {}, status: 404
         end
     end
+
+    def commentsIndex
+        
+    end
     
     
 
