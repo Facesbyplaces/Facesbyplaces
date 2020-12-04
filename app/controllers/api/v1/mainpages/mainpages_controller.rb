@@ -171,7 +171,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
 
             pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
                             .order(view: :desc)
-                            
+
         else
             pages = Pageowner.order(view: :desc)
         end
@@ -193,11 +193,6 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         each_serializer: PageownerSerializer
                     )
         }
-    end
-
-    private
-    def numberOfPage
-        1
     end
     
 end
