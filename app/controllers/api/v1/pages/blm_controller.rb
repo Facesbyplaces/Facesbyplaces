@@ -223,7 +223,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def blm_details_params
-        params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country)
+        params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :longitude, :latitude)
     end
 
     def blm_images_params

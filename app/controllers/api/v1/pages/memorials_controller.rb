@@ -226,7 +226,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def memorial_details_params
-        params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description)
+        params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :longitude, :latitude)
     end
 
     def memorial_images_params
