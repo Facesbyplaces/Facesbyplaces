@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_12_03_112231) do
-=======
 ActiveRecord::Schema.define(version: 2020_12_03_162947) do
->>>>>>> 892aa4b94ddee32ccb0f32f5bfc3694991b529f9
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,14 +31,6 @@ ActiveRecord::Schema.define(version: 2020_12_03_162947) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "authorizations", force: :cascade do |t|
-    t.string "provider"
-    t.string "uid"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "blms", force: :cascade do |t|
@@ -106,9 +94,9 @@ ActiveRecord::Schema.define(version: 2020_12_03_162947) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
+    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
-    t.string "stripe_connect_account_id"
     t.boolean "hideFamily"
     t.boolean "hideFriends"
     t.boolean "hideFollowers"
