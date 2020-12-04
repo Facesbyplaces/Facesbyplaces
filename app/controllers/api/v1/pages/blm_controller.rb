@@ -8,7 +8,11 @@ class Api::V1::Pages::BlmController < ApplicationController
         
         # add count to view of page
         page = Pageowner.where(page_type: 'Blm', page_id: blm.id).first
-        page.update(view: (page.view + 1))
+        if page.view == nil
+            page.update(view: 1)
+        else
+            page.update(view: (page.view + 1))
+        end
         
         render json: {blm: BlmSerializer.new( blm ).attributes}
     end

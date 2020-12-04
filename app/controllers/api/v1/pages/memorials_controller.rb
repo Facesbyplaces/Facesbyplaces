@@ -8,7 +8,11 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         
         # add count to view of page
         page = Pageowner.where(page_type: 'Memorial', page_id: memorial.id).first
-        page.update(view: (page.view + 1))
+        if page.view == nil
+            page.update(view: 1)
+        else
+            page.update(view: (page.view + 1))
+        end
         
         render json: {memorial: MemorialSerializer.new( memorial ).attributes}
     end
