@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
-        resources :image_upload, only: [:create]
+        resources :image_upload, only: [:create, :update]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
       end
