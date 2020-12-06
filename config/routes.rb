@@ -202,9 +202,13 @@ Rails.application.routes.draw do
         put 'updatePost', to: 'pageadmin#updatePost'
         delete 'deletePost/:post_id/:page_type/:page_id', to: 'pageadmin#deletePost'
 
-        get 'unhideOrHideFamily/:page_type/:page_id', to: 'pageadmin#unhideOrHideFamily'
-        get 'unhideOrHideFriends/:page_type/:page_id', to: 'pageadmin#unhideOrHideFriends'
-        get 'unhideOrHideFollowers/:page_type/:page_id', to: 'pageadmin#unhideOrHideFollowers'
+        get 'hideFamily/:page_type/:page_id', to: 'pageadmin#hideFamily'
+        get 'hideFriends/:page_type/:page_id', to: 'pageadmin#hideFriends'
+        get 'hideFollowers/:page_type/:page_id', to: 'pageadmin#hideFollowers'
+
+        get 'unhideFamily/:page_type/:page_id', to: 'pageadmin#unhideFamily'
+        get 'unhideFriends/:page_type/:page_id', to: 'pageadmin#unhideFriends'
+        get 'unhideFollowers/:page_type/:page_id', to: 'pageadmin#unhideFollowers'
       end
       namespace :notifications do
         # ignore lists of notifications

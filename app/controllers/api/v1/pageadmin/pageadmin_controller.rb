@@ -120,7 +120,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         render json: {status: :deleted}
     end
 
-    def unhideOrHideFamily
+    def hideFamily
         case params[:page_type]
         when 'Blm'
             page = Blm.find(params[:page_id])
@@ -128,16 +128,12 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             page = Memorial.find(params[:page_id])
         end
 
-        if page.hideFamily 
-            page.update(hideFamily: false)
-        else
-            page.update(hideFamily: true)
-        end
+        page.update(hideFamily: true)
 
         render json: {}, status: 200
     end
 
-    def unhideOrHideFriends
+    def unhideFamily
         case params[:page_type]
         when 'Blm'
             page = Blm.find(params[:page_id])
@@ -145,16 +141,12 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             page = Memorial.find(params[:page_id])
         end
 
-        if page.hideFriends 
-            page.update(hideFriends: false)
-        else
-            page.update(hideFriends: true)
-        end
+        page.update(hideFamily: false)
 
         render json: {}, status: 200
     end
 
-    def unhideOrHideFollowers
+    def hideFriends
         case params[:page_type]
         when 'Blm'
             page = Blm.find(params[:page_id])
@@ -162,11 +154,46 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             page = Memorial.find(params[:page_id])
         end
 
-        if page.hideFollowers
-            page.update(hideFollowers: false)
-        else
-            page.update(hideFollowers: true)
+        page.update(hideFriends: true)
+
+        render json: {}, status: 200
+    end
+
+    def unhideFriends
+        case params[:page_type]
+        when 'Blm'
+            page = Blm.find(params[:page_id])
+        when 'Memorial'
+            page = Memorial.find(params[:page_id])
         end
+
+        page.update(hideFriends: false)
+
+        render json: {}, status: 200
+    end
+
+    def hideFollowers
+        case params[:page_type]
+        when 'Blm'
+            page = Blm.find(params[:page_id])
+        when 'Memorial'
+            page = Memorial.find(params[:page_id])
+        end
+
+        page.update(hideFollowers: true)
+
+        render json: {}, status: 200
+    end
+
+    def unhideFollowers
+        case params[:page_type]
+        when 'Blm'
+            page = Blm.find(params[:page_id])
+        when 'Memorial'
+            page = Memorial.find(params[:page_id])
+        end
+
+        page.update(hideFollowers: false)
 
         render json: {}, status: 200
     end
