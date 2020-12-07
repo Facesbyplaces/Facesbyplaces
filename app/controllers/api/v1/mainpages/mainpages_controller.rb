@@ -3,7 +3,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
 
     # user's feed
     def feed
-        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type")
+        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type ")
                     .joins("INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = posts.page_type AND followers.page_id = posts.page_id OR posts.user_id = #{user().id}")
                     .order(created_at: :desc)
                     .select("posts.*")
@@ -147,52 +147,6 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         render json: {  itemsremaining:  itemsremaining,
                         notifs: notifs
                     }
-    end
-
-    def suggested
-        # get all the pages in descending order based on their view count
-        followers_page_type = user().followers.pluck("page_type")
-        followers_page_id = user().followers.pluck("page_id")
-        relationships_page_type = user().relationships.pluck("page_type")
-        relationships_page_id = user().relationships.pluck("page_id")
-
-        if followers_page_type.count != 0 && relationships_page_type.count != 0
-
-            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
-                            .where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
-                            .order(view: :desc)
-
-        elsif followers_page_type.count != 0
-
-            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
-                            .order(view: :desc)
-
-        elsif relationships_page_type.count != 0
-
-            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
-                            .order(view: :desc)
-
-        else
-            pages = Pageowner.order(view: :desc)
-        end
-
-        pages = pages.page(params[:page]).per(numberOfPage)
-
-        if pages.total_count == 0 || (pages.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsRemaining = 0
-        elsif pages.total_count < numberOfPage
-            itemsRemaining = pages.total_count 
-        else
-            itemsRemaining = pages.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {
-            itemsRemaining: itemsRemaining,
-            pages: ActiveModel::SerializableResource.new(
-                        pages, 
-                        each_serializer: PageownerSerializer
-                    )
-        }
     end
     
 end
