@@ -59,15 +59,21 @@ class BlmSerializer < ActiveModel::Serializer
   end
   
   def backgroundImage
-    rails_blob_url(object.backgroundImage) 
+    if object.backgroundImage.present?
+      rails_blob_url(object.backgroundImage) 
+    end
   end
 
   def profileImage
-    rails_blob_url(object.profileImage) 
+    if object.profileImage.present?
+      rails_blob_url(object.profileImage) 
+    end
   end
 
   def imagesOrVideos
-    getImage(object.imagesOrVideos)
+    if object.imagesOrVideos.present?
+      getImage(object.imagesOrVideos)
+    end
   end
 
   def familyCount
