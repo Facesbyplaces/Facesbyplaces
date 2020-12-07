@@ -59,11 +59,11 @@ class BlmSerializer < ActiveModel::Serializer
   end
   
   def backgroundImage
-    rails_blob_url(object.backgroundImage) unless object.backgroundImage.attached?
+    rails_blob_url(object.backgroundImage) 
   end
 
   def profileImage
-    rails_blob_url(object.profileImage) unless object.profileImage.attached? 
+    rails_blob_url(object.profileImage) 
   end
 
   def imagesOrVideos
