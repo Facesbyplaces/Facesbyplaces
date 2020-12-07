@@ -213,6 +213,48 @@ class Api::V1::Pages::BlmController < ApplicationController
         }
     end
 
+    def adminIndex
+        adminsRaw = Blm.find(params[:page_id]).roles.first.users
+        admins = adminsRaw.page(params[:page]).per(numberOfPage)
+
+        if admins.total_count == 0 || (admins.total_count - (params[:page].to_i * numberOfPage)) < 0
+            adminsitemsremaining = 0
+        elsif admins.total_count < numberOfPage
+            adminsitemsremaining = admins.total_count 
+        else
+            adminsitemsremaining = admins.total_count - (params[:page].to_i * numberOfPage)
+        end
+        
+        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND user_id NOT IN (?)", adminsRaw.pluck('id'))
+        family = familyRaw.page(params[:page]).per(numberOfPage)
+
+        if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
+            familyitemsremaining = 0
+        elsif admins.total_count < numberOfPage
+            familyitemsremaining = family.total_count 
+        else
+            familyitemsremaining = family.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        family = family.collect do |famUser|
+            user = User.find(famUser.user_id)
+            ActiveModel::SerializableResource.new(
+                user, 
+                each_serializer: UserSerializer
+            )
+        end
+
+        render json: {
+            adminsitemsremaining: adminsitemsremaining,
+            admins: ActiveModel::SerializableResource.new(
+                        admins, 
+                        each_serializer: UserSerializer
+                    ),
+            familyitemsremaining: familyitemsremaining,
+            family: family
+        }
+    end
+
     private
 
     def verify_user_account_type

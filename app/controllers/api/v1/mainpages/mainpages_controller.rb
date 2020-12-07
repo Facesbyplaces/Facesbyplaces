@@ -28,7 +28,9 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's memorials
     def memorials
         # Family
-            blmFamily = Blm.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Father' or relationships.relationship = 'Mother' or relationships.relationship = 'Brother' or relationships.relationship = 'Sister' or relationships.relationship = 'Uncle' or relationships.relationship = 'Aunt' or relationships.relationship = 'Grandmother' or relationships.relationship = 'Grandfather'")
+            # BLM
+            blmFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Blm'").pluck('page_id')
+            blmFamily = Blm.where(id: blmFamily)
             blmFamily = blmFamily.page(params[:page]).per(numberOfPage)
 
             if blmFamily.total_count == 0 || (blmFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -43,8 +45,10 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                             blmFamily, 
                             each_serializer: BlmSerializer
                         )
-
-            memorialFamily = Memorial.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Father' or relationships.relationship = 'Mother' or relationships.relationship = 'Brother' or relationships.relationship = 'Sister' or relationships.relationship = 'Uncle' or relationships.relationship = 'Aunt' or relationships.relationship = 'Grandmother' or relationships.relationship = 'Grandfather'")
+            # ===========================================================================================================
+            # MEMORIAL
+            memorialFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Memorial'").pluck('page_id')
+            memorialFamily = Memorial.where(id: memorialFamily)
             memorialFamily = memorialFamily.page(params[:page]).per(numberOfPage)
 
             if memorialFamily.total_count == 0 || (memorialFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -61,7 +65,9 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         )
                         
         # Friends
-            blmFriends = Blm.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Friend'")
+            # BLM
+            blmFriends = user().relationships.where("relationship = 'Friend' AND page_type = 'Blm'").pluck('page_id')
+            blmFriends = Blm.where(id: blmFriends)
             blmFriends = blmFriends.page(params[:page]).per(numberOfPage)
 
             if blmFriends.total_count == 0 || (blmFriends.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -76,8 +82,11 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                             blmFriends, 
                             each_serializer: BlmSerializer
                         )
-
-            memorialFriends = Memorial.joins(:pageowner).where("pageowners.user_id = #{user().id}").joins(:relationships).where("relationships.relationship = 'Friend'")
+            
+            # ===========================================================================================================
+            # MEMORIAL
+            memorialmemorialFriendsFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Memorial'").pluck('page_id')
+            memorialFriends = Memorial.where(id: memorialFriends)
             memorialFriends = memorialFriends.page(params[:page]).per(numberOfPage)
 
             if memorialFriends.total_count == 0 || (memorialFriends.total_count - (params[:page].to_i * numberOfPage)) < 0

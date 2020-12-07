@@ -72,6 +72,9 @@ Rails.application.routes.draw do
 
           # followers Index
           get 'memorials/:id/followers/index', to: 'memorials#followersIndex'
+
+          # admin Index
+          get 'memorials/adminIndex/index', to: 'memorials#adminIndex'
         
         # blm controller
           # Show memorial
@@ -111,6 +114,9 @@ Rails.application.routes.draw do
 
           # followers Index
           get 'blm/:id/followers/index', to: 'blm#followersIndex'
+
+          # admin Index
+          get 'blm/adminIndex/index', to: 'blm#adminIndex'
       end
       namespace :posts do
         # Post Index
