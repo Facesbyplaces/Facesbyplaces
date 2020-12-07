@@ -56,19 +56,11 @@ class MemorialSerializer < ActiveModel::Serializer
   end
   
   def backgroundImage
-    if object.backgroundImage.attached?
-      {
-        url: rails_blob_url(object.backgroundImage)
-      }
-    end
+    object.backgroundImage.attached? ? url_for(object.backgroundImage) : "" 
   end
 
   def profileImage
-    if object.profileImage.attached?
-      {
-        url: rails_blob_url(object.profileImage)
-      }
-    end
+    object.profileImage.attached? ? url_for(object.profileImage) : ""
   end
 
   def imagesOrVideos
