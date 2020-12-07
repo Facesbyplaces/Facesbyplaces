@@ -7,6 +7,3 @@
  - Home
  - Miscellaneous
  - Regular
-
-
-
