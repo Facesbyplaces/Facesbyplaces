@@ -59,25 +59,15 @@ class BlmSerializer < ActiveModel::Serializer
   end
   
   def backgroundImage
-    if object.backgroundImage.attached?
-      {
-        url: rails_blob_url(object.backgroundImage)
-      }
-    end
+    rails_blob_url(object.backgroundImage) unless object.backgroundImage.attached?
   end
 
   def profileImage
-    if object.profileImage.attached?
-      {
-        url: rails_blob_url(object.profileImage)
-      }
-    end
+    rails_blob_url(object.profileImage) unless object.profileImage.attached? 
   end
 
   def imagesOrVideos
-    if object.imagesOrVideos.attached?
-      getImage(object.imagesOrVideos)
-    end
+    getImage(object.imagesOrVideos)
   end
 
   def familyCount
