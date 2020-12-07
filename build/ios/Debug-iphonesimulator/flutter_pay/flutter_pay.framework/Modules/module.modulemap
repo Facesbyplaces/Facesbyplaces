@@ -1,0 +1,11 @@
+framework module flutter_pay {
+  umbrella header "flutter_pay-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module flutter_pay.Swift {
+    header "flutter_pay-Swift.h"
+    requires objc
+}

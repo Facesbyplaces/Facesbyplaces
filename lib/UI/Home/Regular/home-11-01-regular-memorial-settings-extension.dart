@@ -38,19 +38,43 @@ class HomeRegularMemorialSettingsPage extends StatelessWidget{
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Admins', contentDetail: 'Add or remove admins of this page'),
+                MiscRegularSettingDetailTemplate(
+                  onTap: (){
+                    Navigator.pushNamed(context, 'home/regular/home-23-regular-page-managers');
+                  }, 
+                  titleDetail: 'Admins', 
+                  contentDetail: 'Add or remove admins of this page',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Family', contentDetail: 'Add or remove family of this page'),
+                MiscRegularSettingDetailTemplate(
+                  onTap: (){
+                    Navigator.pushNamed(context, 'home/regular/home-24-regular-page-family');
+                  }, 
+                  titleDetail: 'Family', 
+                  contentDetail: 'Add or remove family of this page',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Friends', contentDetail: 'Add or remove friends of this page'),
+                MiscRegularSettingDetailTemplate(
+                  onTap: (){
+                    Navigator.pushNamed(context, 'home/regular/home-25-regular-page-friends');
+                  }, 
+                  titleDetail: 'Friends', 
+                  contentDetail: 'Add or remove friends of this page',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                MiscRegularSettingDetailTemplate(onTap: (){}, titleDetail: 'Paypal', contentDetail: 'Manage cards that receives the memorial gifts.'),
+                MiscRegularSettingDetailTemplate(
+                  onTap: (){
+
+                  }, 
+                  titleDetail: 'Paypal', 
+                  contentDetail: 'Manage cards that receives the memorial gifts.',
+                ),
 
                 Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
@@ -62,6 +86,11 @@ class HomeRegularMemorialSettingsPage extends StatelessWidget{
                       context.bloc<BlocShowLoading>().modify(true);
                       bool result = await apiRegularDeleteMemorial();
                       context.bloc<BlocShowLoading>().modify(false);
+
+                            // context.showLoaderOverlay();
+                            // bool result = await apiBLMLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                            // context.hideLoaderOverlay();
+
 
                       if(result){
                         Navigator.popAndPushNamed(context, '/home/regular');

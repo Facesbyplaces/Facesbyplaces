@@ -1,10 +1,17 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
 import 'package:facesbyplaces/API/BLM/api-07-02-blm-home-memorials-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+
+class BLMMainPagesMemorials{
+  int memorialId;
+  String memorialName;
+  String memorialDescription;
+
+  BLMMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription});
+}
 
 class HomeBLMManageTab extends StatefulWidget{
 
@@ -13,99 +20,222 @@ class HomeBLMManageTab extends StatefulWidget{
 
 class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+  List<BLMMainPagesMemorials> memorialsFamily = [];
+  List<BLMMainPagesMemorials> memorialsFriends = [];
+  int blmFamilyItemsRemaining = 1;
+  int blmFriendsItemsRemaining = 1;
+  int page = 1;
+
   void initState(){
     super.initState();
-    apiBLMHomeMemorialsTab();
+    onLoading1();
+    onLoading2();
+  }
+
+  void onRefresh() async{
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading1() async{
+    if(blmFamilyItemsRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiBLMHomeMemorialsTab(page);
+      blmFamilyItemsRemaining = newValue.familyMemorialList.blmFamilyItemsRemaining;
+
+      for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
+        memorialsFamily.add(
+          BLMMainPagesMemorials(
+            memorialId: newValue.familyMemorialList.blm[i].id,
+            memorialName: newValue.familyMemorialList.blm[i].name,
+            memorialDescription: newValue.familyMemorialList.blm[i].details.description
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      
+      refreshController.loadComplete();
+      context.hideLoaderOverlay();
+    }else{
+      refreshController.loadNoData();
+    }
+  }
+
+  void onLoading2() async{
+    context.showLoaderOverlay();
+    if(blmFriendsItemsRemaining != 0){
+      var newValue = await apiBLMHomeMemorialsTab(page);
+      blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
+
+      for(int i = 0; i < newValue.friendsMemorialList.blm.length; i++){
+        memorialsFriends.add(
+          BLMMainPagesMemorials(
+            memorialId: newValue.friendsMemorialList.blm[i].id,
+            memorialName: newValue.friendsMemorialList.blm[i].name,
+            memorialDescription: newValue.friendsMemorialList.blm[i].details.description
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      
+      refreshController.loadComplete();
+      context.hideLoaderOverlay();
+    }else{
+      refreshController.loadNoData();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return FutureBuilder<APIBLMHomeTabMemorialMain>(
-      future: apiBLMHomeMemorialsTab(),
-      builder: (context, memorialsTab){
-        if(memorialsTab.hasData){
-          return Container(
-            height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
-            child: BlocBuilder<BlocHomeBLMUpdateListSuggested, List<bool>>(
-              builder: (context, listSuggested){
-
-                return Column(
-                  children: [
-                    Container(
-                      height: SizeConfig.blockSizeVertical * 10,
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                      color: Color(0xffeeeeee),
-                      child: Row(
-                        children: [
-                          Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
-                          Expanded(child: GestureDetector(onTap: (){Navigator.pushNamed(context, '/home/blm/home-07-01-blm-create-memorial');}, child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),)),
-                        ],
-                      ),
-                    ),
-
-                    memorialsTab.data.familyMemorialList.blm.length != 0
-                    ? Expanded(
-                      child: ListView.separated(
-                        physics: ClampingScrollPhysics(),
-                        itemCount: memorialsTab.data.familyMemorialList.blm.length,
-                        itemBuilder: (context, index){
-                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.familyMemorialList.blm[index].id, memorialName: memorialsTab.data.familyMemorialList.blm[index].name, description: memorialsTab.data.familyMemorialList.blm[index].details.description,);
-                        },
-                        separatorBuilder: (context, index){
-                          return Divider(height: 1, color: Colors.grey,);
-                        },
-                      ),
-                    )
-                    : Expanded(
-                      child: Center(child: Text('Family memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
-                    ),
-
-                    Container(
-                      height: SizeConfig.blockSizeVertical * 10,
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                      color: Color(0xffeeeeee),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text('My Friends',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    memorialsTab.data.friendsMemorialList.blm.length != 0
-                    ? Expanded(
-                      child: ListView.separated(
-                        physics: ClampingScrollPhysics(),
-                        itemCount: memorialsTab.data.friendsMemorialList.blm.length,
-                        itemBuilder: (context, index){
-                          return MiscBLMManageMemorialTab(index: index, tab: 0, memorialId: memorialsTab.data.friendsMemorialList.blm[index].id, memorialName: memorialsTab.data.friendsMemorialList.blm[index].name, description: memorialsTab.data.friendsMemorialList.blm[index].details.description,);
-                        },
-                        separatorBuilder: (context, index){
-                          return Divider(height: 1, color: Colors.grey,);
-                        },
-                      ),
-                    )
-                    : Expanded(
-                      child: Center(child: Text('Friends memorial is empty.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
-                    ),
-                    
-                  ],
-                );
-              }
+    return Container(
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      child: Column(
+        children: [
+          Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            color: Color(0xffeeeeee),
+            child: Row(
+              children: [
+                Expanded(child: Align(alignment: Alignment.centerLeft, child: Text('My Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                
+                Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/home/blm/home-07-01-blm-create-memorial');
+                  },
+                  child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                ),
+              ],
             ),
-          );
-        }else if(memorialsTab.hasError){
-          return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
-        }else{
-          return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-        }
-      },
+          ),
+
+          Expanded(
+            child: SmartRefresher(
+              enablePullDown: false,
+              enablePullUp: true,
+              header: MaterialClassicHeader(),
+              footer: CustomFooter(
+                loadStyle: LoadStyle.ShowWhenLoading,
+                builder: (BuildContext context, LoadStatus mode){
+                  Widget body ;
+                  if(mode == LoadStatus.idle){
+                    body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  }
+                  else if(mode == LoadStatus.loading){
+                    body =  CircularProgressIndicator();
+                  }
+                  else if(mode == LoadStatus.failed){
+                    body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  }
+                  else if(mode == LoadStatus.canLoading){
+                    body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                    page++;
+                  }
+                  else{
+                    body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  }
+                  return Container(height: 55.0, child: Center(child: body),);
+                },
+              ),
+              controller: refreshController,
+              onRefresh: onRefresh,
+              onLoading: onLoading1,
+              child: ListView.separated(
+                physics: ClampingScrollPhysics(),
+                itemBuilder: (c, i) {
+                  var container = MiscBLMManageMemorialTab(
+                    index: i,
+                    memorialId: memorialsFamily[i].memorialId, 
+                    memorialName: memorialsFamily[i].memorialName, 
+                    description: memorialsFamily[i].memorialDescription,
+                  );
+
+                  return container;
+                  
+                },
+                separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
+                itemCount: memorialsFamily.length,
+              ),
+            ),
+          ),
+
+          Container(
+            height: SizeConfig.blockSizeVertical * 10,
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            color: Color(0xffeeeeee),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('My Friends',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+          ),
+
+          Expanded(
+            child: SmartRefresher(
+              enablePullDown: false,
+              enablePullUp: true,
+              header: MaterialClassicHeader(),
+              footer: CustomFooter(
+                loadStyle: LoadStyle.ShowWhenLoading,
+                builder: (BuildContext context, LoadStatus mode){
+                  Widget body ;
+                  if(mode == LoadStatus.idle){
+                    body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  }
+                  else if(mode == LoadStatus.loading){
+                    body =  CircularProgressIndicator();
+                  }
+                  else if(mode == LoadStatus.failed){
+                    body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  }
+                  else if(mode == LoadStatus.canLoading){
+                    body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                    page++;
+                  }
+                  else{
+                    body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  }
+                  return Container(height: 55.0, child: Center(child: body),);
+                },
+              ),
+              controller: refreshController,
+              onRefresh: onRefresh,
+              onLoading: onLoading2,
+              child: ListView.separated(
+                padding: EdgeInsets.all(10.0),
+                physics: ClampingScrollPhysics(),
+                itemBuilder: (c, i) {
+                  var container = MiscBLMManageMemorialTab(
+                    index: i,
+                    memorialId: memorialsFriends[i].memorialId, 
+                    memorialName: memorialsFriends[i].memorialName, 
+                    description: memorialsFriends[i].memorialDescription,
+                  );
+
+                  return container;
+                  
+                },
+                separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+                itemCount: memorialsFriends.length,
+              ),
+            ),
+          ),          
+        ],
+      ),
     );
   }
 }
+
 

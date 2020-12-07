@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/API/BLM/api-21-blm-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
+import 'package:facesbyplaces/UI/Home/BLM/home-12-blm-profile.dart';
 // import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'misc-02-blm-dialog.dart';
 
 class MiscBLMManageMemorialTab extends StatefulWidget{
   final int index;
-  final int tab;
   final String memorialName;
   final String description;
   final String image;
@@ -19,7 +19,6 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
 
   MiscBLMManageMemorialTab({
     this.index, 
-    this.tab,
     this.memorialName = '',
     this.description = '',
     this.image = 'assets/icons/graveyard.png',
@@ -27,13 +26,12 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
   });
 
 
-  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, tab: tab, memorialName: memorialName, description: description, image: image, memorialId: memorialId);
+  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId);
 }
 
 class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
   final int index;
-  final int tab;
   final String memorialName;
   final String description;
   final String image;
@@ -41,7 +39,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
   MiscBLMManageMemorialTabState({
     this.index, 
-    this.tab,
     this.memorialName,
     this.description,
     this.image,
@@ -56,9 +53,15 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
     return GestureDetector(
       onTap: () async{
 
-        print('The memorialId is $memorialId');
+        // Navigator.pushNamed(context, '/home/blm/home-12-blm-profile', arguments: memorialId);
 
-        Navigator.pushNamed(context, '/home/blm/home-12-blm-profile', arguments: memorialId);
+
+        // Navigator.pushNamed(context, '/home/blm/home-12-blm-profile', arguments: memorialId);
+        print('The memorial id is $memorialId');
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
+
+        // HomeBLMProfile
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,

@@ -1,9 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'UI/Home/BLM/home-01-blm-home.dart';
 import 'UI/Home/BLM/home-04-blm-search.dart';
 import 'UI/Home/BLM/home-05-blm-post.dart';
 import 'UI/Home/BLM/home-07-01-blm-create-memorial.dart';
+import 'UI/Home/BLM/home-07-02-blm-create-memorial.dart';
+import 'UI/Home/BLM/home-07-03-blm-create-memorial.dart';
 import 'UI/Home/BLM/home-08-blm-memorial.dart';
 import 'UI/Home/BLM/home-09-blm-memorial-settings.dart';
 import 'UI/Home/BLM/home-11-blm-page-details.dart';
@@ -25,8 +26,12 @@ import 'UI/Home/BLM/home-26-blm-page-managers.dart';
 import 'UI/Home/BLM/home-27-blm-page-family.dart';
 import 'UI/Home/BLM/home-28-blm-page-friends.dart';
 import 'UI/Home/BLM/home-29-blm-search-user.dart';
+import 'UI/Home/BLM/home-30-blm-notification-settings.dart';
+import 'UI/Home/BLM/home-31-blm-show-original-post.dart';
 import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
+import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
+import 'UI/Home/Regular/home-04-03-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-05-regular-search.dart';
 import 'UI/Home/Regular/home-06-regular-post.dart';
 import 'UI/Home/Regular/home-08-regular-profile.dart';
@@ -44,6 +49,12 @@ import 'UI/Home/Regular/home-18-regular-other-details.dart';
 import 'UI/Home/Regular/home-19-regular-connection-list.dart';
 import 'UI/Home/Regular/home-21-regular-report.dart';
 import 'UI/Home/Regular/home-22-regular-donate.dart';
+import 'UI/Home/Regular/home-23-regular-page-managers.dart';
+import 'UI/Home/Regular/home-24-regular-page-family.dart';
+import 'UI/Home/Regular/home-25-regular-page-friends.dart';
+import 'UI/Home/Regular/home-26-regular-search-user.dart';
+import 'UI/Home/Regular/home-27-regular-notification-settings.dart';
+import 'UI/Home/Regular/home-28-regular-show-original-post.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
@@ -110,7 +121,10 @@ void main() async{
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
           '/home/blm/home-04-blm-search': (BuildContext context) => HomeBLMSearch(),
           '/home/blm/home-05-blm-post': (BuildContext context) => HomeBLMPost(),
-          '/home/blm/home-07-01-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial(),
+          '/home/blm/home-07-01-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
+          '/home/blm/home-07-02-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial2(),
+          '/home/blm/home-07-03-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial3(),
+        
           '/home/blm/home-08-blm-memorial': (BuildContext context) => HomeBLMMemorialProfile(),
           '/home/blm/home-09-blm-memorial-settings': (BuildContext context) => HomeBLMMemorialSettings(),
           '/home/blm/home-11-blm-page-details': (BuildContext context) => HomeBLMPageDetails(),
@@ -134,9 +148,13 @@ void main() async{
           '/home/blm/home-27-blm-page-family': (BuildContext context) => HomeBLMPageFamily(),
           '/home/blm/home-28-blm-page-friends': (BuildContext context) => HomeBLMPageFriends(),
           '/home/blm/home-29-blm-search-user': (BuildContext context) => HomeBLMSearchUser(),
-
+          '/home/blm/home-30-blm-notification-settings': (BuildContext context) => HomeBLMNotificationSettings(),
+          '/home/blm/home-31-blm-show-original-post': (BuildContext context) => HomeBLMShowOriginalPost(),
+          
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
-          '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial(),
+          '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
+          '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
+          '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
           '/home/regular/home-05-regular-search': (BuildContext context) => HomeRegularSearch(),
           '/home/regular/home-06-regular-post': (BuildContext context) => HomeRegularPost(),
           '/home/regular/home-08-regular-memorial-profile': (BuildContext context) => HomeRegularProfile(),
@@ -154,7 +172,13 @@ void main() async{
           'home/regular/home-19-regular-connection-list': (BuildContext context) => HomeRegularConnectionList(),
           'home/regular/home-21-regular-report': (BuildContext context) => HomeRegularReport(),
           'home/regular/home-22-regular-donate': (BuildContext context) => HomeRegularUserDonate(),
-
+          'home/regular/home-23-regular-page-managers': (BuildContext context) => HomeRegularPageManagers(),
+          'home/regular/home-24-regular-page-family': (BuildContext context) => HomeRegularPageFamily(),
+          'home/regular/home-25-regular-page-friends': (BuildContext context) => HomeRegularPageFriends(),
+          'home/regular/home-26-regular-search-user': (BuildContext context) => HomeRegularSearchUser(),
+          'home/regular/home-27-regular-notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
+          'home/regular/home-28-regular-show-original-post': (BuildContext context) => HomeRegularShowOriginalPost(),
+          
         },
       ),
     ),

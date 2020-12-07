@@ -19,8 +19,8 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
     }
   );
 
-  print('The response status in posts is ${response.statusCode}');
-  print('The response status in posts is ${response.body}');
+  // print('The response status in posts is ${response.statusCode}');
+  // print('The response status in posts is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -56,8 +56,9 @@ class APIRegularHomeTabPostExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  String createAt;
 
-  APIRegularHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos});
+  APIRegularHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
 
   factory APIRegularHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -76,6 +77,7 @@ class APIRegularHomeTabPostExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
+      createAt: parsedJson['created_at'],
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab() async{
+Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -10,7 +10,7 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab() async
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=1',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,8 +19,8 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab() async
     }
   );
 
-  print('The response status in notifications is ${response.statusCode}');
-  print('The response status in notifications is ${response.body}');
+  // print('The response status in notifications is ${response.statusCode}');
+  // print('The response status in notifications is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -31,17 +31,35 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab() async
 }
 
 
-class APIRegularHomeTabNotificationMain{
+// class APIRegularHomeTabNotificationMain{
 
+//   List<APIRegularHomeTabNotificationExtended> notification;
+
+//   APIRegularHomeTabNotificationMain({this.notification});
+
+//   factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic>  parsedJson){
+//     var newList = parsedJson['notifs'] as List;
+//     List<APIRegularHomeTabNotificationExtended> newNotification = newList.map((i) => APIRegularHomeTabNotificationExtended.fromJson(i)).toList();
+
+//     return APIRegularHomeTabNotificationMain(
+//       notification: newNotification,
+//     );
+//   }
+// }
+
+class APIRegularHomeTabNotificationMain{
+  int itemsRemaining;
   List<APIRegularHomeTabNotificationExtended> notification;
 
-  APIRegularHomeTabNotificationMain({this.notification});
+  APIRegularHomeTabNotificationMain({this.itemsRemaining, this.notification});
 
-  factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic>  parsedJson){
+  factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
+
     var newList = parsedJson['notifs'] as List;
     List<APIRegularHomeTabNotificationExtended> newNotification = newList.map((i) => APIRegularHomeTabNotificationExtended.fromJson(i)).toList();
 
     return APIRegularHomeTabNotificationMain(
+      itemsRemaining: parsedJson['itemsremaining'],
       notification: newNotification,
     );
   }

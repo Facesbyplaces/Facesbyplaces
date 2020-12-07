@@ -3,42 +3,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab() async{
+Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  // print('the access token is $getAccessToken');
-  // print('the uid is $getUID');
-  // print('the client is $getClient');
-
-  // final http.Response response = await http.get(
-  //   'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=1',
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json',
-  //     'access-token': getAccessToken,
-  //     'uid': getUID,
-  //     'client': getClient,
-  //   }
-  // );
-  
-  // print('The response status in blm memorial is ${response.statusCode}');
-  // print('The response status in blm memorial is ${response.body}');
-
-  // if(response.statusCode == 200){
-  //   var newValue = json.decode(response.body);
-  //   return APIBLMHomeTabMemorialMain.fromJson(newValue);
-  // }else{
-  //   throw Exception('Failed to get the events');
-  // }
-
   AsyncMemoizer memoizer = AsyncMemoizer();
 
   var value = await memoizer.runOnce(() async{
     final http.Response response = await http.get(
-      'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=1',
+      'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -46,9 +22,9 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab() async{
         'client': getClient,
       }
     );
-    
-    print('The response status in blm memorial is ${response.statusCode}');
-    print('The response status in blm memorial is ${response.body}');
+
+    print('The memorial value is ${response.statusCode}');
+    print('The memorial value is ${response.body}');
 
     if(response.statusCode == 200){
       var newValue = json.decode(response.body);

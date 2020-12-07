@@ -13,7 +13,7 @@ class HomeBLMPost extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // final value = ModalRoute.of(context).settings.arguments;
+    // BLMArguments value = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -44,7 +44,7 @@ class HomeBLMPost extends StatelessWidget{
             appBar: AppBar(
               title: TextFormField(
                 onChanged: (search){
-
+                  
                 },
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(15.0),

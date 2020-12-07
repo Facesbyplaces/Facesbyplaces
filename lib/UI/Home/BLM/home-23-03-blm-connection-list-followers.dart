@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/API/BLM/api-14-01-blm-search-posts.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,7 @@ class HomeBLMConnectionListFollowersState extends State<HomeBLMConnectionListFol
 
   void initState(){
     super.initState();
-    apiBLMSearchPosts('');
+    // apiBLMSearchPosts('');
   }
 
   @override

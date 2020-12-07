@@ -64,8 +64,12 @@ class APIRegularShowMemorialExtended{
   bool manage;
   bool famOrFriends;
   bool follower;
+  int postsCount;
+  int familyCount;
+  int friendsCount;
+  int followersCount;
 
-  APIRegularShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower});
+  APIRegularShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.postsCount, this.familyCount, this.friendsCount, this.followersCount});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowMemorialExtended(
@@ -80,6 +84,10 @@ class APIRegularShowMemorialExtended{
       manage: parsedJson['manage'],
       famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],
+      postsCount: parsedJson['postsCount'],
+      familyCount: parsedJson['familyCount'],
+      friendsCount: parsedJson['friendsCount'],
+      followersCount: parsedJson['followersCount'],
     );
   }
 }

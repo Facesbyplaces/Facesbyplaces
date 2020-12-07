@@ -1,0 +1,66 @@
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<APIRegularSearchUsersMain> apiRegularSearchUsers(String keywords, int page) async{
+
+  final sharedPrefs = await SharedPreferences.getInstance();
+  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+      'access-token': getAccessToken,
+      'uid': getUID,
+      'client': getClient,
+    }
+  );
+
+  print('The status code is ${response.statusCode}');
+  print('The status body is ${response.body}');
+
+  if(response.statusCode == 200){
+    var newValue = json.decode(response.body);
+    return APIRegularSearchUsersMain.fromJson(newValue);
+  }else{
+      throw Exception('Failed to get the user information');
+    }
+}
+
+class APIRegularSearchUsersMain{
+  int itemsRemaining;
+  List<APIBLMSearchUsersExtended> users;
+
+  APIRegularSearchUsersMain({this.itemsRemaining, this.users});
+
+  factory APIRegularSearchUsersMain.fromJson(Map<String, dynamic> parsedJson){
+    var newValue = parsedJson['users'] as List;
+    List<APIBLMSearchUsersExtended> newBLMList = newValue.map((e) => APIBLMSearchUsersExtended.fromJson(e)).toList();
+
+    return APIRegularSearchUsersMain(
+      itemsRemaining: parsedJson['itemsremaining'],
+      users: newBLMList,
+    );
+  }
+}
+
+class APIBLMSearchUsersExtended{
+
+  String firstName;
+  String lastName;
+  String email;
+
+  APIBLMSearchUsersExtended({this.firstName, this.lastName, this.email});
+
+  factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
+
+    return APIBLMSearchUsersExtended(
+      firstName: parsedJson['first_name'],
+      lastName: parsedJson['last_name'],
+      email: parsedJson['email'],
+    );
+  }
+}

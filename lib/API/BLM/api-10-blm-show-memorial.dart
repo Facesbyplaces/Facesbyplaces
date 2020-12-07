@@ -26,8 +26,8 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial(int memorialId) async{
       }
     );
 
-    print('The status code of show memorial heheh is ${response.statusCode}');
-    print('The status body of show memorial heheh is ${response.body}');
+    print('The status code in show memorial is ${response.statusCode}');
+    print('The status body in show memorial is ${response.body}');
 
     if(response.statusCode == 200){
       var newValue = json.decode(response.body);
@@ -58,8 +58,8 @@ class APIBLMShowMemorialExtended{
   int id;
   String name;
   APIBLMShowMemorialExtendedDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
+  String backgroundImage;
+  String profileImage;
   dynamic imagesOrVideos;
   String relationship;
   APIBLMShowMemorialExtendedPageCreator pageCreator;
@@ -74,10 +74,16 @@ class APIBLMShowMemorialExtended{
   APIBLMShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.postsCount, this.familyCount, this.friendsCount, this.followersCount});
 
   factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
+
+    // var backgroundImage = parsedJson['backgroundImage'];
+    // var profileImage = parsedJson['profileImage'];
+
     return APIBLMShowMemorialExtended(
       id: parsedJson['id'],
       name: parsedJson['name'],
       details: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
+      // backgroundImage: backgroundImage['url'],
+      // profileImage: profileImage['url'],
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
       imagesOrVideos: parsedJson['imagesOrVideos'],

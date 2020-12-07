@@ -328,9 +328,9 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
   MiscBLMInputFieldDropDownState({this.displayText});
 
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
-  // String currentSelection = 'Father';
+  String currentSelection = 'Father';
 
-  String currentSelection;
+  // String currentSelection;
 
   void initState(){
     super.initState();
@@ -421,73 +421,73 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
 
 
 
-class BLMRelationshipItem{
+// class BLMRelationshipItem{
 
-  final String name;
-  final String image;
+//   final String name;
+//   final String image;
   
-  const BLMRelationshipItem({this.name, this.image});
-}
+//   const BLMRelationshipItem({this.name, this.image});
+// }
 
 
-class MiscBLMInputFieldDropDownUser extends StatefulWidget{
+// class MiscBLMInputFieldDropDownUser extends StatefulWidget{
 
-  MiscBLMInputFieldDropDownUser({Key key}) : super(key: key);
+//   MiscBLMInputFieldDropDownUser({Key key}) : super(key: key);
 
-  @override
-  MiscBLMInputFieldDropDownUserState createState() => MiscBLMInputFieldDropDownUserState();
-}
+//   @override
+//   MiscBLMInputFieldDropDownUserState createState() => MiscBLMInputFieldDropDownUserState();
+// }
 
-class MiscBLMInputFieldDropDownUserState extends State<MiscBLMInputFieldDropDownUser>{
+// class MiscBLMInputFieldDropDownUserState extends State<MiscBLMInputFieldDropDownUser>{
 
-  List<BLMRelationshipItem> relationship = [
-    const BLMRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-    const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
-  ];
+//   List<BLMRelationshipItem> relationship = [
+//     const BLMRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
+//     const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
+//   ];
 
-  BLMRelationshipItem currentSelection = const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
+//   BLMRelationshipItem currentSelection = const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
 
-  @override
-  Widget build(BuildContext context){
-    return InputDecorator(
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<BLMRelationshipItem>(
-          value: currentSelection,
-          isDense: true,
-          onChanged: (BLMRelationshipItem newValue) {
-            setState(() {
-              currentSelection = newValue;
-            });
-          },
-          items: relationship.map((BLMRelationshipItem value) {
-            return DropdownMenuItem<BLMRelationshipItem>(
-              value: value,
-              child: Row(
-                children: [
-                  CircleAvatar(backgroundImage: AssetImage(value.image),),
+//   @override
+//   Widget build(BuildContext context){
+//     return InputDecorator(
+//       decoration: InputDecoration(
+//         alignLabelWithHint: true,
+//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+//         focusedBorder: UnderlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//         border: UnderlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//       ),
+//       child: DropdownButtonHideUnderline(
+//         child: DropdownButton<BLMRelationshipItem>(
+//           value: currentSelection,
+//           isDense: true,
+//           onChanged: (BLMRelationshipItem newValue) {
+//             setState(() {
+//               currentSelection = newValue;
+//             });
+//           },
+//           items: relationship.map((BLMRelationshipItem value) {
+//             return DropdownMenuItem<BLMRelationshipItem>(
+//               value: value,
+//               child: Row(
+//                 children: [
+//                   CircleAvatar(backgroundImage: AssetImage(value.image),),
 
-                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+//                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                  Text(value.name),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
-  }
-}
+//                   Text(value.name),
+//                 ],
+//               ),
+//             );
+//           }).toList(),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 
 class MiscBLMInputFieldMultiTextPostTemplate extends StatefulWidget{

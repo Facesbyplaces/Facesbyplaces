@@ -19,9 +19,6 @@ Future<bool> apiBLMUnfollowPage(int memorialId) async{
     }
   );
 
-  print('The response status in unfollow page is ${response.statusCode}');
-  print('The response status in unfollow page is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -502,60 +502,135 @@ class MiscBLMToggleSwitchTemplateState extends State<MiscBLMToggleSwitchTemplate
   }
 }
 
-class MiscBLMStoryType extends StatelessWidget {
+// class MiscBLMStoryType extends StatelessWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return BlocBuilder<BlocHomeBLMStoryType, int>(
-      builder: (context, state){
-        return Container(
-          height: SizeConfig.blockSizeVertical * 8,
-          child: DefaultTabController(
-            length: 3,
-            child: TabBar(
-              isScrollable: false,
-              labelColor: Color(0xff04ECFF),
-              unselectedLabelColor: Color(0xff000000),
-              indicatorColor: Colors.transparent,
-              onTap: (int number){
-                context.bloc<BlocHomeBLMStoryType>().updateToggle(number);
-              },
-              tabs: [
+// class MiscBLMStoryType extends StatefulWidget{
 
-                Center(
-                  child: Text('Text',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 3,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+//   MiscBLMStoryTypeState createState() => MiscBLMStoryTypeState();
+// }
 
-                Center(child: 
-                  Text('Video',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 3,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+// class MiscBLMStoryTypeState extends State<MiscBLMStoryType>{
 
-                Center(
-                  child: Text('Slide',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 3,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+//   int toggle = 0;
 
-              ],
-            ),
-          ),
-        );
-      }
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     SizeConfig.init(context);
+//     return BlocBuilder<BlocHomeBLMStoryType, int>(
+//       builder: (context, state){
+//         return Container(
+//           height: SizeConfig.blockSizeVertical * 8,
+//           child: DefaultTabController(
+//             length: 3,
+//             child: TabBar(
+//               isScrollable: false,
+//               labelColor: Color(0xff04ECFF),
+//               unselectedLabelColor: Color(0xff000000),
+//               indicatorColor: Colors.transparent,
+//               onTap: (int number){
+//                 context.bloc<BlocHomeBLMStoryType>().updateToggle(number);
+//               },
+//               tabs: [
+
+//                 Center(
+//                   child: Text('Text',
+//                     style: TextStyle(
+//                       fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                       fontWeight: FontWeight.w400,
+//                     ),
+//                   ),
+//                 ),
+
+//                 Center(child: 
+//                   Text('Video',
+//                     style: TextStyle(
+//                       fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                       fontWeight: FontWeight.w400,
+//                     ),
+//                   ),
+//                 ),
+
+//                 Center(
+//                   child: Text('Slide',
+//                     style: TextStyle(
+//                       fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                       fontWeight: FontWeight.w400,
+//                     ),
+//                   ),
+//                 ),
+
+//               ],
+//             ),
+//           ),
+//         );
+//       }
+//     );
+//   }
+// }
+
+
+
+
+
+// class MiscBLMStoryType extends StatefulWidget{
+
+//   MiscBLMStoryTypeState createState() => MiscBLMStoryTypeState();
+// }
+
+// class MiscBLMStoryTypeState extends State<MiscBLMStoryType>{
+
+//   int toggle = 0;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     SizeConfig.init(context);
+//     return Container(
+//       height: SizeConfig.blockSizeVertical * 8,
+//       child: DefaultTabController(
+//         length: 3,
+//         child: TabBar(
+//           isScrollable: false,
+//           labelColor: Color(0xff04ECFF),
+//           unselectedLabelColor: Color(0xff000000),
+//           indicatorColor: Colors.transparent,
+//           onTap: (int number){
+//             setState(() {
+//               toggle = number;
+//             });
+//           },
+//           tabs: [
+
+//             Center(
+//               child: Text('Text',
+//                 style: TextStyle(
+//                   fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                   fontWeight: FontWeight.w400,
+//                 ),
+//               ),
+//             ),
+
+//             Center(child: 
+//               Text('Video',
+//                 style: TextStyle(
+//                   fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                   fontWeight: FontWeight.w400,
+//                 ),
+//               ),
+//             ),
+
+//             Center(
+//               child: Text('Slide',
+//                 style: TextStyle(
+//                   fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                   fontWeight: FontWeight.w400,
+//                 ),
+//               ),
+//             ),
+
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
