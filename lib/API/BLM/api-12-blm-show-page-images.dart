@@ -2,10 +2,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowPageImagesMain> apiBLMShowPageImages() async{
+Future<APIBLMShowPageImagesMain> apiBLMShowPageImages(int memorialId) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
@@ -20,9 +19,8 @@ Future<APIBLMShowPageImagesMain> apiBLMShowPageImages() async{
     }
   );
 
-  // print('The response status in show memorial is ${response.statusCode}');
-  // print('The response status in show memorial is ${response.body}');
-
+  print('The status code for fetching image is ${response.statusCode}');
+  // print('The status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

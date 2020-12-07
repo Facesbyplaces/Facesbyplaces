@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab() async{
+Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -10,7 +10,7 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab() async{
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=1',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +18,6 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab() async{
       'client': getClient,
     }
   );
-
-  print('The response status in blm notification is ${response.statusCode}');
-  print('The response status in blm notification is ${response.body}');
 
 
   if(response.statusCode == 200){
@@ -33,10 +30,10 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab() async{
 
 
 class APIBLMHomeTabNotificationMain{
-
+  int itemsRemaining;
   List<APIBLMHomeTabNotificationExtended> notification;
 
-  APIBLMHomeTabNotificationMain({this.notification});
+  APIBLMHomeTabNotificationMain({this.itemsRemaining, this.notification});
 
   factory APIBLMHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -44,6 +41,7 @@ class APIBLMHomeTabNotificationMain{
     List<APIBLMHomeTabNotificationExtended> newNotification = newList.map((i) => APIBLMHomeTabNotificationExtended.fromJson(i)).toList();
 
     return APIBLMHomeTabNotificationMain(
+      itemsRemaining: parsedJson['itemsremaining'],
       notification: newNotification,
     );
   }

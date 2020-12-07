@@ -44,8 +44,8 @@ class HomeRegularUserProfileDetails extends StatelessWidget{
                       child: IconButton(
                       onPressed: (){
                         // Navigator.of(context).pushNamedAndRemoveUntil('home/regular/home-14-regular-user-profile', ModalRoute.withName('/home/regular/home-06-regular-post'));
-                        Navigator.of(context).pushNamedAndRemoveUntil('home/regular/home-14-regular-user-profile', ModalRoute.withName('/home/regular'));
-                        // Navigator.pop(context);
+                        // Navigator.of(context).pushNamedAndRemoveUntil('home/regular/home-14-regular-user-profile', ModalRoute.withName('/home/regular'));
+                        Navigator.pop(context);
                       },
                       icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                     ),

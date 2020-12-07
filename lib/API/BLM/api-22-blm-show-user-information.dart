@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -9,30 +10,50 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The access token $getAccessToken');
-  print('The UID $getUID');
-  print('The client $getClient');
+  // final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
 
-  final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/auth/sign_out',
-    'http://fbp.dev1.koda.ws/api/v1/users/image_show',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
-  );
+  // print('The status code is ${response.statusCode}');
+  // print('The status body is ${response.body}');
 
-  print('The status code on blm logout is ${response.statusCode}');
-  print('The status body on blm logout is ${response.body}');
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIBLMShowProfileInformation.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the user information');
+  // }
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowProfileInformation.fromJson(newValue);
-  }else{
+  AsyncMemoizer memoizer = AsyncMemoizer();
+
+  var value = await memoizer.runOnce(() async{
+    final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    print('The status code for drawer is ${response.statusCode}');
+    print('The status body for drawer is ${response.body}');
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      return APIBLMShowProfileInformation.fromJson(newValue);
+    }else{
       throw Exception('Failed to get the user information');
     }
+  });
+
+  return value;
+  
 }
 
 class APIBLMShowProfileInformation{

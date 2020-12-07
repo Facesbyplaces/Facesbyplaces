@@ -8,10 +8,6 @@ Future<String> apiBLMLeavePage(int memorialId) async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The access token $getAccessToken');
-  print('The UID $getUID');
-  print('The client $getClient');
-
   final http.Response response = await http.delete(
     // 'http://fbp.dev1.koda.ws/auth/sign_out',
     'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/relationship/leave',
@@ -22,9 +18,6 @@ Future<String> apiBLMLeavePage(int memorialId) async{
       'client': getClient,
     }
   );
-
-  print('The status code on blm logout is ${response.statusCode}');
-  print('The status body on blm logout is ${response.body}');
 
   if(response.statusCode == 200){
     return 'Succuess';

@@ -19,8 +19,8 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab(int page) async{
     }
   );
 
-  print('The response status in regular feed is ${response.statusCode}');
-  print('The response status in regular feed is ${response.body}');
+  // print('The response status in regular feed is ${response.statusCode}');
+  // print('The response status in regular feed is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -31,19 +31,36 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab(int page) async{
 }
 
 
+// class APIRegularHomeTabFeedMain{
+//   int itemsRemaining;
+//   List<APIRegularHomeTabFeedExtended> familyMemorialList;
+
+//   APIRegularHomeTabFeedMain({this.itemsRemaining, this.familyMemorialList});
+
+//   factory APIRegularHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
+//     var newList = parsedJson['posts'] as List;
+//     List<APIRegularHomeTabFeedExtended> familyMemorials = newList.map((i) => APIRegularHomeTabFeedExtended.fromJson(i)).toList();
+
+//     return APIRegularHomeTabFeedMain(
+//       itemsRemaining: parsedJson['itemsremaining'],
+//       familyMemorialList: familyMemorials,
+//     );
+//   }
+// }
+
 class APIRegularHomeTabFeedMain{
   int itemsRemaining;
   List<APIRegularHomeTabFeedExtended> familyMemorialList;
 
-  APIRegularHomeTabFeedMain({this.itemsRemaining, this.familyMemorialList});
+  APIRegularHomeTabFeedMain({this.familyMemorialList, this.itemsRemaining});
 
   factory APIRegularHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIRegularHomeTabFeedExtended> familyMemorials = newList.map((i) => APIRegularHomeTabFeedExtended.fromJson(i)).toList();
 
     return APIRegularHomeTabFeedMain(
-      itemsRemaining: parsedJson['itemsremaining'],
       familyMemorialList: familyMemorials,
+      itemsRemaining: parsedJson['itemsremaining'],
     );
   }
 }

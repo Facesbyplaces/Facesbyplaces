@@ -117,18 +117,28 @@ class MiscRegularToggleSwitchTemplateState extends State<MiscRegularToggleSwitch
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Padding(
-      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-        child: Switch(
-        value: isSwitched,
-        onChanged: (value){
-          setState(() {
-            isSwitched = value;
-          });
-        },
-        activeColor: Color(0xff2F353D),
-        activeTrackColor: Color(0xff3498DB),
-      ),
+    // return Padding(
+    //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
+    //     child: Switch(
+    //     value: isSwitched,
+    //     onChanged: (value){
+    //       setState(() {
+    //         isSwitched = value;
+    //       });
+    //     },
+    //     activeColor: Color(0xff2F353D),
+    //     activeTrackColor: Color(0xff3498DB),
+    //   ),
+    // );
+    return Switch(
+      value: isSwitched,
+      onChanged: (value){
+        setState(() {
+          isSwitched = value;
+        });
+      },
+      activeColor: Color(0xff2F353D),
+      activeTrackColor: Color(0xff3498DB),
     );
   }
 }

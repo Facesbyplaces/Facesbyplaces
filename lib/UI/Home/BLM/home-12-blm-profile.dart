@@ -1,23 +1,53 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
-import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
+import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
+import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'dart:typed_data';
+import 'dart:io';
+
+class BLMRelationshipItemPost{
+
+  final String name;
+  final File image;
+  final int memorialId;
+  
+  const BLMRelationshipItemPost({this.name, this.image, this.memorialId});
+}
+
+class BLMProfilePosts{
+  int userId;
+  int postId;
+  int memorialId;
+  String memorialName;
+  String timeCreated;
+  String postBody;
+  dynamic profileImage;
+  List<dynamic> imagesOrVideos;
+
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+}
 
 class HomeBLMProfile extends StatefulWidget{
+  final int memorialId;
+  HomeBLMProfile({this.memorialId});
 
-  HomeBLMProfileState createState() => HomeBLMProfileState();
+  HomeBLMProfileState createState() => HomeBLMProfileState(memorialId: memorialId);
 }
 
 class HomeBLMProfileState extends State<HomeBLMProfile>{
+  final int memorialId;
+  HomeBLMProfileState({this.memorialId});
 
-  final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   final dataKey = new GlobalKey();
-
 
   String convertDate(String input){
     DateTime dateTime = DateTime.parse(input);
@@ -28,11 +58,56 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     return '$d/$m/$y';
   }
 
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+  TextEditingController controller = TextEditingController();
+  List<BLMProfilePosts> posts = [];
+  int itemRemaining = 1;
+  bool empty = true;
+  int page = 1;
+
+  void onRefresh() async{
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }  
+
+  void onLoading() async{
+    if(itemRemaining != 0){
+      var newValue = await apiBLMProfilePost(memorialId, page);
+      itemRemaining = newValue.itemsRemaining;
+
+      for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        posts.add(BLMProfilePosts(
+          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
+          postId: newValue.familyMemorialList[i].id,
+          memorialId: newValue.familyMemorialList[i].page.id,
+          timeCreated: newValue.familyMemorialList[i].createAt,
+          memorialName: newValue.familyMemorialList[i].page.name,
+          postBody: newValue.familyMemorialList[i].body,
+          profileImage: newValue.familyMemorialList[i].page.profileImage,
+          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,       
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      
+      refreshController.loadComplete();
+    }else{
+      refreshController.loadNoData();
+    }
+  }
+
+  void initState(){
+    super.initState();
+    onLoading();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    int memorialId = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIBLMShowMemorialMain>(
@@ -42,16 +117,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
               return Stack(
                 children: [
 
-                  // Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background4.png'),),),),
                   Container(
-                    height: SizeConfig.screenHeight / 3, 
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover, 
-                        image: profile.data.memorial.backgroundImage != null
-                        ? NetworkImage(profile.data.memorial.backgroundImage)
-                        : AssetImage('assets/icons/background3.png'),
-                      ),
+                    height: SizeConfig.screenHeight / 3,
+                    child: CachedNetworkImage(
+                      imageUrl: profile.data.memorial.backgroundImage,
+                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                      errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                     ),
                   ),
 
@@ -109,21 +180,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                            // Container(
-                            //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            //   child: Stack(
-                            //     children: [
-                            //       Image.asset('assets/icons/upload_background.png'),
-
-                            //       Positioned(
-                            //         top: SizeConfig.blockSizeVertical * 7,
-                            //         left: SizeConfig.screenWidth / 2.8,
-                            //         child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-
                             ((){
                               if(profile.data.memorial.details.description != ''){
                                 return Container(
@@ -180,7 +236,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: (){
-                                          Navigator.pushNamed(context, '/home/blm/home-09-blm-memorial-settings');
+                                          Navigator.pushNamed(context, '/home/blm/home-09-blm-memorial-settings', arguments: memorialId);
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
@@ -425,117 +481,146 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                Container(
-                                  width: SizeConfig.screenWidth,
-                                  height: SizeConfig.blockSizeVertical * 12,
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: ListView.separated(
-                                    physics: ClampingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index){
-                                      return Container(
-                                        width: SizeConfig.blockSizeVertical * 12,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(images[index]),
-                                          ),
-                                        ),
-                                      );
-                                    }, 
-                                    separatorBuilder: (context, index){
-                                      return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
-                                    },
-                                    itemCount: 4,
-                                  ),
-                                ),
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                profile.data.memorial.imagesOrVideos != null
+                                ? Column(
+                                  children: [
+                                    Container(
+                                      width: SizeConfig.screenWidth,
+                                      height: SizeConfig.blockSizeVertical * 12,
+                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                      child: ListView.separated(
+                                        physics: ClampingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index){
+                                          return Container(
+                                            width: SizeConfig.blockSizeVertical * 12,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              color: Color(0xff888888),
+                                            ),
+                                            child: CachedNetworkImage(
+                                              imageUrl: profile.data.memorial.backgroundImage,
+                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                              errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                            ),
+                                          );
+                                        }, 
+                                        separatorBuilder: (context, index){
+                                          return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                                        },
+                                        itemCount: profile.data.memorial.imagesOrVideos.length,
+                                      ),
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                                  ],
+                                )
+                                : Container(height: 0,),
                               ],
                             ),
 
                             Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                            // Container(
-                            //   padding: EdgeInsets.all(10.0),
-                            //   color: Color(0xffffffff),
-                            //   child: Column(
-                            //     children: [
-                            //       MiscBLMPostDisplayTemplate(),
-                            //     ],
-                            //   ),
-                            // ),
-
-                            Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: FutureBuilder<APIBLMHomeProfilePostMain>(
-                                future: apiBLMProfilePost(memorialId, 1),
-                                builder: (context, profilePost){
-                                  if(profilePost.hasData){
-                                    return Column(
-                                      children: List.generate(profilePost.data.familyMemorialList.length, (index) => 
-                                        Column(
-                                          children: [
-                                            MiscBLMPost(
-                                              userId: profilePost.data.familyMemorialList[index].page.id,
-                                              postId: profilePost.data.familyMemorialList[index].id,
-                                              memorialId: profilePost.data.familyMemorialList[index].page.id,
-                                              memorialName: profilePost.data.familyMemorialList[index].page.name,
-                                              timeCreated: convertDate(profilePost.data.familyMemorialList[index].createAt),
-                                              contents: [
-                                                Column(
-                                                  children: [
-                                                    Align(
-                                                      alignment: Alignment.topLeft,
-                                                      child: RichText(
-                                                        maxLines: 4,
-                                                        overflow: TextOverflow.clip,
-                                                        textAlign: TextAlign.left,
-                                                        text: TextSpan(
-                                                          text: profilePost.data.familyMemorialList[index].body,
-                                                          style: TextStyle(
-                                                            fontWeight: FontWeight.w300,
-                                                            color: Color(0xff000000),
-                                                          ),
-                                                        ),
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                              child: SmartRefresher(
+                                enablePullDown: false,
+                                enablePullUp: true,
+                                header: MaterialClassicHeader(),
+                                footer: CustomFooter(
+                                  loadStyle: LoadStyle.ShowWhenLoading,
+                                  builder: (BuildContext context, LoadStatus mode){
+                                    Widget body ;
+                                    if(mode == LoadStatus.idle){
+                                      body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                    }
+                                    else if(mode == LoadStatus.loading){
+                                      body =  CircularProgressIndicator();
+                                    }
+                                    else if(mode == LoadStatus.failed){
+                                      body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                    }
+                                    else if(mode == LoadStatus.canLoading){
+                                      body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                      page++;
+                                    }
+                                    else{
+                                      body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                    }
+                                    return Container(
+                                      height: 55.0,
+                                      child: Center(child:body),
+                                    );
+                                  },
+                                ),
+                                controller: refreshController,
+                                onRefresh: onRefresh,
+                                onLoading: onLoading,
+                                child: ListView.separated(
+                                  padding: EdgeInsets.all(10.0),
+                                  physics: ClampingScrollPhysics(),
+                                  itemBuilder: (c, i) {
+                                    var container = GestureDetector(
+                                      onTap: (){
+                                        Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
+                                      },
+                                      child: Container(
+                                        child: MiscBLMPost(
+                                          userId: posts[i].userId,
+                                          postId: posts[i].postId,
+                                          memorialId: posts[i].memorialId,
+                                          memorialName: posts[i].memorialName,
+                                          timeCreated: convertDate(posts[i].timeCreated),
+                                          contents: [
+                                            Column(
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: RichText(
+                                                    maxLines: 4,
+                                                    overflow: TextOverflow.clip,
+                                                    textAlign: TextAlign.left,
+                                                    text: TextSpan(
+                                                      text: posts[i].postBody,
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.w300,
+                                                        color: Color(0xff000000),
                                                       ),
                                                     ),
-
-                                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                                  ],
+                                                  ),
                                                 ),
 
-                                                profilePost.data.familyMemorialList[index].imagesOrVideos != null
-                                                ? Container(
-                                                  height: SizeConfig.blockSizeHorizontal * 50,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                                  ),
-                                                  child: CachedNetworkImage(
-                                                    imageUrl: profilePost.data.familyMemorialList[index].imagesOrVideos[0],
-                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                    errorWidget: (context, url, error) => Icon(Icons.error),
-                                                  ),
-                                                )
-                                                : Container(height: 0,),
+                                                SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                               ],
                                             ),
 
-                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
+                                            posts[i].imagesOrVideos != null
+                                            ? Container(
+                                              height: SizeConfig.blockSizeHorizontal * 50,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl: posts[i].imagesOrVideos[0],
+                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                errorWidget: (context, url, error) => Icon(Icons.error),
+                                              ),
+                                            )
+                                            : Container(height: 0,),
                                           ],
-                                        ),                                      
+                                        ),
                                       ),
                                     );
-                                  }else if(profilePost.hasError){
-                                    return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
-                                  }else{
-                                    return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-                                  }
-                                },
+                                    return container;
+                                  },
+                                  separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+                                  itemCount: posts.length,
+                                ),
                               ),
                             ),
-                            
+
                           ],
                         ),
                       ),
@@ -573,8 +658,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                             padding: EdgeInsets.only(right: 20.0),
                             alignment: Alignment.centerRight,
                             child: GestureDetector(
-                              onTap: (){
-                                Navigator.pushNamed(context, '/home/blm/home-19-blm-create-post');
+                              onTap: () async{
+                                final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
+                                final Uint8List list = bytes.buffer.asUint8List();
+
+                                final tempDir = await getTemporaryDirectory();
+                                final file = await new File('${tempDir.path}/blm-post-image.png').create();
+                                file.writeAsBytesSync(list);
+
+                                Navigator.pushNamed(context, '/home/blm/home-19-blm-create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
                               },
                               child: Text('Create Post',
                                 style: TextStyle(
@@ -606,9 +698,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                               backgroundColor: Color(0xff000000),
                               child: Padding(
                                 padding: EdgeInsets.all(5),
-                                  child: CircleAvatar(
+                                child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
-                                  backgroundImage: AssetImage('assets/icons/profile1.png'),
+                                  backgroundColor: Color(0xff888888),
+                                  backgroundImage: CachedNetworkImageProvider(
+                                    profile.data.memorial.profileImage,
+                                    scale: 1.0,
+                                  ),
                                 ),
                               ),
                             ),
@@ -633,813 +729,3 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     );
   }
 }
-
-
-
-
-
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
-// import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
-// import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_share/flutter_share.dart';
-// import 'package:flutter_spinkit/flutter_spinkit.dart';
-// import 'package:flutter/material.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-// class HomeBLMProfile extends StatefulWidget{
-
-//   HomeBLMProfileState createState() => HomeBLMProfileState();
-// }
-
-// class HomeBLMProfileState extends State<HomeBLMProfile>{
-
-//   int page = 1;
-//   int itemRemaining = 1;
-//   int memorialId;
-//   List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
-//   List<Widget> feeds = [];
-//   RefreshController refreshController = RefreshController(initialRefresh: true);
-
-//   void initState(){
-//     super.initState();
-//     onLoading();
-//   }
-
-//   String convertDate(String input){
-//     DateTime dateTime = DateTime.parse(input);
-
-//     final y = dateTime.year.toString().padLeft(4, '0');
-//     final m = dateTime.month.toString().padLeft(2, '0');
-//     final d = dateTime.day.toString().padLeft(2, '0');
-//     return '$d/$m/$y';
-//   }
-
-//   void onRefresh() async{
-//     await Future.delayed(Duration(milliseconds: 1000));
-//     refreshController.refreshCompleted();
-//   }
-
-//   void onLoading() async{
-//     if(itemRemaining != 0){
-//       // var newValue = await apiBLMHomeFeedTab(page);
-//       var newValue = await apiBLMProfilePost(memorialId, page);
-//       // itemRemaining = newValue.itemsRemaining;
-//       feeds.add(Column(
-//         children: [
-//           MiscBLMPost(
-//             userId: newValue.familyMemorialList[0].page.id,
-//             postId: newValue.familyMemorialList[0].id,
-//             memorialId: newValue.familyMemorialList[0].page.id,
-//             memorialName: newValue.familyMemorialList[0].page.name,
-//             profileImage: newValue.familyMemorialList[0].page.profileImage,
-//             timeCreated: convertDate(newValue.familyMemorialList[0].createAt),
-//             contents: [
-//               Column(
-//                 children: [
-//                   Align(
-//                     alignment: Alignment.topLeft,
-//                     child: RichText(
-//                       maxLines: 4,
-//                       overflow: TextOverflow.clip,
-//                       textAlign: TextAlign.left,
-//                       text: TextSpan(
-//                         text: newValue.familyMemorialList[0].body,
-//                         style: TextStyle(
-//                           fontWeight: FontWeight.w300,
-//                           color: Color(0xff000000),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-
-//                   SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-//                 ],
-//               ),
-
-
-//               newValue.familyMemorialList[0].imagesOrVideos != null
-//               ? Container(
-//                 height: SizeConfig.blockSizeHorizontal * 50,
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//                   image: DecorationImage(
-//                     fit: BoxFit.cover,
-//                     image: NetworkImage(newValue.familyMemorialList[0].imagesOrVideos[0]),
-//                   ),
-//                 ),
-//               )
-//               : Container(height: 0,),
-//             ],
-//           ),
-
-//           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-//         ],
-//       ));
-
-//       setState(() {});
-//       refreshController.loadComplete();
-//     }else{
-//       refreshController.loadNoData();
-//     }
-//   }
-
-//   final List<String> images = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
-//   final dataKey = new GlobalKey();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     memorialId = ModalRoute.of(context).settings.arguments;
-//     return Scaffold(
-//       body: SmartRefresher(
-//         enablePullDown: false,
-//         enablePullUp: true,
-//         header: MaterialClassicHeader(),
-//         footer: CustomFooter(
-//           loadStyle: LoadStyle.ShowWhenLoading,
-//           builder: (BuildContext context, LoadStatus mode){
-//             Widget body ;
-//             if(mode == LoadStatus.idle){
-//               body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//             }
-//             else if(mode == LoadStatus.loading){
-//               body =  CircularProgressIndicator();
-//             }
-//             else if(mode == LoadStatus.failed){
-//               body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//             }
-//             else if(mode == LoadStatus.canLoading){
-//               body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//               page++;
-//             }
-//             else{
-//               body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//             }
-//             return Container(
-//               height: 55.0,
-//               child: Center(child:body),
-//             );
-//           },
-//         ),
-//         controller: refreshController,
-//         onRefresh: onRefresh,
-//         onLoading: onLoading,
-//         child: SingleChildScrollView(
-//         // physics: ClampingScrollPhysics(),
-//         physics: NeverScrollableScrollPhysics(),
-//         child: FutureBuilder<APIBLMShowMemorialMain>(
-//           future: apiBLMShowMemorial(memorialId),
-//           builder: (context, profile){
-//             if(profile.hasData){
-//               return Stack(
-//                 children: [
-
-//                   // Container(height: SizeConfig.screenHeight / 3, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background4.png'),),),),
-//                   Container(
-//                     height: SizeConfig.screenHeight / 3, 
-//                     decoration: BoxDecoration(
-//                       image: DecorationImage(
-//                         fit: BoxFit.cover, 
-//                         image: profile.data.memorial.backgroundImage != null
-//                         ? NetworkImage(profile.data.memorial.backgroundImage)
-//                         : AssetImage('assets/icons/background3.png'),
-//                       ),
-//                     ),
-//                   ),
-
-//                   Column(
-//                     children: [
-
-//                       Container(height: SizeConfig.screenHeight / 3.5, color: Colors.transparent,),
-
-//                       Container(
-//                         width: SizeConfig.screenWidth,
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-//                           color: Color(0xffffffff),
-//                         ),
-//                         child: Column(
-//                           children: [
-
-//                             SizedBox(height: SizeConfig.blockSizeVertical * 12,),
-
-//                             Center(child: Text(profile.data.memorial.name, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
-
-//                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                             Container(
-//                               width: SizeConfig.safeBlockHorizontal * 15,
-//                               height: SizeConfig.blockSizeVertical * 5,
-//                               child: Row(
-//                                 children: [
-//                                   Expanded(
-//                                     child: CircleAvatar(
-//                                       radius: SizeConfig.blockSizeVertical * 2,
-//                                       backgroundColor: Color(0xff000000),
-//                                       child: CircleAvatar(
-//                                         radius: SizeConfig.blockSizeVertical * 1,
-//                                         backgroundColor: Colors.transparent,
-//                                         backgroundImage: AssetImage('assets/icons/fist.png'),
-//                                       ),
-//                                     ),
-//                                   ),
-
-//                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-//                                   Expanded(
-//                                     child: Text('45',
-//                                       style: TextStyle(
-//                                         fontSize: SizeConfig.safeBlockHorizontal * 4,
-//                                         fontWeight: FontWeight.w500,
-//                                         color: Color(0xff000000),
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-
-//                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                             // Container(
-//                             //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-//                             //   child: Stack(
-//                             //     children: [
-//                             //       Image.asset('assets/icons/upload_background.png'),
-
-//                             //       Positioned(
-//                             //         top: SizeConfig.blockSizeVertical * 7,
-//                             //         left: SizeConfig.screenWidth / 2.8,
-//                             //         child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
-//                             //       ),
-//                             //     ],
-//                             //   ),
-//                             // ),
-
-//                             ((){
-//                               if(profile.data.memorial.details.description != ''){
-//                                 return Container(
-//                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-//                                   child: Text(profile.data.memorial.details.description,
-//                                     style: TextStyle(
-//                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
-//                                       fontWeight: FontWeight.w300,
-//                                       color: Color(0xff000000),
-//                                     ),
-//                                   ),
-//                                 );
-//                               }else if(profile.data.memorial.imagesOrVideos != null){
-//                                 return Container(
-//                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-//                                   child: Stack(
-//                                     children: [
-//                                       Container(
-//                                         height: SizeConfig.blockSizeHorizontal * 40,
-//                                         decoration: BoxDecoration(
-//                                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//                                           image: DecorationImage(
-//                                             fit: BoxFit.cover,
-//                                             image: AssetImage('assets/icons/regular-image4.png'),
-//                                           ),
-//                                         ),
-//                                       ),
-
-//                                       Positioned(
-//                                         top: SizeConfig.blockSizeVertical * 7,
-//                                         left: SizeConfig.screenWidth / 2.8,
-//                                         child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 );
-//                               }else{
-//                                 return Container(height: 0,);
-//                               }
-//                             }()),
-
-//                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                             Container(
-//                               child: Row(
-//                                 children: [
-//                                   Expanded(
-//                                     child: Container(),
-//                                   ),
-//                                   Expanded(
-//                                     flex: 2,
-//                                     child: Padding(
-//                                       padding: EdgeInsets.only(left: 10.0, right: 10.0),
-//                                       child: MaterialButton(
-//                                         padding: EdgeInsets.zero,
-//                                         onPressed: (){
-//                                           Navigator.pushNamed(context, '/home/blm/home-09-blm-memorial-settings');
-//                                         },
-//                                         child: Text('Manage',
-//                                           style: TextStyle(
-//                                             fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                             fontWeight: FontWeight.bold,
-//                                             color: Color(0xffffffff),
-//                                           ),
-//                                         ),
-//                                         minWidth: SizeConfig.screenWidth / 2,
-//                                         height: SizeConfig.blockSizeVertical * 7,
-//                                         shape: StadiumBorder(),
-//                                         color: Color(0xff2F353D),
-//                                       ),
-//                                     ),
-//                                   ),
-//                                   Expanded(
-//                                     child: GestureDetector(
-//                                       onTap: () async{
-//                                         await FlutterShare.share(
-//                                           title: 'Share',
-//                                           text: 'Share the link',
-//                                           linkUrl: 'https://flutter.dev/',
-//                                           chooserTitle: 'Share link'
-//                                         );
-//                                       },
-//                                       child: CircleAvatar(
-//                                         radius: SizeConfig.blockSizeVertical * 3,
-//                                         backgroundColor: Color(0xff3498DB),
-//                                         child: Icon(Icons.share, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 3,),
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-
-//                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                             Padding(
-//                               padding: EdgeInsets.only(left: 20),
-//                               child: Column(
-//                                 children: [
-
-//                                   Row(
-//                                     children: [
-//                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
-//                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-//                                       Text(profile.data.memorial.details.country,
-//                                         style: TextStyle(
-//                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-//                                           color: Color(0xff000000),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-
-//                                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                                   Row(
-//                                     children: [
-//                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
-//                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-//                                       Text(convertDate(profile.data.memorial.details.dob),
-//                                         style: TextStyle(
-//                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-//                                           color: Color(0xff000000),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-
-//                                   SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                                   Row(
-//                                     children: [
-//                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
-//                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-//                                       Text(convertDate(profile.data.memorial.details.rip),
-//                                         style: TextStyle(
-//                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-//                                           color: Color(0xff000000),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-
-//                                 ],
-//                               ),
-//                             ),
-
-//                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                             Container(
-//                               height: 50.0,
-//                               child: Row(
-//                                 children: [
-//                                   Expanded(
-//                                     child: GestureDetector(
-//                                       onTap: (){
-//                                         Scrollable.ensureVisible(dataKey.currentContext);
-//                                       },
-//                                       child: Column(
-//                                         children: [
-//                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-//                                           Text(profile.data.memorial.postsCount.toString(),
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                               fontWeight: FontWeight.bold,
-//                                               color: Color(0xff000000),
-//                                             ),
-//                                           ),
-
-//                                           Text('Post',
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 3,
-//                                               fontWeight: FontWeight.w300,
-//                                               color: Color(0xffaaaaaa),
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ),
-                                  
-//                                   Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
-
-//                                   Expanded(
-//                                     child: GestureDetector(
-//                                       onTap: (){
-//                                         Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
-//                                       },
-//                                       child: Column(
-//                                         children: [
-//                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-//                                           Text(profile.data.memorial.familyCount.toString(),
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                               fontWeight: FontWeight.bold,
-//                                               color: Color(0xff000000),
-//                                             ),
-//                                           ),
-
-//                                           Text('Family',
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 3,
-//                                               fontWeight: FontWeight.w300,
-//                                               color: Color(0xffaaaaaa),
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ),
-
-//                                   Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
-
-//                                   Expanded(
-//                                     child: GestureDetector(
-//                                       onTap: (){
-//                                         Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
-//                                       },
-//                                       child: Column(
-//                                         children: [
-//                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-//                                           Text(profile.data.memorial.friendsCount.toString(),
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                               fontWeight: FontWeight.bold,
-//                                               color: Color(0xff000000),
-//                                             ),
-//                                           ),
-
-//                                           Text('Friends',
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 3,
-//                                               fontWeight: FontWeight.w300,
-//                                               color: Color(0xffaaaaaa),
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ),
-
-//                                   Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
-
-//                                   Expanded(
-//                                     child: GestureDetector(
-//                                       onTap: (){
-//                                         Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
-//                                       },
-//                                       child: Column(
-//                                         children: [
-//                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-//                                           Text(profile.data.memorial.followersCount.toString(),
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                               fontWeight: FontWeight.bold,
-//                                               color: Color(0xff000000),
-//                                             ),
-//                                           ),
-
-//                                           Text('Joined',
-//                                             style: TextStyle(
-//                                               fontSize: SizeConfig.safeBlockHorizontal * 3,
-//                                               fontWeight: FontWeight.w300,
-//                                               color: Color(0xffaaaaaa),
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-
-//                             Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffffffff),),
-
-//                             Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-//                             Column(
-//                               children: [
-//                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                                 Container(
-//                                   key: dataKey,
-//                                   padding: EdgeInsets.only(left: 20.0),
-//                                   alignment: Alignment.centerLeft,
-//                                   child: Text('Post',
-//                                     style: TextStyle(
-//                                       fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                       fontWeight: FontWeight.bold,
-//                                       color: Color(0xff000000),
-//                                     ),
-//                                   ),
-//                                 ),
-
-//                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-//                                 Container(
-//                                   width: SizeConfig.screenWidth,
-//                                   height: SizeConfig.blockSizeVertical * 12,
-//                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-//                                   child: ListView.separated(
-//                                     physics: ClampingScrollPhysics(),
-//                                     scrollDirection: Axis.horizontal,
-//                                     itemBuilder: (context, index){
-//                                       return Container(
-//                                         width: SizeConfig.blockSizeVertical * 12,
-//                                         decoration: BoxDecoration(
-//                                           borderRadius: BorderRadius.circular(10),
-//                                           image: DecorationImage(
-//                                             fit: BoxFit.cover,
-//                                             image: AssetImage(images[index]),
-//                                           ),
-//                                         ),
-//                                       );
-//                                     }, 
-//                                     separatorBuilder: (context, index){
-//                                       return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
-//                                     },
-//                                     itemCount: 4,
-//                                   ),
-//                                 ),
-//                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-//                               ],
-//                             ),
-
-//                             Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-
-//                             // Container(
-//                             //   padding: EdgeInsets.all(10.0),
-//                             //   color: Color(0xffffffff),
-//                             //   child: Column(
-//                             //     children: [
-//                             //       MiscBLMPostDisplayTemplate(),
-//                             //     ],
-//                             //   ),
-//                             // ),
-
-//                             ListView.separated(
-//                               padding: EdgeInsets.all(10.0),
-//                               shrinkWrap: true,
-//                               itemBuilder: (c, i) => feeds[i],
-//                               separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
-//                               itemCount: feeds.length,
-//                             ),
-
-//                             Container(
-//                               height: SizeConfig.screenHeight,
-//                               child: SmartRefresher(
-//                                 enablePullDown: false,
-//                                 enablePullUp: true,
-//                                 header: MaterialClassicHeader(),
-//                                 footer: CustomFooter(
-//                                   loadStyle: LoadStyle.ShowWhenLoading,
-//                                   builder: (BuildContext context, LoadStatus mode){
-//                                     Widget body ;
-//                                     if(mode == LoadStatus.idle){
-//                                       body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//                                     }
-//                                     else if(mode == LoadStatus.loading){
-//                                       body =  CircularProgressIndicator();
-//                                     }
-//                                     else if(mode == LoadStatus.failed){
-//                                       body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//                                     }
-//                                     else if(mode == LoadStatus.canLoading){
-//                                       body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//                                       page++;
-//                                     }
-//                                     else{
-//                                       body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-//                                     }
-//                                     return Container(
-//                                       height: 55.0,
-//                                       child: Center(child:body),
-//                                     );
-//                                   },
-//                                 ),
-//                                 controller: refreshController,
-//                                 onRefresh: onRefresh,
-//                                 onLoading: onLoading,
-//                                 child: ListView.separated(
-//                                   padding: EdgeInsets.all(10.0),
-//                                   shrinkWrap: true,
-//                                   itemBuilder: (c, i) => feeds[i],
-//                                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
-//                                   itemCount: feeds.length,
-//                                 ),
-//                               )
-//                             ),
-
-//                             // Padding(
-//                             //   padding: EdgeInsets.all(20.0),
-//                             //   child: FutureBuilder<APIBLMHomeProfilePostMain>(
-//                             //     future: apiBLMProfilePost(memorialId),
-//                             //     builder: (context, profilePost){
-//                             //       if(profilePost.hasData){
-//                             //         return Column(
-//                             //           children: List.generate(profilePost.data.familyMemorialList.length, (index) => 
-//                             //             Column(
-//                             //               children: [
-//                             //                 MiscBLMPost(
-//                             //                   userId: profilePost.data.familyMemorialList[index].page.id,
-//                             //                   postId: profilePost.data.familyMemorialList[index].id,
-//                             //                   memorialId: profilePost.data.familyMemorialList[index].page.id,
-//                             //                   memorialName: profilePost.data.familyMemorialList[index].page.name,
-//                             //                   timeCreated: convertDate(profilePost.data.familyMemorialList[index].createAt),
-//                             //                   contents: [
-//                             //                     Column(
-//                             //                       children: [
-//                             //                         Align(
-//                             //                           alignment: Alignment.topLeft,
-//                             //                           child: RichText(
-//                             //                             maxLines: 4,
-//                             //                             overflow: TextOverflow.clip,
-//                             //                             textAlign: TextAlign.left,
-//                             //                             text: TextSpan(
-//                             //                               text: profilePost.data.familyMemorialList[index].body,
-//                             //                               style: TextStyle(
-//                             //                                 fontWeight: FontWeight.w300,
-//                             //                                 color: Color(0xff000000),
-//                             //                               ),
-//                             //                             ),
-//                             //                           ),
-//                             //                         ),
-
-//                             //                         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-//                             //                       ],
-//                             //                     ),
-
-//                             //                     profilePost.data.familyMemorialList[index].imagesOrVideos != null
-//                             //                     ? Container(
-//                             //                       height: SizeConfig.blockSizeHorizontal * 50,
-//                             //                       decoration: BoxDecoration(
-//                             //                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//                             //                       ),
-//                             //                       child: CachedNetworkImage(
-//                             //                         imageUrl: profilePost.data.familyMemorialList[index].imagesOrVideos[0],
-//                             //                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-//                             //                         errorWidget: (context, url, error) => Icon(Icons.error),
-//                             //                       ),
-//                             //                     )
-//                             //                     : Container(height: 0,),
-//                             //                   ],
-//                             //                 ),
-
-//                             //                 SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-//                             //               ],
-//                             //             ),                                      
-//                             //           ),
-//                             //         );
-//                             //       }else if(profilePost.hasError){
-//                             //         return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
-//                             //       }else{
-//                             //         return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-//                             //       }
-//                             //     },
-//                             //   ),
-//                             // ),
-                            
-//                           ],
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-
-//                   Container(
-//                     height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
-//                     child: Row(
-//                       children: [
-//                         Expanded(
-//                           child: Padding(
-//                             padding: EdgeInsets.only(left: 20.0),
-//                             child: GestureDetector(
-//                               onTap: (){
-//                                 Navigator.popAndPushNamed(context, '/home/blm');
-//                               },
-//                               child: Row(
-//                                 children: [
-//                                   Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-//                                   Text('Back',
-//                                     style: TextStyle(
-//                                       fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                       fontWeight: FontWeight.w500,
-//                                       color: Color(0xffffffff),
-//                                     ),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                         Expanded(
-//                           child: Container(
-//                             padding: EdgeInsets.only(right: 20.0),
-//                             alignment: Alignment.centerRight,
-//                             child: GestureDetector(
-//                               onTap: (){
-//                                 Navigator.pushNamed(context, '/home/blm/home-19-blm-create-post');
-//                               },
-//                               child: Text('Create Post',
-//                                 style: TextStyle(
-//                                   fontSize: SizeConfig.safeBlockHorizontal * 5,
-//                                   fontWeight: FontWeight.w500,
-//                                   color: Color(0xffffffff),
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-
-//                   Positioned(
-//                     top: SizeConfig.screenHeight / 5,
-//                     child: Container(
-//                       height: SizeConfig.blockSizeVertical * 18,
-//                       width: SizeConfig.screenWidth,
-//                       child: Row(
-//                         children: [
-//                           Expanded(
-//                             child: Container(),
-//                           ),
-//                           Expanded(
-//                             child: CircleAvatar(
-//                               radius: SizeConfig.blockSizeVertical * 12,
-//                               backgroundColor: Color(0xff000000),
-//                               child: Padding(
-//                                 padding: EdgeInsets.all(5),
-//                                   child: CircleAvatar(
-//                                   radius: SizeConfig.blockSizeVertical * 12,
-//                                   backgroundImage: AssetImage('assets/icons/profile1.png'),
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                           Expanded(
-//                             child: Container(),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               );
-//             }else if(profile.hasError){
-//               return MiscBLMErrorMessageTemplate();
-//             }else{
-//               return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-//             }
-//           },
-//         ),
-//       ),
-//       ),
-//     );
-//   }
-
-// }

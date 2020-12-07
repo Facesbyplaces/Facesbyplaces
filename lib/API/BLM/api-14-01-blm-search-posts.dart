@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords) async{
+Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords, int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -11,7 +11,7 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords) async{
 
   final http.Response response = await http.get(
     // 'http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=1',
-    'http://fbp.dev1.koda.ws/api/v1/search/posts?page=1&keywords=$keywords',
+    'http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -20,8 +20,8 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords) async{
     }
   );
 
-  print('The response status in search profile is ${response.statusCode}');
-  print('The response status in search profile is ${response.body}');
+  print('The status of search posts is ${response.statusCode}');
+  print('The status of search is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -34,15 +34,17 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords) async{
 
 
 class APIBLMSearchPostMain{
-
+  int itemsRemaining;
   List<APIBLMSearchPostExtended> familyMemorialList;
 
-  APIBLMSearchPostMain({this.familyMemorialList});
+  APIBLMSearchPostMain({this.itemsRemaining, this.familyMemorialList});
 
-  factory APIBLMSearchPostMain.fromJson(List<dynamic> parsedJson){
-    List<APIBLMSearchPostExtended> familyMemorials = parsedJson.map((e) => APIBLMSearchPostExtended.fromJson(e)).toList();
+  factory APIBLMSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
+    var newList = parsedJson['posts'] as List;
+    List<APIBLMSearchPostExtended> familyMemorials = newList.map((i) => APIBLMSearchPostExtended.fromJson(i)).toList();
 
     return APIBLMSearchPostMain(
+      itemsRemaining: parsedJson['itemsremaining'],
       familyMemorialList: familyMemorials,
     );
   }

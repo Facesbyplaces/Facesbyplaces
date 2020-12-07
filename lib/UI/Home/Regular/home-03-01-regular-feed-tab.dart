@@ -1,8 +1,23 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
+
+class RegularMainPagesFeeds{
+  int userId;
+  int postId;
+  int memorialId;
+  String memorialName;
+  String timeCreated;
+  String postBody;
+  dynamic profileImage;
+  List<dynamic> imagesOrVideos;
+
+  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+}
 
 class HomeRegularFeedTab extends StatefulWidget{
 
@@ -10,25 +25,15 @@ class HomeRegularFeedTab extends StatefulWidget{
 }
 
 class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
-
-  int page = 1;
-  int itemRemaining = 1;
-  List<String> items = ["1", "2", "3", "4", "5", "6", "7", "8"];
-  List<Widget> feeds = [];
+  
   RefreshController refreshController = RefreshController(initialRefresh: true);
+  List<RegularMainPagesFeeds> feeds = [];
+  int itemRemaining = 1;
+  int page = 1;
 
   void initState(){
     super.initState();
     onLoading();
-  }
-
-  String convertDate(String input){
-    DateTime dateTime = DateTime.parse(input);
-
-    final y = dateTime.year.toString().padLeft(4, '0');
-    final m = dateTime.month.toString().padLeft(2, '0');
-    final d = dateTime.day.toString().padLeft(2, '0');
-    return '$d/$m/$y';
   }
 
   void onRefresh() async{
@@ -40,57 +45,21 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     if(itemRemaining != 0){
       var newValue = await apiRegularHomeFeedTab(page);
       itemRemaining = newValue.itemsRemaining;
-      feeds.add(Column(
-        children: [
-          MiscRegularPost(
-            userId: newValue.familyMemorialList[0].page.id,
-            postId: newValue.familyMemorialList[0].id,
-            memorialId: newValue.familyMemorialList[0].page.id,
-            memorialName: newValue.familyMemorialList[0].page.name,
-            profileImage: newValue.familyMemorialList[0].page.profileImage,
-            timeCreated: convertDate(newValue.familyMemorialList[0].createAt),
-            contents: [
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: RichText(
-                      maxLines: 4,
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.left,
-                      text: TextSpan(
-                        text: newValue.familyMemorialList[0].body,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                  ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                ],
-              ),
+      for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        feeds.add(RegularMainPagesFeeds(
+          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
+          postId: newValue.familyMemorialList[i].id,
+          memorialId: newValue.familyMemorialList[i].page.id,
+          timeCreated: newValue.familyMemorialList[i].createAt,
+          memorialName: newValue.familyMemorialList[i].page.name,
+          postBody: newValue.familyMemorialList[i].body,
+          profileImage: newValue.familyMemorialList[i].page.profileImage,
+          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          ),    
+        );
+      }
 
-
-              newValue.familyMemorialList[0].imagesOrVideos != null
-              ? Container(
-                height: SizeConfig.blockSizeHorizontal * 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(newValue.familyMemorialList[0].imagesOrVideos[0]),
-                  ),
-                ),
-              )
-              : Container(height: 0,),
-            ],
-          ),
-
-          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-        ],
-      ));
       if(mounted)
       setState(() {});
       
@@ -132,8 +101,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             }
             return Container(
               height: 55.0,
-              child: Center(child:body),
+              child: Center(child :body),
             );
+            // return Container(height: SizeConfig.screenHeight - kToolbarHeight, child: Center(child: body),);
           },
         ),
         controller: refreshController,
@@ -141,8 +111,67 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         onLoading: onLoading,
         child: ListView.separated(
           padding: EdgeInsets.all(10.0),
-          shrinkWrap: true,
-          itemBuilder: (c, i) => feeds[i],
+          physics: ClampingScrollPhysics(),
+          itemBuilder: (c, i) {
+            var container = GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, '/home/regular/home-28-regular-show-original-post');
+              },
+              child: Container(
+                child: MiscRegularPost(
+                  userId: feeds[i].userId,
+                  postId: feeds[i].postId,
+                  memorialId: feeds[i].memorialId,
+                  memorialName: feeds[i].memorialName,
+                  timeCreated: convertDate(feeds[i].timeCreated),
+                  contents: [
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: RichText(
+                            maxLines: 4,
+                            overflow: TextOverflow.clip,
+                            textAlign: TextAlign.left,
+                            text: TextSpan(
+                              text: feeds[i].postBody,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                      ],
+                    ),
+
+                    feeds[i].imagesOrVideos != null
+                    ? Container(
+                      height: SizeConfig.blockSizeHorizontal * 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: feeds[i].imagesOrVideos[0],
+                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    )
+                    : Container(height: 0,),
+                  ],
+                ),
+              ),
+            );
+
+            if(feeds.length != 0){
+              return container;
+            }else{
+              return Center(child: Text('Feed is empty.'),);
+            }
+            
+          },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
           itemCount: feeds.length,
         ),

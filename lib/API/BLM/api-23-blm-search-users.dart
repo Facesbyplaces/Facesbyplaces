@@ -8,11 +8,7 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers(String keywords, int page) async
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
-  print('The access token $getAccessToken');
-  print('The UID $getUID');
-  print('The client $getClient');
-
+  
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
     headers: <String, String>{

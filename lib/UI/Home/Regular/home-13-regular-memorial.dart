@@ -35,6 +35,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   // }
 
   bool join = false;
+  final dataKey = new GlobalKey();
 
   String convertDate(String input){
     DateTime dateTime = DateTime.parse(input);
@@ -351,6 +352,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             Container(
                               height: 50.0,
                               child: Row(
+                                // Scrollable.ensureVisible(dataKey.currentContext);
                                 children: [
                                   Expanded(
                                     child: Column(

@@ -17,6 +17,7 @@ class HomeRegularProfile extends StatefulWidget{
 class HomeRegularProfileState extends State<HomeRegularProfile>{
 
   final List<String> images = ['assets/icons/regular-image1.png', 'assets/icons/regular-image2.png', 'assets/icons/regular-image3.png', 'assets/icons/regular-image4.png'];
+  final dataKey = new GlobalKey();
 
   // void initState(){
   //   super.initState();
@@ -346,26 +347,31 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Scrollable.ensureVisible(dataKey.currentContext);
+                                      },
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                        Text('0',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff000000),
+                                          Text(showProfile.data.memorial.postsCount.toString(),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xff000000),
+                                            ),
                                           ),
-                                        ),
 
-                                        Text('Post',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xffaaaaaa),
+                                          Text('Post',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xffaaaaaa),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Expanded(
@@ -377,7 +383,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('0',
+                                          Text(showProfile.data.memorial.familyCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -405,7 +411,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('0',
+                                          Text(showProfile.data.memorial.friendsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -433,7 +439,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('0',
+                                          Text(showProfile.data.memorial.followersCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -463,6 +469,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                                 Container(
+                                  key: dataKey,
                                   padding: EdgeInsets.only(left: 20.0),
                                   alignment: Alignment.centerLeft,
                                   child: Text('Post',

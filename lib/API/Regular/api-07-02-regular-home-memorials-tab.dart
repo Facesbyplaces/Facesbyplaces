@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab() async{
+Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -10,7 +10,7 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab() async{
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials',
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,7 +19,7 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab() async{
     }
   );
   
-  print('The response status in memorial is ${response.statusCode}');
+  // print('The response status in memorial is ${response.statusCode}');
   // print('The response status in memorial is ${response.body}');
 
   if(response.statusCode == 200){
@@ -49,11 +49,14 @@ class APIRegularHomeTabMemorialMain{
 }
 
 class APIRegularHomeTabMemorialExtended{
-
+  int blmFamilyItemsRemaining;
+  int memorialFamilyItemsRemaining;
+  int blmFriendsItemsRemaining;
+  int memorialFriendsItemsRemaining;
   List<APIRegularHomeTabMemorialExtendedPage> blm;
   List<APIRegularHomeTabMemorialExtendedPage> memorial;
 
-  APIRegularHomeTabMemorialExtended({this.blm, this.memorial});
+  APIRegularHomeTabMemorialExtended({this.blm, this.memorial, this.blmFamilyItemsRemaining, this.memorialFamilyItemsRemaining, this.blmFriendsItemsRemaining, this.memorialFriendsItemsRemaining});
 
   factory APIRegularHomeTabMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -66,6 +69,10 @@ class APIRegularHomeTabMemorialExtended{
     return APIRegularHomeTabMemorialExtended(
       blm: newBLMList,
       memorial: newMemorialList,
+      blmFamilyItemsRemaining: parsedJson['blmFamilyItemsRemaining'],
+      memorialFamilyItemsRemaining: parsedJson['memorialFamilyItemsRemaining'],
+      blmFriendsItemsRemaining: parsedJson['blmFriendsItemsRemaining'],
+      memorialFriendsItemsRemaining: parsedJson['memorialFriendsItemsRemaining']
     );
   }
 }

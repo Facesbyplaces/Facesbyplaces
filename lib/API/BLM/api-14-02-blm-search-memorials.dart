@@ -19,9 +19,6 @@ Future<APIBLMSearchMemorialMain> apiBLMSearchMemorials(String keywords) async{
     }
   );
 
-  print('The response status in search profile is ${response.statusCode}');
-  print('The response status in search profile is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchMemorialMain.fromJson(newValue);

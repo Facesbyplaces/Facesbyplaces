@@ -3,7 +3,14 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMMemorialSettingsPrivacy extends StatelessWidget{
+class HomeBLMMemorialSettingsPrivacy extends StatefulWidget{
+
+  HomeBLMMemorialSettingsPrivacyState createState() => HomeBLMMemorialSettingsPrivacyState();
+}
+
+class HomeBLMMemorialSettingsPrivacyState extends State<HomeBLMMemorialSettingsPrivacy>{
+
+  bool isSwitched1 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +32,21 @@ class HomeBLMMemorialSettingsPrivacy extends StatelessWidget{
           color: Color(0xffffffff),
           child: Row(
             children: [
-              Expanded(
-                flex: 2,
-                child: MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Family', contentDetail: 'Show or hide family details'),
+              Expanded(child: MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Hide Family', contentDetail: 'Show or hide family details'),),
+
+              Switch(
+                value: isSwitched1,
+                onChanged: (value){
+                  setState(() {
+                    isSwitched1 = value;
+                  });
+                },
+                activeColor: Color(0xff2F353D),
+                activeTrackColor: Color(0xff3498DB),
               ),
-              Expanded(
-                child: MiscBLMToggleSwitchTemplate(),
-              ),
+              // Expanded(
+              //   child: MiscBLMToggleSwitchTemplate(),
+              // ),
             ],
           ),
         ),

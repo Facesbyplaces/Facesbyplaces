@@ -18,9 +18,6 @@ Future<bool> apiBLMFollowPage(int memorialId) async{
     }
   );
 
-  print('The response status in follow page is ${response.statusCode}');
-  print('The response status in follow page is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

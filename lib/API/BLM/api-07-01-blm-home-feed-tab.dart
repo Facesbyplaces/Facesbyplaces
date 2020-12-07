@@ -9,14 +9,7 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab(int page) async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  // print('The access token $getAccessToken');
-  // print('The UID $getUID');
-  // print('The client $getClient');
-
-  print('The page number is $page');
-
   final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=1',
     'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -26,8 +19,7 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab(int page) async{
     }
   );
 
-  // print('The response status in blm feed is ${response.statusCode}');
-  // print('The response status in blm feed is ${response.body}');
+  print('The feed value is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -46,8 +38,6 @@ class APIBLMHomeTabFeedMain{
   factory APIBLMHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMHomeTabFeedExtended> familyMemorials = newList.map((i) => APIBLMHomeTabFeedExtended.fromJson(i)).toList();
-    
-    print('lkjasdflkjasdf');
 
     return APIBLMHomeTabFeedMain(
       familyMemorialList: familyMemorials,

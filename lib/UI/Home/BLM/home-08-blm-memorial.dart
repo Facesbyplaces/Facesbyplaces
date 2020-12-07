@@ -340,7 +340,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('26',
+                                          Text(showProfile.data.memorial.postsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -368,7 +368,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('526',
+                                          Text(showProfile.data.memorial.familyCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -396,7 +396,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('526',
+                                          Text(showProfile.data.memorial.friendsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -424,7 +424,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('14.4K',
+                                          Text(showProfile.data.memorial.followersCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,

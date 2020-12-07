@@ -1,9 +1,19 @@
+// import 'package:facesbyplaces/API/BLM/api-24-blm-hide-family-setting.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-extra.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-16-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
+// class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
+
+class HomeRegularMemorialSettingsPrivacy extends StatefulWidget{
+
+  HomeRegularMemorialSettingsPrivacyState createState() => HomeRegularMemorialSettingsPrivacyState();
+}
+
+class HomeRegularMemorialSettingsPrivacyState extends State<HomeRegularMemorialSettingsPrivacy>{
+
+  // bool family = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +38,6 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
           child: Row(
             children: [
               Expanded(
-                flex: 2,
                 child: MiscRegularSettingDetailTemplate(
                   onTap: (){
 
@@ -37,9 +46,8 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
                   contentDetail: 'Show or hide family details',
                 ),
               ),
-              Expanded(
-                child: MiscRegularToggleSwitchTemplate(),
-              ),
+              MiscRegularToggleSwitchTemplate(),
+              
             ],
           ),
         ),
@@ -52,7 +60,6 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
           child: Row(
             children: [
               Expanded(
-                flex: 2,
                 child: MiscRegularSettingDetailTemplate(
                   onTap: (){
 
@@ -61,9 +68,7 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
                   contentDetail: 'Show or hide friends details',
                 ),
               ),
-              Expanded(
-                child: MiscRegularToggleSwitchTemplate(),
-              ),
+              MiscRegularToggleSwitchTemplate(),
             ],
           ),
         ),
@@ -76,7 +81,6 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
           child: Row(
             children: [
               Expanded(
-                flex: 2,
                 child: MiscRegularSettingDetailTemplate(
                   onTap: (){
 
@@ -85,9 +89,7 @@ class HomeRegularMemorialSettingsPrivacy extends StatelessWidget{
                   contentDetail: 'Show or hide your followers',
                 ),
               ),
-              Expanded(
-                child: MiscRegularToggleSwitchTemplate(),
-              ),
+              MiscRegularToggleSwitchTemplate(),
             ],
           ),
         ),

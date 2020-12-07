@@ -20,14 +20,9 @@ Future<String> apiBLMDonate(int amount) async{
     }
   );
 
-  print('The response status in donation is ${response.statusCode}');
-  print('The response status in donation is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     var clientSecret = value['client_secret'];
-
-    print('The client secret is $clientSecret');
     
     return clientSecret.toString();
   }else{

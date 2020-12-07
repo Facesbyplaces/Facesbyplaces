@@ -19,8 +19,7 @@ Future<APIBLMHomeTabPostMain> apiBLMHomePostTab(int page) async{
     }
   );
 
-  print('The response status in blm post is ${response.statusCode}');
-  print('The response status in blm post is ${response.body}');
+  print('The post value is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

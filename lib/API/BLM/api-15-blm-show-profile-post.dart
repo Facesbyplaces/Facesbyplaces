@@ -11,11 +11,13 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) as
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('The memorial id $memorialId');
+
   AsyncMemoizer memoizer = AsyncMemoizer();
 
   var value = await memoizer.runOnce(() async{
     final http.Response response = await http.get(
-      'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId',
+      'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId?page=$page',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -24,8 +26,8 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) as
       }
     );
 
-    print('The response status in profile posts is ${response.statusCode}');
-    print('The response status in profile posts is ${response.body}');
+    print('The show profile post is ${response.statusCode}');
+    print('The show profile body is ${response.body}');
 
     if(response.statusCode == 200){
       var newValue = json.decode(response.body);
@@ -41,15 +43,17 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) as
 
 
 class APIBLMHomeProfilePostMain{
-
+  int itemsRemaining;
   List<APIBLMHomeProfilePostExtended> familyMemorialList;
 
-  APIBLMHomeProfilePostMain({this.familyMemorialList});
+  APIBLMHomeProfilePostMain({this.itemsRemaining, this.familyMemorialList});
 
-  factory APIBLMHomeProfilePostMain.fromJson(List<dynamic> parsedJson){
-    List<APIBLMHomeProfilePostExtended> familyMemorials = parsedJson.map((e) => APIBLMHomeProfilePostExtended.fromJson(e)).toList();
+  factory APIBLMHomeProfilePostMain.fromJson(Map<String, dynamic> parsedJson){
+    var newList = parsedJson['posts'] as List;
+    List<APIBLMHomeProfilePostExtended> familyMemorials = newList.map((i) => APIBLMHomeProfilePostExtended.fromJson(i)).toList();
 
     return APIBLMHomeProfilePostMain(
+      itemsRemaining: parsedJson['itemsremaining'],
       familyMemorialList: familyMemorials,
     );
   }

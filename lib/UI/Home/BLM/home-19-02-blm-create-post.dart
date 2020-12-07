@@ -41,9 +41,7 @@ class HomeBLMCreatePostSearchState extends State<HomeBLMCreatePostSearch>{
                     empty = false;
                     places.add(newPlaces);
                   });
-                }
-
-                
+                }                
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),
@@ -125,3 +123,4 @@ class HomeBLMCreatePostSearchState extends State<HomeBLMCreatePostSearch>{
     );
   }
 }
+
