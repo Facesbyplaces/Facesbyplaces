@@ -129,7 +129,10 @@ class Api::V1::Posts::CommentsController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        comments: comments
+                        comments: ActiveModel::SerializableResource.new(
+                                        comments, 
+                                        each_serializer: CommentSerializer
+                                    )
                     }
     end
     
@@ -147,7 +150,10 @@ class Api::V1::Posts::CommentsController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        replies: replies
+                        replies: ActiveModel::SerializableResource.new(
+                                    replies, 
+                                    each_serializer: ReplySerializer
+                                )
                     }
     end
 

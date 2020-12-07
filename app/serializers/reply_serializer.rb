@@ -1,5 +1,5 @@
-class RelationshipSerializer < ActiveModel::Serializer
-  attributes :user, :relationship
+class ReplySerializer < ActiveModel::Serializer
+  attributes :id, :comment_id, :user, :body, :created_at, :updated_at
 
   def user
     ActiveModel::SerializableResource.new(

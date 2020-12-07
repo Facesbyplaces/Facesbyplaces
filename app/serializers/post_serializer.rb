@@ -23,7 +23,17 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def tag_people
-    object.users
+    ActiveModel::SerializableResource.new(
+      object.users, 
+      each_serializer: UserSerializer
+    )
+  end
+
+  def user
+    ActiveModel::SerializableResource.new(
+      object.user, 
+      each_serializer: UserSerializer
+    )
   end
 
   private

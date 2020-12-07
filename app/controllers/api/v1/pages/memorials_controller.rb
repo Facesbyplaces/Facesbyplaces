@@ -210,7 +210,10 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
         render json: {
             itemsremaining: itemsremaining,
-            followers: followers
+            followers: ActiveModel::SerializableResource.new(
+                            followers, 
+                            each_serializer: RelationshipSerializer
+                        )
         }
     end
 

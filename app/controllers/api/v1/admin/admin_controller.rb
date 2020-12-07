@@ -15,14 +15,20 @@ class Api::V1::Admin::AdminController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        users: users
+                        users: ActiveModel::SerializableResource.new(
+                                    users, 
+                                    each_serializer: UserSerializer
+                                )
                     }
     end
 
     def showUser
         user = User.find(params[:id])
 
-        render json: user
+        render json: ActiveModel::SerializableResource.new(
+                        user, 
+                        each_serializer: UserSerializer
+                    )
     end
 
     def searchUser
@@ -38,7 +44,10 @@ class Api::V1::Admin::AdminController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        users: users
+                        users: ActiveModel::SerializableResource.new(
+                                    users, 
+                                    each_serializer: UserSerializer
+                                )
                     }
     end
 

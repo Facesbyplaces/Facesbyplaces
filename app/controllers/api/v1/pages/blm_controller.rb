@@ -206,7 +206,10 @@ class Api::V1::Pages::BlmController < ApplicationController
 
         render json: {
             itemsremaining: itemsremaining,
-            followers: followers
+            followers: ActiveModel::SerializableResource.new(
+                            followers, 
+                            each_serializer: RelationshipSerializer
+                        )
         }
     end
 

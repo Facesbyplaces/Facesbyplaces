@@ -49,7 +49,10 @@ class MemorialSerializer < ActiveModel::Serializer
   end
 
   def page_creator
-    object.pageowner.user
+    ActiveModel::SerializableResource.new(
+      object.pageowner.user, 
+      each_serializer: UserSerializer
+    )
   end
   
   def backgroundImage
