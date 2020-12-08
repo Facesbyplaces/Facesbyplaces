@@ -1,4 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/home-13-regular-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/home-28-regular-show-original-post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +9,7 @@ import 'misc-04-regular-dropdown.dart';
 import 'misc-07-regular-button.dart';
 import 'misc-08-regular-dialog.dart';
 import 'misc-09-regular-extra.dart';
+
 
 class MiscRegularPost extends StatelessWidget{
 
@@ -22,137 +25,288 @@ class MiscRegularPost extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Container(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-      decoration: BoxDecoration(
-        color: Color(0xffffffff),
-        borderRadius: BorderRadius.all(Radius.circular(15),),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: Offset(0, 0)
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Container(
-            height: SizeConfig.blockSizeVertical * 10,
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () async{
-                    // print('The memorialId is $memorialId');
+    return GestureDetector(
+      onTap: (){
+        print('The post is lkjadfoiuzcxv');
 
-                    // final sharedPrefs = await SharedPreferences.getInstance();
-                    // sharedPrefs.setInt('regular-user-memorial-id', memorialId);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId,)));
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+        decoration: BoxDecoration(
+          color: Color(0xffffffff),
+          borderRadius: BorderRadius.all(Radius.circular(15),),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, 0)
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Container(
+              height: SizeConfig.blockSizeVertical * 10,
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () async{
+                      print('The memorialId is $memorialId');
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId,)));
+                      
+                    },
+                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Align(alignment: Alignment.bottomLeft,
+                              child: Text(memorialName,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(timeCreated,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xffaaaaaa)
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  MiscRegularDropDownTemplate(userId: userId, postId: postId,),
+                ],
+              ),
+            ),
 
-                    Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial', arguments: memorialId);
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                children: contents,
+              ),
+            ),
 
-                  },
-                  child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 10.0),
-                    child: Column(
+            Container(
+              height: SizeConfig.blockSizeVertical * 10,
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: (){},
+                    child: Row(
                       children: [
-                        Expanded(
-                          child: Align(alignment: Alignment.bottomLeft,
-                            child: Text(memorialName,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(timeCreated,
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xffaaaaaa)
-                              ),
-                            ),
-                          ),
-                        ),
+                        Image.asset('assets/icons/peace_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+
+                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                       ],
                     ),
                   ),
-                ),
-                MiscRegularDropDownTemplate(userId: userId, postId: postId,),
-              ],
-            ),
-          ),
 
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: contents,
-            ),
-          ),
+                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-          Container(
-            height: SizeConfig.blockSizeVertical * 10,
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: (){},
-                  child: Row(
-                    children: [
-                      Icon(Icons.favorite_rounded, color: Color(0xffE74C3C),),
+                  GestureDetector(
+                    onTap: (){},
+                    child: Row(
+                      children: [
+                        Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
 
-                      SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                      Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                    ],
+                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                      ],
+                    ),
                   ),
-                ),
-
-                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                GestureDetector(
-                  onTap: (){},
-                  child: Row(
-                    children: [
-                      Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
-
-                      SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                      Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                    ],
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () async{
+                        await FlutterShare.share(
+                          title: 'Share',
+                          text: 'Share the link',
+                          linkUrl: 'https://flutter.dev/',
+                          chooserTitle: 'Share link'
+                        );
+                      },
+                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () async{
-                      await FlutterShare.share(
-                        title: 'Share',
-                        text: 'Share the link',
-                        linkUrl: 'https://flutter.dev/',
-                        chooserTitle: 'Share link'
-                      );
-                    },
-                    child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-        ],
+          ],
+        ),
       ),
     );
   }
 }
+
+
+
+// class MiscRegularPost extends StatelessWidget{
+
+//   final List<Widget> contents;
+//   final int userId;
+//   final int postId;
+//   final int memorialId;
+//   final dynamic profileImage;
+//   final String memorialName;
+//   final String timeCreated;
+
+//   MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = ''});
+
+//   @override
+//   Widget build(BuildContext context){
+//     return Container(
+//       padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+//       decoration: BoxDecoration(
+//         color: Color(0xffffffff),
+//         borderRadius: BorderRadius.all(Radius.circular(15),),
+//         boxShadow: <BoxShadow>[
+//           BoxShadow(
+//             color: Colors.grey.withOpacity(0.5),
+//             spreadRadius: 1,
+//             blurRadius: 5,
+//             offset: Offset(0, 0)
+//           ),
+//         ],
+//       ),
+//       child: Column(
+//         children: [
+//           Container(
+//             height: SizeConfig.blockSizeVertical * 10,
+//             child: Row(
+//               children: [
+//                 GestureDetector(
+//                   onTap: () async{
+//                     // print('The memorialId is $memorialId');
+
+//                     // final sharedPrefs = await SharedPreferences.getInstance();
+//                     // sharedPrefs.setInt('regular-user-memorial-id', memorialId);
+
+//                     Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial', arguments: memorialId);
+
+//                   },
+//                   child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
+//                 ),
+//                 Expanded(
+//                   child: Container(
+//                     padding: EdgeInsets.only(left: 10.0),
+//                     child: Column(
+//                       children: [
+//                         Expanded(
+//                           child: Align(alignment: Alignment.bottomLeft,
+//                             child: Text(memorialName,
+//                               overflow: TextOverflow.ellipsis,
+//                               style: TextStyle(
+//                                 fontSize: SizeConfig.safeBlockHorizontal * 4,
+//                                 fontWeight: FontWeight.bold,
+//                                 color: Color(0xff000000),
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                         Expanded(
+//                           child: Align(
+//                             alignment: Alignment.topLeft,
+//                             child: Text(timeCreated,
+//                               maxLines: 1,
+//                               style: TextStyle(
+//                                 fontSize: SizeConfig.safeBlockHorizontal * 3,
+//                                 fontWeight: FontWeight.w400,
+//                                 color: Color(0xffaaaaaa)
+//                               ),
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//                 MiscRegularDropDownTemplate(userId: userId, postId: postId,),
+//               ],
+//             ),
+//           ),
+
+//           Align(
+//             alignment: Alignment.centerLeft,
+//             child: Column(
+//               children: contents,
+//             ),
+//           ),
+
+//           Container(
+//             height: SizeConfig.blockSizeVertical * 10,
+//             child: Row(
+//               children: [
+//                 GestureDetector(
+//                   onTap: (){},
+//                   child: Row(
+//                     children: [
+//                       Icon(Icons.favorite_rounded, color: Color(0xffE74C3C),),
+
+//                       SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+//                       Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+//                     ],
+//                   ),
+//                 ),
+
+//                 SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+//                 GestureDetector(
+//                   onTap: (){},
+//                   child: Row(
+//                     children: [
+//                       Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+
+//                       SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+//                       Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+//                     ],
+//                   ),
+//                 ),
+//                 Expanded(
+//                   child: GestureDetector(
+//                     onTap: () async{
+//                       await FlutterShare.share(
+//                         title: 'Share',
+//                         text: 'Share the link',
+//                         linkUrl: 'https://flutter.dev/',
+//                         chooserTitle: 'Share link'
+//                       );
+//                     },
+//                     child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 
 class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget {

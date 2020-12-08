@@ -65,6 +65,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
       context.hideLoaderOverlay();
@@ -78,7 +79,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight,
+      // height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: SmartRefresher(
         enablePullDown: false,
         enablePullUp: true,
@@ -98,7 +100,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              page++;
+              // page++;
             }
             else{
               body = Text('No more post.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -111,7 +113,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
         onLoading: onLoading,
         child: ListView.separated(
           padding: EdgeInsets.all(10.0),
-          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             var container = GestureDetector(
               onTap: (){

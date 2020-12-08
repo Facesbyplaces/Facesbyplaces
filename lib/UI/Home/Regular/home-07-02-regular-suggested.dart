@@ -5,7 +5,7 @@ import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'home-05-regular-search.dart';
+// import 'home-05-regular-search.dart';
 
 class HomeRegularSuggested extends StatefulWidget{
 
@@ -22,9 +22,10 @@ class HomeRegularSuggestedState extends State<HomeRegularSuggested>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
+    // final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
     return FutureBuilder<APIRegularSearchMemorialMain>(
-      future: apiRegularSearchMemorials(newValue.title),
+      // future: apiRegularSearchMemorials(newValue.title),
+      future: apiRegularSearchMemorials(''),
       builder: (context, memorialSuggested){
         if(memorialSuggested.hasData){
           if(memorialSuggested.data.familyMemorialList.length != 0){

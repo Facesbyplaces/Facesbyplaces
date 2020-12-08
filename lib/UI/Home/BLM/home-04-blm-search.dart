@@ -1,15 +1,23 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'home-05-blm-post.dart';
 
-class BLMArguments {
-  final String title;
-  final int tab;
+class HomeBLMSearch extends StatefulWidget{
+  final double latitude;
+  final double longitude;
+  final String currentLocation;
 
-  BLMArguments(this.title, this.tab);
+  HomeBLMSearch({this.latitude, this.longitude, this.currentLocation});
+
+  HomeBLMSearchState createState() => HomeBLMSearchState(latitude: latitude, longitude: longitude, currentLocation: currentLocation);
 }
 
+class HomeBLMSearchState extends State<HomeBLMSearch>{
+  final double latitude;
+  final double longitude;
+  final String currentLocation;
 
-class HomeBLMSearch extends StatelessWidget{
+  HomeBLMSearchState({this.latitude, this.longitude, this.currentLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +36,8 @@ class HomeBLMSearch extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             title: TextFormField(
-              onFieldSubmitted: (String value){
-                Navigator.pushNamed(context, '/home/blm/home-05-blm-post', arguments: BLMArguments(value, 0));
+              onFieldSubmitted: (String keyword){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: latitude, longitude: longitude, currentLocation: currentLocation,)));
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),

@@ -39,9 +39,11 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   }
 
   void onLoading1() async{
+    
     if(blmFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMHomeMemorialsTab(page);
+      context.hideLoaderOverlay();
       blmFamilyItemsRemaining = newValue.familyMemorialList.blmFamilyItemsRemaining;
 
       for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
@@ -58,16 +60,18 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       
       refreshController.loadComplete();
-      context.hideLoaderOverlay();
+      
     }else{
       refreshController.loadNoData();
     }
   }
 
   void onLoading2() async{
-    context.showLoaderOverlay();
+    
     if(blmFriendsItemsRemaining != 0){
+      context.showLoaderOverlay();
       var newValue = await apiBLMHomeMemorialsTab(page);
+      context.hideLoaderOverlay();
       blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
 
       for(int i = 0; i < newValue.friendsMemorialList.blm.length; i++){
@@ -82,9 +86,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
-      context.hideLoaderOverlay();
     }else{
       refreshController.loadNoData();
     }
@@ -136,11 +140,11 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                   }
                   else if(mode == LoadStatus.canLoading){
                     body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                    page++;
+                    
                   }
-                  else{
-                    body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
+                  // else{
+                  //   body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  // }
                   return Container(height: 55.0, child: Center(child: body),);
                 },
               ),
@@ -204,9 +208,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                     body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                     page++;
                   }
-                  else{
-                    body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
+                  // else{
+                  //   body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  // }
                   return Container(height: 55.0, child: Center(child: body),);
                 },
               ),

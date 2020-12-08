@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/location/intermediates/res/merged/release/color/common_google_signin_btn_text_light.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d904300a5f1bff820356a22e076c5355/jetified-play-services-base-16.0.1/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/location/intermediates/res/merged/release/color/common_google_signin_btn_tint.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d904300a5f1bff820356a22e076c5355/jetified-play-services-base-16.0.1/res/color/common_google_signin_btn_tint.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/location/intermediates/res/merged/release/color/common_google_signin_btn_text_dark.xml",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/d904300a5f1bff820356a22e076c5355/jetified-play-services-base-16.0.1/res/color/common_google_signin_btn_text_dark.xml"
+    }
+]

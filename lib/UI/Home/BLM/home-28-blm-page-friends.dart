@@ -1,118 +1,178 @@
+import 'package:facesbyplaces/API/BLM/api-34-blm-show-friends-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class HomeBLMPageFriends extends StatefulWidget{
+class BLMShowFriendsSettings{
+  final String firstName;
+  final String lastName;
+  final String image;
 
-  HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState();
+  BLMShowFriendsSettings({this.firstName, this.lastName, this.image});
+}
+
+class HomeBLMPageFriends extends StatefulWidget{
+  final int memorialId;
+  HomeBLMPageFriends({this.memorialId});
+
+  HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState(memorialId: memorialId);
 }
 
 class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
+  final int memorialId;
+  HomeBLMPageFriendsState({this.memorialId});
 
-  String convertDate(String input){
-    DateTime dateTime = DateTime.parse(input);
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+  List<BLMShowFriendsSettings> friendsList = [];
+  int friendsItemsRemaining = 1;
+  int page = 1;
 
-    final y = dateTime.year.toString().padLeft(4, '0');
-    final m = dateTime.month.toString().padLeft(2, '0');
-    final d = dateTime.day.toString().padLeft(2, '0');
-    return '$d/$m/$y';
-  }  
+  void initState(){
+    super.initState();
+    onLoading1();
+  }
+
+  void onRefresh() async{
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading1() async{
+    if(friendsItemsRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiBLMShowFriendsSettings(memorialId, page);
+      friendsItemsRemaining = newValue.itemsRemaining;
+
+      for(int i = 0; i < newValue.friendsList.length; i++){
+        friendsList.add(
+          BLMShowFriendsSettings(
+            firstName: newValue.friendsList[i].user.firstName,
+            lastName: newValue.friendsList[i].user.lastName,
+            image: newValue.friendsList[i].user.image,
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page++;
+      
+      refreshController.loadComplete();
+      context.hideLoaderOverlay();
+    }else{
+      refreshController.loadNoData();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return WillPopScope(
-      onWillPop: () async{
-        return Navigator.canPop(context);
-      },
-      child: GestureDetector(
-        onTap: (){
-          FocusNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
-            currentFocus.unfocus();
-          }
-        },
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<BlocShowLoading>(create: (context) => BlocShowLoading(),)
-          ],
-          child: BlocBuilder<BlocShowLoading, bool>(
-            builder: (context, loading){
-              return Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Color(0xff04ECFF),
-                  title: Text('Page Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
-                  centerTitle: true,
-                  leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-                  actions: [
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.pushNamed(context, '/home/blm/home-29-blm-search-user');
-                      },
-                      child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff04ECFF),
+        title: Text('Page Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+        centerTitle: true,
+        leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+        actions: [
+          GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, '/home/blm/home-29-blm-search-user');
+            },
+            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
+          ),
+        ],
+      ),
+      body: Container(
+        child: SmartRefresher(
+          enablePullDown: false,
+          enablePullUp: true,
+          header: MaterialClassicHeader(),
+          footer: CustomFooter(
+            loadStyle: LoadStyle.ShowWhenLoading,
+            builder: (BuildContext context, LoadStatus mode){
+              Widget body ;
+              if(mode == LoadStatus.idle){
+                body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              }
+              else if(mode == LoadStatus.loading){
+                body =  CircularProgressIndicator();
+              }
+              else if(mode == LoadStatus.failed){
+                body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              }
+              else if(mode == LoadStatus.canLoading){
+                body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                // page++;
+              }else{
+                body = Text('End of list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              }
+              return Container(height: 55.0, child: Center(child: body),);
+            },
+          ),
+          controller: refreshController,
+          onRefresh: onRefresh,
+          onLoading: onLoading1,
+          child: ListView.separated(
+            physics: ClampingScrollPhysics(),
+            itemBuilder: (c, i) {
+              var container = Container(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      maxRadius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: AssetImage('assets/icons/graveyard.png'),
                     ),
-                  ],
-                ),
-                body: ListView.separated(
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, index){
-                    return Container(
-                      padding: EdgeInsets.all(10.0),
-                      child: Row(
+
+                    SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
+
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            maxRadius: SizeConfig.blockSizeVertical * 5,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/graveyard.png'),
-                          ),
+                          Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
-
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Danielle Roberts', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
-
-                                Text('Mother', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
-                              ],
-                            ),
-                          ),
-
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
-
-                          MaterialButton(
-                            minWidth: SizeConfig.screenWidth / 3.5,
-                            padding: EdgeInsets.zero,
-                            textColor: Color(0xffffffff),
-                            splashColor: Color(0xff04ECFF),
-                            onPressed: () async{
-
-                            },
-                            child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
-                            height: SizeConfig.blockSizeVertical * 5,
-                            shape: StadiumBorder(
-                              side: BorderSide(color: Color(0xffE74C3C)),
-                            ),
-                              color: Color(0xffE74C3C),
-                          ),
- 
-
+                          Text('Mother', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                         ],
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index){
-                    return Divider(height: SizeConfig.blockSizeVertical * 2,);
-                  },
-                  itemCount: 4,
+                      ),
+                    ),
+
+                    SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
+
+                    MaterialButton(
+                      minWidth: SizeConfig.screenWidth / 3.5,
+                      padding: EdgeInsets.zero,
+                      textColor: Color(0xffffffff),
+                      splashColor: Color(0xff04ECFF),
+                      onPressed: () async{
+
+                      },
+                      child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
+                      height: SizeConfig.blockSizeVertical * 5,
+                      shape: StadiumBorder(
+                        side: BorderSide(color: Color(0xffE74C3C)),
+                      ),
+                        color: Color(0xffE74C3C),
+                    ),
+
+                  ],
                 ),
               );
-            }
+
+              return container;
+              
+            },
+            separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
+            itemCount: friendsList.length,
           ),
         ),
       ),
     );
   }
 }
+
+

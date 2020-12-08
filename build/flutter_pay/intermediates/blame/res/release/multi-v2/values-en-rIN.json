@@ -1,0 +1,68 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/flutter_pay/intermediates/res/merged/release/values-en-rIN/values-en-rIN.xml",
+            "map": [
+                {
+                    "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/values-en-rIN/values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                },
+                {
+                    "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/eebe482e3942a4419ee9f1bddb76d29c/play-services-wallet-18.0.0/res/values-en-rIN/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "206",
+                        "endColumns": "99",
+                        "endOffsets": "305"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "156",
+                        "endColumns": "103",
+                        "endOffsets": "255"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/flutter_pay/intermediates/incremental/mergeReleaseResources/merged.dir/values-en-rIN/values-en-rIN.xml",
+            "map": [
+                {
+                    "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/a528b13ac93e64cafa3d0480e2c93207/core-1.1.0/res/values-en-rIN/values-en-rIN.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                },
+                {
+                    "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/eebe482e3942a4419ee9f1bddb76d29c/play-services-wallet-18.0.0/res/values-en-rIN/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "206",
+                        "endColumns": "99",
+                        "endOffsets": "305"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "156",
+                        "endColumns": "103",
+                        "endOffsets": "255"
+                    }
+                }
+            ]
+        }
+    ]
+}

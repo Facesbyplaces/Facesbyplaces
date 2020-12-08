@@ -6,16 +6,18 @@ import 'package:facesbyplaces/UI/Home/BLM/home-03-01-blm-feed-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:facesbyplaces/API/BLM/api-20-blm-logout.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home-03-02-blm-memorial-list-tab.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as Location;
 import 'package:flutter/material.dart';
 import 'home-03-03-blm-post-tab.dart';
 import '../../ui-01-get-started.dart';
 import 'dart:io';
+
+import 'home-04-blm-search.dart';
 
 class HomeBLMScreenExtended extends StatefulWidget{
 
@@ -96,7 +98,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), 
                   onPressed: () async{
                     
-                    Location location = new Location();
+                    Location.Location location = new Location.Location();
 
                     bool serviceEnabled = await location.serviceEnabled();
                     if (!serviceEnabled) {
@@ -106,21 +108,26 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                       }
                     }
 
-                    PermissionStatus permissionGranted = await location.hasPermission();
-                    if (permissionGranted == PermissionStatus.denied) {
+                    Location.PermissionStatus permissionGranted = await location.hasPermission();
+                    if (permissionGranted == Location.PermissionStatus.denied) {
                       permissionGranted = await location.requestPermission();
-                      if (permissionGranted != PermissionStatus.granted) {
+                      if (permissionGranted != Location.PermissionStatus.granted) {
                         return;
                       }
                     }
 
-                    LocationData locationData = await location.getLocation();
+                    Location.LocationData locationData = await location.getLocation();
 
-                    final sharedPrefs = await SharedPreferences.getInstance();
-                    sharedPrefs.setDouble('blm-user-location-latitude', locationData.latitude);
-                    sharedPrefs.setDouble('blm-user-location-longitude', locationData.longitude);
+                    print('The latitude is ${locationData.latitude}');
+                    print('The longitude is ${locationData.longitude}');
 
-                    Navigator.pushNamed(context, '/home/blm/home-04-blm-search');
+                    List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+
+                    print('The placemarks ${placemarks[0].name}');
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearch(latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+
+
 
                   },
                 ),

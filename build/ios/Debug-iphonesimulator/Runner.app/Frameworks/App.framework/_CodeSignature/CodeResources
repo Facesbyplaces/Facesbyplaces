@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		6T/ypjjPGGnHGW+WjLvpcCY+UQ0=
+		Lsw73sZYgo8zm2d18cLPnmZ0rQA=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES</key>
 		<data>
-		0BgqzESPrCDp5rpEKxpnKew7JVA=
+		jqyXAhwBjqlDSXNMM/PMUwQ23J4=
 		</data>
 		<key>flutter_assets/assets/icons/background-blm.png</key>
 		<data>
@@ -148,6 +148,10 @@
 		<data>
 		hmncvANuMbEKiL0ym+O7LEXpcfU=
 		</data>
+		<key>flutter_assets/assets/icons/paypal.png</key>
+		<data>
+		h1YDAmq/MyaHLqZGbxkJEb7Idhk=
+		</data>
 		<key>flutter_assets/assets/icons/peace_logo.png</key>
 		<data>
 		tWx5Ih/WV+EXgi2GTzGcEBGPnOQ=
@@ -242,7 +246,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		RrluiXXjo7GJjiIqtnKgH0cmKOo=
+		M8aV/VZtRCRU3CUezs+yKAfQ1S0=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -1287,11 +1291,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6T/ypjjPGGnHGW+WjLvpcCY+UQ0=
+			Lsw73sZYgo8zm2d18cLPnmZ0rQA=
 			</data>
 			<key>hash2</key>
 			<data>
-			3YYc7iqFs3smI76DM0QHmEst/b7NO9Y8uApCdDLbKZA=
+			YDNoBvT5x/PoNZ/CmMzzMO7nwltibRAzj65XGl0rmXE=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -1309,11 +1313,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			0BgqzESPrCDp5rpEKxpnKew7JVA=
+			jqyXAhwBjqlDSXNMM/PMUwQ23J4=
 			</data>
 			<key>hash2</key>
 			<data>
-			75XKkeWYB2SFyy4a/42R2Kmg5vUvt8tdUecstWp1Ajo=
+			+V0VntaUvMfOiGMt9RNnt2ilMhP5SLHWhvfvSnp3CA4=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/icons/background-blm.png</key>
@@ -1668,6 +1672,17 @@
 			SucF1Mei5StFNcuB3RUEqw7bv2ciUd048mObwGahB1Y=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/icons/paypal.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			h1YDAmq/MyaHLqZGbxkJEb7Idhk=
+			</data>
+			<key>hash2</key>
+			<data>
+			I85g0Zle8kJ2fjwkbXff2Q5KyO6B+XlqmLAKF64cYIA=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/icons/peace_logo.png</key>
 		<dict>
 			<key>hash</key>
@@ -1925,11 +1940,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			RrluiXXjo7GJjiIqtnKgH0cmKOo=
+			M8aV/VZtRCRU3CUezs+yKAfQ1S0=
 			</data>
 			<key>hash2</key>
 			<data>
-			s7SV5UhEV/7K859iyYbwqDKrqlSz5k0vkJYJvJCbng8=
+			scRsQOhzgradEJD1r4vzkfpME5cXNPjRoqhs0xIECWI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

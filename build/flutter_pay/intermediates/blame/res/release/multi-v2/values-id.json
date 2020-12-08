@@ -1,0 +1,48 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/flutter_pay/intermediates/res/merged/release/values-id/values-id.xml",
+            "map": [
+                {
+                    "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/eebe482e3942a4419ee9f1bddb76d29c/play-services-wallet-18.0.0/res/values-id/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "202",
+                        "endColumns": "102",
+                        "endOffsets": "304"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "106",
+                        "endOffsets": "157"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/flutter_pay/intermediates/incremental/mergeReleaseResources/merged.dir/values-id/values-id.xml",
+            "map": [
+                {
+                    "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/eebe482e3942a4419ee9f1bddb76d29c/play-services-wallet-18.0.0/res/values-id/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "202",
+                        "endColumns": "102",
+                        "endOffsets": "304"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "106",
+                        "endOffsets": "157"
+                    }
+                }
+            ]
+        }
+    ]
+}
