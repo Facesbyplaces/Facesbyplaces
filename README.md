@@ -647,4 +647,78 @@ Used mailcatcher to send emails.
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;], <br>
         &nbsp;&nbsp;&nbsp;&nbsp;} <br>
+### Memorial
+  - Create Memorial
+  - Edit Details
+  - Update Details
+  - Edit Images
+  - Update Images
+  - Show Memorial
+  - Delete Memorial
+  - Set Privacy
+  - Set Relationship
+  - Leave Memorial
+  - Family List
+  - Friends List
+  - Followers List
+  - Admins List
+  
+### BLM
+  - Create Blm
+  - Edit Details
+  - Update Details
+  - Edit Images
+  - Update Images
+  - Show Blm
+  - Delete Blm
+  - Set Privacy
+  - Set Relationship
+  - Leave Blm
+  - Family List
+  - Friends List
+  - Followers List
+  - Admins List
+  
+### Post
+  - Create Post
+  - Show Post
+  - Like Post
+  - Unlike Post
+  - Page Posts
+  - List of Pages
+  - Add Comment
+  - Like Comment
+  - Unlike Comment
+  - Comments List
+  - Add Reply
+  - Replies List
+  
+### Followers
+  - Follow Page
+  - Unfollow Page
+  
+### Page Admin
+  - Add Admin
+  - Remove Admin
+  - Add Family
+  - Remove Family
+  - Add Friends
+  - Remove Friends
+  - Edit Post
+  - Update Post
+  - Hide Family
+  - Unhide Family
+  - Hide Friends 
+  - Unhide Friends
+  - Hide Followers
+  - Unhide Followers
+  
+### Notifications
+  - Add To Ignore Lists
+  - Remove From Ignore Lists
+  - Read
+  - Number of Unread Notifications
+  
+### Admin Dashboard
 
+### Reports
