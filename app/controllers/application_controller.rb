@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-        before_action :set_current_user
+        before_action :set_current_user 
         include DeviseTokenAuth::Concerns::SetUserByToken
 
         protect_from_forgery with: :null_session 
@@ -34,6 +34,10 @@ class ApplicationController < ActionController::Base
         #     session[:guest_user_id] = nil
         #     guest_user if with_retry
         # end
+
+        def after_sign_in_path_for(resource)
+            api_v1_mainpages_memorials_url
+        end
 
         
 
@@ -96,6 +100,6 @@ class ApplicationController < ActionController::Base
         end
         
         def set_current_user
-            User.current = current_user 
+            User.current.present? ? User.current = current_user : ""
         end
 end
