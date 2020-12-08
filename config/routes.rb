@@ -19,6 +19,16 @@ Rails.application.routes.draw do
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
         devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/users/omniauth_callbacks" }
+
+        get 'notifSettingsStatus', to: 'users#notifSettingsStatus'
+
+        put 'newMemorial', to: 'users#newMemorial'
+        put 'newAcitivites', to: 'users#newAcitivites'
+        put 'postLikes', to: 'users#postLikes'
+        put 'postComments', to: 'users#postComments'
+        put 'addFamily', to: 'users#addFamily'
+        put 'addFriends', to: 'users#addFriends'
+        put 'addAdmin', to: 'users#addAdmin'
       end
       devise_scope :user do
         delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session

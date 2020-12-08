@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :shares, dependent: :destroy
   has_many :followers, dependent: :destroy
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
-  has_many :notifsettings, dependent: :destroy
+  has_one :notifsetting, dependent: :destroy
   has_one_attached :image, dependent: :destroy
   has_many :relationships
 
