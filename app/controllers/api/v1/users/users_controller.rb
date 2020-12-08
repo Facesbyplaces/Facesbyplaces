@@ -39,8 +39,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
-        if current_user.present? || @user.guest?
+        if current_user.present?
             render json: {
                 success: true, 
                 first_name: @user.first_name, 

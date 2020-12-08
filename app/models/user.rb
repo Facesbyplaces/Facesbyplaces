@@ -9,10 +9,11 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable, omniauth_providers: %i[:facebook, :google_oauth2]
+         :recoverable, :rememberable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   
   # has_many :pages
   has_many :posts, dependent: :destroy
@@ -23,12 +24,21 @@ class User < ActiveRecord::Base
   has_one_attached :image, dependent: :destroy
   has_many :relationships
 
-  def self.create_from_provider_data(provider_data)
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
+  def self.create_from_provider_data(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
+      puts "hi"
     end
   end
 

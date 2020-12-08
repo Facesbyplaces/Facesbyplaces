@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
-    omniauth_callbacks: 'api/v1/users/omniauth_callbacks',
-  }
+  }, :skip => [:omniauth_callbacks]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   namespace :api, defaults: { format: :json } do
@@ -19,6 +18,10 @@ Rails.application.routes.draw do
         resources :image_upload, only: [:create, :update]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
+        devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/users/omniauth_callbacks" }
+      end
+      devise_scope :user do
+        delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
       end
       namespace :reports do 
         resources :report, only: [:create]
