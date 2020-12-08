@@ -97,7 +97,7 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def relationship
-    if object.relationships.where(user: object.currentUser).first
+    if object.relationships.where(user: object.currentUser).first != nil
       object.relationships.where(user: object.currentUser).first.relationship
     end
   end
