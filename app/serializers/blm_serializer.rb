@@ -97,9 +97,10 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def relationship
-    if object.relationships.where(user: object.currentUser).first != nil
-      object.relationships.where(user: object.currentUser).first.relationship
-    end
+    # if object.relationships.where(user: object.currentUser).first != nil
+    #   object.relationships.where(user: object.currentUser).first.relationship
+    # end
+    object.currentUser
   end
 
   def famOrFriends
