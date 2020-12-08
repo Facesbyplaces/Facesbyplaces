@@ -218,8 +218,9 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def adminIndex
-        adminsRaw = Memorial.find(params[:page_id]).roles.first.users
-        admins = adminsRaw.page(params[:page]).per(numberOfPage)
+        adminsRaw = Memorial.find(params[:page_id]).roles.first.users.pluck('id')
+        admins = Relationship.where(page_type: 'Memorial', user_id: adminsRaw, page_id: params[:page_id])
+        admins = admins.page(params[:page]).per(numberOfPage)
 
         if admins.total_count == 0 || (admins.total_count - (params[:page].to_i * numberOfPage)) < 0
             adminsitemsremaining = 0
@@ -229,7 +230,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             adminsitemsremaining = admins.total_count - (params[:page].to_i * numberOfPage)
         end
         
-        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND user_id NOT IN (?)", adminsRaw.pluck('id'))
+        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND user_id NOT IN (?)", adminsRaw)
         family = familyRaw.page(params[:page]).per(numberOfPage)
 
         if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -240,22 +241,17 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             familyitemsremaining = family.total_count - (params[:page].to_i * numberOfPage)
         end
 
-        family = family.collect do |famUser|
-            user = User.find(famUser.user_id)
-            ActiveModel::SerializableResource.new(
-                user, 
-                each_serializer: UserSerializer
-            )
-        end
-
         render json: {
             adminsitemsremaining: adminsitemsremaining,
             admins: ActiveModel::SerializableResource.new(
                         admins, 
-                        each_serializer: UserSerializer
+                        each_serializer: RelationshipSerializer
                     ),
             familyitemsremaining: familyitemsremaining,
-            family: family
+            family: ActiveModel::SerializableResource.new(
+                        family, 
+                        each_serializer: RelationshipSerializer
+                    )
         }
     end
 
