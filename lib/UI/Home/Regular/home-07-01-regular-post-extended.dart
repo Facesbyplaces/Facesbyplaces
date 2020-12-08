@@ -1,10 +1,11 @@
 import 'package:facesbyplaces/API/Regular/api-13-01-regular-search-posts.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
-import 'home-05-regular-search.dart';
+// import 'home-05-regular-search.dart';
 
 class HomeRegularPostExtended extends StatefulWidget{
 
@@ -21,9 +22,10 @@ class HomeRegularPostExtendedState extends State<HomeRegularPostExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
+    // final RegularArguments newValue = ModalRoute.of(context).settings.arguments;
     return FutureBuilder<APIRegularSearchPostMain>(
-      future: apiRegularSearchPosts(newValue.title),
+      // future: apiRegularSearchPosts(newValue.title),
+      future: apiRegularSearchPosts(''),
       builder: (context, searchPost){
         if(searchPost.hasData){
           if(searchPost.data.familyMemorialList.length != 0){

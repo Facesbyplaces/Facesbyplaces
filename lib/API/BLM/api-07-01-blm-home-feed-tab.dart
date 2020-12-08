@@ -9,6 +9,8 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab(int page) async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('The page in api is $page');
+
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
     headers: <String, String>{

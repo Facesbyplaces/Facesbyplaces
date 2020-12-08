@@ -79,6 +79,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -102,7 +103,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
               page++;
             }
             else{
-              body = Text('No more notifications.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('End of notifications.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             return Container(
               height: 55.0,

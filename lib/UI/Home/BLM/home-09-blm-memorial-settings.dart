@@ -1,30 +1,64 @@
+import 'package:facesbyplaces/API/BLM/api-36-blm-update-switch-status-family.dart';
+import 'package:facesbyplaces/API/BLM/api-37-blm-update-switch-status-friends.dart';
+import 'package:facesbyplaces/API/BLM/api-38-blm-update-switch-status-followers.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/API/BLM/api-06-blm-delete-memorial.dart';
-// import 'package:facesbyplaces/API/BLM/api-25-blm-hide-famliy-setting.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'home-11-blm-page-details.dart';
 import 'home-21-blm-memorial-page-image.dart';
 import 'home-26-blm-page-managers.dart';
+import 'home-27-blm-page-family.dart';
+import 'home-28-blm-page-friends.dart';
+
 
 class HomeBLMMemorialSettings extends StatefulWidget{
+  final int memorialId;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+  HomeBLMMemorialSettings({this.memorialId, this.switchFamily, this.switchFriends, this.switchFollowers});
   
-  HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState();
+  HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState(memorialId: memorialId, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
 
 class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
+  final int memorialId;
+  final bool switchFamily;
+  final bool switchFriends;
+  final bool switchFollowers;
+  HomeBLMMemorialSettingsState({this.memorialId, this.switchFamily, this.switchFriends, this.switchFollowers});
   
   int toggle = 0;
-  bool isSwitched1 = false;
-  bool isSwitched2 = false;
-  bool isSwitched3 = false;
+  bool isSwitched1;
+  bool isSwitched2;
+  bool isSwitched3;
+  Future switchStatus;
+
+  void initState(){
+    super.initState();
+    isSwitched1 = switchFamily;
+    isSwitched2 = switchFriends;
+    isSwitched3 = switchFollowers;
+    // getSwitchStatus(memorialId);
+  }
+
+  // Future<APIBLMShowSwitchStatus> getSwitchStatus(int memorialId) async{
+  //   return await apiBLMShowSwitchStatus(memorialId);
+  //   // var newStatus = await apiBLMShowSwitchStatus(memorialId);
+    
+  //   // setState(() {
+  //   //   newValue.family = newStatus.family;
+  //   //   newValue.friends = newStatus.friends;
+  //   //   newValue.followers = newStatus.followers;
+  //   // });
+  // }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    int memorialId = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff04ECFF),
@@ -101,6 +135,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         MiscBLMSettingDetailTemplate(
           onTap: (){
             // Navigator.pushNamed(context, '/home/blm/home-11-blm-page-details', arguments: memorialId);
+            print('The memorial id is $memorialId');
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageDetails(memorialId: memorialId,)));
           },
         ),
@@ -131,7 +166,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(onTap: (){
-          Navigator.pushNamed(context, '/home/blm/home-27-blm-page-family');
+          // Navigator.pushNamed(context, '/home/blm/home-27-blm-page-family');
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,)));
         }, 
           titleDetail: 'Family', 
           contentDetail: 'Add or remove family of this page',
@@ -140,7 +176,11 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(onTap: (){
-          Navigator.pushNamed(context, '/home/blm/home-28-blm-page-friends');
+          // Navigator.pushNamed(context, '/home/blm/home-28-blm-page-friends');
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,)));
+
+          // HomeBLMPageFriends
         }, 
           titleDetail: 'Friends', 
           contentDetail: 'Add or remove friends of this page',
@@ -148,7 +188,13 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-        MiscBLMSettingDetailTemplate(onTap: (){}, titleDetail: 'Paypal', contentDetail: 'Manage cards that receives the memorial gifts.'),
+        MiscBLMSettingDetailTemplate(
+          onTap: (){
+            Navigator.pushNamed(context, '/home/blm/home-32-blm-paypal-screen');
+          }, 
+          titleDetail: 'Paypal', 
+          contentDetail: 'Manage cards that receives the memorial gifts.',
+        ),
 
         Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
@@ -208,37 +254,16 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
               Switch(
                 value: isSwitched1,
-                onChanged: (value){
+                onChanged: (value) async{
                   setState(() {
                     isSwitched1 = value;
                   });
+                  
+                  await apiBLMUpdateSwitchStatusFamily(memorialId, value);
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
               ),
-
-              // Container(
-              //   padding: EdgeInsets.only(right: 20.0),
-              //   child: FutureBuilder<bool>(
-              //     future: apiBLMHideFamilySetting(memorialId),
-              //     builder: (context, setting){
-              //       if(setting.data){
-              //         return Switch(
-              //           value: setting.data,
-              //           onChanged: (value) async{
-              //           },
-              //           activeColor: Color(0xff2F353D),
-              //           activeTrackColor: Color(0xff3498DB),
-              //         );
-              //       }else if(setting.hasError){
-              //         return Container(height: 0,);
-              //       }else{
-              //         return Center(child: CircularProgressIndicator(),);
-              //       }
-              //     },
-              //   ),
-              // ),
-
             ],
           ),
         ),
@@ -260,39 +285,19 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 ),
               ),
 
-              // Container(
-              //   padding: EdgeInsets.only(right: 20.0),
-              //   child: FutureBuilder<bool>(
-              //     future: apiBLMHideFriendsSetting(memorialId),
-              //     builder: (context, setting){
-              //       if(setting.data){
-              //         return Switch(
-              //           value: setting.data,
-              //           onChanged: (value) async{
-              //           },
-              //           activeColor: Color(0xff2F353D),
-              //           activeTrackColor: Color(0xff3498DB),
-              //         );
-              //       }else if(setting.hasError){
-              //         return Container(height: 0,);
-              //       }else{
-              //         return Center(child: CircularProgressIndicator(),);
-              //       }
-              //     },
-              //   ),
-              // ),
 
               Switch(
                 value: isSwitched2,
-                onChanged: (value){
+                onChanged: (value) async{
                   setState(() {
                     isSwitched2 = value;
                   });
+
+                  await apiBLMUpdateSwitchStatusFriends(memorialId, value);
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
               ),
-
 
             ],
           ),
@@ -331,10 +336,12 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
               Switch(
                 value: isSwitched3,
-                onChanged: (value){
+                onChanged: (value) async{
                   setState(() {
                     isSwitched3 = value;
                   });
+
+                  await apiBLMUpdateSwitchStatusFollowers(memorialId, value);
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),

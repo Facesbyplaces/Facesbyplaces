@@ -1,4 +1,5 @@
-// import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
+import 'package:facesbyplaces/API/BLM/api-35-blm-show-switch-status.dart';
+import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
@@ -7,12 +8,15 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'dart:io';
+import 'home-09-blm-memorial-settings.dart';
+import 'home-22-blm-connection-list.dart';
 
 class BLMRelationshipItemPost{
 
@@ -47,16 +51,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   final int memorialId;
   HomeBLMProfileState({this.memorialId});
 
-  final dataKey = new GlobalKey();
-
-  String convertDate(String input){
-    DateTime dateTime = DateTime.parse(input);
-
-    final y = dateTime.year.toString().padLeft(4, '0');
-    final m = dateTime.month.toString().padLeft(2, '0');
-    final d = dateTime.day.toString().padLeft(2, '0');
-    return '$d/$m/$y';
-  }
+  
+  GlobalKey dataKey = GlobalKey();
+  int postCount = 0;
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
@@ -64,6 +61,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   int itemRemaining = 1;
   bool empty = true;
   int page = 1;
+  Future showProfile;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -74,6 +72,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     if(itemRemaining != 0){
       var newValue = await apiBLMProfilePost(memorialId, page);
       itemRemaining = newValue.itemsRemaining;
+      postCount = newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
         posts.add(BLMProfilePosts(
@@ -98,9 +97,14 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     }
   }
 
+  Future<APIBLMShowMemorialMain> getProfileInformation(int memorialId) async{
+    return await apiBLMShowMemorial(memorialId);
+  }
+
   void initState(){
     super.initState();
     onLoading();
+    showProfile = getProfileInformation(memorialId);
   }
 
   @override
@@ -111,7 +115,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: FutureBuilder<APIBLMShowMemorialMain>(
-          future: apiBLMShowMemorial(memorialId),
+          // future: apiBLMShowMemorial(memorialId),
+          future: showProfile,
           builder: (context, profile){
             if(profile.hasData){
               return Stack(
@@ -119,7 +124,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                   Container(
                     height: SizeConfig.screenHeight / 3,
+                    width: SizeConfig.screenWidth,
                     child: CachedNetworkImage(
+                      fit: BoxFit.cover,
                       imageUrl: profile.data.memorial.backgroundImage,
                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                       errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
@@ -142,7 +149,18 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 12,),
 
-                            Center(child: Text(profile.data.memorial.name, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                            Center(
+                              child: Text(profile.data.memorial.name,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                                  fontWeight: FontWeight.bold, 
+                                  color: Color(0xff000000),
+                                ),
+                                maxLines: 5,
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -235,8 +253,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                       padding: EdgeInsets.only(left: 10.0, right: 10.0),
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
-                                        onPressed: (){
-                                          Navigator.pushNamed(context, '/home/blm/home-09-blm-memorial-settings', arguments: memorialId);
+                                        onPressed: () async{
+                                          context.showLoaderOverlay();
+                                          APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
+                                          context.hideLoaderOverlay();
+
+                                          if(result.success){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                          }
+                                          
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
@@ -367,7 +392,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                        // Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 0)));
                                       },
                                       child: Column(
                                         children: [
@@ -398,7 +424,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                        // Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 1)));
                                       },
                                       child: Column(
                                         children: [
@@ -429,7 +456,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                        // Navigator.pushNamed(context, '/home/blm/home-22-blm-connection-list');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMConnectionList(memorialId: memorialId, newToggle: 2)));
                                       },
                                       child: Column(
                                         children: [
@@ -522,7 +550,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
 
                             Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
 
-                            Container(
+                            postCount != 0
+                            ? Container(
                               padding: EdgeInsets.all(10.0),
                               height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
                               child: SmartRefresher(
@@ -619,7 +648,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   itemCount: posts.length,
                                 ),
                               ),
+                            )
+                            : Container(
+                              padding: EdgeInsets.all(10.0),
+                              height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                              child: Center(
+                                child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
+                              ),
                             ),
+
 
                           ],
                         ),

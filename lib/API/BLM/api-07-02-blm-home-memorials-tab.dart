@@ -24,7 +24,7 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab(int page) async{
     );
 
     print('The memorial value is ${response.statusCode}');
-    print('The memorial value is ${response.body}');
+    // print('The memorial value is ${response.body}');
 
     if(response.statusCode == 200){
       var newValue = json.decode(response.body);

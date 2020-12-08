@@ -9,6 +9,8 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - geocoding (1.0.5):
+    - Flutter
   - geolocator (6.1.9):
     - Flutter
   - google_maps_flutter (0.0.1):
@@ -40,6 +42,8 @@ PODS:
   - stripe_payment (1.0.0):
     - Flutter
     - Stripe (>= 19.0.1)
+  - url_launcher (0.0.1):
+    - Flutter
   - video_player (0.0.1):
     - Flutter
 
@@ -48,6 +52,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_pay (from `.symlinks/plugins/flutter_pay/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
+  - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
@@ -58,6 +63,7 @@ DEPENDENCIES:
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - stripe_payment (from `.symlinks/plugins/stripe_payment/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - video_player (from `.symlinks/plugins/video_player/ios`)
 
 SPEC REPOS:
@@ -76,6 +82,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_pay/ios"
   flutter_share:
     :path: ".symlinks/plugins/flutter_share/ios"
+  geocoding:
+    :path: ".symlinks/plugins/geocoding/ios"
   geolocator:
     :path: ".symlinks/plugins/geolocator/ios"
   google_maps_flutter:
@@ -96,6 +104,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
   stripe_payment:
     :path: ".symlinks/plugins/stripe_payment/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
   video_player:
     :path: ".symlinks/plugins/video_player/ios"
 
@@ -105,6 +115,7 @@ SPEC CHECKSUMS:
   flutter_pay: b9fda1c5be6ddc7af769f26553e9c648fc551263
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
   geolocator: 057a0c63a43e9c5296d8ad845a3ac8e6df23d899
   google_maps_flutter: c7f9c73576de1fbe152a227bfd6e6c4ae8088619
   GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
@@ -118,6 +129,7 @@ SPEC CHECKSUMS:
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Stripe: 92f1c73a9dbd3c54277ed06a1fea6e08f20414c6
   stripe_payment: ad86f099179edb7b9fe12b9b62ac3746d5e56802
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
 
 PODFILE CHECKSUM: 2b3ae1ac85206853680968b3222ea3779afd8b61

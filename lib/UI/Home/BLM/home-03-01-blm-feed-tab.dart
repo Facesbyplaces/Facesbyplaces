@@ -32,12 +32,13 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<BLMMainPagesFeeds> feeds = [];
   int itemRemaining = 1;
-  int page = 1;
+  int page;
   int count = 0;
 
   void initState(){
     super.initState();
     onLoading();
+    page = 1;
   }
 
   void onRefresh() async{
@@ -68,6 +69,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
       context.hideLoaderOverlay();
@@ -76,12 +78,11 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -117,11 +118,14 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
-              },
-              child: Container(
+            // var container = GestureDetector(
+            //   onTap: (){
+            //     Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
+            //   },
+            //   child: 
+            // );
+
+            var container = Container(
                 child: MiscBLMPost(
                   userId: feeds[i].userId,
                   postId: feeds[i].postId,
@@ -166,8 +170,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     : Container(height: 0,),
                   ],
                 ),
-              ),
-            );
+              );
             
             return container;
             
