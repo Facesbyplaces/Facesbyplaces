@@ -14,6 +14,8 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         @user.verification_code = code
         @user.save!
 
+        Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: @user.id)
+
         # Tell the UserMailer to send a code to verify email after save
         VerificationMailer.verify_email(@user).deliver_now
     end
