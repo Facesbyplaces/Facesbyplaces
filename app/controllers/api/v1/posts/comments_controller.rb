@@ -8,7 +8,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
             # Add to notification
                 # For followers
                 (comment.post.page.users.uniq - [user()]).each do |user|
-                    if user.notifsettings.where(ignore_type: 'Post', ignore_id: comment.post.id).count == 0
+                    if user.notifsetting.postComments == true
                         # check if user owns the post
                         if user == comment.post.user 
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
@@ -22,8 +22,8 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
                 # For families and friends
                 (comment.post.page.relationships).each do |relationship|
-                    if relationship.user.notifsettings.where(ignore_type: 'Post', ignore_id: comment.post.id).count == 0
-                        if !relationship.user == user()
+                    if relationship.user.notifsetting.postComments == true
+                        if relationship.user != user()
                             user = relationship.user
                             # check if user owns the post
                             if user == comment.post.user 
@@ -50,19 +50,19 @@ class Api::V1::Posts::CommentsController < ApplicationController
             # Add to notification
             if reply.comment.replies.count == 1
                 if user() != reply.comment.user
-                    if reply.comment.user.notifsettings.where(ignore_type: 'Post', ignore_id: reply.comment.post.id).count == 0
+                    if reply.comment.user.notifsetting.postComments == true
                         Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
                     end
                 end
             else
                 users = reply.comment.users.uniq - [user()]
                 if users.count == 0
-                    if reply.comment.user.notifsettings.where(ignore_type: 'Post', ignore_id: reply.comment.post.id).count == 0
+                    if reply.comment.user.notifsetting.postComments == true
                         Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
                     end
                 else
                     users.each do |user|
-                        if user.notifsettings.where(ignore_type: 'Post', ignore_id: reply.comment.post.id).count == 0
+                        if user.notifsetting.postComments == true
                             if reply.comment.user == user
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
                             else
@@ -87,11 +87,11 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
             # Notification
             if like.commentable_type == "Comment"
-                if like.commentable.user != user()
+                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
                     Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", url: "posts/#{like.commentable.post.id}", read: false)
                 end
             else
-                if like.commentable.user != user()
+                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
                     Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", url: "posts/#{like.commentable.comment.post.id}", read: false)
                 end
             end

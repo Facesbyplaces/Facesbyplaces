@@ -49,6 +49,13 @@ class Api::V1::Pages::BlmController < ApplicationController
             SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, current_user, blm.id).deliver_now
             
             render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
+
+            # Notify all Users
+            users = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.user_id != #{user().id}").pluck('id') 
+
+            users.each do |id|
+                Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", url: "/pages/blm/#{blm.id}")
+            end
         else
             render json: {status: "#{check} is empty"}
         end

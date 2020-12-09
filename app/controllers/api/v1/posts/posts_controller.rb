@@ -28,8 +28,8 @@ class Api::V1::Posts::PostsController < ApplicationController
 
         if post.save
             # check if there are people that have been tagged
-            if params[:tag_people]
-                people = params[:tag_people]
+            params[:tag_people][0] != "" ? people = params[:tag_people] : people = []
+            if people.count != 0
                 # save tagged people to database
                 people.each do |person|
                     tag = Tagperson.new(post_id: post.id, user_id: person)
@@ -37,10 +37,13 @@ class Api::V1::Posts::PostsController < ApplicationController
                         return render json: {errors: tag.errors}, status: 500
                     end
                 end
+            end
                 
-                # Add to notification
-                    # For followers
-                    (post.page.users.uniq - [user()]).each do |user|
+            # Add to notification
+                # For followers
+                (post.page.users.uniq - [user()]).each do |user|
+                    # check if this user can get notification
+                    if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
                         if people.include?("#{user.id}")
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
@@ -48,33 +51,18 @@ class Api::V1::Posts::PostsController < ApplicationController
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
                         end
                     end
+                end
 
-                    # For families and friends
-                    (post.page.relationships).each do |relationship|
-                        if !relationship.user == user()
-                            if people.include?("#{relationship.user.id}")
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
-                            else
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
-                            end
+                # For families and friends
+                (post.page.relationships).each do |relationship|
+                    if relationship.user != user() && relationship.user.notifsetting.newActivities == true
+                        if people.include?("#{relationship.user.id}")
+                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                        else
+                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
                         end
                     end
-            else
-                # Add to notification
-                    # For followers
-                    (post.page.users.uniq - [user()]).each do |user|
-                        Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
-                    end
-
-                    # For families and friends
-                    (post.page.relationships).each do |relationship|
-                        if !relationship.user == user()
-                            if relationship.user.notifsettings.where(ignore_type: "Post", ignore_id: post.id).count == 0
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
-                            end
-                        end
-                    end
-            end
+                end
 
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
