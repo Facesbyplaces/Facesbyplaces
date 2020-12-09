@@ -730,8 +730,9 @@ class MiscBLMPost extends StatelessWidget{
   final dynamic profileImage;
   final String memorialName;
   final String timeCreated;
+  final bool joined;
 
-  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = ''});
+  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.joined});
 
   @override
   Widget build(BuildContext context){
@@ -764,7 +765,7 @@ class MiscBLMPost extends StatelessWidget{
                   GestureDetector(
                     onTap: () async{
                       print('The memorialId is $memorialId');
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId,)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: joined,)));
                       
                     },
                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),

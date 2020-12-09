@@ -81,9 +81,9 @@ Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
     if(response.statusCode == 200){
       var value = response.data;
       var user = value['blm'];
-      int userId = user['id'];
+      int memorialId = user['id'];
       
-      result = userId;
+      result = memorialId;
     }
   }catch(e){
     print('The error is $e');

@@ -139,7 +139,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                     }
                     else if(mode == LoadStatus.canLoading){
                       body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                      // page++;
                     }else{
                       body = Text('End of list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                     }
@@ -264,7 +263,7 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                               children: [
                                 Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                                Text('Mother', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
+                                Text(familyList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                               ],
                             ),
                             ),

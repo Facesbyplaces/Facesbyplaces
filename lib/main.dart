@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'UI/Home/BLM/home-01-blm-home.dart';
 import 'UI/Home/BLM/home-04-blm-search.dart';
-import 'UI/Home/BLM/home-05-blm-post.dart';
+import 'UI/Home/BLM/home-05-blm-searches.dart';
 import 'UI/Home/BLM/home-07-01-blm-create-memorial.dart';
 import 'UI/Home/BLM/home-07-02-blm-create-memorial.dart';
 import 'UI/Home/BLM/home-07-03-blm-create-memorial.dart';

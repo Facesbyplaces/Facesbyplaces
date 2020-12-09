@@ -2220,6 +2220,10 @@
         "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/res/drawable-mdpi-v4/ic_diners.png"
     },
     {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/app/intermediates/res/merged/release/layout_browser_actions_context_menu_page.xml.flat",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/6eadc30b5d3d9b103652e8dca2d14aad/browser-1.0.0/res/layout/browser_actions_context_menu_page.xml"
+    },
+    {
         "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/app/intermediates/res/merged/release/color_mtrl_chip_ripple_color.xml.flat",
         "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/color/mtrl_chip_ripple_color.xml"
     },
@@ -2298,6 +2302,10 @@
     {
         "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/app/intermediates/res/merged/release/layout_design_navigation_item_subheader.xml.flat",
         "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/db2388f0fe5e05a7a168e5a9c11e912f/material-1.0.0/res/layout/design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/app/intermediates/res/merged/release/layout_browser_actions_context_menu_row.xml.flat",
+        "source": "/Users/kk38/.gradle/caches/transforms-2/files-2.1/6eadc30b5d3d9b103652e8dca2d14aad/browser-1.0.0/res/layout/browser_actions_context_menu_row.xml"
     },
     {
         "merged": "/Users/kk38/Desktop/Files - FBP/facesbyplaces/build/app/intermediates/res/merged/release/drawable-zh-mdpi-v4_ic_unionpay_template_32.png.flat",

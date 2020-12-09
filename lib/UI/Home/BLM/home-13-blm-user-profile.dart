@@ -5,7 +5,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-class HomeBLMUserProfile extends StatelessWidget{
+// class HomeBLMUserProfile extends StatelessWidget{
+
+class HomeBLMUserProfile extends StatefulWidget{
+
+  HomeBLMUserProfileState createState() => HomeBLMUserProfileState();
+}
+
+class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
   @override
   Widget build(BuildContext context) {

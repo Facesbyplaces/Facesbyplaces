@@ -432,14 +432,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                             String token = await flutterPay.makePayment(
                               merchantIdentifier: "merchant.com.flutterPay",
-                              currencyCode: "RUB",
-                              countryCode: "RU",
+                              currencyCode: 'USD',
+                              countryCode: 'US',
                               allowedPaymentNetworks: [
                                 PaymentNetwork.visa, 
                                 PaymentNetwork.masterCard,
                               ],
                               paymentItems: [item],
-                              merchantName: "Super Shop", 
+                              merchantName: 'Facesbyplaces Donation',
                               gatewayName: "stripe",
                             );
 

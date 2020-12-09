@@ -201,8 +201,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                             ((){
                               if(profile.data.memorial.details.description != ''){
                                 return Container(
+                                  alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                   child: Text(profile.data.memorial.details.description,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
                                       fontWeight: FontWeight.w300,
@@ -525,9 +527,17 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10),
                                               color: Color(0xff888888),
+                                              // image: DecorationImage(
+                                              //   fit: BoxFit.cover,
+                                              //   image: CachedNetworkImageProvider(
+                                              //     profile.data.memorial.backgroundImage[index].toString(),
+                                              //   ),
+                                              // ),
                                             ),
                                             child: CachedNetworkImage(
-                                              imageUrl: profile.data.memorial.backgroundImage,
+                                              fit: BoxFit.cover,
+                                              // imageUrl: profile.data.memorial.backgroundImage,
+                                              imageUrl: profile.data.memorial.imagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                             ),

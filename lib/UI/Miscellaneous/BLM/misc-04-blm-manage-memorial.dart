@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/API/BLM/api-21-blm-leave-page.dart';
+// import 'package:facesbyplaces/API/BLM/api-21-blm-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:facesbyplaces/UI/Home/BLM/home-12-blm-profile.dart';
@@ -6,7 +6,7 @@ import 'package:facesbyplaces/UI/Home/BLM/home-12-blm-profile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'misc-02-blm-dialog.dart';
+// import 'misc-02-blm-dialog.dart';
 
 // class MiscBLMManageMemorialTab extends StatelessWidget{
 
@@ -16,6 +16,7 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
   final String description;
   final String image;
   final int memorialId;
+  final bool managed;
 
   MiscBLMManageMemorialTab({
     this.index, 
@@ -23,10 +24,11 @@ class MiscBLMManageMemorialTab extends StatefulWidget{
     this.description = '',
     this.image = 'assets/icons/graveyard.png',
     this.memorialId,
+    this.managed,
   });
 
 
-  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId);
+  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed);
 }
 
 class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
@@ -36,6 +38,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
   final String description;
   final String image;
   final int memorialId;
+  final bool managed;
 
   MiscBLMManageMemorialTabState({
     this.index, 
@@ -43,9 +46,16 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
     this.description,
     this.image,
     this.memorialId,
+    this.managed,
   });
 
-  bool manageButton = true;
+  // bool manageButton = true;
+  bool manageButton;
+
+  void initState(){
+    super.initState();
+    manageButton = managed;
+  }
 
   @override
   Widget build(BuildContext context){
@@ -114,23 +124,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                 textColor: manageButton ? Color(0xffffffff) : Color(0xff4EC9D4),
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
-                  // setState(() {
-                  //   manageButton = !manageButton;
-                  // });
+                  setState(() {
+                    manageButton = !manageButton;
+                  });
 
                   // if(!manageButton){
                   //   bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
                   // }
 
-                  bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                  // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
-                  if(confirmResult){
-                    String result = await apiBLMLeavePage(memorialId);
+                  // if(confirmResult){
+                  //   String result = await apiBLMLeavePage(memorialId);
 
-                    if(result != 'Success'){
-                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
-                    }
-                  }
+                  //   if(result != 'Success'){
+                  //     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
+                  //   }
+                  // }
 
 
                 },

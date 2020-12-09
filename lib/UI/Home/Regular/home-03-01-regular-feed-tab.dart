@@ -99,11 +99,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             else{
               body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
-            return Container(
-              height: 55.0,
-              child: Center(child :body),
-            );
-            // return Container(height: SizeConfig.screenHeight - kToolbarHeight, child: Center(child: body),);
+            return Container(height: 55.0, child: Center(child: body),);
           },
         ),
         controller: refreshController,

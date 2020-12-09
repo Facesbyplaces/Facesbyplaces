@@ -15,6 +15,8 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
+import 'home-12-blm-profile.dart';
+
 
 
 class HomeBLMCreateMemorial3 extends StatefulWidget{
@@ -367,7 +369,8 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     context.hideLoaderOverlay();
 
                     if(result != 0){
-                      Navigator.pushReplacementNamed(context, '/home/blm/home-12-blm-profile', arguments: result);
+                      Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result,));
+                      Navigator.pushReplacement(context, newRoute);
                     }else{
                       await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                     }

@@ -61,6 +61,10 @@
     <color name="bright_foreground_inverse_material_light">@color/bright_foreground_material_dark</color>
     <color name="bright_foreground_material_dark">@android:color/white</color>
     <color name="bright_foreground_material_light">@android:color/black</color>
+    <color name="browser_actions_bg_grey">#F5F5F5</color>
+    <color name="browser_actions_divider_color">#1E000000</color>
+    <color name="browser_actions_text_color">#DE000000</color>
+    <color name="browser_actions_title_color">#646464</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="cardview_dark_background">#FF424242</color>
@@ -260,6 +264,8 @@
     <dimen name="android_pay_confirmation_margin">8dp</dimen>
     <dimen name="brand_zone_horizontal_margin">16dp</dimen>
     <dimen name="brand_zone_max_height">100dp</dimen>
+    <dimen name="browser_actions_context_menu_max_width">500dp</dimen>
+    <dimen name="browser_actions_context_menu_min_padding">20dp</dimen>
     <dimen name="card_cvc_initial_margin">1000dp</dimen>
     <dimen name="card_expiry_initial_margin">200dp</dimen>
     <dimen name="card_icon_multiline_padding">8dp</dimen>
@@ -3852,6 +3858,7 @@
 
         <attr format="string" name="viewInflaterClass"/>
     </declare-styleable>
+    <declare-styleable name="AppDataSearch"/>
     <declare-styleable name="BottomAppBar"><attr name="backgroundTint"/><attr name="fabAlignmentMode">
       
       <enum name="center" value="0"/>
@@ -4098,6 +4105,23 @@
             <flag name="all" value="0x77"/>
         </attr>
     </declare-styleable>
+    <declare-styleable name="Corpus">
+<attr format="string" name="corpusId"/>
+
+<attr format="string" name="corpusVersion"/>
+
+<attr format="string" name="contentProviderUri"/>
+
+<attr format="boolean" name="trimmable"/>
+
+<attr format="string" name="schemaOrgType"/>
+
+<attr format="boolean" name="semanticallySearchable"/>
+
+<attr format="integer" name="documentMaxAgeSecs"/>
+
+<attr format="boolean" name="perAccountTemplate"/>
+</declare-styleable>
     <declare-styleable name="CustomWalletTheme"><attr name="windowTransitionStyle">
 <enum name="slide" value="1"/>
 
@@ -4136,6 +4160,11 @@
         <!-- The thickness (stroke size) for the bar paint -->
         <attr format="dimension" name="thickness"/>
     </declare-styleable>
+    <declare-styleable name="FeatureParam">
+<attr format="string" name="paramName"/>
+
+<attr format="string" name="paramValue"/>
+</declare-styleable>
     <declare-styleable name="FloatingActionButton"><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr name="rippleColor"/><attr name="fabSize">
       
       <enum name="auto" value="-1"/>
@@ -4222,6 +4251,47 @@
         <attr name="android:ttcIndex"/>
     </declare-styleable>
     <declare-styleable name="ForegroundLinearLayout"><attr name="android:foreground"/><attr name="android:foregroundGravity"/><attr format="boolean" name="foregroundInsidePadding"/></declare-styleable>
+    <declare-styleable name="GlobalSearch">
+<attr format="boolean" name="searchEnabled"/>
+
+<attr format="string" name="searchLabel"/>
+
+<attr format="string" name="settingsDescription"/>
+
+<attr format="string" name="defaultIntentAction"/>
+
+<attr format="string" name="defaultIntentData"/>
+
+<attr format="string" name="defaultIntentActivity"/>
+</declare-styleable>
+    <declare-styleable name="GlobalSearchCorpus">
+<attr format="boolean" name="allowShortcuts"/>
+</declare-styleable>
+    <declare-styleable name="GlobalSearchSection"><attr name="sectionType">
+<enum name="text1" value="0"/>
+
+<enum name="text2" value="1"/>
+
+<enum name="icon_uri" value="2"/>
+
+<enum name="intent_action" value="3"/>
+
+<enum name="intent_data" value="4"/>
+
+<enum name="intent_data_id" value="5"/>
+
+<enum name="intent_extra_data" value="6"/>
+
+<enum name="large_icon_uri" value="7"/>
+
+<enum name="intent_activity" value="8"/>
+
+<enum name="thing_proto" value="9"/>
+
+</attr>
+
+<attr format="string" name="sectionContent"/>
+</declare-styleable>
     <declare-styleable name="GradientColor">
         <!-- Start color of the gradient. -->
         <attr name="android:startColor"/>
@@ -4266,6 +4336,25 @@
         <!-- The current color for the offset inside the gradient. -->
         <attr name="android:color"/>
     </declare-styleable>
+    <declare-styleable name="IMECorpus">
+<attr format="boolean" name="inputEnabled"/>
+<attr name="sourceClass">
+<enum name="email" value="0"/>
+
+<enum name="contact" value="1"/>
+
+<enum name="instant_message" value="2"/>
+
+</attr>
+
+<attr format="string" name="userInputTag"/>
+
+<attr format="string" name="userInputSection"/>
+
+<attr format="string" name="userInputValue"/>
+
+<attr format="string" name="toAddressesSection"/>
+</declare-styleable>
     <declare-styleable name="LinearLayoutCompat">
         <!-- Should the layout be a column or a row?  Use "horizontal"
              for a row, "vertical" for a column.  The default is
@@ -4662,6 +4751,46 @@
         <attr format="reference" name="submitBackground"/>
         <attr name="android:focusable"/>
     </declare-styleable>
+    <declare-styleable name="Section">
+<attr format="string" name="sectionId"/>
+<attr name="sectionFormat">
+<enum name="plain" value="0"/>
+
+<enum name="html" value="1"/>
+
+<enum name="rfc822" value="2"/>
+
+<enum name="url" value="3"/>
+
+<enum name="date" value="4"/>
+
+</attr>
+
+<attr format="boolean" name="noIndex"/>
+
+<attr format="integer" name="sectionWeight"/>
+
+<attr format="boolean" name="indexPrefixes"/>
+
+<attr format="string" name="subsectionSeparator"/>
+
+<attr format="string" name="schemaOrgProperty"/>
+</declare-styleable>
+    <declare-styleable name="SectionFeature"><attr name="featureType">
+<enum name="match_global_nicknames" value="1"/>
+
+<enum name="demote_common_words" value="2"/>
+
+<enum name="demote_rfc822_hostnames" value="3"/>
+
+<enum name="omnibox_url_section" value="4"/>
+
+<enum name="omnibox_title_section" value="5"/>
+
+<enum name="index_entity_types" value="6"/>
+
+</attr>
+</declare-styleable>
     <declare-styleable name="SignInButton"><attr format="reference" name="buttonSize">
 <enum name="standard" value="0"/>
 

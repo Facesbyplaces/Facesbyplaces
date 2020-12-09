@@ -4,8 +4,8 @@ import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
 import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facesbyplaces/API/BLM/api-17-blm-follow-page.dart';
-import 'package:facesbyplaces/API/BLM/api-18-blm-unfollow-page.dart';
+// import 'package:facesbyplaces/API/BLM/api-17-blm-follow-page.dart';
+// import 'package:facesbyplaces/API/BLM/api-18-blm-unfollow-page.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,14 +28,16 @@ class BLMProfilePosts{
 
 class HomeBLMMemorialProfile extends StatefulWidget{
   final int memorialId;
-  HomeBLMMemorialProfile({this.memorialId});
+  final bool newJoin;
+  HomeBLMMemorialProfile({this.memorialId, this.newJoin});
 
-  HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState(memorialId: memorialId);
+  HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState(memorialId: memorialId, newJoin: newJoin);
 }
 
 class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   final int memorialId;
-  HomeBLMMemorialProfileState({this.memorialId});
+  final bool newJoin;
+  HomeBLMMemorialProfileState({this.memorialId, this.newJoin});
 
   
   GlobalKey dataKey = GlobalKey();
@@ -46,6 +48,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   List<BLMProfilePosts> posts = [];
   int itemRemaining = 1;
   bool empty = true;
+  bool join;
   int page = 1;
   Future showProfile;
 
@@ -91,6 +94,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
     super.initState();
     onLoading();
     showProfile = getProfileInformation(memorialId);
+    join = newJoin;
   }
 
   @override
@@ -134,7 +138,18 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 12,),
 
-                            Center(child: Text(profile.data.memorial.name, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                            Center(
+                              child: Text(
+                                profile.data.memorial.name,
+                                textAlign: TextAlign.center,
+                                maxLines: 5,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                                  fontWeight: FontWeight.bold, color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -234,19 +249,25 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         padding: EdgeInsets.zero,
                                         onPressed: () async{
 
-                                          bool result;
+                                          // bool result;
 
-                                          if(profile.data.memorial.follower){
-                                            result = await apiBLMUnfollowPage(profile.data.memorial.id);
-                                          }else{
-                                            result = await apiBLMFollowPage(profile.data.memorial.id);
-                                          }
+                                          // if(profile.data.memorial.follower){
+                                          //   result = await apiBLMUnfollowPage(profile.data.memorial.id);
+                                          // }else{
+                                          //   result = await apiBLMFollowPage(profile.data.memorial.id);
+                                          // }
 
-                                          print('The result is $result');
+                                          // print('The result is $result');
+
+                                          setState(() {
+                                            join = !join;
+                                          });
+
+
                                           
                                         },
                                         child: Text(
-                                          profile.data.memorial.follower
+                                          join
                                           ? 'Unjoin'
                                           : 'Join',
                                           style: TextStyle(
@@ -254,11 +275,20 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xffffffff),
                                           ),
+
+                                          // profile.data.memorial.follower
+                                          // ? 'Unjoin'
+                                          // : 'Join',
+                                          // style: TextStyle(
+                                          //   fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                          //   fontWeight: FontWeight.bold,
+                                          //   color: Color(0xffffffff),
+                                          // ),
                                         ),
                                         minWidth: SizeConfig.screenWidth / 2,
                                         height: SizeConfig.blockSizeVertical * 7,
                                         shape: StadiumBorder(),
-                                        color: profile.data.memorial.manage
+                                        color: join
                                         ? Color(0xff04ECFF)
                                         : Color(0xff888888),
                                       ),
@@ -550,7 +580,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                               color: Color(0xff888888),
                                             ),
                                             child: CachedNetworkImage(
-                                              imageUrl: profile.data.memorial.backgroundImage,
+                                              imageUrl: profile.data.memorial.imagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                             ),

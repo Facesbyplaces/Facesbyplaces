@@ -4,12 +4,15 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
+import 'home-29-blm-search-user.dart';
+
 class BLMShowFriendsSettings{
   final String firstName;
   final String lastName;
   final String image;
+  final String relationship;
 
-  BLMShowFriendsSettings({this.firstName, this.lastName, this.image});
+  BLMShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeBLMPageFriends extends StatefulWidget{
@@ -77,7 +80,8 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, '/home/blm/home-29-blm-search-user');
+              // Navigator.pushNamed(context, '/home/blm/home-29-blm-search-user');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: memorialId,)));
             },
             child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
           ),
@@ -103,7 +107,6 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
               }
               else if(mode == LoadStatus.canLoading){
                 body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                // page++;
               }else{
                 body = Text('End of list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
               }
@@ -135,7 +138,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                         children: [
                           Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                          Text('Mother', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
+                          Text(friendsList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                         ],
                       ),
                       ),

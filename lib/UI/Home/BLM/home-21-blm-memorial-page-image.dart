@@ -14,6 +14,8 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
+import 'home-12-blm-profile.dart';
+
 class HomeBLMMemorialPageImage extends StatefulWidget{
 
   final int memorialId;
@@ -292,7 +294,13 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               context.hideLoaderOverlay();
 
                               if(result){
-                                Navigator.popUntil(context, ModalRoute.withName('/home/blm/home-09-blm-memorial-settings'));
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                                );
+
+                                Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                               }else{
                                 await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                               }
