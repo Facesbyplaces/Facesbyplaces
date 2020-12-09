@@ -18,8 +18,9 @@ class BLMMainPagesFeeds{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool joined;
 
-  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.joined});
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
@@ -63,6 +64,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
           imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          joined: newValue.familyMemorialList[i].page.follower,
           ),    
         );
       }
@@ -91,19 +93,18 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
+            Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
+              body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
               body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              page++;
             }
             else{
               body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -118,62 +119,55 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            // var container = GestureDetector(
-            //   onTap: (){
-            //     Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
-            //   },
-            //   child: 
-            // );
-
             var container = Container(
-                child: MiscBLMPost(
-                  userId: feeds[i].userId,
-                  postId: feeds[i].postId,
-                  memorialId: feeds[i].memorialId,
-                  memorialName: feeds[i].memorialName,
-                  timeCreated: convertDate(feeds[i].timeCreated),
-                  contents: [
-                    Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: RichText(
-                            maxLines: 4,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              text: feeds[i].postBody,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff000000),
-                              ),
+              child: MiscBLMPost(
+                userId: feeds[i].userId,
+                postId: feeds[i].postId,
+                memorialId: feeds[i].memorialId,
+                memorialName: feeds[i].memorialName,
+                timeCreated: convertDate(feeds[i].timeCreated),
+                joined: feeds[i].joined,
+                contents: [
+                  Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: RichText(
+                          maxLines: 4,
+                          overflow: TextOverflow.clip,
+                          textAlign: TextAlign.left,
+                          text: TextSpan(
+                            text: feeds[i].postBody,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              color: Color(0xff000000),
                             ),
                           ),
                         ),
+                      ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                      ],
+                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    ],
+                  ),
+
+                  feeds[i].imagesOrVideos != null
+                  ? Container(
+                    height: SizeConfig.blockSizeHorizontal * 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     ),
-
-                    feeds[i].imagesOrVideos != null
-                    ? Container(
-                      height: SizeConfig.blockSizeHorizontal * 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: feeds[i].imagesOrVideos[0],
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    )
-                    : Container(height: 0,),
-                  ],
-                ),
-              );
+                    child: CachedNetworkImage(
+                      imageUrl: feeds[i].imagesOrVideos[0],
+                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  )
+                  : Container(height: 0,),
+                ],
+              ),
+            );
             
             return container;
-            
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
           itemCount: feeds.length,

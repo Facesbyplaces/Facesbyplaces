@@ -48,16 +48,17 @@ class APIBLMSearchUsersMain{
 }
 
 class APIBLMSearchUsersExtended{
-
+  int userId;
   String firstName;
   String lastName;
   String email;
 
-  APIBLMSearchUsersExtended({this.firstName, this.lastName, this.email});
+  APIBLMSearchUsersExtended({this.userId, this.firstName, this.lastName, this.email});
 
   factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMSearchUsersExtended(
+      userId: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       email: parsedJson['email'],

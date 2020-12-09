@@ -1,6 +1,9 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'home-07-01-regular-post-extended.dart';
+import 'package:location/location.dart' as Location;
+import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
+
+import 'home-06-regular-searches.dart';
 
 class RegularArguments {
   final String title;
@@ -29,8 +32,31 @@ class HomeRegularSearch extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             title: TextFormField(
-              onFieldSubmitted: (String value){
-                Navigator.pushNamed(context, '/home/regular/home-06-regular-post', arguments: RegularArguments(value, 0));
+              onFieldSubmitted: (String keyword) async{
+                Location.Location location = new Location.Location();
+
+                bool serviceEnabled = await location.serviceEnabled();
+                if (!serviceEnabled) {
+                  serviceEnabled = await location.requestService();
+                  if (!serviceEnabled) {
+                    return;
+                  }
+                }
+
+                Location.PermissionStatus permissionGranted = await location.hasPermission();
+                if (permissionGranted == Location.PermissionStatus.denied) {
+                  permissionGranted = await location.requestPermission();
+                  if (permissionGranted != Location.PermissionStatus.granted) {
+                    return;
+                  }
+                }
+
+                Location.LocationData locationData = await location.getLocation();
+                List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+
+                // Navigator.pushNamed(context, '/home/regular/home-06-regular-post', arguments: RegularArguments(value, 0));
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),

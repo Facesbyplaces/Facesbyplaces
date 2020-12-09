@@ -2,12 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
+Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
     headers: <String, String>{
@@ -23,24 +23,24 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIBLMShowProfileInformation.fromJson(newValue);
+    return APIRegularShowProfileInformation.fromJson(newValue);
   }else{
     throw Exception('Failed to get the user information');
   }
 }
 
-class APIBLMShowProfileInformation{
+class APIRegularShowProfileInformation{
   String firstName;
   String lastName;
   dynamic image;
 
-  APIBLMShowProfileInformation({this.firstName, this.lastName, this.image});
+  APIRegularShowProfileInformation({this.firstName, this.lastName, this.image});
 
-  factory APIBLMShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
+  factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
     var newValue = parsedJson['user'];
 
-    return APIBLMShowProfileInformation(
+    return APIRegularShowProfileInformation(
       firstName: newValue['first_name'],
       lastName: newValue['last_name'],
       image: newValue['image'],

@@ -115,7 +115,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         onRefresh: onRefresh,
         onLoading: onLoading,
         child: ListView.separated(
-          // padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             var container = GestureDetector(

@@ -92,8 +92,9 @@ class APIBLMHomeTabFeedExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabFeedExtendedPageCreator pageCreator;
+  bool follower;
 
-  APIBLMHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIBLMHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower});
 
   factory APIBLMHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabFeedExtendedPage(
@@ -105,7 +106,7 @@ class APIBLMHomeTabFeedExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      follower: parsedJson['follower'],
     );
   }
 }

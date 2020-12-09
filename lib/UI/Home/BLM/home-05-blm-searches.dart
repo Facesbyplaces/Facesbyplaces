@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/BLM/api-14-03-blm-search-blm.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/API/BLM/api-14-01-blm-search-posts.dart';
@@ -5,7 +6,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-26-blm-search-nearby.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 
@@ -26,24 +26,27 @@ class BLMSearchMainSuggested{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool joined;
 
-  BLMSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription});
+  BLMSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
 }
 
 class BLMSearchMainNearby{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool joined;
 
-  BLMSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription});
+  BLMSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
 }
 
 class BLMSearchMainBLM{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool joined;
 
-  BLMSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription});
+  BLMSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
 }
 
 
@@ -143,26 +146,18 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   }
  
   void onLoading3() async{
-    final sharedPrefs = await SharedPreferences.getInstance();
-    double latitude = sharedPrefs.getDouble('blm-user-location-latitude');
-    double longitude = sharedPrefs.getDouble('blm-user-location-longitude');
-
-    print('the latitude is $latitude');
-    print('the longitude is $longitude');
 
     if(nearbyBlmItemsRemaining != 0){
-      // var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
-      var newValue = await apiBLMSearchNearby(page3, 40.71, -100.23);
-      print('hereee!');
+      var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
 
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
 
       for(int i = 0; i < newValue.blmList.length; i++){
         nearby.add(BLMSearchMainNearby(
-          // memorialId: newValue.blmList[i].page.id,
           memorialId: newValue.blmList[i].id,
           memorialName: newValue.blmList[i].name,
           memorialDescription: newValue.blmList[i].details.description,
+          joined: newValue.blmList[i].follower,
           ),    
         );
       }
@@ -175,7 +170,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     }
     else if(nearbyMemorialItemsRemaining != 0){
       var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
-      // var newValue = await apiBLMSearchNearby(page, 40.71, -100.23);
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
 
       for(int i = 0; i < newValue.memorialList.length; i++){
@@ -183,6 +177,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           memorialId: newValue.memorialList[i].id,
           memorialName: newValue.memorialList[i].name,
           memorialDescription: newValue.memorialList[i].details.description,
+          joined: newValue.blmList[i].follower,
           ),    
         );
       }
@@ -200,14 +195,16 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      var newValue = await apiBLMSearchPosts(keyword, page4);
+      // var newValue = await apiBLMSearchPosts(keyword, page4);
+      var newValue = await apiBLMSearchBLM(keyword);
       blmItemRemaining = newValue.itemsRemaining;
 
-      for(int i = 0; i < newValue.familyMemorialList.length; i++){
+      for(int i = 0; i < newValue.memorialList.length; i++){
         blm.add(BLMSearchMainBLM(
-          memorialId: newValue.familyMemorialList[i].page.id,
-          memorialName: newValue.familyMemorialList[i].page.name,
-          memorialDescription: newValue.familyMemorialList[i].page.details.description,
+          memorialId: newValue.memorialList[i].id,
+          memorialName: newValue.memorialList[i].name,
+          memorialDescription: newValue.memorialList[i].details.description,
+          joined: newValue.memorialList[i].follower,
           ),    
         );
       }
@@ -364,7 +361,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                               SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                              // Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
                               ((){
                                 if(currentLocation != null || currentLocation != ''){
                                   return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
@@ -388,8 +384,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               Icon(Icons.location_pin, color: Color(0xff979797),),
 
                               SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              // Text('4015 Oral Lake Road, New York', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
 
                               ((){
                                 if(currentLocation != null || currentLocation != ''){
@@ -437,7 +431,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
+            Widget body;
             if(mode == LoadStatus.idle){
               body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
@@ -449,16 +443,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              // page++;
             }
             else{
               body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
-            return Container(
-              height: 55.0,
-              child: Center(child :body),
-            );
-            // return Container(height: SizeConfig.screenHeight - kToolbarHeight, child: Center(child: body),);
+            return Container(height: 55.0, child: Center(child: body),);
           },
         ),
         controller: refreshController,
@@ -468,56 +457,49 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
-              },
-              child: Container(
-                child: MiscBLMPost(
-                  userId: feeds[i].userId,
-                  postId: feeds[i].postId,
-                  memorialId: feeds[i].memorialId,
-                  memorialName: feeds[i].memorialName,
-                  timeCreated: convertDate(feeds[i].timeCreated),
-                  contents: [
-                    Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: RichText(
-                            maxLines: 4,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              text: feeds[i].postBody,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff000000),
-                              ),
-                            ),
+            var container = MiscBLMPost(
+              userId: feeds[i].userId,
+              postId: feeds[i].postId,
+              memorialId: feeds[i].memorialId,
+              memorialName: feeds[i].memorialName,
+              timeCreated: convertDate(feeds[i].timeCreated),
+              contents: [
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: RichText(
+                        maxLines: 4,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: feeds[i].postBody,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff000000),
                           ),
                         ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                      ],
+                      ),
                     ),
 
-                    feeds[i].imagesOrVideos != null
-                    ? Container(
-                      height: SizeConfig.blockSizeHorizontal * 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: feeds[i].imagesOrVideos[0],
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    )
-                    : Container(height: 0,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                   ],
                 ),
-              ),
+
+                feeds[i].imagesOrVideos != null
+                ? Container(
+                  height: SizeConfig.blockSizeHorizontal * 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: feeds[i].imagesOrVideos[0],
+                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                )
+                : Container(height: 0,),
+              ],
             );
 
             if(feeds.length != 0){
@@ -544,27 +526,23 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
+            Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
+              body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
               body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              // page++;
             }
             else{
               body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
-            return Container(
-              height: 55.0,
-              child: Center(child :body),
-            );
+            return Container(height: 55.0, child: Center(child: body),);
           },
         ),
         controller: refreshController,
@@ -631,6 +609,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               memorialId: nearby[i].memorialId, 
               memorialName: nearby[i].memorialName, 
               description: nearby[i].memorialDescription,
+              managed: nearby[i].joined,
             );
 
             return container;

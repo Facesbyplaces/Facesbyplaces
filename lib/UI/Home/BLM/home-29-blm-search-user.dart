@@ -1,29 +1,47 @@
 import 'package:facesbyplaces/API/BLM/api-23-blm-search-users.dart';
+import 'package:facesbyplaces/API/BLM/api-40-blm-add-family.dart';
+import 'package:facesbyplaces/API/BLM/api-41-blm-add-friends.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter/material.dart';
+
+import 'home-27-blm-page-family.dart';
+import 'home-28-blm-page-friends.dart';
+
+class BLMSearchUsers{
+  final int userId;
+  final String firstName;
+  final String lastName;
+  final String image;
+  final String email;
+
+  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email});
+}
+
 
 class HomeBLMSearchUser extends StatefulWidget{
+  final bool isFamily;
+  final int memorialId;
+  HomeBLMSearchUser({this.isFamily, this.memorialId});
 
   @override
-  HomeBLMSearchUserState createState() => HomeBLMSearchUserState();
+  HomeBLMSearchUserState createState() => HomeBLMSearchUserState(isFamily: isFamily, memorialId: memorialId);
 }
 
 class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
+  final bool isFamily;
+  final int memorialId;
+  HomeBLMSearchUserState({this.isFamily, this.memorialId});
   
   TextEditingController controller = TextEditingController();
-  // List<String> users = [];
-  List<Widget> users = [];
+  List<BLMSearchUsers> users = [];
   bool empty = true;
   int page = 1;
   RefreshController refreshController = RefreshController(initialRefresh: true);
   int itemRemaining = 1;
   String keywords = '';
-
-  void initState(){
-    super.initState();
-    onLoading();
-  }
 
   String convertDate(String input){
     DateTime dateTime = DateTime.parse(input);
@@ -43,12 +61,32 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
     if(itemRemaining != 0){
       var newValue = await apiBLMSearchUsers(keywords, page);
       itemRemaining = newValue.itemsRemaining;
-      users.add(Column(
-        children: [
+      // users.add(Column(
+      //   children: [
 
-          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-        ],
-      ));
+      //     SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+      //   ],
+      // ));
+      // users.add(
+      //   BLMShowFriendsSettings()
+      // );
+
+      for(int i = 0; i < newValue.users.length; i++){
+        users.add(
+          BLMSearchUsers(
+            userId: newValue.users[i].userId,
+            firstName: newValue.users[i].firstName,
+            lastName: newValue.users[i].lastName,
+            email: newValue.users[i].email,
+            // image: newValue.adminList[i].user.image,
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page++;
+
       if(mounted)
       setState(() {});
       
@@ -94,9 +132,37 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                 });                
 
                 if(newPlaces != ''){
-                  empty = false;
-                  onLoading();
+                  setState(() {
+                    empty = false;
+                    itemRemaining = 1;
+                    page = 1;
+                    keywords = '';
+                  });
+                  // onLoading();
+                }else{
+                  empty = true;
+                  setState(() {
+                    users = [];
+                  });
                 }
+                
+              },
+              onFieldSubmitted: (newPlaces){
+                print('The newPlaces is $newPlaces');
+                setState(() {
+                  keywords = newPlaces;
+                  
+                });
+
+                if(newPlaces != ''){
+                  onLoading();
+                }                
+
+                // if(newPlaces != ''){
+                //   empty = false;
+                //   onLoading();
+                // }
+
                 
               },
               decoration: InputDecoration(
@@ -164,7 +230,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
               footer: CustomFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
                 builder: (BuildContext context, LoadStatus mode){
-                  Widget body ;
+                  Widget body;
                   if(mode == LoadStatus.idle){
                     body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                   }
@@ -181,10 +247,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                   else{
                     body = Text('No more results.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                   }
-                  return Container(
-                    height: 55.0,
-                    child: Center(child:body),
-                  );
+                  return Container(height: 55.0, child: Center(child: body),);
                 },
               ),
               controller: refreshController,
@@ -193,8 +256,81 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
               child: ListView.separated(
                 padding: EdgeInsets.all(10.0),
                 shrinkWrap: true,
-                itemBuilder: (c, i) => users[i],
-                separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+                itemBuilder: (c, index){
+                  var container = GestureDetector(
+                    onTap: () async{
+                      if(isFamily){
+
+                        String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
+                        print('The choice is $choice');
+
+                        context.showLoaderOverlay();
+                        bool result = await apiBLMAddFamily(memorialId, users[index].userId, choice);
+                        context.hideLoaderOverlay();
+
+                        print('The result is $result');
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                        );
+
+                        Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                      }else{
+                        String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
+                        print('The choice is $choice');
+
+                        context.showLoaderOverlay();
+                        bool result = await apiBLMAddFriends(memorialId, users[index].userId);
+                        context.hideLoaderOverlay();
+
+                        print('The result is $result');
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                        );
+
+                        Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            maxRadius: SizeConfig.blockSizeVertical * 5,
+                            backgroundColor: Color(0xff888888),
+                            backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                          ),
+
+                          SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
+
+                          Column(
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(text: users[index].firstName, style: users[index].firstName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
+
+                                    TextSpan(text: ' '),
+
+                                    TextSpan(text: users[index].lastName, style: users[index].lastName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+
+                  return container;
+                },
+
+                
+                separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Color(0xff000000)),
                 itemCount: users.length,
               ),
             )

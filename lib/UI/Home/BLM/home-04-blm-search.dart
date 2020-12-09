@@ -1,23 +1,16 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:location/location.dart' as Location;
+import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
-import 'home-05-blm-post.dart';
+import 'home-05-blm-searches.dart';
+
 
 class HomeBLMSearch extends StatefulWidget{
-  final double latitude;
-  final double longitude;
-  final String currentLocation;
 
-  HomeBLMSearch({this.latitude, this.longitude, this.currentLocation});
-
-  HomeBLMSearchState createState() => HomeBLMSearchState(latitude: latitude, longitude: longitude, currentLocation: currentLocation);
+  HomeBLMSearchState createState() => HomeBLMSearchState();
 }
 
 class HomeBLMSearchState extends State<HomeBLMSearch>{
-  final double latitude;
-  final double longitude;
-  final String currentLocation;
-
-  HomeBLMSearchState({this.latitude, this.longitude, this.currentLocation});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +29,29 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
         child: Scaffold(
           appBar: AppBar(
             title: TextFormField(
-              onFieldSubmitted: (String keyword){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: latitude, longitude: longitude, currentLocation: currentLocation,)));
+              onFieldSubmitted: (String keyword) async{
+                Location.Location location = new Location.Location();
+
+                bool serviceEnabled = await location.serviceEnabled();
+                if (!serviceEnabled) {
+                  serviceEnabled = await location.requestService();
+                  if (!serviceEnabled) {
+                    return;
+                  }
+                }
+
+                Location.PermissionStatus permissionGranted = await location.hasPermission();
+                if (permissionGranted == Location.PermissionStatus.denied) {
+                  permissionGranted = await location.requestPermission();
+                  if (permissionGranted != Location.PermissionStatus.granted) {
+                    return;
+                  }
+                }
+
+                Location.LocationData locationData = await location.getLocation();
+                List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
               },
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(15.0),

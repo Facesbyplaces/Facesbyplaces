@@ -79,7 +79,6 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: SmartRefresher(
         enablePullDown: false,
@@ -90,17 +89,16 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
+              body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
               body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              // page++;
             }
             else{
               body = Text('No more post.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);

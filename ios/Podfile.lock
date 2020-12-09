@@ -1,7 +1,11 @@
 PODS:
+  - Branch (0.36.0)
   - camera (0.0.1):
     - Flutter
   - Flutter (1.0.0)
+  - flutter_branch_sdk (1.2.0):
+    - Branch (~> 0.36.0)
+    - Flutter
   - flutter_pay (0.0.1):
     - Flutter
   - flutter_share (0.0.1):
@@ -50,6 +54,7 @@ PODS:
 DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - Flutter (from `Flutter`)
+  - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
   - flutter_pay (from `.symlinks/plugins/flutter_pay/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
@@ -68,6 +73,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Branch
     - FMDB
     - GoogleMaps
     - libPhoneNumber-iOS
@@ -78,6 +84,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/camera/ios"
   Flutter:
     :path: Flutter
+  flutter_branch_sdk:
+    :path: ".symlinks/plugins/flutter_branch_sdk/ios"
   flutter_pay:
     :path: ".symlinks/plugins/flutter_pay/ios"
   flutter_share:
@@ -110,8 +118,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_player/ios"
 
 SPEC CHECKSUMS:
+  Branch: 8aebcb7a6465f19f9f4d315acced369ae078d3f2
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_branch_sdk: e112bc8cc622f6682099823ce4bc1520fb8d55db
   flutter_pay: b9fda1c5be6ddc7af769f26553e9c648fc551263
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

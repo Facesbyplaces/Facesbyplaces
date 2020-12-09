@@ -19,7 +19,7 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers(int memo
       'access-token': getAccessToken,
       'uid': getUID,
       'client': getClient,
-    }
+    },
   );
 
   print('The status of page friends is ${response.statusCode}');

@@ -9,8 +9,9 @@ class BLMMainPagesMemorials{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
 
-  BLMMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription});
+  BLMMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription, this.managed});
 }
 
 class HomeBLMManageTab extends StatefulWidget{
@@ -25,7 +26,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   List<BLMMainPagesMemorials> memorialsFriends = [];
   int blmFamilyItemsRemaining = 1;
   int blmFriendsItemsRemaining = 1;
-  int page = 1;
+  int page1 = 1;
+  int page2 = 1;
 
   void initState(){
     super.initState();
@@ -42,7 +44,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     
     if(blmFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMHomeMemorialsTab(page);
+      var newValue = await apiBLMHomeMemorialsTab(page1);
       context.hideLoaderOverlay();
       blmFamilyItemsRemaining = newValue.familyMemorialList.blmFamilyItemsRemaining;
 
@@ -51,13 +53,15 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           BLMMainPagesMemorials(
             memorialId: newValue.familyMemorialList.blm[i].id,
             memorialName: newValue.familyMemorialList.blm[i].name,
-            memorialDescription: newValue.familyMemorialList.blm[i].details.description
+            memorialDescription: newValue.familyMemorialList.blm[i].details.description,
+            managed: newValue.familyMemorialList.blm[i].managed,
           ),
         );
       }
 
       if(mounted)
       setState(() {});
+      page1++;
       
       refreshController.loadComplete();
       
@@ -70,7 +74,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     
     if(blmFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMHomeMemorialsTab(page);
+      var newValue = await apiBLMHomeMemorialsTab(page2);
       context.hideLoaderOverlay();
       blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
 
@@ -86,7 +90,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
       if(mounted)
       setState(() {});
-      page++;
+      page2++;
       
       refreshController.loadComplete();
     }else{
@@ -113,8 +117,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                   child: GestureDetector(
                     onTap: (){
                       Navigator.pushNamed(context, '/home/blm/home-07-01-blm-create-memorial');
-                  },
-                  child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),),
+                    },
+                    child: Align(alignment: Alignment.centerRight, child: Text('Create', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                  ),
                 ),
               ],
             ),
@@ -130,21 +135,17 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                 builder: (BuildContext context, LoadStatus mode){
                   Widget body ;
                   if(mode == LoadStatus.idle){
-                    body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                    body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                   }
                   else if(mode == LoadStatus.loading){
-                    body =  CircularProgressIndicator();
+                    body = CircularProgressIndicator();
                   }
                   else if(mode == LoadStatus.failed){
                     body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                   }
                   else if(mode == LoadStatus.canLoading){
                     body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                    
                   }
-                  // else{
-                  //   body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  // }
                   return Container(height: 55.0, child: Center(child: body),);
                 },
               ),
@@ -159,6 +160,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                     memorialId: memorialsFamily[i].memorialId, 
                     memorialName: memorialsFamily[i].memorialName, 
                     description: memorialsFamily[i].memorialDescription,
+                    managed: memorialsFamily[i].managed
                   );
 
                   return container;
@@ -206,11 +208,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                   }
                   else if(mode == LoadStatus.canLoading){
                     body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                    page++;
                   }
-                  // else{
-                  //   body = Text('No more memorials.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  // }
                   return Container(height: 55.0, child: Center(child: body),);
                 },
               ),
@@ -229,13 +227,12 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
                   );
 
                   return container;
-                  
                 },
                 separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
                 itemCount: memorialsFriends.length,
               ),
             ),
-          ),          
+          ),
         ],
       ),
     );
