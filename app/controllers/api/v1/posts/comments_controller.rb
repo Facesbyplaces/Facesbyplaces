@@ -11,11 +11,11 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     if user.notifsetting.postComments == true
                         # check if user owns the post
                         if user == comment.post.user 
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false)
                         elsif comment.post.tagpeople.where(user_id: user.id).first
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false)
                         else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", postId: comment.post.id, read: false)
                         end
                     end
                 end
@@ -27,11 +27,11 @@ class Api::V1::Posts::CommentsController < ApplicationController
                             user = relationship.user
                             # check if user owns the post
                             if user == comment.post.user 
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", url: "posts/#{comment.post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false)
                             elsif comment.post.tagpeople.where(user_id: user.id).first
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", url: "posts/#{comment.post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false)
                             else
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", url: "posts/#{comment.post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", postId: comment.post.id, read: false)
                             end
                         end
                     end
@@ -51,22 +51,22 @@ class Api::V1::Posts::CommentsController < ApplicationController
             if reply.comment.replies.count == 1
                 if user() != reply.comment.user
                     if reply.comment.user.notifsetting.postComments == true
-                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
                     end
                 end
             else
                 users = reply.comment.users.uniq - [user()]
                 if users.count == 0
                     if reply.comment.user.notifsetting.postComments == true
-                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
                     end
                 else
                     users.each do |user|
                         if user.notifsetting.postComments == true
                             if reply.comment.user == user
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", url: "posts/#{reply.comment.post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", postId: eply.comment.post.id, read: false)
                             else
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", url: "posts/#{reply.comment.post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", postId: reply.comment.post.id, read: false)
                             end
                         end
                     end
@@ -75,7 +75,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
             render json: {status: :success}
         else
-            render json: {status: comment.errors}
+            render json: {status: comment.errors}, status: 500
         end
     end
 
@@ -88,11 +88,11 @@ class Api::V1::Posts::CommentsController < ApplicationController
             # Notification
             if like.commentable_type == "Comment"
                 if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
-                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", url: "posts/#{like.commentable.post.id}", read: false)
+                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", postId: like.commentable.post.id, read: false)
                 end
             else
                 if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
-                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", url: "posts/#{like.commentable.comment.post.id}", read: false)
+                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", postId: like.commentable.comment.post.id, read: false)
                 end
             end
 

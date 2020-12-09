@@ -153,7 +153,10 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        notifs: notifs
+                        notifs: ActiveModel::SerializableResource.new(
+                                notifs, 
+                                each_serializer: NotificationSerializer
+                            )
                     }
     end
     

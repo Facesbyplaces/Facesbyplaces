@@ -58,7 +58,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             users = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.user_id != #{user().id}").pluck('id') 
 
             users.each do |id|
-                Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", url: "/pages/memorials/#{memorial.id}")
+                Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", postId: memorial.id)
             end
         else
             render json: {status: "#{check} is empty"}

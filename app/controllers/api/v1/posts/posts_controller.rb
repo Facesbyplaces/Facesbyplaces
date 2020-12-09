@@ -46,9 +46,9 @@ class Api::V1::Posts::PostsController < ApplicationController
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
                         if people.include?("#{user.id}")
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                         else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                         end
                     end
                 end
@@ -57,9 +57,9 @@ class Api::V1::Posts::PostsController < ApplicationController
                 (post.page.relationships).each do |relationship|
                     if relationship.user != user() && relationship.user.notifsetting.newActivities == true
                         if people.include?("#{relationship.user.id}")
-                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                         else
-                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                         end
                     end
                 end
@@ -109,9 +109,9 @@ class Api::V1::Posts::PostsController < ApplicationController
                         if user.notifsetting.postLikes == true
                             # check if the user is in the tag people
                             if people.include?("#{user.id}")
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", url: "posts/#{post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false)
                             else
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                             end
                         end
                     end
@@ -120,11 +120,11 @@ class Api::V1::Posts::PostsController < ApplicationController
                     (post.page.relationships).each do |relationship|
                         if relationship.user != user() && relationship.user.notifsetting.postLikes == true
                             if people.include?("#{relationship.user.id}")
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", url: "posts/#{post.id}", read: false)
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false)
                             elsif relationship.user == post.user 
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked your post", url: "posts/#{post.id}", read: false)
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked your post", postId: post.id, read: false)
                             else
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                             end
                         end
                     end

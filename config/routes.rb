@@ -19,6 +19,12 @@ Rails.application.routes.draw do
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
         devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/users/omniauth_callbacks" }
+
+        put 'updateDetails', to: 'users#updateDetails'
+        put 'updateOtherInfos', to: 'users#updateOtherInfos'
+        get 'showDetails', to: 'users#show'
+        get 'posts', to: 'users#posts'
+        get 'memorials', to: 'users#memorials'
       end
       devise_scope :user do
         delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session

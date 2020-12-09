@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_162532) do
+ActiveRecord::Schema.define(version: 2020_12_09_164947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_162532) do
     t.integer "actor_id"
     t.boolean "read"
     t.string "action"
-    t.string "url"
+    t.integer "postId"
   end
 
   create_table "notifsettings", force: :cascade do |t|
@@ -273,6 +273,10 @@ ActiveRecord::Schema.define(version: 2020_12_08_162532) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "guest", default: false
     t.integer "account_type"
+    t.string "question"
+    t.datetime "birthdate"
+    t.string "birthplace"
+    t.string "address"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

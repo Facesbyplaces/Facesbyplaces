@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
         protect_from_forgery with: :null_session 
 
         rescue_from ActiveRecord::RecordNotFound, :with => :known_error
+        rescue_from PG::UniqueViolation, :with => :same_email
 
         rescue_from CanCan::AccessDenied do |exception|
             render json: {status: exception.message}
@@ -68,6 +69,10 @@ class ApplicationController < ActionController::Base
         
         def known_error(exception)
                 return render json: {errors: exception}, status: 404
+        end
+
+        def same_email(exception)
+            return render json: {errors: exception}, status: 406
         end
 
         def numberOfPage
