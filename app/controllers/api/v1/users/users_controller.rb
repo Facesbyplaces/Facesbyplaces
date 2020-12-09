@@ -1,5 +1,4 @@
 class Api::V1::Users::UsersController < ApplicationController
-
     before_action :authenticate_user!
     
     def edit
@@ -15,11 +14,7 @@ class Api::V1::Users::UsersController < ApplicationController
             status: 200}, status: 200
     end
 
-    def update_params
-        params.permit(:first_name, :last_name, :phone_number, :email, :username, :image)
-    end
-
-    def update
+    def updateDetails
 
         if current_user.present?
             @user = User.find(params[:id])
@@ -38,6 +33,14 @@ class Api::V1::Users::UsersController < ApplicationController
 
     end
 
+    def changePassword
+        
+    end
+
+    def updateOtherInfos
+        
+    end
+
     def show
         if current_user.present?
             render json: {
@@ -50,5 +53,10 @@ class Api::V1::Users::UsersController < ApplicationController
                 image: @user.image,
                 status: 200}, status: 200
         end
+    end
+
+    private
+    def update_params
+        params.permit(:first_name, :last_name, :email, :phone_number, :security_question)
     end
 end
