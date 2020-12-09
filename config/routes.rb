@@ -19,16 +19,6 @@ Rails.application.routes.draw do
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
         devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/users/omniauth_callbacks" }
-
-        get 'notifSettingsStatus', to: 'users#notifSettingsStatus'
-
-        put 'newMemorial', to: 'users#newMemorial'
-        put 'newAcitivites', to: 'users#newAcitivites'
-        put 'postLikes', to: 'users#postLikes'
-        put 'postComments', to: 'users#postComments'
-        put 'addFamily', to: 'users#addFamily'
-        put 'addFriends', to: 'users#addFriends'
-        put 'addAdmin', to: 'users#addAdmin'
       end
       devise_scope :user do
         delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
@@ -205,8 +195,8 @@ Rails.application.routes.draw do
         get 'suggested', to: 'search#suggested'
       end
       namespace :followers do
-        post '/', to: 'followers#follow'
-        delete '/', to: 'followers#unfollow'
+        get '/', to: 'followers#followStatus'
+        put '/', to: 'followers#followOrUnfollow'
       end
       namespace :pageadmin do
         post '/', to: 'pageadmin#addAdmin'
@@ -228,9 +218,15 @@ Rails.application.routes.draw do
         put 'unhideOrHideFollowers/:page_type/:page_id', to: 'pageadmin#unhideOrHideFollowers'
       end
       namespace :notifications do
-        # ignore lists of notifications
-        get 'ignore/:ignore_type/:ignore_id', to: 'notifsettings#create'
-        delete 'ignore/:ignore_id', to: 'notifsettings#delete'
+        get 'notifSettingsStatus', to: 'notifsettings#notifSettingsStatus'
+
+        put 'newMemorial', to: 'notifsettings#newMemorial'
+        put 'newActivities', to: 'notifsettings#newActivities'
+        put 'postLikes', to: 'notifsettings#postLikes'
+        put 'postComments', to: 'notifsettings#postComments'
+        put 'addFamily', to: 'notifsettings#addFamily'
+        put 'addFriends', to: 'notifsettings#addFriends'
+        put 'addAdmin', to: 'notifsettings#addAdmin'
 
         # read all notifications
         get 'read', to: 'notifsettings#read'

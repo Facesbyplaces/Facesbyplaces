@@ -1,21 +1,86 @@
 class Api::V1::Notifications::NotifsettingsController < ApplicationController
     before_action :authenticate_user!
-    
-    # Add pages or posts to ignore in notifs
-    def create
-        ignore = Notifsetting.new(ignore_params)
-        ignore.user = user()
 
-        ignore.save 
-
-        render json: {status: "Added to ignore notif list"}
+    def notifSettingsStatus
+        render json: {
+            newMemorial: user().notifsetting.newMemorial,
+            newAcitivites: user().notifsetting.newActivities,
+            postLikes: user().notifsetting.postLikes,
+            postComments: user().notifsetting.postComments,
+            addFamily: user().notifsetting.addFamily,
+            addFriends: user().notifsetting.addFriends,
+            addAdmin: user().notifsetting.addAdmin,
+        }
     end
 
-    # Remove pages or posts from ignore lists
-    def delete
-        ignore = Notifsetting.find(params[:ignore_id])
-        ignore.destroy 
-        render json: {status: "Success"}
+    def newMemorial
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(newMemorial: true)
+        else
+            user().notifsetting.update(newMemorial: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def newActivities
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(newActivities: true)
+        else
+            user().notifsetting.update(newActivities: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def postLikes
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(postLikes: true)
+        else
+            user().notifsetting.update(postLikes: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def postComments
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(postComments: true)
+        else
+            user().notifsetting.update(postComments: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def addFamily
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(addFamily: true)
+        else
+            user().notifsetting.update(addFamily: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def addFriends
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(addFriends: true)
+        else
+            user().notifsetting.update(addFriends: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def addAdmin
+        if params[:setting].downcase == 'true'
+            user().notifsetting.update(addAdmin: true)
+        else
+            user().notifsetting.update(addAdmin: false)
+        end
+
+        render json: {}, status: 200
     end
 
     # Mark Notifications as read

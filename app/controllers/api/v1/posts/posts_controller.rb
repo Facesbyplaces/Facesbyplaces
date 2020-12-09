@@ -52,7 +52,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                     # For families and friends
                     (post.page.relationships).each do |relationship|
                         if !relationship.user == user()
-                            if people.include?("#{user.id}")
+                            if people.include?("#{relationship.user.id}")
                                 Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
                             else
                                 Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
@@ -112,6 +112,35 @@ class Api::V1::Posts::PostsController < ApplicationController
         if Postslike.where(user: user(), post_id: params[:post_id]).first == nil
             like = Postslike.new(post_id: params[:post_id], user_id: user().id)
             if like.save 
+                # Add to notification
+                    post = Post.find(params[:post_id])
+                    people = post.users
+                    # For followers
+                    (post.page.users.uniq - [user()]).each do |user|
+                        # check if the user can get notification from this api
+                        if user.notifsetting.postLikes == true
+                            # check if the user is in the tag people
+                            if people.include?("#{user.id}")
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", url: "posts/#{post.id}", read: false)
+                            else
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            end
+                        end
+                    end
+
+                    # For families and friends
+                    (post.page.relationships).each do |relationship|
+                        if relationship.user != user() && relationship.user.notifsetting.postLikes == true
+                            if people.include?("#{relationship.user.id}")
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", url: "posts/#{post.id}", read: false)
+                            elsif relationship.user == post.user 
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked your post", url: "posts/#{post.id}", read: false)
+                            else
+                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", url: "posts/#{post.id}", read: false)
+                            end
+                        end
+                    end
+
                 render json: {}, status: 200
             else
                 render json: {errors: like.errors}, status: 500
