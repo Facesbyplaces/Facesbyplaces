@@ -36,9 +36,7 @@ class ApplicationController < ActionController::Base
         #     guest_user if with_retry
         # end
 
-        def after_sign_in_path_for(resource)
-            api_v1_mainpages_memorials_url
-        end
+        
 
         
 
@@ -105,6 +103,6 @@ class ApplicationController < ActionController::Base
         end
         
         def set_current_user
-            current_user != nil ? User.current = current_user : ""
+            User.current != nil ? User.current = current_user : ""
         end
 end

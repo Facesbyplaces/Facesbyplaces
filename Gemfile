@@ -57,6 +57,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Newly added
 gem 'devise'
+gem 'omniauth'
 gem 'devise_token_auth'
 gem 'rack-cors'
 gem 'active_model_serializers'
