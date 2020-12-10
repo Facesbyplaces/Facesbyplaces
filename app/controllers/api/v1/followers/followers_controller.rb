@@ -38,6 +38,6 @@ class Api::V1::Followers::FollowersController < ApplicationController
 
     private
     def follower_params
-        params.require(:follower).permit(:page_type, :page_id)
+        params.permit(:page_type, :page_id)
     end
 end
