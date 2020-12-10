@@ -58,6 +58,7 @@ class Api::V1::Users::UsersController < ApplicationController
             birthplace: user.birthplace,
             email: user.email,
             address: user.address
+            phone_number: user.phone_number,
         }
     end
 
@@ -113,6 +114,6 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def updateOtherInfos_params
-        params.permit(:birthdate, :birthplace, :email, :address)
+        params.permit(:birthdate, :birthplace, :email, :address, :phone_number)
     end
 end
