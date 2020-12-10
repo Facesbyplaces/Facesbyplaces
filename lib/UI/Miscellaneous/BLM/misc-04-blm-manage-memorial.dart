@@ -1,10 +1,13 @@
 // import 'package:facesbyplaces/API/BLM/api-21-blm-leave-page.dart';
+import 'package:facesbyplaces/API/BLM/api-21-blm-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
-import 'package:facesbyplaces/UI/Home/BLM/home-12-blm-profile.dart';
+import 'package:facesbyplaces/UI/Home/BLM/View-Memorial/home-12-blm-profile-memorial.dart';
 // import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+
+import 'misc-02-blm-dialog.dart';
 
 // import 'misc-02-blm-dialog.dart';
 
@@ -62,16 +65,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-
-        // Navigator.pushNamed(context, '/home/blm/home-12-blm-profile', arguments: memorialId);
-
-
-        // Navigator.pushNamed(context, '/home/blm/home-12-blm-profile', arguments: memorialId);
-        print('The memorial id is $memorialId');
-
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
-
-        // HomeBLMProfile
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
@@ -124,23 +118,27 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                 textColor: manageButton ? Color(0xffffffff) : Color(0xff4EC9D4),
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
-                  setState(() {
-                    manageButton = !manageButton;
-                  });
+                  
+                  // bool result = await apiBLMLeavePage();
 
-                  // if(!manageButton){
-                  //   bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
-                  // }
+                  // setState(() {
+                  //   manageButton = !manageButton;
+                  // });
+
+                  if(manageButton == true){
+                    bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+
+                    if(confirmResult){
+                      String result = await apiBLMLeavePage(memorialId);
+
+                      if(result != 'Success'){
+                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
+                      }
+                    }
+                  }
 
                   // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
-                  // if(confirmResult){
-                  //   String result = await apiBLMLeavePage(memorialId);
-
-                  //   if(result != 'Success'){
-                  //     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
-                  //   }
-                  // }
 
 
                 },

@@ -1,6 +1,11 @@
+import 'package:facesbyplaces/API/BLM/api-46-show-other-details-status.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/BLM/home-08-blm-memorial.dart';
-import 'package:facesbyplaces/UI/Home/BLM/home-31-blm-show-original-post.dart';
+import 'package:facesbyplaces/UI/Home/BLM/View-Memorial/home-08-blm-view-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-15-blm-change-password.dart';
+import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-16-blm-other-details.dart';
+import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-18-blm-user-update-details.dart';
+import 'package:facesbyplaces/UI/Home/BLM/Show-Post/home-31-blm-show-original-post.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import '../../ui-01-get-started.dart';
@@ -11,12 +16,16 @@ import 'misc-15-blm-dropdown.dart';
 
 
 class MiscBLMUserProfileDetailsDraggable extends StatefulWidget {
+  final int userId;
+  MiscBLMUserProfileDetailsDraggable({this.userId});
 
   @override
-  MiscBLMUserProfileDetailsDraggableState createState() => MiscBLMUserProfileDetailsDraggableState();
+  MiscBLMUserProfileDetailsDraggableState createState() => MiscBLMUserProfileDetailsDraggableState(userId: userId);
 }
 
 class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDetailsDraggable> {
+  final int userId;
+  MiscBLMUserProfileDetailsDraggableState({this.userId});
 
   double height;
   Offset position;
@@ -70,7 +79,8 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, '/home/blm/home-18-blm-user-update-details');
+                // Navigator.pushNamed(context, '/home/blm/home-18-blm-user-update-details');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -114,7 +124,9 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, '/home/blm/home-15-blm-change-password');
+                // Navigator.pushNamed(context, '/home/blm/home-15-blm-change-password');
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -157,8 +169,14 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
             ),
 
             GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, '/home/blm/home-16-blm-other-details');
+              onTap: () async{
+                // Navigator.pushNamed(context, '/home/blm/home-16-blm-other-details');
+
+                context.showLoaderOverlay();
+                APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId);
+                context.hideLoaderOverlay();
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -738,8 +756,6 @@ class MiscBLMPost extends StatelessWidget{
   Widget build(BuildContext context){
     return GestureDetector(
       onTap: (){
-        print('The post is lkjadfoiuzcxv');
-
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId,)));
       },
       child: Container(
@@ -764,7 +780,6 @@ class MiscBLMPost extends StatelessWidget{
                 children: [
                   GestureDetector(
                     onTap: () async{
-                      print('The memorialId is $memorialId');
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: joined,)));
                       
                     },
