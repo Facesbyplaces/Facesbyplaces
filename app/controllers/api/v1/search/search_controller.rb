@@ -33,24 +33,11 @@ class Api::V1::Search::SearchController < ApplicationController
             itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
         end
 
-        memorials = memorials.collect do |memorial|
-            if memorial.searchable_type == 'Blm'
-                memorial = Blm.find(memorial.searchable_id)
-                ActiveModel::SerializableResource.new(
-                    memorial, 
-                    each_serializer: BlmSerializer
-                )
-            else
-                memorial = Memorial.find(memorial.searchable_id)
-                ActiveModel::SerializableResource.new(
-                    memorial, 
-                    each_serializer: MemorialSerializer
-                )
-            end
-        end
-
         render json: {  itemsremaining:  itemsremaining,
-                        memorials: memorials
+                        memorials: ActiveModel::SerializableResource.new(
+                                    memorials, 
+                                    each_serializer: SearchmemorialSerializer
+                                )
                     }
     end
 
