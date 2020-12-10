@@ -24,6 +24,18 @@ class Api::V1::Users::UsersController < ApplicationController
         end
     end
 
+    def getDetails
+        user = User.find(params[:user_id])
+
+        render json: {
+            first_name: user.first_name, 
+            last_name: user.last_name,
+            email: user.email,
+            phone_number: user.phone_number,
+            question: user.question
+        }
+    end
+
     def changePassword
         
     end
@@ -36,6 +48,17 @@ class Api::V1::Users::UsersController < ApplicationController
         else
             render json: {error: "no current user"}, status: 404
         end
+    end
+
+    def getOtherInfos
+        user = User.find(params[:user_id])
+
+        render json: {
+            birthdate: user.birthdate, 
+            birthplace: user.birthplace,
+            email: user.email,
+            address: user.address
+        }
     end
 
     def show

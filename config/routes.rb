@@ -21,7 +21,9 @@ Rails.application.routes.draw do
         devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/users/omniauth_callbacks" }
 
         put 'updateDetails', to: 'users#updateDetails'
+        get 'getDetails', to: 'users#getDetails'
         put 'updateOtherInfos', to: 'users#updateOtherInfos'
+        get 'getOtherInfos', to: 'users#getOtherInfos'
         get 'showDetails', to: 'users#show'
         get 'posts', to: 'users#posts'
         get 'memorials', to: 'users#memorials'
