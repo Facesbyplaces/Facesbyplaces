@@ -219,7 +219,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             itemsremaining: itemsremaining,
             followers: ActiveModel::SerializableResource.new(
                             followers, 
-                            each_serializer: RelationshipSerializer
+                            each_serializer: UserSerializer
                         )
         }
     end
