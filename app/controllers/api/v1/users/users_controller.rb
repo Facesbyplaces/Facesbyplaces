@@ -57,7 +57,7 @@ class Api::V1::Users::UsersController < ApplicationController
             birthdate: user.birthdate, 
             birthplace: user.birthplace,
             email: user.email,
-            address: user.address
+            address: user.address,
             phone_number: user.phone_number,
         }
     end
