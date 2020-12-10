@@ -8,5 +8,5 @@
 users = User.all 
 
 users.each do |user|
-    Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: user.id)
+    user.update(hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false,)
 end

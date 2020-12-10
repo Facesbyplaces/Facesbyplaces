@@ -21,9 +21,9 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                     render json: {}, status: 401
                 end
             when "Memorial"
-                if @user.account_type == 2 && @user.notifsetting.addAdmin == true
+                if @user.account_type == 2
                     # Check if the user if part of the family or friends
-                    if @page.relationships.where(user: @user).first
+                    if @page.relationships.where(user: @user).first && @user.notifsetting.addAdmin == true
                         # Add page admin rights to the user
                         @user.add_role "pageadmin", @page
 

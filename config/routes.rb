@@ -22,10 +22,21 @@ Rails.application.routes.draw do
         devise_for :users, :controllers => { :omniauth_callbacks => "api/v1/users/omniauth_callbacks" }
 
         put 'updateDetails', to: 'users#updateDetails'
+        get 'getDetails', to: 'users#getDetails'
         put 'updateOtherInfos', to: 'users#updateOtherInfos'
+        get 'getOtherInfos', to: 'users#getOtherInfos'
         get 'showDetails', to: 'users#show'
         get 'posts', to: 'users#posts'
         get 'memorials', to: 'users#memorials'
+        
+        get 'otherDetailsStatus', to: 'users#otherDetailsStatus'
+        put 'hideOrUnhideBirthdate', to: 'users#hideOrUnhideBirthdate'
+        put 'hideOrUnhideBirthplace', to: 'users#hideOrUnhideBirthplace'
+        put 'hideOrUnhideEmail', to: 'users#hideOrUnhideEmail'
+        put 'hideOrUnhideAddress', to: 'users#hideOrUnhideAddress'
+        put 'hideOrUnhidePhonenumber', to: 'users#hideOrUnhidePhonenumber'
+
+        post 'changePassword', to: 'users#changePassword'
       end
       devise_scope :user do
         delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session

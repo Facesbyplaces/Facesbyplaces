@@ -24,8 +24,28 @@ class Api::V1::Users::UsersController < ApplicationController
         end
     end
 
+    def getDetails
+        user = User.find(params[:user_id])
+
+        render json: {
+            first_name: user.first_name, 
+            last_name: user.last_name,
+            email: user.email,
+            phone_number: user.phone_number,
+            question: user.question
+        }
+    end
+
     def changePassword
-        
+        user = User.find(user().id)
+        if user.valid_password?(params[:current_password])
+            user.password = user.password_confirmation = params[:new_password]
+            user.save
+
+            render json: {}, status: 200
+        else
+            render json: {error: "Incorrect current password"}, status: 406
+        end
     end
 
     def updateOtherInfos
@@ -36,6 +56,18 @@ class Api::V1::Users::UsersController < ApplicationController
         else
             render json: {error: "no current user"}, status: 404
         end
+    end
+
+    def getOtherInfos
+        user = User.find(params[:user_id])
+
+        render json: {
+            birthdate: user.birthdate, 
+            birthplace: user.birthplace,
+            email: user.email,
+            address: user.address,
+            phone_number: user.phone_number,
+        }
     end
 
     def show
@@ -84,12 +116,76 @@ class Api::V1::Users::UsersController < ApplicationController
         }
     end
 
+    def otherDetailsStatus
+        if user()
+            render json: {
+                hideBirthdate: user().hideBirthdate,
+                hideBirthplace: user().hideBirthplace,
+                hideEmail: user().hideEmail,
+                hideAddress: user().hideAddress,
+                hidePhonenumber: user().hidePhonenumber,
+            }
+        else
+            render json: {error: "no current user"}, status: 404
+        end
+    end
+
+    def hideOrUnhideBirthdate
+        if params[:hide].downcase == 'true'
+            user().update(hideBirthdate: true)
+        else
+            user().update(hideBirthdate: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhideBirthplace
+        if params[:hide].downcase == 'true'
+            user().update(hideBirthplace: true)
+        else
+            user().update(hideBirthplace: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhideEmail
+        if params[:hide].downcase == 'true'
+            user().update(hideEmail: true)
+        else
+            user().update(hideEmail: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhideAddress
+        if params[:hide].downcase == 'true'
+            user().update(hideAddress: true)
+        else
+            user().update(hideAddress: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhidePhonenumber
+        if params[:hide].downcase == 'true'
+            user().update(hidePhonenumber: true)
+        else
+            user().update(hidePhonenumber: false)
+        end
+
+        render json: {}, status: 200
+    end
+
     private
     def updateDetails_params
         params.permit(:first_name, :last_name, :email, :phone_number, :question)
     end
 
     def updateOtherInfos_params
-        params.permit(:birthdate, :birthplace, :email, :address)
+        params.permit(:birthdate, :birthplace, :email, :address, :phone_number)
     end
 end
