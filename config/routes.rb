@@ -34,6 +34,8 @@ Rails.application.routes.draw do
         put 'hideOrUnhideEmail', to: 'users#hideOrUnhideEmail'
         put 'hideOrUnhideAddress', to: 'users#hideOrUnhideAddress'
         put 'hideOrUnhidePhonenumber', to: 'users#hideOrUnhidePhonenumber'
+
+        post 'changePassword', to: 'users#changePassword'
       end
       devise_scope :user do
         delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session

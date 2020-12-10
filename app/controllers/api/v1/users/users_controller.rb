@@ -37,7 +37,15 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def changePassword
-        
+        user = User.find(user().id)
+        if user.valid_password?(params[:current_password])
+            user.password = user.password_confirmation = params[:new_password]
+            user.save
+
+            render json: {}, status: 200
+        else
+            render json: {error: "Incorrect current password"}, status: 406
+        end
     end
 
     def updateOtherInfos
