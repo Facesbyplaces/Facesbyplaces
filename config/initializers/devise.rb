@@ -276,7 +276,7 @@ Devise.setup do |config|
     require 'omniauth-google-oauth2'
     
     config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :facebook_client_id), 
-    Rails.application.credentials.dig(:facebook, :facebook_client_secret), callback_url: "http://localhost:3000/omniauth/facebook/callback", :scope => 'email', :info_fields => 'email'
+    Rails.application.credentials.dig(:facebook, :facebook_client_secret), callback_url: "http://fbp.dev1.koda.ws/omniauth/facebook/callback", :scope => 'email', :info_fields => 'email'
     
     config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :google_client_id), 
     Rails.application.credentials.dig(:google, :google_client_secret), callback_url: "http://localhost:3000/omniauth/google_oauth2/callback", scope: 'userinfo.email,userinfo.profile'
