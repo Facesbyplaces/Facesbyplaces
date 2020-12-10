@@ -1,34 +1,31 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'UI/Home/BLM/home-01-blm-home.dart';
-import 'UI/Home/BLM/home-04-blm-search.dart';
-import 'UI/Home/BLM/home-05-blm-searches.dart';
-import 'UI/Home/BLM/home-07-01-blm-create-memorial.dart';
-import 'UI/Home/BLM/home-07-02-blm-create-memorial.dart';
-import 'UI/Home/BLM/home-07-03-blm-create-memorial.dart';
-import 'UI/Home/BLM/home-08-blm-memorial.dart';
-import 'UI/Home/BLM/home-09-blm-memorial-settings.dart';
-import 'UI/Home/BLM/home-11-blm-page-details.dart';
-import 'UI/Home/BLM/home-12-blm-profile.dart';
-import 'UI/Home/BLM/home-13-blm-user-profile.dart';
-import 'UI/Home/BLM/home-14-blm-user-details.dart';
-import 'UI/Home/BLM/home-15-blm-change-password.dart';
-import 'UI/Home/BLM/home-16-blm-other-details.dart';
-import 'UI/Home/BLM/home-17-blm-report-user.dart';
-import 'UI/Home/BLM/home-18-blm-user-update-details.dart';
-import 'UI/Home/BLM/home-19-blm-create-post.dart';
-import 'UI/Home/BLM/home-19-02-blm-create-post.dart';
-import 'UI/Home/BLM/home-19-03-regular-create-post.dart';
-import 'UI/Home/BLM/home-20-blm-donate.dart';
-import 'UI/Home/BLM/home-21-blm-memorial-page-image.dart';
-import 'UI/Home/BLM/home-22-blm-connection-list.dart';
-import 'UI/Home/BLM/home-24-blm-report.dart';
-import 'UI/Home/BLM/home-26-blm-page-managers.dart';
-// import 'UI/Home/BLM/home-27-blm-page-family.dart';
-// import 'UI/Home/BLM/home-28-blm-page-friends.dart';
-import 'UI/Home/BLM/home-29-blm-search-user.dart';
-import 'UI/Home/BLM/home-30-blm-notification-settings.dart';
-import 'UI/Home/BLM/home-31-blm-show-original-post.dart';
-import 'UI/Home/BLM/home-32-blm-paypal-screen.dart';
+import 'UI/Home/BLM/Main/home-01-blm-home.dart';
+import 'UI/Home/BLM/Search/home-04-blm-search.dart';
+import 'UI/Home/BLM/Search/home-05-blm-searches.dart';
+import 'UI/Home/BLM/Create-Memorial/home-07-01-blm-create-memorial.dart';
+import 'UI/Home/BLM/Create-Memorial/home-07-02-blm-create-memorial.dart';
+import 'UI/Home/BLM/Create-Memorial/home-07-03-blm-create-memorial.dart';
+import 'UI/Home/BLM/View-Memorial/home-08-blm-view-memorial.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-09-blm-memorial-settings.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-11-blm-page-details.dart';
+import 'UI/Home/BLM/View-Memorial/home-12-blm-profile-memorial.dart';
+import 'UI/Home/BLM/View-Memorial/home-13-blm-user-profile.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-14-blm-user-details.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-15-blm-change-password.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-16-blm-other-details.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-18-blm-user-update-details.dart';
+import 'UI/Home/BLM/Create-Post/home-19-01-blm-create-post.dart';
+import 'UI/Home/BLM/Create-Post/home-19-02-blm-create-post-search-location.dart';
+import 'UI/Home/BLM/Create-Post/home-19-03-regular-create-post-search-user.dart';
+import 'UI/Home/BLM/Donate/home-20-blm-donate.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-21-blm-update-memorial-page-image.dart';
+import 'UI/Home/BLM/View-Memorial/home-22-blm-connection-list.dart';
+import 'UI/Home/BLM/Report/home-24-blm-report.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-26-blm-page-managers.dart';
+import 'UI/Home/BLM/Settings-Memorial/home-29-blm-search-user-settings.dart';
+import 'UI/Home/BLM/Settings-Notifications/home-30-blm-notification-settings.dart';
+import 'UI/Home/BLM/Show-Post/home-31-blm-show-original-post.dart';
+import 'UI/Home/BLM/Donate/home-32-blm-paypal-screen.dart';
 import 'UI/Home/Regular/home-01-regular-home.dart';
 import 'UI/Home/Regular/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/home-04-02-regular-create-memorial.dart';
@@ -134,7 +131,7 @@ void main() async{
           '/home/blm/home-14-blm-user-details': (BuildContext context) => HomeBLMUserProfileDetails(),
           '/home/blm/home-15-blm-change-password': (BuildContext context) => HomeBLMUserChangePassword(),
           '/home/blm/home-16-blm-other-details': (BuildContext context) => HomeBLMUserOtherDetails(),
-          '/home/blm/home-17-blm-report-user': (BuildContext context) => HomeBLMReportUser(),
+          // '/home/blm/home-17-blm-report-user': (BuildContext context) => HomeBLMReportUser(),
           '/home/blm/home-18-blm-user-update-details': (BuildContext context) => HomeBLMUserUpdateDetails(),
           '/home/blm/home-19-blm-create-post': (BuildContext context) => HomeBLMCreatePost(),
           '/home/blm/home-19-02-blm-create-post': (BuildContext context) => HomeBLMCreatePostSearch(),
@@ -144,7 +141,7 @@ void main() async{
           '/home/blm/home-21-blm-memorial-page-image': (BuildContext context) => HomeBLMMemorialPageImage(),
           '/home/blm/home-22-blm-connection-list': (BuildContext context) => HomeBLMConnectionList(),
           '/home/blm/home-24-blm-report': (BuildContext context) => HomeBLMReport(),
-          '/home/blm/home-25-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
+          // '/home/blm/home-25-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
           '/home/blm/home-26-blm-page-managers': (BuildContext context) => HomeBLMPageManagers(),
           // '/home/blm/home-27-blm-page-family': (BuildContext context) => HomeBLMPageFamily(),
           // '/home/blm/home-28-blm-page-friends': (BuildContext context) => HomeBLMPageFriends(),

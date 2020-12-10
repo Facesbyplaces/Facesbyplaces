@@ -30,17 +30,19 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
 }
 
 class APIBLMShowProfileInformation{
+  int userId;
   String firstName;
   String lastName;
   dynamic image;
 
-  APIBLMShowProfileInformation({this.firstName, this.lastName, this.image});
+  APIBLMShowProfileInformation({this.userId, this.firstName, this.lastName, this.image});
 
   factory APIBLMShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
     var newValue = parsedJson['user'];
 
     return APIBLMShowProfileInformation(
+      userId: newValue['id'],
       firstName: newValue['first_name'],
       lastName: newValue['last_name'],
       image: newValue['image'],

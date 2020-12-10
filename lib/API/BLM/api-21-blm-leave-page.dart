@@ -9,7 +9,6 @@ Future<String> apiBLMLeavePage(int memorialId) async{
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.delete(
-    // 'http://fbp.dev1.koda.ws/auth/sign_out',
     'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/relationship/leave',
     headers: <String, String>{
       'Content-Type': 'application/json',

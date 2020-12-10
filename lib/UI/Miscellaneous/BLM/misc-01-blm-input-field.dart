@@ -250,6 +250,7 @@ class MiscBLMPhoneNumberTemplate extends StatefulWidget{
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
   MiscBLMPhoneNumberTemplate({
     Key key,
@@ -259,10 +260,11 @@ class MiscBLMPhoneNumberTemplate extends StatefulWidget{
     this.type = TextInputType.text, 
     this.maxLines = 1, 
     this.readOnly = false,
-    this.includeSuffixIcon = false, 
+    this.includeSuffixIcon = false,
+    this.displayText = '', 
   }) : super(key: key);
   
-  MiscBLMPhoneNumberTemplateState createState() => MiscBLMPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon);
+  MiscBLMPhoneNumberTemplateState createState() => MiscBLMPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
 
 class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
@@ -273,11 +275,21 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
-  MiscBLMPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon});
+  MiscBLMPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  // TextEditingController controller = TextEditingController(text: displayText);
+  TextEditingController controller;
   bool valid = false;
+
+  
+
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
+
 
   @override
   Widget build(BuildContext context) {

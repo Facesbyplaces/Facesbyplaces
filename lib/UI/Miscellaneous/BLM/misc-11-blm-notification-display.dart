@@ -6,7 +6,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
   final List<TextSpan> content;
 
   MiscBLMNotificationDisplayTemplate({
-    this.imageIcon = 'assets/icons/graveyard.png',
+    this.imageIcon,
     this.content,
   });
 
@@ -21,9 +21,20 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
           
           SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
+          // CircleAvatar(
+          //   backgroundColor: Color(0xff888888),
+          //   backgroundImage: AssetImage(imageIcon),
+          // ),
+
           CircleAvatar(
             backgroundColor: Color(0xff888888),
-            backgroundImage: AssetImage(imageIcon),
+            backgroundImage: ((){
+              if(imageIcon != null && imageIcon != ''){
+                return NetworkImage(imageIcon);
+              }else{
+                return AssetImage('assets/icons/graveyard.png');
+              }
+            }()),
           ),
 
           Expanded(

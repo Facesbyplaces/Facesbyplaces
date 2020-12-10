@@ -1,9 +1,19 @@
+
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularUserOtherDetails extends StatelessWidget{
+// class HomeRegularUserOtherDetails extends StatelessWidget{
+
+class HomeRegularUserOtherDetails extends StatefulWidget{
+
+  HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState();
+}
+
+class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails>{
+
+  // apiBLMShowAccountDetails
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();

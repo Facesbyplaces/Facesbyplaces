@@ -20,7 +20,7 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab(int page) async
   );
 
   print('The memorial notification code is ${response.statusCode}');
-  // print('The memorial notification body is ${response.body}');
+  print('The memorial notification body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -55,12 +55,13 @@ class APIBLMHomeTabNotificationExtended{
   String createdAt;
   String updatedAt;
   int recipientId;
-  int actorId;
+  // int actorId;
+  APIBLMHomeTabNotificationExtendedActor actor;
   bool read;
   String action;
-  String url;
+  int postId;
 
-  APIBLMHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.read, this.action, this.url});
+  APIBLMHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actor, this.read, this.action, this.postId});
 
   factory APIBLMHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -69,10 +70,27 @@ class APIBLMHomeTabNotificationExtended{
       createdAt: parsedJson['created_at'],
       updatedAt: parsedJson['updated_at'],
       recipientId: parsedJson['recipient_id'],
-      actorId: parsedJson['actor_id'],
+      actor: APIBLMHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
       read: parsedJson['read'],
       action: parsedJson['action'],
-      url: parsedJson['url'],
+      postId: parsedJson['postId'],
+    );
+  }
+}
+
+
+
+class APIBLMHomeTabNotificationExtendedActor{
+  int id;
+  String image;
+
+  APIBLMHomeTabNotificationExtendedActor({this.id, this.image});
+
+  factory APIBLMHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
+
+    return APIBLMHomeTabNotificationExtendedActor(
+      id: parsedJson['id'],
+      image: parsedJson['image'],
     );
   }
 }
