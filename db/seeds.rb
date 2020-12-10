@@ -8,5 +8,5 @@
 users = User.all 
 
 users.each do |user|
-    Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: user.id)
+    user.update(question: "What's the name of your first dog?")
 end

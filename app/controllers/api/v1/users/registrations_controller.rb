@@ -12,6 +12,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         @user = resource
         code = rand(100..999)
         @user.verification_code = code
+        @user.question = "What's the name of your first dog?"
         @user.save!
 
         Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: @user.id)
