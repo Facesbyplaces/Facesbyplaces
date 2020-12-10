@@ -108,6 +108,70 @@ class Api::V1::Users::UsersController < ApplicationController
         }
     end
 
+    def otherDetailsStatus
+        if user()
+            render json: {
+                hideBirthdate: user().hideBirthdate,
+                hideBirthplace: user().hideBirthplace,
+                hideEmail: user().hideEmail,
+                hideAddress: user().hideAddress,
+                hidePhonenumber: user().hidePhonenumber,
+            }
+        else
+            render json: {error: "no current user"}, status: 404
+        end
+    end
+
+    def hideOrUnhideBirthdate
+        if params[:hide].downcase == 'true'
+            user().update(hideBirthdate: true)
+        else
+            user().update(hideBirthdate: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhideBirthplace
+        if params[:hide].downcase == 'true'
+            user().update(hideBirthplace: true)
+        else
+            user().update(hideBirthplace: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhideEmail
+        if params[:hide].downcase == 'true'
+            user().update(hideEmail: true)
+        else
+            user().update(hideEmail: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhideAddress
+        if params[:hide].downcase == 'true'
+            user().update(hideAddress: true)
+        else
+            user().update(hideAddress: false)
+        end
+
+        render json: {}, status: 200
+    end
+
+    def hideOrUnhidePhonenumber
+        if params[:hide].downcase == 'true'
+            user().update(hidePhonenumber: true)
+        else
+            user().update(hidePhonenumber: false)
+        end
+
+        render json: {}, status: 200
+    end
+
     private
     def updateDetails_params
         params.permit(:first_name, :last_name, :email, :phone_number, :question)

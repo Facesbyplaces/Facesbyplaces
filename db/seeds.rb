@@ -8,5 +8,5 @@
 users = User.all 
 
 users.each do |user|
-    user.update(question: "What's the name of your first dog?")
+    user.update(hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false,)
 end
