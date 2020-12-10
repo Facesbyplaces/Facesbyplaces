@@ -148,10 +148,10 @@ Rails.application.routes.draw do
         get '/:id', to: 'posts#show', as: "show_post"
         # Posts of the page
         get '/page/:page_type/:page_id', to: 'posts#pagePosts'
-        # Like Post
-        get '/like/:post_id', to: 'posts#like'
-        # Unlike Post
-        get '/unlike/:post_id', to: 'posts#unlike'
+        # Like Status
+        get '/likePost/status', to: 'posts#likeStatus'
+        # Unlike or Like Post
+        put '/likePost/unlikeOrLike', to: 'posts#unlikeOrLike'
         # List of pages that the user can post in
         get '/listPages/show', to: 'posts#listOfPages'
 
@@ -159,10 +159,10 @@ Rails.application.routes.draw do
         post '/comment', to: 'comments#addComment'
         # Add Reply to Comment
         post '/reply', to: 'comments#addReply'
-        # Like Comment or Reply
-        get '/likeComment/:commentable_type/:commentable_id', to: 'comments#like'
-        # Unlike Comment or Reply
-        get '/unlikeComment/:commentable_type/:commentable_id', to: 'comments#unlike'
+        # Like Status
+        get '/comment/likeCommentStatus', to: 'comments#likeStatus'
+        # Unlike or Like Comment or Reply
+        put '/comment/unlikeOrLikeComment', to: 'comments#likeOrUnlike'
         # Comments index
         get '/index/comments/:id', to: 'comments#commentsIndex'
         # Replies index

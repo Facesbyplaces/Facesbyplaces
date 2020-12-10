@@ -96,6 +96,68 @@ class Api::V1::Posts::PostsController < ApplicationController
                     }
     end
 
+    def likeStatus
+        numberOfLikes = Postslike.where(post_id: params[:post_id]).count 
+
+        if Post.find(params[:post_id])
+            if Postslike.where(user: user(), post_id: params[:post_id]).first
+                render json: {
+                    like: true,
+                    numberOfLikes: numberOfLikes
+                }, status: 200
+            else
+                render json: {
+                    like: false,
+                    numberOfLikes: numberOfLikes
+                }, status: 200
+            end
+        else
+            render json: {}, status: 404
+        end
+    end
+
+    def unlikeOrLike
+        if params[:like].downcase == 'true'
+            like()
+        else
+            unlike()
+        end
+    end
+
+    # pages that the user can manage
+    def listOfPages
+        pagesId = user().roles.joins("INNER JOIN blms ON roles.resource_id = blms.id").select('blms.id')
+
+        pages = pagesId.collect do |page|
+            page = Blm.find(page.id)
+            ActiveModel::SerializableResource.new(
+                page, 
+                each_serializer: BlmSerializer
+            )
+        end
+
+        render json: { pages: pages }
+    end
+
+    private
+    def post_params
+        params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
+    end
+
+    def set_up
+        # find page
+        case params[:post][:page_type]
+        when "Blm"
+            page = Blm.find(params[:post][:page_id])
+        when "Memorial"
+            page = Memorial.find(params[:post][:page_id])
+        end
+
+        if !user().has_role? :pageadmin, page 
+            return render json: {}, status: 401
+        end
+    end
+
     def like
         if Postslike.where(user: user(), post_id: params[:post_id]).first == nil
             like = Postslike.new(post_id: params[:post_id], user_id: user().id)
@@ -148,41 +210,6 @@ class Api::V1::Posts::PostsController < ApplicationController
             end
         else
             render json: {}, status: 404
-        end
-    end
-
-    # pages that the user can manage
-    def listOfPages
-        pagesId = user().roles.joins("INNER JOIN blms ON roles.resource_id = blms.id").select('blms.id')
-
-        pages = pagesId.collect do |page|
-            page = Blm.find(page.id)
-            ActiveModel::SerializableResource.new(
-                page, 
-                each_serializer: BlmSerializer
-            )
-        end
-
-        render json: { pages: pages }
-    end
-
-    private
-
-    def post_params
-        params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude, imagesOrVideos: [])
-    end
-
-    def set_up
-        # find page
-        case params[:post][:page_type]
-        when "Blm"
-            page = Blm.find(params[:post][:page_id])
-        when "Memorial"
-            page = Memorial.find(params[:post][:page_id])
-        end
-
-        if !user().has_role? :pageadmin, page 
-            return render json: {}, status: 401
         end
     end
 end

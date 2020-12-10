@@ -79,39 +79,34 @@ class Api::V1::Posts::CommentsController < ApplicationController
         end
     end
 
-    def like
-        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
-            like = Commentslike.new(comment_like_params)
-            like.user = user()
-            like.save 
-
-            # Notification
-            if like.commentable_type == "Comment"
-                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
-                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", postId: like.commentable.post.id, read: false)
-                end
-            else
-                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
-                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", postId: like.commentable.comment.post.id, read: false)
-                end
-            end
-
-            render json: {}, status: 200
+    def likeStatus
+        numberOfLikes = Commentslike.where(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).count
+        
+        case params[:commentable_type]
+        when 'Comment'
+            comment = Comment.find(params[:commentable_id])
+        when 'Reply'
+            comment = Reply.find(params[:commentable_id])
+        end
+        
+        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first
+            render json: {
+                like: true,
+                numberOfLikes: numberOfLikes
+                }, status: 200
         else
-            render json: {}, status: 409
+            render json: {
+                like: false,
+                numberOfLikes: numberOfLikes
+                }, status: 200
         end
     end
-    
-    def unlike
-        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
-            unlike = Commentslike.where("commentable_type = '#{params[:commentable_type]}' AND commentable_id = #{params[:commentable_id]} AND user_id = #{user().id}").first 
-             if unlike.destroy 
-                render json: {}, status: 200
-             else
-                render json: {}, status: 500
-             end
+
+    def likeOrUnlike
+        if params[:like].downcase == 'true'
+            like()
         else
-            render json: {}, status: 404
+            unlike()
         end
     end
 
@@ -168,6 +163,42 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
     def comment_like_params
         params.permit(:commentable_type, :commentable_id)
+    end
+
+    def like
+        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
+            like = Commentslike.new(comment_like_params)
+            like.user = user()
+            like.save 
+
+            # Notification
+            if like.commentable_type == "Comment"
+                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
+                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", postId: like.commentable.post.id, read: false)
+                end
+            else
+                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
+                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", postId: like.commentable.comment.post.id, read: false)
+                end
+            end
+
+            render json: {}, status: 200
+        else
+            render json: {}, status: 409
+        end
+    end
+    
+    def unlike
+        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
+            unlike = Commentslike.where("commentable_type = '#{params[:commentable_type]}' AND commentable_id = #{params[:commentable_id]} AND user_id = #{user().id}").first 
+             if unlike.destroy 
+                render json: {}, status: 200
+             else
+                render json: {}, status: 500
+             end
+        else
+            render json: {}, status: 404
+        end
     end
     
 end
