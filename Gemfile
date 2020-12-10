@@ -71,6 +71,7 @@ gem 'pg_search', '~> 2.3', '>= 2.3.2'
 
 # Social Share 
 gem 'social-share-button'
+gem 'omniauth'
 
 # Use Omniauth Facebook plugin
 gem 'omniauth-facebook'
