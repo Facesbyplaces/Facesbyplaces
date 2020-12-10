@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '3d475e37e865a9ffe6cd42e1b44ea56a5bb11a6099b206775bc0457b717ba6c432b95ae7919f1b950df7f1a77c5c76583c954d2fe675bc7d9194a5449a1cd58b'
+  # config.secret_key = 'fdc5d4e49b9ccd16a26b9e96a39cc993e4967616e9f005608d46edcf08c5bd1b52169aabab589a603031f24591a3ebf69ba6a338347df067f1b4ad40a404f036'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -24,10 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  
-  #MAILER
   config.mailer_sender = 'facesbyplaces.mailer@gmail.com'
-
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -129,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'ef864065a462ca8e21a435ae45e203754b9b6bbb76de1ddec05aec653f346e4761b85babfa49ba501402cf5a72c5dd5065cacf58fbab8c31c4f9d0cd9a94bde4'
+  # config.pepper = 'e2f67cbadc0a6ba532207f4975c850257e29e4c6feaab1fd32149121d4e374c0fabe09fcac893f76976a6606afc9706819fd6cc43e794c61e35621464a6b4976'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -274,15 +271,16 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  require 'omniauth-facebook'
-  require 'omniauth-google-oauth2'
-  
-  config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :facebook_client_id), 
-  Rails.application.credentials.dig(:facebook, :facebook_client_secret), callback_url: "http://fbp.dev1.koda.ws/omniauth/facebook/callback", scope: 'email'
-  
-  config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :google_client_id), 
-  Rails.application.credentials.dig(:google, :google_client_secret), callback_url: "http://fbp.dev1.koda.ws/omniauth/google_oauth2/callback", scope: 'userinfo.email,userinfo.profile'
-  
+  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+    require 'omniauth-facebook'
+    require 'omniauth-google-oauth2'
+    
+    config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :facebook_client_id), 
+    Rails.application.credentials.dig(:facebook, :facebook_client_secret), callback_url: "http://fbp.dev1.koda.ws/omniauth/facebook/callback", :scope => 'email', :info_fields => 'email'
+    
+    config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :google_client_id), 
+    Rails.application.credentials.dig(:google, :google_client_secret), callback_url: "http://localhost:3000/omniauth/google_oauth2/callback", scope: 'userinfo.email,userinfo.profile'
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

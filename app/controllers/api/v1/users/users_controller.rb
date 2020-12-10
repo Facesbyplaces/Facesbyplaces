@@ -1,5 +1,5 @@
 class Api::V1::Users::UsersController < ApplicationController
-    before_action :authenticate_user!
+    # before_action :authenticate_user!
     
     def edit
         @user = User.find(params[:id])
@@ -71,7 +71,7 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        user = User.find(params[:user_id])
+        user = current_user
         render json: UserSerializer.new( user ).attributes
     end
 
