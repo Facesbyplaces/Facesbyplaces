@@ -1,6 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :page, :body, :location, :latitude, :longitude, :imagesOrVideos, :user, :tag_people, :created_at
+  attributes :id, :page, :body, :location, :latitude, :longitude, :imagesOrVideos, :user, :tag_people, :created_at, :numberOfLikes, :numberOfComments, :likeStatus
 
   def imagesOrVideos
     if object.imagesOrVideos.attached?
@@ -34,6 +34,24 @@ class PostSerializer < ActiveModel::Serializer
       object.user, 
       each_serializer: UserSerializer
     )
+  end
+
+  def likeStatus
+    if object.postslikes.where(user: object.currentUser).first
+      true
+    else
+      false
+    end
+  end
+
+  def numberOfLikes
+    object.postslikes.count
+  end
+
+  def numberOfComments
+    commentsCount = object.comments.count 
+    repliesCount = object.comments.joins(:replies).count 
+    commentsCount + repliesCount
   end
 
   private
