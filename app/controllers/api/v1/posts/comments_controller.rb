@@ -152,6 +152,9 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     }
     end
 
+    def numberOfComments
+    end
+
     private
     def comment_params
         params.permit(:post_id, :body)

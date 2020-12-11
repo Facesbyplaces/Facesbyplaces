@@ -96,26 +96,6 @@ class Api::V1::Posts::PostsController < ApplicationController
                     }
     end
 
-    def likeStatus
-        numberOfLikes = Postslike.where(post_id: params[:post_id]).count 
-
-        if Post.find(params[:post_id])
-            if Postslike.where(user: user(), post_id: params[:post_id]).first
-                render json: {
-                    like: true,
-                    numberOfLikes: numberOfLikes
-                }, status: 200
-            else
-                render json: {
-                    like: false,
-                    numberOfLikes: numberOfLikes
-                }, status: 200
-            end
-        else
-            render json: {}, status: 404
-        end
-    end
-
     def unlikeOrLike
         if params[:like].downcase == 'true'
             like()
