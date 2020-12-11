@@ -221,8 +221,6 @@ ActiveRecord::Schema.define(version: 2020_12_10_060338) do
   end
 
   create_table "shares", force: :cascade do |t|
-    t.string "page_type"
-    t.integer "page_id"
     t.integer "user_id"
     t.integer "post_id"
     t.text "description"
