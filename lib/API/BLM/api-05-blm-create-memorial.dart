@@ -30,11 +30,11 @@ Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
     ]);
 
     if(memorial.latitude != null){
-      MapEntry('blm[longitude]', MultipartFile.fromString(memorial.latitude,),);
+      MapEntry('blm[latitude]', MultipartFile.fromString(memorial.latitude,),);
     }
 
     if(memorial.longitude != null){
-      MapEntry('blm[latitude]', MultipartFile.fromString(memorial.longitude,),);
+      MapEntry('blm[longitude]', MultipartFile.fromString(memorial.longitude,),);
     }
 
     if(memorial.backgroundImage != null){

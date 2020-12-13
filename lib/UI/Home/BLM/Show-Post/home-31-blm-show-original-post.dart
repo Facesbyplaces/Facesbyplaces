@@ -197,7 +197,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                     await FlutterShare.share(
                                       title: 'Share',
                                       text: 'Share the link',
-                                      linkUrl: 'https://flutter.dev/',
+                                      linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
                                       chooserTitle: 'Share link'
                                     );
                                   },

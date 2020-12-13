@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/Regular/api-19-regular-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/Regular/View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:flutter/material.dart';
 import 'misc-08-regular-dialog.dart';
 
@@ -52,10 +53,12 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     return GestureDetector(
       onTap: () async{
 
-        Navigator.pushNamed(context, '/home/regular/home-08-regular-memorial-profile', arguments: memorialId);
+        // Navigator.pushNamed(context, '/home/regular/home-08-regular-memorial-profile', arguments: memorialId);
 
         // Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial', arguments: memorialId);
-        
+
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,

@@ -1,10 +1,13 @@
 import 'package:facesbyplaces/API/BLM/api-46-show-other-details-status.dart';
+import 'package:facesbyplaces/API/BLM/api-62-show-post-likes.dart';
+import 'package:facesbyplaces/API/BLM/api-63-blm-like-or-unlike-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/BLM/View-Memorial/home-08-blm-view-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-15-blm-change-password.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-16-blm-other-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-18-blm-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Show-Post/home-31-blm-show-original-post.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -739,8 +742,7 @@ class MiscBLMDraggableMemorials extends StatelessWidget{
 }
 
 
-class MiscBLMPost extends StatelessWidget{
-
+class MiscBLMPost extends StatefulWidget{
   final List<Widget> contents;
   final int userId;
   final int postId;
@@ -751,6 +753,33 @@ class MiscBLMPost extends StatelessWidget{
   final bool joined;
 
   MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.joined});
+
+  MiscBLMPostState createState() => MiscBLMPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, joined: joined);
+}
+
+class MiscBLMPostState extends State<MiscBLMPost>{
+
+  final List<Widget> contents;
+  final int userId;
+  final int postId;
+  final int memorialId;
+  final dynamic profileImage;
+  final String memorialName;
+  final String timeCreated;
+  final bool joined;
+
+  MiscBLMPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.joined});
+
+  Future postLikes;
+
+  Future<APIBLMShowPostLikes> getPostLikes({int postId}) async{
+    return await apiBLMShowPostLikes(postId: postId);
+  }
+
+  void initState(){
+    super.initState();
+    postLikes = getPostLikes(postId: postId);
+  }
 
   @override
   Widget build(BuildContext context){
@@ -781,7 +810,6 @@ class MiscBLMPost extends StatelessWidget{
                   GestureDetector(
                     onTap: () async{
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: joined,)));
-                      
                     },
                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
                   ),
@@ -835,17 +863,41 @@ class MiscBLMPost extends StatelessWidget{
               height: SizeConfig.blockSizeVertical * 10,
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: (){},
-                    child: Row(
-                      children: [
-                        Image.asset('assets/icons/peace_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                  FutureBuilder<APIBLMShowPostLikes>(
+                    future: postLikes,
+                    builder: (context, likes){
+                      if(likes.hasData){
+                        return GestureDetector(
+                          onTap: () async{
+                            await apiBLMLikeOrUnlikePost();
+                          },
+                          child: Row(
+                            children: [
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                              CircleAvatar(
+                                maxRadius: SizeConfig.blockSizeHorizontal * 3,
+                                backgroundColor: likes.data.isLiked ? Colors.lightBlueAccent : Color(0xffffffff),
+                                backgroundImage: AssetImage('assets/icons/peace_logo.png'),
+                              ),
 
-                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                      ],
-                    ),
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                              Text(likes.data.numberOfLikes.toString(), style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                            ],
+                          ),
+                        );
+                      }else if(likes.hasError){
+                        return Row(
+                          children: [
+                            Container(color: Color(0xff888888), width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                          ],
+                        );
+                      }else{
+                        return Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: SizeConfig.blockSizeHorizontal * 5,),);
+                      }
+                    },
                   ),
 
                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),

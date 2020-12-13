@@ -1,9 +1,9 @@
-import 'package:date_time_picker/date_time_picker.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
   final String labelText;
@@ -13,6 +13,7 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
   MiscRegularInputFieldTemplate({
     Key key,
@@ -22,11 +23,12 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
     this.type = TextInputType.text, 
     this.maxLines = 1, 
     this.readOnly = false,
-    this.includeSuffixIcon = false, 
+    this.includeSuffixIcon = false,
+    this.displayText = '',
   }) : super(key: key);
   
 
-  MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon);
+  MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
 
 
@@ -38,10 +40,16 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
-  MiscRegularInputFieldTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon});
+  MiscRegularInputFieldTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller;
+
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +88,55 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   }
 }
 
+// class MiscBLMPhoneNumberTemplate extends StatefulWidget{
+//   final String labelText;
+//   final TextStyle labelTextStyle;
+//   final bool obscureText;
+//   final TextInputType type;
+//   final int maxLines;
+//   final bool readOnly;
+//   final bool includeSuffixIcon;
+//   final String displayText;
+
+//   MiscBLMPhoneNumberTemplate({
+//     Key key,
+//     this.labelText = '',
+//     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+//     this.obscureText = false, 
+//     this.type = TextInputType.text, 
+//     this.maxLines = 1, 
+//     this.readOnly = false,
+//     this.includeSuffixIcon = false,
+//     this.displayText = '', 
+//   }) : super(key: key);
+  
+//   MiscBLMPhoneNumberTemplateState createState() => MiscBLMPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+// }
+
+// class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
+//   final String labelText;
+//   final TextStyle labelTextStyle;
+//   final bool obscureText;
+//   final TextInputType type;
+//   final int maxLines;
+//   final bool readOnly;
+//   final bool includeSuffixIcon;
+//   final String displayText;
+
+//   MiscBLMPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
+
+//   // TextEditingController controller = TextEditingController(text: displayText);
+//   TextEditingController controller;
+//   bool valid = false;
+
+  
+
+//   void initState(){
+//     super.initState();
+//     controller = TextEditingController(text: displayText);
+//   }
+
+
 class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
@@ -88,6 +145,7 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
   MiscRegularPhoneNumberTemplate({
     Key key,
@@ -97,11 +155,12 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget{
     this.type = TextInputType.text, 
     this.maxLines = 1, 
     this.readOnly = false,
-    this.includeSuffixIcon = false, 
+    this.includeSuffixIcon = false,
+    this.displayText = '',
   }) : super(key: key);
   
 
-  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon);
+  MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
 
 
@@ -113,11 +172,17 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   final int maxLines;
   final bool readOnly;
   final bool includeSuffixIcon;
+  final String displayText;
 
-  MiscRegularPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon});
+  MiscRegularPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller;
   bool valid = false;
+
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -290,19 +355,32 @@ class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularI
 }
 
 
-
 class MiscRegularInputFieldDropDown extends StatefulWidget{
 
-  MiscRegularInputFieldDropDown({Key key}) : super(key: key);
+  final String displayText;
+
+  MiscRegularInputFieldDropDown({
+    Key key,
+    this.displayText = 'Father',
+  }) : super(key: key);
 
   @override
-  MiscRegularInputFieldDropDownState createState() => MiscRegularInputFieldDropDownState();
+  MiscRegularInputFieldDropDownState createState() => MiscRegularInputFieldDropDownState(displayText: displayText);
 }
 
 class MiscRegularInputFieldDropDownState extends State<MiscRegularInputFieldDropDown>{
 
+  final String displayText;
+
+  MiscRegularInputFieldDropDownState({this.displayText});
+
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
+
+  void initState(){
+    super.initState();
+    currentSelection = displayText;
+  }
 
   @override
   Widget build(BuildContext context){
@@ -527,25 +605,33 @@ class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
   }
 }
 
-
-
 class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
+
   final String labelText;
   final DateTimePickerType dateTimePickerType;
+  final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplate({Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date}) : super(key: key);
+  MiscRegularInputFieldDateTimeTemplate({Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
-  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType);
+  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
 
 
 class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
-  final String labelText;
-  final DateTimePickerType dateTimePickerType;
+    final String labelText;
+    final DateTimePickerType dateTimePickerType;
+    final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplateState({this.labelText = '', this.dateTimePickerType});
+    MiscRegularInputFieldDateTimeTemplateState({this.labelText, this.dateTimePickerType, this.displayText});
 
-  TextEditingController controller = TextEditingController();
+    TextEditingController controller = TextEditingController();
+
+    void initState(){
+      super.initState();
+      controller = TextEditingController(text: displayText);
+    }
+
+  
 
   @override
   Widget build(BuildContext context) {

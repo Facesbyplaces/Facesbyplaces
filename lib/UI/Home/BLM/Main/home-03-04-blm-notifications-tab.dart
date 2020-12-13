@@ -30,13 +30,17 @@ class HomeBLMNotificationsTab extends StatefulWidget{
 class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMMainPagesNotifications> notifications = [];
-  int itemRemaining = 1;
-  int page = 1;
-  int count = 0;
+  List<BLMMainPagesNotifications> notifications;
+  int itemRemaining;
+  int page;
+  int count;
 
   void initState(){
     super.initState();
+    notifications = [];
+    itemRemaining = 1;
+    count = 0;
+    page = 1;
     onLoading();
   }
 
@@ -48,8 +52,9 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-
       var newValue = await apiBLMHomeNotificationsTab(page);
+      context.hideLoaderOverlay();
+
       itemRemaining = newValue.itemsRemaining;
       count = newValue.notification.length;
 
@@ -69,9 +74,10 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
-      context.hideLoaderOverlay();
+      
     }else{
       refreshController.loadNoData();
     }
@@ -108,9 +114,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             else{
               body = Text('End of notifications.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
-            return Container(
-              height: 55.0,
-              child: Center(child :body),
+            return Container(height: 55.0, child: Center(child: body),
             );
           },
         ),
@@ -122,8 +126,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           itemBuilder: (c, i) {
             var container = GestureDetector(
               onTap: (){
-                print('The post id is ${notifications[i].postId}');
-                // Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: notifications[i].postId,)));
               },
               child: Container(

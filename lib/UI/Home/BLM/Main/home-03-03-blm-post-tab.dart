@@ -28,12 +28,15 @@ class HomeBLMPostTab extends StatefulWidget{
 class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMMainPagesPosts> posts = [];
-  int itemRemaining = 1;
-  int page = 1;
+  List<BLMMainPagesPosts> posts;
+  int itemRemaining;
+  int page;
 
   void initState(){
     super.initState();
+    itemRemaining = 1;
+    posts = [];
+    page = 1;
     onLoading();
   }
 
