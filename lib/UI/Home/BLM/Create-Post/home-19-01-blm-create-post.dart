@@ -109,25 +109,25 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     newFile = videoFile;
                   }
 
-                    Location.Location location = new Location.Location();
+                  Location.Location location = new Location.Location();
 
-                    bool serviceEnabled = await location.serviceEnabled();
+                  bool serviceEnabled = await location.serviceEnabled();
+                  if (!serviceEnabled) {
+                    serviceEnabled = await location.requestService();
                     if (!serviceEnabled) {
-                      serviceEnabled = await location.requestService();
-                      if (!serviceEnabled) {
-                        return;
-                      }
+                      return;
                     }
+                  }
 
-                    Location.PermissionStatus permissionGranted = await location.hasPermission();
-                    if (permissionGranted == Location.PermissionStatus.denied) {
-                      permissionGranted = await location.requestPermission();
-                      if (permissionGranted != Location.PermissionStatus.granted) {
-                        return;
-                      }
+                  Location.PermissionStatus permissionGranted = await location.hasPermission();
+                  if (permissionGranted == Location.PermissionStatus.denied) {
+                    permissionGranted = await location.requestPermission();
+                    if (permissionGranted != Location.PermissionStatus.granted) {
+                      return;
                     }
+                  }
 
-                    Location.LocationData locationData = await location.getLocation();
+                  Location.LocationData locationData = await location.getLocation();
 
                   APIBLMCreatePost post = APIBLMCreatePost(
                     pageType: 'Blm',

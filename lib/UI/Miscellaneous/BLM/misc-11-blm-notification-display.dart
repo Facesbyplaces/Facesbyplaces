@@ -28,13 +28,14 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
 
           CircleAvatar(
             backgroundColor: Color(0xff888888),
-            backgroundImage: ((){
-              if(imageIcon != null && imageIcon != ''){
-                return NetworkImage(imageIcon);
-              }else{
-                return AssetImage('assets/icons/graveyard.png');
-              }
-            }()),
+            // backgroundImage: ((){
+            //   if(imageIcon != null && imageIcon != ''){
+            //     return NetworkImage(imageIcon.toString());
+            //   }else{
+            //     return AssetImage('assets/icons/graveyard.png');
+            //   }
+            // }()),
+            backgroundImage: AssetImage('assets/icons/graveyard.png'),
           ),
 
           Expanded(

@@ -12,7 +12,7 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost(int postId) async{
   print('The postId is $postId');
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1//posts/$postId',
+    'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
 MERGED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:2:1-37:12
 MERGED from [:flutter_pay] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/flutter_pay/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:google_map_location_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/google_map_location_picker/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
@@ -81,25 +81,25 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/kk38/.gradle/cache
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/bce9999f881bb3993a5b24e08740cbbf/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b1132090a8a1ffc60b82d3452ca52ad/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.installreferrer:installreferrer:1.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a87df434eed0e6eaed82403373684082/jetified-installreferrer-1.0/AndroidManifest.xml:2:1-13:12
-INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
-INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
+INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
+INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
 	package
 		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:2:5-40
 		INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
 		INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:1-69:12
 		INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:1:11-69
 application
-ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:8:5-46:19
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:8:5-67:19
 MERGED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:11:5-35:19
 MERGED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:11:5-35:19
 MERGED from [com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:11:5-27:19
@@ -149,7 +149,7 @@ MERGED from [com.android.installreferrer:installreferrer:1.0] /Users/kk38/.gradl
 	android:name
 		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:9:9-57
 activity#com.example.facesbyplaces.MainActivity
-ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:12:9-40:20
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:12:9-57:20
 	android:launchMode
 		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:14:13-43
 	android:hardwareAccelerated
@@ -184,18 +184,54 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:38:17-76
 	android:name
 		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:38:27-74
-meta-data#flutterEmbedding
-ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:9-45:33
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:facesbyplaces
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:41:13-46:29
+data
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:17-56
+	android:host
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:52:46-80
+	android:scheme
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:23-53
+action#android.intent.action.VIEW
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:17-69
+	android:name
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:17-76
+	android:name
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:17-78
+	android:name
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:27-75
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:29cft-alternate.test-app.link+data:host:29cft.test-app.link+data:scheme:https+data:scheme:https
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:48:12-55:29
+	android:autoVerify
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:48:27-52
+meta-data#io.branch.sdk.BranchKey.test
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:61:9-124
 	android:value
-		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:13-30
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:61:64-121
 	android:name
-		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:13-44
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:61:20-63
+meta-data#io.branch.sdk.TestMode
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:62:9-81
+	android:value
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:62:58-78
+	android:name
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:62:20-57
+meta-data#flutterEmbedding
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:64:9-66:33
+	android:value
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:66:13-30
+	android:name
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:65:13-44
 uses-permission#android.permission.INTERNET
-ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:47:5-66
+ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:68:5-66
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
 	android:name
-		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:47:22-64
+		ADDED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:68:22-64
 uses-sdk
 INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
@@ -392,22 +428,6 @@ ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build
 		ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:22:13-67
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:example
 ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:26:13-33:29
-action#android.intent.action.VIEW
-ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:27:17-69
-	android:name
-		ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:27:25-66
-category#android.intent.category.DEFAULT
-ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:29:17-76
-	android:name
-		ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:29:27-73
-category#android.intent.category.BROWSABLE
-ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:30:17-78
-	android:name
-		ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:30:27-75
-data
-ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:32:17-50
-	android:scheme
-		ADDED from [:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:32:23-47
 activity#com.stripe.android.view.AddPaymentMethodActivity
 ADDED from [com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:12:9-14:57
 	android:theme

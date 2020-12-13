@@ -9,6 +9,11 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The access token is $getAccessToken');
+  print('The UID is $getUID');
+  print('The client is $getClient');
+  print('The page is $page');
+
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
     headers: <String, String>{
@@ -19,7 +24,7 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
     }
   );
   
-  // print('The response status in memorial is ${response.statusCode}');
+  print('The response status in memorial is ${response.statusCode}');
   // print('The response status in memorial is ${response.body}');
 
   if(response.statusCode == 200){
@@ -86,8 +91,9 @@ class APIRegularHomeTabMemorialExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabMemorialExtendedPageCreator pageCreator;
+  bool managed;
 
-  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed});
 
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPage(
@@ -99,7 +105,7 @@ class APIRegularHomeTabMemorialExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      managed: parsedJson['manage'],
     );
   }
 }

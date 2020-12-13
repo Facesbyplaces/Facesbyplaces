@@ -1,8 +1,13 @@
+import 'package:facesbyplaces/API/Regular/api-52-regular-show-other-details-status.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-15-regular-change-password.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-16-regular-other-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-18-regular-user-update-details.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/home-13-regular-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/home-28-regular-show-original-post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-04-regular-dropdown.dart';
@@ -616,12 +621,16 @@ class MiscRegularDraggableMemorials extends StatelessWidget{
 }
 
 class MiscRegularUserProfileDetailsDraggable extends StatefulWidget {
+  final int userId;
+  MiscRegularUserProfileDetailsDraggable({this.userId});
 
   @override
-  MiscRegularUserProfileDetailsDraggableState createState() => MiscRegularUserProfileDetailsDraggableState();
+  MiscRegularUserProfileDetailsDraggableState createState() => MiscRegularUserProfileDetailsDraggableState(userId: userId);
 }
 
 class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserProfileDetailsDraggable> {
+  final int userId;
+  MiscRegularUserProfileDetailsDraggableState({this.userId});
 
   double height;
   Offset position;
@@ -675,7 +684,10 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, 'home/regular/home-16-regular-user-update-details');
+                print('The userId is $userId');
+
+                // Navigator.pushNamed(context, '/home/blm/home-18-blm-user-update-details');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -719,7 +731,9 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
 
             GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, 'home/regular/home-17-regular-change-password');
+                // Navigator.pushNamed(context, '/home/blm/home-15-blm-change-password');
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -762,8 +776,14 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
             ),
 
             GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, 'home/regular/home-18-regular-other-details');
+              onTap: () async{
+                // Navigator.pushNamed(context, '/home/blm/home-16-blm-other-details');
+
+                context.showLoaderOverlay();
+                APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId);
+                context.hideLoaderOverlay();
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -877,5 +897,225 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
         ),
       ),
     );
+
+    // return Material(
+    //   color: Colors.transparent,
+    //   child: Container(
+    //     width: SizeConfig.screenWidth,
+    //     height: SizeConfig.screenHeight,
+    //     padding: EdgeInsets.only(left: 20.0, right: 20.0),
+    //     decoration: BoxDecoration(
+    //       color: Color(0xffffffff),
+    //       borderRadius: BorderRadius.only(topLeft: Radius.circular(100)),
+    //     ),
+    //     child: Column(
+    //       children: [
+
+    //         SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+    //         GestureDetector(
+    //           onTap: (){
+    //             Navigator.pushNamed(context, 'home/regular/home-16-regular-user-update-details');
+    //           },
+    //           child: Container(
+    //             height: SizeConfig.blockSizeVertical * 10,
+    //             color: Color(0xffffffff),
+    //             padding: EdgeInsets.only(left: 20.0, right: 20.0),
+    //             child: Column(
+    //               children: [
+    //                 Expanded(
+    //                   child: Align(
+    //                     alignment: Alignment.bottomLeft,
+    //                     child: Text('Update Details',
+    //                       style: TextStyle(
+    //                         fontSize: SizeConfig.safeBlockHorizontal * 4,
+    //                         fontWeight: FontWeight.bold,
+    //                         color: Color(0xff000000),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+
+    //                 SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+    //                 Expanded(
+    //                   child: Align(
+    //                     alignment: Alignment.topLeft,
+    //                     child: Text('Update your account details',
+    //                       style: TextStyle(
+    //                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+    //                         fontWeight: FontWeight.w300,
+    //                         color: Color(0xffBDC3C7),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+
+    //                 Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+
+    //         GestureDetector(
+    //           onTap: (){
+    //             Navigator.pushNamed(context, 'home/regular/home-17-regular-change-password');
+    //           },
+    //           child: Container(
+    //             height: SizeConfig.blockSizeVertical * 10,
+    //             color: Color(0xffffffff),
+    //             padding: EdgeInsets.only(left: 20.0, right: 20.0),
+    //             child: Column(
+    //               children: [
+    //                 Expanded(
+    //                   child: Align(
+    //                     alignment: Alignment.bottomLeft,
+    //                     child: Text('Password',
+    //                       style: TextStyle(
+    //                         fontSize: SizeConfig.safeBlockHorizontal * 4,
+    //                         fontWeight: FontWeight.bold,
+    //                         color: Color(0xff000000),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+
+    //                 SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+    //                 Expanded(
+    //                   child: Align(
+    //                     alignment: Alignment.topLeft,
+    //                     child: Text('Change your login password',
+    //                       style: TextStyle(
+    //                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+    //                         fontWeight: FontWeight.w300,
+    //                         color: Color(0xffBDC3C7),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+
+    //                 Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+
+    //         GestureDetector(
+    //           onTap: (){
+    //             Navigator.pushNamed(context, 'home/regular/home-18-regular-other-details');
+    //           },
+    //           child: Container(
+    //             height: SizeConfig.blockSizeVertical * 10,
+    //             color: Color(0xffffffff),
+    //             padding: EdgeInsets.only(left: 20.0, right: 20.0),
+    //             child: Column(
+    //               children: [
+    //                 Expanded(
+    //                   child: Align(
+    //                     alignment: Alignment.bottomLeft,
+    //                     child: Text('Other Info',
+    //                       style: TextStyle(
+    //                         fontSize: SizeConfig.safeBlockHorizontal * 4,
+    //                         fontWeight: FontWeight.bold,
+    //                         color: Color(0xff000000),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+
+    //                 SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+    //                 Expanded(
+    //                   child: Align(
+    //                     alignment: Alignment.topLeft,
+    //                     child: Text('Optional informations you can share',
+    //                       style: TextStyle(
+    //                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+    //                         fontWeight: FontWeight.w300,
+    //                         color: Color(0xffBDC3C7),
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ),
+
+    //                 Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+    //               ],
+    //             ),
+    //           ),
+    //         ),
+
+    //         Container(
+    //           height: SizeConfig.blockSizeVertical * 10,
+    //           color: Color(0xffffffff),
+    //           padding: EdgeInsets.only(left: 20.0, right: 20.0),
+    //           child: Column(
+    //             children: [
+    //               Expanded(
+    //                 child: Align(
+    //                   alignment: Alignment.bottomLeft,
+    //                   child: Text('Privacy Settings',
+    //                     style: TextStyle(
+    //                       fontSize: SizeConfig.safeBlockHorizontal * 4,
+    //                       fontWeight: FontWeight.bold,
+    //                       color: Color(0xff000000),
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ),
+
+    //               SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+    //               Expanded(
+    //                 child: Align(
+    //                   alignment: Alignment.topLeft,
+    //                   child: Text('Control what others see',
+    //                     style: TextStyle(
+    //                       fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+    //                       fontWeight: FontWeight.w300,
+    //                       color: Color(0xffBDC3C7),
+    //                     ),
+    //                   ),
+    //                 ),
+    //               ),
+
+    //               Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),),
+    //             ]
+    //           ),
+    //         ),
+
+    //         Expanded(child: Container(),),
+
+    //         MiscRegularButtonTemplate(
+    //           buttonText: 'Logout',
+    //           buttonTextStyle: TextStyle(
+    //             fontSize: SizeConfig.safeBlockHorizontal * 5, 
+    //             fontWeight: FontWeight.bold, 
+    //             color: Color(0xffffffff),
+    //           ), 
+    //           onPressed: () async{
+
+    //             bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+
+    //             if(logoutResult){
+    //               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+    //             }
+
+    //           }, 
+    //           width: SizeConfig.screenWidth / 2, 
+    //           height: SizeConfig.blockSizeVertical * 7, 
+    //           buttonColor: Color(0xff04ECFF),
+    //         ),
+
+    //         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+            
+    //         Text('V.1.1.0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
+
+    //         Expanded(child: Container(),),
+
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }

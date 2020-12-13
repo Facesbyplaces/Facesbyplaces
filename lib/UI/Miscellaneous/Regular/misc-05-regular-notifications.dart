@@ -6,7 +6,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final List<TextSpan> content;
 
   MiscRegularNotificationDisplayTemplate({
-    this.imageIcon = 'assets/icons/profile2.png',
+    this.imageIcon = 'assets/icons/graveyard.png',
     this.content,
   });
 
@@ -18,9 +18,13 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
       child: Row(
         children: [
-          Expanded(child: CircleAvatar(radius: SizeConfig.blockSizeVertical * 3, child: Container(height: SizeConfig.blockSizeVertical * 17, child: Image.asset(imageIcon, fit: BoxFit.cover,),),),),
+          SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+          CircleAvatar(backgroundImage: AssetImage(imageIcon), backgroundColor: Color(0xff888888),),
+
+          SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
+
           Expanded(
-            flex: 4,
             child: Container(
               alignment: Alignment.centerLeft,
               child: RichText(
@@ -28,12 +32,9 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
                   children: content,
                 ),
               ),
-              decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Color(0xff000000), width: .5))
-              ),
             ),
           ),
-          Expanded(child: Container(),),
+          
         ],
       ),
     );

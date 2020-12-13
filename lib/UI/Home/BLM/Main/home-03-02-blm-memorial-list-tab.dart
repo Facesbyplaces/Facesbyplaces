@@ -31,14 +31,14 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
   void initState(){
     super.initState();
-    onLoading1();
-    onLoading2();
     memorialsFamily = [];
     memorialsFriends = [];
     blmFamilyItemsRemaining = 1;
     blmFriendsItemsRemaining = 1;
     page1 = 1;
     page2 = 1;
+    onLoading1();
+    onLoading2();
   }
 
   void onRefresh() async{

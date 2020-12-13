@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.facesbyplaces"
+3    package="com.app.facesbyplaces"
 4    android:versionCode="4001"
 5    android:versionName="1.0.0" >
 6
@@ -11,8 +11,8 @@
 9-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:47:5-66
-11-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:47:22-64
+11-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:68:5-66
+11-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:68:22-64
 12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 12-->[:location] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/location/intermediates/library_manifest/release/AndroidManifest.xml:7:5-81
 12-->[:location] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/location/intermediates/library_manifest/release/AndroidManifest.xml:7:22-78
@@ -53,7 +53,7 @@
 30         FlutterApplication and put your custom class here.
 31    -->
 32    <application
-32-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:8:5-46:19
+32-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:8:5-67:19
 33        android:name="io.flutter.app.FlutterApplication"
 33-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:9:9-57
 34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -65,7 +65,7 @@
 37        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
 37-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:11:18-74
 38        <activity
-38-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:12:9-40:20
+38-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:12:9-57:20
 39            android:name="com.example.facesbyplaces.MainActivity"
 39-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:13:13-41
 40            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -115,164 +115,222 @@
 69-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:38:17-76
 69-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:38:27-74
 70            </intent-filter>
-71        </activity>
-72        <!--
-73             Don't delete the meta-data below.
-74             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-75        -->
-76        <meta-data
-76-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:9-45:33
-77            android:name="flutterEmbedding"
-77-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:13-44
-78            android:value="2" />
-78-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:13-30
-79        <meta-data
-79-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:12:9-14:36
-80            android:name="com.google.android.gms.wallet.api.enabled"
-80-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:13:13-69
-81            android:value="true" />
-81-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:14:13-33
-82
-83        <activity
-83-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:16:9-20:75
-84            android:name="com.gettipsi.stripe.OpenBrowserActivity"
-84-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:17:13-67
-85            android:exported="false"
-85-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:18:13-37
-86            android:launchMode="singleTask"
-86-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:19:13-44
-87            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-87-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:20:13-72
-88        <activity
-88-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:21:9-34:20
-89            android:name="com.gettipsi.stripe.RedirectUriReceiver"
-89-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:22:13-67
-90            android:exported="true"
-90-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:23:13-36
-91            android:launchMode="singleTask"
-91-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:24:13-44
-92            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
-92-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:25:13-83
-93            <intent-filter>
-93-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:26:13-33:29
-94                <action android:name="android.intent.action.VIEW" />
-94-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:27:17-69
-94-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:27:25-66
-95
-96                <category android:name="android.intent.category.DEFAULT" />
-96-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:29:17-76
-96-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:29:27-73
-97                <category android:name="android.intent.category.BROWSABLE" />
-97-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:30:17-78
-97-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:30:27-75
+71            <intent-filter>
+71-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:41:13-46:29
+72                <data android:scheme="facesbyplaces" />
+72-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:17-56
+72-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:23-53
+73
+74                <action android:name="android.intent.action.VIEW" />
+74-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:17-69
+74-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:25-66
+75
+76                <category android:name="android.intent.category.DEFAULT" />
+76-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:17-76
+76-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:27-73
+77                <category android:name="android.intent.category.BROWSABLE" />
+77-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:17-78
+77-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:27-75
+78            </intent-filter>
+79            <intent-filter android:autoVerify="true" >
+79-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:48:12-55:29
+79-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:48:27-52
+80                <action android:name="android.intent.action.VIEW" />
+80-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:17-69
+80-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:25-66
+81
+82                <category android:name="android.intent.category.DEFAULT" />
+82-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:17-76
+82-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:27-73
+83                <category android:name="android.intent.category.BROWSABLE" />
+83-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:17-78
+83-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:27-75
+84
+85                <data
+85-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:17-56
+86                    android:host="29cft.test-app.link"
+86-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:52:46-80
+87                    android:scheme="https" />
+87-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:23-53
+88                <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website. -->
+89                <data
+89-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:17-56
+90                    android:host="29cft-alternate.test-app.link"
+90-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:52:46-80
+91                    android:scheme="https" />
+91-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:23-53
+92            </intent-filter>
+93        </activity>
+94        <!--
+95             Don't delete the meta-data below.
+96             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+97        -->
 98
-99                <data android:scheme="example" />
-99-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:32:17-50
-99-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:32:23-47
-100            </intent-filter>
-101        </activity>
-102        <activity
-102-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:12:9-14:57
-103            android:name="com.stripe.android.view.AddPaymentMethodActivity"
-103-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:13:13-76
-104            android:theme="@style/StripeDefaultTheme" />
-104-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:14:13-54
-105        <activity
-105-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:15:9-17:57
-106            android:name="com.stripe.android.view.PaymentMethodsActivity"
-106-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:16:13-74
-107            android:theme="@style/StripeDefaultTheme" />
-107-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:17:13-54
-108        <activity
-108-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:18:9-20:57
-109            android:name="com.stripe.android.view.PaymentFlowActivity"
-109-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:19:13-71
-110            android:theme="@style/StripeDefaultTheme" />
-110-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:20:13-54
-111        <activity
-111-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:21:9-23:57
-112            android:name="com.stripe.android.view.PaymentAuthWebViewActivity"
-112-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:22:13-78
-113            android:theme="@style/StripeDefaultTheme" />
-113-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:23:13-54
-114        <activity
-114-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:24:9-26:57
-115            android:name="com.stripe.android.view.PaymentRelayActivity"
-115-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:25:13-72
-116            android:theme="@style/StripeDefaultTheme" />
-116-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:26:13-54
+99        <meta-data
+99-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:61:9-124
+100            android:name="io.branch.sdk.BranchKey.test"
+100-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:61:20-63
+101            android:value="key_test_oc2aadbr5zOYZVw6jxaozcehwubdz1gZ" />
+101-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:61:64-121
+102        <meta-data
+102-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:62:9-81
+103            android:name="io.branch.sdk.TestMode"
+103-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:62:20-57
+104            android:value="true" />
+104-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:62:58-78
+105        <meta-data
+105-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:64:9-66:33
+106            android:name="flutterEmbedding"
+106-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:65:13-44
+107            android:value="2" />
+107-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:66:13-30
+108        <meta-data
+108-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:12:9-14:36
+109            android:name="com.google.android.gms.wallet.api.enabled"
+109-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:13:13-69
+110            android:value="true" />
+110-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:14:13-33
+111
+112        <activity
+112-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:16:9-20:75
+113            android:name="com.gettipsi.stripe.OpenBrowserActivity"
+113-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:17:13-67
+114            android:exported="false"
+114-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:18:13-37
+115            android:launchMode="singleTask"
+115-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:19:13-44
+116            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+116-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:20:13-72
 117        <activity
-117-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:12:9-14:54
-118            android:name="com.stripe.android.stripe3ds2.views.ChallengeActivity"
-118-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:13:13-81
-119            android:theme="@style/Stripe3DS2Theme" />
-119-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:14:13-51
-120        <activity
-120-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:15:9-17:54
-121            android:name="com.stripe.android.stripe3ds2.views.ChallengeProgressDialogActivity"
-121-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:16:13-95
-122            android:theme="@style/Stripe3DS2Theme" />
-122-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:17:13-51
-123
-124        <provider
-124-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:9-19:20
-125            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-125-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:12:13-82
-126            android:authorities="com.example.facesbyplaces.flutter.image_provider"
-126-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-74
-127            android:exported="false"
-127-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:13-37
-128            android:grantUriPermissions="true" >
-128-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:13-47
-129            <meta-data
-129-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:16:13-18:75
-130                android:name="android.support.FILE_PROVIDER_PATHS"
-130-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:17:17-67
-131                android:resource="@xml/flutter_image_picker_file_paths" />
-131-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:18:17-72
-132        </provider>
-133
+117-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:21:9-34:20
+118            android:name="com.gettipsi.stripe.RedirectUriReceiver"
+118-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:22:13-67
+119            android:exported="true"
+119-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:23:13-36
+120            android:launchMode="singleTask"
+120-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:24:13-44
+121            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+121-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:25:13-83
+122            <intent-filter>
+122-->[:stripe_payment] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/stripe_payment/intermediates/library_manifest/release/AndroidManifest.xml:26:13-33:29
+123                <action android:name="android.intent.action.VIEW" />
+123-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:17-69
+123-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:43:25-66
+124
+125                <category android:name="android.intent.category.DEFAULT" />
+125-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:17-76
+125-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:44:27-73
+126                <category android:name="android.intent.category.BROWSABLE" />
+126-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:17-78
+126-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:45:27-75
+127
+128                <data android:scheme="example" />
+128-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:17-56
+128-->/Users/kk38/Desktop/Files - FBP/facesbyplaces/android/app/src/main/AndroidManifest.xml:42:23-53
+129            </intent-filter>
+130        </activity>
+131        <activity
+131-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:12:9-14:57
+132            android:name="com.stripe.android.view.AddPaymentMethodActivity"
+132-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:13:13-76
+133            android:theme="@style/StripeDefaultTheme" />
+133-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:14:13-54
 134        <activity
-134-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
-135            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-135-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
-136            android:exported="false"
-136-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
-137            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- Needs to be explicitly declared on P+ -->
-137-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
-138        <uses-library
-138-->[com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
-139            android:name="org.apache.http.legacy"
-139-->[com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
-140            android:required="false" />
-140-->[com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
-141
-142        <activity
-142-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-143            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-143-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
-144            android:exported="false"
-144-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-145            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-145-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-146
-147        <provider
-147-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:12:9-16:39
-148            android:name="com.google.firebase.provider.FirebaseInitProvider"
-148-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:13:13-77
-149            android:authorities="com.example.facesbyplaces.firebaseinitprovider"
-149-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:14:13-72
-150            android:exported="false"
-150-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:15:13-37
-151            android:initOrder="100" />
-151-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:16:13-36
+134-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:15:9-17:57
+135            android:name="com.stripe.android.view.PaymentMethodsActivity"
+135-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:16:13-74
+136            android:theme="@style/StripeDefaultTheme" />
+136-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:17:13-54
+137        <activity
+137-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:18:9-20:57
+138            android:name="com.stripe.android.view.PaymentFlowActivity"
+138-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:19:13-71
+139            android:theme="@style/StripeDefaultTheme" />
+139-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:20:13-54
+140        <activity
+140-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:21:9-23:57
+141            android:name="com.stripe.android.view.PaymentAuthWebViewActivity"
+141-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:22:13-78
+142            android:theme="@style/StripeDefaultTheme" />
+142-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:23:13-54
+143        <activity
+143-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:24:9-26:57
+144            android:name="com.stripe.android.view.PaymentRelayActivity"
+144-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:25:13-72
+145            android:theme="@style/StripeDefaultTheme" />
+145-->[com.stripe:stripe-android:10.4.6] /Users/kk38/.gradle/caches/transforms-2/files-2.1/1f9e0a6c5dfa4f3e0d5d6cd3b5b67ec1/jetified-stripe-android-10.4.6/AndroidManifest.xml:26:13-54
+146        <activity
+146-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:12:9-14:54
+147            android:name="com.stripe.android.stripe3ds2.views.ChallengeActivity"
+147-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:13:13-81
+148            android:theme="@style/Stripe3DS2Theme" />
+148-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:14:13-51
+149        <activity
+149-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:15:9-17:54
+150            android:name="com.stripe.android.stripe3ds2.views.ChallengeProgressDialogActivity"
+150-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:16:13-95
+151            android:theme="@style/Stripe3DS2Theme" />
+151-->[com.stripe:stripe-3ds2-android:1.2.2] /Users/kk38/.gradle/caches/transforms-2/files-2.1/37c31c7f0be7ec64a73b47c077f2ca41/jetified-stripe-3ds2-android-1.2.2/AndroidManifest.xml:17:13-51
 152
-153        <meta-data
-153-->[com.google.android.gms:play-services-basement:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/89ad6f384aa719a10e317edbca2aa6db/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-154            android:name="com.google.android.gms.version"
-154-->[com.google.android.gms:play-services-basement:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/89ad6f384aa719a10e317edbca2aa6db/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-155            android:value="@integer/google_play_services_version" />
-155-->[com.google.android.gms:play-services-basement:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/89ad6f384aa719a10e317edbca2aa6db/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
-156    </application>
-157
-158</manifest>
+153        <provider
+153-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:11:9-19:20
+154            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+154-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:12:13-82
+155            android:authorities="com.app.facesbyplaces.flutter.image_provider"
+155-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:13:13-74
+156            android:exported="false"
+156-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:14:13-37
+157            android:grantUriPermissions="true" >
+157-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:15:13-47
+158            <meta-data
+158-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:16:13-18:75
+159                android:name="android.support.FILE_PROVIDER_PATHS"
+159-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:17:17-67
+160                android:resource="@xml/flutter_image_picker_file_paths" />
+160-->[:image_picker] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:18:17-72
+161        </provider>
+162
+163        <activity
+163-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+164            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+164-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
+165            android:exported="false"
+165-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+166            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- Needs to be explicitly declared on P+ -->
+166-->[:url_launcher] /Users/kk38/Desktop/Files - FBP/facesbyplaces/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+167        <uses-library
+167-->[com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:33:9-35:40
+168            android:name="org.apache.http.legacy"
+168-->[com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:34:13-50
+169            android:required="false" />
+169-->[com.google.android.gms:play-services-maps:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/6b9b7fc1ad481537ed0a66d62976ec46/play-services-maps-17.0.0/AndroidManifest.xml:35:13-37
+170
+171        <activity
+171-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+172            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+172-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+173            android:exported="false"
+173-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+174            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+174-->[com.google.android.gms:play-services-base:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/5ac9ad6f13ea0190a3570ea7a43d9f59/play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+175
+176        <provider
+176-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:12:9-16:39
+177            android:name="com.google.firebase.provider.FirebaseInitProvider"
+177-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:13:13-77
+178            android:authorities="com.app.facesbyplaces.firebaseinitprovider"
+178-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:14:13-72
+179            android:exported="false"
+179-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:15:13-37
+180            android:initOrder="100" />
+180-->[com.google.firebase:firebase-common:18.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/a7451b3566e7138ca8b3537a7d8d8d4d/firebase-common-18.0.0/AndroidManifest.xml:16:13-36
+181
+182        <meta-data
+182-->[com.google.android.gms:play-services-basement:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/89ad6f384aa719a10e317edbca2aa6db/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+183            android:name="com.google.android.gms.version"
+183-->[com.google.android.gms:play-services-basement:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/89ad6f384aa719a10e317edbca2aa6db/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+184            android:value="@integer/google_play_services_version" />
+184-->[com.google.android.gms:play-services-basement:17.0.0] /Users/kk38/.gradle/caches/transforms-2/files-2.1/89ad6f384aa719a10e317edbca2aa6db/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+185    </application>
+186
+187</manifest>

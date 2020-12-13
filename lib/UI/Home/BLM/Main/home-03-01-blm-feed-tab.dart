@@ -19,6 +19,8 @@ class BLMMainPagesFeeds{
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
   bool joined;
+  bool postLikes;
+
 
   BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.joined});
 }
@@ -36,13 +38,24 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   int page;
   int count;
 
+  // Future postLikes;
+
+  // Future<APIBLMShowPostLikes> getPostLikes({int postId}) async{
+  //   return await apiBLMShowPostLikes(postId: postId);
+  // }
+
+  // void initState(){
+  //   super.initState();
+  //   postLikes = getPostLikes(postId: postId);
+  // }
+
   void initState(){
     super.initState();
-    onLoading();
     page = 1;
     itemRemaining = 1;
     count = 0;
     feeds = [];
+    onLoading();
   }
 
   void onRefresh() async{
@@ -54,10 +67,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMHomeFeedTab(page);
+      context.hideLoaderOverlay();
       itemRemaining = newValue.itemsRemaining;
       count = newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+
         feeds.add(BLMMainPagesFeeds(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
@@ -68,6 +83,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           profileImage: newValue.familyMemorialList[i].page.profileImage,
           imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
           joined: newValue.familyMemorialList[i].page.follower,
+
           ),    
         );
       }
@@ -77,7 +93,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       page++;
       
       refreshController.loadComplete();
-      context.hideLoaderOverlay();
     }else{
       refreshController.loadNoData();
     }

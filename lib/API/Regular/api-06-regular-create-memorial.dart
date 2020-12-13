@@ -3,14 +3,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 
 Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
-  // bool result = false;
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('heheheh');
+  print('the memorial name is ${memorial.memorialName}');
+  print('the memorial birthplace is ${memorial.birthPlace}');
+  print('the memorial dob is ${memorial.dob}');
+  print('the memorial rip is ${memorial.rip}');
+  print('the memorial country is ${memorial.country}');
+  print('the memorial description is ${memorial.description}');
+  print('the memorial relationship is ${memorial.relationship}');
+  print('the memorial longitu is ${memorial.longitude}');
+  print('the memorial name is ${memorial.latitude}');
 
   try{
     var dioRequest = dio.Dio();
@@ -22,49 +29,45 @@ Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
       MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.birthPlace,),),
       MapEntry('memorial[dob]', MultipartFile.fromString(memorial.dob,),),
       MapEntry('memorial[rip]', MultipartFile.fromString(memorial.rip,),),
+      MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.cemetery)),
       MapEntry('memorial[country]', MultipartFile.fromString(memorial.country,),),
       MapEntry('memorial[description]', MultipartFile.fromString(memorial.description,),),
       MapEntry('relationship', MultipartFile.fromString(memorial.relationship,),),
     ]);
 
     if(memorial.latitude != null){
-      MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.latitude,),);
+      MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.latitude,),);
     }
 
     if(memorial.longitude != null){
-      MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.longitude,),);
+      MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.longitude,),);
     }
 
     if(memorial.backgroundImage != null){
       var file = await dio.MultipartFile.fromFile(memorial.backgroundImage.path, filename: memorial.backgroundImage.path);
       formData.files.add(MapEntry('memorial[backgroundImage]', file));
-      print('finish backgroundImage');
     }
     
     if(memorial.profileImage != null){
-      print('profile image');
-      print('The background image is ${memorial.profileImage}');
       var file = await dio.MultipartFile.fromFile(memorial.profileImage.path, filename: memorial.profileImage.path);
       formData.files.add(MapEntry('memorial[profileImage]', file));
-      print('finish profileImage');
     }
     
     if(memorial.imagesOrVideos != null){
-      print('images or videos');
-      print('the length is');
 
       for(int i = 0; i < memorial.imagesOrVideos.length - 1; i++){
         if(memorial.imagesOrVideos[i].path != null){
           var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos[i].path, filename: memorial.imagesOrVideos[i].path);
           formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
-          print('The value images or videos is ${memorial.imagesOrVideos[i].path}');
         }
-        print('heheheh');
       }
 
     }
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorial', data: formData,
+    // 'http://fbp.dev1.koda.ws/api/v1/pages/blm'
+
+
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
       options: Options(
         headers: <String, dynamic>{
           'access-token': getAccessToken,
@@ -73,6 +76,8 @@ Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
         }
       ),  
     );
+
+    print('The response is ${response.statusCode}');
 
     if(response.statusCode == 200){
       var value = response.data;
@@ -83,7 +88,6 @@ Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
     }
   }catch(e){
     print('The error is $e');
-    // result = false;
     result = 0;
   }
 
@@ -96,6 +100,7 @@ class APIRegularCreateMemorial{
   String birthPlace;
   String dob;
   String rip;
+  String cemetery;
   String country;
   String relationship;
   dynamic backgroundImage;
@@ -110,6 +115,7 @@ class APIRegularCreateMemorial{
     this.birthPlace, 
     this.dob, 
     this.rip, 
+    this.cemetery,
     this.country, 
     this.relationship, 
     this.backgroundImage, 
@@ -119,3 +125,5 @@ class APIRegularCreateMemorial{
     this.longitude,
   });
 }
+
+

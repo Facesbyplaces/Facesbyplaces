@@ -55,7 +55,6 @@ class APIBLMHomeTabNotificationExtended{
   String createdAt;
   String updatedAt;
   int recipientId;
-  // int actorId;
   APIBLMHomeTabNotificationExtendedActor actor;
   bool read;
   String action;

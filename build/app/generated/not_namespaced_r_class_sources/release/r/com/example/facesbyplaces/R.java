@@ -6567,39 +6567,39 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ActionBar_background com.example.facesbyplaces:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_backgroundSplit com.example.facesbyplaces:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_backgroundStacked com.example.facesbyplaces:backgroundStacked}</code></td><td>Specifies a background drawable for a second stacked row of the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetEnd com.example.facesbyplaces:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetEndWithActions com.example.facesbyplaces:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
+     * <tr><td><code>{@link #ActionBar_background com.app.facesbyplaces:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_backgroundSplit com.app.facesbyplaces:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_backgroundStacked com.app.facesbyplaces:backgroundStacked}</code></td><td>Specifies a background drawable for a second stacked row of the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetEnd com.app.facesbyplaces:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetEndWithActions com.app.facesbyplaces:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
      * are present.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetLeft com.example.facesbyplaces:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetRight com.example.facesbyplaces:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetStart com.example.facesbyplaces:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_contentInsetStartWithNavigation com.example.facesbyplaces:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
+     * <tr><td><code>{@link #ActionBar_contentInsetLeft com.app.facesbyplaces:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetRight com.app.facesbyplaces:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetStart com.app.facesbyplaces:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_contentInsetStartWithNavigation com.app.facesbyplaces:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
      * is present, such as the Up button.</td></tr>
-     * <tr><td><code>{@link #ActionBar_customNavigationLayout com.example.facesbyplaces:customNavigationLayout}</code></td><td>Specifies a layout for custom navigation.</td></tr>
-     * <tr><td><code>{@link #ActionBar_displayOptions com.example.facesbyplaces:displayOptions}</code></td><td>Options affecting how the action bar is displayed.</td></tr>
-     * <tr><td><code>{@link #ActionBar_divider com.example.facesbyplaces:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
-     * <tr><td><code>{@link #ActionBar_elevation com.example.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #ActionBar_height com.example.facesbyplaces:height}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionBar_hideOnContentScroll com.example.facesbyplaces:hideOnContentScroll}</code></td><td>Set true to hide the action bar on a vertical nested scroll of content.</td></tr>
-     * <tr><td><code>{@link #ActionBar_homeAsUpIndicator com.example.facesbyplaces:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
-     * <tr><td><code>{@link #ActionBar_homeLayout com.example.facesbyplaces:homeLayout}</code></td><td>Specifies a layout to use for the "home" section of the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_icon com.example.facesbyplaces:icon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionBar_indeterminateProgressStyle com.example.facesbyplaces:indeterminateProgressStyle}</code></td><td>Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
-     * <tr><td><code>{@link #ActionBar_itemPadding com.example.facesbyplaces:itemPadding}</code></td><td>Specifies padding that should be applied to the left and right sides of
+     * <tr><td><code>{@link #ActionBar_customNavigationLayout com.app.facesbyplaces:customNavigationLayout}</code></td><td>Specifies a layout for custom navigation.</td></tr>
+     * <tr><td><code>{@link #ActionBar_displayOptions com.app.facesbyplaces:displayOptions}</code></td><td>Options affecting how the action bar is displayed.</td></tr>
+     * <tr><td><code>{@link #ActionBar_divider com.app.facesbyplaces:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
+     * <tr><td><code>{@link #ActionBar_elevation com.app.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #ActionBar_height com.app.facesbyplaces:height}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionBar_hideOnContentScroll com.app.facesbyplaces:hideOnContentScroll}</code></td><td>Set true to hide the action bar on a vertical nested scroll of content.</td></tr>
+     * <tr><td><code>{@link #ActionBar_homeAsUpIndicator com.app.facesbyplaces:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
+     * <tr><td><code>{@link #ActionBar_homeLayout com.app.facesbyplaces:homeLayout}</code></td><td>Specifies a layout to use for the "home" section of the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_icon com.app.facesbyplaces:icon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionBar_indeterminateProgressStyle com.app.facesbyplaces:indeterminateProgressStyle}</code></td><td>Specifies a style resource to use for an indeterminate progress spinner.</td></tr>
+     * <tr><td><code>{@link #ActionBar_itemPadding com.app.facesbyplaces:itemPadding}</code></td><td>Specifies padding that should be applied to the left and right sides of
      * system-provided items in the bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_logo com.example.facesbyplaces:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
-     * <tr><td><code>{@link #ActionBar_navigationMode com.example.facesbyplaces:navigationMode}</code></td><td>The type of navigation to use.</td></tr>
-     * <tr><td><code>{@link #ActionBar_popupTheme com.example.facesbyplaces:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #ActionBar_logo com.app.facesbyplaces:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
+     * <tr><td><code>{@link #ActionBar_navigationMode com.app.facesbyplaces:navigationMode}</code></td><td>The type of navigation to use.</td></tr>
+     * <tr><td><code>{@link #ActionBar_popupTheme com.app.facesbyplaces:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_progressBarPadding com.example.facesbyplaces:progressBarPadding}</code></td><td>Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_progressBarStyle com.example.facesbyplaces:progressBarStyle}</code></td><td>Specifies a style resource to use for an embedded progress bar.</td></tr>
-     * <tr><td><code>{@link #ActionBar_subtitle com.example.facesbyplaces:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
-     * <tr><td><code>{@link #ActionBar_subtitleTextStyle com.example.facesbyplaces:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
-     * <tr><td><code>{@link #ActionBar_title com.example.facesbyplaces:title}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionBar_titleTextStyle com.example.facesbyplaces:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
+     * <tr><td><code>{@link #ActionBar_progressBarPadding com.app.facesbyplaces:progressBarPadding}</code></td><td>Specifies the horizontal padding on either end for an embedded progress bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_progressBarStyle com.app.facesbyplaces:progressBarStyle}</code></td><td>Specifies a style resource to use for an embedded progress bar.</td></tr>
+     * <tr><td><code>{@link #ActionBar_subtitle com.app.facesbyplaces:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
+     * <tr><td><code>{@link #ActionBar_subtitleTextStyle com.app.facesbyplaces:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
+     * <tr><td><code>{@link #ActionBar_title com.app.facesbyplaces:title}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionBar_titleTextStyle com.app.facesbyplaces:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
      * </table>
      * @see #ActionBar_background
      * @see #ActionBar_backgroundSplit
@@ -6651,7 +6651,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:background
+     * @attr name com.app.facesbyplaces:background
      */
     public static final int ActionBar_background=0;
     /**
@@ -6667,7 +6667,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundSplit
+     * @attr name com.app.facesbyplaces:backgroundSplit
      */
     public static final int ActionBar_backgroundSplit=1;
     /**
@@ -6683,7 +6683,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundStacked
+     * @attr name com.app.facesbyplaces:backgroundStacked
      */
     public static final int ActionBar_backgroundStacked=2;
     /**
@@ -6698,7 +6698,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetEnd
+     * @attr name com.app.facesbyplaces:contentInsetEnd
      */
     public static final int ActionBar_contentInsetEnd=3;
     /**
@@ -6713,7 +6713,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetEndWithActions
+     * @attr name com.app.facesbyplaces:contentInsetEndWithActions
      */
     public static final int ActionBar_contentInsetEndWithActions=4;
     /**
@@ -6728,7 +6728,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetLeft
+     * @attr name com.app.facesbyplaces:contentInsetLeft
      */
     public static final int ActionBar_contentInsetLeft=5;
     /**
@@ -6743,7 +6743,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetRight
+     * @attr name com.app.facesbyplaces:contentInsetRight
      */
     public static final int ActionBar_contentInsetRight=6;
     /**
@@ -6758,7 +6758,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetStart
+     * @attr name com.app.facesbyplaces:contentInsetStart
      */
     public static final int ActionBar_contentInsetStart=7;
     /**
@@ -6773,7 +6773,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetStartWithNavigation
+     * @attr name com.app.facesbyplaces:contentInsetStartWithNavigation
      */
     public static final int ActionBar_contentInsetStartWithNavigation=8;
     /**
@@ -6786,7 +6786,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:customNavigationLayout
+     * @attr name com.app.facesbyplaces:customNavigationLayout
      */
     public static final int ActionBar_customNavigationLayout=9;
     /**
@@ -6809,7 +6809,7 @@ public final class R {
      * <tr><td>useLogo</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:displayOptions
+     * @attr name com.app.facesbyplaces:displayOptions
      */
     public static final int ActionBar_displayOptions=10;
     /**
@@ -6822,7 +6822,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:divider
+     * @attr name com.app.facesbyplaces:divider
      */
     public static final int ActionBar_divider=11;
     /**
@@ -6836,7 +6836,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:elevation
+     * @attr name com.app.facesbyplaces:elevation
      */
     public static final int ActionBar_elevation=12;
     /**
@@ -6850,7 +6850,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:height
+     * @attr name com.app.facesbyplaces:height
      */
     public static final int ActionBar_height=13;
     /**
@@ -6861,7 +6861,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:hideOnContentScroll
+     * @attr name com.app.facesbyplaces:hideOnContentScroll
      */
     public static final int ActionBar_hideOnContentScroll=14;
     /**
@@ -6874,7 +6874,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:homeAsUpIndicator
+     * @attr name com.app.facesbyplaces:homeAsUpIndicator
      */
     public static final int ActionBar_homeAsUpIndicator=15;
     /**
@@ -6887,7 +6887,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:homeLayout
+     * @attr name com.app.facesbyplaces:homeLayout
      */
     public static final int ActionBar_homeLayout=16;
     /**
@@ -6900,7 +6900,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:icon
+     * @attr name com.app.facesbyplaces:icon
      */
     public static final int ActionBar_icon=17;
     /**
@@ -6913,7 +6913,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:indeterminateProgressStyle
+     * @attr name com.app.facesbyplaces:indeterminateProgressStyle
      */
     public static final int ActionBar_indeterminateProgressStyle=18;
     /**
@@ -6928,7 +6928,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:itemPadding
+     * @attr name com.app.facesbyplaces:itemPadding
      */
     public static final int ActionBar_itemPadding=19;
     /**
@@ -6941,7 +6941,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:logo
+     * @attr name com.app.facesbyplaces:logo
      */
     public static final int ActionBar_logo=20;
     /**
@@ -6960,7 +6960,7 @@ public final class R {
      * <tr><td>tabMode</td><td>2</td><td>The action bar will use a series of horizontal tabs for navigation.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:navigationMode
+     * @attr name com.app.facesbyplaces:navigationMode
      */
     public static final int ActionBar_navigationMode=21;
     /**
@@ -6974,7 +6974,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:popupTheme
+     * @attr name com.app.facesbyplaces:popupTheme
      */
     public static final int ActionBar_popupTheme=22;
     /**
@@ -6988,7 +6988,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:progressBarPadding
+     * @attr name com.app.facesbyplaces:progressBarPadding
      */
     public static final int ActionBar_progressBarPadding=23;
     /**
@@ -7001,7 +7001,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:progressBarStyle
+     * @attr name com.app.facesbyplaces:progressBarStyle
      */
     public static final int ActionBar_progressBarStyle=24;
     /**
@@ -7012,7 +7012,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:subtitle
+     * @attr name com.app.facesbyplaces:subtitle
      */
     public static final int ActionBar_subtitle=25;
     /**
@@ -7025,7 +7025,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:subtitleTextStyle
+     * @attr name com.app.facesbyplaces:subtitleTextStyle
      */
     public static final int ActionBar_subtitleTextStyle=26;
     /**
@@ -7036,7 +7036,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:title
+     * @attr name com.app.facesbyplaces:title
      */
     public static final int ActionBar_title=27;
     /**
@@ -7049,7 +7049,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:titleTextStyle
+     * @attr name com.app.facesbyplaces:titleTextStyle
      */
     public static final int ActionBar_titleTextStyle=28;
     /**
@@ -7131,12 +7131,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ActionMode_background com.example.facesbyplaces:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
-     * <tr><td><code>{@link #ActionMode_backgroundSplit com.example.facesbyplaces:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
-     * <tr><td><code>{@link #ActionMode_closeItemLayout com.example.facesbyplaces:closeItemLayout}</code></td><td>Specifies a layout to use for the "close" item at the starting edge.</td></tr>
-     * <tr><td><code>{@link #ActionMode_height com.example.facesbyplaces:height}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ActionMode_subtitleTextStyle com.example.facesbyplaces:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
-     * <tr><td><code>{@link #ActionMode_titleTextStyle com.example.facesbyplaces:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
+     * <tr><td><code>{@link #ActionMode_background com.app.facesbyplaces:background}</code></td><td>Specifies a background drawable for the action bar.</td></tr>
+     * <tr><td><code>{@link #ActionMode_backgroundSplit com.app.facesbyplaces:backgroundSplit}</code></td><td>Specifies a background drawable for the bottom component of a split action bar.</td></tr>
+     * <tr><td><code>{@link #ActionMode_closeItemLayout com.app.facesbyplaces:closeItemLayout}</code></td><td>Specifies a layout to use for the "close" item at the starting edge.</td></tr>
+     * <tr><td><code>{@link #ActionMode_height com.app.facesbyplaces:height}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ActionMode_subtitleTextStyle com.app.facesbyplaces:subtitleTextStyle}</code></td><td>Specifies a style to use for subtitle text.</td></tr>
+     * <tr><td><code>{@link #ActionMode_titleTextStyle com.app.facesbyplaces:titleTextStyle}</code></td><td>Specifies a style to use for title text.</td></tr>
      * </table>
      * @see #ActionMode_background
      * @see #ActionMode_backgroundSplit
@@ -7159,7 +7159,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:background
+     * @attr name com.app.facesbyplaces:background
      */
     public static final int ActionMode_background=0;
     /**
@@ -7175,7 +7175,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundSplit
+     * @attr name com.app.facesbyplaces:backgroundSplit
      */
     public static final int ActionMode_backgroundSplit=1;
     /**
@@ -7188,7 +7188,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:closeItemLayout
+     * @attr name com.app.facesbyplaces:closeItemLayout
      */
     public static final int ActionMode_closeItemLayout=2;
     /**
@@ -7202,7 +7202,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:height
+     * @attr name com.app.facesbyplaces:height
      */
     public static final int ActionMode_height=3;
     /**
@@ -7215,7 +7215,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:subtitleTextStyle
+     * @attr name com.app.facesbyplaces:subtitleTextStyle
      */
     public static final int ActionMode_subtitleTextStyle=4;
     /**
@@ -7228,7 +7228,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:titleTextStyle
+     * @attr name com.app.facesbyplaces:titleTextStyle
      */
     public static final int ActionMode_titleTextStyle=5;
     /**
@@ -7238,8 +7238,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable com.example.facesbyplaces:expandActivityOverflowButtonDrawable}</code></td><td>The drawable to show in the button for expanding the activities overflow popup.</td></tr>
-     * <tr><td><code>{@link #ActivityChooserView_initialActivityCount com.example.facesbyplaces:initialActivityCount}</code></td><td>The maximal number of items initially shown in the activity list.</td></tr>
+     * <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable com.app.facesbyplaces:expandActivityOverflowButtonDrawable}</code></td><td>The drawable to show in the button for expanding the activities overflow popup.</td></tr>
+     * <tr><td><code>{@link #ActivityChooserView_initialActivityCount com.app.facesbyplaces:initialActivityCount}</code></td><td>The maximal number of items initially shown in the activity list.</td></tr>
      * </table>
      * @see #ActivityChooserView_expandActivityOverflowButtonDrawable
      * @see #ActivityChooserView_initialActivityCount
@@ -7261,7 +7261,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:expandActivityOverflowButtonDrawable
+     * @attr name com.app.facesbyplaces:expandActivityOverflowButtonDrawable
      */
     public static final int ActivityChooserView_expandActivityOverflowButtonDrawable=0;
     /**
@@ -7272,7 +7272,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:initialActivityCount
+     * @attr name com.app.facesbyplaces:initialActivityCount
      */
     public static final int ActivityChooserView_initialActivityCount=1;
     /**
@@ -7283,13 +7283,13 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AlertDialog_android_layout android:layout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_buttonIconDimen com.example.facesbyplaces:buttonIconDimen}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_buttonPanelSideLayout com.example.facesbyplaces:buttonPanelSideLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_listItemLayout com.example.facesbyplaces:listItemLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_listLayout com.example.facesbyplaces:listLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_multiChoiceItemLayout com.example.facesbyplaces:multiChoiceItemLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_showTitle com.example.facesbyplaces:showTitle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AlertDialog_singleChoiceItemLayout com.example.facesbyplaces:singleChoiceItemLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_buttonIconDimen com.app.facesbyplaces:buttonIconDimen}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_buttonPanelSideLayout com.app.facesbyplaces:buttonPanelSideLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_listItemLayout com.app.facesbyplaces:listItemLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_listLayout com.app.facesbyplaces:listLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_multiChoiceItemLayout com.app.facesbyplaces:multiChoiceItemLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_showTitle com.app.facesbyplaces:showTitle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AlertDialog_singleChoiceItemLayout com.app.facesbyplaces:singleChoiceItemLayout}</code></td><td></td></tr>
      * </table>
      * @see #AlertDialog_android_layout
      * @see #AlertDialog_buttonIconDimen
@@ -7317,7 +7317,7 @@ public final class R {
      */
     public static final int AlertDialog_android_layout=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buttonIconDimen}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buttonIconDimen}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -7326,11 +7326,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:buttonIconDimen
+     * @attr name com.app.facesbyplaces:buttonIconDimen
      */
     public static final int AlertDialog_buttonIconDimen=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buttonPanelSideLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buttonPanelSideLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7338,11 +7338,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonPanelSideLayout
+     * @attr name com.app.facesbyplaces:buttonPanelSideLayout
      */
     public static final int AlertDialog_buttonPanelSideLayout=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#listItemLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#listItemLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7350,11 +7350,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:listItemLayout
+     * @attr name com.app.facesbyplaces:listItemLayout
      */
     public static final int AlertDialog_listItemLayout=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#listLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#listLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7362,11 +7362,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:listLayout
+     * @attr name com.app.facesbyplaces:listLayout
      */
     public static final int AlertDialog_listLayout=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#multiChoiceItemLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#multiChoiceItemLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7374,21 +7374,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:multiChoiceItemLayout
+     * @attr name com.app.facesbyplaces:multiChoiceItemLayout
      */
     public static final int AlertDialog_multiChoiceItemLayout=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#showTitle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#showTitle}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:showTitle
+     * @attr name com.app.facesbyplaces:showTitle
      */
     public static final int AlertDialog_showTitle=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#singleChoiceItemLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#singleChoiceItemLayout}
      * attribute's value can be found in the {@link #AlertDialog} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7396,7 +7396,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:singleChoiceItemLayout
+     * @attr name com.app.facesbyplaces:singleChoiceItemLayout
      */
     public static final int AlertDialog_singleChoiceItemLayout=7;
     /**
@@ -7622,9 +7622,9 @@ public final class R {
      * <tr><td><code>{@link #AppBarLayout_android_background android:background}</code></td><td></td></tr>
      * <tr><td><code>{@link #AppBarLayout_android_touchscreenBlocksFocus android:touchscreenBlocksFocus}</code></td><td></td></tr>
      * <tr><td><code>{@link #AppBarLayout_android_keyboardNavigationCluster android:keyboardNavigationCluster}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayout_elevation com.example.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #AppBarLayout_expanded com.example.facesbyplaces:expanded}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayout_liftOnScroll com.example.facesbyplaces:liftOnScroll}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_elevation com.app.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #AppBarLayout_expanded com.app.facesbyplaces:expanded}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_liftOnScroll com.app.facesbyplaces:liftOnScroll}</code></td><td></td></tr>
      * </table>
      * @see #AppBarLayout_android_background
      * @see #AppBarLayout_android_touchscreenBlocksFocus
@@ -7683,27 +7683,27 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:elevation
+     * @attr name com.app.facesbyplaces:elevation
      */
     public static final int AppBarLayout_elevation=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expanded}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expanded}
      * attribute's value can be found in the {@link #AppBarLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:expanded
+     * @attr name com.app.facesbyplaces:expanded
      */
     public static final int AppBarLayout_expanded=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#liftOnScroll}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#liftOnScroll}
      * attribute's value can be found in the {@link #AppBarLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:liftOnScroll
+     * @attr name com.app.facesbyplaces:liftOnScroll
      */
     public static final int AppBarLayout_liftOnScroll=5;
     /**
@@ -7713,10 +7713,10 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsed com.example.facesbyplaces:state_collapsed}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsible com.example.facesbyplaces:state_collapsible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_liftable com.example.facesbyplaces:state_liftable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayoutStates_state_lifted com.example.facesbyplaces:state_lifted}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsed com.app.facesbyplaces:state_collapsed}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_collapsible com.app.facesbyplaces:state_collapsible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_liftable com.app.facesbyplaces:state_liftable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayoutStates_state_lifted com.app.facesbyplaces:state_lifted}</code></td><td></td></tr>
      * </table>
      * @see #AppBarLayoutStates_state_collapsed
      * @see #AppBarLayoutStates_state_collapsible
@@ -7727,43 +7727,43 @@ public final class R {
       0x7f0301ac, 0x7f0301ad, 0x7f0301ae, 0x7f0301af
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#state_collapsed}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#state_collapsed}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:state_collapsed
+     * @attr name com.app.facesbyplaces:state_collapsed
      */
     public static final int AppBarLayoutStates_state_collapsed=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#state_collapsible}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#state_collapsible}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:state_collapsible
+     * @attr name com.app.facesbyplaces:state_collapsible
      */
     public static final int AppBarLayoutStates_state_collapsible=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#state_liftable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#state_liftable}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:state_liftable
+     * @attr name com.app.facesbyplaces:state_liftable
      */
     public static final int AppBarLayoutStates_state_liftable=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#state_lifted}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#state_lifted}
      * attribute's value can be found in the {@link #AppBarLayoutStates} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:state_lifted
+     * @attr name com.app.facesbyplaces:state_lifted
      */
     public static final int AppBarLayoutStates_state_lifted=3;
     /**
@@ -7773,8 +7773,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollFlags com.example.facesbyplaces:layout_scrollFlags}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollInterpolator com.example.facesbyplaces:layout_scrollInterpolator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollFlags com.app.facesbyplaces:layout_scrollFlags}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppBarLayout_Layout_layout_scrollInterpolator com.app.facesbyplaces:layout_scrollInterpolator}</code></td><td></td></tr>
      * </table>
      * @see #AppBarLayout_Layout_layout_scrollFlags
      * @see #AppBarLayout_Layout_layout_scrollInterpolator
@@ -7783,7 +7783,7 @@ public final class R {
       0x7f03013b, 0x7f03013c
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#layout_scrollFlags}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#layout_scrollFlags}
      * attribute's value can be found in the {@link #AppBarLayout_Layout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -7800,11 +7800,11 @@ public final class R {
      * <tr><td>snapMargins</td><td>20</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:layout_scrollFlags
+     * @attr name com.app.facesbyplaces:layout_scrollFlags
      */
     public static final int AppBarLayout_Layout_layout_scrollFlags=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#layout_scrollInterpolator}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#layout_scrollInterpolator}
      * attribute's value can be found in the {@link #AppBarLayout_Layout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -7812,7 +7812,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:layout_scrollInterpolator
+     * @attr name com.app.facesbyplaces:layout_scrollInterpolator
      */
     public static final int AppBarLayout_Layout_layout_scrollInterpolator=1;
     /**
@@ -7823,9 +7823,9 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatImageView_android_src android:src}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatImageView_srcCompat com.example.facesbyplaces:srcCompat}</code></td><td>Sets a drawable as the content of this ImageView.</td></tr>
-     * <tr><td><code>{@link #AppCompatImageView_tint com.example.facesbyplaces:tint}</code></td><td>Tint to apply to the image source.</td></tr>
-     * <tr><td><code>{@link #AppCompatImageView_tintMode com.example.facesbyplaces:tintMode}</code></td><td>Blending mode used to apply the image source tint.</td></tr>
+     * <tr><td><code>{@link #AppCompatImageView_srcCompat com.app.facesbyplaces:srcCompat}</code></td><td>Sets a drawable as the content of this ImageView.</td></tr>
+     * <tr><td><code>{@link #AppCompatImageView_tint com.app.facesbyplaces:tint}</code></td><td>Tint to apply to the image source.</td></tr>
+     * <tr><td><code>{@link #AppCompatImageView_tintMode com.app.facesbyplaces:tintMode}</code></td><td>Blending mode used to apply the image source tint.</td></tr>
      * </table>
      * @see #AppCompatImageView_android_src
      * @see #AppCompatImageView_srcCompat
@@ -7861,7 +7861,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:srcCompat
+     * @attr name com.app.facesbyplaces:srcCompat
      */
     public static final int AppCompatImageView_srcCompat=1;
     /**
@@ -7873,7 +7873,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tint
+     * @attr name com.app.facesbyplaces:tint
      */
     public static final int AppCompatImageView_tint=2;
     /**
@@ -7900,7 +7900,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:tintMode
+     * @attr name com.app.facesbyplaces:tintMode
      */
     public static final int AppCompatImageView_tintMode=3;
     /**
@@ -7911,9 +7911,9 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatSeekBar_android_thumb android:thumb}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatSeekBar_tickMark com.example.facesbyplaces:tickMark}</code></td><td>Drawable displayed at each progress position on a seekbar.</td></tr>
-     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTint com.example.facesbyplaces:tickMarkTint}</code></td><td>Tint to apply to the tick mark drawable.</td></tr>
-     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTintMode com.example.facesbyplaces:tickMarkTintMode}</code></td><td>Blending mode used to apply the tick mark tint.</td></tr>
+     * <tr><td><code>{@link #AppCompatSeekBar_tickMark com.app.facesbyplaces:tickMark}</code></td><td>Drawable displayed at each progress position on a seekbar.</td></tr>
+     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTint com.app.facesbyplaces:tickMarkTint}</code></td><td>Tint to apply to the tick mark drawable.</td></tr>
+     * <tr><td><code>{@link #AppCompatSeekBar_tickMarkTintMode com.app.facesbyplaces:tickMarkTintMode}</code></td><td>Blending mode used to apply the tick mark tint.</td></tr>
      * </table>
      * @see #AppCompatSeekBar_android_thumb
      * @see #AppCompatSeekBar_tickMark
@@ -7945,7 +7945,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tickMark
+     * @attr name com.app.facesbyplaces:tickMark
      */
     public static final int AppCompatSeekBar_tickMark=1;
     /**
@@ -7957,7 +7957,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tickMarkTint
+     * @attr name com.app.facesbyplaces:tickMarkTint
      */
     public static final int AppCompatSeekBar_tickMarkTint=2;
     /**
@@ -7984,7 +7984,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:tickMarkTintMode
+     * @attr name com.app.facesbyplaces:tickMarkTintMode
      */
     public static final int AppCompatSeekBar_tickMarkTintMode=3;
     /**
@@ -8124,18 +8124,18 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatTextView_android_textAppearance android:textAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeMaxTextSize com.example.facesbyplaces:autoSizeMaxTextSize}</code></td><td>The maximum text size constraint to be used when auto-sizing text.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeMinTextSize com.example.facesbyplaces:autoSizeMinTextSize}</code></td><td>The minimum text size constraint to be used when auto-sizing text.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizePresetSizes com.example.facesbyplaces:autoSizePresetSizes}</code></td><td>Resource array of dimensions to be used in conjunction with
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeMaxTextSize com.app.facesbyplaces:autoSizeMaxTextSize}</code></td><td>The maximum text size constraint to be used when auto-sizing text.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeMinTextSize com.app.facesbyplaces:autoSizeMinTextSize}</code></td><td>The minimum text size constraint to be used when auto-sizing text.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_autoSizePresetSizes com.app.facesbyplaces:autoSizePresetSizes}</code></td><td>Resource array of dimensions to be used in conjunction with
      * <code>autoSizeTextType</code> set to <code>uniform</code>.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeStepGranularity com.example.facesbyplaces:autoSizeStepGranularity}</code></td><td>Specify the auto-size step size if <code>autoSizeTextType</code> is set to
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeStepGranularity com.app.facesbyplaces:autoSizeStepGranularity}</code></td><td>Specify the auto-size step size if <code>autoSizeTextType</code> is set to
      * <code>uniform</code>.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_autoSizeTextType com.example.facesbyplaces:autoSizeTextType}</code></td><td>Specify the type of auto-size.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_firstBaselineToTopHeight com.example.facesbyplaces:firstBaselineToTopHeight}</code></td><td>Distance from the top of the TextView to the first text baseline.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_fontFamily com.example.facesbyplaces:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_lastBaselineToBottomHeight com.example.facesbyplaces:lastBaselineToBottomHeight}</code></td><td>Distance from the bottom of the TextView to the last text baseline.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_lineHeight com.example.facesbyplaces:lineHeight}</code></td><td>Explicit height between lines of text.</td></tr>
-     * <tr><td><code>{@link #AppCompatTextView_textAllCaps com.example.facesbyplaces:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_autoSizeTextType com.app.facesbyplaces:autoSizeTextType}</code></td><td>Specify the type of auto-size.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_firstBaselineToTopHeight com.app.facesbyplaces:firstBaselineToTopHeight}</code></td><td>Distance from the top of the TextView to the first text baseline.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_fontFamily com.app.facesbyplaces:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_lastBaselineToBottomHeight com.app.facesbyplaces:lastBaselineToBottomHeight}</code></td><td>Distance from the bottom of the TextView to the last text baseline.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_lineHeight com.app.facesbyplaces:lineHeight}</code></td><td>Explicit height between lines of text.</td></tr>
+     * <tr><td><code>{@link #AppCompatTextView_textAllCaps com.app.facesbyplaces:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
      * </table>
      * @see #AppCompatTextView_android_textAppearance
      * @see #AppCompatTextView_autoSizeMaxTextSize
@@ -8177,7 +8177,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:autoSizeMaxTextSize
+     * @attr name com.app.facesbyplaces:autoSizeMaxTextSize
      */
     public static final int AppCompatTextView_autoSizeMaxTextSize=1;
     /**
@@ -8191,7 +8191,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:autoSizeMinTextSize
+     * @attr name com.app.facesbyplaces:autoSizeMinTextSize
      */
     public static final int AppCompatTextView_autoSizeMinTextSize=2;
     /**
@@ -8206,7 +8206,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:autoSizePresetSizes
+     * @attr name com.app.facesbyplaces:autoSizePresetSizes
      */
     public static final int AppCompatTextView_autoSizePresetSizes=3;
     /**
@@ -8222,7 +8222,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:autoSizeStepGranularity
+     * @attr name com.app.facesbyplaces:autoSizeStepGranularity
      */
     public static final int AppCompatTextView_autoSizeStepGranularity=4;
     /**
@@ -8242,7 +8242,7 @@ public final class R {
      * container.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:autoSizeTextType
+     * @attr name com.app.facesbyplaces:autoSizeTextType
      */
     public static final int AppCompatTextView_autoSizeTextType=5;
     /**
@@ -8257,7 +8257,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:firstBaselineToTopHeight
+     * @attr name com.app.facesbyplaces:firstBaselineToTopHeight
      */
     public static final int AppCompatTextView_firstBaselineToTopHeight=6;
     /**
@@ -8268,7 +8268,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:fontFamily
+     * @attr name com.app.facesbyplaces:fontFamily
      */
     public static final int AppCompatTextView_fontFamily=7;
     /**
@@ -8283,7 +8283,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:lastBaselineToBottomHeight
+     * @attr name com.app.facesbyplaces:lastBaselineToBottomHeight
      */
     public static final int AppCompatTextView_lastBaselineToBottomHeight=8;
     /**
@@ -8298,7 +8298,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:lineHeight
+     * @attr name com.app.facesbyplaces:lineHeight
      */
     public static final int AppCompatTextView_lineHeight=9;
     /**
@@ -8313,7 +8313,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:textAllCaps
+     * @attr name com.app.facesbyplaces:textAllCaps
      */
     public static final int AppCompatTextView_textAllCaps=10;
     /**
@@ -8325,142 +8325,142 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #AppCompatTheme_android_windowIsFloating android:windowIsFloating}</code></td><td></td></tr>
      * <tr><td><code>{@link #AppCompatTheme_android_windowAnimationStyle android:windowAnimationStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarDivider com.example.facesbyplaces:actionBarDivider}</code></td><td>Custom divider drawable to use for elements in the action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarItemBackground com.example.facesbyplaces:actionBarItemBackground}</code></td><td>Custom item state list drawable background for action bar items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarPopupTheme com.example.facesbyplaces:actionBarPopupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #AppCompatTheme_actionBarDivider com.app.facesbyplaces:actionBarDivider}</code></td><td>Custom divider drawable to use for elements in the action bar.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarItemBackground com.app.facesbyplaces:actionBarItemBackground}</code></td><td>Custom item state list drawable background for action bar items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarPopupTheme com.app.facesbyplaces:actionBarPopupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarSize com.example.facesbyplaces:actionBarSize}</code></td><td>Size of the Action Bar, including the contextual
+     * <tr><td><code>{@link #AppCompatTheme_actionBarSize com.app.facesbyplaces:actionBarSize}</code></td><td>Size of the Action Bar, including the contextual
      * bar used to present Action Modes.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarSplitStyle com.example.facesbyplaces:actionBarSplitStyle}</code></td><td>Reference to a style for the split Action Bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarStyle com.example.facesbyplaces:actionBarStyle}</code></td><td>Reference to a style for the Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTabBarStyle com.example.facesbyplaces:actionBarTabBarStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTabStyle com.example.facesbyplaces:actionBarTabStyle}</code></td><td>Default style for tabs within an action bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTabTextStyle com.example.facesbyplaces:actionBarTabTextStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarTheme com.example.facesbyplaces:actionBarTheme}</code></td><td>Reference to a theme that should be used to inflate the
+     * <tr><td><code>{@link #AppCompatTheme_actionBarSplitStyle com.app.facesbyplaces:actionBarSplitStyle}</code></td><td>Reference to a style for the split Action Bar.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarStyle com.app.facesbyplaces:actionBarStyle}</code></td><td>Reference to a style for the Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTabBarStyle com.app.facesbyplaces:actionBarTabBarStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTabStyle com.app.facesbyplaces:actionBarTabStyle}</code></td><td>Default style for tabs within an action bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTabTextStyle com.app.facesbyplaces:actionBarTabTextStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionBarTheme com.app.facesbyplaces:actionBarTheme}</code></td><td>Reference to a theme that should be used to inflate the
      * action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionBarWidgetTheme com.example.facesbyplaces:actionBarWidgetTheme}</code></td><td>Reference to a theme that should be used to inflate widgets
+     * <tr><td><code>{@link #AppCompatTheme_actionBarWidgetTheme com.app.facesbyplaces:actionBarWidgetTheme}</code></td><td>Reference to a theme that should be used to inflate widgets
      * and layouts destined for the action bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionButtonStyle com.example.facesbyplaces:actionButtonStyle}</code></td><td>Default action button style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionDropDownStyle com.example.facesbyplaces:actionDropDownStyle}</code></td><td>Default ActionBar dropdown style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextAppearance com.example.facesbyplaces:actionMenuTextAppearance}</code></td><td>TextAppearance style that will be applied to text that
+     * <tr><td><code>{@link #AppCompatTheme_actionButtonStyle com.app.facesbyplaces:actionButtonStyle}</code></td><td>Default action button style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionDropDownStyle com.app.facesbyplaces:actionDropDownStyle}</code></td><td>Default ActionBar dropdown style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextAppearance com.app.facesbyplaces:actionMenuTextAppearance}</code></td><td>TextAppearance style that will be applied to text that
      * appears within action menu items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextColor com.example.facesbyplaces:actionMenuTextColor}</code></td><td>Color for text that appears within action menu items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeBackground com.example.facesbyplaces:actionModeBackground}</code></td><td>Background drawable to use for action mode UI</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseButtonStyle com.example.facesbyplaces:actionModeCloseButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseDrawable com.example.facesbyplaces:actionModeCloseDrawable}</code></td><td>Drawable to use for the close action mode button</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCopyDrawable com.example.facesbyplaces:actionModeCopyDrawable}</code></td><td>Drawable to use for the Copy action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeCutDrawable com.example.facesbyplaces:actionModeCutDrawable}</code></td><td>Drawable to use for the Cut action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeFindDrawable com.example.facesbyplaces:actionModeFindDrawable}</code></td><td>Drawable to use for the Find action button in WebView selection action modes</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModePasteDrawable com.example.facesbyplaces:actionModePasteDrawable}</code></td><td>Drawable to use for the Paste action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModePopupWindowStyle com.example.facesbyplaces:actionModePopupWindowStyle}</code></td><td>PopupWindow style to use for action modes when showing as a window overlay.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeSelectAllDrawable com.example.facesbyplaces:actionModeSelectAllDrawable}</code></td><td>Drawable to use for the Select all action button in Contextual Action Bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeShareDrawable com.example.facesbyplaces:actionModeShareDrawable}</code></td><td>Drawable to use for the Share action button in WebView selection action modes</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeSplitBackground com.example.facesbyplaces:actionModeSplitBackground}</code></td><td>Background drawable to use for action mode UI in the lower split bar</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeStyle com.example.facesbyplaces:actionModeStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionModeWebSearchDrawable com.example.facesbyplaces:actionModeWebSearchDrawable}</code></td><td>Drawable to use for the Web Search action button in WebView selection action modes</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionOverflowButtonStyle com.example.facesbyplaces:actionOverflowButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_actionOverflowMenuStyle com.example.facesbyplaces:actionOverflowMenuStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_activityChooserViewStyle com.example.facesbyplaces:activityChooserViewStyle}</code></td><td>Default ActivityChooserView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogButtonGroupStyle com.example.facesbyplaces:alertDialogButtonGroupStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogCenterButtons com.example.facesbyplaces:alertDialogCenterButtons}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogStyle com.example.facesbyplaces:alertDialogStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_alertDialogTheme com.example.facesbyplaces:alertDialogTheme}</code></td><td>Theme to use for alert dialogs spawned from this theme.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_autoCompleteTextViewStyle com.example.facesbyplaces:autoCompleteTextViewStyle}</code></td><td>Default AutoCompleteTextView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_borderlessButtonStyle com.example.facesbyplaces:borderlessButtonStyle}</code></td><td>Style for buttons without an explicit border, often used in groups.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarButtonStyle com.example.facesbyplaces:buttonBarButtonStyle}</code></td><td>Style for buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarNegativeButtonStyle com.example.facesbyplaces:buttonBarNegativeButtonStyle}</code></td><td>Style for the "negative" buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarNeutralButtonStyle com.example.facesbyplaces:buttonBarNeutralButtonStyle}</code></td><td>Style for the "neutral" buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarPositiveButtonStyle com.example.facesbyplaces:buttonBarPositiveButtonStyle}</code></td><td>Style for the "positive" buttons within button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonBarStyle com.example.facesbyplaces:buttonBarStyle}</code></td><td>Style for button bars</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonStyle com.example.facesbyplaces:buttonStyle}</code></td><td>Normal Button style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_buttonStyleSmall com.example.facesbyplaces:buttonStyleSmall}</code></td><td>Small Button style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_checkboxStyle com.example.facesbyplaces:checkboxStyle}</code></td><td>Default Checkbox style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_checkedTextViewStyle com.example.facesbyplaces:checkedTextViewStyle}</code></td><td>Default CheckedTextView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorAccent com.example.facesbyplaces:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorBackgroundFloating com.example.facesbyplaces:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorButtonNormal com.example.facesbyplaces:colorButtonNormal}</code></td><td>The color applied to framework buttons in their normal state.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorControlActivated com.example.facesbyplaces:colorControlActivated}</code></td><td>The color applied to framework controls in their activated (ex.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorControlHighlight com.example.facesbyplaces:colorControlHighlight}</code></td><td>The color applied to framework control highlights (ex.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorControlNormal com.example.facesbyplaces:colorControlNormal}</code></td><td>The color applied to framework controls in their normal state.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorError com.example.facesbyplaces:colorError}</code></td><td>Color used for error states and things that need to be drawn to
+     * <tr><td><code>{@link #AppCompatTheme_actionMenuTextColor com.app.facesbyplaces:actionMenuTextColor}</code></td><td>Color for text that appears within action menu items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeBackground com.app.facesbyplaces:actionModeBackground}</code></td><td>Background drawable to use for action mode UI</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseButtonStyle com.app.facesbyplaces:actionModeCloseButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCloseDrawable com.app.facesbyplaces:actionModeCloseDrawable}</code></td><td>Drawable to use for the close action mode button</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCopyDrawable com.app.facesbyplaces:actionModeCopyDrawable}</code></td><td>Drawable to use for the Copy action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeCutDrawable com.app.facesbyplaces:actionModeCutDrawable}</code></td><td>Drawable to use for the Cut action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeFindDrawable com.app.facesbyplaces:actionModeFindDrawable}</code></td><td>Drawable to use for the Find action button in WebView selection action modes</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModePasteDrawable com.app.facesbyplaces:actionModePasteDrawable}</code></td><td>Drawable to use for the Paste action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModePopupWindowStyle com.app.facesbyplaces:actionModePopupWindowStyle}</code></td><td>PopupWindow style to use for action modes when showing as a window overlay.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeSelectAllDrawable com.app.facesbyplaces:actionModeSelectAllDrawable}</code></td><td>Drawable to use for the Select all action button in Contextual Action Bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeShareDrawable com.app.facesbyplaces:actionModeShareDrawable}</code></td><td>Drawable to use for the Share action button in WebView selection action modes</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeSplitBackground com.app.facesbyplaces:actionModeSplitBackground}</code></td><td>Background drawable to use for action mode UI in the lower split bar</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeStyle com.app.facesbyplaces:actionModeStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionModeWebSearchDrawable com.app.facesbyplaces:actionModeWebSearchDrawable}</code></td><td>Drawable to use for the Web Search action button in WebView selection action modes</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionOverflowButtonStyle com.app.facesbyplaces:actionOverflowButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_actionOverflowMenuStyle com.app.facesbyplaces:actionOverflowMenuStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_activityChooserViewStyle com.app.facesbyplaces:activityChooserViewStyle}</code></td><td>Default ActivityChooserView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogButtonGroupStyle com.app.facesbyplaces:alertDialogButtonGroupStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogCenterButtons com.app.facesbyplaces:alertDialogCenterButtons}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogStyle com.app.facesbyplaces:alertDialogStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_alertDialogTheme com.app.facesbyplaces:alertDialogTheme}</code></td><td>Theme to use for alert dialogs spawned from this theme.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_autoCompleteTextViewStyle com.app.facesbyplaces:autoCompleteTextViewStyle}</code></td><td>Default AutoCompleteTextView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_borderlessButtonStyle com.app.facesbyplaces:borderlessButtonStyle}</code></td><td>Style for buttons without an explicit border, often used in groups.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarButtonStyle com.app.facesbyplaces:buttonBarButtonStyle}</code></td><td>Style for buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarNegativeButtonStyle com.app.facesbyplaces:buttonBarNegativeButtonStyle}</code></td><td>Style for the "negative" buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarNeutralButtonStyle com.app.facesbyplaces:buttonBarNeutralButtonStyle}</code></td><td>Style for the "neutral" buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarPositiveButtonStyle com.app.facesbyplaces:buttonBarPositiveButtonStyle}</code></td><td>Style for the "positive" buttons within button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonBarStyle com.app.facesbyplaces:buttonBarStyle}</code></td><td>Style for button bars</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonStyle com.app.facesbyplaces:buttonStyle}</code></td><td>Normal Button style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_buttonStyleSmall com.app.facesbyplaces:buttonStyleSmall}</code></td><td>Small Button style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_checkboxStyle com.app.facesbyplaces:checkboxStyle}</code></td><td>Default Checkbox style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_checkedTextViewStyle com.app.facesbyplaces:checkedTextViewStyle}</code></td><td>Default CheckedTextView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorAccent com.app.facesbyplaces:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorBackgroundFloating com.app.facesbyplaces:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorButtonNormal com.app.facesbyplaces:colorButtonNormal}</code></td><td>The color applied to framework buttons in their normal state.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorControlActivated com.app.facesbyplaces:colorControlActivated}</code></td><td>The color applied to framework controls in their activated (ex.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorControlHighlight com.app.facesbyplaces:colorControlHighlight}</code></td><td>The color applied to framework control highlights (ex.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorControlNormal com.app.facesbyplaces:colorControlNormal}</code></td><td>The color applied to framework controls in their normal state.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorError com.app.facesbyplaces:colorError}</code></td><td>Color used for error states and things that need to be drawn to
      * the user's attention.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorPrimary com.example.facesbyplaces:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorPrimaryDark com.example.facesbyplaces:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_colorSwitchThumbNormal com.example.facesbyplaces:colorSwitchThumbNormal}</code></td><td>The color applied to framework switch thumbs in their normal state.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_controlBackground com.example.facesbyplaces:controlBackground}</code></td><td>The background used by framework controls.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dialogCornerRadius com.example.facesbyplaces:dialogCornerRadius}</code></td><td>Preferred corner radius of dialogs.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dialogPreferredPadding com.example.facesbyplaces:dialogPreferredPadding}</code></td><td>Preferred padding for dialog content.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dialogTheme com.example.facesbyplaces:dialogTheme}</code></td><td>Theme to use for dialogs spawned from this theme.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dividerHorizontal com.example.facesbyplaces:dividerHorizontal}</code></td><td>A drawable that may be used as a horizontal divider between visual elements.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dividerVertical com.example.facesbyplaces:dividerVertical}</code></td><td>A drawable that may be used as a vertical divider between visual elements.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dropDownListViewStyle com.example.facesbyplaces:dropDownListViewStyle}</code></td><td>ListPopupWindow compatibility</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_dropdownListPreferredItemHeight com.example.facesbyplaces:dropdownListPreferredItemHeight}</code></td><td>The preferred item height for dropdown lists.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_editTextBackground com.example.facesbyplaces:editTextBackground}</code></td><td>EditText background drawable.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_editTextColor com.example.facesbyplaces:editTextColor}</code></td><td>EditText text foreground color.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_editTextStyle com.example.facesbyplaces:editTextStyle}</code></td><td>Default EditText style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_homeAsUpIndicator com.example.facesbyplaces:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_imageButtonStyle com.example.facesbyplaces:imageButtonStyle}</code></td><td>ImageButton background drawable.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listChoiceBackgroundIndicator com.example.facesbyplaces:listChoiceBackgroundIndicator}</code></td><td>Drawable used as a background for selected list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listDividerAlertDialog com.example.facesbyplaces:listDividerAlertDialog}</code></td><td>The list divider used in alert dialogs.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listMenuViewStyle com.example.facesbyplaces:listMenuViewStyle}</code></td><td>Default menu-style ListView style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPopupWindowStyle com.example.facesbyplaces:listPopupWindowStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeight com.example.facesbyplaces:listPreferredItemHeight}</code></td><td>The preferred list item height.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightLarge com.example.facesbyplaces:listPreferredItemHeightLarge}</code></td><td>A larger, more robust list item height.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightSmall com.example.facesbyplaces:listPreferredItemHeightSmall}</code></td><td>A smaller, sleeker list item height.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingLeft com.example.facesbyplaces:listPreferredItemPaddingLeft}</code></td><td>The preferred padding along the left edge of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingRight com.example.facesbyplaces:listPreferredItemPaddingRight}</code></td><td>The preferred padding along the right edge of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_panelBackground com.example.facesbyplaces:panelBackground}</code></td><td>The background of a panel when it is inset from the left and right edges of the screen.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_panelMenuListTheme com.example.facesbyplaces:panelMenuListTheme}</code></td><td>Default Panel Menu style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_panelMenuListWidth com.example.facesbyplaces:panelMenuListWidth}</code></td><td>Default Panel Menu width.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_popupMenuStyle com.example.facesbyplaces:popupMenuStyle}</code></td><td>Default PopupMenu style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_popupWindowStyle com.example.facesbyplaces:popupWindowStyle}</code></td><td>Default PopupWindow style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_radioButtonStyle com.example.facesbyplaces:radioButtonStyle}</code></td><td>Default RadioButton style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyle com.example.facesbyplaces:ratingBarStyle}</code></td><td>Default RatingBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleIndicator com.example.facesbyplaces:ratingBarStyleIndicator}</code></td><td>Indicator RatingBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleSmall com.example.facesbyplaces:ratingBarStyleSmall}</code></td><td>Small indicator RatingBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_searchViewStyle com.example.facesbyplaces:searchViewStyle}</code></td><td>Style for the search query widget.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_seekBarStyle com.example.facesbyplaces:seekBarStyle}</code></td><td>Default SeekBar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackground com.example.facesbyplaces:selectableItemBackground}</code></td><td>A style that may be applied to buttons or other selectable items
+     * <tr><td><code>{@link #AppCompatTheme_colorPrimary com.app.facesbyplaces:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorPrimaryDark com.app.facesbyplaces:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_colorSwitchThumbNormal com.app.facesbyplaces:colorSwitchThumbNormal}</code></td><td>The color applied to framework switch thumbs in their normal state.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_controlBackground com.app.facesbyplaces:controlBackground}</code></td><td>The background used by framework controls.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dialogCornerRadius com.app.facesbyplaces:dialogCornerRadius}</code></td><td>Preferred corner radius of dialogs.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dialogPreferredPadding com.app.facesbyplaces:dialogPreferredPadding}</code></td><td>Preferred padding for dialog content.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dialogTheme com.app.facesbyplaces:dialogTheme}</code></td><td>Theme to use for dialogs spawned from this theme.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dividerHorizontal com.app.facesbyplaces:dividerHorizontal}</code></td><td>A drawable that may be used as a horizontal divider between visual elements.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dividerVertical com.app.facesbyplaces:dividerVertical}</code></td><td>A drawable that may be used as a vertical divider between visual elements.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dropDownListViewStyle com.app.facesbyplaces:dropDownListViewStyle}</code></td><td>ListPopupWindow compatibility</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_dropdownListPreferredItemHeight com.app.facesbyplaces:dropdownListPreferredItemHeight}</code></td><td>The preferred item height for dropdown lists.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_editTextBackground com.app.facesbyplaces:editTextBackground}</code></td><td>EditText background drawable.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_editTextColor com.app.facesbyplaces:editTextColor}</code></td><td>EditText text foreground color.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_editTextStyle com.app.facesbyplaces:editTextStyle}</code></td><td>Default EditText style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_homeAsUpIndicator com.app.facesbyplaces:homeAsUpIndicator}</code></td><td>Specifies a drawable to use for the 'home as up' indicator.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_imageButtonStyle com.app.facesbyplaces:imageButtonStyle}</code></td><td>ImageButton background drawable.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listChoiceBackgroundIndicator com.app.facesbyplaces:listChoiceBackgroundIndicator}</code></td><td>Drawable used as a background for selected list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listDividerAlertDialog com.app.facesbyplaces:listDividerAlertDialog}</code></td><td>The list divider used in alert dialogs.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listMenuViewStyle com.app.facesbyplaces:listMenuViewStyle}</code></td><td>Default menu-style ListView style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPopupWindowStyle com.app.facesbyplaces:listPopupWindowStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeight com.app.facesbyplaces:listPreferredItemHeight}</code></td><td>The preferred list item height.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightLarge com.app.facesbyplaces:listPreferredItemHeightLarge}</code></td><td>A larger, more robust list item height.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemHeightSmall com.app.facesbyplaces:listPreferredItemHeightSmall}</code></td><td>A smaller, sleeker list item height.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingLeft com.app.facesbyplaces:listPreferredItemPaddingLeft}</code></td><td>The preferred padding along the left edge of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_listPreferredItemPaddingRight com.app.facesbyplaces:listPreferredItemPaddingRight}</code></td><td>The preferred padding along the right edge of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_panelBackground com.app.facesbyplaces:panelBackground}</code></td><td>The background of a panel when it is inset from the left and right edges of the screen.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_panelMenuListTheme com.app.facesbyplaces:panelMenuListTheme}</code></td><td>Default Panel Menu style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_panelMenuListWidth com.app.facesbyplaces:panelMenuListWidth}</code></td><td>Default Panel Menu width.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_popupMenuStyle com.app.facesbyplaces:popupMenuStyle}</code></td><td>Default PopupMenu style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_popupWindowStyle com.app.facesbyplaces:popupWindowStyle}</code></td><td>Default PopupWindow style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_radioButtonStyle com.app.facesbyplaces:radioButtonStyle}</code></td><td>Default RadioButton style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyle com.app.facesbyplaces:ratingBarStyle}</code></td><td>Default RatingBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleIndicator com.app.facesbyplaces:ratingBarStyleIndicator}</code></td><td>Indicator RatingBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_ratingBarStyleSmall com.app.facesbyplaces:ratingBarStyleSmall}</code></td><td>Small indicator RatingBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_searchViewStyle com.app.facesbyplaces:searchViewStyle}</code></td><td>Style for the search query widget.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_seekBarStyle com.app.facesbyplaces:seekBarStyle}</code></td><td>Default SeekBar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackground com.app.facesbyplaces:selectableItemBackground}</code></td><td>A style that may be applied to buttons or other selectable items
      * that should react to pressed and focus states, but that do not
      * have a clear visual border along the edges.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackgroundBorderless com.example.facesbyplaces:selectableItemBackgroundBorderless}</code></td><td>Background drawable for borderless standalone items that need focus/pressed states.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_spinnerDropDownItemStyle com.example.facesbyplaces:spinnerDropDownItemStyle}</code></td><td>Default Spinner style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_spinnerStyle com.example.facesbyplaces:spinnerStyle}</code></td><td>Default Spinner style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_switchStyle com.example.facesbyplaces:switchStyle}</code></td><td>Default style for the Switch widget.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceLargePopupMenu com.example.facesbyplaces:textAppearanceLargePopupMenu}</code></td><td>Text color, typeface, size, and style for the text inside of a popup menu.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItem com.example.facesbyplaces:textAppearanceListItem}</code></td><td>The preferred TextAppearance for the primary text of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSecondary com.example.facesbyplaces:textAppearanceListItemSecondary}</code></td><td>The preferred TextAppearance for the secondary text of list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSmall com.example.facesbyplaces:textAppearanceListItemSmall}</code></td><td>The preferred TextAppearance for the primary text of small list items.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearancePopupMenuHeader com.example.facesbyplaces:textAppearancePopupMenuHeader}</code></td><td>Text color, typeface, size, and style for header text inside of a popup menu.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultSubtitle com.example.facesbyplaces:textAppearanceSearchResultSubtitle}</code></td><td>Text color, typeface, size, and style for system search result subtitle.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultTitle com.example.facesbyplaces:textAppearanceSearchResultTitle}</code></td><td>Text color, typeface, size, and style for system search result title.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSmallPopupMenu com.example.facesbyplaces:textAppearanceSmallPopupMenu}</code></td><td>Text color, typeface, size, and style for small text inside of a popup menu.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textColorAlertDialogListItem com.example.facesbyplaces:textColorAlertDialogListItem}</code></td><td>Color of list item text in alert dialogs.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_textColorSearchUrl com.example.facesbyplaces:textColorSearchUrl}</code></td><td>Text color for urls in search suggestions, used by things like global search</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_toolbarNavigationButtonStyle com.example.facesbyplaces:toolbarNavigationButtonStyle}</code></td><td>Default Toolar NavigationButtonStyle</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_toolbarStyle com.example.facesbyplaces:toolbarStyle}</code></td><td>Default Toolbar style.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_tooltipForegroundColor com.example.facesbyplaces:tooltipForegroundColor}</code></td><td>Foreground color to use for tooltips</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_tooltipFrameBackground com.example.facesbyplaces:tooltipFrameBackground}</code></td><td>Background to use for tooltips</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_viewInflaterClass com.example.facesbyplaces:viewInflaterClass}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowActionBar com.example.facesbyplaces:windowActionBar}</code></td><td>Flag indicating whether this window should have an Action Bar
+     * <tr><td><code>{@link #AppCompatTheme_selectableItemBackgroundBorderless com.app.facesbyplaces:selectableItemBackgroundBorderless}</code></td><td>Background drawable for borderless standalone items that need focus/pressed states.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_spinnerDropDownItemStyle com.app.facesbyplaces:spinnerDropDownItemStyle}</code></td><td>Default Spinner style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_spinnerStyle com.app.facesbyplaces:spinnerStyle}</code></td><td>Default Spinner style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_switchStyle com.app.facesbyplaces:switchStyle}</code></td><td>Default style for the Switch widget.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceLargePopupMenu com.app.facesbyplaces:textAppearanceLargePopupMenu}</code></td><td>Text color, typeface, size, and style for the text inside of a popup menu.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItem com.app.facesbyplaces:textAppearanceListItem}</code></td><td>The preferred TextAppearance for the primary text of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSecondary com.app.facesbyplaces:textAppearanceListItemSecondary}</code></td><td>The preferred TextAppearance for the secondary text of list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceListItemSmall com.app.facesbyplaces:textAppearanceListItemSmall}</code></td><td>The preferred TextAppearance for the primary text of small list items.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearancePopupMenuHeader com.app.facesbyplaces:textAppearancePopupMenuHeader}</code></td><td>Text color, typeface, size, and style for header text inside of a popup menu.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultSubtitle com.app.facesbyplaces:textAppearanceSearchResultSubtitle}</code></td><td>Text color, typeface, size, and style for system search result subtitle.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSearchResultTitle com.app.facesbyplaces:textAppearanceSearchResultTitle}</code></td><td>Text color, typeface, size, and style for system search result title.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textAppearanceSmallPopupMenu com.app.facesbyplaces:textAppearanceSmallPopupMenu}</code></td><td>Text color, typeface, size, and style for small text inside of a popup menu.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textColorAlertDialogListItem com.app.facesbyplaces:textColorAlertDialogListItem}</code></td><td>Color of list item text in alert dialogs.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_textColorSearchUrl com.app.facesbyplaces:textColorSearchUrl}</code></td><td>Text color for urls in search suggestions, used by things like global search</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_toolbarNavigationButtonStyle com.app.facesbyplaces:toolbarNavigationButtonStyle}</code></td><td>Default Toolar NavigationButtonStyle</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_toolbarStyle com.app.facesbyplaces:toolbarStyle}</code></td><td>Default Toolbar style.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_tooltipForegroundColor com.app.facesbyplaces:tooltipForegroundColor}</code></td><td>Foreground color to use for tooltips</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_tooltipFrameBackground com.app.facesbyplaces:tooltipFrameBackground}</code></td><td>Background to use for tooltips</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_viewInflaterClass com.app.facesbyplaces:viewInflaterClass}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_windowActionBar com.app.facesbyplaces:windowActionBar}</code></td><td>Flag indicating whether this window should have an Action Bar
      * in place of the usual title bar.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowActionBarOverlay com.example.facesbyplaces:windowActionBarOverlay}</code></td><td>Flag indicating whether this window's Action Bar should overlay
+     * <tr><td><code>{@link #AppCompatTheme_windowActionBarOverlay com.app.facesbyplaces:windowActionBarOverlay}</code></td><td>Flag indicating whether this window's Action Bar should overlay
      * application content.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowActionModeOverlay com.example.facesbyplaces:windowActionModeOverlay}</code></td><td>Flag indicating whether action modes should overlay window content
+     * <tr><td><code>{@link #AppCompatTheme_windowActionModeOverlay com.app.facesbyplaces:windowActionModeOverlay}</code></td><td>Flag indicating whether action modes should overlay window content
      * when there is not reserved space for their UI (such as an Action Bar).</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMajor com.example.facesbyplaces:windowFixedHeightMajor}</code></td><td>A fixed height for the window along the major axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMajor com.app.facesbyplaces:windowFixedHeightMajor}</code></td><td>A fixed height for the window along the major axis of the screen,
      * that is, when in portrait.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMinor com.example.facesbyplaces:windowFixedHeightMinor}</code></td><td>A fixed height for the window along the minor axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedHeightMinor com.app.facesbyplaces:windowFixedHeightMinor}</code></td><td>A fixed height for the window along the minor axis of the screen,
      * that is, when in landscape.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMajor com.example.facesbyplaces:windowFixedWidthMajor}</code></td><td>A fixed width for the window along the major axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMajor com.app.facesbyplaces:windowFixedWidthMajor}</code></td><td>A fixed width for the window along the major axis of the screen,
      * that is, when in landscape.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMinor com.example.facesbyplaces:windowFixedWidthMinor}</code></td><td>A fixed width for the window along the minor axis of the screen,
+     * <tr><td><code>{@link #AppCompatTheme_windowFixedWidthMinor com.app.facesbyplaces:windowFixedWidthMinor}</code></td><td>A fixed width for the window along the minor axis of the screen,
      * that is, when in portrait.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMajor com.example.facesbyplaces:windowMinWidthMajor}</code></td><td>The minimum width the window is allowed to be, along the major
+     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMajor com.app.facesbyplaces:windowMinWidthMajor}</code></td><td>The minimum width the window is allowed to be, along the major
      * axis of the screen.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMinor com.example.facesbyplaces:windowMinWidthMinor}</code></td><td>The minimum width the window is allowed to be, along the minor
+     * <tr><td><code>{@link #AppCompatTheme_windowMinWidthMinor com.app.facesbyplaces:windowMinWidthMinor}</code></td><td>The minimum width the window is allowed to be, along the minor
      * axis of the screen.</td></tr>
-     * <tr><td><code>{@link #AppCompatTheme_windowNoTitle com.example.facesbyplaces:windowNoTitle}</code></td><td>Flag indicating whether there should be no title on this window.</td></tr>
+     * <tr><td><code>{@link #AppCompatTheme_windowNoTitle com.app.facesbyplaces:windowNoTitle}</code></td><td>Flag indicating whether there should be no title on this window.</td></tr>
      * </table>
      * @see #AppCompatTheme_android_windowIsFloating
      * @see #AppCompatTheme_android_windowAnimationStyle
@@ -8649,7 +8649,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarDivider
+     * @attr name com.app.facesbyplaces:actionBarDivider
      */
     public static final int AppCompatTheme_actionBarDivider=2;
     /**
@@ -8662,7 +8662,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarItemBackground
+     * @attr name com.app.facesbyplaces:actionBarItemBackground
      */
     public static final int AppCompatTheme_actionBarItemBackground=3;
     /**
@@ -8676,7 +8676,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarPopupTheme
+     * @attr name com.app.facesbyplaces:actionBarPopupTheme
      */
     public static final int AppCompatTheme_actionBarPopupTheme=4;
     /**
@@ -8699,7 +8699,7 @@ public final class R {
      * <tr><td>wrap_content</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:actionBarSize
+     * @attr name com.app.facesbyplaces:actionBarSize
      */
     public static final int AppCompatTheme_actionBarSize=5;
     /**
@@ -8715,7 +8715,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarSplitStyle
+     * @attr name com.app.facesbyplaces:actionBarSplitStyle
      */
     public static final int AppCompatTheme_actionBarSplitStyle=6;
     /**
@@ -8728,11 +8728,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarStyle
+     * @attr name com.app.facesbyplaces:actionBarStyle
      */
     public static final int AppCompatTheme_actionBarStyle=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#actionBarTabBarStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#actionBarTabBarStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8740,7 +8740,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarTabBarStyle
+     * @attr name com.app.facesbyplaces:actionBarTabBarStyle
      */
     public static final int AppCompatTheme_actionBarTabBarStyle=8;
     /**
@@ -8753,11 +8753,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarTabStyle
+     * @attr name com.app.facesbyplaces:actionBarTabStyle
      */
     public static final int AppCompatTheme_actionBarTabStyle=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#actionBarTabTextStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#actionBarTabTextStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8765,7 +8765,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarTabTextStyle
+     * @attr name com.app.facesbyplaces:actionBarTabTextStyle
      */
     public static final int AppCompatTheme_actionBarTabTextStyle=10;
     /**
@@ -8780,7 +8780,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarTheme
+     * @attr name com.app.facesbyplaces:actionBarTheme
      */
     public static final int AppCompatTheme_actionBarTheme=11;
     /**
@@ -8799,7 +8799,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionBarWidgetTheme
+     * @attr name com.app.facesbyplaces:actionBarWidgetTheme
      */
     public static final int AppCompatTheme_actionBarWidgetTheme=12;
     /**
@@ -8812,7 +8812,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionButtonStyle
+     * @attr name com.app.facesbyplaces:actionButtonStyle
      */
     public static final int AppCompatTheme_actionButtonStyle=13;
     /**
@@ -8825,7 +8825,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionDropDownStyle
+     * @attr name com.app.facesbyplaces:actionDropDownStyle
      */
     public static final int AppCompatTheme_actionDropDownStyle=14;
     /**
@@ -8839,7 +8839,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionMenuTextAppearance
+     * @attr name com.app.facesbyplaces:actionMenuTextAppearance
      */
     public static final int AppCompatTheme_actionMenuTextAppearance=15;
     /**
@@ -8855,7 +8855,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionMenuTextColor
+     * @attr name com.app.facesbyplaces:actionMenuTextColor
      */
     public static final int AppCompatTheme_actionMenuTextColor=16;
     /**
@@ -8868,11 +8868,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeBackground
+     * @attr name com.app.facesbyplaces:actionModeBackground
      */
     public static final int AppCompatTheme_actionModeBackground=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#actionModeCloseButtonStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#actionModeCloseButtonStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -8880,7 +8880,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeCloseButtonStyle
+     * @attr name com.app.facesbyplaces:actionModeCloseButtonStyle
      */
     public static final int AppCompatTheme_actionModeCloseButtonStyle=18;
     /**
@@ -8893,7 +8893,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeCloseDrawable
+     * @attr name com.app.facesbyplaces:actionModeCloseDrawable
      */
     public static final int AppCompatTheme_actionModeCloseDrawable=19;
     /**
@@ -8906,7 +8906,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeCopyDrawable
+     * @attr name com.app.facesbyplaces:actionModeCopyDrawable
      */
     public static final int AppCompatTheme_actionModeCopyDrawable=20;
     /**
@@ -8919,7 +8919,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeCutDrawable
+     * @attr name com.app.facesbyplaces:actionModeCutDrawable
      */
     public static final int AppCompatTheme_actionModeCutDrawable=21;
     /**
@@ -8932,7 +8932,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeFindDrawable
+     * @attr name com.app.facesbyplaces:actionModeFindDrawable
      */
     public static final int AppCompatTheme_actionModeFindDrawable=22;
     /**
@@ -8945,7 +8945,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModePasteDrawable
+     * @attr name com.app.facesbyplaces:actionModePasteDrawable
      */
     public static final int AppCompatTheme_actionModePasteDrawable=23;
     /**
@@ -8958,7 +8958,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModePopupWindowStyle
+     * @attr name com.app.facesbyplaces:actionModePopupWindowStyle
      */
     public static final int AppCompatTheme_actionModePopupWindowStyle=24;
     /**
@@ -8971,7 +8971,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeSelectAllDrawable
+     * @attr name com.app.facesbyplaces:actionModeSelectAllDrawable
      */
     public static final int AppCompatTheme_actionModeSelectAllDrawable=25;
     /**
@@ -8984,7 +8984,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeShareDrawable
+     * @attr name com.app.facesbyplaces:actionModeShareDrawable
      */
     public static final int AppCompatTheme_actionModeShareDrawable=26;
     /**
@@ -8997,11 +8997,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeSplitBackground
+     * @attr name com.app.facesbyplaces:actionModeSplitBackground
      */
     public static final int AppCompatTheme_actionModeSplitBackground=27;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#actionModeStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#actionModeStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9009,7 +9009,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeStyle
+     * @attr name com.app.facesbyplaces:actionModeStyle
      */
     public static final int AppCompatTheme_actionModeStyle=28;
     /**
@@ -9022,11 +9022,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionModeWebSearchDrawable
+     * @attr name com.app.facesbyplaces:actionModeWebSearchDrawable
      */
     public static final int AppCompatTheme_actionModeWebSearchDrawable=29;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#actionOverflowButtonStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#actionOverflowButtonStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9034,11 +9034,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionOverflowButtonStyle
+     * @attr name com.app.facesbyplaces:actionOverflowButtonStyle
      */
     public static final int AppCompatTheme_actionOverflowButtonStyle=30;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#actionOverflowMenuStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#actionOverflowMenuStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9046,7 +9046,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionOverflowMenuStyle
+     * @attr name com.app.facesbyplaces:actionOverflowMenuStyle
      */
     public static final int AppCompatTheme_actionOverflowMenuStyle=31;
     /**
@@ -9059,11 +9059,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:activityChooserViewStyle
+     * @attr name com.app.facesbyplaces:activityChooserViewStyle
      */
     public static final int AppCompatTheme_activityChooserViewStyle=32;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#alertDialogButtonGroupStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#alertDialogButtonGroupStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9071,21 +9071,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:alertDialogButtonGroupStyle
+     * @attr name com.app.facesbyplaces:alertDialogButtonGroupStyle
      */
     public static final int AppCompatTheme_alertDialogButtonGroupStyle=33;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#alertDialogCenterButtons}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#alertDialogCenterButtons}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:alertDialogCenterButtons
+     * @attr name com.app.facesbyplaces:alertDialogCenterButtons
      */
     public static final int AppCompatTheme_alertDialogCenterButtons=34;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#alertDialogStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#alertDialogStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9093,7 +9093,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:alertDialogStyle
+     * @attr name com.app.facesbyplaces:alertDialogStyle
      */
     public static final int AppCompatTheme_alertDialogStyle=35;
     /**
@@ -9106,7 +9106,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:alertDialogTheme
+     * @attr name com.app.facesbyplaces:alertDialogTheme
      */
     public static final int AppCompatTheme_alertDialogTheme=36;
     /**
@@ -9119,7 +9119,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:autoCompleteTextViewStyle
+     * @attr name com.app.facesbyplaces:autoCompleteTextViewStyle
      */
     public static final int AppCompatTheme_autoCompleteTextViewStyle=37;
     /**
@@ -9132,7 +9132,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:borderlessButtonStyle
+     * @attr name com.app.facesbyplaces:borderlessButtonStyle
      */
     public static final int AppCompatTheme_borderlessButtonStyle=38;
     /**
@@ -9145,7 +9145,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonBarButtonStyle
+     * @attr name com.app.facesbyplaces:buttonBarButtonStyle
      */
     public static final int AppCompatTheme_buttonBarButtonStyle=39;
     /**
@@ -9158,7 +9158,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonBarNegativeButtonStyle
+     * @attr name com.app.facesbyplaces:buttonBarNegativeButtonStyle
      */
     public static final int AppCompatTheme_buttonBarNegativeButtonStyle=40;
     /**
@@ -9171,7 +9171,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonBarNeutralButtonStyle
+     * @attr name com.app.facesbyplaces:buttonBarNeutralButtonStyle
      */
     public static final int AppCompatTheme_buttonBarNeutralButtonStyle=41;
     /**
@@ -9184,7 +9184,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonBarPositiveButtonStyle
+     * @attr name com.app.facesbyplaces:buttonBarPositiveButtonStyle
      */
     public static final int AppCompatTheme_buttonBarPositiveButtonStyle=42;
     /**
@@ -9197,7 +9197,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonBarStyle
+     * @attr name com.app.facesbyplaces:buttonBarStyle
      */
     public static final int AppCompatTheme_buttonBarStyle=43;
     /**
@@ -9210,7 +9210,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonStyle
+     * @attr name com.app.facesbyplaces:buttonStyle
      */
     public static final int AppCompatTheme_buttonStyle=44;
     /**
@@ -9223,7 +9223,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonStyleSmall
+     * @attr name com.app.facesbyplaces:buttonStyleSmall
      */
     public static final int AppCompatTheme_buttonStyleSmall=45;
     /**
@@ -9236,7 +9236,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:checkboxStyle
+     * @attr name com.app.facesbyplaces:checkboxStyle
      */
     public static final int AppCompatTheme_checkboxStyle=46;
     /**
@@ -9249,7 +9249,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:checkedTextViewStyle
+     * @attr name com.app.facesbyplaces:checkedTextViewStyle
      */
     public static final int AppCompatTheme_checkedTextViewStyle=47;
     /**
@@ -9262,7 +9262,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorAccent
+     * @attr name com.app.facesbyplaces:colorAccent
      */
     public static final int AppCompatTheme_colorAccent=48;
     /**
@@ -9274,7 +9274,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorBackgroundFloating
+     * @attr name com.app.facesbyplaces:colorBackgroundFloating
      */
     public static final int AppCompatTheme_colorBackgroundFloating=49;
     /**
@@ -9286,7 +9286,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorButtonNormal
+     * @attr name com.app.facesbyplaces:colorButtonNormal
      */
     public static final int AppCompatTheme_colorButtonNormal=50;
     /**
@@ -9298,7 +9298,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorControlActivated
+     * @attr name com.app.facesbyplaces:colorControlActivated
      */
     public static final int AppCompatTheme_colorControlActivated=51;
     /**
@@ -9310,7 +9310,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorControlHighlight
+     * @attr name com.app.facesbyplaces:colorControlHighlight
      */
     public static final int AppCompatTheme_colorControlHighlight=52;
     /**
@@ -9322,7 +9322,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorControlNormal
+     * @attr name com.app.facesbyplaces:colorControlNormal
      */
     public static final int AppCompatTheme_colorControlNormal=53;
     /**
@@ -9339,7 +9339,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorError
+     * @attr name com.app.facesbyplaces:colorError
      */
     public static final int AppCompatTheme_colorError=54;
     /**
@@ -9352,7 +9352,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorPrimary
+     * @attr name com.app.facesbyplaces:colorPrimary
      */
     public static final int AppCompatTheme_colorPrimary=55;
     /**
@@ -9365,7 +9365,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorPrimaryDark
+     * @attr name com.app.facesbyplaces:colorPrimaryDark
      */
     public static final int AppCompatTheme_colorPrimaryDark=56;
     /**
@@ -9377,7 +9377,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorSwitchThumbNormal
+     * @attr name com.app.facesbyplaces:colorSwitchThumbNormal
      */
     public static final int AppCompatTheme_colorSwitchThumbNormal=57;
     /**
@@ -9390,7 +9390,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:controlBackground
+     * @attr name com.app.facesbyplaces:controlBackground
      */
     public static final int AppCompatTheme_controlBackground=58;
     /**
@@ -9404,7 +9404,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:dialogCornerRadius
+     * @attr name com.app.facesbyplaces:dialogCornerRadius
      */
     public static final int AppCompatTheme_dialogCornerRadius=59;
     /**
@@ -9418,7 +9418,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:dialogPreferredPadding
+     * @attr name com.app.facesbyplaces:dialogPreferredPadding
      */
     public static final int AppCompatTheme_dialogPreferredPadding=60;
     /**
@@ -9431,7 +9431,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:dialogTheme
+     * @attr name com.app.facesbyplaces:dialogTheme
      */
     public static final int AppCompatTheme_dialogTheme=61;
     /**
@@ -9444,7 +9444,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:dividerHorizontal
+     * @attr name com.app.facesbyplaces:dividerHorizontal
      */
     public static final int AppCompatTheme_dividerHorizontal=62;
     /**
@@ -9457,7 +9457,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:dividerVertical
+     * @attr name com.app.facesbyplaces:dividerVertical
      */
     public static final int AppCompatTheme_dividerVertical=63;
     /**
@@ -9470,7 +9470,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:dropDownListViewStyle
+     * @attr name com.app.facesbyplaces:dropDownListViewStyle
      */
     public static final int AppCompatTheme_dropDownListViewStyle=64;
     /**
@@ -9484,7 +9484,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:dropdownListPreferredItemHeight
+     * @attr name com.app.facesbyplaces:dropdownListPreferredItemHeight
      */
     public static final int AppCompatTheme_dropdownListPreferredItemHeight=65;
     /**
@@ -9497,7 +9497,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:editTextBackground
+     * @attr name com.app.facesbyplaces:editTextBackground
      */
     public static final int AppCompatTheme_editTextBackground=66;
     /**
@@ -9513,7 +9513,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:editTextColor
+     * @attr name com.app.facesbyplaces:editTextColor
      */
     public static final int AppCompatTheme_editTextColor=67;
     /**
@@ -9526,7 +9526,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:editTextStyle
+     * @attr name com.app.facesbyplaces:editTextStyle
      */
     public static final int AppCompatTheme_editTextStyle=68;
     /**
@@ -9539,7 +9539,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:homeAsUpIndicator
+     * @attr name com.app.facesbyplaces:homeAsUpIndicator
      */
     public static final int AppCompatTheme_homeAsUpIndicator=69;
     /**
@@ -9552,7 +9552,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:imageButtonStyle
+     * @attr name com.app.facesbyplaces:imageButtonStyle
      */
     public static final int AppCompatTheme_imageButtonStyle=70;
     /**
@@ -9565,7 +9565,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:listChoiceBackgroundIndicator
+     * @attr name com.app.facesbyplaces:listChoiceBackgroundIndicator
      */
     public static final int AppCompatTheme_listChoiceBackgroundIndicator=71;
     /**
@@ -9578,7 +9578,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:listDividerAlertDialog
+     * @attr name com.app.facesbyplaces:listDividerAlertDialog
      */
     public static final int AppCompatTheme_listDividerAlertDialog=72;
     /**
@@ -9591,11 +9591,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:listMenuViewStyle
+     * @attr name com.app.facesbyplaces:listMenuViewStyle
      */
     public static final int AppCompatTheme_listMenuViewStyle=73;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#listPopupWindowStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#listPopupWindowStyle}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -9603,7 +9603,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:listPopupWindowStyle
+     * @attr name com.app.facesbyplaces:listPopupWindowStyle
      */
     public static final int AppCompatTheme_listPopupWindowStyle=74;
     /**
@@ -9617,7 +9617,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:listPreferredItemHeight
+     * @attr name com.app.facesbyplaces:listPreferredItemHeight
      */
     public static final int AppCompatTheme_listPreferredItemHeight=75;
     /**
@@ -9631,7 +9631,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:listPreferredItemHeightLarge
+     * @attr name com.app.facesbyplaces:listPreferredItemHeightLarge
      */
     public static final int AppCompatTheme_listPreferredItemHeightLarge=76;
     /**
@@ -9645,7 +9645,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:listPreferredItemHeightSmall
+     * @attr name com.app.facesbyplaces:listPreferredItemHeightSmall
      */
     public static final int AppCompatTheme_listPreferredItemHeightSmall=77;
     /**
@@ -9659,7 +9659,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:listPreferredItemPaddingLeft
+     * @attr name com.app.facesbyplaces:listPreferredItemPaddingLeft
      */
     public static final int AppCompatTheme_listPreferredItemPaddingLeft=78;
     /**
@@ -9673,7 +9673,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:listPreferredItemPaddingRight
+     * @attr name com.app.facesbyplaces:listPreferredItemPaddingRight
      */
     public static final int AppCompatTheme_listPreferredItemPaddingRight=79;
     /**
@@ -9686,7 +9686,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:panelBackground
+     * @attr name com.app.facesbyplaces:panelBackground
      */
     public static final int AppCompatTheme_panelBackground=80;
     /**
@@ -9699,7 +9699,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:panelMenuListTheme
+     * @attr name com.app.facesbyplaces:panelMenuListTheme
      */
     public static final int AppCompatTheme_panelMenuListTheme=81;
     /**
@@ -9713,7 +9713,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:panelMenuListWidth
+     * @attr name com.app.facesbyplaces:panelMenuListWidth
      */
     public static final int AppCompatTheme_panelMenuListWidth=82;
     /**
@@ -9726,7 +9726,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:popupMenuStyle
+     * @attr name com.app.facesbyplaces:popupMenuStyle
      */
     public static final int AppCompatTheme_popupMenuStyle=83;
     /**
@@ -9739,7 +9739,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:popupWindowStyle
+     * @attr name com.app.facesbyplaces:popupWindowStyle
      */
     public static final int AppCompatTheme_popupWindowStyle=84;
     /**
@@ -9752,7 +9752,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:radioButtonStyle
+     * @attr name com.app.facesbyplaces:radioButtonStyle
      */
     public static final int AppCompatTheme_radioButtonStyle=85;
     /**
@@ -9765,7 +9765,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:ratingBarStyle
+     * @attr name com.app.facesbyplaces:ratingBarStyle
      */
     public static final int AppCompatTheme_ratingBarStyle=86;
     /**
@@ -9778,7 +9778,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:ratingBarStyleIndicator
+     * @attr name com.app.facesbyplaces:ratingBarStyleIndicator
      */
     public static final int AppCompatTheme_ratingBarStyleIndicator=87;
     /**
@@ -9791,7 +9791,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:ratingBarStyleSmall
+     * @attr name com.app.facesbyplaces:ratingBarStyleSmall
      */
     public static final int AppCompatTheme_ratingBarStyleSmall=88;
     /**
@@ -9804,7 +9804,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:searchViewStyle
+     * @attr name com.app.facesbyplaces:searchViewStyle
      */
     public static final int AppCompatTheme_searchViewStyle=89;
     /**
@@ -9817,7 +9817,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:seekBarStyle
+     * @attr name com.app.facesbyplaces:seekBarStyle
      */
     public static final int AppCompatTheme_seekBarStyle=90;
     /**
@@ -9832,7 +9832,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:selectableItemBackground
+     * @attr name com.app.facesbyplaces:selectableItemBackground
      */
     public static final int AppCompatTheme_selectableItemBackground=91;
     /**
@@ -9845,7 +9845,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:selectableItemBackgroundBorderless
+     * @attr name com.app.facesbyplaces:selectableItemBackgroundBorderless
      */
     public static final int AppCompatTheme_selectableItemBackgroundBorderless=92;
     /**
@@ -9858,7 +9858,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:spinnerDropDownItemStyle
+     * @attr name com.app.facesbyplaces:spinnerDropDownItemStyle
      */
     public static final int AppCompatTheme_spinnerDropDownItemStyle=93;
     /**
@@ -9871,7 +9871,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:spinnerStyle
+     * @attr name com.app.facesbyplaces:spinnerStyle
      */
     public static final int AppCompatTheme_spinnerStyle=94;
     /**
@@ -9884,7 +9884,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:switchStyle
+     * @attr name com.app.facesbyplaces:switchStyle
      */
     public static final int AppCompatTheme_switchStyle=95;
     /**
@@ -9897,7 +9897,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceLargePopupMenu
+     * @attr name com.app.facesbyplaces:textAppearanceLargePopupMenu
      */
     public static final int AppCompatTheme_textAppearanceLargePopupMenu=96;
     /**
@@ -9910,7 +9910,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceListItem
+     * @attr name com.app.facesbyplaces:textAppearanceListItem
      */
     public static final int AppCompatTheme_textAppearanceListItem=97;
     /**
@@ -9923,7 +9923,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceListItemSecondary
+     * @attr name com.app.facesbyplaces:textAppearanceListItemSecondary
      */
     public static final int AppCompatTheme_textAppearanceListItemSecondary=98;
     /**
@@ -9936,7 +9936,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceListItemSmall
+     * @attr name com.app.facesbyplaces:textAppearanceListItemSmall
      */
     public static final int AppCompatTheme_textAppearanceListItemSmall=99;
     /**
@@ -9949,7 +9949,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearancePopupMenuHeader
+     * @attr name com.app.facesbyplaces:textAppearancePopupMenuHeader
      */
     public static final int AppCompatTheme_textAppearancePopupMenuHeader=100;
     /**
@@ -9962,7 +9962,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceSearchResultSubtitle
+     * @attr name com.app.facesbyplaces:textAppearanceSearchResultSubtitle
      */
     public static final int AppCompatTheme_textAppearanceSearchResultSubtitle=101;
     /**
@@ -9975,7 +9975,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceSearchResultTitle
+     * @attr name com.app.facesbyplaces:textAppearanceSearchResultTitle
      */
     public static final int AppCompatTheme_textAppearanceSearchResultTitle=102;
     /**
@@ -9988,7 +9988,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceSmallPopupMenu
+     * @attr name com.app.facesbyplaces:textAppearanceSmallPopupMenu
      */
     public static final int AppCompatTheme_textAppearanceSmallPopupMenu=103;
     /**
@@ -10004,7 +10004,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textColorAlertDialogListItem
+     * @attr name com.app.facesbyplaces:textColorAlertDialogListItem
      */
     public static final int AppCompatTheme_textColorAlertDialogListItem=104;
     /**
@@ -10020,7 +10020,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textColorSearchUrl
+     * @attr name com.app.facesbyplaces:textColorSearchUrl
      */
     public static final int AppCompatTheme_textColorSearchUrl=105;
     /**
@@ -10033,7 +10033,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:toolbarNavigationButtonStyle
+     * @attr name com.app.facesbyplaces:toolbarNavigationButtonStyle
      */
     public static final int AppCompatTheme_toolbarNavigationButtonStyle=106;
     /**
@@ -10046,7 +10046,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:toolbarStyle
+     * @attr name com.app.facesbyplaces:toolbarStyle
      */
     public static final int AppCompatTheme_toolbarStyle=107;
     /**
@@ -10062,7 +10062,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tooltipForegroundColor
+     * @attr name com.app.facesbyplaces:tooltipForegroundColor
      */
     public static final int AppCompatTheme_tooltipForegroundColor=108;
     /**
@@ -10075,17 +10075,17 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tooltipFrameBackground
+     * @attr name com.app.facesbyplaces:tooltipFrameBackground
      */
     public static final int AppCompatTheme_tooltipFrameBackground=109;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#viewInflaterClass}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#viewInflaterClass}
      * attribute's value can be found in the {@link #AppCompatTheme} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:viewInflaterClass
+     * @attr name com.app.facesbyplaces:viewInflaterClass
      */
     public static final int AppCompatTheme_viewInflaterClass=110;
     /**
@@ -10097,7 +10097,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:windowActionBar
+     * @attr name com.app.facesbyplaces:windowActionBar
      */
     public static final int AppCompatTheme_windowActionBar=111;
     /**
@@ -10110,7 +10110,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:windowActionBarOverlay
+     * @attr name com.app.facesbyplaces:windowActionBarOverlay
      */
     public static final int AppCompatTheme_windowActionBarOverlay=112;
     /**
@@ -10122,7 +10122,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:windowActionModeOverlay
+     * @attr name com.app.facesbyplaces:windowActionModeOverlay
      */
     public static final int AppCompatTheme_windowActionModeOverlay=113;
     /**
@@ -10142,7 +10142,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:windowFixedHeightMajor
+     * @attr name com.app.facesbyplaces:windowFixedHeightMajor
      */
     public static final int AppCompatTheme_windowFixedHeightMajor=114;
     /**
@@ -10162,7 +10162,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:windowFixedHeightMinor
+     * @attr name com.app.facesbyplaces:windowFixedHeightMinor
      */
     public static final int AppCompatTheme_windowFixedHeightMinor=115;
     /**
@@ -10182,7 +10182,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:windowFixedWidthMajor
+     * @attr name com.app.facesbyplaces:windowFixedWidthMajor
      */
     public static final int AppCompatTheme_windowFixedWidthMajor=116;
     /**
@@ -10202,7 +10202,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:windowFixedWidthMinor
+     * @attr name com.app.facesbyplaces:windowFixedWidthMinor
      */
     public static final int AppCompatTheme_windowFixedWidthMinor=117;
     /**
@@ -10223,7 +10223,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:windowMinWidthMajor
+     * @attr name com.app.facesbyplaces:windowMinWidthMajor
      */
     public static final int AppCompatTheme_windowMinWidthMajor=118;
     /**
@@ -10244,7 +10244,7 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:windowMinWidthMinor
+     * @attr name com.app.facesbyplaces:windowMinWidthMinor
      */
     public static final int AppCompatTheme_windowMinWidthMinor=119;
     /**
@@ -10255,7 +10255,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:windowNoTitle
+     * @attr name com.app.facesbyplaces:windowNoTitle
      */
     public static final int AppCompatTheme_windowNoTitle=120;
     public static final int[] AppDataSearch={
@@ -10267,12 +10267,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #BottomAppBar_backgroundTint com.example.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabAlignmentMode com.example.facesbyplaces:fabAlignmentMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabCradleMargin com.example.facesbyplaces:fabCradleMargin}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabCradleRoundedCornerRadius com.example.facesbyplaces:fabCradleRoundedCornerRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_fabCradleVerticalOffset com.example.facesbyplaces:fabCradleVerticalOffset}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomAppBar_hideOnScroll com.example.facesbyplaces:hideOnScroll}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_backgroundTint com.app.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabAlignmentMode com.app.facesbyplaces:fabAlignmentMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabCradleMargin com.app.facesbyplaces:fabCradleMargin}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabCradleRoundedCornerRadius com.app.facesbyplaces:fabCradleRoundedCornerRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_fabCradleVerticalOffset com.app.facesbyplaces:fabCradleVerticalOffset}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomAppBar_hideOnScroll com.app.facesbyplaces:hideOnScroll}</code></td><td></td></tr>
      * </table>
      * @see #BottomAppBar_backgroundTint
      * @see #BottomAppBar_fabAlignmentMode
@@ -10294,11 +10294,11 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundTint
+     * @attr name com.app.facesbyplaces:backgroundTint
      */
     public static final int BottomAppBar_backgroundTint=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fabAlignmentMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fabAlignmentMode}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -10311,11 +10311,11 @@ public final class R {
      * <tr><td>end</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:fabAlignmentMode
+     * @attr name com.app.facesbyplaces:fabAlignmentMode
      */
     public static final int BottomAppBar_fabAlignmentMode=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fabCradleMargin}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fabCradleMargin}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10324,11 +10324,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:fabCradleMargin
+     * @attr name com.app.facesbyplaces:fabCradleMargin
      */
     public static final int BottomAppBar_fabCradleMargin=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fabCradleRoundedCornerRadius}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fabCradleRoundedCornerRadius}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10337,11 +10337,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:fabCradleRoundedCornerRadius
+     * @attr name com.app.facesbyplaces:fabCradleRoundedCornerRadius
      */
     public static final int BottomAppBar_fabCradleRoundedCornerRadius=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fabCradleVerticalOffset}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fabCradleVerticalOffset}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10350,17 +10350,17 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:fabCradleVerticalOffset
+     * @attr name com.app.facesbyplaces:fabCradleVerticalOffset
      */
     public static final int BottomAppBar_fabCradleVerticalOffset=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hideOnScroll}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hideOnScroll}
      * attribute's value can be found in the {@link #BottomAppBar} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:hideOnScroll
+     * @attr name com.app.facesbyplaces:hideOnScroll
      */
     public static final int BottomAppBar_hideOnScroll=5;
     /**
@@ -10370,16 +10370,16 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #BottomNavigationView_elevation com.example.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemBackground com.example.facesbyplaces:itemBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemHorizontalTranslationEnabled com.example.facesbyplaces:itemHorizontalTranslationEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemIconSize com.example.facesbyplaces:itemIconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemIconTint com.example.facesbyplaces:itemIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceActive com.example.facesbyplaces:itemTextAppearanceActive}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceInactive com.example.facesbyplaces:itemTextAppearanceInactive}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_itemTextColor com.example.facesbyplaces:itemTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_labelVisibilityMode com.example.facesbyplaces:labelVisibilityMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomNavigationView_menu com.example.facesbyplaces:menu}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_elevation com.app.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemBackground com.app.facesbyplaces:itemBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemHorizontalTranslationEnabled com.app.facesbyplaces:itemHorizontalTranslationEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemIconSize com.app.facesbyplaces:itemIconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemIconTint com.app.facesbyplaces:itemIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceActive com.app.facesbyplaces:itemTextAppearanceActive}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemTextAppearanceInactive com.app.facesbyplaces:itemTextAppearanceInactive}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_itemTextColor com.app.facesbyplaces:itemTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_labelVisibilityMode com.app.facesbyplaces:labelVisibilityMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomNavigationView_menu com.app.facesbyplaces:menu}</code></td><td></td></tr>
      * </table>
      * @see #BottomNavigationView_elevation
      * @see #BottomNavigationView_itemBackground
@@ -10408,11 +10408,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:elevation
+     * @attr name com.app.facesbyplaces:elevation
      */
     public static final int BottomNavigationView_elevation=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemBackground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemBackground}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10420,21 +10420,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemBackground
+     * @attr name com.app.facesbyplaces:itemBackground
      */
     public static final int BottomNavigationView_itemBackground=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemHorizontalTranslationEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemHorizontalTranslationEnabled}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:itemHorizontalTranslationEnabled
+     * @attr name com.app.facesbyplaces:itemHorizontalTranslationEnabled
      */
     public static final int BottomNavigationView_itemHorizontalTranslationEnabled=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemIconSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemIconSize}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10443,22 +10443,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:itemIconSize
+     * @attr name com.app.facesbyplaces:itemIconSize
      */
     public static final int BottomNavigationView_itemIconSize=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemIconTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemIconTint}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemIconTint
+     * @attr name com.app.facesbyplaces:itemIconTint
      */
     public static final int BottomNavigationView_itemIconTint=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemTextAppearanceActive}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemTextAppearanceActive}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10466,11 +10466,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemTextAppearanceActive
+     * @attr name com.app.facesbyplaces:itemTextAppearanceActive
      */
     public static final int BottomNavigationView_itemTextAppearanceActive=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemTextAppearanceInactive}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemTextAppearanceInactive}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10478,22 +10478,22 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemTextAppearanceInactive
+     * @attr name com.app.facesbyplaces:itemTextAppearanceInactive
      */
     public static final int BottomNavigationView_itemTextAppearanceInactive=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemTextColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemTextColor}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemTextColor
+     * @attr name com.app.facesbyplaces:itemTextColor
      */
     public static final int BottomNavigationView_itemTextColor=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#labelVisibilityMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#labelVisibilityMode}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -10508,11 +10508,11 @@ public final class R {
      * <tr><td>unlabeled</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:labelVisibilityMode
+     * @attr name com.app.facesbyplaces:labelVisibilityMode
      */
     public static final int BottomNavigationView_labelVisibilityMode=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#menu}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#menu}
      * attribute's value can be found in the {@link #BottomNavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -10520,7 +10520,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:menu
+     * @attr name com.app.facesbyplaces:menu
      */
     public static final int BottomNavigationView_menu=9;
     /**
@@ -10530,10 +10530,10 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_fitToContents com.example.facesbyplaces:behavior_fitToContents}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_hideable com.example.facesbyplaces:behavior_hideable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_peekHeight com.example.facesbyplaces:behavior_peekHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_skipCollapsed com.example.facesbyplaces:behavior_skipCollapsed}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_fitToContents com.app.facesbyplaces:behavior_fitToContents}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_hideable com.app.facesbyplaces:behavior_hideable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_peekHeight com.app.facesbyplaces:behavior_peekHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #BottomSheetBehavior_Layout_behavior_skipCollapsed com.app.facesbyplaces:behavior_skipCollapsed}</code></td><td></td></tr>
      * </table>
      * @see #BottomSheetBehavior_Layout_behavior_fitToContents
      * @see #BottomSheetBehavior_Layout_behavior_hideable
@@ -10544,27 +10544,27 @@ public final class R {
       0x7f03003b, 0x7f03003c, 0x7f03003e, 0x7f03003f
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#behavior_fitToContents}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#behavior_fitToContents}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:behavior_fitToContents
+     * @attr name com.app.facesbyplaces:behavior_fitToContents
      */
     public static final int BottomSheetBehavior_Layout_behavior_fitToContents=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#behavior_hideable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#behavior_hideable}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:behavior_hideable
+     * @attr name com.app.facesbyplaces:behavior_hideable
      */
     public static final int BottomSheetBehavior_Layout_behavior_hideable=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#behavior_peekHeight}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#behavior_peekHeight}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -10581,17 +10581,17 @@ public final class R {
      * <tr><td>auto</td><td>ffffffff</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:behavior_peekHeight
+     * @attr name com.app.facesbyplaces:behavior_peekHeight
      */
     public static final int BottomSheetBehavior_Layout_behavior_peekHeight=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#behavior_skipCollapsed}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#behavior_skipCollapsed}
      * attribute's value can be found in the {@link #BottomSheetBehavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:behavior_skipCollapsed
+     * @attr name com.app.facesbyplaces:behavior_skipCollapsed
      */
     public static final int BottomSheetBehavior_Layout_behavior_skipCollapsed=3;
     /**
@@ -10601,7 +10601,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ButtonBarLayout_allowStacking com.example.facesbyplaces:allowStacking}</code></td><td>Whether to automatically stack the buttons when there is not
+     * <tr><td><code>{@link #ButtonBarLayout_allowStacking com.app.facesbyplaces:allowStacking}</code></td><td>Whether to automatically stack the buttons when there is not
      * enough space to lay them out side-by-side.</td></tr>
      * </table>
      * @see #ButtonBarLayout_allowStacking
@@ -10618,7 +10618,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:allowStacking
+     * @attr name com.app.facesbyplaces:allowStacking
      */
     public static final int ButtonBarLayout_allowStacking=0;
     /**
@@ -10628,9 +10628,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CardInputView_cardHintText com.example.facesbyplaces:cardHintText}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CardInputView_cardTextErrorColor com.example.facesbyplaces:cardTextErrorColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CardInputView_cardTint com.example.facesbyplaces:cardTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CardInputView_cardHintText com.app.facesbyplaces:cardHintText}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CardInputView_cardTextErrorColor com.app.facesbyplaces:cardTextErrorColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CardInputView_cardTint com.app.facesbyplaces:cardTint}</code></td><td></td></tr>
      * </table>
      * @see #CardInputView_cardHintText
      * @see #CardInputView_cardTextErrorColor
@@ -10640,35 +10640,35 @@ public final class R {
       0x7f03006a, 0x7f03006d, 0x7f03006e
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cardHintText}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cardHintText}
      * attribute's value can be found in the {@link #CardInputView} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:cardHintText
+     * @attr name com.app.facesbyplaces:cardHintText
      */
     public static final int CardInputView_cardHintText=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cardTextErrorColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cardTextErrorColor}
      * attribute's value can be found in the {@link #CardInputView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:cardTextErrorColor
+     * @attr name com.app.facesbyplaces:cardTextErrorColor
      */
     public static final int CardInputView_cardTextErrorColor=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cardTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cardTint}
      * attribute's value can be found in the {@link #CardInputView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:cardTint
+     * @attr name com.app.facesbyplaces:cardTint
      */
     public static final int CardInputView_cardTint=2;
     /**
@@ -10678,7 +10678,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CardMultilineWidget_shouldShowPostalCode com.example.facesbyplaces:shouldShowPostalCode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CardMultilineWidget_shouldShowPostalCode com.app.facesbyplaces:shouldShowPostalCode}</code></td><td></td></tr>
      * </table>
      * @see #CardMultilineWidget_shouldShowPostalCode
      */
@@ -10686,13 +10686,13 @@ public final class R {
       0x7f030198
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#shouldShowPostalCode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#shouldShowPostalCode}
      * attribute's value can be found in the {@link #CardMultilineWidget} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:shouldShowPostalCode
+     * @attr name com.app.facesbyplaces:shouldShowPostalCode
      */
     public static final int CardMultilineWidget_shouldShowPostalCode=0;
     /**
@@ -10704,17 +10704,17 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #CardView_android_minWidth android:minWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #CardView_android_minHeight android:minHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CardView_cardBackgroundColor com.example.facesbyplaces:cardBackgroundColor}</code></td><td>Background color for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardCornerRadius com.example.facesbyplaces:cardCornerRadius}</code></td><td>Corner radius for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardElevation com.example.facesbyplaces:cardElevation}</code></td><td>Elevation for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardMaxElevation com.example.facesbyplaces:cardMaxElevation}</code></td><td>Maximum Elevation for CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.example.facesbyplaces:cardPreventCornerOverlap}</code></td><td>Add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.</td></tr>
-     * <tr><td><code>{@link #CardView_cardUseCompatPadding com.example.facesbyplaces:cardUseCompatPadding}</code></td><td>Add padding in API v21+ as well to have the same measurements with previous versions.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPadding com.example.facesbyplaces:contentPadding}</code></td><td>Inner padding between the edges of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingBottom com.example.facesbyplaces:contentPaddingBottom}</code></td><td>Inner padding between the bottom edge of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingLeft com.example.facesbyplaces:contentPaddingLeft}</code></td><td>Inner padding between the left edge of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingRight com.example.facesbyplaces:contentPaddingRight}</code></td><td>Inner padding between the right edge of the Card and children of the CardView.</td></tr>
-     * <tr><td><code>{@link #CardView_contentPaddingTop com.example.facesbyplaces:contentPaddingTop}</code></td><td>Inner padding between the top edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardBackgroundColor com.app.facesbyplaces:cardBackgroundColor}</code></td><td>Background color for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardCornerRadius com.app.facesbyplaces:cardCornerRadius}</code></td><td>Corner radius for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardElevation com.app.facesbyplaces:cardElevation}</code></td><td>Elevation for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardMaxElevation com.app.facesbyplaces:cardMaxElevation}</code></td><td>Maximum Elevation for CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.app.facesbyplaces:cardPreventCornerOverlap}</code></td><td>Add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.</td></tr>
+     * <tr><td><code>{@link #CardView_cardUseCompatPadding com.app.facesbyplaces:cardUseCompatPadding}</code></td><td>Add padding in API v21+ as well to have the same measurements with previous versions.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPadding com.app.facesbyplaces:contentPadding}</code></td><td>Inner padding between the edges of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingBottom com.app.facesbyplaces:contentPaddingBottom}</code></td><td>Inner padding between the bottom edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingLeft com.app.facesbyplaces:contentPaddingLeft}</code></td><td>Inner padding between the left edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingRight com.app.facesbyplaces:contentPaddingRight}</code></td><td>Inner padding between the right edge of the Card and children of the CardView.</td></tr>
+     * <tr><td><code>{@link #CardView_contentPaddingTop com.app.facesbyplaces:contentPaddingTop}</code></td><td>Inner padding between the top edge of the Card and children of the CardView.</td></tr>
      * </table>
      * @see #CardView_android_minWidth
      * @see #CardView_android_minHeight
@@ -10773,7 +10773,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:cardBackgroundColor
+     * @attr name com.app.facesbyplaces:cardBackgroundColor
      */
     public static final int CardView_cardBackgroundColor=2;
     /**
@@ -10787,7 +10787,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:cardCornerRadius
+     * @attr name com.app.facesbyplaces:cardCornerRadius
      */
     public static final int CardView_cardCornerRadius=3;
     /**
@@ -10801,7 +10801,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:cardElevation
+     * @attr name com.app.facesbyplaces:cardElevation
      */
     public static final int CardView_cardElevation=4;
     /**
@@ -10815,7 +10815,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:cardMaxElevation
+     * @attr name com.app.facesbyplaces:cardMaxElevation
      */
     public static final int CardView_cardMaxElevation=5;
     /**
@@ -10826,7 +10826,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:cardPreventCornerOverlap
+     * @attr name com.app.facesbyplaces:cardPreventCornerOverlap
      */
     public static final int CardView_cardPreventCornerOverlap=6;
     /**
@@ -10837,7 +10837,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:cardUseCompatPadding
+     * @attr name com.app.facesbyplaces:cardUseCompatPadding
      */
     public static final int CardView_cardUseCompatPadding=7;
     /**
@@ -10851,7 +10851,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentPadding
+     * @attr name com.app.facesbyplaces:contentPadding
      */
     public static final int CardView_contentPadding=8;
     /**
@@ -10865,7 +10865,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentPaddingBottom
+     * @attr name com.app.facesbyplaces:contentPaddingBottom
      */
     public static final int CardView_contentPaddingBottom=9;
     /**
@@ -10879,7 +10879,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentPaddingLeft
+     * @attr name com.app.facesbyplaces:contentPaddingLeft
      */
     public static final int CardView_contentPaddingLeft=10;
     /**
@@ -10893,7 +10893,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentPaddingRight
+     * @attr name com.app.facesbyplaces:contentPaddingRight
      */
     public static final int CardView_contentPaddingRight=11;
     /**
@@ -10907,7 +10907,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentPaddingTop
+     * @attr name com.app.facesbyplaces:contentPaddingTop
      */
     public static final int CardView_contentPaddingTop=12;
     /**
@@ -10922,35 +10922,35 @@ public final class R {
      * <tr><td><code>{@link #Chip_android_maxWidth android:maxWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #Chip_android_text android:text}</code></td><td></td></tr>
      * <tr><td><code>{@link #Chip_android_checkable android:checkable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_checkedIcon com.example.facesbyplaces:checkedIcon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_checkedIconEnabled com.example.facesbyplaces:checkedIconEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_checkedIconVisible com.example.facesbyplaces:checkedIconVisible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipBackgroundColor com.example.facesbyplaces:chipBackgroundColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipCornerRadius com.example.facesbyplaces:chipCornerRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipEndPadding com.example.facesbyplaces:chipEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIcon com.example.facesbyplaces:chipIcon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconEnabled com.example.facesbyplaces:chipIconEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconSize com.example.facesbyplaces:chipIconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconTint com.example.facesbyplaces:chipIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipIconVisible com.example.facesbyplaces:chipIconVisible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipMinHeight com.example.facesbyplaces:chipMinHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipStartPadding com.example.facesbyplaces:chipStartPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipStrokeColor com.example.facesbyplaces:chipStrokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_chipStrokeWidth com.example.facesbyplaces:chipStrokeWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIcon com.example.facesbyplaces:closeIcon}</code></td><td>Close button icon</td></tr>
-     * <tr><td><code>{@link #Chip_closeIconEnabled com.example.facesbyplaces:closeIconEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconEndPadding com.example.facesbyplaces:closeIconEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconSize com.example.facesbyplaces:closeIconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconStartPadding com.example.facesbyplaces:closeIconStartPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconTint com.example.facesbyplaces:closeIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_closeIconVisible com.example.facesbyplaces:closeIconVisible}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_hideMotionSpec com.example.facesbyplaces:hideMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_iconEndPadding com.example.facesbyplaces:iconEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_iconStartPadding com.example.facesbyplaces:iconStartPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_rippleColor com.example.facesbyplaces:rippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_showMotionSpec com.example.facesbyplaces:showMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_textEndPadding com.example.facesbyplaces:textEndPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Chip_textStartPadding com.example.facesbyplaces:textStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_checkedIcon com.app.facesbyplaces:checkedIcon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_checkedIconEnabled com.app.facesbyplaces:checkedIconEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_checkedIconVisible com.app.facesbyplaces:checkedIconVisible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipBackgroundColor com.app.facesbyplaces:chipBackgroundColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipCornerRadius com.app.facesbyplaces:chipCornerRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipEndPadding com.app.facesbyplaces:chipEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIcon com.app.facesbyplaces:chipIcon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconEnabled com.app.facesbyplaces:chipIconEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconSize com.app.facesbyplaces:chipIconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconTint com.app.facesbyplaces:chipIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipIconVisible com.app.facesbyplaces:chipIconVisible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipMinHeight com.app.facesbyplaces:chipMinHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipStartPadding com.app.facesbyplaces:chipStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipStrokeColor com.app.facesbyplaces:chipStrokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_chipStrokeWidth com.app.facesbyplaces:chipStrokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIcon com.app.facesbyplaces:closeIcon}</code></td><td>Close button icon</td></tr>
+     * <tr><td><code>{@link #Chip_closeIconEnabled com.app.facesbyplaces:closeIconEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconEndPadding com.app.facesbyplaces:closeIconEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconSize com.app.facesbyplaces:closeIconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconStartPadding com.app.facesbyplaces:closeIconStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconTint com.app.facesbyplaces:closeIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_closeIconVisible com.app.facesbyplaces:closeIconVisible}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_hideMotionSpec com.app.facesbyplaces:hideMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_iconEndPadding com.app.facesbyplaces:iconEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_iconStartPadding com.app.facesbyplaces:iconStartPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_rippleColor com.app.facesbyplaces:rippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_showMotionSpec com.app.facesbyplaces:showMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_textEndPadding com.app.facesbyplaces:textEndPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Chip_textStartPadding com.app.facesbyplaces:textStartPadding}</code></td><td></td></tr>
      * </table>
      * @see #Chip_android_textAppearance
      * @see #Chip_android_ellipsize
@@ -11064,7 +11064,7 @@ public final class R {
      */
     public static final int Chip_android_checkable=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#checkedIcon}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#checkedIcon}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11072,42 +11072,42 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:checkedIcon
+     * @attr name com.app.facesbyplaces:checkedIcon
      */
     public static final int Chip_checkedIcon=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#checkedIconEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#checkedIconEnabled}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:checkedIconEnabled
+     * @attr name com.app.facesbyplaces:checkedIconEnabled
      */
     public static final int Chip_checkedIconEnabled=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#checkedIconVisible}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#checkedIconVisible}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:checkedIconVisible
+     * @attr name com.app.facesbyplaces:checkedIconVisible
      */
     public static final int Chip_checkedIconVisible=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipBackgroundColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipBackgroundColor}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipBackgroundColor
+     * @attr name com.app.facesbyplaces:chipBackgroundColor
      */
     public static final int Chip_chipBackgroundColor=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipCornerRadius}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipCornerRadius}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11116,11 +11116,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipCornerRadius
+     * @attr name com.app.facesbyplaces:chipCornerRadius
      */
     public static final int Chip_chipCornerRadius=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipEndPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11129,11 +11129,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipEndPadding
+     * @attr name com.app.facesbyplaces:chipEndPadding
      */
     public static final int Chip_chipEndPadding=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipIcon}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipIcon}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11141,21 +11141,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipIcon
+     * @attr name com.app.facesbyplaces:chipIcon
      */
     public static final int Chip_chipIcon=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipIconEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipIconEnabled}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:chipIconEnabled
+     * @attr name com.app.facesbyplaces:chipIconEnabled
      */
     public static final int Chip_chipIconEnabled=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipIconSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipIconSize}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11164,32 +11164,32 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipIconSize
+     * @attr name com.app.facesbyplaces:chipIconSize
      */
     public static final int Chip_chipIconSize=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipIconTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipIconTint}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipIconTint
+     * @attr name com.app.facesbyplaces:chipIconTint
      */
     public static final int Chip_chipIconTint=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipIconVisible}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipIconVisible}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:chipIconVisible
+     * @attr name com.app.facesbyplaces:chipIconVisible
      */
     public static final int Chip_chipIconVisible=15;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipMinHeight}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipMinHeight}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11198,11 +11198,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipMinHeight
+     * @attr name com.app.facesbyplaces:chipMinHeight
      */
     public static final int Chip_chipMinHeight=16;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipStartPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11211,22 +11211,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipStartPadding
+     * @attr name com.app.facesbyplaces:chipStartPadding
      */
     public static final int Chip_chipStartPadding=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipStrokeColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipStrokeColor}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipStrokeColor
+     * @attr name com.app.facesbyplaces:chipStrokeColor
      */
     public static final int Chip_chipStrokeColor=18;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipStrokeWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipStrokeWidth}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11235,7 +11235,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipStrokeWidth
+     * @attr name com.app.facesbyplaces:chipStrokeWidth
      */
     public static final int Chip_chipStrokeWidth=19;
     /**
@@ -11248,21 +11248,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:closeIcon
+     * @attr name com.app.facesbyplaces:closeIcon
      */
     public static final int Chip_closeIcon=20;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#closeIconEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#closeIconEnabled}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:closeIconEnabled
+     * @attr name com.app.facesbyplaces:closeIconEnabled
      */
     public static final int Chip_closeIconEnabled=21;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#closeIconEndPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#closeIconEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11271,11 +11271,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:closeIconEndPadding
+     * @attr name com.app.facesbyplaces:closeIconEndPadding
      */
     public static final int Chip_closeIconEndPadding=22;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#closeIconSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#closeIconSize}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11284,11 +11284,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:closeIconSize
+     * @attr name com.app.facesbyplaces:closeIconSize
      */
     public static final int Chip_closeIconSize=23;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#closeIconStartPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#closeIconStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11297,32 +11297,32 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:closeIconStartPadding
+     * @attr name com.app.facesbyplaces:closeIconStartPadding
      */
     public static final int Chip_closeIconStartPadding=24;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#closeIconTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#closeIconTint}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:closeIconTint
+     * @attr name com.app.facesbyplaces:closeIconTint
      */
     public static final int Chip_closeIconTint=25;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#closeIconVisible}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#closeIconVisible}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:closeIconVisible
+     * @attr name com.app.facesbyplaces:closeIconVisible
      */
     public static final int Chip_closeIconVisible=26;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hideMotionSpec}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hideMotionSpec}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11330,11 +11330,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:hideMotionSpec
+     * @attr name com.app.facesbyplaces:hideMotionSpec
      */
     public static final int Chip_hideMotionSpec=27;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#iconEndPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#iconEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11343,11 +11343,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:iconEndPadding
+     * @attr name com.app.facesbyplaces:iconEndPadding
      */
     public static final int Chip_iconEndPadding=28;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#iconStartPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#iconStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11356,22 +11356,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:iconStartPadding
+     * @attr name com.app.facesbyplaces:iconStartPadding
      */
     public static final int Chip_iconStartPadding=29;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#rippleColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#rippleColor}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:rippleColor
+     * @attr name com.app.facesbyplaces:rippleColor
      */
     public static final int Chip_rippleColor=30;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#showMotionSpec}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#showMotionSpec}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11379,11 +11379,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:showMotionSpec
+     * @attr name com.app.facesbyplaces:showMotionSpec
      */
     public static final int Chip_showMotionSpec=31;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textEndPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textEndPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11392,11 +11392,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:textEndPadding
+     * @attr name com.app.facesbyplaces:textEndPadding
      */
     public static final int Chip_textEndPadding=32;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textStartPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textStartPadding}
      * attribute's value can be found in the {@link #Chip} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11405,7 +11405,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:textStartPadding
+     * @attr name com.app.facesbyplaces:textStartPadding
      */
     public static final int Chip_textStartPadding=33;
     /**
@@ -11415,12 +11415,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ChipGroup_checkedChip com.example.facesbyplaces:checkedChip}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_chipSpacing com.example.facesbyplaces:chipSpacing}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_chipSpacingHorizontal com.example.facesbyplaces:chipSpacingHorizontal}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_chipSpacingVertical com.example.facesbyplaces:chipSpacingVertical}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_singleLine com.example.facesbyplaces:singleLine}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ChipGroup_singleSelection com.example.facesbyplaces:singleSelection}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_checkedChip com.app.facesbyplaces:checkedChip}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_chipSpacing com.app.facesbyplaces:chipSpacing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_chipSpacingHorizontal com.app.facesbyplaces:chipSpacingHorizontal}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_chipSpacingVertical com.app.facesbyplaces:chipSpacingVertical}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_singleLine com.app.facesbyplaces:singleLine}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ChipGroup_singleSelection com.app.facesbyplaces:singleSelection}</code></td><td></td></tr>
      * </table>
      * @see #ChipGroup_checkedChip
      * @see #ChipGroup_chipSpacing
@@ -11434,7 +11434,7 @@ public final class R {
       0x7f03019f, 0x7f0301a0
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#checkedChip}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#checkedChip}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11442,11 +11442,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:checkedChip
+     * @attr name com.app.facesbyplaces:checkedChip
      */
     public static final int ChipGroup_checkedChip=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipSpacing}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipSpacing}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11455,11 +11455,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipSpacing
+     * @attr name com.app.facesbyplaces:chipSpacing
      */
     public static final int ChipGroup_chipSpacing=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipSpacingHorizontal}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipSpacingHorizontal}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11468,11 +11468,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipSpacingHorizontal
+     * @attr name com.app.facesbyplaces:chipSpacingHorizontal
      */
     public static final int ChipGroup_chipSpacingHorizontal=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipSpacingVertical}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipSpacingVertical}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11481,27 +11481,27 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:chipSpacingVertical
+     * @attr name com.app.facesbyplaces:chipSpacingVertical
      */
     public static final int ChipGroup_chipSpacingVertical=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#singleLine}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#singleLine}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:singleLine
+     * @attr name com.app.facesbyplaces:singleLine
      */
     public static final int ChipGroup_singleLine=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#singleSelection}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#singleSelection}
      * attribute's value can be found in the {@link #ChipGroup} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:singleSelection
+     * @attr name com.app.facesbyplaces:singleSelection
      */
     public static final int ChipGroup_singleSelection=5;
     /**
@@ -11511,22 +11511,22 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleGravity com.example.facesbyplaces:collapsedTitleGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleTextAppearance com.example.facesbyplaces:collapsedTitleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_contentScrim com.example.facesbyplaces:contentScrim}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleGravity com.example.facesbyplaces:expandedTitleGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMargin com.example.facesbyplaces:expandedTitleMargin}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginBottom com.example.facesbyplaces:expandedTitleMarginBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginEnd com.example.facesbyplaces:expandedTitleMarginEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginStart com.example.facesbyplaces:expandedTitleMarginStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginTop com.example.facesbyplaces:expandedTitleMarginTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleTextAppearance com.example.facesbyplaces:expandedTitleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimAnimationDuration com.example.facesbyplaces:scrimAnimationDuration}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimVisibleHeightTrigger com.example.facesbyplaces:scrimVisibleHeightTrigger}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_statusBarScrim com.example.facesbyplaces:statusBarScrim}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_title com.example.facesbyplaces:title}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_titleEnabled com.example.facesbyplaces:titleEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_toolbarId com.example.facesbyplaces:toolbarId}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleGravity com.app.facesbyplaces:collapsedTitleGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_collapsedTitleTextAppearance com.app.facesbyplaces:collapsedTitleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_contentScrim com.app.facesbyplaces:contentScrim}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleGravity com.app.facesbyplaces:expandedTitleGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMargin com.app.facesbyplaces:expandedTitleMargin}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginBottom com.app.facesbyplaces:expandedTitleMarginBottom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginEnd com.app.facesbyplaces:expandedTitleMarginEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginStart com.app.facesbyplaces:expandedTitleMarginStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleMarginTop com.app.facesbyplaces:expandedTitleMarginTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_expandedTitleTextAppearance com.app.facesbyplaces:expandedTitleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimAnimationDuration com.app.facesbyplaces:scrimAnimationDuration}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_scrimVisibleHeightTrigger com.app.facesbyplaces:scrimVisibleHeightTrigger}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_statusBarScrim com.app.facesbyplaces:statusBarScrim}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_title com.app.facesbyplaces:title}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_titleEnabled com.app.facesbyplaces:titleEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_toolbarId com.app.facesbyplaces:toolbarId}</code></td><td></td></tr>
      * </table>
      * @see #CollapsingToolbarLayout_collapsedTitleGravity
      * @see #CollapsingToolbarLayout_collapsedTitleTextAppearance
@@ -11552,7 +11552,7 @@ public final class R {
       0x7f0301b1, 0x7f030200, 0x7f030201, 0x7f03020c
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#collapsedTitleGravity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#collapsedTitleGravity}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -11573,11 +11573,11 @@ public final class R {
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:collapsedTitleGravity
+     * @attr name com.app.facesbyplaces:collapsedTitleGravity
      */
     public static final int CollapsingToolbarLayout_collapsedTitleGravity=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#collapsedTitleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#collapsedTitleTextAppearance}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11585,22 +11585,22 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:collapsedTitleTextAppearance
+     * @attr name com.app.facesbyplaces:collapsedTitleTextAppearance
      */
     public static final int CollapsingToolbarLayout_collapsedTitleTextAppearance=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#contentScrim}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#contentScrim}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:contentScrim
+     * @attr name com.app.facesbyplaces:contentScrim
      */
     public static final int CollapsingToolbarLayout_contentScrim=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleGravity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleGravity}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -11621,11 +11621,11 @@ public final class R {
      * <tr><td>top</td><td>30</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:expandedTitleGravity
+     * @attr name com.app.facesbyplaces:expandedTitleGravity
      */
     public static final int CollapsingToolbarLayout_expandedTitleGravity=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleMargin}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleMargin}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11634,11 +11634,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:expandedTitleMargin
+     * @attr name com.app.facesbyplaces:expandedTitleMargin
      */
     public static final int CollapsingToolbarLayout_expandedTitleMargin=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleMarginBottom}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleMarginBottom}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11647,11 +11647,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:expandedTitleMarginBottom
+     * @attr name com.app.facesbyplaces:expandedTitleMarginBottom
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginBottom=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleMarginEnd}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleMarginEnd}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11660,11 +11660,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:expandedTitleMarginEnd
+     * @attr name com.app.facesbyplaces:expandedTitleMarginEnd
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginEnd=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleMarginStart}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleMarginStart}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11673,11 +11673,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:expandedTitleMarginStart
+     * @attr name com.app.facesbyplaces:expandedTitleMarginStart
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginStart=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleMarginTop}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleMarginTop}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11686,11 +11686,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:expandedTitleMarginTop
+     * @attr name com.app.facesbyplaces:expandedTitleMarginTop
      */
     public static final int CollapsingToolbarLayout_expandedTitleMarginTop=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#expandedTitleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#expandedTitleTextAppearance}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11698,20 +11698,20 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:expandedTitleTextAppearance
+     * @attr name com.app.facesbyplaces:expandedTitleTextAppearance
      */
     public static final int CollapsingToolbarLayout_expandedTitleTextAppearance=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#scrimAnimationDuration}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#scrimAnimationDuration}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:scrimAnimationDuration
+     * @attr name com.app.facesbyplaces:scrimAnimationDuration
      */
     public static final int CollapsingToolbarLayout_scrimAnimationDuration=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#scrimVisibleHeightTrigger}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#scrimVisibleHeightTrigger}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -11720,42 +11720,42 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:scrimVisibleHeightTrigger
+     * @attr name com.app.facesbyplaces:scrimVisibleHeightTrigger
      */
     public static final int CollapsingToolbarLayout_scrimVisibleHeightTrigger=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#statusBarScrim}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#statusBarScrim}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:statusBarScrim
+     * @attr name com.app.facesbyplaces:statusBarScrim
      */
     public static final int CollapsingToolbarLayout_statusBarScrim=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#title}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#title}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:title
+     * @attr name com.app.facesbyplaces:title
      */
     public static final int CollapsingToolbarLayout_title=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#titleEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#titleEnabled}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:titleEnabled
+     * @attr name com.app.facesbyplaces:titleEnabled
      */
     public static final int CollapsingToolbarLayout_titleEnabled=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#toolbarId}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#toolbarId}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -11763,7 +11763,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:toolbarId
+     * @attr name com.app.facesbyplaces:toolbarId
      */
     public static final int CollapsingToolbarLayout_toolbarId=15;
     /**
@@ -11773,8 +11773,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseMode com.example.facesbyplaces:layout_collapseMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier com.example.facesbyplaces:layout_collapseParallaxMultiplier}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseMode com.app.facesbyplaces:layout_collapseMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier com.app.facesbyplaces:layout_collapseParallaxMultiplier}</code></td><td></td></tr>
      * </table>
      * @see #CollapsingToolbarLayout_Layout_layout_collapseMode
      * @see #CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier
@@ -11783,7 +11783,7 @@ public final class R {
       0x7f030136, 0x7f030137
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#layout_collapseMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#layout_collapseMode}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout_Layout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -11797,16 +11797,16 @@ public final class R {
      * <tr><td>pin</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:layout_collapseMode
+     * @attr name com.app.facesbyplaces:layout_collapseMode
      */
     public static final int CollapsingToolbarLayout_Layout_layout_collapseMode=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#layout_collapseParallaxMultiplier}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#layout_collapseParallaxMultiplier}
      * attribute's value can be found in the {@link #CollapsingToolbarLayout_Layout} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:layout_collapseParallaxMultiplier
+     * @attr name com.app.facesbyplaces:layout_collapseParallaxMultiplier
      */
     public static final int CollapsingToolbarLayout_Layout_layout_collapseParallaxMultiplier=1;
     /**
@@ -11818,7 +11818,7 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ColorStateListItem_android_color android:color}</code></td><td></td></tr>
      * <tr><td><code>{@link #ColorStateListItem_android_alpha android:alpha}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ColorStateListItem_alpha com.example.facesbyplaces:alpha}</code></td><td>Alpha multiplier applied to the base color.</td></tr>
+     * <tr><td><code>{@link #ColorStateListItem_alpha com.app.facesbyplaces:alpha}</code></td><td>Alpha multiplier applied to the base color.</td></tr>
      * </table>
      * @see #ColorStateListItem_android_color
      * @see #ColorStateListItem_android_alpha
@@ -11855,7 +11855,7 @@ public final class R {
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:alpha
+     * @attr name com.app.facesbyplaces:alpha
      */
     public static final int ColorStateListItem_alpha=2;
     /**
@@ -11866,8 +11866,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #CompoundButton_android_button android:button}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CompoundButton_buttonTint com.example.facesbyplaces:buttonTint}</code></td><td>Tint to apply to the button drawable.</td></tr>
-     * <tr><td><code>{@link #CompoundButton_buttonTintMode com.example.facesbyplaces:buttonTintMode}</code></td><td>Blending mode used to apply the button tint.</td></tr>
+     * <tr><td><code>{@link #CompoundButton_buttonTint com.app.facesbyplaces:buttonTint}</code></td><td>Tint to apply to the button drawable.</td></tr>
+     * <tr><td><code>{@link #CompoundButton_buttonTintMode com.app.facesbyplaces:buttonTintMode}</code></td><td>Blending mode used to apply the button tint.</td></tr>
      * </table>
      * @see #CompoundButton_android_button
      * @see #CompoundButton_buttonTint
@@ -11897,7 +11897,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:buttonTint
+     * @attr name com.app.facesbyplaces:buttonTint
      */
     public static final int CompoundButton_buttonTint=1;
     /**
@@ -11924,7 +11924,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buttonTintMode
+     * @attr name com.app.facesbyplaces:buttonTintMode
      */
     public static final int CompoundButton_buttonTintMode=2;
     /**
@@ -11934,9 +11934,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_keylines com.example.facesbyplaces:keylines}</code></td><td>A reference to an array of integers representing the
+     * <tr><td><code>{@link #CoordinatorLayout_keylines com.app.facesbyplaces:keylines}</code></td><td>A reference to an array of integers representing the
      * locations of horizontal keylines in dp from the starting edge.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_statusBarBackground com.example.facesbyplaces:statusBarBackground}</code></td><td>Drawable to display behind the status bar when the view is set to draw behind it.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_statusBarBackground com.app.facesbyplaces:statusBarBackground}</code></td><td>Drawable to display behind the status bar when the view is set to draw behind it.</td></tr>
      * </table>
      * @see #CoordinatorLayout_keylines
      * @see #CoordinatorLayout_statusBarBackground
@@ -11958,7 +11958,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:keylines
+     * @attr name com.app.facesbyplaces:keylines
      */
     public static final int CoordinatorLayout_keylines=0;
     /**
@@ -11974,7 +11974,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:statusBarBackground
+     * @attr name com.app.facesbyplaces:statusBarBackground
      */
     public static final int CoordinatorLayout_statusBarBackground=1;
     /**
@@ -11985,15 +11985,15 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #CoordinatorLayout_Layout_android_layout_gravity android:layout_gravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchor com.example.facesbyplaces:layout_anchor}</code></td><td>The id of an anchor view that this view should position relative to.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchorGravity com.example.facesbyplaces:layout_anchorGravity}</code></td><td>Specifies how an object should position relative to an anchor, on both the X and Y axes,
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchor com.app.facesbyplaces:layout_anchor}</code></td><td>The id of an anchor view that this view should position relative to.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_anchorGravity com.app.facesbyplaces:layout_anchorGravity}</code></td><td>Specifies how an object should position relative to an anchor, on both the X and Y axes,
      * within its parent's bounds.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_behavior com.example.facesbyplaces:layout_behavior}</code></td><td>The class name of a Behavior class defining special runtime behavior
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_behavior com.app.facesbyplaces:layout_behavior}</code></td><td>The class name of a Behavior class defining special runtime behavior
      * for this child view.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_dodgeInsetEdges com.example.facesbyplaces:layout_dodgeInsetEdges}</code></td><td>Specifies how this view dodges the inset edges of the CoordinatorLayout.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_insetEdge com.example.facesbyplaces:layout_insetEdge}</code></td><td>Specifies how this view insets the CoordinatorLayout and make some other views
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_dodgeInsetEdges com.app.facesbyplaces:layout_dodgeInsetEdges}</code></td><td>Specifies how this view dodges the inset edges of the CoordinatorLayout.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_insetEdge com.app.facesbyplaces:layout_insetEdge}</code></td><td>Specifies how this view insets the CoordinatorLayout and make some other views
      * dodge it.</td></tr>
-     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_keyline com.example.facesbyplaces:layout_keyline}</code></td><td>The index of a keyline this view should position relative to.</td></tr>
+     * <tr><td><code>{@link #CoordinatorLayout_Layout_layout_keyline com.app.facesbyplaces:layout_keyline}</code></td><td>The index of a keyline this view should position relative to.</td></tr>
      * </table>
      * @see #CoordinatorLayout_Layout_android_layout_gravity
      * @see #CoordinatorLayout_Layout_layout_anchor
@@ -12046,7 +12046,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:layout_anchor
+     * @attr name com.app.facesbyplaces:layout_anchor
      */
     public static final int CoordinatorLayout_Layout_layout_anchor=1;
     /**
@@ -12083,7 +12083,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Push object to the top of its container, not changing its size.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:layout_anchorGravity
+     * @attr name com.app.facesbyplaces:layout_anchorGravity
      */
     public static final int CoordinatorLayout_Layout_layout_anchorGravity=2;
     /**
@@ -12095,7 +12095,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:layout_behavior
+     * @attr name com.app.facesbyplaces:layout_behavior
      */
     public static final int CoordinatorLayout_Layout_layout_behavior=3;
     /**
@@ -12119,7 +12119,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Dodge the top inset edge.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:layout_dodgeInsetEdges
+     * @attr name com.app.facesbyplaces:layout_dodgeInsetEdges
      */
     public static final int CoordinatorLayout_Layout_layout_dodgeInsetEdges=4;
     /**
@@ -12143,7 +12143,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Inset the top edge.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:layout_insetEdge
+     * @attr name com.app.facesbyplaces:layout_insetEdge
      */
     public static final int CoordinatorLayout_Layout_layout_insetEdge=5;
     /**
@@ -12155,7 +12155,7 @@ public final class R {
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:layout_keyline
+     * @attr name com.app.facesbyplaces:layout_keyline
      */
     public static final int CoordinatorLayout_Layout_layout_keyline=6;
     /**
@@ -12165,14 +12165,14 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #Corpus_contentProviderUri com.example.facesbyplaces:contentProviderUri}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_corpusId com.example.facesbyplaces:corpusId}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_corpusVersion com.example.facesbyplaces:corpusVersion}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_documentMaxAgeSecs com.example.facesbyplaces:documentMaxAgeSecs}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_perAccountTemplate com.example.facesbyplaces:perAccountTemplate}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_schemaOrgType com.example.facesbyplaces:schemaOrgType}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_semanticallySearchable com.example.facesbyplaces:semanticallySearchable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Corpus_trimmable com.example.facesbyplaces:trimmable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_contentProviderUri com.app.facesbyplaces:contentProviderUri}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_corpusId com.app.facesbyplaces:corpusId}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_corpusVersion com.app.facesbyplaces:corpusVersion}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_documentMaxAgeSecs com.app.facesbyplaces:documentMaxAgeSecs}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_perAccountTemplate com.app.facesbyplaces:perAccountTemplate}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_schemaOrgType com.app.facesbyplaces:schemaOrgType}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_semanticallySearchable com.app.facesbyplaces:semanticallySearchable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Corpus_trimmable com.app.facesbyplaces:trimmable}</code></td><td></td></tr>
      * </table>
      * @see #Corpus_contentProviderUri
      * @see #Corpus_corpusId
@@ -12188,82 +12188,82 @@ public final class R {
       0x7f030173, 0x7f030184, 0x7f030196, 0x7f030216
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#contentProviderUri}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#contentProviderUri}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:contentProviderUri
+     * @attr name com.app.facesbyplaces:contentProviderUri
      */
     public static final int Corpus_contentProviderUri=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#corpusId}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#corpusId}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:corpusId
+     * @attr name com.app.facesbyplaces:corpusId
      */
     public static final int Corpus_corpusId=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#corpusVersion}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#corpusVersion}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:corpusVersion
+     * @attr name com.app.facesbyplaces:corpusVersion
      */
     public static final int Corpus_corpusVersion=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#documentMaxAgeSecs}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#documentMaxAgeSecs}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:documentMaxAgeSecs
+     * @attr name com.app.facesbyplaces:documentMaxAgeSecs
      */
     public static final int Corpus_documentMaxAgeSecs=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#perAccountTemplate}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#perAccountTemplate}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:perAccountTemplate
+     * @attr name com.app.facesbyplaces:perAccountTemplate
      */
     public static final int Corpus_perAccountTemplate=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#schemaOrgType}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#schemaOrgType}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:schemaOrgType
+     * @attr name com.app.facesbyplaces:schemaOrgType
      */
     public static final int Corpus_schemaOrgType=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#semanticallySearchable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#semanticallySearchable}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:semanticallySearchable
+     * @attr name com.app.facesbyplaces:semanticallySearchable
      */
     public static final int Corpus_semanticallySearchable=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#trimmable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#trimmable}
      * attribute's value can be found in the {@link #Corpus} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:trimmable
+     * @attr name com.app.facesbyplaces:trimmable
      */
     public static final int Corpus_trimmable=7;
     /**
@@ -12273,9 +12273,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #CustomWalletTheme_customThemeStyle com.example.facesbyplaces:customThemeStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CustomWalletTheme_toolbarTextColorStyle com.example.facesbyplaces:toolbarTextColorStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #CustomWalletTheme_windowTransitionStyle com.example.facesbyplaces:windowTransitionStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CustomWalletTheme_customThemeStyle com.app.facesbyplaces:customThemeStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CustomWalletTheme_toolbarTextColorStyle com.app.facesbyplaces:toolbarTextColorStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #CustomWalletTheme_windowTransitionStyle com.app.facesbyplaces:windowTransitionStyle}</code></td><td></td></tr>
      * </table>
      * @see #CustomWalletTheme_customThemeStyle
      * @see #CustomWalletTheme_toolbarTextColorStyle
@@ -12285,7 +12285,7 @@ public final class R {
       0x7f0300bc, 0x7f03020f, 0x7f030231
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#customThemeStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#customThemeStyle}
      * attribute's value can be found in the {@link #CustomWalletTheme} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12298,11 +12298,11 @@ public final class R {
      * <tr><td>material</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:customThemeStyle
+     * @attr name com.app.facesbyplaces:customThemeStyle
      */
     public static final int CustomWalletTheme_customThemeStyle=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#toolbarTextColorStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#toolbarTextColorStyle}
      * attribute's value can be found in the {@link #CustomWalletTheme} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12315,11 +12315,11 @@ public final class R {
      * <tr><td>light</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:toolbarTextColorStyle
+     * @attr name com.app.facesbyplaces:toolbarTextColorStyle
      */
     public static final int CustomWalletTheme_toolbarTextColorStyle=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#windowTransitionStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#windowTransitionStyle}
      * attribute's value can be found in the {@link #CustomWalletTheme} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12332,7 +12332,7 @@ public final class R {
      * <tr><td>slide</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:windowTransitionStyle
+     * @attr name com.app.facesbyplaces:windowTransitionStyle
      */
     public static final int CustomWalletTheme_windowTransitionStyle=2;
     /**
@@ -12342,8 +12342,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #DesignTheme_bottomSheetDialogTheme com.example.facesbyplaces:bottomSheetDialogTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #DesignTheme_bottomSheetStyle com.example.facesbyplaces:bottomSheetStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #DesignTheme_bottomSheetDialogTheme com.app.facesbyplaces:bottomSheetDialogTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #DesignTheme_bottomSheetStyle com.app.facesbyplaces:bottomSheetStyle}</code></td><td></td></tr>
      * </table>
      * @see #DesignTheme_bottomSheetDialogTheme
      * @see #DesignTheme_bottomSheetStyle
@@ -12352,7 +12352,7 @@ public final class R {
       0x7f030044, 0x7f030045
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#bottomSheetDialogTheme}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#bottomSheetDialogTheme}
      * attribute's value can be found in the {@link #DesignTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12360,11 +12360,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:bottomSheetDialogTheme
+     * @attr name com.app.facesbyplaces:bottomSheetDialogTheme
      */
     public static final int DesignTheme_bottomSheetDialogTheme=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#bottomSheetStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#bottomSheetStyle}
      * attribute's value can be found in the {@link #DesignTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12372,7 +12372,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:bottomSheetStyle
+     * @attr name com.app.facesbyplaces:bottomSheetStyle
      */
     public static final int DesignTheme_bottomSheetStyle=1;
     /**
@@ -12382,14 +12382,14 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_arrowHeadLength com.example.facesbyplaces:arrowHeadLength}</code></td><td>The length of the arrow head when formed to make an arrow</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_arrowShaftLength com.example.facesbyplaces:arrowShaftLength}</code></td><td>The length of the shaft when formed to make an arrow</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_barLength com.example.facesbyplaces:barLength}</code></td><td>The length of the bars when they are parallel to each other</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_color com.example.facesbyplaces:color}</code></td><td>The drawing color for the bars</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_drawableSize com.example.facesbyplaces:drawableSize}</code></td><td>The total size of the drawable</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_gapBetweenBars com.example.facesbyplaces:gapBetweenBars}</code></td><td>The max gap between the bars when they are parallel to each other</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_spinBars com.example.facesbyplaces:spinBars}</code></td><td>Whether bars should rotate or not during transition</td></tr>
-     * <tr><td><code>{@link #DrawerArrowToggle_thickness com.example.facesbyplaces:thickness}</code></td><td>The thickness (stroke size) for the bar paint</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_arrowHeadLength com.app.facesbyplaces:arrowHeadLength}</code></td><td>The length of the arrow head when formed to make an arrow</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_arrowShaftLength com.app.facesbyplaces:arrowShaftLength}</code></td><td>The length of the shaft when formed to make an arrow</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_barLength com.app.facesbyplaces:barLength}</code></td><td>The length of the bars when they are parallel to each other</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_color com.app.facesbyplaces:color}</code></td><td>The drawing color for the bars</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_drawableSize com.app.facesbyplaces:drawableSize}</code></td><td>The total size of the drawable</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_gapBetweenBars com.app.facesbyplaces:gapBetweenBars}</code></td><td>The max gap between the bars when they are parallel to each other</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_spinBars com.app.facesbyplaces:spinBars}</code></td><td>Whether bars should rotate or not during transition</td></tr>
+     * <tr><td><code>{@link #DrawerArrowToggle_thickness com.app.facesbyplaces:thickness}</code></td><td>The thickness (stroke size) for the bar paint</td></tr>
      * </table>
      * @see #DrawerArrowToggle_arrowHeadLength
      * @see #DrawerArrowToggle_arrowShaftLength
@@ -12415,7 +12415,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:arrowHeadLength
+     * @attr name com.app.facesbyplaces:arrowHeadLength
      */
     public static final int DrawerArrowToggle_arrowHeadLength=0;
     /**
@@ -12429,7 +12429,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:arrowShaftLength
+     * @attr name com.app.facesbyplaces:arrowShaftLength
      */
     public static final int DrawerArrowToggle_arrowShaftLength=1;
     /**
@@ -12443,7 +12443,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:barLength
+     * @attr name com.app.facesbyplaces:barLength
      */
     public static final int DrawerArrowToggle_barLength=2;
     /**
@@ -12455,7 +12455,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:color
+     * @attr name com.app.facesbyplaces:color
      */
     public static final int DrawerArrowToggle_color=3;
     /**
@@ -12469,7 +12469,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:drawableSize
+     * @attr name com.app.facesbyplaces:drawableSize
      */
     public static final int DrawerArrowToggle_drawableSize=4;
     /**
@@ -12483,7 +12483,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:gapBetweenBars
+     * @attr name com.app.facesbyplaces:gapBetweenBars
      */
     public static final int DrawerArrowToggle_gapBetweenBars=5;
     /**
@@ -12494,7 +12494,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:spinBars
+     * @attr name com.app.facesbyplaces:spinBars
      */
     public static final int DrawerArrowToggle_spinBars=6;
     /**
@@ -12508,7 +12508,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:thickness
+     * @attr name com.app.facesbyplaces:thickness
      */
     public static final int DrawerArrowToggle_thickness=7;
     /**
@@ -12518,8 +12518,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FeatureParam_paramName com.example.facesbyplaces:paramName}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FeatureParam_paramValue com.example.facesbyplaces:paramValue}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FeatureParam_paramName com.app.facesbyplaces:paramName}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FeatureParam_paramValue com.app.facesbyplaces:paramValue}</code></td><td></td></tr>
      * </table>
      * @see #FeatureParam_paramName
      * @see #FeatureParam_paramValue
@@ -12528,23 +12528,23 @@ public final class R {
       0x7f03016c, 0x7f03016d
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#paramName}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#paramName}
      * attribute's value can be found in the {@link #FeatureParam} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:paramName
+     * @attr name com.app.facesbyplaces:paramName
      */
     public static final int FeatureParam_paramName=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#paramValue}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#paramValue}
      * attribute's value can be found in the {@link #FeatureParam} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:paramValue
+     * @attr name com.app.facesbyplaces:paramValue
      */
     public static final int FeatureParam_paramValue=1;
     /**
@@ -12554,19 +12554,19 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FloatingActionButton_backgroundTint com.example.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_backgroundTintMode com.example.facesbyplaces:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_borderWidth com.example.facesbyplaces:borderWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_elevation com.example.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_fabCustomSize com.example.facesbyplaces:fabCustomSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_fabSize com.example.facesbyplaces:fabSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_hideMotionSpec com.example.facesbyplaces:hideMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_hoveredFocusedTranslationZ com.example.facesbyplaces:hoveredFocusedTranslationZ}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_maxImageSize com.example.facesbyplaces:maxImageSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_pressedTranslationZ com.example.facesbyplaces:pressedTranslationZ}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_rippleColor com.example.facesbyplaces:rippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_showMotionSpec com.example.facesbyplaces:showMotionSpec}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FloatingActionButton_useCompatPadding com.example.facesbyplaces:useCompatPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_backgroundTint com.app.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_backgroundTintMode com.app.facesbyplaces:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_borderWidth com.app.facesbyplaces:borderWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_elevation com.app.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_fabCustomSize com.app.facesbyplaces:fabCustomSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_fabSize com.app.facesbyplaces:fabSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_hideMotionSpec com.app.facesbyplaces:hideMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_hoveredFocusedTranslationZ com.app.facesbyplaces:hoveredFocusedTranslationZ}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_maxImageSize com.app.facesbyplaces:maxImageSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_pressedTranslationZ com.app.facesbyplaces:pressedTranslationZ}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_rippleColor com.app.facesbyplaces:rippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_showMotionSpec com.app.facesbyplaces:showMotionSpec}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_useCompatPadding com.app.facesbyplaces:useCompatPadding}</code></td><td></td></tr>
      * </table>
      * @see #FloatingActionButton_backgroundTint
      * @see #FloatingActionButton_backgroundTintMode
@@ -12597,7 +12597,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundTint
+     * @attr name com.app.facesbyplaces:backgroundTint
      */
     public static final int FloatingActionButton_backgroundTint=0;
     /**
@@ -12624,11 +12624,11 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:backgroundTintMode
+     * @attr name com.app.facesbyplaces:backgroundTintMode
      */
     public static final int FloatingActionButton_backgroundTintMode=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#borderWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#borderWidth}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12637,7 +12637,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:borderWidth
+     * @attr name com.app.facesbyplaces:borderWidth
      */
     public static final int FloatingActionButton_borderWidth=2;
     /**
@@ -12651,11 +12651,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:elevation
+     * @attr name com.app.facesbyplaces:elevation
      */
     public static final int FloatingActionButton_elevation=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fabCustomSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fabCustomSize}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12664,11 +12664,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:fabCustomSize
+     * @attr name com.app.facesbyplaces:fabCustomSize
      */
     public static final int FloatingActionButton_fabCustomSize=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fabSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fabSize}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -12682,11 +12682,11 @@ public final class R {
      * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:fabSize
+     * @attr name com.app.facesbyplaces:fabSize
      */
     public static final int FloatingActionButton_fabSize=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hideMotionSpec}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hideMotionSpec}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12694,11 +12694,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:hideMotionSpec
+     * @attr name com.app.facesbyplaces:hideMotionSpec
      */
     public static final int FloatingActionButton_hideMotionSpec=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hoveredFocusedTranslationZ}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hoveredFocusedTranslationZ}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12707,11 +12707,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:hoveredFocusedTranslationZ
+     * @attr name com.app.facesbyplaces:hoveredFocusedTranslationZ
      */
     public static final int FloatingActionButton_hoveredFocusedTranslationZ=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maxImageSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maxImageSize}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12720,11 +12720,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:maxImageSize
+     * @attr name com.app.facesbyplaces:maxImageSize
      */
     public static final int FloatingActionButton_maxImageSize=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#pressedTranslationZ}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#pressedTranslationZ}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12733,22 +12733,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:pressedTranslationZ
+     * @attr name com.app.facesbyplaces:pressedTranslationZ
      */
     public static final int FloatingActionButton_pressedTranslationZ=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#rippleColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#rippleColor}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:rippleColor
+     * @attr name com.app.facesbyplaces:rippleColor
      */
     public static final int FloatingActionButton_rippleColor=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#showMotionSpec}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#showMotionSpec}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -12756,17 +12756,17 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:showMotionSpec
+     * @attr name com.app.facesbyplaces:showMotionSpec
      */
     public static final int FloatingActionButton_showMotionSpec=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#useCompatPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#useCompatPadding}
      * attribute's value can be found in the {@link #FloatingActionButton} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:useCompatPadding
+     * @attr name com.app.facesbyplaces:useCompatPadding
      */
     public static final int FloatingActionButton_useCompatPadding=12;
     /**
@@ -12776,7 +12776,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FloatingActionButton_Behavior_Layout_behavior_autoHide com.example.facesbyplaces:behavior_autoHide}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FloatingActionButton_Behavior_Layout_behavior_autoHide com.app.facesbyplaces:behavior_autoHide}</code></td><td></td></tr>
      * </table>
      * @see #FloatingActionButton_Behavior_Layout_behavior_autoHide
      */
@@ -12784,13 +12784,13 @@ public final class R {
       0x7f03003a
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#behavior_autoHide}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#behavior_autoHide}
      * attribute's value can be found in the {@link #FloatingActionButton_Behavior_Layout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:behavior_autoHide
+     * @attr name com.app.facesbyplaces:behavior_autoHide
      */
     public static final int FloatingActionButton_Behavior_Layout_behavior_autoHide=0;
     /**
@@ -12800,8 +12800,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FlowLayout_itemSpacing com.example.facesbyplaces:itemSpacing}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FlowLayout_lineSpacing com.example.facesbyplaces:lineSpacing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FlowLayout_itemSpacing com.app.facesbyplaces:itemSpacing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #FlowLayout_lineSpacing com.app.facesbyplaces:lineSpacing}</code></td><td></td></tr>
      * </table>
      * @see #FlowLayout_itemSpacing
      * @see #FlowLayout_lineSpacing
@@ -12810,7 +12810,7 @@ public final class R {
       0x7f030125, 0x7f03013f
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemSpacing}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemSpacing}
      * attribute's value can be found in the {@link #FlowLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12819,11 +12819,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:itemSpacing
+     * @attr name com.app.facesbyplaces:itemSpacing
      */
     public static final int FlowLayout_itemSpacing=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#lineSpacing}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#lineSpacing}
      * attribute's value can be found in the {@link #FlowLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -12832,7 +12832,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:lineSpacing
+     * @attr name com.app.facesbyplaces:lineSpacing
      */
     public static final int FlowLayout_lineSpacing=1;
     /**
@@ -12842,12 +12842,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderAuthority com.example.facesbyplaces:fontProviderAuthority}</code></td><td>The authority of the Font Provider to be used for the request.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderCerts com.example.facesbyplaces:fontProviderCerts}</code></td><td>The sets of hashes for the certificates the provider should be signed with.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderFetchStrategy com.example.facesbyplaces:fontProviderFetchStrategy}</code></td><td>The strategy to be used when fetching font data from a font provider in XML layouts.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderFetchTimeout com.example.facesbyplaces:fontProviderFetchTimeout}</code></td><td>The length of the timeout during fetching.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderPackage com.example.facesbyplaces:fontProviderPackage}</code></td><td>The package for the Font Provider to be used for the request.</td></tr>
-     * <tr><td><code>{@link #FontFamily_fontProviderQuery com.example.facesbyplaces:fontProviderQuery}</code></td><td>The query to be sent over to the provider.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderAuthority com.app.facesbyplaces:fontProviderAuthority}</code></td><td>The authority of the Font Provider to be used for the request.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderCerts com.app.facesbyplaces:fontProviderCerts}</code></td><td>The sets of hashes for the certificates the provider should be signed with.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderFetchStrategy com.app.facesbyplaces:fontProviderFetchStrategy}</code></td><td>The strategy to be used when fetching font data from a font provider in XML layouts.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderFetchTimeout com.app.facesbyplaces:fontProviderFetchTimeout}</code></td><td>The length of the timeout during fetching.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderPackage com.app.facesbyplaces:fontProviderPackage}</code></td><td>The package for the Font Provider to be used for the request.</td></tr>
+     * <tr><td><code>{@link #FontFamily_fontProviderQuery com.app.facesbyplaces:fontProviderQuery}</code></td><td>The query to be sent over to the provider.</td></tr>
      * </table>
      * @see #FontFamily_fontProviderAuthority
      * @see #FontFamily_fontProviderCerts
@@ -12868,7 +12868,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:fontProviderAuthority
+     * @attr name com.app.facesbyplaces:fontProviderAuthority
      */
     public static final int FontFamily_fontProviderAuthority=0;
     /**
@@ -12885,7 +12885,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:fontProviderCerts
+     * @attr name com.app.facesbyplaces:fontProviderCerts
      */
     public static final int FontFamily_fontProviderCerts=1;
     /**
@@ -12917,7 +12917,7 @@ public final class R {
      * default typeface will be used instead.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:fontProviderFetchStrategy
+     * @attr name com.app.facesbyplaces:fontProviderFetchStrategy
      */
     public static final int FontFamily_fontProviderFetchStrategy=2;
     /**
@@ -12936,7 +12936,7 @@ public final class R {
      * timeout and wait until a reply is received from the font provider.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:fontProviderFetchTimeout
+     * @attr name com.app.facesbyplaces:fontProviderFetchTimeout
      */
     public static final int FontFamily_fontProviderFetchTimeout=3;
     /**
@@ -12948,7 +12948,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:fontProviderPackage
+     * @attr name com.app.facesbyplaces:fontProviderPackage
      */
     public static final int FontFamily_fontProviderPackage=4;
     /**
@@ -12960,7 +12960,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:fontProviderQuery
+     * @attr name com.app.facesbyplaces:fontProviderQuery
      */
     public static final int FontFamily_fontProviderQuery=5;
     /**
@@ -12975,11 +12975,11 @@ public final class R {
      * <tr><td><code>{@link #FontFamilyFont_android_fontStyle android:fontStyle}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_android_ttcIndex android:ttcIndex}</code></td><td></td></tr>
      * <tr><td><code>{@link #FontFamilyFont_android_fontVariationSettings android:fontVariationSettings}</code></td><td></td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_font com.example.facesbyplaces:font}</code></td><td>The reference to the font file to be used.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_fontStyle com.example.facesbyplaces:fontStyle}</code></td><td>The style of the given font file.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_fontVariationSettings com.example.facesbyplaces:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_fontWeight com.example.facesbyplaces:fontWeight}</code></td><td>The weight of the given font file.</td></tr>
-     * <tr><td><code>{@link #FontFamilyFont_ttcIndex com.example.facesbyplaces:ttcIndex}</code></td><td>The index of the font in the tcc font file.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_font com.app.facesbyplaces:font}</code></td><td>The reference to the font file to be used.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_fontStyle com.app.facesbyplaces:fontStyle}</code></td><td>The style of the given font file.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_fontVariationSettings com.app.facesbyplaces:fontVariationSettings}</code></td><td>The variation settings to be applied to the font.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_fontWeight com.app.facesbyplaces:fontWeight}</code></td><td>The weight of the given font file.</td></tr>
+     * <tr><td><code>{@link #FontFamilyFont_ttcIndex com.app.facesbyplaces:ttcIndex}</code></td><td>The index of the font in the tcc font file.</td></tr>
      * </table>
      * @see #FontFamilyFont_android_font
      * @see #FontFamilyFont_android_fontWeight
@@ -13066,7 +13066,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:font
+     * @attr name com.app.facesbyplaces:font
      */
     public static final int FontFamilyFont_font=5;
     /**
@@ -13086,7 +13086,7 @@ public final class R {
      * <tr><td>normal</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:fontStyle
+     * @attr name com.app.facesbyplaces:fontStyle
      */
     public static final int FontFamilyFont_fontStyle=6;
     /**
@@ -13100,7 +13100,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:fontVariationSettings
+     * @attr name com.app.facesbyplaces:fontVariationSettings
      */
     public static final int FontFamilyFont_fontVariationSettings=7;
     /**
@@ -13114,7 +13114,7 @@ public final class R {
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:fontWeight
+     * @attr name com.app.facesbyplaces:fontWeight
      */
     public static final int FontFamilyFont_fontWeight=8;
     /**
@@ -13125,7 +13125,7 @@ public final class R {
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:ttcIndex
+     * @attr name com.app.facesbyplaces:ttcIndex
      */
     public static final int FontFamilyFont_ttcIndex=9;
     /**
@@ -13137,7 +13137,7 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ForegroundLinearLayout_android_foreground android:foreground}</code></td><td></td></tr>
      * <tr><td><code>{@link #ForegroundLinearLayout_android_foregroundGravity android:foregroundGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ForegroundLinearLayout_foregroundInsidePadding com.example.facesbyplaces:foregroundInsidePadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ForegroundLinearLayout_foregroundInsidePadding com.app.facesbyplaces:foregroundInsidePadding}</code></td><td></td></tr>
      * </table>
      * @see #ForegroundLinearLayout_android_foreground
      * @see #ForegroundLinearLayout_android_foregroundGravity
@@ -13189,13 +13189,13 @@ public final class R {
      */
     public static final int ForegroundLinearLayout_android_foregroundGravity=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#foregroundInsidePadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#foregroundInsidePadding}
      * attribute's value can be found in the {@link #ForegroundLinearLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:foregroundInsidePadding
+     * @attr name com.app.facesbyplaces:foregroundInsidePadding
      */
     public static final int ForegroundLinearLayout_foregroundInsidePadding=2;
     /**
@@ -13205,12 +13205,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #GlobalSearch_defaultIntentAction com.example.facesbyplaces:defaultIntentAction}</code></td><td></td></tr>
-     * <tr><td><code>{@link #GlobalSearch_defaultIntentActivity com.example.facesbyplaces:defaultIntentActivity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #GlobalSearch_defaultIntentData com.example.facesbyplaces:defaultIntentData}</code></td><td></td></tr>
-     * <tr><td><code>{@link #GlobalSearch_searchEnabled com.example.facesbyplaces:searchEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #GlobalSearch_searchLabel com.example.facesbyplaces:searchLabel}</code></td><td></td></tr>
-     * <tr><td><code>{@link #GlobalSearch_settingsDescription com.example.facesbyplaces:settingsDescription}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearch_defaultIntentAction com.app.facesbyplaces:defaultIntentAction}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearch_defaultIntentActivity com.app.facesbyplaces:defaultIntentActivity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearch_defaultIntentData com.app.facesbyplaces:defaultIntentData}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearch_searchEnabled com.app.facesbyplaces:searchEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearch_searchLabel com.app.facesbyplaces:searchLabel}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearch_settingsDescription com.app.facesbyplaces:settingsDescription}</code></td><td></td></tr>
      * </table>
      * @see #GlobalSearch_defaultIntentAction
      * @see #GlobalSearch_defaultIntentActivity
@@ -13224,63 +13224,63 @@ public final class R {
       0x7f03018c, 0x7f030197
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#defaultIntentAction}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#defaultIntentAction}
      * attribute's value can be found in the {@link #GlobalSearch} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:defaultIntentAction
+     * @attr name com.app.facesbyplaces:defaultIntentAction
      */
     public static final int GlobalSearch_defaultIntentAction=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#defaultIntentActivity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#defaultIntentActivity}
      * attribute's value can be found in the {@link #GlobalSearch} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:defaultIntentActivity
+     * @attr name com.app.facesbyplaces:defaultIntentActivity
      */
     public static final int GlobalSearch_defaultIntentActivity=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#defaultIntentData}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#defaultIntentData}
      * attribute's value can be found in the {@link #GlobalSearch} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:defaultIntentData
+     * @attr name com.app.facesbyplaces:defaultIntentData
      */
     public static final int GlobalSearch_defaultIntentData=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#searchEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#searchEnabled}
      * attribute's value can be found in the {@link #GlobalSearch} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:searchEnabled
+     * @attr name com.app.facesbyplaces:searchEnabled
      */
     public static final int GlobalSearch_searchEnabled=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#searchLabel}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#searchLabel}
      * attribute's value can be found in the {@link #GlobalSearch} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:searchLabel
+     * @attr name com.app.facesbyplaces:searchLabel
      */
     public static final int GlobalSearch_searchLabel=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#settingsDescription}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#settingsDescription}
      * attribute's value can be found in the {@link #GlobalSearch} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:settingsDescription
+     * @attr name com.app.facesbyplaces:settingsDescription
      */
     public static final int GlobalSearch_settingsDescription=5;
     /**
@@ -13290,7 +13290,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #GlobalSearchCorpus_allowShortcuts com.example.facesbyplaces:allowShortcuts}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearchCorpus_allowShortcuts com.app.facesbyplaces:allowShortcuts}</code></td><td></td></tr>
      * </table>
      * @see #GlobalSearchCorpus_allowShortcuts
      */
@@ -13298,13 +13298,13 @@ public final class R {
       0x7f030026
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#allowShortcuts}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#allowShortcuts}
      * attribute's value can be found in the {@link #GlobalSearchCorpus} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:allowShortcuts
+     * @attr name com.app.facesbyplaces:allowShortcuts
      */
     public static final int GlobalSearchCorpus_allowShortcuts=0;
     /**
@@ -13314,8 +13314,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #GlobalSearchSection_sectionContent com.example.facesbyplaces:sectionContent}</code></td><td></td></tr>
-     * <tr><td><code>{@link #GlobalSearchSection_sectionType com.example.facesbyplaces:sectionType}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearchSection_sectionContent com.app.facesbyplaces:sectionContent}</code></td><td></td></tr>
+     * <tr><td><code>{@link #GlobalSearchSection_sectionType com.app.facesbyplaces:sectionType}</code></td><td></td></tr>
      * </table>
      * @see #GlobalSearchSection_sectionContent
      * @see #GlobalSearchSection_sectionType
@@ -13324,17 +13324,17 @@ public final class R {
       0x7f03018e, 0x7f030191
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#sectionContent}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#sectionContent}
      * attribute's value can be found in the {@link #GlobalSearchSection} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:sectionContent
+     * @attr name com.app.facesbyplaces:sectionContent
      */
     public static final int GlobalSearchSection_sectionContent=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#sectionType}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#sectionType}
      * attribute's value can be found in the {@link #GlobalSearchSection} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13355,7 +13355,7 @@ public final class R {
      * <tr><td>thing_proto</td><td>9</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:sectionType
+     * @attr name com.app.facesbyplaces:sectionType
      */
     public static final int GlobalSearchSection_sectionType=1;
     /**
@@ -13608,12 +13608,12 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #IMECorpus_inputEnabled com.example.facesbyplaces:inputEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #IMECorpus_sourceClass com.example.facesbyplaces:sourceClass}</code></td><td></td></tr>
-     * <tr><td><code>{@link #IMECorpus_toAddressesSection com.example.facesbyplaces:toAddressesSection}</code></td><td></td></tr>
-     * <tr><td><code>{@link #IMECorpus_userInputSection com.example.facesbyplaces:userInputSection}</code></td><td></td></tr>
-     * <tr><td><code>{@link #IMECorpus_userInputTag com.example.facesbyplaces:userInputTag}</code></td><td></td></tr>
-     * <tr><td><code>{@link #IMECorpus_userInputValue com.example.facesbyplaces:userInputValue}</code></td><td></td></tr>
+     * <tr><td><code>{@link #IMECorpus_inputEnabled com.app.facesbyplaces:inputEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #IMECorpus_sourceClass com.app.facesbyplaces:sourceClass}</code></td><td></td></tr>
+     * <tr><td><code>{@link #IMECorpus_toAddressesSection com.app.facesbyplaces:toAddressesSection}</code></td><td></td></tr>
+     * <tr><td><code>{@link #IMECorpus_userInputSection com.app.facesbyplaces:userInputSection}</code></td><td></td></tr>
+     * <tr><td><code>{@link #IMECorpus_userInputTag com.app.facesbyplaces:userInputTag}</code></td><td></td></tr>
+     * <tr><td><code>{@link #IMECorpus_userInputValue com.app.facesbyplaces:userInputValue}</code></td><td></td></tr>
      * </table>
      * @see #IMECorpus_inputEnabled
      * @see #IMECorpus_sourceClass
@@ -13627,17 +13627,17 @@ public final class R {
       0x7f030223, 0x7f030224
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#inputEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#inputEnabled}
      * attribute's value can be found in the {@link #IMECorpus} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:inputEnabled
+     * @attr name com.app.facesbyplaces:inputEnabled
      */
     public static final int IMECorpus_inputEnabled=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#sourceClass}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#sourceClass}
      * attribute's value can be found in the {@link #IMECorpus} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -13651,47 +13651,47 @@ public final class R {
      * <tr><td>instant_message</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:sourceClass
+     * @attr name com.app.facesbyplaces:sourceClass
      */
     public static final int IMECorpus_sourceClass=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#toAddressesSection}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#toAddressesSection}
      * attribute's value can be found in the {@link #IMECorpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:toAddressesSection
+     * @attr name com.app.facesbyplaces:toAddressesSection
      */
     public static final int IMECorpus_toAddressesSection=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#userInputSection}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#userInputSection}
      * attribute's value can be found in the {@link #IMECorpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:userInputSection
+     * @attr name com.app.facesbyplaces:userInputSection
      */
     public static final int IMECorpus_userInputSection=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#userInputTag}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#userInputTag}
      * attribute's value can be found in the {@link #IMECorpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:userInputTag
+     * @attr name com.app.facesbyplaces:userInputTag
      */
     public static final int IMECorpus_userInputTag=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#userInputValue}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#userInputValue}
      * attribute's value can be found in the {@link #IMECorpus} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:userInputValue
+     * @attr name com.app.facesbyplaces:userInputValue
      */
     public static final int IMECorpus_userInputValue=5;
     /**
@@ -13706,11 +13706,11 @@ public final class R {
      * <tr><td><code>{@link #LinearLayoutCompat_android_baselineAligned android:baselineAligned}</code></td><td></td></tr>
      * <tr><td><code>{@link #LinearLayoutCompat_android_baselineAlignedChildIndex android:baselineAlignedChildIndex}</code></td><td></td></tr>
      * <tr><td><code>{@link #LinearLayoutCompat_android_weightSum android:weightSum}</code></td><td></td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_divider com.example.facesbyplaces:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_dividerPadding com.example.facesbyplaces:dividerPadding}</code></td><td>Size of padding on either end of a divider.</td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_measureWithLargestChild com.example.facesbyplaces:measureWithLargestChild}</code></td><td>When set to true, all children with a weight will be considered having
+     * <tr><td><code>{@link #LinearLayoutCompat_divider com.app.facesbyplaces:divider}</code></td><td>Specifies the drawable used for item dividers.</td></tr>
+     * <tr><td><code>{@link #LinearLayoutCompat_dividerPadding com.app.facesbyplaces:dividerPadding}</code></td><td>Size of padding on either end of a divider.</td></tr>
+     * <tr><td><code>{@link #LinearLayoutCompat_measureWithLargestChild com.app.facesbyplaces:measureWithLargestChild}</code></td><td>When set to true, all children with a weight will be considered having
      * the minimum size of the largest child.</td></tr>
-     * <tr><td><code>{@link #LinearLayoutCompat_showDividers com.example.facesbyplaces:showDividers}</code></td><td>Setting for which dividers to show.</td></tr>
+     * <tr><td><code>{@link #LinearLayoutCompat_showDividers com.app.facesbyplaces:showDividers}</code></td><td>Setting for which dividers to show.</td></tr>
      * </table>
      * @see #LinearLayoutCompat_android_gravity
      * @see #LinearLayoutCompat_android_orientation
@@ -13825,7 +13825,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:divider
+     * @attr name com.app.facesbyplaces:divider
      */
     public static final int LinearLayoutCompat_divider=5;
     /**
@@ -13839,7 +13839,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:dividerPadding
+     * @attr name com.app.facesbyplaces:dividerPadding
      */
     public static final int LinearLayoutCompat_dividerPadding=6;
     /**
@@ -13852,7 +13852,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:measureWithLargestChild
+     * @attr name com.app.facesbyplaces:measureWithLargestChild
      */
     public static final int LinearLayoutCompat_measureWithLargestChild=7;
     /**
@@ -13872,7 +13872,7 @@ public final class R {
      * <tr><td>none</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:showDividers
+     * @attr name com.app.facesbyplaces:showDividers
      */
     public static final int LinearLayoutCompat_showDividers=8;
     /**
@@ -14030,9 +14030,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #LoadingImageView_circleCrop com.example.facesbyplaces:circleCrop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #LoadingImageView_imageAspectRatio com.example.facesbyplaces:imageAspectRatio}</code></td><td></td></tr>
-     * <tr><td><code>{@link #LoadingImageView_imageAspectRatioAdjust com.example.facesbyplaces:imageAspectRatioAdjust}</code></td><td></td></tr>
+     * <tr><td><code>{@link #LoadingImageView_circleCrop com.app.facesbyplaces:circleCrop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #LoadingImageView_imageAspectRatio com.app.facesbyplaces:imageAspectRatio}</code></td><td></td></tr>
+     * <tr><td><code>{@link #LoadingImageView_imageAspectRatioAdjust com.app.facesbyplaces:imageAspectRatioAdjust}</code></td><td></td></tr>
      * </table>
      * @see #LoadingImageView_circleCrop
      * @see #LoadingImageView_imageAspectRatio
@@ -14042,26 +14042,26 @@ public final class R {
       0x7f030089, 0x7f030115, 0x7f030116
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#circleCrop}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#circleCrop}
      * attribute's value can be found in the {@link #LoadingImageView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:circleCrop
+     * @attr name com.app.facesbyplaces:circleCrop
      */
     public static final int LoadingImageView_circleCrop=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#imageAspectRatio}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#imageAspectRatio}
      * attribute's value can be found in the {@link #LoadingImageView} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:imageAspectRatio
+     * @attr name com.app.facesbyplaces:imageAspectRatio
      */
     public static final int LoadingImageView_imageAspectRatio=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#imageAspectRatioAdjust}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#imageAspectRatioAdjust}
      * attribute's value can be found in the {@link #LoadingImageView} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -14075,7 +14075,7 @@ public final class R {
      * <tr><td>none</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:imageAspectRatioAdjust
+     * @attr name com.app.facesbyplaces:imageAspectRatioAdjust
      */
     public static final int LoadingImageView_imageAspectRatioAdjust=2;
     /**
@@ -14085,30 +14085,30 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #MapAttrs_ambientEnabled com.example.facesbyplaces:ambientEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraBearing com.example.facesbyplaces:cameraBearing}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraMaxZoomPreference com.example.facesbyplaces:cameraMaxZoomPreference}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraMinZoomPreference com.example.facesbyplaces:cameraMinZoomPreference}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraTargetLat com.example.facesbyplaces:cameraTargetLat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraTargetLng com.example.facesbyplaces:cameraTargetLng}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraTilt com.example.facesbyplaces:cameraTilt}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_cameraZoom com.example.facesbyplaces:cameraZoom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_latLngBoundsNorthEastLatitude com.example.facesbyplaces:latLngBoundsNorthEastLatitude}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_latLngBoundsNorthEastLongitude com.example.facesbyplaces:latLngBoundsNorthEastLongitude}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_latLngBoundsSouthWestLatitude com.example.facesbyplaces:latLngBoundsSouthWestLatitude}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_latLngBoundsSouthWestLongitude com.example.facesbyplaces:latLngBoundsSouthWestLongitude}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_liteMode com.example.facesbyplaces:liteMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_mapType com.example.facesbyplaces:mapType}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiCompass com.example.facesbyplaces:uiCompass}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiMapToolbar com.example.facesbyplaces:uiMapToolbar}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiRotateGestures com.example.facesbyplaces:uiRotateGestures}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiScrollGestures com.example.facesbyplaces:uiScrollGestures}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiScrollGesturesDuringRotateOrZoom com.example.facesbyplaces:uiScrollGesturesDuringRotateOrZoom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiTiltGestures com.example.facesbyplaces:uiTiltGestures}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiZoomControls com.example.facesbyplaces:uiZoomControls}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_uiZoomGestures com.example.facesbyplaces:uiZoomGestures}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_useViewLifecycle com.example.facesbyplaces:useViewLifecycle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MapAttrs_zOrderOnTop com.example.facesbyplaces:zOrderOnTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_ambientEnabled com.app.facesbyplaces:ambientEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraBearing com.app.facesbyplaces:cameraBearing}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraMaxZoomPreference com.app.facesbyplaces:cameraMaxZoomPreference}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraMinZoomPreference com.app.facesbyplaces:cameraMinZoomPreference}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraTargetLat com.app.facesbyplaces:cameraTargetLat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraTargetLng com.app.facesbyplaces:cameraTargetLng}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraTilt com.app.facesbyplaces:cameraTilt}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_cameraZoom com.app.facesbyplaces:cameraZoom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsNorthEastLatitude com.app.facesbyplaces:latLngBoundsNorthEastLatitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsNorthEastLongitude com.app.facesbyplaces:latLngBoundsNorthEastLongitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsSouthWestLatitude com.app.facesbyplaces:latLngBoundsSouthWestLatitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_latLngBoundsSouthWestLongitude com.app.facesbyplaces:latLngBoundsSouthWestLongitude}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_liteMode com.app.facesbyplaces:liteMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_mapType com.app.facesbyplaces:mapType}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiCompass com.app.facesbyplaces:uiCompass}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiMapToolbar com.app.facesbyplaces:uiMapToolbar}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiRotateGestures com.app.facesbyplaces:uiRotateGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiScrollGestures com.app.facesbyplaces:uiScrollGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiScrollGesturesDuringRotateOrZoom com.app.facesbyplaces:uiScrollGesturesDuringRotateOrZoom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiTiltGestures com.app.facesbyplaces:uiTiltGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiZoomControls com.app.facesbyplaces:uiZoomControls}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_uiZoomGestures com.app.facesbyplaces:uiZoomGestures}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_useViewLifecycle com.app.facesbyplaces:useViewLifecycle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MapAttrs_zOrderOnTop com.app.facesbyplaces:zOrderOnTop}</code></td><td></td></tr>
      * </table>
      * @see #MapAttrs_ambientEnabled
      * @see #MapAttrs_cameraBearing
@@ -14144,126 +14144,126 @@ public final class R {
       0x7f03021e, 0x7f03021f, 0x7f030221, 0x7f030232
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#ambientEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#ambientEnabled}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:ambientEnabled
+     * @attr name com.app.facesbyplaces:ambientEnabled
      */
     public static final int MapAttrs_ambientEnabled=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraBearing}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraBearing}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraBearing
+     * @attr name com.app.facesbyplaces:cameraBearing
      */
     public static final int MapAttrs_cameraBearing=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraMaxZoomPreference}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraMaxZoomPreference}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraMaxZoomPreference
+     * @attr name com.app.facesbyplaces:cameraMaxZoomPreference
      */
     public static final int MapAttrs_cameraMaxZoomPreference=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraMinZoomPreference}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraMinZoomPreference}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraMinZoomPreference
+     * @attr name com.app.facesbyplaces:cameraMinZoomPreference
      */
     public static final int MapAttrs_cameraMinZoomPreference=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraTargetLat}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraTargetLat}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraTargetLat
+     * @attr name com.app.facesbyplaces:cameraTargetLat
      */
     public static final int MapAttrs_cameraTargetLat=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraTargetLng}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraTargetLng}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraTargetLng
+     * @attr name com.app.facesbyplaces:cameraTargetLng
      */
     public static final int MapAttrs_cameraTargetLng=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraTilt}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraTilt}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraTilt
+     * @attr name com.app.facesbyplaces:cameraTilt
      */
     public static final int MapAttrs_cameraTilt=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cameraZoom}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cameraZoom}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:cameraZoom
+     * @attr name com.app.facesbyplaces:cameraZoom
      */
     public static final int MapAttrs_cameraZoom=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#latLngBoundsNorthEastLatitude}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#latLngBoundsNorthEastLatitude}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:latLngBoundsNorthEastLatitude
+     * @attr name com.app.facesbyplaces:latLngBoundsNorthEastLatitude
      */
     public static final int MapAttrs_latLngBoundsNorthEastLatitude=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#latLngBoundsNorthEastLongitude}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#latLngBoundsNorthEastLongitude}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:latLngBoundsNorthEastLongitude
+     * @attr name com.app.facesbyplaces:latLngBoundsNorthEastLongitude
      */
     public static final int MapAttrs_latLngBoundsNorthEastLongitude=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#latLngBoundsSouthWestLatitude}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#latLngBoundsSouthWestLatitude}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:latLngBoundsSouthWestLatitude
+     * @attr name com.app.facesbyplaces:latLngBoundsSouthWestLatitude
      */
     public static final int MapAttrs_latLngBoundsSouthWestLatitude=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#latLngBoundsSouthWestLongitude}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#latLngBoundsSouthWestLongitude}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
-     * @attr name com.example.facesbyplaces:latLngBoundsSouthWestLongitude
+     * @attr name com.app.facesbyplaces:latLngBoundsSouthWestLongitude
      */
     public static final int MapAttrs_latLngBoundsSouthWestLongitude=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#liteMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#liteMode}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:liteMode
+     * @attr name com.app.facesbyplaces:liteMode
      */
     public static final int MapAttrs_liteMode=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#mapType}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#mapType}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -14279,107 +14279,107 @@ public final class R {
      * <tr><td>terrain</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:mapType
+     * @attr name com.app.facesbyplaces:mapType
      */
     public static final int MapAttrs_mapType=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiCompass}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiCompass}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiCompass
+     * @attr name com.app.facesbyplaces:uiCompass
      */
     public static final int MapAttrs_uiCompass=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiMapToolbar}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiMapToolbar}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiMapToolbar
+     * @attr name com.app.facesbyplaces:uiMapToolbar
      */
     public static final int MapAttrs_uiMapToolbar=15;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiRotateGestures}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiRotateGestures}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiRotateGestures
+     * @attr name com.app.facesbyplaces:uiRotateGestures
      */
     public static final int MapAttrs_uiRotateGestures=16;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiScrollGestures}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiScrollGestures}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiScrollGestures
+     * @attr name com.app.facesbyplaces:uiScrollGestures
      */
     public static final int MapAttrs_uiScrollGestures=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiScrollGesturesDuringRotateOrZoom}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiScrollGesturesDuringRotateOrZoom}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiScrollGesturesDuringRotateOrZoom
+     * @attr name com.app.facesbyplaces:uiScrollGesturesDuringRotateOrZoom
      */
     public static final int MapAttrs_uiScrollGesturesDuringRotateOrZoom=18;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiTiltGestures}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiTiltGestures}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiTiltGestures
+     * @attr name com.app.facesbyplaces:uiTiltGestures
      */
     public static final int MapAttrs_uiTiltGestures=19;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiZoomControls}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiZoomControls}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiZoomControls
+     * @attr name com.app.facesbyplaces:uiZoomControls
      */
     public static final int MapAttrs_uiZoomControls=20;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#uiZoomGestures}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#uiZoomGestures}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:uiZoomGestures
+     * @attr name com.app.facesbyplaces:uiZoomGestures
      */
     public static final int MapAttrs_uiZoomGestures=21;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#useViewLifecycle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#useViewLifecycle}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:useViewLifecycle
+     * @attr name com.app.facesbyplaces:useViewLifecycle
      */
     public static final int MapAttrs_useViewLifecycle=22;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#zOrderOnTop}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#zOrderOnTop}
      * attribute's value can be found in the {@link #MapAttrs} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:zOrderOnTop
+     * @attr name com.app.facesbyplaces:zOrderOnTop
      */
     public static final int MapAttrs_zOrderOnTop=23;
     /**
@@ -14393,18 +14393,18 @@ public final class R {
      * <tr><td><code>{@link #MaterialButton_android_insetRight android:insetRight}</code></td><td></td></tr>
      * <tr><td><code>{@link #MaterialButton_android_insetTop android:insetTop}</code></td><td></td></tr>
      * <tr><td><code>{@link #MaterialButton_android_insetBottom android:insetBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_backgroundTint com.example.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_backgroundTintMode com.example.facesbyplaces:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_cornerRadius com.example.facesbyplaces:cornerRadius}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_icon com.example.facesbyplaces:icon}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconGravity com.example.facesbyplaces:iconGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconPadding com.example.facesbyplaces:iconPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconSize com.example.facesbyplaces:iconSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconTint com.example.facesbyplaces:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_iconTintMode com.example.facesbyplaces:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
-     * <tr><td><code>{@link #MaterialButton_rippleColor com.example.facesbyplaces:rippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_strokeColor com.example.facesbyplaces:strokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialButton_strokeWidth com.example.facesbyplaces:strokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_backgroundTint com.app.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_backgroundTintMode com.app.facesbyplaces:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_cornerRadius com.app.facesbyplaces:cornerRadius}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_icon com.app.facesbyplaces:icon}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconGravity com.app.facesbyplaces:iconGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconPadding com.app.facesbyplaces:iconPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconSize com.app.facesbyplaces:iconSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconTint com.app.facesbyplaces:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_iconTintMode com.app.facesbyplaces:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
+     * <tr><td><code>{@link #MaterialButton_rippleColor com.app.facesbyplaces:rippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_strokeColor com.app.facesbyplaces:strokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialButton_strokeWidth com.app.facesbyplaces:strokeWidth}</code></td><td></td></tr>
      * </table>
      * @see #MaterialButton_android_insetLeft
      * @see #MaterialButton_android_insetRight
@@ -14506,7 +14506,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundTint
+     * @attr name com.app.facesbyplaces:backgroundTint
      */
     public static final int MaterialButton_backgroundTint=4;
     /**
@@ -14533,11 +14533,11 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:backgroundTintMode
+     * @attr name com.app.facesbyplaces:backgroundTintMode
      */
     public static final int MaterialButton_backgroundTintMode=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#cornerRadius}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#cornerRadius}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14546,11 +14546,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:cornerRadius
+     * @attr name com.app.facesbyplaces:cornerRadius
      */
     public static final int MaterialButton_cornerRadius=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#icon}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#icon}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14558,11 +14558,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:icon
+     * @attr name com.app.facesbyplaces:icon
      */
     public static final int MaterialButton_icon=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#iconGravity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#iconGravity}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -14575,11 +14575,11 @@ public final class R {
      * <tr><td>textStart</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:iconGravity
+     * @attr name com.app.facesbyplaces:iconGravity
      */
     public static final int MaterialButton_iconGravity=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#iconPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#iconPadding}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14588,11 +14588,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:iconPadding
+     * @attr name com.app.facesbyplaces:iconPadding
      */
     public static final int MaterialButton_iconPadding=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#iconSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#iconSize}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14601,7 +14601,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:iconSize
+     * @attr name com.app.facesbyplaces:iconSize
      */
     public static final int MaterialButton_iconSize=10;
     /**
@@ -14613,7 +14613,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:iconTint
+     * @attr name com.app.facesbyplaces:iconTint
      */
     public static final int MaterialButton_iconTint=11;
     /**
@@ -14640,33 +14640,33 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:iconTintMode
+     * @attr name com.app.facesbyplaces:iconTintMode
      */
     public static final int MaterialButton_iconTintMode=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#rippleColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#rippleColor}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:rippleColor
+     * @attr name com.app.facesbyplaces:rippleColor
      */
     public static final int MaterialButton_rippleColor=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#strokeColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#strokeColor}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:strokeColor
+     * @attr name com.app.facesbyplaces:strokeColor
      */
     public static final int MaterialButton_strokeColor=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#strokeWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#strokeWidth}
      * attribute's value can be found in the {@link #MaterialButton} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14675,7 +14675,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:strokeWidth
+     * @attr name com.app.facesbyplaces:strokeWidth
      */
     public static final int MaterialButton_strokeWidth=15;
     /**
@@ -14685,8 +14685,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #MaterialCardView_strokeColor com.example.facesbyplaces:strokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialCardView_strokeWidth com.example.facesbyplaces:strokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialCardView_strokeColor com.app.facesbyplaces:strokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialCardView_strokeWidth com.app.facesbyplaces:strokeWidth}</code></td><td></td></tr>
      * </table>
      * @see #MaterialCardView_strokeColor
      * @see #MaterialCardView_strokeWidth
@@ -14695,18 +14695,18 @@ public final class R {
       0x7f0301b3, 0x7f0301b4
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#strokeColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#strokeColor}
      * attribute's value can be found in the {@link #MaterialCardView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:strokeColor
+     * @attr name com.app.facesbyplaces:strokeColor
      */
     public static final int MaterialCardView_strokeColor=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#strokeWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#strokeWidth}
      * attribute's value can be found in the {@link #MaterialCardView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -14715,7 +14715,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:strokeWidth
+     * @attr name com.app.facesbyplaces:strokeWidth
      */
     public static final int MaterialCardView_strokeWidth=1;
     /**
@@ -14725,38 +14725,38 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetDialogTheme com.example.facesbyplaces:bottomSheetDialogTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetStyle com.example.facesbyplaces:bottomSheetStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_chipGroupStyle com.example.facesbyplaces:chipGroupStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_chipStandaloneStyle com.example.facesbyplaces:chipStandaloneStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_chipStyle com.example.facesbyplaces:chipStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorAccent com.example.facesbyplaces:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorBackgroundFloating com.example.facesbyplaces:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimary com.example.facesbyplaces:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimaryDark com.example.facesbyplaces:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_colorSecondary com.example.facesbyplaces:colorSecondary}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_editTextStyle com.example.facesbyplaces:editTextStyle}</code></td><td>Default EditText style.</td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_floatingActionButtonStyle com.example.facesbyplaces:floatingActionButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_materialButtonStyle com.example.facesbyplaces:materialButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_materialCardViewStyle com.example.facesbyplaces:materialCardViewStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_navigationViewStyle com.example.facesbyplaces:navigationViewStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_scrimBackground com.example.facesbyplaces:scrimBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_snackbarButtonStyle com.example.facesbyplaces:snackbarButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_tabStyle com.example.facesbyplaces:tabStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody1 com.example.facesbyplaces:textAppearanceBody1}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody2 com.example.facesbyplaces:textAppearanceBody2}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceButton com.example.facesbyplaces:textAppearanceButton}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceCaption com.example.facesbyplaces:textAppearanceCaption}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline1 com.example.facesbyplaces:textAppearanceHeadline1}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline2 com.example.facesbyplaces:textAppearanceHeadline2}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline3 com.example.facesbyplaces:textAppearanceHeadline3}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline4 com.example.facesbyplaces:textAppearanceHeadline4}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline5 com.example.facesbyplaces:textAppearanceHeadline5}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline6 com.example.facesbyplaces:textAppearanceHeadline6}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceOverline com.example.facesbyplaces:textAppearanceOverline}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle1 com.example.facesbyplaces:textAppearanceSubtitle1}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle2 com.example.facesbyplaces:textAppearanceSubtitle2}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MaterialComponentsTheme_textInputStyle com.example.facesbyplaces:textInputStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetDialogTheme com.app.facesbyplaces:bottomSheetDialogTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_bottomSheetStyle com.app.facesbyplaces:bottomSheetStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_chipGroupStyle com.app.facesbyplaces:chipGroupStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_chipStandaloneStyle com.app.facesbyplaces:chipStandaloneStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_chipStyle com.app.facesbyplaces:chipStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorAccent com.app.facesbyplaces:colorAccent}</code></td><td>Bright complement to the primary branding color.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorBackgroundFloating com.app.facesbyplaces:colorBackgroundFloating}</code></td><td>Default color of background imagery for floating components, ex.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimary com.app.facesbyplaces:colorPrimary}</code></td><td>The primary branding color for the app.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorPrimaryDark com.app.facesbyplaces:colorPrimaryDark}</code></td><td>Dark variant of the primary branding color.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_colorSecondary com.app.facesbyplaces:colorSecondary}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_editTextStyle com.app.facesbyplaces:editTextStyle}</code></td><td>Default EditText style.</td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_floatingActionButtonStyle com.app.facesbyplaces:floatingActionButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_materialButtonStyle com.app.facesbyplaces:materialButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_materialCardViewStyle com.app.facesbyplaces:materialCardViewStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_navigationViewStyle com.app.facesbyplaces:navigationViewStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_scrimBackground com.app.facesbyplaces:scrimBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_snackbarButtonStyle com.app.facesbyplaces:snackbarButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_tabStyle com.app.facesbyplaces:tabStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody1 com.app.facesbyplaces:textAppearanceBody1}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceBody2 com.app.facesbyplaces:textAppearanceBody2}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceButton com.app.facesbyplaces:textAppearanceButton}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceCaption com.app.facesbyplaces:textAppearanceCaption}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline1 com.app.facesbyplaces:textAppearanceHeadline1}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline2 com.app.facesbyplaces:textAppearanceHeadline2}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline3 com.app.facesbyplaces:textAppearanceHeadline3}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline4 com.app.facesbyplaces:textAppearanceHeadline4}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline5 com.app.facesbyplaces:textAppearanceHeadline5}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceHeadline6 com.app.facesbyplaces:textAppearanceHeadline6}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceOverline com.app.facesbyplaces:textAppearanceOverline}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle1 com.app.facesbyplaces:textAppearanceSubtitle1}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textAppearanceSubtitle2 com.app.facesbyplaces:textAppearanceSubtitle2}</code></td><td></td></tr>
+     * <tr><td><code>{@link #MaterialComponentsTheme_textInputStyle com.app.facesbyplaces:textInputStyle}</code></td><td></td></tr>
      * </table>
      * @see #MaterialComponentsTheme_bottomSheetDialogTheme
      * @see #MaterialComponentsTheme_bottomSheetStyle
@@ -14802,7 +14802,7 @@ public final class R {
       0x7f0301ea, 0x7f0301ef, 0x7f0301f0, 0x7f0301f4
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#bottomSheetDialogTheme}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#bottomSheetDialogTheme}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14810,11 +14810,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:bottomSheetDialogTheme
+     * @attr name com.app.facesbyplaces:bottomSheetDialogTheme
      */
     public static final int MaterialComponentsTheme_bottomSheetDialogTheme=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#bottomSheetStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#bottomSheetStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14822,11 +14822,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:bottomSheetStyle
+     * @attr name com.app.facesbyplaces:bottomSheetStyle
      */
     public static final int MaterialComponentsTheme_bottomSheetStyle=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipGroupStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipGroupStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14834,11 +14834,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipGroupStyle
+     * @attr name com.app.facesbyplaces:chipGroupStyle
      */
     public static final int MaterialComponentsTheme_chipGroupStyle=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipStandaloneStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipStandaloneStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14846,11 +14846,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipStandaloneStyle
+     * @attr name com.app.facesbyplaces:chipStandaloneStyle
      */
     public static final int MaterialComponentsTheme_chipStandaloneStyle=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#chipStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#chipStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14858,7 +14858,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:chipStyle
+     * @attr name com.app.facesbyplaces:chipStyle
      */
     public static final int MaterialComponentsTheme_chipStyle=4;
     /**
@@ -14871,7 +14871,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorAccent
+     * @attr name com.app.facesbyplaces:colorAccent
      */
     public static final int MaterialComponentsTheme_colorAccent=5;
     /**
@@ -14883,7 +14883,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorBackgroundFloating
+     * @attr name com.app.facesbyplaces:colorBackgroundFloating
      */
     public static final int MaterialComponentsTheme_colorBackgroundFloating=6;
     /**
@@ -14896,7 +14896,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorPrimary
+     * @attr name com.app.facesbyplaces:colorPrimary
      */
     public static final int MaterialComponentsTheme_colorPrimary=7;
     /**
@@ -14909,18 +14909,18 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorPrimaryDark
+     * @attr name com.app.facesbyplaces:colorPrimaryDark
      */
     public static final int MaterialComponentsTheme_colorPrimaryDark=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#colorSecondary}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#colorSecondary}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:colorSecondary
+     * @attr name com.app.facesbyplaces:colorSecondary
      */
     public static final int MaterialComponentsTheme_colorSecondary=9;
     /**
@@ -14933,11 +14933,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:editTextStyle
+     * @attr name com.app.facesbyplaces:editTextStyle
      */
     public static final int MaterialComponentsTheme_editTextStyle=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#floatingActionButtonStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#floatingActionButtonStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14963,11 +14963,11 @@ public final class R {
      * The % suffix always means a percentage of the base size;
      * the optional %p suffix provides a size relative to some parent container.
      *
-     * @attr name com.example.facesbyplaces:floatingActionButtonStyle
+     * @attr name com.app.facesbyplaces:floatingActionButtonStyle
      */
     public static final int MaterialComponentsTheme_floatingActionButtonStyle=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#materialButtonStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#materialButtonStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14975,11 +14975,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:materialButtonStyle
+     * @attr name com.app.facesbyplaces:materialButtonStyle
      */
     public static final int MaterialComponentsTheme_materialButtonStyle=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#materialCardViewStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#materialCardViewStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14987,11 +14987,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:materialCardViewStyle
+     * @attr name com.app.facesbyplaces:materialCardViewStyle
      */
     public static final int MaterialComponentsTheme_materialCardViewStyle=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#navigationViewStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#navigationViewStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -14999,11 +14999,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:navigationViewStyle
+     * @attr name com.app.facesbyplaces:navigationViewStyle
      */
     public static final int MaterialComponentsTheme_navigationViewStyle=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#scrimBackground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#scrimBackground}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15014,11 +15014,11 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:scrimBackground
+     * @attr name com.app.facesbyplaces:scrimBackground
      */
     public static final int MaterialComponentsTheme_scrimBackground=15;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#snackbarButtonStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#snackbarButtonStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15026,11 +15026,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:snackbarButtonStyle
+     * @attr name com.app.facesbyplaces:snackbarButtonStyle
      */
     public static final int MaterialComponentsTheme_snackbarButtonStyle=16;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15038,11 +15038,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabStyle
+     * @attr name com.app.facesbyplaces:tabStyle
      */
     public static final int MaterialComponentsTheme_tabStyle=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceBody1}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceBody1}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15050,11 +15050,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceBody1
+     * @attr name com.app.facesbyplaces:textAppearanceBody1
      */
     public static final int MaterialComponentsTheme_textAppearanceBody1=18;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceBody2}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceBody2}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15062,11 +15062,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceBody2
+     * @attr name com.app.facesbyplaces:textAppearanceBody2
      */
     public static final int MaterialComponentsTheme_textAppearanceBody2=19;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceButton}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceButton}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15074,11 +15074,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceButton
+     * @attr name com.app.facesbyplaces:textAppearanceButton
      */
     public static final int MaterialComponentsTheme_textAppearanceButton=20;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceCaption}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceCaption}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15086,11 +15086,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceCaption
+     * @attr name com.app.facesbyplaces:textAppearanceCaption
      */
     public static final int MaterialComponentsTheme_textAppearanceCaption=21;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceHeadline1}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceHeadline1}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15098,11 +15098,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceHeadline1
+     * @attr name com.app.facesbyplaces:textAppearanceHeadline1
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline1=22;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceHeadline2}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceHeadline2}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15110,11 +15110,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceHeadline2
+     * @attr name com.app.facesbyplaces:textAppearanceHeadline2
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline2=23;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceHeadline3}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceHeadline3}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15122,11 +15122,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceHeadline3
+     * @attr name com.app.facesbyplaces:textAppearanceHeadline3
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline3=24;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceHeadline4}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceHeadline4}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15134,11 +15134,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceHeadline4
+     * @attr name com.app.facesbyplaces:textAppearanceHeadline4
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline4=25;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceHeadline5}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceHeadline5}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15146,11 +15146,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceHeadline5
+     * @attr name com.app.facesbyplaces:textAppearanceHeadline5
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline5=26;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceHeadline6}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceHeadline6}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15158,11 +15158,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceHeadline6
+     * @attr name com.app.facesbyplaces:textAppearanceHeadline6
      */
     public static final int MaterialComponentsTheme_textAppearanceHeadline6=27;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceOverline}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceOverline}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15170,11 +15170,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceOverline
+     * @attr name com.app.facesbyplaces:textAppearanceOverline
      */
     public static final int MaterialComponentsTheme_textAppearanceOverline=28;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceSubtitle1}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceSubtitle1}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15182,11 +15182,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceSubtitle1
+     * @attr name com.app.facesbyplaces:textAppearanceSubtitle1
      */
     public static final int MaterialComponentsTheme_textAppearanceSubtitle1=29;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textAppearanceSubtitle2}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textAppearanceSubtitle2}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15194,11 +15194,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textAppearanceSubtitle2
+     * @attr name com.app.facesbyplaces:textAppearanceSubtitle2
      */
     public static final int MaterialComponentsTheme_textAppearanceSubtitle2=30;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#textInputStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#textInputStyle}
      * attribute's value can be found in the {@link #MaterialComponentsTheme} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15206,7 +15206,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:textInputStyle
+     * @attr name com.app.facesbyplaces:textInputStyle
      */
     public static final int MaterialComponentsTheme_textInputStyle=31;
     /**
@@ -15340,18 +15340,18 @@ public final class R {
      * <tr><td><code>{@link #MenuItem_android_numericShortcut android:numericShortcut}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuItem_android_checkable android:checkable}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuItem_android_onClick android:onClick}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MenuItem_actionLayout com.example.facesbyplaces:actionLayout}</code></td><td>An optional layout to be used as an action view.</td></tr>
-     * <tr><td><code>{@link #MenuItem_actionProviderClass com.example.facesbyplaces:actionProviderClass}</code></td><td>The name of an optional ActionProvider class to instantiate an action view
+     * <tr><td><code>{@link #MenuItem_actionLayout com.app.facesbyplaces:actionLayout}</code></td><td>An optional layout to be used as an action view.</td></tr>
+     * <tr><td><code>{@link #MenuItem_actionProviderClass com.app.facesbyplaces:actionProviderClass}</code></td><td>The name of an optional ActionProvider class to instantiate an action view
      * and perform operations such as default action for that menu item.</td></tr>
-     * <tr><td><code>{@link #MenuItem_actionViewClass com.example.facesbyplaces:actionViewClass}</code></td><td>The name of an optional View class to instantiate and use as an
+     * <tr><td><code>{@link #MenuItem_actionViewClass com.app.facesbyplaces:actionViewClass}</code></td><td>The name of an optional View class to instantiate and use as an
      * action view.</td></tr>
-     * <tr><td><code>{@link #MenuItem_alphabeticModifiers com.example.facesbyplaces:alphabeticModifiers}</code></td><td>The alphabetic modifier key.</td></tr>
-     * <tr><td><code>{@link #MenuItem_contentDescription com.example.facesbyplaces:contentDescription}</code></td><td>The content description associated with the item.</td></tr>
-     * <tr><td><code>{@link #MenuItem_iconTint com.example.facesbyplaces:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
-     * <tr><td><code>{@link #MenuItem_iconTintMode com.example.facesbyplaces:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
-     * <tr><td><code>{@link #MenuItem_numericModifiers com.example.facesbyplaces:numericModifiers}</code></td><td>The numeric modifier key.</td></tr>
-     * <tr><td><code>{@link #MenuItem_showAsAction com.example.facesbyplaces:showAsAction}</code></td><td>How this item should display in the Action Bar, if present.</td></tr>
-     * <tr><td><code>{@link #MenuItem_tooltipText com.example.facesbyplaces:tooltipText}</code></td><td>The tooltip text associated with the item.</td></tr>
+     * <tr><td><code>{@link #MenuItem_alphabeticModifiers com.app.facesbyplaces:alphabeticModifiers}</code></td><td>The alphabetic modifier key.</td></tr>
+     * <tr><td><code>{@link #MenuItem_contentDescription com.app.facesbyplaces:contentDescription}</code></td><td>The content description associated with the item.</td></tr>
+     * <tr><td><code>{@link #MenuItem_iconTint com.app.facesbyplaces:iconTint}</code></td><td>Tint to apply to the icon.</td></tr>
+     * <tr><td><code>{@link #MenuItem_iconTintMode com.app.facesbyplaces:iconTintMode}</code></td><td>Blending mode used to apply the icon tint.</td></tr>
+     * <tr><td><code>{@link #MenuItem_numericModifiers com.app.facesbyplaces:numericModifiers}</code></td><td>The numeric modifier key.</td></tr>
+     * <tr><td><code>{@link #MenuItem_showAsAction com.app.facesbyplaces:showAsAction}</code></td><td>How this item should display in the Action Bar, if present.</td></tr>
+     * <tr><td><code>{@link #MenuItem_tooltipText com.app.facesbyplaces:tooltipText}</code></td><td>The tooltip text associated with the item.</td></tr>
      * </table>
      * @see #MenuItem_android_icon
      * @see #MenuItem_android_enabled
@@ -15560,7 +15560,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:actionLayout
+     * @attr name com.app.facesbyplaces:actionLayout
      */
     public static final int MenuItem_actionLayout=13;
     /**
@@ -15574,7 +15574,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:actionProviderClass
+     * @attr name com.app.facesbyplaces:actionProviderClass
      */
     public static final int MenuItem_actionProviderClass=14;
     /**
@@ -15587,7 +15587,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:actionViewClass
+     * @attr name com.app.facesbyplaces:actionViewClass
      */
     public static final int MenuItem_actionViewClass=15;
     /**
@@ -15610,7 +15610,7 @@ public final class R {
      * <tr><td>SYM</td><td>4</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:alphabeticModifiers
+     * @attr name com.app.facesbyplaces:alphabeticModifiers
      */
     public static final int MenuItem_alphabeticModifiers=16;
     /**
@@ -15621,7 +15621,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:contentDescription
+     * @attr name com.app.facesbyplaces:contentDescription
      */
     public static final int MenuItem_contentDescription=17;
     /**
@@ -15633,7 +15633,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:iconTint
+     * @attr name com.app.facesbyplaces:iconTint
      */
     public static final int MenuItem_iconTint=18;
     /**
@@ -15660,7 +15660,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:iconTintMode
+     * @attr name com.app.facesbyplaces:iconTintMode
      */
     public static final int MenuItem_iconTintMode=19;
     /**
@@ -15683,7 +15683,7 @@ public final class R {
      * <tr><td>SYM</td><td>4</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:numericModifiers
+     * @attr name com.app.facesbyplaces:numericModifiers
      */
     public static final int MenuItem_numericModifiers=20;
     /**
@@ -15713,7 +15713,7 @@ public final class R {
      * label with it even if it has an icon representation.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:showAsAction
+     * @attr name com.app.facesbyplaces:showAsAction
      */
     public static final int MenuItem_showAsAction=21;
     /**
@@ -15724,7 +15724,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:tooltipText
+     * @attr name com.app.facesbyplaces:tooltipText
      */
     public static final int MenuItem_tooltipText=22;
     /**
@@ -15741,8 +15741,8 @@ public final class R {
      * <tr><td><code>{@link #MenuView_android_headerBackground android:headerBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuView_android_itemBackground android:itemBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #MenuView_android_itemIconDisabledAlpha android:itemIconDisabledAlpha}</code></td><td></td></tr>
-     * <tr><td><code>{@link #MenuView_preserveIconSpacing com.example.facesbyplaces:preserveIconSpacing}</code></td><td>Whether space should be reserved in layout when an icon is missing.</td></tr>
-     * <tr><td><code>{@link #MenuView_subMenuArrow com.example.facesbyplaces:subMenuArrow}</code></td><td>Drawable for the arrow icon indicating a particular item is a submenu.</td></tr>
+     * <tr><td><code>{@link #MenuView_preserveIconSpacing com.app.facesbyplaces:preserveIconSpacing}</code></td><td>Whether space should be reserved in layout when an icon is missing.</td></tr>
+     * <tr><td><code>{@link #MenuView_subMenuArrow com.app.facesbyplaces:subMenuArrow}</code></td><td>Drawable for the arrow icon indicating a particular item is a submenu.</td></tr>
      * </table>
      * @see #MenuView_android_windowAnimationStyle
      * @see #MenuView_android_itemTextAppearance
@@ -15861,7 +15861,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:preserveIconSpacing
+     * @attr name com.app.facesbyplaces:preserveIconSpacing
      */
     public static final int MenuView_preserveIconSpacing=7;
     /**
@@ -15874,7 +15874,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:subMenuArrow
+     * @attr name com.app.facesbyplaces:subMenuArrow
      */
     public static final int MenuView_subMenuArrow=8;
     /**
@@ -15887,15 +15887,15 @@ public final class R {
      * <tr><td><code>{@link #NavigationView_android_background android:background}</code></td><td></td></tr>
      * <tr><td><code>{@link #NavigationView_android_fitsSystemWindows android:fitsSystemWindows}</code></td><td></td></tr>
      * <tr><td><code>{@link #NavigationView_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_elevation com.example.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #NavigationView_headerLayout com.example.facesbyplaces:headerLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemBackground com.example.facesbyplaces:itemBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemHorizontalPadding com.example.facesbyplaces:itemHorizontalPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemIconPadding com.example.facesbyplaces:itemIconPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemIconTint com.example.facesbyplaces:itemIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemTextAppearance com.example.facesbyplaces:itemTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_itemTextColor com.example.facesbyplaces:itemTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #NavigationView_menu com.example.facesbyplaces:menu}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_elevation com.app.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #NavigationView_headerLayout com.app.facesbyplaces:headerLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemBackground com.app.facesbyplaces:itemBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemHorizontalPadding com.app.facesbyplaces:itemHorizontalPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemIconPadding com.app.facesbyplaces:itemIconPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemIconTint com.app.facesbyplaces:itemIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemTextAppearance com.app.facesbyplaces:itemTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_itemTextColor com.app.facesbyplaces:itemTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #NavigationView_menu com.app.facesbyplaces:menu}</code></td><td></td></tr>
      * </table>
      * @see #NavigationView_android_background
      * @see #NavigationView_android_fitsSystemWindows
@@ -15964,11 +15964,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:elevation
+     * @attr name com.app.facesbyplaces:elevation
      */
     public static final int NavigationView_elevation=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#headerLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#headerLayout}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15976,11 +15976,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:headerLayout
+     * @attr name com.app.facesbyplaces:headerLayout
      */
     public static final int NavigationView_headerLayout=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemBackground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemBackground}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -15988,11 +15988,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemBackground
+     * @attr name com.app.facesbyplaces:itemBackground
      */
     public static final int NavigationView_itemBackground=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemHorizontalPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemHorizontalPadding}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -16001,11 +16001,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:itemHorizontalPadding
+     * @attr name com.app.facesbyplaces:itemHorizontalPadding
      */
     public static final int NavigationView_itemHorizontalPadding=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemIconPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemIconPadding}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -16014,22 +16014,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:itemIconPadding
+     * @attr name com.app.facesbyplaces:itemIconPadding
      */
     public static final int NavigationView_itemIconPadding=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemIconTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemIconTint}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemIconTint
+     * @attr name com.app.facesbyplaces:itemIconTint
      */
     public static final int NavigationView_itemIconTint=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemTextAppearance}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16037,22 +16037,22 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemTextAppearance
+     * @attr name com.app.facesbyplaces:itemTextAppearance
      */
     public static final int NavigationView_itemTextAppearance=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#itemTextColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#itemTextColor}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:itemTextColor
+     * @attr name com.app.facesbyplaces:itemTextColor
      */
     public static final int NavigationView_itemTextColor=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#menu}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#menu}
      * attribute's value can be found in the {@link #NavigationView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16060,7 +16060,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:menu
+     * @attr name com.app.facesbyplaces:menu
      */
     public static final int NavigationView_menu=11;
     /**
@@ -16072,7 +16072,7 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #PopupWindow_android_popupBackground android:popupBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #PopupWindow_android_popupAnimationStyle android:popupAnimationStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #PopupWindow_overlapAnchor com.example.facesbyplaces:overlapAnchor}</code></td><td>Whether the popup window should overlap its anchor view.</td></tr>
+     * <tr><td><code>{@link #PopupWindow_overlapAnchor com.app.facesbyplaces:overlapAnchor}</code></td><td>Whether the popup window should overlap its anchor view.</td></tr>
      * </table>
      * @see #PopupWindow_android_popupBackground
      * @see #PopupWindow_android_popupAnimationStyle
@@ -16116,7 +16116,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:overlapAnchor
+     * @attr name com.app.facesbyplaces:overlapAnchor
      */
     public static final int PopupWindow_overlapAnchor=2;
     /**
@@ -16126,7 +16126,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #PopupWindowBackgroundState_state_above_anchor com.example.facesbyplaces:state_above_anchor}</code></td><td>State identifier indicating the popup will be above the anchor.</td></tr>
+     * <tr><td><code>{@link #PopupWindowBackgroundState_state_above_anchor com.app.facesbyplaces:state_above_anchor}</code></td><td>State identifier indicating the popup will be above the anchor.</td></tr>
      * </table>
      * @see #PopupWindowBackgroundState_state_above_anchor
      */
@@ -16141,7 +16141,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:state_above_anchor
+     * @attr name com.app.facesbyplaces:state_above_anchor
      */
     public static final int PopupWindowBackgroundState_state_above_anchor=0;
     /**
@@ -16151,8 +16151,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #RecycleListView_paddingBottomNoButtons com.example.facesbyplaces:paddingBottomNoButtons}</code></td><td>Bottom padding to use when no buttons are present.</td></tr>
-     * <tr><td><code>{@link #RecycleListView_paddingTopNoTitle com.example.facesbyplaces:paddingTopNoTitle}</code></td><td>Top padding to use when no title is present.</td></tr>
+     * <tr><td><code>{@link #RecycleListView_paddingBottomNoButtons com.app.facesbyplaces:paddingBottomNoButtons}</code></td><td>Bottom padding to use when no buttons are present.</td></tr>
+     * <tr><td><code>{@link #RecycleListView_paddingTopNoTitle com.app.facesbyplaces:paddingTopNoTitle}</code></td><td>Top padding to use when no title is present.</td></tr>
      * </table>
      * @see #RecycleListView_paddingBottomNoButtons
      * @see #RecycleListView_paddingTopNoTitle
@@ -16171,7 +16171,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:paddingBottomNoButtons
+     * @attr name com.app.facesbyplaces:paddingBottomNoButtons
      */
     public static final int RecycleListView_paddingBottomNoButtons=0;
     /**
@@ -16185,7 +16185,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:paddingTopNoTitle
+     * @attr name com.app.facesbyplaces:paddingTopNoTitle
      */
     public static final int RecycleListView_paddingTopNoTitle=1;
     /**
@@ -16197,15 +16197,15 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #RecyclerView_android_orientation android:orientation}</code></td><td></td></tr>
      * <tr><td><code>{@link #RecyclerView_android_descendantFocusability android:descendantFocusability}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollEnabled com.example.facesbyplaces:fastScrollEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalThumbDrawable com.example.facesbyplaces:fastScrollHorizontalThumbDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalTrackDrawable com.example.facesbyplaces:fastScrollHorizontalTrackDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalThumbDrawable com.example.facesbyplaces:fastScrollVerticalThumbDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalTrackDrawable com.example.facesbyplaces:fastScrollVerticalTrackDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_layoutManager com.example.facesbyplaces:layoutManager}</code></td><td>Class name of the Layout Manager to be used.</td></tr>
-     * <tr><td><code>{@link #RecyclerView_reverseLayout com.example.facesbyplaces:reverseLayout}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_spanCount com.example.facesbyplaces:spanCount}</code></td><td></td></tr>
-     * <tr><td><code>{@link #RecyclerView_stackFromEnd com.example.facesbyplaces:stackFromEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollEnabled com.app.facesbyplaces:fastScrollEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalThumbDrawable com.app.facesbyplaces:fastScrollHorizontalThumbDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollHorizontalTrackDrawable com.app.facesbyplaces:fastScrollHorizontalTrackDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalThumbDrawable com.app.facesbyplaces:fastScrollVerticalThumbDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_fastScrollVerticalTrackDrawable com.app.facesbyplaces:fastScrollVerticalTrackDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_layoutManager com.app.facesbyplaces:layoutManager}</code></td><td>Class name of the Layout Manager to be used.</td></tr>
+     * <tr><td><code>{@link #RecyclerView_reverseLayout com.app.facesbyplaces:reverseLayout}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_spanCount com.app.facesbyplaces:spanCount}</code></td><td></td></tr>
+     * <tr><td><code>{@link #RecyclerView_stackFromEnd com.app.facesbyplaces:stackFromEnd}</code></td><td></td></tr>
      * </table>
      * @see #RecyclerView_android_orientation
      * @see #RecyclerView_android_descendantFocusability
@@ -16260,17 +16260,17 @@ public final class R {
      */
     public static final int RecyclerView_android_descendantFocusability=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fastScrollEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fastScrollEnabled}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:fastScrollEnabled
+     * @attr name com.app.facesbyplaces:fastScrollEnabled
      */
     public static final int RecyclerView_fastScrollEnabled=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fastScrollHorizontalThumbDrawable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fastScrollHorizontalThumbDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16278,11 +16278,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:fastScrollHorizontalThumbDrawable
+     * @attr name com.app.facesbyplaces:fastScrollHorizontalThumbDrawable
      */
     public static final int RecyclerView_fastScrollHorizontalThumbDrawable=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fastScrollHorizontalTrackDrawable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fastScrollHorizontalTrackDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16290,11 +16290,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:fastScrollHorizontalTrackDrawable
+     * @attr name com.app.facesbyplaces:fastScrollHorizontalTrackDrawable
      */
     public static final int RecyclerView_fastScrollHorizontalTrackDrawable=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fastScrollVerticalThumbDrawable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fastScrollVerticalThumbDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16302,11 +16302,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:fastScrollVerticalThumbDrawable
+     * @attr name com.app.facesbyplaces:fastScrollVerticalThumbDrawable
      */
     public static final int RecyclerView_fastScrollVerticalThumbDrawable=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fastScrollVerticalTrackDrawable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fastScrollVerticalTrackDrawable}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16314,7 +16314,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:fastScrollVerticalTrackDrawable
+     * @attr name com.app.facesbyplaces:fastScrollVerticalTrackDrawable
      */
     public static final int RecyclerView_fastScrollVerticalTrackDrawable=6;
     /**
@@ -16333,36 +16333,36 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:layoutManager
+     * @attr name com.app.facesbyplaces:layoutManager
      */
     public static final int RecyclerView_layoutManager=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#reverseLayout}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#reverseLayout}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:reverseLayout
+     * @attr name com.app.facesbyplaces:reverseLayout
      */
     public static final int RecyclerView_reverseLayout=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#spanCount}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#spanCount}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:spanCount
+     * @attr name com.app.facesbyplaces:spanCount
      */
     public static final int RecyclerView_spanCount=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#stackFromEnd}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#stackFromEnd}
      * attribute's value can be found in the {@link #RecyclerView} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:stackFromEnd
+     * @attr name com.app.facesbyplaces:stackFromEnd
      */
     public static final int RecyclerView_stackFromEnd=10;
     /**
@@ -16372,7 +16372,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ScrimInsetsFrameLayout_insetForeground com.example.facesbyplaces:insetForeground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ScrimInsetsFrameLayout_insetForeground com.app.facesbyplaces:insetForeground}</code></td><td></td></tr>
      * </table>
      * @see #ScrimInsetsFrameLayout_insetForeground
      */
@@ -16380,7 +16380,7 @@ public final class R {
       0x7f03011c
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#insetForeground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#insetForeground}
      * attribute's value can be found in the {@link #ScrimInsetsFrameLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16391,7 +16391,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:insetForeground
+     * @attr name com.app.facesbyplaces:insetForeground
      */
     public static final int ScrimInsetsFrameLayout_insetForeground=0;
     /**
@@ -16401,7 +16401,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #ScrollingViewBehavior_Layout_behavior_overlapTop com.example.facesbyplaces:behavior_overlapTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ScrollingViewBehavior_Layout_behavior_overlapTop com.app.facesbyplaces:behavior_overlapTop}</code></td><td></td></tr>
      * </table>
      * @see #ScrollingViewBehavior_Layout_behavior_overlapTop
      */
@@ -16409,7 +16409,7 @@ public final class R {
       0x7f03003d
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#behavior_overlapTop}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#behavior_overlapTop}
      * attribute's value can be found in the {@link #ScrollingViewBehavior_Layout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -16418,7 +16418,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:behavior_overlapTop
+     * @attr name com.app.facesbyplaces:behavior_overlapTop
      */
     public static final int ScrollingViewBehavior_Layout_behavior_overlapTop=0;
     /**
@@ -16432,20 +16432,20 @@ public final class R {
      * <tr><td><code>{@link #SearchView_android_maxWidth android:maxWidth}</code></td><td></td></tr>
      * <tr><td><code>{@link #SearchView_android_inputType android:inputType}</code></td><td></td></tr>
      * <tr><td><code>{@link #SearchView_android_imeOptions android:imeOptions}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SearchView_closeIcon com.example.facesbyplaces:closeIcon}</code></td><td>Close button icon</td></tr>
-     * <tr><td><code>{@link #SearchView_commitIcon com.example.facesbyplaces:commitIcon}</code></td><td>Commit icon shown in the query suggestion row</td></tr>
-     * <tr><td><code>{@link #SearchView_defaultQueryHint com.example.facesbyplaces:defaultQueryHint}</code></td><td>Default query hint used when {@code queryHint} is undefined and
+     * <tr><td><code>{@link #SearchView_closeIcon com.app.facesbyplaces:closeIcon}</code></td><td>Close button icon</td></tr>
+     * <tr><td><code>{@link #SearchView_commitIcon com.app.facesbyplaces:commitIcon}</code></td><td>Commit icon shown in the query suggestion row</td></tr>
+     * <tr><td><code>{@link #SearchView_defaultQueryHint com.app.facesbyplaces:defaultQueryHint}</code></td><td>Default query hint used when {@code queryHint} is undefined and
      * the search view's {@code SearchableInfo} does not provide a hint.</td></tr>
-     * <tr><td><code>{@link #SearchView_goIcon com.example.facesbyplaces:goIcon}</code></td><td>Go button icon</td></tr>
-     * <tr><td><code>{@link #SearchView_iconifiedByDefault com.example.facesbyplaces:iconifiedByDefault}</code></td><td>The default state of the SearchView.</td></tr>
-     * <tr><td><code>{@link #SearchView_layout com.example.facesbyplaces:layout}</code></td><td>The layout to use for the search view.</td></tr>
-     * <tr><td><code>{@link #SearchView_queryBackground com.example.facesbyplaces:queryBackground}</code></td><td>Background for the section containing the search query</td></tr>
-     * <tr><td><code>{@link #SearchView_queryHint com.example.facesbyplaces:queryHint}</code></td><td>An optional user-defined query hint string to be displayed in the empty query field.</td></tr>
-     * <tr><td><code>{@link #SearchView_searchHintIcon com.example.facesbyplaces:searchHintIcon}</code></td><td>Search icon displayed as a text field hint</td></tr>
-     * <tr><td><code>{@link #SearchView_searchIcon com.example.facesbyplaces:searchIcon}</code></td><td>Search icon</td></tr>
-     * <tr><td><code>{@link #SearchView_submitBackground com.example.facesbyplaces:submitBackground}</code></td><td>Background for the section containing the action (e.g.</td></tr>
-     * <tr><td><code>{@link #SearchView_suggestionRowLayout com.example.facesbyplaces:suggestionRowLayout}</code></td><td>Layout for query suggestion rows</td></tr>
-     * <tr><td><code>{@link #SearchView_voiceIcon com.example.facesbyplaces:voiceIcon}</code></td><td>Voice button icon</td></tr>
+     * <tr><td><code>{@link #SearchView_goIcon com.app.facesbyplaces:goIcon}</code></td><td>Go button icon</td></tr>
+     * <tr><td><code>{@link #SearchView_iconifiedByDefault com.app.facesbyplaces:iconifiedByDefault}</code></td><td>The default state of the SearchView.</td></tr>
+     * <tr><td><code>{@link #SearchView_layout com.app.facesbyplaces:layout}</code></td><td>The layout to use for the search view.</td></tr>
+     * <tr><td><code>{@link #SearchView_queryBackground com.app.facesbyplaces:queryBackground}</code></td><td>Background for the section containing the search query</td></tr>
+     * <tr><td><code>{@link #SearchView_queryHint com.app.facesbyplaces:queryHint}</code></td><td>An optional user-defined query hint string to be displayed in the empty query field.</td></tr>
+     * <tr><td><code>{@link #SearchView_searchHintIcon com.app.facesbyplaces:searchHintIcon}</code></td><td>Search icon displayed as a text field hint</td></tr>
+     * <tr><td><code>{@link #SearchView_searchIcon com.app.facesbyplaces:searchIcon}</code></td><td>Search icon</td></tr>
+     * <tr><td><code>{@link #SearchView_submitBackground com.app.facesbyplaces:submitBackground}</code></td><td>Background for the section containing the action (e.g.</td></tr>
+     * <tr><td><code>{@link #SearchView_suggestionRowLayout com.app.facesbyplaces:suggestionRowLayout}</code></td><td>Layout for query suggestion rows</td></tr>
+     * <tr><td><code>{@link #SearchView_voiceIcon com.app.facesbyplaces:voiceIcon}</code></td><td>Voice button icon</td></tr>
      * </table>
      * @see #SearchView_android_focusable
      * @see #SearchView_android_maxWidth
@@ -16595,7 +16595,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:closeIcon
+     * @attr name com.app.facesbyplaces:closeIcon
      */
     public static final int SearchView_closeIcon=4;
     /**
@@ -16608,7 +16608,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:commitIcon
+     * @attr name com.app.facesbyplaces:commitIcon
      */
     public static final int SearchView_commitIcon=5;
     /**
@@ -16620,7 +16620,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:defaultQueryHint
+     * @attr name com.app.facesbyplaces:defaultQueryHint
      */
     public static final int SearchView_defaultQueryHint=6;
     /**
@@ -16633,7 +16633,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:goIcon
+     * @attr name com.app.facesbyplaces:goIcon
      */
     public static final int SearchView_goIcon=7;
     /**
@@ -16645,7 +16645,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:iconifiedByDefault
+     * @attr name com.app.facesbyplaces:iconifiedByDefault
      */
     public static final int SearchView_iconifiedByDefault=8;
     /**
@@ -16658,7 +16658,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:layout
+     * @attr name com.app.facesbyplaces:layout
      */
     public static final int SearchView_layout=9;
     /**
@@ -16671,7 +16671,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:queryBackground
+     * @attr name com.app.facesbyplaces:queryBackground
      */
     public static final int SearchView_queryBackground=10;
     /**
@@ -16682,7 +16682,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:queryHint
+     * @attr name com.app.facesbyplaces:queryHint
      */
     public static final int SearchView_queryHint=11;
     /**
@@ -16695,7 +16695,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:searchHintIcon
+     * @attr name com.app.facesbyplaces:searchHintIcon
      */
     public static final int SearchView_searchHintIcon=12;
     /**
@@ -16708,7 +16708,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:searchIcon
+     * @attr name com.app.facesbyplaces:searchIcon
      */
     public static final int SearchView_searchIcon=13;
     /**
@@ -16721,7 +16721,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:submitBackground
+     * @attr name com.app.facesbyplaces:submitBackground
      */
     public static final int SearchView_submitBackground=14;
     /**
@@ -16734,7 +16734,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:suggestionRowLayout
+     * @attr name com.app.facesbyplaces:suggestionRowLayout
      */
     public static final int SearchView_suggestionRowLayout=15;
     /**
@@ -16747,7 +16747,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:voiceIcon
+     * @attr name com.app.facesbyplaces:voiceIcon
      */
     public static final int SearchView_voiceIcon=16;
     /**
@@ -16757,13 +16757,13 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #Section_indexPrefixes com.example.facesbyplaces:indexPrefixes}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Section_noIndex com.example.facesbyplaces:noIndex}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Section_schemaOrgProperty com.example.facesbyplaces:schemaOrgProperty}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Section_sectionFormat com.example.facesbyplaces:sectionFormat}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Section_sectionId com.example.facesbyplaces:sectionId}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Section_sectionWeight com.example.facesbyplaces:sectionWeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Section_subsectionSeparator com.example.facesbyplaces:subsectionSeparator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_indexPrefixes com.app.facesbyplaces:indexPrefixes}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_noIndex com.app.facesbyplaces:noIndex}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_schemaOrgProperty com.app.facesbyplaces:schemaOrgProperty}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_sectionFormat com.app.facesbyplaces:sectionFormat}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_sectionId com.app.facesbyplaces:sectionId}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_sectionWeight com.app.facesbyplaces:sectionWeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Section_subsectionSeparator com.app.facesbyplaces:subsectionSeparator}</code></td><td></td></tr>
      * </table>
      * @see #Section_indexPrefixes
      * @see #Section_noIndex
@@ -16778,37 +16778,37 @@ public final class R {
       0x7f030190, 0x7f030192, 0x7f0301b7
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#indexPrefixes}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#indexPrefixes}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:indexPrefixes
+     * @attr name com.app.facesbyplaces:indexPrefixes
      */
     public static final int Section_indexPrefixes=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#noIndex}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#noIndex}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:noIndex
+     * @attr name com.app.facesbyplaces:noIndex
      */
     public static final int Section_noIndex=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#schemaOrgProperty}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#schemaOrgProperty}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:schemaOrgProperty
+     * @attr name com.app.facesbyplaces:schemaOrgProperty
      */
     public static final int Section_schemaOrgProperty=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#sectionFormat}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#sectionFormat}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -16824,36 +16824,36 @@ public final class R {
      * <tr><td>url</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:sectionFormat
+     * @attr name com.app.facesbyplaces:sectionFormat
      */
     public static final int Section_sectionFormat=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#sectionId}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#sectionId}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:sectionId
+     * @attr name com.app.facesbyplaces:sectionId
      */
     public static final int Section_sectionId=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#sectionWeight}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#sectionWeight}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:sectionWeight
+     * @attr name com.app.facesbyplaces:sectionWeight
      */
     public static final int Section_sectionWeight=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#subsectionSeparator}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#subsectionSeparator}
      * attribute's value can be found in the {@link #Section} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:subsectionSeparator
+     * @attr name com.app.facesbyplaces:subsectionSeparator
      */
     public static final int Section_subsectionSeparator=6;
     /**
@@ -16863,7 +16863,7 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #SectionFeature_featureType com.example.facesbyplaces:featureType}</code></td><td></td></tr>
+     * <tr><td><code>{@link #SectionFeature_featureType com.app.facesbyplaces:featureType}</code></td><td></td></tr>
      * </table>
      * @see #SectionFeature_featureType
      */
@@ -16871,7 +16871,7 @@ public final class R {
       0x7f0300eb
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#featureType}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#featureType}
      * attribute's value can be found in the {@link #SectionFeature} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -16888,7 +16888,7 @@ public final class R {
      * <tr><td>omnibox_url_section</td><td>4</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:featureType
+     * @attr name com.app.facesbyplaces:featureType
      */
     public static final int SectionFeature_featureType=0;
     /**
@@ -16898,9 +16898,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #SignInButton_buttonSize com.example.facesbyplaces:buttonSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SignInButton_colorScheme com.example.facesbyplaces:colorScheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SignInButton_scopeUris com.example.facesbyplaces:scopeUris}</code></td><td></td></tr>
+     * <tr><td><code>{@link #SignInButton_buttonSize com.app.facesbyplaces:buttonSize}</code></td><td></td></tr>
+     * <tr><td><code>{@link #SignInButton_colorScheme com.app.facesbyplaces:colorScheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #SignInButton_scopeUris com.app.facesbyplaces:scopeUris}</code></td><td></td></tr>
      * </table>
      * @see #SignInButton_buttonSize
      * @see #SignInButton_colorScheme
@@ -16910,7 +16910,7 @@ public final class R {
       0x7f030057, 0x7f0300a0, 0x7f030185
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buttonSize}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buttonSize}
      * attribute's value can be found in the {@link #SignInButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16928,11 +16928,11 @@ public final class R {
      * <tr><td>wide</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buttonSize
+     * @attr name com.app.facesbyplaces:buttonSize
      */
     public static final int SignInButton_buttonSize=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#colorScheme}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#colorScheme}
      * attribute's value can be found in the {@link #SignInButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16950,11 +16950,11 @@ public final class R {
      * <tr><td>light</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:colorScheme
+     * @attr name com.app.facesbyplaces:colorScheme
      */
     public static final int SignInButton_colorScheme=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#scopeUris}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#scopeUris}
      * attribute's value can be found in the {@link #SignInButton} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16964,7 +16964,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:scopeUris
+     * @attr name com.app.facesbyplaces:scopeUris
      */
     public static final int SignInButton_scopeUris=2;
     /**
@@ -16974,8 +16974,8 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #Snackbar_snackbarButtonStyle com.example.facesbyplaces:snackbarButtonStyle}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Snackbar_snackbarStyle com.example.facesbyplaces:snackbarStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Snackbar_snackbarButtonStyle com.app.facesbyplaces:snackbarButtonStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Snackbar_snackbarStyle com.app.facesbyplaces:snackbarStyle}</code></td><td></td></tr>
      * </table>
      * @see #Snackbar_snackbarButtonStyle
      * @see #Snackbar_snackbarStyle
@@ -16984,7 +16984,7 @@ public final class R {
       0x7f0301a1, 0x7f0301a2
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#snackbarButtonStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#snackbarButtonStyle}
      * attribute's value can be found in the {@link #Snackbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -16992,11 +16992,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:snackbarButtonStyle
+     * @attr name com.app.facesbyplaces:snackbarButtonStyle
      */
     public static final int Snackbar_snackbarButtonStyle=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#snackbarStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#snackbarStyle}
      * attribute's value can be found in the {@link #Snackbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17004,7 +17004,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:snackbarStyle
+     * @attr name com.app.facesbyplaces:snackbarStyle
      */
     public static final int Snackbar_snackbarStyle=1;
     /**
@@ -17015,8 +17015,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #SnackbarLayout_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SnackbarLayout_elevation com.example.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
-     * <tr><td><code>{@link #SnackbarLayout_maxActionInlineWidth com.example.facesbyplaces:maxActionInlineWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #SnackbarLayout_elevation com.app.facesbyplaces:elevation}</code></td><td>Elevation for the action bar itself</td></tr>
+     * <tr><td><code>{@link #SnackbarLayout_maxActionInlineWidth com.app.facesbyplaces:maxActionInlineWidth}</code></td><td></td></tr>
      * </table>
      * @see #SnackbarLayout_android_maxWidth
      * @see #SnackbarLayout_elevation
@@ -17049,11 +17049,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:elevation
+     * @attr name com.app.facesbyplaces:elevation
      */
     public static final int SnackbarLayout_elevation=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maxActionInlineWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maxActionInlineWidth}
      * attribute's value can be found in the {@link #SnackbarLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17062,7 +17062,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:maxActionInlineWidth
+     * @attr name com.app.facesbyplaces:maxActionInlineWidth
      */
     public static final int SnackbarLayout_maxActionInlineWidth=2;
     /**
@@ -17076,7 +17076,7 @@ public final class R {
      * <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td></td></tr>
      * <tr><td><code>{@link #Spinner_android_prompt android:prompt}</code></td><td></td></tr>
      * <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Spinner_popupTheme com.example.facesbyplaces:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #Spinner_popupTheme com.app.facesbyplaces:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
      * </table>
      * @see #Spinner_android_entries
@@ -17165,7 +17165,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:popupTheme
+     * @attr name com.app.facesbyplaces:popupTheme
      */
     public static final int Spinner_popupTheme=4;
     /**
@@ -17305,17 +17305,17 @@ public final class R {
      * <tr><td><code>{@link #SwitchCompat_android_textOn android:textOn}</code></td><td></td></tr>
      * <tr><td><code>{@link #SwitchCompat_android_textOff android:textOff}</code></td><td></td></tr>
      * <tr><td><code>{@link #SwitchCompat_android_thumb android:thumb}</code></td><td></td></tr>
-     * <tr><td><code>{@link #SwitchCompat_showText com.example.facesbyplaces:showText}</code></td><td>Whether to draw on/off text.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_splitTrack com.example.facesbyplaces:splitTrack}</code></td><td>Whether to split the track and leave a gap for the thumb drawable.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_switchMinWidth com.example.facesbyplaces:switchMinWidth}</code></td><td>Minimum width for the switch component</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_switchPadding com.example.facesbyplaces:switchPadding}</code></td><td>Minimum space between the switch and caption text</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_switchTextAppearance com.example.facesbyplaces:switchTextAppearance}</code></td><td>TextAppearance style for text displayed on the switch thumb.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_thumbTextPadding com.example.facesbyplaces:thumbTextPadding}</code></td><td>Amount of padding on either side of text within the switch thumb.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_thumbTint com.example.facesbyplaces:thumbTint}</code></td><td>Tint to apply to the thumb drawable.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_thumbTintMode com.example.facesbyplaces:thumbTintMode}</code></td><td>Blending mode used to apply the thumb tint.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_track com.example.facesbyplaces:track}</code></td><td>Drawable to use as the "track" that the switch thumb slides within.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_trackTint com.example.facesbyplaces:trackTint}</code></td><td>Tint to apply to the track.</td></tr>
-     * <tr><td><code>{@link #SwitchCompat_trackTintMode com.example.facesbyplaces:trackTintMode}</code></td><td>Blending mode used to apply the track tint.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_showText com.app.facesbyplaces:showText}</code></td><td>Whether to draw on/off text.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_splitTrack com.app.facesbyplaces:splitTrack}</code></td><td>Whether to split the track and leave a gap for the thumb drawable.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_switchMinWidth com.app.facesbyplaces:switchMinWidth}</code></td><td>Minimum width for the switch component</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_switchPadding com.app.facesbyplaces:switchPadding}</code></td><td>Minimum space between the switch and caption text</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_switchTextAppearance com.app.facesbyplaces:switchTextAppearance}</code></td><td>TextAppearance style for text displayed on the switch thumb.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_thumbTextPadding com.app.facesbyplaces:thumbTextPadding}</code></td><td>Amount of padding on either side of text within the switch thumb.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_thumbTint com.app.facesbyplaces:thumbTint}</code></td><td>Tint to apply to the thumb drawable.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_thumbTintMode com.app.facesbyplaces:thumbTintMode}</code></td><td>Blending mode used to apply the thumb tint.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_track com.app.facesbyplaces:track}</code></td><td>Drawable to use as the "track" that the switch thumb slides within.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_trackTint com.app.facesbyplaces:trackTint}</code></td><td>Tint to apply to the track.</td></tr>
+     * <tr><td><code>{@link #SwitchCompat_trackTintMode com.app.facesbyplaces:trackTintMode}</code></td><td>Blending mode used to apply the track tint.</td></tr>
      * </table>
      * @see #SwitchCompat_android_textOn
      * @see #SwitchCompat_android_textOff
@@ -17381,7 +17381,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:showText
+     * @attr name com.app.facesbyplaces:showText
      */
     public static final int SwitchCompat_showText=3;
     /**
@@ -17392,7 +17392,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:splitTrack
+     * @attr name com.app.facesbyplaces:splitTrack
      */
     public static final int SwitchCompat_splitTrack=4;
     /**
@@ -17406,7 +17406,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:switchMinWidth
+     * @attr name com.app.facesbyplaces:switchMinWidth
      */
     public static final int SwitchCompat_switchMinWidth=5;
     /**
@@ -17420,7 +17420,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:switchPadding
+     * @attr name com.app.facesbyplaces:switchPadding
      */
     public static final int SwitchCompat_switchPadding=6;
     /**
@@ -17433,7 +17433,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:switchTextAppearance
+     * @attr name com.app.facesbyplaces:switchTextAppearance
      */
     public static final int SwitchCompat_switchTextAppearance=7;
     /**
@@ -17447,7 +17447,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:thumbTextPadding
+     * @attr name com.app.facesbyplaces:thumbTextPadding
      */
     public static final int SwitchCompat_thumbTextPadding=8;
     /**
@@ -17459,7 +17459,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:thumbTint
+     * @attr name com.app.facesbyplaces:thumbTint
      */
     public static final int SwitchCompat_thumbTint=9;
     /**
@@ -17486,7 +17486,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:thumbTintMode
+     * @attr name com.app.facesbyplaces:thumbTintMode
      */
     public static final int SwitchCompat_thumbTintMode=10;
     /**
@@ -17499,7 +17499,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:track
+     * @attr name com.app.facesbyplaces:track
      */
     public static final int SwitchCompat_track=11;
     /**
@@ -17511,7 +17511,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:trackTint
+     * @attr name com.app.facesbyplaces:trackTint
      */
     public static final int SwitchCompat_trackTint=12;
     /**
@@ -17538,7 +17538,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:trackTintMode
+     * @attr name com.app.facesbyplaces:trackTintMode
      */
     public static final int SwitchCompat_trackTintMode=13;
     /**
@@ -17600,31 +17600,31 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #TabLayout_tabBackground com.example.facesbyplaces:tabBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabContentStart com.example.facesbyplaces:tabContentStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabGravity com.example.facesbyplaces:tabGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIconTint com.example.facesbyplaces:tabIconTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIconTintMode com.example.facesbyplaces:tabIconTintMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicator com.example.facesbyplaces:tabIndicator}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorAnimationDuration com.example.facesbyplaces:tabIndicatorAnimationDuration}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorColor com.example.facesbyplaces:tabIndicatorColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorFullWidth com.example.facesbyplaces:tabIndicatorFullWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorGravity com.example.facesbyplaces:tabIndicatorGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabIndicatorHeight com.example.facesbyplaces:tabIndicatorHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabInlineLabel com.example.facesbyplaces:tabInlineLabel}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabMaxWidth com.example.facesbyplaces:tabMaxWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabMinWidth com.example.facesbyplaces:tabMinWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabMode com.example.facesbyplaces:tabMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPadding com.example.facesbyplaces:tabPadding}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingBottom com.example.facesbyplaces:tabPaddingBottom}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingEnd com.example.facesbyplaces:tabPaddingEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingStart com.example.facesbyplaces:tabPaddingStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabPaddingTop com.example.facesbyplaces:tabPaddingTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabRippleColor com.example.facesbyplaces:tabRippleColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabSelectedTextColor com.example.facesbyplaces:tabSelectedTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabTextAppearance com.example.facesbyplaces:tabTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabTextColor com.example.facesbyplaces:tabTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TabLayout_tabUnboundedRipple com.example.facesbyplaces:tabUnboundedRipple}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabBackground com.app.facesbyplaces:tabBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabContentStart com.app.facesbyplaces:tabContentStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabGravity com.app.facesbyplaces:tabGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIconTint com.app.facesbyplaces:tabIconTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIconTintMode com.app.facesbyplaces:tabIconTintMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicator com.app.facesbyplaces:tabIndicator}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorAnimationDuration com.app.facesbyplaces:tabIndicatorAnimationDuration}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorColor com.app.facesbyplaces:tabIndicatorColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorFullWidth com.app.facesbyplaces:tabIndicatorFullWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorGravity com.app.facesbyplaces:tabIndicatorGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabIndicatorHeight com.app.facesbyplaces:tabIndicatorHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabInlineLabel com.app.facesbyplaces:tabInlineLabel}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabMaxWidth com.app.facesbyplaces:tabMaxWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabMinWidth com.app.facesbyplaces:tabMinWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabMode com.app.facesbyplaces:tabMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPadding com.app.facesbyplaces:tabPadding}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingBottom com.app.facesbyplaces:tabPaddingBottom}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingEnd com.app.facesbyplaces:tabPaddingEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingStart com.app.facesbyplaces:tabPaddingStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabPaddingTop com.app.facesbyplaces:tabPaddingTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabRippleColor com.app.facesbyplaces:tabRippleColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabSelectedTextColor com.app.facesbyplaces:tabSelectedTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabTextAppearance com.app.facesbyplaces:tabTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabTextColor com.app.facesbyplaces:tabTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TabLayout_tabUnboundedRipple com.app.facesbyplaces:tabUnboundedRipple}</code></td><td></td></tr>
      * </table>
      * @see #TabLayout_tabBackground
      * @see #TabLayout_tabContentStart
@@ -17662,7 +17662,7 @@ public final class R {
       0x7f0301da
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabBackground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabBackground}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17670,11 +17670,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabBackground
+     * @attr name com.app.facesbyplaces:tabBackground
      */
     public static final int TabLayout_tabBackground=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabContentStart}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabContentStart}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17683,11 +17683,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabContentStart
+     * @attr name com.app.facesbyplaces:tabContentStart
      */
     public static final int TabLayout_tabContentStart=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabGravity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabGravity}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -17700,22 +17700,22 @@ public final class R {
      * <tr><td>fill</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:tabGravity
+     * @attr name com.app.facesbyplaces:tabGravity
      */
     public static final int TabLayout_tabGravity=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIconTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIconTint}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabIconTint
+     * @attr name com.app.facesbyplaces:tabIconTint
      */
     public static final int TabLayout_tabIconTint=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIconTintMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIconTintMode}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -17732,11 +17732,11 @@ public final class R {
      * <tr><td>src_over</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:tabIconTintMode
+     * @attr name com.app.facesbyplaces:tabIconTintMode
      */
     public static final int TabLayout_tabIconTintMode=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIndicator}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIndicator}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17744,41 +17744,41 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabIndicator
+     * @attr name com.app.facesbyplaces:tabIndicator
      */
     public static final int TabLayout_tabIndicator=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIndicatorAnimationDuration}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIndicatorAnimationDuration}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:tabIndicatorAnimationDuration
+     * @attr name com.app.facesbyplaces:tabIndicatorAnimationDuration
      */
     public static final int TabLayout_tabIndicatorAnimationDuration=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIndicatorColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIndicatorColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabIndicatorColor
+     * @attr name com.app.facesbyplaces:tabIndicatorColor
      */
     public static final int TabLayout_tabIndicatorColor=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIndicatorFullWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIndicatorFullWidth}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:tabIndicatorFullWidth
+     * @attr name com.app.facesbyplaces:tabIndicatorFullWidth
      */
     public static final int TabLayout_tabIndicatorFullWidth=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIndicatorGravity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIndicatorGravity}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -17793,11 +17793,11 @@ public final class R {
      * <tr><td>top</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:tabIndicatorGravity
+     * @attr name com.app.facesbyplaces:tabIndicatorGravity
      */
     public static final int TabLayout_tabIndicatorGravity=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabIndicatorHeight}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabIndicatorHeight}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17806,21 +17806,21 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabIndicatorHeight
+     * @attr name com.app.facesbyplaces:tabIndicatorHeight
      */
     public static final int TabLayout_tabIndicatorHeight=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabInlineLabel}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabInlineLabel}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:tabInlineLabel
+     * @attr name com.app.facesbyplaces:tabInlineLabel
      */
     public static final int TabLayout_tabInlineLabel=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabMaxWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabMaxWidth}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17829,11 +17829,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabMaxWidth
+     * @attr name com.app.facesbyplaces:tabMaxWidth
      */
     public static final int TabLayout_tabMaxWidth=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabMinWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabMinWidth}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17842,11 +17842,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabMinWidth
+     * @attr name com.app.facesbyplaces:tabMinWidth
      */
     public static final int TabLayout_tabMinWidth=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabMode}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -17859,11 +17859,11 @@ public final class R {
      * <tr><td>scrollable</td><td>0</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:tabMode
+     * @attr name com.app.facesbyplaces:tabMode
      */
     public static final int TabLayout_tabMode=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabPadding}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabPadding}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17872,11 +17872,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabPadding
+     * @attr name com.app.facesbyplaces:tabPadding
      */
     public static final int TabLayout_tabPadding=15;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabPaddingBottom}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabPaddingBottom}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17885,11 +17885,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabPaddingBottom
+     * @attr name com.app.facesbyplaces:tabPaddingBottom
      */
     public static final int TabLayout_tabPaddingBottom=16;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabPaddingEnd}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabPaddingEnd}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17898,11 +17898,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabPaddingEnd
+     * @attr name com.app.facesbyplaces:tabPaddingEnd
      */
     public static final int TabLayout_tabPaddingEnd=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabPaddingStart}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabPaddingStart}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17911,11 +17911,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabPaddingStart
+     * @attr name com.app.facesbyplaces:tabPaddingStart
      */
     public static final int TabLayout_tabPaddingStart=18;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabPaddingTop}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabPaddingTop}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -17924,33 +17924,33 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:tabPaddingTop
+     * @attr name com.app.facesbyplaces:tabPaddingTop
      */
     public static final int TabLayout_tabPaddingTop=19;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabRippleColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabRippleColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabRippleColor
+     * @attr name com.app.facesbyplaces:tabRippleColor
      */
     public static final int TabLayout_tabRippleColor=20;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabSelectedTextColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabSelectedTextColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabSelectedTextColor
+     * @attr name com.app.facesbyplaces:tabSelectedTextColor
      */
     public static final int TabLayout_tabSelectedTextColor=21;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabTextAppearance}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -17958,28 +17958,28 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabTextAppearance
+     * @attr name com.app.facesbyplaces:tabTextAppearance
      */
     public static final int TabLayout_tabTextAppearance=22;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabTextColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabTextColor}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:tabTextColor
+     * @attr name com.app.facesbyplaces:tabTextColor
      */
     public static final int TabLayout_tabTextColor=23;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#tabUnboundedRipple}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#tabUnboundedRipple}
      * attribute's value can be found in the {@link #TabLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:tabUnboundedRipple
+     * @attr name com.app.facesbyplaces:tabUnboundedRipple
      */
     public static final int TabLayout_tabUnboundedRipple=24;
     /**
@@ -18000,8 +18000,8 @@ public final class R {
      * <tr><td><code>{@link #TextAppearance_android_shadowDy android:shadowDy}</code></td><td></td></tr>
      * <tr><td><code>{@link #TextAppearance_android_shadowRadius android:shadowRadius}</code></td><td></td></tr>
      * <tr><td><code>{@link #TextAppearance_android_fontFamily android:fontFamily}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextAppearance_fontFamily com.example.facesbyplaces:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
-     * <tr><td><code>{@link #TextAppearance_textAllCaps com.example.facesbyplaces:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
+     * <tr><td><code>{@link #TextAppearance_fontFamily com.app.facesbyplaces:fontFamily}</code></td><td>The attribute for the font family.</td></tr>
+     * <tr><td><code>{@link #TextAppearance_textAllCaps com.app.facesbyplaces:textAllCaps}</code></td><td>Present the text in ALL CAPS.</td></tr>
      * </table>
      * @see #TextAppearance_android_textSize
      * @see #TextAppearance_android_typeface
@@ -18174,7 +18174,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:fontFamily
+     * @attr name com.app.facesbyplaces:fontFamily
      */
     public static final int TextAppearance_fontFamily=11;
     /**
@@ -18189,7 +18189,7 @@ public final class R {
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:textAllCaps
+     * @attr name com.app.facesbyplaces:textAllCaps
      */
     public static final int TextAppearance_textAllCaps=12;
     /**
@@ -18201,32 +18201,32 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #TextInputLayout_android_textColorHint android:textColorHint}</code></td><td></td></tr>
      * <tr><td><code>{@link #TextInputLayout_android_hint android:hint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxBackgroundColor com.example.facesbyplaces:boxBackgroundColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxBackgroundMode com.example.facesbyplaces:boxBackgroundMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCollapsedPaddingTop com.example.facesbyplaces:boxCollapsedPaddingTop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomEnd com.example.facesbyplaces:boxCornerRadiusBottomEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomStart com.example.facesbyplaces:boxCornerRadiusBottomStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopEnd com.example.facesbyplaces:boxCornerRadiusTopEnd}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopStart com.example.facesbyplaces:boxCornerRadiusTopStart}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxStrokeColor com.example.facesbyplaces:boxStrokeColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_boxStrokeWidth com.example.facesbyplaces:boxStrokeWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterEnabled com.example.facesbyplaces:counterEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterMaxLength com.example.facesbyplaces:counterMaxLength}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterOverflowTextAppearance com.example.facesbyplaces:counterOverflowTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_counterTextAppearance com.example.facesbyplaces:counterTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_errorEnabled com.example.facesbyplaces:errorEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_errorTextAppearance com.example.facesbyplaces:errorTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_helperText com.example.facesbyplaces:helperText}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_helperTextEnabled com.example.facesbyplaces:helperTextEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_helperTextTextAppearance com.example.facesbyplaces:helperTextTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_hintAnimationEnabled com.example.facesbyplaces:hintAnimationEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_hintEnabled com.example.facesbyplaces:hintEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_hintTextAppearance com.example.facesbyplaces:hintTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleContentDescription com.example.facesbyplaces:passwordToggleContentDescription}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleDrawable com.example.facesbyplaces:passwordToggleDrawable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleEnabled com.example.facesbyplaces:passwordToggleEnabled}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleTint com.example.facesbyplaces:passwordToggleTint}</code></td><td></td></tr>
-     * <tr><td><code>{@link #TextInputLayout_passwordToggleTintMode com.example.facesbyplaces:passwordToggleTintMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxBackgroundColor com.app.facesbyplaces:boxBackgroundColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxBackgroundMode com.app.facesbyplaces:boxBackgroundMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCollapsedPaddingTop com.app.facesbyplaces:boxCollapsedPaddingTop}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomEnd com.app.facesbyplaces:boxCornerRadiusBottomEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusBottomStart com.app.facesbyplaces:boxCornerRadiusBottomStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopEnd com.app.facesbyplaces:boxCornerRadiusTopEnd}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxCornerRadiusTopStart com.app.facesbyplaces:boxCornerRadiusTopStart}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxStrokeColor com.app.facesbyplaces:boxStrokeColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_boxStrokeWidth com.app.facesbyplaces:boxStrokeWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterEnabled com.app.facesbyplaces:counterEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterMaxLength com.app.facesbyplaces:counterMaxLength}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterOverflowTextAppearance com.app.facesbyplaces:counterOverflowTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_counterTextAppearance com.app.facesbyplaces:counterTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_errorEnabled com.app.facesbyplaces:errorEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_errorTextAppearance com.app.facesbyplaces:errorTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_helperText com.app.facesbyplaces:helperText}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_helperTextEnabled com.app.facesbyplaces:helperTextEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_helperTextTextAppearance com.app.facesbyplaces:helperTextTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_hintAnimationEnabled com.app.facesbyplaces:hintAnimationEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_hintEnabled com.app.facesbyplaces:hintEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_hintTextAppearance com.app.facesbyplaces:hintTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleContentDescription com.app.facesbyplaces:passwordToggleContentDescription}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleDrawable com.app.facesbyplaces:passwordToggleDrawable}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleEnabled com.app.facesbyplaces:passwordToggleEnabled}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleTint com.app.facesbyplaces:passwordToggleTint}</code></td><td></td></tr>
+     * <tr><td><code>{@link #TextInputLayout_passwordToggleTintMode com.app.facesbyplaces:passwordToggleTintMode}</code></td><td></td></tr>
      * </table>
      * @see #TextInputLayout_android_textColorHint
      * @see #TextInputLayout_android_hint
@@ -18292,18 +18292,18 @@ public final class R {
      */
     public static final int TextInputLayout_android_hint=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxBackgroundColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxBackgroundColor}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:boxBackgroundColor
+     * @attr name com.app.facesbyplaces:boxBackgroundColor
      */
     public static final int TextInputLayout_boxBackgroundColor=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxBackgroundMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxBackgroundMode}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -18317,11 +18317,11 @@ public final class R {
      * <tr><td>outline</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:boxBackgroundMode
+     * @attr name com.app.facesbyplaces:boxBackgroundMode
      */
     public static final int TextInputLayout_boxBackgroundMode=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxCollapsedPaddingTop}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxCollapsedPaddingTop}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18330,11 +18330,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:boxCollapsedPaddingTop
+     * @attr name com.app.facesbyplaces:boxCollapsedPaddingTop
      */
     public static final int TextInputLayout_boxCollapsedPaddingTop=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxCornerRadiusBottomEnd}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxCornerRadiusBottomEnd}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18343,11 +18343,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:boxCornerRadiusBottomEnd
+     * @attr name com.app.facesbyplaces:boxCornerRadiusBottomEnd
      */
     public static final int TextInputLayout_boxCornerRadiusBottomEnd=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxCornerRadiusBottomStart}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxCornerRadiusBottomStart}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18356,11 +18356,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:boxCornerRadiusBottomStart
+     * @attr name com.app.facesbyplaces:boxCornerRadiusBottomStart
      */
     public static final int TextInputLayout_boxCornerRadiusBottomStart=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxCornerRadiusTopEnd}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxCornerRadiusTopEnd}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18369,11 +18369,11 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:boxCornerRadiusTopEnd
+     * @attr name com.app.facesbyplaces:boxCornerRadiusTopEnd
      */
     public static final int TextInputLayout_boxCornerRadiusTopEnd=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxCornerRadiusTopStart}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxCornerRadiusTopStart}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18382,22 +18382,22 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:boxCornerRadiusTopStart
+     * @attr name com.app.facesbyplaces:boxCornerRadiusTopStart
      */
     public static final int TextInputLayout_boxCornerRadiusTopStart=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxStrokeColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxStrokeColor}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:boxStrokeColor
+     * @attr name com.app.facesbyplaces:boxStrokeColor
      */
     public static final int TextInputLayout_boxStrokeColor=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#boxStrokeWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#boxStrokeWidth}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18406,30 +18406,30 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:boxStrokeWidth
+     * @attr name com.app.facesbyplaces:boxStrokeWidth
      */
     public static final int TextInputLayout_boxStrokeWidth=10;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#counterEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#counterEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:counterEnabled
+     * @attr name com.app.facesbyplaces:counterEnabled
      */
     public static final int TextInputLayout_counterEnabled=11;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#counterMaxLength}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#counterMaxLength}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be an integer value, such as "<code>100</code>".
      *
-     * @attr name com.example.facesbyplaces:counterMaxLength
+     * @attr name com.app.facesbyplaces:counterMaxLength
      */
     public static final int TextInputLayout_counterMaxLength=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#counterOverflowTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#counterOverflowTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18437,11 +18437,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:counterOverflowTextAppearance
+     * @attr name com.app.facesbyplaces:counterOverflowTextAppearance
      */
     public static final int TextInputLayout_counterOverflowTextAppearance=13;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#counterTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#counterTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18449,21 +18449,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:counterTextAppearance
+     * @attr name com.app.facesbyplaces:counterTextAppearance
      */
     public static final int TextInputLayout_counterTextAppearance=14;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#errorEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#errorEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:errorEnabled
+     * @attr name com.app.facesbyplaces:errorEnabled
      */
     public static final int TextInputLayout_errorEnabled=15;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#errorTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#errorTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18471,31 +18471,31 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:errorTextAppearance
+     * @attr name com.app.facesbyplaces:errorTextAppearance
      */
     public static final int TextInputLayout_errorTextAppearance=16;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#helperText}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#helperText}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:helperText
+     * @attr name com.app.facesbyplaces:helperText
      */
     public static final int TextInputLayout_helperText=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#helperTextEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#helperTextEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:helperTextEnabled
+     * @attr name com.app.facesbyplaces:helperTextEnabled
      */
     public static final int TextInputLayout_helperTextEnabled=18;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#helperTextTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#helperTextTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18503,31 +18503,31 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:helperTextTextAppearance
+     * @attr name com.app.facesbyplaces:helperTextTextAppearance
      */
     public static final int TextInputLayout_helperTextTextAppearance=19;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hintAnimationEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hintAnimationEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:hintAnimationEnabled
+     * @attr name com.app.facesbyplaces:hintAnimationEnabled
      */
     public static final int TextInputLayout_hintAnimationEnabled=20;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hintEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hintEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:hintEnabled
+     * @attr name com.app.facesbyplaces:hintEnabled
      */
     public static final int TextInputLayout_hintEnabled=21;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#hintTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#hintTextAppearance}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18535,21 +18535,21 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:hintTextAppearance
+     * @attr name com.app.facesbyplaces:hintTextAppearance
      */
     public static final int TextInputLayout_hintTextAppearance=22;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#passwordToggleContentDescription}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#passwordToggleContentDescription}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:passwordToggleContentDescription
+     * @attr name com.app.facesbyplaces:passwordToggleContentDescription
      */
     public static final int TextInputLayout_passwordToggleContentDescription=23;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#passwordToggleDrawable}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#passwordToggleDrawable}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -18557,32 +18557,32 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:passwordToggleDrawable
+     * @attr name com.app.facesbyplaces:passwordToggleDrawable
      */
     public static final int TextInputLayout_passwordToggleDrawable=24;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#passwordToggleEnabled}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#passwordToggleEnabled}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:passwordToggleEnabled
+     * @attr name com.app.facesbyplaces:passwordToggleEnabled
      */
     public static final int TextInputLayout_passwordToggleEnabled=25;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#passwordToggleTint}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#passwordToggleTint}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:passwordToggleTint
+     * @attr name com.app.facesbyplaces:passwordToggleTint
      */
     public static final int TextInputLayout_passwordToggleTint=26;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#passwordToggleTintMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#passwordToggleTintMode}
      * attribute's value can be found in the {@link #TextInputLayout} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -18598,7 +18598,7 @@ public final class R {
      * <tr><td>src_over</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:passwordToggleTintMode
+     * @attr name com.app.facesbyplaces:passwordToggleTintMode
      */
     public static final int TextInputLayout_passwordToggleTintMode=27;
     /**
@@ -18609,8 +18609,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ThemeEnforcement_android_textAppearance android:textAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ThemeEnforcement_enforceMaterialTheme com.example.facesbyplaces:enforceMaterialTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ThemeEnforcement_enforceTextAppearance com.example.facesbyplaces:enforceTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ThemeEnforcement_enforceMaterialTheme com.app.facesbyplaces:enforceMaterialTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #ThemeEnforcement_enforceTextAppearance com.app.facesbyplaces:enforceTextAppearance}</code></td><td></td></tr>
      * </table>
      * @see #ThemeEnforcement_android_textAppearance
      * @see #ThemeEnforcement_enforceMaterialTheme
@@ -18632,23 +18632,23 @@ public final class R {
      */
     public static final int ThemeEnforcement_android_textAppearance=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#enforceMaterialTheme}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#enforceMaterialTheme}
      * attribute's value can be found in the {@link #ThemeEnforcement} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:enforceMaterialTheme
+     * @attr name com.app.facesbyplaces:enforceMaterialTheme
      */
     public static final int ThemeEnforcement_enforceMaterialTheme=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#enforceTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#enforceTextAppearance}
      * attribute's value can be found in the {@link #ThemeEnforcement} array.
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      *
-     * @attr name com.example.facesbyplaces:enforceTextAppearance
+     * @attr name com.app.facesbyplaces:enforceTextAppearance
      */
     public static final int ThemeEnforcement_enforceTextAppearance=2;
     /**
@@ -18660,40 +18660,40 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #Toolbar_android_gravity android:gravity}</code></td><td></td></tr>
      * <tr><td><code>{@link #Toolbar_android_minHeight android:minHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_buttonGravity com.example.facesbyplaces:buttonGravity}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_collapseContentDescription com.example.facesbyplaces:collapseContentDescription}</code></td><td>Text to set as the content description for the collapse button.</td></tr>
-     * <tr><td><code>{@link #Toolbar_collapseIcon com.example.facesbyplaces:collapseIcon}</code></td><td>Icon drawable to use for the collapse button.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetEnd com.example.facesbyplaces:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetEndWithActions com.example.facesbyplaces:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
+     * <tr><td><code>{@link #Toolbar_buttonGravity com.app.facesbyplaces:buttonGravity}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_collapseContentDescription com.app.facesbyplaces:collapseContentDescription}</code></td><td>Text to set as the content description for the collapse button.</td></tr>
+     * <tr><td><code>{@link #Toolbar_collapseIcon com.app.facesbyplaces:collapseIcon}</code></td><td>Icon drawable to use for the collapse button.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetEnd com.app.facesbyplaces:contentInsetEnd}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetEndWithActions com.app.facesbyplaces:contentInsetEndWithActions}</code></td><td>Minimum inset for content views within a bar when actions from a menu
      * are present.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetLeft com.example.facesbyplaces:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetRight com.example.facesbyplaces:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetStart com.example.facesbyplaces:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_contentInsetStartWithNavigation com.example.facesbyplaces:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
+     * <tr><td><code>{@link #Toolbar_contentInsetLeft com.app.facesbyplaces:contentInsetLeft}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetRight com.app.facesbyplaces:contentInsetRight}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetStart com.app.facesbyplaces:contentInsetStart}</code></td><td>Minimum inset for content views within a bar.</td></tr>
+     * <tr><td><code>{@link #Toolbar_contentInsetStartWithNavigation com.app.facesbyplaces:contentInsetStartWithNavigation}</code></td><td>Minimum inset for content views within a bar when a navigation button
      * is present, such as the Up button.</td></tr>
-     * <tr><td><code>{@link #Toolbar_logo com.example.facesbyplaces:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
-     * <tr><td><code>{@link #Toolbar_logoDescription com.example.facesbyplaces:logoDescription}</code></td><td>A content description string to describe the appearance of the
+     * <tr><td><code>{@link #Toolbar_logo com.app.facesbyplaces:logo}</code></td><td>Specifies the drawable used for the application logo.</td></tr>
+     * <tr><td><code>{@link #Toolbar_logoDescription com.app.facesbyplaces:logoDescription}</code></td><td>A content description string to describe the appearance of the
      * associated logo image.</td></tr>
-     * <tr><td><code>{@link #Toolbar_maxButtonHeight com.example.facesbyplaces:maxButtonHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_navigationContentDescription com.example.facesbyplaces:navigationContentDescription}</code></td><td>Text to set as the content description for the navigation button
+     * <tr><td><code>{@link #Toolbar_maxButtonHeight com.app.facesbyplaces:maxButtonHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_navigationContentDescription com.app.facesbyplaces:navigationContentDescription}</code></td><td>Text to set as the content description for the navigation button
      * located at the start of the toolbar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_navigationIcon com.example.facesbyplaces:navigationIcon}</code></td><td>Icon drawable to use for the navigation button located at
+     * <tr><td><code>{@link #Toolbar_navigationIcon com.app.facesbyplaces:navigationIcon}</code></td><td>Icon drawable to use for the navigation button located at
      * the start of the toolbar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_popupTheme com.example.facesbyplaces:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
+     * <tr><td><code>{@link #Toolbar_popupTheme com.app.facesbyplaces:popupTheme}</code></td><td>Reference to a theme that should be used to inflate popups
      * shown by widgets in the action bar.</td></tr>
-     * <tr><td><code>{@link #Toolbar_subtitle com.example.facesbyplaces:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
-     * <tr><td><code>{@link #Toolbar_subtitleTextAppearance com.example.facesbyplaces:subtitleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_subtitleTextColor com.example.facesbyplaces:subtitleTextColor}</code></td><td>A color to apply to the subtitle string.</td></tr>
-     * <tr><td><code>{@link #Toolbar_title com.example.facesbyplaces:title}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMargin com.example.facesbyplaces:titleMargin}</code></td><td>Specifies extra space on the left, start, right and end sides
+     * <tr><td><code>{@link #Toolbar_subtitle com.app.facesbyplaces:subtitle}</code></td><td>Specifies subtitle text used for navigationMode="normal"</td></tr>
+     * <tr><td><code>{@link #Toolbar_subtitleTextAppearance com.app.facesbyplaces:subtitleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_subtitleTextColor com.app.facesbyplaces:subtitleTextColor}</code></td><td>A color to apply to the subtitle string.</td></tr>
+     * <tr><td><code>{@link #Toolbar_title com.app.facesbyplaces:title}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMargin com.app.facesbyplaces:titleMargin}</code></td><td>Specifies extra space on the left, start, right and end sides
      * of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginBottom com.example.facesbyplaces:titleMarginBottom}</code></td><td>Specifies extra space on the bottom side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginEnd com.example.facesbyplaces:titleMarginEnd}</code></td><td>Specifies extra space on the end side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginStart com.example.facesbyplaces:titleMarginStart}</code></td><td>Specifies extra space on the start side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMarginTop com.example.facesbyplaces:titleMarginTop}</code></td><td>Specifies extra space on the top side of the toolbar's title.</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleMargins com.example.facesbyplaces:titleMargins}</code></td><td>{@deprecated Use titleMargin}</td></tr>
-     * <tr><td><code>{@link #Toolbar_titleTextAppearance com.example.facesbyplaces:titleTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #Toolbar_titleTextColor com.example.facesbyplaces:titleTextColor}</code></td><td>A color to apply to the title string.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginBottom com.app.facesbyplaces:titleMarginBottom}</code></td><td>Specifies extra space on the bottom side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginEnd com.app.facesbyplaces:titleMarginEnd}</code></td><td>Specifies extra space on the end side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginStart com.app.facesbyplaces:titleMarginStart}</code></td><td>Specifies extra space on the start side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMarginTop com.app.facesbyplaces:titleMarginTop}</code></td><td>Specifies extra space on the top side of the toolbar's title.</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleMargins com.app.facesbyplaces:titleMargins}</code></td><td>{@deprecated Use titleMargin}</td></tr>
+     * <tr><td><code>{@link #Toolbar_titleTextAppearance com.app.facesbyplaces:titleTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #Toolbar_titleTextColor com.app.facesbyplaces:titleTextColor}</code></td><td>A color to apply to the title string.</td></tr>
      * </table>
      * @see #Toolbar_android_gravity
      * @see #Toolbar_android_minHeight
@@ -18779,7 +18779,7 @@ public final class R {
      */
     public static final int Toolbar_android_minHeight=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buttonGravity}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buttonGravity}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>Must be one or more (separated by '|') of the following constant values.</p>
@@ -18792,7 +18792,7 @@ public final class R {
      * <tr><td>top</td><td>30</td><td>Push object to the top of its container, not changing its size.</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buttonGravity
+     * @attr name com.app.facesbyplaces:buttonGravity
      */
     public static final int Toolbar_buttonGravity=2;
     /**
@@ -18803,7 +18803,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:collapseContentDescription
+     * @attr name com.app.facesbyplaces:collapseContentDescription
      */
     public static final int Toolbar_collapseContentDescription=3;
     /**
@@ -18816,7 +18816,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:collapseIcon
+     * @attr name com.app.facesbyplaces:collapseIcon
      */
     public static final int Toolbar_collapseIcon=4;
     /**
@@ -18831,7 +18831,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetEnd
+     * @attr name com.app.facesbyplaces:contentInsetEnd
      */
     public static final int Toolbar_contentInsetEnd=5;
     /**
@@ -18846,7 +18846,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetEndWithActions
+     * @attr name com.app.facesbyplaces:contentInsetEndWithActions
      */
     public static final int Toolbar_contentInsetEndWithActions=6;
     /**
@@ -18861,7 +18861,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetLeft
+     * @attr name com.app.facesbyplaces:contentInsetLeft
      */
     public static final int Toolbar_contentInsetLeft=7;
     /**
@@ -18876,7 +18876,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetRight
+     * @attr name com.app.facesbyplaces:contentInsetRight
      */
     public static final int Toolbar_contentInsetRight=8;
     /**
@@ -18891,7 +18891,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetStart
+     * @attr name com.app.facesbyplaces:contentInsetStart
      */
     public static final int Toolbar_contentInsetStart=9;
     /**
@@ -18906,7 +18906,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:contentInsetStartWithNavigation
+     * @attr name com.app.facesbyplaces:contentInsetStartWithNavigation
      */
     public static final int Toolbar_contentInsetStartWithNavigation=10;
     /**
@@ -18920,7 +18920,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:logo
+     * @attr name com.app.facesbyplaces:logo
      */
     public static final int Toolbar_logo=11;
     /**
@@ -18932,11 +18932,11 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:logoDescription
+     * @attr name com.app.facesbyplaces:logoDescription
      */
     public static final int Toolbar_logoDescription=12;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maxButtonHeight}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maxButtonHeight}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -18945,7 +18945,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:maxButtonHeight
+     * @attr name com.app.facesbyplaces:maxButtonHeight
      */
     public static final int Toolbar_maxButtonHeight=13;
     /**
@@ -18957,7 +18957,7 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:navigationContentDescription
+     * @attr name com.app.facesbyplaces:navigationContentDescription
      */
     public static final int Toolbar_navigationContentDescription=14;
     /**
@@ -18971,7 +18971,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:navigationIcon
+     * @attr name com.app.facesbyplaces:navigationIcon
      */
     public static final int Toolbar_navigationIcon=15;
     /**
@@ -18985,7 +18985,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:popupTheme
+     * @attr name com.app.facesbyplaces:popupTheme
      */
     public static final int Toolbar_popupTheme=16;
     /**
@@ -18996,11 +18996,11 @@ public final class R {
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:subtitle
+     * @attr name com.app.facesbyplaces:subtitle
      */
     public static final int Toolbar_subtitle=17;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#subtitleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#subtitleTextAppearance}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19008,7 +19008,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:subtitleTextAppearance
+     * @attr name com.app.facesbyplaces:subtitleTextAppearance
      */
     public static final int Toolbar_subtitleTextAppearance=18;
     /**
@@ -19020,17 +19020,17 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:subtitleTextColor
+     * @attr name com.app.facesbyplaces:subtitleTextColor
      */
     public static final int Toolbar_subtitleTextColor=19;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#title}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#title}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      *
-     * @attr name com.example.facesbyplaces:title
+     * @attr name com.app.facesbyplaces:title
      */
     public static final int Toolbar_title=20;
     /**
@@ -19045,7 +19045,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:titleMargin
+     * @attr name com.app.facesbyplaces:titleMargin
      */
     public static final int Toolbar_titleMargin=21;
     /**
@@ -19061,7 +19061,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:titleMarginBottom
+     * @attr name com.app.facesbyplaces:titleMarginBottom
      */
     public static final int Toolbar_titleMarginBottom=22;
     /**
@@ -19077,7 +19077,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:titleMarginEnd
+     * @attr name com.app.facesbyplaces:titleMarginEnd
      */
     public static final int Toolbar_titleMarginEnd=23;
     /**
@@ -19093,7 +19093,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:titleMarginStart
+     * @attr name com.app.facesbyplaces:titleMarginStart
      */
     public static final int Toolbar_titleMarginStart=24;
     /**
@@ -19109,7 +19109,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:titleMarginTop
+     * @attr name com.app.facesbyplaces:titleMarginTop
      */
     public static final int Toolbar_titleMarginTop=25;
     /**
@@ -19123,12 +19123,12 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:titleMargins
+     * @attr name com.app.facesbyplaces:titleMargins
      */
     @Deprecated
     public static final int Toolbar_titleMargins=26;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#titleTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#titleTextAppearance}
      * attribute's value can be found in the {@link #Toolbar} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19136,7 +19136,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:titleTextAppearance
+     * @attr name com.app.facesbyplaces:titleTextAppearance
      */
     public static final int Toolbar_titleTextAppearance=27;
     /**
@@ -19148,7 +19148,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:titleTextColor
+     * @attr name com.app.facesbyplaces:titleTextColor
      */
     public static final int Toolbar_titleTextColor=28;
     /**
@@ -19160,9 +19160,9 @@ public final class R {
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #View_android_theme android:theme}</code></td><td></td></tr>
      * <tr><td><code>{@link #View_android_focusable android:focusable}</code></td><td></td></tr>
-     * <tr><td><code>{@link #View_paddingEnd com.example.facesbyplaces:paddingEnd}</code></td><td>Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
-     * <tr><td><code>{@link #View_paddingStart com.example.facesbyplaces:paddingStart}</code></td><td>Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
-     * <tr><td><code>{@link #View_theme com.example.facesbyplaces:theme}</code></td><td>Deprecated.</td></tr>
+     * <tr><td><code>{@link #View_paddingEnd com.app.facesbyplaces:paddingEnd}</code></td><td>Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}.</td></tr>
+     * <tr><td><code>{@link #View_paddingStart com.app.facesbyplaces:paddingStart}</code></td><td>Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}.</td></tr>
+     * <tr><td><code>{@link #View_theme com.app.facesbyplaces:theme}</code></td><td>Deprecated.</td></tr>
      * </table>
      * @see #View_android_theme
      * @see #View_android_focusable
@@ -19224,7 +19224,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:paddingEnd
+     * @attr name com.app.facesbyplaces:paddingEnd
      */
     public static final int View_paddingEnd=2;
     /**
@@ -19238,7 +19238,7 @@ public final class R {
      * sp (scaled pixels based on preferred font size), in (inches), and
      * mm (millimeters).
      *
-     * @attr name com.example.facesbyplaces:paddingStart
+     * @attr name com.app.facesbyplaces:paddingStart
      */
     public static final int View_paddingStart=3;
     /**
@@ -19251,7 +19251,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:theme
+     * @attr name com.app.facesbyplaces:theme
      */
     public static final int View_theme=4;
     /**
@@ -19262,8 +19262,8 @@ public final class R {
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
      * <tr><td><code>{@link #ViewBackgroundHelper_android_background android:background}</code></td><td></td></tr>
-     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTint com.example.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
-     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTintMode com.example.facesbyplaces:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
+     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTint com.app.facesbyplaces:backgroundTint}</code></td><td>Tint to apply to the background.</td></tr>
+     * <tr><td><code>{@link #ViewBackgroundHelper_backgroundTintMode com.app.facesbyplaces:backgroundTintMode}</code></td><td>Blending mode used to apply the background tint.</td></tr>
      * </table>
      * @see #ViewBackgroundHelper_android_background
      * @see #ViewBackgroundHelper_backgroundTint
@@ -19296,7 +19296,7 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:backgroundTint
+     * @attr name com.app.facesbyplaces:backgroundTint
      */
     public static final int ViewBackgroundHelper_backgroundTint=1;
     /**
@@ -19323,7 +19323,7 @@ public final class R {
      * [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]</td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:backgroundTintMode
+     * @attr name com.app.facesbyplaces:backgroundTintMode
      */
     public static final int ViewBackgroundHelper_backgroundTintMode=2;
     /**
@@ -19391,10 +19391,10 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #WalletFragmentOptions_appTheme com.example.facesbyplaces:appTheme}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentOptions_environment com.example.facesbyplaces:environment}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentOptions_fragmentMode com.example.facesbyplaces:fragmentMode}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentOptions_fragmentStyle com.example.facesbyplaces:fragmentStyle}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentOptions_appTheme com.app.facesbyplaces:appTheme}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentOptions_environment com.app.facesbyplaces:environment}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentOptions_fragmentMode com.app.facesbyplaces:fragmentMode}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentOptions_fragmentStyle com.app.facesbyplaces:fragmentStyle}</code></td><td></td></tr>
      * </table>
      * @see #WalletFragmentOptions_appTheme
      * @see #WalletFragmentOptions_environment
@@ -19405,7 +19405,7 @@ public final class R {
       0x7f03002b, 0x7f0300d4, 0x7f0300fa, 0x7f0300fb
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#appTheme}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#appTheme}
      * attribute's value can be found in the {@link #WalletFragmentOptions} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19418,11 +19418,11 @@ public final class R {
      * <tr><td>holo_light</td><td>1</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:appTheme
+     * @attr name com.app.facesbyplaces:appTheme
      */
     public static final int WalletFragmentOptions_appTheme=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#environment}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#environment}
      * attribute's value can be found in the {@link #WalletFragmentOptions} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19437,11 +19437,11 @@ public final class R {
      * <tr><td>test</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:environment
+     * @attr name com.app.facesbyplaces:environment
      */
     public static final int WalletFragmentOptions_environment=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fragmentMode}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fragmentMode}
      * attribute's value can be found in the {@link #WalletFragmentOptions} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19454,11 +19454,11 @@ public final class R {
      * <tr><td>selectionDetails</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:fragmentMode
+     * @attr name com.app.facesbyplaces:fragmentMode
      */
     public static final int WalletFragmentOptions_fragmentMode=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#fragmentStyle}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#fragmentStyle}
      * attribute's value can be found in the {@link #WalletFragmentOptions} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19466,7 +19466,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:fragmentStyle
+     * @attr name com.app.facesbyplaces:fragmentStyle
      */
     public static final int WalletFragmentOptions_fragmentStyle=3;
     /**
@@ -19476,17 +19476,17 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonAppearance com.example.facesbyplaces:buyButtonAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonHeight com.example.facesbyplaces:buyButtonHeight}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonText com.example.facesbyplaces:buyButtonText}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonWidth com.example.facesbyplaces:buyButtonWidth}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsBackground com.example.facesbyplaces:maskedWalletDetailsBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsButtonBackground com.example.facesbyplaces:maskedWalletDetailsButtonBackground}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsButtonTextAppearance com.example.facesbyplaces:maskedWalletDetailsButtonTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsHeaderTextAppearance com.example.facesbyplaces:maskedWalletDetailsHeaderTextAppearance}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsLogoImageType com.example.facesbyplaces:maskedWalletDetailsLogoImageType}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsLogoTextColor com.example.facesbyplaces:maskedWalletDetailsLogoTextColor}</code></td><td></td></tr>
-     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsTextAppearance com.example.facesbyplaces:maskedWalletDetailsTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonAppearance com.app.facesbyplaces:buyButtonAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonHeight com.app.facesbyplaces:buyButtonHeight}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonText com.app.facesbyplaces:buyButtonText}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_buyButtonWidth com.app.facesbyplaces:buyButtonWidth}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsBackground com.app.facesbyplaces:maskedWalletDetailsBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsButtonBackground com.app.facesbyplaces:maskedWalletDetailsButtonBackground}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsButtonTextAppearance com.app.facesbyplaces:maskedWalletDetailsButtonTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsHeaderTextAppearance com.app.facesbyplaces:maskedWalletDetailsHeaderTextAppearance}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsLogoImageType com.app.facesbyplaces:maskedWalletDetailsLogoImageType}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsLogoTextColor com.app.facesbyplaces:maskedWalletDetailsLogoTextColor}</code></td><td></td></tr>
+     * <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsTextAppearance com.app.facesbyplaces:maskedWalletDetailsTextAppearance}</code></td><td></td></tr>
      * </table>
      * @see #WalletFragmentStyle_buyButtonAppearance
      * @see #WalletFragmentStyle_buyButtonHeight
@@ -19506,7 +19506,7 @@ public final class R {
       0x7f030153, 0x7f030154, 0x7f030155
     };
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buyButtonAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buyButtonAppearance}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19526,11 +19526,11 @@ public final class R {
      * <tr><td>monochrome</td><td>3</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buyButtonAppearance
+     * @attr name com.app.facesbyplaces:buyButtonAppearance
      */
     public static final int WalletFragmentStyle_buyButtonAppearance=0;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buyButtonHeight}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buyButtonHeight}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19548,11 +19548,11 @@ public final class R {
      * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buyButtonHeight
+     * @attr name com.app.facesbyplaces:buyButtonHeight
      */
     public static final int WalletFragmentStyle_buyButtonHeight=1;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buyButtonText}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buyButtonText}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19570,11 +19570,11 @@ public final class R {
      * <tr><td>logo_only</td><td>6</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buyButtonText
+     * @attr name com.app.facesbyplaces:buyButtonText
      */
     public static final int WalletFragmentStyle_buyButtonText=2;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#buyButtonWidth}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#buyButtonWidth}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a dimension value, which is a floating point number appended with a
@@ -19592,11 +19592,11 @@ public final class R {
      * <tr><td>wrap_content</td><td>fffffffe</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:buyButtonWidth
+     * @attr name com.app.facesbyplaces:buyButtonWidth
      */
     public static final int WalletFragmentStyle_buyButtonWidth=3;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsBackground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsBackground}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19607,11 +19607,11 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsBackground
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsBackground
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsBackground=4;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsButtonBackground}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsButtonBackground}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19622,11 +19622,11 @@ public final class R {
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsButtonBackground
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsButtonBackground
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsButtonBackground=5;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsButtonTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsButtonTextAppearance}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19634,11 +19634,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsButtonTextAppearance
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsButtonTextAppearance
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsButtonTextAppearance=6;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsHeaderTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsHeaderTextAppearance}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19646,11 +19646,11 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsHeaderTextAppearance
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsHeaderTextAppearance
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsHeaderTextAppearance=7;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsLogoImageType}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsLogoImageType}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>Must be one of the following constant values.</p>
@@ -19666,22 +19666,22 @@ public final class R {
      * <tr><td>monochrome</td><td>2</td><td></td></tr>
      * </table>
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsLogoImageType
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsLogoImageType
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsLogoImageType=8;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsLogoTextColor}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsLogoTextColor}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a color value, in the form of "<code>#<i>rgb</i></code>",
      * "<code>#<i>argb</i></code>", "<code>#<i>rrggbb</i></code>", or
      * "<code>#<i>aarrggbb</i></code>".
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsLogoTextColor
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsLogoTextColor
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsLogoTextColor=9;
     /**
-     * <p>This symbol is the offset where the {@link com.example.facesbyplaces.R.attr#maskedWalletDetailsTextAppearance}
+     * <p>This symbol is the offset where the {@link com.app.facesbyplaces.R.attr#maskedWalletDetailsTextAppearance}
      * attribute's value can be found in the {@link #WalletFragmentStyle} array.
      *
      * <p>May be a reference to another resource, in the form
@@ -19689,7 +19689,7 @@ public final class R {
      * attribute in the form
      * "<code>?[<i>package</i>:]<i>type</i>/<i>name</i></code>".
      *
-     * @attr name com.example.facesbyplaces:maskedWalletDetailsTextAppearance
+     * @attr name com.app.facesbyplaces:maskedWalletDetailsTextAppearance
      */
     public static final int WalletFragmentStyle_maskedWalletDetailsTextAppearance=10;
   }
