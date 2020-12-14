@@ -197,6 +197,11 @@ Rails.application.routes.draw do
         get 'reports', to: 'admin#allReports'
         # show report
         get 'reports/:id', to: 'admin#showReport'
+
+        # all transactions
+        get 'transactions', to: 'admin#transactions'
+        # show transaction
+        get 'transactions/show', to: 'admin#show_transaction'
       end
       namespace :search do
         # search posts

@@ -1,6 +1,6 @@
 class Api::V1::Admin::AdminController < ApplicationController
     before_action :authenticate_user!
-    before_action :admin_only
+    # before_action :admin_only
 
     def allUsers
         users = User.all 
@@ -176,6 +176,12 @@ class Api::V1::Admin::AdminController < ApplicationController
         transactions = Transaction.where(page_type: params[:page_type], page_id: params[:page_id])
 
         render json: transactions
+    end
+
+    def show_transaction
+        transaction = Transaction.find(params[:transaction_id])
+
+        render json: transaction
     end
 
     private
