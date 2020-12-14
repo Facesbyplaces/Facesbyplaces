@@ -17,6 +17,9 @@ class Api::V1::PaymentIntentController < ApplicationController
           description: "Donation for #{@memorial.name}",
         })
 
+        # save to transaction
+        Transaction.create(page: @memorial, user: user(), amount: @amount)
+
         render json: {
           publishable_key: Rails.configuration.stripe[:publishable_key],
           client_secret: payment_intent[:client_secret],

@@ -172,6 +172,12 @@ class Api::V1::Admin::AdminController < ApplicationController
         render json: report
     end
 
+    def transactions
+        transactions = Transaction.where(page_type: params[:page_type], page_id: params[:page_id])
+
+        render json: transactions
+    end
+
     private
     def admin_only
         if !user().has_role? :admin 

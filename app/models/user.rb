@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   has_one_attached :image, dependent: :destroy
   has_many :relationships
 
+  # Transactions
+  has_many :transactions, dependent: :destroy
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

@@ -24,6 +24,9 @@ class Blm < ApplicationRecord
   # Report
   has_many :reports, as: :reportable, dependent: :destroy
 
+  # Transactions
+  has_many :transactions, as: :page, dependent: :destroy
+
   resourcify
 
   # geocdoe
