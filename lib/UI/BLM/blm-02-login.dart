@@ -1,8 +1,8 @@
-import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
+import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-01-blm-login.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -124,7 +124,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
     return forgotPasswordResult;
   }
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -194,12 +193,10 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                       GestureDetector(
                         onTap: () async{
 
-
                           DateTime date = DateTime.now();
                           String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
                           FlutterBranchSdk.setIdentity('id-$id');
                           context.showLoaderOverlay();
-                          // bool result = await apiHomeResetPassword(email: 'deanver@kodakollectiv.com');
                           bool result = await generateLink('deanver@kodakollectiv.com');
                           context.hideLoaderOverlay();
 
@@ -276,7 +273,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
 
                       GestureDetector(
                         onTap: (){
-                          // Navigator.pushReplacementNamed(context, '/home/');
                           Navigator.pushReplacementNamed(context, '/home/blm');
                         },
                         child: Text('Sign in as Guest',

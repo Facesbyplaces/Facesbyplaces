@@ -11,14 +11,10 @@ Future<bool> apiBLMLogin(String email, String password) async{
     }
   );
 
-  print('The status code on blm login is ${response.statusCode}');
-  print('The status body on blm login is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     var user = value['user'];
     int userId = user['id'];
-    print('The userId is $userId');
 
     final sharedPrefs = await SharedPreferences.getInstance();
 

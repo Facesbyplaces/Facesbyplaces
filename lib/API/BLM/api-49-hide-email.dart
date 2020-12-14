@@ -20,15 +20,12 @@ Future<bool> apiBLMHideEmail({bool hide}) async{
         'client': getClient,
       }
     );
-    
-    print('The status code for hide email is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

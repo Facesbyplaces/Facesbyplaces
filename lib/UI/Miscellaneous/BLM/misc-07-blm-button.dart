@@ -36,63 +36,6 @@ class MiscBLMButtonTemplate extends StatelessWidget{
   }
 }
 
-// class MiscBLMButtonIconTemplate extends StatelessWidget{
-
-//   final String buttonText;
-//   final TextStyle buttonTextStyle;
-//   final Function onPressed;
-//   final double width;
-//   final double height;
-//   final Color buttonColor;
-//   final Color backgroundColor;
-//   final Widget image;
-
-//   MiscBLMButtonIconTemplate({
-//     this.buttonText = '',
-//     this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: Color(0xff000000),),
-//     this.onPressed,
-//     this.width,
-//     this.height,
-//     this.buttonColor = const Color(0xff2F353D),
-//     this.backgroundColor = const Color(0xff000000),
-//     this.image,
-//   });
-
-//   @override
-//   Widget build(BuildContext context){
-//     return MaterialButton(
-//       padding: EdgeInsets.zero,
-//       onPressed: onPressed,
-//       minWidth: width,
-//       height: height,
-//       child: Row(
-//         children: [
-//           Align(
-//             alignment: Alignment.centerLeft,
-//             child: CircleAvatar(
-//               radius: SizeConfig.blockSizeVertical * 4.5,
-//               backgroundColor: backgroundColor,
-//               child: Center(child: image,),
-//             ),
-//           ),
-//           Expanded(
-//             child: Container(
-//               padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-//               alignment: Alignment.centerLeft,
-//               child: Text(buttonText,
-//                 style: buttonTextStyle
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       shape: StadiumBorder(),
-//       color: buttonColor,
-//     );
-//   }
-// }
-
-
 class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
 
   final String buttonText;

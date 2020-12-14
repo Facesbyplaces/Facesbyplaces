@@ -10,10 +10,6 @@ Future<bool> apiBLMAddFamily(int memorialId, int userId, String relationship) as
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The memorialId is $memorialId');
-  print('The userId is $userId');
-  print('The relationship is $relationship');
-
   try{
     var dioRequest = Dio();
 
@@ -42,7 +38,6 @@ Future<bool> apiBLMAddFamily(int memorialId, int userId, String relationship) as
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

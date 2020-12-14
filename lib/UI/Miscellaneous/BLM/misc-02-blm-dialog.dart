@@ -72,7 +72,6 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
         borderRadius: BorderRadius.all(Radius.circular(5))
       ),
       child: Container(
-        // height: SizeConfig.screenHeight / 4,
         padding: EdgeInsets.all(20.0),
         child: Column(
           children: [
@@ -84,8 +83,6 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
                 color: Color(0xff000000),
               ),
             ),
-
-            // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
             Expanded(child: Container(),),
 
@@ -255,28 +252,16 @@ class MiscBLMAlertDialog extends StatelessWidget{
         padding: EdgeInsets.all(20.0),
         child: Column(
           children: [
-            // Expanded(
-            //   child: Align(
-            //     alignment: Alignment.centerLeft,
-            //     child: Text(title,
-            //       style: TextStyle(
-            //         fontSize: SizeConfig.safeBlockHorizontal * 5,
-            //         fontWeight: FontWeight.bold,
-            //         color: color,
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Align(
-                alignment: Alignment.centerLeft,
-                child: Text(title,
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                    fontWeight: FontWeight.bold,
-                    color: color,
-                  ),
+              alignment: Alignment.centerLeft,
+              child: Text(title,
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 5,
+                  fontWeight: FontWeight.bold,
+                  color: color,
                 ),
               ),
+            ),
             
             Expanded(
               child: Align(
@@ -292,39 +277,21 @@ class MiscBLMAlertDialog extends StatelessWidget{
               ),
             ),
             GestureDetector(
-                onTap: (){
-                  Navigator.pop(context, true);
-                },
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(confirmText,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontWeight: FontWeight.bold,
-                      color: color,
-                    ),
+              onTap: (){
+                Navigator.pop(context, true);
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(confirmText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontWeight: FontWeight.bold,
+                    color: color,
                   ),
                 ),
               ),
-            // Expanded(
-            //   child: GestureDetector(
-            //     onTap: (){
-            //       Navigator.pop(context, true);
-            //     },
-            //     child: Align(
-            //       alignment: Alignment.centerRight,
-            //       child: Text(confirmText,
-            //         textAlign: TextAlign.center,
-            //         style: TextStyle(
-            //           fontSize: SizeConfig.safeBlockHorizontal * 4,
-            //           fontWeight: FontWeight.bold,
-            //           color: color,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            ),
           ],
         ),
       ),

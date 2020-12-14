@@ -1,4 +1,3 @@
-import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,30 +9,22 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab(int page) async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  AsyncMemoizer memoizer = AsyncMemoizer();
-
-  var value = await memoizer.runOnce(() async{
-    final http.Response response = await http.get(
-      'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'access-token': getAccessToken,
-        'uid': getUID,
-        'client': getClient,
-      }
-    );
-
-    print('The memorial value is ${response.statusCode}');
-
-    if(response.statusCode == 200){
-      var newValue = json.decode(response.body);
-      return APIBLMHomeTabMemorialMain.fromJson(newValue);
-    }else{
-      throw Exception('Failed to get the memorials');
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+      'access-token': getAccessToken,
+      'uid': getUID,
+      'client': getClient,
     }
-  });
+  );
 
-  return value;
+  if(response.statusCode == 200){
+    var newValue = json.decode(response.body);
+    return APIBLMHomeTabMemorialMain.fromJson(newValue);
+  }else{
+    throw Exception('Failed to get the memorials');
+  }
 }
 
 

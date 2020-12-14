@@ -9,8 +9,7 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested(int page) async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested(int page) async{
       'client': getClient,
     }
   );
-
-  print('The status of search suggested is ${response.statusCode}');
-  print('The status of search suggested is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

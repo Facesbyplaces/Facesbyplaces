@@ -1,16 +1,13 @@
-// import 'package:facesbyplaces/API/BLM/api-42-blm-show-account-details.dart';
-import 'package:facesbyplaces/API/Regular/api-33-update-account-details.dart';
-import 'package:facesbyplaces/API/Regular/api-49-show-account-details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/API/Regular/api-33-update-account-details.dart';
+import 'package:facesbyplaces/API/Regular/api-49-show-account-details.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
-
 import 'home-14-regular-user-details.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularUserUpdateDetails extends StatefulWidget{
   final int userId;
@@ -142,7 +139,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                                     Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                                   }else{
-                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                   }
                                 }
                               }

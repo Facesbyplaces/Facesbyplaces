@@ -20,21 +20,9 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
         children: [
           
           SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-          // CircleAvatar(
-          //   backgroundColor: Color(0xff888888),
-          //   backgroundImage: AssetImage(imageIcon),
-          // ),
-
+          
           CircleAvatar(
             backgroundColor: Color(0xff888888),
-            // backgroundImage: ((){
-            //   if(imageIcon != null && imageIcon != ''){
-            //     return NetworkImage(imageIcon.toString());
-            //   }else{
-            //     return AssetImage('assets/icons/graveyard.png');
-            //   }
-            // }()),
             backgroundImage: AssetImage('assets/icons/graveyard.png'),
           ),
 

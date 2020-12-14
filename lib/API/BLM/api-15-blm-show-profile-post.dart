@@ -1,4 +1,3 @@
-import 'package:async/async.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,38 +5,26 @@ import 'dart:convert';
 Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The memorial id $memorialId');
-
-  AsyncMemoizer memoizer = AsyncMemoizer();
-
-  var value = await memoizer.runOnce(() async{
-    final http.Response response = await http.get(
-      'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId?page=$page',
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'access-token': getAccessToken,
-        'uid': getUID,
-        'client': getClient,
-      }
-    );
-
-    print('The show profile post is ${response.statusCode}');
-    print('The show profile body is ${response.body}');
-
-    if(response.statusCode == 200){
-      var newValue = json.decode(response.body);
-      return APIBLMHomeProfilePostMain.fromJson(newValue);
-    }else{
-      throw Exception('Failed to get the post');
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/posts/page/Blm/$memorialId?page=$page',
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+      'access-token': getAccessToken,
+      'uid': getUID,
+      'client': getClient,
     }
-  });
+  );
 
-  return value;
+  if(response.statusCode == 200){
+    var newValue = json.decode(response.body);
+    return APIBLMHomeProfilePostMain.fromJson(newValue);
+  }else{
+    throw Exception('Failed to get the post');
+  }
 
 }
 

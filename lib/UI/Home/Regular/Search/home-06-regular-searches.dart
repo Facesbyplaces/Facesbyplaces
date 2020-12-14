@@ -1,9 +1,9 @@
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/API/Regular/api-26-regular-search-suggested.dart';
 import 'package:facesbyplaces/API/Regular/api-27-regular-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/api-28-regular-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/api-29-regular-search-blm.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -458,7 +458,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = MiscBLMPost(
+            var container = MiscRegularPost(
               userId: feeds[i].userId,
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
@@ -553,7 +553,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
 
-            var container = MiscBLMManageMemorialTab(
+            var container = MiscRegularManageMemorialTab(
               index: i,
               memorialId: suggested[i].memorialId, 
               memorialName: suggested[i].memorialName, 
@@ -606,7 +606,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
 
-            var container = MiscBLMManageMemorialTab(
+            var container = MiscRegularManageMemorialTab(
               index: i,
               memorialId: nearby[i].memorialId, 
               memorialName: nearby[i].memorialName, 
@@ -659,7 +659,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
 
-            var container = MiscBLMManageMemorialTab(
+            var container = MiscRegularManageMemorialTab(
               index: i,
               memorialId: blm[i].memorialId, 
               memorialName: blm[i].memorialName, 

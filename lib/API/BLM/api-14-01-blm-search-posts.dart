@@ -10,7 +10,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords, int page) async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=1',
     'http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -19,9 +18,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords, int page) async{
       'client': getClient,
     }
   );
-
-  print('The status of search posts is ${response.statusCode}');
-  print('The status of search is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

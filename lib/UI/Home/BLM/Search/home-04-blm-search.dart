@@ -5,7 +5,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 import 'home-05-blm-searches.dart';
 
-
 class HomeBLMSearch extends StatefulWidget{
 
   HomeBLMSearchState createState() => HomeBLMSearchState();

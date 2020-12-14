@@ -21,7 +21,6 @@ class BLMMainPagesFeeds{
   bool joined;
   bool postLikes;
 
-
   BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.joined});
 }
 
@@ -37,17 +36,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   int itemRemaining;
   int page;
   int count;
-
-  // Future postLikes;
-
-  // Future<APIBLMShowPostLikes> getPostLikes({int postId}) async{
-  //   return await apiBLMShowPostLikes(postId: postId);
-  // }
-
-  // void initState(){
-  //   super.initState();
-  //   postLikes = getPostLikes(postId: postId);
-  // }
 
   void initState(){
     super.initState();

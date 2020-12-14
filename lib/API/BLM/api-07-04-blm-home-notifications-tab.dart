@@ -19,9 +19,6 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab(int page) async
     }
   );
 
-  print('The memorial notification code is ${response.statusCode}');
-  print('The memorial notification body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMHomeTabNotificationMain.fromJson(newValue);

@@ -1,83 +1,7 @@
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
-class MiscBLMInputFieldOTP extends StatefulWidget {  
-  MiscBLMInputFieldOTP({Key key}) : super(key: key);
-
-  @override
-  MiscBLMInputFieldOTPState createState() => MiscBLMInputFieldOTPState();
-}
-
-class MiscBLMInputFieldOTPState extends State<MiscBLMInputFieldOTP> {
-
-  TextEditingController controller = TextEditingController();
-  bool readOnly;
-  bool checker;
-
-  @override
-  void initState(){
-    super.initState();
-    checker = false;
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      maxLength: 1,
-      maxLengthEnforced: true,
-      cursorColor: Color(0xff000000),
-      controller: controller,
-      textAlign: TextAlign.center,
-      keyboardType: TextInputType.number,
-      onChanged: (value){
-        if(!checker){
-          if(value.length == 1){
-            context.bloc<BlocUpdateButtonText>().add();
-            setState(() {
-              checker = true;
-            });
-          }
-        }else{
-          if(value.length == 0){
-            context.bloc<BlocUpdateButtonText>().remove();
-            setState(() {
-              checker = false;
-            });
-          }
-        }
-      },
-      style: TextStyle(
-        fontSize: SizeConfig.safeBlockHorizontal * 15,
-        fontWeight: FontWeight.bold,
-        color: Color(0xff000000)
-      ),
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        counterText: '',
-        labelStyle: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 4,
-          fontWeight: FontWeight.w400,
-          color: Color(0xff000000).withOpacity(.5),
-        ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-        ),
-      ),
-    );
-  }
-}
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter/material.dart';
 
 class MiscBLMInputFieldTemplate extends StatefulWidget{
   final String labelText;
@@ -144,36 +68,10 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
             color: Color(0xff000000),
           ),
         ),
-        // suffixIcon: ((){
-        //   if(includeSuffixIcon){
-        //     if(obscure){
-        //       return IconButton(
-        //         onPressed: (){
-        //           setState(() {
-        //             obscure = !obscure;
-        //           });
-        //         },
-        //         icon: Icon(Icons.visibility_off, color: Color(0xff000000).withOpacity(0.3), size: SizeConfig.blockSizeVertical * 4,),
-        //       );
-        //     }else{
-        //       return IconButton(
-        //         onPressed: (){
-        //           setState(() {
-        //             obscure = !obscure;
-        //           });
-        //         },
-        //         icon: Icon(Icons.visibility, color: Color(0xff000000).withOpacity(0.3), size: SizeConfig.blockSizeVertical * 4,),
-        //       );
-        //     }
-        //   }
-        // }()),
       ),
     );
   }
 }
-
-
-
 
 class MiscBLMInputFieldMultiTextTemplate extends StatefulWidget{
   final String labelText;
@@ -279,11 +177,8 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
 
   MiscBLMPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
 
-  // TextEditingController controller = TextEditingController(text: displayText);
   TextEditingController controller;
-  bool valid = false;
-
-  
+  bool valid = false;  
 
   void initState(){
     super.initState();
@@ -319,7 +214,6 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
   }
 }
 
-
 class MiscBLMInputFieldDropDown extends StatefulWidget{
 
   final String displayText;
@@ -341,8 +235,6 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
-
-  // String currentSelection;
 
   void initState(){
     super.initState();
@@ -431,77 +323,6 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
   }
 }
 
-
-
-// class BLMRelationshipItem{
-
-//   final String name;
-//   final String image;
-  
-//   const BLMRelationshipItem({this.name, this.image});
-// }
-
-
-// class MiscBLMInputFieldDropDownUser extends StatefulWidget{
-
-//   MiscBLMInputFieldDropDownUser({Key key}) : super(key: key);
-
-//   @override
-//   MiscBLMInputFieldDropDownUserState createState() => MiscBLMInputFieldDropDownUserState();
-// }
-
-// class MiscBLMInputFieldDropDownUserState extends State<MiscBLMInputFieldDropDownUser>{
-
-//   List<BLMRelationshipItem> relationship = [
-//     const BLMRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-//     const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
-//   ];
-
-//   BLMRelationshipItem currentSelection = const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
-
-//   @override
-//   Widget build(BuildContext context){
-//     return InputDecorator(
-//       decoration: InputDecoration(
-//         alignLabelWithHint: true,
-//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-//         focusedBorder: UnderlineInputBorder(
-//           borderSide: BorderSide.none,
-//         ),
-//         border: UnderlineInputBorder(
-//           borderSide: BorderSide.none,
-//         ),
-//       ),
-//       child: DropdownButtonHideUnderline(
-//         child: DropdownButton<BLMRelationshipItem>(
-//           value: currentSelection,
-//           isDense: true,
-//           onChanged: (BLMRelationshipItem newValue) {
-//             setState(() {
-//               currentSelection = newValue;
-//             });
-//           },
-//           items: relationship.map((BLMRelationshipItem value) {
-//             return DropdownMenuItem<BLMRelationshipItem>(
-//               value: value,
-//               child: Row(
-//                 children: [
-//                   CircleAvatar(backgroundImage: AssetImage(value.image),),
-
-//                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-//                   Text(value.name),
-//                 ],
-//               ),
-//             );
-//           }).toList(),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
 class MiscBLMInputFieldMultiTextPostTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
@@ -519,7 +340,6 @@ class MiscBLMInputFieldMultiTextPostTemplate extends StatefulWidget{
     this.readOnly = false,
     this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
-  
 
   MiscBLMInputFieldMultiTextPostTemplateState createState() => MiscBLMInputFieldMultiTextPostTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
 }
@@ -548,7 +368,6 @@ class MiscBLMInputFieldMultiTextPostTemplateState extends State<MiscBLMInputFiel
       readOnly: readOnly,
       decoration: InputDecoration(
         fillColor: backgroundColor,
-        // filled: true,
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
@@ -560,17 +379,13 @@ class MiscBLMInputFieldMultiTextPostTemplateState extends State<MiscBLMInputFiel
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            // color: Color(0xff000000),
             color: Colors.transparent,
           ),
-          // borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            // color: Color(0xff000000),
             color: Colors.transparent,
           ),
-          // borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );

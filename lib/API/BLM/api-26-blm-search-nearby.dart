@@ -9,9 +9,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby(int page, double latitude, doubl
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The longitude is $longitude');
-  print('The latitude is $latitude');
-
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
     headers: <String, String>{
@@ -21,9 +18,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby(int page, double latitude, doubl
       'client': getClient,
     }
   );
-
-  print('The status of search nearby is ${response.statusCode}');
-  print('The status of search nearby is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -44,17 +38,11 @@ class APIBLMSearchPostMain{
   APIBLMSearchPostMain({this.blmItemsRemaining, this.memorialItemsRemaining, this.blmList, this.memorialList});
 
   factory APIBLMSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
-    print('test!');
-
     var newList1 = parsedJson['blm'] as List;
     var newList2 = parsedJson['memorial'] as List;
 
     List<APIBLMSearchPostExtended> blmList = newList1.map((i) => APIBLMSearchPostExtended.fromJson(i)).toList();
-    print('test test test');
-
     List<APIBLMSearchPostExtended> memorialList = newList2.map((e) => APIBLMSearchPostExtended.fromJson(e)).toList();
-
-    print('new new new');
 
     return APIBLMSearchPostMain(
       blmItemsRemaining: parsedJson['blmItemsRemaining'],
@@ -80,8 +68,6 @@ class APIBLMSearchPostExtended{
   APIBLMSearchPostExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
-    print('last!');
-
     return APIBLMSearchPostExtended(
       id: parsedJson['id'],
       name: parsedJson['name'],

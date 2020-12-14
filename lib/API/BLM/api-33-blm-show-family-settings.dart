@@ -9,9 +9,6 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings(int memorialId, in
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The memorial id is $memorialId');
-  print('The page number is $page');
-
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/family/index?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -20,9 +17,6 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings(int memorialId, in
       'client': getClient,
     }
   );
-
-  print('The status of page managers is ${response.statusCode}');
-  print('The status of page managers is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

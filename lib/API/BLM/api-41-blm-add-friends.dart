@@ -10,9 +10,6 @@ Future<bool> apiBLMAddFriends(int memorialId, int userId) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The memorialId is $memorialId');
-  print('The userId is $userId');
-
   try{
     var dioRequest = Dio();
 
@@ -41,7 +38,6 @@ Future<bool> apiBLMAddFriends(int memorialId, int userId) async{
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

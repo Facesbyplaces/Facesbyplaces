@@ -9,13 +9,7 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The UID is $getUID');
-  print('The client is $getClient');
-  print('The page is $page');
-
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -23,9 +17,6 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
       'client': getClient,
     }
   );
-  
-  print('The response status in memorial is ${response.statusCode}');
-  // print('The response status in memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

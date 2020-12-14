@@ -1,9 +1,7 @@
-import 'package:facesbyplaces/API/Regular/api-15-regular-donation-payment-intent.dart';
+
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:stripe_payment/stripe_payment.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
@@ -73,7 +71,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         (index){
                           return GestureDetector(
                             onTap: (){
-                              context.bloc<BlocHomeBLMDonate>().modify(index);
+                              // context.bloc<BlocHomeBLMDonate>().modify(index);
                             },
                             child: Container(
                               child: Column(
@@ -114,63 +112,63 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonText: 'Send Gift',
                     onPressed: () async{
 
-                      int amount = 0;
+                      // int amount = 0;
 
-                      var paymentResult = await StripePayment.paymentRequestWithNativePay(
-                        androidPayOptions: AndroidPayPaymentRequest(
-                          totalPrice: ((){
-                            switch(donateToggle){
-                              case 0: amount = 1; return '0.99'; break;
-                              case 1: amount = 5; return '5.00'; break;
-                              case 2: amount = 15; return '15.00'; break;
-                              case 3: amount = 25; return '25.00'; break;
-                              case 4: amount = 50; return '50.00'; break;
-                              case 5: amount = 100; return '100.00'; break;
-                            }
-                          }()),
-                          currencyCode: 'USD',
-                        ),
-                        applePayOptions: ApplePayPaymentOptions(
-                          countryCode: 'DE',
-                          currencyCode: 'USD',
-                          items: [
-                            ApplePayItem(
-                              label: 'Test',
-                              amount: ((){
-                                switch(donateToggle){
-                                  case 0: amount = 1; return '0.99'; break;
-                                  case 1: amount = 5; return '5.00'; break;
-                                  case 2: amount = 15; return '15.00'; break;
-                                  case 3: amount = 25; return '25.00'; break;
-                                  case 4: amount = 50; return '50.00'; break;
-                                  case 5: amount = 100; return '100.00'; break;
-                                }
-                              }()),
-                            )
-                          ],
-                        ),
-                      );
+                      // var paymentResult = await StripePayment.paymentRequestWithNativePay(
+                      //   androidPayOptions: AndroidPayPaymentRequest(
+                      //     totalPrice: ((){
+                      //       switch(donateToggle){
+                      //         case 0: amount = 1; return '0.99'; break;
+                      //         case 1: amount = 5; return '5.00'; break;
+                      //         case 2: amount = 15; return '15.00'; break;
+                      //         case 3: amount = 25; return '25.00'; break;
+                      //         case 4: amount = 50; return '50.00'; break;
+                      //         case 5: amount = 100; return '100.00'; break;
+                      //       }
+                      //     }()),
+                      //     currencyCode: 'USD',
+                      //   ),
+                      //   applePayOptions: ApplePayPaymentOptions(
+                      //     countryCode: 'DE',
+                      //     currencyCode: 'USD',
+                      //     items: [
+                      //       ApplePayItem(
+                      //         label: 'Test',
+                      //         amount: ((){
+                      //           switch(donateToggle){
+                      //             case 0: amount = 1; return '0.99'; break;
+                      //             case 1: amount = 5; return '5.00'; break;
+                      //             case 2: amount = 15; return '15.00'; break;
+                      //             case 3: amount = 25; return '25.00'; break;
+                      //             case 4: amount = 50; return '50.00'; break;
+                      //             case 5: amount = 100; return '100.00'; break;
+                      //           }
+                      //         }()),
+                      //       )
+                      //     ],
+                      //   ),
+                      // );
 
-                      await StripePayment.completeNativePayRequest();
+                      // await StripePayment.completeNativePayRequest();
 
-                      var paymentMethod = await StripePayment.createPaymentMethod(
-                        PaymentMethodRequest(
-                          card: CreditCard(
-                            token: paymentResult.tokenId,
-                          ),
-                        ),
-                      );
+                      // var paymentMethod = await StripePayment.createPaymentMethod(
+                      //   PaymentMethodRequest(
+                      //     card: CreditCard(
+                      //       token: paymentResult.tokenId,
+                      //     ),
+                      //   ),
+                      // );
 
-                      var intentApiResult = await apiRegularDonate(amount);
+                      // var intentApiResult = await apiRegularDonate(amount);
 
-                      if(intentApiResult != 'Failed'){
-                        await StripePayment.confirmPaymentIntent(
-                          PaymentIntent(
-                            clientSecret: intentApiResult,
-                            paymentMethodId: paymentMethod.id,
-                          ),
-                        );
-                      }
+                      // if(intentApiResult != 'Failed'){
+                      //   await StripePayment.confirmPaymentIntent(
+                      //     PaymentIntent(
+                      //       clientSecret: intentApiResult,
+                      //       paymentMethodId: paymentMethod.id,
+                      //     ),
+                      //   );
+                      // }
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 

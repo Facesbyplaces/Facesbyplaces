@@ -1,12 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 
 Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post, int memorialId) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
-  // int memorialId = sharedPrefs.getInt('regular-user-memorial-id') ?? 0;
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
@@ -43,14 +42,10 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post, int memorialId)
       ),  
     );
 
-    print('The status code in regular create post is ${response.statusCode}');
-    print('The status code in regular create post is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

@@ -9,10 +9,8 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost(int postId) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The postId is $postId');
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -21,8 +19,6 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost(int postId) async{
     }
   );
 
-  print('The status of show original post is ${response.statusCode}');
-  // print('The status of show original post is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -61,8 +57,6 @@ class APIBLMShowOriginalPostMainExtended{
   APIBLMShowOriginalPostMainExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
 
   factory APIBLMShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
-
-    print('The memorial name is ${parsedJson['name']}');
     
     List<dynamic> newList;
 

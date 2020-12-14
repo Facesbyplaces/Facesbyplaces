@@ -11,8 +11,7 @@ Future<bool> apiRegularHideBirthdate({bool hide}) async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    final http.Response response = await http.put(
-      'http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideBirthdate?hide=$hide',
+    final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideBirthdate?hide=$hide',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -20,15 +19,12 @@ Future<bool> apiRegularHideBirthdate({bool hide}) async{
         'client': getClient,
       }
     );
-    
-    print('The status code for hide birthdate is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

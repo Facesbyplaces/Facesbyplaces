@@ -9,8 +9,7 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails(int userId) as
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,9 +18,6 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails(int userId) as
     }
   );
 
-  print('The status of account details is ${response.statusCode}');
-  print('The status of account details is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowAccountDetails.fromJson(newValue);
@@ -29,8 +25,6 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails(int userId) as
     throw Exception('Failed to get the post');
   }
 }
-
-
 
 class APIRegularShowAccountDetails{
   String firstName;

@@ -1,3 +1,7 @@
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-44-show-other-details.dart';
 import 'package:facesbyplaces/API/BLM/api-45-update-other-details.dart';
 import 'package:facesbyplaces/API/BLM/api-47-hide-birthdate.dart';
@@ -5,10 +9,6 @@ import 'package:facesbyplaces/API/BLM/api-48-hide-birthplace.dart';
 import 'package:facesbyplaces/API/BLM/api-49-hide-email.dart';
 import 'package:facesbyplaces/API/BLM/api-50-hide-address.dart';
 import 'package:facesbyplaces/API/BLM/api-51-hide-phone-number.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';

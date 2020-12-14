@@ -11,8 +11,7 @@ Future<bool> apiRegularUpdateNotificationMemorial({bool hide}) async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    final http.Response response = await http.put(
-      'http://fbp.dev1.koda.ws/api/v1/notifications/newMemorial?setting=$hide',
+    final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/notifications/newMemorial?setting=$hide',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -20,15 +19,12 @@ Future<bool> apiRegularUpdateNotificationMemorial({bool hide}) async{
         'client': getClient,
       }
     );
-    
-    print('The status code for notification update memorial is ${response.statusCode}');
 
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

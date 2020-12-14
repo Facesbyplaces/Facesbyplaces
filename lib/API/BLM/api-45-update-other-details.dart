@@ -10,17 +10,6 @@ Future<bool> apiBLMUpdateOtherDetails({String birthdate, String birthplace, Stri
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The UID is $getUID');
-  print('The client is $getClient');
-
-  print('The birthdate is $birthdate');
-  print('The birthplace is $birthplace');
-  print('The email is $email');
-  print('The address is $address');
-  print('The phone number is $phoneNumber');
-
-
   try{
     var dioRequest = Dio();
 
@@ -44,15 +33,11 @@ Future<bool> apiBLMUpdateOtherDetails({String birthdate, String birthplace, Stri
       ),  
     );
 
-    print('The status code for PUT update other details is ${response.statusCode}');
-    // print('The status body for update other details is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

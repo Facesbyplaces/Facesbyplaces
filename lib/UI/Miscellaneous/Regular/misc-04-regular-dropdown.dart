@@ -51,26 +51,9 @@ class MiscRegularDropDownTemplate extends StatelessWidget{
                   chooserTitle: 'Share link'
                 );
               }else if(dropDownList == 'Report'){
-                // print('Report');
                 Navigator.pushNamed(context, 'home/regular/home-21-regular-report', arguments: RegularReportID(userId: userId, postId: postId));
               }
             },
-            // onChanged: (String val) async{
-            //   setState(() {
-            //     dropDown = val;
-            //   });
-            //   if(dropDown == 'Share'){
-            //     await FlutterShare.share(
-            //       title: 'Example share',
-            //       text: 'Example share text',
-            //       linkUrl: 'https://flutter.dev/',
-            //       chooserTitle: 'Example Chooser Title'
-            //     );
-            //   }else if(dropDown == 'Report'){
-            //     Navigator.pushNamed(context, '/home/home-17-report-user');
-            //   }
-            // },
-            
           );
         },
       ),  

@@ -33,15 +33,11 @@ Future<bool> apiRegularUpdateOtherDetails({String birthdate, String birthplace, 
       ),  
     );
 
-    print('The status code for PUT update other details is ${response.statusCode}');
-    // print('The status body for update other details is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

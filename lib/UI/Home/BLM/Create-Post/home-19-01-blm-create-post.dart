@@ -288,7 +288,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 newLocation = result.toString();
                               }
 
-                              
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -363,7 +362,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),

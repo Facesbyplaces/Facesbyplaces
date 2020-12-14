@@ -17,10 +17,7 @@ Future<bool> apiBLMHideFriendsSetting(int memorialId) async{
       'client': getClient,
     }
   );
-
-  print('The status code on switch is ${response.statusCode}');
-  print('The status body on switch ${response.body}');
-
+  
   if(response.statusCode == 200){
     return true;
   }else{

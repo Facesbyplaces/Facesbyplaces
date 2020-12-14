@@ -127,8 +127,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                           Row(
                             children: [
                               Expanded(child: Text('Post Likes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
-
-                              // MiscRegularToggleSwitchTemplate(),
+                              
                               Switch(
                                 value: toggle3,
                                 onChanged: (value) async{

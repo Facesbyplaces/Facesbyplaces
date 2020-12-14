@@ -2,11 +2,10 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-notification-disp
 import 'package:facesbyplaces/API/BLM/api-07-04-blm-home-notifications-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import '../Show-Post/home-31-blm-show-original-post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-
-import '../Show-Post/home-31-blm-show-original-post.dart';
 
 class BLMMainPagesNotifications{
   int id;
@@ -97,7 +96,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
+            Widget body;
             if(mode == LoadStatus.idle){
               body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }

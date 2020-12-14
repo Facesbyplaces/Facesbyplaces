@@ -33,14 +33,11 @@ Future<bool> apiRegularUpdateAccountDetails({String firstName, String lastName, 
       ),  
     );
 
-    print('The status code for update account details is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

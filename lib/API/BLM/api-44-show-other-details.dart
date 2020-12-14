@@ -9,8 +9,7 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails(int userId) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,9 +18,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails(int userId) async{
     }
   );
 
-  print('The status of GET other details is ${response.statusCode}');
-  // print('The status of other details is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowOtherDetails.fromJson(newValue);
@@ -29,8 +25,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails(int userId) async{
     throw Exception('Failed to get the post');
   }
 }
-
-
 
 class APIBLMShowOtherDetails{
   String birthdate;

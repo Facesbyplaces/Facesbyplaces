@@ -5,7 +5,6 @@ import 'dart:convert';
 Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails(int memorialId) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
@@ -19,9 +18,6 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails(int memorialId) async{
       'client': getClient,
     }
   );
-
-  print('The status code in page details is ${response.statusCode}');
-  // print('The status body in page details is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

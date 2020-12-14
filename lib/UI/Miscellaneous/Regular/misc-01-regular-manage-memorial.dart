@@ -1,10 +1,8 @@
+import 'package:facesbyplaces/UI/Home/Regular/View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:facesbyplaces/API/Regular/api-19-regular-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/Regular/View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:flutter/material.dart';
 import 'misc-08-regular-dialog.dart';
-
-// class MiscRegularManageMemorialTab extends StatelessWidget{
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
   final int index;
@@ -13,6 +11,7 @@ class MiscRegularManageMemorialTab extends StatefulWidget{
   final String description;
   final String image;
   final int memorialId;
+  final bool managed;
 
   MiscRegularManageMemorialTab({
     this.index, 
@@ -21,10 +20,10 @@ class MiscRegularManageMemorialTab extends StatefulWidget{
     this.description = '',
     this.image = 'assets/icons/graveyard.png',
     this.memorialId,
+    this.managed,
   });
 
-
-  MiscRegularManageMemorialTabState createState() => MiscRegularManageMemorialTabState(index: index, tab: tab, memorialName: memorialName, description: description, image: image, memorialId: memorialId);
+  MiscRegularManageMemorialTabState createState() => MiscRegularManageMemorialTabState(index: index, tab: tab, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed);
 }
 
 class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialTab>{
@@ -35,6 +34,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
   final String description;
   final String image;
   final int memorialId;
+  final bool managed;
 
   MiscRegularManageMemorialTabState({
     this.index, 
@@ -43,20 +43,21 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     this.description,
     this.image,
     this.memorialId,
+    this.managed,
   });
 
-  bool manageButton = true;
+  bool manageButton;
+
+  void initState(){
+    super.initState();
+    manageButton = managed;
+  }
 
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-
-        // Navigator.pushNamed(context, '/home/regular/home-08-regular-memorial-profile', arguments: memorialId);
-
-        // Navigator.pushNamed(context, 'home/regular/home-13-regular-memorial', arguments: memorialId);
-
 
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
       },
@@ -108,17 +109,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               child: MaterialButton(
                 elevation: 0,
                 padding: EdgeInsets.zero,
-                // textColor: ((){
-                //   if(manageButton == true){
-                //     return Color(0xffffffff);
-                //   }else{
-                //     return Color(0xff4EC9D4);
-                //   }
-                // }()),
                 textColor: manageButton ? Color(0xffffffff) : Color(0xff4EC9D4),
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
-                  // context.bloc<BlocMiscRegularManageMemorialButton>().modify(!manageButton);
                   bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                   if(confirmResult){
@@ -129,41 +122,12 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     }
                   }
                 },
-                // child: ((){
-                //   if(manageButton == true){
-                //     return Text('Leave',
-                //       style: TextStyle(
-                //         fontSize: SizeConfig.safeBlockHorizontal * 4,
-                //       ),
-                //     );
-                //   }else{
-                //     return Text('Manage',
-                //       style: TextStyle(
-                //         fontSize: SizeConfig.safeBlockHorizontal * 4,
-                //       ),
-                //     );
-                //   }
-                // }()),
                 child: manageButton ? Text('Leave', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),) : Text('Manage', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),),
                 height: SizeConfig.blockSizeVertical * 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
-                  // side: ((){
-                  //   if(manageButton == true){
-                  //     return BorderSide(color: Color(0xff04ECFF));
-                  //   }else{
-                  //     return BorderSide(color: Color(0xff4EC9D4));
-                  //   }
-                  // }())
                   side: manageButton ? BorderSide(color: Color(0xff04ECFF)) : BorderSide(color: Color(0xff4EC9D4)),
                 ),
-                // color: ((){
-                //   if(manageButton == true){
-                //     return Color(0xff04ECFF);
-                //   }else{
-                //     return Color(0xffffffff);
-                //   }
-                // }()),
                 color: manageButton ? Color(0xff04ECFF) : Color(0xffffffff),
               ),
             ),

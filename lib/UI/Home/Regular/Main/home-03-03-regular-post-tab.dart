@@ -91,10 +91,10 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
+              body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
               body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);

@@ -8,8 +8,8 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({int u
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus',
+
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -17,8 +17,6 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({int u
       'client': getClient,
     }
   );
-
-  print('The status of show notification status is ${response.statusCode}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

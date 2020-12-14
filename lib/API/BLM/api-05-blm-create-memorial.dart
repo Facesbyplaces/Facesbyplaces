@@ -3,14 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 
 Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
-  // bool result = false;
+  
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
-  print('heheheh');
 
   try{
     var dioRequest = dio.Dio();
@@ -38,32 +36,21 @@ Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
     }
 
     if(memorial.backgroundImage != null){
-      print('background image');
-      print('The background image is ${memorial.backgroundImage}');
       var file = await dio.MultipartFile.fromFile(memorial.backgroundImage.path, filename: memorial.backgroundImage.path);
       formData.files.add(MapEntry('blm[backgroundImage]', file));
-      print('finish backgroundImage');
     }
     
     if(memorial.profileImage != null){
-      print('profile image');
-      print('The background image is ${memorial.profileImage}');
       var file = await dio.MultipartFile.fromFile(memorial.profileImage.path, filename: memorial.profileImage.path);
       formData.files.add(MapEntry('blm[profileImage]', file));
-      print('finish profileImage');
     }
     
     if(memorial.imagesOrVideos != null){
-      print('images or videos');
-      print('the length is');
-
       for(int i = 0; i < memorial.imagesOrVideos.length - 1; i++){
         if(memorial.imagesOrVideos[i].path != null){
           var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos[i].path, filename: memorial.imagesOrVideos[i].path);
           formData.files.add(MapEntry('blm[imagesOrVideos][]', file));
-          print('The value images or videos is ${memorial.imagesOrVideos[i].path}');
         }
-        print('heheheh');
       }
 
     }
@@ -86,8 +73,6 @@ Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
       result = memorialId;
     }
   }catch(e){
-    print('The error is $e');
-    // result = false;
     result = 0;
   }
 
