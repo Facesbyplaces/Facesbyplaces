@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   rolify
 
   has_many :authorizations
-  validates :email, :presence => true
+  # validates :email, :presence => true, unless: :guest?
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -47,11 +47,6 @@ class User < ActiveRecord::Base
 
   def self.new_guest
       new { |u| u.guest = true }
-  end
-     
-  def move_to(user)
-       pages.update_all(user_id: user.id)
-       posts.update_all(user_id: user.id)
   end
 
   def self.current
