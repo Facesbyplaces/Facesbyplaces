@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
         end
 
         def user
-            User.find(current_user.id)
+            current_user
         end
 
         def params_presence(data)

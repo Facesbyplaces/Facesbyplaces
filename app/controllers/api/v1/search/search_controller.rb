@@ -127,40 +127,44 @@ class Api::V1::Search::SearchController < ApplicationController
 
     def suggested
         # get all the pages in descending order based on their view count
-        followers_page_type = user().followers.pluck("page_type")
-        followers_page_id = user().followers.pluck("page_id")
-        relationships_page_type = user().relationships.pluck("page_type")
-        relationships_page_id = user().relationships.pluck("page_id")
+        if user()
+            followers_page_type = user().followers.pluck("page_type")
+            followers_page_id = user().followers.pluck("page_id")
+            relationships_page_type = user().relationships.pluck("page_type")
+            relationships_page_id = user().relationships.pluck("page_id")
 
-        if followers_page_type.count != 0 && relationships_page_type.count != 0
+            if followers_page_type.count != 0 && relationships_page_type.count != 0
 
-            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
-                            .where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
-                            .order(view: :desc)
+                pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
+                                .where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
+                                .order(view: :desc)
 
-        elsif followers_page_type.count != 0
+            elsif followers_page_type.count != 0
 
-            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
-                            .order(view: :desc)
+                pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", followers_page_type, followers_page_id)
+                                .order(view: :desc)
 
-        elsif relationships_page_type.count != 0
+            elsif relationships_page_type.count != 0
 
-            pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
-                            .order(view: :desc)
+                pages = Pageowner.where("page_type NOT IN (?) OR page_id NOT IN (?)", relationships_page_type, relationships_page_id)
+                                .order(view: :desc)
 
+            else
+                pages = Pageowner.order(view: :desc)
+            end
         else
-            pages = Pageowner.order(view: :desc)
+            pages = Pageowner.all 
         end
 
-        pages = pages.page(params[:page]).per(numberOfPage)
+            pages = pages.page(params[:page]).per(numberOfPage)
 
-        if pages.total_count == 0 || (pages.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsRemaining = 0
-        elsif pages.total_count < numberOfPage
-            itemsRemaining = pages.total_count 
-        else
-            itemsRemaining = pages.total_count - (params[:page].to_i * numberOfPage)
-        end
+            if pages.total_count == 0 || (pages.total_count - (params[:page].to_i * numberOfPage)) < 0
+                itemsRemaining = 0
+            elsif pages.total_count < numberOfPage
+                itemsRemaining = pages.total_count 
+            else
+                itemsRemaining = pages.total_count - (params[:page].to_i * numberOfPage)
+            end
 
         render json: {
             itemsRemaining: itemsRemaining,
