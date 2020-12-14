@@ -34,7 +34,7 @@ class UILogin01 extends StatelessWidget {
 
             MiscStartButtonIconTemplate(
               buttonText: 'Speak for a loved one killed by law enforcement', 
-              onPressed: (){Navigator.pushNamed(context, '/blm/blm-01-join');},
+              onPressed: (){Navigator.pushNamed(context, '/blm/join');},
               width: SizeConfig.screenWidth / 1.5,
               height: SizeConfig.blockSizeVertical * 9,
               buttonColor: Color(0xffF2F2F2),
@@ -49,7 +49,7 @@ class UILogin01 extends StatelessWidget {
 
             MiscStartButtonIconTemplate(
               buttonText: 'Speak for a loved one killed by law enforcement', 
-              onPressed: (){Navigator.pushNamed(context, '/regular/regular-01-join');},
+              onPressed: (){Navigator.pushNamed(context, '/regular/join');},
               width: SizeConfig.screenWidth / 1.5,
               height: SizeConfig.blockSizeVertical * 9,
               buttonColor: Color(0xffE6FDFF),
@@ -80,7 +80,7 @@ class UILogin01 extends StatelessWidget {
                     ),
                     recognizer: TapGestureRecognizer()
                     ..onTap = (){
-                      Navigator.pushNamed(context, '/regular/regular-02-login');
+                      Navigator.pushNamed(context, '/regular/login');
                     }
                   ),
                 ],

@@ -27,7 +27,7 @@
 			<string>google.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>facesbyplaces://</string>
+				<string>facesbyplaces</string>
 				<string>http</string>
 			</array>
 		</dict>

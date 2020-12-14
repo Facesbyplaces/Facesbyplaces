@@ -11,7 +11,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Search/home-05-regular-search.dart';
 import 'home-03-01-regular-feed-tab.dart';
 import 'home-03-02-regular-memorial-list-tab.dart';
 import 'home-03-03-regular-post-tab.dart';
@@ -66,13 +65,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         return IconButton(
                           icon: CircleAvatar(
                             backgroundColor: Color(0xff888888),
-                            backgroundImage: ((){
-                              if(profileImage.data.image != null && profileImage.data.image != ''){
-                                return NetworkImage(profileImage.data.image);
-                              }else{
-                                return AssetImage('assets/icons/graveyard.png');
-                              }
-                            }()),
+                            // backgroundImage: ((){
+                            //   if(profileImage.data.image != null && profileImage.data.image != ''){
+                            //     return NetworkImage(profileImage.data.image);
+                            //   }else{
+                            //     return AssetImage('assets/icons/app-icon.png');
+                            //   }
+                            // }()),
+                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
                           ),
                           onPressed: () async{
                             Scaffold.of(context).openDrawer();
@@ -93,9 +93,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 IconButton(
                   icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), 
                   onPressed: () async{
-
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearch()));
-
+                    Navigator.pushNamed(context, '/home/regular/search');
                   },
                 ),
               ],
@@ -130,13 +128,18 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 10.5,
                             backgroundColor: Color(0xff888888),
-                            backgroundImage: ((){
-                              if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                return NetworkImage(manageDrawer.data.image);
-                              }else{
-                                return AssetImage('assets/icons/graveyard.png');
-                              }
-                            }()),
+                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
+
+                            // child: CachedNetworkImage(
+                            //   imageUrl: manageDrawer.data.image,
+                            //   placeholder: (context, url) => CircleAvatar(
+                            //     backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                            //   ),
+                            // ),
+                            // backgroundImage: CachedNetworkImageProvider(
+                            //   manageDrawer.data.image,
+                            //   scale: 1.0
+                            // ),
                           ),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
@@ -157,7 +160,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           GestureDetector(
                             onTap: (){
                               Navigator.pop(context);
-                              Navigator.pushNamed(context, '/home/regular/home-04-01-regular-create-memorial');
+                              Navigator.pushNamed(context, '/home/regular/create-memorial');
                             },
                             child: Text('Create Memorial Page', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                           ),

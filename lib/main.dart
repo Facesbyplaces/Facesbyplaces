@@ -1,39 +1,10 @@
+import 'UI/Home/Regular/Create-Memorial/home-04-01-regular-create-memorial.dart';
+import 'UI/Home/Regular/Search/home-05-regular-search.dart';
+import 'UI/Home/Regular/Settings-Notifications/home-01-regular-notification-settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'UI/Home/BLM/Main/home-01-blm-home.dart';
-import 'UI/Home/BLM/Search/home-04-blm-search.dart';
-import 'UI/Home/BLM/Search/home-05-blm-searches.dart';
-import 'UI/Home/BLM/Create-Memorial/home-07-01-blm-create-memorial.dart';
-import 'UI/Home/BLM/Create-Memorial/home-07-02-blm-create-memorial.dart';
-import 'UI/Home/BLM/Create-Memorial/home-07-03-blm-create-memorial.dart';
-import 'UI/Home/BLM/View-Memorial/home-08-blm-view-memorial.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-09-blm-memorial-settings.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-11-blm-page-details.dart';
-import 'UI/Home/BLM/View-Memorial/home-12-blm-profile-memorial.dart';
-import 'UI/Home/BLM/View-Memorial/home-13-blm-user-profile.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-14-blm-user-details.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-15-blm-change-password.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-16-blm-other-details.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-18-blm-user-update-details.dart';
-import 'UI/Home/BLM/Create-Post/home-19-01-blm-create-post.dart';
-import 'UI/Home/BLM/Create-Post/home-19-02-blm-create-post-search-location.dart';
-import 'UI/Home/BLM/Create-Post/home-19-03-blm-create-post-search-user.dart';
-import 'UI/Home/BLM/Donate/home-20-blm-donate.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-21-blm-update-memorial-page-image.dart';
-import 'UI/Home/BLM/View-Memorial/home-22-blm-connection-list.dart';
-import 'UI/Home/BLM/Report/home-24-blm-report.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-26-blm-page-managers.dart';
-import 'UI/Home/BLM/Settings-Memorial/home-29-blm-search-user-settings.dart';
-import 'UI/Home/BLM/Settings-Notifications/home-30-blm-notification-settings.dart';
-import 'UI/Home/BLM/Show-Post/home-31-blm-show-original-post.dart';
-import 'UI/Home/BLM/Donate/home-32-blm-paypal-screen.dart';
 import 'UI/Home/Regular/Donate/home-32-regular-paypal-screen.dart';
-import 'UI/Home/Regular/Main/home-01-regular-home.dart';
-import 'UI/Home/Regular/Create-Memorial/home-04-01-regular-create-memorial.dart';
-import 'UI/Home/Regular/Create-Memorial/home-04-02-regular-create-memorial.dart';
-import 'UI/Home/Regular/Create-Memorial/home-04-03-regular-create-memorial.dart';
-import 'UI/Home/Regular/Search/home-05-regular-search.dart';
-import 'UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
-import 'UI/Home/Regular/Settings-Notifications/home-01-regular-notification-settings.dart';
+import 'UI/Home/Regular/01-Main/home-01-regular-home.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
@@ -83,62 +54,29 @@ void main() async{
           cardColor: Colors.purple,
         ),
         routes: <String, WidgetBuilder>{
-          '/ui-02-login': (BuildContext context) => UILogin01(),
+          '/login': (BuildContext context) => UILogin01(),
 
-          '/blm/blm-01-join': (BuildContext context) => BLMJoin(),
-          '/blm/blm-02-login': (BuildContext context) => BLMLogin(),
-          '/blm/blm-03-register': (BuildContext context) => BLMRegister(),
-          '/blm/blm-04-verify-email': (BuildContext context) => BLMVerifyEmail(),
-          '/blm/blm-05-upload-photo': (BuildContext context) => BLMUploadPhoto(),
+          '/blm/join': (BuildContext context) => BLMJoin(),
+          '/blm/login': (BuildContext context) => BLMLogin(),
+          '/blm/register': (BuildContext context) => BLMRegister(),
+          '/blm/verify-email': (BuildContext context) => BLMVerifyEmail(),
+          '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(),
 
-          '/regular/regular-01-join': (BuildContext context) => RegularJoin(),
-          '/regular/regular-02-login': (BuildContext context) => RegularLogin(),
-          '/regular/regular-03-register': (BuildContext context) => RegularRegister(),
-          '/regular/regular-04-verify-email': (BuildContext context) => RegularVerifyEmail(),
-          '/regular/regular-05-upload-photo': (BuildContext context) => RegularUploadPhoto(),
+          '/regular/join': (BuildContext context) => RegularJoin(),
+          '/regular/login': (BuildContext context) => RegularLogin(),
+          '/regular/register': (BuildContext context) => RegularRegister(),
+          '/regular/verify-email': (BuildContext context) => RegularVerifyEmail(),
+          '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(),
 
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
-          '/home/blm/home-04-blm-search': (BuildContext context) => HomeBLMSearch(),
-          '/home/blm/home-05-blm-post': (BuildContext context) => HomeBLMPost(),
-          '/home/blm/home-07-01-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
-          '/home/blm/home-07-02-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial2(),
-          '/home/blm/home-07-03-blm-create-memorial': (BuildContext context) => HomeBLMCreateMemorial3(),
-        
-          '/home/blm/home-08-blm-memorial': (BuildContext context) => HomeBLMMemorialProfile(),
-          '/home/blm/home-09-blm-memorial-settings': (BuildContext context) => HomeBLMMemorialSettings(),
-          '/home/blm/home-11-blm-page-details': (BuildContext context) => HomeBLMPageDetails(),
-          '/home/blm/home-12-blm-profile': (BuildContext context) => HomeBLMProfile(),
-          '/home/blm/home-13-blm-user-profile': (BuildContext context) => HomeBLMUserProfile(),
-          '/home/blm/home-14-blm-user-details': (BuildContext context) => HomeBLMUserProfileDetails(),
-          '/home/blm/home-15-blm-change-password': (BuildContext context) => HomeBLMUserChangePassword(),
-          '/home/blm/home-16-blm-other-details': (BuildContext context) => HomeBLMUserOtherDetails(),
-          '/home/blm/home-18-blm-user-update-details': (BuildContext context) => HomeBLMUserUpdateDetails(),
-          '/home/blm/home-19-blm-create-post': (BuildContext context) => HomeBLMCreatePost(),
-          '/home/blm/home-19-02-blm-create-post': (BuildContext context) => HomeBLMCreatePostSearch(),
-          '/home/blm/home-19-03-blm-create-post': (BuildContext context) => HomeBLMCreatePostSearchUser(),
-          '/home/blm/home-19-03-regular-create-post': (BuildContext context) => HomeBLMCreatePostSearchUser(),
-          '/home/blm/home-20-blm-donate': (BuildContext context) => HomeBLMUserDonate(),
-          '/home/blm/home-21-blm-memorial-page-image': (BuildContext context) => HomeBLMMemorialPageImage(),
-          '/home/blm/home-22-blm-connection-list': (BuildContext context) => HomeBLMConnectionList(),
-          '/home/blm/home-24-blm-report': (BuildContext context) => HomeBLMReport(),
-          '/home/blm/home-26-blm-page-managers': (BuildContext context) => HomeBLMPageManagers(),
-          '/home/blm/home-29-blm-search-user': (BuildContext context) => HomeBLMSearchUser(),
-          '/home/blm/home-30-blm-notification-settings': (BuildContext context) => HomeBLMNotificationSettings(),
-          '/home/blm/home-31-blm-show-original-post': (BuildContext context) => HomeBLMShowOriginalPost(),
-          '/home/blm/home-32-blm-paypal-screen': (BuildContext context) => HomeBLMPaypal(),
-          
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
-          '/home/regular/create-memorial': (BuildContext context) => HomeRegularScreen(),
+          '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
           '/home/regular/notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
           '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
+          '/home/regular/search': (BuildContext context) => HomeRegularSearch(),
 
 
-          '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
-          '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
-          '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
-          '/home/regular/home-05-regular-search': (BuildContext context) => HomeRegularSearch(),
-          'home/regular/home-09-regular-create-post': (BuildContext context) => HomeRegularCreatePost(),          
         },
       ),
     ),

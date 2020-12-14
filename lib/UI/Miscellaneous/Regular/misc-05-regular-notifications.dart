@@ -6,7 +6,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final List<TextSpan> content;
 
   MiscRegularNotificationDisplayTemplate({
-    this.imageIcon = 'assets/icons/graveyard.png',
+    this.imageIcon = 'assets/icons/app-icon.png',
     this.content,
   });
 

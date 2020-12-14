@@ -148,7 +148,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                       context.bloc<BlocUpdateButtonText>().reset();
 
                                       if(result){
-                                        Navigator.pushNamed(context, '/regular/regular-05-upload-photo');
+                                        Navigator.pushNamed(context, '/regular/upload-photo');
                                       }else{
                                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
                                       }

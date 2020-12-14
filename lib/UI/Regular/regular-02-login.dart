@@ -141,7 +141,7 @@ class RegularLogin extends StatelessWidget {
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
-                                Navigator.pushNamed(context, '/regular/regular-03-register');
+                                Navigator.pushNamed(context, '/regular/register');
                               }
                             ),
 

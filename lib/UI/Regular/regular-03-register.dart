@@ -106,7 +106,7 @@ class RegularRegister extends StatelessWidget{
                                 if(result == 'Success'){
                                   final sharedPrefs = await SharedPreferences.getInstance();
                                   String verificationCode = sharedPrefs.getString('regular-verification-code');
-                                  Navigator.pushNamed(context, '/regular/regular-04-verify-email', arguments: verificationCode);
+                                  Navigator.pushNamed(context, '/regular/verify-email', arguments: verificationCode);
                                 }else{
                                   await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: result));
                                 }
@@ -139,7 +139,7 @@ class RegularRegister extends StatelessWidget{
                                   ),
                                   recognizer: TapGestureRecognizer()
                                   ..onTap = (){
-                                    Navigator.pushNamed(context, '/regular/regular-02-login');
+                                    Navigator.pushNamed(context, '/regular/login');
                                   }
                                 ),
                               ],

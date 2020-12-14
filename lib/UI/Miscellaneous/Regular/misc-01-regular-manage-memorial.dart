@@ -58,7 +58,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
       },
       child: Container(
