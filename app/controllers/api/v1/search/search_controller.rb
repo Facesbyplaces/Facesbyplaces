@@ -1,4 +1,6 @@
 class Api::V1::Search::SearchController < ApplicationController
+    before_action :authenticate_user!, only: [:nearby]
+
     def posts
         postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
 
@@ -89,7 +91,7 @@ class Api::V1::Search::SearchController < ApplicationController
 
         user_location = Geocoder.search([lat,lon])
 
-        blm = Blm.near([lat,lon], 50)
+        blm = Blm.joins(:pageowner).where("pageowners.user_id != #{user().id}").near([lat,lon], 50)
         
         blm = blm.page(params[:page]).per(numberOfPage)
         if blm.total_count == 0 || (blm.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -100,7 +102,7 @@ class Api::V1::Search::SearchController < ApplicationController
             blmitemsremaining = blm.total_count - (params[:page].to_i * numberOfPage)
         end
 
-        memorial = Memorial.near([lat,lon], 50)
+        memorial = Memorial.joins(:pageowner).where("pageowners.user_id != #{user().id}").near([lat,lon], 50)
         
         memorial = memorial.page(params[:page]).per(numberOfPage)
         if memorial.total_count == 0 || (memorial.total_count - (params[:page].to_i * numberOfPage)) < 0
