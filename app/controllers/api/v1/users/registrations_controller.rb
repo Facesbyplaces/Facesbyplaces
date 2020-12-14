@@ -7,6 +7,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   def create
       # if params[:email].present?
     @user = User.new(sign_up_params)
+
     super do |resource|
       logger.info ">>>Error: #{resource.errors.full_messages}"
         @user = resource
