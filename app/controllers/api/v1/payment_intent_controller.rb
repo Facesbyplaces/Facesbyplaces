@@ -1,4 +1,5 @@
 class Api::V1::PaymentIntentController < ApplicationController
+    before_action :authenticate_user!
     
     def set_payment_intent
         case params[:page_type]
@@ -11,11 +12,6 @@ class Api::V1::PaymentIntentController < ApplicationController
         @amount = (params[:amount].to_i * 100).to_i
         puts @amount
 
-        # payment_intent = Stripe::PaymentIntent.create({
-        #   amount: @amount.to_i,
-        #   currency: 'usd',
-        #   description: "Donation for #{@memorial.name}",
-        # })
         payment_intent = Stripe::PaymentIntent.create({
           payment_method_types: ['card'],
           amount: @amount.to_i,

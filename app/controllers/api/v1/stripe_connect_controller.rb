@@ -1,4 +1,5 @@
 class Api::V1::StripeConnectController < ApplicationController
+  before_action :authenticate_user!
 
     def success_stripe_connect
         response = Stripe::OAuth.token({
