@@ -15,28 +15,32 @@ class BlmSerializer < ActiveModel::Serializer
         country:      object.country
       }
     when "followers"
-      if object.followers.where(user_id: object.currentUser.id).first || object.relationships.where(user_id: object.currentUser.id).first 
-        {
-          description:  object.description,
-          location:     object.location,
-          precinct:     object.precinct,
-          dob:          object.dob,
-          rip:          object.rip,
-          state:        object.state,
-          country:      object.country
-        }
+      if object.currentUser
+        if object.followers.where(user_id: object.currentUser.id).first || object.relationships.where(user_id: object.currentUser.id).first 
+          {
+            description:  object.description,
+            location:     object.location,
+            precinct:     object.precinct,
+            dob:          object.dob,
+            rip:          object.rip,
+            state:        object.state,
+            country:      object.country
+          }
+        end
       end
     when "familyOrFriends"
-      if object.relationships.where(user_id: object.currentUser.id).first 
-        {
-          description:  object.description,
-          location:     object.location,
-          precinct:     object.precinct,
-          dob:          object.dob,
-          rip:          object.rip,
-          state:        object.state,
-          country:      object.country
-        }
+      if object.currentUser
+        if object.relationships.where(user_id: object.currentUser.id).first 
+          {
+            description:  object.description,
+            location:     object.location,
+            precinct:     object.precinct,
+            dob:          object.dob,
+            rip:          object.rip,
+            state:        object.state,
+            country:      object.country
+          }
+        end
       end
     end
   end
