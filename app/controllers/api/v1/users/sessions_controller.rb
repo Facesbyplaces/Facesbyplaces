@@ -39,4 +39,19 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
          }, status: 200
       end
     end
+
+    def facebook
+      if params[:facebook_id].nil?
+        return render ResponseBuilder.bad_request "A facebook id is needed"
+      end
+      
+      @user = User.where(facebook_id: params[:facebook_id]).first
+
+      if @user
+        render :create, status: :ok
+      else
+        render ResponseBuilder.bad_request "This facebook is not linked to any account."
+      end
+    end
+
 end

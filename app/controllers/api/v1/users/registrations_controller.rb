@@ -1,7 +1,7 @@
 class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsController
 
   def sign_up_params
-    params.permit(:account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
+    params.permit(:facebook_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
   end
 
   def create
@@ -20,21 +20,6 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         # Tell the UserMailer to send a code to verify email after save
         VerificationMailer.verify_email(@user).deliver_now
     end
-      # else
-      #   @user = User.new_guest
-      #   if @user.save
-      #     current_user.move_to(@user) if current_user && current_user.guest?
-      #     session[:user_id] = @user.id
-      #     redirect_to root_url
-      #   end   
-      #   render json: {
-      #     success: true,
-      #     user:  {
-      #       user: user
-      #     },
-      #     status: 200
-      #   }, status: 200
-      # end
       
   end
 
