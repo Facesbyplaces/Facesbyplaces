@@ -147,7 +147,7 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                       context.bloc<BlocUpdateButtonText>().reset();
 
                                       if(result){
-                                        Navigator.pushNamed(context, '/blm/blm-05-upload-photo'); 
+                                        Navigator.pushNamed(context, '/blm/upload-photo'); 
                                       }else{
                                         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                       }

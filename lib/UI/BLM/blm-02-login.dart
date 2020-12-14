@@ -262,7 +262,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                               ),
                               recognizer: TapGestureRecognizer()
                               ..onTap = (){
-                                Navigator.pushNamed(context, '/blm/blm-03-register');
+                                Navigator.pushNamed(context, '/blm/register');
                               }
                             ),
                           ],

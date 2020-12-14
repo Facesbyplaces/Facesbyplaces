@@ -1,13 +1,14 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/API/Regular/api-07-01-regular-home-feed-tab.dart';
+import 'package:facesbyplaces/API/Regular/api-07-03-regular-home-post-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class RegularMainPagesFeeds{
+class RegularMainPagesPosts{
   int userId;
   int postId;
   int memorialId;
@@ -17,20 +18,30 @@ class RegularMainPagesFeeds{
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
 
-  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  RegularMainPagesPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
 }
 
-class HomeRegularFeedTab extends StatefulWidget{
+class HomeRegularPostTab extends StatefulWidget{
 
-  HomeRegularFeedTabState createState() => HomeRegularFeedTabState();
+  HomeRegularPostTabState createState() => HomeRegularPostTabState();
 }
 
-class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
+class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularMainPagesFeeds> feeds;
+  List<RegularMainPagesPosts> posts;
   int itemRemaining;
   int page;
+  int count;
+
+  void initState(){
+    super.initState();
+    itemRemaining = 1;
+    posts = [];
+    page = 1;
+    count = 0;
+    onLoading();
+  }
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -40,12 +51,13 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeFeedTab(page);
+      var newValue = await apiRegularHomePostTab(page);
       context.hideLoaderOverlay();
       itemRemaining = newValue.itemsRemaining;
+      count = count + newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
-        feeds.add(RegularMainPagesFeeds(
+        posts.add(RegularMainPagesPosts(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
           memorialId: newValue.familyMemorialList[i].page.id,
@@ -68,20 +80,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     }
   }
 
-  void initState(){
-    super.initState();
-    onLoading();
-    itemRemaining = 1;
-    feeds = [];
-    page = 1;
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
       height: SizeConfig.screenHeight,
-      child: SmartRefresher(
+      child: count != 0
+      ? SmartRefresher(
         enablePullDown: false,
         enablePullUp: true,
         header: MaterialClassicHeader(),
@@ -102,9 +108,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more post.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Container(height: 55.0, child: Center(child: body),
+            );
           },
         ),
         controller: refreshController,
@@ -112,7 +119,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         onLoading: onLoading,
         child: ListView.separated(
           padding: EdgeInsets.all(10.0),
-          physics: ClampingScrollPhysics(),
+          shrinkWrap: true,
           itemBuilder: (c, i) {
             var container = GestureDetector(
               onTap: (){
@@ -120,11 +127,11 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               },
               child: Container(
                 child: MiscRegularPost(
-                  userId: feeds[i].userId,
-                  postId: feeds[i].postId,
-                  memorialId: feeds[i].memorialId,
-                  memorialName: feeds[i].memorialName,
-                  timeCreated: convertDate(feeds[i].timeCreated),
+                  userId: posts[i].userId,
+                  postId: posts[i].postId,
+                  memorialId: posts[i].memorialId,
+                  memorialName: posts[i].memorialName,
+                  timeCreated: convertDate(posts[i].timeCreated),
                   contents: [
                     Column(
                       children: [
@@ -135,7 +142,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             overflow: TextOverflow.clip,
                             textAlign: TextAlign.left,
                             text: TextSpan(
-                              text: feeds[i].postBody,
+                              text: posts[i].postBody,
                               style: TextStyle(
                                 fontWeight: FontWeight.w300,
                                 color: Color(0xff000000),
@@ -148,14 +155,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                       ],
                     ),
 
-                    feeds[i].imagesOrVideos != null
+                    posts[i].imagesOrVideos != null
                     ? Container(
                       height: SizeConfig.blockSizeHorizontal * 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: feeds[i].imagesOrVideos[0],
+                        imageUrl: posts[i].imagesOrVideos[0],
                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
@@ -166,17 +173,18 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               ),
             );
 
-            if(feeds.length != 0){
+            if(posts.length != 0){
               return container;
             }else{
-              return Center(child: Text('Feed is empty.'),);
+              return Center(child: Text('Post is empty.'),);
             }
             
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
-          itemCount: feeds.length,
+          itemCount: posts.length,
         ),
       )
+      : MiscRegularEmptyDisplayTemplate(),
     );
   }
 }

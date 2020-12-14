@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-notificat
 import 'package:facesbyplaces/API/Regular/api-07-04-regular-home-notifications-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       context.hideLoaderOverlay();
 
       itemRemaining = newValue.itemsRemaining;
-      count = newValue.notification.length;
+      count = count + newValue.notification.length;
 
       for(int i = 0; i < newValue.notification.length; i++){
         notifications.add(
@@ -129,7 +130,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
               },
               child: Container(
                 child: MiscRegularNotificationDisplayTemplate(
-                  // imageIcon: notifications[i].actorImage,
+                  // imageIcon: 'assets/images/app-icon.png',
                   content: [
                     TextSpan(
                       text: '${notifications[i].action}\n',
@@ -167,9 +168,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           itemCount: notifications.length,
         ),
       )
-      : Container(
-        child: Center(child: Text('Notification is empty', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),
-      ),
+      : MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
     );
   }
 }

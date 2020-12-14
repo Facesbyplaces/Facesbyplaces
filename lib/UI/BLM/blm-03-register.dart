@@ -112,7 +112,7 @@ class BLMRegister extends StatelessWidget{
                                   if(result == 'Success'){
                                     final sharedPrefs = await SharedPreferences.getInstance();
                                     String verificationCode = sharedPrefs.getString('blm-verification-code');
-                                    Navigator.pushNamed(context, '/blm/blm-04-verify-email', arguments: verificationCode);
+                                    Navigator.pushNamed(context, '/blm/verify-email', arguments: verificationCode);
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
                                   }
@@ -145,7 +145,7 @@ class BLMRegister extends StatelessWidget{
                                     ),
                                     recognizer: TapGestureRecognizer()
                                     ..onTap = (){
-                                      Navigator.pushNamed(context, '/blm/blm-02-login');
+                                      Navigator.pushNamed(context, '/blm/login');
                                     }
                                   ),
                                 ],
