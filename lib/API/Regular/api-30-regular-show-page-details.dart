@@ -9,8 +9,7 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails(int memorialId) 
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails(int memorialId) 
       'client': getClient,
     }
   );
-
-  print('The status code in page details is ${response.statusCode}');
-  // print('The status body in page details is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

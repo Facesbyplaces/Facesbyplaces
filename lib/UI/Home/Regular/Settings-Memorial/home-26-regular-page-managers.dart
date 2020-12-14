@@ -1,32 +1,32 @@
-import 'package:facesbyplaces/API/BLM/api-32-blm-show-admin-settings.dart';
+import 'package:facesbyplaces/API/Regular/api-62-regular-show-admin-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
-class BLMShowAdminSettings{
+class RegularShowAdminSettings{
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMShowAdminSettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowAdminSettings({this.firstName, this.lastName, this.image, this.relationship});
 }
 
-class HomeBLMPageManagers extends StatefulWidget{
+class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageManagers({this.memorialId});
+  HomeRegularPageManagers({this.memorialId});
 
-  HomeBLMPageManagersState createState() => HomeBLMPageManagersState(memorialId: memorialId);
+  HomeRegularPageManagersState createState() => HomeRegularPageManagersState(memorialId: memorialId);
 }
 
-class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
+class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   final int memorialId;
-  HomeBLMPageManagersState({this.memorialId});
+  HomeRegularPageManagersState({this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMShowAdminSettings> adminList = [];
-  List<BLMShowAdminSettings> familyList = [];
+  List<RegularShowAdminSettings> adminList = [];
+  List<RegularShowAdminSettings> familyList = [];
   int adminItemsRemaining = 1;
   int familyItemsRemaining = 1;
   int page = 1;
@@ -45,12 +45,12 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   void onLoading1() async{
     if(adminItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowAdminSettings(memorialId, page);
+      var newValue = await apiRegularShowAdminSettings(memorialId, page);
       adminItemsRemaining = newValue.adminItemsRemaining;
 
       for(int i = 0; i < newValue.adminList.length; i++){
         adminList.add(
-          BLMShowAdminSettings(
+          RegularShowAdminSettings(
             firstName: newValue.adminList[i].user.firstName,
             lastName: newValue.adminList[i].user.lastName,
             image: newValue.adminList[i].user.image,
@@ -74,13 +74,13 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowAdminSettings(memorialId, page);
+      var newValue = await apiRegularShowAdminSettings(memorialId, page);
       context.hideLoaderOverlay();
       familyItemsRemaining = newValue.familyItemsRemaining;
 
       for(int i = 0; i < newValue.familyList.length; i++){
         familyList.add(
-          BLMShowAdminSettings(
+          RegularShowAdminSettings(
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.adminList[i].user.image,

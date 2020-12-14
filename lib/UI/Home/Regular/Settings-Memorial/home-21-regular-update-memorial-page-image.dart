@@ -1,11 +1,11 @@
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/API/BLM/api-27-blm-update-page-image.dart';
-import 'package:facesbyplaces/API/BLM/api-12-blm-show-page-images.dart';
+import 'package:facesbyplaces/UI/Home/Regular/View-Memorial/home-01-regular-view-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
+import 'package:facesbyplaces/API/Regular/api-61-regular-update-images.dart';
+import 'package:facesbyplaces/API/Regular/api-60-regular-show-images.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import '../View-Memorial/home-12-blm-profile-memorial.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,18 +15,18 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-class HomeBLMMemorialPageImage extends StatefulWidget{
+class HomeRegularMemorialPageImage extends StatefulWidget{
 
   final int memorialId;
-  HomeBLMMemorialPageImage({this.memorialId});
+  HomeRegularMemorialPageImage({this.memorialId});
 
-  HomeBLMMemorialPageImageState createState() => HomeBLMMemorialPageImageState(memorialId: memorialId);
+  HomeRegularMemorialPageImageState createState() => HomeRegularMemorialPageImageState(memorialId: memorialId);
 }
 
-class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
+class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage>{
 
   final int memorialId;
-  HomeBLMMemorialPageImageState({this.memorialId});
+  HomeRegularMemorialPageImageState({this.memorialId});
 
   final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   int backgroundImageToggle;
@@ -53,8 +53,8 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
     }
   }
 
-  Future<APIBLMShowPageImagesMain> getMemorialSettings(int memorialId) async{
-    return await apiBLMShowPageImages(memorialId);
+  Future<APIRegularShowPageImagesMain> getMemorialSettings(int memorialId) async{
+    return await apiRegularShowPageImages(memorialId);
   }
 
   void initState(){
@@ -80,14 +80,14 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
       ),
       body: Container(
         height: SizeConfig.screenHeight,
-        child: FutureBuilder<APIBLMShowPageImagesMain>(
+        child: FutureBuilder<APIRegularShowPageImagesMain>(
           future: futureMemorialSettings,
           builder: (context, memorialImageSettings){
             if(memorialImageSettings.hasData){
               return Stack(
                 children: [
 
-                  MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
+                  MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -213,7 +213,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                       final Uint8List list = bytes.buffer.asUint8List();
 
                                       final tempDir = await getTemporaryDirectory();
-                                      final file = await new File('${tempDir.path}/blm-background-image-$index.png').create();
+                                      final file = await new File('${tempDir.path}/regular-background-image-$index.png').create();
                                       file.writeAsBytesSync(list);                                    
 
                                       setState(() {
@@ -279,7 +279,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                        MiscBLMButtonTemplate(
+                        MiscRegularButtonTemplate(
                           buttonText: 'Update', 
                           buttonTextStyle: TextStyle(
                             fontSize: SizeConfig.safeBlockHorizontal * 4, 
@@ -290,19 +290,19 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             if(profileImage != null || backgroundImage != null){
                               context.showLoaderOverlay();
-                              bool result = await apiBLMUpdatePageImages(memorialId, backgroundImage, profileImage);
+                              bool result = await apiRegularUpdatePageImages(memorialId, backgroundImage, profileImage);
                               context.hideLoaderOverlay();
 
                               if(result){
 
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
-                                // );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                                );
 
                                 Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                               }else{
-                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                               }
                             }
 

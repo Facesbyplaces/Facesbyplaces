@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/BLM/api-34-blm-show-friends-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
 import 'home-29-blm-search-user-settings.dart';
+import 'package:flutter/material.dart';
 
 class BLMShowFriendsSettings{
   final String firstName;

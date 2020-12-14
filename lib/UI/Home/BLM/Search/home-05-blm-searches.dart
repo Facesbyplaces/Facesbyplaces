@@ -197,7 +197,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      // var newValue = await apiBLMSearchPosts(keyword, page4);
       var newValue = await apiBLMSearchBLM(keyword);
       blmItemRemaining = newValue.itemsRemaining;
 
@@ -634,12 +633,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
+            Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
+              body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
               body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);

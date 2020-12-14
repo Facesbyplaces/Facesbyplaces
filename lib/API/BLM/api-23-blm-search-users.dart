@@ -19,9 +19,6 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers(String keywords, int page) async
     }
   );
 
-  print('The status code on blm search user is ${response.statusCode}');
-  print('The status body on blm search user is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchUsersMain.fromJson(newValue);

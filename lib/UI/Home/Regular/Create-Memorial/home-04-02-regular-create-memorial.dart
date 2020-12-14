@@ -3,12 +3,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-04-01-regular-create-memorial.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
-import 'home-04-01-regular-create-memorial.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
 
 class HomeRegularCreateMemorial2 extends StatefulWidget{
 
@@ -22,7 +21,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   VideoPlayerController videoPlayerController;
   List<File> slideImages = [];
   int toggle = 0;
-
   File videoFile;
   File imageFile;
   File newFile;
@@ -44,31 +42,14 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
     }
   }
 
-  // Future<File> getSlideImage() async{
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-  //   return imageFile = File(pickedFile.path);
-  // }
-
   Future getSlideImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if(pickedFile != null){
-      // setState(() {
-      //   backgroundImage = File(pickedFile.path);
-      // });
       setState(() {
         slideImages.add(File(pickedFile.path));
       });
     }
   }
-
-  // Future getImage() async{
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-  //   if(pickedFile != null){
-  //     setState(() {
-  //       backgroundFile = File(pickedFile.path);
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -182,19 +163,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     if(_key1.currentState.controller.text == ''){
                       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                     }else{
-                      // List<File> newFiles = [];
-
-                      // newFiles.addAll(slideImages);
-                      // newFiles.add(videoFile);
-
-                      // for(int i = 0; i < newFiles.length; i++){
-                      //   print('The value for videos is ${newFiles[i]}');
-                      // }
-
-                      // newValue.description = controllerStory.text;
-                      // newValue.blmName = _key1.currentState.controller.text;
-                      // newValue.imagesOrVideos = newFiles;
-
                       List<File> newFiles = [];
 
                       newFiles.addAll(slideImages);
@@ -203,10 +171,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       newValue.description = controllerStory.text;
                       newValue.memorialName = _key1.currentState.controller.text;
                       newValue.imagesOrVideos = newFiles;
-
-                      print('The description is ${newValue.description}');
-                      print('The memorial name is ${newValue.memorialName}');
-                      print('The imagesOrVideos is ${newValue.imagesOrVideos}');
 
                       Navigator.pushNamed(context, '/home/regular/home-04-03-regular-create-memorial', arguments: newValue);
                     }
@@ -309,10 +273,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     return GestureDetector(
                       onTap: () async{
                         await getSlideImage();
-
-                        // setState(() {
-                        //   slideImages.add(newFile);
-                        // });
                       },
                       child: Container(
                         width: SizeConfig.blockSizeVertical * 10,

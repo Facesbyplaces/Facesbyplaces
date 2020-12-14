@@ -1,32 +1,32 @@
-import 'package:facesbyplaces/API/BLM/api-33-blm-show-family-settings.dart';
+import 'package:facesbyplaces/API/Regular/api-63-regular-show-family-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
 import 'home-29-regular-search-user-settings.dart';
+import 'package:flutter/material.dart';
 
-class BLMShowFamilySettings{
+class RegularShowFamilySettings{
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship});
 }
 
-class HomeBLMPageFamily extends StatefulWidget{
+class HomeRegularPageFamily extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageFamily({this.memorialId});
+  HomeRegularPageFamily({this.memorialId});
 
-  HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState(memorialId: memorialId);
+  HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState(memorialId: memorialId);
 }
 
-class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
+class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
   final int memorialId;
-  HomeBLMPageFamilyState({this.memorialId});
+  HomeRegularPageFamilyState({this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMShowFamilySettings> familyList;
+  List<RegularShowFamilySettings> familyList;
   int familyItemsRemaining;
   int page;
 
@@ -38,12 +38,12 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   void onLoading1() async{
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowFamilySettings(memorialId, page);
+      var newValue = await apiRegularShowFamilySettings(memorialId, page);
       familyItemsRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.familyList.length; i++){
         familyList.add(
-          BLMShowFamilySettings(
+          RegularShowFamilySettings(
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
@@ -83,7 +83,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: true, memorialId: memorialId,)));
             },
             child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
           ),

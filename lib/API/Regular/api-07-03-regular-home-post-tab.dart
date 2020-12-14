@@ -9,8 +9,7 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
       'client': getClient,
     }
   );
-
-  // print('The response status in posts is ${response.statusCode}');
-  // print('The response status in posts is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

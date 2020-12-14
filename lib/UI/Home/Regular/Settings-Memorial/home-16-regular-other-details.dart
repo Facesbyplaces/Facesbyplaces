@@ -5,14 +5,14 @@ import 'package:facesbyplaces/API/Regular/api-37-regular-hide-email.dart';
 import 'package:facesbyplaces/API/Regular/api-38-regular-hide-address.dart';
 import 'package:facesbyplaces/API/Regular/api-39-regular-hide-phone-number.dart';
 import 'package:facesbyplaces/API/Regular/api-51-regular-update-other-details.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
 import 'home-14-regular-user-details.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularUserOtherDetails extends StatefulWidget{
   final int userId;
@@ -239,8 +239,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   address: _key4.currentState.controller.text,
                                   phoneNumber: _key5.currentState.controller.text,
                                 );
-
-                                print('The result is $result');
 
                                 context.hideLoaderOverlay();
 

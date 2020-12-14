@@ -6,15 +6,9 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
   bool result = false;
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
-  // print('The memorialId is $memorialId');
-  print('The getAccessToken is $getAccessToken');
-  print('The getUID is $getUID');
-  print('The getClient is $getClient');
 
   try{
     var dioRequest = Dio();
@@ -45,14 +39,11 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
 
 
     if(response.statusCode == 200){
-      // var newValue = json.decode(response.body);
-      // return APIBLMShowPageDetailsMain.fromJson(newValue);
       result = true;
     }
 
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

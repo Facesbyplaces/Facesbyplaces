@@ -1,10 +1,9 @@
-// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-19-blm-report.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -78,8 +77,6 @@ class HomeBLMReport extends StatelessWidget{
                         context.showLoaderOverlay();
                         bool result = await apiBLMReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
                         context.hideLoaderOverlay();
-
-                        print('The report result is $result');
 
                         if(result){
                           Navigator.pushReplacementNamed(context, '/home/blm');

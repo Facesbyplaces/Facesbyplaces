@@ -1,42 +1,6 @@
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:http/http.dart' as http;
-// // import 'dart:convert';
-
-// Future<bool> apiBLMUpdatePageImages(int memorialId) async{
-
-//   final sharedPrefs = await SharedPreferences.getInstance();
-//   // int memorialId = sharedPrefs.getInt('blm-user-memorial-id') ?? 0;
-//   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-//   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-//   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
-//   final http.Response response = await http.put(
-//     'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/images',
-//     headers: <String, String>{
-//       'Content-Type': 'application/json',
-//       'access-token': getAccessToken,
-//       'uid': getUID,
-//       'client': getClient,
-//     }
-//   );
-
-//   print('The status code is ${response.statusCode}');
-//   // print('The status body is ${response.body}');
-
-//   if(response.statusCode == 200){
-//     return true;
-//   }else{
-//     // throw Exception('Failed to get the events');
-//     return false;
-//   }
-// }
-
-
-
-
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 
 Future<bool> apiBLMUpdatePageImages(int memorialId, dynamic backgroundImage, dynamic profileImage) async{
 

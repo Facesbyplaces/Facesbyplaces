@@ -13,9 +13,6 @@ Future<bool> apiBLMVerifyEmail(String verificationCode) async{
     }
   );
 
-  print('The status code on blm verify email is ${response.statusCode}');
-  print('The status body on blm verify email is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

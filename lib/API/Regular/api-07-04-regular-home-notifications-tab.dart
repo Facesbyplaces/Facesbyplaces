@@ -9,8 +9,7 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab(int pag
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

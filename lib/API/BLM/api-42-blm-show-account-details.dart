@@ -19,9 +19,6 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails(int userId) async{
     }
   );
 
-  print('The status of account details is ${response.statusCode}');
-  print('The status of account details is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowAccountDetails.fromJson(newValue);

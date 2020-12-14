@@ -10,10 +10,6 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The getAccessToken is $getAccessToken');
-  print('The getUID is $getUID');
-  print('The getClient is $getClient');
-
   try{
     var dioRequest = Dio();
 
@@ -43,10 +39,8 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
     if(response.statusCode == 200){
       result = true;
     }
-
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

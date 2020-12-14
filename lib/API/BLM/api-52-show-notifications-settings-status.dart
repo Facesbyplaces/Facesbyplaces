@@ -1,8 +1,3 @@
-// http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus
-
-// http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus
-
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -14,8 +9,7 @@ Future<APIBLMShowNotificationStatus> apiBLMShowNotificationStatus({int userId}) 
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -24,8 +18,6 @@ Future<APIBLMShowNotificationStatus> apiBLMShowNotificationStatus({int userId}) 
     }
   );
 
-  print('The status of show notification status is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowNotificationStatus.fromJson(newValue);
@@ -33,8 +25,6 @@ Future<APIBLMShowNotificationStatus> apiBLMShowNotificationStatus({int userId}) 
     throw Exception('Failed to get the post');
   }
 }
-
-
 
 class APIBLMShowNotificationStatus{
   bool newMemorial;

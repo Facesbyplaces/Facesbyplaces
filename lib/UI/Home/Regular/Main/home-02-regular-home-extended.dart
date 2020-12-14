@@ -1,26 +1,22 @@
-// import 'package:facesbyplaces/API/Regular/api-37-regular-show-notification-settings.dart';
-import 'package:facesbyplaces/API/Regular/api-41-regular-show-notification-settings.dart';
-import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-14-regular-user-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Notifications/home-01-regular-notification-settings.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-14-regular-user-details.dart';
+import 'package:facesbyplaces/API/Regular/api-41-regular-show-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
+import 'package:facesbyplaces/API/Regular/api-22-regular-show-user-information.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/API/Regular/api-18-regular-logout.dart';
-import 'package:facesbyplaces/API/Regular/api-22-regular-show-user-information.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
-// import 'package:flutter_pay/flutter_pay.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../Search/home-05-regular-search.dart';
 import 'home-03-01-regular-feed-tab.dart';
 import 'home-03-02-regular-memorial-list-tab.dart';
 import 'home-03-03-regular-post-tab.dart';
-// import 'home-03-04-regular-notifications-tab.dart';
-import '../Search/home-05-regular-search.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/material.dart';
-
-import 'home-03-04-regular-notifications-tab.dart';
 
 class HomeRegularScreenExtended extends StatefulWidget{
 
@@ -192,33 +188,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                           GestureDetector(
                             onTap: () async{
-                              print('The userId is ${manageDrawer.data.userId}');
                               Navigator.pop(context);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.userId)));
-
-                            // FlutterPay flutterPay = FlutterPay();
-
-                            // bool isAvailable = await flutterPay.canMakePayments();
-
-                            // print('The value of $isAvailable');
-
-                            // PaymentItem item = PaymentItem(name: 'Donation', price: 10.98);
-
-                            // String token = await flutterPay.makePayment(
-                            //   merchantIdentifier: 'merchant.com.app.facesbyplaces',
-                            //   currencyCode: 'USD',
-                            //   countryCode: 'US',
-                            //   allowedPaymentNetworks: [
-                            //     PaymentNetwork.visa, 
-                            //     PaymentNetwork.masterCard,
-                            //   ],
-                            //   paymentItems: [item],
-                            //   merchantName: 'Facesbyplaces Donation',
-                            //   gatewayName: 'stripe',
-                            // );
-
-                            // print('The token is ${token[0]}');
-
                             },
                             child: Text('Profile Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                           ),

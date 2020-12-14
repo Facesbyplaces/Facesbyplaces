@@ -9,11 +9,7 @@ Future<APIRegularSearchPostMain> apiRegularSearchNearby(int page, double latitud
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The longitude is $longitude');
-  print('The latitude is $latitude');
-
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -21,9 +17,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchNearby(int page, double latitud
       'client': getClient,
     }
   );
-
-  print('The status of search nearby is ${response.statusCode}');
-  print('The status of search nearby is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -44,17 +37,11 @@ class APIRegularSearchPostMain{
   APIRegularSearchPostMain({this.blmItemsRemaining, this.memorialItemsRemaining, this.blmList, this.memorialList});
 
   factory APIRegularSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
-    print('test!');
-
     var newList1 = parsedJson['blm'] as List;
     var newList2 = parsedJson['memorial'] as List;
 
     List<APIRegularSearchPostExtended> blmList = newList1.map((i) => APIRegularSearchPostExtended.fromJson(i)).toList();
-    print('test test test');
-
     List<APIRegularSearchPostExtended> memorialList = newList2.map((e) => APIRegularSearchPostExtended.fromJson(e)).toList();
-
-    print('new new new');
 
     return APIRegularSearchPostMain(
       blmItemsRemaining: parsedJson['blmItemsRemaining'],
@@ -80,8 +67,6 @@ class APIRegularSearchPostExtended{
   APIRegularSearchPostExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
-    print('last!');
-
     return APIRegularSearchPostExtended(
       id: parsedJson['id'],
       name: parsedJson['name'],

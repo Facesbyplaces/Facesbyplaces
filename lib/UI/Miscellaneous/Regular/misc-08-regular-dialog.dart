@@ -233,3 +233,167 @@ class MiscRegularConfirmDialog extends StatelessWidget{
     );
   }
 }
+
+class MiscRegularRelationshipFromDialog extends StatelessWidget{
+
+  Widget build(BuildContext context){
+    SizeConfig.init(context);
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5))
+      ),
+      child: Container(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text('Choose the relationship of this person:',
+            textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                fontWeight: FontWeight.w200,
+                color: Color(0xff000000),
+              ),
+            ),
+
+            Expanded(child: Container(),),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Father');
+              },
+              child: Text('Father',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Mother');
+              },
+              child: Text('Mother',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Sister');
+              },
+              child: Text('Sister',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Brother');
+              },
+              child: Text('Brother',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Aunt');
+              },
+              child: Text('Aunt',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Uncle');
+              },
+              child: Text('Uncle',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Nephew');
+              },
+              child: Text('Nephew',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Grandfather');
+              },
+              child: Text('Grandfather',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context, 'Grandmother');
+              },
+              child: Text('Grandmother',
+                style: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff000000).withOpacity(0.5),
+                ),
+              ),
+            ),
+
+            Expanded(child: Container(),),
+          ],
+        ),
+      ),
+    );
+  }
+}

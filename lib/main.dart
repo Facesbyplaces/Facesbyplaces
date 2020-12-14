@@ -26,23 +26,14 @@ import 'UI/Home/BLM/Settings-Memorial/home-29-blm-search-user-settings.dart';
 import 'UI/Home/BLM/Settings-Notifications/home-30-blm-notification-settings.dart';
 import 'UI/Home/BLM/Show-Post/home-31-blm-show-original-post.dart';
 import 'UI/Home/BLM/Donate/home-32-blm-paypal-screen.dart';
+import 'UI/Home/Regular/Donate/home-32-regular-paypal-screen.dart';
 import 'UI/Home/Regular/Main/home-01-regular-home.dart';
 import 'UI/Home/Regular/Create-Memorial/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/Create-Memorial/home-04-02-regular-create-memorial.dart';
 import 'UI/Home/Regular/Create-Memorial/home-04-03-regular-create-memorial.dart';
 import 'UI/Home/Regular/Search/home-05-regular-search.dart';
 import 'UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
-import 'UI/Home/Regular/home-12-regular-page-details.dart';
-import 'UI/Home/Regular/home-14-regular-user-profile.dart';
-import 'UI/Home/Regular/home-15-regular-user-details.dart';
-import 'UI/Home/Regular/home-21-regular-report.dart';
-import 'UI/Home/Regular/home-22-regular-donate.dart';
-import 'UI/Home/Regular/home-23-regular-page-managers.dart';
-import 'UI/Home/Regular/home-24-regular-page-family.dart';
-import 'UI/Home/Regular/home-25-regular-page-friends.dart';
-import 'UI/Home/Regular/home-26-regular-search-user.dart';
-import 'UI/Home/Regular/home-27-regular-notification-settings.dart';
-import 'UI/Home/Regular/home-28-regular-show-original-post.dart';
+import 'UI/Home/Regular/Settings-Notifications/home-01-regular-notification-settings.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';
 import 'UI/Regular/regular-03-register.dart';
@@ -138,23 +129,16 @@ void main() async{
           
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
+          '/home/regular/create-memorial': (BuildContext context) => HomeRegularScreen(),
+          '/home/regular/notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
+          '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
+
+
           '/home/regular/home-04-01-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
           '/home/regular/home-04-02-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial2(),
           '/home/regular/home-04-03-regular-create-memorial': (BuildContext context) => HomeRegularCreateMemorial3(),
           '/home/regular/home-05-regular-search': (BuildContext context) => HomeRegularSearch(),
-          'home/regular/home-09-regular-create-post': (BuildContext context) => HomeRegularCreatePost(),
-          'home/regular/home-12-regular-page-details': (BuildContext context) => HomeRegularPageDetails(),
-          'home/regular/home-14-regular-user-profile': (BuildContext context) => HomeRegularUserProfile(),
-          'home/regular/home-15-regular-user-details': (BuildContext context) => HomeRegularUserProfileDetails(),
-          'home/regular/home-21-regular-report': (BuildContext context) => HomeRegularReport(),
-          'home/regular/home-22-regular-donate': (BuildContext context) => HomeRegularUserDonate(),
-          'home/regular/home-23-regular-page-managers': (BuildContext context) => HomeRegularPageManagers(),
-          'home/regular/home-24-regular-page-family': (BuildContext context) => HomeRegularPageFamily(),
-          'home/regular/home-25-regular-page-friends': (BuildContext context) => HomeRegularPageFriends(),
-          'home/regular/home-26-regular-search-user': (BuildContext context) => HomeRegularSearchUser(),
-          'home/regular/home-27-regular-notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
-          'home/regular/home-28-regular-show-original-post': (BuildContext context) => HomeRegularShowOriginalPost(),
-          
+          'home/regular/home-09-regular-create-post': (BuildContext context) => HomeRegularCreatePost(),          
         },
       ),
     ),

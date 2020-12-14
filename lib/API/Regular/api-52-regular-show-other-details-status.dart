@@ -1,6 +1,3 @@
-// http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus
-
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -12,8 +9,7 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus(int us
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -21,9 +17,6 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus(int us
       'client': getClient,
     }
   );
-
-  print('The status of GET other details is ${response.statusCode}');
-  // print('The status of other details is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

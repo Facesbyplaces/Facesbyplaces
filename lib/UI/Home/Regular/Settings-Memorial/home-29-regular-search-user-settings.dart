@@ -1,41 +1,41 @@
-import 'package:facesbyplaces/API/BLM/api-23-blm-search-users.dart';
-import 'package:facesbyplaces/API/BLM/api-40-blm-add-family.dart';
-import 'package:facesbyplaces/API/BLM/api-41-blm-add-friends.dart';
+import 'package:facesbyplaces/API/Regular/api-65-regular-search-users.dart';
+import 'package:facesbyplaces/API/Regular/api-66-regular-add-family.dart';
+import 'package:facesbyplaces/API/Regular/api-67-regular-add-friends.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'home-27-regular-page-family.dart';
 import 'home-28-regular-page-friends.dart';
 
-class BLMSearchUsers{
+class RegularSearchUsers{
   final int userId;
   final String firstName;
   final String lastName;
   final String image;
   final String email;
 
-  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email});
+  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email});
 }
 
-class HomeBLMSearchUser extends StatefulWidget{
+class HomeRegularSearchUser extends StatefulWidget{
   final bool isFamily;
   final int memorialId;
-  HomeBLMSearchUser({this.isFamily, this.memorialId});
+  HomeRegularSearchUser({this.isFamily, this.memorialId});
 
   @override
-  HomeBLMSearchUserState createState() => HomeBLMSearchUserState(isFamily: isFamily, memorialId: memorialId);
+  HomeRegularSearchUserState createState() => HomeRegularSearchUserState(isFamily: isFamily, memorialId: memorialId);
 }
 
-class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
+class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   final bool isFamily;
   final int memorialId;
-  HomeBLMSearchUserState({this.isFamily, this.memorialId});
+  HomeRegularSearchUserState({this.isFamily, this.memorialId});
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
-  List<BLMSearchUsers> users;
+  List<RegularSearchUsers> users;
   int itemRemaining;
   String keywords;
     bool empty;
@@ -66,11 +66,11 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMSearchUsers(keywords, page);
+      var newValue = await apiRegularSearchUsers(keywords, page);
       itemRemaining = newValue.itemsRemaining;
       for(int i = 0; i < newValue.users.length; i++){
         users.add(
-          BLMSearchUsers(
+          RegularSearchUsers(
             userId: newValue.users[i].userId,
             firstName: newValue.users[i].firstName,
             lastName: newValue.users[i].lastName,
@@ -232,28 +232,28 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                     onTap: () async{
                       if(isFamily){
 
-                        String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
+                        String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
                         context.showLoaderOverlay();
-                        bool result = await apiBLMAddFamily(memorialId, users[index].userId, choice);
+                        bool result = await apiRegularAddFamily(memorialId, users[index].userId, choice);
                         context.hideLoaderOverlay();
 
                         if(result){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                         }
                       }else{
                         context.showLoaderOverlay();
-                        bool result = await apiBLMAddFriends(memorialId, users[index].userId);
+                        bool result = await apiRegularAddFriends(memorialId, users[index].userId);
                         context.hideLoaderOverlay();
 
                         if(result){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                         }
 
                       }

@@ -1,23 +1,14 @@
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 
 Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
+  
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-
-  print('the memorial name is ${memorial.memorialName}');
-  print('the memorial birthplace is ${memorial.birthPlace}');
-  print('the memorial dob is ${memorial.dob}');
-  print('the memorial rip is ${memorial.rip}');
-  print('the memorial country is ${memorial.country}');
-  print('the memorial description is ${memorial.description}');
-  print('the memorial relationship is ${memorial.relationship}');
-  print('the memorial longitu is ${memorial.longitude}');
-  print('the memorial name is ${memorial.latitude}');
 
   try{
     var dioRequest = dio.Dio();
@@ -61,11 +52,7 @@ Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
           formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
         }
       }
-
     }
-
-    // 'http://fbp.dev1.koda.ws/api/v1/pages/blm'
-
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
       options: Options(
@@ -77,8 +64,6 @@ Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
       ),  
     );
 
-    print('The response is ${response.statusCode}');
-
     if(response.statusCode == 200){
       var value = response.data;
       var user = value['memorial'];
@@ -87,7 +72,6 @@ Future<int> apiRegularCreateMemorial(APIRegularCreateMemorial memorial) async{
       result = userId;
     }
   }catch(e){
-    print('The error is $e');
     result = 0;
   }
 
@@ -125,5 +109,3 @@ class APIRegularCreateMemorial{
     this.longitude,
   });
 }
-
-

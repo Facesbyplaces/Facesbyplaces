@@ -9,8 +9,7 @@ Future<APIBLMShowPostLikes> apiBLMShowPostLikes({int postId}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/likePost/status?post_id=$postId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/likePost/status?post_id=$postId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIBLMShowPostLikes> apiBLMShowPostLikes({int postId}) async{
       'client': getClient,
     }
   );
-
-  print('The status of search suggested is ${response.statusCode}');
-  print('The status of search suggested is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

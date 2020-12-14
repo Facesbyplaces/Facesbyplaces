@@ -19,8 +19,6 @@ Future<APIBLMHomeTabPostMain> apiBLMHomePostTab(int page) async{
     }
   );
 
-  print('The post value is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMHomeTabPostMain.fromJson(newValue);

@@ -1,32 +1,32 @@
-import 'package:facesbyplaces/API/BLM/api-34-blm-show-friends-settings.dart';
+import 'package:facesbyplaces/API/Regular/api-64-regular-show-friends-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
 import 'home-29-regular-search-user-settings.dart';
+import 'package:flutter/material.dart';
 
-class BLMShowFriendsSettings{
+class RegularShowFriendsSettings{
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
 }
 
-class HomeBLMPageFriends extends StatefulWidget{
+class HomeRegularPageFriends extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageFriends({this.memorialId});
+  HomeRegularPageFriends({this.memorialId});
 
-  HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState(memorialId: memorialId);
+  HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(memorialId: memorialId);
 }
 
-class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
+class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   final int memorialId;
-  HomeBLMPageFriendsState({this.memorialId});
+  HomeRegularPageFriendsState({this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMShowFriendsSettings> friendsList;
+  List<RegularShowFriendsSettings> friendsList;
   int friendsItemsRemaining;
   int page;
 
@@ -38,12 +38,12 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   void onLoading1() async{
     if(friendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowFriendsSettings(memorialId, page);
+      var newValue = await apiRegularShowFriendsSettings(memorialId, page);
       friendsItemsRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.friendsList.length; i++){
         friendsList.add(
-          BLMShowFriendsSettings(
+          RegularShowFriendsSettings(
             firstName: newValue.friendsList[i].user.firstName,
             lastName: newValue.friendsList[i].user.lastName,
             image: newValue.friendsList[i].user.image,
@@ -82,7 +82,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: memorialId,)));
             },
             child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
           ),

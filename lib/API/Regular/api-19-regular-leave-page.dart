@@ -8,13 +8,7 @@ Future<String> apiRegularLeavePage(int memorialId) async{
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token $getAccessToken');
-  print('The UID $getUID');
-  print('The client $getClient');
-
-  final http.Response response = await http.delete(
-    // 'http://fbp.dev1.koda.ws/auth/sign_out',
-    'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/relationship/leave',
+  final http.Response response = await http.delete('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/relationship/leave',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -22,9 +16,6 @@ Future<String> apiRegularLeavePage(int memorialId) async{
       'client': getClient,
     }
   );
-
-  print('The status code on blm logout is ${response.statusCode}');
-  print('The status body on blm logout is ${response.body}');
 
   if(response.statusCode == 200){
     return 'Succuess';

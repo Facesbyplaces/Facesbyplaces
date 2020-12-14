@@ -9,9 +9,6 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily(int me
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The memorial id is $memorialId');
-  print('The page number is $page');
-
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -20,10 +17,7 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily(int me
       'client': getClient,
     }
   );
-
-  print('The status of page managers is ${response.statusCode}');
-  print('The status of page managers is ${response.body}');
-
+  
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularConnectionListFamilyMain.fromJson(newValue);

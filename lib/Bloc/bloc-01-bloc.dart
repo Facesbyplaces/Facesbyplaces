@@ -14,12 +14,3 @@ class BlocUpdateButtonText extends Cubit<int>{
   void remove() => emit(state - 1);
   void reset() => emit(0);
 }
-
-
-
-
-class BlocShowLoading extends Cubit<bool>{
-
-  BlocShowLoading() : super(false);
-  void modify(bool value) => emit(value);
-}

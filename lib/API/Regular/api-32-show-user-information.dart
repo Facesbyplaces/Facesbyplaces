@@ -18,9 +18,6 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     }
   );
 
-  print('The status code for drawer is ${response.statusCode}');
-  print('The status body for drawer is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowProfileInformation.fromJson(newValue);

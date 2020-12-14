@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/BLM/api-36-blm-update-switch-status-family.dart';
-import 'package:facesbyplaces/API/BLM/api-37-blm-update-switch-status-friends.dart';
-import 'package:facesbyplaces/API/BLM/api-38-blm-update-switch-status-followers.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/API/BLM/api-06-blm-delete-memorial.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/API/Regular/api-05-regular-delete-memorial.dart';
+import 'package:facesbyplaces/API/Regular/api-57-regular-update-switch-status-family.dart';
+import 'package:facesbyplaces/API/Regular/api-58-regular-update-switch-status-friends.dart';
+import 'package:facesbyplaces/API/Regular/api-59-regular-update-switch-status-followers.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-16-regular-setting-detail.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-11-regular-page-details.dart';
 import 'home-21-regular-update-memorial-page-image.dart';
@@ -131,7 +131,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialPageImage(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialPageImage(memorialId: memorialId,)));
           }, 
           titleDetail: 'Page Image', 
           contentDetail: 'Update Page image and background image',
@@ -141,7 +141,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageManagers(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageManagers(memorialId: memorialId,)));
           }, 
           titleDetail: 'Admins', 
           contentDetail: 'Add or remove admins of this page',
@@ -151,7 +151,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,)));
           }, 
           titleDetail: 'Family', 
           contentDetail: 'Add or remove family of this page',
@@ -161,7 +161,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,)));
           }, 
           titleDetail: 'Friends', 
           contentDetail: 'Add or remove friends of this page',
@@ -171,7 +171,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
-            Navigator.pushNamed(context, '/home/blm/home-32-blm-paypal-screen');
+            Navigator.pushNamed(context, '/home/regular/donation-paypal');
           }, 
           titleDetail: 'Paypal', 
           contentDetail: 'Manage cards that receives the memorial gifts.',
@@ -181,17 +181,17 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(),);
             if(confirmResult){
 
               context.showLoaderOverlay();
-              bool result = await apiBLMDeleteMemorial(memorialId);
+              bool result = await apiRegularDeleteMemorial(memorialId);
               context.hideLoaderOverlay();
 
               if(result){
-                Navigator.popAndPushNamed(context, '/home/blm');
+                Navigator.popAndPushNamed(context, '/home/regular');
               }else{
-                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
               }
             }
           }, 
@@ -236,7 +236,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     isSwitched1 = value;
                   });
                   
-                  await apiBLMUpdateSwitchStatusFamily(memorialId, value);
+                  await apiRegularUpdateSwitchStatusFamily(memorialId, value);
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
@@ -270,7 +270,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     isSwitched2 = value;
                   });
 
-                  await apiBLMUpdateSwitchStatusFriends(memorialId, value);
+                  await apiRegularUpdateSwitchStatusFriends(memorialId, value);
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
@@ -296,7 +296,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                     isSwitched3 = value;
                   });
 
-                  await apiBLMUpdateSwitchStatusFollowers(memorialId, value);
+                  await apiRegularUpdateSwitchStatusFollowers(memorialId, value);
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),

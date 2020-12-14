@@ -108,12 +108,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                     _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
                       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                     }else{
-                      print('The value of relationship is ${_key1.currentState.currentSelection}');
-                      print('The value of birthplace is ${_key2.currentState.controller.text}');
-                      print('The value of dob is ${_key3.currentState.controller.text}');
-                      print('The value of rip is ${_key4.currentState.controller.text}');
-                      print('The value of cemetery is ${_key5.currentState.controller.text}');
-                      print('The value of country is ${_key5.currentState.controller.text}');
 
                       Navigator.pushNamed(context, '/home/regular/home-04-02-regular-create-memorial', 
                         arguments: RegularCreateMemorialValues(

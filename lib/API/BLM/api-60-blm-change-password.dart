@@ -10,11 +10,6 @@ Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) 
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The UID is $getUID');
-  print('The client is $getClient');
-
-
   try{
     var dioRequest = Dio();
 
@@ -35,15 +30,11 @@ Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) 
       ),  
     );
 
-    print('The status code for change password is ${response.statusCode}');
-    // print('The status body for update other details is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

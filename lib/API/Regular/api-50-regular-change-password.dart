@@ -10,11 +10,6 @@ Future<bool> apiRegularChangePassword({String currentPassword, String newPasswor
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The UID is $getUID');
-  print('The client is $getClient');
-
-
   try{
     var dioRequest = Dio();
 
@@ -35,15 +30,11 @@ Future<bool> apiRegularChangePassword({String currentPassword, String newPasswor
       ),  
     );
 
-    print('The status code for change password is ${response.statusCode}');
-    // print('The status body for update other details is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

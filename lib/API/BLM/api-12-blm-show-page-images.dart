@@ -19,9 +19,6 @@ Future<APIBLMShowPageImagesMain> apiBLMShowPageImages(int memorialId) async{
     }
   );
 
-  print('The status code for fetching image is ${response.statusCode}');
-  // print('The status body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowPageImagesMain.fromJson(newValue);

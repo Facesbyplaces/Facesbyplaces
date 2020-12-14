@@ -9,8 +9,7 @@ Future<APIBLMShowSwitchStatus> apiBLMShowSwitchStatus(int memorialId) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Blm/$memorialId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Blm/$memorialId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIBLMShowSwitchStatus> apiBLMShowSwitchStatus(int memorialId) async{
       'client': getClient,
     }
   );
-
-  print('The status of switch is ${response.statusCode}');
-  print('The status of switch is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

@@ -1,8 +1,6 @@
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -27,10 +25,8 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
     this.displayText = '',
   }) : super(key: key);
   
-
   MiscRegularInputFieldTemplateState createState() => MiscRegularInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
-
 
 class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemplate>{
   final String labelText;
@@ -67,75 +63,13 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
         labelStyle: labelTextStyle,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            // color: Colors.transparent,
             color: Color(0xff000000),
           ),
         ),
-        // border: UnderlineInputBorder(
-        //   borderSide: BorderSide(
-        //     // color: Colors.transparent,
-        //     color: Color(0xff000000),
-        //   ),
-        // ),
-        // enabledBorder: UnderlineInputBorder(
-        //   borderSide: BorderSide(
-        //     // color: Colors.transparent,
-        //     color: Color(0xff000000),
-        //   ),
-        // ),
       ),
     );
   }
 }
-
-// class MiscBLMPhoneNumberTemplate extends StatefulWidget{
-//   final String labelText;
-//   final TextStyle labelTextStyle;
-//   final bool obscureText;
-//   final TextInputType type;
-//   final int maxLines;
-//   final bool readOnly;
-//   final bool includeSuffixIcon;
-//   final String displayText;
-
-//   MiscBLMPhoneNumberTemplate({
-//     Key key,
-//     this.labelText = '',
-//     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-//     this.obscureText = false, 
-//     this.type = TextInputType.text, 
-//     this.maxLines = 1, 
-//     this.readOnly = false,
-//     this.includeSuffixIcon = false,
-//     this.displayText = '', 
-//   }) : super(key: key);
-  
-//   MiscBLMPhoneNumberTemplateState createState() => MiscBLMPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
-// }
-
-// class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
-//   final String labelText;
-//   final TextStyle labelTextStyle;
-//   final bool obscureText;
-//   final TextInputType type;
-//   final int maxLines;
-//   final bool readOnly;
-//   final bool includeSuffixIcon;
-//   final String displayText;
-
-//   MiscBLMPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
-
-//   // TextEditingController controller = TextEditingController(text: displayText);
-//   TextEditingController controller;
-//   bool valid = false;
-
-  
-
-//   void initState(){
-//     super.initState();
-//     controller = TextEditingController(text: displayText);
-//   }
-
 
 class MiscRegularPhoneNumberTemplate extends StatefulWidget{
   final String labelText;
@@ -325,7 +259,6 @@ class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularI
       readOnly: readOnly,
       decoration: InputDecoration(
         fillColor: backgroundColor,
-        // filled: true,
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
@@ -337,17 +270,13 @@ class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularI
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            // color: Color(0xff000000),
             color: Colors.transparent,
           ),
-          // borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            // color: Color(0xff000000),
             color: Colors.transparent,
           ),
-          // borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );
@@ -457,20 +386,6 @@ class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputField
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<RegularRelationshipItem>(
-          // selectedItemBuilder: (BuildContext context) {
-          //   return relationship.map<Widget>((RelationshipItem item) {
-          //     // return Text(item);
-          //     return Row(
-          //       children: [
-          //         CircleAvatar(backgroundImage: AssetImage(item.image),),
-
-          //         SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-          //         Text(item.name),
-          //       ],
-          //     );
-          //   }).toList();
-          // },
           value: currentSelection,
           isDense: true,
           onChanged: (RegularRelationshipItem newValue) {
@@ -492,113 +407,6 @@ class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputField
               ),
             );
           }).toList(),
-        ),
-
-        // child: DropdownButton<String>(
-        //   value: currentSelection,
-        //   isDense: true,
-        //   onChanged: (String newValue) {
-        //     setState(() {
-        //       currentSelection = newValue;
-        //     });
-        //   },
-        //   items: relationship.map((String value) {
-        //     return DropdownMenuItem<String>(
-        //       value: value,
-        //       child: Row(
-        //         children: [
-        //           CircleAvatar(backgroundImage: AssetImage('assets/icons/profile2.png'),),
-
-        //           Text(value),
-        //         ],
-        //       ),
-        //     );
-        //   }).toList(),
-        // ),
-      ),
-    );
-  }
-}
-
-
-class MiscRegularInputFieldOTP extends StatefulWidget {  
-  final FocusScopeNode node;
-
-  MiscRegularInputFieldOTP({Key key, this.node}) : super(key: key);
-
-  @override
-  MiscRegularInputFieldOTPState createState() => MiscRegularInputFieldOTPState(node: node);
-}
-
-class MiscRegularInputFieldOTPState extends State<MiscRegularInputFieldOTP> {
-  final FocusScopeNode node;
-
-  MiscRegularInputFieldOTPState({this.node});
-
-  TextEditingController controller = TextEditingController();
-  bool readOnly;
-  bool checker;
-
-  @override
-  void initState(){
-    super.initState();
-    checker = false;
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    // final node = FocusScope.of(context);
-    return TextFormField(
-      maxLength: 1,
-      maxLengthEnforced: true,
-      cursorColor: Color(0xff000000),
-      controller: controller,
-      textAlign: TextAlign.center,
-      keyboardType: TextInputType.number,
-      onEditingComplete: () => node.nextFocus(),
-      // onEditingComplete: (){
-      //   node.focusNode.nextFocus();
-      // },
-      onChanged: (value){
-        if(!checker){
-          if(value.length == 1){
-            context.bloc<BlocUpdateButtonText>().add();
-            setState(() {
-              checker = true;
-            });
-          }
-        }else{
-          if(value.length == 0){
-            context.bloc<BlocUpdateButtonText>().remove();
-            setState(() {
-              checker = false;
-            });
-          }
-        }
-      },
-      style: TextStyle(
-        fontSize: SizeConfig.safeBlockHorizontal * 15,
-        fontWeight: FontWeight.bold,
-        color: Color(0xff000000)
-      ),
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        counterText: '',
-        labelStyle: TextStyle(
-          fontSize: SizeConfig.safeBlockHorizontal * 4,
-          fontWeight: FontWeight.w400,
-          color: Color(0xff000000).withOpacity(.5),
-        ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
         ),
       ),
     );

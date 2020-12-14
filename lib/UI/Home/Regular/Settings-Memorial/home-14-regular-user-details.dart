@@ -1,7 +1,7 @@
-import 'package:facesbyplaces/API/Regular/api-32-show-user-information.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-17-regular-custom-drawings.dart';
+import 'package:facesbyplaces/API/Regular/api-32-show-user-information.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +53,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         child: CircleAvatar(
                           radius: SizeConfig.blockSizeVertical * 15,
                           backgroundColor: Color(0xff888888),
-                          // backgroundImage: AssetImage(profile.data.image),
+                          backgroundImage: AssetImage(profile.data.image),
                         ),
                       ),
                     ],
