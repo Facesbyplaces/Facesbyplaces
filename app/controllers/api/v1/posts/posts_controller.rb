@@ -106,14 +106,26 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     # pages that the user can manage
     def listOfPages
-        pagesId = user().roles.joins("INNER JOIN blms ON roles.resource_id = blms.id").select('blms.id')
+        if user().account_type == 1
+            pagesId = user().roles.joins("INNER JOIN blms ON roles.resource_id = blms.id").select('blms.id')
 
-        pages = pagesId.collect do |page|
-            page = Blm.find(page.id)
-            ActiveModel::SerializableResource.new(
-                page, 
-                each_serializer: BlmSerializer
-            )
+            pages = pagesId.collect do |page|
+                page = Blm.find(page.id)
+                ActiveModel::SerializableResource.new(
+                    page, 
+                    each_serializer: BlmSerializer
+                )
+            end
+        else
+            pagesId = user().roles.joins("INNER JOIN memorials ON roles.resource_id = memorials.id").select('memorials.id')
+
+            pages = pagesId.collect do |page|
+                page = Memorial.find(page.id)
+                ActiveModel::SerializableResource.new(
+                    page, 
+                    each_serializer: MemorialSerializer
+                )
+            end
         end
 
         render json: { pages: pages }
