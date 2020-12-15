@@ -130,12 +130,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
               },
               child: Container(
                 child: MiscRegularNotificationDisplayTemplate(
-                  // imageIcon: 'assets/images/app-icon.png',
                   content: [
                     TextSpan(
                       text: '${notifications[i].action}\n',
                       style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                         fontWeight: FontWeight.w300,
                         color: Color(0xff000000),
                       ),
@@ -143,7 +141,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
                     TextSpan(
                       text: '${convertDate(notifications[i].createdAt)}',
                       style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3,
                         fontWeight: FontWeight.w300,
                         color: Color(0xff888888),
                       ),

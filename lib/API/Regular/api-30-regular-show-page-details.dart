@@ -18,6 +18,9 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails(int memorialId) 
     }
   );
 
+  // print('The status code for regular page details is ${response.statusCode}');
+  // print('The status body for regular page details is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowPageDetailsMain.fromJson(newValue);
@@ -35,7 +38,7 @@ class APIRegularShowPageDetailsMain{
 
   factory APIRegularShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsMain(
-      memorial: APIRegularShowPageDetailsExtended.fromJson(parsedJson['memorials']),
+      memorial: APIRegularShowPageDetailsExtended.fromJson(parsedJson['memorial']),
     );
   }
 }

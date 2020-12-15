@@ -18,6 +18,9 @@ Future<APIBLMShowPostLikes> apiBLMShowPostLikes({int postId}) async{
     }
   );
 
+    print('The status code of likes is ${response.statusCode}');
+    print('The status body of likes is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowPostLikes.fromJson(newValue);

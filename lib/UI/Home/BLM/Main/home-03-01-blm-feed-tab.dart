@@ -71,7 +71,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           profileImage: newValue.familyMemorialList[i].page.profileImage,
           imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
           joined: newValue.familyMemorialList[i].page.follower,
-
           ),    
         );
       }
@@ -125,55 +124,51 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = Container(
-              child: MiscBLMPost(
-                userId: feeds[i].userId,
-                postId: feeds[i].postId,
-                memorialId: feeds[i].memorialId,
-                memorialName: feeds[i].memorialName,
-                timeCreated: convertDate(feeds[i].timeCreated),
-                joined: feeds[i].joined,
-                contents: [
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: RichText(
-                          maxLines: 4,
-                          overflow: TextOverflow.clip,
-                          textAlign: TextAlign.left,
-                          text: TextSpan(
-                            text: feeds[i].postBody,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xff000000),
-                            ),
+            return MiscBLMPost(
+              userId: feeds[i].userId,
+              postId: feeds[i].postId,
+              memorialId: feeds[i].memorialId,
+              memorialName: feeds[i].memorialName,
+              timeCreated: convertDate(feeds[i].timeCreated),
+              joined: feeds[i].joined,
+              contents: [
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: RichText(
+                        maxLines: 4,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: feeds[i].postBody,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff000000),
                           ),
                         ),
                       ),
+                    ),
 
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                    ],
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  ],
+                ),
+
+                feeds[i].imagesOrVideos != null
+                ? Container(
+                  height: SizeConfig.blockSizeHorizontal * 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
-
-                  feeds[i].imagesOrVideos != null
-                  ? Container(
-                    height: SizeConfig.blockSizeHorizontal * 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: feeds[i].imagesOrVideos[0],
-                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  )
-                  : Container(height: 0,),
-                ],
-              ),
+                  child: CachedNetworkImage(
+                    imageUrl: feeds[i].imagesOrVideos[0],
+                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                )
+                : Container(height: 0,),
+              ],
             );
-            
-            return container;
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
           itemCount: feeds.length,

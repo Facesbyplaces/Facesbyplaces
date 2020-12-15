@@ -1,4 +1,8 @@
 import 'UI/Home/Regular/Create-Memorial/home-04-01-regular-create-memorial.dart';
+import 'UI/Home/Regular/Create-Memorial/home-04-02-regular-create-memorial.dart';
+import 'UI/Home/Regular/Create-Memorial/home-04-03-regular-create-memorial.dart';
+import 'UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
+import 'UI/Home/Regular/Donate/home-20-regular-donate.dart';
 import 'UI/Home/Regular/Search/home-05-regular-search.dart';
 import 'UI/Home/Regular/Settings-Notifications/home-01-regular-notification-settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,11 +75,14 @@ void main() async{
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
+          '/home/create-post': (BuildContext context) => HomeRegularCreatePost(),
           '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
+          '/home/regular/create-memorial-2': (BuildContext context) => HomeRegularCreateMemorial2(),
+          '/home/regular/create-memorial-3': (BuildContext context) => HomeRegularCreateMemorial3(),
           '/home/regular/notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
+          '/home/regular/donation': (BuildContext context) => HomeRegularUserDonate(),
           '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
           '/home/regular/search': (BuildContext context) => HomeRegularSearch(),
-
 
         },
       ),

@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/UI/Home/Regular/View-Memorial/home-01-regular-view-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
@@ -110,7 +110,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               image: backgroundImage != null
                               ? AssetImage(backgroundImage.path)
                               : CachedNetworkImageProvider(
-                                memorialImageSettings.data.memorial.backgroundImage.toString(),
+                                memorialImageSettings.data.backgroundImage.toString(),
                               ),
                             ),
                           ),
@@ -133,7 +133,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                         backgroundImage: profileImage != null
                                         ? AssetImage(profileImage.path)
                                         : CachedNetworkImageProvider(
-                                          memorialImageSettings.data.memorial.profileImage.toString()
+                                          memorialImageSettings.data.profileImage.toString()
                                         ),
                                       ),
                                     ),

@@ -18,6 +18,9 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab(int page) async{
     }
   );
 
+  print('The status code of regular feed is ${response.statusCode}');
+  print('The status body of regular feed is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularHomeTabFeedMain.fromJson(newValue);
@@ -86,8 +89,12 @@ class APIRegularHomeTabFeedExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabFeedExtendedPageCreator pageCreator;
+  bool follower;
+  bool manage;
+  String pageType;
+  String privacy;
 
-  APIRegularHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIRegularHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPage(
@@ -99,7 +106,10 @@ class APIRegularHomeTabFeedExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      follower: parsedJson['follower'],
+      manage: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

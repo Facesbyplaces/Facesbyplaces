@@ -109,7 +109,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                     }else{
 
-                      Navigator.pushNamed(context, '/home/regular/home-04-02-regular-create-memorial', 
+                      Navigator.pushNamed(context, '/home/regular/create-memorial-2', 
                         arguments: RegularCreateMemorialValues(
                           relationship: _key1.currentState.currentSelection,
                           birthplace: _key2.currentState.controller.text,

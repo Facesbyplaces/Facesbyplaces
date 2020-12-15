@@ -172,7 +172,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                       newValue.memorialName = _key1.currentState.controller.text;
                       newValue.imagesOrVideos = newFiles;
 
-                      Navigator.pushNamed(context, '/home/regular/home-04-03-regular-create-memorial', arguments: newValue);
+                      Navigator.pushNamed(context, '/home/regular/create-memorial-3', arguments: newValue);
                     }
                   }, 
                   width: SizeConfig.screenWidth / 2, 
