@@ -68,7 +68,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def editDetails
         memorial = Memorial.find(params[:id])
         # render memorial details that be editted
-        render json: memorial
+        render json: {memorial: MemorialSerializer.new( memorial ).attributes}
     end
 
     def updateDetails
@@ -92,7 +92,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def editImages
         memorial = Memorial.find(params[:id])
         # render memorial images that be editted
-        render json: memorial
+        render json: {memorial: MemorialSerializer.new( memorial ).attributes}
     end
 
     def updateImages
