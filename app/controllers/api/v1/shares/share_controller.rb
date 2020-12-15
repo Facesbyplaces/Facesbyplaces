@@ -10,7 +10,7 @@ class Api::V1::Shares::ShareController < ApplicationController
             success: true,
             share_id:       @share.id, 
             user_id:        @share.user_id,
-            post_id:        @share.post_id,
+            post:           PostSerializer.new( Post.find(@share.post_id) ).attributes,
             description:    @share.description,
             status: 200}, status: 200
     end
