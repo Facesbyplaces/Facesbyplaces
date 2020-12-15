@@ -55,7 +55,21 @@ class RegularLogin extends StatelessWidget {
                         padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                         child: Row(
                           children: [
-                            Expanded(child: MiscRegularButtonSignInWithTemplate(buttonText: 'Facebook', buttonColor: Color(0xff3A559F), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xffffffff)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7,),),
+                            Expanded(
+                              child: MiscRegularButtonSignInWithTemplate(
+                                buttonText: 'Facebook', 
+                                buttonColor: Color(0xff3A559F), 
+                                buttonTextStyle: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                                  fontWeight: FontWeight.w300, 
+                                  color: Color(0xffffffff),
+                                ), 
+                                onPressed: () async{
+                                }, 
+                                width: SizeConfig.screenWidth / 1.5, 
+                                height: SizeConfig.blockSizeVertical * 7,
+                              ),
+                            ),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 

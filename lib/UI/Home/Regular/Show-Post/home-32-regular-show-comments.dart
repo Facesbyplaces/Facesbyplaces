@@ -7,28 +7,28 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularShowOriginalPost extends StatefulWidget{
+class HomeRegularShowCommentsList extends StatefulWidget{
   final int postId;
-  HomeRegularShowOriginalPost({this.postId});
+  HomeRegularShowCommentsList({this.postId});
 
   @override
-  HomeRegularShowOriginalPostState createState() => HomeRegularShowOriginalPostState(postId: postId);
+  HomeRegularShowCommentsListState createState() => HomeRegularShowCommentsListState(postId: postId);
 }
 
-class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost>{
+class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList>{
   final int postId;
-  HomeRegularShowOriginalPostState({this.postId});
+  HomeRegularShowCommentsListState({this.postId});
 
   Future showOriginalPost;
 
-  void initState(){
-    super.initState();
-    showOriginalPost = getOriginalPost(postId);
-  }
+  // void initState(){
+  //   super.initState();
+  //   showOriginalPost = getOriginalPost(postId);
+  // }
 
-  Future<APIRegularShowOriginalPostMainMain> getOriginalPost(postId) async{
-    return await apiRegularShowOriginalPost(postId);
-  }
+  // Future<APIRegularShowOriginalPostMainMain> getOriginalPost(postId) async{
+  //   return await apiRegularShowOriginalPost(postId);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Comments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 

@@ -18,8 +18,10 @@ class RegularMainPagesFeeds{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool managed;
+  bool joined;
 
-  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined});
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -58,6 +60,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
           imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          managed: newValue.familyMemorialList[i].page.manage,
+          joined: newValue.familyMemorialList[i].page.follower,
           ),    
         );
       }
@@ -120,12 +124,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = MiscRegularPost(
+            return MiscRegularPost(
               userId: feeds[i].userId,
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: convertDate(feeds[i].timeCreated),
+              managed: feeds[i].managed,
+              joined: feeds[i].joined,
               contents: [
                 Column(
                   children: [
@@ -158,18 +164,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   child: CachedNetworkImage(
                     imageUrl: feeds[i].imagesOrVideos[0],
                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                   ),
                 )
                 : Container(height: 0,),
               ],
             );
-
-            if(feeds.length != 0){
-              return container;
-            }else{
-              return Center(child: Text('Feed is empty.'),);
-            }
             
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),

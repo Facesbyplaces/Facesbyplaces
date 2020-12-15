@@ -136,8 +136,29 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                Expanded(
+                                // Expanded(
+                                //   child: Container(
+                                //     child: ((){
+                                //       if(originalPost.data.post.imagesOrVideos != null){
+                                //         return Container(
+                                //           child: CachedNetworkImage(
+                                //             fit: BoxFit.cover,
+                                //             imageUrl: originalPost.data.post.page.imagesOrVideos[0],
+                                //             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                //             errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                //           ),
+                                //         );
+                                //       }else{
+                                //         return Container(height: 0,);
+                                //       }
+                                //     }()),
+                                //   ),
+                                // ),
+
+                                originalPost.data.post.imagesOrVideos != null
+                                ? Expanded(
                                   child: Container(
+                                    color: Colors.blue,
                                     child: ((){
                                       if(originalPost.data.post.imagesOrVideos != null){
                                         return Container(
@@ -153,6 +174,10 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                       }
                                     }()),
                                   ),
+                                )
+                                : Container(
+                                  color: Colors.red,
+                                  height: 0,
                                 ),
 
                               ],
@@ -168,7 +193,9 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                 onTap: (){},
                                 child: Row(
                                   children: [
-                                    Image.asset('assets/icons/peace_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                                    // Image.asset('assets/icons/peace_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                                    // Image.asset('assets/icons/heart_', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                                    Icon(Icons.favorite, color: Color(0xffE74C3C), size: SizeConfig.blockSizeVertical * 5,),
 
                                     SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 

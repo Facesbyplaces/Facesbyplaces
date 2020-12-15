@@ -1,9 +1,14 @@
+import 'package:facesbyplaces/API/Regular/api-68-regular-show-post-likes.dart';
+import 'package:facesbyplaces/API/Regular/api-69-regular-show-profile-following.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-view-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-03-regular-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-15-regular-change-password.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-16-regular-other-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-18-regular-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-31-regular-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/api-52-regular-show-other-details-status.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +17,7 @@ import 'misc-04-regular-dropdown.dart';
 import 'misc-07-regular-button.dart';
 import 'misc-08-regular-dialog.dart';
 
-
-class MiscRegularPost extends StatelessWidget{
-
+class MiscRegularPost extends StatefulWidget{
   final List<Widget> contents;
   final int userId;
   final int postId;
@@ -22,8 +25,43 @@ class MiscRegularPost extends StatelessWidget{
   final dynamic profileImage;
   final String memorialName;
   final String timeCreated;
+  final bool managed;
+  final bool joined;
 
-  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = ''});
+  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined});
+
+  MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined);
+}
+
+class MiscRegularPostState extends State<MiscRegularPost>{
+  final List<Widget> contents;
+  final int userId;
+  final int postId;
+  final int memorialId;
+  final dynamic profileImage;
+  final String memorialName;
+  final String timeCreated;
+  final bool managed;
+  final bool joined;
+
+  MiscRegularPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined});
+
+  Future postLikes;
+  Future profileFollowing;
+
+  Future<APIRegularShowPostLikes> getPostLikes({int postId}) async{
+    return await apiRegularShowPostLikes(postId: postId);
+  }
+
+  Future<APIRegularShowProfileFollowing> getProfileFollowing() async{
+    return await apiRegularShowProfileFollowing();
+  }
+
+  void initState(){
+    super.initState();
+    postLikes = getPostLikes(postId: postId);
+    profileFollowing = getProfileFollowing();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -53,8 +91,15 @@ class MiscRegularPost extends StatelessWidget{
                 children: [
                   GestureDetector(
                     onTap: () async{
+
+                      if(managed == true){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
+                      }else{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: true)));
+                      }
                     },
-                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/graveyard.png')),
+                    // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png')),
+                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
                   ),
                   Expanded(
                     child: Container(
@@ -110,7 +155,7 @@ class MiscRegularPost extends StatelessWidget{
                     onTap: (){},
                     child: Row(
                       children: [
-                        Image.asset('assets/icons/peace_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                        Icon(Icons.favorite, color: Color(0xffE74C3C),),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
@@ -136,10 +181,14 @@ class MiscRegularPost extends StatelessWidget{
                   Expanded(
                     child: GestureDetector(
                       onTap: () async{
+                        DateTime date = DateTime.now();
+                        String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
+                        FlutterBranchSdk.setIdentity('id-$id');
+
                         await FlutterShare.share(
                           title: 'Share',
                           text: 'Share the link',
-                          linkUrl: 'https://flutter.dev/',
+                          linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
                           chooserTitle: 'Share link'
                         );
                       },
@@ -402,7 +451,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                 fontSize: SizeConfig.safeBlockHorizontal * 5, 
                 fontWeight: FontWeight.bold, 
                 color: Color(0xffffffff),
-              ), 
+              ),
               onPressed: () async{
 
                 bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));

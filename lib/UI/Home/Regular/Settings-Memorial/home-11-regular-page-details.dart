@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/UI/Home/Regular/View-Memorial/home-01-regular-view-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';

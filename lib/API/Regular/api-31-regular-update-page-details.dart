@@ -25,7 +25,7 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
       MapEntry('cemetery', MultipartFile.fromString(cemetery,),),
     ]);
 
-    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', data: formData,
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pages/memorial/$memorialId', data: formData,
       options: Options(
         headers: <String, dynamic>{
           'access-token': getAccessToken,
@@ -35,12 +35,12 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
       ),  
     );
 
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
+    print('The e is $e');
     result = false;
   }
 

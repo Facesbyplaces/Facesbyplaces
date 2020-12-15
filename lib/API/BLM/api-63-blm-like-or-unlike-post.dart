@@ -30,6 +30,9 @@ Future<bool> apiBLMLikeOrUnlikePost({int postId, bool like}) async{
       ),  
     );
 
+    print('The status code is ${response.statusCode}');
+    print('The status body is ${response.data}');
+
     if(response.statusCode == 200){
       result = true;
     }
