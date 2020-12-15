@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-
+# 
       #Set Account ID Stripe
       post 'payment_intent', to: 'payment_intent#set_payment_intent'
       get 'stripe_connect', to: 'stripe_connect#success_stripe_connect'
