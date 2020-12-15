@@ -56,7 +56,10 @@ class Api::V1::Search::SearchController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        users: users
+                        users: ActiveModel::SerializableResource.new(
+                            users, 
+                            each_serializer: UserSerializer
+                        )
                     }
     end
 
@@ -81,7 +84,10 @@ class Api::V1::Search::SearchController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        followers: followers
+                        followers: ActiveModel::SerializableResource.new(
+                            followers, 
+                            each_serializer: UserSerializer
+                        )
                     }
     end
 
