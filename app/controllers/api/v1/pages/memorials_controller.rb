@@ -48,9 +48,9 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             user().add_role "pageadmin", memorial
             
             # Tell the Mailer to send link to register stripe user account after save
-            redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
-            client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
-            SendStripeLinkMailer.send_memorial_link(redirect_uri, client_id, current_user, memorial.id).deliver_now
+            # redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+            # client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+            # SendStripeLinkMailer.send_memorial_link(redirect_uri, client_id, current_user, memorial.id).deliver_now
 
             render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
 
