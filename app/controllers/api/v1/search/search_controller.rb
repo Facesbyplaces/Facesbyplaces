@@ -182,5 +182,4 @@ class Api::V1::Search::SearchController < ApplicationController
                     )
         }
     end
-    
 end
