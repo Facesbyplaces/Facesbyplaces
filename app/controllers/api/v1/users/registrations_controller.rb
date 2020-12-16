@@ -7,15 +7,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   def create
     @user = User.new(sign_up_params)
 
-    if params[:google_id].present?
-      validator = GoogleIDToken::Validator.new
-      begin
-        validator.check(params[:google_id]) 
-        @user.save!
-      rescue GoogleIDToken::ValidationError => e
-        report "Cannot validate: #{e}"
-      end
-    else super do |resource|
+    super do |resource|
         logger.info ">>>Error: #{resource.errors.full_messages}"
           @user = resource
           code = rand(100..999)
@@ -28,7 +20,6 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
           # Tell the UserMailer to send a code to verify email after save
           VerificationMailer.verify_email(@user).deliver_now
       end
-    end
       
   end
 
