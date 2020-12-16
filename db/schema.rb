@@ -280,7 +280,6 @@ ActiveRecord::Schema.define(version: 2020_12_16_043305) do
     t.boolean "hideEmail"
     t.boolean "hideAddress"
     t.boolean "hidePhonenumber"
-    t.string "facebook_id"
     t.string "google_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
