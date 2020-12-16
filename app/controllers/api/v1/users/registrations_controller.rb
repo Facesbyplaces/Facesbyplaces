@@ -11,6 +11,14 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
       validator = GoogleIDToken::Validator.new
       begin
         validator.check(@user.google_id) 
+        code = rand(100..999)
+        @user.verification_code = code
+        @user.question = "What's the name of your first dog?"
+        @user.hideBirthdate = false 
+        @user.hideBirthplace = false 
+        @user.hideEmail = false 
+        @user.hideAddress = false 
+        @user.hidePhonenumber = false 
         @user.save!
       rescue GoogleIDToken::ValidationError => e
         report "Cannot validate: #{e}"
