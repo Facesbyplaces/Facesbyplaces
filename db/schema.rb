@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_155839) do
+ActiveRecord::Schema.define(version: 2020_12_16_030204) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -221,9 +221,8 @@ ActiveRecord::Schema.define(version: 2020_12_11_155839) do
   end
 
   create_table "shares", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "post_id"
-    t.text "description"
+    t.integer "content_type"
+    t.integer "content_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -282,6 +281,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_155839) do
     t.boolean "hideAddress"
     t.boolean "hidePhonenumber"
     t.string "facebook_id"
+    t.string "google_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -10,8 +10,6 @@ class Api::V1::Shares::ShareController < ApplicationController
             success: true,
             share_id:       @share.id, 
             user_id:        @share.user_id,
-            post_id:        @share.post_id,
-            description:    @share.description,
             status: 200}, status: 200
     end
 
@@ -41,7 +39,7 @@ class Api::V1::Shares::ShareController < ApplicationController
     private
 
     def shares_params
-        params.permit(:post_id, :user_id, :description)
+        params.permit(:content_type_id,)
     end
 
 end
