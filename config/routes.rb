@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: { callbacks: 'api/v1/users/omniauth_callback' }
+  # devise_for :users, controllers: { callbacks: 'api/v1/users/omniauth_callback' }
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
