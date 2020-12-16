@@ -9,7 +9,12 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
 
     if @user.google_id.present?
       validator = GoogleIDToken::Validator.new
-      validator.check(@user.google_id) ? @user.save! : "" 
+      begin
+        validator.check(@user.google_id) 
+        @user.save!
+      rescue GoogleIDToken::ValidationError => e
+        report "Cannot validate: #{e}"
+      end
     else super do |resource|
         logger.info ">>>Error: #{resource.errors.full_messages}"
           @user = resource

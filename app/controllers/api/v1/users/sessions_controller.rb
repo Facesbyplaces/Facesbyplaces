@@ -54,4 +54,18 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       end
     end
 
+    def google
+      if params[:google_id].nil?
+        return render ResponseBuilder.bad_request "A Google id is needed"
+      end
+      
+      @user = User.where(google_id: params[:google_id]).first
+
+      if @user
+        render :create, status: :ok
+      else
+        render ResponseBuilder.bad_request "This facebook is not linked to any account."
+      end
+    end
+
 end
