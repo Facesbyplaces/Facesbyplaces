@@ -21,6 +21,8 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         @user.hideAddress = false 
         @user.hidePhonenumber = false 
         @user.save!
+
+        render json: UserSerializer.new( @user ).attributes
       rescue GoogleIDToken::ValidationError => e
         # report "Cannot validate: #{e}"
         return render json: {status: "Cannot validate: #{e}"}, status: 422
