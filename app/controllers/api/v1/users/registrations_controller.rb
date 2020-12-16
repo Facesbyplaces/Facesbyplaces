@@ -60,7 +60,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
       else
         # Register user
         @user = User.register_user_from_apple(id_token.sub, id_token.email)
-        @user.update(first_name: params[:first_name], last_name: params[:last_name], phone_number: params[:phone_number], account_type: params[:account_type])
+        @user.update(first_name: params[:first_name], last_name: params[:last_name], phone_number: params[:phone_number], account_type: params[:account_type], hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false)
         
         return render json: {
           status: :created,
@@ -73,6 +73,11 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
           code = rand(100..999)
           @user.verification_code = code
           @user.question = "What's the name of your first dog?"
+          @user.hideBirthdate = false 
+          @user.hideBirthplace = false 
+          @user.hideEmail = false 
+          @user.hideAddress = false 
+          @user.hidePhonenumber = false 
           @user.save!
 
           Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: @user.id)
