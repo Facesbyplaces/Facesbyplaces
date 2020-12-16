@@ -86,7 +86,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
         id_token_back_channel = token_response.id_token
         id_token_back_channel.verify!(
-          client: @client
+          client: @client,
           access_token: token_response.access_token,
         )
 
