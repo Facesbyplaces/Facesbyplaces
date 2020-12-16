@@ -9,7 +9,6 @@ class Api::V1::Shares::ShareController < ApplicationController
         render json: {
             success: true,
             share_id:       @share.id, 
-            user_id:        @share.user_id,
             status: 200}, status: 200
     end
 
