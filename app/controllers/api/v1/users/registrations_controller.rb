@@ -1,16 +1,16 @@
 class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsController
 
   def sign_up_params
-    params.permit(:facebook_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
+    params.permit(:google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
   end
 
   def create
     @user = User.new(sign_up_params)
 
-    if @user.google_id.present?
+    if params[:google_id].present?
       validator = GoogleIDToken::Validator.new
       begin
-        validator.check(@user.google_id) 
+        validator.check(params[:google_id]) 
         @user.save!
       rescue GoogleIDToken::ValidationError => e
         report "Cannot validate: #{e}"
