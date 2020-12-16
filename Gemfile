@@ -69,7 +69,7 @@ gem 'stripe'
 gem 'kaminari'
 gem 'geocoder'
 gem 'pg_search', '~> 2.3', '>= 2.3.2'
-gem 'google-id-token'
+gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
 gem 'apple_id'
 
 # Social Share 

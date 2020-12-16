@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/google/google-id-token.git
+  revision: 46ac65ff03bd125d93b5acadd1c1adbdb86d919c
+  specs:
+    google-id-token (1.4.2)
+      jwt (>= 1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -129,8 +136,6 @@ GEM
     geocoder (1.6.4)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    google-id-token (1.4.2)
-      jwt (>= 1)
     hashie (4.1.0)
     httpclient (2.8.3)
     i18n (1.8.5)
@@ -378,7 +383,7 @@ DEPENDENCIES
   devise_token_auth
   dotenv (~> 2.2.1)
   geocoder
-  google-id-token
+  google-id-token!
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.2)
