@@ -117,7 +117,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           user: UserSerializer.new( @user ).attributes
         }
       else
-        return json: {status: "Account not found"}, status: 404
+        return render json: {status: "Account not found"}, status: 404
       end
     end
 
