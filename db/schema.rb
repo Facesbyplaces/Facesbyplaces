@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_12_16_070410) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -54,8 +57,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -65,8 +68,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
 
   create_table "commentslikes", force: :cascade do |t|
     t.string "commentable_type", null: false
-    t.integer "commentable_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "commentable_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_commentslikes_on_commentable_type_and_commentable_id"
@@ -75,8 +78,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
 
   create_table "followers", force: :cascade do |t|
     t.string "page_type", null: false
-    t.integer "page_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "page_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["page_type", "page_id"], name: "index_followers_on_page_type_and_page_id"
@@ -94,9 +97,9 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
-    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
+    t.string "stripe_connect_account_id"
     t.boolean "hideFamily"
     t.boolean "hideFriends"
     t.boolean "hideFollowers"
@@ -122,14 +125,14 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
     t.boolean "addFamily"
     t.boolean "addFriends"
     t.boolean "addAdmin"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_notifsettings_on_user_id"
   end
 
   create_table "pageowners", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "page_type", null: false
-    t.integer "page_id", null: false
+    t.bigint "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "view"
@@ -140,7 +143,7 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
     t.string "searchable_type"
-    t.integer "searchable_id"
+    t.bigint "searchable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
@@ -153,16 +156,16 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "latitude"
     t.float "longitude"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "page_type", null: false
-    t.integer "page_id", null: false
+    t.bigint "page_id", null: false
     t.index ["page_type", "page_id"], name: "index_posts_on_page_type_and_page_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "postslikes", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_postslikes_on_post_id"
@@ -171,8 +174,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
 
   create_table "relationships", force: :cascade do |t|
     t.string "page_type", null: false
-    t.integer "page_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "page_id", null: false
+    t.bigint "user_id", null: false
     t.string "relationship"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -181,8 +184,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
   end
 
   create_table "replies", force: :cascade do |t|
-    t.integer "comment_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "comment_id", null: false
+    t.bigint "user_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -196,14 +199,14 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reportable_type", null: false
-    t.integer "reportable_id", null: false
+    t.bigint "reportable_id", null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable_type_and_reportable_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -228,8 +231,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
   end
 
   create_table "tagpeople", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_tagpeople_on_post_id"
@@ -238,8 +241,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "page_type", null: false
-    t.integer "page_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "page_id", null: false
+    t.bigint "user_id", null: false
     t.float "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -289,8 +292,8 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"

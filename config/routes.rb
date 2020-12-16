@@ -50,7 +50,7 @@ Rails.application.routes.draw do
         resources :report, only: [:create]
       end
       namespace :shares do 
-        resources :share, only: [:create, :index]
+        get 'share', to: 'share#getLink'
       end
       namespace :mainpages do
         # user's feed
