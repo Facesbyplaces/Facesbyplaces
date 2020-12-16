@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         
         post 'signin-facebook',     to: 'sessions#facebook'
         post 'signin-google',     to: 'sessions#google'
+        post 'signin-apple',     to: 'sessions#apple'
         put 'updateDetails', to: 'users#updateDetails'
         get 'getDetails', to: 'users#getDetails'
         put 'updateOtherInfos', to: 'users#updateOtherInfos'

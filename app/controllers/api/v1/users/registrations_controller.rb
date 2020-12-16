@@ -15,6 +15,58 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
       rescue GoogleIDToken::ValidationError => e
         report "Cannot validate: #{e}"
       end
+    elsif params[:identity_token].present?    # For apple registration
+      # Initialized of apple processes
+        if !params[:code].present? && !params[:identity_token].present?
+          return render json: {status: "error"}, status: 422
+        end
+        
+        @client.authorization_code = params[:code]
+
+        begin
+          token_response = @client.access_token!
+          rescue AppleID::Client::Error => e
+          # puts e # gives useful messages from apple on failure
+          return render json: {status: e}, status: 401
+        end
+
+        id_token_back_channel = token_response.id_token
+        id_token_back_channel.verify!(
+          client: @client
+          access_token: token_response.access_token,
+        )
+
+        id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
+        id_token_front_channel.verify!(
+          client: @client,
+          code: params[:code],
+        )
+        id_token = token_response.id_token
+      
+      # check if apple id already registered
+      @user = User.find_by(apple_uid: id_token.sub)
+      if @user.present? 
+        return render json: {status: "You already registered"}, status: 409
+      end
+
+      # check if apple id already registered
+      @user = User.find_by_email(id_token.email)
+
+      if @user.present
+        # Enable apple login to existing user
+        @user.update_column(:apple_uid, id_token.sub)
+
+        return render json: {status: "You already registered"}, status: 409
+      else
+        # Register user
+        @user = User.register_user_from_apple(id_token.sub, id_token.email)
+        @user.update(first_name: params[:first_name], last_name: params[:last_name], phone_number: params[:phone_number], account_type: params[:account_type])
+        
+        return render json: {
+          status: :created,
+          user: UserSerializer.new( @user ).attributes
+          }, status: 200
+      end
     else super do |resource|
         logger.info ">>>Error: #{resource.errors.full_messages}"
           @user = resource
@@ -28,8 +80,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
           # Tell the UserMailer to send a code to verify email after save
           VerificationMailer.verify_email(@user).deliver_now
       end
-    end
-      
+    end  
   end
 
 end
