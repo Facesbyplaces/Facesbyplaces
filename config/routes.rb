@@ -19,9 +19,12 @@ Rails.application.routes.draw do
         resources :image_upload, only: [:create, :update]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
+
+        devise_scope :user do
+          post 'signin-facebook',     to: 'sessions#facebook'
+          post 'signin-google',     to: 'sessions#google'
+        end
         
-        post 'signin-facebook',     to: 'sessions#facebook'
-        post 'signin-google',     to: 'sessions#google'
         put 'updateDetails', to: 'users#updateDetails'
         get 'getDetails', to: 'users#getDetails'
         put 'updateOtherInfos', to: 'users#updateOtherInfos'

@@ -10,15 +10,20 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
     super do |resource|
         logger.info ">>>Error: #{resource.errors.full_messages}"
           @user = resource
-          code = rand(100..999)
-          @user.verification_code = code
-          @user.question = "What's the name of your first dog?"
-          @user.save!
+          if @user.google_id?
+            @user.is_verified = true
+            @user.save!
+          else
+            code = rand(100..999)
+            @user.verification_code = code
+            @user.question = "What's the name of your first dog?"
+            @user.save!
 
-          Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: @user.id)
+            Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: @user.id)
 
-          # Tell the UserMailer to send a code to verify email after save
-          VerificationMailer.verify_email(@user).deliver_now
+            # Tell the UserMailer to send a code to verify email after save
+            VerificationMailer.verify_email(@user).deliver_now
+          end
       end
       
   end
