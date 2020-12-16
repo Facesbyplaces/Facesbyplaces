@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_12_16_070410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+=======
+ActiveRecord::Schema.define(version: 2020_12_16_043305) do
+>>>>>>> 533fa57cbe60da1971b51e8f1457d8ce2f2b0e5a
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -293,7 +297,6 @@ ActiveRecord::Schema.define(version: 2020_12_16_070410) do
     t.boolean "hideEmail"
     t.boolean "hideAddress"
     t.boolean "hidePhonenumber"
-    t.string "facebook_id"
     t.string "google_id"
     t.string "apple_uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
