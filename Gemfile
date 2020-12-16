@@ -86,4 +86,4 @@ gem 'activerecord-session_store'
 
 # DATABASE
   # For production
-  gem 'pg'
+  gem 'pg', '~> 1.2', '>= 1.2.3'
