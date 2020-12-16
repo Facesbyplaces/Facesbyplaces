@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/BLM/api-64-blm-sign-in-with-google.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
@@ -6,10 +7,14 @@ import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-01-blm-login.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+
 import 'blm-06-password-reset.dart';
+
 
 class BLMLogin extends StatefulWidget{
 
@@ -60,6 +65,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
       });
 
       if(value['reset_password_token'] == null){
+        // FlutterBranchSdk.logout();
         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
       }else{
         Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => BLMPasswordReset(initialLink: value['reset_password_token'],)));
@@ -171,16 +177,87 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
 
-                            Expanded(child: MiscBLMButtonSignInWithTemplate(buttonText: 'Google', buttonColor: Color(0xffF5F5F5), buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000)), onPressed: (){}, width: SizeConfig.screenWidth / 1.5, height: SizeConfig.blockSizeVertical * 7, image: 'assets/icons/google.png'),),
+                            Expanded(
+                              child: MiscBLMButtonSignInWithTemplate(
+                                buttonText: 'Google', 
+                                buttonColor: Color(0xffF5F5F5), 
+                                buttonTextStyle: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                                  fontWeight: FontWeight.w300, 
+                                  color: Color(0xff000000),
+                                ), 
+                                onPressed: () async{
+                                  GoogleSignIn googleSignIn = GoogleSignIn(
+                                    scopes: [
+                                      'profile',
+                                      'email',
+                                      'openid'
+                                    ],
+                                  );
+
+                                  var value = await googleSignIn.signIn();
+
+                                  print('The value is ${value.email}');
+                                  print('The value is ${value.displayName}');
+                                  print('The value is ${value.id}');
+                                  print('The value is ${value.photoUrl}');
+
+                                  var header = await value.authHeaders;
+                                  var auth = await value.authentication;
+
+                                  print('The header is $header');
+                                  print('The auth is $auth');
+                                  print('The auth is ${auth.idToken}');
+                            
+                                  context.showLoaderOverlay();
+                                  bool result = await apiBLMSignInWithGoogle(
+                                    firstName: value.displayName, 
+                                    lastName: value.displayName, 
+                                    email: value.email, 
+                                    username: value.email,
+                                    googleId: auth.idToken,
+                                  );
+                                  context.hideLoaderOverlay();
+
+                                  print('The result is $result');
+
+                                  if(result){
+                                    Navigator.pushReplacementNamed(context, '/home/blm');
+                                  }else{
+                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                  }
+
+                                }, 
+                                width: SizeConfig.screenWidth / 1.5, 
+                                height: SizeConfig.blockSizeVertical * 7, 
+                                image: 'assets/icons/google.png',
+                              ),
+                            ),
                           ],
                         ),
                       ),
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                      Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                      SignInWithAppleButton(
+                        onPressed: () async {
+                          final credential = await SignInWithApple.getAppleIDCredential(
+                            scopes: [
+                              AppleIDAuthorizationScopes.email,
+                              AppleIDAuthorizationScopes.fullName,
+                            ],
+                          );
+
+                          print(credential);
+
+                          // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
+                          // after they have been validated with Apple (see `Integration` section for more information on how to do this)
+                        },
+                      ),
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                      Center(child: Text('or log in with email', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
                       Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
 
@@ -193,16 +270,31 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                       GestureDetector(
                         onTap: () async{
 
+                          String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
+
                           DateTime date = DateTime.now();
                           String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
                           FlutterBranchSdk.setIdentity('id-$id');
                           context.showLoaderOverlay();
-                          bool result = await generateLink('deanver@kodakollectiv.com');
+
+                          bool result = await generateLink(email);
+                          // bool result = await generateLink('deanver@kodakollectiv.com');
                           context.hideLoaderOverlay();
 
                           print('The result is $result');
+
+
                         },
-                        child: Align(alignment: Alignment.centerRight, child: Text('Forgot Password?', style: TextStyle(decoration: TextDecoration.underline, fontSize: SizeConfig.safeBlockHorizontal * 3.5, fontWeight: FontWeight.w400,),),),
+                        child: Align(
+                          alignment: Alignment.centerRight, 
+                          child: Text('Forgot Password?', 
+                          style: TextStyle(
+                            decoration: TextDecoration.underline, 
+                            fontSize: SizeConfig.safeBlockHorizontal * 3.5, 
+                            fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
                       ),
 
                       Expanded(child: Container(),),

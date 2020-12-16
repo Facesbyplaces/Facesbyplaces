@@ -61,6 +61,8 @@
         <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_oc2aadbr5zOYZVw6jxaozcehwubdz1gZ" />
         <meta-data android:name="io.branch.sdk.TestMode" android:value="true" />   
 
+        <meta-data android:name="com.google.android.gms.wallet.api.enabled" android:value="true" />
+
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

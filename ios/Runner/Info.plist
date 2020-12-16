@@ -27,6 +27,8 @@
 			<string>google.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb674832526555519</string>
+				<string>com.googleusercontent.apps.436631194271-pc53hk5b4ecam0ien8gekt9iv910bg9r</string>
 				<string>facesbyplaces</string>
 				<string>http</string>
 			</array>
@@ -34,6 +36,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>674832526555519</string>
+	<key>FacebookDisplayName</key>
+	<string>FacesbyPlaces</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>instagram-stories</string>
@@ -43,6 +49,21 @@
 		<string>twitter</string>
 		<string>whatsapp</string>
 		<string>tg</string>
+		<string>fbapi</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20160328</string>
+		<string>fbauth</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -1,6 +1,7 @@
 
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_pay/flutter_pay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,9 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                           return GestureDetector(
                             onTap: (){
                               // context.bloc<BlocHomeBLMDonate>().modify(index);
+                              setState(() {
+                                donateToggle = index;
+                              });
                             },
                             child: Container(
                               child: Column(
@@ -111,6 +115,37 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     onPressed: () async{
+
+                      FlutterPay flutterPay = FlutterPay();
+
+                      
+
+                      bool isAvailable = await flutterPay.canMakePayments();
+
+                      print('The value is $isAvailable');
+
+                      // flutterPay.setEnvironment(
+                      //   environment: PaymentEnvironment.Test,
+                      // );
+
+
+
+                      // PaymentItem item = PaymentItem(name: 'T-Shirt', price: 10.98);
+
+                      // String token = await flutterPay.makePayment(
+                      //   merchantIdentifier: 'merchant.com.app.facesbyplaces',
+                      //   currencyCode: 'USD',
+                      //   countryCode: 'US',
+                      //   allowedPaymentNetworks: [
+                      //     PaymentNetwork.visa, 
+                      //     PaymentNetwork.masterCard,
+                      //   ],
+                      //   paymentItems: [item],
+                      //   merchantName: 'FacesbyPlaces', 
+                      //   gatewayName: 'Stripe',
+                      // );
+
+                      // print('The token is $token');
 
                       // int amount = 0;
 
