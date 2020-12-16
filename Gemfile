@@ -75,7 +75,8 @@ gem 'social-share-button'
 
 # Use Omniauth Facebook plugin
 gem 'omniauth-facebook'
-
+# Use Omniatuh Apple plugin
+gem 'omniauth-apple'
 # Use Omniauth Google plugin
 gem 'omniauth-google-oauth2'
 # Use ActiveRecord Sessions

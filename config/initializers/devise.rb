@@ -281,6 +281,15 @@ Devise.setup do |config|
     config.omniauth :google_oauth2, Rails.application.credentials.dig(:google, :google_client_id), 
     Rails.application.credentials.dig(:google, :google_client_secret), callback_url: "http://localhost:3000/omniauth/google_oauth2/callback", scope: 'userinfo.email,userinfo.profile'
 
+    Rails.application.config.middleware.use OmniAuth::Builder do
+      provider :apple, Rails.application.credentials.dig(:apple, :apple_client_id), '',
+               {
+                 scope: 'email name',
+                 team_id: Rails.application.credentials.dig(:apple, :apple_team_id),
+                 key_id: Rails.application.credentials.dig(:apple, :apple_key_id),
+                 pem: Rails.application.credentials.dig(:apple, :apple_private_key)
+               }
+    end
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

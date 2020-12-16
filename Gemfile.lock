@@ -182,6 +182,9 @@ GEM
     omniauth (1.9.1)
       hashie (>= 3.4.6)
       rack (>= 1.6.2, < 3)
+    omniauth-apple (1.0.1)
+      jwt
+      omniauth-oauth2
     omniauth-facebook (8.0.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-google-oauth2 (0.8.0)
@@ -336,6 +339,7 @@ DEPENDENCIES
   kaminari
   listen (~> 3.2)
   omniauth
+  omniauth-apple
   omniauth-facebook
   omniauth-google-oauth2
   pager_api

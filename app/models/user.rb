@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+         :recoverable, :rememberable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :apple]
   
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
-  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :apple]
   
   # has_many :pages
   has_many :posts, dependent: :destroy
