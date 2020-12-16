@@ -29,7 +29,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         # Family
             # BLM
             blmFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Blm'").pluck('page_id')
-            blmFamily = Blm.where(id: blmFamily)
+            blmFamily = Blm.where(id: blmFamily).order(created_at: :desc)
             blmFamily = blmFamily.page(params[:page]).per(numberOfPage)
 
             if blmFamily.total_count == 0 || (blmFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -47,7 +47,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
             # ===========================================================================================================
             # MEMORIAL
             memorialFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Memorial'").pluck('page_id')
-            memorialFamily = Memorial.where(id: memorialFamily)
+            memorialFamily = Memorial.where(id: memorialFamily).order(created_at: :desc)
             memorialFamily = memorialFamily.page(params[:page]).per(numberOfPage)
 
             if memorialFamily.total_count == 0 || (memorialFamily.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -66,7 +66,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         # Friends
             # BLM
             blmFriends = user().relationships.where("relationship = 'Friend' AND page_type = 'Blm'").pluck('page_id')
-            blmFriends = Blm.where(id: blmFriends)
+            blmFriends = Blm.where(id: blmFriends).order(created_at: :desc)
             blmFriends = blmFriends.page(params[:page]).per(numberOfPage)
 
             if blmFriends.total_count == 0 || (blmFriends.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -85,7 +85,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
             # ===========================================================================================================
             # MEMORIAL
             memorialmemorialFriendsFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Memorial'").pluck('page_id')
-            memorialFriends = Memorial.where(id: memorialFriends)
+            memorialFriends = Memorial.where(id: memorialFriends).order(created_at: :desc)
             memorialFriends = memorialFriends.page(params[:page]).per(numberOfPage)
 
             if memorialFriends.total_count == 0 || (memorialFriends.total_count - (params[:page].to_i * numberOfPage)) < 0
