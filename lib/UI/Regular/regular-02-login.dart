@@ -1,12 +1,13 @@
-import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
+// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
+import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/Regular/api-01-regular-login.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,7 +15,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'blm-06-password-reset.dart';
+// import 'blm-06-password-reset.dart';
 
 // class RegularLogin extends StatelessWidget {
 
@@ -28,123 +29,123 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-  String category;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  BranchContentMetaData metadata;
+  // String category;
+  // BranchUniversalObject buo;
+  // BranchLinkProperties lp;
+  // BranchContentMetaData metadata;
 
-  String requestResult = '';
-  DateTime idDate = DateTime.now();
+  // String requestResult = '';
+  // DateTime idDate = DateTime.now();
 
-  void didChangeAppLifecycleState(AppLifecycleState state) async{
-    if(state == AppLifecycleState.resumed){
-      initUnit();
-    }
-  }
+  // void didChangeAppLifecycleState(AppLifecycleState state) async{
+  //   if(state == AppLifecycleState.resumed){
+  //     initUnit();
+  //   }
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    initDeepLinkData();
-    initUnit();
-    WidgetsBinding.instance.addObserver(this);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   initDeepLinkData();
+  //   initUnit();
+  //   WidgetsBinding.instance.addObserver(this);
+  // }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   WidgetsBinding.instance.removeObserver(this);
+  //   super.dispose();
+  // }
 
-  initUnit() async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
-    // FlutterBranchSdk.logout();
+  // initUnit() async{
+  //   bool login = await FlutterBranchSdk.isUserIdentified();
+  //   // FlutterBranchSdk.logout();
 
-    print('The login is $login');
+  //   print('The login is $login');
 
-    if(login){
-      var value = await FlutterBranchSdk.getLatestReferringParams();
+  //   if(login){
+  //     var value = await FlutterBranchSdk.getLatestReferringParams();
 
-      print('The value is $value');
+  //     print('The value is $value');
 
-      setState(() {
-        requestResult = '';
-      });
+  //     setState(() {
+  //       requestResult = '';
+  //     });
 
-      if(value['reset_password_token'] == null){
+  //     if(value['reset_password_token'] == null){
         
-        await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
-      }else{
-        Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset(initialLink: value['reset_password_token'],)));
-      }
-    }
-  }
+  //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
+  //     }else{
+  //       Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset(initialLink: value['reset_password_token'],)));
+  //     }
+  //   }
+  // }
 
 
-  void initDeepLinkData() {
-    metadata = BranchContentMetaData()
-      .addCustomMetadata('custom_string', 'abc')
-      .addCustomMetadata('custom_number', 12345)
-      .addCustomMetadata('custom_bool', true)
-      .addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5,],)
-      .addCustomMetadata('custom_list_string', ['a', 'b', 'c']);
+  // void initDeepLinkData() {
+  //   metadata = BranchContentMetaData()
+  //     .addCustomMetadata('custom_string', 'abc')
+  //     .addCustomMetadata('custom_number', 12345)
+  //     .addCustomMetadata('custom_bool', true)
+  //     .addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5,],)
+  //     .addCustomMetadata('custom_list_string', ['a', 'b', 'c']);
 
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'reset-password-${idDate.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '')}',
-      title: 'Facesbyplaces',
-      imageUrl:'',
-      contentDescription: 'Facesbyplaces Forgot Password',
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('custom_string', 'abc')
-        ..addCustomMetadata('custom_number', 12345)
-        ..addCustomMetadata('custom_bool', true)
-        ..addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5])
-        ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']
-      ),
-      keywords: ['Facesbyplaces', 'Password', 'Reset'],
-      publiclyIndex: true,
-      locallyIndex: true,
-    );
+  //   buo = BranchUniversalObject(
+  //     canonicalIdentifier: 'reset-password-${idDate.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '')}',
+  //     title: 'Facesbyplaces',
+  //     imageUrl:'',
+  //     contentDescription: 'Facesbyplaces Forgot Password',
+  //     contentMetadata: BranchContentMetaData()
+  //       ..addCustomMetadata('custom_string', 'abc')
+  //       ..addCustomMetadata('custom_number', 12345)
+  //       ..addCustomMetadata('custom_bool', true)
+  //       ..addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5])
+  //       ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']
+  //     ),
+  //     keywords: ['Facesbyplaces', 'Password', 'Reset'],
+  //     publiclyIndex: true,
+  //     locallyIndex: true,
+  //   );
 
-    print('The buo is ${buo.keywords}');
-    print('The buo is ${buo.canonicalIdentifier}');
+  //   print('The buo is ${buo.keywords}');
+  //   print('The buo is ${buo.canonicalIdentifier}');
 
-    lp = BranchLinkProperties(
-      channel: 'email',
-      feature: 'sharing',
-      stage: 'new share',
-      campaign: 'xxxxx',
-      tags: ['reset', 'password', 'email'],
-    );
+  //   lp = BranchLinkProperties(
+  //     channel: 'email',
+  //     feature: 'sharing',
+  //     stage: 'new share',
+  //     campaign: 'xxxxx',
+  //     tags: ['reset', 'password', 'email'],
+  //   );
 
-    lp.addControlParam('\$uri_redirect_mode', '1');
-  }
+  //   lp.addControlParam('\$uri_redirect_mode', '1');
+  // }
 
-  Future<bool> generateLink(String email) async {
+  // Future<bool> generateLink(String email) async {
 
-    bool forgotPasswordResult;
+  //   bool forgotPasswordResult;
 
-    try{
-      BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-      print('The response is $response');
-      print('The response is ${response.errorCode}');
-      print('The response is ${response.errorMessage}');
-      print('The response is ${response.result}');
-      print('The response is ${response.success}');
+  //   try{
+  //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+  //     print('The response is $response');
+  //     print('The response is ${response.errorCode}');
+  //     print('The response is ${response.errorMessage}');
+  //     print('The response is ${response.result}');
+  //     print('The response is ${response.success}');
 
-      if(response.success){
+  //     if(response.success){
 
-        await apiHomeResetPassword(email: 'deanver@kodakollectiv.com');
-      }
-    }catch(e){
-      setState(() {
-        requestResult = 'Something went wrong. Please try again.';
-      });
-      forgotPasswordResult = false;
-    }
+  //       await apiHomeResetPassword(email: email);
+  //     }
+  //   }catch(e){
+  //     setState(() {
+  //       requestResult = 'Something went wrong. Please try again.';
+  //     });
+  //     forgotPasswordResult = false;
+  //   }
 
-    return forgotPasswordResult;
-  }
+  //   return forgotPasswordResult;
+  // }
 
 
   @override
@@ -199,20 +200,63 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                                   color: Color(0xffffffff),
                                 ), 
                                 onPressed: () async{
+
                                   final fb = FacebookLogin();
+
+                                  // await fb.logOut();
+
+                                  print('The value is ${fb.hashCode}');
+                                  print('The value is ${fb.accessToken}');
+                                  print('The value is ${fb.debug}');
 
                                   // Log in
                                   final result = await fb.logIn(permissions: [
                                     FacebookPermission.publicProfile,
                                     FacebookPermission.email,
-                                    // FacebookPermission.publicProfile.name,
+                                    FacebookPermission.userFriends,
                                   ]);
+
+                                  print('The result status is ${result.status}');
+                                  print('The result access token is ${result.accessToken.token}');
+                                  print('The result error is ${result.error}');
+
+
+                                  final email = await fb.getUserEmail();
+                                  final profile = await fb.getUserProfile();
+                                  final image = await fb.getProfileImageUrl(width: 50, height: 50);
+
+                                  print('The email is $email');
+                                  print('The firstName is ${profile.firstName}');
+                                  print('The lastName is ${profile.lastName}');
+                                  print('The image is $image');
+
+                                  context.showLoaderOverlay();
+                                  bool apiResult = await apiRegularSignInWithFacebook(
+                                    firstName: profile.firstName.toString(), 
+                                    lastName: profile.lastName.toString(), 
+                                    email: email, 
+                                    username: email,
+                                    facebookId: result.accessToken.token,
+                                  );
+                                  context.hideLoaderOverlay();
+
+                                  print('The apiResult is $apiResult');
+
+
 
                                   // final result = await fb.logIn()
 
-                                  print('The result status is ${result.status}');
-                                  print('The result access token is ${result.accessToken}');
-                                  print('The result error is ${result.error}');
+                                  // context.showLoaderOverlay();
+                                  // bool result = await apiRegularSignInWithGoogle(
+                                  //   firstName: value.displayName, 
+                                  //   lastName: value.displayName, 
+                                  //   email: value.email, 
+                                  //   username: value.email,
+                                  //   googleId: auth.idToken,
+                                  // );
+                                  // context.hideLoaderOverlay();
+
+
                                 }, 
                                 width: SizeConfig.screenWidth / 1.5, 
                                 height: SizeConfig.blockSizeVertical * 7,
@@ -239,39 +283,84 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                                     ],
                                   );
 
-                                  var value = await googleSignIn.signIn();
+                                  
 
-                                  print('The value is ${value.email}');
-                                  print('The value is ${value.displayName}');
-                                  print('The value is ${value.id}');
-                                  print('The value is ${value.photoUrl}');
+                                  bool isSignedIn = await googleSignIn.isSignedIn();
 
-                                  var header = await value.authHeaders;
-                                  var auth = await value.authentication;
+                                  print('The value is $isSignedIn');
+                                  
 
-                                  print('The header is $header');
-                                  print('The auth is $auth');
-                                  print('The auth is ${auth.idToken}');
-                                  print('The server auth is ${auth.serverAuthCode}');
-                                  print('The access token is ${auth.accessToken}');
-                            
-                                  context.showLoaderOverlay();
-                                  bool result = await apiRegularSignInWithGoogle(
-                                    firstName: value.displayName, 
-                                    lastName: value.displayName, 
-                                    email: value.email, 
-                                    username: value.email,
-                                    googleId: auth.idToken,
-                                  );
-                                  context.hideLoaderOverlay();
+                                  if(isSignedIn == true){
 
-                                  // print('The result is $result');
+                                    // context.showLoaderOverlay();
+                                    // bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                                    // context.hideLoaderOverlay();
 
-                                  if(result){
-                                    Navigator.pushReplacementNamed(context, '/home/regular');
-                                  }else{
-                                    await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                    // var accountSignedIn = await googleSignIn.signInSilently();
+                                    // var authHeaders = await googleSignIn.currentUser.authHeaders;
+                                    // var auth = await googleSignIn.currentUser.authentication;
+
+
+                                    // print('The auth is ${auth.accessToken}}');
+                                    // print('The auth is ${auth.idToken}');
+                                    // print('The auth is ${auth.serverAuthCode}');
+
+                                    // print('The auth headers is $authHeaders');
+
+                                    // print('The client id is ${googleSignIn.clientId}');
+
+
+                                    // print('The headers is $authHeaders');
+
+                                    // context.showLoaderOverlay();
+                                    // bool result = await apiRegularSignInWithGoogle(
+                                    //   firstName: accountSignedIn.displayName, 
+                                    //   lastName: accountSignedIn.displayName, 
+                                    //   email: accountSignedIn.email, 
+                                    //   username: accountSignedIn.email,
+                                    //   googleId: auth.idToken,
+                                    // );
+                                    // context.hideLoaderOverlay();
+
+                                    // print('The value of result is $result');
+                                    // print('The value is ${accountSignedIn.authHeaders}');
+
                                   }
+
+                                  // var value = await googleSignIn.signIn();
+                                  // var value = await googleSignIn.signIn();
+
+                                  // print('The value is ${value.email}');
+                                  // print('The value is ${value.displayName}');
+                                  // print('The value is ${value.id}');
+                                  // print('The value is ${value.photoUrl}');
+
+                                  // var header = await value.authHeaders;
+                                  // var auth = await value.authentication;
+
+                                  // print('The header is $header');
+                                  // print('The auth is $auth');
+                                  // print('The auth is ${auth.idToken}');
+                                  // print('The server auth is ${auth.serverAuthCode}');
+                                  // print('The access token is ${auth.accessToken}');
+                            
+                                  // context.showLoaderOverlay();
+                                  // bool result = await apiRegularSignInWithGoogle(
+                                  //   firstName: value.displayName, 
+                                  //   lastName: value.displayName, 
+                                  //   email: value.email, 
+                                  //   username: value.email,
+                                  //   googleId: auth.idToken,
+                                  // );
+                                  // context.hideLoaderOverlay();
+
+                                  // // print('The result is $result');
+
+                                  // if(result){
+                                  //   Navigator.pushReplacementNamed(context, '/home/regular');
+                                  // }else{
+                                  //   await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                  // }
                                   
                                 }, 
                                 width: SizeConfig.screenWidth / 1.5, 
@@ -318,18 +407,18 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                       GestureDetector(
                         onTap: () async{
 
-                          String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
+                          // String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
 
-                          DateTime date = DateTime.now();
-                          String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
-                          FlutterBranchSdk.setIdentity('id-$id');
-                          context.showLoaderOverlay();
+                          // DateTime date = DateTime.now();
+                          // String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
+                          // FlutterBranchSdk.setIdentity('id-$id');
+                          // context.showLoaderOverlay();
 
-                          bool result = await generateLink(email);
-                          // bool result = await generateLink('deanver@kodakollectiv.com');
-                          context.hideLoaderOverlay();
+                          // bool result = await generateLink(email);
+                          // // bool result = await generateLink('deanver@kodakollectiv.com');
+                          // context.hideLoaderOverlay();
 
-                          print('The result is $result');
+                          // print('The result is $result');
 
 
                         },

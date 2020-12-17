@@ -1,16 +1,16 @@
-import 'package:facesbyplaces/UI/Home/BLM/Donate/home-20-blm-donate.dart';
+
+import 'package:facesbyplaces/API/BLM/api-35-blm-show-switch-status.dart';
+import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-09-blm-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
 import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
-// import 'package:facesbyplaces/API/BLM/api-35-blm-show-switch-status.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
-// import '../Settings-Memorial/home-09-blm-memorial-settings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-// import 'package:loader_overlay/loader_overlay.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:path_provider/path_provider.dart';
 import 'home-22-blm-connection-list.dart';
@@ -261,16 +261,16 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: () async{
-                                          // context.showLoaderOverlay();
-                                          // APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
-                                          // context.hideLoaderOverlay();
+                                          context.showLoaderOverlay();
+                                          APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
+                                          context.hideLoaderOverlay();
 
-                                          // if(result.success){
-                                          //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
-                                          // }
+                                          if(result.success){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                          }
 
-                                          // Navigator.pushNamed(context, '/home/blm/home-25-blm-donate');
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate()));
+                                          // Navigator.pushNamed(context, '/home/blm/donation');
+                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate()));
                                           
                                         },
                                         child: Text('Manage',
@@ -709,7 +709,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                 final file = await new File('${tempDir.path}/blm-post-image.png').create();
                                 file.writeAsBytesSync(list);
 
-                                Navigator.pushNamed(context, '/home/blm/home-19-blm-create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
+                                Navigator.pushNamed(context, '/home/blm/create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
                               },
                               child: Text('Create Post',
                                 style: TextStyle(

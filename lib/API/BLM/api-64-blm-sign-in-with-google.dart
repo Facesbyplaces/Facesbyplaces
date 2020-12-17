@@ -16,10 +16,14 @@ Future<bool> apiBLMSignInWithGoogle({String firstName, String lastName, String e
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    var user = value['data'];
-    int userId = user['id'];
-    String verificationCode = user['verification_code'];
+    // var user = value['data'];
+    // int userId = user['id'];
+    // String verificationCode = user['verification_code'];
 
+    // final sharedPrefs = await SharedPreferences.getInstance();
+
+    int userId = value['id'];
+    String verificationCode = value['verification_code'];
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('blm-user-id', userId);

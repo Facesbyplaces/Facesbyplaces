@@ -295,12 +295,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                 Expanded(child: Container()),
               ],
             ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-              onPressed: (){
-                Navigator.pop(context);
-              },
-            ),
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(

@@ -65,14 +65,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         return IconButton(
                           icon: CircleAvatar(
                             backgroundColor: Color(0xff888888),
-                            // backgroundImage: ((){
-                            //   if(profileImage.data.image != null && profileImage.data.image != ''){
-                            //     return NetworkImage(profileImage.data.image);
-                            //   }else{
-                            //     return AssetImage('assets/icons/app-icon.png');
-                            //   }
-                            // }()),
-                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                            backgroundImage: ((){
+                              if(profileImage.data.image != null && profileImage.data.image != ''){
+                                return NetworkImage(profileImage.data.image);
+                              }else{
+                                return AssetImage('assets/icons/app-icon.png');
+                              }
+                            }()),
                           ),
                           onPressed: () async{
                             Scaffold.of(context).openDrawer();
@@ -128,18 +127,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 10.5,
                             backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/app-icon.png'),
-
-                            // child: CachedNetworkImage(
-                            //   imageUrl: manageDrawer.data.image,
-                            //   placeholder: (context, url) => CircleAvatar(
-                            //     backgroundImage: AssetImage('assets/icons/app-icon.png'),
-                            //   ),
-                            // ),
-                            // backgroundImage: CachedNetworkImageProvider(
-                            //   manageDrawer.data.image,
-                            //   scale: 1.0
-                            // ),
+                            backgroundImage: ((){
+                              if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
+                                return NetworkImage(manageDrawer.data.image);
+                              }else{
+                                return AssetImage('assets/icons/app-icon.png');
+                              }
+                            }()),
                           ),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),

@@ -35,19 +35,19 @@ Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
       MapEntry('blm[longitude]', MultipartFile.fromString(memorial.longitude,),);
     }
 
-    if(memorial.backgroundImage != null){
+    if(memorial.backgroundImage != null || memorial.backgroundImage != ''){
       var file = await dio.MultipartFile.fromFile(memorial.backgroundImage.path, filename: memorial.backgroundImage.path);
       formData.files.add(MapEntry('blm[backgroundImage]', file));
     }
     
-    if(memorial.profileImage != null){
+    if(memorial.profileImage != null || memorial.profileImage != ''){
       var file = await dio.MultipartFile.fromFile(memorial.profileImage.path, filename: memorial.profileImage.path);
       formData.files.add(MapEntry('blm[profileImage]', file));
     }
     
-    if(memorial.imagesOrVideos != null){
+    if(memorial.imagesOrVideos != null || memorial.imagesOrVideos != ['']){
       for(int i = 0; i < memorial.imagesOrVideos.length - 1; i++){
-        if(memorial.imagesOrVideos[i].path != null){
+        if(memorial.imagesOrVideos[i].path != null || memorial.imagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos[i].path, filename: memorial.imagesOrVideos[i].path);
           formData.files.add(MapEntry('blm[imagesOrVideos][]', file));
         }

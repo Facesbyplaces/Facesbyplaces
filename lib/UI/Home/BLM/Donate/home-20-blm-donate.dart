@@ -130,22 +130,34 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
 
 
-                      // PaymentItem item = PaymentItem(name: 'T-Shirt', price: 10.98);
+                      PaymentItem item = PaymentItem(
+                        name: 'Donation', 
+                        price: ((){
+                          switch(donateToggle){
+                            case 0: return 0.99; break;
+                            case 1: return 5.00; break;
+                            case 2: return 15.00; break;
+                            case 3: return 25.00; break;
+                            case 4: return 50.00; break;
+                            case 5: return 100.00; break;
+                          }
+                        }()),
+                      );
 
-                      // String token = await flutterPay.makePayment(
-                      //   merchantIdentifier: 'merchant.com.app.facesbyplaces',
-                      //   currencyCode: 'USD',
-                      //   countryCode: 'US',
-                      //   allowedPaymentNetworks: [
-                      //     PaymentNetwork.visa, 
-                      //     PaymentNetwork.masterCard,
-                      //   ],
-                      //   paymentItems: [item],
-                      //   merchantName: 'FacesbyPlaces', 
-                      //   gatewayName: 'Stripe',
-                      // );
+                      String token = await flutterPay.makePayment(
+                        merchantIdentifier: 'merchant.com.app.facesbyplaces',
+                        currencyCode: 'USD',
+                        countryCode: 'US',
+                        allowedPaymentNetworks: [
+                          PaymentNetwork.visa, 
+                          PaymentNetwork.masterCard,
+                        ],
+                        paymentItems: [item],
+                        merchantName: 'FacesbyPlaces', 
+                        gatewayName: 'Stripe',
+                      );
 
-                      // print('The token is $token');
+                      print('The token is $token');
 
                       // int amount = 0;
 

@@ -16,10 +16,15 @@ Future<bool> apiRegularSignInWithGoogle({String firstName, String lastName, Stri
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    var user = value['data'];
-    int userId = user['id'];
-    String verificationCode = user['verification_code'];
+    print('The value is ${value['verification_code']}');
 
+    // var user = value['data'];
+    // int userId = user['id'];
+    // String verificationCode = user['verification_code'];
+
+
+    int userId = value['id'];
+    String verificationCode = value['verification_code'];
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('regular-user-id', userId);

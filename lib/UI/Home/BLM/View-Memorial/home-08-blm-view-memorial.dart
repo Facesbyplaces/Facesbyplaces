@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/UI/Home/BLM/Donate/home-20-blm-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/API/BLM/api-10-blm-show-memorial.dart';
@@ -235,7 +236,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, '/home/blm/home-25-blm-donate');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate()));
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,

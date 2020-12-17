@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-09-regular-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
@@ -697,7 +698,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 final file = await new File('${tempDir.path}/regular-post-image.png').create();
                                 file.writeAsBytesSync(list);
 
-                                // Navigator.pushNamed(context, 'home/regular/home-09-regular-create-post', arguments: RegularRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
+                                
+
+                                // Navigator.pushNamed(context, '/home/regular/create-post', arguments: RegularRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
+                                // Navigator.pushNamed(context, '/home/regular/create-post');
+
+                                
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.name, image: profile.data.memorial.profileImage)));
                                 
                               },
                               child: Text('Create Post',

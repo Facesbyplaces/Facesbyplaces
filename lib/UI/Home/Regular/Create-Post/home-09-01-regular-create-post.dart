@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/Regular/api-72-regular-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/API/Regular/api-09-regular-create-post.dart';
@@ -9,16 +10,89 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+
+class ManagedPagesItem{
+
+  final String name;
+  final String image;
+  
+  const ManagedPagesItem({this.name, this.image});
+}
+
+
 class HomeRegularCreatePost extends StatefulWidget{
+  final String name;
+  final dynamic image;
+
+  HomeRegularCreatePost({this.name, this.image});
 
   @override
-  HomeRegularCreatePostState createState() => HomeRegularCreatePostState();
+  HomeRegularCreatePostState createState() => HomeRegularCreatePostState(name: name, image: image);
 }
 
 class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
+  final String name;
+  final dynamic image;
+
+  HomeRegularCreatePostState({this.name, this.image});
 
   final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
-  final GlobalKey<MiscRegularInputFieldDropDownUserState> _key2 = GlobalKey<MiscRegularInputFieldDropDownUserState>();
+  // final GlobalKey<MiscRegularInputFieldDropDownUserState> _key2 = GlobalKey<MiscRegularInputFieldDropDownUserState>();
+
+  // List<ManagedPagesItem> managedPages = [
+    // const ManagedPagesItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
+    // const ManagedPagesItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
+  // ];
+
+  // ManagedPagesItem currentSelection = const ManagedPagesItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
+
+  List<ManagedPagesItem> managedPages;
+  ManagedPagesItem currentSelection;
+
+  // List<ManagedPagesItem> managedPages = [ManagedPagesItem(name: name, image: image)];
+  Future listManagedPages;
+
+  void initState(){
+    super.initState();
+    // listManagedPages = getManagedPages();
+    // managedPages.add(ManagedPagesItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'));
+    // managedPages = [];
+    currentSelection = ManagedPagesItem(name: name, image: image);
+    managedPages = [ManagedPagesItem(name: name, image: image), ManagedPagesItem(name: name, image: image)];
+    print('The value of currentSelection is ${currentSelection.name}');
+    print('The value of currentSelection is ${currentSelection.image}');
+    print('The value of managedPages is ${managedPages[0].name}');
+    print('The value of managedPages is ${managedPages[0].image}');
+    // getManagedPages();
+  }
+
+  // Future<APIRegularShowListOfManagedPages> getManagedPages() async{
+  //   return await apiRegularShowListOfManagedPages();
+  // }
+
+  // void getManagedPages() async{
+  //   context.showLoaderOverlay();
+  //   var newValue = await apiRegularShowListOfManagedPages();
+  //   context.hideLoaderOverlay();
+
+
+    
+
+  //   currentSelection = ManagedPagesItem(name: newValue.pagesList[0].name, image: newValue.pagesList[0].profileImage.toString());
+
+  //   for(int i = 0; i < newValue.pagesList.length; i++){
+  //     managedPages.add(ManagedPagesItem(name: newValue.pagesList[i].name, image: newValue.pagesList[i].profileImage.toString()));
+  //     // print('The name is ${newValue.pagesList[i].name}');
+  //     // print('The image is ${newValue.pagesList[i].profileImage}');
+  //   }
+
+  //   for(int i = 0; i < managedPages.length; i++){
+  //     print('The value of name is ${managedPages[i].name}');
+  //     print('The value of image is ${managedPages[i].image}');
+  //   }
+
+  //   setState(() {});
+  // }
 
   File imageFile;
   File videoFile;
@@ -127,6 +201,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   }else{
                     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                   }
+
+                  // apiRegularShowListOfManagedPages();
                 }, 
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.0), 
@@ -149,7 +225,44 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                 children: [
 
                   Container(
-                    child: MiscRegularInputFieldDropDownUser(key: _key2,),
+                    // child: MiscRegularInputFieldDropDownUser(key: _key2,),
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<ManagedPagesItem>(
+                          value: currentSelection,
+                          isDense: true,
+                          onChanged: (ManagedPagesItem newValue) {
+                            setState(() {
+                              currentSelection = newValue;
+                            });
+                          },
+                          items: managedPages.map((ManagedPagesItem value) {
+                            return DropdownMenuItem<ManagedPagesItem>(
+                              value: value,
+                              child: Row(
+                                children: [
+                                  // CircleAvatar(backgroundImage: NetworkImage(value.image),),
+
+                                  // SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                  // Text(value.name),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
                     decoration: BoxDecoration(
                       color: Color(0xffffffff),
                       boxShadow: <BoxShadow>[
@@ -314,3 +427,63 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     );
   }
 }
+
+
+// class MiscRegularInputFieldDropDownUser extends StatefulWidget{
+
+//   MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
+
+//   @override
+//   MiscRegularInputFieldDropDownUserState createState() => MiscRegularInputFieldDropDownUserState();
+// }
+
+// class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
+
+//   List<RegularRelationshipItem> relationship = [
+//     const RegularRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
+//     const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
+//   ];
+
+//   RegularRelationshipItem currentSelection = const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
+
+//   @override
+//   Widget build(BuildContext context){
+//     return InputDecorator(
+//       decoration: InputDecoration(
+//         alignLabelWithHint: true,
+//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+//         focusedBorder: UnderlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//         border: UnderlineInputBorder(
+//           borderSide: BorderSide.none,
+//         ),
+//       ),
+//       child: DropdownButtonHideUnderline(
+//         child: DropdownButton<RegularRelationshipItem>(
+//           value: currentSelection,
+//           isDense: true,
+//           onChanged: (RegularRelationshipItem newValue) {
+//             setState(() {
+//               currentSelection = newValue;
+//             });
+//           },
+//           items: relationship.map((RegularRelationshipItem value) {
+//             return DropdownMenuItem<RegularRelationshipItem>(
+//               value: value,
+//               child: Row(
+//                 children: [
+//                   CircleAvatar(backgroundImage: AssetImage(value.image),),
+
+//                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+//                   Text(value.name),
+//                 ],
+//               ),
+//             );
+//           }).toList(),
+//         ),
+//       ),
+//     );
+//   }
+// }

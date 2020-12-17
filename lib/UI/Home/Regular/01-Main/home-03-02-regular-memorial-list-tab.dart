@@ -133,13 +133,17 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       if(mounted)
       setState(() {});
       page1++;
+
+      if(memorialFamilyItemsRemaining == 0){
+        addMemorials2();
+      }
       
       refreshController.loadComplete();
     }else{
       setState(() {
         flag1 = true;
       });
-      addMemorials2();
+      
       refreshController.loadNoData();
     }
 

@@ -1,3 +1,5 @@
+import 'UI/Home/BLM/Create-Post/home-19-01-blm-create-post.dart';
+import 'UI/Home/BLM/Donate/home-20-blm-donate.dart';
 import 'UI/Home/Regular/Create-Memorial/home-04-01-regular-create-memorial.dart';
 import 'UI/Home/Regular/Create-Memorial/home-04-02-regular-create-memorial.dart';
 import 'UI/Home/Regular/Create-Memorial/home-04-03-regular-create-memorial.dart';
@@ -26,7 +28,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 void main() async{
-  SharedPreferences.setMockInitialValues({});
   WidgetsFlutterBinding.ensureInitialized();
 
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -72,11 +73,14 @@ void main() async{
           '/regular/register': (BuildContext context) => RegularRegister(),
           '/regular/verify-email': (BuildContext context) => RegularVerifyEmail(),
           '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(),
+          
 
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
+          '/home/blm/donation': (BuildContext context) => HomeBLMUserDonate(),
+          '/home/blm/create-post': (BuildContext context) => HomeBLMCreatePost(),
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
-          '/home/create-post': (BuildContext context) => HomeRegularCreatePost(),
+          '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
           '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
           '/home/regular/create-memorial-2': (BuildContext context) => HomeRegularCreateMemorial2(),
           '/home/regular/create-memorial-3': (BuildContext context) => HomeRegularCreateMemorial3(),
