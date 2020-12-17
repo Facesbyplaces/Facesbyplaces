@@ -71,6 +71,7 @@ gem 'geocoder'
 gem 'pg_search', '~> 2.3', '>= 2.3.2'
 gem 'google-id-token', git: 'https://github.com/google/google-id-token.git'
 gem 'apple_id'
+gem 'repost'
 
 # Social Share 
 gem 'social-share-button'
@@ -83,7 +84,7 @@ gem 'omniauth-apple'
 gem 'omniauth-google-oauth2'
 # Use ActiveRecord Sessions
 gem 'activerecord-session_store'
-
+        
 # DATABASE
   # For production
   gem 'pg', '~> 1.2', '>= 1.2.3'
