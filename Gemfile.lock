@@ -385,7 +385,6 @@ DEPENDENCIES
   geocoder
   google-id-token!
   jbuilder (~> 2.7)
-  jwt
   kaminari
   listen (~> 3.2)
   omniauth
