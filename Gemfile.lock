@@ -393,7 +393,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   pager_api
   pagy
-  pg
+  pg (~> 1.2, >= 1.2.3)
   pg_search (~> 2.3, >= 2.3.2)
   puma (~> 4.1)
   rack-cors
