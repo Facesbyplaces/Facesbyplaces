@@ -27,6 +27,17 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         # report "Cannot validate: #{e}"
         return render json: {status: "Cannot validate: #{e}"}, status: 422
       end
+    elsif @user.facebook_id.present?   # For apple registration
+      @user.is_verified = true
+      @user.facebook_id = @user.facebook_id
+      @user.hideBirthdate = false 
+      @user.hideBirthplace = false 
+      @user.hideEmail = false 
+      @user.hideAddress = false 
+      @user.hidePhonenumber = false 
+      @user.save!
+
+      render json: {status: "success", user: @user }
     elsif params[:identity_token].present?    # For apple registration
       # Initialized of apple processes
         if !params[:code].present? && !params[:identity_token].present?
