@@ -4,69 +4,77 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def render_create_success
       user = @resource
       if user.is_verified?
-        render json: {
-          success: true,
-          user:  {
-            account_type: user.account_type,
-            id: user.id,
-            email: user.email,
-            username: user.username.to_s,
-            first_name: user.first_name.to_s,
-            last_name: user.last_name.to_s,
-            is_verified: user.is_verified,
-            # image: user.image.attached? ? (request.base_url+url_for(user.image)) : "",
-            phone_number: user.phone_number.to_s
-          },
-          status: 200
-        }, status: 200
+        render json: { success: true, user:  user, status: 200 }, status: 200
       end
     end
 
     def create
-      user = User.find_by(email: params[:email])
-      account_type = params[:account_type].to_i
-  
-      if user.account_type == account_type && user.is_verified?
-        super
-      elsif user.account_type != account_type
-        if account_type == 1
-          render json: { message: "BLM account not found. Register to login to the page.", status: 401 }
-        elsif account_type == 2
-          render json: { message: "ALM account not found. Register to login to the page.", status: 401 }
+
+      #Facebook Login
+      if params[:facebook_id].present?
+        @user = User.where(facebook_id: params[:facebook_id]).first
+
+        if @user
+          super
+        else
+          @user = User.new(sign_up_params)
+          @user.is_verified = true
+          @user.facebook_id = @user.facebook_id
+          @user.hideBirthdate = false 
+          @user.hideBirthplace = false 
+          @user.hideEmail = false 
+          @user.hideAddress = false 
+          @user.hidePhonenumber = false 
+          @user.save!
+
+          render json: {status: "success", user: @user }
+        end
+      #Google Login
+      elsif params[:google_id].present?
+        @user = User.where(google_id: params[:google_id]).first
+
+        if @user
+          super
+        else
+          @user = User.new(sign_up_params)
+          validator = GoogleIDToken::Validator.new(expiry: 1800)
+          token = @user.google_id
+          required_audience = JWT.decode(token, nil, false)[0]['aud'] 
+          begin
+            payload = validator.check(token, required_audience, required_audience)
+            email = payload['email']
+            @user.is_verified = true
+            @user.hideBirthdate = false 
+            @user.hideBirthplace = false 
+            @user.hideEmail = false 
+            @user.hideAddress = false 
+            @user.hidePhonenumber = false 
+            @user.save!
+    
+            render json: UserSerializer.new( @user ).attributes
+          rescue GoogleIDToken::ValidationError => e
+            return render json: {status: "Cannot validate: #{e}"}, status: 422
+          end
         end
       else
-         render json: {
-            message: "Verify email to login to the app.",
-         }, status: 200
-      end
-    end
-
-    def facebook
-      if params[:facebook_id].nil?
-        return render ResponseBuilder.bad_request "A facebook id is needed"
-      end
-      
-      @user = User.where(facebook_id: params[:facebook_id]).first
-
-      if @user
-        render :create, status: :ok
-      else
-        render ResponseBuilder.bad_request "This facebook is not linked to any account."
-      end
-    end
-
-    def google
-      if params[:google_id].nil?
-        return render ResponseBuilder.bad_request "A Google id is needed"
+        user = User.find_by(email: params[:email])
+        account_type = params[:account_type].to_i
+    
+        if user.account_type == account_type && user.is_verified?
+          super
+        elsif user.account_type != account_type
+          if account_type == 1
+            render json: { message: "BLM account not found. Register to login to the page.", status: 401 }
+          elsif account_type == 2
+            render json: { message: "ALM account not found. Register to login to the page.", status: 401 }
+          end
+        else
+          render json: {
+              message: "Verify email to login to the app.",
+          }, status: 200
+        end
       end
       
-      @user = User.where(google_id: params[:google_id]).first
-
-      if @user
-        render :create, status: :ok
-      else
-        render ResponseBuilder.bad_request "This facebook is not linked to any account."
-      end
     end
 
     def apple
@@ -121,7 +129,12 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       end
     end
 
+    def sign_up_params
+      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
+    end
+
     private
+
     def setup_apple_client
       @client ||= AppleID::Client.new(
       identifier: ENV['APPLE_CLIENT_ID'],
@@ -131,4 +144,36 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       redirect_uri: ENV['APPLE_REDIRECT_URI']
       )
     end
+
+    
+
 end
+
+# def facebook
+    #   if params[:facebook_id].nil?
+    #     return render ResponseBuilder.bad_request "A facebook id is needed"
+    #   end
+      
+    #   @user = User.where(facebook_id: params[:facebook_id]).first
+
+    #   if @user
+    #     render :create, status: :ok
+    #   else
+    #     render ResponseBuilder.bad_request "This facebook is not linked to any account."
+    #   end
+    # end
+
+    # def google
+    #   if params[:google_id].nil?
+    #     return render ResponseBuilder.bad_request "A Google id is needed"
+    #   end
+      
+    #   @user = User.where(google_id: params[:google_id]).first
+
+    #   if @user
+    #     sign_in(:user, @resource, store: false, bypass: false)
+    #     render_create_success
+    #   else
+    #     render ResponseBuilder.bad_request "This facebook is not linked to any account."
+    #   end
+    # end 

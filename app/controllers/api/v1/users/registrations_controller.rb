@@ -7,27 +7,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   def create
     @user = User.new(sign_up_params)
 
-    if @user.google_id.present?
-      validator = GoogleIDToken::Validator.new(expiry: 1800)
-      token = @user.google_id
-      required_audience = JWT.decode(token, nil, false)[0]['aud'] 
-      begin
-        payload = validator.check(token, required_audience, required_audience)
-        email = payload['email']
-        @user.is_verified = true
-        @user.hideBirthdate = false 
-        @user.hideBirthplace = false 
-        @user.hideEmail = false 
-        @user.hideAddress = false 
-        @user.hidePhonenumber = false 
-        @user.save!
-
-        render json: UserSerializer.new( @user ).attributes
-      rescue GoogleIDToken::ValidationError => e
-        # report "Cannot validate: #{e}"
-        return render json: {status: "Cannot validate: #{e}"}, status: 422
-      end
-    elsif params[:identity_token].present?    # For apple registration
+    if params[:identity_token].present?    # For apple registration
       # Initialized of apple processes
         if !params[:code].present? && !params[:identity_token].present?
           return render json: {status: "error"}, status: 422
