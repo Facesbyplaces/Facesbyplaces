@@ -10,6 +10,10 @@ Future<bool> apiBLMHomeCreatePost(APIBLMCreatePost post, int memorialId) async{
   var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('The access token is $getAccessToken');
+  print('The UID is $getUID');
+  print('The client is $getClient');
+
   try{
     var dioRequest = dio.Dio();
 
@@ -23,7 +27,9 @@ Future<bool> apiBLMHomeCreatePost(APIBLMCreatePost post, int memorialId) async{
       MapEntry('post[location]', MultipartFile.fromString(post.location),),
       MapEntry('post[latitude]', MultipartFile.fromString(post.latitude),),
       MapEntry('post[longitude]', MultipartFile.fromString(post.longitude),),
-      MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople),),
+      
+      // MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople),),
+      // MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople),),
     ]);
 
     
@@ -42,10 +48,14 @@ Future<bool> apiBLMHomeCreatePost(APIBLMCreatePost post, int memorialId) async{
       ),  
     );
 
+    print('The response status code is ${response.statusCode}');
+    print('The response status body is ${response.data}');
+
     if(response.statusCode == 200){
       result = true;
     }
   }catch(e){
+    print('The value of e ${e.toString()}');
     result = false;
   }
 
@@ -60,7 +70,8 @@ class APIBLMCreatePost{
   dynamic imagesOrVideos;
   String latitude;
   String longitude;
-  String tagPeople;
+  // String tagPeople;
+  List<String> tagPeople;
   
   APIBLMCreatePost({
     this.pageType, 

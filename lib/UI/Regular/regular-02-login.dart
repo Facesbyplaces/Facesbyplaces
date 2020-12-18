@@ -1,5 +1,5 @@
 // import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
-import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
+// import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';

@@ -18,6 +18,9 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
     }
   );
 
+  print('The response status code of post is ${response.statusCode}');
+  print('The response status body of post is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularHomeTabPostMain.fromJson(newValue);
@@ -64,6 +67,8 @@ class APIRegularHomeTabPostExtended{
       var list = parsedJson['imagesOrVideos'];
       newList = List<dynamic>.from(list);
     }
+
+    print('The new list is $newList');
     
     return APIRegularHomeTabPostExtended(
       id: parsedJson['id'],

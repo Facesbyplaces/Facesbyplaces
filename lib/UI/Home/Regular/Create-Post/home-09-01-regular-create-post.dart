@@ -10,89 +10,53 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+class TaggedUsers{
+  String name;
+  int userId;
 
-class ManagedPagesItem{
-
-  final String name;
-  final String image;
-  
-  const ManagedPagesItem({this.name, this.image});
+  TaggedUsers({this.name, this.userId,});
 }
-
 
 class HomeRegularCreatePost extends StatefulWidget{
   final String name;
-  final dynamic image;
-
-  HomeRegularCreatePost({this.name, this.image});
+  final int memorialId;
+  HomeRegularCreatePost({this.name, this.memorialId});
 
   @override
-  HomeRegularCreatePostState createState() => HomeRegularCreatePostState(name: name, image: image);
+  HomeRegularCreatePostState createState() => HomeRegularCreatePostState(name: name, memorialId: memorialId);
 }
 
 class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   final String name;
-  final dynamic image;
-
-  HomeRegularCreatePostState({this.name, this.image});
+  final int memorialId;
+  HomeRegularCreatePostState({this.name, this.memorialId});
 
   final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
-  // final GlobalKey<MiscRegularInputFieldDropDownUserState> _key2 = GlobalKey<MiscRegularInputFieldDropDownUserState>();
 
-  // List<ManagedPagesItem> managedPages = [
-    // const ManagedPagesItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-    // const ManagedPagesItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
-  // ];
-
-  // ManagedPagesItem currentSelection = const ManagedPagesItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
-
-  List<ManagedPagesItem> managedPages;
-  ManagedPagesItem currentSelection;
-
-  // List<ManagedPagesItem> managedPages = [ManagedPagesItem(name: name, image: image)];
+  List<String> managedPages;
+  String currentSelection;
   Future listManagedPages;
+  List<TaggedUsers> users = [];
 
   void initState(){
     super.initState();
-    // listManagedPages = getManagedPages();
-    // managedPages.add(ManagedPagesItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'));
-    // managedPages = [];
-    currentSelection = ManagedPagesItem(name: name, image: image);
-    managedPages = [ManagedPagesItem(name: name, image: image), ManagedPagesItem(name: name, image: image)];
-    print('The value of currentSelection is ${currentSelection.name}');
-    print('The value of currentSelection is ${currentSelection.image}');
-    print('The value of managedPages is ${managedPages[0].name}');
-    print('The value of managedPages is ${managedPages[0].image}');
-    // getManagedPages();
+    managedPages = [];
+    currentSelection = name;
+    getManagedPages();
   }
 
-  // Future<APIRegularShowListOfManagedPages> getManagedPages() async{
-  //   return await apiRegularShowListOfManagedPages();
-  // }
 
-  // void getManagedPages() async{
-  //   context.showLoaderOverlay();
-  //   var newValue = await apiRegularShowListOfManagedPages();
-  //   context.hideLoaderOverlay();
+  void getManagedPages() async{
+    context.showLoaderOverlay();
+    var newValue = await apiRegularShowListOfManagedPages();
+    context.hideLoaderOverlay();
 
+    for(int i = 0; i < newValue.pagesList.length; i++){
+      managedPages.add(newValue.pagesList[i].name);
+    }
 
-    
-
-  //   currentSelection = ManagedPagesItem(name: newValue.pagesList[0].name, image: newValue.pagesList[0].profileImage.toString());
-
-  //   for(int i = 0; i < newValue.pagesList.length; i++){
-  //     managedPages.add(ManagedPagesItem(name: newValue.pagesList[i].name, image: newValue.pagesList[i].profileImage.toString()));
-  //     // print('The name is ${newValue.pagesList[i].name}');
-  //     // print('The image is ${newValue.pagesList[i].profileImage}');
-  //   }
-
-  //   for(int i = 0; i < managedPages.length; i++){
-  //     print('The value of name is ${managedPages[i].name}');
-  //     print('The value of image is ${managedPages[i].image}');
-  //   }
-
-  //   setState(() {});
-  // }
+    setState(() {});
+  }
 
   File imageFile;
   File videoFile;
@@ -132,7 +96,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    int memorialId = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -182,18 +145,30 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   Location.LocationData locationData = await location.getLocation();
 
+                  List<int> userIds = [];
+
+                  if(users.length != 0){
+                    for(int i = 0; i < users.length; i++){
+                      userIds.add(users[i].userId);
+                    }
+                  }
+
+                  print('The new user id is $userIds');
+
                   APIRegularCreatePost post = APIRegularCreatePost(
                     pageType: 'Memorial',
                     postBody: _key1.currentState.controller.text,
+                    pageId: memorialId.toString(),
                     location: newLocation,
                     imagesOrVideos: newFile,
                     latitude: locationData.latitude.toString(),
                     longitude: locationData.longitude.toString(),
-                    tagPeople: '1'
+                    tagPeople: userIds,
+                    // tagPeople: userIds.toString()
                   );
 
                   context.showLoaderOverlay();
-                  bool result = await apiRegularHomeCreatePost(post, memorialId);
+                  bool result = await apiRegularHomeCreatePost(post);
                   context.hideLoaderOverlay();
 
                   if(result){
@@ -202,7 +177,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                   }
 
-                  // apiRegularShowListOfManagedPages();
                 }, 
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.0), 
@@ -225,7 +199,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                 children: [
 
                   Container(
-                    // child: MiscRegularInputFieldDropDownUser(key: _key2,),
                     child: InputDecorator(
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
@@ -238,24 +211,24 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         ),
                       ),
                       child: DropdownButtonHideUnderline(
-                        child: DropdownButton<ManagedPagesItem>(
+                        child: DropdownButton<String>(
                           value: currentSelection,
                           isDense: true,
-                          onChanged: (ManagedPagesItem newValue) {
+                          onChanged: (String newValue) {
                             setState(() {
                               currentSelection = newValue;
                             });
                           },
-                          items: managedPages.map((ManagedPagesItem value) {
-                            return DropdownMenuItem<ManagedPagesItem>(
+                          items: managedPages.map((String value) {
+                            return DropdownMenuItem<String>(
                               value: value,
                               child: Row(
                                 children: [
-                                  // CircleAvatar(backgroundImage: NetworkImage(value.image),),
+                                  CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
 
-                                  // SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                                  // Text(value.name),
+                                  Text(value),
                                 ],
                               ),
                             );
@@ -281,27 +254,93 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                   Container(
-                    child: Row(
-                      children: [
-                        newLocation != ''
-                        ? Text('at')
-                        : Text(''),
+                    // child: Row(
+                    //   children: [
+                    //     // newLocation != ''
+                    //     // ? Text('at')
+                    //     // : Text(''),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                    //     // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        Text(newLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
+                    //     // Text(newLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                    //     // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        person != ''
-                        ? Text('with')
-                        : Text(''),
+                    //     // person != ''
+                    //     // ? Text('with')
+                    //     // : Text(''),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                    //     // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        Text(person, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
-                      ],
-                    ), 
+                    //     // Text(person, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
+                    //   ],
+                    // ), 
+
+                    // child: Chip(
+                    //   labelPadding: const EdgeInsets.only(left: 8.0),
+                    //   label: Text('sampe'),
+                    //   deleteIcon: Icon(
+                    //     Icons.close,
+                    //     size: 18,
+                    //   ),
+                    //   onDeleted: () {
+                    //     onDeleted(index);
+                    //   },
+                    // ),
+
+                    // child: TagEditor(
+                    //   length: users.length,
+                    //   delimiters: [',', ' '],
+                    //   hasAddButton: false,
+                    //   enabled: false,
+                    //   // inputDecoration: const InputDecoration(
+                    //   //   border: InputBorder.none,
+                    //   // ),
+                    //   onTagChanged: (newValue) {
+                    //     // setState(() {
+                    //     //   users.add(newValue);
+                    //     // });
+
+                    //     setState(() {
+                          
+                    //     });
+                    //   },
+                    //   tagBuilder: (context, index) => Chip(
+                    //     labelPadding: const EdgeInsets.only(left: 8.0),
+                    //     label: Text(users[index].name),
+                    //     deleteIcon: Icon(
+                    //       Icons.close,
+                    //       size: 18,
+                    //     ),
+                    //     onDeleted: () {
+                    //       setState(() {
+                    //         users.removeAt(index);
+                    //       });
+                    //     },
+                    //   ),
+                    // ),
+                    
+                    // height: SizeConfig.blockSizeVertical * 20,
+                    // width: SizeConfig.screenWidth,
+                    child: Wrap(
+                      spacing: 5.0,
+                      children: List.generate(
+                        users.length, 
+                        (index) => Chip(
+                          labelPadding: const EdgeInsets.only(left: 8.0),
+                          label: Text(users[index].name),
+                          deleteIcon: Icon(
+                            Icons.close,
+                            size: 18,
+                          ),
+                          onDeleted: () {
+                            setState(() {
+                              users.removeAt(index);
+                            });
+                          },
+                        ),
+                      ),
+                    ),
                     padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
                     alignment: Alignment.centerLeft,
                   ),
@@ -369,8 +408,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           child: GestureDetector(
                             onTap: () async{
                               
-                              var result = await Navigator.pushNamed(context, 'home/regular/home-09-03-regular-create-post');
-                              person = result.toString();
+                              var result = await Navigator.pushNamed(context, '/home/regular/create-post-user');
+                              // person = result.toString();
+
+                              if(result != null){
+                                users.add(result);
+                              }
+
+                              setState(() {});
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -427,63 +472,3 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     );
   }
 }
-
-
-// class MiscRegularInputFieldDropDownUser extends StatefulWidget{
-
-//   MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
-
-//   @override
-//   MiscRegularInputFieldDropDownUserState createState() => MiscRegularInputFieldDropDownUserState();
-// }
-
-// class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
-
-//   List<RegularRelationshipItem> relationship = [
-//     const RegularRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-//     const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
-//   ];
-
-//   RegularRelationshipItem currentSelection = const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
-
-//   @override
-//   Widget build(BuildContext context){
-//     return InputDecorator(
-//       decoration: InputDecoration(
-//         alignLabelWithHint: true,
-//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-//         focusedBorder: UnderlineInputBorder(
-//           borderSide: BorderSide.none,
-//         ),
-//         border: UnderlineInputBorder(
-//           borderSide: BorderSide.none,
-//         ),
-//       ),
-//       child: DropdownButtonHideUnderline(
-//         child: DropdownButton<RegularRelationshipItem>(
-//           value: currentSelection,
-//           isDense: true,
-//           onChanged: (RegularRelationshipItem newValue) {
-//             setState(() {
-//               currentSelection = newValue;
-//             });
-//           },
-//           items: relationship.map((RegularRelationshipItem value) {
-//             return DropdownMenuItem<RegularRelationshipItem>(
-//               value: value,
-//               child: Row(
-//                 children: [
-//                   CircleAvatar(backgroundImage: AssetImage(value.image),),
-
-//                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-//                   Text(value.name),
-//                 ],
-//               ),
-//             );
-//           }).toList(),
-//         ),
-//       ),
-//     );
-//   }
-// }

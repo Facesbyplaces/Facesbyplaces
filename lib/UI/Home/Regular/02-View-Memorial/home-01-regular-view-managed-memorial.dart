@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:facesbyplaces/UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-09-regular-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
@@ -8,6 +10,7 @@ import 'package:facesbyplaces/API/Regular/api-55-regular-show-switch-status.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -48,7 +51,7 @@ class HomeRegularProfile extends StatefulWidget{
   HomeRegularProfileState createState() => HomeRegularProfileState(memorialId: memorialId);
 }
 
-class HomeRegularProfileState extends State<HomeRegularProfile>{
+class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBindingObserver{
   final int memorialId;
   HomeRegularProfileState({this.memorialId});
 
@@ -61,6 +64,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   int postCount;
   bool empty;
   int page;
+
+  String category;
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+  BranchContentMetaData metadata;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -110,8 +118,52 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     page = 1;
     showProfile = getProfileInformation(memorialId);
     onLoading();
+    initDeepLinkData();
+    WidgetsBinding.instance.addObserver(this);
   }
 
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  // void generateLink() async{
+  //   BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+  //   if (response.success) {
+  //     print('Link generated: ${response.result}');
+  //   } else {
+  //       print('Error : ${response.errorCode} - ${response.errorMessage}');
+  //   }
+  // }
+
+
+  void initDeepLinkData(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'flutter/branch',
+      title: 'Flutter Branch Plugin',
+      imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
+      contentDescription: 'Flutter Branch Description',
+      keywords: ['Plugin', 'Branch', 'Flutter'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
+          ..addCustomMetadata('custom_number', 12345)
+          ..addCustomMetadata('custom_bool', true)
+          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
+          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+    );
+
+    lp = BranchLinkProperties(
+        channel: 'facebook',
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    // lp.addControlParam('url', 'http://www.google.com');
+    lp.addControlParam('url2', 'https://29cft.test-app.link/mrY1OGhsjcb');
+    // lp.addControlParam('\$uri_redirect_mode', '1');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -286,12 +338,57 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        await FlutterShare.share(
-                                          title: 'Share',
-                                          text: 'Share the link',
-                                          linkUrl: 'https://flutter.dev/',
-                                          chooserTitle: 'Share link'
-                                        );
+                                        // await FlutterShare.share(
+                                        //   title: 'Share',
+                                        //   text: 'Share the link',
+                                        //   linkUrl: 'https://flutter.dev/',
+                                        //   chooserTitle: 'Share link'
+                                        // );
+
+                                          DateTime date = DateTime.now();
+                                          String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-alm-memorial';
+                                          // FlutterBranchSdk.setIdentity('id-$id-share-memorial');
+                                          FlutterBranchSdk.setIdentity(id);
+
+                                          BranchResponse response =
+                                              await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                                          if (response.success) {
+                                            print('Link generated: ${response.result}');
+                                          } else {
+                                              print('Error : ${response.errorCode} - ${response.errorMessage}');
+                                          }
+
+                                          BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
+                                            buo: buo,
+                                            linkProperties: lp,
+                                            messageText: profile.data.memorial.name,
+                                            androidMessageTitle: 'Share ${profile.data.memorial.name} memorial',
+                                            androidSharingTitle: profile.data.memorial.name,
+                                          );
+
+
+                                          print('The value of deep link response is ${response.errorMessage}');
+                                          print('The value of deep link response is ${response.errorCode}');
+                                          print('The value of deep link response is ${response.result}');
+                                          print('The value of deep link response is ${response.success}');
+
+                                          if (response.success) {
+                                            print('deep link showShareSheet Sucess');
+                                          } else {
+                                            print('deep link Error : ${response.errorCode} - ${response.errorMessage}');
+                                          }
+
+                                          print('The value of response is ${shareResult.errorMessage}');
+                                          print('The value of response is ${shareResult.errorCode}');
+                                          print('The value of response is ${shareResult.result}');
+                                          print('The value of response is ${shareResult.success}');
+
+                                          if (shareResult.success) {
+                                            print('showShareSheet Sucess');
+                                          } else {
+                                            print('Error : ${shareResult.errorCode} - ${shareResult.errorMessage}');
+                                          }
+
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,
@@ -705,7 +802,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                 
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.name, image: profile.data.memorial.profileImage)));
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.name, image: profile.data.memorial.profileImage)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.name, memorialId: profile.data.memorial.id)));
                                 
                               },
                               child: Text('Create Post',

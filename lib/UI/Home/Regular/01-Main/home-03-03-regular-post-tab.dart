@@ -65,10 +65,14 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
-          ),    
+          // imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+          ),
         );
+        print('The value of image is ${newValue.familyMemorialList[i].page.imagesOrVideos}');
       }
+
+      
 
       if(mounted)
       setState(() {});
@@ -121,63 +125,50 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           padding: EdgeInsets.all(10.0),
           shrinkWrap: true,
           itemBuilder: (c, i) {
-            var container = GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, '/home/regular/home-28-regular-show-original-post');
-              },
-              child: Container(
-                child: MiscRegularPost(
-                  userId: posts[i].userId,
-                  postId: posts[i].postId,
-                  memorialId: posts[i].memorialId,
-                  memorialName: posts[i].memorialName,
-                  timeCreated: convertDate(posts[i].timeCreated),
-                  contents: [
-                    Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: RichText(
-                            maxLines: 4,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.left,
-                            text: TextSpan(
-                              text: posts[i].postBody,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                color: Color(0xff000000),
-                              ),
-                            ),
+            return MiscRegularPost(
+              userId: posts[i].userId,
+              postId: posts[i].postId,
+              memorialId: posts[i].memorialId,
+              memorialName: posts[i].memorialName,
+              timeCreated: convertDate(posts[i].timeCreated),
+              contents: [
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: RichText(
+                        maxLines: 4,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: posts[i].postBody,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff000000),
                           ),
                         ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                      ],
+                      ),
                     ),
 
-                    posts[i].imagesOrVideos != null
-                    ? Container(
-                      height: SizeConfig.blockSizeHorizontal * 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: posts[i].imagesOrVideos[0],
-                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
-                    )
-                    : Container(height: 0,),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                   ],
                 ),
-              ),
-            );
 
-            if(posts.length != 0){
-              return container;
-            }else{
-              return Center(child: Text('Post is empty.'),);
-            }
+                posts[i].imagesOrVideos != null
+                ? Container(
+                  height: SizeConfig.blockSizeHorizontal * 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: posts[i].imagesOrVideos[0],
+                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                )
+                : Container(height: 0,),
+              ],
+            );
             
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),

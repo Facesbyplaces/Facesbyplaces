@@ -136,7 +136,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     imagesOrVideos: newFile,
                     latitude: locationData.latitude.toString(),
                     longitude: locationData.longitude.toString(),
-                    tagPeople: '1'
+                    // tagPeople: '1'
                   );
 
                     context.showLoaderOverlay();

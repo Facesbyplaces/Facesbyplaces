@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:facesbyplaces/API/BLM/api-35-blm-show-switch-status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-09-blm-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
@@ -8,10 +10,11 @@ import 'package:facesbyplaces/API/BLM/api-15-blm-show-profile-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter_share/flutter_share.dart';
+// import 'package:flutter_share/flutter_share.dart';
 import 'package:path_provider/path_provider.dart';
 import 'home-22-blm-connection-list.dart';
 import 'package:flutter/services.dart';
@@ -111,6 +114,18 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     empty = true;
     page = 1;
   }
+
+    // StreamSubscription<Map> streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+    //   if (data.containsKey('+clicked_branch_link') &&
+    //       data['+clicked_branch_link'] == true) {
+    //      //Link clicked. Add logic to get link data
+    //      print('Custom string: ${data["custom_string"]}');
+    //   }
+    // }, onError: (error) {
+    //   PlatformException platformException = error as PlatformException;
+    //   print(
+    //       'InitSession error: ${platformException.code} - ${platformException.message}');
+    // });
 
 
   @override
@@ -290,12 +305,23 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        await FlutterShare.share(
-                                          title: 'Share',
-                                          text: 'Share the link',
-                                          linkUrl: 'https://flutter.dev/',
-                                          chooserTitle: 'Share link'
-                                        );
+                                        // await FlutterShare.share(
+                                        //   title: 'Share',
+                                        //   text: 'Share the link',
+                                        //   linkUrl: 'https://flutter.dev/',
+                                        //   chooserTitle: 'Share link'
+                                        // );
+
+                                          DateTime date = DateTime.now();
+                                          String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-blm-memorial';
+                                          // FlutterBranchSdk.setIdentity('id-$id-share-memorial');
+                                          FlutterBranchSdk.setIdentity(id);
+                                          // context.showLoaderOverlay();
+
+                                          // bool result = await generateLink(email);
+                                          // context.hideLoaderOverlay();
+
+                                          // print('The result is $result');
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,

@@ -3,12 +3,15 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 
+import 'home-09-01-regular-create-post.dart';
+
 class RegularSearchUsers{
+  int userId;
   String firstName;
   String lastName;
   String email;
 
-  RegularSearchUsers({this.firstName, this.lastName, this.email});
+  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.email});
 }
 
 class HomeRegularCreatePostSearchUser extends StatefulWidget{
@@ -37,7 +40,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
       itemRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.users.length; i++){
-        users.add(RegularSearchUsers(firstName: newValue.users[i].firstName, lastName: newValue.users[i].lastName, email: newValue.users[i].email));
+        users.add(RegularSearchUsers(userId: newValue.users[i].userId, firstName: newValue.users[i].firstName, lastName: newValue.users[i].lastName, email: newValue.users[i].email));
       }
 
       if(mounted)
@@ -186,7 +189,9 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 itemBuilder: (c, i) {
                   var container = GestureDetector(
                     onTap: (){
-                      Navigator.pop(context, '${users[i].firstName}' + ' ' + '${users[i].lastName}');
+                      // Navigator.pop(context, '${users[i].firstName}' + ' ' + '${users[i].lastName}');
+
+                      Navigator.pop(context, TaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
