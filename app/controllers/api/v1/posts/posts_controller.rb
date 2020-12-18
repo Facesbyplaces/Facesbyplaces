@@ -28,7 +28,8 @@ class Api::V1::Posts::PostsController < ApplicationController
 
         if post.save
             # check if there are people that have been tagged
-            params[:tag_people][0] != "" ? people = params[:tag_people] : people = []
+            # params[:tag_people][0] != "" ? people = params[:tag_people] : people = []
+            people = params[:tag_people]
             if people.count != 0
                 # save tagged people to database
                 people.each do |person|
