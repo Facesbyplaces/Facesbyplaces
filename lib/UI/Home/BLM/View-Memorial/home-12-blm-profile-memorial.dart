@@ -51,7 +51,7 @@ class HomeBLMProfile extends StatefulWidget{
   HomeBLMProfileState createState() => HomeBLMProfileState(memorialId: memorialId);
 }
 
-class HomeBLMProfileState extends State<HomeBLMProfile>{
+class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObserver{
   final int memorialId;
   HomeBLMProfileState({this.memorialId});
 
@@ -64,6 +64,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
   int postCount;
   bool empty;
   int page;
+
+  String category;
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+  BranchContentMetaData metadata;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -113,20 +118,40 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
     dataKey = GlobalKey();
     empty = true;
     page = 1;
+    initDeepLinkData();
+    WidgetsBinding.instance.addObserver(this);
   }
 
-    // StreamSubscription<Map> streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-    //   if (data.containsKey('+clicked_branch_link') &&
-    //       data['+clicked_branch_link'] == true) {
-    //      //Link clicked. Add logic to get link data
-    //      print('Custom string: ${data["custom_string"]}');
-    //   }
-    // }, onError: (error) {
-    //   PlatformException platformException = error as PlatformException;
-    //   print(
-    //       'InitSession error: ${platformException.code} - ${platformException.message}');
-    // });
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
+  void initDeepLinkData(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'flutter/branch',
+      title: 'Flutter Branch Plugin',
+      imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
+      contentDescription: 'Flutter Branch Description',
+      keywords: ['Plugin', 'Branch', 'Flutter'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
+          ..addCustomMetadata('custom_number', 12345)
+          ..addCustomMetadata('custom_bool', true)
+          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
+          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+    );
+
+    lp = BranchLinkProperties(
+        channel: 'facebook',
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url2', 'https://29cft.test-app.link/mrY1OGhsjcb');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -305,23 +330,51 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        // await FlutterShare.share(
-                                        //   title: 'Share',
-                                        //   text: 'Share the link',
-                                        //   linkUrl: 'https://flutter.dev/',
-                                        //   chooserTitle: 'Share link'
-                                        // );
 
                                           DateTime date = DateTime.now();
                                           String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-blm-memorial';
                                           // FlutterBranchSdk.setIdentity('id-$id-share-memorial');
                                           FlutterBranchSdk.setIdentity(id);
-                                          // context.showLoaderOverlay();
 
-                                          // bool result = await generateLink(email);
-                                          // context.hideLoaderOverlay();
+                                          BranchResponse response =
+                                              await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                                          if (response.success) {
+                                            print('Link generated: ${response.result}');
+                                          } else {
+                                              print('Error : ${response.errorCode} - ${response.errorMessage}');
+                                          }
 
-                                          // print('The result is $result');
+                                          BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
+                                            buo: buo,
+                                            linkProperties: lp,
+                                            messageText: profile.data.memorial.name,
+                                            androidMessageTitle: 'Share ${profile.data.memorial.name} memorial',
+                                            androidSharingTitle: profile.data.memorial.name,
+                                          );
+
+
+                                          print('The value of deep link response is ${response.errorMessage}');
+                                          print('The value of deep link response is ${response.errorCode}');
+                                          print('The value of deep link response is ${response.result}');
+                                          print('The value of deep link response is ${response.success}');
+
+                                          if (response.success) {
+                                            print('deep link showShareSheet Sucess');
+                                          } else {
+                                            print('deep link Error : ${response.errorCode} - ${response.errorMessage}');
+                                          }
+
+                                          print('The value of response is ${shareResult.errorMessage}');
+                                          print('The value of response is ${shareResult.errorCode}');
+                                          print('The value of response is ${shareResult.result}');
+                                          print('The value of response is ${shareResult.success}');
+
+                                          if (shareResult.success) {
+                                            print('showShareSheet Sucess');
+                                          } else {
+                                            print('Error : ${shareResult.errorCode} - ${shareResult.errorMessage}');
+                                          }
+
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,

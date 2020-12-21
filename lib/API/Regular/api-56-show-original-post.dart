@@ -18,6 +18,9 @@ Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost(int postId
     }
   );
 
+  print('The status code is ${response.statusCode}');
+  print('The status body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowOriginalPostMainMain.fromJson(newValue);
@@ -51,8 +54,11 @@ class APIRegularShowOriginalPostMainExtended{
   double longitude;
   List<dynamic> imagesOrVideos;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIRegularShowOriginalPostMainExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIRegularShowOriginalPostMainExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIRegularShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -72,6 +78,9 @@ class APIRegularShowOriginalPostMainExtended{
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }

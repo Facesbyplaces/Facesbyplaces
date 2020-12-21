@@ -29,22 +29,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
     var formData;
     formData = FormData();
 
-    // formData.files.addAll([
-    //   MapEntry('post[page_type]', MultipartFile.fromString(post.pageType),),
-    //   MapEntry('post[page_id]', MultipartFile.fromString(post.pageId),),
-    //   MapEntry('post[body]', MultipartFile.fromString(post.postBody),),
-    //   MapEntry('post[location]', MultipartFile.fromString(post.location),),
-    //   MapEntry('post[latitude]', MultipartFile.fromString(post.latitude),),
-    //   MapEntry('post[longitude]', MultipartFile.fromString(post.longitude),),
-    //   // MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople.toString()),),
-    //   MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople.toString()),),
-    //   // MapEntry('tag_people[]', MultipartFile.fromString('4'),),
-
-    //   // for(int i = 0; i < post.tagPeople.length; i++){
-    //   //   MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople[i]),),
-    //   // }
-    // ]);
-
     formData = FormData.fromMap({
       'post[page_type]': post.pageType,
       'post[page_id]': post.pageId,
@@ -54,20 +38,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
       'post[longitude]': post.longitude,
       'tag_people': post.tagPeople,
     });
-
-      // MapEntry('post[page_type]', MultipartFile.fromString(post.pageType),),
-      // MapEntry('post[page_id]', MultipartFile.fromString(post.pageId),),
-      // MapEntry('post[body]', MultipartFile.fromString(post.postBody),),
-      // MapEntry('post[location]', MultipartFile.fromString(post.location),),
-      // MapEntry('post[latitude]', MultipartFile.fromString(post.latitude),),
-      // MapEntry('post[longitude]', MultipartFile.fromString(post.longitude),),
-      // MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople.toString()),),
-      // MapEntry('tag_people[]', MultipartFile.fromString('4'),),
-
-      // for(int i = 0; i < post.tagPeople.length; i++){
-      //   MapEntry('tag_people[]', MultipartFile.fromString(post.tagPeople[i]),),
-      // }
-
     
     if(post.imagesOrVideos != null){
       var file = await dio.MultipartFile.fromFile(post.imagesOrVideos.path, filename: post.imagesOrVideos.path);

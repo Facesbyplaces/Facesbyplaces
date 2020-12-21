@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/API/Regular/api-56-show-original-post.dart';
+import 'package:facesbyplaces/API/Regular/api-73-regular-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
@@ -9,20 +10,30 @@ import 'package:flutter/material.dart';
 
 class HomeRegularShowOriginalPost extends StatefulWidget{
   final int postId;
-  HomeRegularShowOriginalPost({this.postId});
+  final bool likeStatus;
+  final int numberOfLikes;
+  HomeRegularShowOriginalPost({this.postId, this.likeStatus, this.numberOfLikes});
 
   @override
-  HomeRegularShowOriginalPostState createState() => HomeRegularShowOriginalPostState(postId: postId);
+  HomeRegularShowOriginalPostState createState() => HomeRegularShowOriginalPostState(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes);
 }
 
 class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost>{
   final int postId;
-  HomeRegularShowOriginalPostState({this.postId});
+  final bool likeStatus;
+  final int numberOfLikes;
+  HomeRegularShowOriginalPostState({this.postId, this.likeStatus, this.numberOfLikes});
 
   Future showOriginalPost;
+  bool likePost;
+  bool pressedLike;
+  int likesCount;
 
   void initState(){
     super.initState();
+    pressedLike = false;
+    likePost = likeStatus;
+    likesCount = numberOfLikes;
     showOriginalPost = getOriginalPost(postId);
   }
 
@@ -52,7 +63,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, '/home/regular');
+                // Navigator.pop(context);
               },
             ),
           ),
@@ -135,13 +147,12 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                             originalPost.data.post.imagesOrVideos != null
                             ? Container(
                               height: SizeConfig.blockSizeVertical * 50,
-                              color: Colors.blue,
                               child: ((){
                                 if(originalPost.data.post.imagesOrVideos != null){
                                   return Container(
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
-                                      imageUrl: originalPost.data.post.page.imagesOrVideos[0],
+                                      imageUrl: originalPost.data.post.imagesOrVideos[0],
                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                     ),
@@ -161,14 +172,36 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                               child: Row(
                                 children: [
                                   GestureDetector(
-                                    onTap: (){},
+                                    onTap: () async{
+                                      setState(() {
+                                        likePost = !likePost;
+
+                                        if(likePost == true){
+                                          pressedLike = true;
+                                          likesCount++;
+                                        }else{
+                                          pressedLike = false;
+                                          likesCount--;
+                                        }
+                                      });
+
+                                      await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
+
+                                    },
                                     child: Row(
                                       children: [
-                                        Icon(Icons.favorite, color: Color(0xffE74C3C),),
+                                        likePost == true
+                                        ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
+                                        : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
 
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                        Text('$likesCount', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+
+                                        // Text('${originalPost.data.post.numberOfLikes}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                        // pressedLike == true
+                                        // ? Text('${numberOfLikes + 1}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)
+                                        // : Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                                       ],
                                     ),
                                   ),
@@ -183,7 +216,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                        Text('${originalPost.data.post.numberOfComments}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                                       ],
                                     ),
                                   ),

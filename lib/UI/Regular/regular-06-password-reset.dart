@@ -1,16 +1,18 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 class RegularPasswordReset extends StatefulWidget{
-  final String initialLink;
-  RegularPasswordReset({this.initialLink});
 
   RegularPasswordResetState createState() => RegularPasswordResetState();
 }
 
 class RegularPasswordResetState extends State<RegularPasswordReset>{
-  final String initialLink;
-  RegularPasswordResetState({this.initialLink});
+
+  void initState(){
+    super.initState();
+    FlutterBranchSdk.logout();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
       backgroundColor: Color(0xffffffff),
       body: Container(
         child: Center(
-          child: Text('Reset password and the initial link is $initialLink'),
+          child: Text('Success!'),
         ),
       ),
     );

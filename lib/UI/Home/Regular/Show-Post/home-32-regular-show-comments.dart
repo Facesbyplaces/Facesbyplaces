@@ -1,34 +1,132 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facesbyplaces/API/Regular/api-56-show-original-post.dart';
+import 'package:facesbyplaces/API/Regular/api-75-regular-show-list-of-replies.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/API/Regular/api-74-regular-show-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+
+class RegularOriginalComment{
+  int commentId;
+  int postId;
+  int userId;
+  String commentBody;
+  String createdAt;
+  String firstName;
+  String lastName;
+  dynamic image;
+
+  RegularOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image});
+}
 
 class HomeRegularShowCommentsList extends StatefulWidget{
   final int postId;
-  HomeRegularShowCommentsList({this.postId});
+  final int numberOfLikes;
+  final int numberOfComments;
+  HomeRegularShowCommentsList({this.postId, this.numberOfLikes, this.numberOfComments});
 
   @override
-  HomeRegularShowCommentsListState createState() => HomeRegularShowCommentsListState(postId: postId);
+  HomeRegularShowCommentsListState createState() => HomeRegularShowCommentsListState(postId: postId, numberOfLikes: numberOfLikes, numberOfComments: numberOfComments);
 }
 
 class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList>{
   final int postId;
-  HomeRegularShowCommentsListState({this.postId});
+  final int numberOfLikes;
+  final int numberOfComments;
+  HomeRegularShowCommentsListState({this.postId, this.numberOfLikes, this.numberOfComments});
 
+  GlobalKey<MiscRegularBottomSheetCommentState> key1 = GlobalKey<MiscRegularBottomSheetCommentState>();
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+  List<RegularOriginalComment> comments;
   Future showOriginalPost;
+  int itemRemaining;
+  int page;
+  int count;
 
-  // void initState(){
-  //   super.initState();
-  //   showOriginalPost = getOriginalPost(postId);
+  int page2;
+
+  void onRefresh() async{
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading() async{
+    if(itemRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiRegularShowListOfComments(postId: postId, page: page);
+      context.hideLoaderOverlay();
+      itemRemaining = newValue.itemsRemaining;
+      count = count + newValue.commentsList.length;
+
+      for(int i = 0; i < newValue.commentsList.length; i++){
+        comments.add(
+          RegularOriginalComment(
+            commentId: newValue.commentsList[i].commentId,
+            postId: newValue.commentsList[i].postId,
+            userId: newValue.commentsList[i].user.userId,
+            commentBody: newValue.commentsList[i].commentBody,
+            createdAt: newValue.commentsList[i].createdAt,
+            firstName: newValue.commentsList[i].user.firstName,
+            lastName: newValue.commentsList[i].user.lastName,
+            image: newValue.commentsList[i].user.image,
+          ),    
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page++;
+      
+      refreshController.loadComplete();
+    }else{
+      refreshController.loadNoData();
+    }
+  }
+
+  // void onLoadingReplies() async{
+  //   if(itemRemaining != 0){
+  //     context.showLoaderOverlay();
+  //     var newValue = await apiRegularShowListOfReplies(commentId: postId, page: page2);
+  //     context.hideLoaderOverlay();
+  //     itemRemaining = newValue.itemsRemaining;
+  //     count = count + newValue.commentsList.length;
+
+  //     for(int i = 0; i < newValue.commentsList.length; i++){
+  //       comments.add(
+  //         RegularOriginalComment(
+  //           commentId: newValue.commentsList[i].commentId,
+  //           postId: newValue.commentsList[i].postId,
+  //           userId: newValue.commentsList[i].user.userId,
+  //           commentBody: newValue.commentsList[i].commentBody,
+  //           createdAt: newValue.commentsList[i].createdAt,
+  //           firstName: newValue.commentsList[i].user.firstName,
+  //           lastName: newValue.commentsList[i].user.lastName,
+  //           image: newValue.commentsList[i].user.image,
+  //         ),    
+  //       );
+  //     }
+
+  //     if(mounted)
+  //     setState(() {});
+  //     page++;
+      
+  //     refreshController.loadComplete();
+  //   }else{
+  //     refreshController.loadNoData();
+  //   }
   // }
 
-  // Future<APIRegularShowOriginalPostMainMain> getOriginalPost(postId) async{
-  //   return await apiRegularShowOriginalPost(postId);
-  // }
+  void initState(){
+    super.initState();
+    key1 = GlobalKey();
+    itemRemaining = 1;
+    comments = [];
+    page = 1;
+    count = 0;
+    onLoading();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,173 +150,233 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, '/home/regular');
               },
             ),
           ),
           body: Container(
-            padding: EdgeInsets.all(5.0),
-            height: SizeConfig.screenHeight,
-            child: FutureBuilder<APIRegularShowOriginalPostMainMain>(
-              future: showOriginalPost,
-              builder: (context, originalPost){
-                if(originalPost.hasData){
-                  return Column(
+            child: Column(
+              children: [
+                Container(
+                  height: SizeConfig.blockSizeVertical * 5,
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-                        decoration: BoxDecoration(
-                          color: Color(0xffffffff),
-                          borderRadius: BorderRadius.all(Radius.circular(15),),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 5,
-                              offset: Offset(0, 0)
-                            ),
-                          ],
-                        ),
-                        child: Column(
+
+                      GestureDetector(
+                        onTap: () async{
+                          
+                        },
+                        child: Row(
                           children: [
-                            Container(
-                              height: SizeConfig.blockSizeVertical * 10,
-                              child: Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () async{
-                                      
-                                    },
-                                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.post.page.profileImage != null ? NetworkImage(originalPost.data.post.page.profileImage) : AssetImage('assets/icons/app-icon.png')),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: Align(alignment: Alignment.bottomLeft,
-                                              child: Text(originalPost.data.post.page.name,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xff000000),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(convertDate(originalPost.data.post.createAt),
-                                                maxLines: 1,
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Color(0xffaaaaaa)
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  MiscRegularDropDownTemplate(userId: originalPost.data.post.page.id, postId: postId,),
-                                ],
-                              ),
-                            ),
+                            Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
 
-                            Container(alignment: Alignment.centerLeft, child: Text(originalPost.data.post.body),),
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                            originalPost.data.post.imagesOrVideos != null
-                            ? Container(
-                              height: SizeConfig.blockSizeVertical * 50,
-                              color: Colors.blue,
-                              child: ((){
-                                if(originalPost.data.post.imagesOrVideos != null){
-                                  return Container(
-                                    child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: originalPost.data.post.page.imagesOrVideos[0],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                                    ),
-                                  );
-                                }else{
-                                  return Container(height: 0,);
-                                }
-                              }()),
-                            )
-                            : Container(
-                              color: Colors.red,
-                              height: 0,
-                            ),
-
-                            Container(
-                              height: SizeConfig.blockSizeVertical * 10,
-                              child: Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: (){},
-                                    child: Row(
-                                      children: [
-                                        Icon(Icons.favorite, color: Color(0xffE74C3C),),
-
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                                      ],
-                                    ),
-                                  ),
-
-                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                                  GestureDetector(
-                                    onTap: (){},
-                                    child: Row(
-                                      children: [
-                                        Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
-
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () async{
-                                        await FlutterShare.share(
-                                          title: 'Share',
-                                          text: 'Share the link',
-                                          linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
-                                          chooserTitle: 'Share link'
-                                        );
-                                      },
-                                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
                           ],
                         ),
                       ),
 
-                      Flexible(child: Container(color: Colors.transparent,),),
+                      SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
+
+                      GestureDetector(
+                        onTap: (){
+                          
+                        },
+                        child: Row(
+                          children: [
+                            Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
+
+                            SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                            Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                          ],
+                        ),
+                      ),
                     ],
-                  );
-                }else if(originalPost.hasError){
-                  return Container(child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
-                }else{
-                  return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-                }
-              }
+                  ),
+                ),
+
+                Expanded(
+                  child: count != 0
+                  ? SmartRefresher(
+                    enablePullDown: false,
+                    enablePullUp: true,
+                    header: MaterialClassicHeader(),
+                    footer: CustomFooter(
+                      loadStyle: LoadStyle.ShowWhenLoading,
+                      builder: (BuildContext context, LoadStatus mode){
+                        Widget body;
+                        if(mode == LoadStatus.idle){
+                          body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                        }
+                        else if(mode == LoadStatus.loading){
+                          body = CircularProgressIndicator();
+                        }
+                        else if(mode == LoadStatus.failed){
+                          body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                        }
+                        else if(mode == LoadStatus.canLoading){
+                          body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                        }
+                        else{
+                          body = Text('End of conversation.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                        }
+                        return Container(height: 55.0, child: Center(child: body),);
+                      },
+                    ),
+                    controller: refreshController,
+                    onRefresh: onRefresh,
+                    onLoading: onLoading,
+                    child: ListView.separated(
+                      padding: EdgeInsets.all(10.0),
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (c, i) {
+                        return Column(
+                          children: [
+                            Container(
+                              height: SizeConfig.blockSizeVertical * 5,
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                    backgroundColor: Color(0xff888888),
+                                  ),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  Expanded(
+                                    child: Text(comments[i].firstName.toString() + ' ' + comments[i].lastName.toString(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+
+                                  Icon(Icons.favorite, color: Color(0xffE74C3C),),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                  Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+
+                                ],
+                              ),
+                            ),
+
+                            Row(
+                              children: [
+                                Container(width: SizeConfig.blockSizeHorizontal * 12,),
+
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      comments[i].commentBody,
+                                      style: TextStyle(
+                                        color: Color(0xffffffff),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xff4EC9D4),
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                            Row(
+                              children: [
+
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
+
+                                Text(convertDate(comments[i].createdAt)),
+
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
+
+                                Text('Reply',),
+
+                              ],
+                            ),
+
+
+                          ],
+                        );
+                      },
+                      separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+                      itemCount: comments.length,
+                    ),
+                  )
+                  : MiscRegularEmptyDisplayTemplate(),
+                ),
+              ],
             ),
           ),
+          bottomNavigationBar: MiscRegularBottomSheetComment(key: key1,),
+          // bottomSheet: Container(
+          //   key: _scaffoldKey,
+          //   child: MiscRegularBottomSheetComment(key: _key1,),
+          // ),
+          // bottomNavigationBar: Container(
+          //   height: SizeConfig.blockSizeVertical * 10,
+          //   padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+          //   color: Color(0xffdddddd),
+          //   child: Row(
+          //     children: [
+
+          //       CircleAvatar(
+          //         backgroundColor: Color(0xff888888),
+          //       ),
+
+          //       Expanded(
+          //         child: Padding(
+          //           padding: EdgeInsets.all(10.0),
+          //           child: TextFormField(
+          //             // controller: controller,
+          //             cursorColor: Color(0xff000000),
+          //             keyboardType: TextInputType.text,
+          //             decoration: InputDecoration(
+          //               fillColor: Color(0xffBDC3C7),
+          //               filled: true,
+          //               labelText: 'Say something...',
+          //               labelStyle: TextStyle(
+          //                 fontSize: SizeConfig.safeBlockHorizontal * 4, 
+          //                 color: Color(0xffffffff),
+          //               ),
+          //               border: OutlineInputBorder(
+          //                 borderSide: BorderSide(
+          //                   color: Color(0xffBDC3C7),
+          //                 ),
+          //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+          //               ),
+          //               focusedBorder: OutlineInputBorder(
+          //                 borderSide: BorderSide(
+          //                   color: Color(0xffBDC3C7),
+          //                 ),
+          //                 borderRadius: BorderRadius.all(Radius.circular(10)),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+
+          //       Container(
+          //         child: Text('Post',
+          //           style: TextStyle(
+          //             fontSize: SizeConfig.safeBlockHorizontal * 4,
+          //             fontWeight: FontWeight.bold, 
+          //             color: Color(0xff000000),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ),
       ),
     );

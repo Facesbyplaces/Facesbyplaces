@@ -55,8 +55,11 @@ class APIRegularHomeTabFeedExtended{
   double longitude;
   List<dynamic> imagesOrVideos;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -76,6 +79,9 @@ class APIRegularHomeTabFeedExtended{
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }

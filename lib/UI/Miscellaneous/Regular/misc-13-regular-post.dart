@@ -1,5 +1,3 @@
-import 'package:facesbyplaces/API/Regular/api-68-regular-show-post-likes.dart';
-import 'package:facesbyplaces/API/Regular/api-69-regular-show-profile-following.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-03-regular-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-15-regular-change-password.dart';
@@ -7,7 +5,9 @@ import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-16-regular-
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-18-regular-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-31-regular-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/api-52-regular-show-other-details-status.dart';
+import 'package:facesbyplaces/API/Regular/api-73-regular-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-32-regular-show-comments.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -27,10 +27,13 @@ class MiscRegularPost extends StatefulWidget{
   final String timeCreated;
   final bool managed;
   final bool joined;
+  final int numberOfComments;
+  final int numberOfLikes;
+  final bool likeStatus;
 
-  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined});
+  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
 
-  MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined);
+  MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus);
 }
 
 class MiscRegularPostState extends State<MiscRegularPost>{
@@ -43,31 +46,30 @@ class MiscRegularPostState extends State<MiscRegularPost>{
   final String timeCreated;
   final bool managed;
   final bool joined;
+  final int numberOfComments;
+  final int numberOfLikes;
+  final bool likeStatus;
 
-  MiscRegularPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined});
+  MiscRegularPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
 
-  Future postLikes;
   Future profileFollowing;
-
-  Future<APIRegularShowPostLikes> getPostLikes({int postId}) async{
-    return await apiRegularShowPostLikes(postId: postId);
-  }
-
-  Future<APIRegularShowProfileFollowing> getProfileFollowing() async{
-    return await apiRegularShowProfileFollowing();
-  }
+  bool likePost;
+  bool pressedLike;
+  int likesCount;
 
   void initState(){
     super.initState();
-    postLikes = getPostLikes(postId: postId);
-    profileFollowing = getProfileFollowing();
+    likePost = likeStatus;
+    pressedLike = false;
+    likesCount = numberOfLikes;
   }
 
   @override
   Widget build(BuildContext context){
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId,)));
+        print('The post id is $postId');
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
       },
       child: Container(
         padding: EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -98,7 +100,7 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: true)));
                       }
                     },
-                    // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png')),
+
                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
                   ),
                   Expanded(
@@ -152,14 +154,33 @@ class MiscRegularPostState extends State<MiscRegularPost>{
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () async{
+                      
+                      setState(() {
+                        likePost = !likePost;
+
+                        if(likePost == true){
+                          pressedLike = true;
+                          likesCount++;
+                        }else{
+                          pressedLike = false;
+                          likesCount--;
+                        }
+                      });
+
+                      await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
+
+                    },
                     child: Row(
                       children: [
-                        Icon(Icons.favorite, color: Color(0xffE74C3C),),
+                        likePost == true
+                        ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
+                        : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                        Text('$likesCount', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+
                       ],
                     ),
                   ),
@@ -167,14 +188,16 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
+                    },
                     child: Row(
                       children: [
                         Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                        Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                       ],
                     ),
                   ),

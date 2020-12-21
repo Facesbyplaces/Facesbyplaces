@@ -57,19 +57,18 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       count = count + newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
-        posts.add(RegularMainPagesPosts(
-          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].id,
-          memorialId: newValue.familyMemorialList[i].page.id,
-          timeCreated: newValue.familyMemorialList[i].createAt,
-          memorialName: newValue.familyMemorialList[i].page.name,
-          postBody: newValue.familyMemorialList[i].body,
-          profileImage: newValue.familyMemorialList[i].page.profileImage,
-          // imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
-          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+        posts.add(
+          RegularMainPagesPosts(
+            userId: newValue.familyMemorialList[i].page.pageCreator.id, 
+            postId: newValue.familyMemorialList[i].id,
+            memorialId: newValue.familyMemorialList[i].page.id,
+            timeCreated: newValue.familyMemorialList[i].createAt,
+            memorialName: newValue.familyMemorialList[i].page.name,
+            postBody: newValue.familyMemorialList[i].body,
+            profileImage: newValue.familyMemorialList[i].page.profileImage,
+            imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
           ),
         );
-        print('The value of image is ${newValue.familyMemorialList[i].page.imagesOrVideos}');
       }
 
       

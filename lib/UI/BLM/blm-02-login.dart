@@ -1,17 +1,18 @@
-import 'package:facesbyplaces/API/BLM/api-64-blm-sign-in-with-google.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
+import 'package:facesbyplaces/API/BLM/api-64-blm-sign-in-with-google.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-01-blm-login.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+
+import 'blm-06-password-reset.dart';
 
 // import 'blm-06-password-reset.dart';
 
@@ -26,109 +27,64 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
-  // String category;
-  // BranchUniversalObject buo;
-  // BranchLinkProperties lp;
-  // BranchContentMetaData metadata;
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+  String link = '';
 
-  // String requestResult = '';
-  // DateTime idDate = DateTime.now();
+  void didChangeAppLifecycleState(AppLifecycleState state) async{
+    if(state == AppLifecycleState.detached || state == AppLifecycleState.paused || state == AppLifecycleState.resumed || state == AppLifecycleState.inactive){
+      initUnit();
+    }
+  }
 
-  // void didChangeAppLifecycleState(AppLifecycleState state) async{
-  //   if(state == AppLifecycleState.resumed){
-  //     initUnit();
-  //   }
-  // }
+  initUnit() async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initDeepLinkData();
-  //   initUnit();
-  //   WidgetsBinding.instance.addObserver(this);
-  // }
+    print('The login is $login');
 
-  // @override
-  // void dispose() {
-  //   WidgetsBinding.instance.removeObserver(this);
-  //   super.dispose();
-  // }
-
-  // initUnit() async{
-  //   bool login = await FlutterBranchSdk.isUserIdentified();
-
-  //   if(login){
-  //     var value = await FlutterBranchSdk.getLatestReferringParams();
-
-  //     setState(() {
-  //       requestResult = '';
-  //     });
-
-  //     if(value['reset_password_token'] == null){
-  //       // FlutterBranchSdk.logout();
-  //       await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
-  //     }else{
-  //       Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => BLMPasswordReset(initialLink: value['reset_password_token'],)));
-  //     }
-  //   }
-  // }
+    if(login){
+      Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => BLMPasswordReset()));
+    }
+  }
 
 
-  // void initDeepLinkData() {
-  //   metadata = BranchContentMetaData()
-  //     .addCustomMetadata('custom_string', 'abc')
-  //     .addCustomMetadata('custom_number', 12345)
-  //     .addCustomMetadata('custom_bool', true)
-  //     .addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5,],)
-  //     .addCustomMetadata('custom_list_string', ['a', 'b', 'c']);
+  void initDeepLink(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'password-reset-blm-account',
+      title: 'Password Reset for BLM Accounts',
+      imageUrl: 'assets/icons/app-icon.png',
+      contentDescription: 'Password reset request for BLM accounts',
+      keywords: ['Password', 'Reset', 'BLM'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
+        ..addCustomMetadata('custom_number', 12345)
+        ..addCustomMetadata('custom_bool', true)
+        ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
+        ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+    );
 
-  //   buo = BranchUniversalObject(
-  //     canonicalIdentifier: 'reset-password-${idDate.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '')}',
-  //     title: 'Facesbyplaces',
-  //     imageUrl:'',
-  //     contentDescription: 'Facesbyplaces Forgot Password',
-  //     contentMetadata: BranchContentMetaData()
-  //       ..addCustomMetadata('custom_string', 'abc')
-  //       ..addCustomMetadata('custom_number', 12345)
-  //       ..addCustomMetadata('custom_bool', true)
-  //       ..addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5])
-  //       ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']
-  //     ),
-  //     keywords: ['Facesbyplaces', 'Password', 'Reset'],
-  //     publiclyIndex: true,
-  //     locallyIndex: true,
-  //   );
+    lp = BranchLinkProperties(
+        channel: 'email',
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://29cft.test-app.link/suCwfzCi6bb');
+  }
 
-  //   lp = BranchLinkProperties(
-  //     channel: 'email',
-  //     feature: 'sharing',
-  //     stage: 'new share',
-  //     campaign: 'xxxxx',
-  //     tags: ['reset', 'password', 'email'],
-  //   );
 
-  //   lp.addControlParam('\$uri_redirect_mode', '1');
-  // }
+  void initState(){
+    super.initState();
+    initDeepLink();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
-  // Future<bool> generateLink(String email) async {
-
-  //   bool forgotPasswordResult;
-
-  //   try{
-  //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-  //     if(response.success){
-
-  //       await apiHomeResetPassword(email: email);
-  //     }
-  //   }catch(e){
-  //     setState(() {
-  //       requestResult = 'Something went wrong. Please try again.';
-  //     });
-  //     forgotPasswordResult = false;
-  //   }
-
-  //   return forgotPasswordResult;
-  // }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -283,6 +239,33 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                           // print('The result is $result');
 
 
+                          String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
+
+                          print('The value of email is $email');
+
+                          if(email != null){
+                            DateTime date = DateTime.now();
+                            String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
+                            print('The id is $id');
+                            FlutterBranchSdk.setIdentity('id-$id');
+
+                            context.showLoaderOverlay();
+                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                            context.hideLoaderOverlay();
+
+                            if (response.success) {
+                              print('Link generated: ${response.result}');
+                              setState(() {
+                                link = response.result;
+                              });
+                              await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Success', content: response.result, color: Colors.green,));
+                            } else {
+                              await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                            }
+
+                          }
+
+
                         },
                         child: Align(
                           alignment: Alignment.centerRight, 
@@ -295,6 +278,17 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                           ),
                         ),
                       ),
+
+                      // Expanded(
+                      //   child: Container(
+                      //     child: IconButton(
+                      //       icon: Icon(Icons.copy),
+                      //       onPressed: (){
+                      //         FlutterClipboard.copy(link).then(( value ) => print('copied'));
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
 
                       Expanded(child: Container(),),
 

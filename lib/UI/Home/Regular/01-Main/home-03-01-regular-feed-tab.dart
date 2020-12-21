@@ -20,8 +20,11 @@ class RegularMainPagesFeeds{
   List<dynamic> imagesOrVideos;
   bool managed;
   bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined});
+  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -59,9 +62,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
           managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,
           ),    
         );
       }
@@ -89,7 +95,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -132,6 +138,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               timeCreated: convertDate(feeds[i].timeCreated),
               managed: feeds[i].managed,
               joined: feeds[i].joined,
+              profileImage: feeds[i].profileImage,
+              numberOfComments: feeds[i].numberOfComments,
+              numberOfLikes: feeds[i].numberOfLikes,
+              likeStatus: feeds[i].likeStatus,
               contents: [
                 Column(
                   children: [

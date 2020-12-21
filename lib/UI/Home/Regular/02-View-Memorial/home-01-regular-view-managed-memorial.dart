@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:facesbyplaces/UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-09-regular-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
@@ -14,12 +12,12 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter_share/flutter_share.dart';
 import 'package:path_provider/path_provider.dart';
 import 'home-02-regular-connection-list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
+import 'dart:async';
 import 'dart:io';
 
 class RegularRelationshipItemPost{
@@ -128,16 +126,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
     super.dispose();
   }
 
-  // void generateLink() async{
-  //   BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-  //   if (response.success) {
-  //     print('Link generated: ${response.result}');
-  //   } else {
-  //       print('Error : ${response.errorCode} - ${response.errorMessage}');
-  //   }
-  // }
-
-
   void initDeepLinkData(){
     buo = BranchUniversalObject(
       canonicalIdentifier: 'flutter/branch',
@@ -160,9 +148,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    // lp.addControlParam('url', 'http://www.google.com');
     lp.addControlParam('url2', 'https://29cft.test-app.link/mrY1OGhsjcb');
-    // lp.addControlParam('\$uri_redirect_mode', '1');
   }
 
   @override
@@ -338,12 +324,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        // await FlutterShare.share(
-                                        //   title: 'Share',
-                                        //   text: 'Share the link',
-                                        //   linkUrl: 'https://flutter.dev/',
-                                        //   chooserTitle: 'Share link'
-                                        // );
+
 
                                           DateTime date = DateTime.now();
                                           String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-alm-memorial';

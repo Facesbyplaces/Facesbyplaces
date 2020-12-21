@@ -1,5 +1,3 @@
-// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
-// import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
@@ -7,17 +5,15 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/Regular/api-01-regular-login.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-// import 'blm-06-password-reset.dart';
-
-// class RegularLogin extends StatelessWidget {
 
 class RegularLogin extends StatefulWidget{
 
@@ -29,123 +25,64 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-  // String category;
-  // BranchUniversalObject buo;
-  // BranchLinkProperties lp;
-  // BranchContentMetaData metadata;
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+  String link = '';
 
-  // String requestResult = '';
-  // DateTime idDate = DateTime.now();
+  void didChangeAppLifecycleState(AppLifecycleState state) async{
+    if(state == AppLifecycleState.detached || state == AppLifecycleState.paused || state == AppLifecycleState.resumed || state == AppLifecycleState.inactive){
+      initUnit();
+    }
+  }
 
-  // void didChangeAppLifecycleState(AppLifecycleState state) async{
-  //   if(state == AppLifecycleState.resumed){
-  //     initUnit();
-  //   }
-  // }
+  initUnit() async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initDeepLinkData();
-  //   initUnit();
-  //   WidgetsBinding.instance.addObserver(this);
-  // }
+    print('The login is $login');
 
-  // @override
-  // void dispose() {
-  //   WidgetsBinding.instance.removeObserver(this);
-  //   super.dispose();
-  // }
-
-  // initUnit() async{
-  //   bool login = await FlutterBranchSdk.isUserIdentified();
-  //   // FlutterBranchSdk.logout();
-
-  //   print('The login is $login');
-
-  //   if(login){
-  //     var value = await FlutterBranchSdk.getLatestReferringParams();
-
-  //     print('The value is $value');
-
-  //     setState(() {
-  //       requestResult = '';
-  //     });
-
-  //     if(value['reset_password_token'] == null){
-        
-  //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
-  //     }else{
-  //       Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset(initialLink: value['reset_password_token'],)));
-  //     }
-  //   }
-  // }
+    if(login){
+      Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
+    }
+  }
 
 
-  // void initDeepLinkData() {
-  //   metadata = BranchContentMetaData()
-  //     .addCustomMetadata('custom_string', 'abc')
-  //     .addCustomMetadata('custom_number', 12345)
-  //     .addCustomMetadata('custom_bool', true)
-  //     .addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5,],)
-  //     .addCustomMetadata('custom_list_string', ['a', 'b', 'c']);
+  void initDeepLink(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'password-reset-alm-account',
+      title: 'Password Reset for ALM Accounts',
+      imageUrl: 'assets/icons/app-icon.png',
+      contentDescription: 'Password reset request for ALM accounts',
+      keywords: ['Password', 'Reset', 'ALM'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
+        ..addCustomMetadata('custom_number', 12345)
+        ..addCustomMetadata('custom_bool', true)
+        ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
+        ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+    );
 
-  //   buo = BranchUniversalObject(
-  //     canonicalIdentifier: 'reset-password-${idDate.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '')}',
-  //     title: 'Facesbyplaces',
-  //     imageUrl:'',
-  //     contentDescription: 'Facesbyplaces Forgot Password',
-  //     contentMetadata: BranchContentMetaData()
-  //       ..addCustomMetadata('custom_string', 'abc')
-  //       ..addCustomMetadata('custom_number', 12345)
-  //       ..addCustomMetadata('custom_bool', true)
-  //       ..addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5])
-  //       ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']
-  //     ),
-  //     keywords: ['Facesbyplaces', 'Password', 'Reset'],
-  //     publiclyIndex: true,
-  //     locallyIndex: true,
-  //   );
+    lp = BranchLinkProperties(
+        channel: 'email',
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://29cft.test-app.link/suCwfzCi6bb');
+  }
 
-  //   print('The buo is ${buo.keywords}');
-  //   print('The buo is ${buo.canonicalIdentifier}');
 
-  //   lp = BranchLinkProperties(
-  //     channel: 'email',
-  //     feature: 'sharing',
-  //     stage: 'new share',
-  //     campaign: 'xxxxx',
-  //     tags: ['reset', 'password', 'email'],
-  //   );
+  void initState(){
+    super.initState();
+    initDeepLink();
+    WidgetsBinding.instance.addObserver(this);
+  }
 
-  //   lp.addControlParam('\$uri_redirect_mode', '1');
-  // }
-
-  // Future<bool> generateLink(String email) async {
-
-  //   bool forgotPasswordResult;
-
-  //   try{
-  //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-  //     print('The response is $response');
-  //     print('The response is ${response.errorCode}');
-  //     print('The response is ${response.errorMessage}');
-  //     print('The response is ${response.result}');
-  //     print('The response is ${response.success}');
-
-  //     if(response.success){
-
-  //       await apiHomeResetPassword(email: email);
-  //     }
-  //   }catch(e){
-  //     setState(() {
-  //       requestResult = 'Something went wrong. Please try again.';
-  //     });
-  //     forgotPasswordResult = false;
-  //   }
-
-  //   return forgotPasswordResult;
-  // }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
 
   @override
@@ -402,24 +339,34 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
 
                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                      // MiscRegularAlertInputEmailDialog
-
                       GestureDetector(
                         onTap: () async{
 
-                          // String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
+                          String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
 
-                          // DateTime date = DateTime.now();
-                          // String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
-                          // FlutterBranchSdk.setIdentity('id-$id');
-                          // context.showLoaderOverlay();
+                          print('The value of email is $email');
 
-                          // bool result = await generateLink(email);
-                          // // bool result = await generateLink('deanver@kodakollectiv.com');
-                          // context.hideLoaderOverlay();
+                          if(email != null){
+                            DateTime date = DateTime.now();
+                            String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
+                            print('The id is $id');
+                            FlutterBranchSdk.setIdentity('id-$id');
 
-                          // print('The result is $result');
+                            context.showLoaderOverlay();
+                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                            context.hideLoaderOverlay();
 
+                            if (response.success) {
+                              print('Link generated: ${response.result}');
+                              setState(() {
+                                link = response.result;
+                              });
+                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Success', content: response.result, color: Colors.green,));
+                            } else {
+                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                            }
+
+                          }
 
                         },
                         child: Align(
@@ -433,6 +380,17 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                           ),
                         ),
                       ),
+
+                      // Expanded(
+                      //   child: Container(
+                      //     child: IconButton(
+                      //       icon: Icon(Icons.copy),
+                      //       onPressed: (){
+                      //         FlutterClipboard.copy(link).then(( value ) => print('copied'));
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
 
                       Expanded(child: Container(),),
 
@@ -566,4 +524,3 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
     );
   }
 }
-
