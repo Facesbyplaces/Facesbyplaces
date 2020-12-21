@@ -1,5 +1,5 @@
 class Api::V1::Search::SearchController < ApplicationController
-    before_action :authenticate_user!, only: [:nearby]
+    before_action :authenticate_user!, only: [:nearby, :suggested]
 
     def posts
         postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
@@ -135,7 +135,7 @@ class Api::V1::Search::SearchController < ApplicationController
 
     def suggested
         # get all the pages in descending order based on their view count
-        if user()
+        if user().guest == false
             followers_page_type = user().followers.pluck("page_type")
             followers_page_id = user().followers.pluck("page_id")
             relationships_page_type = user().relationships.pluck("page_type")
