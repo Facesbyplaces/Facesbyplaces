@@ -35,7 +35,7 @@ test:
 
 production:
   <<: *default
-  database: "fbp"
+  database: fbp
   username: fbp
   password: facesbyplaces
   host: localhost
