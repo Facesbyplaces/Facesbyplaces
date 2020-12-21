@@ -745,7 +745,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                             padding: EdgeInsets.only(left: 20.0),
                             child: GestureDetector(
                               onTap: (){
-                                Navigator.popAndPushNamed(context, '/home/regular');
+                                Navigator.pop(context);
                               },
                               child: Row(
                                 children: [
@@ -776,14 +776,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                 final file = await new File('${tempDir.path}/regular-post-image.png').create();
                                 file.writeAsBytesSync(list);
 
-                                
-
-                                // Navigator.pushNamed(context, '/home/regular/create-post', arguments: RegularRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
-                                // Navigator.pushNamed(context, '/home/regular/create-post');
-
-                                
-
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.name, image: profile.data.memorial.profileImage)));
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.name, memorialId: profile.data.memorial.id)));
                                 
                               },

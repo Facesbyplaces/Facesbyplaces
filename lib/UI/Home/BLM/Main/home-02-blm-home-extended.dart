@@ -27,13 +27,13 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
   Future drawerSettings;
 
+  Future<APIBLMShowProfileInformation> getDrawerInformation() async{
+    return await apiBLMShowProfileInformation();
+  }
+
   void initState(){
     super.initState();
     drawerSettings = getDrawerInformation();
-  }
-
-  Future<APIBLMShowProfileInformation> getDrawerInformation() async{
-    return await apiBLMShowProfileInformation();
   }
 
   @override
@@ -71,7 +71,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               if(profileImage.data.image != null && profileImage.data.image != ''){
                                 return NetworkImage(profileImage.data.image);
                               }else{
-                                return AssetImage('assets/icons/graveyard.png');
+                                return AssetImage('assets/icons/app-icon.png');
                               }
                             }()),
                           ),
@@ -134,10 +134,11 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
                                 return NetworkImage(manageDrawer.data.image);
                               }else{
-                                return AssetImage('assets/icons/graveyard.png');
+                                return AssetImage('assets/icons/app-icon.png');
                               }
                             }()),
                           ),
+
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 

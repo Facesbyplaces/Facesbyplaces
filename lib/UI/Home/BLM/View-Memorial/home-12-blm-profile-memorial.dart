@@ -1,6 +1,3 @@
-
-import 'dart:async';
-
 import 'package:facesbyplaces/API/BLM/api-35-blm-show-switch-status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-09-blm-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
@@ -14,12 +11,12 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:flutter_share/flutter_share.dart';
 import 'package:path_provider/path_provider.dart';
 import 'home-22-blm-connection-list.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
+import 'dart:async';
 import 'dart:io';
 
 class BLMRelationshipItemPost{
@@ -758,7 +755,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                             padding: EdgeInsets.only(left: 20.0),
                             child: GestureDetector(
                               onTap: (){
-                                Navigator.popAndPushNamed(context, '/home/blm');
+                                // Navigator.popAndPushNamed(context, '/home/blm');
+                                Navigator.pop(context);
                               },
                               child: Row(
                                 children: [

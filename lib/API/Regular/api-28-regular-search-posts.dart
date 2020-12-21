@@ -18,11 +18,14 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts(String keywords, int page
     }
   );
 
+  print('The status code for search posts is ${response.statusCode}');
+  print('The status code for search posts is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchPostMain.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the feed');
+    throw Exception('Failed to get the posts.');
   }
 }
 
@@ -30,58 +33,72 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts(String keywords, int page
 
 class APIRegularSearchPostMain{
   int itemsRemaining;
-  List<APIRegularSearchPostExtended> familyMemorialList;
+  List<APIRegularSearchPostExtended> searchPostList;
 
-  APIRegularSearchPostMain({this.itemsRemaining, this.familyMemorialList});
+  APIRegularSearchPostMain({this.itemsRemaining, this.searchPostList});
 
   factory APIRegularSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
-    List<APIRegularSearchPostExtended> familyMemorials = newList.map((i) => APIRegularSearchPostExtended.fromJson(i)).toList();
+    List<APIRegularSearchPostExtended> searchPostList = newList.map((i) => APIRegularSearchPostExtended.fromJson(i)).toList();
 
     return APIRegularSearchPostMain(
       itemsRemaining: parsedJson['itemsremaining'],
-      familyMemorialList: familyMemorials,
+      searchPostList: searchPostList,
     );
   }
 }
 
 
 class APIRegularSearchPostExtended{
-  int id;
+  int postId;
   APIRegularSearchPostExtendedPage page;
   String body;
   String location;
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  List<dynamic> tagPeople;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIRegularSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIRegularSearchPostExtended({this.postId, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.tagPeople, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList;
+    List<dynamic> newList1;
+    List<dynamic> newList2;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
-      newList = List<dynamic>.from(list);
+      newList1 = List<dynamic>.from(list);
+    }
+
+    if(parsedJson['tag_people'] != null){
+      var list = parsedJson['tag_people'];
+      newList2 = List<dynamic>.from(list);
     }
     
     return APIRegularSearchPostExtended(
-      id: parsedJson['id'],
+      postId: parsedJson['id'],
       page: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
       body: parsedJson['body'],
       location: parsedJson['location'],
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
-      imagesOrVideos: newList,
+      imagesOrVideos: newList1,
+      tagPeople: newList2,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIRegularSearchPostExtendedPage{
-  int id;
+  int pageId;
   String name;
   APIRegularPostExtendedPageDetails details;
   dynamic backgroundImage;
@@ -89,12 +106,16 @@ class APIRegularSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabPostExtendedPageCreator pageCreator;
+  bool follower;
+  bool manage;
+  String pageType;
+  String privacy;
 
-  APIRegularSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularSearchPostExtendedPage({this.pageId, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPage(
-      id: parsedJson['id'],
+      pageId: parsedJson['id'],
       name: parsedJson['name'],
       details: APIRegularPostExtendedPageDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
@@ -102,7 +123,10 @@ class APIRegularSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      follower: parsedJson['follower'],
+      manage: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }
@@ -130,7 +154,7 @@ class APIRegularPostExtendedPageDetails{
 }
 
 class APIRegularHomeTabPostExtendedPageCreator{
-  int id;
+  int creatorId;
   String firstName;
   String lastName;
   String phoneNumber;
@@ -138,11 +162,11 @@ class APIRegularHomeTabPostExtendedPageCreator{
   String userName;
   dynamic image;
 
-  APIRegularHomeTabPostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularHomeTabPostExtendedPageCreator({this.creatorId, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
   factory APIRegularHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabPostExtendedPageCreator(
-      id: parsedJson['id'],
+      creatorId: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       phoneNumber: parsedJson['phone_number'],

@@ -4,13 +4,12 @@ import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-15-regular-
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-16-regular-other-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-18-regular-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-31-regular-show-original-post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-32-regular-show-comments.dart';
 import 'package:facesbyplaces/API/Regular/api-52-regular-show-other-details-status.dart';
 import 'package:facesbyplaces/API/Regular/api-73-regular-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-32-regular-show-comments.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter/material.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-04-regular-dropdown.dart';
@@ -36,7 +35,7 @@ class MiscRegularPost extends StatefulWidget{
   MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus);
 }
 
-class MiscRegularPostState extends State<MiscRegularPost>{
+class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObserver{
   final List<Widget> contents;
   final int userId;
   final int postId;
@@ -57,18 +56,55 @@ class MiscRegularPostState extends State<MiscRegularPost>{
   bool pressedLike;
   int likesCount;
 
+  String category;
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+  BranchContentMetaData metadata;
+
   void initState(){
     super.initState();
     likePost = likeStatus;
     pressedLike = false;
     likesCount = numberOfLikes;
+    initDeepLinkData();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void initDeepLinkData(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'flutter/branch',
+      title: 'FacesbyPlace Post',
+      imageUrl: 'assets/icons/app-icon.png',
+      contentDescription: 'FacesbyPlaces post shared.',
+      keywords: ['FacesbyPlaces', 'Share', 'Post'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
+          ..addCustomMetadata('custom_number', 12345)
+          ..addCustomMetadata('custom_bool', true)
+          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
+          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+    );
+
+    lp = BranchLinkProperties(
+        channel: 'facebook',
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://29cft.test-app.link/suCwfzCi6bb');
   }
 
   @override
   Widget build(BuildContext context){
     return GestureDetector(
       onTap: (){
-        print('The post id is $postId');
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
       },
       child: Container(
@@ -205,15 +241,49 @@ class MiscRegularPostState extends State<MiscRegularPost>{
                     child: GestureDetector(
                       onTap: () async{
                         DateTime date = DateTime.now();
-                        String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
-                        FlutterBranchSdk.setIdentity('id-$id');
+                        String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-alm-memorial';
+                        // FlutterBranchSdk.setIdentity('id-$id-share-memorial');
+                        FlutterBranchSdk.setIdentity(id);
 
-                        await FlutterShare.share(
-                          title: 'Share',
-                          text: 'Share the link',
-                          linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
-                          chooserTitle: 'Share link'
+                        BranchResponse response =
+                            await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                        if (response.success) {
+                          print('Link generated: ${response.result}');
+                        } else {
+                            print('Error : ${response.errorCode} - ${response.errorMessage}');
+                        }
+
+                        BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
+                          buo: buo,
+                          linkProperties: lp,
+                          messageText: 'FacesbyPlaces Post',
+                          androidMessageTitle: 'New post from FacesbyPlaces. Click this link to view the post.',
+                          androidSharingTitle: 'FacesbyPlaces Post',
                         );
+
+
+                        print('The value of deep link response is ${response.errorMessage}');
+                        print('The value of deep link response is ${response.errorCode}');
+                        print('The value of deep link response is ${response.result}');
+                        print('The value of deep link response is ${response.success}');
+
+                        if (response.success) {
+                          print('deep link showShareSheet Sucess');
+                        } else {
+                          print('deep link Error : ${response.errorCode} - ${response.errorMessage}');
+                        }
+
+                        print('The value of response is ${shareResult.errorMessage}');
+                        print('The value of response is ${shareResult.errorCode}');
+                        print('The value of response is ${shareResult.result}');
+                        print('The value of response is ${shareResult.success}');
+
+                        if (shareResult.success) {
+                          print('showShareSheet Sucess');
+                        } else {
+                          print('Error : ${shareResult.errorCode} - ${shareResult.errorMessage}');
+                        }
+
                       },
                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
                     ),

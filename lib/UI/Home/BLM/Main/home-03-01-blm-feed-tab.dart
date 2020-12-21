@@ -18,10 +18,13 @@ class BLMMainPagesFeeds{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool managed;
   bool joined;
-  bool postLikes;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.joined});
+  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
@@ -69,8 +72,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+          managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,
           ),    
         );
       }
@@ -130,7 +137,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: convertDate(feeds[i].timeCreated),
+              managed: feeds[i].managed,
               joined: feeds[i].joined,
+              profileImage: feeds[i].profileImage,
+              numberOfComments: feeds[i].numberOfComments,
+              numberOfLikes: feeds[i].numberOfLikes,
+              likeStatus: feeds[i].likeStatus,
               contents: [
                 Column(
                   children: [

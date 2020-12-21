@@ -132,12 +132,15 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                                   if(result){
 
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
-                                    );
+                                    // Navigator.pushReplacement(
+                                    //   context,
+                                    //   MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
+                                    // );
 
-                                    Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                                    // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+
+                                    Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
+                                    Navigator.popAndPushNamed(context, route.settings.name);
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                   }

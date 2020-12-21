@@ -54,8 +54,11 @@ class APIBLMHomeTabFeedExtended{
   double longitude;
   List<dynamic> imagesOrVideos;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIBLMHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIBLMHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -75,6 +78,9 @@ class APIBLMHomeTabFeedExtended{
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }
@@ -89,8 +95,11 @@ class APIBLMHomeTabFeedExtendedPage{
   String relationship;
   APIBLMHomeTabFeedExtendedPageCreator pageCreator;
   bool follower;
+  bool manage;
+  String pageType;
+  String privacy;
 
-  APIBLMHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower});
+  APIBLMHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIBLMHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabFeedExtendedPage(
@@ -103,6 +112,9 @@ class APIBLMHomeTabFeedExtendedPage{
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
       follower: parsedJson['follower'],
+      manage: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

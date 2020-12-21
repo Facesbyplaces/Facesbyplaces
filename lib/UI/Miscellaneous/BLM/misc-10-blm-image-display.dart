@@ -33,7 +33,7 @@ class MiscBLMImageDisplayFeedTemplate extends StatelessWidget{
   final Color backgroundColor;
 
   MiscBLMImageDisplayFeedTemplate({
-    this.image = 'assets/icons/blm-image5.png',
+    this.image = 'assets/icons/app-icon.png',
     this.backSize = 20,
     this.frontSize = 15,
     this.backgroundColor = const Color(0xff000000),

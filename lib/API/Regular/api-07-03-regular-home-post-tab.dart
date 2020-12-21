@@ -18,8 +18,8 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
     }
   );
 
-  print('The response status code of post is ${response.statusCode}');
-  print('The response status body of post is ${response.body}');
+  // print('The response status code of post is ${response.statusCode}');
+  // print('The response status body of post is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -56,8 +56,11 @@ class APIRegularHomeTabPostExtended{
   double longitude;
   List<dynamic> imagesOrVideos;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIRegularHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIRegularHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIRegularHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -79,6 +82,9 @@ class APIRegularHomeTabPostExtended{
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }
@@ -92,8 +98,12 @@ class APIRegularHomeTabPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabPostExtendedPageCreator pageCreator;
+  bool follower;
+  bool manage;
+  String pageType;
+  String privacy;
 
-  APIRegularHomeTabPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularHomeTabPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIRegularHomeTabPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabPostExtendedPage(
@@ -105,7 +115,10 @@ class APIRegularHomeTabPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      follower: parsedJson['follower'],
+      manage: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

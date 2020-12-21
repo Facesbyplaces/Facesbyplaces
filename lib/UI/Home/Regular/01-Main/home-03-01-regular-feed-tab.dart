@@ -65,6 +65,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
           managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
+          
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
@@ -136,6 +137,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: convertDate(feeds[i].timeCreated),
+
               managed: feeds[i].managed,
               joined: feeds[i].joined,
               profileImage: feeds[i].profileImage,

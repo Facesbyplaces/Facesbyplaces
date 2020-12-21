@@ -2,6 +2,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-notification-disp
 import 'package:facesbyplaces/API/BLM/api-07-04-blm-home-notifications-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import '../Show-Post/home-31-blm-show-original-post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -167,9 +168,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           itemCount: notifications.length,
         ),
       )
-      : Container(
-        child: Center(child: Text('Notification is empty', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),
-      ),
+      : MiscBLMEmptyDisplayTemplate(message: 'Notification is empty'),
     );
   }
 }

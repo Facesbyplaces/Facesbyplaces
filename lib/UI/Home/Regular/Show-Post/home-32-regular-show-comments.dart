@@ -1,9 +1,8 @@
-import 'package:facesbyplaces/API/Regular/api-75-regular-show-list-of-replies.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/API/Regular/api-74-regular-show-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,19 @@ class RegularOriginalComment{
   dynamic image;
 
   RegularOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image});
+}
+
+class RegularOriginalReply{
+  int commentId;
+  int postId;
+  int userId;
+  String commentBody;
+  String createdAt;
+  String firstName;
+  String lastName;
+  dynamic image;
+
+  RegularOriginalReply({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image});
 }
 
 class HomeRegularShowCommentsList extends StatefulWidget{
@@ -44,7 +56,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   int itemRemaining;
   int page;
   int count;
-
+  List<int> commentIds;
   int page2;
 
   void onRefresh() async{
@@ -73,6 +85,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             image: newValue.commentsList[i].user.image,
           ),    
         );
+
+        commentIds.add(newValue.commentsList[i].commentId,);
       }
 
       if(mounted)
@@ -88,24 +102,23 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   // void onLoadingReplies() async{
   //   if(itemRemaining != 0){
   //     context.showLoaderOverlay();
-  //     var newValue = await apiRegularShowListOfReplies(commentId: postId, page: page2);
+  //     var newValue = await apiRegularShowListOfReplies(commentId: commentId, page: page2);
   //     context.hideLoaderOverlay();
   //     itemRemaining = newValue.itemsRemaining;
   //     count = count + newValue.commentsList.length;
 
   //     for(int i = 0; i < newValue.commentsList.length; i++){
-  //       comments.add(
-  //         RegularOriginalComment(
-  //           commentId: newValue.commentsList[i].commentId,
-  //           postId: newValue.commentsList[i].postId,
-  //           userId: newValue.commentsList[i].user.userId,
-  //           commentBody: newValue.commentsList[i].commentBody,
-  //           createdAt: newValue.commentsList[i].createdAt,
-  //           firstName: newValue.commentsList[i].user.firstName,
-  //           lastName: newValue.commentsList[i].user.lastName,
-  //           image: newValue.commentsList[i].user.image,
-  //         ),    
-  //       );
+  //       // comments.add(
+  //       //   RegularOriginalComment(
+  //       //     commentId: newValue.commentsList[i].commentId,
+  //       //     userId: newValue.commentsList[i].user.userId,
+  //       //     commentBody: newValue.commentsList[i].commentBody,
+  //       //     createdAt: newValue.commentsList[i].createdAt,
+  //       //     firstName: newValue.commentsList[i].user.firstName,
+  //       //     lastName: newValue.commentsList[i].user.lastName,
+  //       //     image: newValue.commentsList[i].user.image,
+  //       //   ),    
+  //       // );
   //     }
 
   //     if(mounted)
@@ -123,9 +136,11 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     key1 = GlobalKey();
     itemRemaining = 1;
     comments = [];
+    commentIds = [];
     page = 1;
     count = 0;
     onLoading();
+    // onLoadingReplies();
   }
 
   @override
@@ -256,7 +271,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                     ),
                                   ),
 
-                                  Icon(Icons.favorite, color: Color(0xffE74C3C),),
+                                  Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
@@ -268,7 +283,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                             Row(
                               children: [
-                                Container(width: SizeConfig.blockSizeHorizontal * 12,),
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
 
                                 Expanded(
                                   child: Container(
@@ -304,6 +319,87 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                               ],
                             ),
 
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                            Column(
+                              children: List.generate(3, (index) => 
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: SizeConfig.blockSizeVertical * 5,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
+
+                                          CircleAvatar(
+                                            backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                            backgroundColor: Color(0xff888888),
+                                          ),
+
+                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                          Expanded(
+                                            child: Text(comments[i].firstName.toString() + ' ' + comments[i].lastName.toString(),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+
+                                          Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+
+                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                          Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                    Row(
+                                      children: [
+                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
+
+                                        Expanded(
+                                          child: Container(
+                                            padding: EdgeInsets.all(10.0),
+                                            child: Text(
+                                              comments[i].commentBody,
+                                              style: TextStyle(
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff4EC9D4),
+                                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                    Row(
+                                      children: [
+
+                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
+
+                                        Text(convertDate(comments[i].createdAt)),
+
+                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
+
+                                        Text('Reply',),
+
+                                      ],
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                  ],
+                                ),
+                              ),
+                            ),
 
                           ],
                         );
@@ -318,65 +414,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             ),
           ),
           bottomNavigationBar: MiscRegularBottomSheetComment(key: key1,),
-          // bottomSheet: Container(
-          //   key: _scaffoldKey,
-          //   child: MiscRegularBottomSheetComment(key: _key1,),
-          // ),
-          // bottomNavigationBar: Container(
-          //   height: SizeConfig.blockSizeVertical * 10,
-          //   padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-          //   color: Color(0xffdddddd),
-          //   child: Row(
-          //     children: [
-
-          //       CircleAvatar(
-          //         backgroundColor: Color(0xff888888),
-          //       ),
-
-          //       Expanded(
-          //         child: Padding(
-          //           padding: EdgeInsets.all(10.0),
-          //           child: TextFormField(
-          //             // controller: controller,
-          //             cursorColor: Color(0xff000000),
-          //             keyboardType: TextInputType.text,
-          //             decoration: InputDecoration(
-          //               fillColor: Color(0xffBDC3C7),
-          //               filled: true,
-          //               labelText: 'Say something...',
-          //               labelStyle: TextStyle(
-          //                 fontSize: SizeConfig.safeBlockHorizontal * 4, 
-          //                 color: Color(0xffffffff),
-          //               ),
-          //               border: OutlineInputBorder(
-          //                 borderSide: BorderSide(
-          //                   color: Color(0xffBDC3C7),
-          //                 ),
-          //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-          //               ),
-          //               focusedBorder: OutlineInputBorder(
-          //                 borderSide: BorderSide(
-          //                   color: Color(0xffBDC3C7),
-          //                 ),
-          //                 borderRadius: BorderRadius.all(Radius.circular(10)),
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-
-          //       Container(
-          //         child: Text('Post',
-          //           style: TextStyle(
-          //             fontSize: SizeConfig.safeBlockHorizontal * 4,
-          //             fontWeight: FontWeight.bold, 
-          //             color: Color(0xff000000),
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ),
       ),
     );

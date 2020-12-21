@@ -18,7 +18,27 @@ class RegularMainPagesPosts{
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
 
-  RegularMainPagesPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
+
+  RegularMainPagesPosts({
+    this.userId, 
+    this.postId, 
+    this.memorialId, 
+    this.memorialName, 
+    this.timeCreated, 
+    this.postBody, 
+    this.profileImage, 
+    this.imagesOrVideos, 
+    this.managed,
+    this.joined,
+    this.numberOfLikes,
+    this.numberOfComments,
+    this.likeStatus,
+  });
 }
 
 class HomeRegularPostTab extends StatefulWidget{
@@ -67,11 +87,15 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             postBody: newValue.familyMemorialList[i].body,
             profileImage: newValue.familyMemorialList[i].page.profileImage,
             imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+
+            managed: newValue.familyMemorialList[i].page.manage,
+            joined: newValue.familyMemorialList[i].page.follower,
+            numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+            numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+            likeStatus: newValue.familyMemorialList[i].likeStatus,
           ),
         );
       }
-
-      
 
       if(mounted)
       setState(() {});
@@ -130,6 +154,13 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               memorialId: posts[i].memorialId,
               memorialName: posts[i].memorialName,
               timeCreated: convertDate(posts[i].timeCreated),
+
+              managed: posts[i].managed,
+              joined: posts[i].joined,
+              profileImage: posts[i].profileImage,
+              numberOfComments: posts[i].numberOfComments,
+              numberOfLikes: posts[i].numberOfLikes,
+              likeStatus: posts[i].likeStatus,
               contents: [
                 Column(
                   children: [

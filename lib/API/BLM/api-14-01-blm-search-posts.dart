@@ -56,8 +56,11 @@ class APIBLMSearchPostExtended{
   double longitude;
   List<dynamic> imagesOrVideos;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIBLMSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIBLMSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -77,6 +80,9 @@ class APIBLMSearchPostExtended{
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }
@@ -90,8 +96,12 @@ class APIBLMSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
+  bool follower;
+  bool manage;
+  String pageType;
+  String privacy;
 
-  APIBLMSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIBLMSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedPage(
@@ -103,7 +113,10 @@ class APIBLMSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      follower: parsedJson['follower'],
+      manage: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

@@ -80,12 +80,15 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
 
                       if(result){
 
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
-                        );
+                        // Navigator.pushReplacement(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
+                        // );
 
-                        Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                        // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+
+                        Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
+                        Navigator.popAndPushNamed(context, route.settings.name);
                       }else{
                         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                       }

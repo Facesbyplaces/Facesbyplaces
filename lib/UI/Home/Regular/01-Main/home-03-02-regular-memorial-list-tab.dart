@@ -23,8 +23,6 @@ class HomeRegularManageTab extends StatefulWidget{
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<Widget> memorials1;
-  List<Widget> memorials2;
   List<Widget> finalMemorials;
   int memorialFamilyItemsRemaining;
   int memorialFriendsItemsRemaining;
@@ -35,8 +33,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
   void initState(){
     super.initState();
-    memorials1 = [];
-    memorials2 = [];
     finalMemorials = [];
     memorialFamilyItemsRemaining = 1;
     memorialFriendsItemsRemaining = 1;

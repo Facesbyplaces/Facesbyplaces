@@ -21,7 +21,13 @@ class RegularSearchMainPosts{
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
 
-  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
+
+  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 }
 
 class RegularSearchMainSuggested{
@@ -102,18 +108,24 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     if(postItemRemaining != 0){
       var newValue = await apiRegularSearchPosts(keyword, page1);
       postItemRemaining = newValue.itemsRemaining;
-      tabCount1 = tabCount1 + newValue.familyMemorialList.length;
+      tabCount1 = tabCount1 + newValue.searchPostList.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.length; i++){
+      for(int i = 0; i < newValue.searchPostList.length; i++){
         feeds.add(RegularSearchMainPosts(
-          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].id,
-          memorialId: newValue.familyMemorialList[i].page.id,
-          timeCreated: newValue.familyMemorialList[i].createAt,
-          memorialName: newValue.familyMemorialList[i].page.name,
-          postBody: newValue.familyMemorialList[i].body,
-          profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          userId: newValue.searchPostList[i].page.pageCreator.creatorId, 
+          postId: newValue.searchPostList[i].postId,
+          memorialId: newValue.searchPostList[i].page.pageId,
+          timeCreated: newValue.searchPostList[i].createAt,
+          memorialName: newValue.searchPostList[i].page.name,
+          postBody: newValue.searchPostList[i].body,
+          profileImage: newValue.searchPostList[i].page.profileImage,
+          imagesOrVideos: newValue.searchPostList[i].imagesOrVideos,
+
+          managed: newValue.searchPostList[i].page.manage,
+          joined: newValue.searchPostList[i].page.follower,
+          numberOfComments: newValue.searchPostList[i].numberOfComments,
+          numberOfLikes: newValue.searchPostList[i].numberOfLikes,
+          likeStatus: newValue.searchPostList[i].likeStatus,
           ),    
         );
       }
@@ -182,8 +194,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
       var newValue = await apiRegularSearchNearby(page3, latitude, longitude);
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
-      tabCount4 = tabCount4 + newValue.memorialList.length;
-
+      tabCount3 = tabCount3 + newValue.memorialList.length;
+      
       for(int i = 0; i < newValue.memorialList.length; i++){
         nearby.add(RegularSearchMainNearby(
           memorialId: newValue.memorialList[i].id,
@@ -209,6 +221,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     if(blmItemRemaining != 0){
       var newValue = await apiRegularSearchBLM(keyword);
       blmItemRemaining = newValue.itemsRemaining;
+      tabCount4 = tabCount4 + newValue.memorialList.length;
 
       for(int i = 0; i < newValue.memorialList.length; i++){
         blm.add(RegularSearchMainBLM(
@@ -482,6 +495,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: convertDate(feeds[i].timeCreated),
+
+              managed: feeds[i].managed,
+              joined: feeds[i].joined,
+              profileImage: feeds[i].profileImage,
+              numberOfComments: feeds[i].numberOfComments,
+              numberOfLikes: feeds[i].numberOfLikes,
+              likeStatus: feeds[i].likeStatus,
               contents: [
                 Column(
                   children: [
@@ -504,6 +524,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                     SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                   ],
                 ),
+
+                // feeds[i].imagesOrVideos != null
+                // ? Container(
+                //   height: SizeConfig.blockSizeHorizontal * 50,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                //   ),
+                //   child: CachedNetworkImage(
+                //     imageUrl: feeds[i].imagesOrVideos[0],
+                //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                //     errorWidget: (context, url, error) => Icon(Icons.error),
+                //   ),
+                // )
+                // : Container(height: 0,),
 
                 feeds[i].imagesOrVideos != null
                 ? Container(

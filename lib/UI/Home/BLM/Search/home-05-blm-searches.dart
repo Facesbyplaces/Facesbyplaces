@@ -7,6 +7,7 @@ import 'package:facesbyplaces/API/BLM/api-61-blm-search-suggested.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,13 @@ class BLMSearchMainPosts{
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
 
-  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
+
+  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 }
 
 class BLMSearchMainSuggested{
@@ -86,6 +93,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   int page3 = 1;
   int page4 = 1;
   int toggle;
+  int tabCount1 = 0;
+  int tabCount2 = 0;
+  int tabCount3 = 0;
+  int tabCount4 = 0;
+
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -97,6 +109,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     if(postItemRemaining != 0){
       var newValue = await apiBLMSearchPosts(keyword, page1);
       postItemRemaining = newValue.itemsRemaining;
+      tabCount1 = tabCount1 + newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
         feeds.add(BLMSearchMainPosts(
@@ -107,7 +120,13 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+
+          managed: newValue.familyMemorialList[i].page.manage,
+          joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,
           ),    
         );
       }
@@ -126,6 +145,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     if(suggestedItemRemaining != 0){
       var newValue = await apiBLMSearchSuggested(page2);
       suggestedItemRemaining = newValue.itemsRemaining;
+      tabCount2 = tabCount2 + newValue.pages.length;
 
       for(int i = 0; i < newValue.pages.length; i++){
         suggested.add(BLMSearchMainSuggested(
@@ -151,8 +171,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
     if(nearbyBlmItemsRemaining != 0){
       var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
-
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
+      tabCount3 = tabCount3 + newValue.blmList.length;
 
       for(int i = 0; i < newValue.blmList.length; i++){
         nearby.add(BLMSearchMainNearby(
@@ -173,6 +193,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     else if(nearbyMemorialItemsRemaining != 0){
       var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
+      tabCount3 = tabCount3 + newValue.memorialList.length;
 
       for(int i = 0; i < newValue.memorialList.length; i++){
         nearby.add(BLMSearchMainNearby(
@@ -199,6 +220,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     if(blmItemRemaining != 0){
       var newValue = await apiBLMSearchBLM(keyword);
       blmItemRemaining = newValue.itemsRemaining;
+      tabCount4 = tabCount4 + newValue.memorialList.length;
 
       for(int i = 0; i < newValue.memorialList.length; i++){
         blm.add(BLMSearchMainBLM(
@@ -425,7 +447,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   searchPostExtended(){
     return Container(
       height: SizeConfig.screenHeight,
-      child: SmartRefresher(
+      child: tabCount1 != 0
+      ? SmartRefresher(
         enablePullDown: false,
         enablePullUp: true,
         header: MaterialClassicHeader(),
@@ -464,6 +487,13 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: convertDate(feeds[i].timeCreated),
+
+              managed: feeds[i].managed,
+              joined: feeds[i].joined,
+              profileImage: feeds[i].profileImage,
+              numberOfComments: feeds[i].numberOfComments,
+              numberOfLikes: feeds[i].numberOfLikes,
+              likeStatus: feeds[i].likeStatus,
               contents: [
                 Column(
                   children: [
@@ -514,13 +544,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: feeds.length,
         ),
       )
+      : MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
     );
   }
 
   searchSuggestedExtended(){
     return Container(
       height: SizeConfig.screenHeight,
-      child: SmartRefresher(
+      child: tabCount2 != 0
+      ? SmartRefresher(
         enablePullDown: false,
         enablePullUp: true,
         header: MaterialClassicHeader(),
@@ -567,13 +599,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: suggested.length,
         ),
       )
+      : MiscBLMEmptyDisplayTemplate(message: 'Suggested is empty',),
     );
   }
 
   searchNearbyExtended(){
     return Container(
       height: SizeConfig.screenHeight,
-      child: SmartRefresher(
+      child: tabCount3 != 0
+      ? SmartRefresher(
         enablePullDown: false,
         enablePullUp: true,
         header: MaterialClassicHeader(),
@@ -620,13 +654,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: nearby.length,
         ),
       )
+      : MiscBLMEmptyDisplayTemplate(message: 'Nearby is empty',),
     );
   }
 
   searchBLMExtended(){
     return Container(
       height: SizeConfig.screenHeight,
-      child: SmartRefresher(
+      child: tabCount4 != 0
+      ? SmartRefresher(
         enablePullDown: false,
         enablePullUp: true,
         header: MaterialClassicHeader(),
@@ -672,6 +708,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: blm.length,
         ),
       )
+      : MiscBLMEmptyDisplayTemplate(message: 'BLM is empty',),
     );
   }
 }

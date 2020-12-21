@@ -62,6 +62,11 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
+
+                    // Navigator.popAndPushNamed(context, '/home/blm');
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
+                    // MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: 'home/blm/profile-settings'));
+                    // Navigator.popAndPushNamed(context, 'home/blm/profile-settings');
                   },
                 );
               },
@@ -131,13 +136,8 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                   context.hideLoaderOverlay();
 
                                   if(result){
-
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
-                                    );
-
-                                    Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                                    Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
+                                    Navigator.popAndPushNamed(context, route.settings.name);
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                   }

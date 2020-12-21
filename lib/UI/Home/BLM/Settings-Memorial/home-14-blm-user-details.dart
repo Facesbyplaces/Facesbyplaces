@@ -53,7 +53,13 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         child: CircleAvatar(
                           radius: SizeConfig.blockSizeVertical * 15,
                           backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage(profile.data.image.toString()),
+                          backgroundImage: ((){
+                            if(profile.data.image != null && profile.data.image != ''){
+                              return NetworkImage(profile.data.image);
+                            }else{
+                              return AssetImage('assets/icons/app-icon.png');
+                            }
+                          }()),
                         ),
                       ),
                     ],
