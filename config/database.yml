@@ -9,8 +9,8 @@ default: &default
   encoding: unicode
   host: localhost
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: postgres
-  password: postgres
+  # username: postgres
+  # password: postgres
   timeout: 5000
 
 development:
@@ -38,7 +38,3 @@ production:
   database: fbp
   username: fbp
   password: facesbyplaces
-  # adapter: postgresql
-  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # timeout: 5000
-  # url: <%= ENV['DATABASE_URL'] %>
