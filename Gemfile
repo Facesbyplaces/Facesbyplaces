@@ -38,7 +38,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'sqlite3', '~> 1.4'
 
   # Use Dotenv for environment variables
   gem 'dotenv', '~> 2.2.1'
@@ -50,6 +49,11 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+end
+
+group :production do
+  # For production
+  gem 'pg', '~> 1.2', '>= 1.2.3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -86,5 +90,4 @@ gem 'omniauth-google-oauth2'
 gem 'activerecord-session_store'
         
 # DATABASE
-  # For production
-  gem 'pg', '~> 1.2', '>= 1.2.3'
+gem 'sqlite3', '~> 1.4'
