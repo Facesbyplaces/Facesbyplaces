@@ -37,6 +37,7 @@ production:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   host: localhost
 =======
   hostname: 127.0.0.1
@@ -46,6 +47,8 @@ production:
 =======
   hostname: 127.0.0.1
 >>>>>>> b475a1a31e06eacb648d77dbe1bda2f5242f3fbc
+=======
+>>>>>>> bf79597d067ce0d166c4d0ce9c33e7482e0712e0
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   url: <%= ENV['DATABASE_URL'] %>
