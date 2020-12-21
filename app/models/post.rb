@@ -12,10 +12,6 @@ class Post < ApplicationRecord
   # Report
   has_many :reports, as: :reportable, dependent: :destroy
 
-  # validation
-  validates :body, presence: true
-  validates :location, presence: true
-
   # Search
   include PgSearch::Model
   multisearchable against: [:body, :page_name, :page_location, :page_precinct, :page_state, :page_country, :page_cemetery, :page_birthplace]
