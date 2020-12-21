@@ -34,7 +34,11 @@ production:
   username: fbp
   password: facesbyplaces
   adapter: postgresql
+<<<<<<< HEAD
   host: localhost
+=======
+  hostname: 127.0.0.1
+>>>>>>> 9584029847f95635d8d1f8fad80072b7e4f3630c
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   url: <%= ENV['DATABASE_URL'] %>
