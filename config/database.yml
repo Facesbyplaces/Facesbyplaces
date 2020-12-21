@@ -34,7 +34,6 @@ production:
   username: fbp
   password: facesbyplaces
   adapter: postgresql
-  hostname: 127.0.0.1
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   url: <%= ENV['DATABASE_URL'] %>
