@@ -37,7 +37,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           super
         else
           @user = User.new(sign_up_params)
-          validator = GoogleIDToken::Validator.new(expiry: 1800)
+          validator = GoogleIDToken::Validator.new
           token = @user.google_id
           required_audience = JWT.decode(token, nil, false)[0]['aud'] 
           begin
