@@ -30,9 +30,11 @@ test:
   database: db/test.sqlite3
 
 production:
+  <<: *default
   database: fbp
   username: fbp
   password: facesbyplaces
+<<<<<<< HEAD
   adapter: postgresql
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -52,3 +54,9 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   url: <%= ENV['DATABASE_URL'] %>
+=======
+  # adapter: postgresql
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # timeout: 5000
+  # url: <%= ENV['DATABASE_URL'] %>
+>>>>>>> b4982aae38146136553c7e660a1ce7cd98ebff9d
