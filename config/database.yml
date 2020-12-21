@@ -30,9 +30,9 @@ test:
   database: db/test.sqlite3
 
 production:
-  database: Rails.application.credentials.dig(:database, :database)
-  username: Rails.application.credentials.dig(:database, :username)
-  password: Rails.application.credentials.dig(:database, :password)
+  database: fbp
+  username: fbp
+  password: facesbyplaces
   adapter: postgresql
   host: localhost
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
