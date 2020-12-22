@@ -18,6 +18,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           super
         else
           @user = User.new(sign_up_params_google_and_fb)
+
           @user.is_verified = true
           @user.facebook_id = @user.facebook_id
           @user.hideBirthdate = false 
@@ -25,7 +26,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideEmail = false 
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
-          @user.is_verified = true
           @user.save!
 
           render json: {status: "success", user: @user }
@@ -44,6 +44,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           begin
             payload = validator.check(token, required_audience, required_audience)
             email = payload['email']
+
             @user.is_verified = true
             @user.hideBirthdate = false 
             @user.hideBirthplace = false 
@@ -95,10 +96,20 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           super
         else
           # Register user
-          @user = User.register_user_from_apple(id_token.sub, id_token.email)
-          @user.update(first_name: params[:first_name], last_name: params[:last_name], phone_number: params[:phone_number], account_type: params[:account_type], hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false)
+          @user = User.new(sign_up_params_google_and_fb)
 
-          @user = User.new
+          @user.is_verified = true
+          @user.hideBirthdate = false 
+          @user.hideBirthplace = false 
+          @user.hideEmail = false 
+          @user.hideAddress = false 
+          @user.hidePhonenumber = false 
+          @user.apple_uid = id_token.email
+          @user.email = id_token.sub
+          @user.provider = :apple # devise_token_auth attribute, but you can add it yourself.
+          @user.uid = id_token.sub # devise_token_auth attribute
+
+          @user.save!
           
           return render json: {
             status: :created,
