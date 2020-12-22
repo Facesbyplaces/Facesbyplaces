@@ -9,7 +9,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/Regular/api-01-regular-login.dart';
-import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
 // import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -36,44 +35,88 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
   BranchLinkProperties lp;
   BranchContentMetaData metadata;
 
+  String token = '';
   String requestResult = '';
   DateTime idDate = DateTime.now();
+  DateTime date = DateTime.now();
+  StreamSubscription<Map> streamSubscription;
 
   void didChangeAppLifecycleState(AppLifecycleState state) async{
     if(state == AppLifecycleState.resumed){
-      initUnit();
+      // initUnit();
+      listenDeepLinkData();
     }
   }
 
   @override
   void initState() {
     super.initState();
+    String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
+    FlutterBranchSdk.setIdentity('$id');
     initDeepLinkData();
-    initUnit();
+    // initUnit();
+    listenDeepLinkData();
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
+    streamSubscription.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
-  initUnit() async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
+  // initUnit() async{
+  //   bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if(login){
+  //   if(login){
+  //     var value = await FlutterBranchSdk.getLatestReferringParams();
+
+  //     setState(() {
+  //       requestResult = '';
+  //     });
+
+  //     print('The value of value is $value');
+
+  //     // if(value['reset_password_token'] == null){
+  //     //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+  //     // }else{
+  //     //   Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
+  //     // }
+  //   }
+  // }
+
+
+  void listenDeepLinkData() async {
+    bool login = await FlutterBranchSdk.isUserIdentified();
+    // var first = await FlutterBranchSdk.getFirstReferringParams();
+
+    if(login == true){
+
       var value = await FlutterBranchSdk.getLatestReferringParams();
 
       setState(() {
+        token = value['token'];
         requestResult = '';
       });
 
-      if(value['reset_password_token'] == null){
-        await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-      }else{
-        Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
-      }
+      print('The login is $login');
+      print('The map value of value is $value');
+      print('The value of token is ${value['token']}');
+      print('The token is $token');
+
+      streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+        if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true && data['custom_id'] == 'password-reset-alm-account') {
+          print('Custom string: ${data['custom_id']}');
+          // Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
+        }
+      }, onError: (error) {
+        PlatformException platformException = error as PlatformException;
+        print(
+            'InitSession error: ${platformException.code} - ${platformException.message}');
+      });
+
+      print('The streamSubscription is $streamSubscription');
     }
   }
 
@@ -391,32 +434,32 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                       GestureDetector(
                         onTap: () async{
 
-                          FlutterBranchSdk.logout();
-                          print('heheheh');
+                          // FlutterBranchSdk.logout();
+                          // print('heheheh');
 
-                          // String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
+                          String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
 
-                          // print('The value of email is $email');
+                          print('The value of email is $email');
 
-                          // if(email != null){
-                          //   bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+                          if(email != null){
+                            bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
 
-                          //   if(validEmail == true){
-                          //     DateTime date = DateTime.now();
-                          //     String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
-                          //     FlutterBranchSdk.setIdentity('$id');
+                            if(validEmail == true){
+                              // DateTime date = DateTime.now();
+                              // String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
+                              // FlutterBranchSdk.setIdentity('$id');
 
-                          //     context.showLoaderOverlay();
-                          //     bool result = await generateLink(email);
-                          //     context.hideLoaderOverlay();
+                              context.showLoaderOverlay();
+                              bool result = await generateLink(email);
+                              context.hideLoaderOverlay();
 
-                          //     if(result){
-                          //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
-                          //     }else{
-                          //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-                          //     }
-                          //   } 
-                          // }
+                              if(result){
+                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
+                              }else{
+                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+                              }
+                            } 
+                          }
 
                         },
                         child: Align(
