@@ -153,6 +153,30 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     }
     end
 
+    def deleteComment
+        comment = Comment.find(params[:comment_id])
+
+        if comment.user == user()
+            comment.destroy 
+
+            render json: {status: :destroy}, status: 200
+        else
+            render json: {status: "This is not your comment"}, status: 401
+        end
+    end
+
+    def deleteReply
+        reply = Reply.find(params[:reply_id])
+
+        if reply.user == user()
+            reply.destroy 
+
+            render json: {status: :destroy}, status: 200
+        else
+            render json: {status: "This is not your reply"}, status: 401
+        end
+    end
+
     private
     def comment_params
         params.permit(:post_id, :body)
