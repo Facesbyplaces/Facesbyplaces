@@ -17,7 +17,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         if @user
           super
         else
-          @user = User.new(sign_up_params)
+          @user = User.new(sign_up_params_google_and_fb)
           @user.is_verified = true
           @user.facebook_id = @user.facebook_id
           @user.hideBirthdate = false 
@@ -36,7 +36,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         if @user
           super
         else
-          @user = User.new(sign_up_params)
+          @user = User.new(sign_up_params_google_and_fb)
           validator = GoogleIDToken::Validator.new
           token = @user.google_id
           required_audience = JWT.decode(token, nil, false)[0]['aud'] 
@@ -131,6 +131,10 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def sign_up_params
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
+    end
+    d
+    def sign_up_params_google_and_fb
+      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
     end
 
     protected
