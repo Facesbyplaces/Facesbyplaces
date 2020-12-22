@@ -133,6 +133,12 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
     end
 
+    protected
+
+    def valid_params?(key, val)
+      params[:facebook_id].present? || params[:google_id].present? ? "" : resource_params[:password] && key && val
+    end
+
     private
 
     def setup_apple_client

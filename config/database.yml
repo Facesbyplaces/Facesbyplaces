@@ -35,6 +35,6 @@ test:
 
 production:
   <<: *default
-  database: fbp
+  database: fbp_db
   username: fbp
   password: facesbyplaces
