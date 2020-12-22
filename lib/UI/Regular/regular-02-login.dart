@@ -2,6 +2,7 @@
 
 // import 'package:clipboard/clipboard.dart';
 import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
+import 'package:facesbyplaces/API/Home/api-02-home-login-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
@@ -26,155 +27,157 @@ class RegularLogin extends StatefulWidget{
   RegularLoginState createState() => RegularLoginState();
 }
 
-class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
+//  with WidgetsBindingObserver
+
+class RegularLoginState extends State<RegularLogin>{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  BranchContentMetaData metadata;
+  // BranchUniversalObject buo;
+  // BranchLinkProperties lp;
+  // BranchContentMetaData metadata;
 
-  String token = '';
-  String requestResult = '';
-  DateTime idDate = DateTime.now();
-  DateTime date = DateTime.now();
-  StreamSubscription<Map> streamSubscription;
+  // String token = '';
+  // String requestResult = '';
+  // DateTime idDate = DateTime.now();
+  // DateTime date = DateTime.now();
+  // StreamSubscription<Map> streamSubscription;
 
-  void didChangeAppLifecycleState(AppLifecycleState state) async{
-    if(state == AppLifecycleState.resumed){
-      // initUnit();
-      listenDeepLinkData();
-    }
-  }
+  // void didChangeAppLifecycleState(AppLifecycleState state) async{
+  //   if(state == AppLifecycleState.resumed){
+  //     // initUnit();
+  //     listenDeepLinkData();
+  //   }
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
-    FlutterBranchSdk.setIdentity('$id');
-    initDeepLinkData();
-    // initUnit();
-    listenDeepLinkData();
-    WidgetsBinding.instance.addObserver(this);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
+  //   FlutterBranchSdk.setIdentity('$id');
+  //   initDeepLinkData();
+  //   // initUnit();
+  //   listenDeepLinkData();
+  //   WidgetsBinding.instance.addObserver(this);
+  // }
 
-  @override
-  void dispose() {
-    streamSubscription.cancel();
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   streamSubscription.cancel();
+  //   WidgetsBinding.instance.removeObserver(this);
+  //   super.dispose();
+  // }
 
-  // initUnit() async{
+  // // initUnit() async{
+  // //   bool login = await FlutterBranchSdk.isUserIdentified();
+
+  // //   if(login){
+  // //     var value = await FlutterBranchSdk.getLatestReferringParams();
+
+  // //     setState(() {
+  // //       requestResult = '';
+  // //     });
+
+  // //     print('The value of value is $value');
+
+  // //     // if(value['reset_password_token'] == null){
+  // //     //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+  // //     // }else{
+  // //     //   Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
+  // //     // }
+  // //   }
+  // // }
+
+
+  // void listenDeepLinkData() async {
   //   bool login = await FlutterBranchSdk.isUserIdentified();
+  //   // var first = await FlutterBranchSdk.getFirstReferringParams();
 
-  //   if(login){
+  //   if(login == true){
+
   //     var value = await FlutterBranchSdk.getLatestReferringParams();
 
   //     setState(() {
+  //       token = value['token'];
   //       requestResult = '';
   //     });
 
-  //     print('The value of value is $value');
+  //     print('The login is $login');
+  //     print('The map value of value is $value');
+  //     print('The value of token is ${value['token']}');
+  //     print('The token is $token');
 
-  //     // if(value['reset_password_token'] == null){
-  //     //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-  //     // }else{
-  //     //   Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
-  //     // }
+  //     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+  //       if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true && data['custom_id'] == 'password-reset-alm-account') {
+  //         print('Custom string: ${data['custom_id']}');
+  //         // Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
+  //       }
+  //     }, onError: (error) {
+  //       PlatformException platformException = error as PlatformException;
+  //       print(
+  //           'InitSession error: ${platformException.code} - ${platformException.message}');
+  //     });
+
+  //     print('The streamSubscription is $streamSubscription');
   //   }
   // }
 
 
-  void listenDeepLinkData() async {
-    bool login = await FlutterBranchSdk.isUserIdentified();
-    // var first = await FlutterBranchSdk.getFirstReferringParams();
+  // void initDeepLinkData() {
+  //   metadata = BranchContentMetaData()
+  //     .addCustomMetadata('custom_string', 'abc')
+  //     .addCustomMetadata('custom_number', 12345)
+  //     .addCustomMetadata('custom_bool', true)
+  //     .addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5,],)
+  //     .addCustomMetadata('custom_list_string', ['a', 'b', 'c']);
 
-    if(login == true){
+  //   buo = BranchUniversalObject(
+  //     canonicalIdentifier: 'reset-password-${idDate.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '')}',
+  //     title: 'ChipinCauses',
+  //     imageUrl:'',
+  //     contentDescription: 'ChipinCauses Forgot Password',
+  //     contentMetadata: BranchContentMetaData()
+  //       ..addCustomMetadata('custom_string', 'abc')
+  //       ..addCustomMetadata('custom_number', 12345)
+  //       ..addCustomMetadata('custom_bool', true)
+  //       ..addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5])
+  //       ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']
+  //     ),
+  //     keywords: ['ChipinCauses', 'Password', 'Reset'],
+  //     publiclyIndex: true,
+  //     locallyIndex: true,
+  //   );
 
-      var value = await FlutterBranchSdk.getLatestReferringParams();
+  //   lp = BranchLinkProperties(
+  //     channel: 'email',
+  //     feature: 'sharing',
+  //     stage: 'new share',
+  //     campaign: 'xxxxx',
+  //     tags: ['reset', 'password', 'email'],
+  //   );
 
-      setState(() {
-        token = value['token'];
-        requestResult = '';
-      });
+  //   lp.addControlParam('\$uri_redirect_mode', '1');
+  // }
 
-      print('The login is $login');
-      print('The map value of value is $value');
-      print('The value of token is ${value['token']}');
-      print('The token is $token');
+  // Future<bool> generateLink(String email) async {
 
-      streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-        if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true && data['custom_id'] == 'password-reset-alm-account') {
-          print('Custom string: ${data['custom_id']}');
-          // Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => RegularPasswordReset()));
-        }
-      }, onError: (error) {
-        PlatformException platformException = error as PlatformException;
-        print(
-            'InitSession error: ${platformException.code} - ${platformException.message}');
-      });
+  //   bool forgotPasswordResult;
 
-      print('The streamSubscription is $streamSubscription');
-    }
-  }
+  //   try{
+  //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+  //     if(response.success){
+  //       forgotPasswordResult = await apiHomeResetPassword(email: email, redirectLink: response.result);
+  //     }
+  //   }catch(e){
+  //     setState(() {
+  //       requestResult = 'Something went wrong. Please try again.';
+  //     });
+  //     forgotPasswordResult = false;
+  //   }
 
-
-  void initDeepLinkData() {
-    metadata = BranchContentMetaData()
-      .addCustomMetadata('custom_string', 'abc')
-      .addCustomMetadata('custom_number', 12345)
-      .addCustomMetadata('custom_bool', true)
-      .addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5,],)
-      .addCustomMetadata('custom_list_string', ['a', 'b', 'c']);
-
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'reset-password-${idDate.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '')}',
-      title: 'ChipinCauses',
-      imageUrl:'',
-      contentDescription: 'ChipinCauses Forgot Password',
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('custom_string', 'abc')
-        ..addCustomMetadata('custom_number', 12345)
-        ..addCustomMetadata('custom_bool', true)
-        ..addCustomMetadata('custom_list_number', [1, 2, 3, 4, 5])
-        ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']
-      ),
-      keywords: ['ChipinCauses', 'Password', 'Reset'],
-      publiclyIndex: true,
-      locallyIndex: true,
-    );
-
-    lp = BranchLinkProperties(
-      channel: 'email',
-      feature: 'sharing',
-      stage: 'new share',
-      campaign: 'xxxxx',
-      tags: ['reset', 'password', 'email'],
-    );
-
-    lp.addControlParam('\$uri_redirect_mode', '1');
-  }
-
-  Future<bool> generateLink(String email) async {
-
-    bool forgotPasswordResult;
-
-    try{
-      BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-      if(response.success){
-        forgotPasswordResult = await apiHomeResetPassword(email: email, redirectLink: response.result);
-      }
-    }catch(e){
-      setState(() {
-        requestResult = 'Something went wrong. Please try again.';
-      });
-      forgotPasswordResult = false;
-    }
-
-    return forgotPasswordResult;
-  }
+  //   return forgotPasswordResult;
+  // }
 
 
   @override
@@ -232,44 +235,68 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
 
                                   final fb = FacebookLogin();
 
+
+
                                   // await fb.logOut();
-
-                                  print('The value is ${fb.hashCode}');
-                                  print('The value is ${fb.accessToken}');
-                                  print('The value is ${fb.debug}');
-
-                                  // Log in
-                                  final result = await fb.logIn(permissions: [
-                                    FacebookPermission.publicProfile,
-                                    FacebookPermission.email,
-                                    FacebookPermission.userFriends,
-                                  ]);
-
-                                  print('The result status is ${result.status}');
-                                  print('The result access token is ${result.accessToken.token}');
-                                  print('The result error is ${result.error}');
+                                  // print('heheheheh');
 
 
-                                  final email = await fb.getUserEmail();
-                                  final profile = await fb.getUserProfile();
-                                  final image = await fb.getProfileImageUrl(width: 50, height: 50);
+                                  bool isLoggedIn = await fb.isLoggedIn;
 
-                                  print('The email is $email');
-                                  print('The firstName is ${profile.firstName}');
-                                  print('The lastName is ${profile.lastName}');
-                                  print('The image is $image');
+                                  if(isLoggedIn == true){
+                                    String email = await fb.getUserEmail();
+                                    bool result = await apiHomeLoginWithFacebook(email);
 
-                                  context.showLoaderOverlay();
-                                  bool apiResult = await apiRegularSignInWithFacebook(
-                                    firstName: profile.firstName.toString(), 
-                                    lastName: profile.lastName.toString(), 
-                                    email: email, 
-                                    username: email,
-                                    facebookId: result.accessToken.token,
-                                  );
-                                  context.hideLoaderOverlay();
+                                    if(result == true){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                    }
 
-                                  print('The apiResult is $apiResult');
+                                  }else{
+                                    // Log in
+                                    final result = await fb.logIn(permissions: [
+                                      FacebookPermission.publicProfile,
+                                      FacebookPermission.email,
+                                      FacebookPermission.userFriends,
+                                    ]);
+
+                                    print('The result status is ${result.status}');
+                                    print('The result access token is ${result.accessToken.token}');
+                                    print('The result error is ${result.error}');
+
+
+                                    final email = await fb.getUserEmail();
+                                    final profile = await fb.getUserProfile();
+                                    final image = await fb.getProfileImageUrl(width: 50, height: 50);
+
+                                    print('The email is $email');
+                                    print('The firstName is ${profile.firstName}');
+                                    print('The lastName is ${profile.lastName}');
+                                    print('The image is $image');
+
+                                    context.showLoaderOverlay();
+                                    bool apiResult = await apiRegularSignInWithFacebook(
+                                      firstName: profile.firstName.toString(), 
+                                      lastName: profile.lastName.toString(), 
+                                      email: email, 
+                                      username: email,
+                                      facebookId: result.accessToken.token,
+                                    );
+                                    context.hideLoaderOverlay();
+
+                                    print('The apiResult is $apiResult');
+
+                                    if(apiResult == false){
+                                      await fb.logOut();
+                                    }
+                                  }
+
+
+                                  // context.showLoaderOverlay();
+                                  // bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                                  // context.hideLoaderOverlay();
+
 
 
 
@@ -437,29 +464,29 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                           // FlutterBranchSdk.logout();
                           // print('heheheh');
 
-                          String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
+                          // String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
 
-                          print('The value of email is $email');
+                          // print('The value of email is $email');
 
-                          if(email != null){
-                            bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+                          // if(email != null){
+                          //   bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
 
-                            if(validEmail == true){
-                              // DateTime date = DateTime.now();
-                              // String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
-                              // FlutterBranchSdk.setIdentity('$id');
+                          //   if(validEmail == true){
+                          //     // DateTime date = DateTime.now();
+                          //     // String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-alm-password-reset';
+                          //     // FlutterBranchSdk.setIdentity('$id');
 
-                              context.showLoaderOverlay();
-                              bool result = await generateLink(email);
-                              context.hideLoaderOverlay();
+                          //     context.showLoaderOverlay();
+                          //     bool result = await generateLink(email);
+                          //     context.hideLoaderOverlay();
 
-                              if(result){
-                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
-                              }else{
-                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-                              }
-                            } 
-                          }
+                          //     if(result){
+                          //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
+                          //     }else{
+                          //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+                          //     }
+                          //   } 
+                          // }
 
                         },
                         child: Align(

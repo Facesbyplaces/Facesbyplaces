@@ -17,6 +17,9 @@ Future<bool> apiRegularLogout() async{
     }
   );
 
+  print('The response status is ${response.statusCode}');
+  print('The response body is ${response.body}');
+
   if(response.statusCode == 200){
 
     sharedPrefs.remove('blm-user-id');

@@ -9,6 +9,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home-03-01-regular-feed-tab.dart';
@@ -205,6 +206,23 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               }else{
                                 await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
                               }
+
+                              //   Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                              //   Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+
+                              // final sharedPrefs = await SharedPreferences.getInstance();
+
+                              // sharedPrefs.remove('blm-user-id');
+                              // sharedPrefs.remove('blm-access-token');
+                              // sharedPrefs.remove('blm-uid');
+                              // sharedPrefs.remove('blm-client');
+                              // sharedPrefs.remove('blm-user-session');
+
+                              // sharedPrefs.remove('regular-user-id');
+                              // sharedPrefs.remove('regular-access-token');
+                              // sharedPrefs.remove('regular-uid');
+                              // sharedPrefs.remove('regular-client');
+                              // sharedPrefs.remove('regular-user-session');
                               
                             },
                             child: Text('Log Out', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
