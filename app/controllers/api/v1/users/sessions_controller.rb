@@ -13,7 +13,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       if params[:facebook_id].present?
         user = User.where(facebook_id: params[:facebook_id]).first
 
-        if @user
+        if user
           super
           # return render json: {status: "fb"}, status: 200
         else
