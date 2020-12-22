@@ -172,6 +172,10 @@ Rails.application.routes.draw do
         get '/index/comments/:id', to: 'comments#commentsIndex'
         # Replies index
         get '/index/replies/:id', to: 'comments#repliesIndex'
+        # Delete Comment
+        delete 'comment', to: 'comments#deleteComment'
+        # Delete reply
+        delete 'reply', to: 'comments#deleteReply'
       end
       namespace :admin do
         # all users
