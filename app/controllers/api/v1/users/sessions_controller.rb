@@ -1,4 +1,5 @@
 class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
+  include DeviseTokenAuth::Concerns::SetUserByToken
   before_action :setup_apple_client, only: [:apple]
 
     def render_create_success
@@ -16,7 +17,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         if @user
           # super
           # return render json: {status: "fb"}, status: 200
-          return sign_in(@user, store: true, bypass: false)
+          sign_in(@user, store: true, bypass: false)
+
+          render json: {status: "success", user: @user }
         else
           @user = User.new(sign_up_params_google_and_fb)
 
