@@ -30,9 +30,10 @@ class APIRegularShowProfileInformation{
   int userId;
   String firstName;
   String lastName;
-  dynamic image;
+  String image;
+  String email;
 
-  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image});
+  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image, this.email});
 
   factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -43,6 +44,7 @@ class APIRegularShowProfileInformation{
       firstName: newValue['first_name'],
       lastName: newValue['last_name'],
       image: newValue['image'],
+      email: newValue['email'],
     );
   }
 }

@@ -34,8 +34,9 @@ class APIBLMShowProfileInformation{
   String firstName;
   String lastName;
   String image;
+  String email;
 
-  APIBLMShowProfileInformation({this.userId, this.firstName, this.lastName, this.image});
+  APIBLMShowProfileInformation({this.userId, this.firstName, this.lastName, this.image, this.email});
 
   factory APIBLMShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -46,6 +47,7 @@ class APIBLMShowProfileInformation{
       firstName: newValue['first_name'],
       lastName: newValue['last_name'],
       image: newValue['image'],
+      email: newValue['email'],
     );
   }
 }

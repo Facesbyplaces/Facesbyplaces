@@ -108,7 +108,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                         Center(
-                          child: Text('+email',
+                          child: Text(profile.data.email,
                             style: TextStyle(
                               fontSize: SizeConfig.safeBlockHorizontal * 4,
                               fontWeight: FontWeight.w300,

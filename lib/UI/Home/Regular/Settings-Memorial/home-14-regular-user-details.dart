@@ -53,7 +53,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         child: CircleAvatar(
                           radius: SizeConfig.blockSizeVertical * 15,
                           backgroundColor: Color(0xff888888),
-                          backgroundImage: AssetImage(profile.data.image),
+                          backgroundImage: ((){
+                            if(profile.data.image != null && profile.data.image != ''){
+                              return NetworkImage(profile.data.image);
+                            }else{
+                              return AssetImage('assets/icons/app-icon.png');
+                            }
+                          }()),
                         ),
                       ),
                     ],
@@ -102,7 +108,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                         Center(
-                          child: Text('+email',
+                          child: Text(profile.data.email,
                             style: TextStyle(
                               fontSize: SizeConfig.safeBlockHorizontal * 4,
                               fontWeight: FontWeight.w300,

@@ -100,11 +100,11 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>branch_key</key>
-	<string>key_test_oc2aadbr5zOYZVw6jxaozcehwubdz1gZ</string>
+	<string>key_live_ojZbbbmuXFU4YLE3lDeonklaDzenB7dV</string>
 	<key>branch_universal_link_domains</key>
 	<array>
-		<string>29cft.test-app.link</string>
-		<string>29cft-alternate.test-app.link</string>
+		<string>29cft.app.link</string>
+		<string>29cft-alternate.app.link</string>
 	</array>
 </dict>
 </plist>

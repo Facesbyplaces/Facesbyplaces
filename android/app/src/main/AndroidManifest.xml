@@ -50,9 +50,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="dlscheme" android:host="dlhost" />
-                <data android:scheme="https" android:host="29cft.test-app.link" />
+                <data android:scheme="https" android:host="29cft.app.link" />
                 <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
-                <data android:scheme="https" android:host="29cft-alternate.test-app.link" />
+                <data android:scheme="https" android:host="29cft-alternate.app.link" />
             </intent-filter>
             
         </activity>
@@ -77,8 +77,10 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_oc2aadbr5zOYZVw6jxaozcehwubdz1gZ" />
-        <meta-data android:name="io.branch.sdk.TestMode" android:value="true" />   
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_ojZbbbmuXFU4YLE3lDeonklaDzenB7dV" />
+        <!-- <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_live_ojZbbbmuXFU4YLE3lDeonklaDzenB7dV" /> -->
+        <!-- secret_live_FCwcI5UnWBVwo4fiYymYQrGVXa3HBy2s -->
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />   
 
         <meta-data android:name="com.google.android.gms.wallet.api.enabled" android:value="true" />
 
