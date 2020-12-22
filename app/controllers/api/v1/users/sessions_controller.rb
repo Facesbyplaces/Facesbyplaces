@@ -9,13 +9,13 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     end
 
     def create
-
       #Facebook Login
       if params[:facebook_id].present?
         @user = User.where(facebook_id: params[:facebook_id]).first
 
         if @user
-          super
+          # super
+          return render json: {status: "fb"}, status: 200
         else
           @user = User.new(sign_up_params_google_and_fb)
 
