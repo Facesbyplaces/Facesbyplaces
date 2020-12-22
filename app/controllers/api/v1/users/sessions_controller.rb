@@ -25,6 +25,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideEmail = false 
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
+          @user.is_verified = true
           @user.save!
 
           render json: {status: "success", user: @user }
@@ -49,6 +50,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.hideEmail = false 
             @user.hideAddress = false 
             @user.hidePhonenumber = false 
+            @user.is_verified = true
             @user.save!
     
             render json: UserSerializer.new( @user ).attributes
@@ -56,6 +58,54 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             return render json: {status: "Cannot validate: #{e}"}, status: 422
           end
         end
+      # Apple Login
+      elsif params[:code].present? && params[:identity_token].present?
+        # Initialized of apple processes
+          setup_apple_client()
+          @client.authorization_code = params[:code]
+
+          begin
+            token_response = @client.access_token!
+            rescue AppleID::Client::Error => e
+            # puts e # gives useful messages from apple on failure
+            return render json: {status: e}, status: 401
+          end
+
+          id_token_back_channel = token_response.id_token
+          id_token_back_channel.verify!(
+            client: @client,
+            access_token: token_response.access_token,
+          )
+
+          id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
+          id_token_front_channel.verify!(
+            client: @client,
+            code: params[:code],
+          )
+          id_token = token_response.id_token
+
+        @user = User.find_by(apple_uid: id_token.sub)
+        if @user.present?
+          super
+        end
+  
+        @user = User.find_by_email(id_token.email)
+  
+        if @user.present?
+          super
+        else
+          # Register user
+          @user = User.register_user_from_apple(id_token.sub, id_token.email)
+          @user.update(first_name: params[:first_name], last_name: params[:last_name], phone_number: params[:phone_number], account_type: params[:account_type], hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false)
+
+          @user = User.new
+          
+          return render json: {
+            status: :created,
+            user: UserSerializer.new( @user ).attributes
+            }, status: 200
+        end
+      # Fbp Login
       else
         user = User.find_by(email: params[:email])
         account_type = params[:account_type].to_i
@@ -77,58 +127,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       
     end
 
-    def apple
-      # Initialized of apple processes
-        if !params[:code].present? && !params[:identity_token].present?
-          return render json: {status: "error"}, status: 422
-        end
-        
-        @client.authorization_code = params[:code]
-
-        begin
-          token_response = @client.access_token!
-          rescue AppleID::Client::Error => e
-          # puts e # gives useful messages from apple on failure
-          return render json: {status: e}, status: 401
-        end
-
-        id_token_back_channel = token_response.id_token
-        id_token_back_channel.verify!(
-          client: @client,
-          access_token: token_response.access_token,
-        )
-
-        id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
-        id_token_front_channel.verify!(
-          client: @client,
-          code: params[:code],
-        )
-        id_token = token_response.id_token
-
-      @user = User.find_by(apple_uid: id_token.sub)
-      if @user.present?
-        sign_in(@user, store: true, bypass: false) # Devise method
-        return render status: 200, json: {
-          status: "success",
-          user: UserSerializer.new( @user ).attributes
-        }
-      end
-
-      @user = User.find_by_email(id_token.email)
-
-      if @user.present?
-        # Enable apple login to existing user
-        @user.update_column(:apple_uid, id_token.sub)
-        sign_in(@user, store: true, bypass: false) # Devise method
-        return render status: 200, json: {
-          status: "success",
-          user: UserSerializer.new( @user ).attributes
-        }
-      else
-        return render json: {status: "Account not found"}, status: 404
-      end
-    end
-
     def sign_up_params
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
     end
@@ -147,10 +145,10 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def setup_apple_client
       @client ||= AppleID::Client.new(
-      identifier: ENV['APPLE_CLIENT_ID'],
-      team_id: ENV['APPLE_TEAM_ID'],
-      key_id: ENV['APPLE_KEY'],
-      private_key: OpenSSL::PKey::EC.new(ENV['APPLE_PRIVATE_KEY']),
+      identifier: Rails.application.credentials.dig(:apple, :apple_client_id),
+      team_id: Rails.application.credentials.dig(:apple, :apple_team_id),
+      key_id: Rails.application.credentials.dig(:apple, :apple_key_id),
+      private_key: OpenSSL::PKey::EC.new(Rails.application.credentials.dig(:apple, :apple_private_key)),
       redirect_uri: ENV['APPLE_REDIRECT_URI']
       )
     end
