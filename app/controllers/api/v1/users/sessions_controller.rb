@@ -27,7 +27,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           user.hidePhonenumber = false 
           user.save!
 
-          @ser.update(is_verified: true)
+          user.update(is_verified: true)
 
           render json: {status: "success", user: user }
         end
