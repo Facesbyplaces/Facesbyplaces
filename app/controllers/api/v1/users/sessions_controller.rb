@@ -11,25 +11,25 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def create
       #Facebook Login
       if params[:facebook_id].present?
-        @user = User.where(facebook_id: params[:facebook_id]).first
+        user = User.where(facebook_id: params[:facebook_id]).first
 
         if @user
-          # super
-          return render json: {status: "fb"}, status: 200
+          super
+          # return render json: {status: "fb"}, status: 200
         else
-          @user = User.new(sign_up_params_google_and_fb)
+          user = User.new(sign_up_params_google_and_fb)
 
-          @user.facebook_id = @user.facebook_id
-          @user.hideBirthdate = false 
-          @user.hideBirthplace = false 
-          @user.hideEmail = false 
-          @user.hideAddress = false 
-          @user.hidePhonenumber = false 
-          @user.save!
+          user.facebook_id = @user.facebook_id
+          user.hideBirthdate = false 
+          user.hideBirthplace = false 
+          user.hideEmail = false 
+          user.hideAddress = false 
+          user.hidePhonenumber = false 
+          user.save!
 
-          @user.update(is_verified: true)
+          @ser.update(is_verified: true)
 
-          render json: {status: "success", user: @user }
+          render json: {status: "success", user: user }
         end
       #Google Login
       elsif params[:google_id].present?
