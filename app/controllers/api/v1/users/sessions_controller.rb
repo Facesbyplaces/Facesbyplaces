@@ -19,7 +19,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         else
           @user = User.new(sign_up_params_google_and_fb)
 
-          @user.is_verified = true
           @user.facebook_id = @user.facebook_id
           @user.hideBirthdate = false 
           @user.hideBirthplace = false 
@@ -27,6 +26,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
           @user.save!
+
+          @user.update(is_verified: true)
 
           render json: {status: "success", user: @user }
         end
@@ -45,7 +46,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             payload = validator.check(token, required_audience, required_audience)
             email = payload['email']
 
-            @user.is_verified = true
             @user.hideBirthdate = false 
             @user.hideBirthplace = false 
             @user.hideEmail = false 
@@ -53,6 +53,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.hidePhonenumber = false 
             @user.is_verified = true
             @user.save!
+
+            @user.update(is_verified: true)
     
             render json: UserSerializer.new( @user ).attributes
           rescue GoogleIDToken::ValidationError => e
@@ -96,7 +98,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           super
         else
           # Register user
-          @user = User.new(sign_up_params_google_and_fb)
+          @user = User.new(sign_up_params_apple)
 
           @user.is_verified = true
           @user.hideBirthdate = false 
@@ -144,6 +146,10 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     
     def sign_up_params_google_and_fb
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
+    end
+    
+    def sign_up_params_apple
+      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :username)
     end
 
     protected
