@@ -5,8 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-users = User.all 
 
-users.each do |user|
-    user.update(hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false,)
+# users = User.all 
+
+# users.each do |user|
+#     user.update(hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false,)
+# end
+
+comments = Comment.all 
+
+comments.each do |comment|
+    if comment.user.guest == true 
+        comment.destroy 
+    end
+end
+
+replies = Reply.all 
+
+replies.each do |reply|
+    if reply.user.guest == true 
+        reply.destroy 
+    end
 end
