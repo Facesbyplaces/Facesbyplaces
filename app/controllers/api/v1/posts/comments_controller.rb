@@ -156,7 +156,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     def deleteComment
         comment = Comment.find(params[:comment_id])
 
-        if comment.user == user()
+        if comment.user == user() || comment.user.guest == true
             comment.destroy 
 
             render json: {status: :destroy}, status: 200
@@ -168,7 +168,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     def deleteReply
         reply = Reply.find(params[:reply_id])
 
-        if reply.user == user()
+        if reply.user == user() || comment.user.guest == true
             reply.destroy 
 
             render json: {status: :destroy}, status: 200
