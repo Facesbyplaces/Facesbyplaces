@@ -19,7 +19,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.save
           super
-          render json: {success: true, user: UserSerializer.new( @user ).attributes}, status: 200
         else
           @user = User.new(sign_up_params_google_and_fb)
 
@@ -41,7 +40,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.save!
 
           super
-          # render json: {status: "success", user: @user }
         end
       #Google Login
       elsif params[:google_id].present?
@@ -86,7 +84,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
             @user.save!
             super
-            # render json: UserSerializer.new( @user ).attributes
           rescue GoogleIDToken::ValidationError => e
             return render json: {status: "Cannot validate: #{e}"}, status: 422
           end
