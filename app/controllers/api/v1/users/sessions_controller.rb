@@ -60,6 +60,12 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.hideAddress = false 
             @user.hidePhonenumber = false 
             @user.is_verified = true
+
+            # image
+            if params[:image].present? 
+              downloaded_image = open(params[:image])
+              @user.image.attach(io: downloaded_image  , filename: "foo.jpg")
+            end
             @user.save!
     
             render json: UserSerializer.new( @user ).attributes
@@ -145,13 +151,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       end
       
     end
- 
-    def sign_up_params
-      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
-    end
     
     def sign_up_params_google_and_fb
-      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :image)
+      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
     end
     
     def sign_up_params_apple
