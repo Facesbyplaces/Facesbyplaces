@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_one :notifsetting, dependent: :destroy
   has_one_attached :image, dependent: :destroy
   has_many :relationships
+  has_many :pageowners, dependent: :destroy
 
   # Transactions
   has_many :transactions, dependent: :destroy
