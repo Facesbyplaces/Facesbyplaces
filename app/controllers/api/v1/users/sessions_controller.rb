@@ -40,7 +40,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
           @user.save!
 
-          render json: {status: "success", user: @user }
+          super
+          # render json: {status: "success", user: @user }
         end
       #Google Login
       elsif params[:google_id].present?
@@ -82,10 +83,10 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
               filename = File.basename(URI.parse(params[:image]).path)
               @user.image.attach(io: downloaded_image  , filename: filename)
             end
-            
+
             @user.save!
-    
-            render json: UserSerializer.new( @user ).attributes
+            super
+            # render json: UserSerializer.new( @user ).attributes
           rescue GoogleIDToken::ValidationError => e
             return render json: {status: "Cannot validate: #{e}"}, status: 422
           end
