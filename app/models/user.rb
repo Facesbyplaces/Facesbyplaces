@@ -22,8 +22,13 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
   has_one :notifsetting, dependent: :destroy
   has_one_attached :image, dependent: :destroy
-  has_many :relationships
+  has_many :relationships, dependent: :destroy
   has_many :pageowners, dependent: :destroy
+  has_many :postslikes, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :replies, dependent: :destroy
+  has_many :commentslikes, dependent: :destroy
+  has_many :tagpeople, dependent: :destroy
 
   # Transactions
   has_many :transactions, dependent: :destroy
