@@ -14,11 +14,10 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         @user = User.where(facebook_id: params[:facebook_id]).first
 
         if @user
-          # super
-          # return render json: {status: "fb"}, status: 200
-          sign_in(@user, store: true)
-
-          render json: {status: "success", user: @user }
+          params[:email] = @user.email
+          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+          @user.password = @user.password_confirmation = params[:password]
+          super
         else
           @user = User.new(sign_up_params_google_and_fb)
 
@@ -28,9 +27,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideEmail = false 
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
+          @user.is_verified = true
           @user.save!
-
-          @user.update(is_verified: true)
 
           render json: {status: "success", user: @user }
         end
