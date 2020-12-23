@@ -19,6 +19,9 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) as
     }
   );
 
+  print('The response status is ${response.statusCode}');
+  print('The response body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMHomeProfilePostMain.fromJson(newValue);
@@ -56,8 +59,11 @@ class APIBLMHomeProfilePostExtended{
   double longitude;
   List<dynamic> imagesOrVideos;
   String createAt;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  APIBLMHomeProfilePostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt});
+  APIBLMHomeProfilePostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIBLMHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -77,6 +83,9 @@ class APIBLMHomeProfilePostExtended{
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList,
       createAt: parsedJson['created_at'],
+      numberOfLikes: parsedJson['numberOfLikes'],
+      numberOfComments: parsedJson['numberOfComments'],
+      likeStatus: parsedJson['likeStatus'],
     );
   }
 }
@@ -90,8 +99,12 @@ class APIBLMHomeProfilePostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeProfilePostExtendedPageCreator pageCreator;
+  bool follower;
+  bool manage;
+  String pageType;
+  String privacy;
 
-  APIBLMHomeProfilePostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIBLMHomeProfilePostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIBLMHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedPage(
@@ -103,7 +116,10 @@ class APIBLMHomeProfilePostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      follower: parsedJson['follower'],
+      manage: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

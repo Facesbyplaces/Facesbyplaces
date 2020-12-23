@@ -37,8 +37,13 @@ class BLMProfilePosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 }
 
 class HomeBLMProfile extends StatefulWidget{
@@ -87,13 +92,19 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,       
+          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          managed: newValue.familyMemorialList[i].page.manage,
+          joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,     
           ),
         );
       }
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
     }else{
@@ -657,7 +668,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     }
                                     else if(mode == LoadStatus.canLoading){
                                       body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                                      page++;
                                     }
                                     else{
                                       body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -673,58 +683,57 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   padding: EdgeInsets.all(10.0),
                                   physics: ClampingScrollPhysics(),
                                   itemBuilder: (c, i) {
-                                    var container = GestureDetector(
-                                      onTap: (){
-                                        Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
-                                      },
-                                      child: Container(
-                                        child: MiscBLMPost(
-                                          userId: posts[i].userId,
-                                          postId: posts[i].postId,
-                                          memorialId: posts[i].memorialId,
-                                          memorialName: posts[i].memorialName,
-                                          timeCreated: convertDate(posts[i].timeCreated),
-                                          contents: [
-                                            Column(
-                                              children: [
-                                                Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: RichText(
-                                                    maxLines: 4,
-                                                    overflow: TextOverflow.clip,
-                                                    textAlign: TextAlign.left,
-                                                    text: TextSpan(
-                                                      text: posts[i].postBody,
-                                                      style: TextStyle(
-                                                        fontWeight: FontWeight.w300,
-                                                        color: Color(0xff000000),
-                                                      ),
-                                                    ),
+                                    return MiscBLMPost(
+                                      userId: posts[i].userId,
+                                      postId: posts[i].postId,
+                                      memorialId: posts[i].memorialId,
+                                      memorialName: posts[i].memorialName,
+                                      timeCreated: convertDate(posts[i].timeCreated),
+                                      managed: posts[i].managed,
+                                      joined: posts[i].joined,
+                                      profileImage: posts[i].profileImage,
+                                      numberOfComments: posts[i].numberOfComments,
+                                      numberOfLikes: posts[i].numberOfLikes,
+                                      likeStatus: posts[i].likeStatus,
+                                      contents: [
+                                        Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: RichText(
+                                                maxLines: 4,
+                                                overflow: TextOverflow.clip,
+                                                textAlign: TextAlign.left,
+                                                text: TextSpan(
+                                                  text: posts[i].postBody,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Color(0xff000000),
                                                   ),
                                                 ),
-
-                                                SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                              ],
+                                              ),
                                             ),
 
-                                            posts[i].imagesOrVideos != null
-                                            ? Container(
-                                              height: SizeConfig.blockSizeHorizontal * 50,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl: posts[i].imagesOrVideos[0],
-                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                errorWidget: (context, url, error) => Icon(Icons.error),
-                                              ),
-                                            )
-                                            : Container(height: 0,),
+                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                           ],
                                         ),
-                                      ),
+
+                                        posts[i].imagesOrVideos != null
+                                        ? Container(
+                                          height: SizeConfig.blockSizeHorizontal * 50,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            imageUrl: posts[i].imagesOrVideos[0],
+                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                          ),
+                                        )
+                                        : Container(height: 0,),
+                                      ],
                                     );
-                                    return container;
+                                    
                                   },
                                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
                                   itemCount: posts.length,

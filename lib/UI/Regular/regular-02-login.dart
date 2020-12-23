@@ -1,8 +1,6 @@
 
 
-// import 'package:clipboard/clipboard.dart';
-import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
-import 'package:facesbyplaces/API/Home/api-02-home-login-with-facebook.dart';
+
 import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
@@ -19,7 +17,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
 
 
 class RegularLogin extends StatefulWidget{
@@ -243,11 +240,31 @@ class RegularLoginState extends State<RegularLogin>{
 
                                   bool isLoggedIn = await fb.isLoggedIn;
 
-                                  if(isLoggedIn == true){
-                                    String email = await fb.getUserEmail();
-                                    bool result = await apiHomeLoginWithFacebook(email);
+                                  print('The value of isLoggedIn is $isLoggedIn');
 
-                                    if(result == true){
+                                  if(isLoggedIn == true){
+                                    FacebookUserProfile profile = await fb.getUserProfile();
+                                    String email = await fb.getUserEmail();
+                                    FacebookAccessToken token = await fb.accessToken;
+
+                                    print('The access token is ${token.token}');
+
+
+                                    context.showLoaderOverlay();
+                                    // bool result = await apiHomeLoginWithFacebook(email);
+                                    bool apiResult = await apiRegularSignInWithFacebook(
+                                      firstName: profile.firstName.toString(), 
+                                      lastName: profile.lastName.toString(), 
+                                      email: email, 
+                                      username: email,
+                                      // facebookId: result.accessToken.token,
+                                      facebookId: token.token,
+                                    );
+                                    context.hideLoaderOverlay();
+
+                                    print('The value of result is $apiResult');
+
+                                    if(apiResult == true){
                                       Navigator.pushReplacementNamed(context, '/home/regular');
                                     }else{
                                       await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
@@ -289,6 +306,8 @@ class RegularLoginState extends State<RegularLogin>{
 
                                     if(apiResult == false){
                                       await fb.logOut();
+                                    }else{
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
                                     }
                                   }
 
@@ -439,7 +458,7 @@ class RegularLoginState extends State<RegularLogin>{
                             ],
                           );
 
-                          print(credential);
+                          print('The credential is $credential');
 
                           // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
                           // after they have been validated with Apple (see `Integration` section for more information on how to do this)

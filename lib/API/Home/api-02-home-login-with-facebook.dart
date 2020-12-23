@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 Future<bool> apiHomeLoginWithFacebook(String email) async{
   bool value = false;
 
+  print('The email is $email');
+
   try{
     final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth/sign_in?email=$email&account_type=2',
       headers: <String, String>{

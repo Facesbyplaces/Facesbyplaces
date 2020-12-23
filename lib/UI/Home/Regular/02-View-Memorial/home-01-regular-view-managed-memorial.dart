@@ -38,8 +38,13 @@ class RegularProfilePosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
 }
 
 class HomeRegularProfile extends StatefulWidget{
@@ -88,7 +93,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,       
+          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          
+          managed: newValue.familyMemorialList[i].page.manage,
+          joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,  
           ),
         );
       }
@@ -677,6 +688,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
                                       timeCreated: convertDate(posts[i].timeCreated),
+
+                                      managed: posts[i].managed,
+                                      joined: posts[i].joined,
+                                      profileImage: posts[i].profileImage,
+                                      numberOfComments: posts[i].numberOfComments,
+                                      numberOfLikes: posts[i].numberOfLikes,
+                                      likeStatus: posts[i].likeStatus,
                                       contents: [
                                         Column(
                                           children: [

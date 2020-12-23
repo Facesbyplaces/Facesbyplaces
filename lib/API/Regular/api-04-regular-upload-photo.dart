@@ -25,6 +25,9 @@ Future<bool> apiRegularUploadPhoto(dynamic image) async{
       ),
     );
 
+    print('The status code is ${response.statusCode}');
+    print('The status body is ${response.data}');
+
     if(response.statusCode == 200){
       sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
