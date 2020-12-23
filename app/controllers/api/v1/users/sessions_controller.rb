@@ -145,7 +145,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       end
       
     end
-
+ 
     def sign_up_params
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
     end
