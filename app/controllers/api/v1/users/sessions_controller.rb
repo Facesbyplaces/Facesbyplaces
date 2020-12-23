@@ -46,7 +46,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           # super
           render json: {success: true, user: UserSerializer.new( @user ).attributes}, status: 200
         else
-          render json: {success: false, user: UserSerializer.new( @user ).attributes}, status: 200
+          render json: {google: params[:google_id]}, status: 200
           # @user = User.new(sign_up_params_google_and_fb)
           # validator = GoogleIDToken::Validator.new
           # token = @user.google_id
