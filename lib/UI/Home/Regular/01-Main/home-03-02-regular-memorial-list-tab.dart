@@ -10,8 +10,11 @@ class RegularMainPagesMemorials{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
+  bool joined;
+  String pageType;
 
-  RegularMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription});
+  RegularMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 

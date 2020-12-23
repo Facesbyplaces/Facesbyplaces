@@ -21,8 +21,13 @@ class BLMProfilePosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 }
 
 class HomeBLMMemorialProfile extends StatefulWidget{
@@ -69,7 +74,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,       
+          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          managed: newValue.familyMemorialList[i].page.manage,
+          joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,
           ),
         );
       }
@@ -84,7 +94,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   }
 
   Future<APIBLMShowMemorialMain> getProfileInformation(int memorialId) async{
-    return await apiBLMShowMemorial(memorialId);
+    return await apiBLMShowMemorial(memorialId: memorialId);
   }
 
   void initState(){
@@ -307,10 +317,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     children: [
                                       Image.asset('assets/icons/prayer_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text('Roman Catholic',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                                          color: Color(0xff000000),
+                                      Expanded(
+                                        child: Text('Roman Catholic',
+                                          style: TextStyle(
+                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            color: Color(0xff000000),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -322,10 +334,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.details.precinct,
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                                          color: Color(0xff000000),
+                                      Expanded(
+                                        child: Text(profile.data.memorial.details.precinct,
+                                          style: TextStyle(
+                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            color: Color(0xff000000),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -337,42 +351,48 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.details.dob),
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                                          color: Color(0xff000000),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                                  Row(
-                                    children: [
-                                      Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.details.rip),
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                                          color: Color(0xff000000),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                                  Row(
-                                    children: [
-                                      Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      GestureDetector(
-                                        onTap: (){},
-                                        child: Text(profile.data.memorial.details.location,
+                                      Expanded(
+                                        child: Text(convertDate(profile.data.memorial.details.dob),
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                                            color: Color(0xff3498DB),
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                                  Row(
+                                    children: [
+                                      Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
+                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                      Expanded(
+                                        child: Text(convertDate(profile.data.memorial.details.rip),
+                                          style: TextStyle(
+                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+
+                                  Row(
+                                    children: [
+                                      Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
+                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: (){},
+                                          child: Text(profile.data.memorial.details.location,
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                              color: Color(0xff3498DB),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -382,7 +402,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                 ],
                               ),
                             ),
-
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -617,58 +636,56 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   padding: EdgeInsets.all(10.0),
                                   physics: ClampingScrollPhysics(),
                                   itemBuilder: (c, i) {
-                                    var container = GestureDetector(
-                                      onTap: (){
-                                        Navigator.pushNamed(context, '/home/blm/home-31-blm-show-original-post');
-                                      },
-                                      child: Container(
-                                        child: MiscBLMPost(
-                                          userId: posts[i].userId,
-                                          postId: posts[i].postId,
-                                          memorialId: posts[i].memorialId,
-                                          memorialName: posts[i].memorialName,
-                                          timeCreated: convertDate(posts[i].timeCreated),
-                                          contents: [
-                                            Column(
-                                              children: [
-                                                Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: RichText(
-                                                    maxLines: 4,
-                                                    overflow: TextOverflow.clip,
-                                                    textAlign: TextAlign.left,
-                                                    text: TextSpan(
-                                                      text: posts[i].postBody,
-                                                      style: TextStyle(
-                                                        fontWeight: FontWeight.w300,
-                                                        color: Color(0xff000000),
-                                                      ),
-                                                    ),
+                                    return MiscBLMPost(
+                                      userId: posts[i].userId,
+                                      postId: posts[i].postId,
+                                      memorialId: posts[i].memorialId,
+                                      memorialName: posts[i].memorialName,
+                                      timeCreated: convertDate(posts[i].timeCreated),
+                                      managed: posts[i].managed,
+                                      joined: posts[i].joined,
+                                      profileImage: posts[i].profileImage,
+                                      numberOfComments: posts[i].numberOfComments,
+                                      numberOfLikes: posts[i].numberOfLikes,
+                                      likeStatus: posts[i].likeStatus,
+                                      contents: [
+                                        Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: RichText(
+                                                maxLines: 4,
+                                                overflow: TextOverflow.clip,
+                                                textAlign: TextAlign.left,
+                                                text: TextSpan(
+                                                  text: posts[i].postBody,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    color: Color(0xff000000),
                                                   ),
                                                 ),
-
-                                                SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                              ],
+                                              ),
                                             ),
 
-                                            posts[i].imagesOrVideos != null
-                                            ? Container(
-                                              height: SizeConfig.blockSizeHorizontal * 50,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl: posts[i].imagesOrVideos[0],
-                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                errorWidget: (context, url, error) => Icon(Icons.error),
-                                              ),
-                                            )
-                                            : Container(height: 0,),
+                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                           ],
                                         ),
-                                      ),
+
+                                        posts[i].imagesOrVideos != null
+                                        ? Container(
+                                          height: SizeConfig.blockSizeHorizontal * 50,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            imageUrl: posts[i].imagesOrVideos[0],
+                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                          ),
+                                        )
+                                        : Container(height: 0,),
+                                      ],
                                     );
-                                    return container;
                                   },
                                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
                                   itemCount: posts.length,
@@ -696,7 +713,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                       child: IconButton(
                         icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                         onPressed: (){
-                          Navigator.popAndPushNamed(context, '/home/blm');
+                          // Navigator.popAndPushNamed(context, '/home/blm');
+                          Navigator.pop(context);
                         },
                       ),
 

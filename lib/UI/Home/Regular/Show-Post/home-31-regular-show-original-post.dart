@@ -63,8 +63,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                Navigator.popAndPushNamed(context, '/home/regular');
-                // Navigator.pop(context);
+                // Navigator.popAndPushNamed(context, '/home/regular');
+                Navigator.pop(context);
               },
             ),
           ),

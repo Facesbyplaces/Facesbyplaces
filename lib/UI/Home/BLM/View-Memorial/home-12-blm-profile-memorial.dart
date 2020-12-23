@@ -113,7 +113,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
   }
 
   Future<APIBLMShowMemorialMain> getProfileInformation(int memorialId) async{
-    return await apiBLMShowMemorial(memorialId);
+    return await apiBLMShowMemorial(memorialId: memorialId);
   }
 
   void initState(){

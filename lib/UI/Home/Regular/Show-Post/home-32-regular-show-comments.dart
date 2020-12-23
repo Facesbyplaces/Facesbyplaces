@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-dis
 import 'package:facesbyplaces/API/Regular/api-74-regular-show-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-20-regular-reply.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +166,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                Navigator.popAndPushNamed(context, '/home/regular');
+                // Navigator.popAndPushNamed(context, '/home/regular');
+                Navigator.pop(context);
               },
             ),
           ),
@@ -323,80 +325,13 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                             Column(
                               children: List.generate(3, (index) => 
-                                Column(
-                                  children: [
-                                    Container(
-                                      height: SizeConfig.blockSizeVertical * 5,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
-
-                                          CircleAvatar(
-                                            backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
-                                            backgroundColor: Color(0xff888888),
-                                          ),
-
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                          Expanded(
-                                            child: Text(comments[i].firstName.toString() + ' ' + comments[i].lastName.toString(),
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-
-                                          Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
-
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                          Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                        ],
-                                      ),
-                                    ),
-
-                                    Row(
-                                      children: [
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
-
-                                        Expanded(
-                                          child: Container(
-                                            padding: EdgeInsets.all(10.0),
-                                            child: Text(
-                                              comments[i].commentBody,
-                                              style: TextStyle(
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Color(0xff4EC9D4),
-                                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                    Row(
-                                      children: [
-
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
-
-                                        Text(convertDate(comments[i].createdAt)),
-
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                                        Text('Reply',),
-
-                                      ],
-                                    ),
-
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                  ],
+                                MiscRegularShowReply(
+                                  image: comments[i].image,
+                                  firstName: comments[i].firstName,
+                                  lastName: comments[i].lastName,
+                                  commentBody: comments[i].commentBody,
+                                  createdAt: comments[i].createdAt,
+                                  numberOfLikes: 1,
                                 ),
                               ),
                             ),

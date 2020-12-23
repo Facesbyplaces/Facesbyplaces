@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:location/location.dart' as Location;
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,8 @@ class HomeRegularSearch extends StatelessWidget{
                       if (permissionGranted == Location.PermissionStatus.denied) {
                         permissionGranted = await location.requestPermission();
                         if (permissionGranted != Location.PermissionStatus.granted) {
-                          return;
+                          // return;
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'FacesbyPlaces needs to access the location. Turn on the access on the settings.'));
                         }
                       }
 

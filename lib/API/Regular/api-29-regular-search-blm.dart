@@ -57,8 +57,9 @@ class APIRegularSearchMemorialExtended{
   APIRegularSearchMemorialExtendedPageCreator pageCreator;
   bool managed;
   bool follower;
+  String pageType;
 
-  APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower});
+  APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower, this.pageType});
 
   factory APIRegularSearchMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchMemorialExtended(
@@ -72,6 +73,7 @@ class APIRegularSearchMemorialExtended{
       pageCreator: APIRegularSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       managed: parsedJson['manage'],
       follower: parsedJson['follower'],
+      pageType: parsedJson['page_type'],
     );
   }
 }

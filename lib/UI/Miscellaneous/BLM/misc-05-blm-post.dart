@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/BLM/api-67-blm-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-15-blm-change-password.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-16-blm-other-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Settings-Memorial/home-18-blm-user-update-details.dart';
@@ -906,6 +907,8 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                           likesCount--;
                         }
                       });
+
+                      await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
                     },
                     child: Row(
                       children: [

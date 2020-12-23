@@ -114,7 +114,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
   }
 
   Future<APIRegularShowMemorialMain> getProfileInformation(int memorialId) async{
-    return await apiRegularShowMemorial(memorialId);
+    return await apiRegularShowMemorial(memorialId: memorialId);
   }
 
   void initState(){

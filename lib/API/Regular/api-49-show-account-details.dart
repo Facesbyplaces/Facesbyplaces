@@ -18,6 +18,9 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails(int userId) as
     }
   );
 
+  print('The account details status is ${response.statusCode}');
+  print('The account details body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowAccountDetails.fromJson(newValue);
@@ -27,16 +30,36 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails(int userId) as
 }
 
 class APIRegularShowAccountDetails{
+  // String firstName;
+  // String lastName;
+  // String email;
+  // String phoneNumber;
+  // String question;
+  
+  // APIRegularShowAccountDetails({this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
+
+  // factory APIRegularShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
+  //   return APIRegularShowAccountDetails(
+  //     firstName: parsedJson['first_name'],
+  //     lastName: parsedJson['last_name'],
+  //     email: parsedJson['email'],
+  //     phoneNumber: parsedJson['phone_number'],
+  //     question: parsedJson['question'],
+  //   );
+  // }
+
+  int id;
   String firstName;
   String lastName;
   String email;
   String phoneNumber;
   String question;
   
-  APIRegularShowAccountDetails({this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
+  APIRegularShowAccountDetails({this.id, this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
 
   factory APIRegularShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAccountDetails(
+      id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       email: parsedJson['email'],

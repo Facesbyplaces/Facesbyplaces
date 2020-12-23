@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowMemorialMain> apiBLMShowMemorial(int memorialId) async{
+Future<APIBLMShowMemorialMain> apiBLMShowMemorial({int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';

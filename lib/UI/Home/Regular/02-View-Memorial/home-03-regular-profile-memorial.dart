@@ -20,8 +20,14 @@ class RegularProfilePosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
+  bool managed;
+  bool joined;
+  int numberOfLikes;
+  int numberOfComments;
+  bool likeStatus;
 
-  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos});
+
+  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
 }
 
 class HomeRegularMemorialProfile extends StatefulWidget{
@@ -68,7 +74,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,       
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+          managed: newValue.familyMemorialList[i].page.manage,
+          joined: newValue.familyMemorialList[i].page.follower,
+          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].likeStatus,  
           ),
         );
       }
@@ -83,7 +94,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   }
 
   Future<APIRegularShowMemorialMain> getProfileInformation(int memorialId) async{
-    return await apiRegularShowMemorial(memorialId);
+    return await apiRegularShowMemorial(memorialId: memorialId);
   }
 
   void initState(){
@@ -206,8 +217,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             ((){
                               if(profile.data.memorial.details.description != '' || profile.data.memorial.details.description != null){
                                 return Container(
+                                  alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                   child: Text(profile.data.memorial.details.description,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
                                       fontWeight: FontWeight.w300,
@@ -222,12 +235,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Container(
                                         height: SizeConfig.blockSizeHorizontal * 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage('assets/icons/regular-image4.png'),
-                                          ),
+                                        child: CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: profile.data.memorial.imagesOrVideos,
+                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
                                       ),
 
@@ -271,9 +283,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                           setState(() {
                                             join = !join;
-                                          });
-
-                                          
+                                          });                                          
                                           
                                         },
                                         child: Text(
@@ -650,6 +660,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
                                       timeCreated: convertDate(posts[i].timeCreated),
+
+                                      managed: posts[i].managed,
+                                      joined: posts[i].joined,
+                                      profileImage: posts[i].profileImage,
+                                      numberOfComments: posts[i].numberOfComments,
+                                      numberOfLikes: posts[i].numberOfLikes,
+                                      likeStatus: posts[i].likeStatus,
                                       contents: [
                                         Column(
                                           children: [
@@ -722,7 +739,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                       child: IconButton(
                         icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                         onPressed: (){
-                          Navigator.popAndPushNamed(context, '/home/regular');
+                          // Navigator.popAndPushNamed(context, '/home/regular');
+                          Navigator.pop(context);
                         },
                       ),
 

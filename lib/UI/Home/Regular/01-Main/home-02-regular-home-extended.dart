@@ -7,7 +7,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/Regular/api-18-regular-logout.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,7 +140,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                          Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -195,8 +197,22 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                           GestureDetector(
                             onTap: () async{
+
                               context.showLoaderOverlay();
                               bool result = await apiRegularLogout();
+
+                              GoogleSignIn googleSignIn = GoogleSignIn(
+                                scopes: [
+                                  'profile',
+                                  'email',
+                                  'openid'
+                                ],
+                              );
+                              await googleSignIn.signOut();
+
+                              FacebookLogin fb = FacebookLogin();
+                              await fb.logOut();
+
                               context.hideLoaderOverlay();
 
                               if(result){

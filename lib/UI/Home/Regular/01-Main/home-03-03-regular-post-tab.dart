@@ -112,7 +112,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -146,6 +146,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
         onLoading: onLoading,
         child: ListView.separated(
           padding: EdgeInsets.all(10.0),
+          physics: ClampingScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (c, i) {
             return MiscRegularPost(

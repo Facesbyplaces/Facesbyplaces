@@ -370,7 +370,8 @@ class RegularLoginState extends State<RegularLogin>{
                                     
                                     bool result = await apiRegularSignInWithGoogle(
                                       firstName: accountSignedIn.displayName, 
-                                      lastName: accountSignedIn.displayName, 
+                                      // lastName: accountSignedIn.displayName,
+                                      lastName: '', 
                                       email: accountSignedIn.email, 
                                       username: accountSignedIn.email,
                                       googleId: auth.idToken,
@@ -402,11 +403,14 @@ class RegularLoginState extends State<RegularLogin>{
 
 
                                     print('The headers is $authHeaders');
+
+                                    context.showLoaderOverlay();
                                     
 
                                     bool result = await apiRegularSignInWithGoogle(
                                       firstName: signIn.displayName, 
-                                      lastName: signIn.displayName, 
+                                      // lastName: signIn.displayName, 
+                                      lastName: '',
                                       email: signIn.email, 
                                       username: signIn.email,
                                       googleId: auth.idToken,

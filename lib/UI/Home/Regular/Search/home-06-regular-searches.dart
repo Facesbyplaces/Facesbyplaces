@@ -34,27 +34,33 @@ class RegularSearchMainSuggested{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
   bool joined;
+  String pageType;
 
-  RegularSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
+  RegularSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 class RegularSearchMainNearby{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
   bool joined;
+  String pageType;
 
-  RegularSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
+  RegularSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 class RegularSearchMainBLM{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
   bool joined;
+  String pageType;
 
-  RegularSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
+  RegularSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 
@@ -148,10 +154,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
       for(int i = 0; i < newValue.pages.length; i++){
         suggested.add(RegularSearchMainSuggested(
-          memorialId: newValue.pages[i].id,
+          memorialId: newValue.pages[i].page.id,
           memorialName: newValue.pages[i].page.name,
           memorialDescription: newValue.pages[i].page.details.description,
-          joined: true
+          managed: newValue.pages[i].page.managed,
+          joined: newValue.pages[i].page.follower,
+          pageType: newValue.pages[i].page.pageType,
           ),    
         );
       }
@@ -179,7 +187,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           memorialId: newValue.blmList[i].id,
           memorialName: newValue.blmList[i].name,
           memorialDescription: newValue.blmList[i].details.description,
+          managed: newValue.blmList[i].managed,
           joined: newValue.blmList[i].follower,
+          pageType: newValue.blmList[i].pageType,
           ),    
         );
       }
@@ -201,7 +211,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           memorialId: newValue.memorialList[i].id,
           memorialName: newValue.memorialList[i].name,
           memorialDescription: newValue.memorialList[i].details.description,
+          managed: newValue.blmList[i].managed,
           joined: newValue.blmList[i].follower,
+          pageType: newValue.blmList[i].pageType,
           ),    
         );
       }
@@ -228,7 +240,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           memorialId: newValue.memorialList[i].id,
           memorialName: newValue.memorialList[i].name,
           memorialDescription: newValue.memorialList[i].details.description,
+          managed: newValue.memorialList[i].managed,
           joined: newValue.memorialList[i].follower,
+          pageType: newValue.memorialList[i].pageType,
           ),    
         );
       }
@@ -525,20 +539,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                   ],
                 ),
 
-                // feeds[i].imagesOrVideos != null
-                // ? Container(
-                //   height: SizeConfig.blockSizeHorizontal * 50,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                //   ),
-                //   child: CachedNetworkImage(
-                //     imageUrl: feeds[i].imagesOrVideos[0],
-                //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                //     errorWidget: (context, url, error) => Icon(Icons.error),
-                //   ),
-                // )
-                // : Container(height: 0,),
-
                 feeds[i].imagesOrVideos != null
                 ? Container(
                   height: SizeConfig.blockSizeHorizontal * 50,
@@ -604,7 +604,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               memorialId: suggested[i].memorialId, 
               memorialName: suggested[i].memorialName, 
               description: suggested[i].memorialDescription,
-              managed: suggested[i].joined,
+              managed: suggested[i].managed,
+              follower: suggested[i].joined,
+              pageType: suggested[i].pageType,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
@@ -656,7 +658,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               memorialId: nearby[i].memorialId, 
               memorialName: nearby[i].memorialName, 
               description: nearby[i].memorialDescription,
-              managed: nearby[i].joined,
+              managed: nearby[i].managed,
+              follower: nearby[i].joined,
+              pageType: nearby[i].pageType,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
@@ -708,7 +712,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               memorialId: blm[i].memorialId, 
               memorialName: blm[i].memorialName, 
               description: blm[i].memorialDescription,
-              managed: blm[i].joined,
+              managed: blm[i].managed,
+              follower: blm[i].joined,
+              pageType: blm[i].pageType,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),

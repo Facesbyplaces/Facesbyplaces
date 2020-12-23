@@ -86,8 +86,9 @@ class APIRegularHomeTabMemorialExtendedPage{
   String relationship;
   APIRegularHomeTabMemorialExtendedPageCreator pageCreator;
   bool managed;
+  String pageType;
 
-  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed});
+  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.pageType});
 
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPage(
@@ -100,6 +101,7 @@ class APIRegularHomeTabMemorialExtendedPage{
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       managed: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
     );
   }
 }
