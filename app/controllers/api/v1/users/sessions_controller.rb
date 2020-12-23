@@ -30,6 +30,13 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
           @user.is_verified = true
+          
+          # image
+          if params[:image].present? 
+            downloaded_image = open(params[:image])
+            @user.image.attach(io: downloaded_image  , filename: "foo.jpg")
+          end
+
           @user.save!
 
           render json: {status: "success", user: @user }
@@ -68,11 +75,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.hidePhonenumber = false 
             @user.is_verified = true
 
-            # # image
-            # if params[:image].present? 
-            #   downloaded_image = open(params[:image])
-            #   @user.image.attach(io: downloaded_image  , filename: "foo.jpg")
-            # end
+            # image
+            if params[:image].present? 
+              downloaded_image = open(params[:image])
+              @user.image.attach(io: downloaded_image  , filename: "foo.jpg")
+            end
             @user.save!
     
             render json: UserSerializer.new( @user ).attributes
