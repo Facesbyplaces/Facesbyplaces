@@ -36,7 +36,15 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end
       #Google Login
       elsif params[:google_id].present?
-        @user = User.where(google_id: params[:google_id]).first
+        validator = GoogleIDToken::Validator.new
+        required_audience = JWT.decode(params[:google_id], nil, false)[0]['aud'] 
+        begin
+          payload = validator.check(params[:google_id], required_audience, required_audience)
+          @user = User.where(email: payload['email']).first
+        rescue GoogleIDToken::ValidationError => e
+          @user = nil
+          return render json: {status: "Cannot validate: #{e}"}, status: 422
+        end
 
         if @user
           params[:email] = @user.email
