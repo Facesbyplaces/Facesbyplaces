@@ -46,32 +46,33 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           # super
           render json: {success: true, user: UserSerializer.new( @user ).attributes}, status: 200
         else
-          @user = User.new(sign_up_params_google_and_fb)
-          validator = GoogleIDToken::Validator.new
-          token = @user.google_id
-          required_audience = JWT.decode(token, nil, false)[0]['aud'] 
-          begin
-            payload = validator.check(token, required_audience, required_audience)
-            email = payload['email']
+          render json: {status: "errorrrss"}
+          # @user = User.new(sign_up_params_google_and_fb)
+          # validator = GoogleIDToken::Validator.new
+          # token = @user.google_id
+          # required_audience = JWT.decode(token, nil, false)[0]['aud'] 
+          # begin
+          #   payload = validator.check(token, required_audience, required_audience)
+          #   email = payload['email']
 
-            @user.hideBirthdate = false 
-            @user.hideBirthplace = false 
-            @user.hideEmail = false 
-            @user.hideAddress = false 
-            @user.hidePhonenumber = false 
-            @user.is_verified = true
+          #   @user.hideBirthdate = false 
+          #   @user.hideBirthplace = false 
+          #   @user.hideEmail = false 
+          #   @user.hideAddress = false 
+          #   @user.hidePhonenumber = false 
+          #   @user.is_verified = true
 
-            # # image
-            # if params[:image].present? 
-            #   downloaded_image = open(params[:image])
-            #   @user.image.attach(io: downloaded_image  , filename: "foo.jpg")
-            # end
-            @user.save!
+          #   # # image
+          #   # if params[:image].present? 
+          #   #   downloaded_image = open(params[:image])
+          #   #   @user.image.attach(io: downloaded_image  , filename: "foo.jpg")
+          #   # end
+          #   @user.save!
     
-            render json: UserSerializer.new( @user ).attributes
-          rescue GoogleIDToken::ValidationError => e
-            return render json: {status: "Cannot validate: #{e}"}, status: 422
-          end
+          #   render json: UserSerializer.new( @user ).attributes
+          # rescue GoogleIDToken::ValidationError => e
+          #   return render json: {status: "Cannot validate: #{e}"}, status: 422
+          # end
         end
       # Apple Login
       elsif params[:code].present? && params[:identity_token].present?
