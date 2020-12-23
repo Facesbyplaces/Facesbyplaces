@@ -17,6 +17,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:email] = @user.email
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
+          @user.save
           super
         else
           @user = User.new(sign_up_params_google_and_fb)
