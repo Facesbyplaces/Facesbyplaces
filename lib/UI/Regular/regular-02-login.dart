@@ -1,6 +1,7 @@
 
 
 
+import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
@@ -243,22 +244,22 @@ class RegularLoginState extends State<RegularLogin>{
                                   print('The value of isLoggedIn is $isLoggedIn');
 
                                   if(isLoggedIn == true){
+                                    context.showLoaderOverlay();
+
                                     FacebookUserProfile profile = await fb.getUserProfile();
                                     String email = await fb.getUserEmail();
+                                    String image = await fb.getProfileImageUrl(width: 50, height: 50);
                                     FacebookAccessToken token = await fb.accessToken;
 
                                     print('The access token is ${token.token}');
 
-
-                                    context.showLoaderOverlay();
-                                    // bool result = await apiHomeLoginWithFacebook(email);
                                     bool apiResult = await apiRegularSignInWithFacebook(
                                       firstName: profile.firstName.toString(), 
                                       lastName: profile.lastName.toString(), 
                                       email: email, 
                                       username: email,
-                                      // facebookId: result.accessToken.token,
                                       facebookId: token.token,
+                                      image: image
                                     );
                                     context.hideLoaderOverlay();
 
@@ -282,6 +283,8 @@ class RegularLoginState extends State<RegularLogin>{
                                     print('The result access token is ${result.accessToken.token}');
                                     print('The result error is ${result.error}');
 
+                                    context.showLoaderOverlay();
+
 
                                     final email = await fb.getUserEmail();
                                     final profile = await fb.getUserProfile();
@@ -292,13 +295,14 @@ class RegularLoginState extends State<RegularLogin>{
                                     print('The lastName is ${profile.lastName}');
                                     print('The image is $image');
 
-                                    context.showLoaderOverlay();
+                                    
                                     bool apiResult = await apiRegularSignInWithFacebook(
                                       firstName: profile.firstName.toString(), 
                                       lastName: profile.lastName.toString(), 
                                       email: email, 
                                       username: email,
                                       facebookId: result.accessToken.token,
+                                      image: image,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -310,27 +314,6 @@ class RegularLoginState extends State<RegularLogin>{
                                       Navigator.pushReplacementNamed(context, '/home/regular');
                                     }
                                   }
-
-
-                                  // context.showLoaderOverlay();
-                                  // bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
-                                  // context.hideLoaderOverlay();
-
-
-
-
-                                  // final result = await fb.logIn()
-
-                                  // context.showLoaderOverlay();
-                                  // bool result = await apiRegularSignInWithGoogle(
-                                  //   firstName: value.displayName, 
-                                  //   lastName: value.displayName, 
-                                  //   email: value.email, 
-                                  //   username: value.email,
-                                  //   googleId: auth.idToken,
-                                  // );
-                                  // context.hideLoaderOverlay();
-
 
                                 }, 
                                 width: SizeConfig.screenWidth / 1.5, 
@@ -358,49 +341,119 @@ class RegularLoginState extends State<RegularLogin>{
                                     ],
                                   );
 
-                                  
+                                  bool isLoggedIn = await googleSignIn.isSignedIn();
 
-                                  bool isSignedIn = await googleSignIn.isSignedIn();
+                                  print('The value is $isLoggedIn');
 
-                                  print('The value is $isSignedIn');
-                                  
-
-                                  if(isSignedIn == true){
-
-                                    // context.showLoaderOverlay();
-                                    // bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
-                                    // context.hideLoaderOverlay();
-
-                                    // var accountSignedIn = await googleSignIn.signInSilently();
-                                    // var authHeaders = await googleSignIn.currentUser.authHeaders;
-                                    // var auth = await googleSignIn.currentUser.authentication;
+                                  if(isLoggedIn == true){
+                                    context.showLoaderOverlay();
+                                    var accountSignedIn = await googleSignIn.signInSilently();
+                                    var authHeaders = await googleSignIn.currentUser.authHeaders;
+                                    var auth = await googleSignIn.currentUser.authentication;
 
 
-                                    // print('The auth is ${auth.accessToken}}');
-                                    // print('The auth is ${auth.idToken}');
-                                    // print('The auth is ${auth.serverAuthCode}');
+                                    print('The auth is ${auth.accessToken}}');
+                                    print('The auth is ${auth.idToken}');
+                                    print('The auth is ${auth.serverAuthCode}');
 
-                                    // print('The auth headers is $authHeaders');
+                                    print('The auth headers is $authHeaders');
 
-                                    // print('The client id is ${googleSignIn.clientId}');
+                                    print('The client id is ${googleSignIn.clientId}');
 
 
-                                    // print('The headers is $authHeaders');
+                                    print('The headers is $authHeaders');
 
-                                    // context.showLoaderOverlay();
-                                    // bool result = await apiRegularSignInWithGoogle(
-                                    //   firstName: accountSignedIn.displayName, 
-                                    //   lastName: accountSignedIn.displayName, 
-                                    //   email: accountSignedIn.email, 
-                                    //   username: accountSignedIn.email,
-                                    //   googleId: auth.idToken,
-                                    // );
-                                    // context.hideLoaderOverlay();
+                                    
+                                    bool result = await apiRegularSignInWithGoogle(
+                                      firstName: accountSignedIn.displayName, 
+                                      lastName: accountSignedIn.displayName, 
+                                      email: accountSignedIn.email, 
+                                      username: accountSignedIn.email,
+                                      googleId: auth.idToken,
+                                      image: accountSignedIn.photoUrl,
+                                    );
+                                    context.hideLoaderOverlay();
 
-                                    // print('The value of result is $result');
-                                    // print('The value is ${accountSignedIn.authHeaders}');
+                                    print('The value of result is $result');
+                                    print('The value is ${accountSignedIn.authHeaders}');
 
+                                    if(result == true){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                    }
+
+                                  }else{
+                                    GoogleSignInAccount signIn = await googleSignIn.signIn();
+                                    var authHeaders = await googleSignIn.currentUser.authHeaders;
+                                    var auth = await googleSignIn.currentUser.authentication;
+
+                                    print('The auth is ${auth.accessToken}}');
+                                    print('The auth is ${auth.idToken}');
+                                    print('The auth is ${auth.serverAuthCode}');
+
+                                    print('The auth headers is $authHeaders');
+
+                                    print('The client id is ${googleSignIn.clientId}');
+
+
+                                    print('The headers is $authHeaders');
+                                    
+
+                                    bool result = await apiRegularSignInWithGoogle(
+                                      firstName: signIn.displayName, 
+                                      lastName: signIn.displayName, 
+                                      email: signIn.email, 
+                                      username: signIn.email,
+                                      googleId: auth.idToken,
+                                      image: signIn.photoUrl,
+                                    );
+                                    context.hideLoaderOverlay();
+
+                                    if(result == true){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                    }
                                   }
+                                  
+
+                                  // if(isSignedIn == true){
+
+                                  //   // context.showLoaderOverlay();
+                                  //   // bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                                  //   // context.hideLoaderOverlay();
+
+                                  //   // var accountSignedIn = await googleSignIn.signInSilently();
+                                  //   // var authHeaders = await googleSignIn.currentUser.authHeaders;
+                                  //   // var auth = await googleSignIn.currentUser.authentication;
+
+
+                                  //   // print('The auth is ${auth.accessToken}}');
+                                  //   // print('The auth is ${auth.idToken}');
+                                  //   // print('The auth is ${auth.serverAuthCode}');
+
+                                  //   // print('The auth headers is $authHeaders');
+
+                                  //   // print('The client id is ${googleSignIn.clientId}');
+
+
+                                  //   // print('The headers is $authHeaders');
+
+                                  //   // context.showLoaderOverlay();
+                                  //   // bool result = await apiRegularSignInWithGoogle(
+                                  //   //   firstName: accountSignedIn.displayName, 
+                                  //   //   lastName: accountSignedIn.displayName, 
+                                  //   //   email: accountSignedIn.email, 
+                                  //   //   username: accountSignedIn.email,
+                                  //   //   googleId: auth.idToken,
+                                  //   // );
+                                  //   // context.hideLoaderOverlay();
+
+                                  //   // print('The value of result is $result');
+                                  //   // print('The value is ${accountSignedIn.authHeaders}');
+
+                                  // }
 
                                   // var value = await googleSignIn.signIn();
                                   // var value = await googleSignIn.signIn();
@@ -459,6 +512,13 @@ class RegularLoginState extends State<RegularLogin>{
                           );
 
                           print('The credential is $credential');
+                          print('The credential is ${credential.authorizationCode}');
+                          print('The credential is ${credential.email}');
+                          print('The credential is ${credential.familyName}');
+                          print('The credential is ${credential.givenName}');
+                          print('The credential is ${credential.identityToken}');
+                          print('The credential is ${credential.state}');
+                          print('The credential is ${credential.userIdentifier}');
 
                           // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
                           // after they have been validated with Apple (see `Integration` section for more information on how to do this)

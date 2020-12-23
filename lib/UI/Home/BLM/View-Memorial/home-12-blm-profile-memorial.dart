@@ -786,8 +786,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                           child: Container(
                             padding: EdgeInsets.only(right: 20.0),
                             alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () async{
+                            child: MaterialButton(
+                              onPressed: () async{
+
                                 final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
                                 final Uint8List list = bytes.buffer.asUint8List();
 
@@ -796,10 +797,14 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 file.writeAsBytesSync(list);
 
                                 Navigator.pushNamed(context, '/home/blm/create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
+
                               },
+                              shape: StadiumBorder(),
+                              color: Colors.green,
+                              splashColor: Colors.yellow,
                               child: Text('Create Post',
                                 style: TextStyle(
-                                  fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xffffffff),
                                 ),
