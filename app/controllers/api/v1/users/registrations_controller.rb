@@ -18,6 +18,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         @user.hideEmail = false 
         @user.hideAddress = false 
         @user.hidePhonenumber = false 
+        @user.is_verified = false
         @user.save!
 
         Notifsetting.create(newMemorial: false, newActivities: false, postLikes: false, postComments: false, addFamily: false, addFriends: false, addAdmin: false, user_id: @user.id)
