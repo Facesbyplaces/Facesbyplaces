@@ -341,6 +341,10 @@ class RegularLoginState extends State<RegularLogin>{
                                     ],
                                   );
 
+                                  // await googleSignIn.signOut();
+
+                                  // print('google logout');
+
                                   bool isLoggedIn = await googleSignIn.isSignedIn();
 
                                   print('The value is $isLoggedIn');
