@@ -256,13 +256,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.1"
-  flutter_phoenix:
-    dependency: "direct main"
-    description:
-      name: flutter_phoenix
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -270,6 +263,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.11"
+  flutter_screenutil:
+    dependency: transitive
+    description:
+      name: flutter_screenutil
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter_share:
     dependency: "direct main"
     description:
@@ -693,6 +693,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.2"
+  responsive_widgets:
+    dependency: "direct main"
+    description:
+      name: responsive_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   rxdart:
     dependency: transitive
     description:

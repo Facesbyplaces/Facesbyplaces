@@ -14,7 +14,7 @@ class MiscStartButtonIconTemplate extends StatelessWidget{
 
   MiscStartButtonIconTemplate({
     this.buttonText = '',
-    this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: Color(0xff000000),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),
     this.onPressed,
     this.width,
     this.height,
