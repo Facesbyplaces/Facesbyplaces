@@ -3,16 +3,22 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class MiscRegularBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return BlocBuilder<BlocHomeRegularUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          // height: SizeConfig.blockSizeVertical * 10,
+          height: ScreenUtil().setHeight(65),
           alignment: Alignment.center,
           width: SizeConfig.screenWidth,
           child: ToggleButtons(
@@ -27,9 +33,10 @@ class MiscRegularBottomSheet extends StatelessWidget {
                 width: SizeConfig.screenWidth / 4,
                 child: Column(
                   children: [
-                    Icon(MdiIcons.fire, size: SizeConfig.blockSizeVertical * 4,),
+                    // Icon(MdiIcons.fire, size: SizeConfig.blockSizeVertical * 4,),
+                    Icon(MdiIcons.fire, size: ScreenUtil().setHeight(25),),
                     SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                    Text('Feed', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    Text('Feed', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
                   ],
                 ),
               ),
@@ -38,9 +45,9 @@ class MiscRegularBottomSheet extends StatelessWidget {
                 width: SizeConfig.screenWidth / 4,
                 child: Column(
                   children: [
-                    Icon(MdiIcons.graveStone, size: SizeConfig.blockSizeVertical * 4,),
+                    Icon(MdiIcons.graveStone, size: ScreenUtil().setHeight(25),),
                     SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                    Text('Memorials', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    Text('Memorials', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
                   ],
                 ),
               ),
@@ -49,9 +56,9 @@ class MiscRegularBottomSheet extends StatelessWidget {
                 width: SizeConfig.screenWidth / 4,
                 child: Column(
                   children: [
-                    Icon(MdiIcons.post, size: SizeConfig.blockSizeVertical * 4,),
+                    Icon(MdiIcons.post, size: ScreenUtil().setHeight(25),),
                     SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                    Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    Text('Post', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
                   ],
                 ),
               ),
@@ -60,9 +67,9 @@ class MiscRegularBottomSheet extends StatelessWidget {
                 width: SizeConfig.screenWidth / 4,
                 child: Column(
                   children: [
-                    Icon(MdiIcons.heart, size: SizeConfig.blockSizeVertical * 4,),
+                    Icon(MdiIcons.heart, size: ScreenUtil().setHeight(25),),
                     SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                    Text('Notification', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3,),),
+                    Text('Notification', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
                   ],
                 ),
               ),

@@ -278,6 +278,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home-03-01-regular-feed-tab.dart';
@@ -306,13 +307,26 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
+          // ContainerResponsive(
+          //   height: SizeConfig.screenHeight,
+          //   width: SizeConfig.screenWidth,
+          //   alignment: Alignment.center,
+          //   child: ContainerResponsive(
+          //     padding: EdgeInsetsResponsive.only(left: 10.0, right: 10.0),
+          //     // width: SizeConfig.screenHeight,
+          //     width: SizeConfig.screenWidth,
+          //     heightResponsive: false,
+          //     widthResponsive: true,
+          //     alignment: Alignment.center,
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocHomeRegularUpdateCubit>(create: (context) => BlocHomeRegularUpdateCubit(),),
         BlocProvider<BlocHomeRegularUpdateToggle>(create: (context) => BlocHomeRegularUpdateToggle(),),
       ],
-// BlocBuilder<BlocHomeRegularUpdateCubit, int>(
-            //   builder: (context, toggleBottom){
       child: BlocBuilder<BlocHomeRegularUpdateCubit, int>(
         builder: (context, toggleBottom){
           return WillPopScope(
@@ -359,7 +373,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       }
                     },
                   ),
-                  title: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),),
+                  title: Text('FacesByPlaces.com', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xffffffff),),),
                   centerTitle: true,
                   actions: [
                     IconButton(
