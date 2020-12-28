@@ -37,7 +37,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           end
 
           @user.save!
-
+          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+          @user.password = @user.password_confirmation = params[:password]
+          @user.save
           super
         end
       #Google Login
@@ -82,6 +84,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             end
 
             @user.save!
+            params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+            @user.password = @user.password_confirmation = params[:password]
+            @user.save
             super
           rescue GoogleIDToken::ValidationError => e
             return render json: {status: "Cannot validate: #{e}"}, status: 422
