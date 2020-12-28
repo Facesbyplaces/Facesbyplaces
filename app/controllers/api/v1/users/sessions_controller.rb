@@ -11,10 +11,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def create
       #Facebook Login
       if params[:facebook_id].present?
-        @user = User.where(facebook_id: params[:facebook_id]).first
+        @user = User.where(email: params[:email]).first
 
         if @user
-          params[:email] = @user.email
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
           @user.save
@@ -192,36 +191,4 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       redirect_uri: ENV['APPLE_REDIRECT_URI']
       )
     end
-
-    
-
 end
-
-# def facebook
-    #   if params[:facebook_id].nil?
-    #     return render ResponseBuilder.bad_request "A facebook id is needed"
-    #   end
-      
-    #   @user = User.where(facebook_id: params[:facebook_id]).first
-
-    #   if @user
-    #     render :create, status: :ok
-    #   else
-    #     render ResponseBuilder.bad_request "This facebook is not linked to any account."
-    #   end
-    # end
-
-    # def google
-    #   if params[:google_id].nil?
-    #     return render ResponseBuilder.bad_request "A Google id is needed"
-    #   end
-      
-    #   @user = User.where(google_id: params[:google_id]).first
-
-    #   if @user
-    #     sign_in(:user, @resource, store: false, bypass: false)
-    #     render_create_success
-    #   else
-    #     render ResponseBuilder.bad_request "This facebook is not linked to any account."
-    #   end
-    # end 
