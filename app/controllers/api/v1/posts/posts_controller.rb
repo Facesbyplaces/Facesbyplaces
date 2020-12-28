@@ -30,7 +30,7 @@ class Api::V1::Posts::PostsController < ApplicationController
             # check if there are people that have been tagged
             # params[:tag_people][0] != "" ? people = params[:tag_people] : people = []
             people = params[:tag_people]
-            if people.count != 0
+            if people
                 # save tagged people to database
                 people.each do |person|
                     tag = Tagperson.new(post_id: post.id, user_id: person)
