@@ -11,7 +11,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def create
       #Facebook Login
       if params[:facebook_id].present?
-        @user = User.where(email: params[:email]).first
+        @user = User.where(email: params[:email], account_type: params[:account_type]).first
 
         if @user
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
