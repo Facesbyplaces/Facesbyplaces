@@ -104,51 +104,51 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             # puts e # gives useful messages from apple on failure
             return render json: {status: e}, status: 401
           end
+          render json: "success"
+          # id_token_back_channel = token_response.id_token
+          # id_token_back_channel.verify!(
+          #   client: @client,
+          #   access_token: token_response.access_token,
+          # )
 
-          id_token_back_channel = token_response.id_token
-          id_token_back_channel.verify!(
-            client: @client,
-            access_token: token_response.access_token,
-          )
+          # id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
+          # id_token_front_channel.verify!(
+          #   client: @client,
+          #   code: params[:code],
+          # )
+          # id_token = token_response.id_token
 
-          id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
-          id_token_front_channel.verify!(
-            client: @client,
-            code: params[:code],
-          )
-          id_token = token_response.id_token
-
-        @user = User.find_by(apple_uid: id_token.sub)
-        if @user.present?
-          super
-        end
+        # @user = User.find_by(apple_uid: id_token.sub)
+        # if @user.present?
+        #   super
+        # end
   
-        @user = User.find_by_email(id_token.email)
+        # @user = User.find_by_email(id_token.email)
   
-        if @user.present?
-          super
-        else
-          # Register user
-          @user = User.new(sign_up_params_apple)
+        # if @user.present?
+        #   super
+        # else
+        #   # # Register user
+        #   # @user = User.new(sign_up_params_apple)
 
-          @user.is_verified = true
-          @user.hideBirthdate = false 
-          @user.hideBirthplace = false 
-          @user.hideEmail = false 
-          @user.hideAddress = false 
-          @user.hidePhonenumber = false 
-          @user.apple_uid = id_token.email
-          @user.email = id_token.sub
-          @user.provider = :apple # devise_token_auth attribute, but you can add it yourself.
-          @user.uid = id_token.sub # devise_token_auth attribute
+        #   # @user.is_verified = true
+        #   # @user.hideBirthdate = false 
+        #   # @user.hideBirthplace = false 
+        #   # @user.hideEmail = false 
+        #   # @user.hideAddress = false 
+        #   # @user.hidePhonenumber = false 
+        #   # @user.apple_uid = id_token.email
+        #   # @user.email = id_token.sub
+        #   # @user.provider = :apple # devise_token_auth attribute, but you can add it yourself.
+        #   # @user.uid = id_token.sub # devise_token_auth attribute
 
-          @user.save!
+        #   # @user.save!
           
-          return render json: {
-            status: :created,
-            user: UserSerializer.new( @user ).attributes
-            }, status: 200
-        end
+        #   return render json: {
+        #     status: :created,
+        #     user: id_token.email
+        #     }, status: 200
+        # end
       # Fbp Login
       else
         user = User.find_by(email: params[:email])
