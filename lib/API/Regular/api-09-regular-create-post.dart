@@ -37,6 +37,7 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
       'post[latitude]': post.latitude,
       'post[longitude]': post.longitude,
       'tag_people': post.tagPeople,
+      // 'tag_people': '[]',
     });
     
     if(post.imagesOrVideos != null){
@@ -70,14 +71,13 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
 
 class APIRegularCreatePost{
   String pageType;
-  String pageId;
+  int pageId;
   String postBody;
   String location;
   dynamic imagesOrVideos;
-  String latitude;
-  String longitude;
+  double latitude;
+  double longitude;
   List<int> tagPeople;
-  // String tagPeople;
   
   APIRegularCreatePost({
     this.pageType, 

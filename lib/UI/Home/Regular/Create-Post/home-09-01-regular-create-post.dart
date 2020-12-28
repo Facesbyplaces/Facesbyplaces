@@ -161,6 +161,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
               GestureDetector(
                 onTap: () async{
 
+                  
+
                   File newFile;
 
                   if(imageFile != null){
@@ -187,6 +189,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     }
                   }
 
+                  context.showLoaderOverlay();
+
                   Location.LocationData locationData = await location.getLocation();
 
                   List<int> userIds = [];
@@ -202,15 +206,18 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   APIRegularCreatePost post = APIRegularCreatePost(
                     pageType: 'Memorial',
                     postBody: _key1.currentState.controller.text,
-                    pageId: currentIdSelected.toString(),
+                    // pageId: currentIdSelected.toString(),
+                    pageId: currentIdSelected,
                     location: newLocation,
                     imagesOrVideos: newFile,
-                    latitude: locationData.latitude.toString(),
-                    longitude: locationData.longitude.toString(),
+                    // latitude: locationData.latitude.toString(),
+                    // longitude: locationData.longitude.toString(),
+                    latitude: locationData.latitude,
+                    longitude: locationData.longitude,
                     tagPeople: userIds,
                   );
 
-                  context.showLoaderOverlay();
+                  
                   bool result = await apiRegularHomeCreatePost(post);
                   context.hideLoaderOverlay();
 

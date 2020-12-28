@@ -552,6 +552,8 @@ class RegularLoginState extends State<RegularLogin>{
                               ],
                             );
 
+                            
+
                             print('The credential is $credential');
                             print('The credential is ${credential.authorizationCode}');
                             print('The credential is ${credential.email}');

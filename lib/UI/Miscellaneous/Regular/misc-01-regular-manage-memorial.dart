@@ -4,6 +4,7 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-v
 import 'package:facesbyplaces/API/Regular/api-19-regular-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-03-regular-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/Donate/home-20-regular-donate.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-04-regular-sample-refresher.dart';
 import 'package:flutter/material.dart';
 import 'misc-08-regular-dialog.dart';
@@ -72,24 +73,26 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-        print('The memorial type is $pageType');
-        print('The memorial id is $memorialId');
+        // print('The memorial type is $pageType');
+        // print('The memorial id is $memorialId');
 
-        if(managed == true){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
-        }else{
-          if(pageType == 'Memorial'){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: follower,)));
-          }else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
-          }
+        // if(managed == true){
+        //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
+        // }else{
+        //   if(pageType == 'Memorial'){
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+        //   }else{
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+        //   }
           
-        }
+        // }
 
         // print('hehehehe');
 
 
         // Navigator.push(context, MaterialPageRoute(builder: (context) => DeliveryPage()));
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
@@ -179,8 +182,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   });
 
                   await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: followButton);
-
-
 
 
                   // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Are you sure you want to unfollow this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));

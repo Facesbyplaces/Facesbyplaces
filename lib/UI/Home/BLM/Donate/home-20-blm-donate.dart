@@ -2,7 +2,7 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_pay/flutter_pay.dart';
-import 'package:stripe_payment/stripe_payment.dart';
+// import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
@@ -18,7 +18,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   initState() {
     super.initState();
     donateToggle = 0;
-    StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", merchantId: "Test", androidPayMode: 'test'));
+    // StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", merchantId: "Test", androidPayMode: 'test'));
   }
 
   @override

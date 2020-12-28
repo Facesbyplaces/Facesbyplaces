@@ -258,7 +258,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               color: Color(0xffffffff),
             ), 
             onPressed: (){
-              Navigator.pushNamed(context, '/home/blm/home-07-01-blm-create-memorial');
+              Navigator.pushNamed(context, '/home/blm/create-memorial');
             }, 
             width: SizeConfig.screenWidth / 2, 
             height: SizeConfig.blockSizeVertical * 7, 

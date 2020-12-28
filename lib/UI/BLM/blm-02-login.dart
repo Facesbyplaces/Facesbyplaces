@@ -193,7 +193,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                         print('The value of result is $apiResult');
 
                                         if(apiResult == true){
-                                          Navigator.pushReplacementNamed(context, '/home/regular');
+                                          Navigator.pushReplacementNamed(context, '/home/blm');
                                         }else{
                                           await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
                                         }
@@ -238,7 +238,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                         if(apiResult == false){
                                           await fb.logOut();
                                         }else{
-                                          Navigator.pushReplacementNamed(context, '/home/regular');
+                                          Navigator.pushReplacementNamed(context, '/home/blm');
                                         }
                                       }
                                     }, 
@@ -261,7 +261,50 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                       color: Color(0xff000000),
                                     ), 
                                     onPressed: () async{
-                                      GoogleSignIn googleSignIn = GoogleSignIn(
+                                      // GoogleSignIn googleSignIn = GoogleSignIn(
+                                      //   scopes: [
+                                      //     'profile',
+                                      //     'email',
+                                      //     'openid'
+                                      //   ],
+                                      // );
+
+                                      // var value = await googleSignIn.signIn();
+
+                                      // print('The value is ${value.email}');
+                                      // print('The value is ${value.displayName}');
+                                      // print('The value is ${value.id}');
+                                      // print('The value is ${value.photoUrl}');
+
+                                      // var header = await value.authHeaders;
+                                      // var auth = await value.authentication;
+
+                                      // print('The header is $header');
+                                      // print('The auth is $auth');
+                                      // print('The auth is ${auth.idToken}');
+                                
+                                      // context.showLoaderOverlay();
+                                      // bool result = await apiBLMSignInWithGoogle(
+                                      //   firstName: value.displayName, 
+                                      //   lastName: value.displayName, 
+                                      //   email: value.email, 
+                                      //   username: value.email,
+                                      //   googleId: auth.idToken,
+                                      // );
+                                      // context.hideLoaderOverlay();
+
+                                      // print('The result is $result');
+
+                                      // if(result){
+                                      //   Navigator.pushReplacementNamed(context, '/home/blm');
+                                      // }else{
+                                      //   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                      // }
+
+
+
+
+                                    GoogleSignIn googleSignIn = GoogleSignIn(
                                         scopes: [
                                           'profile',
                                           'email',
@@ -269,36 +312,88 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                         ],
                                       );
 
-                                      var value = await googleSignIn.signIn();
+                                      // await googleSignIn.signOut();
 
-                                      print('The value is ${value.email}');
-                                      print('The value is ${value.displayName}');
-                                      print('The value is ${value.id}');
-                                      print('The value is ${value.photoUrl}');
+                                      // print('google logout');
 
-                                      var header = await value.authHeaders;
-                                      var auth = await value.authentication;
+                                      bool isLoggedIn = await googleSignIn.isSignedIn();
 
-                                      print('The header is $header');
-                                      print('The auth is $auth');
-                                      print('The auth is ${auth.idToken}');
-                                
-                                      context.showLoaderOverlay();
-                                      bool result = await apiBLMSignInWithGoogle(
-                                        firstName: value.displayName, 
-                                        lastName: value.displayName, 
-                                        email: value.email, 
-                                        username: value.email,
-                                        googleId: auth.idToken,
-                                      );
-                                      context.hideLoaderOverlay();
+                                      print('The value is $isLoggedIn');
 
-                                      print('The result is $result');
+                                      if(isLoggedIn == true){
+                                        context.showLoaderOverlay();
+                                        var accountSignedIn = await googleSignIn.signInSilently();
+                                        var authHeaders = await googleSignIn.currentUser.authHeaders;
+                                        var auth = await googleSignIn.currentUser.authentication;
 
-                                      if(result){
-                                        Navigator.pushReplacementNamed(context, '/home/blm');
+
+                                        print('The auth is ${auth.accessToken}}');
+                                        print('The auth is ${auth.idToken}');
+                                        print('The auth is ${auth.serverAuthCode}');
+
+                                        print('The auth headers is $authHeaders');
+
+                                        print('The client id is ${googleSignIn.clientId}');
+
+
+                                        print('The headers is $authHeaders');
+
+                                        
+                                        bool result = await apiBLMSignInWithGoogle(
+                                          firstName: accountSignedIn.displayName, 
+                                          // lastName: accountSignedIn.displayName,
+                                          lastName: '', 
+                                          email: accountSignedIn.email, 
+                                          username: accountSignedIn.email,
+                                          googleId: auth.idToken,
+                                          image: accountSignedIn.photoUrl,
+                                        );
+                                        context.hideLoaderOverlay();
+
+                                        print('The value of result is $result');
+                                        print('The value is ${accountSignedIn.authHeaders}');
+
+                                        if(result == true){
+                                          Navigator.pushReplacementNamed(context, '/home/blm');
+                                        }else{
+                                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        }
+
                                       }else{
-                                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                        GoogleSignInAccount signIn = await googleSignIn.signIn();
+                                        var authHeaders = await googleSignIn.currentUser.authHeaders;
+                                        var auth = await googleSignIn.currentUser.authentication;
+
+                                        print('The auth is ${auth.accessToken}}');
+                                        print('The auth is ${auth.idToken}');
+                                        print('The auth is ${auth.serverAuthCode}');
+
+                                        print('The auth headers is $authHeaders');
+
+                                        print('The client id is ${googleSignIn.clientId}');
+
+
+                                        print('The headers is $authHeaders');
+
+                                        context.showLoaderOverlay();
+                                        
+
+                                        bool result = await apiBLMSignInWithGoogle(
+                                          firstName: signIn.displayName, 
+                                          // lastName: signIn.displayName, 
+                                          lastName: '',
+                                          email: signIn.email, 
+                                          username: signIn.email,
+                                          googleId: auth.idToken,
+                                          image: signIn.photoUrl,
+                                        );
+                                        context.hideLoaderOverlay();
+
+                                        if(result == true){
+                                          Navigator.pushReplacementNamed(context, '/home/blm');
+                                        }else{
+                                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        }
                                       }
 
                                     }, 

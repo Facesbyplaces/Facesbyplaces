@@ -348,7 +348,34 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
               ],
             ),
           ),
-          bottomNavigationBar: MiscRegularBottomSheetComment(key: key1,),
+          // bottomNavigationBar: MiscRegularBottomSheetComment(key: key1,),
+          // bottomSheet: MiscRegularBottomSheetComment(key: key1,),
+          bottomSheet: TextFormField(
+                // controller: controller,
+                cursorColor: Color(0xff000000),
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  fillColor: Color(0xffBDC3C7),
+                  filled: true,
+                  labelText: 'Say something...',
+                  labelStyle: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                    color: Color(0xffffffff),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xffBDC3C7),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xffBDC3C7),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                ),
+              ),
         ),
       ),
     );
