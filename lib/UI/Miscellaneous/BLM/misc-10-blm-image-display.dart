@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class MiscBLMImageDisplayTemplate extends StatelessWidget{
 
@@ -10,9 +11,13 @@ class MiscBLMImageDisplayTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Container(
-      height: SizeConfig.blockSizeVertical * 15,
-      width: SizeConfig.blockSizeVertical * 15,
+      height: ScreenUtil().setHeight(100),
+      width: ScreenUtil().setWidth(100),
       color: Color(0xffF4F3EB),
       child: Padding(
         padding: EdgeInsets.all(5.0),

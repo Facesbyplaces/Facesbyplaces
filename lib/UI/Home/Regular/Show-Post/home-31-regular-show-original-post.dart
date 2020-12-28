@@ -8,6 +8,8 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
+import 'home-32-regular-show-comments.dart';
+
 class HomeRegularShowOriginalPost extends StatefulWidget{
   final int postId;
   final bool likeStatus;
@@ -209,7 +211,9 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                                   GestureDetector(
-                                    onTap: (){},
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
+                                    },
                                     child: Row(
                                       children: [
                                         Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),

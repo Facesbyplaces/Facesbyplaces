@@ -23,7 +23,8 @@ class UILogin01 extends StatelessWidget {
           alignment: Alignment.center,
           child: ContainerResponsive(
             padding: EdgeInsetsResponsive.only(left: 10.0, right: 10.0),
-            width: SizeConfig.screenHeight,
+            // width: SizeConfig.screenHeight,
+            width: SizeConfig.screenWidth,
             heightResponsive: false,
             widthResponsive: true,
             alignment: Alignment.center,

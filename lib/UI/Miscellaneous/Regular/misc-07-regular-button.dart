@@ -75,8 +75,8 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
           Expanded(
             flex: 2, 
             child: Padding(
-              padding: EdgeInsets.only(left: 5), 
-              child: Text(buttonText, 
+              padding: EdgeInsets.only(left: 5),
+              child: Text(buttonText,
                 style: buttonTextStyle,
               ),
             ),

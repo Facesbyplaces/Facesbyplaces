@@ -6,6 +6,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:image_picker/image_picker.dart';
+// import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -15,6 +16,13 @@ class TaggedUsers{
   int userId;
 
   TaggedUsers({this.name, this.userId,});
+}
+
+class ManagedPages{
+  String name;
+  int pageId;
+
+  ManagedPages({this.name, this.pageId});
 }
 
 class HomeRegularCreatePost extends StatefulWidget{
@@ -33,18 +41,23 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
 
-  List<String> managedPages;
+  // List<String> managedPages;
+  List<ManagedPages> managedPages;
   String currentSelection;
+  int currentIdSelected;
   Future listManagedPages;
   List<TaggedUsers> users = [];
+  
+  // List<Asset> multiImages = List<Asset>();
+  // String newError;
 
   void initState(){
     super.initState();
     managedPages = [];
     currentSelection = name;
+    currentIdSelected = memorialId;
     getManagedPages();
   }
-
 
   void getManagedPages() async{
     context.showLoaderOverlay();
@@ -52,11 +65,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.pagesList.length; i++){
-      managedPages.add(newValue.pagesList[i].name);
+      managedPages.add(ManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
     }
 
     setState(() {});
   }
+
+
 
   File imageFile;
   File videoFile;
@@ -92,6 +107,35 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
       });
     }
   }
+
+  // Future<void> getMultipleImages() async {
+  //   setState(() {
+  //     multiImages = List<Asset>();
+  //   });
+
+  //   List<Asset> resultList;
+  //   String error;
+
+  //   try {
+  //     resultList = await MultiImagePicker.pickImages(
+  //       maxImages: 300,
+  //     );
+  //   } on Exception catch (e) {
+      
+  //     error = e.toString();
+  //     print('The error is $error');
+  //   }
+
+  //   // If the widget was removed from the tree while the asynchronous platform
+  //   // message was in flight, we want to discard the reply rather than calling
+  //   // setState to update our non-existent appearance.
+  //   if (!mounted) return;
+
+  //   setState(() {
+  //     multiImages = resultList;
+  //     if (error == null) newError = 'No Error Dectected';
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -158,13 +202,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   APIRegularCreatePost post = APIRegularCreatePost(
                     pageType: 'Memorial',
                     postBody: _key1.currentState.controller.text,
-                    pageId: memorialId.toString(),
+                    pageId: currentIdSelected.toString(),
                     location: newLocation,
                     imagesOrVideos: newFile,
                     latitude: locationData.latitude.toString(),
                     longitude: locationData.longitude.toString(),
                     tagPeople: userIds,
-                    // tagPeople: userIds.toString()
                   );
 
                   context.showLoaderOverlay();
@@ -211,24 +254,27 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         ),
                       ),
                       child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: currentSelection,
+                        child: DropdownButton<int>(
+                          value: currentIdSelected,
                           isDense: true,
-                          onChanged: (String newValue) {
+                          onChanged: (int newValue) {
                             setState(() {
-                              currentSelection = newValue;
+                              currentIdSelected = newValue;
+                              print('The currentId selected is $currentIdSelected');
                             });
                           },
-                          items: managedPages.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
+                          items: managedPages.map((ManagedPages value) {
+                            return DropdownMenuItem<int>(
+                              // value: value.name,
+                              value: value.pageId,
+                              
                               child: Row(
                                 children: [
                                   CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-                                  Text(value),
+                                  Text(value.name),
                                 ],
                               ),
                             );
@@ -254,74 +300,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                   Container(
-                    // child: Row(
-                    //   children: [
-                    //     // newLocation != ''
-                    //     // ? Text('at')
-                    //     // : Text(''),
-
-                    //     // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                    //     // Text(newLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
-
-                    //     // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                    //     // person != ''
-                    //     // ? Text('with')
-                    //     // : Text(''),
-
-                    //     // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                    //     // Text(person, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
-                    //   ],
-                    // ), 
-
-                    // child: Chip(
-                    //   labelPadding: const EdgeInsets.only(left: 8.0),
-                    //   label: Text('sampe'),
-                    //   deleteIcon: Icon(
-                    //     Icons.close,
-                    //     size: 18,
-                    //   ),
-                    //   onDeleted: () {
-                    //     onDeleted(index);
-                    //   },
-                    // ),
-
-                    // child: TagEditor(
-                    //   length: users.length,
-                    //   delimiters: [',', ' '],
-                    //   hasAddButton: false,
-                    //   enabled: false,
-                    //   // inputDecoration: const InputDecoration(
-                    //   //   border: InputBorder.none,
-                    //   // ),
-                    //   onTagChanged: (newValue) {
-                    //     // setState(() {
-                    //     //   users.add(newValue);
-                    //     // });
-
-                    //     setState(() {
-                          
-                    //     });
-                    //   },
-                    //   tagBuilder: (context, index) => Chip(
-                    //     labelPadding: const EdgeInsets.only(left: 8.0),
-                    //     label: Text(users[index].name),
-                    //     deleteIcon: Icon(
-                    //       Icons.close,
-                    //       size: 18,
-                    //     ),
-                    //     onDeleted: () {
-                    //       setState(() {
-                    //         users.removeAt(index);
-                    //       });
-                    //     },
-                    //   ),
-                    // ),
-                    
-                    // height: SizeConfig.blockSizeVertical * 20,
-                    // width: SizeConfig.screenWidth,
                     child: Wrap(
                       spacing: 5.0,
                       children: List.generate(
@@ -409,7 +387,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                             onTap: () async{
                               
                               var result = await Navigator.pushNamed(context, '/home/regular/create-post-user');
-                              // person = result.toString();
 
                               if(result != null){
                                 users.add(result);
@@ -446,6 +423,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   await getVideo();
                                 }
                               }
+
+                              // print('new image');
+
+                              // await getMultipleImages();
                             },
                             child: Container(
                               color: Colors.transparent,

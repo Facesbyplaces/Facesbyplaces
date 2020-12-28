@@ -1,8 +1,10 @@
+import 'package:facesbyplaces/API/Regular/api-77-regular-follow-page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/View-Memorial/home-08-blm-view-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-view-managed-memorial.dart';
 import 'package:facesbyplaces/API/Regular/api-19-regular-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-03-regular-profile-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-04-regular-sample-refresher.dart';
 import 'package:flutter/material.dart';
 import 'misc-08-regular-dialog.dart';
 
@@ -70,9 +72,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
-
-        // apiRegularShowMemorial
         print('The memorial type is $pageType');
         print('The memorial id is $memorialId');
 
@@ -86,6 +85,11 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
           }
           
         }
+
+        // print('hehehehe');
+
+
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => DeliveryPage()));
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,
@@ -169,6 +173,16 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                 textColor: followButton ? Color(0xffffffff) : Color(0xff4EC9D4),
                 splashColor: Color(0xff4EC9D4),
                 onPressed: () async{
+
+                  setState(() {
+                    followButton = !followButton;
+                  });
+
+                  await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: followButton);
+
+
+
+
                   // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Are you sure you want to unfollow this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                   // if(confirmResult){

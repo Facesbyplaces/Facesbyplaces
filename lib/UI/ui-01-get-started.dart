@@ -31,7 +31,8 @@ class UIGetStarted extends StatelessWidget {
                   MiscStartBackgroundTemplate(),
 
                   ContainerResponsive(
-                    width: SizeConfig.screenHeight,
+                    // width: SizeConfig.screenHeight,
+                    width: SizeConfig.screenWidth,
                     heightResponsive: false,
                     widthResponsive: true,
                     alignment: Alignment.topCenter,

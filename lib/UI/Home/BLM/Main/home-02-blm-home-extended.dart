@@ -4,6 +4,8 @@ import 'package:facesbyplaces/API/BLM/api-22-blm-show-user-information.dart';
 import 'package:facesbyplaces/UI/Home/BLM/Main/home-03-01-blm-feed-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-extra.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../Settings-Notifications/home-30-blm-notification-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
@@ -200,8 +202,22 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                           GestureDetector(
                             onTap: () async{
+
                               context.showLoaderOverlay();
                               bool result = await apiBLMLogout();
+
+                              GoogleSignIn googleSignIn = GoogleSignIn(
+                                scopes: [
+                                  'profile',
+                                  'email',
+                                  'openid'
+                                ],
+                              );
+                              await googleSignIn.signOut();
+
+                              FacebookLogin fb = FacebookLogin();
+                              await fb.logOut();
+
                               context.hideLoaderOverlay();
 
                               if(result){

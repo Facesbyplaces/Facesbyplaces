@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/API/Regular/api-04-regular-upload-photo.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -9,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularUploadPhoto extends StatefulWidget{
 
@@ -43,6 +46,10 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocUpdateButtonText>(create: (context) => BlocUpdateButtonText(),),
@@ -50,173 +57,204 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
       ],
       child: Scaffold(
         backgroundColor: Color(0xffffffff),
-        body: BlocBuilder<BlocUpdateButtonText, int>(
-          builder: (context, textNumber){
-            return BlocBuilder<BlocShowMessage, bool>(
-              builder: (context, showMessage){
-                return Stack(
-                  children: [
+        body: ContainerResponsive(
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          alignment: Alignment.center,
+          child: ContainerResponsive(
+            width: SizeConfig.screenWidth,
+            heightResponsive: false,
+            widthResponsive: true,
+            alignment: Alignment.center,
+            child: BlocBuilder<BlocUpdateButtonText, int>(
+              builder: (context, textNumber){
+                return BlocBuilder<BlocShowMessage, bool>(
+                  builder: (context, showMessage){
+                    return Stack(
+                      children: [
 
-                    ((){ return showMessage ? MiscRegularMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
+                        SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                      child: Column(
-                        children: [
+                        ((){ return showMessage ? MiscRegularMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SingleChildScrollView(
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          physics: ClampingScrollPhysics(),
+                          child: Column(
+                            children: [
 
-                          Center(child: Text('Upload Photo', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-                          GestureDetector(
-                            onTap: () async{
-                              context.bloc<BlocUpdateButtonText>().add();
-
-                              var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
-
-                              if(choice == null){
-                                choice = 0;
-                              }else{
-                                if(choice == 1){
-                                  await openCamera();
-                                }else{
-                                  await getImage();
-                                }
-                              }
-
-                              context.bloc<BlocUpdateButtonText>().reset();
-                              
-                            },
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 4,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(15.0),
-                                      child: _image != null
-                                      ? Stack(
-                                        children: [
-                                          Container(color: Color(0xffffffff),),
-
-                                          Align(alignment: Alignment.center, child: Image.asset(_image.path),),
-                                        ],
-                                      )
-                                      : Stack(
-                                        children: [
-                                          Container(color: Color(0xffffffff),),
-
-                                          Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: SizeConfig.safeBlockVertical * 30,),),
-                                        ],
-                                      ),
-                                    ),
+                              Center(
+                                child: Text('Upload Photo', 
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true),
+                                    fontWeight: FontWeight.bold, 
+                                    color: Color(0xff000000),
                                   ),
-                                  Expanded(
-                                    child: Center(
-                                      child: Text('Add a photo',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                          fontWeight: FontWeight.w300,
-                                          color: Color(0xff000000),
+                                ),
+                              ),
+
+                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                              GestureDetector(
+                                onTap: () async{
+                                  context.bloc<BlocUpdateButtonText>().add();
+
+                                  var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
+
+                                  if(choice == null){
+                                    choice = 0;
+                                  }else{
+                                    if(choice == 1){
+                                      await openCamera();
+                                    }else{
+                                      await getImage();
+                                    }
+                                  }
+
+                                  context.bloc<BlocUpdateButtonText>().reset();
+                                  
+                                },
+                                child: Container(
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        flex: 4,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(15.0),
+                                          child: _image != null
+                                          ? Stack(
+                                            children: [
+                                              Container(color: Color(0xffffffff),),
+
+                                              Align(alignment: Alignment.center, child: Image.asset(_image.path),),
+                                            ],
+                                          )
+                                          : Stack(
+                                            children: [
+                                              Container(color: Color(0xffffffff),),
+
+                                              Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: SizeConfig.safeBlockVertical * 30,),),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                      Expanded(
+                                        child: Center(
+                                          child: Text('Add a photo',
+                                            style: TextStyle(
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                              fontWeight: FontWeight.w300,
+                                              color: Color(0xff000000),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                  // height: SizeConfig.blockSizeVertical * 50,
+                                  height: ScreenUtil().setHeight(335),
+                                  width: SizeConfig.screenWidth / 1.2,
+                                  color: Color(0xffF9F8EE),
+                                ),
                               ),
-                              height: SizeConfig.blockSizeVertical * 50,
-                              width: SizeConfig.screenWidth / 1.2,
-                              color: Color(0xffF9F8EE),
-                            ),
-                          ),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                          MiscRegularButtonTemplate(
-                            buttonText: textNumber == 1
-                            ? 'Sign Up'
-                            : 'Next',
-                            buttonTextStyle: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                              fontWeight: FontWeight.bold, 
-                              color: Color(0xffffffff),
-                            ), 
-                            onPressed: () async{
-                              if(_image != null){
+                              MiscRegularButtonTemplate(
+                                buttonText: textNumber == 1
+                                ? 'Sign Up'
+                                : 'Next',
+                                buttonTextStyle: TextStyle(
+                                  // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontWeight: FontWeight.bold, 
+                                  color: Color(0xffffffff),
+                                ), 
+                                onPressed: () async{
+                                  if(_image != null){
 
-                                context.showLoaderOverlay();
-                                bool result = await apiRegularUploadPhoto(_image);
-                                context.hideLoaderOverlay();
+                                    context.showLoaderOverlay();
+                                    bool result = await apiRegularUploadPhoto(_image);
+                                    context.hideLoaderOverlay();
 
-                                context.bloc<BlocUpdateButtonText>().reset();
+                                    context.bloc<BlocUpdateButtonText>().reset();
 
-                                if(result){
-                                  Navigator.pushReplacementNamed(context, '/home/regular');
-                                }else{
-                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
-                                }
+                                    if(result){
+                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    }else{
+                                      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                    }
 
-                              }else{
-                                context.bloc<BlocShowMessage>().showMessage();
-                                Duration duration = Duration(seconds: 2);
+                                  }else{
+                                    context.bloc<BlocShowMessage>().showMessage();
+                                    Duration duration = Duration(seconds: 2);
 
-                                Future.delayed(duration, (){
-                                  context.bloc<BlocShowMessage>().showMessage();
-                                });
-                              }
-                            }, 
-                            width: SizeConfig.screenWidth / 2, 
-                            height: SizeConfig.blockSizeVertical * 7, 
-                            buttonColor: Color(0xff04ECFF),
-                          ),
+                                    Future.delayed(duration, (){
+                                      context.bloc<BlocShowMessage>().showMessage();
+                                    });
+                                  }
+                                }, 
+                                width: SizeConfig.screenWidth / 2, 
+                                // height: SizeConfig.blockSizeVertical * 7,
+                                height: ScreenUtil().setHeight(45),
+                                buttonColor: Color(0xff04ECFF),
+                              ),
 
-                          Expanded(child: Container(),),
+                              // Expanded(child: Container(),),
+                              SizedBox(height: ScreenUtil().setHeight(20)),
 
-                          RichText(
-                            text: TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'Connect / ', 
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color(0xff888888),
-                                  ),
+                              RichText(
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Connect / ', 
+                                      style: TextStyle(
+                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                        fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xff888888),
+                                      ),
+                                    ),
+
+                                    TextSpan(
+                                      text: 'Remember / ',
+                                      style: TextStyle(
+                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                        fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xff888888),
+                                      ),
+                                    ),
+
+                                    TextSpan(
+                                      text: 'Honor',
+                                      style: TextStyle(
+                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                        fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xff888888),
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                              ),
 
-                                TextSpan(
-                                  text: 'Remember / ',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color(0xff888888),
-                                  ),
-                                ),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                TextSpan(
-                                  text: 'Honor',
-                                  style: TextStyle(
-                                    fontSize: SizeConfig.safeBlockHorizontal * 5,
-                                    fontWeight: FontWeight.w300,
-                                    color: Color(0xff888888),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
-
-                          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                        ],
-                      ),
-                    ),
-                  ],
+                        ),
+                        
+                      ],
+                    );
+                  },
                 );
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

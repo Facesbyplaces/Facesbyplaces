@@ -10,6 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:responsive_widgets/responsive_widgets.dart';
+
 class BLMUploadPhoto extends StatefulWidget{
 
   BLMUploadPhotoState createState() => BLMUploadPhotoState();
@@ -46,6 +48,10 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocUpdateButtonText>(create: (context) => BlocUpdateButtonText(),),
@@ -53,135 +59,159 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
       ],
       child: Scaffold(
         backgroundColor: Color(0xffffffff),
-        body: BlocBuilder<BlocUpdateButtonText, int>(
-          builder: (context, textNumber){
-            return BlocBuilder<BlocShowMessage, bool>(
-              builder: (context, showMessage){
-                return Stack(
-                  children: [
+        body: ContainerResponsive(
+          height: SizeConfig.screenHeight,
+          width: SizeConfig.screenWidth,
+          alignment: Alignment.center,
+          child: ContainerResponsive(
+            width: SizeConfig.screenWidth,
+            heightResponsive: false,
+            widthResponsive: true,
+            alignment: Alignment.center,
+            child: BlocBuilder<BlocUpdateButtonText, int>(
+              builder: (context, textNumber){
+                return BlocBuilder<BlocShowMessage, bool>(
+                  builder: (context, showMessage){
+                    return Stack(
+                      children: [
 
-                    ((){ return showMessage ? MiscBLMMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
+                        Column(
+                          children: [
+                            SizedBox(height: ScreenUtil().setHeight(20)),
 
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                      child: Column(
-                        children: [
+                            ((){ return showMessage ? MiscBLMMessageTemplate(message: 'Please upload a photo.',) : Container(); }()),
+                          ],
+                        ),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        // Padding(
+                        //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                        //   child: 
+                        // ),
 
-                          Center(child: Text('Upload Photo', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 8, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                        SingleChildScrollView(
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          physics: ClampingScrollPhysics(),
+                          child: Column(
+                            children: [
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                          BlocBuilder<BlocUpdateButtonText, int>(
-                            builder: (context, state){
-                              return GestureDetector(
-                                onTap: () async{
-                                  context.bloc<BlocUpdateButtonText>().add();
+                              Center(child: Text('Upload Photo', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                                  var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog());
+                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                                  if(choice == null){
-                                    choice = 0;
-                                  }else{
-                                    if(choice == 1){
-                                      await openCamera();
-                                    }else{
-                                      await getImage();
-                                    }
-                                  }
+                              BlocBuilder<BlocUpdateButtonText, int>(
+                                builder: (context, state){
+                                  return GestureDetector(
+                                    onTap: () async{
+                                      context.bloc<BlocUpdateButtonText>().add();
 
-                                  context.bloc<BlocUpdateButtonText>().reset();
-                                  
-                                },
-                                child: Container(
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(15.0),
-                                          child: _image != null
-                                          ? Stack(
-                                            children: [
-                                              Container(color: Color(0xffffffff),),
+                                      var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog());
 
-                                              Align(alignment: Alignment.center, child: Image.asset(_image.path),),
-                                            ],
-                                          )
-                                          : Stack(
-                                            children: [
-                                              Container(color: Color(0xffffffff),),
+                                      if(choice == null){
+                                        choice = 0;
+                                      }else{
+                                        if(choice == 1){
+                                          await openCamera();
+                                        }else{
+                                          await getImage();
+                                        }
+                                      }
 
-                                              Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: SizeConfig.safeBlockVertical * 30,),),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Center(
-                                          child: Text('Select a photo',
-                                            style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                              fontWeight: FontWeight.w300,
-                                              color: Color(0xff000000),
+                                      context.bloc<BlocUpdateButtonText>().reset();
+                                      
+                                    },
+                                    child: Container(
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            flex: 4,
+                                            child: Padding(
+                                              padding: EdgeInsets.all(15.0),
+                                              child: _image != null
+                                              ? Stack(
+                                                children: [
+                                                  Container(color: Color(0xffffffff),),
+
+                                                  Align(alignment: Alignment.center, child: Image.asset(_image.path),),
+                                                ],
+                                              )
+                                              : Stack(
+                                                children: [
+                                                  Container(color: Color(0xffffffff),),
+
+                                                  Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: SizeConfig.safeBlockVertical * 30,),),
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                          Expanded(
+                                            child: Center(
+                                              child: Text('Select a photo',
+                                                style: TextStyle(
+                                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Color(0xff000000),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  height: SizeConfig.blockSizeVertical * 50,
-                                  width: SizeConfig.screenWidth / 1.2,
-                                  color: Color(0xffF9F8EE),
-                                ),
-                              );
-                            }
-                          ),
-
-                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
-
-                          MiscBLMButtonTemplate(
-                            buttonText: textNumber == 1 ? 'Sign Up' : 'Speak Now',
-                            buttonTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffffffff),),
-                            onPressed: () async{
-                              if(_image != null){
-
-                                context.showLoaderOverlay();
-                                bool result = await apiBLMUploadPhoto(_image);
-                                context.hideLoaderOverlay();
-
-                                context.bloc<BlocUpdateButtonText>().reset();
-
-                                if(result){
-                                  Navigator.pushReplacementNamed(context, '/home/blm');
-                                }else{
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                      // height: SizeConfig.blockSizeVertical * 50,
+                                      height: ScreenUtil().setHeight(335),
+                                      width: SizeConfig.screenWidth / 1.2,
+                                      color: Color(0xffF9F8EE),
+                                    ),
+                                  );
                                 }
-                              }else{
-                                context.bloc<BlocShowMessage>().showMessage();
-                                Duration duration = Duration(seconds: 2);
+                              ),
 
-                                Future.delayed(duration, (){
-                                  context.bloc<BlocShowMessage>().showMessage();
-                                });
-                              }
-                            }, 
-                            width: SizeConfig.screenWidth / 2, 
-                            height: SizeConfig.blockSizeVertical * 7, 
-                            buttonColor: textNumber == 1
-                            ? Color(0xff04ECFF)
-                            : Color(0xff000000),
+                              SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+
+                              MiscBLMButtonTemplate(
+                                buttonText: textNumber == 1 ? 'Sign Up' : 'Speak Now',
+                                buttonTextStyle: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xffffffff),),
+                                onPressed: () async{
+                                  if(_image != null){
+
+                                    context.showLoaderOverlay();
+                                    bool result = await apiBLMUploadPhoto(_image);
+                                    context.hideLoaderOverlay();
+
+                                    context.bloc<BlocUpdateButtonText>().reset();
+
+                                    if(result){
+                                      Navigator.pushReplacementNamed(context, '/home/blm');
+                                    }else{
+                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                    }
+                                  }else{
+                                    context.bloc<BlocShowMessage>().showMessage();
+                                    Duration duration = Duration(seconds: 2);
+
+                                    Future.delayed(duration, (){
+                                      context.bloc<BlocShowMessage>().showMessage();
+                                    });
+                                  }
+                                }, 
+                                width: SizeConfig.screenWidth / 2, 
+                                height: ScreenUtil().setHeight(45),
+                                buttonColor: textNumber == 1
+                                ? Color(0xff04ECFF)
+                                : Color(0xff000000),
+                              ),
+
+                            ],
                           ),
-
-                        ],
-                      ),
-                    ),
-                  ],
+                        ),
+                      ],
+                    );
+                  },
                 );
               },
-            );
-          },
+            ),
+          ),
         ),
       ),
     );
