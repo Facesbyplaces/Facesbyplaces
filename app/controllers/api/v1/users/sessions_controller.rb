@@ -1,5 +1,4 @@
 class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
-  before_action :setup_apple_client, only: [:apple]
 
     def render_create_success
       user = @resource
@@ -93,62 +92,41 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           end
         end
       # Apple Login
-      elsif params[:code].present? && params[:identity_token].present?
-        # Initialized of apple processes
-          setup_apple_client()
-          @client.authorization_code = params[:code]
+      elsif params[:user_identification].present? && params[:identity_token].present?
+        apple = AppleAuth::UserIdentity.new(params[:user_identification], params[:identity_token]).validate!
+        
+        @user = User.where(email: apple.email).first 
 
-          begin
-            token_response = @client.access_token!
-            rescue AppleID::Client::Error => e
-            # puts e # gives useful messages from apple on failure
-            return render json: {status: e}, status: 401
+        if @user 
+          params[:email] = @user.email
+          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+          @user.password = @user.password_confirmation = params[:password]
+          @user.save
+          super
+        else
+          @user = User.new(sign_up_params_apple)
+
+          @user.email = apple.email
+          @user.hideBirthdate = false 
+          @user.hideBirthplace = false 
+          @user.hideEmail = false 
+          @user.hideAddress = false 
+          @user.hidePhonenumber = false 
+          @user.is_verified = true
+
+          # image
+          if params[:image].present? 
+            downloaded_image = URI.open(params[:image])
+            filename = File.basename(URI.parse(params[:image]).path)
+            @user.image.attach(io: downloaded_image  , filename: filename)
           end
-          render json: "success"
-          # id_token_back_channel = token_response.id_token
-          # id_token_back_channel.verify!(
-          #   client: @client,
-          #   access_token: token_response.access_token,
-          # )
 
-          # id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
-          # id_token_front_channel.verify!(
-          #   client: @client,
-          #   code: params[:code],
-          # )
-          # id_token = token_response.id_token
-
-        # @user = User.find_by(apple_uid: id_token.sub)
-        # if @user.present?
-        #   super
-        # end
-  
-        # @user = User.find_by_email(id_token.email)
-  
-        # if @user.present?
-        #   super
-        # else
-        #   # # Register user
-        #   # @user = User.new(sign_up_params_apple)
-
-        #   # @user.is_verified = true
-        #   # @user.hideBirthdate = false 
-        #   # @user.hideBirthplace = false 
-        #   # @user.hideEmail = false 
-        #   # @user.hideAddress = false 
-        #   # @user.hidePhonenumber = false 
-        #   # @user.apple_uid = id_token.email
-        #   # @user.email = id_token.sub
-        #   # @user.provider = :apple # devise_token_auth attribute, but you can add it yourself.
-        #   # @user.uid = id_token.sub # devise_token_auth attribute
-
-        #   # @user.save!
-          
-        #   return render json: {
-        #     status: :created,
-        #     user: id_token.email
-        #     }, status: 200
-        # end
+          @user.save!
+          params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+          @user.password = @user.password_confirmation = params[:password]
+          @user.save
+          super
+        end
       # Fbp Login
       else
         user = User.find_by(email: params[:email])
@@ -183,17 +161,5 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def valid_params?(key, val)
       params[:facebook_id].present? || params[:google_id].present? ? "" : resource_params[:password] && key && val
-    end
-
-    private
-
-    def setup_apple_client
-      @client ||= AppleID::Client.new(
-      identifier: Rails.application.credentials.dig(:apple, :apple_client_id),
-      team_id: Rails.application.credentials.dig(:apple, :apple_team_id),
-      key_id: Rails.application.credentials.dig(:apple, :apple_key_id),
-      private_key: OpenSSL::PKey::EC.new(Rails.application.credentials.dig(:apple, :apple_private_key)),
-      redirect_uri: ENV['APPLE_REDIRECT_URI']
-      )
     end
 end
