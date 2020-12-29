@@ -107,7 +107,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user = User.new()
           @user.first_name = "Paul Brian"
           @user.last_name = "Marcuelo"
-          @user.phone_number = 09171058588
+          @user.phone_number = "09171058588"
           @user.username = "miloe"
           @user.account_type = params[:account_type]
           @user.email = apple.email
