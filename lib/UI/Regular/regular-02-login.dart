@@ -3,6 +3,7 @@
 
 import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
+import 'package:facesbyplaces/API/Regular/api-78-regular-sign-in-with-apple.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
@@ -562,6 +563,13 @@ class RegularLoginState extends State<RegularLogin>{
                             print('The credential is ${credential.identityToken}');
                             print('The credential is ${credential.state}');
                             print('The credential is ${credential.userIdentifier}');
+
+
+                            bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
+
+                            print('The result is $result');
+
+
 
                             // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
                             // after they have been validated with Apple (see `Integration` section for more information on how to do this)

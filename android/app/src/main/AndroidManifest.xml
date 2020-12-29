@@ -77,19 +77,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.aboutyou.dart_packages.sign_in_with_apple.SignInWithAppleCallback"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="signinwithapple" />
-                <data android:path="callback" />
-            </intent-filter>
-        </activity>
-
         <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_ojZbbbmuXFU4YLE3lDeonklaDzenB7dV" />
         <!-- <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_live_ojZbbbmuXFU4YLE3lDeonklaDzenB7dV" /> -->
         <!-- secret_live_FCwcI5UnWBVwo4fiYymYQrGVXa3HBy2s -->
@@ -102,7 +89,4 @@
             android:value="2" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
 </manifest>

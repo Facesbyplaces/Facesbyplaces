@@ -4,9 +4,10 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-01-regular-v
 import 'package:facesbyplaces/API/Regular/api-19-regular-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-03-regular-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/Regular/Donate/home-20-regular-donate.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/Donate/home-20-regular-donate.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-04-regular-sample-refresher.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'misc-08-regular-dialog.dart';
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
@@ -71,31 +72,36 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return GestureDetector(
       onTap: () async{
-        // print('The memorial type is $pageType');
-        // print('The memorial id is $memorialId');
+        print('The memorial type is $pageType');
+        print('The memorial id is $memorialId');
 
-        // if(managed == true){
-        //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
-        // }else{
-        //   if(pageType == 'Memorial'){
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: follower,)));
-        //   }else{
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
-        //   }
+        if(managed == true){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
+        }else{
+          if(pageType == 'Memorial'){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+          }else{
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+          }
           
-        // }
+        }
 
         // print('hehehehe');
 
 
         // Navigator.push(context, MaterialPageRoute(builder: (context) => DeliveryPage()));
 
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
       },
       child: Container(
-        height: SizeConfig.blockSizeVertical * 15,
+        // height: SizeConfig.blockSizeVertical * 15,
+        height: ScreenUtil().setHeight(80),
         color: Color(0xffffffff),
         child: Row(
           children: [
@@ -118,7 +124,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
                           ),
@@ -132,7 +139,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 3,
+                            fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                             fontWeight: FontWeight.w200,
                             color: Colors.grey,
                           ),
@@ -162,8 +170,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     }
                   }
                 },
-                child: manageButton ? Text('Leave', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),) : Text('Manage', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),),
-                height: SizeConfig.blockSizeVertical * 5,
+                child: manageButton ? Text('Leave', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),) : Text('Manage', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
+                // height: SizeConfig.blockSizeVertical * 5,
+                height: ScreenUtil().setHeight(35),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   side: manageButton ? BorderSide(color: Color(0xff04ECFF)) : BorderSide(color: Color(0xff4EC9D4)),
@@ -207,8 +216,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
 
 
                 },
-                child: followButton ? Text('Unfollow', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),) : Text('Follow', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),),
-                height: SizeConfig.blockSizeVertical * 5,
+                child: followButton ? Text('Unfollow', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),) : Text('Follow', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
+                // height: SizeConfig.blockSizeVertical * 5,
+                height: ScreenUtil().setHeight(35),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                   side: followButton ? BorderSide(color: Color(0xff04ECFF)) : BorderSide(color: Color(0xff4EC9D4)),

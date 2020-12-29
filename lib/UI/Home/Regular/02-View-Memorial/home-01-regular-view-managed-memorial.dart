@@ -13,6 +13,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-02-regular-connection-list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -93,7 +94,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
           
           managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
@@ -165,6 +166,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -201,13 +206,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                         child: Column(
                           children: [
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 12,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 12,),
+
+                            SizedBox(height: ScreenUtil().setHeight(105)),
 
                             Center(
                               child: Text(profile.data.memorial.name,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                                  // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                  fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xff000000),
                                 ),
@@ -216,7 +224,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: ScreenUtil().setHeight(20)),
 
                             Container(
                               width: SizeConfig.safeBlockHorizontal * 15,
@@ -235,12 +244,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                     ),
                                   ),
 
-                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                  // SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                  SizedBox(width: ScreenUtil().setWidth(10)),
 
                                   Expanded(
                                     child: Text('45',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                        // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                        fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xff000000),
                                       ),
@@ -250,7 +261,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: ScreenUtil().setHeight(20)),
 
                             ((){
                               if(profile.data.memorial.details.description != '' || profile.data.memorial.details.description != null){
@@ -260,7 +271,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   child: Text(profile.data.memorial.details.description,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                      // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                      fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                       fontWeight: FontWeight.w300,
                                       color: Color(0xff000000),
                                     ),
@@ -294,7 +306,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               }
                             }()),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: ScreenUtil().setHeight(20)),
 
                             Container(
                               child: Row(
@@ -320,13 +333,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                            // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
                                         minWidth: SizeConfig.screenWidth / 2,
-                                        height: SizeConfig.blockSizeVertical * 7,
+                                        // height: SizeConfig.blockSizeVertical * 7,
+                                        height: ScreenUtil().setHeight(45),
                                         shape: StadiumBorder(),
                                         color: Color(0xff2F353D),
                                       ),
@@ -383,9 +398,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                       },
                                       child: CircleAvatar(
-                                        radius: SizeConfig.blockSizeVertical * 3,
+                                        // SizedBox(height: ScreenUtil().setHeight(20)),
+                                        // radius: SizeConfig.blockSizeVertical * 3,
+                                        radius: ScreenUtil().setHeight(25),
                                         backgroundColor: Color(0xff3498DB),
-                                        child: Icon(Icons.share, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 3,),
+                                        child: Icon(Icons.share, color: Color(0xffffffff), size: ScreenUtil().setHeight(25),),
                                       ),
                                     ),
                                   ),
@@ -393,7 +410,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: ScreenUtil().setHeight(20)),
 
                             Padding(
                               padding: EdgeInsets.only(left: 20),
@@ -402,11 +420,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                   Row(
                                     children: [
-                                      Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
+                                      Icon(Icons.place, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Text(profile.data.memorial.details.country,
                                         style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -417,11 +436,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                   Row(
                                     children: [
-                                      Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
+                                      Icon(Icons.star, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Text(convertDate(profile.data.memorial.details.dob),
                                         style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -432,11 +452,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                   Row(
                                     children: [
-                                      Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
+                                      Image.asset('assets/icons/grave_logo.png', height: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Text(convertDate(profile.data.memorial.details.rip),
                                         style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -447,7 +468,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: ScreenUtil().setHeight(20)),
 
                             Container(
                               height: 50.0,
@@ -464,7 +486,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text(profile.data.memorial.postsCount.toString(),
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -472,7 +495,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text('Post',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -482,7 +506,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                     ),
                                   ),
                                   
-                                  Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  // Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  Container(width: ScreenUtil().setHeight(2), color: Color(0xffeeeeee),),
+
+                                  // ScreenUtil().setHeight(20)
 
                                   Expanded(
                                     child: GestureDetector(
@@ -495,7 +522,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text(profile.data.memorial.familyCount.toString(),
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -503,7 +531,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text('Family',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -513,7 +542,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                     ),
                                   ),
 
-                                  Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  // Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  Container(width: ScreenUtil().setHeight(2), color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -526,7 +556,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text(profile.data.memorial.friendsCount.toString(),
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -534,7 +565,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text('Friends',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -544,7 +576,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                     ),
                                   ),
 
-                                  Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  // Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  Container(width: ScreenUtil().setHeight(2), color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -557,7 +590,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text(profile.data.memorial.followersCount.toString(),
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -565,7 +599,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
                                           Text('Joined',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              // fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -578,13 +613,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               ),
                             ),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffffffff),),
+                            Container(height: ScreenUtil().setHeight(2), color: Color(0xffffffff),),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            Container(height: ScreenUtil().setHeight(5), color: Color(0xffeeeeee),),
 
                             Column(
                               children: [
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                SizedBox(height: ScreenUtil().setHeight(20)),
 
                                 Container(
                                   key: dataKey,
@@ -592,28 +628,32 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   alignment: Alignment.centerLeft,
                                   child: Text('Post',
                                     style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                      // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                      fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xff000000),
                                     ),
                                   ),
                                 ),
 
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                SizedBox(height: ScreenUtil().setHeight(20)),
 
                                 profile.data.memorial.imagesOrVideos != null
                                 ? Column(
                                   children: [
                                     Container(
                                       width: SizeConfig.screenWidth,
-                                      height: SizeConfig.blockSizeVertical * 12,
-                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                      // height: SizeConfig.blockSizeVertical * 12,
+                                      height: ScreenUtil().setHeight(110),
+                                      // padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       child: ListView.separated(
                                         physics: ClampingScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index){
                                           return Container(
-                                            width: SizeConfig.blockSizeVertical * 12,
+                                            // width: SizeConfig.blockSizeVertical * 12,
+                                            width: ScreenUtil().setHeight(110),
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10),
                                               color: Color(0xff888888),
@@ -627,13 +667,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                           );
                                         }, 
                                         separatorBuilder: (context, index){
-                                          return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                                          return SizedBox(width: ScreenUtil().setHeight(20));
                                         },
                                         itemCount: profile.data.memorial.imagesOrVideos.length,
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                    // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                    SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   ],
                                 )
@@ -641,7 +682,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               ],
                             ),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            Container(height: ScreenUtil().setHeight(5), color: Color(0xffeeeeee),),
 
                             postCount != 0
                             ? Container(
@@ -656,20 +698,20 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   builder: (BuildContext context, LoadStatus mode){
                                     Widget body;
                                     if(mode == LoadStatus.idle){
-                                      body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                      body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
                                     }
                                     else if(mode == LoadStatus.loading){
                                       body =  CircularProgressIndicator();
                                     }
                                     else if(mode == LoadStatus.failed){
-                                      body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                      body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
                                     }
                                     else if(mode == LoadStatus.canLoading){
-                                      body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                      body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
                                       page++;
                                     }
                                     else{
-                                      body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                      body = Text('End of result.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
                                     }
                                     return Container(height: 55.0, child: Center(child: body),
                                     );
@@ -743,7 +785,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               padding: EdgeInsets.all(10.0),
                               height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
                               child: Center(
-                                child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
+                                child: Text('Post is empty.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),)),
                               ),
                             ),
 
@@ -770,7 +812,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                                   Text('Back',
                                     style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                      // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                      fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                       fontWeight: FontWeight.w500,
                                       color: Color(0xffffffff),
                                     ),
@@ -800,9 +843,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                               shape: StadiumBorder(),
                               color: Colors.green,
                               splashColor: Colors.yellow,
+                              height: ScreenUtil().setHeight(45),
                               child: Text('Create Post',
                                 style: TextStyle(
-                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xffffffff),
                                 ),
@@ -817,7 +862,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                   Positioned(
                     top: SizeConfig.screenHeight / 5,
                     child: Container(
-                      height: SizeConfig.blockSizeVertical * 18,
+                      // height: SizeConfig.blockSizeVertical * 18,
+                      height: ScreenUtil().setHeight(160),
                       width: SizeConfig.screenWidth,
                       child: Row(
                         children: [

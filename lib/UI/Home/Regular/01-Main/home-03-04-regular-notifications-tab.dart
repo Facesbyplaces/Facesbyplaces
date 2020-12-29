@@ -7,6 +7,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-dis
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularMainPagesNotifications{
   int id;
@@ -87,6 +88,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -165,7 +170,21 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           itemCount: notifications.length,
         ),
       )
-      : MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
+          ),
+        ),
+      ),
     );
   }
 }

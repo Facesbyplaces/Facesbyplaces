@@ -6,6 +6,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-extra.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import '../Settings-Notifications/home-30-blm-notification-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
@@ -41,6 +42,10 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocHomeBLMToggleBottom>(create: (context) => BlocHomeBLMToggleBottom(),),
@@ -90,11 +95,11 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   }
                 },
               ),
-              title: Text('FacesByPlaces.com', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),),
+              title: Text('FacesByPlaces.com', style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xffffffff),),),
               centerTitle: true,
               actions: [
                 IconButton(
-                  icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,), 
+                  icon: Icon(Icons.search, color: Color(0xffffffff), size: ScreenUtil().setHeight(35)), 
                   onPressed: (){
 
                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearch()));

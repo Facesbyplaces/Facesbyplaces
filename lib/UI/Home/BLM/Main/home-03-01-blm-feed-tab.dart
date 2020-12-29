@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMMainPagesFeeds{
   int userId;
@@ -95,6 +96,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -107,19 +112,19 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -186,86 +191,114 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           itemCount: feeds.length,
         ),
       )
-      : Column(
-        children: [
-
-          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-          Align(
-            alignment: Alignment.center,
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                children: <TextSpan>[
-                  TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                  TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                ],
-              ),
-            ),
-          ),
-
-          SizedBox(height: SizeConfig.blockSizeVertical * 3,),
-
-          Container(
-            width: SizeConfig.screenWidth,
-            child: Stack(
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Column(
               children: [
-                Positioned(
-                  left: 0,
-                  top: SizeConfig.blockSizeVertical * 8,
-                  child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
+
+                // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+                SizedBox(height: ScreenUtil().setHeight(45)),
+
+                Align(
+                  alignment: Alignment.center,
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+
+                        TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                      ],
+                    ),
+                  ),
                 ),
 
-                Positioned(
-                  right: 0,
-                  top: SizeConfig.blockSizeVertical * 8,
-                  child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
+                // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+
+                SizedBox(height: ScreenUtil().setHeight(25)),
+
+                ContainerResponsive(
+                  width: SizeConfig.screenHeight,
+                  heightResponsive: false,
+                  widthResponsive: true,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0,
+                        top: SizeConfig.blockSizeVertical * 8,
+                        child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
+                      ),
+
+                      Positioned(
+                        right: 0,
+                        top: SizeConfig.blockSizeVertical * 8,
+                        child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
+                      ),
+
+                      Positioned(
+                        left: SizeConfig.blockSizeHorizontal * 12,
+                        top: SizeConfig.blockSizeVertical * 6,
+                        child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
+                      ),
+
+                      Positioned(
+                        right: SizeConfig.blockSizeHorizontal * 12,
+                        top: SizeConfig.blockSizeVertical * 6,
+                        child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
+                      ),
+
+                      Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+                      // Center(child: Image.asset('assets/icons/logo.png', height: ScreenUtil().setHeight(250), width: ScreenUtil().setWidth(250))),
+                    ],
+                  ),
                 ),
 
-                Positioned(
-                  left: SizeConfig.blockSizeHorizontal * 12,
-                  top: SizeConfig.blockSizeVertical * 6,
-                  child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
+                // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                SizedBox(height: ScreenUtil().setHeight(45)),
+
+                Center(child: Text('Feed is empty', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
+
+                // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: ScreenUtil().setHeight(20)),
+
+                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xff000000),),),),),
+
+                // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                SizedBox(height: ScreenUtil().setHeight(25)),
+
+                MiscBLMButtonTemplate(
+                  buttonText: 'Create', 
+                  buttonTextStyle: TextStyle(
+                    // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                    fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                    fontWeight: FontWeight.bold, 
+                    color: Color(0xffffffff),
+                  ), 
+                  onPressed: (){
+                    Navigator.pushNamed(context, '/home/blm/create-memorial');
+                  }, 
+                  width: SizeConfig.screenWidth / 2, 
+                  // height: SizeConfig.blockSizeVertical * 7,
+                  height: ScreenUtil().setHeight(45),
+                  buttonColor: Color(0xff04ECFF),
                 ),
 
-                Positioned(
-                  right: SizeConfig.blockSizeHorizontal * 12,
-                  top: SizeConfig.blockSizeVertical * 6,
-                  child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
-                ),
-
-                Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+                SizedBox(height: ScreenUtil().setHeight(20)),
+                
               ],
             ),
           ),
-
-          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
-          Center(child: Text('Feed is empty', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
-
-          SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-          Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),),
-
-          SizedBox(height: SizeConfig.blockSizeVertical * 3,),
-
-          MiscBLMButtonTemplate(
-            buttonText: 'Create', 
-            buttonTextStyle: TextStyle(
-              fontSize: SizeConfig.safeBlockHorizontal * 5, 
-              fontWeight: FontWeight.bold, 
-              color: Color(0xffffffff),
-            ), 
-            onPressed: (){
-              Navigator.pushNamed(context, '/home/blm/create-memorial');
-            }, 
-            width: SizeConfig.screenWidth / 2, 
-            height: SizeConfig.blockSizeVertical * 7, 
-            buttonColor: Color(0xff04ECFF),
-          ),
-          
-        ],
+        ),
       ),
     );
   }
