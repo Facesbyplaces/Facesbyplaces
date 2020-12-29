@@ -3,7 +3,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
 
     # user's feed
     def feed
-        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = pages.object_type AND followers.page_id = pages.id OR posts.user_id = #{user().id}")
+        posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type INNER JOIN followers ON followers.user_id = #{user().id} AND followers.page_type = pages.object_type AND followers.page_id = pages.id INNER JOIN relationships ON relationships.user_id = #{user().id} AND relationships.page_type = pages.object_type AND relationships.page_id = pages.id")
                     .order(created_at: :desc)
                     .select("posts.*")
                     
