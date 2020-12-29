@@ -1,4 +1,4 @@
-package com.example.facesbyplaces
+package com.app.facesbyplaces
 
 import io.flutter.embedding.android.FlutterActivity
 
