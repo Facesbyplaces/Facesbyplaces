@@ -104,8 +104,12 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.save
           super
         else
-          @user = User.new(sign_up_params_apple)
-
+          @user = User.new()
+          @user.first_name = "Paul Brian"
+          @user.last_name = "Marcuelo"
+          @user.phone_number = 09171058588
+          @user.username = "miloe"
+          @user.account_type = params[:account_type]
           @user.email = apple.email
           @user.hideBirthdate = false 
           @user.hideBirthplace = false 
@@ -113,13 +117,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
           @user.is_verified = true
-
-          # image
-          if params[:image].present? 
-            downloaded_image = URI.open(params[:image])
-            filename = File.basename(URI.parse(params[:image]).path)
-            @user.image.attach(io: downloaded_image  , filename: filename)
-          end
 
           @user.save
           params[:email] = @user.email
@@ -152,10 +149,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     
     def sign_up_params_google_and_fb
       params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username)
-    end
-    
-    def sign_up_params_apple
-      params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :username)
     end
 
     protected
