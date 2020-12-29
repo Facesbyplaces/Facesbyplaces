@@ -50,15 +50,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.register_user_from_apple(email, uid)
-    User.create do |user|
-      user.apple_uid = uid
-      user.email = email
-      user.provider = :apple # devise_token_auth attribute, but you can add it yourself.
-      user.uid = email # devise_token_auth attribute
-    end
-  end
-
   def self.new_guest
       new { |u| u.guest = true }
   end

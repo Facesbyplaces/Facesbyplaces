@@ -121,7 +121,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.image.attach(io: downloaded_image  , filename: filename)
           end
 
-          @user.save!
+          @user.save
+          params[:email] = @user.email
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
           @user.save
