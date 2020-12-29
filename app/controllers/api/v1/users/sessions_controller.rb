@@ -95,7 +95,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       elsif params[:user_identification].present? && params[:identity_token].present?
         apple = AppleAuth::UserIdentity.new(params[:user_identification], params[:identity_token]).validate!
         
-        @user = User.where(email: apple.email).first 
+        @user = User.where(email: apple[:email], account_type: params[:account_type]).first 
 
         if @user 
           params[:email] = @user.email
@@ -110,7 +110,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.phone_number = "09171058588"
           @user.username = "miloe"
           @user.account_type = params[:account_type]
-          @user.email = apple.email
+          @user.email = apple[:email]
           @user.hideBirthdate = false 
           @user.hideBirthplace = false 
           @user.hideEmail = false 
