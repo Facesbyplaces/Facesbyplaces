@@ -64,6 +64,14 @@ class ApplicationController < ActionController::Base
             ) AS pages"
         end
         
+        def relationship_sql
+            "(
+                SELECT id, page_type, page_id, user_id FROM relationships
+                UNION
+                SELECT id, page_type, page_id, user_id FROM followers
+            ) AS relationship"
+        end
+        
         def set_current_user
             User.current = current_user
             # current_user != nil ? User.current = current_user : ""
