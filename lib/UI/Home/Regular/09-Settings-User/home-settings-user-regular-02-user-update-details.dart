@@ -2,8 +2,8 @@ import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-use
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
-import 'package:facesbyplaces/API/Regular/api-33-update-account-details.dart';
-import 'package:facesbyplaces/API/Regular/api-49-show-account-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-01-update-account-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-02-show-account-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';

@@ -1,19 +1,17 @@
 
 
 
-import 'dart:async';
 
 import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
-import 'package:facesbyplaces/API/Regular/api-70-regular-sign-in-google.dart';
-import 'package:facesbyplaces/API/Regular/api-71-regular-sign-in-with-facebook.dart';
-import 'package:facesbyplaces/API/Regular/api-78-regular-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-regular-sign-in-with-apple.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/Regular/api-01-regular-login.dart';
-// import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -23,6 +21,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 
 
 class RegularLogin extends StatefulWidget{

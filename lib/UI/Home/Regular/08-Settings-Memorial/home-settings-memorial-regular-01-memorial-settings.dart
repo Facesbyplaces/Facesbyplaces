@@ -1,15 +1,15 @@
-import 'package:facesbyplaces/API/Regular/api-05-regular-delete-memorial.dart';
-import 'package:facesbyplaces/API/Regular/api-57-regular-update-switch-status-family.dart';
-import 'package:facesbyplaces/API/Regular/api-58-regular-update-switch-status-friends.dart';
-import 'package:facesbyplaces/API/Regular/api-59-regular-update-switch-status-followers.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-01-delete-memorial.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-02-update-switch-status-family.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-03-update-switch-status-friends.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-04-update-switch-status-followers.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-16-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'home-11-regular-page-details.dart';
-import 'home-21-regular-update-memorial-page-image.dart';
 import 'package:flutter/material.dart';
 
+import 'home-settings-memorial-regular-02-page-details.dart';
+import 'home-settings-memorial-regular-03-update-memorial-image.dart';
 import 'home-settings-memorial-regular-04-page-managers.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';

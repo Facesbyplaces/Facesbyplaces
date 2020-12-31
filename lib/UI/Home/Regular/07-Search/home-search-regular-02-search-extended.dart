@@ -1,9 +1,9 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/API/Regular/api-26-regular-search-suggested.dart';
-import 'package:facesbyplaces/API/Regular/api-27-regular-search-nearby.dart';
-import 'package:facesbyplaces/API/Regular/api-28-regular-search-posts.dart';
-import 'package:facesbyplaces/API/Regular/api-29-regular-search-blm.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-suggested.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-nearby.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-posts.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';

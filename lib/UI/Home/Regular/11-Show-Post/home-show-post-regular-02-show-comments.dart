@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
-import 'package:facesbyplaces/API/Regular/api-74-regular-show-post-comments.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-20-regular-reply.dart';

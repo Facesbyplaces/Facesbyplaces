@@ -1,6 +1,6 @@
-import 'package:facesbyplaces/API/Regular/api-65-regular-search-users.dart';
-import 'package:facesbyplaces/API/Regular/api-66-regular-add-family.dart';
-import 'package:facesbyplaces/API/Regular/api-67-regular-add-friends.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-search-users.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-add-family.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-14-add-friends.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/API/Regular/api-21-regular-search-users.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';

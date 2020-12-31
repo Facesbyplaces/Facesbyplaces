@@ -18,9 +18,6 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     }
   );
 
-  print('The status code is ${response.statusCode}');
-  print('The status body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowProfileInformation.fromJson(newValue);
@@ -33,9 +30,10 @@ class APIRegularShowProfileInformation{
   int userId;
   String firstName;
   String lastName;
-  dynamic image;
+  String image;
+  String email;
 
-  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image});
+  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image, this.email});
 
   factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -46,6 +44,7 @@ class APIRegularShowProfileInformation{
       firstName: newValue['first_name'],
       lastName: newValue['last_name'],
       image: newValue['image'],
+      email: newValue['email'],
     );
   }
 }

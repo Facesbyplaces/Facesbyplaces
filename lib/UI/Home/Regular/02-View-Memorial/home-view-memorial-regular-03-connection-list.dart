@@ -1,6 +1,6 @@
-import 'package:facesbyplaces/API/Regular/api-23-regular-connection-list-family.dart';
-import 'package:facesbyplaces/API/Regular/api-24-regular-connection-list-friends.dart';
-import 'package:facesbyplaces/API/Regular/api-25-regular-connection-list-followers.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-01-connection-list-family.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-02-connection-list-friends.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-03-connection-list-followers.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

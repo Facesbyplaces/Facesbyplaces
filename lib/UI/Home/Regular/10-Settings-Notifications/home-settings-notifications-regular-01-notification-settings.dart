@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/Regular/api-42-regular-update-notification-memorial.dart';
-import 'package:facesbyplaces/API/Regular/api-43-update-notification-activities.dart';
-import 'package:facesbyplaces/API/Regular/api-44-update-notification-post-likes.dart';
-import 'package:facesbyplaces/API/Regular/api-45-update-notification-post-comments.dart';
-import 'package:facesbyplaces/API/Regular/api-46-update-notification-add-family.dart';
-import 'package:facesbyplaces/API/Regular/api-47-update-notification-add-friends.dart';
-import 'package:facesbyplaces/API/Regular/api-48-update-notification-add-admin.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-01-update-notification-memorial.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-02-update-notification-activities.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-03-update-notification-post-likes.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-04-update-notification-post-comments.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-05-update-notification-add-family.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-06-update-notification-add-friends.dart';
+import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:flutter/material.dart';
