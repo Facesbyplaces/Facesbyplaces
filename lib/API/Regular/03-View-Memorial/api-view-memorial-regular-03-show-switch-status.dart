@@ -26,8 +26,6 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus(int memorialId) as
   }
 }
 
-
-
 class APIRegularShowSwitchStatus{
   bool family;
   bool friends;

@@ -26,7 +26,6 @@ Future<APIRegularSearchMemorialMain> apiRegularSearchBLM(String keywords) async{
   }
 }
 
-
 class APIRegularSearchMemorialMain{
   int itemsRemaining;
   List<APIRegularSearchMemorialExtended> memorialList;

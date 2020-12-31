@@ -11,18 +11,8 @@ Future<bool> apiRegularSignInWithGoogle({String firstName, String lastName, Stri
     }
   );
 
-  print('The response status in sign in with google is ${response.statusCode}');
-  print('The response body in sign in with google is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    print('The value is ${value['verification_code']}');
-
-    // var user = value['data'];
-    // int userId = user['id'];
-    // String verificationCode = user['verification_code'];
-
-
     int userId = value['id'];
     String verificationCode = value['verification_code'];
     final sharedPrefs = await SharedPreferences.getInstance();

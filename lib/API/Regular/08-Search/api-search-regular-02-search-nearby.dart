@@ -26,8 +26,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchNearby(int page, double latitud
   }
 }
 
-
-
 class APIRegularSearchPostMain{
   int blmItemsRemaining;
   int memorialItemsRemaining;

@@ -5,10 +5,10 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-01-home-feed-tab.d
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMMainPagesFeeds{
   int userId;
@@ -205,8 +205,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
             child: Column(
               children: [
 
-                // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
-
                 SizedBox(height: ScreenUtil().setHeight(45)),
 
                 Align(
@@ -222,8 +220,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     ),
                   ),
                 ),
-
-                // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
 
                 SizedBox(height: ScreenUtil().setHeight(25)),
 
@@ -258,28 +254,23 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                       ),
 
                       Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
-                      // Center(child: Image.asset('assets/icons/logo.png', height: ScreenUtil().setHeight(250), width: ScreenUtil().setWidth(250))),
                     ],
                   ),
                 ),
 
-                // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
                 SizedBox(height: ScreenUtil().setHeight(45)),
 
                 Center(child: Text('Feed is empty', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
 
-                // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                 SizedBox(height: ScreenUtil().setHeight(20)),
 
                 Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xff000000),),),),),
 
-                // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
                 SizedBox(height: ScreenUtil().setHeight(25)),
 
                 MiscBLMButtonTemplate(
                   buttonText: 'Create', 
                   buttonTextStyle: TextStyle(
-                    // fontSize: SizeConfig.safeBlockHorizontal * 5,
                     fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                     fontWeight: FontWeight.bold, 
                     color: Color(0xffffffff),
@@ -288,7 +279,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     Navigator.pushNamed(context, '/home/blm/create-memorial');
                   }, 
                   width: SizeConfig.screenWidth / 2, 
-                  // height: SizeConfig.blockSizeVertical * 7,
                   height: ScreenUtil().setHeight(45),
                   buttonColor: Color(0xff04ECFF),
                 ),

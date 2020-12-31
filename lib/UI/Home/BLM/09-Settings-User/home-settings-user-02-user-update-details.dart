@@ -62,11 +62,6 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () {
                     Navigator.pop(context);
-
-                    // Navigator.popAndPushNamed(context, '/home/blm');
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
-                    // MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: 'home/blm/profile-settings'));
-                    // Navigator.popAndPushNamed(context, 'home/blm/profile-settings');
                   },
                 );
               },

@@ -5,13 +5,13 @@ import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-use
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-04-other-details.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-11-show-other-details-status.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-02-show-comments.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-04-regular-dropdown.dart';
 import 'misc-07-regular-button.dart';
@@ -130,7 +130,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
         child: Column(
           children: [
             Container(
-              // height: SizeConfig.blockSizeVertical * 10,
               height: ScreenUtil().setHeight(65),
               child: Row(
                 children: [
@@ -193,7 +192,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             ),
 
             Container(
-              // height: SizeConfig.blockSizeVertical * 10,
               height: ScreenUtil().setHeight(65),
               child: Row(
                 children: [
@@ -250,7 +248,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       onTap: () async{
                         DateTime date = DateTime.now();
                         String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-alm-memorial';
-                        // FlutterBranchSdk.setIdentity('id-$id-share-memorial');
                         FlutterBranchSdk.setIdentity(id);
 
                         BranchResponse response =

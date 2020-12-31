@@ -6,11 +6,11 @@ import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-extra.dart';
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

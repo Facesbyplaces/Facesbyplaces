@@ -1,10 +1,10 @@
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-02-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-03-change-password.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-show-other-details-status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-04-other-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -929,12 +929,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     onTap: (){},
                     child: Row(
                       children: [
-                        // Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
-
-                        // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                        // Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
                         Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),

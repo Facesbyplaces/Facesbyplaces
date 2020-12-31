@@ -2,9 +2,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class MiscBLMBottomSheet extends StatelessWidget {
 
@@ -18,7 +18,6 @@ class MiscBLMBottomSheet extends StatelessWidget {
     return BlocBuilder<BlocHomeBLMUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: ScreenUtil().setHeight(65),
           alignment: Alignment.center,
           width: SizeConfig.screenWidth,

@@ -1,9 +1,9 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-search-regular-02-search-extended.dart';
 import 'package:location/location.dart' as Location;
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
-import 'home-search-regular-02-search-extended.dart';
 
 class RegularArguments {
   final String title;
@@ -54,7 +54,6 @@ class HomeRegularSearch extends StatelessWidget{
                       if (permissionGranted == Location.PermissionStatus.denied) {
                         permissionGranted = await location.requestPermission();
                         if (permissionGranted != Location.PermissionStatus.granted) {
-                          // return;
                           await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'FacesbyPlaces needs to access the location. Turn on the access on the settings.'));
                         }
                       }
@@ -93,7 +92,6 @@ class HomeRegularSearch extends StatelessWidget{
               ],
             ), 
             leading: Container(),
-            // leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: SingleChildScrollView(

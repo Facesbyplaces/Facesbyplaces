@@ -27,8 +27,6 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings(int memo
   }
 }
 
-
-
 class APIRegularShowFriendsSettingsMain{
   int itemsRemaining;
   List<APIRegularShowFriendsSettingsExtended> friendsList;

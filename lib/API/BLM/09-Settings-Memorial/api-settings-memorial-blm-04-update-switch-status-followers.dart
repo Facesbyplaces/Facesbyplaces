@@ -17,9 +17,6 @@ Future<bool> apiBLMUpdateSwitchStatusFollowers(int memorialId, bool status) asyn
     }
   );
 
-  print('The status of switch is ${response.statusCode}');
-  print('The status of switch is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

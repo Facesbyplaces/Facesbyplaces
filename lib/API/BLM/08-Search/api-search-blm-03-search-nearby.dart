@@ -27,8 +27,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby(int page, double latitude, doubl
   }
 }
 
-
-
 class APIBLMSearchPostMain{
   int blmItemsRemaining;
   int memorialItemsRemaining;

@@ -5,12 +5,11 @@ import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-reg
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter/material.dart';
-
-import 'home-view-memorial-regular-03-connection-list.dart';
 
 class RegularProfilePosts{
   int userId;
@@ -125,17 +124,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
             if(profile.hasData){
               return Stack(
                 children: [
-
-                  // Container(
-                  //   height: SizeConfig.screenHeight / 3,
-                  //   width: SizeConfig.screenWidth,
-                  //   child: CachedNetworkImage(
-                  //     fit: BoxFit.cover,
-                  //     imageUrl: profile.data.memorial.backgroundImage,
-                  //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                  //     errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                  //   ),
-                  // ),
 
                   Container(
                     height: SizeConfig.screenHeight / 3,
@@ -593,7 +581,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                   imageUrl: profile.data.memorial.imagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                                                  // errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 );
                                               }
                                             }()),
@@ -740,7 +727,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                       child: IconButton(
                         icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                         onPressed: (){
-                          // Navigator.popAndPushNamed(context, '/home/regular');
                           Navigator.pop(context);
                         },
                       ),

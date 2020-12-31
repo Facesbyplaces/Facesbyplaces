@@ -33,9 +33,6 @@ Future<bool> apiRegularUpdateOtherDetails({String birthdate, String birthplace, 
       ),  
     );
 
-    print('The response status of update other details is ${response.statusCode}');
-    print('The response data of update other details is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }

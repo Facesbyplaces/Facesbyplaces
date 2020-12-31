@@ -1,25 +1,24 @@
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
-import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
-import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../ui-01-get-started.dart';
-import 'package:flutter/material.dart';
-
 import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
 import 'home-main-regular-03-03-post-tab.dart';
 import 'home-main-regular-03-04-notifications-tab.dart';
+import '../../../ui-01-get-started.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularScreenExtended extends StatefulWidget{
 
@@ -100,8 +99,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   centerTitle: true,
                   actions: [
                     IconButton(
-                      // ScreenUtil().setHeight(20)
-                      // icon: Icon(Icons.search, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 4,),
                       icon: Icon(Icons.search, color: Color(0xffffffff), size: ScreenUtil().setHeight(35)),
                       onPressed: () async{
                         Navigator.pushNamed(context, '/home/regular/search');
@@ -134,18 +131,15 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             width: SizeConfig.screenWidth,
                             heightResponsive: false,
                             widthResponsive: true,
-                            // alignment: Alignment.center,
                             alignment: Alignment.topCenter,
                             color: Color(0xff4EC9D4),
                             child: SingleChildScrollView(
                               physics: ClampingScrollPhysics(),
                               child: Column(
                                 children: [
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   CircleAvatar(
-                                    // radius: SizeConfig.blockSizeVertical * 10.5,
                                     radius: ScreenUtil().setHeight(100),
                                     backgroundColor: Color(0xff888888),
                                     backgroundImage: ((){
@@ -157,24 +151,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     }()),
                                   ),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
                                   SizedBox(height: ScreenUtil().setHeight(45)),
 
                                   GestureDetector(
                                     onTap: (){
                                       Navigator.pop(context);
                                     },
-                                    // ScreenUtil().setSp(20, allowFontScalingSelf: true),
-                                    // child: Text('Home', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                                     child: Text('Home', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                                   ),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
                                   SizedBox(height: ScreenUtil().setHeight(25)),
 
                                   GestureDetector(
@@ -185,7 +174,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     child: Text('Create Memorial Page', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                                   ),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
                                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   GestureDetector(
@@ -208,7 +196,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     child: Text('Notification Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                                   ),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
                                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   GestureDetector(
@@ -219,7 +206,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                                   ),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 3,),
                                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   GestureDetector(
@@ -248,23 +234,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                       }else{
                                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
                                       }
-
-                                      //   Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                      //   Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-
-                                      // final sharedPrefs = await SharedPreferences.getInstance();
-
-                                      // sharedPrefs.remove('blm-user-id');
-                                      // sharedPrefs.remove('blm-access-token');
-                                      // sharedPrefs.remove('blm-uid');
-                                      // sharedPrefs.remove('blm-client');
-                                      // sharedPrefs.remove('blm-user-session');
-
-                                      // sharedPrefs.remove('regular-user-id');
-                                      // sharedPrefs.remove('regular-access-token');
-                                      // sharedPrefs.remove('regular-uid');
-                                      // sharedPrefs.remove('regular-client');
-                                      // sharedPrefs.remove('regular-user-session');
                                       
                                     },
                                     child: Text('Log Out', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
@@ -275,7 +244,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             ),
                           ),
                         ),
-                        // child: 
                       );
                     }else if(manageDrawer.hasError){
                       return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);

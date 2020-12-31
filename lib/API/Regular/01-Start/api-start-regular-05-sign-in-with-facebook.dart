@@ -11,17 +11,8 @@ Future<bool> apiRegularSignInWithFacebook({String firstName, String lastName, St
     }
   );
 
-  print('The response status in sign in with facebook is ${response.statusCode}');
-  print('The response body in sign in with facebook is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    // var user = value['data'];
-    // int userId = user['id'];
-    // String verificationCode = user['verification_code'];
-
-    // final sharedPrefs = await SharedPreferences.getInstance();
-
     int userId = value['id'];
     final sharedPrefs = await SharedPreferences.getInstance();
 

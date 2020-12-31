@@ -26,8 +26,6 @@ Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings(int memorialId, 
   }
 }
 
-
-
 class APIBLMShowFriendsSettingsMain{
   int itemsRemaining;
   List<APIBLMShowFriendsSettingsExtended> friendsList;

@@ -27,7 +27,6 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails(int memorialId) async{
   }
 }
 
-
 class APIBLMShowPageDetailsMain{
 
   APIBLMShowPageDetailsExtended memorial;

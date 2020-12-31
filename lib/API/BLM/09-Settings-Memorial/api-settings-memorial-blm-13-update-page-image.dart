@@ -34,8 +34,6 @@ Future<bool> apiBLMUpdatePageImages(int memorialId, dynamic backgroundImage, dyn
       ),
     );
 
-    print('The status code for updating image is ${response.statusCode}');
-
     if(response.statusCode == 200){
       sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    

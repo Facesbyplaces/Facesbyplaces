@@ -26,8 +26,6 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested(int page) async{
   }
 }
 
-
-
 class APIBLMSearchSuggestedMain{
   int itemsRemaining;
   List<APIBLMSearchSuggestedExtended> pages;

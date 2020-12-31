@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-suggested.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-posts.dart';
@@ -7,7 +8,6 @@ import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 

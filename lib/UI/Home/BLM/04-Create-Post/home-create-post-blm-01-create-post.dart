@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-create-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-create-post.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
@@ -136,7 +136,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     imagesOrVideos: newFile,
                     latitude: locationData.latitude.toString(),
                     longitude: locationData.longitude.toString(),
-                    // tagPeople: '1'
                   );
 
                     context.showLoaderOverlay();

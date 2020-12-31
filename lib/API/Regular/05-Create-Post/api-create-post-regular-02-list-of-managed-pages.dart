@@ -19,9 +19,6 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
     }
   );
 
-  print('The status code of manage pages is ${response.statusCode}');
-  print('The status body of manage pages is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowListOfManagedPages.fromJson(newValue);
@@ -29,8 +26,6 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
     throw Exception('Failed to get the lists.');
   }
 }
-
-
 
 class APIRegularShowListOfManagedPages{
   List<APIRegularShowListOfManagedPagesExtended> pagesList;

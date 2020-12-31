@@ -1,12 +1,11 @@
+import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
-import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:image_picker/image_picker.dart';
-// import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -41,15 +40,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
 
-  // List<String> managedPages;
   List<ManagedPages> managedPages;
   String currentSelection;
   int currentIdSelected;
   Future listManagedPages;
   List<TaggedUsers> users = [];
-  
-  // List<Asset> multiImages = List<Asset>();
-  // String newError;
 
   void initState(){
     super.initState();
@@ -67,11 +62,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     for(int i = 0; i < newValue.pagesList.length; i++){
       managedPages.add(ManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
     }
-
     setState(() {});
   }
-
-
 
   File imageFile;
   File videoFile;
@@ -108,35 +100,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     }
   }
 
-  // Future<void> getMultipleImages() async {
-  //   setState(() {
-  //     multiImages = List<Asset>();
-  //   });
-
-  //   List<Asset> resultList;
-  //   String error;
-
-  //   try {
-  //     resultList = await MultiImagePicker.pickImages(
-  //       maxImages: 300,
-  //     );
-  //   } on Exception catch (e) {
-      
-  //     error = e.toString();
-  //     print('The error is $error');
-  //   }
-
-  //   // If the widget was removed from the tree while the asynchronous platform
-  //   // message was in flight, we want to discard the reply rather than calling
-  //   // setState to update our non-existent appearance.
-  //   if (!mounted) return;
-
-  //   setState(() {
-  //     multiImages = resultList;
-  //     if (error == null) newError = 'No Error Dectected';
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -160,8 +123,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
             actions: [
               GestureDetector(
                 onTap: () async{
-
-                  
 
                   File newFile;
 
@@ -206,12 +167,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   APIRegularCreatePost post = APIRegularCreatePost(
                     pageType: 'Memorial',
                     postBody: _key1.currentState.controller.text,
-                    // pageId: currentIdSelected.toString(),
                     pageId: currentIdSelected,
                     location: newLocation,
                     imagesOrVideos: newFile,
-                    // latitude: locationData.latitude.toString(),
-                    // longitude: locationData.longitude.toString(),
                     latitude: locationData.latitude,
                     longitude: locationData.longitude,
                     tagPeople: userIds,
@@ -272,7 +230,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           },
                           items: managedPages.map((ManagedPages value) {
                             return DropdownMenuItem<int>(
-                              // value: value.name,
                               value: value.pageId,
                               
                               child: Row(
@@ -430,10 +387,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                   await getVideo();
                                 }
                               }
-
-                              // print('new image');
-
-                              // await getMultipleImages();
+                              
                             },
                             child: Container(
                               color: Colors.transparent,

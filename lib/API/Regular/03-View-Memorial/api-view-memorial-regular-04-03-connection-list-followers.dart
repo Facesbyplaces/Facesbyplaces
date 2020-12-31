@@ -26,8 +26,6 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
   }
 }
 
-
-
 class APIRegularConnectionListFollowersMain{
   int itemsRemaining;
   List<APIRegularConnectionListFollowersExtended> followersList;

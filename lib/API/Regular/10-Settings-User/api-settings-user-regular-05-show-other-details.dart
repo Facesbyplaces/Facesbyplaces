@@ -18,9 +18,6 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails(int userId) async{
     }
   );
 
-  print('The show other details is ${response.statusCode}');
-  print('The show other details is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowOtherDetails.fromJson(newValue);

@@ -5,14 +5,13 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
-
 import 'home-settings-memorial-blm-02-page-details.dart';
 import 'home-settings-memorial-blm-03-update-memorial-image.dart';
 import 'home-settings-memorial-blm-04-page-managers.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter/material.dart';
 
 
 class HomeBLMMemorialSettings extends StatefulWidget{

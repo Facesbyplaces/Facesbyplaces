@@ -27,8 +27,6 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers(int memo
   }
 }
 
-
-
 class APIBLMConnectionListFollowersMain{
   int itemsRemaining;
   List<APIBLMConnectionListFollowersExtended> followersList;

@@ -19,9 +19,6 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost(int memorialId, int page) as
     }
   );
 
-  print('The response status is ${response.statusCode}');
-  print('The response body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMHomeProfilePostMain.fromJson(newValue);

@@ -18,9 +18,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts(String keywords, int page
     }
   );
 
-  print('The status code for search posts is ${response.statusCode}');
-  print('The status code for search posts is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchPostMain.fromJson(newValue);
@@ -28,8 +25,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts(String keywords, int page
     throw Exception('Failed to get the posts.');
   }
 }
-
-
 
 class APIRegularSearchPostMain{
   int itemsRemaining;

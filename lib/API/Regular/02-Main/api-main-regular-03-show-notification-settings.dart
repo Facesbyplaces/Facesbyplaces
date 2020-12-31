@@ -26,8 +26,6 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({int u
   }
 }
 
-
-
 class APIRegularShowNotificationStatus{
   bool newMemorial;
   bool newActivities;

@@ -27,8 +27,6 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails(int userId) async{
   }
 }
 
-
-
 class APIBLMShowAccountDetails{
   String firstName;
   String lastName;

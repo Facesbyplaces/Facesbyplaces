@@ -26,8 +26,6 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings(int memorialId, in
   }
 }
 
-
-
 class APIBLMShowFamilySettingsMain{
   int itemsRemaining;
   List<APIBLMShowFamilySettingsExtended> familyList;

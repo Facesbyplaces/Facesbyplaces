@@ -14,14 +14,12 @@ class MiscBLMMessageTemplate extends StatelessWidget{
       alignment: Alignment.topCenter,
       child: Container(
         height: SizeConfig.blockSizeVertical * 5,
-        // height: ScreenUtil().setHeight(50),
         width: SizeConfig.screenWidth / 1.2,
         child: Center(
           child: Text(message, 
             textAlign: TextAlign.center, 
             style: TextStyle(
               fontSize: SizeConfig.safeBlockHorizontal * 4,
-              // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
               fontWeight: FontWeight.w300,
               color: Color(0xffffffff),
             ),

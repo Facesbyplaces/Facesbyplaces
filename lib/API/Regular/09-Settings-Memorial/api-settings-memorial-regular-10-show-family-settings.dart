@@ -26,8 +26,6 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings(int memori
   }
 }
 
-
-
 class APIRegularShowFamilySettingsMain{
   int itemsRemaining;
   List<APIRegularShowFamilySettingsExtended> familyList;

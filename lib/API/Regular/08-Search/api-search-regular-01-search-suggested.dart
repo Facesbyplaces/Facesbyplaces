@@ -26,8 +26,6 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested(int page) async{
   }
 }
 
-
-
 class APIRegularSearchSuggestedMain{
   int itemsRemaining;
   List<APIRegularSearchSuggestedExtended> pages;

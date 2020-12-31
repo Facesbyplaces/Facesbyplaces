@@ -1,11 +1,11 @@
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:flutter/material.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:flutter/material.dart';
 import 'misc-08-regular-dialog.dart';
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
@@ -76,9 +76,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     );
     return GestureDetector(
       onTap: () async{
-        print('The memorial type is $pageType');
-        print('The memorial id is $memorialId');
-
         if(managed == true){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
         }else{
@@ -89,16 +86,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
           }
           
         }
-
-        // print('hehehehe');
-
-
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => DeliveryPage()));
-
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
       },
       child: Container(
-        // height: SizeConfig.blockSizeVertical * 15,
         height: ScreenUtil().setHeight(80),
         color: Color(0xffffffff),
         child: Row(
@@ -122,7 +111,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
                             fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
@@ -137,7 +125,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                           style: TextStyle(
-                            // fontSize: SizeConfig.safeBlockHorizontal * 3,
                             fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                             fontWeight: FontWeight.w200,
                             color: Colors.grey,
@@ -169,7 +156,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   }
                 },
                 child: manageButton ? Text('Leave', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),) : Text('Manage', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
-                // height: SizeConfig.blockSizeVertical * 5,
                 height: ScreenUtil().setHeight(35),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -189,33 +175,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                   });
 
                   await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: followButton);
-
-
-                  // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Are you sure you want to unfollow this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
-
-                  // if(confirmResult){
-                  //   String result = await apiRegularLeavePage(memorialId);
-
-                  //   if(result != 'Success'){
-                  //     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: result));
-                  //   }
-                  // }
-
-                  // setState(() {
-                  //   followButton = !followButton;
-                  // });
-
-                  print('The page id is $memorialId');
-                  print('The page type is $pageType');
-
-                  // apiRegularModifyFollowPage
-
-
-
-
                 },
                 child: followButton ? Text('Unfollow', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),) : Text('Follow', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
-                // height: SizeConfig.blockSizeVertical * 5,
                 height: ScreenUtil().setHeight(35),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),

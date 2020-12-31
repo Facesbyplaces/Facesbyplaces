@@ -1,9 +1,9 @@
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-04-bloc-regular-home.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class MiscRegularBottomSheet extends StatelessWidget {
 
@@ -17,7 +17,6 @@ class MiscRegularBottomSheet extends StatelessWidget {
     return BlocBuilder<BlocHomeRegularUpdateToggle, List<bool>>(
       builder: (context, state){
         return Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: ScreenUtil().setHeight(65),
           alignment: Alignment.center,
           width: SizeConfig.screenWidth,
@@ -33,7 +32,6 @@ class MiscRegularBottomSheet extends StatelessWidget {
                 width: SizeConfig.screenWidth / 4,
                 child: Column(
                   children: [
-                    // Icon(MdiIcons.fire, size: SizeConfig.blockSizeVertical * 4,),
                     Icon(MdiIcons.fire, size: ScreenUtil().setHeight(25),),
                     SizedBox(height: SizeConfig.blockSizeVertical * 1),
                     Text('Feed', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -104,87 +102,6 @@ class MiscRegularBottomSheet extends StatelessWidget {
   }
 }
 
-
-// class MiscRegularBottomSheetComment extends StatefulWidget{
-//   MiscRegularBottomSheetComment({Key key}) : super(key: key);
-
-//   MiscRegularBottomSheetCommentState createState() => MiscRegularBottomSheetCommentState();
-// }
-
-// class MiscRegularBottomSheetCommentState extends State<MiscRegularBottomSheetComment>{
-
-//   TextEditingController controller;
-
-//   void initState(){
-//     super.initState();
-//     controller = TextEditingController(text: '');
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     return Container(
-//       height: SizeConfig.blockSizeVertical * 10,
-//       padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-//       color: Color(0xffdddddd),
-//       child: Row(
-//         children: [
-
-//           CircleAvatar(
-//             backgroundColor: Color(0xff888888),
-//           ),
-
-//           Expanded(
-//             child: Padding(
-//               padding: EdgeInsets.all(10.0),
-//               child: TextFormField(
-//                 controller: controller,
-//                 cursorColor: Color(0xff000000),
-//                 keyboardType: TextInputType.text,
-//                 decoration: InputDecoration(
-//                   fillColor: Color(0xffBDC3C7),
-//                   filled: true,
-//                   labelText: 'Say something...',
-//                   labelStyle: TextStyle(
-//                     fontSize: SizeConfig.safeBlockHorizontal * 4, 
-//                     color: Color(0xffffffff),
-//                   ),
-//                   border: OutlineInputBorder(
-//                     borderSide: BorderSide(
-//                       color: Color(0xffBDC3C7),
-//                     ),
-//                     borderRadius: BorderRadius.all(Radius.circular(10)),
-//                   ),
-//                   focusedBorder: OutlineInputBorder(
-//                     borderSide: BorderSide(
-//                       color: Color(0xffBDC3C7),
-//                     ),
-//                     borderRadius: BorderRadius.all(Radius.circular(10)),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-
-              
-
-//           Container(
-//             child: Text('Post',
-//               style: TextStyle(
-//                 fontSize: SizeConfig.safeBlockHorizontal * 4,
-//                 fontWeight: FontWeight.bold, 
-//                 color: Color(0xff000000),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-
-
 class MiscRegularBottomSheetComment extends StatefulWidget{
   MiscRegularBottomSheetComment({Key key}) : super(key: key);
 
@@ -204,56 +121,54 @@ class MiscRegularBottomSheetCommentState extends State<MiscRegularBottomSheetCom
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Row(
-        children: [
+      children: [
 
-          CircleAvatar(
-            backgroundColor: Color(0xff888888),
-          ),
+        CircleAvatar(
+          backgroundColor: Color(0xff888888),
+        ),
 
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: TextFormField(
-                controller: controller,
-                cursorColor: Color(0xff000000),
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  fillColor: Color(0xffBDC3C7),
-                  filled: true,
-                  labelText: 'Say something...',
-                  labelStyle: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                    color: Color(0xffffffff),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: TextFormField(
+              controller: controller,
+              cursorColor: Color(0xff000000),
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                fillColor: Color(0xffBDC3C7),
+                filled: true,
+                labelText: 'Say something...',
+                labelStyle: TextStyle(
+                  fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                  color: Color(0xffffffff),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xffBDC3C7),
                   ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xffBDC3C7),
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color(0xffBDC3C7),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xffBDC3C7),
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
             ),
           ),
+        ),
 
-              
-
-          Container(
-            child: Text('Post',
-              style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
-                fontWeight: FontWeight.bold, 
-                color: Color(0xff000000),
-              ),
+        Container(
+          child: Text('Post',
+            style: TextStyle(
+              fontSize: SizeConfig.safeBlockHorizontal * 4,
+              fontWeight: FontWeight.bold, 
+              color: Color(0xff000000),
             ),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

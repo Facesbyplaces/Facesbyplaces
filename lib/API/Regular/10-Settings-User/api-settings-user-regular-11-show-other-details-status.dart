@@ -18,9 +18,6 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus(int us
     }
   );
 
-  print('The status code is ${response.statusCode}');
-  print('The status body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowOtherDetailsStatus.fromJson(newValue);
@@ -28,8 +25,6 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus(int us
     throw Exception('Failed to get the post');
   }
 }
-
-
 
 class APIRegularShowOtherDetailsStatus{
   bool hideBirthdate;

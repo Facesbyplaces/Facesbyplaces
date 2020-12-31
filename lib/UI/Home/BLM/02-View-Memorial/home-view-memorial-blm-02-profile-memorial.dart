@@ -1,17 +1,16 @@
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
-import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
-import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter/material.dart';
-
-import 'home-view-memorial-blm-03-connection-list.dart';
 
 class BLMProfilePosts{
   int userId;
@@ -714,7 +713,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                       child: IconButton(
                         icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                         onPressed: (){
-                          // Navigator.popAndPushNamed(context, '/home/blm');
                           Navigator.pop(context);
                         },
                       ),

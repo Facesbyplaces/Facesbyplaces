@@ -60,7 +60,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
   Future<APIRegularShowOtherDetails> getOtherDetails(int userId) async{
     return await apiRegularShowOtherDetails(userId);
-    // return await apiRegularShowAccountDetails(userId);
   }
 
   @override
@@ -243,16 +242,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 context.hideLoaderOverlay();
 
                                 if(result){
-
-                                  // Navigator.pushReplacement(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
-                                  // );
-
-                                  // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-
-                                  // Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
-                                  // Navigator.popAndPushNamed(context, route.settings.name);
                                   Navigator.pop(context);
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));

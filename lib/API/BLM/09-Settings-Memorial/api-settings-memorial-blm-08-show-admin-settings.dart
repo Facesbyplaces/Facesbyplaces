@@ -27,8 +27,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings(int memorialId, int 
   }
 }
 
-
-
 class APIBLMShowAdminsSettingMain{
   int adminItemsRemaining;
   int familyItemsRemaining;

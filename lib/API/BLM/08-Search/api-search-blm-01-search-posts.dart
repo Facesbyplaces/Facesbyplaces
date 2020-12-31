@@ -27,8 +27,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords, int page) async{
   }
 }
 
-
-
 class APIBLMSearchPostMain{
   int itemsRemaining;
   List<APIBLMSearchPostExtended> familyMemorialList;

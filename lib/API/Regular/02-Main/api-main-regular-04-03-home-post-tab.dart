@@ -18,9 +18,6 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab(int page) async{
     }
   );
 
-  // print('The response status code of post is ${response.statusCode}');
-  // print('The response status body of post is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularHomeTabPostMain.fromJson(newValue);

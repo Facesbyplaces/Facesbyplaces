@@ -18,9 +18,6 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost(int postId) async{
     }
   );
 
-  print('The status code is ${response.statusCode}');
-  print('The status body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowOriginalPostMainMain.fromJson(newValue);
@@ -29,12 +26,9 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost(int postId) async{
   }
 }
 
-
-
 class APIBLMShowOriginalPostMainMain{
   APIBLMShowOriginalPostMainExtended post;
   
-
   APIBLMShowOriginalPostMainMain({this.post});
 
   factory APIBLMShowOriginalPostMainMain.fromJson(Map<String, dynamic> parsedJson){

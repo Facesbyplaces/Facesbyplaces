@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularPaypal extends StatefulWidget{
 
@@ -55,7 +55,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                     
                     Container(
                       height: SizeConfig.blockSizeVertical * 30,
-                      // height: ScreenUtil().setHeight(270),
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/icons/paypal.png'),
@@ -65,7 +64,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
 
                     Text('Log in with Paypal', style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xff000000)),),
 
-                    // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
                     SizedBox(height: ScreenUtil().setHeight(45)),
 
                     TextFormField(
@@ -77,9 +75,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                         filled: true,
                         alignLabelWithHint: true,
                         labelText: 'Email',
-
-                        // ScreenUtil().setSp(20, allowFontScalingSelf: true),
-                        // labelStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff888888)),
                         labelStyle: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xff888888)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
@@ -114,7 +109,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                         filled: true,
                         alignLabelWithHint: true,
                         labelText: 'Password',
-                        // labelStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff888888)),
                         labelStyle: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xff888888)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
@@ -137,7 +131,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                       ),
                     ),
 
-                    // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
                     SizedBox(height: ScreenUtil().setHeight(45)),
 
                     MaterialButton(
@@ -146,14 +139,12 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                       child: Text(
                         'Login',
                         style: TextStyle(
-                          // fontSize: SizeConfig.safeBlockHorizontal * 5,
                           fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ), 
                       ),
                       minWidth: SizeConfig.screenWidth,
-                      // height: SizeConfig.blockSizeVertical * 8,
                       height: ScreenUtil().setHeight(60),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0)
@@ -161,7 +152,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                       color: Color(0xff0070BA),
                     ),
 
-                    // Expanded(child: Container(),),
                     SizedBox(height: ScreenUtil().setHeight(45)),
 
                   ],

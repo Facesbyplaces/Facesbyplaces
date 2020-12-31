@@ -26,8 +26,6 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends(int memorial
   }
 }
 
-
-
 class APIBLMConnectionListFriendsMain{
   int itemsRemaining;
   List<APIBLMConnectionListFriendsExtended> friendsList;

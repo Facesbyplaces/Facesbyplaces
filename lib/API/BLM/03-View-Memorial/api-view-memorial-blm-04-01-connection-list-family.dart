@@ -26,8 +26,6 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily(int memorialId
   }
 }
 
-
-
 class APIBLMConnectionListFamilyMain{
   int itemsRemaining;
   List<APIBLMConnectionListFamilyExtended> familyList;

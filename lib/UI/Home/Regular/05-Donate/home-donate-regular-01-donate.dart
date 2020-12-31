@@ -1,9 +1,8 @@
-
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_pay/flutter_pay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
 
@@ -18,7 +17,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   initState() {
     super.initState();
     donateToggle = 0;
-    // StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", merchantId: "Test", androidPayMode: 'test'));
   }
 
   @override
@@ -50,23 +48,18 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
               ),
               child: Column(
                 children: [
-                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                   Row(
                     children: [
                       Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xff000000),), onPressed: (){Navigator.pop(context);},)),),
 
-                      // Text('Send a Gift', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),),
                       Text('Send a Gift', style: TextStyle(fontSize: ScreenUtil().setSp(24, allowFontScalingSelf: true),),),
-                      // ScreenUtil().setSp(20, allowFontScalingSelf: true),
 
                       Expanded(child: Container(),)
-
                     ],
                   ),
 
-                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                   Expanded(
@@ -87,14 +80,10 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                             child: Container(
                               child: Column(
                                 children: [
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                   SizedBox(height: ScreenUtil().setHeight(10)),
 
-                                  // Image.asset('assets/icons/gift.png', height: SizeConfig.blockSizeVertical * 15, width: SizeConfig.blockSizeVertical * 15),
-                                  // Image.asset('assets/icons/gift.png', height: ScreenUtil().setHeight(120), width: ScreenUtil().setHeight(120)),
                                   Expanded(child: Image.asset('assets/icons/gift.png'),),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                   SizedBox(height: ScreenUtil().setHeight(10)),
 
                                   ((){
@@ -120,14 +109,12 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ),
                   ),
 
-                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                   MiscRegularButtonTemplate(
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     buttonTextStyle: TextStyle(
-                      // fontSize: SizeConfig.safeBlockHorizontal * 5,
                       fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                       fontWeight: FontWeight.bold, 
                       color: Color(0xffffffff),
@@ -138,48 +125,46 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       bool isAvailable = await flutterPay.canMakePayments();
 
-                      print('The value is $isAvailable');
+                      if(isAvailable == true){
+                        flutterPay.setEnvironment(
+                          environment: PaymentEnvironment.Production,
+                        );
 
-                      flutterPay.setEnvironment(
-                        environment: PaymentEnvironment.Production,
-                      );
+                        PaymentItem item = PaymentItem(
+                          name: 'Donation', 
+                          price: ((){
+                            switch(donateToggle){
+                              case 0: return 0.99; break;
+                              case 1: return 5.00; break;
+                              case 2: return 15.00; break;
+                              case 3: return 25.00; break;
+                              case 4: return 50.00; break;
+                              case 5: return 100.00; break;
+                            }
+                          }()),
+                        );
 
-                      PaymentItem item = PaymentItem(
-                        name: 'Donation', 
-                        price: ((){
-                          switch(donateToggle){
-                            case 0: return 0.99; break;
-                            case 1: return 5.00; break;
-                            case 2: return 15.00; break;
-                            case 3: return 25.00; break;
-                            case 4: return 50.00; break;
-                            case 5: return 100.00; break;
-                          }
-                        }()),
-                      );
+                        String token = await flutterPay.makePayment(
+                          merchantIdentifier: 'merchant.com.app.facesbyplaces',
+                          currencyCode: 'USD',
+                          countryCode: 'US',
+                          allowedPaymentNetworks: [
+                            PaymentNetwork.visa, 
+                            PaymentNetwork.masterCard,
+                          ],
+                          paymentItems: [item],
+                          merchantName: 'FacesbyPlaces', 
+                          gatewayName: 'Stripe',
+                        );
 
-                      String token = await flutterPay.makePayment(
-                        merchantIdentifier: 'merchant.com.app.facesbyplaces',
-                        currencyCode: 'USD',
-                        countryCode: 'US',
-                        allowedPaymentNetworks: [
-                          PaymentNetwork.visa, 
-                          PaymentNetwork.masterCard,
-                        ],
-                        paymentItems: [item],
-                        merchantName: 'FacesbyPlaces', 
-                        gatewayName: 'Stripe',
-                      );
-
-                      print('The token is $token');
+                        print('The token is $token');
+                      }
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 
-                    // height: SizeConfig.blockSizeVertical * 7,
                     height: ScreenUtil().setHeight(45),
                   ),
 
-                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                   SizedBox(height: ScreenUtil().setHeight(20)),
 
                 ],

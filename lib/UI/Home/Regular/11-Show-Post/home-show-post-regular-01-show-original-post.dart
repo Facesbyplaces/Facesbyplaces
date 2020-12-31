@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter/material.dart';
-
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'home-show-post-regular-02-show-comments.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularShowOriginalPost extends StatefulWidget{
   final int postId;
@@ -199,11 +198,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
                                         Text('$likesCount', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                        // Text('${originalPost.data.post.numberOfLikes}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                                        // pressedLike == true
-                                        // ? Text('${numberOfLikes + 1}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)
-                                        // : Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                                       ],
                                     ),
                                   ),

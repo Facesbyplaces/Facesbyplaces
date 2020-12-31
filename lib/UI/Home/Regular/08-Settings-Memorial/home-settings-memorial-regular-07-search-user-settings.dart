@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-search-users.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-add-family.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-14-add-friends.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-settings-memorial-regular-05-page-family.dart';
+import 'home-settings-memorial-regular-06-page-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'home-settings-memorial-regular-05-page-family.dart';
-import 'home-settings-memorial-regular-06-page-friends.dart';
 
 class RegularSearchUsers{
   final int userId;

@@ -5,8 +5,8 @@ import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-05-update-notification-add-family.dart';
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-06-update-notification-add-friends.dart';
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-07-update-notification-add-admin.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularNotificationSettings extends StatefulWidget{
@@ -128,7 +128,6 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                             children: [
                               Expanded(child: Text('Post Likes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),)),
 
-                              // MiscRegularToggleSwitchTemplate(),
                               Switch(
                                 value: toggle3,
                                 onChanged: (value) async{

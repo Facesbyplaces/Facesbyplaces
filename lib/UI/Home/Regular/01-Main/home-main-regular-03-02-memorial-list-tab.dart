@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularMainPagesMemorials{
   int memorialId;
@@ -55,10 +55,8 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   }
 
   void addMemorials1(){
-    // ScreenUtil().setSp(14, allowFontScalingSelf: true),
     finalMemorials.add(
       Container(
-        // height: SizeConfig.blockSizeVertical * 10,
         height: 80,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         color: Color(0xffeeeeee),
@@ -83,7 +81,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   void addMemorials2(){
     finalMemorials.add(
       Container(
-        // height: SizeConfig.blockSizeVertical * 10,
         height: 80,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         color: Color(0xffeeeeee),
@@ -216,7 +213,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
               body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),
               body = Text('No more memorials.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);

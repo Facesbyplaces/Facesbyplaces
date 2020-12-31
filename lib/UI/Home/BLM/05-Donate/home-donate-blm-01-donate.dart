@@ -1,8 +1,6 @@
-
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_pay/flutter_pay.dart';
-// import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
@@ -18,7 +16,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   initState() {
     super.initState();
     donateToggle = 0;
-    // StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", merchantId: "Test", androidPayMode: 'test'));
   }
 
   @override
@@ -72,7 +69,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         (index){
                           return GestureDetector(
                             onTap: (){
-                              // context.bloc<BlocHomeBLMDonate>().modify(index);
                               setState(() {
                                 donateToggle = index;
                               });
@@ -118,104 +114,40 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                       FlutterPay flutterPay = FlutterPay();
 
-                      
-
                       bool isAvailable = await flutterPay.canMakePayments();
 
                       print('The value is $isAvailable');
 
-                      // flutterPay.setEnvironment(
-                      //   environment: PaymentEnvironment.Test,
-                      // );
+                      if(isAvailable == true){
+                        PaymentItem item = PaymentItem(
+                          name: 'Donation', 
+                          price: ((){
+                            switch(donateToggle){
+                              case 0: return 0.99; break;
+                              case 1: return 5.00; break;
+                              case 2: return 15.00; break;
+                              case 3: return 25.00; break;
+                              case 4: return 50.00; break;
+                              case 5: return 100.00; break;
+                            }
+                          }()),
+                        );
 
+                        String token = await flutterPay.makePayment(
+                          merchantIdentifier: 'merchant.com.app.facesbyplaces',
+                          currencyCode: 'USD',
+                          countryCode: 'US',
+                          allowedPaymentNetworks: [
+                            PaymentNetwork.visa, 
+                            PaymentNetwork.masterCard,
+                          ],
+                          paymentItems: [item],
+                          merchantName: 'FacesbyPlaces', 
+                          gatewayName: 'Stripe',
+                        );
 
-
-                      PaymentItem item = PaymentItem(
-                        name: 'Donation', 
-                        price: ((){
-                          switch(donateToggle){
-                            case 0: return 0.99; break;
-                            case 1: return 5.00; break;
-                            case 2: return 15.00; break;
-                            case 3: return 25.00; break;
-                            case 4: return 50.00; break;
-                            case 5: return 100.00; break;
-                          }
-                        }()),
-                      );
-
-                      String token = await flutterPay.makePayment(
-                        merchantIdentifier: 'merchant.com.app.facesbyplaces',
-                        currencyCode: 'USD',
-                        countryCode: 'US',
-                        allowedPaymentNetworks: [
-                          PaymentNetwork.visa, 
-                          PaymentNetwork.masterCard,
-                        ],
-                        paymentItems: [item],
-                        merchantName: 'FacesbyPlaces', 
-                        gatewayName: 'Stripe',
-                      );
-
-                      print('The token is $token');
-
-                      // int amount = 0;
-
-                      // var paymentResult = await StripePayment.paymentRequestWithNativePay(
-                      //   androidPayOptions: AndroidPayPaymentRequest(
-                      //     totalPrice: ((){
-                      //       switch(donateToggle){
-                      //         case 0: amount = 1; return '0.99'; break;
-                      //         case 1: amount = 5; return '5.00'; break;
-                      //         case 2: amount = 15; return '15.00'; break;
-                      //         case 3: amount = 25; return '25.00'; break;
-                      //         case 4: amount = 50; return '50.00'; break;
-                      //         case 5: amount = 100; return '100.00'; break;
-                      //       }
-                      //     }()),
-                      //     currencyCode: 'USD',
-                      //   ),
-                      //   applePayOptions: ApplePayPaymentOptions(
-                      //     countryCode: 'DE',
-                      //     currencyCode: 'USD',
-                      //     items: [
-                      //       ApplePayItem(
-                      //         label: 'Test',
-                      //         amount: ((){
-                      //           switch(donateToggle){
-                      //             case 0: amount = 1; return '0.99'; break;
-                      //             case 1: amount = 5; return '5.00'; break;
-                      //             case 2: amount = 15; return '15.00'; break;
-                      //             case 3: amount = 25; return '25.00'; break;
-                      //             case 4: amount = 50; return '50.00'; break;
-                      //             case 5: amount = 100; return '100.00'; break;
-                      //           }
-                      //         }()),
-                      //       )
-                      //     ],
-                      //   ),
-                      // );
-
-                      // await StripePayment.completeNativePayRequest();
-
-                      // var paymentMethod = await StripePayment.createPaymentMethod(
-                      //   PaymentMethodRequest(
-                      //     card: CreditCard(
-                      //       token: paymentResult.tokenId,
-                      //     ),
-                      //   ),
-                      // );
-
-                      // var intentApiResult = await apiRegularDonate(amount);
-
-                      // if(intentApiResult != 'Failed'){
-                      //   await StripePayment.confirmPaymentIntent(
-                      //     PaymentIntent(
-                      //       clientSecret: intentApiResult,
-                      //       paymentMethodId: paymentMethod.id,
-                      //     ),
-                      //   );
-                      // }
+                        print('The token is $token');
+                      }
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 

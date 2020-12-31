@@ -3,12 +3,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-create-memorial-blm-01-create-memorial.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'home-create-memorial-blm-01-create-memorial.dart';
 
 
 class HomeBLMCreateMemorial2 extends StatefulWidget{

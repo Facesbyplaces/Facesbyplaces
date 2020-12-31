@@ -32,7 +32,6 @@ Future<bool> apiRegularAddFriends(int memorialId, int userId) async{
       ),  
     );
 
-
     if(response.statusCode == 200){
       result = true;
     }

@@ -18,9 +18,6 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
     }
   );
 
-  print('The status code is ${response.statusCode}');
-  print('The status body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularHomeTabMemorialMain.fromJson(newValue);
@@ -28,8 +25,6 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
     throw Exception('Failed to get the memorials');
   }
 }
-
-
 
 class APIRegularHomeTabMemorialMain{
 

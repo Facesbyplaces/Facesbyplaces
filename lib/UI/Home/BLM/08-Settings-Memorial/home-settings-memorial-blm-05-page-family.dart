@@ -1,10 +1,9 @@
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-09-show-family-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-settings-memorial-blm-07-search-user-settings.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-
-import 'home-settings-memorial-blm-07-search-user-settings.dart';
 
 class BLMShowFamilySettings{
   final String firstName;

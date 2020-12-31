@@ -1,13 +1,14 @@
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -17,8 +18,6 @@ import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:io';
-
-import 'home-view-memorial-blm-03-connection-list.dart';
 
 class BLMRelationshipItemPost{
 
@@ -317,9 +316,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                           if(result.success){
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
                                           }
-
-                                          // Navigator.pushNamed(context, '/home/blm/donation');
-                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate()));
                                           
                                         },
                                         child: Text('Manage',
@@ -342,7 +338,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                           DateTime date = DateTime.now();
                                           String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-blm-memorial';
-                                          // FlutterBranchSdk.setIdentity('id-$id-share-memorial');
                                           FlutterBranchSdk.setIdentity(id);
 
                                           BranchResponse response =
@@ -765,7 +760,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                             padding: EdgeInsets.only(left: 20.0),
                             child: GestureDetector(
                               onTap: (){
-                                // Navigator.popAndPushNamed(context, '/home/blm');
                                 Navigator.pop(context);
                               },
                               child: Row(

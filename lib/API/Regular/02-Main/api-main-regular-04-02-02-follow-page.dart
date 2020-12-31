@@ -32,9 +32,6 @@ Future<bool> apiRegularModifyFollowPage({String pageType, int pageId, bool follo
       ),  
     );
 
-    print('The response status of follow page is ${response.statusCode}');
-    print('The response data of follow page is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }

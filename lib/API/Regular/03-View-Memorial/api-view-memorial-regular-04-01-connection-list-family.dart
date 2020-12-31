@@ -26,8 +26,6 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily(int me
   }
 }
 
-
-
 class APIRegularConnectionListFamilyMain{
   int itemsRemaining;
   List<APIRegularConnectionListFamilyExtended> familyList;

@@ -23,8 +23,8 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers(String keywords, int pag
     var newValue = json.decode(response.body);
     return APIRegularSearchUsersMain.fromJson(newValue);
   }else{
-      throw Exception('Failed to get the user information');
-    }
+    throw Exception('Failed to get the user information');
+  }
 }
 
 class APIRegularSearchUsersMain{

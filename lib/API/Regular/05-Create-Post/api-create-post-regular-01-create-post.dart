@@ -10,19 +10,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
   var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The UID is $getUID');
-  print('The client is $getClient');
-
-  print('The page type is ${post.pageType}');
-  print('The page id is ${post.pageId}');
-  print('The body is ${post.postBody}');
-  print('The location is ${post.location}');
-  print('The latitude is ${post.latitude}');
-  print('The longitude is ${post.longitude}');
-  print('The image or video is ${post.imagesOrVideos}');
-  print('The tag people is ${post.tagPeople.toString()}');
-
   try{
     var dioRequest = dio.Dio();
 
@@ -37,7 +24,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
       'post[latitude]': post.latitude,
       'post[longitude]': post.longitude,
       'tag_people': post.tagPeople,
-      // 'tag_people': '[]',
     });
     
     if(post.imagesOrVideos != null){
@@ -54,9 +40,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
         }
       ),  
     );
-
-    print('The response status is ${response.statusCode}');
-    print('The response data is ${response.data}');
 
     if(response.statusCode == 200){
       result = true;

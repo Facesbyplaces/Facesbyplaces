@@ -1,9 +1,9 @@
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-01-update-account-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-02-show-account-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-01-update-account-details.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-02-show-account-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -131,14 +131,6 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                   context.hideLoaderOverlay();
 
                                   if(result){
-
-                                    // Navigator.pushReplacement(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
-                                    // );
-
-                                    // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-
                                     Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                                     Navigator.popAndPushNamed(context, route.settings.name);
                                   }else{

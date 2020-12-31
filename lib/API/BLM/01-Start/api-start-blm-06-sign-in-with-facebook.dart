@@ -11,9 +11,6 @@ Future<bool> apiBLMSignInWithFacebook({String firstName, String lastName, String
     }
   );
 
-  print('The response status in blm sign in with facebook is ${response.statusCode}');
-  print('The response body in blm sign in with facebook is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     int userId = value['id'];

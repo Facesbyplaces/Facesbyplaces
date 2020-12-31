@@ -1,13 +1,13 @@
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-post-comments.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
-import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-post-comments.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-20-regular-reply.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-20-regular-reply.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularOriginalComment{
   int commentId;
@@ -51,7 +51,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   final int numberOfComments;
   HomeRegularShowCommentsListState({this.postId, this.numberOfLikes, this.numberOfComments});
 
-  // static GlobalKey<MiscRegularBottomSheetCommentState> key1 = GlobalKey<MiscRegularBottomSheetCommentState>();
   GlobalKey<MiscRegularBottomSheetCommentState> key1;
   RefreshController refreshController = RefreshController(initialRefresh: true);
   static TextEditingController controller = TextEditingController();
@@ -176,9 +175,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
         GestureDetector(
           onTap: (){
-            print('The controller is ${controller.text}');
-
-            // addComment();
             controller.clear();
           },
           child: Text('Post',
@@ -193,15 +189,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     ),
   );
 
-  // void addComment(){
-  //   setState(() {
-  //     controller.clear();
-  //   });
-  // }
-
   void initState(){
     super.initState();
-    // key1 = GlobalKey();
     key1 = GlobalKey<MiscRegularBottomSheetCommentState>();
     itemRemaining = 1;
     comments = [];
@@ -209,7 +198,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     page = 1;
     count = 0;
     onLoading();
-    // onLoadingReplies();
   }
   
 
@@ -239,7 +227,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                // Navigator.popAndPushNamed(context, '/home/regular');
                 Navigator.pop(context);
               },
             ),

@@ -1,8 +1,4 @@
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-04-show-other-details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-05-update-other-details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-06-hide-birthdate.dart';
@@ -10,6 +6,10 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-07-
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-08-hide-email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-09-hide-address.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-10-hide-phone-number.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -245,13 +245,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 context.hideLoaderOverlay();
 
                                 if(result){
-
-                                  // Navigator.pushReplacement(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,), settings: RouteSettings(name: 'newRoute')),
-                                  // );
-
-                                  // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                                   
                                   Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                                   Navigator.popAndPushNamed(context, route.settings.name);
