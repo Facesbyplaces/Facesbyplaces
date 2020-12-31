@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/api-77-regular-follow-page.dart';
-import 'package:facesbyplaces/UI/Home/BLM/View-Memorial/home-08-blm-view-memorial.dart';
 import 'package:facesbyplaces/API/Regular/api-19-regular-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:flutter/material.dart';

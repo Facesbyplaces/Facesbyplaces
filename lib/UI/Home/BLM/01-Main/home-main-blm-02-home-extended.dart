@@ -1,25 +1,25 @@
 import 'package:facesbyplaces/API/BLM/api-52-show-notifications-settings-status.dart';
-import 'package:facesbyplaces/UI/Home/BLM/Main/home-03-04-blm-notifications-tab.dart';
 import 'package:facesbyplaces/API/BLM/api-22-blm-show-user-information.dart';
-import 'package:facesbyplaces/UI/Home/BLM/Main/home-03-01-blm-feed-tab.dart';
+import 'package:facesbyplaces/UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
+import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
+import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-extra.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import '../Settings-Notifications/home-30-blm-notification-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
 import 'package:facesbyplaces/API/BLM/api-20-blm-logout.dart';
-import '../Settings-Memorial/home-14-blm-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'home-03-02-blm-memorial-list-tab.dart';
-import '../Search/home-04-blm-search.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/material.dart';
-import 'home-03-03-blm-post-tab.dart';
+import 'home-main-blm-03-01-feed-tab.dart';
+import 'home-main-blm-03-02-memorial-list-tab.dart';
+import 'home-main-blm-03-03-post-tab.dart';
+import 'home-main-blm-03-04-notifications-tab.dart';
 
 class HomeBLMScreenExtended extends StatefulWidget{
 

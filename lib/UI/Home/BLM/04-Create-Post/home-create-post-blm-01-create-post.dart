@@ -1,8 +1,8 @@
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/API/BLM/api-09-blm-create-post.dart';
-import '../View-Memorial/home-12-blm-profile-memorial.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';

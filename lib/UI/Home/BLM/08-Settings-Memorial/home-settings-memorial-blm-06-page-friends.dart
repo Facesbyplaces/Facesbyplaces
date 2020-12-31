@@ -1,33 +1,34 @@
-import 'package:facesbyplaces/API/BLM/api-33-blm-show-family-settings.dart';
+import 'package:facesbyplaces/API/BLM/api-34-blm-show-friends-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'home-29-blm-search-user-settings.dart';
 import 'package:flutter/material.dart';
 
-class BLMShowFamilySettings{
+import 'home-settings-memorial-blm-07-search-user-settings.dart';
+
+class BLMShowFriendsSettings{
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship});
+  BLMShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
 }
 
-class HomeBLMPageFamily extends StatefulWidget{
+class HomeBLMPageFriends extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageFamily({this.memorialId});
+  HomeBLMPageFriends({this.memorialId});
 
-  HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState(memorialId: memorialId);
+  HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState(memorialId: memorialId);
 }
 
-class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
+class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   final int memorialId;
-  HomeBLMPageFamilyState({this.memorialId});
+  HomeBLMPageFriendsState({this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMShowFamilySettings> familyList;
-  int familyItemsRemaining;
+  List<BLMShowFriendsSettings> friendsList;
+  int friendsItemsRemaining;
   int page;
 
   void onRefresh() async{
@@ -36,18 +37,17 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   }
 
   void onLoading1() async{
-    if(familyItemsRemaining != 0){
+    if(friendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowFamilySettings(memorialId, page);
-      familyItemsRemaining = newValue.itemsRemaining;
+      var newValue = await apiBLMShowFriendsSettings(memorialId, page);
+      friendsItemsRemaining = newValue.itemsRemaining;
 
-      for(int i = 0; i < newValue.familyList.length; i++){
-        familyList.add(
-          BLMShowFamilySettings(
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
+      for(int i = 0; i < newValue.friendsList.length; i++){
+        friendsList.add(
+          BLMShowFriendsSettings(
+            firstName: newValue.friendsList[i].user.firstName,
+            lastName: newValue.friendsList[i].user.lastName,
+            image: newValue.friendsList[i].user.image,
           ),
         );
       }
@@ -66,8 +66,8 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   void initState(){
     super.initState();
     onLoading1();
-    familyItemsRemaining = 1;
-    familyList = [];
+    friendsItemsRemaining = 1;
+    friendsList = [];
     page = 1;
   }
 
@@ -77,15 +77,15 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff04ECFF),
-        title: Text('Page Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+        title: Text('Page Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
         centerTitle: true,
         leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: true, memorialId: memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: memorialId,)));
             },
-            child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
+            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
           ),
         ],
       ),
@@ -138,9 +138,9 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                         child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
+                          Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                          Text(familyList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
+                          Text(friendsList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                         ],
                       ),
                       ),
@@ -172,7 +172,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
               
             },
             separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
-            itemCount: familyList.length,
+            itemCount: friendsList.length,
           ),
         ),
       ),

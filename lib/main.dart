@@ -1,6 +1,7 @@
-import 'UI/Home/BLM/Create-Memorial/home-07-01-blm-create-memorial.dart';
-import 'UI/Home/BLM/Create-Post/home-19-01-blm-create-post.dart';
-import 'UI/Home/BLM/Donate/home-20-blm-donate.dart';
+import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
+import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
+import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
+import 'UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
@@ -11,7 +12,6 @@ import 'UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'UI/Home/Regular/05-Donate/home-donate-regular-02-paypal-screen.dart';
 import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'UI/Home/BLM/Main/home-01-blm-home.dart';
 import 'UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'UI/Regular/regular-01-join.dart';
 import 'UI/Regular/regular-02-login.dart';

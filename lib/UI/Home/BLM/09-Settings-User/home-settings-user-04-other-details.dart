@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
@@ -12,7 +13,6 @@ import 'package:facesbyplaces/API/BLM/api-51-hide-phone-number.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'home-14-blm-user-details.dart';
 
 class HomeBLMUserOtherDetails extends StatefulWidget{
   final int userId;

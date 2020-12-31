@@ -6,8 +6,9 @@ import 'package:facesbyplaces/API/BLM/api-41-blm-add-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'home-27-blm-page-family.dart';
-import 'home-28-blm-page-friends.dart';
+
+import 'home-settings-memorial-blm-05-page-family.dart';
+import 'home-settings-memorial-blm-06-page-friends.dart';
 
 class BLMSearchUsers{
   final int userId;
