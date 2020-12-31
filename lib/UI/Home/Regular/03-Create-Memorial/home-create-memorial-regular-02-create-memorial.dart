@@ -3,11 +3,12 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'home-04-01-regular-create-memorial.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+
+import 'home-create-memorial-regular-01-create-memorial.dart';
 
 class HomeRegularCreateMemorial2 extends StatefulWidget{
 

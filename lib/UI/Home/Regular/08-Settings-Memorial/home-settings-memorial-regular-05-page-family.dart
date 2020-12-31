@@ -1,33 +1,34 @@
-import 'package:facesbyplaces/API/Regular/api-64-regular-show-friends-settings.dart';
+import 'package:facesbyplaces/API/Regular/api-63-regular-show-family-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'home-29-regular-search-user-settings.dart';
 import 'package:flutter/material.dart';
 
-class RegularShowFriendsSettings{
+import 'home-settings-memorial-regular-07-search-user-settings.dart';
+
+class RegularShowFamilySettings{
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  RegularShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship});
 }
 
-class HomeRegularPageFriends extends StatefulWidget{
+class HomeRegularPageFamily extends StatefulWidget{
   final int memorialId;
-  HomeRegularPageFriends({this.memorialId});
+  HomeRegularPageFamily({this.memorialId});
 
-  HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(memorialId: memorialId);
+  HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState(memorialId: memorialId);
 }
 
-class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
+class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
   final int memorialId;
-  HomeRegularPageFriendsState({this.memorialId});
+  HomeRegularPageFamilyState({this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularShowFriendsSettings> friendsList;
-  int friendsItemsRemaining;
+  List<RegularShowFamilySettings> familyList;
+  int familyItemsRemaining;
   int page;
 
   void onRefresh() async{
@@ -36,17 +37,18 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   }
 
   void onLoading1() async{
-    if(friendsItemsRemaining != 0){
+    if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularShowFriendsSettings(memorialId, page);
-      friendsItemsRemaining = newValue.itemsRemaining;
+      var newValue = await apiRegularShowFamilySettings(memorialId, page);
+      familyItemsRemaining = newValue.itemsRemaining;
 
-      for(int i = 0; i < newValue.friendsList.length; i++){
-        friendsList.add(
-          RegularShowFriendsSettings(
-            firstName: newValue.friendsList[i].user.firstName,
-            lastName: newValue.friendsList[i].user.lastName,
-            image: newValue.friendsList[i].user.image,
+      for(int i = 0; i < newValue.familyList.length; i++){
+        familyList.add(
+          RegularShowFamilySettings(
+            firstName: newValue.familyList[i].user.firstName,
+            lastName: newValue.familyList[i].user.lastName,
+            image: newValue.familyList[i].user.image,
+            relationship: newValue.familyList[i].relationship,
           ),
         );
       }
@@ -65,8 +67,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   void initState(){
     super.initState();
     onLoading1();
-    friendsItemsRemaining = 1;
-    friendsList = [];
+    familyItemsRemaining = 1;
+    familyList = [];
     page = 1;
   }
 
@@ -76,15 +78,15 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff04ECFF),
-        title: Text('Page Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+        title: Text('Page Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
         centerTitle: true,
         leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: false, memorialId: memorialId,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularSearchUser(isFamily: true, memorialId: memorialId,)));
             },
-            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
+            child: Center(child: Text('Add Family', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
           ),
         ],
       ),
@@ -137,9 +139,9 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                         child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
+                          Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                          Text(friendsList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
+                          Text(familyList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                         ],
                       ),
                       ),
@@ -171,7 +173,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
               
             },
             separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
-            itemCount: friendsList.length,
+            itemCount: familyList.length,
           ),
         ),
       ),

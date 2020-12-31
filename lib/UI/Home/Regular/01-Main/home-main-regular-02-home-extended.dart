@@ -265,9 +265,9 @@
 
 
 
-import 'package:facesbyplaces/UI/Home/Regular/Settings-Notifications/home-01-regular-notification-settings.dart';
-import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-14-regular-user-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
 import 'package:facesbyplaces/API/Regular/api-41-regular-show-notification-settings.dart';
+import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/API/Regular/api-22-regular-show-user-information.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
@@ -279,13 +279,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'home-03-04-regular-notifications-tab.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'home-03-01-regular-feed-tab.dart';
-import 'home-03-02-regular-memorial-list-tab.dart';
-import 'home-03-03-regular-post-tab.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/material.dart';
+
+import 'home-main-regular-03-01-feed-tab.dart';
+import 'home-main-regular-03-02-memorial-list-tab.dart';
+import 'home-main-regular-03-03-post-tab.dart';
+import 'home-main-regular-03-04-notifications-tab.dart';
 
 class HomeRegularScreenExtended extends StatefulWidget{
 

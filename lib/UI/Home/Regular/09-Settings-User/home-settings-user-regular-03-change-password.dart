@@ -1,10 +1,10 @@
 import 'package:facesbyplaces/API/Regular/api-50-regular-change-password.dart';
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'home-14-regular-user-details.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularUserChangePassword extends StatefulWidget{

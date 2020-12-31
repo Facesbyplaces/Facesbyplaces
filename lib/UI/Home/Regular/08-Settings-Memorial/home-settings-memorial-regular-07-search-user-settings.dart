@@ -6,8 +6,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'home-27-regular-page-family.dart';
-import 'home-28-regular-page-friends.dart';
+import 'home-settings-memorial-regular-05-page-family.dart';
+import 'home-settings-memorial-regular-06-page-friends.dart';
 
 class RegularSearchUsers{
   final int userId;

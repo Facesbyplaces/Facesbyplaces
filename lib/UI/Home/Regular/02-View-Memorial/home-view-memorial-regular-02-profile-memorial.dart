@@ -8,8 +8,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'home-02-regular-connection-list.dart';
 import 'package:flutter/material.dart';
+
+import 'home-view-memorial-regular-03-connection-list.dart';
 
 class RegularProfilePosts{
   int userId;

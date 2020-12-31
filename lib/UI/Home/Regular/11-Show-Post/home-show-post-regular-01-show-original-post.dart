@@ -8,7 +8,7 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-import 'home-32-regular-show-comments.dart';
+import 'home-show-post-regular-02-show-comments.dart';
 
 class HomeRegularShowOriginalPost extends StatefulWidget{
   final int postId;

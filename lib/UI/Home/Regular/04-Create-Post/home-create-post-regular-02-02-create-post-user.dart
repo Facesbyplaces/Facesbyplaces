@@ -3,7 +3,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 
-import 'home-09-01-regular-create-post.dart';
+import 'home-create-post-regular-01-create-post.dart';
 
 class RegularSearchUsers{
   int userId;

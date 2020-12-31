@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:location/location.dart' as Location;
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
-import '../Search/home-06-regular-searches.dart';
+import 'home-search-regular-02-search-extended.dart';
 
 class RegularArguments {
   final String title;

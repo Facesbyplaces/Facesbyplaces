@@ -1,4 +1,4 @@
-import 'home-02-regular-home-extended.dart';
+import 'home-main-regular-02-home-extended.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularScreen extends StatelessWidget{

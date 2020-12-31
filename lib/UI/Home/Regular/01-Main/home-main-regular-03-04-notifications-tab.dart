@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/UI/Home/Regular/Show-Post/home-31-regular-show-original-post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-notifications.dart';
 import 'package:facesbyplaces/API/Regular/api-07-04-regular-home-notifications-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';

@@ -8,10 +8,11 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-11-regular-page-details.dart';
 import 'home-21-regular-update-memorial-page-image.dart';
-import 'home-26-regular-page-managers.dart';
-import 'home-27-regular-page-family.dart';
-import 'home-28-regular-page-friends.dart';
 import 'package:flutter/material.dart';
+
+import 'home-settings-memorial-regular-04-page-managers.dart';
+import 'home-settings-memorial-regular-05-page-family.dart';
+import 'home-settings-memorial-regular-06-page-friends.dart';
 
 
 class HomeRegularMemorialSettings extends StatefulWidget{

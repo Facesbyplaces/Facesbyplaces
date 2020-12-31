@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/UI/Home/Regular/Create-Post/home-09-01-regular-create-post.dart';
-import 'package:facesbyplaces/UI/Home/Regular/Settings-Memorial/home-09-regular-memorial-settings.dart';
+import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/API/Regular/api-53-regular-show-profile.dart';
@@ -14,12 +14,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'home-02-regular-connection-list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:io';
+
+import 'home-view-memorial-regular-03-connection-list.dart';
 
 class RegularRelationshipItemPost{
 
