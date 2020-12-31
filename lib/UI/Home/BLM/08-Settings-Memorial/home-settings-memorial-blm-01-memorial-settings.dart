@@ -1,9 +1,9 @@
-import 'package:facesbyplaces/API/BLM/api-36-blm-update-switch-status-family.dart';
-import 'package:facesbyplaces/API/BLM/api-37-blm-update-switch-status-friends.dart';
-import 'package:facesbyplaces/API/BLM/api-38-blm-update-switch-status-followers.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-01-delete-memorial.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-02-update-switch-status-family.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-03-update-switch-status-friends.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-04-update-switch-status-followers.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/API/BLM/api-06-blm-delete-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';

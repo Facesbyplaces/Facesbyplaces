@@ -31,7 +31,6 @@ class UIGetStarted extends StatelessWidget {
                   MiscStartBackgroundTemplate(),
 
                   ContainerResponsive(
-                    // width: SizeConfig.screenHeight,
                     width: SizeConfig.screenWidth,
                     heightResponsive: false,
                     widthResponsive: true,
@@ -39,9 +38,7 @@ class UIGetStarted extends StatelessWidget {
                     child: Stack(
                       children: [
                         ContainerResponsive(
-                          // height: SizeConfig.screenHeight / 2,
                           height: SizeConfig.screenHeight / 2,
-                          // height: ScreenUtil().setHeight(),
                           heightResponsive: false,
                           widthResponsive: true,
                           child: Stack(
@@ -53,8 +50,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
-                                    // ScreenUtil().setWidth(540)
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image3.png'),
                                   ),
@@ -67,8 +62,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
-                                    // height: ScreenUtil().setHeight(200),
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -79,8 +72,6 @@ class UIGetStarted extends StatelessWidget {
                                 child: Container(
                                   padding: EdgeInsets.all(5),
                                   color: Color(0xffffffff),
-                                  // height: (SizeConfig.screenHeight / 2) / 4,
-                                  // height: ScreenUtil().setHeight(200),
                                   height: ScreenUtil().setHeight(100),
                                   child: Image.asset('assets/icons/frontpage-image5.png'),
                                 ),
@@ -90,7 +81,6 @@ class UIGetStarted extends StatelessWidget {
                                 child: Container(
                                   padding: EdgeInsets.all(5),
                                   color: Color(0xffffffff),
-                                  // height: (SizeConfig.screenHeight / 2) / 4,
                                   height: ScreenUtil().setHeight(100),
                                   child: Image.asset('assets/icons/frontpage-image7.png'),
                                 ),
@@ -105,7 +95,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image3.png'),
                                   ),
@@ -119,7 +108,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -133,7 +121,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -147,7 +134,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
                                   ),
@@ -161,7 +147,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -175,7 +160,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
                                   ),
@@ -189,7 +173,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image3.png'),
                                   ),
@@ -203,7 +186,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -217,7 +199,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -231,7 +212,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -245,7 +225,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
                                   ),
@@ -259,7 +238,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -273,7 +251,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image3.png'),
                                   ),
@@ -287,7 +264,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -301,7 +277,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
                                   ),
@@ -315,7 +290,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -329,7 +303,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -343,7 +316,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
                                   ),
@@ -357,7 +329,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image3.png'),
                                   ),
@@ -371,7 +342,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -385,7 +355,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -399,7 +368,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
                                   ),
@@ -413,7 +381,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image4.png'),
                                   ),
@@ -427,7 +394,6 @@ class UIGetStarted extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: (SizeConfig.screenHeight / 2) / 4,
                                     height: ScreenUtil().setHeight(100),
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
                                   ),

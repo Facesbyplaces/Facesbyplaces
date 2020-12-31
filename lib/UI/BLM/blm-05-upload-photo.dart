@@ -1,16 +1,15 @@
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-04-upload-photo.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/api-04-blm-upload-photo.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMUploadPhoto extends StatefulWidget{
 
@@ -83,11 +82,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                           ],
                         ),
 
-                        // Padding(
-                        //   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        //   child: 
-                        // ),
-
                         SingleChildScrollView(
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                           physics: ClampingScrollPhysics(),
@@ -158,7 +152,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                           ),
                                         ],
                                       ),
-                                      // height: SizeConfig.blockSizeVertical * 50,
                                       height: ScreenUtil().setHeight(335),
                                       width: SizeConfig.screenWidth / 1.2,
                                       color: Color(0xffF9F8EE),

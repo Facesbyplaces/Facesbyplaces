@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/API/BLM/api-42-blm-show-account-details.dart';
-import 'package:facesbyplaces/API/BLM/api-43-update-account-details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-01-show-account-details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-02-update-account-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';

@@ -1,16 +1,16 @@
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-03-verify-email.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/api-03-blm-verify-email.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMVerifyEmail extends StatefulWidget{
 
@@ -94,7 +94,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                         controller: controller,
                                         fieldsCount: 3,
                                         textStyle: TextStyle(
-                                          // fontSize: SizeConfig.safeBlockHorizontal * 15,
                                           fontSize: ScreenUtil().setSp(56, allowFontScalingSelf: true),
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff000000)
@@ -119,7 +118,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                           TextSpan(
                                             text: 'Didn\'t receive a code? ', 
                                             style: TextStyle(
-                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
@@ -129,7 +127,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                           TextSpan(
                                             text: 'Resend',
                                             style: TextStyle(
-                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
@@ -173,7 +170,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
 
                                       }, 
                                       width: SizeConfig.screenWidth / 2, 
-                                      // height: SizeConfig.blockSizeVertical * 7,
                                       height: ScreenUtil().setHeight(45),
                                       buttonColor: Color(0xff000000),
                                     ),

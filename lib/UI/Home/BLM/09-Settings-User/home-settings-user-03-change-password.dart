@@ -2,7 +2,7 @@ import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/API/BLM/api-60-blm-change-password.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-03-change-password.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';

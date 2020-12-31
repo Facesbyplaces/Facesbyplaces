@@ -86,7 +86,6 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Your Name', 
                                 type: TextInputType.name, 
                                 labelTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
@@ -100,7 +99,6 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Last Name', 
                                 type: TextInputType.name, 
                                 labelTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
@@ -114,7 +112,6 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Mobile #', 
                                 type: TextInputType.phone, 
                                 labelTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
@@ -128,7 +125,6 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Email Address', 
                                 type: TextInputType.emailAddress, 
                                 labelTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
@@ -142,7 +138,6 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Username', 
                                 type: TextInputType.text, 
                                 labelTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
@@ -156,7 +151,6 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Password', 
                                 type: TextInputType.text, 
                                 labelTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
@@ -169,7 +163,6 @@ class RegularRegister extends StatelessWidget{
                               MiscRegularButtonTemplate(
                                 buttonText: 'Next', 
                                 buttonTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                   fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xffffffff),
@@ -210,7 +203,6 @@ class RegularRegister extends StatelessWidget{
 
                                 }, 
                                 width: SizeConfig.screenWidth / 2, 
-                                // height: SizeConfig.blockSizeVertical * 7,
                                 height: ScreenUtil().setHeight(45),
                                 buttonColor: Color(0xff04ECFF),
                               ),
@@ -223,7 +215,6 @@ class RegularRegister extends StatelessWidget{
                                     TextSpan(
                                       text: 'Already have an account? ', 
                                       style: TextStyle(
-                                        // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                         fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                         color: Color(0xff000000),
                                       ),
@@ -232,7 +223,6 @@ class RegularRegister extends StatelessWidget{
                                     TextSpan(
                                       text: 'Login', 
                                       style: TextStyle(
-                                        // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                         fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                         color: Color(0xff04ECFF),
                                       ),
@@ -265,7 +255,6 @@ class RegularRegister extends StatelessWidget{
                           icon: Icon(
                             Icons.arrow_back, 
                             color: Color(0xffffffff), 
-                            // size: SizeConfig.blockSizeVertical * 5,
                             size: ScreenUtil().setHeight(30),
                           ),
                         ),

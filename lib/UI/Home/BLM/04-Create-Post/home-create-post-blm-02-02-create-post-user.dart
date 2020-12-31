@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/api-23-blm-search-users.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api-23-blm-search-users.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
 

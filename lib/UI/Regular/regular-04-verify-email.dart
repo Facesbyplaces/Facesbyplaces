@@ -4,13 +4,13 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularVerifyEmail extends StatefulWidget{
 
@@ -94,7 +94,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                         controller: controller,
                                         fieldsCount: 3,
                                         textStyle: TextStyle(
-                                          // fontSize: SizeConfig.safeBlockHorizontal * 15,
                                           fontSize: ScreenUtil().setSp(56, allowFontScalingSelf: true),
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff000000)
@@ -119,7 +118,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           TextSpan(
                                             text: 'Didn\'t receive a code? ', 
                                             style: TextStyle(
-                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
@@ -129,7 +127,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           TextSpan(
                                             text: 'Resend',
                                             style: TextStyle(
-                                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
@@ -147,7 +144,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                     MiscRegularButtonTemplate(
                                       buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
                                       buttonTextStyle: TextStyle(
-                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                         fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                         fontWeight: FontWeight.bold, 
                                         color: Color(0xffffffff),
@@ -179,7 +175,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
 
                                       }, 
                                       width: SizeConfig.screenWidth / 2, 
-                                      // height: SizeConfig.blockSizeVertical * 7,
                                       height: ScreenUtil().setHeight(45),
                                       buttonColor: Color(0xff04ECFF),
                                     ),

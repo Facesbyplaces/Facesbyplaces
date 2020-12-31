@@ -1,8 +1,8 @@
-import 'package:facesbyplaces/API/BLM/api-67-blm-post-like-or-unlike.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-02-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-03-change-password.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/api-46-show-other-details-status.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-show-other-details-status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-04-other-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';

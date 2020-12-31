@@ -4,14 +4,13 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularUploadPhoto extends StatefulWidget{
 
@@ -144,7 +143,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                         child: Center(
                                           child: Text('Add a photo',
                                             style: TextStyle(
-                                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                               fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
@@ -154,7 +152,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                       ),
                                     ],
                                   ),
-                                  // height: SizeConfig.blockSizeVertical * 50,
                                   height: ScreenUtil().setHeight(335),
                                   width: SizeConfig.screenWidth / 1.2,
                                   color: Color(0xffF9F8EE),
@@ -168,7 +165,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                 ? 'Sign Up'
                                 : 'Next',
                                 buttonTextStyle: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                   fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xffffffff),
@@ -198,12 +194,10 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   }
                                 }, 
                                 width: SizeConfig.screenWidth / 2, 
-                                // height: SizeConfig.blockSizeVertical * 7,
                                 height: ScreenUtil().setHeight(45),
                                 buttonColor: Color(0xff04ECFF),
                               ),
 
-                              // Expanded(child: Container(),),
                               SizedBox(height: ScreenUtil().setHeight(20)),
 
                               RichText(
@@ -212,7 +206,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     TextSpan(
                                       text: 'Connect / ', 
                                       style: TextStyle(
-                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                         fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                         fontWeight: FontWeight.w300,
                                         color: Color(0xff888888),
@@ -222,7 +215,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     TextSpan(
                                       text: 'Remember / ',
                                       style: TextStyle(
-                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                         fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                         fontWeight: FontWeight.w300,
                                         color: Color(0xff888888),
@@ -232,7 +224,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     TextSpan(
                                       text: 'Honor',
                                       style: TextStyle(
-                                        // fontSize: SizeConfig.safeBlockHorizontal * 5,
                                         fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                         fontWeight: FontWeight.w300,
                                         color: Color(0xff888888),

@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/BLM/api-53-update-notification-memorial.dart';
-import 'package:facesbyplaces/API/BLM/api-54-update-notification-activities.dart';
-import 'package:facesbyplaces/API/BLM/api-55-update-notification-post-likes.dart';
-import 'package:facesbyplaces/API/BLM/api-56-update-notification-post-comments.dart';
-import 'package:facesbyplaces/API/BLM/api-57-update-notification-add-family.dart';
-import 'package:facesbyplaces/API/BLM/api-58-update-notification-add-friends.dart';
-import 'package:facesbyplaces/API/BLM/api-59-update-notification-add-admin.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-01-update-notification-memorial.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-02-update-notification-activities.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-03-update-notification-post-likes.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-04-update-notification-post-comments.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-05-update-notification-add-family.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-06-update-notification-add-friends.dart';
+import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';

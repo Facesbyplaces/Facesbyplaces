@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/api-21-blm-leave-page.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-05-leave-page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:flutter/material.dart';
 import 'misc-02-blm-dialog.dart';

@@ -1,23 +1,20 @@
-import 'package:facesbyplaces/API/BLM/api-65-blm-sign-in-with-facebook.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-facebook.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-google.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/API/BLM/api-64-blm-sign-in-with-google.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/API/BLM/api-01-blm-login.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-
 import 'blm-06-password-reset.dart';
-
-// import 'blm-06-password-reset.dart';
 
 
 class BLMLogin extends StatefulWidget{
@@ -118,8 +115,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                 width: SizeConfig.screenWidth,
                 alignment: Alignment.center,
                 child: ContainerResponsive(
-                  // padding: EdgeInsetsResponsive.only(left: 10.0, right: 10.0),
-                  // width: SizeConfig.screenHeight,
                   width: SizeConfig.screenWidth,
                   heightResponsive: false,
                   widthResponsive: true,
@@ -152,7 +147,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                     buttonText: 'Facebook', 
                                     buttonColor: Color(0xff3A559F), 
                                     buttonTextStyle: TextStyle(
-                                      // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                       fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                       fontWeight: FontWeight.w300, 
                                       color: Color(0xffffffff),
@@ -160,11 +154,8 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                     onPressed: () async{
                                       final fb = FacebookLogin();
 
-
-
                                       // await fb.logOut();
                                       // print('heheheheh');
-
 
                                       bool isLoggedIn = await fb.isLoggedIn;
 
@@ -199,7 +190,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                         }
 
                                       }else{
-                                        // Log in
                                         final result = await fb.logIn(permissions: [
                                           FacebookPermission.publicProfile,
                                           FacebookPermission.email,
@@ -243,7 +233,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                       }
                                     }, 
                                     width: SizeConfig.screenWidth / 1.5, 
-                                    // height: SizeConfig.blockSizeVertical * 7,
                                     height: ScreenUtil().setHeight(45),
                                   ),
                                 ),
@@ -255,54 +244,11 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                     buttonText: 'Google', 
                                     buttonColor: Color(0xffF5F5F5), 
                                     buttonTextStyle: TextStyle(
-                                      // fontSize: SizeConfig.safeBlockHorizontal * 4, 
                                       fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                       fontWeight: FontWeight.w300, 
                                       color: Color(0xff000000),
                                     ), 
                                     onPressed: () async{
-                                      // GoogleSignIn googleSignIn = GoogleSignIn(
-                                      //   scopes: [
-                                      //     'profile',
-                                      //     'email',
-                                      //     'openid'
-                                      //   ],
-                                      // );
-
-                                      // var value = await googleSignIn.signIn();
-
-                                      // print('The value is ${value.email}');
-                                      // print('The value is ${value.displayName}');
-                                      // print('The value is ${value.id}');
-                                      // print('The value is ${value.photoUrl}');
-
-                                      // var header = await value.authHeaders;
-                                      // var auth = await value.authentication;
-
-                                      // print('The header is $header');
-                                      // print('The auth is $auth');
-                                      // print('The auth is ${auth.idToken}');
-                                
-                                      // context.showLoaderOverlay();
-                                      // bool result = await apiBLMSignInWithGoogle(
-                                      //   firstName: value.displayName, 
-                                      //   lastName: value.displayName, 
-                                      //   email: value.email, 
-                                      //   username: value.email,
-                                      //   googleId: auth.idToken,
-                                      // );
-                                      // context.hideLoaderOverlay();
-
-                                      // print('The result is $result');
-
-                                      // if(result){
-                                      //   Navigator.pushReplacementNamed(context, '/home/blm');
-                                      // }else{
-                                      //   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
-                                      // }
-
-
-
 
                                     GoogleSignIn googleSignIn = GoogleSignIn(
                                         scopes: [
@@ -313,7 +259,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                       );
 
                                       // await googleSignIn.signOut();
-
                                       // print('google logout');
 
                                       bool isLoggedIn = await googleSignIn.isSignedIn();
@@ -332,16 +277,12 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                         print('The auth is ${auth.serverAuthCode}');
 
                                         print('The auth headers is $authHeaders');
-
                                         print('The client id is ${googleSignIn.clientId}');
-
-
                                         print('The headers is $authHeaders');
 
                                         
                                         bool result = await apiBLMSignInWithGoogle(
                                           firstName: accountSignedIn.displayName, 
-                                          // lastName: accountSignedIn.displayName,
                                           lastName: '', 
                                           email: accountSignedIn.email, 
                                           username: accountSignedIn.email,
@@ -369,18 +310,13 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                         print('The auth is ${auth.serverAuthCode}');
 
                                         print('The auth headers is $authHeaders');
-
                                         print('The client id is ${googleSignIn.clientId}');
-
-
                                         print('The headers is $authHeaders');
 
                                         context.showLoaderOverlay();
                                         
-
                                         bool result = await apiBLMSignInWithGoogle(
                                           firstName: signIn.displayName, 
-                                          // lastName: signIn.displayName, 
                                           lastName: '',
                                           email: signIn.email, 
                                           username: signIn.email,
@@ -398,7 +334,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
 
                                     }, 
                                     width: SizeConfig.screenWidth / 1.5, 
-                                    // height: SizeConfig.blockSizeVertical * 7,
                                     height: ScreenUtil().setHeight(45),
                                     image: 'assets/icons/google.png',
                                   ),
@@ -420,8 +355,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
 
                               print(credential);
 
-                              // Now send the credential (especially `credential.authorizationCode`) to your server to create a session
-                              // after they have been validated with Apple (see `Integration` section for more information on how to do this)
                             },
                             height: ScreenUtil().setHeight(45),
                           ),
@@ -436,34 +369,16 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
 
                           Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
 
-                          // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
                           SizedBox(height: ScreenUtil().setHeight(20)),
 
                           GestureDetector(
                             onTap: () async{
 
-                              // String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
-
-                              // DateTime date = DateTime.now();
-                              // String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
-                              // FlutterBranchSdk.setIdentity('id-$id');
-                              // context.showLoaderOverlay();
-
-                              // bool result = await generateLink(email);
-                              // context.hideLoaderOverlay();
-
-                              // print('The result is $result');
-
-
                               String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
-
-                              print('The value of email is $email');
 
                               if(email != null){
                                 DateTime date = DateTime.now();
                                 String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
-                                print('The id is $id');
                                 FlutterBranchSdk.setIdentity('id-$id');
 
                                 context.showLoaderOverlay();
@@ -471,7 +386,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                 context.hideLoaderOverlay();
 
                                 if (response.success) {
-                                  print('Link generated: ${response.result}');
                                   setState(() {
                                     link = response.result;
                                   });
@@ -496,25 +410,11 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                             ),
                           ),
 
-                          // Expanded(
-                          //   child: Container(
-                          //     child: IconButton(
-                          //       icon: Icon(Icons.copy),
-                          //       onPressed: (){
-                          //         FlutterClipboard.copy(link).then(( value ) => print('copied'));
-                          //       },
-                          //     ),
-                          //   ),
-                          // ),
-
-                          // Expanded(child: Container(),),
-
                           SizedBox(height: ScreenUtil().setHeight(20)),
 
                           MiscBLMButtonTemplate(
                             buttonText: 'Login', 
                             buttonTextStyle: TextStyle(
-                              // fontSize: SizeConfig.safeBlockHorizontal * 5,
                               fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                               fontWeight: FontWeight.bold, 
                               color: Color(0xffffffff),
@@ -541,7 +441,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                               }
                             }, 
                             width: SizeConfig.screenWidth / 2, 
-                            // height: SizeConfig.blockSizeVertical * 7, 
                             height: ScreenUtil().setHeight(45),
                             buttonColor: Color(0xff4EC9D4),
                           ),
@@ -554,7 +453,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                 TextSpan(
                                   text: 'Don\'t have an Account? ', 
                                   style: TextStyle(
-                                    // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                     fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                     color: Color(0xff000000),
                                   ),
@@ -563,7 +461,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                 TextSpan(
                                   text: 'Sign Up', 
                                   style: TextStyle(
-                                    // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                     fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xff4EC9D4),
@@ -585,7 +482,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                             },
                             child: Text('Sign in as Guest',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xff4EC9D4),
@@ -601,9 +497,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                     ),
                   ),
                 ),
-              ),
-
-              
+              ),              
 
             ],
           ),

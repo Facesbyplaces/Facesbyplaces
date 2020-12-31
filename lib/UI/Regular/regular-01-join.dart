@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:flutter/material.dart';
 
 class RegularJoin extends StatelessWidget {
 
@@ -27,7 +27,6 @@ class RegularJoin extends StatelessWidget {
             alignment: Alignment.center,
             child: ContainerResponsive(
               padding: EdgeInsetsResponsive.only(left: 10.0, right: 10.0),
-              // width: SizeConfig.screenHeight,
               width: SizeConfig.screenWidth,
               heightResponsive: false,
               widthResponsive: true,

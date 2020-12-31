@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter/material.dart';
 
 class RegularPasswordReset extends StatefulWidget{
 
@@ -27,4 +27,3 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
     );
   }
 }
-

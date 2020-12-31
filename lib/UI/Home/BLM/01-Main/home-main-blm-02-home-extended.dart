@@ -1,5 +1,6 @@
-import 'package:facesbyplaces/API/BLM/api-52-show-notifications-settings-status.dart';
-import 'package:facesbyplaces/API/BLM/api-22-blm-show-user-information.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
 import 'package:facesbyplaces/UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
@@ -10,7 +11,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-home.dart';
-import 'package:facesbyplaces/API/BLM/api-20-blm-logout.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
