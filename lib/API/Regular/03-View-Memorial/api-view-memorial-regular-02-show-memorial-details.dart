@@ -18,6 +18,9 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) asyn
     }
   );
 
+  print('The show memorial status code is ${response.statusCode}');
+  print('The show memorial status body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowMemorialMain.fromJson(newValue);
@@ -41,42 +44,42 @@ class APIRegularShowMemorialMain{
 
 
 class APIRegularShowMemorialExtended{
-  int id;
-  String name;
-  APIRegularShowMemorialExtendedDetails details;
-  String backgroundImage;
-  String profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularShowMemorialExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  int postsCount;
-  int familyCount;
-  int friendsCount;
-  int followersCount;
+  int memorialId;
+  String memorialName;
+  APIRegularShowMemorialExtendedDetails memorialDetails;
+  String memorialBackgroundImage;
+  String memorialProfileImage;
+  dynamic memorialImagesOrVideos;
+  String memorialRelationship;
+  APIRegularShowMemorialExtendedPageCreator memorialPageCreator;
+  bool memorialManage;
+  bool memorialFamOrFriends;
+  bool memorialFollower;
+  int memorialPostsCount;
+  int memorialFamilyCount;
+  int memorialFriendsCount;
+  int memorialFollowersCount;
 
-  APIRegularShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.postsCount, this.familyCount, this.friendsCount, this.followersCount});
+  APIRegularShowMemorialExtended({this.memorialId, this.memorialName, this.memorialDetails, this.memorialBackgroundImage, this.memorialProfileImage, this.memorialImagesOrVideos, this. memorialRelationship, this.memorialPageCreator, this.memorialManage, this.memorialFamOrFriends, this.memorialFollower, this.memorialPostsCount, this.memorialFamilyCount, this.memorialFriendsCount, this.memorialFollowersCount});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
     return APIRegularShowMemorialExtended(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      postsCount: parsedJson['postsCount'],
-      familyCount: parsedJson['familyCount'],
-      friendsCount: parsedJson['friendsCount'],
-      followersCount: parsedJson['followersCount'],
+      memorialId: parsedJson['id'],
+      memorialName: parsedJson['name'],
+      memorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
+      memorialBackgroundImage: parsedJson['backgroundImage'],
+      memorialProfileImage: parsedJson['profileImage'],
+      memorialImagesOrVideos: parsedJson['imagesOrVideos'],
+      memorialRelationship: parsedJson['relationship'],
+      memorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      memorialManage: parsedJson['manage'],
+      memorialFamOrFriends: parsedJson['famOrFriends'],
+      memorialFollower: parsedJson['follower'],
+      memorialPostsCount: parsedJson['postsCount'],
+      memorialFamilyCount: parsedJson['familyCount'],
+      memorialFriendsCount: parsedJson['friendsCount'],
+      memorialFollowersCount: parsedJson['followersCount'],
     );
   }
 }

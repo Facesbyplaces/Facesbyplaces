@@ -25,6 +25,12 @@ class RegularMainPagesPosts{
   int numberOfComments;
   bool likeStatus;
 
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
+
   RegularMainPagesPosts({
     this.userId, 
     this.postId, 
@@ -39,6 +45,11 @@ class RegularMainPagesPosts{
     this.numberOfLikes,
     this.numberOfComments,
     this.likeStatus,
+    this.numberOfTagged, 
+    this.taggedFirstName, 
+    this.taggedLastName, 
+    this.taggedImage, 
+    this.taggedId
   });
 }
 
@@ -77,7 +88,19 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         posts.add(
           RegularMainPagesPosts(
             userId: newValue.familyMemorialList[i].page.pageCreator.id, 
@@ -94,6 +117,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             numberOfComments: newValue.familyMemorialList[i].numberOfComments,
             numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
             likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+            numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
           ),
         );
       }
@@ -167,6 +196,11 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               numberOfComments: posts[i].numberOfComments,
               numberOfLikes: posts[i].numberOfLikes,
               likeStatus: posts[i].likeStatus,
+
+              numberOfTagged: posts[i].numberOfTagged,
+              taggedFirstName: posts[i].taggedFirstName,
+              taggedLastName: posts[i].taggedLastName,
+              taggedId: posts[i].taggedId,
               contents: [
                 Column(
                   children: [

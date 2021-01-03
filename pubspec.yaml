@@ -63,7 +63,6 @@ dependencies:
   responsive_widgets: ^2.0.1
   flutter_easyrefresh: ^2.1.7
   modal_bottom_sheet: ^1.0.0+1
-  
 
 
 dev_dependencies:

@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-suggested.dart';
@@ -10,6 +11,7 @@ import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularSearchMainPosts{
   int userId;
@@ -269,6 +271,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -301,7 +307,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search Memorial',
                       hintStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(
@@ -325,141 +332,156 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: Container(
-            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
-            child: Column(
-              children: [
+          // body: Container(
+          //   decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+          //   child: 
+          // ),
+          body: Stack(
+            children: [
+              SingleChildScrollView(child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-                Container(
-                  alignment: Alignment.center,
-                  width: SizeConfig.screenWidth,
-                  height: SizeConfig.blockSizeVertical * 8,
-                  color: Color(0xffffffff),
-                  child: DefaultTabController(
-                    length: 4,
-                    child: TabBar(
-                      isScrollable: true,
-                      labelColor: Color(0xff04ECFF),
-                      unselectedLabelColor: Color(0xff000000),
-                      indicatorColor: Color(0xff04ECFF),
-                      onTap: (int number){
-                        setState(() {
-                          toggle = number;
-                        });
-                      },
-                      tabs: [
+              Column(
+                children: [
 
-                        Center(
-                          child: Text('Post',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                              fontWeight: FontWeight.w400,
+                  Container(
+                    alignment: Alignment.center,
+                    // width: SizeConfig.screenWidth,
+                    // height: SizeConfig.blockSizeVertical * 8,
+                    height: ScreenUtil().setHeight(55),
+                    color: Color(0xffffffff),
+                    child: DefaultTabController(
+                      length: 4,
+                      child: TabBar(
+                        isScrollable: true,
+                        labelColor: Color(0xff04ECFF),
+                        unselectedLabelColor: Color(0xff000000),
+                        indicatorColor: Color(0xff04ECFF),
+                        onTap: (int number){
+                          setState(() {
+                            toggle = number;
+                          });
+                        },
+                        tabs: [
+
+                          Center(
+                            child: Text('Post',
+                              style: TextStyle(
+                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
-                        ),
 
-                        Center(child: Text('Suggested',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                              fontWeight: FontWeight.w400,
+                          Center(child: Text('Suggested',
+                              style: TextStyle(
+                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
-                        ),
 
-                        Center(
-                          child: Text('Nearby',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                              fontWeight: FontWeight.w400,
+                          Center(
+                            child: Text('Nearby',
+                              style: TextStyle(
+                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
-                        ),
 
-                        Center(
-                          child: Text('BLM',
-                            style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
-                              fontWeight: FontWeight.w400,
+                          Center(
+                            child: Text('BLM',
+                              style: TextStyle(
+                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-                Container(
-                  child: ((){
-                    switch(toggle){
-                      case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                      case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                      case 2: return 
-                      Container(
-                        height: SizeConfig.blockSizeVertical * 5,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              Icon(Icons.location_pin, color: Color(0xff979797),),
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              ((){
-                                if(currentLocation != null || currentLocation != ''){
-                                  return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
-                                }else{
-                                  Text('', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
-                                }
-                              }()),
-                            ],
-                          ),
-                        ),
-                      ); break;
-                      case 3: return 
-                      Container(
-                        height: SizeConfig.blockSizeVertical * 5,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              Icon(Icons.location_pin, color: Color(0xff979797),),
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                              ((){
-                                if(currentLocation != null || currentLocation != ''){
-                                  return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
-                                }else{
-                                  Text('', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
-                                }
-                              }()),
-                            ],
-                          ),
-                        ),
-                      ); break;
-                    }
-                  }()),
-                ),
-
-                Expanded(
-                  child: Container(
+                  Container(
                     child: ((){
                       switch(toggle){
-                        case 0: return searchPostExtended(); break;
-                        case 1: return searchSuggestedExtended(); break;
-                        case 2: return searchNearbyExtended(); break;
-                        case 3: return searchBLMExtended(); break;
+                        case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                        case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                        case 2: return 
+                        Container(
+                          height: SizeConfig.blockSizeVertical * 5,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                Icon(Icons.location_pin, color: Color(0xff979797),),
+
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                ((){
+                                  if(currentLocation != null || currentLocation != ''){
+                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                  }else{
+                                    Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                  }
+                                }()),
+                              ],
+                            ),
+                          ),
+                        ); break;
+                        case 3: return 
+                        Container(
+                          height: SizeConfig.blockSizeVertical * 5,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                Icon(Icons.location_pin, color: Color(0xff979797),),
+
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                ((){
+                                  if(currentLocation != null || currentLocation != ''){
+                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                  }else{
+                                    Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                  }
+                                }()),
+                              ],
+                            ),
+                          ),
+                        ); break;
                       }
                     }()),
                   ),
-                ),
 
-              ],
-            ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                      child: ((){
+                        switch(toggle){
+                          // case 0: return searchPostExtended(); break;
+                          case 0: return searchPostExtended(); break;
+                          case 1: return searchSuggestedExtended(); break;
+                          case 2: return searchNearbyExtended(); break;
+                          case 3: return searchBLMExtended(); break;
+                        }
+                      }()),
+                    ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -479,19 +501,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -559,7 +581,24 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: feeds.length,
         ),
       )
-      : MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
+      // : MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          // height: SizeConfig.screenHeight,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
+          ),
+        ),
+      ),
     );
   }
 
@@ -576,19 +615,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -613,7 +652,23 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: suggested.length,
         ),
       )
-      : MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
+      // : MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
+          ),
+        ),
+      ),
     );
   }
 
@@ -630,19 +685,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body ;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -667,7 +722,23 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: nearby.length,
         ),
       )
-      : MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
+      // : MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
+          ),
+        ),
+      ),
     );
   }
 
@@ -684,19 +755,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body ;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -721,7 +792,23 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: blm.length,
         ),
       )
-      : MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
+      // : MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
+          ),
+        ),
+      ),
     );
   }
 }

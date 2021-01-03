@@ -13,6 +13,9 @@ Future<bool> apiRegularVerifyEmail(String verificationCode) async{
     }
   );
 
+  print('The response status in verify email is ${response.statusCode}');
+  print('The response body in verify email is ${response.body}');
+
   if(response.statusCode == 200){
     return true;
   }else{

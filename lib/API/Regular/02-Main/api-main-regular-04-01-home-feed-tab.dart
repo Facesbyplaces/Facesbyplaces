@@ -51,21 +51,25 @@ class APIRegularHomeTabFeedExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  List<APIRegularHomeProfilePostExtendedTagged> postTagged;
   String createAt;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
 
-  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList;
+    List<dynamic> newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
-      newList = List<dynamic>.from(list);
+      newList1 = List<dynamic>.from(list);
     }
+
+    var newList2 = parsedJson['tag_people'] as List;
+    List<APIRegularHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeProfilePostExtendedTagged.fromJson(i)).toList();
     
     return APIRegularHomeTabFeedExtended(
       id: parsedJson['id'],
@@ -74,7 +78,8 @@ class APIRegularHomeTabFeedExtended{
       location: parsedJson['location'],
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
-      imagesOrVideos: newList,
+      imagesOrVideos: newList1,
+      postTagged: taggedList,
       createAt: parsedJson['created_at'],
       numberOfLikes: parsedJson['numberOfLikes'],
       numberOfComments: parsedJson['numberOfComments'],
@@ -159,6 +164,24 @@ class APIRegularHomeTabFeedExtendedPageCreator{
       email: parsedJson['email'],
       userName: parsedJson['username'],
       image: parsedJson['image']
+    );
+  }
+}
+
+class APIRegularHomeProfilePostExtendedTagged{
+  int taggedId;
+  String taggedFirstName;
+  String taggedLastName;
+  String taggedImage;
+
+  APIRegularHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+
+  factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularHomeProfilePostExtendedTagged(
+      taggedId: parsedJson['id'],
+      taggedFirstName: parsedJson['first_name'],
+      taggedLastName: parsedJson['last_name'],
+      taggedImage: parsedJson['image']
     );
   }
 }

@@ -13,6 +13,9 @@ Future<String> apiRegularRegistration(APIRegularAccountRegistration account) asy
       }
     );
 
+    print('The response status in registration is ${response.statusCode}');
+    print('The response body in registration is ${response.body}');
+
     if(response.statusCode == 200){
       var value = json.decode(response.body);
       var user = value['data'];
@@ -38,6 +41,8 @@ Future<String> apiRegularRegistration(APIRegularAccountRegistration account) asy
   }catch(e){
     result = 'Something went wrong. Please try again.';
   }
+
+  print('The result in registration is $result');
 
   return result;
 }

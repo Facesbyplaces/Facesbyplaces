@@ -168,6 +168,48 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                               height: 0,
                             ),
 
+                            originalPost.data.post.postTagged.length != 0
+                            ? Row(
+                              children: [
+                                Text('with'),
+
+                                Container(
+                                  child: Wrap(
+                                    spacing: 5.0,
+                                    children: List.generate(
+                                      originalPost.data.post.postTagged.length,
+                                      (index) => GestureDetector(
+                                        onTap: (){
+                                          print('The user id is ${originalPost.data.post.postTagged[index]}');
+
+                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index])));
+                                        },
+                                        child: RichText(
+                                          text: TextSpan(
+                                            style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                                            children: <TextSpan>[
+                                              TextSpan(text: originalPost.data.post.postTagged[index].taggedFirstName,),
+
+                                              TextSpan(text: ' '),
+
+                                              TextSpan(text: originalPost.data.post.postTagged[index].taggedLastName,),
+
+                                              index < originalPost.data.post.postTagged.length - 1
+                                              ? TextSpan(text: ',')
+                                              : TextSpan(text: ''),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
+                                  alignment: Alignment.centerLeft,
+                                ),
+                              ],
+                            )
+                            : Container(height: 0,),
+
                             Container(
                               height: SizeConfig.blockSizeVertical * 10,
                               child: Row(

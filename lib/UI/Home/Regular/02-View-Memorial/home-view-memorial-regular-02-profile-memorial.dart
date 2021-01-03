@@ -67,19 +67,19 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
         posts.add(RegularProfilePosts(
-          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].id,
-          memorialId: newValue.familyMemorialList[i].page.id,
-          timeCreated: newValue.familyMemorialList[i].createAt,
-          memorialName: newValue.familyMemorialList[i].page.name,
-          postBody: newValue.familyMemorialList[i].body,
-          profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
-          managed: newValue.familyMemorialList[i].page.manage,
-          joined: newValue.familyMemorialList[i].page.follower,
-          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
-          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].likeStatus,  
+          userId: newValue.familyMemorialList[i].postPage.pageCreator.id, 
+          postId: newValue.familyMemorialList[i].postId,
+          memorialId: newValue.familyMemorialList[i].postPage.id,
+          timeCreated: newValue.familyMemorialList[i].postCreatedAt,
+          memorialName: newValue.familyMemorialList[i].postPage.name,
+          postBody: newValue.familyMemorialList[i].postBody,
+          profileImage: newValue.familyMemorialList[i].postPage.profileImage,
+          imagesOrVideos: newValue.familyMemorialList[i].postImagesOrVideos,
+          managed: newValue.familyMemorialList[i].postPage.manage,
+          joined: newValue.familyMemorialList[i].postPage.follower,
+          numberOfComments: newValue.familyMemorialList[i].postNumberOfComments,
+          numberOfLikes: newValue.familyMemorialList[i].postNumberOfLikes,
+          likeStatus: newValue.familyMemorialList[i].postLikeStatus,  
           ),
         );
       }
@@ -129,12 +129,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                     height: SizeConfig.screenHeight / 3,
                     width: SizeConfig.screenWidth,
                     child: ((){
-                      if(profile.data.memorial.backgroundImage == null || profile.data.memorial.backgroundImage == ''){
+                      if(profile.data.memorial.memorialBackgroundImage == null || profile.data.memorial.memorialBackgroundImage == ''){
                         return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
                       }else{
                         return CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl: profile.data.memorial.backgroundImage,
+                          imageUrl: profile.data.memorial.memorialBackgroundImage,
                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                           errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                         );
@@ -160,7 +160,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                             Center(
                               child: Text(
-                                profile.data.memorial.name,
+                                profile.data.memorial.memorialName,
                                 textAlign: TextAlign.center,
                                 maxLines: 5,
                                 overflow: TextOverflow.clip,
@@ -189,7 +189,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                                   Expanded(
-                                    child: Text('45',
+                                    child: Text('${profile.data.memorial.memorialFollowersCount}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 4,
                                         fontWeight: FontWeight.w500,
@@ -204,11 +204,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             ((){
-                              if(profile.data.memorial.details.description != '' || profile.data.memorial.details.description != null){
+                              if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
                                 return Container(
                                   alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Text(profile.data.memorial.details.description,
+                                  child: Text(profile.data.memorial.memorialDetails.description,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -217,7 +217,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     ),
                                   ),
                                 );
-                              }else if(profile.data.memorial.imagesOrVideos != null){
+                              }else if(profile.data.memorial.memorialImagesOrVideos != null){
                                 return Container(
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                   child: Stack(
@@ -226,7 +226,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         height: SizeConfig.blockSizeHorizontal * 40,
                                         child: CachedNetworkImage(
                                           fit: BoxFit.cover,
-                                          imageUrl: profile.data.memorial.imagesOrVideos,
+                                          imageUrl: profile.data.memorial.memorialImagesOrVideos,
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
@@ -339,7 +339,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.details.birthPlace,
+                                      Text(profile.data.memorial.memorialDetails.birthPlace,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -354,7 +354,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.details.dob),
+                                      Text(convertDate(profile.data.memorial.memorialDetails.dob),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -369,7 +369,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.details.rip),
+                                      Text(convertDate(profile.data.memorial.memorialDetails.rip),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -386,7 +386,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       GestureDetector(
                                         onTap: (){},
-                                        child: Text(profile.data.memorial.details.cemetery,
+                                        child: Text(profile.data.memorial.memorialDetails.cemetery,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             color: Color(0xff3498DB),
@@ -416,7 +416,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.postsCount.toString(),
+                                          Text(profile.data.memorial.memorialPostsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -447,7 +447,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.familyCount.toString(),
+                                          Text(profile.data.memorial.memorialFamilyCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -478,7 +478,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.friendsCount.toString(),
+                                          Text(profile.data.memorial.memorialFriendsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -509,7 +509,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.followersCount.toString(),
+                                          Text('${profile.data.memorial.memorialFollowersCount}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -555,7 +555,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                profile.data.memorial.imagesOrVideos != null
+                                profile.data.memorial.memorialImagesOrVideos != null
                                 ? Column(
                                   children: [
                                     Container(
@@ -573,12 +573,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                               color: Color(0xff888888),
                                             ),
                                             child: ((){
-                                              if(profile.data.memorial.imagesOrVideos[index] == null || profile.data.memorial.imagesOrVideos[index] == ''){
+                                              if(profile.data.memorial.memorialImagesOrVideos[index] == null || profile.data.memorial.memorialImagesOrVideos[index] == ''){
                                                 return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
                                               }else{
                                                 return CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: profile.data.memorial.imagesOrVideos[index],
+                                                  imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                                 );
@@ -589,7 +589,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         separatorBuilder: (context, index){
                                           return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
                                         },
-                                        itemCount: profile.data.memorial.imagesOrVideos.length,
+                                        itemCount: profile.data.memorial.memorialImagesOrVideos.length,
                                       ),
                                     ),
 

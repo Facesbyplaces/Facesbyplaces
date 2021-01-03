@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-post-comments.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-bottom-sheet.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
@@ -61,6 +62,22 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   int count;
   List<int> commentIds;
   int page2;
+  static Future<APIRegularShowProfileInformation> currentUser;
+  // static String userImage;
+  // static String userImage = 'assets/icons/app-icon.png';
+
+  void initState(){
+    super.initState();
+    // userImage = 'assets/icons/app-icon.png';
+    key1 = GlobalKey<MiscRegularBottomSheetCommentState>();
+    itemRemaining = 1;
+    comments = [];
+    commentIds = [];
+    page = 1;
+    count = 0;
+    onLoading();
+    currentUser = getDrawerInformation();
+  }
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -134,12 +151,30 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   //   }
   // }
 
-  var bottomSheet = Padding(
+  
+
+  Future<APIRegularShowProfileInformation> getDrawerInformation() async{
+    return await apiRegularShowProfileInformation();
+  }
+
+  Widget bottomSheet = Padding(
     padding: EdgeInsets.only(left: 20.0, right: 20.0,),
     child: Row(
       children: [
-
-        CircleAvatar(backgroundColor: Color(0xff888888),),
+        
+        FutureBuilder<APIRegularShowProfileInformation>(
+          future: currentUser,
+          builder: (context, user){
+            if(user.hasData){
+              return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(user.data.image));
+            }else if(user.hasError){
+              return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'));
+            }
+            else{
+              return CircularProgressIndicator();
+            }
+          },
+        ),
 
         Expanded(
           child: Padding(
@@ -188,18 +223,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
       ],
     ),
   );
-
-  void initState(){
-    super.initState();
-    key1 = GlobalKey<MiscRegularBottomSheetCommentState>();
-    itemRemaining = 1;
-    comments = [];
-    commentIds = [];
-    page = 1;
-    count = 0;
-    onLoading();
-  }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -405,7 +428,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
               ),
             ],
           )
-          : ContainerResponsive(
+          : SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: ContainerResponsive(
             height: SizeConfig.screenHeight,
             width: SizeConfig.screenWidth,
             alignment: Alignment.center,
@@ -419,6 +444,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                 child: MiscRegularEmptyDisplayTemplate(message: 'Comment is empty',),
               ),
             ),
+          ),
           ),
         bottomSheet: bottomSheet,
         ),

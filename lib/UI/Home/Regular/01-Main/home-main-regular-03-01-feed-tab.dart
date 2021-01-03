@@ -24,8 +24,13 @@ class RegularMainPagesFeeds{
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
 
-  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
+  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -54,7 +59,19 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         feeds.add(RegularMainPagesFeeds(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
@@ -70,6 +87,13 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
+          
           ),    
         );
       }
@@ -149,6 +173,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
+
+              numberOfTagged: feeds[i].numberOfTagged,
+              taggedFirstName: feeds[i].taggedFirstName,
+              taggedLastName: feeds[i].taggedLastName,
+              taggedId: feeds[i].taggedId,
+              
               contents: [
                 Column(
                   children: [
