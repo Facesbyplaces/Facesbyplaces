@@ -113,7 +113,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hidePhonenumber = false 
           @user.is_verified = true
 
-          if @user.first_name == nil
+          if params[:first_name] == nil
             @user.first_name = "John"
             @user.last_name = "Doe #{@user.id}"
           end
