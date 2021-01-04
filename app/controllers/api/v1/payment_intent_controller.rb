@@ -17,6 +17,8 @@ class Api::V1::PaymentIntentController < ApplicationController
           amount: @amount.to_i,
           currency: 'usd',
           description: "Donation for #{@memorial.name}",
+          confirmation_method: 'manual',
+          confirm: true    
         }, stripe_account: @memorial.stripe_connect_account_id)
 
         # save to transaction
