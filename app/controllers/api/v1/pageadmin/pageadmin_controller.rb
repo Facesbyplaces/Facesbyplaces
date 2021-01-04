@@ -41,6 +41,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
     
     def removeAdmin
+        if @page.pageowner.user == @user
+            return render json: {error: "cannot remove pageowner"}, status: 422
+        end
+
         if User.with_role(:pageadmin, @page).where(id: @user.id).first != nil
             # Remove page admin rights to the user
             @user.remove_role "pageadmin", @page
@@ -92,6 +96,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
     def removeFamilyorFriend
+        if @page.pageowner.user == @user
+            return render json: {error: "cannot remove pageowner"}, status: 422
+        end
+        
         # check if relation exist or not
         if @page.relationships.where(user: @user).first != nil
             if @page.relationships.where(user: @user).first.destroy 
