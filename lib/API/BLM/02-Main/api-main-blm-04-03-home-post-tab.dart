@@ -54,21 +54,25 @@ class APIBLMHomeTabPostExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  List<APIBLMHomeProfilePostExtendedTagged> postTagged;
   String createAt;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
 
-  APIBLMHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIBLMHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList;
+    List<dynamic> newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
-      newList = List<dynamic>.from(list);
+      newList1 = List<dynamic>.from(list);
     }
+
+    var newList2 = parsedJson['tag_people'] as List;
+    List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();
     
     return APIBLMHomeTabPostExtended(
       id: parsedJson['id'],
@@ -77,7 +81,8 @@ class APIBLMHomeTabPostExtended{
       location: parsedJson['location'],
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
-      imagesOrVideos: newList,
+      imagesOrVideos: newList1,
+      postTagged: taggedList,
       createAt: parsedJson['created_at'],
       numberOfLikes: parsedJson['numberOfLikes'],
       numberOfComments: parsedJson['numberOfComments'],
@@ -162,6 +167,25 @@ class APIBLMHomeTabPostExtendedPageCreator{
       email: parsedJson['email'],
       userName: parsedJson['username'],
       image: parsedJson['image']
+    );
+  }
+}
+
+
+class APIBLMHomeProfilePostExtendedTagged{
+  int taggedId;
+  String taggedFirstName;
+  String taggedLastName;
+  String taggedImage;
+
+  APIBLMHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+
+  factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMHomeProfilePostExtendedTagged(
+      taggedId: parsedJson['id'],
+      taggedFirstName: parsedJson['first_name'],
+      taggedLastName: parsedJson['last_name'],
+      taggedImage: parsedJson['image']
     );
   }
 }

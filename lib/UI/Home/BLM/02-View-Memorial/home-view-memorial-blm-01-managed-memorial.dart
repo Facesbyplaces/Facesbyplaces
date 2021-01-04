@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
@@ -42,8 +43,13 @@ class BLMProfilePosts{
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class HomeBLMProfile extends StatefulWidget{
@@ -80,10 +86,24 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
   void onLoading() async{
     if(itemRemaining != 0){
       var newValue = await apiBLMProfilePost(memorialId, page);
+      print('The post count is $postCount');
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         posts.add(BLMProfilePosts(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
@@ -92,12 +112,18 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
           managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].likeStatus,     
+          likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),
         );
       }
@@ -118,14 +144,14 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
   void initState(){
     super.initState();
-    onLoading();
-    showProfile = getProfileInformation(memorialId);
     posts = [];
     itemRemaining = 1;
     postCount = 0;
     dataKey = GlobalKey();
     empty = true;
     page = 1;
+    onLoading();
+    showProfile = getProfileInformation(memorialId);
     initDeepLinkData();
     WidgetsBinding.instance.addObserver(this);
   }
@@ -180,7 +206,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                     width: SizeConfig.screenWidth,
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: profile.data.memorial.backgroundImage,
+                      imageUrl: profile.data.memorial.blmBackgroundImage,
                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                       errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                     ),
@@ -203,7 +229,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                             SizedBox(height: SizeConfig.blockSizeVertical * 12,),
 
                             Center(
-                              child: Text(profile.data.memorial.name,
+                              child: Text(profile.data.memorial.blmName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: SizeConfig.safeBlockHorizontal * 5, 
@@ -252,11 +278,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             ((){
-                              if(profile.data.memorial.details.description != ''){
+                              if(profile.data.memorial.blmDetails.description != ''){
                                 return Container(
                                   alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Text(profile.data.memorial.details.description,
+                                  child: Text(profile.data.memorial.blmDetails.description,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -265,7 +291,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     ),
                                   ),
                                 );
-                              }else if(profile.data.memorial.imagesOrVideos != null){
+                              }else if(profile.data.memorial.blmImagesOrVideos != null){
                                 return Container(
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                   child: Stack(
@@ -351,9 +377,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                           BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
                                             buo: buo,
                                             linkProperties: lp,
-                                            messageText: profile.data.memorial.name,
-                                            androidMessageTitle: 'Share ${profile.data.memorial.name} memorial',
-                                            androidSharingTitle: profile.data.memorial.name,
+                                            messageText: profile.data.memorial.blmName,
+                                            androidMessageTitle: 'Share ${profile.data.memorial.blmName} memorial',
+                                            androidSharingTitle: profile.data.memorial.blmName,
                                           );
 
 
@@ -402,7 +428,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.details.country,
+                                      Text(profile.data.memorial.blmDetails.country,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -417,7 +443,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.details.dob),
+                                      Text(convertDate(profile.data.memorial.blmDetails.dob),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -432,7 +458,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.details.rip),
+                                      Text(convertDate(profile.data.memorial.blmDetails.rip),
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -460,7 +486,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.postsCount.toString(),
+                                          Text('${profile.data.memorial.blmPostsCount}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -491,7 +517,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.familyCount.toString(),
+                                          Text('${profile.data.memorial.blmFamilyCount}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -522,7 +548,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.friendsCount.toString(),
+                                          Text('${profile.data.memorial.blmFriendsCount}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -553,7 +579,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.followersCount.toString(),
+                                          Text('${profile.data.memorial.blmFollowersCount}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -599,7 +625,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                profile.data.memorial.imagesOrVideos != null
+                                profile.data.memorial.blmImagesOrVideos != null
                                 ? Column(
                                   children: [
                                     Container(
@@ -618,7 +644,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                             ),
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
-                                              imageUrl: profile.data.memorial.imagesOrVideos[index],
+                                              imageUrl: profile.data.memorial.blmImagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                             ),
@@ -627,7 +653,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         separatorBuilder: (context, index){
                                           return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
                                         },
-                                        itemCount: profile.data.memorial.imagesOrVideos.length,
+                                        itemCount: profile.data.memorial.blmImagesOrVideos.length,
                                       ),
                                     ),
 
@@ -691,6 +717,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       numberOfComments: posts[i].numberOfComments,
                                       numberOfLikes: posts[i].numberOfLikes,
                                       likeStatus: posts[i].likeStatus,
+
+                                      numberOfTagged: posts[i].numberOfTagged,
+                                      taggedFirstName: posts[i].taggedFirstName,
+                                      taggedLastName: posts[i].taggedLastName,
+                                      taggedId: posts[i].taggedId,
                                       contents: [
                                         Column(
                                           children: [
@@ -791,7 +822,16 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 final file = await new File('${tempDir.path}/blm-post-image.png').create();
                                 file.writeAsBytesSync(list);
 
-                                Navigator.pushNamed(context, '/home/blm/create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
+                                // Navigator.pushNamed(context, '/home/blm/create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
+
+                                // final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
+                                // final Uint8List list = bytes.buffer.asUint8List();
+
+                                // final tempDir = await getTemporaryDirectory();
+                                // final file = await new File('${tempDir.path}/regular-post-image.png').create();
+                                // file.writeAsBytesSync(list);
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePost(name: profile.data.memorial.blmName, memorialId: profile.data.memorial.blmId)));
 
                               },
                               shape: StadiumBorder(),
@@ -829,7 +869,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
                                   backgroundImage: CachedNetworkImageProvider(
-                                    profile.data.memorial.profileImage,
+                                    profile.data.memorial.blmProfileImage,
                                     scale: 1.0,
                                   ),
                                 ),

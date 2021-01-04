@@ -174,6 +174,8 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                       buttonColor: Color(0xff000000),
                                     ),
 
+                                    SizedBox(height: ScreenUtil().setHeight(10)),
+
                                   ],
                                 ),
                               ),

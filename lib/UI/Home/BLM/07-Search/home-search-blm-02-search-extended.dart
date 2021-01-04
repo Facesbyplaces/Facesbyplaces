@@ -10,6 +10,7 @@ import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMSearchMainPosts{
   int userId;
@@ -27,7 +28,13 @@ class BLMSearchMainPosts{
   int numberOfComments;
   bool likeStatus;
 
-  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
+
+  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class BLMSearchMainSuggested{
@@ -111,7 +118,20 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       postItemRemaining = newValue.itemsRemaining;
       tabCount1 = tabCount1 + newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         feeds.add(BLMSearchMainPosts(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
@@ -127,6 +147,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),    
         );
       }
@@ -225,9 +251,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       for(int i = 0; i < newValue.memorialList.length; i++){
         blm.add(BLMSearchMainBLM(
           memorialId: newValue.memorialList[i].id,
-          memorialName: newValue.memorialList[i].name,
-          memorialDescription: newValue.memorialList[i].details.description,
-          joined: newValue.memorialList[i].follower,
+          // memorialName: newValue.memorialList[i].name,
+          // memorialDescription: newValue.memorialList[i].details.description,
+          // joined: newValue.memorialList[i].follower,
+          memorialName: newValue.memorialList[i].page.name,
+          memorialDescription: newValue.memorialList[i].page.details.description,
+          joined: newValue.memorialList[i].page.follower,
           ),    
         );
       }
@@ -254,6 +283,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -278,7 +311,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 focusColor: Color(0xffffffff),
                 hintText: 'Search Memorial',
                 hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                 ),
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
                 border: OutlineInputBorder(
@@ -311,7 +345,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                 Container(
                   alignment: Alignment.center,
                   width: SizeConfig.screenWidth,
-                  height: SizeConfig.blockSizeVertical * 8,
+                  // height: SizeConfig.blockSizeVertical * 8,
+                  height: ScreenUtil().setHeight(55),
                   color: Color(0xffffffff),
                   child: DefaultTabController(
                     length: 4,
@@ -330,15 +365,18 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         Center(
                           child: Text('Post',
                             style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
 
-                        Center(child: Text('Suggested',
+                        Center(
+                          child: Text('Suggested',
                             style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -347,7 +385,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         Center(
                           child: Text('Nearby',
                             style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -356,7 +395,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         Center(
                           child: Text('BLM',
                             style: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -386,9 +426,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                               ((){
                                 if(currentLocation != null || currentLocation != ''){
-                                  return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
+                                  return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                 }else{
-                                  Text('', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
+                                  Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                 }
                               }()),
                             ],
@@ -410,9 +450,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                               ((){
                                 if(currentLocation != null || currentLocation != ''){
-                                  return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
+                                  return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                 }else{
-                                  Text('', style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 3.5,),);
+                                  Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                 }
                               }()),
                             ],
@@ -457,19 +497,19 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -494,6 +534,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
+
+              numberOfTagged: feeds[i].numberOfTagged,
+              taggedFirstName: feeds[i].taggedFirstName,
+              taggedLastName: feeds[i].taggedLastName,
+              taggedId: feeds[i].taggedId,
               contents: [
                 Column(
                   children: [
@@ -544,7 +589,25 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: feeds.length,
         ),
       )
-      : MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
+      // : MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
+
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          // height: SizeConfig.screenHeight,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
+          ),
+        ),
+      ),
     );
   }
 
@@ -561,19 +624,19 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -599,7 +662,24 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: suggested.length,
         ),
       )
-      : MiscBLMEmptyDisplayTemplate(message: 'Suggested is empty',),
+      // : MiscBLMEmptyDisplayTemplate(message: 'Suggested is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          // height: SizeConfig.screenHeight,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscBLMEmptyDisplayTemplate(message: 'Suggested is empty',),
+          ),
+        ),
+      ),
     );
   }
 
@@ -616,19 +696,19 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body ;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -654,7 +734,24 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: nearby.length,
         ),
       )
-      : MiscBLMEmptyDisplayTemplate(message: 'Nearby is empty',),
+      // : MiscBLMEmptyDisplayTemplate(message: 'Nearby is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          // height: SizeConfig.screenHeight,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscBLMEmptyDisplayTemplate(message: 'Nearby is empty',),
+          ),
+        ),
+      ),
     );
   }
 
@@ -671,19 +768,19 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more feed.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -708,7 +805,24 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: blm.length,
         ),
       )
-      : MiscBLMEmptyDisplayTemplate(message: 'BLM is empty',),
+      // : MiscBLMEmptyDisplayTemplate(message: 'BLM is empty',),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          // height: SizeConfig.screenHeight,
+          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscBLMEmptyDisplayTemplate(message: 'BLM is empty',),
+          ),
+        ),
+      ),
     );
   }
 }

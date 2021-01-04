@@ -25,6 +25,9 @@ Future<bool> apiBLMUploadPhoto(dynamic image) async{
       ),
     );
 
+    print('The response status in blm upload photo is ${response.statusCode}');
+    print('The response body in blm upload photo is ${response.data}');
+
     if(response.statusCode == 200){
       sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    

@@ -1,14 +1,16 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api-23-blm-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'home-create-post-blm-01-create-post.dart';
 import 'package:flutter/material.dart';
 
 class BLMSearchUsers{
+  int userId;
   String firstName;
   String lastName;
   String email;
 
-  BLMSearchUsers({this.firstName, this.lastName, this.email});
+  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.email});
 }
 
 class HomeBLMCreatePostSearchUser extends StatefulWidget{
@@ -37,7 +39,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
       itemRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.users.length; i++){
-        users.add(BLMSearchUsers(firstName: newValue.users[i].firstName, lastName: newValue.users[i].lastName, email: newValue.users[i].email));
+        users.add(BLMSearchUsers(userId: newValue.users[i].userId, firstName: newValue.users[i].firstName, lastName: newValue.users[i].lastName, email: newValue.users[i].email));
       }
 
       if(mounted)
@@ -186,7 +188,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                 itemBuilder: (c, i) {
                   var container = GestureDetector(
                     onTap: (){
-                      Navigator.pop(context, '${users[i].firstName}' + ' ' + '${users[i].lastName}');
+                      Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),

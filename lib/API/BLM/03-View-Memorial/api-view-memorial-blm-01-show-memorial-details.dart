@@ -41,42 +41,42 @@ class APIBLMShowMemorialMain{
 
 
 class APIBLMShowMemorialExtended{
-  int id;
-  String name;
-  APIBLMShowMemorialExtendedDetails details;
-  String backgroundImage;
-  String profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIBLMShowMemorialExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  int postsCount;
-  int familyCount;
-  int friendsCount;
-  int followersCount;
+  int blmId;
+  String blmName;
+  APIBLMShowMemorialExtendedDetails blmDetails;
+  String blmBackgroundImage;
+  String blmProfileImage;
+  dynamic blmImagesOrVideos;
+  String blmRelationship;
+  APIBLMShowMemorialExtendedPageCreator blmPageCreator;
+  bool blmManage;
+  bool blmFamOrFriends;
+  bool blmFollower;
+  int blmPostsCount;
+  int blmFamilyCount;
+  int blmFriendsCount;
+  int blmFollowersCount;
 
-  APIBLMShowMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.postsCount, this.familyCount, this.friendsCount, this.followersCount});
+  APIBLMShowMemorialExtended({this.blmId, this.blmName, this.blmDetails, this.blmBackgroundImage, this.blmProfileImage, this.blmImagesOrVideos, this.blmRelationship, this.blmPageCreator, this.blmManage, this.blmFamOrFriends, this.blmFollower, this.blmPostsCount, this.blmFamilyCount, this.blmFriendsCount, this.blmFollowersCount});
 
   factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMShowMemorialExtended(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIBLMShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      postsCount: parsedJson['postsCount'],
-      familyCount: parsedJson['familyCount'],
-      friendsCount: parsedJson['friendsCount'],
-      followersCount: parsedJson['followersCount'],
+      blmId: parsedJson['id'],
+      blmName: parsedJson['name'],
+      blmDetails: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
+      blmBackgroundImage: parsedJson['backgroundImage'],
+      blmProfileImage: parsedJson['profileImage'],
+      blmImagesOrVideos: parsedJson['imagesOrVideos'],
+      blmRelationship: parsedJson['relationship'],
+      blmPageCreator: APIBLMShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      blmManage: parsedJson['manage'],
+      blmFamOrFriends: parsedJson['famOrFriends'],
+      blmFollower: parsedJson['follower'],
+      blmPostsCount: parsedJson['postsCount'],
+      blmFamilyCount: parsedJson['familyCount'],
+      blmFriendsCount: parsedJson['friendsCount'],
+      blmFollowersCount: parsedJson['followersCount'],
     );
   }
 }

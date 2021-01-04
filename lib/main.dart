@@ -1,3 +1,9 @@
+import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
+import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart';
+import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
+import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
+import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
+import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
 import 'UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
@@ -80,11 +86,17 @@ void main() async{
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
           '/home/blm/donation': (BuildContext context) => HomeBLMUserDonate(),
           '/home/blm/create-post': (BuildContext context) => HomeBLMCreatePost(),
+          '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
+          '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
           '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
+          '/home/blm/create-memorial-2': (BuildContext context) => HomeBLMCreateMemorial2(),
+          '/home/blm/create-memorial-3': (BuildContext context) => HomeBLMCreateMemorial3(),
+          '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
           '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
           '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
+          '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
           '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
           '/home/regular/create-memorial-2': (BuildContext context) => HomeRegularCreateMemorial2(),
           '/home/regular/create-memorial-3': (BuildContext context) => HomeRegularCreateMemorial3(),

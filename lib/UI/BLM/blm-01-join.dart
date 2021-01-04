@@ -150,6 +150,8 @@ class BLMJoin extends StatelessWidget {
                       buttonColor: Color(0xff4EC9D4),
                     ),
 
+                    SizedBox(height: ScreenUtil().setHeight(10)),
+
                   ],
                 ),
               ),

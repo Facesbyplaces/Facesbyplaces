@@ -1,39 +1,76 @@
-import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-create-post.dart';
+import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:location/location.dart' as Location;
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class BLMRelationshipItem{
+class BLMTaggedUsers{
+  String name;
+  int userId;
 
-  final String name;
-  final String image;
-  
-  const BLMRelationshipItem({this.name, this.image});
+  BLMTaggedUsers({this.name, this.userId,});
+}
+
+class BLMManagedPages{
+  String name;
+  int pageId;
+
+  BLMManagedPages({this.name, this.pageId});
 }
 
 class HomeBLMCreatePost extends StatefulWidget{
+  final String name;
+  final int memorialId;
+  HomeBLMCreatePost({this.name, this.memorialId});
 
   @override
-  HomeBLMCreatePostState createState() => HomeBLMCreatePostState();
+  HomeBLMCreatePostState createState() => HomeBLMCreatePostState(name: name, memorialId: memorialId);
 }
 
 class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
+  final String name;
+  final int memorialId;
+  HomeBLMCreatePostState({this.name, this.memorialId});
 
   final GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState>();
+
+  List<BLMManagedPages> managedPages;
+  String currentSelection;
+  int currentIdSelected;
+  Future listManagedPages;
+  List<BLMTaggedUsers> users = [];
+
+  void initState(){
+    super.initState();
+    managedPages = [];
+    currentSelection = name;
+    currentIdSelected = memorialId;
+    getManagedPages();
+  }
+
+  void getManagedPages() async{
+    context.showLoaderOverlay();
+    var newValue = await apiBLMShowListOfManagedPages();
+    context.hideLoaderOverlay();
+
+    for(int i = 0; i < newValue.pagesList.length; i++){
+      managedPages.add(BLMManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
+    }
+    setState(() {});
+  }
 
   File imageFile;
   File videoFile;
   final picker = ImagePicker();
   VideoPlayerController videoPlayerController;
-  String newLocation;
-  String person;
+  String newLocation = '';
+  String person = '';
 
   Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -63,23 +100,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     }
   }
 
-  List<BLMRelationshipItem> relationship = [
-    const BLMRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-    const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
-  ];
-
-  BLMRelationshipItem currentSelection = const BLMRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
-
-  void initState(){
-    super.initState();
-    newLocation = '';
-    person = '';
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    BLMRelationshipItemPost newValue = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -127,26 +150,41 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     }
                   }
 
+                  context.showLoaderOverlay();
+
                   Location.LocationData locationData = await location.getLocation();
+
+                  List<int> userIds = [];
+
+                  if(users.length != 0){
+                    for(int i = 0; i < users.length; i++){
+                      userIds.add(users[i].userId);
+                    }
+                  }
+
+                  print('The new user id is $userIds');
 
                   APIBLMCreatePost post = APIBLMCreatePost(
                     pageType: 'Blm',
                     postBody: _key1.currentState.controller.text,
+                    pageId: currentIdSelected,
                     location: newLocation,
                     imagesOrVideos: newFile,
-                    latitude: locationData.latitude.toString(),
-                    longitude: locationData.longitude.toString(),
+                    latitude: locationData.latitude,
+                    longitude: locationData.longitude,
+                    tagPeople: userIds,
                   );
 
-                    context.showLoaderOverlay();
-                    bool result = await apiBLMHomeCreatePost(post, newValue.memorialId);
-                    context.hideLoaderOverlay();
+                  
+                  bool result = await apiBLMHomeCreatePost(post);
+                  context.hideLoaderOverlay();
 
                   if(result){
                     Navigator.popAndPushNamed(context, '/home/blm');
                   }else{
                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                   }
+
                 }, 
                 child: Padding(
                   padding: EdgeInsets.only(right: 20.0), 
@@ -168,45 +206,88 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
               child: Column(
                 children: [
 
-                  InputDecorator(
-                    decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide.none,
+                  Container(
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
                       ),
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide.none,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<int>(
+                          value: currentIdSelected,
+                          isDense: true,
+                          onChanged: (int newValue) {
+                            setState(() {
+                              currentIdSelected = newValue;
+                              print('The currentId selected is $currentIdSelected');
+                            });
+                          },
+                          items: managedPages.map((BLMManagedPages value) {
+                            return DropdownMenuItem<int>(
+                              value: value.pageId,
+                              
+                              child: Row(
+                                children: [
+                                  CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
+
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+
+                                  Text(value.name),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<BLMRelationshipItem>(
-                        value: currentSelection,
-                        isDense: true,
-                        onChanged: (BLMRelationshipItem newValue) {
-                          setState(() {
-                            currentSelection = newValue;
-                          });
-                        },
-                        items: relationship.map((BLMRelationshipItem value) {
-                          return DropdownMenuItem<BLMRelationshipItem>(
-                            value: value,
-                            child: Row(
-                              children: [
-                                CircleAvatar(backgroundImage: AssetImage(value.image),),
-
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                                Text(value.name),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                    decoration: BoxDecoration(
+                      color: Color(0xffffffff),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: Offset(0, 0)
+                        ),
+                      ],
                     ),
                   ),
 
                   Expanded(child: Padding(padding: EdgeInsets.all(20.0), child: MiscBLMInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 20),),),
+
+                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                  Container(
+                    child: Wrap(
+                      spacing: 5.0,
+                      children: List.generate(
+                        users.length, 
+                        (index) => Chip(
+                          labelPadding: const EdgeInsets.only(left: 8.0),
+                          label: Text(users[index].name),
+                          deleteIcon: Icon(
+                            Icons.close,
+                            size: 18,
+                          ),
+                          onDeleted: () {
+                            setState(() {
+                              users.removeAt(index);
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    alignment: Alignment.centerLeft,
+                  ),
+
+                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                   Container(
                     child: ((){
@@ -239,36 +320,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     }()),
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                  Container(
-                    child: Row(
-                      children: [
-                        newLocation != ''
-                        ? Text('at')
-                        : Text(''),
-
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                        Text(newLocation, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
-
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                        person != ''
-                        ? Text('with')
-                        : Text(''),
-
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                        Text(person, style: TextStyle(color: Color(0xff000000), fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold),),
-                      ],
-                    ), 
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                    alignment: Alignment.centerLeft,
-                  ),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
                   Container(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                     height: SizeConfig.blockSizeVertical * 20,
@@ -277,16 +328,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              var result = await Navigator.pushNamed(context, '/home/blm/home-19-02-blm-create-post');
+                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
 
-                              setState(() {});
-
-                              if(result == null){
-                                newLocation = '';
-                              }else{
-                                newLocation = result.toString();
-                              }
-
+                              newLocation = result.toString();
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -306,15 +350,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                           child: GestureDetector(
                             onTap: () async{
                               
-                              var result = await Navigator.pushNamed(context, '/home/blm/home-19-03-blm-create-post');
+                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
+
+                              if(result != null){
+                                users.add(result);
+                              }
 
                               setState(() {});
-
-                              if(result == null){
-                                person = '';
-                              }else{
-                                person = result.toString();
-                              }
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -345,6 +387,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                   await getVideo();
                                 }
                               }
+                              
                             },
                             child: Container(
                               color: Colors.transparent,
@@ -361,6 +404,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                       ],
                     ),
                   ),
+                  
                 ],
               ),
             ),
@@ -370,4 +414,3 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     );
   }
 }
-

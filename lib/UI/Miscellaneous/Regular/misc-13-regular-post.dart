@@ -151,6 +151,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       }else{
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: true)));
                       }
+                      
                     },
 
                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),

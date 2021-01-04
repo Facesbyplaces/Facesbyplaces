@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class HomeRegularCreatePostSearch extends StatefulWidget{
+class HomeRegularCreatePostSearchLocation extends StatefulWidget{
 
   @override
-  HomeRegularCreatePostSearchState createState() => HomeRegularCreatePostSearchState();
+  HomeRegularCreatePostSearchLocationState createState() => HomeRegularCreatePostSearchLocationState();
 }
 
-class HomeRegularCreatePostSearchState extends State<HomeRegularCreatePostSearch>{
+class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePostSearchLocation>{
   
   TextEditingController controller = TextEditingController();
   List<String> places;

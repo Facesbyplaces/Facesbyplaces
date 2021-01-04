@@ -7,6 +7,7 @@ import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMMainPagesNotifications{
   int id;
@@ -87,6 +88,10 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -99,20 +104,20 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
               page++;
             }
             else{
-              body = Text('End of notifications.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('End of notifications.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),
             );
@@ -168,7 +173,21 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           itemCount: notifications.length,
         ),
       )
-      : MiscBLMEmptyDisplayTemplate(message: 'Notification is empty'),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscBLMEmptyDisplayTemplate(message: 'Notification is empty'),
+          ),
+        ),
+      ),
     );
   }
 }

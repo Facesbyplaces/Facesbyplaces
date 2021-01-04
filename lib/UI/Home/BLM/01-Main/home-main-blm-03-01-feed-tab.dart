@@ -3,7 +3,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-image-display.dar
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-01-home-feed-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
+// import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -24,8 +25,13 @@ class BLMMainPagesFeeds{
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
 
-  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
@@ -63,7 +69,18 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       itemRemaining = newValue.itemsRemaining;
       count = newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
 
         feeds.add(BLMMainPagesFeeds(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
@@ -79,6 +96,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),    
         );
       }
@@ -136,18 +159,32 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
+            // DateTime dateTime = DateTime.parse(feeds[i].timeCreated);
+            // // print('The time created is $dateTime');
+            // String dateCreated = timeago.format(dateTime);
+
+            // print('The time created is $dateCreated');
+
             return MiscBLMPost(
               userId: feeds[i].userId,
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              timeCreated: convertDate(feeds[i].timeCreated),
+              // timeCreated: convertDate(feeds[i].timeCreated),
+              // timeCreated: dateCreated,
+              // child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)).toString(),
+              timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
               managed: feeds[i].managed,
               joined: feeds[i].joined,
               profileImage: feeds[i].profileImage,
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
+
+              numberOfTagged: feeds[i].numberOfTagged,
+              taggedFirstName: feeds[i].taggedFirstName,
+              taggedLastName: feeds[i].taggedLastName,
+              taggedId: feeds[i].taggedId,
               contents: [
                 Column(
                   children: [
@@ -280,7 +317,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                   }, 
                   width: SizeConfig.screenWidth / 2, 
                   height: ScreenUtil().setHeight(45),
-                  buttonColor: Color(0xff04ECFF),
+                  buttonColor: Color(0xff000000),
                 ),
 
                 SizedBox(height: ScreenUtil().setHeight(20)),

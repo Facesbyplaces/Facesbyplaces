@@ -84,7 +84,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
           }else{
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
           }
-          
         }
       },
       child: Container(
@@ -97,7 +96,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
               child: CircleAvatar(
                 radius: SizeConfig.blockSizeVertical * 5, 
                 backgroundColor: Color(0xff888888), 
-                backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),),
+                backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
+              ),
             ),
             Expanded(
               child: Padding(

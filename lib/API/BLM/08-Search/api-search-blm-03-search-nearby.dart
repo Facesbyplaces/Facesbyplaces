@@ -19,6 +19,9 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby(int page, double latitude, doubl
     }
   );
 
+  print('The status code for nearby search is ${response.statusCode}');
+  print('The status body for nearby search is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchPostMain.fromJson(newValue);

@@ -2,12 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}) async{
+Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
     headers: <String, String>{
@@ -20,13 +20,13 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIRegularShowUserInformation.fromJson(newValue);
+    return APIBLMShowUserInformation.fromJson(newValue);
   }else{
     throw Exception('Failed to get the user profile');
   }
 }
 
-class APIRegularShowUserInformation{
+class APIBLMShowUserInformation{
   int id;
   String firstName;
   String lastName;
@@ -34,10 +34,10 @@ class APIRegularShowUserInformation{
   String phoneNumber;
   String question;
   
-  APIRegularShowUserInformation({this.id, this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
+  APIBLMShowUserInformation({this.id, this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
 
-  factory APIRegularShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularShowUserInformation(
+  factory APIBLMShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMShowUserInformation(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],

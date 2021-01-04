@@ -2,11 +2,14 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-ori
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
+// import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter/material.dart';
+
+import 'home-show-post-blm-02-view-comments.dart';
 
 class HomeBLMShowOriginalPost extends StatefulWidget{
   final int postId;
@@ -28,6 +31,12 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
   bool likePost;
   bool pressedLike;
   int likesCount;
+
+            // DateTime dateTime = DateTime.parse(feeds[i].timeCreated);
+            // // print('The time created is $dateTime');
+            // String dateCreated = timeago.format(dateTime);
+
+  // DateTime dateTime;
 
   void initState(){
     super.initState();
@@ -63,7 +72,8 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                Navigator.popAndPushNamed(context, '/home/blm');
+                // Navigator.popAndPushNamed(context, '/home/blm');
+                Navigator.pop(context);
               },
             ),
           ),
@@ -122,7 +132,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                           Expanded(
                                             child: Align(
                                               alignment: Alignment.topLeft,
-                                              child: Text(convertDate(originalPost.data.post.createAt),
+                                              child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)).toString(),
                                                 maxLines: 1,
                                                 style: TextStyle(
                                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
@@ -204,7 +214,9 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                                   GestureDetector(
-                                    onTap: (){},
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
+                                    },
                                     child: Row(
                                       children: [
                                         Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),

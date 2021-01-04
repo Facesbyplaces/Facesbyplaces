@@ -188,7 +188,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 itemBuilder: (c, i) {
                   var container = GestureDetector(
                     onTap: (){
-                      Navigator.pop(context, TaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
+                      Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),

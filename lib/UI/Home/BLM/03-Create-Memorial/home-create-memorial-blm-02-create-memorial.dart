@@ -181,7 +181,8 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                       newValue.blmName = _key1.currentState.controller.text;
                       newValue.imagesOrVideos = newFiles;
 
-                      Navigator.pushNamed(context, '/home/blm/home-07-03-blm-create-memorial', arguments: newValue);
+                      // Navigator.pushNamed(context, '/home/blm/home-07-03-blm-create-memorial', arguments: newValue);
+                      Navigator.pushNamed(context, '/home/blm/create-memorial-3', arguments: newValue);
                     }
                   }, 
                   width: SizeConfig.screenWidth / 2, 

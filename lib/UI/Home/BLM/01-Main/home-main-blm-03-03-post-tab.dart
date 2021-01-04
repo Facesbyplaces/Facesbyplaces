@@ -2,11 +2,13 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-03-home-post-tab.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
+// import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMMainPagesPosts{
   int userId;
@@ -24,7 +26,13 @@ class BLMMainPagesPosts{
   int numberOfComments;
   bool likeStatus;
 
-  BLMMainPagesPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
+
+  BLMMainPagesPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class HomeBLMPostTab extends StatefulWidget{
@@ -62,7 +70,19 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         posts.add(BLMMainPagesPosts(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
@@ -78,6 +98,12 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),    
         );
       }
@@ -97,6 +123,10 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -109,19 +139,19 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Release to load more.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else{
-              body = Text('No more post.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more post.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -139,7 +169,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 postId: posts[i].postId,
                 memorialId: posts[i].memorialId,
                 memorialName: posts[i].memorialName,
-                timeCreated: convertDate(posts[i].timeCreated),
+                // timeCreated: convertDate(posts[i].timeCreated),
+                timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
 
                 managed: posts[i].managed,
                 joined: posts[i].joined,
@@ -147,6 +178,11 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 numberOfComments: posts[i].numberOfComments,
                 numberOfLikes: posts[i].numberOfLikes,
                 likeStatus: posts[i].likeStatus,
+
+                numberOfTagged: posts[i].numberOfTagged,
+                taggedFirstName: posts[i].taggedFirstName,
+                taggedLastName: posts[i].taggedLastName,
+                taggedId: posts[i].taggedId,
                 contents: [
                   Column(
                     children: [
@@ -191,7 +227,21 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           itemCount: posts.length,
         ),
       )
-      : MiscBLMEmptyDisplayTemplate(),
+      : ContainerResponsive(
+        height: SizeConfig.screenHeight,
+        width: SizeConfig.screenWidth,
+        alignment: Alignment.center,
+        child: ContainerResponsive(
+          width: SizeConfig.screenWidth,
+          heightResponsive: false,
+          widthResponsive: true,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: MiscBLMEmptyDisplayTemplate(),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -10,18 +10,18 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-class TaggedUsers{
+class RegularTaggedUsers{
   String name;
   int userId;
 
-  TaggedUsers({this.name, this.userId,});
+  RegularTaggedUsers({this.name, this.userId,});
 }
 
-class ManagedPages{
+class RegularManagedPages{
   String name;
   int pageId;
 
-  ManagedPages({this.name, this.pageId});
+  RegularManagedPages({this.name, this.pageId});
 }
 
 class HomeRegularCreatePost extends StatefulWidget{
@@ -40,11 +40,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
 
-  List<ManagedPages> managedPages;
+  List<RegularManagedPages> managedPages;
   String currentSelection;
   int currentIdSelected;
   Future listManagedPages;
-  List<TaggedUsers> users = [];
+  List<RegularTaggedUsers> users = [];
 
   void initState(){
     super.initState();
@@ -60,7 +60,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.pagesList.length; i++){
-      managedPages.add(ManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
+      managedPages.add(RegularManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
     }
     setState(() {});
   }
@@ -228,7 +228,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               print('The currentId selected is $currentIdSelected');
                             });
                           },
-                          items: managedPages.map((ManagedPages value) {
+                          items: managedPages.map((RegularManagedPages value) {
                             return DropdownMenuItem<int>(
                               value: value.pageId,
                               
@@ -328,7 +328,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         Expanded(
                           child: GestureDetector(
                             onTap: () async{
-                              var result = await Navigator.pushNamed(context, 'home/regular/home-09-02-regular-create-post');
+                              var result = await Navigator.pushNamed(context, '/home/regular/create-post-location');
 
                               newLocation = result.toString();
                             },

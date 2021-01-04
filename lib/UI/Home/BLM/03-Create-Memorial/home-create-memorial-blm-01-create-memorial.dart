@@ -117,7 +117,8 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                     }else{
                       Navigator.pushNamed(
                         context, 
-                        '/home/blm/home-07-02-blm-create-memorial', 
+                        // '/home/blm/home-07-02-blm-create-memorial', 
+                        '/home/blm/create-memorial-2',
                         arguments: BLMCreateMemorialValues(
                           relationship: _key1.currentState.currentSelection,
                           location: _key2.currentState.controller.text,

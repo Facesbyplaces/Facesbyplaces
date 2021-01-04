@@ -166,6 +166,8 @@ class BLMRegister extends StatelessWidget{
                                   ),
                                 ),
 
+                                SizedBox(height: ScreenUtil().setHeight(10)),
+
                               ],
                             ),
                           ),

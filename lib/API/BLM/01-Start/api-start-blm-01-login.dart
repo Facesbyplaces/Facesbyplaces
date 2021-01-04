@@ -14,6 +14,9 @@ Future<bool> apiBLMLogin(String email, String password) async{
       }
     );
 
+    print('The response status in blm login is ${response.statusCode}');
+    print('The response body in blm login is ${response.body}');
+
     if(response.statusCode == 200){
       var value = json.decode(response.body);
       var user = value['user'];

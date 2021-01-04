@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-search-blm-02-search-extended.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -62,7 +67,8 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                 focusColor: Color(0xffffffff),
                 hintText: 'Search a Memorial',
                 hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                 ),
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
                 border: OutlineInputBorder(
@@ -82,22 +88,44 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             backgroundColor: Color(0xff04ECFF),
           ),
+          // body: SingleChildScrollView(
+          //   physics: ClampingScrollPhysics(),
+          //   child: Container(
+          //     decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
+          //     padding: EdgeInsets.only(left: 20.0, right: 20.0),
+          //     height: SizeConfig.screenHeight,
+          //     child: Column(
+          //       children: [
+
+          //         SizedBox(height: SizeConfig.blockSizeVertical * 25,),
+
+          //         GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: SizeConfig.blockSizeVertical * 15),),),),
+
+          //         SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+
+          //         Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+
+          //       ],
+          //     ),
+          //   ),
+          // ),
           body: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             child: Container(
-              decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
               padding: EdgeInsets.only(left: 20.0, right: 20.0),
               height: SizeConfig.screenHeight,
               child: Column(
                 children: [
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 25,),
+                  Expanded(child: Container(),),
 
-                  GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: SizeConfig.blockSizeVertical * 15),),),),
+                  GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: ScreenUtil().setHeight(80), backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: ScreenUtil().setHeight(120)),),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                  SizedBox(height: ScreenUtil().setHeight(20)),
 
-                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+
+                  Expanded(child: Container(),),
 
                 ],
               ),

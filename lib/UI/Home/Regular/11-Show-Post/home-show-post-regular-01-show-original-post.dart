@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
+import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
@@ -182,7 +183,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                         onTap: (){
                                           print('The user id is ${originalPost.data.post.postTagged[index]}');
 
-                                          // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index])));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.post.postTagged[index].taggedId)));
                                         },
                                         child: RichText(
                                           text: TextSpan(

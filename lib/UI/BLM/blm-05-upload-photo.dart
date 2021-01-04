@@ -195,6 +195,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                 : Color(0xff000000),
                               ),
 
+                              SizedBox(height: ScreenUtil().setHeight(10)),
+
                             ],
                           ),
                         ),

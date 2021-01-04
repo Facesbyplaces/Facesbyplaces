@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-regular-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
@@ -477,7 +477,20 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
 
                             bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
 
-                            print('The result is $result');
+                            // bool result = await apiRegularSignInWithApple(
+                            //   userIdentification: '001290.59295b853a3647ceb44da083f136f311.0702', 
+                            //   identityToken: 'eyJraWQiOiJlWGF1bm1MIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLmFwcC5mYWNlc2J5cGxhY2VzIiwiZXhwIjoxNjA5MzExNzM3LCJpYXQiOjE2MDkyMjUzMzcsInN1YiI6IjAwMTI5MC41OTI5NWI4NTNhMzY0N2NlYjQ0ZGEwODNmMTM2ZjMxMS4wNzAyIiwiY19oYXNoIjoiLWk1dlpSc1dOT25ieWlnNWs5MWMtQSIsImVtYWlsIjoiZGVhbnZlckBrb2Rha29sbGVjdGl2LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImF1dGhfdGltZSI6MTYwOTIyNTMzNywibm9uY2Vfc3VwcG9ydGVkIjp0cnVlfQ.OHo0uab8ONyvf6RHnHeYGw3U5f9iS_TWCCVVfa6nje8OjEFhi_LtxiEw5_joNO5sCXiUOSrLu6ZDrJ7V48vOtZpVG-BvrR1AvMCk5wvbImviH8Ia_lfbHAxA6soPPI0WSgR1eddajduuZWW4F6f7zcy2N0fEkfVn4Q-VrW5ieHlHg7XueanjyeOKoY9NJ8zTBO9IEOotMOU4Fv-V25Us_SIQ1Qo1bJ0enJzWq2O2aLlLSwJZ7tdWJ-y9V2InSxRBIYbrOb6NwLxgac358qwrwdUsp3Z2r-f5IRRLhCgsNH4m0sFcaF3lO3n3gckckdJyNnXJ7j_zyXSpa4RlbZuy6w',
+                            // );
+
+                            // 001290.59295b853a3647ceb44da083f136f311.0702
+
+                            // print('The result is $result');
+
+                            if(result == true){
+                              Navigator.pushReplacementNamed(context, '/home/regular');
+                            }else{
+                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                            }
 
                           },
                           height: ScreenUtil().setHeight(45),
