@@ -56,10 +56,12 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def page_creator
-    ActiveModel::SerializableResource.new(
-      object.pageowner.user, 
-      each_serializer: UserSerializer
-    )
+    if object.pageowner
+      ActiveModel::SerializableResource.new(
+        object.pageowner.user, 
+        each_serializer: UserSerializer
+      )
+    end
   end
   
   def backgroundImage

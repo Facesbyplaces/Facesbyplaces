@@ -36,7 +36,10 @@ class Api::V1::Search::SearchController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        memorials: memorials
+                        memorials: ActiveModel::SerializableResource.new(
+                                    memorials, 
+                                    each_serializer: SearchmemorialSerializer
+                                )
                     }
     end
 
