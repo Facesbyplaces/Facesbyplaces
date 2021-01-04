@@ -105,7 +105,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           super
         else
           @user = User.new(sign_up_params)
-          @user.account_type = params[:account_type]
           @user.email = apple[:email]
           @user.hideBirthdate = false 
           @user.hideBirthplace = false 
@@ -113,6 +112,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hideAddress = false 
           @user.hidePhonenumber = false 
           @user.is_verified = true
+
+          if @user.first_name == nil
+            @user.first_name = "John"
+            @user.last_name = "Doe #{@user.id}"
+          end
 
           @user.save
           params[:email] = @user.email
