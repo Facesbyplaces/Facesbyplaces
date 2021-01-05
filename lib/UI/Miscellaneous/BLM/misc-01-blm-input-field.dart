@@ -275,6 +275,77 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
   }
 }
 
+
+class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
+
+  final String displayText;
+
+  MiscBLMInputFieldSecurityQuestions({
+    Key key,
+    this.displayText = 'What\'s the name of your first dog?',
+  }) : super(key: key);
+
+  @override
+  MiscBLMInputFieldSecurityQuestionsState createState() => MiscBLMInputFieldSecurityQuestionsState(displayText: displayText);
+}
+
+class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSecurityQuestions>{
+
+  final String displayText;
+
+  MiscBLMInputFieldSecurityQuestionsState({this.displayText});
+
+  List<String> securityQuestions = [
+    'What\'s the name of your first dog?', 
+    'What primary school did you attend?', 
+    'In what city or town was your first job?', 
+    'What was your childhood nickname?', 
+    'What street did you live on in third grade?',
+  ];
+  String currentSelection = 'What\'s the name of your first dog?';
+
+  void initState(){
+    super.initState();
+    currentSelection = displayText;
+  }
+
+  @override
+  Widget build(BuildContext context){
+    return InputDecorator(
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: 'Relationship',
+        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff000000)
+          ),
+          value: currentSelection,
+          isDense: true,
+          onChanged: (String newValue) {
+            setState(() {
+              currentSelection = newValue;
+            });
+          },
+          items: securityQuestions.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+
 class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
   final String labelText;
   final DateTimePickerType dateTimePickerType;

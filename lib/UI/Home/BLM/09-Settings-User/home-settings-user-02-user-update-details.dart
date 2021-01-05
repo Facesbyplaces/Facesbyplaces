@@ -24,7 +24,8 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
-  final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
+  // final GlobalKey<MiscBLMInputFieldTemplateState> _key5 = GlobalKey<MiscBLMInputFieldTemplateState>();
+    final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
 
   Future accountDetails;
 
@@ -95,7 +96,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        MiscBLMInputFieldTemplate(key: _key5, labelText: 'Security Question', displayText: details.data.question,),
+                        MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data.question,),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -113,8 +114,8 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                 details.data.firstName != _key1.currentState.controller.text ||
                                 details.data.lastName !=  _key2.currentState.controller.text ||
                                 details.data.email != _key3.currentState.controller.text ||
-                                details.data.phoneNumber != _key4.currentState.controller.text ||
-                                details.data.question != _key5.currentState.controller.text
+                                details.data.phoneNumber != _key4.currentState.controller.text || 
+                                details.data.question != _key5.currentState.currentSelection
                               ){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -126,11 +127,13 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                     lastName: _key2.currentState.controller.text,
                                     email: _key3.currentState.controller.text,
                                     phoneNumber: _key4.currentState.controller.text,
-                                    question: _key5.currentState.controller.text,
+                                    question: _key5.currentState.currentSelection,
                                   );
                                   context.hideLoaderOverlay();
 
                                   if(result){
+                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
+
                                     Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                                     Navigator.popAndPushNamed(context, route.settings.name);
                                   }else{

@@ -1,5 +1,8 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-05-leave-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'misc-02-blm-dialog.dart';
@@ -104,17 +107,22 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
     );
     return GestureDetector(
       onTap: () async{
+        print('The value of managed is $managed');
+        print('The value of memorial id is $memorialId');
+        print('The value of follower is $follower');
+        print('The value of pageType is $pageType');
+
         // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
 
-        // if(managed == true){
-        //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
-        // }else{
-        //   if(pageType == 'Memorial'){
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
-        //   }else{
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
-        //   }
-        // }
+        if(managed == true){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
+        }else{
+          if(pageType == 'Memorial'){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+          }else{
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+          }
+        }
       },
       child: Container(
         height: SizeConfig.blockSizeVertical * 15,

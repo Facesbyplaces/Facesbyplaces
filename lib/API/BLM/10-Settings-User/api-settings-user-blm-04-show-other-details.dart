@@ -18,6 +18,9 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails(int userId) async{
     }
   );
 
+  print('The other details status code is ${response.statusCode}');
+  print('The other details body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowOtherDetails.fromJson(newValue);

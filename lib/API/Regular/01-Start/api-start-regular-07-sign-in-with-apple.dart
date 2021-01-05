@@ -6,7 +6,8 @@ Future<bool> apiRegularSignInWithApple({String userIdentification, String identi
 
   final http.Response response = await http.post(
     // 'http://fbp.dev1.koda.ws/auth/sign_in?account_type=2&first_name=null&last_name=null&email=null&username=null&user_identification=$userIdentification&identity_token=$identityToken&image=null',
-    'http://fbp.dev1.koda.ws/auth/sign_in?account_type=2&first_name=null&last_name=null&user_identification=$userIdentification&identity_token=$identityToken&image=null',
+    // 'http://fbp.dev1.koda.ws/auth/sign_in?account_type=2&first_name=null&last_name=null&user_identification=$userIdentification&identity_token=$identityToken&image=null',
+    'http://fbp.dev1.koda.ws/auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }

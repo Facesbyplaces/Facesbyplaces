@@ -16,20 +16,22 @@ import 'package:flutter/material.dart';
 
 class HomeBLMMemorialSettings extends StatefulWidget{
   final int memorialId;
+  final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeBLMMemorialSettings({this.memorialId, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeBLMMemorialSettings({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
   
-  HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState(memorialId: memorialId, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
 
 class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
   final int memorialId;
+  final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeBLMMemorialSettingsState({this.memorialId, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeBLMMemorialSettingsState({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
   
   int toggle;
   bool isSwitched1;
@@ -171,7 +173,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         MiscBLMSettingDetailTemplate(
           onTap: (){
-            Navigator.pushNamed(context, '/home/blm/home-32-blm-paypal-screen');
+            Navigator.pushNamed(context, '/home/blm/donation-paypal');
           }, 
           titleDetail: 'Paypal', 
           contentDetail: 'Manage cards that receives the memorial gifts.',
@@ -181,7 +183,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
         MiscBLMSettingDetailTemplate(
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(
+              content: 'Are you sure you want to delete "$memorialName"?',
+            ),);
             if(confirmResult){
 
               context.showLoaderOverlay();

@@ -7,6 +7,7 @@ import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-04-other-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-view-comments.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -1009,7 +1010,9 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId ,numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
+                    },
                     child: Row(
                       children: [
                         // fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),

@@ -2,6 +2,7 @@ import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memori
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
+import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
 import 'UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
@@ -92,6 +93,7 @@ void main() async{
           '/home/blm/create-memorial-2': (BuildContext context) => HomeBLMCreateMemorial2(),
           '/home/blm/create-memorial-3': (BuildContext context) => HomeBLMCreateMemorial3(),
           '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
+          '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(),
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
           '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),

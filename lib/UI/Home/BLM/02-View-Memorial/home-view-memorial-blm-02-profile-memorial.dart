@@ -26,8 +26,13 @@ class BLMProfilePosts{
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class HomeBLMMemorialProfile extends StatefulWidget{
@@ -64,8 +69,21 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
       var newValue = await apiBLMProfilePost(memorialId, page);
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
+      print('The items remaining is $itemRemaining');
+
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         posts.add(BLMProfilePosts(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
@@ -74,18 +92,25 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           memorialName: newValue.familyMemorialList[i].page.name,
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].page.imagesOrVideos,
+          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
           managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),
         );
       }
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
     }else{
@@ -621,7 +646,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     }
                                     else if(mode == LoadStatus.canLoading){
                                       body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                                      page++;
                                     }
                                     else{
                                       body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -648,6 +672,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       numberOfComments: posts[i].numberOfComments,
                                       numberOfLikes: posts[i].numberOfLikes,
                                       likeStatus: posts[i].likeStatus,
+
+                                      numberOfTagged: posts[i].numberOfTagged,
+                                      taggedFirstName: posts[i].taggedFirstName,
+                                      taggedLastName: posts[i].taggedLastName,
+                                      taggedId: posts[i].taggedId,
                                       contents: [
                                         Column(
                                           children: [

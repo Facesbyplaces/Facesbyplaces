@@ -109,7 +109,9 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
           body: Stack(
             children: [
 
-              Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+              SingleChildScrollView(
+                child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
+              ),
 
               ContainerResponsive(
                 height: SizeConfig.screenHeight,

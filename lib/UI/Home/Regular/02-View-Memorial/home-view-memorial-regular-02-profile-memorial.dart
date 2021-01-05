@@ -26,8 +26,15 @@ class RegularProfilePosts{
   int numberOfComments;
   bool likeStatus;
 
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
 
-  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus});
+
+
+  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId,});
 }
 
 class HomeRegularMemorialProfile extends StatefulWidget{
@@ -65,7 +72,19 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        }
+
         posts.add(RegularProfilePosts(
           userId: newValue.familyMemorialList[i].postPage.pageCreator.id, 
           postId: newValue.familyMemorialList[i].postId,
@@ -79,7 +98,13 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
           joined: newValue.familyMemorialList[i].postPage.follower,
           numberOfComments: newValue.familyMemorialList[i].postNumberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].postNumberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].postLikeStatus,  
+          likeStatus: newValue.familyMemorialList[i].postLikeStatus,
+
+          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),
         );
       }
@@ -655,6 +680,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       numberOfComments: posts[i].numberOfComments,
                                       numberOfLikes: posts[i].numberOfLikes,
                                       likeStatus: posts[i].likeStatus,
+
+                                      numberOfTagged: posts[i].numberOfTagged,
+                                      taggedFirstName: posts[i].taggedFirstName,
+                                      taggedLastName: posts[i].taggedLastName,
+                                      taggedId: posts[i].taggedId,
                                       contents: [
                                         Column(
                                           children: [

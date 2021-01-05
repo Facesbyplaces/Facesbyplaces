@@ -223,8 +223,10 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                             if(
                               details.data.birthdate != _key1.currentState.controller.text ||
                               details.data.birthplace !=  _key2.currentState.controller.text ||
-                              details.data.email != _key3.currentState.controller.text ||
-                              details.data.address != _key4.currentState.controller.text ||
+                              // details.data.email != _key3.currentState.controller.text ||
+                              // details.data.address != _key4.currentState.controller.text ||
+                              details.data.address != _key3.currentState.controller.text ||
+                              details.data.email != _key4.currentState.controller.text ||
                               details.data.phoneNumber != _key5.currentState.controller.text
                             ){
                               bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -232,11 +234,19 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                               if(confirmResult){
                                 context.showLoaderOverlay();
 
+                                print('The key1 is ${_key1.currentState.controller.text}');
+                                print('The key2 is ${_key2.currentState.controller.text}');
+                                print('The key3 is ${_key3.currentState.controller.text}');
+                                print('The key4 is ${_key4.currentState.controller.text}');
+                                print('The key5 is ${_key5.currentState.controller.text}');
+
                                 bool result = await apiBLMUpdateOtherDetails(
                                   birthdate: _key1.currentState.controller.text,
                                   birthplace: _key2.currentState.controller.text,
-                                  email: _key3.currentState.controller.text,
-                                  address: _key4.currentState.controller.text,
+                                  // email: _key3.currentState.controller.text,
+                                  // address: _key4.currentState.controller.text,
+                                  address: _key3.currentState.controller.text,
+                                  email: _key4.currentState.controller.text,
                                   phoneNumber: _key5.currentState.controller.text,
                                 );
 
@@ -245,6 +255,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                 context.hideLoaderOverlay();
 
                                 if(result){
+                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the other details.', color: Colors.green,));
                                   
                                   Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                                   Navigator.popAndPushNamed(context, route.settings.name);

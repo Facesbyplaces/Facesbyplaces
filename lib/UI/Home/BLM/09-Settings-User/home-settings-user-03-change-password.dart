@@ -79,6 +79,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                       context.hideLoaderOverlay();
 
                       if(result){
+                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
+
                         Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                         Navigator.popAndPushNamed(context, route.settings.name);
                       }else{

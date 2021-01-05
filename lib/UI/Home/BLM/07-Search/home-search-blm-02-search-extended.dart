@@ -6,7 +6,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
@@ -41,27 +41,33 @@ class BLMSearchMainSuggested{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
   bool joined;
+  String pageType;
 
-  BLMSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
+  BLMSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 class BLMSearchMainNearby{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
   bool joined;
+  String pageType;
 
-  BLMSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
+  BLMSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 class BLMSearchMainBLM{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  bool managed;
   bool joined;
+  String pageType;
 
-  BLMSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.joined});
+  BLMSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
 
@@ -179,6 +185,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           memorialName: newValue.pages[i].page.name,
           memorialDescription: newValue.pages[i].page.details.description,
           joined: newValue.pages[i].page.follower,
+
+          managed: newValue.pages[i].page.managed,
+          pageType: newValue.pages[i].page.pageType,
           ),    
         );
       }
@@ -206,6 +215,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           memorialName: newValue.blmList[i].name,
           memorialDescription: newValue.blmList[i].details.description,
           joined: newValue.blmList[i].follower,
+
+          managed: newValue.blmList[i].managed,
+          pageType: newValue.blmList[i].pageType,
           ),    
         );
       }
@@ -227,6 +239,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           memorialName: newValue.memorialList[i].name,
           memorialDescription: newValue.memorialList[i].details.description,
           joined: newValue.blmList[i].follower,
+
+          managed: newValue.blmList[i].managed,
+          pageType: newValue.blmList[i].pageType,
           ),    
         );
       }
@@ -257,6 +272,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           memorialName: newValue.memorialList[i].page.name,
           memorialDescription: newValue.memorialList[i].page.details.description,
           joined: newValue.memorialList[i].page.follower,
+          managed: newValue.memorialList[i].page.managed,
+          pageType: newValue.memorialList[i].page.pageType,
           ),    
         );
       }
@@ -526,7 +543,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              timeCreated: convertDate(feeds[i].timeCreated),
+              // timeCreated: convertDate(feeds[i].timeCreated),
+              timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
 
               managed: feeds[i].managed,
               joined: feeds[i].joined,
@@ -654,6 +672,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               memorialName: suggested[i].memorialName, 
               description: suggested[i].memorialDescription,
               managed: suggested[i].joined,
+              follower: suggested[i].joined,
+              pageType: suggested[i].pageType,
             );
 
             return container;

@@ -243,8 +243,9 @@ class APIBLMSearchMemorialExtended{
   APIBLMSearchMemorialExtendedPageCreator pageCreator;
   bool managed;
   bool follower;
+  String pageType;
 
-  APIBLMSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower});
+  APIBLMSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower, this.pageType});
 
   factory APIBLMSearchMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     print('The id is ${parsedJson['id']}');
@@ -268,6 +269,7 @@ class APIBLMSearchMemorialExtended{
       pageCreator: APIBLMSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       managed: parsedJson['manage'],
       follower: parsedJson['follower'],
+      pageType: parsedJson['page_type'],
     );
   }
 }

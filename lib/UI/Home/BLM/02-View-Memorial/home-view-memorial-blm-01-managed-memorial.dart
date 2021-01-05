@@ -340,7 +340,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                           context.hideLoaderOverlay();
 
                                           if(result.success){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.blmName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
                                           }
                                           
                                         },

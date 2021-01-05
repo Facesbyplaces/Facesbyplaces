@@ -215,7 +215,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
                                     },
                                     child: Row(
                                       children: [

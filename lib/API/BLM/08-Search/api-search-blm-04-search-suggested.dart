@@ -73,8 +73,10 @@ class APIBLMSearchPostExtendedPage{
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
   bool follower;
+  bool managed;
+  String pageType;
 
-  APIBLMSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower});
+  APIBLMSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.managed, this.pageType});
 
   factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedPage(
@@ -87,6 +89,8 @@ class APIBLMSearchPostExtendedPage{
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       follower: parsedJson['follower'],
+      managed: parsedJson['manage'],
+      pageType: parsedJson['page_type'],
     );
   }
 }

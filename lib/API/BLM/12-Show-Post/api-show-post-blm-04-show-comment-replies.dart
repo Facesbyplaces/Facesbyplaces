@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}) async{
+Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({int postId, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -13,7 +13,8 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
   print('The page is $page');
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+    // 'http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+    'http://fbp.dev1.koda.ws/api/v1/posts/index/replies/$postId?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -22,53 +23,53 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
     }
   );
 
-  print('The status code of comments is ${response.statusCode}');
-  // print('The status body of comments is ${response.body}');
+  print('The status code of replies is ${response.statusCode}');
+  // print('The status body of replies is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIBLMShowListOfComments.fromJson(newValue);
+    return APIBLMShowListOfReplies.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the comments.');
+    throw Exception('Failed to get the replies.');
   }
 }
 
 
 
-class APIBLMShowListOfComments{
+class APIBLMShowListOfReplies{
   int itemsRemaining;
-  List<APIBLMShowListOfCommentsExtended> commentsList;
+  List<APIBLMShowListOfRepliesExtended> repliesList;
 
-  APIBLMShowListOfComments({this.itemsRemaining, this.commentsList});
+  APIBLMShowListOfReplies({this.itemsRemaining, this.repliesList});
 
-  factory APIBLMShowListOfComments.fromJson(Map<String, dynamic> parsedJson){
+  factory APIBLMShowListOfReplies.fromJson(Map<String, dynamic> parsedJson){
 
-    var newList1 = parsedJson['comments'] as List;
-    List<APIBLMShowListOfCommentsExtended> commentsList = newList1.map((i) => APIBLMShowListOfCommentsExtended.fromJson(i)).toList();
+    var newList1 = parsedJson['replies'] as List;
+    List<APIBLMShowListOfRepliesExtended> repliesList = newList1.map((i) => APIBLMShowListOfRepliesExtended.fromJson(i)).toList();
 
-    return APIBLMShowListOfComments(
+    return APIBLMShowListOfReplies(
       itemsRemaining: parsedJson['itemsremaining'],
-      commentsList: commentsList,
+      repliesList: repliesList,
     );
   }
 }
 
 
-class APIBLMShowListOfCommentsExtended{
+class APIBLMShowListOfRepliesExtended{
+  int replyId;
   int commentId;
-  int postId;
   APIBLMShowListOfCommentsExtendedUser user;
-  String commentBody;
+  String replyBody;
   String createdAt;
 
-  APIBLMShowListOfCommentsExtended({this.commentId, this.postId, this.commentBody, this.user, this.createdAt});
+  APIBLMShowListOfRepliesExtended({this.replyId, this.commentId, this.replyBody, this.user, this.createdAt});
 
-  factory APIBLMShowListOfCommentsExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowListOfCommentsExtended(
-      commentId: parsedJson['id'],
-      postId: parsedJson['post_id'],
+  factory APIBLMShowListOfRepliesExtended.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMShowListOfRepliesExtended(
+      replyId: parsedJson['id'],
+      commentId: parsedJson['comment_id'],
       user: APIBLMShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
-      commentBody: parsedJson['body'],
+      replyBody: parsedJson['body'],
       createdAt: parsedJson['created_at'],
     );
   }
