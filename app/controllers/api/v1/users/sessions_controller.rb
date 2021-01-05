@@ -113,12 +113,15 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.hidePhonenumber = false 
           @user.is_verified = true
 
+          @user.save
+
           if params[:first_name]
             @user.first_name = "John"
             @user.last_name = "Doe #{@user.id}"
+
+            @user.save
           end
 
-          @user.save
           params[:email] = @user.email
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
