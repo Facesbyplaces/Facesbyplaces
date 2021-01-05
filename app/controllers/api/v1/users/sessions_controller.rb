@@ -137,9 +137,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           super
         elsif user.account_type != account_type
           if account_type == 1
-            render json: { message: "BLM account not found. Register to login to the page.", status: 401 }
+            render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
           elsif account_type == 2
-            render json: { message: "ALM account not found. Register to login to the page.", status: 401 }
+            render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
           end
         else
           render json: {
