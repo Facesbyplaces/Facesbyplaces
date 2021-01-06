@@ -1011,7 +1011,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId ,numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId, numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
                     },
                     child: Row(
                       children: [

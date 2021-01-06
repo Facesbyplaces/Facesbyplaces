@@ -22,7 +22,7 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({int postId, int
     }
   );
 
-  print('The status code of replies is ${response.statusCode}');
+  // print('The status code of replies is ${response.statusCode}');
   // print('The status body of replies is ${response.body}');
 
   if(response.statusCode == 200){

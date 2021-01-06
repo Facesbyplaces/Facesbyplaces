@@ -630,7 +630,21 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                     controller.clear();
 
+                    itemRemaining = 1;
+                    repliesRemaining = 1;
+                    comments = [];
+                    replies = [];
+                    numberOfReplies = 0;
+                    page1 = 1;
+                    page2 = 1;
+                    count = 0;
+                    replyToComment = 0;
+                    replyToReply = 0;
+                    onLoading();
+
                     print('The result is $result');
+
+                    onLoading();
                   },
                   child: Text('Post',
                     style: TextStyle(
