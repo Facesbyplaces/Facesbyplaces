@@ -19,7 +19,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) asyn
   );
 
   print('The show memorial status code is ${response.statusCode}');
-  print('The show memorial status body is ${response.body}');
+  // print('The show memorial status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -49,7 +49,7 @@ class APIRegularShowMemorialExtended{
   APIRegularShowMemorialExtendedDetails memorialDetails;
   String memorialBackgroundImage;
   String memorialProfileImage;
-  dynamic memorialImagesOrVideos;
+  List<dynamic> memorialImagesOrVideos;
   String memorialRelationship;
   APIRegularShowMemorialExtendedPageCreator memorialPageCreator;
   bool memorialManage;
@@ -64,13 +64,21 @@ class APIRegularShowMemorialExtended{
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
+    List<dynamic> newList1;
+
+    if(parsedJson['imagesOrVideos'] != null){
+      var list = parsedJson['imagesOrVideos'];
+      newList1 = List<dynamic>.from(list);
+    }
+
     return APIRegularShowMemorialExtended(
       memorialId: parsedJson['id'],
       memorialName: parsedJson['name'],
       memorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
       memorialBackgroundImage: parsedJson['backgroundImage'],
       memorialProfileImage: parsedJson['profileImage'],
-      memorialImagesOrVideos: parsedJson['imagesOrVideos'],
+      // memorialImagesOrVideos: parsedJson['imagesOrVideos'],
+      memorialImagesOrVideos: newList1,
       memorialRelationship: parsedJson['relationship'],
       memorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       memorialManage: parsedJson['manage'],

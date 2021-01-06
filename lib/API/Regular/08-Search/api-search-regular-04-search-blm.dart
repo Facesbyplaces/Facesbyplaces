@@ -18,6 +18,7 @@ Future<APIRegularSearchMemorialMain> apiRegularSearchBLM(String keywords) async{
     }
   );
 
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchMemorialMain.fromJson(newValue);
@@ -28,14 +29,23 @@ Future<APIRegularSearchMemorialMain> apiRegularSearchBLM(String keywords) async{
 
 class APIRegularSearchMemorialMain{
   int itemsRemaining;
-  List<APIRegularSearchMemorialExtended> memorialList;
+  List<APIRegularSearchMemorialPage> memorialList;
 
   APIRegularSearchMemorialMain({this.itemsRemaining, this.memorialList});
 
   factory APIRegularSearchMemorialMain.fromJson(Map<String, dynamic> parsedJson){
 
-    var memorialList = parsedJson['memorial'] as List;
-    List<APIRegularSearchMemorialExtended> newMemorialList = memorialList.map((e) => APIRegularSearchMemorialExtended.fromJson(e)).toList();
+    print('Samplee!');
+
+    print('The item remaining is ${parsedJson['itemsremaining']}');
+
+    var memorialList = parsedJson['memorials'] as List;
+
+    List<APIRegularSearchMemorialPage> newMemorialList = memorialList.map((e) => APIRegularSearchMemorialPage.fromJson(e)).toList();
+
+    print('The memorial list is $newMemorialList');
+
+    print('Nicee!');
 
     return APIRegularSearchMemorialMain(
       itemsRemaining: parsedJson['itemsremaining'],
@@ -44,6 +54,21 @@ class APIRegularSearchMemorialMain{
   }
 }
 
+class APIRegularSearchMemorialPage{
+  int id;
+  APIRegularSearchMemorialExtended page;
+
+  APIRegularSearchMemorialPage({this.id, this.page});
+
+  factory APIRegularSearchMemorialPage.fromJson(Map<String, dynamic> parsedJson){
+    print('New new new!');
+    return APIRegularSearchMemorialPage(
+      id: parsedJson['id'],
+      // page: parsedJson['page'],
+      page: APIRegularSearchMemorialExtended.fromJson(parsedJson['page']),
+    );
+  }
+}
 
 class APIRegularSearchMemorialExtended{
   int id;
@@ -51,24 +76,35 @@ class APIRegularSearchMemorialExtended{
   APIRegularSearchMemorialExtendedPageDetails details;
   dynamic backgroundImage;
   dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
+  List<dynamic> imagesOrVideos;
+  // String relationship;
   APIRegularSearchMemorialExtendedPageCreator pageCreator;
   bool managed;
   bool follower;
   String pageType;
 
-  APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower, this.pageType});
+  // APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower, this.pageType});
+  APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.pageCreator, this.managed, this.follower, this.pageType});
 
   factory APIRegularSearchMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
+    print('The id is ${parsedJson['id']}');
+
+    List<dynamic> newList1;
+
+    if(parsedJson['imagesOrVideos'] != null){
+      var list = parsedJson['imagesOrVideos'];
+      newList1 = List<dynamic>.from(list);
+    }
+
     return APIRegularSearchMemorialExtended(
       id: parsedJson['id'],
       name: parsedJson['name'],
       details: APIRegularSearchMemorialExtendedPageDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
+      // imagesOrVideos: parsedJson['imagesOrVideos'],
+      imagesOrVideos: newList1,
+      // relationship: parsedJson['relationship'],
       pageCreator: APIRegularSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       managed: parsedJson['manage'],
       follower: parsedJson['follower'],
@@ -76,6 +112,7 @@ class APIRegularSearchMemorialExtended{
     );
   }
 }
+
 
 class APIRegularSearchMemorialExtendedPageDetails{
   String description;
@@ -88,6 +125,7 @@ class APIRegularSearchMemorialExtendedPageDetails{
   APIRegularSearchMemorialExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
   factory APIRegularSearchMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    print('Test test test!');
     return APIRegularSearchMemorialExtendedPageDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
@@ -111,6 +149,8 @@ class APIRegularSearchMemorialExtendedPageCreator{
   APIRegularSearchMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
   factory APIRegularSearchMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    print('Sample sample sample!');
+    print('The value is $parsedJson');
     return APIRegularSearchMemorialExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],

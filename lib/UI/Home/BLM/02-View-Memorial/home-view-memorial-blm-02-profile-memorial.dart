@@ -124,8 +124,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
   void initState(){
     super.initState();
-    onLoading();
-    showProfile = getProfileInformation(memorialId);
     join = newJoin;
     posts = [];
     itemRemaining = 1;
@@ -133,6 +131,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
     page = 1;
     postCount = 0;
     dataKey = GlobalKey();
+    onLoading();
+    showProfile = getProfileInformation(memorialId);
   }
 
 

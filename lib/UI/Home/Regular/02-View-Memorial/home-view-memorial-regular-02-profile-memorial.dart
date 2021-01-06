@@ -251,7 +251,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         height: SizeConfig.blockSizeHorizontal * 40,
                                         child: CachedNetworkImage(
                                           fit: BoxFit.cover,
-                                          imageUrl: profile.data.memorial.memorialImagesOrVideos,
+                                          imageUrl: profile.data.memorial.memorialImagesOrVideos[0],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),

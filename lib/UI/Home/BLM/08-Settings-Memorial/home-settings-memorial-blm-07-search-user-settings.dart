@@ -238,6 +238,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         bool result = await apiBLMAddFamily(memorialId, users[index].userId, choice);
                         context.hideLoaderOverlay();
 
+                        print('The result for adding a family is $result');
+
                         if(result){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
@@ -248,6 +250,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         context.showLoaderOverlay();
                         bool result = await apiBLMAddFriends(memorialId, users[index].userId);
                         context.hideLoaderOverlay();
+
+                        print('The result for adding a friends is $result');
 
                         if(result){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);

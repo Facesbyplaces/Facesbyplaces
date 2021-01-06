@@ -18,15 +18,32 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages(int memorialId) as
     }
   );
 
+  print('The status code for show images is ${response.statusCode}');
+  // print('The status body for show images is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowPageImagesMain.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the events');
+    throw Exception('Failed to get the images');
   }
 }
 
 class APIRegularShowPageImagesMain{
+
+  APIRegularShowPageImagesExtended memorial;
+
+  APIRegularShowPageImagesMain({this.memorial});
+
+  factory APIRegularShowPageImagesMain.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowPageImagesMain(
+      memorial: APIRegularShowPageImagesExtended.fromJson(parsedJson['memorial']),
+    );
+  }
+}
+
+
+class APIRegularShowPageImagesExtended{
   int id;
   String name;
   APIRegularShowPageImagesExtendedDetails details;
@@ -36,16 +53,24 @@ class APIRegularShowPageImagesMain{
   String relationship;
   APIRegularShowPageImagesExtendedPageCreator pageCreator;
 
-  APIRegularShowPageImagesMain({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularShowPageImagesExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
 
-  factory APIRegularShowPageImagesMain.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularShowPageImagesMain(
+  factory APIRegularShowPageImagesExtended.fromJson(Map<String, dynamic> parsedJson){
+    List<dynamic> newList1;
+
+    if(parsedJson['imagesOrVideos'] != null){
+      var list = parsedJson['imagesOrVideos'];
+      newList1 = List<dynamic>.from(list);
+    }
+
+    return APIRegularShowPageImagesExtended(
       id: parsedJson['id'],
       name: parsedJson['name'],
       details: APIRegularShowPageImagesExtendedDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
+      // imagesOrVideos: parsedJson['imagesOrVideos'],
+      imagesOrVideos: newList1,
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularShowPageImagesExtendedPageCreator.fromJson(parsedJson['page_creator'])
     );

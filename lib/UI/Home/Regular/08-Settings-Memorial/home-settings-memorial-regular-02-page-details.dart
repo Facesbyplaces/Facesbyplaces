@@ -125,6 +125,13 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                 if(confirmResult){
                                   context.showLoaderOverlay();
 
+                                  print('The name is ${_key1.currentState.controller.text}');
+                                  print('The relationship is ${_key2.currentState.currentSelection}');
+                                  print('The dob is ${_key3.currentState.controller.text}');
+                                  print('The rip is ${_key4.currentState.controller.text}');
+                                  print('The country is ${_key5.currentState.controller.text}');
+                                  print('The cemetery is ${_key6.currentState.controller.text}');
+
                                   bool result = await apiRegularUpdatePageDetails(
                                     name: _key1.currentState.controller.text,
                                     relationship: _key2.currentState.currentSelection,
@@ -132,6 +139,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                     rip: convertDate(_key4.currentState.controller.text),
                                     country: _key5.currentState.controller.text,
                                     cemetery: _key6.currentState.controller.text,
+                                    memorialId: memorialId,
                                   );
 
                                   context.hideLoaderOverlay();

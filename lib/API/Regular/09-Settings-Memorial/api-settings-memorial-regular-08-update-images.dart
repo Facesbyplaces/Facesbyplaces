@@ -24,7 +24,7 @@ Future<bool> apiRegularUpdatePageImages(int memorialId, dynamic backgroundImage,
       formData.files.add(MapEntry('profileImage', file));
     }
 
-    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pages/memorial/$memorialId/images', data: formData,
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/images', data: formData,
       options: Options(
         headers: <String, String>{
           'access-token': getAccessToken,

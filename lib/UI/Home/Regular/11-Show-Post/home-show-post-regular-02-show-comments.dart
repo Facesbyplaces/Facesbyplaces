@@ -74,18 +74,13 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   int count;
   int numberOfReplies;
   int page2;
-  static Future<APIRegularShowProfileInformation> currentUser;
-  // int replyToComment;
-  // int replyToReply;
-
+  Future<APIRegularShowProfileInformation> currentUser;
   List<bool> commentsLikes;
   List<int> commentsNumberOfLikes;
-
   bool isComment;
   int currentCommentId;
-
-  List<bool> repliesLikes;
-  List<int> repliesNumberOfLikes;
+  List<List<bool>> repliesLikes;
+  List<List<int>> repliesNumberOfLikes;
 
   void initState(){
     super.initState();
@@ -97,14 +92,11 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     page1 = 1;
     page2 = 1;
     count = 0;
-
     commentsLikes = [];
     commentsNumberOfLikes = [];
-
-    isComment = true;
-
     repliesLikes = [];
     repliesNumberOfLikes = [];
+    isComment = true;
 
     onLoading();
     currentUser = getDrawerInformation();
@@ -124,10 +116,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
       count = count + newValue1.commentsList.length;
 
       for(int i = 0; i < newValue1.commentsList.length; i++){
-        // print('The id of comment is ${newValue1.commentsList[i].commentId}');
         var commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.commentsList[i].commentId);
-        // print('The comment status is ${commentLikeStatus.likeStatus}');
-
         commentsLikes.add(commentLikeStatus.likeStatus);
         commentsNumberOfLikes.add(commentLikeStatus.numberOfLikes);
         
@@ -135,18 +124,17 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
           context.showLoaderOverlay();
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.commentsList[i].commentId, page: page2);
           context.hideLoaderOverlay();
+
+          List<bool> newRepliesLikes = [];
+          List<int> newRepliesNumberOfLikes = [];
+          List<int> newReplyId = [];
+
           for(int j = 0; j < newValue2.repliesList.length; j++){
 
             var replyLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.repliesList[j].replyId);
-            // print('The comment status is ${commentLikeStatus.likeStatus}');
-
-            print('The reply status is ${replyLikeStatus.likeStatus}');
-            print('The number of likes for reply is ${replyLikeStatus.numberOfLikes}');
-
-
-
-            repliesLikes.add(replyLikeStatus.likeStatus);
-            repliesNumberOfLikes.add(replyLikeStatus.numberOfLikes);
+            newRepliesLikes.add(replyLikeStatus.likeStatus);
+            newRepliesNumberOfLikes.add(replyLikeStatus.numberOfLikes);
+            newReplyId.add(newValue2.repliesList[j].replyId);
 
             replies.add(
               RegularOriginalReply(
@@ -163,6 +151,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
               ),
             );
           }
+
+          repliesLikes.add(newRepliesLikes);
+          repliesNumberOfLikes.add(newRepliesNumberOfLikes);
 
           repliesRemaining = newValue2.itemsRemaining;
           page2++;
@@ -207,9 +198,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
   @override
   Widget build(BuildContext context) {
-    // userId == comments[i].userId
-    // print('The userId is $userId');
-    // print('The userId is $');
     SizeConfig.init(context);
     ResponsiveWidgets.init(context,
       height: SizeConfig.screenHeight,
@@ -226,7 +214,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             currentFocus.unfocus();
             isComment = true;
             controller.clear();
-            print('The value of is comment in focus is $isComment');
           }
         },
         child: Scaffold(
@@ -343,7 +330,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                   ),
                                 ),
 
-                                // comments[i].commentLikes == true
                                 commentsLikes[i] == true
                                 ? IconButton(
                                   icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
@@ -413,13 +399,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                               GestureDetector(
                                 onTap: () async{
                                   setState(() {
-                                    // replyToComment = i;
                                     isComment = false;
                                     currentCommentId = comments[i].commentId;
                                   });
-                                  // print('The index of reply is $replyToComment');
-                                  print('The value of isComment is $isComment');
-                                  print('The comment id is $currentCommentId');
 
                                   await showMaterialModalBottomSheet(
                                     expand: true,
@@ -432,8 +414,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                         keyboardType: TextInputType.text,
                                         maxLines: 10,
                                         decoration: InputDecoration(
-                                          // fillColor: Color(0xffBDC3C7),
-                                          // filled: true,
                                           labelText: 'Say something...',
                                           labelStyle: TextStyle(
                                             fontSize: 14,
@@ -487,8 +467,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                                         userId == comments[i].listOfReplies[index].userId
                                         ? Expanded(
-                                          // child: Text('You',
-                                          child: Text('${comments[i].listOfReplies[index].replyId}',
+                                          child: Text('You',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -502,27 +481,17 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                           ),
                                         ),
 
-                                        // Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
-                                        // // repliesLikeStatus
-
-                                        // SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                        // Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                        // repliesLikes[index] == true
-                                        // comments[i].listOfReplies[index].replyLikes == true
-                                        repliesLikes[index] == true
+                                        repliesLikes[i][index] == true
                                         ? IconButton(
                                           icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
                                           padding: EdgeInsets.zero,
                                           onPressed: () async{
                                             setState(() {
-                                              repliesLikes[index] = false;
-                                              repliesNumberOfLikes[index]--;
+                                              repliesLikes[i][index] = false;
+                                              repliesNumberOfLikes[i][index]--;
                                               
                                             });
-
-                                            // await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: replies[index].replyId, likeStatus: false);
+                                            await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
                                           },
                                         )
                                         : IconButton(
@@ -530,18 +499,14 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                           padding: EdgeInsets.zero,
                                           onPressed: () async{
                                             setState(() {
-                                              repliesLikes[index] = true;
-                                              repliesNumberOfLikes[index]++;
+                                              repliesLikes[i][index] = true;
+                                              repliesNumberOfLikes[i][index]++;
                                             });
-
-                                            // await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
-                                            // await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: replies[index].replyId, likeStatus: true);
+                                            await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
                                           },
                                         ),
 
-                                        Text('${repliesNumberOfLikes[index]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                        // Text('${comments[i].listOfReplies[index].replyNumberOfLikes}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                        Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
                                       ],
                                     ),
@@ -584,14 +549,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                         onTap: () async{
                                           controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
                                           setState(() {
-                                            // replyToComment = i;
                                             isComment = false;
                                             currentCommentId = comments[i].commentId;
                                           });
-                                          // print('The index of reply is $replyToComment');
-                                          print('The value of isComment is $isComment');
-                                          print('The comment id is $currentCommentId');
-
                                           await showMaterialModalBottomSheet(
                                             expand: true,
                                             context: context,
@@ -603,8 +563,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                                 keyboardType: TextInputType.text,
                                                 maxLines: 10,
                                                 decoration: InputDecoration(
-                                                  // fillColor: Color(0xffBDC3C7),
-                                                  // filled: true,
                                                   labelText: 'Say something...',
                                                   labelStyle: TextStyle(
                                                     fontSize: 14,
@@ -630,11 +588,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                             ),
                                           );
                                         },
-                                        child: 
-                                        // replyToReply == index
-                                        // ? Text('Reply', style: TextStyle(fontWeight: FontWeight.bold),)
-                                        // : Text('Reply',),
-                                        Text('Reply',),
+                                        child: Text('Reply',),
                                       ),
 
                                     ],
@@ -704,7 +658,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                     child: TextFormField(
                       
                       onTap: () async{
-                        print('The value of isComment in text input field is $isComment');
                         await showMaterialModalBottomSheet(
                           expand: true,
                           context: context,
@@ -716,8 +669,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                               keyboardType: TextInputType.text,
                               maxLines: 10,
                               decoration: InputDecoration(
-                                // fillColor: Color(0xffBDC3C7),
-                                // filled: true,
                                 labelText: 'Say something...',
                                 labelStyle: TextStyle(
                                   fontSize: 14,
@@ -774,18 +725,12 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                 GestureDetector(
                   onTap: () async{
-                    // print('The post id is $postId');
-                    // print('The post id is ${controller.text}');
-
-
                     if(isComment == true){
                       context.showLoaderOverlay();
                       await apiRegularAddComment(postId: postId, commentBody: controller.text);
                       context.hideLoaderOverlay();
 
                       controller.clear();
-
-                      // print('The result is $result');
 
                       itemRemaining = 1;
                       repliesRemaining = 1;
@@ -795,10 +740,10 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                       page1 = 1;
                       page2 = 1;
                       count = 0;
-
                       commentsLikes = [];
                       commentsNumberOfLikes = [];
-
+                      repliesLikes = [];
+                      repliesNumberOfLikes = [];
                       isComment = true;                 
 
                       onLoading();
@@ -817,10 +762,10 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                       page1 = 1;
                       page2 = 1;
                       count = 0;
-
                       commentsLikes = [];
                       commentsNumberOfLikes = [];
-
+                      repliesLikes = [];
+                      repliesNumberOfLikes = [];
                       isComment = true;
 
                       onLoading();

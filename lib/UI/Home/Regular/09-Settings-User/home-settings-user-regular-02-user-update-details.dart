@@ -24,7 +24,8 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularPhoneNumberTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
-  final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  // final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
+  final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
 
   Future accountDetails;
 
@@ -95,7 +96,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        MiscRegularInputFieldTemplate(key: _key5, labelText: 'Security Question', displayText: details.data.question,),
+                        MiscRegularInputFieldSecurityQuestions(key: _key5, displayText: details.data.question,),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -114,7 +115,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                 details.data.lastName !=  _key2.currentState.controller.text ||
                                 details.data.email != _key3.currentState.controller.text ||
                                 details.data.phoneNumber != _key4.currentState.controller.text ||
-                                details.data.question != _key5.currentState.controller.text
+                                details.data.question != _key5.currentState.currentSelection
                               ){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -126,11 +127,13 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                     lastName: _key2.currentState.controller.text,
                                     email: _key3.currentState.controller.text,
                                     phoneNumber: _key4.currentState.controller.text,
-                                    question: _key5.currentState.controller.text,
+                                    question: _key5.currentState.currentSelection
                                   );
                                   context.hideLoaderOverlay();
 
                                   if(result){
+                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
+
                                     Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                                     Navigator.popAndPushNamed(context, route.settings.name);
                                   }else{

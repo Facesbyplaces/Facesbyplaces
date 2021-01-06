@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-02-user-update-details.dart';
@@ -11,6 +12,8 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -1046,8 +1049,33 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                 bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                 if(logoutResult){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+                  // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+                    context.showLoaderOverlay();
+                    bool result = await apiRegularLogout();
+
+                    GoogleSignIn googleSignIn = GoogleSignIn(
+                      scopes: [
+                        'profile',
+                        'email',
+                        'openid'
+                      ],
+                    );
+                    await googleSignIn.signOut();
+
+                    FacebookLogin fb = FacebookLogin();
+                    await fb.logOut();
+
+                    context.hideLoaderOverlay();
+
+                    if(result){
+                      Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                      Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                    }else{
+                      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                    }
                 }
+
+
 
               }, 
               width: SizeConfig.screenWidth / 2, 

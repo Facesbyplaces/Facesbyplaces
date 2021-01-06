@@ -1,16 +1,19 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-09-show-admin-settings.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-15-add-admin.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-16-remove-admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class RegularShowAdminSettings{
+  final int userId;
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  RegularShowAdminSettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowAdminSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeRegularPageManagers extends StatefulWidget{
@@ -25,14 +28,19 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   HomeRegularPageManagersState({this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularShowAdminSettings> adminList = [];
-  List<RegularShowAdminSettings> familyList = [];
-  int adminItemsRemaining = 1;
-  int familyItemsRemaining = 1;
-  int page = 1;
+  List<RegularShowAdminSettings> adminList;
+  List<RegularShowAdminSettings> familyList;
+  int adminItemsRemaining;
+  int familyItemsRemaining;
+  int page;
 
   void initState(){
     super.initState();
+    adminList = [];
+    familyList = [];
+    adminItemsRemaining = 1;
+    familyItemsRemaining = 1;
+    page = 1;
     onLoading1();
     onLoading2();
   }
@@ -45,12 +53,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   void onLoading1() async{
     if(adminItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularShowAdminSettings(memorialId, page);
+      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page);
       adminItemsRemaining = newValue.adminItemsRemaining;
 
       for(int i = 0; i < newValue.adminList.length; i++){
         adminList.add(
           RegularShowAdminSettings(
+            userId: newValue.adminList[i].user.id,
             firstName: newValue.adminList[i].user.firstName,
             lastName: newValue.adminList[i].user.lastName,
             image: newValue.adminList[i].user.image,
@@ -74,13 +83,15 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularShowAdminSettings(memorialId, page);
+      // var newValue = await apiRegularShowAdminSettings(memorialId, page);
+      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page);
       context.hideLoaderOverlay();
       familyItemsRemaining = newValue.familyItemsRemaining;
 
       for(int i = 0; i < newValue.familyList.length; i++){
         familyList.add(
           RegularShowAdminSettings(
+            userId: newValue.familyList[i].user.id,
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.adminList[i].user.image,
@@ -182,9 +193,20 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                             minWidth: SizeConfig.screenWidth / 3.5,
                             padding: EdgeInsets.zero,
                             textColor: Color(0xffffffff),
-                            splashColor: Color(0xff04ECFF),
+                            splashColor: Color(0xffE74C3C),
                             onPressed: () async{
+                              context.showLoaderOverlay();
+                              await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: familyList[i].userId);
+                              context.hideLoaderOverlay();
 
+
+                              adminList = [];
+                              familyList = [];
+                              adminItemsRemaining = 1;
+                              familyItemsRemaining = 1;
+                              page = 1;
+                              onLoading1();
+                              onLoading2();
                             },
                             child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
                             height: SizeConfig.blockSizeVertical * 5,
@@ -277,7 +299,17 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                             textColor: Color(0xffffffff),
                             splashColor: Color(0xff04ECFF),
                             onPressed: () async{
+                              context.showLoaderOverlay();
+                              await apiRegularAddMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: familyList[i].userId);
+                              context.hideLoaderOverlay();
 
+                              adminList = [];
+                              familyList = [];
+                              adminItemsRemaining = 1;
+                              familyItemsRemaining = 1;
+                              page = 1;
+                              onLoading1();
+                              onLoading2();
                             },
                             child: Text('Make Manager', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
                             height: SizeConfig.blockSizeVertical * 5,

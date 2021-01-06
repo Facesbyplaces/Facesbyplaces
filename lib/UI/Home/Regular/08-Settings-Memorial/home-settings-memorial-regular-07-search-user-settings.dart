@@ -264,15 +264,21 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         children: [
                           CircleAvatar(
                             maxRadius: SizeConfig.blockSizeVertical * 5,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                            backgroundColor: Color(0xff888888), 
+                            backgroundImage: users[index].image != null 
+                            ? NetworkImage(users[index].image) 
+                            : AssetImage('assets/icons/app-icon.png'),
                           ),
+
 
                           SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
 
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               RichText(
+                                textAlign: TextAlign.left,
                                 text: TextSpan(
                                   children: <TextSpan>[
                                     TextSpan(text: users[index].firstName, style: users[index].firstName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
@@ -280,11 +286,17 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                     TextSpan(text: ' '),
 
                                     TextSpan(text: users[index].lastName, style: users[index].lastName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
+
                                   ],
                                 ),
                               ),
+
+                              Text(users[index].email, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888),),),
+
                             ],
                           ),
+
+                          
                         ],
                       ),
                     ),

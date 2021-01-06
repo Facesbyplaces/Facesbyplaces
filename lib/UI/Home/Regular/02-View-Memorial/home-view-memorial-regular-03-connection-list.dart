@@ -2,7 +2,6 @@ import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-reg
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-02-connection-list-friends.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-03-connection-list-followers.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +63,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             image: newValue.familyList[i].user.image,
           ),    
         );
+
+        print('The image is ${newValue.familyList[i].user.image}');
       }
 
       if(mounted)
@@ -336,35 +337,51 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 children: [
                   onSearch
                   ? Expanded(
+                    // child: CircleAvatar(
+                    //   radius: SizeConfig.blockSizeVertical * 5, 
+                    //   backgroundColor: Color(0xff888888),
+                    //   backgroundImage: ((){
+                    //     if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
+                    //       return AssetImage('assets/icons/graveyard.png');
+                    //     }else{
+                    //       return CachedNetworkImageProvider(
+                    //         searches[index].image.toString(),
+                    //         scale: 1.0,
+                    //       );
+                    //     }
+                    //   }()),
+                    // ),
+
                     child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            searches[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
+                      radius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: searches[index].image != null && searches[index].image != ''
+                      ? NetworkImage(searches[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
                     ),
                   )
                   : Expanded(
+                    // child: CircleAvatar(
+                    //   radius: SizeConfig.blockSizeVertical * 5, 
+                    //   backgroundColor: Color(0xff888888),
+                    //   backgroundImage: ((){
+                    //     if(listsFamily[index].image.toString() == '' || listsFamily[index].image.toString() == null){
+                    //       return AssetImage('assets/icons/graveyard.png');
+                    //     }else{
+                    //       return CachedNetworkImageProvider(
+                    //         listsFamily[index].image.toString(),
+                    //         scale: 1.0,
+                    //       );
+                    //     }
+                    //   }()),
+                    // ),
+
                     child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(listsFamily[index].image.toString() == '' || listsFamily[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            listsFamily[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
+                      radius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
+                      ? NetworkImage(listsFamily[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
 
@@ -424,35 +441,50 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 children: [
                   onSearch
                   ? Expanded(
+                    // child: CircleAvatar(
+                    //   radius: SizeConfig.blockSizeVertical * 5, 
+                    //   backgroundColor: Color(0xff888888),
+                    //   backgroundImage: ((){
+                    //     if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
+                    //       return AssetImage('assets/icons/graveyard.png');
+                    //     }else{
+                    //       return CachedNetworkImageProvider(
+                    //         searches[index].image.toString(),
+                    //         scale: 1.0,
+                    //       );
+                    //     }
+                    //   }()),
+                    // ),
                     child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            searches[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
+                      radius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: searches[index].image != null && searches[index].image != ''
+                      ? NetworkImage(searches[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
                     ),
                   )
                   : Expanded(
+                    // child: CircleAvatar(
+                    //   radius: SizeConfig.blockSizeVertical * 5, 
+                    //   backgroundColor: Color(0xff888888),
+                    //   backgroundImage: ((){
+                    //     if(listsFriends[index].image.toString() == '' || listsFriends[index].image.toString() == null){
+                    //       return AssetImage('assets/icons/graveyard.png');
+                    //     }else{
+                    //       return CachedNetworkImageProvider(
+                    //         listsFriends[index].image.toString(),
+                    //         scale: 1.0,
+                    //       );
+                    //     }
+                    //   }()),
+                    // ),
+
                     child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(listsFriends[index].image.toString() == '' || listsFriends[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            listsFriends[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
+                      radius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
+                      ? NetworkImage(listsFriends[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
 
@@ -512,35 +544,50 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 children: [
                   onSearch
                   ? Expanded(
+                    // child: CircleAvatar(
+                    //   radius: SizeConfig.blockSizeVertical * 5, 
+                    //   backgroundColor: Color(0xff888888),
+                    //   backgroundImage: ((){
+                    //     if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
+                    //       return AssetImage('assets/icons/graveyard.png');
+                    //     }else{
+                    //       return CachedNetworkImageProvider(
+                    //         searches[index].image.toString(),
+                    //         scale: 1.0,
+                    //       );
+                    //     }
+                    //   }()),
+                    // ),
                     child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            searches[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
+                      radius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: searches[index].image != null && searches[index].image != ''
+                      ? NetworkImage(searches[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
                     ),
                   )
                   : Expanded(
+                    // child: CircleAvatar(
+                    //   radius: SizeConfig.blockSizeVertical * 5, 
+                    //   backgroundColor: Color(0xff888888),
+                    //   backgroundImage: ((){
+                    //     if(listsFollowers[index].image.toString() == '' || listsFollowers[index].image.toString() == null){
+                    //       return AssetImage('assets/icons/graveyard.png');
+                    //     }else{
+                    //       return CachedNetworkImageProvider(
+                    //         listsFollowers[index].image.toString(),
+                    //         scale: 1.0,
+                    //       );
+                    //     }
+                    //   }()),
+                    // ),
+
                     child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(listsFollowers[index].image.toString() == '' || listsFollowers[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            listsFollowers[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
+                      radius: SizeConfig.blockSizeVertical * 5,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
+                      ? NetworkImage(listsFollowers[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
 

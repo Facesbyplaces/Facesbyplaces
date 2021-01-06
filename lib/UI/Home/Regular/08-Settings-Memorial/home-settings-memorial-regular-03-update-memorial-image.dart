@@ -28,12 +28,13 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   final int memorialId;
   HomeRegularMemorialPageImageState({this.memorialId});
 
-  final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  // final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
+  List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   int backgroundImageToggle;
   final picker = ImagePicker();
   File backgroundImage;
   File profileImage;
-  Future futureMemorialSettings;
+  Future<APIRegularShowPageImagesMain> futureMemorialSettings;
 
   Future getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -54,6 +55,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   }
 
   Future<APIRegularShowPageImagesMain> getMemorialSettings(int memorialId) async{
+    print('The memorialId is $memorialId');
     return await apiRegularShowPageImages(memorialId);
   }
 
@@ -110,7 +112,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               image: backgroundImage != null
                               ? AssetImage(backgroundImage.path)
                               : CachedNetworkImageProvider(
-                                memorialImageSettings.data.backgroundImage.toString(),
+                                memorialImageSettings.data.memorial.backgroundImage.toString(),
                               ),
                             ),
                           ),
@@ -133,7 +135,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                         backgroundImage: profileImage != null
                                         ? AssetImage(profileImage.path)
                                         : CachedNetworkImageProvider(
-                                          memorialImageSettings.data.profileImage.toString()
+                                          memorialImageSettings.data.memorial.profileImage.toString()
                                         ),
                                       ),
                                     ),

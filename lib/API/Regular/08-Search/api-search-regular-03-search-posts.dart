@@ -52,28 +52,32 @@ class APIRegularSearchPostExtended{
   double latitude;
   double longitude;
   List<dynamic> imagesOrVideos;
+  List<APIRegularHomeTabPostExtendedTagged> postTagged;
   List<dynamic> tagPeople;
   String createAt;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
 
-  APIRegularSearchPostExtended({this.postId, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.tagPeople, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIRegularSearchPostExtended({this.postId, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.tagPeople, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
     List<dynamic> newList1;
-    List<dynamic> newList2;
+    // List<dynamic> newList2;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
       newList1 = List<dynamic>.from(list);
     }
 
-    if(parsedJson['tag_people'] != null){
-      var list = parsedJson['tag_people'];
-      newList2 = List<dynamic>.from(list);
-    }
+    // if(parsedJson['tag_people'] != null){
+    //   var list = parsedJson['tag_people'];
+    //   newList2 = List<dynamic>.from(list);
+    // }
+
+    var newList2 = parsedJson['tag_people'] as List;
+    List<APIRegularHomeTabPostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeTabPostExtendedTagged.fromJson(i)).toList();
     
     return APIRegularSearchPostExtended(
       postId: parsedJson['id'],
@@ -83,7 +87,8 @@ class APIRegularSearchPostExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList1,
-      tagPeople: newList2,
+      // tagPeople: newList2,
+      postTagged: taggedList,
       createAt: parsedJson['created_at'],
       numberOfLikes: parsedJson['numberOfLikes'],
       numberOfComments: parsedJson['numberOfComments'],
@@ -168,6 +173,24 @@ class APIRegularHomeTabPostExtendedPageCreator{
       email: parsedJson['email'],
       userName: parsedJson['username'],
       image: parsedJson['image']
+    );
+  }
+}
+
+class APIRegularHomeTabPostExtendedTagged{
+  int taggedId;
+  String taggedFirstName;
+  String taggedLastName;
+  String taggedImage;
+
+  APIRegularHomeTabPostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+
+  factory APIRegularHomeTabPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularHomeTabPostExtendedTagged(
+      taggedId: parsedJson['id'],
+      taggedFirstName: parsedJson['first_name'],
+      taggedLastName: parsedJson['last_name'],
+      taggedImage: parsedJson['image']
     );
   }
 }

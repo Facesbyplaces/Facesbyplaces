@@ -29,7 +29,13 @@ class RegularSearchMainPosts{
   int numberOfComments;
   bool likeStatus;
 
-  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  int numberOfTagged;
+  List<String> taggedFirstName;
+  List<String> taggedLastName;
+  List<String> taggedImage;
+  List<int> taggedId;
+
+  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class RegularSearchMainSuggested{
@@ -118,7 +124,19 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       postItemRemaining = newValue.itemsRemaining;
       tabCount1 = tabCount1 + newValue.searchPostList.length;
 
+      List<String> newList1 = [];
+      List<String> newList2 = [];
+      List<String> newList3 = [];
+      List<int> newList4 = [];
+
       for(int i = 0; i < newValue.searchPostList.length; i++){
+        for(int j = 0; j < newValue.searchPostList[i].postTagged.length; j++){
+          newList1.add(newValue.searchPostList[i].postTagged[j].taggedFirstName);
+          newList2.add(newValue.searchPostList[i].postTagged[j].taggedLastName);
+          newList3.add(newValue.searchPostList[i].postTagged[j].taggedImage);
+          newList4.add(newValue.searchPostList[i].postTagged[j].taggedId);
+        }
+        
         feeds.add(RegularSearchMainPosts(
           userId: newValue.searchPostList[i].page.pageCreator.creatorId, 
           postId: newValue.searchPostList[i].postId,
@@ -134,6 +152,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           numberOfComments: newValue.searchPostList[i].numberOfComments,
           numberOfLikes: newValue.searchPostList[i].numberOfLikes,
           likeStatus: newValue.searchPostList[i].likeStatus,
+
+          numberOfTagged: newValue.searchPostList[i].postTagged.length,
+          taggedFirstName: newList1,
+          taggedLastName: newList2,
+          taggedImage: newList3,
+          taggedId: newList4,
           ),    
         );
       }
@@ -240,11 +264,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       for(int i = 0; i < newValue.memorialList.length; i++){
         blm.add(RegularSearchMainBLM(
           memorialId: newValue.memorialList[i].id,
-          memorialName: newValue.memorialList[i].name,
-          memorialDescription: newValue.memorialList[i].details.description,
-          managed: newValue.memorialList[i].managed,
-          joined: newValue.memorialList[i].follower,
-          pageType: newValue.memorialList[i].pageType,
+          memorialName: newValue.memorialList[i].page.name,
+          memorialDescription: newValue.memorialList[i].page.details.description,
+          managed: newValue.memorialList[i].page.managed,
+          joined: newValue.memorialList[i].page.follower,
+          pageType: newValue.memorialList[i].page.pageType,
           ),    
         );
       }
@@ -490,7 +514,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchPostExtended(){
     return Container(
-      height: SizeConfig.screenHeight,
+      // height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount1 != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -538,6 +563,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
+
+              numberOfTagged: feeds[i].numberOfTagged,
+              taggedFirstName: feeds[i].taggedFirstName,
+              taggedLastName: feeds[i].taggedLastName,
+              taggedId: feeds[i].taggedId,
               contents: [
                 Column(
                   children: [
@@ -604,7 +634,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchSuggestedExtended(){
     return Container(
-      height: SizeConfig.screenHeight,
+      // height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount2 != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -674,7 +705,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchNearbyExtended(){
     return Container(
-      height: SizeConfig.screenHeight,
+      // height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
         enablePullDown: false,
@@ -744,7 +776,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchBLMExtended(){
     return Container(
-      height: SizeConfig.screenHeight,
+      // height: SizeConfig.screenHeight,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(
         enablePullDown: false,

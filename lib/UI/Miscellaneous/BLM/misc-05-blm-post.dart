@@ -10,6 +10,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-view-comments.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -992,12 +993,18 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                       });
 
                       await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
+
+                      print('Test!');
                     },
                     child: Row(
                       children: [
+                        // likePost == true
+                        // ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
+                        // : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+
                         likePost == true
-                        ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
-                        : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                        ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
+                        : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 

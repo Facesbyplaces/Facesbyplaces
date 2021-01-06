@@ -47,6 +47,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
             firstName: newValue.friendsList[i].user.firstName,
             lastName: newValue.friendsList[i].user.lastName,
             image: newValue.friendsList[i].user.image,
+            relationship: newValue.friendsList[i].relationship,
           ),
         );
       }

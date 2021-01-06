@@ -2,14 +2,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowAdminsSettingMain> apiRegularShowAdminSettings(int memorialId, int page) async{
+Future<APIRegularShowAdminsSettingMain> apiRegularShowAdminSettings({int memorialId, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorial/adminIndex/index?page=$page&page_id=$memorialId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -69,7 +69,6 @@ class APIRegularShowAdminsSettingExtended{
 }
 
 class APIRegularShowAdminsSettingExtendedUser{
-
   int id;
   String firstName;
   String lastName;

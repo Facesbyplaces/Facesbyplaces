@@ -124,6 +124,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
       
@@ -313,7 +314,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              page++;
             }
             else{
               body = Text('No more list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -341,7 +341,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                       backgroundColor: Color(0xff888888),
                       backgroundImage: ((){
                         if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
+                          // return AssetImage('assets/icons/graveyard.png');
+                          return AssetImage('assets/icons/app-icon.png');
+                          // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
                         }else{
                           return CachedNetworkImageProvider(
                             searches[index].image.toString(),
@@ -350,6 +352,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         }
                       }()),
                     ),
+
+                    // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: searches[index].image.toString() != null || searches[index].image.toString() == '' ? NetworkImage(searches[index].image.toString()) : AssetImage('assets/icons/app-icon.png')),
                   )
                   : Expanded(
                     child: CircleAvatar(
@@ -366,6 +370,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                         }
                       }()),
                     ),
+                    // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: searches[index].image.toString() != null || searches[index].image.toString() == '' ? NetworkImage(searches[index].image.toString()) : AssetImage('assets/icons/app-icon.png')),
                   ),
 
                   onSearch

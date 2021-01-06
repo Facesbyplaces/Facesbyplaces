@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-ori
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -200,8 +201,10 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                     child: Row(
                                       children: [
                                         likePost == true
-                                        ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
-                                        : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                        // ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
+                                        // : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                        ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
+                                        : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 

@@ -239,8 +239,10 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                   setState(() {
                     isSwitched1 = value;
                   });
-                  
+
+                  context.showLoaderOverlay();
                   await apiBLMUpdateSwitchStatusFamily(memorialId, value);
+                  context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
@@ -274,7 +276,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                     isSwitched2 = value;
                   });
 
+                  context.showLoaderOverlay();
                   await apiBLMUpdateSwitchStatusFriends(memorialId, value);
+                  context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),
@@ -300,7 +304,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                     isSwitched3 = value;
                   });
 
+                  context.showLoaderOverlay();
                   await apiBLMUpdateSwitchStatusFollowers(memorialId, value);
+                  context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
                 activeTrackColor: Color(0xff3498DB),

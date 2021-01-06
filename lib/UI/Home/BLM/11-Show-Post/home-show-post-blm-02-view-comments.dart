@@ -2,8 +2,12 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-informat
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-03-show-post-comments.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-04-show-comment-replies.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-add-comment.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-show-comment-or-reply-like-status.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-07-comment-reply-like-or-unlike.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-add-reply.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -20,9 +24,11 @@ class BLMOriginalComment{
   String firstName;
   String lastName;
   dynamic image;
+  bool commentLikes;
+  int commentNumberOfLikes;
   List<BLMOriginalReply> listOfReplies;
 
-  BLMOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.listOfReplies});
+  BLMOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.listOfReplies});
 }
 
 class BLMOriginalReply{
@@ -34,8 +40,10 @@ class BLMOriginalReply{
   String firstName;
   String lastName;
   dynamic image;
+  bool replyLikes;
+  int replyNumberOfLikes;
 
-  BLMOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image});
+  BLMOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes});
 }
 
 class HomeBLMShowCommentsList extends StatefulWidget{
@@ -54,7 +62,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   final int userId;
   final int numberOfLikes;
   final int numberOfComments;
-  HomeBLMShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+ HomeBLMShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   static TextEditingController controller = TextEditingController();
@@ -67,10 +75,13 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   int count;
   int numberOfReplies;
   int page2;
-  static Future<APIBLMShowProfileInformation> currentUser;
-  int replyToComment;
-  int replyToReply;
-  
+  Future<APIBLMShowProfileInformation> currentUser;
+  List<bool> commentsLikes;
+  List<int> commentsNumberOfLikes;
+  bool isComment;
+  int currentCommentId;
+  List<List<bool>> repliesLikes;
+  List<List<int>> repliesNumberOfLikes;
 
   void initState(){
     super.initState();
@@ -82,8 +93,12 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
     page1 = 1;
     page2 = 1;
     count = 0;
-    replyToComment = 0;
-    replyToReply = 0;
+    commentsLikes = [];
+    commentsNumberOfLikes = [];
+    repliesLikes = [];
+    repliesNumberOfLikes = [];
+    isComment = true;
+
     onLoading();
     currentUser = getDrawerInformation();
   }
@@ -102,32 +117,44 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
       count = count + newValue1.commentsList.length;
 
       for(int i = 0; i < newValue1.commentsList.length; i++){
-        print('The number of loops is $i');
+        var commentLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.commentsList[i].commentId);
+        commentsLikes.add(commentLikeStatus.likeStatus);
+        commentsNumberOfLikes.add(commentLikeStatus.numberOfLikes);
+        
         if(repliesRemaining != 0){
           context.showLoaderOverlay();
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.commentsList[i].commentId, page: page2);
           context.hideLoaderOverlay();
-          // numberOfReplies = newValue2.repliesList.length;
-          print('The number of replies is ${newValue2.repliesList.length}');
+
+          List<bool> newRepliesLikes = [];
+          List<int> newRepliesNumberOfLikes = [];
+          List<int> newReplyId = [];
+
           for(int j = 0; j < newValue2.repliesList.length; j++){
+
+            var replyLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.repliesList[j].replyId);
+            newRepliesLikes.add(replyLikeStatus.likeStatus);
+            newRepliesNumberOfLikes.add(replyLikeStatus.numberOfLikes);
+            newReplyId.add(newValue2.repliesList[j].replyId);
+
             replies.add(
               BLMOriginalReply(
                 replyId: newValue2.repliesList[j].replyId,
                 commentId: newValue2.repliesList[j].commentId,
                 userId: newValue2.repliesList[j].user.userId,
                 replyBody: newValue2.repliesList[j].replyBody,
-                // createdAt: timeago.format(DateTime.parse(newValue2.repliesList[j].createdAt)),
                 createdAt: newValue2.repliesList[j].createdAt,
                 firstName: newValue2.repliesList[j].user.firstName,
                 lastName: newValue2.repliesList[j].user.lastName,
+                replyLikes: replyLikeStatus.likeStatus,
+                replyNumberOfLikes: replyLikeStatus.numberOfLikes,
                 image: newValue2.repliesList[j].user.image,
               ),
             );
-
-            print('The reply is ${newValue2.repliesList[j].replyBody}');
           }
 
-          
+          repliesLikes.add(newRepliesLikes);
+          repliesNumberOfLikes.add(newRepliesNumberOfLikes);
 
           repliesRemaining = newValue2.itemsRemaining;
           page2++;
@@ -135,8 +162,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
         repliesRemaining = 1;
         page2 = 1;
-
-        
         
         comments.add(
           BLMOriginalComment(
@@ -148,20 +173,15 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             firstName: newValue1.commentsList[i].user.firstName,
             lastName: newValue1.commentsList[i].user.lastName,
             image: newValue1.commentsList[i].user.image,
+            commentLikes: commentLikeStatus.likeStatus,
+            commentNumberOfLikes: commentLikeStatus.numberOfLikes,
             listOfReplies: replies
           ),    
         );
 
-        print('The length of replies is ${comments[i].listOfReplies.length}');
-
-        // print('The reply body is ${comments[i].listOfReplies[0].replyBody}');
-
-        // replies.clear();
         replies = [];
       
       }
-
-      
 
       if(mounted)
       setState(() {});
@@ -193,6 +213,8 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
           FocusNode currentFocus = FocusScope.of(context);
           if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
+            isComment = true;
+            controller.clear();
           }
         },
         child: Scaffold(
@@ -220,37 +242,27 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
 
-                    GestureDetector(
-                      onTap: () async{
-                        
-                      },
-                      child: Row(
-                        children: [
-                          Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
+                    Row(
+                      children: [
+                        Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
 
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                          Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                        Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
-                        ],
-                      ),
+                      ],
                     ),
 
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                    GestureDetector(
-                      onTap: (){
-                        
-                      },
-                      child: Row(
-                        children: [
-                          Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
+                    Row(
+                      children: [
+                        Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
 
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                          Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                        ],
-                      ),
+                        Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                      ],
                     ),
                   ],
                 ),
@@ -319,11 +331,37 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                   ),
                                 ),
 
-                                Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                // ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
+                                // : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                                commentsLikes[i] == true
+                                ? IconButton(
+                                  icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () async{
+                                    setState(() {
+                                      commentsLikes[i] = false;
+                                      commentsNumberOfLikes[i]--;
+                                      
+                                    });
 
-                                Text('0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                    await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
+                                  },
+                                )
+                                : IconButton(
+                                  icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () async{
+                                    setState(() {
+                                      commentsLikes[i] = true;
+                                      commentsNumberOfLikes[i]++;
+                                    });
+
+                                    await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
+                                  },
+                                ),
+
+                                Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
                               ],
                             ),
@@ -363,11 +401,47 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                               SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
                               GestureDetector(
-                                onTap: (){
+                                onTap: () async{
                                   setState(() {
-                                    replyToComment = i;
+                                    isComment = false;
+                                    currentCommentId = comments[i].commentId;
                                   });
-                                  print('The index of reply is $replyToComment');
+
+                                  await showMaterialModalBottomSheet(
+                                    expand: true,
+                                    context: context,
+                                    builder: (context) => Container(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: TextFormField(
+                                        controller: controller,
+                                        cursorColor: Color(0xff000000),
+                                        keyboardType: TextInputType.text,
+                                        maxLines: 10,
+                                        decoration: InputDecoration(
+                                          labelText: 'Say something...',
+                                          labelStyle: TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xffffffff),
+                                          ),
+                                          border: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: Text('Reply',),
                               ),
@@ -380,17 +454,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                           comments[i].listOfReplies.length != 0
                           ? Column(
                               children: List.generate(comments[i].listOfReplies.length, (index) => 
-                              // MiscBLMShowReply(
-                              //   currentUserId: userId,
-                              //   userId: comments[i].listOfReplies[index].userId,
-                              //   image: comments[i].listOfReplies[index].image,
-                              //   firstName: comments[i].listOfReplies[index].firstName,
-                              //   lastName: comments[i].listOfReplies[index].lastName,
-                              //   commentBody: comments[i].listOfReplies[index].replyBody,
-                              //   createdAt: comments[i].listOfReplies[index].createdAt,
-                              //   numberOfLikes: 1,
-                              // ),
-
                               Column(
                                 children: [
                                   Container(
@@ -422,11 +485,34 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                           ),
                                         ),
 
-                                        Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                        repliesLikes[i][index] == true
+                                        ? IconButton(
+                                          // icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
+                                          icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () async{
+                                            setState(() {
+                                              repliesLikes[i][index] = false;
+                                              repliesNumberOfLikes[i][index]--;
+                                              
+                                            });
+                                            await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
+                                          },
+                                        )
+                                        : IconButton(
+                                          // icon: Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                          icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,), 
+                                          padding: EdgeInsets.zero,
+                                          onPressed: () async{
+                                            setState(() {
+                                              repliesLikes[i][index] = true;
+                                              repliesNumberOfLikes[i][index]++;
+                                            });
+                                            await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
+                                          },
+                                        ),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                        Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                        Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
                                       ],
                                     ),
@@ -461,22 +547,54 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
 
-                                      // Text(convertDate(createdAt)),
                                       Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
 
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
                                       GestureDetector(
-                                        onTap: (){
+                                        onTap: () async{
+                                          controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
                                           setState(() {
-                                            replyToReply = index;
+                                            isComment = false;
+                                            currentCommentId = comments[i].commentId;
                                           });
-                                          print('The index of reply is $replyToComment');
+                                          await showMaterialModalBottomSheet(
+                                            expand: true,
+                                            context: context,
+                                            builder: (context) => Container(
+                                              padding: EdgeInsets.all(20.0),
+                                              child: TextFormField(
+                                                controller: controller,
+                                                cursorColor: Color(0xff000000),
+                                                keyboardType: TextInputType.text,
+                                                maxLines: 10,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Say something...',
+                                                  labelStyle: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color(0xffffffff),
+                                                  ),
+                                                  border: UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                    ),
+                                                  ),
+                                                  focusedBorder: UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                    ),
+                                                  ),
+                                                  enabledBorder: UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
                                         },
-                                        child: 
-                                        replyToReply == index
-                                        ? Text('Reply', style: TextStyle(fontWeight: FontWeight.bold),)
-                                        : Text('Reply',),
+                                        child: Text('Reply',),
                                       ),
 
                                     ],
@@ -544,6 +662,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: TextFormField(
+                      
                       onTap: () async{
                         await showMaterialModalBottomSheet(
                           expand: true,
@@ -556,8 +675,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                               keyboardType: TextInputType.text,
                               maxLines: 10,
                               decoration: InputDecoration(
-                                // fillColor: Color(0xffBDC3C7),
-                                // filled: true,
                                 labelText: 'Say something...',
                                 labelStyle: TextStyle(
                                   fontSize: 14,
@@ -578,12 +695,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                     color: Colors.transparent,
                                   ),
                                 ),
-                                // focusedBorder: OutlineInputBorder(
-                                //   borderSide: BorderSide(
-                                //     color: Color(0xffBDC3C7),
-                                //   ),
-                                //   borderRadius: BorderRadius.all(Radius.circular(10)),
-                                // ),
                               ),
                             ),
                           ),
@@ -620,31 +731,52 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                 GestureDetector(
                   onTap: () async{
+                    if(isComment == true){
+                      context.showLoaderOverlay();
+                      await apiBLMAddComment(postId: postId, commentBody: controller.text);
+                      context.hideLoaderOverlay();
 
-                    print('The post id is $postId');
-                    print('The post id is ${controller.text}');
+                      controller.clear();
 
-                    context.showLoaderOverlay();
-                    bool result = await apiBLMAddComment(postId: postId, commentBody: controller.text);
-                    context.hideLoaderOverlay();
+                      itemRemaining = 1;
+                      repliesRemaining = 1;
+                      comments = [];
+                      replies = [];
+                      numberOfReplies = 0;
+                      page1 = 1;
+                      page2 = 1;
+                      count = 0;
+                      commentsLikes = [];
+                      commentsNumberOfLikes = [];
+                      repliesLikes = [];
+                      repliesNumberOfLikes = [];
+                      isComment = true;                 
 
-                    controller.clear();
+                      onLoading();
+                    }else{
+                      context.showLoaderOverlay();
+                      apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
+                      context.hideLoaderOverlay();
 
-                    itemRemaining = 1;
-                    repliesRemaining = 1;
-                    comments = [];
-                    replies = [];
-                    numberOfReplies = 0;
-                    page1 = 1;
-                    page2 = 1;
-                    count = 0;
-                    replyToComment = 0;
-                    replyToReply = 0;
-                    onLoading();
+                      controller.clear();
 
-                    print('The result is $result');
+                      itemRemaining = 1;
+                      repliesRemaining = 1;
+                      comments = [];
+                      replies = [];
+                      numberOfReplies = 0;
+                      page1 = 1;
+                      page2 = 1;
+                      count = 0;
+                      commentsLikes = [];
+                      commentsNumberOfLikes = [];
+                      repliesLikes = [];
+                      repliesNumberOfLikes = [];
+                      isComment = true;
 
-                    onLoading();
+                      onLoading();
+                    }
+
                   },
                   child: Text('Post',
                     style: TextStyle(

@@ -222,8 +222,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             if(
                               details.data.birthdate != _key1.currentState.controller.text ||
                               details.data.birthplace !=  _key2.currentState.controller.text ||
-                              details.data.email != _key3.currentState.controller.text ||
-                              details.data.address != _key4.currentState.controller.text ||
+                              // details.data.email != _key3.currentState.controller.text ||
+                              // details.data.address != _key4.currentState.controller.text ||
+                              // details.data.phoneNumber != _key5.currentState.controller.text
+                              details.data.address != _key3.currentState.controller.text ||
+                              details.data.email != _key4.currentState.controller.text ||
                               details.data.phoneNumber != _key5.currentState.controller.text
                             ){
                               bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -234,14 +237,18 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 bool result = await apiRegularUpdateOtherDetails(
                                   birthdate: _key1.currentState.controller.text,
                                   birthplace: _key2.currentState.controller.text,
-                                  email: _key3.currentState.controller.text,
-                                  address: _key4.currentState.controller.text,
+                                  // email: _key3.currentState.controller.text,
+                                  // address: _key4.currentState.controller.text,
+                                  // phoneNumber: _key5.currentState.controller.text,
+                                  address: _key3.currentState.controller.text,
+                                  email: _key4.currentState.controller.text,
                                   phoneNumber: _key5.currentState.controller.text,
                                 );
 
                                 context.hideLoaderOverlay();
 
                                 if(result){
+                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the other details.', color: Colors.green,));
                                   Navigator.pop(context);
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));

@@ -7,7 +7,9 @@ import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings
 import 'package:facesbyplaces/API/Regular/11-Settings-Notifications/api-settings-notifications-regular-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+
 
 class HomeRegularNotificationSettings extends StatefulWidget{
   final bool newMemorial;
@@ -96,7 +98,10 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle1 = value;
                                   });
                                   
+
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationMemorial(hide: toggle1);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),
@@ -116,7 +121,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle2 = value;
                                   });
                                   
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationActivities(hide: toggle2);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),
@@ -135,7 +142,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle3 = value;
                                   });
                                   
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationPostLikes(hide: toggle3);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),
@@ -154,7 +163,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle4 = value;
                                   });
                                   
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationPostComments(hide: toggle4);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),
@@ -192,7 +203,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle5 = value;
                                   });
                                   
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationAddFamily(hide: toggle5);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),
@@ -211,7 +224,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle6 = value;
                                   });
                                   
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationAddFriends(hide: toggle6);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),
@@ -230,7 +245,9 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
                                     toggle7 = value;
                                   });
                                   
+                                  context.showLoaderOverlay();
                                   await apiRegularUpdateNotificationAddAdmin(hide: toggle7);
+                                  context.hideLoaderOverlay();
                                 },
                                 activeColor: Color(0xff2F353D),
                                 activeTrackColor: Color(0xff3498DB),

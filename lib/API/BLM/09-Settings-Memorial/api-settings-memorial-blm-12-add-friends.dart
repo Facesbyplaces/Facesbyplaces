@@ -32,12 +32,15 @@ Future<bool> apiBLMAddFriends(int memorialId, int userId) async{
       ),  
     );
 
+    print('The response status code for adding friends is ${response.statusCode}');
+    print('The response status body for adding friends is ${response.data}');
 
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
+    print('The e is $e');
     result = false;
   }
 
