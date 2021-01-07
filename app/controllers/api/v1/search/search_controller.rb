@@ -24,7 +24,11 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def memorials
-        memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
+        if user().account_type == 1
+            memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Blm')
+        else
+            memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Memorial')
+        end
         
         memorials = memorials.page(params[:page]).per(numberOfPage)
         if memorials.total_count == 0 || (memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
