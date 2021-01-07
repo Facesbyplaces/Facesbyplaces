@@ -51,7 +51,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
             render json: {status: "Removed Admin"}
         else
-            render json: {}, status: 404
+            render json: {}, status: 400
         end
     end
 
@@ -108,7 +108,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
                 render json: {}, status: 500
             end
         else
-            render json: {}, status: 404
+            render json: {}, status: 400
         end
     end
 
