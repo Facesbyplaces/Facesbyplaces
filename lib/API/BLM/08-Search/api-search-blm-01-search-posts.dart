@@ -29,9 +29,9 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts(String keywords, int page) async{
 
 class APIBLMSearchPostMain{
   int itemsRemaining;
-  List<APIBLMSearchPostExtended> familyMemorialList;
+  List<APIBLMSearchPostExtended> searchPostList;
 
-  APIBLMSearchPostMain({this.itemsRemaining, this.familyMemorialList});
+  APIBLMSearchPostMain({this.itemsRemaining, this.searchPostList});
 
   factory APIBLMSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -39,14 +39,14 @@ class APIBLMSearchPostMain{
 
     return APIBLMSearchPostMain(
       itemsRemaining: parsedJson['itemsremaining'],
-      familyMemorialList: familyMemorials,
+      searchPostList: familyMemorials,
     );
   }
 }
 
 
 class APIBLMSearchPostExtended{
-  int id;
+  int postId;
   APIBLMSearchPostExtendedPage page;
   String body;
   String location;
@@ -59,7 +59,7 @@ class APIBLMSearchPostExtended{
   int numberOfComments;
   bool likeStatus;
 
-  APIBLMSearchPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMSearchPostExtended({this.postId, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -74,7 +74,7 @@ class APIBLMSearchPostExtended{
     List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();
     
     return APIBLMSearchPostExtended(
-      id: parsedJson['id'],
+      postId: parsedJson['id'],
       page: APIBLMSearchPostExtendedPage.fromJson(parsedJson['page']),
       body: parsedJson['body'],
       location: parsedJson['location'],
@@ -91,7 +91,7 @@ class APIBLMSearchPostExtended{
 }
 
 class APIBLMSearchPostExtendedPage{
-  int id;
+  int pageId;
   String name;
   APIBLMPostExtendedPageDetails details;
   dynamic backgroundImage;
@@ -104,11 +104,11 @@ class APIBLMSearchPostExtendedPage{
   String pageType;
   String privacy;
 
-  APIBLMSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
+  APIBLMSearchPostExtendedPage({this.pageId, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
 
   factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedPage(
-      id: parsedJson['id'],
+      pageId: parsedJson['id'],
       name: parsedJson['name'],
       details: APIBLMPostExtendedPageDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
@@ -147,7 +147,7 @@ class APIBLMPostExtendedPageDetails{
 }
 
 class APIBLMHomeTabPostExtendedPageCreator{
-  int id;
+  int creatorId;
   String firstName;
   String lastName;
   String phoneNumber;
@@ -155,11 +155,11 @@ class APIBLMHomeTabPostExtendedPageCreator{
   String userName;
   dynamic image;
 
-  APIBLMHomeTabPostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMHomeTabPostExtendedPageCreator({this.creatorId, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
   factory APIBLMHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPageCreator(
-      id: parsedJson['id'],
+      creatorId: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       phoneNumber: parsedJson['phone_number'],

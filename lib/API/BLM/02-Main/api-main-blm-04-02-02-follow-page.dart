@@ -1,12 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiRegularModifyFollowPage({String pageType, int pageId, bool follow}) async{
+Future<bool> apiBLMModifyFollowPage({String pageType, int pageId, bool follow}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   print('The page id is $pageId');
   print('The follow is $follow');

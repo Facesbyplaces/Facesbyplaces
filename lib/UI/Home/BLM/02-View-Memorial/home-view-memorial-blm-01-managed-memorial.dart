@@ -53,15 +53,21 @@ class BLMProfilePosts{
 }
 
 class HomeBLMProfile extends StatefulWidget{
+  // final int memorialId;
   final int memorialId;
-  HomeBLMProfile({this.memorialId});
+  final String relationship;
+  final bool managed;
+  HomeBLMProfile({this.memorialId, this.relationship, this.managed});
 
-  HomeBLMProfileState createState() => HomeBLMProfileState(memorialId: memorialId);
+  HomeBLMProfileState createState() => HomeBLMProfileState(memorialId: memorialId, relationship: relationship, managed: managed);
 }
 
 class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObserver{
+  // final int memorialId;
   final int memorialId;
-  HomeBLMProfileState({this.memorialId});
+  final String relationship;
+  final bool managed;
+  HomeBLMProfileState({this.memorialId, this.relationship, this.managed});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();

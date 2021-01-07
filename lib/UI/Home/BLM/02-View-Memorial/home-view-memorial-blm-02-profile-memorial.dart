@@ -37,16 +37,18 @@ class BLMProfilePosts{
 
 class HomeBLMMemorialProfile extends StatefulWidget{
   final int memorialId;
+  final String pageType;
   final bool newJoin;
-  HomeBLMMemorialProfile({this.memorialId, this.newJoin});
+  HomeBLMMemorialProfile({this.memorialId, this.pageType, this.newJoin});
 
-  HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState(memorialId: memorialId, newJoin: newJoin);
+  HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState(memorialId: memorialId, pageType: pageType, newJoin: newJoin);
 }
 
 class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   final int memorialId;
+  final String pageType;
   final bool newJoin;
-  HomeBLMMemorialProfileState({this.memorialId, this.newJoin});
+  HomeBLMMemorialProfileState({this.memorialId, this.pageType, this.newJoin});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();

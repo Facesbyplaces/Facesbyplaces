@@ -5,9 +5,9 @@ import 'dart:convert';
 Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab(int page) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
@@ -18,6 +18,9 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab(int page) async{
       'client': getClient,
     }
   );
+
+  print('The status code is ${response.statusCode}');
+  print('The status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -83,9 +86,14 @@ class APIBLMHomeTabMemorialExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabMemorialExtendedPageCreator pageCreator;
-  bool managed;
+  // bool managed;
+  bool manage;
+  bool famOrFriends;
+  bool follower;
+  String pageType;
+  String privacy;
 
-  APIBLMHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed});
+  APIBLMHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIBLMHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabMemorialExtendedPage(
@@ -97,7 +105,12 @@ class APIBLMHomeTabMemorialExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      managed: parsedJson['manage'],
+      // managed: parsedJson['manage'],
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

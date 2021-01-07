@@ -1,100 +1,75 @@
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-05-leave-page.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter/material.dart';
 import 'misc-02-blm-dialog.dart';
 
 class MiscBLMManageMemorialTab extends StatefulWidget{
-  // final int index;
-  // final String memorialName;
-  // final String description;
-  // final String image;
-  // final int memorialId;
-  // final bool managed;
-
-  // MiscBLMManageMemorialTab({
-  //   this.index, 
-  //   this.memorialName = '',
-  //   this.description = '',
-  //   this.image = 'assets/icons/graveyard.png',
-  //   this.memorialId,
-  //   this.managed,
-  // });
-
-
   final int index;
-  final int tab;
   final String memorialName;
   final String description;
   final String image;
   final int memorialId;
   final bool managed;
   final bool follower;
+  final bool famOrFriends;
   final String pageType;
+  final String relationship;
 
   MiscBLMManageMemorialTab({
     this.index, 
-    this.tab,
     this.memorialName = '',
     this.description = '',
     this.image,
     this.memorialId,
     this.managed,
     this.follower,
+    this.famOrFriends,
     this.pageType,
+    this.relationship,
   });
 
-  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, tab: tab, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed, follower: follower, pageType: pageType);
-  // MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed);
+  MiscBLMManageMemorialTabState createState() => MiscBLMManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed, follower: follower, famOrFriends: famOrFriends, pageType: pageType, relationship: relationship);
 }
 
 class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
 
-  // final int index;
-  // final String memorialName;
-  // final String description;
-  // final String image;
-  // final int memorialId;
-  // final bool managed;
-
-  // MiscBLMManageMemorialTabState({
-  //   this.index, 
-  //   this.memorialName,
-  //   this.description,
-  //   this.image,
-  //   this.memorialId,
-  //   this.managed,
-  // });
-
   final int index;
-  final int tab;
   final String memorialName;
   final String description;
   final String image;
   final int memorialId;
   final bool managed;
   final bool follower;
+  final bool famOrFriends;
   final String pageType;
+  final String relationship;
 
   MiscBLMManageMemorialTabState({
     this.index, 
-    this.tab,
-    this.memorialName = '',
-    this.description = '',
+    this.memorialName,
+    this.description,
     this.image,
     this.memorialId,
     this.managed,
     this.follower,
+    this.famOrFriends,
     this.pageType,
+    this.relationship,
   });
 
   bool manageButton;
+  bool followButton;
 
   void initState(){
     super.initState();
+    followButton = follower;
     manageButton = managed;
   }
 
@@ -107,29 +82,29 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
     );
     return GestureDetector(
       onTap: () async{
-        print('The value of managed is $managed');
-        print('The value of memorial id is $memorialId');
-        print('The value of follower is $follower');
-        print('The value of pageType is $pageType');
+        print('The memorial id is $memorialId');
+        print('The managed is $managed');
+        print('The page type is $pageType');
 
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
-
-        if(managed == true){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
-        }else{
-          if(pageType == 'Memorial'){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+        if(pageType == 'Blm'){
+          if(managed == true){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
           }else{
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: follower,)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+          }
+        }else{
+          if(managed == true){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+          }else{
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
           }
         }
       },
       child: Container(
-        height: SizeConfig.blockSizeVertical * 15,
+        height: ScreenUtil().setHeight(80),
         color: Color(0xffffffff),
         child: Row(
           children: [
-            // Padding(padding: EdgeInsets.only(left: 10.0), child: CircleAvatar(maxRadius: SizeConfig.blockSizeVertical * 5, backgroundColor: Color(0xff4EC9D4), backgroundImage: AssetImage(image),),),
             Padding(
               padding: EdgeInsets.only(left: 10.0), 
               child: CircleAvatar(
@@ -150,7 +125,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
                             fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
@@ -165,7 +139,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                           style: TextStyle(
-                            // fontSize: SizeConfig.safeBlockHorizontal * 3,
                             fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                             fontWeight: FontWeight.w200,
                             color: Colors.grey,
@@ -179,35 +152,94 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
             ),
             Container(
               padding: EdgeInsets.only(right: 15.0),
-              child: MaterialButton(
-                elevation: 0,
-                padding: EdgeInsets.zero,
-                textColor: manageButton ? Color(0xffffffff) : Color(0xff4EC9D4),
-                splashColor: Color(0xff4EC9D4),
-                onPressed: () async{
+              child: ((){
+                if(managed == true || famOrFriends == true){
+                  return MaterialButton(
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
+                    textColor: Color(0xffffffff),
+                    splashColor: Color(0xff4EC9D4),
+                    onPressed: () async{
 
-                  if(manageButton == true){
-                    bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Are you sure you want to leave this page?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                      bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
+                      if(confirmResult){
 
-                    if(confirmResult){
-                      String result = await apiBLMLeavePage(memorialId);
+                        context.showLoaderOverlay();
+                        bool result = await apiRegularLeavePage(memorialId: memorialId);
+                        context.hideLoaderOverlay();
 
-                      if(result != 'Success'){
-                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
+                        if(result){
+                          Navigator.popAndPushNamed(context, '/home/blm');
+                        }else{
+                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        }
                       }
-                    }
-                  }
+                    },
+                    child: Text('Leave', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
+                    height: ScreenUtil().setHeight(35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      side: BorderSide(color: Color(0xff04ECFF)),
+                    ),
+                    color: Color(0xff04ECFF),
+                  );
+                }else if(follower == true){
+                  return MaterialButton(
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
+                    textColor: Color(0xffffffff),
+                    splashColor: Color(0xff4EC9D4),
+                    onPressed: () async{
 
-                },
-                child: manageButton ? Text('Leave', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),) : Text('Manage', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
-                // height: SizeConfig.blockSizeVertical * 5,
-                height: ScreenUtil().setHeight(35),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  side: manageButton ? BorderSide(color: Color(0xff04ECFF)) : BorderSide(color: Color(0xff4EC9D4)),
-                ),
-                color: manageButton ? Color(0xff04ECFF) : Color(0xffffffff),
-              ),
+                      bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
+                      if(confirmResult){
+
+                        context.showLoaderOverlay();
+                        bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
+                        context.hideLoaderOverlay();
+
+                        if(result){
+                          Navigator.popAndPushNamed(context, '/home/blm');
+                        }else{
+                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        }
+                      }
+                    },
+                    child: Text('Leave', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
+                    height: ScreenUtil().setHeight(35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      side: BorderSide(color: Color(0xff04ECFF)),
+                    ),
+                    color: Color(0xff04ECFF),
+                  );
+                }else{
+                  return MaterialButton(
+                    elevation: 0,
+                    padding: EdgeInsets.zero,
+                    textColor: Color(0xff4EC9D4),
+                    splashColor: Color(0xff4EC9D4),
+                    onPressed: () async{
+                      context.showLoaderOverlay();
+                      bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
+                      context.hideLoaderOverlay();
+
+                      if(result){
+                        Navigator.popAndPushNamed(context, '/home/blm');
+                      }else{
+                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                      }
+                    },
+                    child: Text('Join', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),
+                    height: ScreenUtil().setHeight(35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      side: BorderSide(color: Color(0xff4EC9D4)),
+                    ),
+                    color: Color(0xffffffff),
+                  );
+                }
+              }()),
             ),
           ],
         ),

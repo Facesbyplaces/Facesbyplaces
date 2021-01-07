@@ -1,20 +1,23 @@
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMMainPagesMemorials{
-  int memorialId;
-  String memorialName;
-  String memorialDescription;
+  int blmId;
+  String blmName;
+  String blmDescription;
   bool managed;
+  bool joined;
+  String pageType;
 
-  BLMMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription, this.managed});
+  BLMMainPagesMemorials({this.blmId, this.blmName, this.blmDescription, this.managed, this.joined, this.pageType});
 }
+
 
 class HomeBLMManageTab extends StatefulWidget{
 
@@ -42,9 +45,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     count = 0;
     flag1 = false;
     addMemorials1();
-    onLoading1();
+    onLoading();
   }
 
+  
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
@@ -53,7 +57,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   void addMemorials1(){
     finalMemorials.add(
       Container(
-        height: SizeConfig.blockSizeVertical * 10,
+        height: 80,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         color: Color(0xffeeeeee),
         child: Row(
@@ -73,10 +77,11 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     );
   }
 
+
   void addMemorials2(){
     finalMemorials.add(
       Container(
-        height: SizeConfig.blockSizeVertical * 10,
+        height: 80,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         color: Color(0xffeeeeee),
         child: Align(
@@ -117,32 +122,48 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialId: newValue.familyMemorialList.blm[i].id, 
             memorialName: newValue.familyMemorialList.blm[i].name,
             description: newValue.familyMemorialList.blm[i].details.description,
-            managed: newValue.familyMemorialList.blm[i].managed,
+            image: newValue.familyMemorialList.blm[i].profileImage,
+            memorialId: newValue.familyMemorialList.blm[i].id, 
+            managed: newValue.familyMemorialList.blm[i].manage,
+            follower: newValue.familyMemorialList.blm[i].follower,
+            pageType: newValue.familyMemorialList.blm[i].pageType,
+            relationship: newValue.familyMemorialList.blm[i].relationship,
           ),
         );
       }
-
-      print('The count is $count');
 
       if(mounted)
       setState(() {});
       page1++;
 
       if(blmFamilyItemsRemaining == 0){
+        print('Test test test!');
         addMemorials2();
+        print('Donee!');
+        setState(() {
+          flag1 = true;
+        });
+        onLoading();
       }
-      
+
       refreshController.loadComplete();
+      
+      
     }else{
-      setState(() {
-        flag1 = true;
-      });
+        // print('Donee!');
+        // setState(() {
+        //   flag1 = true;
+        // });
+        // onLoading();
+
       
       refreshController.loadNoData();
     }
+
+
+    
   }
 
   void onLoading2() async{
@@ -152,17 +173,28 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       var newValue = await apiBLMHomeMemorialsTab(page2);
       context.hideLoaderOverlay();
 
-      blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
-      count = count + newValue.familyMemorialList.blm.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
+
+      blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
+      count = count + newValue.friendsMemorialList.blm.length;
+
+      
+
+      for(int i = 0; i < newValue.friendsMemorialList.blm.length; i++){
+
+        
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialId: newValue.friendsMemorialList.blm[i].id,
             memorialName: newValue.friendsMemorialList.blm[i].name,
             description: newValue.friendsMemorialList.blm[i].details.description,
-            managed: newValue.familyMemorialList.blm[i].managed,
+            image: newValue.friendsMemorialList.blm[i].profileImage,
+            memorialId: newValue.friendsMemorialList.blm[i].id, 
+            managed: newValue.friendsMemorialList.blm[i].manage,
+            follower: newValue.friendsMemorialList.blm[i].follower,
+            famOrFriends: newValue.friendsMemorialList.blm[i].famOrFriends,
+            pageType: newValue.friendsMemorialList.blm[i].pageType,
+            relationship: newValue.friendsMemorialList.blm[i].relationship,
           ),
         );
       }
@@ -170,8 +202,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       if(mounted)
       setState(() {});
       page2++;
-
-      
 
       refreshController.loadComplete();
     }else{
@@ -245,5 +275,3 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     );
   }
 }
-
-
