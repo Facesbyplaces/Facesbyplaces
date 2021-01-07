@@ -122,10 +122,14 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         finalMemorials.add(
           MiscRegularManageMemorialTab(
             index: i,
-            memorialId: newValue.familyMemorialList.memorial[i].id, 
             memorialName: newValue.familyMemorialList.memorial[i].name,
             description: newValue.familyMemorialList.memorial[i].details.description,
-            managed: newValue.familyMemorialList.memorial[i].managed,
+            image: newValue.familyMemorialList.memorial[i].profileImage,
+            memorialId: newValue.familyMemorialList.memorial[i].id, 
+            managed: newValue.familyMemorialList.memorial[i].manage,
+            follower: newValue.familyMemorialList.memorial[i].follower,
+            pageType: newValue.familyMemorialList.memorial[i].pageType,
+            relationship: newValue.familyMemorialList.memorial[i].relationship,
           ),
         );
       }
@@ -135,17 +139,31 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       page1++;
 
       if(memorialFamilyItemsRemaining == 0){
+        print('Test test test!');
         addMemorials2();
+        print('Donee!');
+        setState(() {
+          flag1 = true;
+        });
+        onLoading();
       }
-      
+
+      print('The items remaining is $memorialFamilyItemsRemaining');
+
       refreshController.loadComplete();
+      
+      
     }else{
-      setState(() {
-        flag1 = true;
-      });
+        // print('Donee!');
+        // setState(() {
+        //   flag1 = true;
+        // });
+        // onLoading();
+
       
       refreshController.loadNoData();
     }
+
 
     
   }
@@ -157,17 +175,37 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       var newValue = await apiRegularHomeMemorialsTab(page2);
       context.hideLoaderOverlay();
 
-      memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
-      count = count + newValue.familyMemorialList.memorial.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.memorial.length; i++){
+
+      memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
+      count = count + newValue.friendsMemorialList.memorial.length;
+
+      
+
+      for(int i = 0; i < newValue.friendsMemorialList.memorial.length; i++){
+
+        print('The name is ${newValue.friendsMemorialList.memorial[i].name}');
+
+        print('The length is ${newValue.friendsMemorialList.memorial.length}');
+        print('The value of managed is ${newValue.friendsMemorialList.memorial[i].manage}');
+        
         finalMemorials.add(
           MiscRegularManageMemorialTab(
+            // index: i,
+            // memorialId: newValue.friendsMemorialList.memorial[i].id,
+            // memorialName: newValue.friendsMemorialList.memorial[i].name,
+            // description: newValue.friendsMemorialList.memorial[i].details.description,
+            // managed: newValue.friendsMemorialList.memorial[i].managed,
             index: i,
-            memorialId: newValue.friendsMemorialList.memorial[i].id,
             memorialName: newValue.friendsMemorialList.memorial[i].name,
             description: newValue.friendsMemorialList.memorial[i].details.description,
-            managed: newValue.familyMemorialList.memorial[i].managed,
+            image: newValue.friendsMemorialList.memorial[i].profileImage,
+            memorialId: newValue.friendsMemorialList.memorial[i].id, 
+            managed: newValue.friendsMemorialList.memorial[i].manage,
+            follower: newValue.friendsMemorialList.memorial[i].follower,
+            famOrFriends: newValue.friendsMemorialList.memorial[i].famOrFriends,
+            pageType: newValue.friendsMemorialList.memorial[i].pageType,
+            relationship: newValue.friendsMemorialList.memorial[i].relationship,
           ),
         );
       }

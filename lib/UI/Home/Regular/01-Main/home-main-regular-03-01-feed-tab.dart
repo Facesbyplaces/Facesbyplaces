@@ -3,11 +3,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-18-regular-image-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class RegularMainPagesFeeds{
@@ -165,7 +165,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              timeCreated: convertDate(feeds[i].timeCreated),
+              // timeCreated: convertDate(feeds[i].timeCreated),
+              timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
 
               managed: feeds[i].managed,
               joined: feeds[i].joined,

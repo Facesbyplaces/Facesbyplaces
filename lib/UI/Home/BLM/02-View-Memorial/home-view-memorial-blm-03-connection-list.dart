@@ -2,7 +2,6 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-02-connection-list-friends.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-03-connection-list-follower.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +38,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   int itemRemaining1;
   int itemRemaining2;
   int itemRemaining3;
-  int page;
+  // int page;
+  int page1;
+  int page2;
+  int page3;
   int toggle;
 
   void onRefresh() async{
@@ -51,7 +53,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     if(itemRemaining1 != 0){
 
       context.showLoaderOverlay();
-      var newValue = await apiBLMConnectionListFamily(memorialId, page);
+      var newValue = await apiBLMConnectionListFamily(memorialId, page1);
       context.hideLoaderOverlay();
 
       itemRemaining1 = newValue.itemsRemaining;
@@ -64,10 +66,12 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             image: newValue.familyList[i].user.image,
           ),    
         );
+
       }
 
       if(mounted)
       setState(() {});
+      page1++;
       
       refreshController.loadComplete();
       
@@ -79,7 +83,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void onLoading2() async{
     if(itemRemaining2 != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMConnectionListFriends(memorialId, page);
+      var newValue = await apiBLMConnectionListFriends(memorialId, page2);
       context.hideLoaderOverlay();
 
       itemRemaining2 = newValue.itemsRemaining;
@@ -96,6 +100,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
       if(mounted)
       setState(() {});
+      page2++;
       
       refreshController.loadComplete();
       
@@ -107,24 +112,26 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void onLoading3() async{
     if(itemRemaining3 != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMConnectionListFollowers(memorialId, page);
+      var newValue = await apiBLMConnectionListFollowers(memorialId, page3);
       context.hideLoaderOverlay();
 
       itemRemaining3 = newValue.itemsRemaining;
 
+      print('The length of list follower is ${newValue.followersList.length}');
+
       for(int i = 0; i < newValue.followersList.length; i++){
-        listsFriends.add(
+        listsFollowers.add(
           BLMConnectionListItem(
-            firstName: newValue.followersList[i].user.firstName,
-            lastName: newValue.followersList[i].user.lastName,
-            image: newValue.followersList[i].user.image,
+            firstName: newValue.followersList[i].firstName,
+            lastName: newValue.followersList[i].lastName,
+            image: newValue.followersList[i].image,
           ),    
         );
       }
 
       if(mounted)
       setState(() {});
-      page++;
+      page3++;
       
       refreshController.loadComplete();
       
@@ -135,9 +142,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
 
   void initState(){
     super.initState();
-    onLoading1();
-    onLoading2();
-    onLoading3();
     toggle = newToggle;
     listsFamily = [];
     listsFriends = [];
@@ -147,7 +151,13 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     itemRemaining1 = 1;
     itemRemaining2 = 1;
     itemRemaining3 = 1;
-    page = 1;
+    // page = 1;
+    page1 = 1;
+    page2 = 1;
+    page3 = 1;
+    onLoading1();
+    onLoading2();
+    onLoading3();
   }
 
   @override
@@ -172,6 +182,18 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                   for(int i = 0; i < listsFamily.length; i++){
                     if(listsFamily[i].firstName == search || listsFamily[i].lastName == search){
                       searches.add(listsFamily[i]);
+                    }
+                  }
+                }else if(toggle == 1){
+                  for(int i = 0; i < listsFriends.length; i++){
+                    if(listsFriends[i].firstName == search || listsFriends[i].lastName == search){
+                      searches.add(listsFriends[i]);
+                    }
+                  }
+                }else if(toggle == 2){
+                  for(int i = 0; i < listsFollowers.length; i++){
+                    if(listsFollowers[i].firstName == search || listsFollowers[i].lastName == search){
+                      searches.add(listsFollowers[i]);
                     }
                   }
                 }
@@ -304,10 +326,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
+              body = CircularProgressIndicator();
             }
             else if(mode == LoadStatus.failed){
               body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -324,60 +346,39 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         controller: refreshController,
         onRefresh: onRefresh,
         onLoading: onLoading1,
-        child: Container(
+        child: GridView.count(
           padding: EdgeInsets.all(10.0),
-          child: GridView.count(
-            physics: ClampingScrollPhysics(),
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 20,
-            crossAxisCount: 4,
-            children: List.generate(
-              onSearch ? searches.length : listsFamily.length, (index) => Column(
-                children: [
-                  onSearch
-                  ? Expanded(
-                    child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          // return AssetImage('assets/icons/graveyard.png');
-                          return AssetImage('assets/icons/app-icon.png');
-                          // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
-                        }else{
-                          return CachedNetworkImageProvider(
-                            searches[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
-                    ),
-
-                    // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: searches[index].image.toString() != null || searches[index].image.toString() == '' ? NetworkImage(searches[index].image.toString()) : AssetImage('assets/icons/app-icon.png')),
-                  )
-                  : Expanded(
-                    child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(listsFamily[index].image.toString() == '' || listsFamily[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            listsFamily[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
-                    ),
-                    // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: searches[index].image.toString() != null || searches[index].image.toString() == '' ? NetworkImage(searches[index].image.toString()) : AssetImage('assets/icons/app-icon.png')),
+          physics: ClampingScrollPhysics(),
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 20,
+          crossAxisCount: 4,
+          children: List.generate(
+            onSearch ? searches.length : listsFamily.length, (index) => Column(
+              children: [
+                onSearch
+                ? Expanded(
+                  child: CircleAvatar(
+                    radius: SizeConfig.blockSizeVertical * 5,
+                    backgroundColor: Color(0xff888888), 
+                    backgroundImage: searches[index].image != null && searches[index].image != ''
+                    ? NetworkImage(searches[index].image) 
+                    : AssetImage('assets/icons/app-icon.png'),
                   ),
+                )
+                : Expanded(
+                  child: CircleAvatar(
+                    radius: SizeConfig.blockSizeVertical * 5,
+                    backgroundColor: Color(0xff888888), 
+                    backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
+                    ? NetworkImage(listsFamily[index].image) 
+                    : AssetImage('assets/icons/app-icon.png'),
+                  ),
+                ),
 
-                  onSearch
-                  ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
-                  : Text(listsFamily[index].firstName.toString() + ' ' + listsFamily[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
-                ],
-              ),
+                onSearch
+                ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
+                : Text(listsFamily[index].firstName.toString() + ' ' + listsFamily[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+              ],
             ),
           ),
         ),
@@ -396,7 +397,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -406,10 +407,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              page++;
             }
             else{
-              body = Text('No more post.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -417,55 +417,39 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         controller: refreshController,
         onRefresh: onRefresh,
         onLoading: onLoading2,
-        child: Container(
+        child: GridView.count(
           padding: EdgeInsets.all(10.0),
-          child: GridView.count(
-            physics: ClampingScrollPhysics(),
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 20,
-            crossAxisCount: 4,
-            children: List.generate(
-              onSearch ? searches.length : listsFriends.length, (index) => Column(
-                children: [
-                  onSearch
-                  ? Expanded(
-                    child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            searches[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
-                    ),
-                  )
-                  : Expanded(
-                    child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(listsFriends[index].image.toString() == '' || listsFriends[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            listsFriends[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
-                    ),
+          physics: ClampingScrollPhysics(),
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 20,
+          crossAxisCount: 4,
+          children: List.generate(
+            onSearch ? searches.length : listsFriends.length, (index) => Column(
+              children: [
+                onSearch
+                ? Expanded(
+                  child: CircleAvatar(
+                    radius: SizeConfig.blockSizeVertical * 5,
+                    backgroundColor: Color(0xff888888), 
+                    backgroundImage: searches[index].image != null && searches[index].image != ''
+                    ? NetworkImage(searches[index].image) 
+                    : AssetImage('assets/icons/app-icon.png'),
                   ),
+                )
+                : Expanded(
+                  child: CircleAvatar(
+                    radius: SizeConfig.blockSizeVertical * 5,
+                    backgroundColor: Color(0xff888888), 
+                    backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
+                    ? NetworkImage(listsFriends[index].image) 
+                    : AssetImage('assets/icons/app-icon.png'),
+                  ),
+                ),
 
-                  onSearch
-                  ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
-                  : Text(listsFriends[index].firstName.toString() + ' ' + listsFriends[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
-                ],
-              ),
+                onSearch
+                ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
+                : Text(listsFriends[index].firstName.toString() + ' ' + listsFriends[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+              ],
             ),
           ),
         ),
@@ -484,7 +468,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -494,10 +478,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              page++;
             }
             else{
-              body = Text('No more post.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              body = Text('No more list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
             }
             return Container(height: 55.0, child: Center(child: body),);
           },
@@ -505,55 +488,39 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         controller: refreshController,
         onRefresh: onRefresh,
         onLoading: onLoading3,
-        child: Container(
+        child: GridView.count(
           padding: EdgeInsets.all(10.0),
-          child: GridView.count(
-            physics: ClampingScrollPhysics(),
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 20,
-            crossAxisCount: 4,
-            children: List.generate(
-              onSearch ? searches.length : listsFriends.length, (index) => Column(
-                children: [
-                  onSearch
-                  ? Expanded(
-                    child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(searches[index].image.toString() == '' || searches[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            searches[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
-                    ),
-                  )
-                  : Expanded(
-                    child: CircleAvatar(
-                      radius: SizeConfig.blockSizeVertical * 5, 
-                      backgroundColor: Color(0xff888888),
-                      backgroundImage: ((){
-                        if(listsFollowers[index].image.toString() == '' || listsFollowers[index].image.toString() == null){
-                          return AssetImage('assets/icons/graveyard.png');
-                        }else{
-                          return CachedNetworkImageProvider(
-                            listsFollowers[index].image.toString(),
-                            scale: 1.0,
-                          );
-                        }
-                      }()),
-                    ),
+          physics: ClampingScrollPhysics(),
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 20,
+          crossAxisCount: 4,
+          children: List.generate(
+            onSearch ? searches.length : listsFollowers.length, (index) => Column(
+              children: [
+                onSearch
+                ? Expanded(
+                  child: CircleAvatar(
+                    radius: SizeConfig.blockSizeVertical * 5,
+                    backgroundColor: Color(0xff888888), 
+                    backgroundImage: searches[index].image != null && searches[index].image != ''
+                    ? NetworkImage(searches[index].image) 
+                    : AssetImage('assets/icons/app-icon.png'),
                   ),
+                )
+                : Expanded(
+                  child: CircleAvatar(
+                    radius: SizeConfig.blockSizeVertical * 5,
+                    backgroundColor: Color(0xff888888), 
+                    backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
+                    ? NetworkImage(listsFollowers[index].image) 
+                    : AssetImage('assets/icons/app-icon.png'),
+                  ),
+                ),
 
-                  onSearch
-                  ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
-                  : Text(listsFollowers[index].firstName.toString() + ' ' + listsFollowers[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
-                ],
-              ),
+                onSearch
+                ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
+                : Text(listsFollowers[index].firstName.toString() + ' ' + listsFollowers[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+              ],
             ),
           ),
         ),

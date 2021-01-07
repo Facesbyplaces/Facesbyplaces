@@ -7,11 +7,11 @@ import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter/material.dart';
 
 class RegularSearchMainPosts{
   int userId;
@@ -24,7 +24,7 @@ class RegularSearchMainPosts{
   List<dynamic> imagesOrVideos;
 
   bool managed;
-  bool joined;
+  bool follower;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
@@ -35,40 +35,49 @@ class RegularSearchMainPosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
 class RegularSearchMainSuggested{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  String image;
   bool managed;
-  bool joined;
+  bool follower;
   String pageType;
+  bool famOrFriends;
+  String relationship;
 
-  RegularSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
+  RegularSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class RegularSearchMainNearby{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  String image;
   bool managed;
-  bool joined;
+  bool follower;
   String pageType;
+  bool famOrFriends;
+  String relationship;
 
-  RegularSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
+  RegularSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class RegularSearchMainBLM{
   int memorialId;
   String memorialName;
   String memorialDescription;
+  String image;
   bool managed;
-  bool joined;
+  bool follower;
   String pageType;
+  bool famOrFriends;
+  String relationship;
 
-  RegularSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
+  RegularSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
 }
 
 
@@ -148,7 +157,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           imagesOrVideos: newValue.searchPostList[i].imagesOrVideos,
 
           managed: newValue.searchPostList[i].page.manage,
-          joined: newValue.searchPostList[i].page.follower,
+          follower: newValue.searchPostList[i].page.follower,
           numberOfComments: newValue.searchPostList[i].numberOfComments,
           numberOfLikes: newValue.searchPostList[i].numberOfLikes,
           likeStatus: newValue.searchPostList[i].likeStatus,
@@ -183,9 +192,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           memorialId: newValue.pages[i].page.id,
           memorialName: newValue.pages[i].page.name,
           memorialDescription: newValue.pages[i].page.details.description,
-          managed: newValue.pages[i].page.managed,
-          joined: newValue.pages[i].page.follower,
+          image: newValue.pages[i].page.profileImage,
+          managed: newValue.pages[i].page.manage,
+          follower: newValue.pages[i].page.follower,
           pageType: newValue.pages[i].page.pageType,
+          famOrFriends: newValue.pages[i].page.famOrFriends,
+          relationship: newValue.pages[i].page.relationship,
           ),    
         );
       }
@@ -213,9 +225,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           memorialId: newValue.blmList[i].id,
           memorialName: newValue.blmList[i].name,
           memorialDescription: newValue.blmList[i].details.description,
-          managed: newValue.blmList[i].managed,
-          joined: newValue.blmList[i].follower,
+          image: newValue.blmList[i].profileImage,
+          managed: newValue.blmList[i].manage,
+          follower: newValue.blmList[i].follower,
           pageType: newValue.blmList[i].pageType,
+          famOrFriends: newValue.blmList[i].famOrFriends,
+          relationship: newValue.blmList[i].relationship,
           ),    
         );
       }
@@ -237,9 +252,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           memorialId: newValue.memorialList[i].id,
           memorialName: newValue.memorialList[i].name,
           memorialDescription: newValue.memorialList[i].details.description,
-          managed: newValue.blmList[i].managed,
-          joined: newValue.blmList[i].follower,
+          image: newValue.blmList[i].profileImage,
+          managed: newValue.blmList[i].manage,
+          follower: newValue.blmList[i].follower,
           pageType: newValue.blmList[i].pageType,
+          famOrFriends: newValue.blmList[i].famOrFriends,
+          relationship: newValue.blmList[i].relationship,
           ),    
         );
       }
@@ -263,12 +281,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
       for(int i = 0; i < newValue.memorialList.length; i++){
         blm.add(RegularSearchMainBLM(
-          memorialId: newValue.memorialList[i].id,
+          memorialId: newValue.memorialList[i].page.id,
           memorialName: newValue.memorialList[i].page.name,
           memorialDescription: newValue.memorialList[i].page.details.description,
-          managed: newValue.memorialList[i].page.managed,
-          joined: newValue.memorialList[i].page.follower,
+          image: newValue.memorialList[i].page.profileImage,
+          managed: newValue.memorialList[i].page.manage,
+          follower: newValue.memorialList[i].page.follower,
           pageType: newValue.memorialList[i].page.pageType,
+          famOrFriends: newValue.memorialList[i].page.famOrFriends,
+          relationship: newValue.memorialList[i].page.relationship,
           ),    
         );
       }
@@ -356,10 +377,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
-          // body: Container(
-          //   decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
-          //   child: 
-          // ),
           body: Stack(
             children: [
               SingleChildScrollView(child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
@@ -369,8 +386,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                   Container(
                     alignment: Alignment.center,
-                    // width: SizeConfig.screenWidth,
-                    // height: SizeConfig.blockSizeVertical * 8,
                     height: ScreenUtil().setHeight(55),
                     color: Color(0xffffffff),
                     child: DefaultTabController(
@@ -452,7 +467,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   if(currentLocation != null || currentLocation != ''){
                                     return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                   }else{
-                                    Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                   }
                                 }()),
                               ],
@@ -476,7 +491,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                   if(currentLocation != null || currentLocation != ''){
                                     return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                   }else{
-                                    Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
                                   }
                                 }()),
                               ],
@@ -526,7 +541,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body =  Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -555,10 +570,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              timeCreated: convertDate(feeds[i].timeCreated),
+              // timeCreated: convertDate(feeds[i].timeCreated),
+              timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
 
               managed: feeds[i].managed,
-              joined: feeds[i].joined,
+              joined: feeds[i].follower,
               profileImage: feeds[i].profileImage,
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
@@ -618,7 +634,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         alignment: Alignment.center,
         child: ContainerResponsive(
           width: SizeConfig.screenWidth,
-          // height: SizeConfig.screenHeight,
           height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
           heightResponsive: false,
           widthResponsive: true,
@@ -669,14 +684,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
+            print('The value of manage is ${suggested[i].managed}');
             return MiscRegularManageMemorialTab(
               index: i,
-              memorialId: suggested[i].memorialId, 
-              memorialName: suggested[i].memorialName, 
+              memorialName: suggested[i].memorialName,
               description: suggested[i].memorialDescription,
+              image: suggested[i].image,
+              memorialId: suggested[i].memorialId,
               managed: suggested[i].managed,
-              follower: suggested[i].joined,
+              follower: suggested[i].follower,
               pageType: suggested[i].pageType,
+              relationship: suggested[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
@@ -717,7 +735,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body ;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -741,13 +759,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscRegularManageMemorialTab(
-              index: i,
-              memorialId: nearby[i].memorialId, 
-              memorialName: nearby[i].memorialName, 
-              description: nearby[i].memorialDescription,
-              managed: nearby[i].managed,
-              follower: nearby[i].joined,
-              pageType: nearby[i].pageType,
+                index: i,
+                memorialName: nearby[i].memorialName,
+                description: nearby[i].memorialDescription,
+                image: nearby[i].image,
+                memorialId: nearby[i].memorialId,
+                managed: nearby[i].managed,
+                follower: nearby[i].follower,
+                pageType: nearby[i].pageType,
+                relationship: nearby[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
@@ -788,7 +808,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body ;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -812,20 +832,21 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscRegularManageMemorialTab(
-              index: i,
-              memorialId: blm[i].memorialId, 
-              memorialName: blm[i].memorialName, 
-              description: blm[i].memorialDescription,
-              managed: blm[i].managed,
-              follower: blm[i].joined,
-              pageType: blm[i].pageType,
+                index: i,
+                memorialName: blm[i].memorialName,
+                description: blm[i].memorialDescription,
+                image: blm[i].image,
+                memorialId: blm[i].memorialId,
+                managed: blm[i].managed,
+                follower: blm[i].follower,
+                pageType: blm[i].pageType,
+                relationship: blm[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
           itemCount: blm.length,
         ),
       )
-      // : MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
       : ContainerResponsive(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,

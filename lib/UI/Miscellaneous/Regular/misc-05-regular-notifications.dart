@@ -6,7 +6,8 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final List<TextSpan> content;
 
   MiscRegularNotificationDisplayTemplate({
-    this.imageIcon = 'assets/icons/app-icon.png',
+    // this.imageIcon = 'assets/icons/app-icon.png',
+    this.imageIcon = '',
     this.content,
   });
 
@@ -20,7 +21,9 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
         children: [
           SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
-          CircleAvatar(backgroundImage: AssetImage(imageIcon), backgroundColor: Color(0xff888888),),
+          // CircleAvatar(backgroundImage: AssetImage(imageIcon), backgroundColor: Color(0xff888888),),
+          
+          CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),
 
           SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 

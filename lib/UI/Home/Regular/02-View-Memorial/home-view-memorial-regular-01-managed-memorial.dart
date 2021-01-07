@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-03-show-switch-status.dart';
+import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -15,6 +16,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
@@ -55,14 +57,18 @@ class RegularProfilePosts{
 
 class HomeRegularProfile extends StatefulWidget{
   final int memorialId;
-  HomeRegularProfile({this.memorialId});
+  final String relationship;
+  final bool managed;
+  HomeRegularProfile({this.memorialId, this.relationship, this.managed,});
 
-  HomeRegularProfileState createState() => HomeRegularProfileState(memorialId: memorialId);
+  HomeRegularProfileState createState() => HomeRegularProfileState(memorialId: memorialId, relationship: relationship, managed: managed);
 }
 
 class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBindingObserver{
   final int memorialId;
-  HomeRegularProfileState({this.memorialId});
+  final String relationship;
+  final bool managed;
+  HomeRegularProfileState({this.memorialId, this.relationship, this.managed,});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
@@ -131,6 +137,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
     }else{
@@ -338,13 +345,33 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: () async{
-                                          context.showLoaderOverlay();
-                                          APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId);
-                                          context.hideLoaderOverlay();
+                                          if(managed == true){
+                                            context.showLoaderOverlay();
+                                            APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId);
+                                            context.hideLoaderOverlay();
 
-                                          if(result.success){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                            if(result.success){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                            }
+                                          }else{
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: memorialId, relationship: relationship,)));
                                           }
+
+                                          // context.showLoaderOverlay();
+                                          // APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId);
+                                          // context.hideLoaderOverlay();
+
+                                          // if(result.success){
+                                          //   // if(managed == true){
+                                          //   //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                          //   // }
+
+                                          //   print('The value of manage is $managed');
+                                          //   print('The value of famOrFriends is $famOrFriends');
+                                          //   print('The value of relationship is $relationship');
+
+                                            
+                                          // }
                                           
                                         },
                                         child: Text('Manage',
@@ -683,7 +710,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   builder: (BuildContext context, LoadStatus mode){
                                     Widget body;
                                     if(mode == LoadStatus.idle){
-                                      body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+                                      body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
                                     }
                                     else if(mode == LoadStatus.loading){
                                       body =  CircularProgressIndicator();
@@ -693,7 +720,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                     }
                                     else if(mode == LoadStatus.canLoading){
                                       body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-                                      page++;
                                     }
                                     else{
                                       body = Text('End of result.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
@@ -714,7 +740,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      timeCreated: convertDate(posts[i].timeCreated),
+                                      // timeCreated: convertDate(posts[i].timeCreated),
+                                      timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
 
                                       managed: posts[i].managed,
                                       joined: posts[i].joined,

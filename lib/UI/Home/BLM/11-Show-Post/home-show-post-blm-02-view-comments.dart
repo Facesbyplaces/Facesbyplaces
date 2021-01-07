@@ -79,9 +79,12 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   List<bool> commentsLikes;
   List<int> commentsNumberOfLikes;
   bool isComment;
-  int currentCommentId;
   List<List<bool>> repliesLikes;
   List<List<int>> repliesNumberOfLikes;
+
+  int currentCommentId;
+  int currentUserId;
+  String currentUserImage;
 
   void initState(){
     super.initState();
@@ -106,6 +109,13 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
+  }
+
+  void loadUserInformation() async{
+    var currentLoggedInUser = await apiBLMShowProfileInformation();
+
+   currentUserId = currentLoggedInUser.userId;
+   currentUserImage = currentLoggedInUser.image;
   }
 
   void onLoading() async{
@@ -278,7 +288,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                     builder: (BuildContext context, LoadStatus mode){
                       Widget body;
                       if(mode == LoadStatus.idle){
-                        body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                        body = Text('Pull up to load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                       }
                       else if(mode == LoadStatus.loading){
                         body = CircularProgressIndicator();
@@ -644,18 +654,25 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             child: Row(
               children: [
                 
-                FutureBuilder<APIBLMShowProfileInformation>(
-                  future: currentUser,
-                  builder: (context, user){
-                    if(user.hasData){
-                      return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(user.data.image));
-                    }else if(user.hasError){
-                      return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'));
-                    }
-                    else{
-                      return CircularProgressIndicator();
-                    }
-                  },
+                // FutureBuilder<APIBLMShowProfileInformation>(
+                //   future: currentUser,
+                //   builder: (context, user){
+                //     if(user.hasData){
+                //       return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(user.data.image));
+                //     }else if(user.hasError){
+                //       return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'));
+                //     }
+                //     else{
+                //       return CircularProgressIndicator();
+                //     }
+                //   },
+                // ),
+
+                CircleAvatar(
+                  backgroundColor: Color(0xff888888), 
+                  backgroundImage: currentUserImage != null && currentUserImage != ''
+                  ? NetworkImage(currentUserImage)
+                  : AssetImage('assets/icons/app-icon.png'),
                 ),
 
                 Expanded(

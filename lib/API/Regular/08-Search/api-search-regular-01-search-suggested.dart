@@ -69,11 +69,16 @@ class APIRegularSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabPostExtendedPageCreator pageCreator;
-  bool managed;
+  // bool managed;
+  // bool follower;
+  // String pageType;
+  bool manage;
+  bool famOrFriends;
   bool follower;
   String pageType;
+  String privacy;
 
-  APIRegularSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower, this.pageType});
+  APIRegularSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPage(
@@ -85,9 +90,11 @@ class APIRegularSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      managed: parsedJson['manage'],
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],
       pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

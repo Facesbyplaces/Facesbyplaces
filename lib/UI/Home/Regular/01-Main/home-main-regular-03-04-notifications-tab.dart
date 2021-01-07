@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-notifications-tab.dart';
-import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class RegularMainPagesNotifications{
@@ -69,6 +69,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             read: newValue.notification[i].read,
             action: newValue.notification[i].action,
             postId: newValue.notification[i].postId,
+            actorImage: newValue.notification[i].actor.image,
           ),
         );
       }
@@ -104,7 +105,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           builder: (BuildContext context, LoadStatus mode){
             Widget body ;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -114,7 +115,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-              page++;
             }
             else{
               body = Text('End of notifications.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
@@ -129,41 +129,47 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: notifications[i].postId,)));
-              },
-              child: Container(
-                child: MiscRegularNotificationDisplayTemplate(
-                  content: [
-                    TextSpan(
-                      text: '${notifications[i].action}\n',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                    TextSpan(
-                      text: '${convertDate(notifications[i].createdAt)}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
-                      ),
-                    ),
-                    TextSpan(
-                      text: '\n\n',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            // var container = GestureDetector(
+            //   onTap: (){
+            //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: notifications[i].postId,)));
+            //   },
+            //   child: Container(
+            //     child: 
+            //   ),
+            // );
 
-            return container;
+            // return container;
+
+            print('The image is ${notifications[i].actorImage}');
+
+            return MiscRegularNotificationDisplayTemplate(
+              imageIcon: notifications[i].actorImage,
+              content: [
+                TextSpan(
+                  text: '${notifications[i].action}\n',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xff000000),
+                  ),
+                ),
+                TextSpan(
+                  // text: '${convertDate(notifications[i].createdAt)}',
+                  text: timeago.format(DateTime.parse(notifications[i].createdAt)),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xff888888),
+                  ),
+                ),
+                TextSpan(
+                  text: '\n\n',
+                  style: TextStyle(
+                    fontSize: SizeConfig.safeBlockHorizontal * 3,
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xff888888),
+                  ),
+                ),
+              ],
+            );
             
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),

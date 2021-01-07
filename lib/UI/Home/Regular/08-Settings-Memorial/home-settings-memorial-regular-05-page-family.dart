@@ -10,8 +10,9 @@ class RegularShowFamilySettings{
   final String lastName;
   final String image;
   final String relationship;
+  final String email;
 
-  RegularShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship, this.email});
 }
 
 class HomeRegularPageFamily extends StatefulWidget{
@@ -48,6 +49,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
             relationship: newValue.familyList[i].relationship,
+            email: newValue.familyList[i].user.email,
           ),
         );
       }

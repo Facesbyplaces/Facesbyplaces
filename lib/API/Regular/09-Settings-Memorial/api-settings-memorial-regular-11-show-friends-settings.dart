@@ -66,8 +66,9 @@ class APIRegularShowFriendsSettingsExtendedDetails{
   String firstName;
   String lastName;
   dynamic image;
+  String email;
 
-  APIRegularShowFriendsSettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIRegularShowFriendsSettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image, this.email});
 
   factory APIRegularShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFriendsSettingsExtendedDetails(
@@ -75,6 +76,7 @@ class APIRegularShowFriendsSettingsExtendedDetails{
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       image: parsedJson['image'],
+      email: parsedJson['email'],
     );
   }
 }

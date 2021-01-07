@@ -12,8 +12,9 @@ class RegularShowAdminSettings{
   final String lastName;
   final String image;
   final String relationship;
+  final String email;
 
-  RegularShowAdminSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowAdminSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.email});
 }
 
 class HomeRegularPageManagers extends StatefulWidget{
@@ -32,18 +33,9 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   List<RegularShowAdminSettings> familyList;
   int adminItemsRemaining;
   int familyItemsRemaining;
-  int page;
-
-  void initState(){
-    super.initState();
-    adminList = [];
-    familyList = [];
-    adminItemsRemaining = 1;
-    familyItemsRemaining = 1;
-    page = 1;
-    onLoading1();
-    onLoading2();
-  }
+  // int page;
+  int page1;
+  int page2;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -53,7 +45,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   void onLoading1() async{
     if(adminItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page);
+      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page1);
       adminItemsRemaining = newValue.adminItemsRemaining;
 
       for(int i = 0; i < newValue.adminList.length; i++){
@@ -64,13 +56,14 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             lastName: newValue.adminList[i].user.lastName,
             image: newValue.adminList[i].user.image,
             relationship: newValue.adminList[i].relationship,
+            email: newValue.adminList[i].user.email,
           ),
         );
       }
 
       if(mounted)
       setState(() {});
-      page++;
+      page1++;
       
       refreshController.loadComplete();
       context.hideLoaderOverlay();
@@ -84,7 +77,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
       // var newValue = await apiRegularShowAdminSettings(memorialId, page);
-      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page);
+      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
       familyItemsRemaining = newValue.familyItemsRemaining;
 
@@ -94,21 +87,35 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
             userId: newValue.familyList[i].user.id,
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
-            image: newValue.adminList[i].user.image,
-            relationship: newValue.familyList[i].relationship
+            image: newValue.familyList[i].user.image,
+            relationship: newValue.familyList[i].relationship,
+            email: newValue.familyList[i].user.email,
           ),
         );
       }
 
       if(mounted)
       setState(() {});
-      page++;
+      page2++;
       
       refreshController.loadComplete();
       
     }else{
       refreshController.loadNoData();
     }
+  }
+
+
+  void initState(){
+    super.initState();
+    adminList = [];
+    familyList = [];
+    adminItemsRemaining = 1;
+    familyItemsRemaining = 1;
+    page1 = 1;
+    page2 = 1;
+    onLoading1();
+    onLoading2();
   }
 
   @override
@@ -140,7 +147,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   builder: (BuildContext context, LoadStatus mode){
                     Widget body ;
                     if(mode == LoadStatus.idle){
-                      body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                      body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                     }
                     else if(mode == LoadStatus.loading){
                       body =  CircularProgressIndicator();
@@ -162,14 +169,19 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 child: ListView.separated(
                   physics: ClampingScrollPhysics(),
                   itemBuilder: (c, i) {
-                    var container = Container(
+                    return Container(
                       padding: EdgeInsets.all(10.0),
                       child: Row(
                         children: [
+                          // CircleAvatar(
+                          //   maxRadius: SizeConfig.blockSizeVertical * 5,
+                          //   backgroundColor: Color(0xff888888),
+                          //   backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                          // ),
                           CircleAvatar(
-                            maxRadius: SizeConfig.blockSizeVertical * 5,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                            radius: SizeConfig.blockSizeVertical * 5, 
+                            backgroundColor: Color(0xff888888), 
+                            backgroundImage: adminList[i].image != null ? NetworkImage(adminList[i].image) : AssetImage('assets/icons/app-icon.png'),
                           ),
 
                           SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
@@ -180,6 +192,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(adminList[i].firstName + ' ' + adminList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
+
+                                // Text(adminList[i].email, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
 
                                 Text(adminList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                               ],
@@ -204,7 +218,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                               familyList = [];
                               adminItemsRemaining = 1;
                               familyItemsRemaining = 1;
-                              page = 1;
+                              page1 = 1;
+                              page2 = 1;
                               onLoading1();
                               onLoading2();
                             },
@@ -219,12 +234,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                         ],
                       ),
                     );
-
-                    return container;
-                    
                   },
                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
                   itemCount: adminList.length,
+                  // itemCount: 1,
                 ),
               ),
             ),
@@ -243,7 +256,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                   builder: (BuildContext context, LoadStatus mode){
                     Widget body ;
                     if(mode == LoadStatus.idle){
-                      body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                      body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                     }
                     else if(mode == LoadStatus.loading){
                       body =  CircularProgressIndicator();
@@ -253,7 +266,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                     }
                     else if(mode == LoadStatus.canLoading){
                       body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                      page++;
                     }else{
                       body = Text('End of list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                     }
@@ -266,14 +278,20 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                 child: ListView.separated(
                   physics: ClampingScrollPhysics(),
                   itemBuilder: (c, i) {
-                    var container = Container(
+                    return Container(
                       padding: EdgeInsets.all(10.0),
                       child: Row(
                         children: [
+                          // CircleAvatar(
+                          //   maxRadius: SizeConfig.blockSizeVertical * 5,
+                          //   backgroundColor: Color(0xff888888),
+                          //   backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                          // ),
+
                           CircleAvatar(
-                            maxRadius: SizeConfig.blockSizeVertical * 5,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                            radius: SizeConfig.blockSizeVertical * 5, 
+                            backgroundColor: Color(0xff888888), 
+                            backgroundImage: familyList[i].image != null ? NetworkImage(familyList[i].image) : AssetImage('assets/icons/app-icon.png'),
                           ),
 
                           SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
@@ -285,7 +303,10 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                               children: [
                                 Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
+                                // Text(familyList[i].email, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
+
                                 Text(familyList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
+                                
                               ],
                             ),
                             ),
@@ -307,7 +328,8 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                               familyList = [];
                               adminItemsRemaining = 1;
                               familyItemsRemaining = 1;
-                              page = 1;
+                              page1 = 1;
+                              page2 = 1;
                               onLoading1();
                               onLoading2();
                             },
@@ -322,12 +344,11 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                         ],
                       ),
                     );
-
-                    return container;
                     
                   },
                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
                   itemCount: familyList.length,
+                  // itemCount: 1,
                 ),
               ),
             ),

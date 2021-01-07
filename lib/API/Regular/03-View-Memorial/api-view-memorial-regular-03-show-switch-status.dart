@@ -18,6 +18,9 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus(int memorialId) as
     }
   );
 
+  print('The status code is ${response.statusCode}');
+  // print('The status body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowSwitchStatus.fromJson(newValue);

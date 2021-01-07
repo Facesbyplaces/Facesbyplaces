@@ -35,17 +35,8 @@ class APIRegularSearchMemorialMain{
 
   factory APIRegularSearchMemorialMain.fromJson(Map<String, dynamic> parsedJson){
 
-    print('Samplee!');
-
-    print('The item remaining is ${parsedJson['itemsremaining']}');
-
     var memorialList = parsedJson['memorials'] as List;
-
     List<APIRegularSearchMemorialPage> newMemorialList = memorialList.map((e) => APIRegularSearchMemorialPage.fromJson(e)).toList();
-
-    print('The memorial list is $newMemorialList');
-
-    print('Nicee!');
 
     return APIRegularSearchMemorialMain(
       itemsRemaining: parsedJson['itemsremaining'],
@@ -61,10 +52,8 @@ class APIRegularSearchMemorialPage{
   APIRegularSearchMemorialPage({this.id, this.page});
 
   factory APIRegularSearchMemorialPage.fromJson(Map<String, dynamic> parsedJson){
-    print('New new new!');
     return APIRegularSearchMemorialPage(
       id: parsedJson['id'],
-      // page: parsedJson['page'],
       page: APIRegularSearchMemorialExtended.fromJson(parsedJson['page']),
     );
   }
@@ -77,17 +66,17 @@ class APIRegularSearchMemorialExtended{
   dynamic backgroundImage;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
-  // String relationship;
+  String relationship;
   APIRegularSearchMemorialExtendedPageCreator pageCreator;
-  bool managed;
+  bool manage;
+  bool famOrFriends;
   bool follower;
   String pageType;
+  String privacy;
 
-  // APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.follower, this.pageType});
-  APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.pageCreator, this.managed, this.follower, this.pageType});
+  APIRegularSearchMemorialExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIRegularSearchMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
-    print('The id is ${parsedJson['id']}');
 
     List<dynamic> newList1;
 
@@ -104,11 +93,16 @@ class APIRegularSearchMemorialExtended{
       profileImage: parsedJson['profileImage'],
       // imagesOrVideos: parsedJson['imagesOrVideos'],
       imagesOrVideos: newList1,
-      // relationship: parsedJson['relationship'],
+      relationship: parsedJson['relationship'],
       pageCreator: APIRegularSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      managed: parsedJson['manage'],
+      // managed: parsedJson['manage'],
+      // follower: parsedJson['follower'],
+      // pageType: parsedJson['page_type'],
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],
       pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }
@@ -125,7 +119,6 @@ class APIRegularSearchMemorialExtendedPageDetails{
   APIRegularSearchMemorialExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
   factory APIRegularSearchMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    print('Test test test!');
     return APIRegularSearchMemorialExtendedPageDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
@@ -149,8 +142,6 @@ class APIRegularSearchMemorialExtendedPageCreator{
   APIRegularSearchMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
   factory APIRegularSearchMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    print('Sample sample sample!');
-    print('The value is $parsedJson');
     return APIRegularSearchMemorialExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],

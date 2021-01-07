@@ -19,6 +19,9 @@ Future<APIRegularSearchUsersMain> apiRegularSearchUsers(String keywords, int pag
     }
   );
 
+  print('The status code for search users is ${response.statusCode}');
+  print('The status body for search users is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchUsersMain.fromJson(newValue);

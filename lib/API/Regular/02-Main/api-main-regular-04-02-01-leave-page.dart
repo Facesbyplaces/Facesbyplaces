@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<String> apiRegularLeavePage(int memorialId) async{
+Future<bool> apiRegularLeavePage({int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -17,11 +17,18 @@ Future<String> apiRegularLeavePage(int memorialId) async{
     }
   );
 
+  print('The status code for leave page is ${response.statusCode}');
+  print('The status body for leave page is ${response.body}');
+
   if(response.statusCode == 200){
-    return 'Succuess';
-  }else if(response.statusCode == 406){
-    return 'Can\'t leave a page without another adminstrator available. Please try again.';
+    // return 'Succss';
+    return true;
   }else{
-    return 'Something went wrong. Please try again.';
+    // return 'Something went wrong. Please try again.';
+    return false;
   }
+
+// else if(response.statusCode == 406){
+//     return 'Can\'t leave a page without another adminstrator available. Please try again.';
+//   }
 }

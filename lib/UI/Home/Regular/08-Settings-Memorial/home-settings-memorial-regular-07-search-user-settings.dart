@@ -246,7 +246,8 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         }
                       }else{
                         context.showLoaderOverlay();
-                        bool result = await apiRegularAddFriends(memorialId, users[index].userId);
+                        // bool result = await apiRegularAddFriends(memorialId, users[index].userId);
+                        bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId);
                         context.hideLoaderOverlay();
 
                         if(result){

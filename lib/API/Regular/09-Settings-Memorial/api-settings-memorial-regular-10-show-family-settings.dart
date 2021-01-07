@@ -65,8 +65,9 @@ class APIRegularShowFamilySettingsExtendedDetails{
   String firstName;
   String lastName;
   dynamic image;
+  String email;
 
-  APIRegularShowFamilySettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIRegularShowFamilySettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image, this.email});
 
   factory APIRegularShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFamilySettingsExtendedDetails(
@@ -74,6 +75,7 @@ class APIRegularShowFamilySettingsExtendedDetails{
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       image: parsedJson['image'],
+      email: parsedJson['email'],
     );
   }
 }

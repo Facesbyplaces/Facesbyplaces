@@ -10,8 +10,9 @@ class RegularShowFriendsSettings{
   final String lastName;
   final String image;
   final String relationship;
+  final String email;
 
-  RegularShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
+  RegularShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship, this.email});
 }
 
 class HomeRegularPageFriends extends StatefulWidget{
@@ -48,6 +49,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
             lastName: newValue.friendsList[i].user.lastName,
             image: newValue.friendsList[i].user.image,
             relationship: newValue.friendsList[i].relationship,
+            email: newValue.friendsList[i].user.email,
           ),
         );
       }

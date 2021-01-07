@@ -10,6 +10,11 @@ Future<bool> apiRegularDeleteMemorialAdmin({String pageType, int pageId, int use
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The pageType is $pageType');
+  print('The pageId is $pageId');
+  print('The userId is $userId');
+
+
   try{
     var dioRequest = dio.Dio();
 

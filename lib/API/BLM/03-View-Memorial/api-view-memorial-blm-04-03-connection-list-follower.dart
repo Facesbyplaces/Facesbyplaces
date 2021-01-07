@@ -29,14 +29,14 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers(int memo
 
 class APIBLMConnectionListFollowersMain{
   int itemsRemaining;
-  List<APIBLMConnectionListFollowersExtended> followersList;
+  List<APIBLMConnectionListFollowersExtendedDetails> followersList;
 
   APIBLMConnectionListFollowersMain({this.itemsRemaining, this.followersList});
 
   factory APIBLMConnectionListFollowersMain.fromJson(Map<String, dynamic> parsedJson){
 
     var newList1 = parsedJson['followers'] as List;
-    List<APIBLMConnectionListFollowersExtended> familyList = newList1.map((i) => APIBLMConnectionListFollowersExtended.fromJson(i)).toList();
+    List<APIBLMConnectionListFollowersExtendedDetails> familyList = newList1.map((i) => APIBLMConnectionListFollowersExtendedDetails.fromJson(i)).toList();
 
     return APIBLMConnectionListFollowersMain(
       itemsRemaining: parsedJson['itemsremaining'],
@@ -46,19 +46,19 @@ class APIBLMConnectionListFollowersMain{
 }
 
 
-class APIBLMConnectionListFollowersExtended{
-  APIBLMConnectionListFollowersExtendedDetails user;
-  String relationship;
+// class APIBLMConnectionListFollowersExtended{
+//   APIBLMConnectionListFollowersExtendedDetails user;
+//   String relationship;
 
-  APIBLMConnectionListFollowersExtended({this.user, this.relationship});
+//   APIBLMConnectionListFollowersExtended({this.user, this.relationship});
 
-  factory APIBLMConnectionListFollowersExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMConnectionListFollowersExtended(
-      user: APIBLMConnectionListFollowersExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
-    );
-  }
-}
+//   factory APIBLMConnectionListFollowersExtended.fromJson(Map<String, dynamic> parsedJson){
+//     return APIBLMConnectionListFollowersExtended(
+//       user: APIBLMConnectionListFollowersExtendedDetails.fromJson(parsedJson['user']),
+//       relationship: parsedJson['relationship'],
+//     );
+//   }
+// }
 
 class APIBLMConnectionListFollowersExtendedDetails{
 

@@ -18,6 +18,9 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
     },
   );
 
+  print('The status code for list follower is ${response.statusCode}');
+  print('The status body for list follower is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularConnectionListFollowersMain.fromJson(newValue);
@@ -28,14 +31,15 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
 
 class APIRegularConnectionListFollowersMain{
   int itemsRemaining;
-  List<APIRegularConnectionListFollowersExtended> followersList;
+  List<APIRegularConnectionListFollowersExtendedDetails> followersList;
 
   APIRegularConnectionListFollowersMain({this.itemsRemaining, this.followersList});
 
   factory APIRegularConnectionListFollowersMain.fromJson(Map<String, dynamic> parsedJson){
 
     var newList1 = parsedJson['followers'] as List;
-    List<APIRegularConnectionListFollowersExtended> familyList = newList1.map((i) => APIRegularConnectionListFollowersExtended.fromJson(i)).toList();
+    // List<APIRegularConnectionListFollowersExtended> familyList = newList1.map((i) => APIRegularConnectionListFollowersExtended.fromJson(i)).toList();
+    List<APIRegularConnectionListFollowersExtendedDetails> familyList = newList1.map((i) => APIRegularConnectionListFollowersExtendedDetails.fromJson(i)).toList();
 
     return APIRegularConnectionListFollowersMain(
       itemsRemaining: parsedJson['itemsremaining'],
@@ -45,19 +49,19 @@ class APIRegularConnectionListFollowersMain{
 }
 
 
-class APIRegularConnectionListFollowersExtended{
-  APIRegularConnectionListFollowersExtendedDetails user;
-  String relationship;
+// class APIRegularConnectionListFollowersExtended{
+//   APIRegularConnectionListFollowersExtendedDetails user;
+//   String relationship;
 
-  APIRegularConnectionListFollowersExtended({this.user, this.relationship});
+//   APIRegularConnectionListFollowersExtended({this.user, this.relationship});
 
-  factory APIRegularConnectionListFollowersExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularConnectionListFollowersExtended(
-      user: APIRegularConnectionListFollowersExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
-    );
-  }
-}
+//   factory APIRegularConnectionListFollowersExtended.fromJson(Map<String, dynamic> parsedJson){
+//     return APIRegularConnectionListFollowersExtended(
+//       user: APIRegularConnectionListFollowersExtendedDetails.fromJson(parsedJson['user']),
+//       relationship: parsedJson['relationship'],
+//     );
+//   }
+// }
 
 class APIRegularConnectionListFollowersExtendedDetails{
 

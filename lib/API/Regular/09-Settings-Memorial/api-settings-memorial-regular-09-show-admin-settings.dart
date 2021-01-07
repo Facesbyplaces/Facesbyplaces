@@ -18,6 +18,9 @@ Future<APIRegularShowAdminsSettingMain> apiRegularShowAdminSettings({int memoria
     }
   );
 
+  print('The status code of page managers is ${response.statusCode}');
+  // print('The status body of page managers is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowAdminsSettingMain.fromJson(newValue);
@@ -73,8 +76,9 @@ class APIRegularShowAdminsSettingExtendedUser{
   String firstName;
   String lastName;
   dynamic image;
+  String email;
 
-  APIRegularShowAdminsSettingExtendedUser({this.id, this.firstName, this.lastName, this.image});
+  APIRegularShowAdminsSettingExtendedUser({this.id, this.firstName, this.lastName, this.image, this.email});
 
   factory APIRegularShowAdminsSettingExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAdminsSettingExtendedUser(
@@ -82,6 +86,7 @@ class APIRegularShowAdminsSettingExtendedUser{
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       image: parsedJson['image'],
+      email: parsedJson['email'],
     );
   }
 }

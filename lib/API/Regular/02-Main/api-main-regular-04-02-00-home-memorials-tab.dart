@@ -18,6 +18,9 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
     }
   );
 
+  print('The response status of memorials tab is ${response.statusCode}');
+  // print('The response body of memorials tab is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularHomeTabMemorialMain.fromJson(newValue);
@@ -80,12 +83,17 @@ class APIRegularHomeTabMemorialExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabMemorialExtendedPageCreator pageCreator;
-  bool managed;
+  bool manage;
+  bool famOrFriends;
+  bool follower;
   String pageType;
+  String privacy;
 
-  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.managed, this.pageType});
+  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
+    print('The value of manage is ${parsedJson['manage']}');
+
     return APIRegularHomeTabMemorialExtendedPage(
       id: parsedJson['id'],
       name: parsedJson['name'],
@@ -95,8 +103,11 @@ class APIRegularHomeTabMemorialExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      managed: parsedJson['manage'],
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
       pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

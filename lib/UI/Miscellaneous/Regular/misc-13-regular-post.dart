@@ -148,6 +148,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                 children: [
                   GestureDetector(
                     onTap: () async{
+                      print('The memorial id is $memorialId');
 
                       if(managed == true){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
@@ -217,7 +218,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       numberOfTagged,
                       (index) => GestureDetector(
                         onTap: (){
-                          print('The user id is ${taggedId[index]}');
 
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index])));
                         },

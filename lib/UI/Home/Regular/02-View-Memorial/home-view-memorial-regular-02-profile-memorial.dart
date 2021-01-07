@@ -1,3 +1,5 @@
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
@@ -8,7 +10,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class RegularProfilePosts{
@@ -39,16 +43,18 @@ class RegularProfilePosts{
 
 class HomeRegularMemorialProfile extends StatefulWidget{
   final int memorialId;
+  final String pageType;
   final bool newJoin;
-  HomeRegularMemorialProfile({this.memorialId, this.newJoin});
+  HomeRegularMemorialProfile({this.memorialId, this.pageType, this.newJoin});
 
-  HomeRegularMemorialProfileState createState() => HomeRegularMemorialProfileState(memorialId: memorialId, newJoin: newJoin);
+  HomeRegularMemorialProfileState createState() => HomeRegularMemorialProfileState(memorialId: memorialId, pageType: pageType, newJoin: newJoin);
 }
 
 class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   final int memorialId;
+  final String pageType;
   final bool newJoin;
-  HomeRegularMemorialProfileState({this.memorialId, this.newJoin});
+  HomeRegularMemorialProfileState({this.memorialId, this.pageType, this.newJoin});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
@@ -297,7 +303,23 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                           setState(() {
                                             join = !join;
-                                          });                                          
+                                          });
+
+                                          // context.showLoaderOverlay();
+                                          // bool result = await apiRegularModifyFollowPage(pageId: profile.data.memorial.memorialId, follow: profile.data.memorial.memorialFollower);
+                                          // context.hideLoaderOverlay();
+
+                                          // print('The result is $result');
+
+                                          context.showLoaderOverlay();
+                                          bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
+                                          context.hideLoaderOverlay();
+
+                                          if(result){
+                                            Navigator.popAndPushNamed(context, '/home/regular');
+                                          }else{
+                                            await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                          }
                                           
                                         },
                                         child: Text(
@@ -672,7 +694,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      timeCreated: convertDate(posts[i].timeCreated),
+                                      // timeCreated: convertDate(posts[i].timeCreated),
+                                      timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
 
                                       managed: posts[i].managed,
                                       joined: posts[i].joined,
