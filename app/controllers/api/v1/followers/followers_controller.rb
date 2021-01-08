@@ -41,10 +41,4 @@ class Api::V1::Followers::FollowersController < ApplicationController
     def follower_params
         params.permit(:page_type, :page_id)
     end
-
-    def no_guest_users
-        if user().guest == true
-            return render json: {error: "pls login"}, status: 422
-        end
-    end
 end

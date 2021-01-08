@@ -20,6 +20,12 @@ class ApplicationController < ActionController::Base
         def guest_user
             User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
         end
+
+        def no_guest_users
+            if user().guest == true
+                return render json: {error: "pls login"}, status: 422
+            end
+        end
       
         def create_guest_user
             u = User.create(:username => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com", :guest => true)

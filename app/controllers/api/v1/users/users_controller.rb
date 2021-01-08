@@ -1,5 +1,5 @@
 class Api::V1::Users::UsersController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
     
     def edit
         @user = User.find(params[:id])
