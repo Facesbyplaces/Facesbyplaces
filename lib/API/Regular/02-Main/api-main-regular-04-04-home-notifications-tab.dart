@@ -18,8 +18,8 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab(int pag
     }
   );
 
-  print('The response status code is ${response.statusCode}');
-  print('The response status body is ${response.body}');
+  // print('The response status code is ${response.statusCode}');
+  // print('The response status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

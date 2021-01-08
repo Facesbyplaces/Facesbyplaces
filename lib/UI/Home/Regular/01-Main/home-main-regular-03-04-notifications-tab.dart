@@ -129,21 +129,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            // var container = GestureDetector(
-            //   onTap: (){
-            //     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: notifications[i].postId,)));
-            //   },
-            //   child: Container(
-            //     child: 
-            //   ),
-            // );
-
-            // return container;
-
-            print('The image is ${notifications[i].actorImage}');
 
             return MiscRegularNotificationDisplayTemplate(
               imageIcon: notifications[i].actorImage,
+              postId: notifications[i].postId,
               content: [
                 TextSpan(
                   text: '${notifications[i].action}\n',

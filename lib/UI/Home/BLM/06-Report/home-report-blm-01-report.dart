@@ -1,13 +1,16 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:facesbyplaces/API/BLM/07-Report/api-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMReport extends StatelessWidget{
+  final int postId;
+  final String reportType;
+
+  HomeBLMReport({this.postId, this.reportType});
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscBLMInputFieldMultiTextTemplateState>();
@@ -15,7 +18,6 @@ class HomeBLMReport extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final BLMReportID newValue = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -75,13 +77,15 @@ class HomeBLMReport extends StatelessWidget{
                       }else{
 
                         context.showLoaderOverlay();
-                        bool result = await apiBLMReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
+                        // bool result = await apiBLMReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
+                        bool result = await apiBLMReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
                         context.hideLoaderOverlay();
 
                         if(result){
+                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully submitted a report. Your report will be reviewed by the administrator.', color: Colors.green,));
                           Navigator.pushReplacementNamed(context, '/home/blm');
                         }else{
-                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                         }
                       }
 

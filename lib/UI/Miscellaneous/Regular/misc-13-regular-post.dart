@@ -194,7 +194,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       ),
                     ),
                   ),
-                  MiscRegularDropDownTemplate(userId: userId, postId: postId,),
+                  MiscRegularDropDownTemplate(postId: postId, reportType: 'Post',),
                 ],
               ),
             ),

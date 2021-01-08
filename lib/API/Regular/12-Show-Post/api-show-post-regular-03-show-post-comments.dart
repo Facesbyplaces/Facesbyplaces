@@ -22,8 +22,8 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({int postId, i
     }
   );
 
-  // print('The status code of comments is ${response.statusCode}');
-  // print('The status body of comments is ${response.body}');
+  print('The status code of comments is ${response.statusCode}');
+  print('The status body of comments is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

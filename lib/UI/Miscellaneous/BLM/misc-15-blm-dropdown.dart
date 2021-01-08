@@ -1,22 +1,15 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
+import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-class BLMReportID{
-  int userId;
-  int postId;
-
-  BLMReportID({this.userId, this.postId});
-}
-
 class MiscBLMDropDownTemplate extends StatelessWidget{
-
-  final int userId;
   final int postId;
+  final String reportType;
 
-  MiscBLMDropDownTemplate({this.userId, this.postId});
+  MiscBLMDropDownTemplate({this.postId, this.reportType});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +44,8 @@ class MiscBLMDropDownTemplate extends StatelessWidget{
                   chooserTitle: 'Share link'
                 );
               }else if(dropDownList == 'Report'){
-                Navigator.pushNamed(context, '/home/blm/home-24-blm-report', arguments: BLMReportID(userId: userId, postId: postId));
+                // Navigator.pushNamed(context, '/home/blm/home-24-blm-report', arguments: BLMReportID(userId: userId, postId: postId));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
               }
             },
             

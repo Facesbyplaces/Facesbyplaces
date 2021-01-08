@@ -147,7 +147,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                       ),
                                     ),
                                   ),
-                                  MiscBLMDropDownTemplate(userId: originalPost.data.post.page.id, postId: postId,),
+                                  MiscBLMDropDownTemplate(postId: postId, reportType: 'Post'),
                                 ],
                               ),
                             ),
@@ -218,7 +218,8 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
+                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id)));
                                     },
                                     child: Row(
                                       children: [

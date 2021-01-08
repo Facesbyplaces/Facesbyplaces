@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/07-Report/api-report-regular-01-report.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
@@ -8,6 +7,11 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularReport extends StatelessWidget{
+  // userId: userId, postId: postId
+  final int postId;
+  final String reportType;
+
+  HomeRegularReport({this.postId, this.reportType});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscRegularInputFieldMultiTextTemplateState>();
@@ -15,7 +19,6 @@ class HomeRegularReport extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    final RegularReportID newValue = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -75,13 +78,16 @@ class HomeRegularReport extends StatelessWidget{
                       }else{
 
                         context.showLoaderOverlay();
-                        bool result = await apiRegularReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
+                        // bool result = await apiRegularReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
+                        // bool result = await apiRegularReport(userId: userId, postId: postId, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
+                        bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
                         context.hideLoaderOverlay();
 
                         if(result){
+                          await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully submitted a report. Your report will be reviewed by the administrator.', color: Colors.green,));
                           Navigator.pushReplacementNamed(context, '/home/regular');
                         }else{
-                          await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                          await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                         }
                       }
 

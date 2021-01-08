@@ -18,6 +18,9 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     }
   );
 
+  // print('The user information code is ${response.statusCode}');
+  // print('The user information body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowProfileInformation.fromJson(newValue);

@@ -84,6 +84,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
       onTap: () async{
         print('The memorial id is $memorialId');
         print('The managed is $managed');
+        print('The famOrFriends is $famOrFriends');
         print('The page type is $pageType');
 
         // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));

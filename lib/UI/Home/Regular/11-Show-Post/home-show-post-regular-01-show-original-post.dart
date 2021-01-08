@@ -139,7 +139,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                       ),
                                     ),
                                   ),
-                                  MiscRegularDropDownTemplate(userId: originalPost.data.post.page.id, postId: postId,),
+                                  MiscRegularDropDownTemplate(postId: postId, reportType: 'Post',),
                                 ],
                               ),
                             ),

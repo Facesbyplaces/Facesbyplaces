@@ -118,6 +118,8 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       memorialFamilyItemsRemaining = newValue.familyMemorialList.memorialFamilyItemsRemaining;
       count = count + newValue.familyMemorialList.memorial.length;
 
+      
+
       for(int i = 0; i < newValue.familyMemorialList.memorial.length; i++){
         finalMemorials.add(
           MiscRegularManageMemorialTab(
@@ -132,6 +134,8 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             relationship: newValue.familyMemorialList.memorial[i].relationship,
           ),
         );
+
+        print('The name is ${newValue.familyMemorialList.memorial[i].famOrFriends}');
       }
 
       if(mounted)
