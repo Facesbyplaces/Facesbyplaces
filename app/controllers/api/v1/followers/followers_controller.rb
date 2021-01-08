@@ -1,5 +1,6 @@
 class Api::V1::Followers::FollowersController < ApplicationController
     before_action :authenticate_user!
+    before_action :no_guest_users
     
     def followStatus
         if Follower.where(user: user(), page_type: params[:page_type], page_id: params[:page_id]).first == nil
@@ -39,5 +40,11 @@ class Api::V1::Followers::FollowersController < ApplicationController
     private
     def follower_params
         params.permit(:page_type, :page_id)
+    end
+
+    def no_guest_users
+        if user().guest == true
+            return render json: {error: "pls login"}, status: 422
+        end
     end
 end
