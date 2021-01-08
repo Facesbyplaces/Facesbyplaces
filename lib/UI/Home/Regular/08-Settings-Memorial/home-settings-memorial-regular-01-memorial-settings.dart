@@ -15,20 +15,22 @@ import 'package:flutter/material.dart';
 
 class HomeRegularMemorialSettings extends StatefulWidget{
   final int memorialId;
+  final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeRegularMemorialSettings({this.memorialId, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeRegularMemorialSettings({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
   
-  HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState(memorialId: memorialId, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
+  HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
 
 class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings>{
   final int memorialId;
+  final String memorialName;
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeRegularMemorialSettingsState({this.memorialId, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeRegularMemorialSettingsState({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
   
   int toggle;
   bool isSwitched1;
@@ -180,7 +182,10 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: () async{
-            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(),);
+            // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(),);
+                        bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(
+              content: 'Are you sure you want to delete "$memorialName"?',
+            ),);
             if(confirmResult){
 
               context.showLoaderOverlay();

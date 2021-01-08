@@ -10,8 +10,9 @@ class BLMConnectionListItem{
   final String firstName;
   final String lastName;
   final String image;
+  final String relationship;
 
-  BLMConnectionListItem({this.firstName, this.lastName, this.image});
+  BLMConnectionListItem({this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeBLMConnectionList extends StatefulWidget{
@@ -64,6 +65,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
+            relationship: newValue.familyList[i].relationship,
           ),    
         );
 
@@ -378,6 +380,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                 onSearch
                 ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
                 : Text(listsFamily[index].firstName.toString() + ' ' + listsFamily[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+
+                Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, color: Color(0xff888888))),
               ],
             ),
           ),

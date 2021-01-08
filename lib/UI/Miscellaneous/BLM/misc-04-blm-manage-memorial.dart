@@ -85,15 +85,16 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
         print('The memorial id is $memorialId');
         print('The managed is $managed');
         print('The page type is $pageType');
+        print('The famOrFriends is $famOrFriends');
 
         if(pageType == 'Blm'){
-          if(managed == true){
+          if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
           }else{
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
           }
         }else{
-          if(managed == true){
+          if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
           }else{
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
@@ -154,6 +155,9 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
               padding: EdgeInsets.only(right: 15.0),
               child: ((){
                 if(managed == true || famOrFriends == true){
+                  print('The value of managed is $managed');
+                  print('The value of famOrFriends is $famOrFriends');
+
                   return MaterialButton(
                     elevation: 0,
                     padding: EdgeInsets.zero,

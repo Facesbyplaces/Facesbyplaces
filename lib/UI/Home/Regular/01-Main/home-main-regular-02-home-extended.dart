@@ -1,3 +1,6 @@
+import 'package:badges/badges.dart';
+import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
+import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
@@ -28,16 +31,42 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   int toggleBottom;
   List<bool> bottomTab;
   Future drawerSettings;
+  // Future unreadNotifications;
+  int unreadNotifications;
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{
     return await apiRegularShowProfileInformation();
   }
 
+  // Future<int> getUnreadNotifications() async{
+  //   return await apiRegularShowUnreadNotifications();
+  // }
+
+  void getUnreadNotifications() async{
+    var value = await apiRegularShowUnreadNotifications();
+
+    print('The value is $value');
+
+
+
+    setState(() {
+      unreadNotifications = value;
+    });
+
+
+  }
+
+  // apiRegularShowUnreadNotifications
+
   void initState(){
     super.initState();
+    unreadNotifications = 0;
+    getUnreadNotifications();
     toggleBottom = 0;
     bottomTab = [true, false, false, false];
     drawerSettings = getDrawerInformation();
+    
+    // unreadNotifications = getUnreadNotifications();
   }
 
   @override
@@ -170,7 +199,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   child: Column(
                     children: [
                       // Icon(MdiIcons.heart, size: ScreenUtil().setHeight(25),),
-                      Icon(MdiIcons.heart),
+                      // Icon(MdiIcons.heart),
+                      Badge(
+                        position: BadgePosition.topEnd(top: -3, end: -10),
+                        animationDuration: Duration(milliseconds: 300),
+                        // animationType: BadgeAnimationType.slide,
+                        animationType: BadgeAnimationType.fade,
+                        badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
+                        badgeContent: Text(
+                          '$unreadNotifications',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        child: Icon(MdiIcons.heart),
+                      ),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Notification', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
                     ],
@@ -178,7 +219,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 ),
 
               ],
-              onPressed: (int index){
+              onPressed: (int index) async{
                 setState(() {
                   toggleBottom = index;
 
@@ -189,7 +230,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       bottomTab[i] = false;
                     }
                   }
+
                 });
+
+                if(toggleBottom == 3){
+                  await apiRegularReadUnreadNotifications();
+                  unreadNotifications = 0;
+                  getUnreadNotifications();
+                }
               },
               isSelected: bottomTab
             ),

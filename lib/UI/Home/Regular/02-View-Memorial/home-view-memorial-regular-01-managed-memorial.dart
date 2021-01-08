@@ -351,7 +351,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                             context.hideLoaderOverlay();
 
                                             if(result.success){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.memorialName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
                                             }
                                           }else{
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: memorialId, relationship: relationship,)));
@@ -660,13 +660,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   children: [
                                     Container(
                                       width: SizeConfig.screenWidth,
-                                      height: ScreenUtil().setHeight(110),
+                                      // height: ScreenUtil().setHeight(110),
+                                      height: SizeConfig.blockSizeVertical * 12,
+                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       child: ListView.separated(
                                         physics: ClampingScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index){
                                           return Container(
-                                            width: ScreenUtil().setHeight(110),
+                                            // width: ScreenUtil().setHeight(110),
+                                            width: SizeConfig.blockSizeVertical * 12,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10),
                                               color: Color(0xff888888),

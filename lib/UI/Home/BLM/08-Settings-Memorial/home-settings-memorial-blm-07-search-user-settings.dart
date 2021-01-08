@@ -244,7 +244,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          // await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
                         }
                       }else{
                         context.showLoaderOverlay();
@@ -257,7 +258,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          // await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
                         }
 
                       }

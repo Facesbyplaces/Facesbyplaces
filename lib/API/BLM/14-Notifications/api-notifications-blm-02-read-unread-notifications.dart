@@ -1,16 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiBLMLeavePage({int memorialId}) async{
-
-  
+Future<bool> apiBLMReadUnreadNotifications() async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.delete('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/relationship/leave',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/notifications/read',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,9 +17,8 @@ Future<bool> apiBLMLeavePage({int memorialId}) async{
     }
   );
 
-  print('The status code for leave page is ${response.statusCode}');
-  print('The status body for leave page is ${response.body}');
-  print('The memorial id is $memorialId');
+  print('The unread in blm is ${response.statusCode}');
+  print('The unread in blm is ${response.body}');
 
   if(response.statusCode == 200){
     return true;

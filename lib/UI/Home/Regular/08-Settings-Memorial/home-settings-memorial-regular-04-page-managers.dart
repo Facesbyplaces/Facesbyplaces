@@ -210,7 +210,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                             splashColor: Color(0xffE74C3C),
                             onPressed: () async{
                               context.showLoaderOverlay();
-                              await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: familyList[i].userId);
+                              await apiRegularDeleteMemorialAdmin(pageType: 'Memorial', pageId: memorialId, userId: adminList[i].userId);
                               context.hideLoaderOverlay();
 
 

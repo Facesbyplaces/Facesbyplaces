@@ -3,6 +3,7 @@ import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-mem
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
+import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -341,12 +342,24 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: () async{
-                                          context.showLoaderOverlay();
-                                          APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
-                                          context.hideLoaderOverlay();
+                                          // context.showLoaderOverlay();
+                                          // APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
+                                          // context.hideLoaderOverlay();
 
-                                          if(result.success){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.blmName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                          // if(result.success){
+                                          //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.blmName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                          // }
+
+                                          if(managed == true){
+                                            context.showLoaderOverlay();
+                                            APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
+                                            context.hideLoaderOverlay();
+
+                                            if(result.success){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.blmName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                            }
+                                          }else{
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettingsWithHidden(memorialId: memorialId, relationship: relationship,)));
                                           }
                                           
                                         },

@@ -10,8 +10,9 @@ class RegularConnectionListItem{
   final String firstName;
   final String lastName;
   final String image;
+  final String relationship;
 
-  RegularConnectionListItem({this.firstName, this.lastName, this.image});
+  RegularConnectionListItem({this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeRegularConnectionList extends StatefulWidget{
@@ -64,6 +65,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
+            relationship: newValue.familyList[i].relationship,
           ),    
         );
 
@@ -378,6 +380,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 onSearch
                 ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
                 : Text(listsFamily[index].firstName.toString() + ' ' + listsFamily[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+
+                Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, color: Color(0xff888888))),
               ],
             ),
           ),

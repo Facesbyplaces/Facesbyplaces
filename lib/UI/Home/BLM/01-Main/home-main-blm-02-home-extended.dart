@@ -1,6 +1,9 @@
+import 'package:badges/badges.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
+import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
+import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
@@ -28,13 +31,30 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   int toggleBottom;
   List<bool> bottomTab;
   Future drawerSettings;
+  int unreadNotifications;
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async{
     return await apiBLMShowProfileInformation();
   }
 
+  void getUnreadNotifications() async{
+    var value = await apiBLMShowUnreadNotifications();
+
+    print('The value is $value');
+
+
+
+    setState(() {
+      unreadNotifications = value;
+    });
+
+
+  }
+
   void initState(){
     super.initState();
+    unreadNotifications = 0;
+    getUnreadNotifications();
     toggleBottom = 0;
     bottomTab = [true, false, false, false];
     drawerSettings = getDrawerInformation();
@@ -170,7 +190,19 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   child: Column(
                     children: [
                       // Icon(MdiIcons.heart, size: ScreenUtil().setHeight(25),),
-                      Icon(MdiIcons.heart),
+                      // Icon(MdiIcons.heart),
+                      Badge(
+                        position: BadgePosition.topEnd(top: -3, end: -10),
+                        animationDuration: Duration(milliseconds: 300),
+                        // animationType: BadgeAnimationType.slide,
+                        animationType: BadgeAnimationType.fade,
+                        badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
+                        badgeContent: Text(
+                          '$unreadNotifications',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        child: Icon(MdiIcons.heart),
+                      ),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Notification', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
                     ],
@@ -178,7 +210,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                 ),
 
               ],
-              onPressed: (int index){
+              onPressed: (int index) async{
                 setState(() {
                   toggleBottom = index;
 
@@ -190,6 +222,12 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     }
                   }
                 });
+
+                if(toggleBottom == 3){
+                  await apiBLMReadUnreadNotifications();
+                  unreadNotifications = 0;
+                  getUnreadNotifications();
+                }
               },
               isSelected: bottomTab
             ),

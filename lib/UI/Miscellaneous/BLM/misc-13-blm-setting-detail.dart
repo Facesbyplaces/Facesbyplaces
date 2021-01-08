@@ -6,11 +6,13 @@ class MiscBLMSettingDetailTemplate extends StatelessWidget{
   final Function onTap;
   final String titleDetail;
   final String contentDetail;
+  final Color backgroundColor;
 
   MiscBLMSettingDetailTemplate({
     this.onTap,
     this.titleDetail = 'Page Details',
     this.contentDetail = 'Update page details',
+    this.backgroundColor = const Color(0xffffffff),
   });
 
   @override
@@ -20,7 +22,8 @@ class MiscBLMSettingDetailTemplate extends StatelessWidget{
       onTap: onTap,
       child: Container(
         height: SizeConfig.blockSizeVertical * 10,
-        color: Color(0xffffffff),
+        // color: Color(0xffffffff),
+        color: backgroundColor,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         child: Column(
           children: [

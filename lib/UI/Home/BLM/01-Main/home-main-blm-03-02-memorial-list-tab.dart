@@ -121,6 +121,16 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
+            // index: i,
+            // memorialName: newValue.familyMemorialList.blm[i].name,
+            // description: newValue.familyMemorialList.blm[i].details.description,
+            // image: newValue.familyMemorialList.blm[i].profileImage,
+            // memorialId: newValue.familyMemorialList.blm[i].id, 
+            // managed: newValue.familyMemorialList.blm[i].manage,
+            // follower: newValue.familyMemorialList.blm[i].follower,
+            // pageType: newValue.familyMemorialList.blm[i].pageType,
+            // relationship: newValue.familyMemorialList.blm[i].relationship,
+
             index: i,
             memorialName: newValue.familyMemorialList.blm[i].name,
             description: newValue.familyMemorialList.blm[i].details.description,
@@ -128,6 +138,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
             memorialId: newValue.familyMemorialList.blm[i].id, 
             managed: newValue.familyMemorialList.blm[i].manage,
             follower: newValue.familyMemorialList.blm[i].follower,
+            famOrFriends: newValue.familyMemorialList.blm[i].famOrFriends,
             pageType: newValue.familyMemorialList.blm[i].pageType,
             relationship: newValue.familyMemorialList.blm[i].relationship,
           ),
@@ -185,6 +196,17 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         
         finalMemorials.add(
           MiscBLMManageMemorialTab(
+            // index: i,
+            // memorialName: newValue.friendsMemorialList.blm[i].name,
+            // description: newValue.friendsMemorialList.blm[i].details.description,
+            // image: newValue.friendsMemorialList.blm[i].profileImage,
+            // memorialId: newValue.friendsMemorialList.blm[i].id, 
+            // managed: newValue.friendsMemorialList.blm[i].manage,
+            // follower: newValue.friendsMemorialList.blm[i].follower,
+            // famOrFriends: newValue.friendsMemorialList.blm[i].famOrFriends,
+            // pageType: newValue.friendsMemorialList.blm[i].pageType,
+            // relationship: newValue.friendsMemorialList.blm[i].relationship,
+
             index: i,
             memorialName: newValue.friendsMemorialList.blm[i].name,
             description: newValue.friendsMemorialList.blm[i].details.description,
