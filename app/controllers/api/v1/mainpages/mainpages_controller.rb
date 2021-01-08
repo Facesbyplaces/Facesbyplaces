@@ -65,7 +65,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
                         
         # Friends
             # BLM
-            blmFriends = user().relationships.where("relationship = 'Friend' AND page_type = 'Blm'").pluck('page_id')
+            blmFriends = user().relationships.where(relationship: 'Friend', page_type: 'Blm').pluck('page_id')
             blmFriends = Blm.where(id: blmFriends).order(created_at: :desc)
             blmFriends = blmFriends.page(params[:page]).per(numberOfPage)
 
@@ -84,7 +84,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
             
             # ===========================================================================================================
             # MEMORIAL
-            memorialmemorialFriendsFamily = user().relationships.where("relationship != 'Friend' AND page_type = 'Memorial'").pluck('page_id')
+            memorialFriends = user().relationships.where(relationship: 'Friend', page_type: 'Memorial').pluck('page_id')
             memorialFriends = Memorial.where(id: memorialFriends).order(created_at: :desc)
             memorialFriends = memorialFriends.page(params[:page]).per(numberOfPage)
 

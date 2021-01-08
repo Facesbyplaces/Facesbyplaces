@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
         end
         
         def known_error(exception)
-                return render json: {errors: exception}, status: 404
+                return render json: {errors: exception}, status: 400
         end
 
         def same_email(exception)
