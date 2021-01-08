@@ -1,6 +1,6 @@
 class Reply < ApplicationRecord
   belongs_to :comment
-  belongs_to :user
+  belongs_to :account, polymorphic: true
   has_many :commentslikes, as: :commentable
 
   # Report

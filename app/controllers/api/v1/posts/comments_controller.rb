@@ -4,19 +4,19 @@ class Api::V1::Posts::CommentsController < ApplicationController
 
     def addComment
         comment = Comment.new(comment_params)
-        comment.user = user()
+        comment.account = user()
         if comment.save
             # Add to notification
                 # For followers
-                (comment.post.page.users.uniq - [user()]).each do |user|
+                (comment.post.page.accounts.uniq - [user()]).each do |user|
                     if user.notifsetting.postComments == true
                         # check if user owns the post
-                        if user == comment.post.user 
+                        if user == comment.post.account 
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false)
                         elsif comment.post.tagpeople.where(user_id: user.id).first
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false)
                         else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", postId: comment.post.id, read: false)
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false)
                         end
                     end
                 end
@@ -46,26 +46,26 @@ class Api::V1::Posts::CommentsController < ApplicationController
     
     def addReply
         reply = Reply.new(reply_params)
-        reply.user = user()
+        reply.account = user()
         if reply.save 
             # Add to notification
             if reply.comment.replies.count == 1
-                if user() != reply.comment.user
-                    if reply.comment.user.notifsetting.postComments == true
-                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
+                if user() != reply.comment.account
+                    if reply.comment.account.notifsetting.postComments == true
+                        Notification.create(recipient: reply.comment.account, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
                     end
                 end
             else
-                users = reply.comment.users.uniq - [user()]
+                users = reply.comment.accounts.uniq - [user()]
                 if users.count == 0
-                    if reply.comment.user.notifsetting.postComments == true
-                        Notification.create(recipient: reply.comment.user, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
+                    if reply.comment.account.notifsetting.postComments == true
+                        Notification.create(recipient: reply.comment.account, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
                     end
                 else
                     users.each do |user|
                         if user.notifsetting.postComments == true
-                            if reply.comment.user == user
-                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", postId: eply.comment.post.id, read: false)
+                            if reply.comment.account == user
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false)
                             else
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", postId: reply.comment.post.id, read: false)
                             end
@@ -90,7 +90,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
             comment = Reply.find(params[:commentable_id])
         end
         
-        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first
+        if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first
             render json: {
                 like: true,
                 numberOfLikes: numberOfLikes
@@ -156,7 +156,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     def deleteComment
         comment = Comment.find(params[:comment_id])
 
-        if comment.user == user() || comment.user.guest == true
+        if comment.account == user() || comment.account.guest == true
             comment.destroy 
 
             render json: {status: :destroy}, status: 200
@@ -168,7 +168,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
     def deleteReply
         reply = Reply.find(params[:reply_id])
 
-        if reply.user == user() || comment.user.guest == true
+        if reply.account == user() || comment.user.guest == true
             reply.destroy 
 
             render json: {status: :destroy}, status: 200
@@ -191,19 +191,19 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
 
     def like
-        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
+        if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first == nil
             like = Commentslike.new(comment_like_params)
-            like.user = user()
+            like.account = user()
             like.save 
 
             # Notification
             if like.commentable_type == "Comment"
-                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
-                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your comment", postId: like.commentable.post.id, read: false)
+                if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
+                    Notification.create(recipient: like.commentable.account, actor: user(), action: "#{user().first_name} liked your comment", postId: like.commentable.post.id, read: false)
                 end
             else
-                if like.commentable.user != user() && like.commentable.user.notifsetting.postLikes == true
-                    Notification.create(recipient: like.commentable.user, actor: user(), action: "#{user().first_name} liked your reply", postId: like.commentable.comment.post.id, read: false)
+                if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
+                    Notification.create(recipient: like.commentable.account, actor: user(), action: "#{user().first_name} liked your reply", postId: like.commentable.comment.post.id, read: false)
                 end
             end
 
@@ -214,8 +214,8 @@ class Api::V1::Posts::CommentsController < ApplicationController
     end
     
     def unlike
-        if Commentslike.where(user: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
-            unlike = Commentslike.where("commentable_type = '#{params[:commentable_type]}' AND commentable_id = #{params[:commentable_id]} AND user_id = #{user().id}").first 
+        if Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first != nil
+            unlike = Commentslike.where(account: user(), commentable_type: params[:commentable_type], commentable_id: params[:commentable_id]).first 
              if unlike.destroy 
                 render json: {}, status: 200
              else

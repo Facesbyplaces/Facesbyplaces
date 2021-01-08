@@ -12,6 +12,15 @@ class AlmUser < ActiveRecord::Base
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
   
+  has_many :pageowners, as: :account, dependent: :destroy
+  has_many :followers, as: :account, dependent: :destroy
+  has_many :posts, as: :account, dependent: :destroy
+  has_many :relationships, as: :account, dependent: :destroy
+  has_many :replies, as: :account, dependent: :destroy
+  has_many :postslikes, as: :account, dependent: :destroy
+  has_many :comments, as: :account, dependent: :destroy
+  has_many :commentslikes, as: :account, dependent: :destroy
+  
   # has_many :pages
   has_many :posts, dependent: :destroy
   has_many :shares, dependent: :destroy

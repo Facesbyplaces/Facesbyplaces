@@ -16,19 +16,20 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :apple]
   
   # has_many :pages
-  has_many :posts, dependent: :destroy
-  has_many :shares, dependent: :destroy
-  has_many :followers, dependent: :destroy
-  has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
-  has_one :notifsetting, dependent: :destroy
-  has_one_attached :image, dependent: :destroy
-  has_many :relationships, dependent: :destroy
-  has_many :pageowners, dependent: :destroy
+  has_many :posts, dependent: :destroy 
+  has_many :relationships, dependent: :destroy 
+  has_many :pageowners, dependent: :destroy 
+  has_many :followers, dependent: :destroy 
   has_many :postslikes, dependent: :destroy
-  has_many :comments, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :commentslikes, dependent: :destroy
+  has_one :notifsetting, dependent: :destroy
   has_many :tagpeople, dependent: :destroy
+
+  has_many :shares, dependent: :destroy
+  has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
+  has_one_attached :image, dependent: :destroy
 
   # Transactions
   has_many :transactions, dependent: :destroy

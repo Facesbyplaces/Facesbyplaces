@@ -3,7 +3,7 @@ class ReplySerializer < ActiveModel::Serializer
 
   def user
     ActiveModel::SerializableResource.new(
-      object.user, 
+      object.account, 
       each_serializer: UserSerializer
     )
   end

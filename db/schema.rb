@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_030506) do
+ActiveRecord::Schema.define(version: 2021_01_08_074954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,32 +124,35 @@ ActiveRecord::Schema.define(version: 2021_01_08_030506) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_type", "account_id"], name: "index_comments_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "commentslikes", force: :cascade do |t|
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_type", "account_id"], name: "index_commentslikes_on_account_type_and_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_commentslikes_on_commentable_type_and_commentable_id"
-    t.index ["user_id"], name: "index_commentslikes_on_user_id"
   end
 
   create_table "followers", force: :cascade do |t|
     t.string "page_type", null: false
     t.bigint "page_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_type", "account_id"], name: "index_followers_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_followers_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_followers_on_user_id"
   end
 
   create_table "memorials", force: :cascade do |t|
@@ -191,19 +194,21 @@ ActiveRecord::Schema.define(version: 2021_01_08_030506) do
     t.boolean "addFamily"
     t.boolean "addFriends"
     t.boolean "addAdmin"
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_notifsettings_on_user_id"
+    t.string "account_type"
+    t.bigint "account_id"
+    t.index ["account_type", "account_id"], name: "index_notifsettings_on_account_type_and_account_id"
   end
 
   create_table "pageowners", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "page_type", null: false
     t.bigint "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "view"
+    t.string "account_type"
+    t.bigint "account_id"
+    t.index ["account_type", "account_id"], name: "index_pageowners_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_pageowners_on_user_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -222,41 +227,45 @@ ActiveRecord::Schema.define(version: 2021_01_08_030506) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "latitude"
     t.float "longitude"
-    t.bigint "user_id", null: false
     t.string "page_type", null: false
     t.bigint "page_id", null: false
+    t.string "account_type"
+    t.bigint "account_id"
+    t.index ["account_type", "account_id"], name: "index_posts_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_posts_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "postslikes", force: :cascade do |t|
     t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type"
+    t.bigint "account_id"
+    t.index ["account_type", "account_id"], name: "index_postslikes_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_postslikes_on_post_id"
-    t.index ["user_id"], name: "index_postslikes_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
     t.string "page_type", null: false
     t.bigint "page_id", null: false
-    t.bigint "user_id", null: false
     t.string "relationship"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type"
+    t.bigint "account_id"
+    t.index ["account_type", "account_id"], name: "index_relationships_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_relationships_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "replies", force: :cascade do |t|
     t.bigint "comment_id", null: false
-    t.bigint "user_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_type", "account_id"], name: "index_replies_on_account_type_and_account_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
-    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -298,11 +307,12 @@ ActiveRecord::Schema.define(version: 2021_01_08_030506) do
 
   create_table "tagpeople", force: :cascade do |t|
     t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type"
+    t.bigint "account_id"
+    t.index ["account_type", "account_id"], name: "index_tagpeople_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_tagpeople_on_post_id"
-    t.index ["user_id"], name: "index_tagpeople_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -368,18 +378,8 @@ ActiveRecord::Schema.define(version: 2021_01_08_030506) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
-  add_foreign_key "commentslikes", "users"
-  add_foreign_key "followers", "users"
-  add_foreign_key "notifsettings", "users"
-  add_foreign_key "pageowners", "users"
-  add_foreign_key "posts", "users"
   add_foreign_key "postslikes", "posts"
-  add_foreign_key "postslikes", "users"
-  add_foreign_key "relationships", "users"
   add_foreign_key "replies", "comments"
-  add_foreign_key "replies", "users"
   add_foreign_key "tagpeople", "posts"
-  add_foreign_key "tagpeople", "users"
   add_foreign_key "transactions", "users"
 end

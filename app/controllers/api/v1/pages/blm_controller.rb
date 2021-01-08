@@ -33,11 +33,11 @@ class Api::V1::Pages::BlmController < ApplicationController
             blm.save 
 
             # save the owner of the user
-            pageowner = Pageowner.new(user: user(), view: 0)
+            pageowner = Pageowner.new(account_type:  "BlmUser", account_id: user().id, view: 0)
             blm.pageowner = pageowner
 
             # save relationship of the user to the page
-            relationship = blm.relationships.new(user: user(), relationship: params[:relationship])
+            relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
             relationship.save 
 
             # Make the user as admin of the 
@@ -202,7 +202,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     def followersIndex
         blm = Blm.find(params[:id])
 
-        followers = blm.users.page(params[:page]).per(numberOfPage)
+        followers = blm.accounts.page(params[:page]).per(numberOfPage)
         if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif followers.total_count < numberOfPage

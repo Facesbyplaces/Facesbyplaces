@@ -31,13 +31,13 @@ class PostSerializer < ActiveModel::Serializer
 
   def user
     ActiveModel::SerializableResource.new(
-      object.user, 
+      object.account, 
       each_serializer: UserSerializer
     )
   end
 
   def likeStatus
-    if object.postslikes.where(user: object.currentUser).first
+    if object.postslikes.where(account: object.currentUser).first
       true
     else
       false

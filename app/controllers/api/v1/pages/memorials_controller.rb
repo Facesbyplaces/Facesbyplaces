@@ -37,11 +37,11 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             memorial.save
 
             # save the owner of the user
-            pageowner = Pageowner.new(user: user(), view: 0)
+            pageowner = Pageowner.new(account_type:  "AlmUser", account_id: user().id, view: 0)
             memorial.pageowner = pageowner
 
             # save relationship of the user to the page
-            relationship = memorial.relationships.new(user: user(), relationship: params[:relationship])
+            relationship = memorial.relationships.new(account: user(), relationship: params[:relationship])
             relationship.save 
 
             # Make the user as admin of the 
@@ -206,7 +206,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def followersIndex
         memorial = Memorial.find(params[:id])
 
-        followers = memorial.users.page(params[:page]).per(numberOfPage)
+        followers = memorial.accounts.page(params[:page]).per(numberOfPage)
         if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif followers.total_count < numberOfPage

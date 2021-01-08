@@ -9,7 +9,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             when "Blm"
                 if @user.account_type == 1
                     # Check if the user if part of the family or friends
-                    if @page.relationships.where(user: @user).first && @user.notifsetting.addAdmin == true
+                    if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
                         # Add page admin rights to the user
                         @user.add_role "pageadmin", @page
 
@@ -23,7 +23,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             when "Memorial"
                 if @user.account_type == 2
                     # Check if the user if part of the family or friends
-                    if @page.relationships.where(user: @user).first && @user.notifsetting.addAdmin == true
+                    if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
                         # Add page admin rights to the user
                         @user.add_role "pageadmin", @page
 
@@ -41,7 +41,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
     
     def removeAdmin
-        if @page.pageowner.user == @user
+        if @page.pageowner.account == @user
             return render json: {error: "cannot remove pageowner"}, status: 422
         end
 
@@ -57,10 +57,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def addFamily
         # check if relationship already exists
-        if @page.relationships.where(user: @user).first == nil && Follower.where(user: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
+        if @page.relationships.where(account: @user).first == nil && Follower.where(account: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
             if @user.notifsetting.addFamily == true
                 # add new relationship to the page
-                family = @page.relationships.new(relationship: params[:relationship], user: @user)
+                family = @page.relationships.new(relationship: params[:relationship], account: @user)
                 # save relationship
                 if family.save 
                     render json: {status: "Added Successfuly", relationship_id: family.id}
@@ -77,10 +77,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def addFriend
         # check if relationship already exists
-        if @page.relationships.where(user: @user).first == nil && Follower.where(user: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
+        if @page.relationships.where(account: @user).first == nil && Follower.where(account: @user, page_type: params[:page_type], page_id: params[:page_id]).first == nil
             if @user.notifsetting.addFriends == true
                 # add new relationship to the page
-                friend = @page.relationships.new(relationship: params[:relationship], user: @user)
+                friend = @page.relationships.new(relationship: params[:relationship], account: @user)
                 # save relationship
                 if friend.save 
                     render json: {status: "Added Successfuly", relationship_id: friend.id}
@@ -96,13 +96,13 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     end
 
     def removeFamilyorFriend
-        if @page.pageowner.user == @user
+        if @page.pageowner.account == @user
             return render json: {error: "cannot remove pageowner"}, status: 422
         end
         
         # check if relation exist or not
-        if @page.relationships.where(user: @user).first != nil
-            if @page.relationships.where(user: @user).first.destroy 
+        if @page.relationships.where(account: @user).first != nil
+            if @page.relationships.where(account: @user).first.destroy 
                 render json: {status: "Deleted Successfully"}
             else
                 render json: {}, status: 500

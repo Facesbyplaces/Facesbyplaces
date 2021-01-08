@@ -58,7 +58,7 @@ class BlmSerializer < ActiveModel::Serializer
   def page_creator
     if object.pageowner
       ActiveModel::SerializableResource.new(
-        object.pageowner.user, 
+        object.pageowner.account, 
         each_serializer: UserSerializer
       )
     end

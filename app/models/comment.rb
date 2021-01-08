@@ -1,10 +1,10 @@
 class Comment < ApplicationRecord
   belongs_to :post
   # Owner of comment
-  belongs_to :user
+  belongs_to :account, polymorphic: true
   # replies
   has_many :replies, dependent: :destroy
-  has_many :users, through: :replies
+  has_many :accounts, through: :replies
   
   has_many :commentslikes, as: :commentable, dependent: :destroy
 

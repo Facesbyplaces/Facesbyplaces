@@ -3,7 +3,7 @@ class Api::V1::Posts::PostsController < ApplicationController
     before_action :set_up, only: [:create]
 
     def index  
-        posts = Post.where(:user_id => current_user.id)
+        posts = Post.where(accout: user())
 
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -24,7 +24,7 @@ class Api::V1::Posts::PostsController < ApplicationController
 
     def create
         post = Post.new(post_params)
-        post.user = user()
+        post.account = user()
 
         if post.save
             # check if there are people that have been tagged
@@ -33,7 +33,7 @@ class Api::V1::Posts::PostsController < ApplicationController
             if people
                 # save tagged people to database
                 people.each do |person|
-                    tag = Tagperson.new(post_id: post.id, user_id: person)
+                    tag = Tagperson.new(post_id: post.id, account: person)
                     if !tag.save
                         return render json: {errors: tag.errors}, status: 500
                     end
@@ -152,14 +152,14 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def like
-        if Postslike.where(user: user(), post_id: params[:post_id]).first == nil
-            like = Postslike.new(post_id: params[:post_id], user_id: user().id)
+        if Postslike.where(account: user(), post_id: params[:post_id]).first == nil
+            like = Postslike.new(post_id: params[:post_id], account: user())
             if like.save 
                 # Add to notification
                     post = Post.find(params[:post_id])
                     people = post.users
                     # For followers
-                    (post.page.users.uniq - [user()]).each do |user|
+                    (post.page.accounts.uniq - [user()]).each do |user|
                         # check if the user can get notification from this api
                         if user.notifsetting.postLikes == true
                             # check if the user is in the tag people
@@ -173,13 +173,13 @@ class Api::V1::Posts::PostsController < ApplicationController
 
                     # For families and friends
                     (post.page.relationships).each do |relationship|
-                        if relationship.user != user() && relationship.user.notifsetting.postLikes == true
+                        if relationship.account != user() && relationship.account.notifsetting.postLikes == true
                             if people.include?("#{relationship.user.id}")
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false)
-                            elsif relationship.user == post.user 
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked your post", postId: post.id, read: false)
+                                Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false)
+                            elsif relationship.account == post.account 
+                                Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked your post", postId: post.id, read: false)
                             else
-                                Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                                Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
                             end
                         end
                     end
@@ -194,8 +194,8 @@ class Api::V1::Posts::PostsController < ApplicationController
     end
 
     def unlike
-        if Postslike.where(user: user(), post_id: params[:post_id]).first != nil
-            unlike = Postslike.where("post_id = #{params[:post_id]} AND user_id = #{user().id}").first
+        if Postslike.where(account: user(), post_id: params[:post_id]).first != nil
+            unlike = Postslike.where(account: user(), post_id: params[:post_id]).first
             if unlike.destroy 
                 render json: {status: "Unliked Post"}
             else

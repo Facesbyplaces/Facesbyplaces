@@ -120,7 +120,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's posts
     def posts
         # Posts that they created or owned
-        posts = Post.where(user: user()).order(created_at: :desc)
+        posts = Post.where(account: user()).order(created_at: :desc)
         
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
