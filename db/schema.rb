@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_014243) do
     t.string "address"
     t.boolean "hideBirthdate"
     t.boolean "hideBirthplace"
+    t.boolean "hideEmail"
     t.boolean "hideAddress"
     t.boolean "hidePhonenumber"
     t.string "google_id"

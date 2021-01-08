@@ -5,7 +5,7 @@ class Api::V1::Users::VerifyController < ApplicationController
     end
 
     def create
-        @user = User.find(params[:user_id])
+        @user = AlmUser.find(params[:user_id]) # || BlmUser.find(params[:user_id])
         if verify_code_params[:verification_code] === @user.verification_code
             @user.update_attribute(:is_verified, true)
             render json: {success: true, message: "Successfully Verified", status: 200}, status: 200

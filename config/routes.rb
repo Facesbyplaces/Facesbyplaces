@@ -27,9 +27,7 @@ Rails.application.routes.draw do
         resources :image_show, only: [:index]
 
         devise_scope :user do
-          post 'signin-facebook',     to: 'sessions#facebook'
-          post 'signin-google',     to: 'sessions#google'
-          post 'signin-apple',     to: 'sessions#apple'
+          post 'signin-guest',     to: 'sessions#guest'
         end
       
         put 'updateDetails', to: 'users#updateDetails'
