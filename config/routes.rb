@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
   }, :skip => [:omniauth_callbacks]
+
+  mount_devise_token_auth_for 'BlmUser', at: 'blm_auth', controllers: {
+    # Define routes for BlmUser within this block.
+    registrations: 'api/v1/users/registrations',
+    sessions: 'api/v1/users/sessions',
+  }, :skip => [:omniauth_callbacks]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
