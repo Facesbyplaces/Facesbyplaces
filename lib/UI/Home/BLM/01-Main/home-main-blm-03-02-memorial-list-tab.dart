@@ -34,6 +34,9 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   bool flag1;
   int count;
 
+  int memorialFamilyItemsRemaining;
+  int memorialFriendsItemsRemaining;
+
   void initState(){
     super.initState();
     finalMemorials = [];
@@ -43,6 +46,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     page2 = 1;
     count = 0;
     flag1 = false;
+    
+    memorialFamilyItemsRemaining = 1;
+    memorialFriendsItemsRemaining = 1;
+
     addMemorials1();
     onLoading();
   }
@@ -138,24 +145,76 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       page1++;
 
-      if(blmFamilyItemsRemaining == 0){
-        print('Test test test!');
+      // if(blmFamilyItemsRemaining == 0){
+      //   addMemorials2();
+      //   setState(() {
+      //     flag1 = true;
+      //   });
+      //   onLoading();
+      // }
+
+      // refreshController.loadComplete();
+      
+    }
+
+    page1 = 1;
+
+    if(memorialFamilyItemsRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiBLMHomeMemorialsTab(page: page1);
+      context.hideLoaderOverlay();
+
+      memorialFamilyItemsRemaining = newValue.familyMemorialList.memorialFamilyItemsRemaining;
+      count = count + newValue.familyMemorialList.memorial.length;
+
+      for(int i = 0; i < newValue.familyMemorialList.memorial.length; i++){
+        finalMemorials.add(
+          MiscBLMManageMemorialTab(
+            index: i,
+            memorialName: newValue.familyMemorialList.memorial[i].name,
+            description: newValue.familyMemorialList.memorial[i].details.description,
+            image: newValue.familyMemorialList.memorial[i].profileImage,
+            memorialId: newValue.familyMemorialList.memorial[i].id, 
+            managed: newValue.familyMemorialList.memorial[i].manage,
+            follower: newValue.familyMemorialList.memorial[i].follower,
+            famOrFriends: newValue.familyMemorialList.memorial[i].famOrFriends,
+            pageType: newValue.familyMemorialList.memorial[i].pageType,
+            relationship: newValue.familyMemorialList.memorial[i].relationship,
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page1++;
+
+      if(memorialFamilyItemsRemaining == 0){
         addMemorials2();
-        print('Donee!');
         setState(() {
           flag1 = true;
         });
         onLoading();
       }
 
-      refreshController.loadComplete();
       
-    }else{
-      refreshController.loadNoData();
+      
     }
-
-
     
+    // else{
+    //   refreshController.loadNoData();
+    // }    
+    
+    // else{
+    //   refreshController.loadNoData();
+    // }
+
+    // addMemorials2();
+    // setState(() {
+    //   flag1 = true;
+    // });
+
+    refreshController.loadComplete();
+
   }
 
   void onLoading2() async{
@@ -189,10 +248,55 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       page2++;
 
-      refreshController.loadComplete();
-    }else{
-      refreshController.loadNoData();
+      // refreshController.loadComplete();
     }
+    
+    // else{
+    //   refreshController.loadNoData();
+    // }
+
+    // print('The page is $page2');
+    page2 = 1;
+
+    if(memorialFriendsItemsRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiBLMHomeMemorialsTab(page: page2);
+      context.hideLoaderOverlay();
+
+      memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
+      count = count + newValue.friendsMemorialList.memorial.length;
+
+      print('The length of friends memorial is ${newValue.friendsMemorialList.memorial.length}');
+
+      for(int i = 0; i < newValue.friendsMemorialList.memorial.length; i++){
+        finalMemorials.add(
+          MiscBLMManageMemorialTab(
+            index: i,
+            memorialName: newValue.friendsMemorialList.memorial[i].name,
+            description: newValue.friendsMemorialList.memorial[i].details.description,
+            image: newValue.friendsMemorialList.memorial[i].profileImage,
+            memorialId: newValue.friendsMemorialList.memorial[i].id, 
+            managed: newValue.friendsMemorialList.memorial[i].manage,
+            follower: newValue.friendsMemorialList.memorial[i].follower,
+            famOrFriends: newValue.friendsMemorialList.memorial[i].famOrFriends,
+            pageType: newValue.friendsMemorialList.memorial[i].pageType,
+            relationship: newValue.friendsMemorialList.memorial[i].relationship,
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page2++;
+
+      // refreshController.loadComplete();
+    }
+    
+    // else{
+    //   refreshController.loadNoData();
+    // }
+
+    refreshController.loadComplete();
   }
 
   @override

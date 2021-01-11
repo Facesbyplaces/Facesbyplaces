@@ -133,12 +133,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       postItemRemaining = newValue.itemsRemaining;
       tabCount1 = tabCount1 + newValue.searchPostList.length;
 
-      List<String> newList1 = [];
-      List<String> newList2 = [];
-      List<String> newList3 = [];
-      List<int> newList4 = [];
-
       for(int i = 0; i < newValue.searchPostList.length; i++){
+        List<String> newList1 = [];
+        List<String> newList2 = [];
+        List<String> newList3 = [];
+        List<int> newList4 = [];
         for(int j = 0; j < newValue.searchPostList[i].postTagged.length; j++){
           newList1.add(newValue.searchPostList[i].postTagged[j].taggedFirstName);
           newList2.add(newValue.searchPostList[i].postTagged[j].taggedLastName);

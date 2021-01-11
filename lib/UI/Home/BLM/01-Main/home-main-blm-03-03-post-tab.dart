@@ -69,12 +69,12 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
-      List<String> newList1 = [];
-      List<String> newList2 = [];
-      List<String> newList3 = [];
-      List<int> newList4 = [];
-
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        List<String> newList1 = [];
+        List<String> newList2 = [];
+        List<String> newList3 = [];
+        List<int> newList4 = [];
+
         for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
           newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
           newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
@@ -138,7 +138,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();

@@ -132,30 +132,8 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             return MiscRegularNotificationDisplayTemplate(
               imageIcon: notifications[i].actorImage,
               postId: notifications[i].postId,
-              content: [
-                TextSpan(
-                  text: '${notifications[i].action}\n',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff000000),
-                  ),
-                ),
-                TextSpan(
-                  text: timeago.format(DateTime.parse(notifications[i].createdAt)),
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff888888),
-                  ),
-                ),
-                TextSpan(
-                  text: '\n\n',
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 3,
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff888888),
-                  ),
-                ),
-              ],
+              notification: notifications[i].action,
+              dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
             );
             
           },

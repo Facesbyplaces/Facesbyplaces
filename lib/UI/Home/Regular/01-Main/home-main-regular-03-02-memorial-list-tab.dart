@@ -34,6 +34,9 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   bool flag1;
   int count;
 
+  int blmFamilyItemsRemaining;
+  int blmFriendsItemsRemaining;
+
   void initState(){
     super.initState();
     finalMemorials = [];
@@ -43,6 +46,10 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     page2 = 1;
     count = 0;
     flag1 = false;
+
+    blmFamilyItemsRemaining = 1;
+    blmFriendsItemsRemaining = 1;
+
     addMemorials1();
     onLoading();
   }
@@ -117,8 +124,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       memorialFamilyItemsRemaining = newValue.familyMemorialList.memorialFamilyItemsRemaining;
       count = count + newValue.familyMemorialList.memorial.length;
 
-      
-
       for(int i = 0; i < newValue.familyMemorialList.memorial.length; i++){
         finalMemorials.add(
           MiscRegularManageMemorialTab(
@@ -129,6 +134,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             memorialId: newValue.familyMemorialList.memorial[i].id, 
             managed: newValue.familyMemorialList.memorial[i].manage,
             follower: newValue.familyMemorialList.memorial[i].follower,
+            famOrFriends: newValue.familyMemorialList.memorial[i].famOrFriends,
             pageType: newValue.familyMemorialList.memorial[i].pageType,
             relationship: newValue.familyMemorialList.memorial[i].relationship,
           ),
@@ -139,21 +145,77 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       setState(() {});
       page1++;
 
-      if(memorialFamilyItemsRemaining == 0){
-        print('Test test test!');
+      // if(memorialFamilyItemsRemaining == 0){
+      //   addMemorials2();
+      //   setState(() {
+      //     flag1 = true;
+      //   });
+      //   onLoading();
+      // }
+
+      // refreshController.loadComplete();
+      
+    }
+
+    page1 = 1;
+
+    if(blmFamilyItemsRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiRegularHomeMemorialsTab(page: page1);
+      context.hideLoaderOverlay();
+
+      blmFamilyItemsRemaining = newValue.familyMemorialList.blmFamilyItemsRemaining;
+      count = count + newValue.familyMemorialList.blm.length;
+
+      for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
+        finalMemorials.add(
+          MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: newValue.familyMemorialList.blm[i].name,
+            description: newValue.familyMemorialList.blm[i].details.description,
+            image: newValue.familyMemorialList.blm[i].profileImage,
+            memorialId: newValue.familyMemorialList.blm[i].id, 
+            managed: newValue.familyMemorialList.blm[i].manage,
+            follower: newValue.familyMemorialList.blm[i].follower,
+            famOrFriends: newValue.familyMemorialList.blm[i].famOrFriends,
+            pageType: newValue.familyMemorialList.blm[i].pageType,
+            relationship: newValue.familyMemorialList.blm[i].relationship,
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page1++;
+
+      // if(blmFamilyItemsRemaining == 0){
+      //   addMemorials2();
+      //   setState(() {
+      //     flag1 = true;
+      //   });
+      //   onLoading();
+      // }
+
+      // refreshController.loadComplete();
+
+      if(blmFamilyItemsRemaining == 0){
         addMemorials2();
-        print('Donee!');
         setState(() {
           flag1 = true;
         });
         onLoading();
       }
+      
+    }
+    
+    
+    // else{
+    //   refreshController.loadNoData();
+    // }
+
+
 
       refreshController.loadComplete();
-      
-    }else{
-      refreshController.loadNoData();
-    }
 
   }
 
@@ -190,10 +252,48 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       setState(() {});
       page2++;
 
-      refreshController.loadComplete();
-    }else{
-      refreshController.loadNoData();
+      // refreshController.loadComplete();
     }
+
+    page2 = 1;
+
+    if(blmFriendsItemsRemaining != 0){
+      context.showLoaderOverlay();
+      var newValue = await apiRegularHomeMemorialsTab(page: page2);
+      context.hideLoaderOverlay();
+
+      blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
+      count = count + newValue.friendsMemorialList.blm.length;
+
+      for(int i = 0; i < newValue.friendsMemorialList.blm.length; i++){
+        finalMemorials.add(
+          MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: newValue.friendsMemorialList.blm[i].name,
+            description: newValue.friendsMemorialList.blm[i].details.description,
+            image: newValue.friendsMemorialList.blm[i].profileImage,
+            memorialId: newValue.friendsMemorialList.blm[i].id, 
+            managed: newValue.friendsMemorialList.blm[i].manage,
+            follower: newValue.friendsMemorialList.blm[i].follower,
+            famOrFriends: newValue.friendsMemorialList.blm[i].famOrFriends,
+            pageType: newValue.friendsMemorialList.blm[i].pageType,
+            relationship: newValue.friendsMemorialList.blm[i].relationship,
+          ),
+        );
+      }
+
+      if(mounted)
+      setState(() {});
+      page2++;
+
+      // refreshController.loadComplete();
+    }
+    
+    // else{
+    //   refreshController.loadNoData();
+    // }
+
+    refreshController.loadComplete();
   }
 
   @override

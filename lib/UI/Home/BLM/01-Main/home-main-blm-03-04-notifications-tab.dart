@@ -1,12 +1,11 @@
-import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-04-home-notifications-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-notification-display.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class BLMMainPagesNotifications{
@@ -57,7 +56,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       context.hideLoaderOverlay();
 
       itemRemaining = newValue.itemsRemaining;
-      count = newValue.notification.length;
+      count = count + newValue.notification.length;
 
       for(int i = 0; i < newValue.notification.length; i++){
         notifications.add(
@@ -69,6 +68,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             read: newValue.notification[i].read,
             action: newValue.notification[i].action,
             postId: newValue.notification[i].postId,
+            actorImage: newValue.notification[i].actor.image,
           ),
         );
       }
@@ -104,7 +104,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body =  Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load/.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body =  CircularProgressIndicator();
@@ -114,13 +114,11 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             }
             else if(mode == LoadStatus.canLoading){
               body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-              page++;
             }
             else{
               body = Text('End of notifications.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
-            return Container(height: 55.0, child: Center(child: body),
-            );
+            return Container(height: 55.0, child: Center(child: body),);
           },
         ),
         controller: refreshController,
@@ -129,44 +127,13 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            var container = GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: notifications[i].postId,)));
-              },
-              child: Container(
-                child: MiscBLMNotificationDisplayTemplate(
-                  imageIcon: notifications[i].actorImage,
-                  content: [
-                    TextSpan(
-                      text: '${notifications[i].action}\n',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff000000),
-                      ),
-                    ),
-                    TextSpan(
-                      text: '${convertDate(notifications[i].createdAt)}',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
-                      ),
-                    ),
-                    TextSpan(
-                      text: '\n\n',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3,
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff888888),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
 
-            return container;
+            return MiscBLMNotificationDisplayTemplate(
+              imageIcon: notifications[i].actorImage,
+              postId: notifications[i].postId,
+              notification: notifications[i].action,
+              dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
+            );
             
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),

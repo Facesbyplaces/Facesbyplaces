@@ -88,12 +88,11 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
-      List<String> newList1 = [];
-      List<String> newList2 = [];
-      List<String> newList3 = [];
-      List<int> newList4 = [];
-
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        List<String> newList1 = [];
+        List<String> newList2 = [];
+        List<String> newList3 = [];
+        List<int> newList4 = [];
         for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
           newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
           newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
@@ -171,8 +170,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             else{
               body = Text('No more post.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
-            return Container(height: 55.0, child: Center(child: body),
-            );
+              return Container(height: 55.0, child: Center(child: body),);
           },
         ),
         controller: refreshController,

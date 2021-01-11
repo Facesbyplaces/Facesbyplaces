@@ -30,20 +30,28 @@ class APIBLMShowUserInformation{
   int id;
   String firstName;
   String lastName;
-  String email;
-  String phoneNumber;
-  String question;
+  String birthdate;
+  String birthplace;
+  String homeAddress;
+  String emailAddress;
+  String contactNumber;
+  String image;
   
-  APIBLMShowUserInformation({this.id, this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
+  APIBLMShowUserInformation({this.id, this.firstName, this.lastName, this.birthdate, this.birthplace, this.homeAddress, this.emailAddress, this.contactNumber, this.image});
 
   factory APIBLMShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserInformation(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
-      email: parsedJson['email'],
-      phoneNumber: parsedJson['phone_number'],
-      question: parsedJson['question'],
+      birthdate: parsedJson['birthdate'],
+      birthplace: parsedJson['birthplace'],
+      homeAddress: parsedJson['address'],
+      emailAddress: parsedJson['email'],
+      contactNumber: parsedJson['phone_number'],
+      image: parsedJson['image'],
     );
   }
 }
+
+

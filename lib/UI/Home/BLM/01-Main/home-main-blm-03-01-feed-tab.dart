@@ -68,12 +68,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       itemRemaining = newValue.itemsRemaining;
       count = newValue.familyMemorialList.length;
 
-      List<String> newList1 = [];
-      List<String> newList2 = [];
-      List<String> newList3 = [];
-      List<int> newList4 = [];
-
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
+        List<String> newList1 = [];
+        List<String> newList2 = [];
+        List<String> newList3 = [];
+        List<int> newList4 = [];
+
         for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
           newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
           newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
@@ -101,8 +101,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
-          ),    
+          ),
+
         );
+
       }
 
       if(mounted)

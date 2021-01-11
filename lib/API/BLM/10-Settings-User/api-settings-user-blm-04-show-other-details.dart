@@ -18,11 +18,14 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({int userId}) async{
     }
   );
 
+  print('The response status code ${response.statusCode}');
+  print('The response status body ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowOtherDetails.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Failed to get the details.');
   }
 }
 
@@ -37,11 +40,11 @@ class APIBLMShowOtherDetails{
 
   factory APIBLMShowOtherDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOtherDetails(
-      birthdate: parsedJson['birthdate'],
-      birthplace: parsedJson['birthplace'],
-      email: parsedJson['email'],
-      address: parsedJson['address'],
-      phoneNumber: parsedJson['phone_number'],
+      birthdate: parsedJson['birthdate'] != null ? parsedJson['birthdate'] : '',
+      birthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
+      email: parsedJson['email'] != null ? parsedJson['email'] : '',
+      address: parsedJson['address'] != null ? parsedJson['address'] : '',
+      phoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
     );
   }
 }
