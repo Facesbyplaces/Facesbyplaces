@@ -3,8 +3,8 @@ import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-01-show-use
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
@@ -30,7 +30,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   }
 
   Future<APIBLMShowOtherDetails> getOtherDetails(int userId) async{
-    return await apiBLMShowOtherDetails(userId);
+    return await apiBLMShowOtherDetails(userId: userId);
   }
 
   Future<APIBLMShowUserInformation> getProfileInformation(int userId) async{
@@ -64,10 +64,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        // child: CircleAvatar(radius: SizeConfig.blockSizeVertical * 15, backgroundImage: AssetImage('assets/icons/profile1.png'),)
                         child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'))
-
-                        // child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
                       ),
 
                     ],
@@ -84,10 +81,8 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                           alignment: Alignment.centerLeft,
                             child: IconButton(
                             onPressed: (){
-                              // Navigator.popUntil(context, ModalRoute.withName('/home/blm'));
                               Navigator.pop(context);
                             },
-                            // icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
                             icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: ScreenUtil().setHeight(30)), 
                           ),
                         ),

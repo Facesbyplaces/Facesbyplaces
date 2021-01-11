@@ -77,7 +77,6 @@ class HomeBLMReport extends StatelessWidget{
                       }else{
 
                         context.showLoaderOverlay();
-                        // bool result = await apiBLMReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
                         bool result = await apiBLMReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
                         context.hideLoaderOverlay();
 

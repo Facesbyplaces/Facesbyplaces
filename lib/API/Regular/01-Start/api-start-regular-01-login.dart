@@ -2,10 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<bool> apiRegularLogin(String email, String password) async{
+Future<bool> apiRegularLogin({String email, String password}) async{
+
   bool value = false;
 
   try{
+    
     final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password&account_type=2',
       headers: <String, String>{
         'Content-Type': 'application/json',

@@ -2,12 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab(int page) async{
+Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     headers: <String, String>{
@@ -17,9 +17,6 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab(int pag
       'client': getClient,
     }
   );
-
-  // print('The response status code is ${response.statusCode}');
-  // print('The response status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

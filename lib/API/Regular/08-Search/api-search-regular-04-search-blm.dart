@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchMemorialMain> apiRegularSearchBLM(String keywords) async{
+Future<APIRegularSearchMemorialMain> apiRegularSearchBLM({String keywords}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -17,7 +17,6 @@ Future<APIRegularSearchMemorialMain> apiRegularSearchBLM(String keywords) async{
       'client': getClient,
     }
   );
-
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -91,13 +90,9 @@ class APIRegularSearchMemorialExtended{
       details: APIRegularSearchMemorialExtendedPageDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
-      // imagesOrVideos: parsedJson['imagesOrVideos'],
       imagesOrVideos: newList1,
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      // managed: parsedJson['manage'],
-      // follower: parsedJson['follower'],
-      // pageType: parsedJson['page_type'],
       manage: parsedJson['manage'],
       famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],

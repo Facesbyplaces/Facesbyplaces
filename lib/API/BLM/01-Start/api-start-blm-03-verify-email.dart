@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiBLMVerifyEmail(String verificationCode) async{
+Future<bool> apiBLMVerifyEmail({String verificationCode}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('blm-user-id');
@@ -12,9 +12,6 @@ Future<bool> apiBLMVerifyEmail(String verificationCode) async{
       'Content-Type': 'application/json',
     }
   );
-
-    print('The response status in blm verify email is ${response.statusCode}');
-    print('The response body in blm verify email is ${response.body}');
 
   if(response.statusCode == 200){
     return true;

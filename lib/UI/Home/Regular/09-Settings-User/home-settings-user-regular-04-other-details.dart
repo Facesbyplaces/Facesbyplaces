@@ -59,7 +59,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   }
 
   Future<APIRegularShowOtherDetails> getOtherDetails(int userId) async{
-    return await apiRegularShowOtherDetails(userId);
+    return await apiRegularShowOtherDetails(userId: userId);
   }
 
   @override
@@ -222,9 +222,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             if(
                               details.data.birthdate != _key1.currentState.controller.text ||
                               details.data.birthplace !=  _key2.currentState.controller.text ||
-                              // details.data.email != _key3.currentState.controller.text ||
-                              // details.data.address != _key4.currentState.controller.text ||
-                              // details.data.phoneNumber != _key5.currentState.controller.text
                               details.data.address != _key3.currentState.controller.text ||
                               details.data.email != _key4.currentState.controller.text ||
                               details.data.phoneNumber != _key5.currentState.controller.text
@@ -237,9 +234,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 bool result = await apiRegularUpdateOtherDetails(
                                   birthdate: _key1.currentState.controller.text,
                                   birthplace: _key2.currentState.controller.text,
-                                  // email: _key3.currentState.controller.text,
-                                  // address: _key4.currentState.controller.text,
-                                  // phoneNumber: _key5.currentState.controller.text,
                                   address: _key3.currentState.controller.text,
                                   email: _key4.currentState.controller.text,
                                   phoneNumber: _key5.currentState.controller.text,

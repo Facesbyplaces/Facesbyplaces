@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings(int memorialId, int page) async{
+Future<APIBLMShowFriendsSettingsMain> apiBLMShowFriendsSettings({int memorialId, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';

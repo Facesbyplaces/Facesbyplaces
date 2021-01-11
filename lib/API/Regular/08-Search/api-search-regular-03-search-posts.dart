@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchPostMain> apiRegularSearchPosts(String keywords, int page) async{
+Future<APIRegularSearchPostMain> apiRegularSearchPosts({String keywords, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -64,17 +64,11 @@ class APIRegularSearchPostExtended{
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
     List<dynamic> newList1;
-    // List<dynamic> newList2;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
       newList1 = List<dynamic>.from(list);
     }
-
-    // if(parsedJson['tag_people'] != null){
-    //   var list = parsedJson['tag_people'];
-    //   newList2 = List<dynamic>.from(list);
-    // }
 
     var newList2 = parsedJson['tag_people'] as List;
     List<APIRegularHomeTabPostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeTabPostExtendedTagged.fromJson(i)).toList();
@@ -87,7 +81,6 @@ class APIRegularSearchPostExtended{
       latitude: parsedJson['latitude'],
       longitude: parsedJson['longitude'],
       imagesOrVideos: newList1,
-      // tagPeople: newList2,
       postTagged: taggedList,
       createAt: parsedJson['created_at'],
       numberOfLikes: parsedJson['numberOfLikes'],
@@ -106,10 +99,6 @@ class APIRegularSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabPostExtendedPageCreator pageCreator;
-  // bool follower;
-  // bool manage;
-  // String pageType;
-  // String privacy;
   bool manage;
   bool famOrFriends;
   bool follower;
@@ -128,10 +117,6 @@ class APIRegularSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      // follower: parsedJson['follower'],
-      // manage: parsedJson['manage'],
-      // pageType: parsedJson['page_type'],
-      // privacy: parsedJson['privacy'],
       manage: parsedJson['manage'],
       famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],

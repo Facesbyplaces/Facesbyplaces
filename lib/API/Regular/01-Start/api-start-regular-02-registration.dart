@@ -2,19 +2,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<String> apiRegularRegistration(APIRegularAccountRegistration account) async{
+Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) async{
 
   String result = 'Success';
 
   try{
+
     final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }
     );
-
-    print('The response status in registration is ${response.statusCode}');
-    print('The response body in registration is ${response.body}');
 
     if(response.statusCode == 200){
       var value = json.decode(response.body);
@@ -41,8 +39,6 @@ Future<String> apiRegularRegistration(APIRegularAccountRegistration account) asy
   }catch(e){
     result = 'Something went wrong. Please try again.';
   }
-
-  print('The result in registration is $result');
 
   return result;
 }

@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMAddFriends(int memorialId, int userId) async{
+Future<bool> apiBLMAddFriends({int memorialId, int userId}) async{
 
   bool result = false;
 
@@ -31,9 +31,6 @@ Future<bool> apiBLMAddFriends(int memorialId, int userId) async{
         }
       ),  
     );
-
-    print('The response status code for adding friends is ${response.statusCode}');
-    print('The response status body for adding friends is ${response.data}');
 
     if(response.statusCode == 200){
       result = true;

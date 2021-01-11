@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchPostMain> apiRegularSearchNearby(int page, double latitude, double longitude) async{
+Future<APIRegularSearchPostMain> apiRegularSearchNearby({int page, double latitude, double longitude}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -60,9 +60,6 @@ class APIRegularSearchPostExtended{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabPostExtendedPageCreator pageCreator;
-  // bool managed;
-  // bool follower;
-  // String pageType;
   bool manage;
   bool famOrFriends;
   bool follower;

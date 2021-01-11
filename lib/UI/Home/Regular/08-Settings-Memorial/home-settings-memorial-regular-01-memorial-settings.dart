@@ -182,14 +182,11 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         MiscRegularSettingDetailTemplate(
           onTap: () async{
-            // bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(),);
-                        bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(
-              content: 'Are you sure you want to delete "$memorialName"?',
-            ),);
+            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(content: 'Are you sure you want to delete "$memorialName"?',),);
             if(confirmResult){
 
               context.showLoaderOverlay();
-              bool result = await apiRegularDeleteMemorial(memorialId);
+              bool result = await apiRegularDeleteMemorial(memorialId: memorialId);
               context.hideLoaderOverlay();
 
               if(result){
@@ -241,7 +238,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   });
                   
                   context.showLoaderOverlay();      
-                  await apiRegularUpdateSwitchStatusFamily(memorialId, value);
+                  await apiRegularUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
                   context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
@@ -277,7 +274,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   });
 
                   context.showLoaderOverlay();
-                  await apiRegularUpdateSwitchStatusFriends(memorialId, value);
+                  await apiRegularUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
                   context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
@@ -305,7 +302,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
                   });
 
                   context.showLoaderOverlay();
-                  await apiRegularUpdateSwitchStatusFollowers(memorialId, value);
+                  await apiRegularUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
                   context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),

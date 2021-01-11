@@ -39,7 +39,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   int itemRemaining1;
   int itemRemaining2;
   int itemRemaining3;
-  // int page;
   int page1;
   int page2;
   int page3;
@@ -54,7 +53,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     if(itemRemaining1 != 0){
 
       context.showLoaderOverlay();
-      var newValue = await apiBLMConnectionListFamily(memorialId, page1);
+      var newValue = await apiBLMConnectionListFamily(memorialId: memorialId, page: page1);
       context.hideLoaderOverlay();
 
       itemRemaining1 = newValue.itemsRemaining;
@@ -85,7 +84,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void onLoading2() async{
     if(itemRemaining2 != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMConnectionListFriends(memorialId, page2);
+      var newValue = await apiBLMConnectionListFriends(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
 
       itemRemaining2 = newValue.itemsRemaining;
@@ -114,12 +113,10 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void onLoading3() async{
     if(itemRemaining3 != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMConnectionListFollowers(memorialId, page3);
+      var newValue = await apiBLMConnectionListFollowers(memorialId: memorialId, page: page3);
       context.hideLoaderOverlay();
 
       itemRemaining3 = newValue.itemsRemaining;
-
-      print('The length of list follower is ${newValue.followersList.length}');
 
       for(int i = 0; i < newValue.followersList.length; i++){
         listsFollowers.add(
@@ -153,7 +150,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
     itemRemaining1 = 1;
     itemRemaining2 = 1;
     itemRemaining3 = 1;
-    // page = 1;
     page1 = 1;
     page2 = 1;
     page3 = 1;

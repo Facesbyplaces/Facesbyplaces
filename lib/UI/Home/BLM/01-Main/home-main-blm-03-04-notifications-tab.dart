@@ -4,10 +4,10 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-notification-disp
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class BLMMainPagesNotifications{
   int id;
@@ -53,7 +53,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMHomeNotificationsTab(page);
+      var newValue = await apiBLMHomeNotificationsTab(page: page);
       context.hideLoaderOverlay();
 
       itemRemaining = newValue.itemsRemaining;

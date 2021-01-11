@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeProfilePostMain> apiRegularProfilePost(int memorialId, int page) async{
+Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({int memorialId, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';

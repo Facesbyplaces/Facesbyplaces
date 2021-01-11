@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -82,13 +82,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     );
     return GestureDetector(
       onTap: () async{
-        print('The memorial id is $memorialId');
-        print('The managed is $managed');
-        print('The famOrFriends is $famOrFriends');
-        print('The page type is $pageType');
-
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
-
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
@@ -155,9 +148,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
             ),
             Container(
               padding: EdgeInsets.only(right: 15.0),
-              // child: managed == true || famOrFriends == true
-              // ? 
-              // : 
               child: ((){
                 if(managed == true || famOrFriends == true){
                   return MaterialButton(
@@ -201,7 +191,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       if(confirmResult){
 
                         context.showLoaderOverlay();
-                        // bool result = await apiRegularLeavePage(memorialId: memorialId);
                         bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
                         context.hideLoaderOverlay();
 

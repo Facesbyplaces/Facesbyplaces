@@ -35,7 +35,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiRegularSearchUsers(controller.text, page);
+      var newValue = await apiRegularSearchUsers(keywords: controller.text, page: page);
       itemRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.users.length; i++){

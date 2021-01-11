@@ -2,12 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabPostMain> apiBLMHomePostTab(int page) async{
+Future<APIBLMHomeTabPostMain> apiBLMHomePostTab({int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page',

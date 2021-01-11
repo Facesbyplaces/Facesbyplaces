@@ -1,3 +1,5 @@
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-01-search-posts.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.dart';
@@ -6,8 +8,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -131,7 +131,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   void onLoading1() async{
 
     if(postItemRemaining != 0){
-      var newValue = await apiBLMSearchPosts(keyword, page1);
+      var newValue = await apiBLMSearchPosts(keywords: keyword, page: page1);
       postItemRemaining = newValue.itemsRemaining;
       tabCount1 = tabCount1 + newValue.searchPostList.length;
 
@@ -185,7 +185,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void onLoading2() async{
     if(suggestedItemRemaining != 0){
-      var newValue = await apiBLMSearchSuggested(page2);
+      var newValue = await apiBLMSearchSuggested(page: page2);
       suggestedItemRemaining = newValue.itemsRemaining;
       tabCount2 = tabCount2 + newValue.pages.length;
 
@@ -218,7 +218,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
     if(nearbyBlmItemsRemaining != 0){
 
-      var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
+      var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3 = tabCount3 + newValue.blmList.length;
 
@@ -245,7 +245,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     }
     else if(nearbyMemorialItemsRemaining != 0){
 
-      var newValue = await apiBLMSearchNearby(page3, latitude, longitude);
+      var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
@@ -277,7 +277,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      var newValue = await apiBLMSearchBLM(keyword);
+      var newValue = await apiBLMSearchBLM(keywords: keyword);
       blmItemRemaining = newValue.itemsRemaining;
       tabCount4 = tabCount4 + newValue.memorialList.length;
 
@@ -407,7 +407,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           Center(
                             child: Text('Post',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -416,7 +415,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                           Center(child: Text('Suggested',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -426,7 +424,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           Center(
                             child: Text('Nearby',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -436,7 +433,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           Center(
                             child: Text('BLM',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -509,7 +505,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       child: Container(
                       child: ((){
                         switch(toggle){
-                          // case 0: return searchPostExtended(); break;
                           case 0: return searchPostExtended(); break;
                           case 1: return searchSuggestedExtended(); break;
                           case 2: return searchNearbyExtended(); break;
@@ -531,7 +526,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchPostExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount1 != 0
       ? SmartRefresher(
@@ -572,7 +566,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              // timeCreated: convertDate(feeds[i].timeCreated),
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
 
               managed: feeds[i].managed,
@@ -650,7 +643,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchSuggestedExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount2 != 0
       ? SmartRefresher(
@@ -685,7 +677,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            print('The value of manage is ${suggested[i].managed}');
             return MiscBLMManageMemorialTab(
               index: i,
               memorialName: suggested[i].memorialName,
@@ -702,7 +693,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: suggested.length,
         ),
       )
-      // : MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
       : ContainerResponsive(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
@@ -724,7 +714,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchNearbyExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
@@ -775,7 +764,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: nearby.length,
         ),
       )
-      // : MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
       : ContainerResponsive(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
@@ -797,7 +785,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchBLMExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(

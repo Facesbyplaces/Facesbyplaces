@@ -38,7 +38,6 @@ Future<bool> apiBLMUpdateAccountDetails({String firstName, String lastName, Stri
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

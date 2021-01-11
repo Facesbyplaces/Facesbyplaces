@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowPageImagesMain> apiRegularShowPageImages(int memorialId) async{
+Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -17,9 +17,6 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages(int memorialId) as
       'client': getClient,
     }
   );
-
-  print('The status code for show images is ${response.statusCode}');
-  // print('The status body for show images is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -69,7 +66,6 @@ class APIRegularShowPageImagesExtended{
       details: APIRegularShowPageImagesExtendedDetails.fromJson(parsedJson['details']),
       backgroundImage: parsedJson['backgroundImage'],
       profileImage: parsedJson['profileImage'],
-      // imagesOrVideos: parsedJson['imagesOrVideos'],
       imagesOrVideos: newList1,
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularShowPageImagesExtendedPageCreator.fromJson(parsedJson['page_creator'])

@@ -18,9 +18,6 @@ Future<APIRegularShowAdminsSettingMain> apiRegularShowAdminSettings({int memoria
     }
   );
 
-  print('The status code of page managers is ${response.statusCode}');
-  // print('The status body of page managers is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowAdminsSettingMain.fromJson(newValue);

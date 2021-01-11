@@ -66,7 +66,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiRegularSearchUsers(keywords, page);
+      var newValue = await apiRegularSearchUsers(keywords: keywords, page: page);
       itemRemaining = newValue.itemsRemaining;
       for(int i = 0; i < newValue.users.length; i++){
         users.add(
@@ -235,19 +235,17 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
                         context.showLoaderOverlay();
-                        bool result = await apiRegularAddFamily(memorialId, users[index].userId, choice);
+                        bool result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice);
                         context.hideLoaderOverlay();
 
                         if(result){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          // await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                           await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
                         }
                       }else{
                         context.showLoaderOverlay();
-                        // bool result = await apiRegularAddFriends(memorialId, users[index].userId);
                         bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId);
                         context.hideLoaderOverlay();
 
@@ -255,7 +253,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          // await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                           await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
                         }
 

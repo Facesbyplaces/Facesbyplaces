@@ -160,7 +160,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                         }else{
 
                                           context.showLoaderOverlay();
-                                          bool result = await apiRegularVerifyEmail(controller.text);
+                                          bool result = await apiRegularVerifyEmail(verificationCode: controller.text);
                                           context.hideLoaderOverlay();
 
                                           context.bloc<BlocUpdateButtonText>().reset();

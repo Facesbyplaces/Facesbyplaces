@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-02-user-update-details.dart';
@@ -8,14 +7,15 @@ import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-reg
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-02-show-comments.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-04-regular-dropdown.dart';
@@ -148,7 +148,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                 children: [
                   GestureDetector(
                     onTap: () async{
-                      print('The memorial id is $memorialId');
 
                       if(managed == true){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
@@ -951,7 +950,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
             GestureDetector(
               onTap: () async{
                 context.showLoaderOverlay();
-                APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId);
+                APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: userId);
                 context.hideLoaderOverlay();
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
@@ -1049,7 +1048,6 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                 bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                 if(logoutResult){
-                  // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
                     context.showLoaderOverlay();
                     bool result = await apiRegularLogout();
 

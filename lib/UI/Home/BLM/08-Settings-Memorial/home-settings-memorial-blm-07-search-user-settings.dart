@@ -38,7 +38,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   List<BLMSearchUsers> users;
   int itemRemaining;
   String keywords;
-    bool empty;
+  bool empty;
   int page;
 
   void initState(){
@@ -66,7 +66,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMSearchUsers(keywords, page);
+      var newValue = await apiBLMSearchUsers(keywords: keywords, page: page);
       itemRemaining = newValue.itemsRemaining;
       for(int i = 0; i < newValue.users.length; i++){
         users.add(
@@ -235,30 +235,24 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
 
                         context.showLoaderOverlay();
-                        bool result = await apiBLMAddFamily(memorialId, users[index].userId, choice);
+                        bool result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice);
                         context.hideLoaderOverlay();
-
-                        print('The result for adding a family is $result');
 
                         if(result){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          // await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                           await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
                         }
                       }else{
                         context.showLoaderOverlay();
-                        bool result = await apiBLMAddFriends(memorialId, users[index].userId);
+                        bool result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId);
                         context.hideLoaderOverlay();
-
-                        print('The result for adding a friends is $result');
 
                         if(result){
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          // await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                           await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
                         }
 

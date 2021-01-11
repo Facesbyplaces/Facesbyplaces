@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers(int memorialId, int page) async{
+Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({int memorialId, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -50,21 +50,6 @@ class APIBLMConnectionListFollowersMain{
     );
   }
 }
-
-
-// class APIBLMConnectionListFollowersExtended{
-//   APIBLMConnectionListFollowersExtendedDetails user;
-//   String relationship;
-
-//   APIBLMConnectionListFollowersExtended({this.user, this.relationship});
-
-//   factory APIBLMConnectionListFollowersExtended.fromJson(Map<String, dynamic> parsedJson){
-//     return APIBLMConnectionListFollowersExtended(
-//       user: APIBLMConnectionListFollowersExtendedDetails.fromJson(parsedJson['user']),
-//       relationship: parsedJson['relationship'],
-//     );
-//   }
-// }
 
 class APIBLMConnectionListFollowersExtendedDetails{
 

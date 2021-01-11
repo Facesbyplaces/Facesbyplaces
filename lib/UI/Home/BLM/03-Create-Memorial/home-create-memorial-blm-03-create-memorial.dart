@@ -307,7 +307,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     );
 
                     context.showLoaderOverlay();
-                    int result = await apiBLMCreateMemorial(memorial);
+                    int result = await apiBLMCreateMemorial(memorial: memorial);
                     context.hideLoaderOverlay();
 
                     if(result != 0){

@@ -6,7 +6,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
-// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -17,7 +16,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'dart:async';
 
 
 class RegularLogin extends StatefulWidget{
@@ -259,7 +257,6 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                                     // await fb.logOut();
                                     // print('heheheheh');
 
-
                                     bool isLoggedIn = await fb.isLoggedIn;
 
                                     print('The value of isLoggedIn is $isLoggedIn');
@@ -477,15 +474,6 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
 
                             bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
 
-                            // bool result = await apiRegularSignInWithApple(
-                            //   userIdentification: '001290.59295b853a3647ceb44da083f136f311.0702', 
-                            //   identityToken: 'eyJraWQiOiJlWGF1bm1MIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLmFwcC5mYWNlc2J5cGxhY2VzIiwiZXhwIjoxNjA5MzExNzM3LCJpYXQiOjE2MDkyMjUzMzcsInN1YiI6IjAwMTI5MC41OTI5NWI4NTNhMzY0N2NlYjQ0ZGEwODNmMTM2ZjMxMS4wNzAyIiwiY19oYXNoIjoiLWk1dlpSc1dOT25ieWlnNWs5MWMtQSIsImVtYWlsIjoiZGVhbnZlckBrb2Rha29sbGVjdGl2LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImF1dGhfdGltZSI6MTYwOTIyNTMzNywibm9uY2Vfc3VwcG9ydGVkIjp0cnVlfQ.OHo0uab8ONyvf6RHnHeYGw3U5f9iS_TWCCVVfa6nje8OjEFhi_LtxiEw5_joNO5sCXiUOSrLu6ZDrJ7V48vOtZpVG-BvrR1AvMCk5wvbImviH8Ia_lfbHAxA6soPPI0WSgR1eddajduuZWW4F6f7zcy2N0fEkfVn4Q-VrW5ieHlHg7XueanjyeOKoY9NJ8zTBO9IEOotMOU4Fv-V25Us_SIQ1Qo1bJ0enJzWq2O2aLlLSwJZ7tdWJ-y9V2InSxRBIYbrOb6NwLxgac358qwrwdUsp3Z2r-f5IRRLhCgsNH4m0sFcaF3lO3n3gckckdJyNnXJ7j_zyXSpa4RlbZuy6w',
-                            // );
-
-                            // 001290.59295b853a3647ceb44da083f136f311.0702
-
-                            // print('The result is $result');
-
                             if(result == true){
                               Navigator.pushReplacementNamed(context, '/home/regular');
                             }else{
@@ -568,10 +556,6 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                             color: Color(0xffffffff),
                           ), 
                           onPressed: () async{
-
-                            // FlutterBranchSdk.logout();
-
-                            // print('Logged out!');
                             
                             bool validEmail = false;
                             validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
@@ -583,7 +567,7 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                             }else{
 
                               context.showLoaderOverlay();
-                              bool result = await apiRegularLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                              bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text);
                               context.hideLoaderOverlay();
 
                               if(result){

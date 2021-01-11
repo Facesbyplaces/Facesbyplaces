@@ -5,16 +5,16 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMAddReply({int commentId, dynamic replyBody}) async{
 
   bool result = false;
+
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
 
-    var formData;
-    formData = FormData();
+    var dioRequest = dio.Dio();
+    var formData = FormData();
 
     formData = FormData.fromMap({
       'comment_id': commentId,
@@ -36,7 +36,6 @@ Future<bool> apiBLMAddReply({int commentId, dynamic replyBody}) async{
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

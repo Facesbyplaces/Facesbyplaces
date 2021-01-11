@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchPostMain> apiBLMSearchNearby(int page, double latitude, double longitude) async{
+Future<APIBLMSearchPostMain> apiBLMSearchNearby({int page, double latitude, double longitude}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -18,9 +18,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby(int page, double latitude, doubl
       'client': getClient,
     }
   );
-
-  print('The status code for nearby search is ${response.statusCode}');
-  print('The status body for nearby search is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -64,9 +61,6 @@ class APIBLMSearchPostExtended{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  // bool follower;
-  // bool managed;
-  // String pageType;
   bool manage;
   bool famOrFriends;
   bool follower;

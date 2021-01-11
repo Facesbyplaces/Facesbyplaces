@@ -54,7 +54,6 @@ class BLMProfilePosts{
 }
 
 class HomeBLMProfile extends StatefulWidget{
-  // final int memorialId;
   final int memorialId;
   final String relationship;
   final bool managed;
@@ -64,7 +63,6 @@ class HomeBLMProfile extends StatefulWidget{
 }
 
 class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObserver{
-  // final int memorialId;
   final int memorialId;
   final String relationship;
   final bool managed;
@@ -92,8 +90,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMProfilePost(memorialId, page);
-      print('The post count is $postCount');
+      var newValue = await apiBLMProfilePost(memorialId: memorialId, page: page);
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
 
@@ -101,7 +98,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
       List<String> newList2 = [];
       List<String> newList3 = [];
       List<int> newList4 = [];
-
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
         for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
@@ -342,17 +338,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       child: MaterialButton(
                                         padding: EdgeInsets.zero,
                                         onPressed: () async{
-                                          // context.showLoaderOverlay();
-                                          // APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
-                                          // context.hideLoaderOverlay();
-
-                                          // if(result.success){
-                                          //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.blmName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
-                                          // }
-
                                           if(managed == true){
                                             context.showLoaderOverlay();
-                                            APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId);
+                                            APIBLMShowSwitchStatus result = await apiBLMShowSwitchStatus(memorialId: memorialId);
                                             context.hideLoaderOverlay();
 
                                             if(result.success){
@@ -840,15 +828,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 final tempDir = await getTemporaryDirectory();
                                 final file = await new File('${tempDir.path}/blm-post-image.png').create();
                                 file.writeAsBytesSync(list);
-
-                                // Navigator.pushNamed(context, '/home/blm/create-post', arguments: BLMRelationshipItemPost(name: profile.data.memorial.name, image: file, memorialId: profile.data.memorial.id));
-
-                                // final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
-                                // final Uint8List list = bytes.buffer.asUint8List();
-
-                                // final tempDir = await getTemporaryDirectory();
-                                // final file = await new File('${tempDir.path}/regular-post-image.png').create();
-                                // file.writeAsBytesSync(list);
 
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMCreatePost(name: profile.data.memorial.blmName, memorialId: profile.data.memorial.blmId)));
 

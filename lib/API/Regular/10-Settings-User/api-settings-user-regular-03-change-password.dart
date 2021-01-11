@@ -11,10 +11,10 @@ Future<bool> apiRegularChangePassword({String currentPassword, String newPasswor
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
+    
     var dioRequest = Dio();
+    var formData = FormData();
 
-    var formData;
-    formData = FormData();
     formData.files.addAll([
       MapEntry('current_password', MultipartFile.fromString(currentPassword),),
       MapEntry('new_password', MultipartFile.fromString(newPassword)),

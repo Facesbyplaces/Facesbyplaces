@@ -28,7 +28,6 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   final int memorialId;
   HomeRegularMemorialPageImageState({this.memorialId});
 
-  // final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
   List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   int backgroundImageToggle;
   final picker = ImagePicker();
@@ -55,8 +54,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   }
 
   Future<APIRegularShowPageImagesMain> getMemorialSettings(int memorialId) async{
-    print('The memorialId is $memorialId');
-    return await apiRegularShowPageImages(memorialId);
+    return await apiRegularShowPageImages(memorialId: memorialId);
   }
 
   void initState(){
@@ -292,7 +290,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                             if(profileImage != null || backgroundImage != null){
                               context.showLoaderOverlay();
-                              bool result = await apiRegularUpdatePageImages(memorialId, backgroundImage, profileImage);
+                              bool result = await apiRegularUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
                               context.hideLoaderOverlay();
 
                               if(result){

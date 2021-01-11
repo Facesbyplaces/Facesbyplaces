@@ -2,13 +2,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMUpdatePageImages(int memorialId, dynamic backgroundImage, dynamic profileImage) async{
+Future<bool> apiBLMUpdatePageImages({int memorialId, dynamic backgroundImage, dynamic profileImage}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
     var dioRequest = Dio();

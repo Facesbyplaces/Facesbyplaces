@@ -13,8 +13,7 @@ Future<bool> apiBLMLikeOrUnlikePost({int postId, bool like}) async{
   try{
     var dioRequest = dio.Dio();
 
-    var formData;
-    formData = FormData();
+    var formData = FormData();
 
     formData = FormData.fromMap({
       'post_id': postId,
@@ -36,7 +35,6 @@ Future<bool> apiBLMLikeOrUnlikePost({int postId, bool like}) async{
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

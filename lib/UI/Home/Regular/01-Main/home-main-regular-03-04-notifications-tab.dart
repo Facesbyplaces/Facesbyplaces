@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-notifications-tab.dart';
-// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -53,7 +52,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeNotificationsTab(page);
+      var newValue = await apiRegularHomeNotificationsTab(page: page);
       context.hideLoaderOverlay();
 
       itemRemaining = newValue.itemsRemaining;
@@ -142,7 +141,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
                   ),
                 ),
                 TextSpan(
-                  // text: '${convertDate(notifications[i].createdAt)}',
                   text: timeago.format(DateTime.parse(notifications[i].createdAt)),
                   style: TextStyle(
                     fontWeight: FontWeight.w300,

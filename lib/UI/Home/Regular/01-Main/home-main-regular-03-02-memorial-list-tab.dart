@@ -18,7 +18,6 @@ class RegularMainPagesMemorials{
   RegularMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
 }
 
-
 class HomeRegularManageTab extends StatefulWidget{
 
   HomeRegularManageTabState createState() => HomeRegularManageTabState();
@@ -112,7 +111,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
     if(memorialFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeMemorialsTab(page1);
+      var newValue = await apiRegularHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
 
       memorialFamilyItemsRemaining = newValue.familyMemorialList.memorialFamilyItemsRemaining;
@@ -134,8 +133,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             relationship: newValue.familyMemorialList.memorial[i].relationship,
           ),
         );
-
-        print('The name is ${newValue.familyMemorialList.memorial[i].famOrFriends}');
       }
 
       if(mounted)
@@ -152,34 +149,20 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         onLoading();
       }
 
-      print('The items remaining is $memorialFamilyItemsRemaining');
-
       refreshController.loadComplete();
       
-      
     }else{
-        // print('Donee!');
-        // setState(() {
-        //   flag1 = true;
-        // });
-        // onLoading();
-
-      
       refreshController.loadNoData();
     }
 
-
-    
   }
 
   void onLoading2() async{
 
     if(memorialFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeMemorialsTab(page2);
+      var newValue = await apiRegularHomeMemorialsTab(page: page2);
       context.hideLoaderOverlay();
-
-
 
       memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
       count = count + newValue.friendsMemorialList.memorial.length;
@@ -187,19 +170,8 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       
 
       for(int i = 0; i < newValue.friendsMemorialList.memorial.length; i++){
-
-        print('The name is ${newValue.friendsMemorialList.memorial[i].name}');
-
-        print('The length is ${newValue.friendsMemorialList.memorial.length}');
-        print('The value of managed is ${newValue.friendsMemorialList.memorial[i].manage}');
-        
         finalMemorials.add(
           MiscRegularManageMemorialTab(
-            // index: i,
-            // memorialId: newValue.friendsMemorialList.memorial[i].id,
-            // memorialName: newValue.friendsMemorialList.memorial[i].name,
-            // description: newValue.friendsMemorialList.memorial[i].details.description,
-            // managed: newValue.friendsMemorialList.memorial[i].managed,
             index: i,
             memorialName: newValue.friendsMemorialList.memorial[i].name,
             description: newValue.friendsMemorialList.memorial[i].details.description,
@@ -243,7 +215,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();

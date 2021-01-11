@@ -1,15 +1,14 @@
-import 'package:badges/badges.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
+import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
-import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,6 +19,7 @@ import 'home-main-blm-03-03-post-tab.dart';
 import 'home-main-blm-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
 
 class HomeBLMScreenExtended extends StatefulWidget{
 
@@ -40,15 +40,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   void getUnreadNotifications() async{
     var value = await apiBLMShowUnreadNotifications();
 
-    print('The value is $value');
-
-
-
     setState(() {
       unreadNotifications = value;
     });
-
-
   }
 
   void initState(){
@@ -127,7 +121,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
             child: ((){
               switch(toggleBottom){
                 case 0: return HomeBLMFeedTab(); break;
-                // case 0: return Container(color: Colors.red,); break;
                 case 1: return HomeBLMManageTab(); break;
                 case 2: return HomeBLMPostTab(); break;
                 case 3: return HomeBLMNotificationsTab(); break;
@@ -147,10 +140,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.fire, size: ScreenUtil().setHeight(25),),
                       Icon(MdiIcons.fire,),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Feed', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -160,10 +151,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.graveStone, size: ScreenUtil().setHeight(25),),
                       Icon(MdiIcons.graveStone),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Memorials', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -173,10 +162,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.post, size: ScreenUtil().setHeight(25),),
                       Icon(MdiIcons.post),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Post', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -186,15 +173,11 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.heart, size: ScreenUtil().setHeight(25),),
-                      // Icon(MdiIcons.heart),
                       Badge(
                         position: BadgePosition.topEnd(top: -3, end: -10),
                         animationDuration: Duration(milliseconds: 300),
-                        // animationType: BadgeAnimationType.slide,
                         animationType: BadgeAnimationType.fade,
                         badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
                         badgeContent: Text(

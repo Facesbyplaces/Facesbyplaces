@@ -18,12 +18,8 @@ Future<int> apiBLMShowUnreadNotifications() async{
     }
   );
 
-  print('The notification status code in blm is ${response.statusCode}');
-  print('The notification status body in blm is ${response.body}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    print('The unread notifications is ${value['number_of_unread_notifs']}');
     return value['number_of_unread_notifs'];
   }else{
     return 0;

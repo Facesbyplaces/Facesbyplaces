@@ -3,12 +3,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-image-display.dar
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-01-home-feed-tab.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class BLMMainPagesFeeds{
@@ -64,7 +63,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMHomeFeedTab(page);
+      var newValue = await apiBLMHomeFeedTab(page: page);
       context.hideLoaderOverlay();
       itemRemaining = newValue.itemsRemaining;
       count = newValue.familyMemorialList.length;
@@ -135,7 +134,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
@@ -159,20 +158,11 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            // DateTime dateTime = DateTime.parse(feeds[i].timeCreated);
-            // // print('The time created is $dateTime');
-            // String dateCreated = timeago.format(dateTime);
-
-            // print('The time created is $dateCreated');
-
             return MiscBLMPost(
               userId: feeds[i].userId,
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              // timeCreated: convertDate(feeds[i].timeCreated),
-              // timeCreated: dateCreated,
-              // child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)).toString(),
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
               managed: feeds[i].managed,
               joined: feeds[i].joined,

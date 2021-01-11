@@ -35,7 +35,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMSearchUsers(controller.text, page);
+      var newValue = await apiBLMSearchUsers(keywords: controller.text, page: page);
       itemRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.users.length; i++){

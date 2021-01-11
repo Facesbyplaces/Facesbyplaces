@@ -5,8 +5,8 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-06-show-comment-or-reply-like-status.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-07-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-08-add-reply.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -326,7 +326,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                                 SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                // userId == comments[i].userId
                                 currentUserId == comments[i].userId
                                 ? Expanded(
                                   child: Text('You',
@@ -337,7 +336,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                 )
                                 : Expanded(
                                   child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                  // child: Text('$userId' + ' ' + '${comments[i].userId}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -479,7 +477,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        // userId == comments[i].listOfReplies[index].userId
                                         currentUserId == comments[i].listOfReplies[index].userId
                                         ? Expanded(
                                           child: Text('You',

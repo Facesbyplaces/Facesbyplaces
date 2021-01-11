@@ -11,6 +11,7 @@ Future<bool> apiBLMHidePhoneNumber({bool hide}) async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
+    
     final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhidePhonenumber?hide=$hide',
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -25,7 +26,6 @@ Future<bool> apiBLMHidePhoneNumber({bool hide}) async{
     }
       
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

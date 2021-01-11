@@ -1,13 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularUploadPhoto(dynamic image) async{
+Future<bool> apiRegularUploadPhoto({dynamic image}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
     var dioRequest = Dio();
@@ -24,9 +24,6 @@ Future<bool> apiRegularUploadPhoto(dynamic image) async{
         }
       ),
     );
-
-    print('The response status in verify email is ${response.statusCode}');
-    print('The response body in verify email is ${response.data}');
 
     if(response.statusCode == 200){
       sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));

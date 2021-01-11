@@ -5,10 +5,11 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularAddComment({int postId, dynamic commentBody}) async{
 
   bool result = false;
+
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
     var dioRequest = dio.Dio();
@@ -32,14 +33,10 @@ Future<bool> apiRegularAddComment({int postId, dynamic commentBody}) async{
       ),  
     );
 
-    // print('The response status is ${response.statusCode}');
-    // print('The response data is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

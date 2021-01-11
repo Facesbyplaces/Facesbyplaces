@@ -7,7 +7,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularReport extends StatelessWidget{
-  // userId: userId, postId: postId
   final int postId;
   final String reportType;
 
@@ -78,8 +77,6 @@ class HomeRegularReport extends StatelessWidget{
                       }else{
 
                         context.showLoaderOverlay();
-                        // bool result = await apiRegularReport(newValue.userId, newValue.postId ,_key1.currentState.controller.text, _key2.currentState.controller.text);
-                        // bool result = await apiRegularReport(userId: userId, postId: postId, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
                         bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
                         context.hideLoaderOverlay();
 

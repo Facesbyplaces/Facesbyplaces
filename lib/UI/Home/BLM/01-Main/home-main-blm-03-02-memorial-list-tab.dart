@@ -18,7 +18,6 @@ class BLMMainPagesMemorials{
   BLMMainPagesMemorials({this.blmId, this.blmName, this.blmDescription, this.managed, this.joined, this.pageType});
 }
 
-
 class HomeBLMManageTab extends StatefulWidget{
 
   HomeBLMManageTabState createState() => HomeBLMManageTabState();
@@ -112,7 +111,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
     if(blmFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMHomeMemorialsTab(page1);
+      var newValue = await apiBLMHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
 
       blmFamilyItemsRemaining = newValue.familyMemorialList.blmFamilyItemsRemaining;
@@ -121,16 +120,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
-            // index: i,
-            // memorialName: newValue.familyMemorialList.blm[i].name,
-            // description: newValue.familyMemorialList.blm[i].details.description,
-            // image: newValue.familyMemorialList.blm[i].profileImage,
-            // memorialId: newValue.familyMemorialList.blm[i].id, 
-            // managed: newValue.familyMemorialList.blm[i].manage,
-            // follower: newValue.familyMemorialList.blm[i].follower,
-            // pageType: newValue.familyMemorialList.blm[i].pageType,
-            // relationship: newValue.familyMemorialList.blm[i].relationship,
-
             index: i,
             memorialName: newValue.familyMemorialList.blm[i].name,
             description: newValue.familyMemorialList.blm[i].details.description,
@@ -161,15 +150,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
       refreshController.loadComplete();
       
-      
     }else{
-        // print('Donee!');
-        // setState(() {
-        //   flag1 = true;
-        // });
-        // onLoading();
-
-      
       refreshController.loadNoData();
     }
 
@@ -181,32 +162,15 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
     if(blmFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMHomeMemorialsTab(page2);
+      var newValue = await apiBLMHomeMemorialsTab(page: page2);
       context.hideLoaderOverlay();
-
-
 
       blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
       count = count + newValue.friendsMemorialList.blm.length;
 
-      
-
       for(int i = 0; i < newValue.friendsMemorialList.blm.length; i++){
-
-        
         finalMemorials.add(
           MiscBLMManageMemorialTab(
-            // index: i,
-            // memorialName: newValue.friendsMemorialList.blm[i].name,
-            // description: newValue.friendsMemorialList.blm[i].details.description,
-            // image: newValue.friendsMemorialList.blm[i].profileImage,
-            // memorialId: newValue.friendsMemorialList.blm[i].id, 
-            // managed: newValue.friendsMemorialList.blm[i].manage,
-            // follower: newValue.friendsMemorialList.blm[i].follower,
-            // famOrFriends: newValue.friendsMemorialList.blm[i].famOrFriends,
-            // pageType: newValue.friendsMemorialList.blm[i].pageType,
-            // relationship: newValue.friendsMemorialList.blm[i].relationship,
-
             index: i,
             memorialName: newValue.friendsMemorialList.blm[i].name,
             description: newValue.friendsMemorialList.blm[i].details.description,
@@ -250,7 +214,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();

@@ -28,7 +28,6 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   final int newToggle;
   HomeRegularConnectionListState({this.memorialId, this.newToggle});
 
-  
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<RegularConnectionListItem> listsFamily;
   List<RegularConnectionListItem> listsFriends;
@@ -39,7 +38,6 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   int itemRemaining1;
   int itemRemaining2;
   int itemRemaining3;
-  // int page;
   int page1;
   int page2;
   int page3;
@@ -54,7 +52,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
     if(itemRemaining1 != 0){
 
       context.showLoaderOverlay();
-      var newValue = await apiRegularConnectionListFamily(memorialId, page1);
+      var newValue = await apiRegularConnectionListFamily(memorialId: memorialId, page: page1);
       context.hideLoaderOverlay();
 
       itemRemaining1 = newValue.itemsRemaining;
@@ -68,7 +66,6 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
             relationship: newValue.familyList[i].relationship,
           ),    
         );
-
       }
 
       if(mounted)
@@ -85,7 +82,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   void onLoading2() async{
     if(itemRemaining2 != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularConnectionListFriends(memorialId, page2);
+      var newValue = await apiRegularConnectionListFriends(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
 
       itemRemaining2 = newValue.itemsRemaining;
@@ -114,12 +111,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   void onLoading3() async{
     if(itemRemaining3 != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularConnectionListFollowers(memorialId, page3);
+      var newValue = await apiRegularConnectionListFollowers(memorialId: memorialId, page: page3);
       context.hideLoaderOverlay();
 
       itemRemaining3 = newValue.itemsRemaining;
-
-      print('The length of list follower is ${newValue.followersList.length}');
 
       for(int i = 0; i < newValue.followersList.length; i++){
         listsFollowers.add(
@@ -153,7 +148,6 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
     itemRemaining1 = 1;
     itemRemaining2 = 1;
     itemRemaining3 = 1;
-    // page = 1;
     page1 = 1;
     page2 = 1;
     page3 = 1;

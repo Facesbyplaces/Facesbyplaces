@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus(int memorialId) async{
+Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -17,9 +17,6 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus(int memorialId) as
       'client': getClient,
     }
   );
-
-  print('The status code is ${response.statusCode}');
-  // print('The status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

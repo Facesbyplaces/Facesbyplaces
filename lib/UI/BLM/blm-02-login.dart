@@ -349,56 +349,21 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
 
                           SignInWithAppleButton(
                             onPressed: () async {
-                            //   // final credential = await SignInWithApple.getAppleIDCredential(
-                            //   //   scopes: [
-                            //   //     AppleIDAuthorizationScopes.email,
-                            //   //     AppleIDAuthorizationScopes.fullName,
-                            //   //   ],
-                            //   // );
 
-                            //   // print(credential);
+                              final credential = await SignInWithApple.getAppleIDCredential(
+                                scopes: [
+                                  AppleIDAuthorizationScopes.email,
+                                  AppleIDAuthorizationScopes.fullName,
+                                ],
+                              );
 
-                            // if(result == true){
-                            //   Navigator.pushReplacementNamed(context, '/home/regular');
-                            // }else{
-                            //   await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
-                            // }
+                              bool result = await apiBLMSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
 
-                            final credential = await SignInWithApple.getAppleIDCredential(
-                              scopes: [
-                                AppleIDAuthorizationScopes.email,
-                                AppleIDAuthorizationScopes.fullName,
-                              ],
-                            );
-
-                            
-
-                            print('The credential is $credential');
-                            print('The credential is ${credential.authorizationCode}');
-                            print('The credential is ${credential.email}');
-                            print('The credential is ${credential.familyName}');
-                            print('The credential is ${credential.givenName}');
-                            print('The credential is ${credential.identityToken}');
-                            print('The credential is ${credential.state}');
-                            print('The credential is ${credential.userIdentifier}');
-
-
-                            bool result = await apiBLMSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
-
-                            // bool result = await apiRegularSignInWithApple(
-                            //   userIdentification: '001290.59295b853a3647ceb44da083f136f311.0702', 
-                            //   identityToken: 'eyJraWQiOiJlWGF1bm1MIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLmFwcC5mYWNlc2J5cGxhY2VzIiwiZXhwIjoxNjA5MzExNzM3LCJpYXQiOjE2MDkyMjUzMzcsInN1YiI6IjAwMTI5MC41OTI5NWI4NTNhMzY0N2NlYjQ0ZGEwODNmMTM2ZjMxMS4wNzAyIiwiY19oYXNoIjoiLWk1dlpSc1dOT25ieWlnNWs5MWMtQSIsImVtYWlsIjoiZGVhbnZlckBrb2Rha29sbGVjdGl2LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjoidHJ1ZSIsImF1dGhfdGltZSI6MTYwOTIyNTMzNywibm9uY2Vfc3VwcG9ydGVkIjp0cnVlfQ.OHo0uab8ONyvf6RHnHeYGw3U5f9iS_TWCCVVfa6nje8OjEFhi_LtxiEw5_joNO5sCXiUOSrLu6ZDrJ7V48vOtZpVG-BvrR1AvMCk5wvbImviH8Ia_lfbHAxA6soPPI0WSgR1eddajduuZWW4F6f7zcy2N0fEkfVn4Q-VrW5ieHlHg7XueanjyeOKoY9NJ8zTBO9IEOotMOU4Fv-V25Us_SIQ1Qo1bJ0enJzWq2O2aLlLSwJZ7tdWJ-y9V2InSxRBIYbrOb6NwLxgac358qwrwdUsp3Z2r-f5IRRLhCgsNH4m0sFcaF3lO3n3gckckdJyNnXJ7j_zyXSpa4RlbZuy6w',
-                            // );
-
-                            // 001290.59295b853a3647ceb44da083f136f311.0702
-
-                            // print('The result is $result');
-
-                            if(result == true){
-                              Navigator.pushReplacementNamed(context, '/home/regular');
-                            }else{
-                              await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
-                            }
+                              if(result == true){
+                                Navigator.pushReplacementNamed(context, '/home/regular');
+                              }else{
+                                await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                              }
 
                             },
                             height: ScreenUtil().setHeight(45),
@@ -440,8 +405,6 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                 }
 
                               }
-
-
                             },
                             child: Align(
                               alignment: Alignment.centerRight, 
@@ -475,7 +438,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                               }else{
 
                                 context.showLoaderOverlay();
-                                bool result = await apiBLMLogin(_key1.currentState.controller.text, _key2.currentState.controller.text);
+                                bool result = await apiBLMLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text);
                                 context.hideLoaderOverlay();
 
                                 if(result){
@@ -542,7 +505,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                     ),
                   ),
                 ),
-              ),              
+              ),
 
             ],
           ),

@@ -173,7 +173,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   if(_image != null){
 
                                     context.showLoaderOverlay();
-                                    bool result = await apiRegularUploadPhoto(_image);
+                                    bool result = await apiRegularUploadPhoto(image: _image);
                                     context.hideLoaderOverlay();
 
                                     context.bloc<BlocUpdateButtonText>().reset();

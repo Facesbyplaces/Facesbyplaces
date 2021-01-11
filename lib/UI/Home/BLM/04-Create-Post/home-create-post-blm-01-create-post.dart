@@ -162,8 +162,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     }
                   }
 
-                  print('The new user id is $userIds');
-
                   APIBLMCreatePost post = APIBLMCreatePost(
                     pageType: 'Blm',
                     postBody: _key1.currentState.controller.text,
@@ -176,7 +174,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   );
 
                   
-                  bool result = await apiBLMHomeCreatePost(post);
+                  bool result = await apiBLMHomeCreatePost(post: post);
                   context.hideLoaderOverlay();
 
                   if(result){
@@ -225,7 +223,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                           onChanged: (int newValue) {
                             setState(() {
                               currentIdSelected = newValue;
-                              print('The currentId selected is $currentIdSelected');
                             });
                           },
                           items: managedPages.map((BLMManagedPages value) {

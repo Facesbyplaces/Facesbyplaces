@@ -40,7 +40,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
   }
 
   Future<APIRegularShowOriginalPostMainMain> getOriginalPost(postId) async{
-    return await apiRegularShowOriginalPost(postId);
+    return await apiRegularShowOriginalPost(postId: postId);
   }
 
   @override
@@ -65,7 +65,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                // Navigator.popAndPushNamed(context, '/home/regular');
                 Navigator.pop(context);
               },
             ),
@@ -181,8 +180,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                       originalPost.data.post.postTagged.length,
                                       (index) => GestureDetector(
                                         onTap: (){
-                                          print('The user id is ${originalPost.data.post.postTagged[index]}');
-
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.post.postTagged[index].taggedId)));
                                         },
                                         child: RichText(

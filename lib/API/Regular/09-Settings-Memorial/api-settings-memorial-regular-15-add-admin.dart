@@ -13,8 +13,7 @@ Future<bool> apiRegularAddMemorialAdmin({String pageType, int pageId, int userId
   try{
     var dioRequest = dio.Dio();
 
-    var formData;
-    formData = FormData();
+    var formData = FormData();
 
     formData = FormData.fromMap({
       'page_type': pageType,
@@ -36,7 +35,6 @@ Future<bool> apiRegularAddMemorialAdmin({String pageType, int pageId, int userId
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

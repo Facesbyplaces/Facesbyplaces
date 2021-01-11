@@ -18,9 +18,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({int memorialId, int
     }
   );
 
-  print('The status code of page managers is ${response.statusCode}');
-  // print('The status body of page managers is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowAdminsSettingMain.fromJson(newValue);
@@ -28,8 +25,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({int memorialId, int
     throw Exception('Failed to get the lists.');
   }
 }
-
-
 
 class APIBLMShowAdminsSettingMain{
   int adminItemsRemaining;

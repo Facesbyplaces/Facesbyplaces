@@ -22,7 +22,6 @@ class MiscBLMSettingDetailTemplate extends StatelessWidget{
       onTap: onTap,
       child: Container(
         height: SizeConfig.blockSizeVertical * 10,
-        // color: Color(0xffffffff),
         color: backgroundColor,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         child: Column(

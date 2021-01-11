@@ -38,7 +38,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   void onLoading1() async{
     if(friendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowFriendsSettings(memorialId, page);
+      var newValue = await apiBLMShowFriendsSettings(memorialId: memorialId, page: page);
       friendsItemsRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.friendsList.length; i++){
@@ -99,10 +99,10 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
             builder: (BuildContext context, LoadStatus mode){
               Widget body;
               if(mode == LoadStatus.idle){
-                body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
               }
               else if(mode == LoadStatus.loading){
-                body =  CircularProgressIndicator();
+                body = CircularProgressIndicator();
               }
               else if(mode == LoadStatus.failed){
                 body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);

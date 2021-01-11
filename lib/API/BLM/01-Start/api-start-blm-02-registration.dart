@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<String> apiBLMRegistration(APIBLMAccountRegistration account) async{
+Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
 
   String result = 'Success';
 
@@ -13,9 +13,6 @@ Future<String> apiBLMRegistration(APIBLMAccountRegistration account) async{
         'Content-Type': 'application/json',
       }
     );
-
-    print('The response status in blm registration is ${response.statusCode}');
-    print('The response body in blm registration is ${response.body}');
     
     if(response.statusCode == 200){
       var value = json.decode(response.body);

@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-17-set-relationship.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-16-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -161,7 +162,15 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
           onTap: () async{
             String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
-            print('The choice is $choice');
+            if(choice != null){
+              bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
+
+              if(result == true){
+                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the relationship setting.', color: Colors.green,));
+              }else{
+                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+              }
+            }
           },
           titleDetail: 'Relationship',
           contentDetail: 'Set your relationship for this page',
@@ -232,7 +241,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
         Container(
           height: SizeConfig.blockSizeVertical * 10,
-          // color: Color(0xffffffff),
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -246,7 +254,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               ),
 
               Switch(
-                // value: isSwitched1,
                 value: false,
                 onChanged: (value) async{
 
@@ -262,7 +269,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
         Container(
           height: SizeConfig.blockSizeVertical * 10,
-          // color: Color(0xffffffff),
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -279,7 +285,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
 
               Switch(
-                // value: isSwitched2,
                 value: false,
                 onChanged: (value) async{
 
@@ -296,7 +301,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
 
         Container(
           height: SizeConfig.blockSizeVertical * 10,
-          // color: Color(0xffffffff),
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -308,7 +312,6 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               ),
 
               Switch(
-                // value: isSwitched3,
                 value: false,
                 onChanged: (value) async{
 

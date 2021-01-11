@@ -1,9 +1,9 @@
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
+import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
-import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -35,8 +35,6 @@ class RegularProfilePosts{
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
-
 
   RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId,});
 }
@@ -74,7 +72,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiRegularProfilePost(memorialId, page);
+      var newValue = await apiRegularProfilePost(memorialId: memorialId, page: page);
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
 
@@ -117,6 +115,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
       if(mounted)
       setState(() {});
+      page++;
       
       refreshController.loadComplete();
     }else{
@@ -140,7 +139,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
     onLoading();
     showProfile = getProfileInformation(memorialId);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -304,12 +302,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                           setState(() {
                                             join = !join;
                                           });
-
-                                          // context.showLoaderOverlay();
-                                          // bool result = await apiRegularModifyFollowPage(pageId: profile.data.memorial.memorialId, follow: profile.data.memorial.memorialFollower);
-                                          // context.hideLoaderOverlay();
-
-                                          // print('The result is $result');
 
                                           context.showLoaderOverlay();
                                           bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
@@ -664,7 +656,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   builder: (BuildContext context, LoadStatus mode){
                                     Widget body;
                                     if(mode == LoadStatus.idle){
-                                      body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                      body =  Text('Pull up to load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
                                     }
                                     else if(mode == LoadStatus.loading){
                                       body =  CircularProgressIndicator();
@@ -674,7 +666,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     }
                                     else if(mode == LoadStatus.canLoading){
                                       body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                                      page++;
                                     }
                                     else{
                                       body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
@@ -694,7 +685,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      // timeCreated: convertDate(posts[i].timeCreated),
                                       timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
 
                                       managed: posts[i].managed,

@@ -39,7 +39,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
   void onLoading1() async{
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularShowFamilySettings(memorialId, page);
+      var newValue = await apiRegularShowFamilySettings(memorialId: memorialId, page: page);
       familyItemsRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.familyList.length; i++){
@@ -101,7 +101,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
             builder: (BuildContext context, LoadStatus mode){
               Widget body;
               if(mode == LoadStatus.idle){
-                body =  Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
               }
               else if(mode == LoadStatus.loading){
                 body =  CircularProgressIndicator();
@@ -127,11 +127,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                 padding: EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    // CircleAvatar(
-                    //   maxRadius: SizeConfig.blockSizeVertical * 5,
-                    //   backgroundColor: Color(0xff888888),
-                    //   backgroundImage: AssetImage('assets/icons/graveyard.png'),
-                    // ),
 
                     CircleAvatar(
                       maxRadius: SizeConfig.blockSizeVertical * 5,

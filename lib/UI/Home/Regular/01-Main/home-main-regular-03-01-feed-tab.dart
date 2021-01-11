@@ -54,7 +54,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomeFeedTab(page);
+      var newValue = await apiRegularHomeFeedTab(page: page);
       context.hideLoaderOverlay();
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
@@ -136,7 +136,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
@@ -165,7 +165,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              // timeCreated: convertDate(feeds[i].timeCreated),
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
 
               managed: feeds[i].managed,

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested(int page) async{
+Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -17,9 +17,6 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested(int page) async{
       'client': getClient,
     }
   );
-
-  // print('The status code for suggested search is ${response.statusCode}');
-  // print('The status body for suggested search is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -72,9 +69,6 @@ class APIBLMSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  // bool follower;
-  // bool managed;
-  // String pageType;
   bool manage;
   bool famOrFriends;
   bool follower;
@@ -93,9 +87,6 @@ class APIBLMSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      // follower: parsedJson['follower'],
-      // managed: parsedJson['manage'],
-      // pageType: parsedJson['page_type'],
       manage: parsedJson['manage'],
       famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],

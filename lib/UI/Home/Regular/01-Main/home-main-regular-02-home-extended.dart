@@ -1,15 +1,14 @@
-import 'package:badges/badges.dart';
+import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
-import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,6 +19,7 @@ import 'home-main-regular-03-03-post-tab.dart';
 import 'home-main-regular-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
 
 class HomeRegularScreenExtended extends StatefulWidget{
 
@@ -31,32 +31,20 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   int toggleBottom;
   List<bool> bottomTab;
   Future drawerSettings;
-  // Future unreadNotifications;
   int unreadNotifications;
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{
     return await apiRegularShowProfileInformation();
   }
 
-  // Future<int> getUnreadNotifications() async{
-  //   return await apiRegularShowUnreadNotifications();
-  // }
-
   void getUnreadNotifications() async{
     var value = await apiRegularShowUnreadNotifications();
-
-    print('The value is $value');
-
-
 
     setState(() {
       unreadNotifications = value;
     });
 
-
   }
-
-  // apiRegularShowUnreadNotifications
 
   void initState(){
     super.initState();
@@ -65,8 +53,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     toggleBottom = 0;
     bottomTab = [true, false, false, false];
     drawerSettings = getDrawerInformation();
-    
-    // unreadNotifications = getUnreadNotifications();
   }
 
   @override
@@ -136,7 +122,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
             child: ((){
               switch(toggleBottom){
                 case 0: return HomeRegularFeedTab(); break;
-                // case 0: return Container(color: Colors.red,); break;
                 case 1: return HomeRegularManageTab(); break;
                 case 2: return HomeRegularPostTab(); break;
                 case 3: return HomeRegularNotificationsTab(); break;
@@ -156,10 +141,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.fire, size: ScreenUtil().setHeight(25),),
                       Icon(MdiIcons.fire,),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Feed', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -169,10 +152,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.graveStone, size: ScreenUtil().setHeight(25),),
                       Icon(MdiIcons.graveStone),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Memorials', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -182,10 +163,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.post, size: ScreenUtil().setHeight(25),),
                       Icon(MdiIcons.post),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
                       Text('Post', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
@@ -195,15 +174,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                 Container(
                   width: SizeConfig.screenWidth / 4,
-                  // width: SizeConfig.screenWidth / 5,
                   child: Column(
                     children: [
-                      // Icon(MdiIcons.heart, size: ScreenUtil().setHeight(25),),
-                      // Icon(MdiIcons.heart),
                       Badge(
                         position: BadgePosition.topEnd(top: -3, end: -10),
                         animationDuration: Duration(milliseconds: 300),
-                        // animationType: BadgeAnimationType.slide,
                         animationType: BadgeAnimationType.fade,
                         badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
                         badgeContent: Text(

@@ -20,7 +20,6 @@ Future<int> apiRegularShowUnreadNotifications() async{
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    print('The unread notifications is ${value['number_of_unread_notifs']}');
     return value['number_of_unread_notifs'];
   }else{
     return 0;

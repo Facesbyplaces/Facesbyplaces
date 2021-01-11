@@ -155,7 +155,7 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                         }else{
 
                                           context.showLoaderOverlay();
-                                          bool result = await apiBLMVerifyEmail(controller.text);
+                                          bool result = await apiBLMVerifyEmail(verificationCode: controller.text);
                                           context.hideLoaderOverlay();
 
                                           context.bloc<BlocUpdateButtonText>().reset();

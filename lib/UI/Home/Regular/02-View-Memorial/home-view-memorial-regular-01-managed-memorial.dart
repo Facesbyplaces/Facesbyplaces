@@ -1,9 +1,9 @@
+import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-03-show-switch-status.dart';
-import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -92,7 +92,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiRegularProfilePost(memorialId, page);
+      var newValue = await apiRegularProfilePost(memorialId: memorialId, page: page);
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
 
@@ -347,7 +347,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                         onPressed: () async{
                                           if(managed == true){
                                             context.showLoaderOverlay();
-                                            APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId);
+                                            APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId: memorialId);
                                             context.hideLoaderOverlay();
 
                                             if(result.success){
@@ -355,24 +355,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                             }
                                           }else{
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: memorialId, relationship: relationship,)));
-                                          }
-
-                                          // context.showLoaderOverlay();
-                                          // APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId);
-                                          // context.hideLoaderOverlay();
-
-                                          // if(result.success){
-                                          //   // if(managed == true){
-                                          //   //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
-                                          //   // }
-
-                                          //   print('The value of manage is $managed');
-                                          //   print('The value of famOrFriends is $famOrFriends');
-                                          //   print('The value of relationship is $relationship');
-
-                                            
-                                          // }
-                                          
+                                          }                                          
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
@@ -660,7 +643,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   children: [
                                     Container(
                                       width: SizeConfig.screenWidth,
-                                      // height: ScreenUtil().setHeight(110),
                                       height: SizeConfig.blockSizeVertical * 12,
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       child: ListView.separated(
@@ -668,7 +650,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index){
                                           return Container(
-                                            // width: ScreenUtil().setHeight(110),
                                             width: SizeConfig.blockSizeVertical * 12,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10),
@@ -689,7 +670,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                       ),
                                     ),
 
-                                    // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                     SizedBox(height: ScreenUtil().setHeight(20)),
 
                                   ],
@@ -727,7 +707,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                     else{
                                       body = Text('End of result.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
                                     }
-                                    return Container(height: 55.0, child: Center(child: body),
+                                      return Container(height: 55.0, child: Center(child: body),
                                     );
                                   },
                                 ),
@@ -743,7 +723,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      // timeCreated: convertDate(posts[i].timeCreated),
                                       timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
 
                                       managed: posts[i].managed,

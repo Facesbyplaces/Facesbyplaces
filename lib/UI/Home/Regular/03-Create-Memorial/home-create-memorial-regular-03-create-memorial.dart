@@ -255,7 +255,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                 MiscRegularButtonTemplate(
                   onPressed: () async{
 
-
                     if(profileImage == null){
                       final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
                       final Uint8List list = bytes.buffer.asUint8List();
@@ -306,7 +305,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     );
 
                     context.showLoaderOverlay();
-                    int result = await apiRegularCreateMemorial(memorial);
+                    int result = await apiRegularCreateMemorial(memorial: memorial);
                     context.hideLoaderOverlay();
 
                     if(result != 0){

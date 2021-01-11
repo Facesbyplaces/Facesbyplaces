@@ -9,11 +9,7 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({int postId, i
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The post id is $postId');
-  print('The page is $page');
-
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -21,9 +17,6 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({int postId, i
       'client': getClient,
     }
   );
-
-  print('The status code of comments is ${response.statusCode}');
-  print('The status body of comments is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

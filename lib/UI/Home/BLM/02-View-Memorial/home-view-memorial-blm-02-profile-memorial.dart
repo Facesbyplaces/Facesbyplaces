@@ -68,10 +68,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
   void onLoading() async{
     if(itemRemaining != 0){
-      var newValue = await apiBLMProfilePost(memorialId, page);
+      
+      var newValue = await apiBLMProfilePost(memorialId: memorialId, page: page);
       itemRemaining = newValue.itemsRemaining;
       postCount = newValue.familyMemorialList.length;
-      print('The items remaining is $itemRemaining');
 
       List<String> newList1 = [];
       List<String> newList2 = [];

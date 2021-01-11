@@ -1,14 +1,14 @@
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 
-Future<int> apiBLMCreateMemorial(APIBLMCreateMemorial memorial) async{
+Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial memorial}) async{
   
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
     var dioRequest = dio.Dio();

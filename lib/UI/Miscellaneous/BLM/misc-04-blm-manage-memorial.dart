@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -82,11 +82,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
     );
     return GestureDetector(
       onTap: () async{
-        print('The memorial id is $memorialId');
-        print('The managed is $managed');
-        print('The page type is $pageType');
-        print('The famOrFriends is $famOrFriends');
-
         if(pageType == 'Blm'){
           if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
@@ -155,9 +150,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
               padding: EdgeInsets.only(right: 15.0),
               child: ((){
                 if(managed == true || famOrFriends == true){
-                  print('The value of managed is $managed');
-                  print('The value of famOrFriends is $famOrFriends');
-
                   return MaterialButton(
                     elevation: 0,
                     padding: EdgeInsets.zero,

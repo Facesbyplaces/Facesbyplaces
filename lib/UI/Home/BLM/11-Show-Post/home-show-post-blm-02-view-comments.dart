@@ -341,9 +341,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                   ),
                                 ),
 
-                                // ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
-                                // : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
-
                                 commentsLikes[i] == true
                                 ? IconButton(
                                   icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
@@ -497,7 +494,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                                         repliesLikes[i][index] == true
                                         ? IconButton(
-                                          // icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
                                           icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
                                           padding: EdgeInsets.zero,
                                           onPressed: () async{
@@ -510,7 +506,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                           },
                                         )
                                         : IconButton(
-                                          // icon: Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
                                           icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,), 
                                           padding: EdgeInsets.zero,
                                           onPressed: () async{
@@ -654,20 +649,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             child: Row(
               children: [
                 
-                // FutureBuilder<APIBLMShowProfileInformation>(
-                //   future: currentUser,
-                //   builder: (context, user){
-                //     if(user.hasData){
-                //       return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(user.data.image));
-                //     }else if(user.hasError){
-                //       return CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png'));
-                //     }
-                //     else{
-                //       return CircularProgressIndicator();
-                //     }
-                //   },
-                // ),
-
                 CircleAvatar(
                   backgroundColor: Color(0xff888888), 
                   backgroundImage: currentUserImage != null && currentUserImage != ''

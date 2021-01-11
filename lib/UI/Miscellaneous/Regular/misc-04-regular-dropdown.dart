@@ -1,6 +1,6 @@
+import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
-import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +45,6 @@ class MiscRegularDropDownTemplate extends StatelessWidget{
                   chooserTitle: 'Share link'
                 );
               }else if(dropDownList == 'Report'){
-                // Navigator.pushNamed(context, 'home/regular/home-21-regular-report', arguments: RegularReportID(userId: userId, postId: postId));
-
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: reportType,)));
               }
             },

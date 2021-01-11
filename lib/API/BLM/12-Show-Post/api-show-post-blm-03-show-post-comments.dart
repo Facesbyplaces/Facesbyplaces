@@ -9,11 +9,7 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The post id is $postId');
-  print('The page is $page');
-
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -21,9 +17,6 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
       'client': getClient,
     }
   );
-
-  print('The status code of comments is ${response.statusCode}');
-  // print('The status body of comments is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

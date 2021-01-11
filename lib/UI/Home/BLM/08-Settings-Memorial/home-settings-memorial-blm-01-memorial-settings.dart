@@ -189,7 +189,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
             if(confirmResult){
 
               context.showLoaderOverlay();
-              bool result = await apiBLMDeleteMemorial(memorialId);
+              bool result = await apiBLMDeleteMemorial(memorialId: memorialId);
               context.hideLoaderOverlay();
 
               if(result){
@@ -241,7 +241,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                   });
 
                   context.showLoaderOverlay();
-                  await apiBLMUpdateSwitchStatusFamily(memorialId, value);
+                  await apiBLMUpdateSwitchStatusFamily(memorialId: memorialId, status: value);
                   context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
@@ -277,7 +277,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                   });
 
                   context.showLoaderOverlay();
-                  await apiBLMUpdateSwitchStatusFriends(memorialId, value);
+                  await apiBLMUpdateSwitchStatusFriends(memorialId: memorialId, status: value);
                   context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),
@@ -305,7 +305,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                   });
 
                   context.showLoaderOverlay();
-                  await apiBLMUpdateSwitchStatusFollowers(memorialId, value);
+                  await apiBLMUpdateSwitchStatusFollowers(memorialId: memorialId, status: value);
                   context.hideLoaderOverlay();
                 },
                 activeColor: Color(0xff2F353D),

@@ -2,12 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async{
+Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
     headers: <String, String>{
@@ -17,9 +17,6 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab(int page) async
       'client': getClient,
     }
   );
-
-  print('The response status of memorials tab is ${response.statusCode}');
-  // print('The response body of memorials tab is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -92,8 +89,6 @@ class APIRegularHomeTabMemorialExtendedPage{
   APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
-    print('The value of manage is ${parsedJson['manage']}');
-
     return APIRegularHomeTabMemorialExtendedPage(
       id: parsedJson['id'],
       name: parsedJson['name'],

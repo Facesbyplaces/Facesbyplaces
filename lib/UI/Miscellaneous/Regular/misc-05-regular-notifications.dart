@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-02-show-comments.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
@@ -8,7 +8,6 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
   final int postId;
 
   MiscRegularNotificationDisplayTemplate({
-    // this.imageIcon = 'assets/icons/app-icon.png',
     this.imageIcon = '',
     this.content,
     this.postId,
@@ -27,8 +26,6 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
         child: Row(
           children: [
             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-            // CircleAvatar(backgroundImage: AssetImage(imageIcon), backgroundColor: Color(0xff888888),),
             
             CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),
 
@@ -50,5 +47,4 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
       ),
     );
   }
-
 }

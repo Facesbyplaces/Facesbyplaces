@@ -169,7 +169,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                   if(_image != null){
 
                                     context.showLoaderOverlay();
-                                    bool result = await apiBLMUploadPhoto(_image);
+                                    bool result = await apiBLMUploadPhoto(image: _image);
                                     context.hideLoaderOverlay();
 
                                     context.bloc<BlocUpdateButtonText>().reset();

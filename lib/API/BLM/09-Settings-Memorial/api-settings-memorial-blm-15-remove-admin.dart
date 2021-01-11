@@ -10,11 +10,6 @@ Future<bool> apiBLMDeleteMemorialAdmin({String pageType, int pageId, int userId}
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The pageType is $pageType');
-  print('The pageId is $pageId');
-  print('The userId is $userId');
-
-
   try{
     var dioRequest = dio.Dio();
 
@@ -41,7 +36,6 @@ Future<bool> apiBLMDeleteMemorialAdmin({String pageType, int pageId, int userId}
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

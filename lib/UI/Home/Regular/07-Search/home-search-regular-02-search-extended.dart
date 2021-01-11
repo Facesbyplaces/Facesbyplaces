@@ -1,11 +1,11 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-suggested.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -129,7 +129,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   void onLoading1() async{
 
     if(postItemRemaining != 0){
-      var newValue = await apiRegularSearchPosts(keyword, page1);
+      var newValue = await apiRegularSearchPosts(keywords: keyword, page: page1);
       postItemRemaining = newValue.itemsRemaining;
       tabCount1 = tabCount1 + newValue.searchPostList.length;
 
@@ -183,7 +183,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   void onLoading2() async{
     if(suggestedItemRemaining != 0){
-      var newValue = await apiRegularSearchSuggested(page2);
+      var newValue = await apiRegularSearchSuggested(page: page2);
       suggestedItemRemaining = newValue.itemsRemaining;
       tabCount2 = tabCount2 + newValue.pages.length;
 
@@ -216,7 +216,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
     if(nearbyBlmItemsRemaining != 0){
 
-      var newValue = await apiRegularSearchNearby(page3, latitude, longitude);
+      var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3 = tabCount3 + newValue.blmList.length;
 
@@ -243,7 +243,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     }
     else if(nearbyMemorialItemsRemaining != 0){
 
-      var newValue = await apiRegularSearchNearby(page3, latitude, longitude);
+      var newValue = await apiRegularSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
@@ -275,7 +275,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      var newValue = await apiRegularSearchBLM(keyword);
+      var newValue = await apiRegularSearchBLM(keywords: keyword);
       blmItemRemaining = newValue.itemsRemaining;
       tabCount4 = tabCount4 + newValue.memorialList.length;
 
@@ -352,7 +352,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search Memorial',
                       hintStyle: TextStyle(
-                        // fontSize: SizeConfig.safeBlockHorizontal * 4,
                         fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -405,7 +404,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           Center(
                             child: Text('Post',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -414,7 +412,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                           Center(child: Text('Suggested',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -424,7 +421,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           Center(
                             child: Text('Nearby',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -434,7 +430,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           Center(
                             child: Text('BLM',
                               style: TextStyle(
-                                // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontWeight: FontWeight.w400,
                               ),
@@ -507,7 +502,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       child: Container(
                       child: ((){
                         switch(toggle){
-                          // case 0: return searchPostExtended(); break;
                           case 0: return searchPostExtended(); break;
                           case 1: return searchSuggestedExtended(); break;
                           case 2: return searchNearbyExtended(); break;
@@ -529,7 +523,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchPostExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount1 != 0
       ? SmartRefresher(
@@ -570,7 +563,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               postId: feeds[i].postId,
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
-              // timeCreated: convertDate(feeds[i].timeCreated),
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
 
               managed: feeds[i].managed,
@@ -627,7 +619,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: feeds.length,
         ),
       )
-      // : MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
       : ContainerResponsive(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
@@ -649,7 +640,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchSuggestedExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount2 != 0
       ? SmartRefresher(
@@ -661,7 +651,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
@@ -684,7 +674,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            print('The value of manage is ${suggested[i].managed}');
             return MiscRegularManageMemorialTab(
               index: i,
               memorialName: suggested[i].memorialName,
@@ -701,7 +690,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: suggested.length,
         ),
       )
-      // : MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
       : ContainerResponsive(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
@@ -723,7 +711,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchNearbyExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
@@ -774,7 +761,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: nearby.length,
         ),
       )
-      // : MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
       : ContainerResponsive(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,
@@ -796,7 +782,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchBLMExtended(){
     return Container(
-      // height: SizeConfig.screenHeight,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(
@@ -832,15 +817,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscRegularManageMemorialTab(
-                index: i,
-                memorialName: blm[i].memorialName,
-                description: blm[i].memorialDescription,
-                image: blm[i].image,
-                memorialId: blm[i].memorialId,
-                managed: blm[i].managed,
-                follower: blm[i].follower,
-                pageType: blm[i].pageType,
-                relationship: blm[i].relationship,
+              index: i,
+              memorialName: blm[i].memorialName,
+              description: blm[i].memorialDescription,
+              image: blm[i].image,
+              memorialId: blm[i].memorialId,
+              managed: blm[i].managed,
+              follower: blm[i].follower,
+              pageType: blm[i].pageType,
+              relationship: blm[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),

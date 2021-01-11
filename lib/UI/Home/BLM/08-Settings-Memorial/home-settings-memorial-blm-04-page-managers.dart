@@ -33,7 +33,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
   List<BLMShowAdminSettings> familyList;
   int adminItemsRemaining;
   int familyItemsRemaining;
-  // int page;
   int page1;
   int page2;
 
@@ -172,11 +171,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                       padding: EdgeInsets.all(10.0),
                       child: Row(
                         children: [
-                          // CircleAvatar(
-                          //   maxRadius: SizeConfig.blockSizeVertical * 5,
-                          //   backgroundColor: Color(0xff888888),
-                          //   backgroundImage: AssetImage('assets/icons/graveyard.png'),
-                          // ),
                           CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 5, 
                             backgroundColor: Color(0xff888888), 
@@ -191,8 +185,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(adminList[i].firstName + ' ' + adminList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
-
-                                // Text(adminList[i].email, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
 
                                 Text(adminList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                               ],
@@ -236,7 +228,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   },
                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
                   itemCount: adminList.length,
-                  // itemCount: 1,
                 ),
               ),
             ),
@@ -281,12 +272,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                       padding: EdgeInsets.all(10.0),
                       child: Row(
                         children: [
-                          // CircleAvatar(
-                          //   maxRadius: SizeConfig.blockSizeVertical * 5,
-                          //   backgroundColor: Color(0xff888888),
-                          //   backgroundImage: AssetImage('assets/icons/graveyard.png'),
-                          // ),
-
                           CircleAvatar(
                             radius: SizeConfig.blockSizeVertical * 5, 
                             backgroundColor: Color(0xff888888), 
@@ -301,8 +286,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
-
-                                // Text(familyList[i].email, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
 
                                 Text(familyList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
                                 
@@ -347,7 +330,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                   },
                   separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
                   itemCount: familyList.length,
-                  // itemCount: 1,
                 ),
               ),
             ),

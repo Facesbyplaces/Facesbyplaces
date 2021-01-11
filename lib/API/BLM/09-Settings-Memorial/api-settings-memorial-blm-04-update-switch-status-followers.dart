@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiBLMUpdateSwitchStatusFollowers(int memorialId, bool status) async{
+Future<bool> apiBLMUpdateSwitchStatusFollowers({int memorialId, bool status}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails(int userId) async{
+Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({int userId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -17,9 +17,6 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails(int userId) async{
       'client': getClient,
     }
   );
-
-  print('The other details status code is ${response.statusCode}');
-  print('The other details body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

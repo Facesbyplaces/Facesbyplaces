@@ -36,7 +36,6 @@ Future<bool> apiBLMAddMemorialAdmin({String pageType, int pageId, int userId}) a
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

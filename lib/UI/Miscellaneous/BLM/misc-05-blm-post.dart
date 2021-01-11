@@ -6,14 +6,14 @@ import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-03
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-show-other-details-status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-04-other-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-view-comments.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-02-blm-dialog.dart';
 import 'misc-04-blm-extra.dart';
@@ -174,7 +174,7 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
             GestureDetector(
               onTap: () async{
                 context.showLoaderOverlay();
-                APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId);
+                APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: userId);
                 context.hideLoaderOverlay();
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
@@ -739,7 +739,6 @@ class MiscBLMPost extends StatefulWidget{
   final dynamic profileImage;
   final String memorialName;
   final String timeCreated;
-  // final DateTime timeCreated;
   final bool managed;
   final bool joined;
   final int numberOfComments;
@@ -764,7 +763,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   final dynamic profileImage;
   final String memorialName;
   final String timeCreated;
-  // final DateTime timeCreated;
   final bool managed;
   final bool joined;
   final int numberOfComments;
@@ -787,9 +785,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   BranchLinkProperties lp;
   BranchContentMetaData metadata;
 
-  // DateTime.parse(timeCreated)
-
-
   void initState(){
     super.initState();
     likePost = likeStatus;
@@ -797,8 +792,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
     likesCount = numberOfLikes;
     initDeepLinkData();
     WidgetsBinding.instance.addObserver(this);
-    // dateTime = DateTime.parse(timeCreated);
-    
   }
   
   @override
@@ -860,14 +853,11 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
         child: Column(
           children: [
             Container(
-              // height: SizeConfig.blockSizeVertical * 10,
               height: ScreenUtil().setHeight(65),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: () async{
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: joined,)));
-
                       if(managed == true){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
                       }else{
@@ -886,7 +876,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                               child: Text(memorialName,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                   fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xff000000),
@@ -898,12 +887,8 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Text(timeCreated,
-                              // child: Text('',
-                              // child: Text(timeago.format(DateTime.parse(timeCreated)),
-                              // DateTime dateTime = DateTime.parse(input);
                                 maxLines: 1,
                                 style: TextStyle(
-                                  // fontSize: SizeConfig.safeBlockHorizontal * 3,
                                   fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xffaaaaaa)
@@ -943,8 +928,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                       numberOfTagged,
                       (index) => GestureDetector(
                         onTap: (){
-                          print('The user id is ${taggedId[index]}');
-
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index])));
                         },
                         child: RichText(
@@ -998,17 +981,12 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     },
                     child: Row(
                       children: [
-                        // likePost == true
-                        // ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
-                        // : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
-
                         likePost == true
                         ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
                         : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        // Text('$likesCount', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                         Text('$likesCount', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),),
                       ],
                     ),
@@ -1022,12 +1000,10 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     },
                     child: Row(
                       children: [
-                        // fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                         Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        // Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                         Text('$numberOfComments', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),),
                       ],
                     ),

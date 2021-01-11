@@ -3,14 +3,12 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-lik
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:flutter/material.dart';
-
 import 'home-show-post-blm-02-view-comments.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter/material.dart';
 
 class HomeBLMShowOriginalPost extends StatefulWidget{
   final int postId;
@@ -33,12 +31,6 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
   bool pressedLike;
   int likesCount;
 
-            // DateTime dateTime = DateTime.parse(feeds[i].timeCreated);
-            // // print('The time created is $dateTime');
-            // String dateCreated = timeago.format(dateTime);
-
-  // DateTime dateTime;
-
   void initState(){
     super.initState();
     pressedLike = false;
@@ -48,7 +40,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
   }
 
   Future<APIBLMShowOriginalPostMainMain> getOriginalPost(postId) async{
-    return await apiBLMShowOriginalPost(postId);
+    return await apiBLMShowOriginalPost(postId: postId);
   }
 
   @override
@@ -73,7 +65,6 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
               onPressed: (){
-                // Navigator.popAndPushNamed(context, '/home/blm');
                 Navigator.pop(context);
               },
             ),
@@ -201,8 +192,6 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                     child: Row(
                                       children: [
                                         likePost == true
-                                        // ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
-                                        // : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
                                         ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
                                         : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
@@ -218,7 +207,6 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                   GestureDetector(
                                     onTap: (){
-                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
                                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id)));
                                     },
                                     child: Row(

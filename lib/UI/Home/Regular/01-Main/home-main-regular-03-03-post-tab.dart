@@ -2,11 +2,11 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-03-home-po
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class RegularMainPagesPosts{
@@ -83,7 +83,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiRegularHomePostTab(page);
+      var newValue = await apiRegularHomePostTab(page: page);
       context.hideLoaderOverlay();
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
@@ -157,7 +157,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
             if(mode == LoadStatus.idle){
-              body = Text('Pull up load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
             }
             else if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
@@ -188,7 +188,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               postId: posts[i].postId,
               memorialId: posts[i].memorialId,
               memorialName: posts[i].memorialName,
-              timeCreated: convertDate(posts[i].timeCreated),
+              timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
 
               managed: posts[i].managed,
               joined: posts[i].joined,

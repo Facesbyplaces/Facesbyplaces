@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<bool> apiBLMLogin(String email, String password) async{
+Future<bool> apiBLMLogin({String email, String password}) async{
 
   bool value = false;
 
@@ -13,9 +13,6 @@ Future<bool> apiBLMLogin(String email, String password) async{
         'Content-Type': 'application/json',
       }
     );
-
-    print('The response status in blm login is ${response.statusCode}');
-    print('The response body in blm login is ${response.body}');
 
     if(response.statusCode == 200){
       var value = json.decode(response.body);

@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-14-set-relationship.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -165,7 +165,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             if(choice != null){
               bool result = await apiBLMMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
-              print('The result is $result');
+              if(result == true){
+                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the relationship setting.', color: Colors.green,));
+              }else{
+                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+              }
             }
           },
           titleDetail: 'Relationship',
@@ -237,7 +241,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
         Container(
           height: SizeConfig.blockSizeVertical * 10,
-          // color: Color(0xffffffff),
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -251,7 +254,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               ),
 
               Switch(
-                // value: isSwitched1,
                 value: false,
                 onChanged: (value) async{
 
@@ -267,7 +269,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
         Container(
           height: SizeConfig.blockSizeVertical * 10,
-          // color: Color(0xffffffff),
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -284,7 +285,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
 
               Switch(
-                // value: isSwitched2,
                 value: false,
                 onChanged: (value) async{
 
@@ -301,7 +301,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
         Container(
           height: SizeConfig.blockSizeVertical * 10,
-          // color: Color(0xffffffff),
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -313,7 +312,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
               ),
 
               Switch(
-                // value: isSwitched3,
                 value: false,
                 onChanged: (value) async{
 

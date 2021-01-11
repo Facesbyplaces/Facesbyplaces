@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost(int postId) async{
+Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost({int postId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -17,9 +17,6 @@ Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost(int postId
       'client': getClient,
     }
   );
-
-  print('The status code of show post is ${response.statusCode}');
-  print('The status body is show post  ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

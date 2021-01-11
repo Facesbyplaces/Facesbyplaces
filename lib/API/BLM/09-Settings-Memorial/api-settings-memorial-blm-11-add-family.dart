@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMAddFamily(int memorialId, int userId, String relationship) async{
+Future<bool> apiBLMAddFamily({int memorialId, int userId, String relationship}) async{
 
   bool result = false;
 

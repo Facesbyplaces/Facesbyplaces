@@ -76,8 +76,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           alignment: Alignment.centerLeft,
                             child: IconButton(
                             onPressed: (){
-                              // Navigator.pop(context);
-                              // Navigator.popUntil(context, ModalRoute.withName('/home/regular'));
                               Navigator.of(context).pushNamedAndRemoveUntil('/home/regular', (Route<dynamic> route) => false);
                             },
                             icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 

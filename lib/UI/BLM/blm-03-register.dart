@@ -120,7 +120,7 @@ class BLMRegister extends StatelessWidget{
                                       );
 
                                       context.showLoaderOverlay();
-                                      String result = await apiBLMRegistration(account);
+                                      String result = await apiBLMRegistration(account: account);
                                       context.hideLoaderOverlay();
 
                                       if(result == 'Success'){

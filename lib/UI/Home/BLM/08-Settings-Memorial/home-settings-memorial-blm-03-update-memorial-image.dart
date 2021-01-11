@@ -54,7 +54,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
   }
 
   Future<APIBLMShowPageImagesMain> getMemorialSettings(int memorialId) async{
-    return await apiBLMShowPageImages(memorialId);
+    return await apiBLMShowPageImages(memorialId: memorialId);
   }
 
   void initState(){
@@ -290,7 +290,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             if(profileImage != null || backgroundImage != null){
                               context.showLoaderOverlay();
-                              bool result = await apiBLMUpdatePageImages(memorialId, backgroundImage, profileImage);
+                              bool result = await apiBLMUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
                               context.hideLoaderOverlay();
 
                               if(result){

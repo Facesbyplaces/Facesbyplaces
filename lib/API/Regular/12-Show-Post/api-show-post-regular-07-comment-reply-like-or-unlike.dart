@@ -8,8 +8,7 @@ Future<bool> apiRegularLikeOrUnlikeCommentReply({String commentableType, int com
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.put(
-    'http://fbp.dev1.koda.ws/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
+  final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/posts/comment/unlikeOrLikeComment?commentable_type=$commentableType&commentable_id=$commentableId&like=$likeStatus',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -17,9 +16,6 @@ Future<bool> apiRegularLikeOrUnlikeCommentReply({String commentableType, int com
       'client': getClient,
     }
   );
-
-  // print('The status code of regular like or unlike comment and reply is ${response.statusCode}');
-  // print('The status body of regular like or unlike comment and reply is ${response.body}');
 
   if(response.statusCode == 200){
     return true;

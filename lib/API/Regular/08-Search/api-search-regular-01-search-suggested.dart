@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested(int page) async{
+Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -69,9 +69,6 @@ class APIRegularSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabPostExtendedPageCreator pageCreator;
-  // bool managed;
-  // bool follower;
-  // String pageType;
   bool manage;
   bool famOrFriends;
   bool follower;

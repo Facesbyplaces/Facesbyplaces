@@ -75,7 +75,6 @@ class HomeRegularSearch extends StatelessWidget{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search a Memorial',
                       hintStyle: TextStyle(
-                        // fontSize: SizeConfig.safeBlockHorizontal * 4,
                         fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),

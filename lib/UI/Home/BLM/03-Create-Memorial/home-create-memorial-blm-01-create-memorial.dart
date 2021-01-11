@@ -116,9 +116,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
                     }else{
                       Navigator.pushNamed(
-                        context, 
-                        // '/home/blm/home-07-02-blm-create-memorial', 
-                        '/home/blm/create-memorial-2',
+                        context, '/home/blm/create-memorial-2',
                         arguments: BLMCreateMemorialValues(
                           relationship: _key1.currentState.currentSelection,
                           location: _key2.currentState.controller.text,

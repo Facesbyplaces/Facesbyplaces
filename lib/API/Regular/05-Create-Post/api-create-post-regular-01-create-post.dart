@@ -2,19 +2,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
+Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
 
   bool result = false;
+
   final sharedPrefs = await SharedPreferences.getInstance();
-  var getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
-  var getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
-  var getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
+  String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
+  String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = dio.Dio();
 
-    var formData;
-    formData = FormData();
+    var dioRequest = dio.Dio();
+    var formData = FormData();
 
     formData = FormData.fromMap({
       'post[page_type]': post.pageType,
@@ -45,7 +45,6 @@ Future<bool> apiRegularHomeCreatePost(APIRegularCreatePost post) async{
       result = true;
     }
   }catch(e){
-    print('The value of e is ${e.toString()}');
     result = false;
   }
 

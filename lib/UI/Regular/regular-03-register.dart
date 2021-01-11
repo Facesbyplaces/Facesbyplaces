@@ -189,7 +189,7 @@ class RegularRegister extends StatelessWidget{
                                     );
 
                                     context.showLoaderOverlay();
-                                    String result = await apiRegularRegistration(account);
+                                    String result = await apiRegularRegistration(account: account);
                                     context.hideLoaderOverlay();
 
                                     if(result == 'Success'){

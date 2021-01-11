@@ -162,8 +162,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     }
                   }
 
-                  print('The new user id is $userIds');
-
                   APIRegularCreatePost post = APIRegularCreatePost(
                     pageType: 'Memorial',
                     postBody: _key1.currentState.controller.text,
@@ -176,7 +174,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   );
 
                   
-                  bool result = await apiRegularHomeCreatePost(post);
+                  bool result = await apiRegularHomeCreatePost(post: post);
                   context.hideLoaderOverlay();
 
                   if(result){
@@ -225,7 +223,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           onChanged: (int newValue) {
                             setState(() {
                               currentIdSelected = newValue;
-                              print('The currentId selected is $currentIdSelected');
                             });
                           },
                           items: managedPages.map((RegularManagedPages value) {

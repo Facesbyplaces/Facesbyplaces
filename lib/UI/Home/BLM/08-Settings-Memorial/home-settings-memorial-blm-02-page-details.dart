@@ -41,7 +41,7 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   }
 
   Future<APIBLMShowPageDetailsMain> getMemorialSettings(int memorialId) async{
-    return await apiBLMShowPageDetails(memorialId);
+    return await apiBLMShowPageDetails(memorialId: memorialId);
   }
 
   @override

@@ -20,7 +20,6 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
       MapEntry('relationship', MultipartFile.fromString(relationship,),),
       MapEntry('dob', MultipartFile.fromString(dob,),),
       MapEntry('rip', MultipartFile.fromString(rip,),),
-      // MapEntry('state', MultipartFile.fromString(state,),),
       MapEntry('country', MultipartFile.fromString(country,),),
       MapEntry('cemetery', MultipartFile.fromString(cemetery,),),
     ]);
@@ -40,7 +39,6 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
     }
     
   }catch(e){
-    print('The e is $e');
     result = false;
   }
 

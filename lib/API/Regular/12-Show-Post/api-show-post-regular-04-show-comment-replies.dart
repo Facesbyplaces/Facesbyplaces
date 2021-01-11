@@ -9,11 +9,7 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({int postId, int
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The post id is $postId');
-  print('The page is $page');
-
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/index/replies/$postId?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/index/replies/$postId?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -22,9 +18,6 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({int postId, int
     }
   );
 
-  // print('The status code of replies is ${response.statusCode}');
-  // print('The status body of replies is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowListOfReplies.fromJson(newValue);
@@ -32,8 +25,6 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({int postId, int
     throw Exception('Failed to get the replies.');
   }
 }
-
-
 
 class APIRegularShowListOfReplies{
   int itemsRemaining;

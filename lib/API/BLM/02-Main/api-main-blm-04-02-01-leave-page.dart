@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 
 Future<bool> apiBLMLeavePage({int memorialId}) async{
 
-  
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -18,10 +16,6 @@ Future<bool> apiBLMLeavePage({int memorialId}) async{
       'client': getClient,
     }
   );
-
-  print('The status code for leave page is ${response.statusCode}');
-  print('The status body for leave page is ${response.body}');
-  print('The memorial id is $memorialId');
 
   if(response.statusCode == 200){
     return true;
