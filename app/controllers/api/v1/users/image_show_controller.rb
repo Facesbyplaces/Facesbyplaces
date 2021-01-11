@@ -1,5 +1,5 @@
 class Api::V1::Users::ImageShowController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_alm_user!
 
     def index
         render json: {
