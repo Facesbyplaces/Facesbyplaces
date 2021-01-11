@@ -5,7 +5,13 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   end
 
   def create
-    @user = User.new(sign_up_params)
+    account_type = params[:account_type].to_i
+    
+    if account_type  == 2 
+      @user = AlmUser.new(sign_up_params)
+    else
+      @user = BlmUser.new(sign_up_params)
+    end
 
     super do |resource|
       logger.info ">>>Error: #{resource.errors.full_messages}"

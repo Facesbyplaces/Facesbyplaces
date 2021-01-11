@@ -1,5 +1,5 @@
 class Api::V1::Users::UsersController < ApplicationController
-    # before_action :authenticate_user!
+    before_action :authenticate_user!
     
     def edit
         @user = User.find(params[:id])
@@ -104,11 +104,31 @@ class Api::V1::Users::UsersController < ApplicationController
         # Followed
         followed = user.followers.select("page_type, page_id")
 
+        owned = owned.page(params[:page]).per(numberOfPage)
+        if owned.total_count == 0 || (owned.total_count - (params[:page].to_i * numberOfPage)) < 0
+            ownedItemsRemaining = 0
+        elsif owned.total_count < numberOfPage
+            ownedItemsRemaining = owned.total_count 
+        else
+            ownedItemsRemaining = owned.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        followed = followed.page(params[:page]).per(numberOfPage)
+        if followed.total_count == 0 || (followed.total_count - (params[:page].to_i * numberOfPage)) < 0
+            followedItemsRemaining = 0
+        elsif followed.total_count < numberOfPage
+            followedItemsRemaining = followed.total_count 
+        else
+            followedItemsRemaining = followed.total_count - (params[:page].to_i * numberOfPage)
+        end
+
         render json: {
+            ownedItemsRemaining: ownedItemsRemaining,
             owned: ActiveModel::SerializableResource.new(
                         owned, 
                         each_serializer: PageSerializer
                     ),
+            followedItemsRemaining: followedItemsRemaining,
             followed: ActiveModel::SerializableResource.new(
                         followed, 
                         each_serializer: PageSerializer

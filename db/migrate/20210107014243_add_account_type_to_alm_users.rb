@@ -8,6 +8,7 @@ class AddAccountTypeToAlmUsers < ActiveRecord::Migration[6.0]
     add_column :alm_users, :address, :string
     add_column :alm_users, :hideBirthdate, :boolean
     add_column :alm_users, :hideBirthplace, :boolean
+    add_column :alm_users, :hideEmail, :boolean
     add_column :alm_users, :hideAddress, :boolean
     add_column :alm_users, :hidePhonenumber, :boolean
     add_column :alm_users, :google_id, :string

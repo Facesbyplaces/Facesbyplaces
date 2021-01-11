@@ -1,6 +1,6 @@
 class Api::V1::Posts::CommentsController < ApplicationController
     before_action :authenticate_user!
-    before_action :checkUser, only: [:addComment, :addReply, :likeOrUnlike]
+    before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
 
     def addComment
         comment = Comment.new(comment_params)
@@ -223,12 +223,6 @@ class Api::V1::Posts::CommentsController < ApplicationController
              end
         else
             render json: {}, status: 404
-        end
-    end
-
-    def checkUser
-        if user().guest == true
-            return render json: {}, status: 422
         end
     end
     
