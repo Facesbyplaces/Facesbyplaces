@@ -23,11 +23,11 @@ class AlmUser < ActiveRecord::Base
   has_many :notifsetting, as: :account, dependent: :destroy
   has_many :tagpeople, as: :account, dependent: :destroy
   has_many :transactions, as: :account, dependent: :destroy
+
+  has_one_attached :image, dependent: :destroy
   
-  # has_many :pages
   has_many :shares, dependent: :destroy
   has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
-  has_one_attached :image, dependent: :destroy
 
   def self.new_with_session(params, session)
     super.tap do |user|

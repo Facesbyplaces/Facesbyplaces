@@ -82,7 +82,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             memorial.update(memorial_details_params)
 
             # Update relationship of the current page admin to the page
-            memorial.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
+            memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
             return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
         else
