@@ -103,8 +103,8 @@ class BlmSerializer < ActiveModel::Serializer
   end
 
   def relationship
-    if object.relationships.where(user: object.currentUser).first
-      object.relationships.where(user: object.currentUser).first.relationship
+    if object.relationships.where(account: object.currentUser).first
+      object.relationships.where(account: object.currentUser).first.relationship
     end
   end
 
@@ -112,7 +112,7 @@ class BlmSerializer < ActiveModel::Serializer
     if object.currentUser == nil
       return false 
     end
-    if object.relationships.where(user_id: object.currentUser.id).first
+    if object.relationships.where(account: object.currentUser).first
       return true
     end
     
@@ -121,7 +121,7 @@ class BlmSerializer < ActiveModel::Serializer
 
   def follower
     if object.currentUser
-      if object.users.where(id: object.currentUser.id).first
+      if object.accounts.where(account: object.currentUser).first
         return true
       end
     end

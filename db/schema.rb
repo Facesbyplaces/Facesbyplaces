@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_024359) do
+ActiveRecord::Schema.define(version: 2021_01_12_070353) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 2021_01_12_024359) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "alm_roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_alm_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_alm_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_alm_roles_on_resource_type_and_resource_id"
   end
 
   create_table "alm_users", force: :cascade do |t|
@@ -75,6 +86,25 @@ ActiveRecord::Schema.define(version: 2021_01_12_024359) do
     t.index ["uid", "provider"], name: "index_alm_users_on_uid_and_provider", unique: true
   end
 
+  create_table "alm_users_alm_roles", id: false, force: :cascade do |t|
+    t.integer "alm_user_id"
+    t.integer "alm_role_id"
+    t.index ["alm_role_id"], name: "index_alm_users_alm_roles_on_alm_role_id"
+    t.index ["alm_user_id", "alm_role_id"], name: "index_alm_users_alm_roles_on_alm_user_id_and_alm_role_id"
+    t.index ["alm_user_id"], name: "index_alm_users_alm_roles_on_alm_user_id"
+  end
+
+  create_table "blm_roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_blm_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_blm_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_blm_roles_on_resource_type_and_resource_id"
+  end
+
   create_table "blm_users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -117,6 +147,14 @@ ActiveRecord::Schema.define(version: 2021_01_12_024359) do
     t.index ["email"], name: "index_blm_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_blm_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_blm_users_on_uid_and_provider", unique: true
+  end
+
+  create_table "blm_users_blm_roles", id: false, force: :cascade do |t|
+    t.integer "blm_user_id"
+    t.integer "blm_role_id"
+    t.index ["blm_role_id"], name: "index_blm_users_blm_roles_on_blm_role_id"
+    t.index ["blm_user_id", "blm_role_id"], name: "index_blm_users_blm_roles_on_blm_user_id_and_blm_role_id"
+    t.index ["blm_user_id"], name: "index_blm_users_blm_roles_on_blm_user_id"
   end
 
   create_table "blms", force: :cascade do |t|

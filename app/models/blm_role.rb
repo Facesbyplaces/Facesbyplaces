@@ -1,5 +1,5 @@
-class BlmUserRole < ApplicationRecord
-  has_and_belongs_to_many :blm_users, :join_table => :blm_users_blm_user_roles
+class BlmRole < ApplicationRecord
+  has_and_belongs_to_many :blm_users, :join_table => :blm_users_blm_roles
   
   belongs_to :resource,
              :polymorphic => true,

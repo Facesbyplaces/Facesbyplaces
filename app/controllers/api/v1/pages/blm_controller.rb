@@ -46,7 +46,7 @@ class Api::V1::Pages::BlmController < ApplicationController
             # Tell the Mailer to send link to register stripe user account after save
             redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
             client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
-            SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, current_user, blm.id).deliver_now
+            SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, user(), blm.id).deliver_now
             
             render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
 

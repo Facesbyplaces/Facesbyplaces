@@ -3,7 +3,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
     def render_create_success
       # user = @resource
       # if user.is_verified?
-      #   render json: { success: true, user:  user, status: 200 }, status: 200
+      #   render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
       # end
     end
 

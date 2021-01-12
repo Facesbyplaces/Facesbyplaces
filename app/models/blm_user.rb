@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class BlmUser < ActiveRecord::Base
-  rolify :role_cname => 'BlmUsersRole'
-  rolify
+  rolify :role_cname => 'BlmRole'
 
   has_many :authorizations
   # Include default devise modules. Others available are:
