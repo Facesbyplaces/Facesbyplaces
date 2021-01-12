@@ -55,7 +55,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.save!
 
-          Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, user_id: @user.id)
+          Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
           super
         end
 
@@ -115,7 +115,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user.password = @user.password_confirmation = params[:password]
             @user.save
 
-            Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, user_id: @user.id)
+            Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
             super
           rescue GoogleIDToken::ValidationError => e
             return render json: {status: "Cannot validate: #{e}"}, status: 422
@@ -164,7 +164,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           @user.password = @user.password_confirmation = params[:password]
           @user.save
 
-          Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, user_id: @user.id)
+          Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
           super
         end
         

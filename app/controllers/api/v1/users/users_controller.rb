@@ -2,7 +2,12 @@ class Api::V1::Users::UsersController < ApplicationController
     before_action :authenticate_user!
     
     def edit
-        @user = User.find(params[:id])
+        if params[:account_type] == "1"
+            @user = BlmUser.find(params[:id])
+        else
+            @user = AlmUser.find(params[:id])
+        end
+        
         render json: {
             success: true, 
             first_name: @user.first_name, 
@@ -16,16 +21,19 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def updateDetails
         if user()
-            user = User.find(user().id)
-            user.update(updateDetails_params)
-            render json: UserSerializer.new( user ).attributes
+            user().update(updateDetails_params)
+            render json: UserSerializer.new( user() ).attributes
         else
             render json: {error: "no current user"}, status: 404
         end
     end
 
     def getDetails
-        user = User.find(params[:user_id])
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        else
+            user = AlmUser.find(params[:user_id])
+        end
 
         render json: {
             first_name: user.first_name, 
@@ -37,10 +45,9 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def changePassword
-        user = User.find(user().id)
-        if user.valid_password?(params[:current_password])
-            user.password = user.password_confirmation = params[:new_password]
-            user.save
+        if user().valid_password?(params[:current_password])
+            user().password = user().password_confirmation = params[:new_password]
+            user().save
 
             render json: {}, status: 200
         else
@@ -50,16 +57,19 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def updateOtherInfos
         if user()
-            user = User.find(user().id)
-            user.update(updateOtherInfos_params)
-            render json: UserSerializer.new( user ).attributes
+            user().update(updateOtherInfos_params)
+            render json: UserSerializer.new( user() ).attributes
         else
             render json: {error: "no current user"}, status: 404
         end
     end
 
     def getOtherInfos
-        user = User.find(params[:user_id])
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        else
+            user = AlmUser.find(params[:user_id])
+        end
 
         render json: {
             birthdate: user.birthdate, 
@@ -71,14 +81,18 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        user = current_user
-        render json: UserSerializer.new( user ).attributes
+        render json: UserSerializer.new( user() ).attributes
     end
 
     def posts
         # Posts that they created or owned
-        user = User.find(params[:user_id])
-        posts = Post.where(user: user).order(created_at: :desc)
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        else
+            user = AlmUser.find(params[:user_id])
+        end
+
+        posts = Post.where(account: user).order(created_at: :desc)
         
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -98,7 +112,11 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def memorials
-        user = User.find(params[:user_id])
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        else
+            user = AlmUser.find(params[:user_id])
+        end
         # Own or part of fam or friend of page
         owned = user.relationships.select("page_type, page_id")
         # Followed

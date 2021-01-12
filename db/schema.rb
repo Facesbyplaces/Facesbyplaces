@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_074954) do
+ActiveRecord::Schema.define(version: 2021_01_11_153106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2021_01_08_074954) do
     t.string "address"
     t.boolean "hideBirthdate"
     t.boolean "hideBirthplace"
-    t.boolean "hideEmail"
     t.boolean "hideAddress"
     t.boolean "hidePhonenumber"
     t.string "google_id"
@@ -319,12 +318,13 @@ ActiveRecord::Schema.define(version: 2021_01_08_074954) do
   create_table "transactions", force: :cascade do |t|
     t.string "page_type", null: false
     t.bigint "page_id", null: false
-    t.bigint "user_id", null: false
     t.float "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "account_type", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_type", "account_id"], name: "index_transactions_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_transactions_on_page_type_and_page_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -382,5 +382,4 @@ ActiveRecord::Schema.define(version: 2021_01_08_074954) do
   add_foreign_key "postslikes", "posts"
   add_foreign_key "replies", "comments"
   add_foreign_key "tagpeople", "posts"
-  add_foreign_key "transactions", "users"
 end
