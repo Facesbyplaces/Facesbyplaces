@@ -295,12 +295,17 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                               if(result){
 
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
-                                );
+                                // Navigator.pushReplacement(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                                // );
 
-                                Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                                // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+
+                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
+
+                                Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true,));
+                                Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                               }else{
                                 await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                               }

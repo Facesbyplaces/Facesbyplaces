@@ -295,12 +295,18 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                               if(result){
 
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
-                                );
+                                // Navigator.pushReplacement(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                                // );
 
-                                Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                                // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+
+
+                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
+
+                                Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true,));
+                                Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                               }else{
                                 await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                               }

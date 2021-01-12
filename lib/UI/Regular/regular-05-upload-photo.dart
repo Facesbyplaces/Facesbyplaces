@@ -127,7 +127,17 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                             children: [
                                               Container(color: Color(0xffffffff),),
 
-                                              Align(alignment: Alignment.center, child: Image.asset(_image.path),),
+                                              // Align(alignment: Alignment.center, child: Image.asset(_image.path),),
+                                              Align(
+                                                alignment: Alignment.center, 
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: FileImage(_image),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           )
                                           : Stack(

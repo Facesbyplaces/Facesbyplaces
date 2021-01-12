@@ -41,17 +41,21 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
     print('The uid in blm update account details is ${response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '')}');
     print('The client in blm update account details is ${response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '')}');
 
+    print('The status code of update details is ${response.statusCode}');
+    print('The status data of update details is ${response.data}');
+
     if(response.statusCode == 200){
       result = true;
-      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-        sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
-        sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
-        sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
+      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
+        sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+        sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+        sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       }
     }
 
     
   }catch(e){
+    print('The page details is $e');
     result = false;
   }
 

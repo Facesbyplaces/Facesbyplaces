@@ -210,7 +210,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                                   Expanded(
-                                    child: Text('45',
+                                    child: Text('${profile.data.memorial.blmFollowersCount}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 4,
                                         fontWeight: FontWeight.w500,
