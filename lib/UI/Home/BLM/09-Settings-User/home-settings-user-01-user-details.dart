@@ -76,7 +76,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                           alignment: Alignment.centerLeft,
                             child: IconButton(
                             onPressed: (){
-                              Navigator.of(context).pushNamedAndRemoveUntil('/home/blm', (Route<dynamic> route) => false);
+                              // Navigator.of(context).pushNamedAndRemoveUntil('/home/blm', (Route<dynamic> route) => false);
+                              Navigator.of(context).popAndPushNamed('/home/blm');
                             },
                             icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                           ),

@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-change-password.dart';
-import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
@@ -81,8 +81,9 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                       if(result){
                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
 
-                        Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
-                        Navigator.popAndPushNamed(context, route.settings.name);
+                        // Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
+                        // Navigator.popAndPushNamed(context, route.settings.name);
+                        Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
                       }else{
                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                       }

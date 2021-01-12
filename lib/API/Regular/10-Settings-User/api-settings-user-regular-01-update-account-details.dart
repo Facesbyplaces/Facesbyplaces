@@ -30,11 +30,23 @@ Future<bool> apiRegularUpdateAccountDetails({String firstName, String lastName, 
           'uid': getUID,
           'client': getClient,
         }
-      ),  
+      ),
     );
+
+    print('The access token in update account details is ${response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '')}');
+    print('The uid in update account details is ${response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '')}');
+    print('The client in update account details is ${response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '')}');
 
     if(response.statusCode == 200){
       result = true;
+      // sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
+      // sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
+      // sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
+      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
+        sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
+        sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
+        sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
+      }
     }
     
   }catch(e){

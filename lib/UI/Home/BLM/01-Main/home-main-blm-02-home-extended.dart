@@ -309,7 +309,9 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                             GestureDetector(
                               onTap: () async{
-                                Navigator.pop(context);
+                                // Navigator.pop(context);
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
+
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
                               },
                               child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),

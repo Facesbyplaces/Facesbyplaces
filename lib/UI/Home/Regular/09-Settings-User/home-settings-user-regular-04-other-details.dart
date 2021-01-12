@@ -243,7 +243,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                                 if(result){
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the other details.', color: Colors.green,));
-                                  Navigator.pop(context);
+                                  Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                 }

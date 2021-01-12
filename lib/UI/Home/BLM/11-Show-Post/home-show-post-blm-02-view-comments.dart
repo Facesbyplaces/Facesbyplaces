@@ -119,10 +119,11 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   }
 
   void onLoading() async{
+    
     if(itemRemaining != 0){
       context.showLoaderOverlay();
+      
       var newValue1 = await apiBLMShowListOfComments(postId: postId, page: page1);
-      context.hideLoaderOverlay();
       itemRemaining = newValue1.itemsRemaining;
       count = count + newValue1.commentsList.length;
 
@@ -132,9 +133,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
         commentsNumberOfLikes.add(commentLikeStatus.numberOfLikes);
         
         if(repliesRemaining != 0){
-          context.showLoaderOverlay();
           var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.commentsList[i].commentId, page: page2);
-          context.hideLoaderOverlay();
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
@@ -198,6 +197,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
       page1++;
       
       refreshController.loadComplete();
+      context.hideLoaderOverlay();
     }else{
       refreshController.loadNoData();
     }

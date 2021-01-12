@@ -9,6 +9,10 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -17,6 +21,9 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
       'client': getClient,
     }
   );
+
+  print('The response status code is ${response.statusCode}');
+  print('The response status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

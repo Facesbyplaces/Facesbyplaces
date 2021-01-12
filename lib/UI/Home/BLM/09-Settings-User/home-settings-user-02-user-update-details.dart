@@ -133,8 +133,11 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                   if(result){
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
 
-                                    Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
-                                    Navigator.popAndPushNamed(context, route.settings.name);
+                                    // Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
+                                    // Navigator.popAndPushNamed(context, route.settings.name);
+
+                                    // '/home/blm/profile-settings'
+                                    Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                   }

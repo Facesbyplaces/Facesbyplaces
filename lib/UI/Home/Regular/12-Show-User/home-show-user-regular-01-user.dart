@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-05-show-other-details.dart';
+// import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-05-show-other-details.dart';
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-01-show-user-information.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-17-regular-custom-drawings.dart';

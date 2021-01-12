@@ -77,7 +77,12 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           alignment: Alignment.centerLeft,
                             child: IconButton(
                             onPressed: (){
-                              Navigator.of(context).pushNamedAndRemoveUntil('/home/regular', (Route<dynamic> route) => false);
+                              // Navigator.of(context).pushNamedAndRemoveUntil('/home/regular', (Route<dynamic> route) => false);
+
+                              // Route route = MaterialPageRoute(builder: (context) => HomeRegularScreen());
+                              // Navigator.of(context).pushAndRemoveUntil(, (route) => false)
+
+                              Navigator.of(context).popAndPushNamed('/home/regular');
                             },
                             icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 
                           ),

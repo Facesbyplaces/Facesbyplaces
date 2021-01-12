@@ -311,7 +311,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                             GestureDetector(
                               onTap: () async{
-                                Navigator.pop(context);
+                                // print('The user id is ${manageDrawer.data.userId}');
+
+                                // Navigator.pop(context);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.userId)));
                               },
                               child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),

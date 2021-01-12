@@ -160,12 +160,15 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                                   if(result){
 
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
-                                    );
+                                    // Navigator.pushReplacement(
+                                    //   context,
+                                    //   MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
+                                    // );
 
-                                    Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                                    // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+
+                                    // Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
+                                    Navigator.popAndPushNamed(context, '/home/blm/managed-profile');
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                   }

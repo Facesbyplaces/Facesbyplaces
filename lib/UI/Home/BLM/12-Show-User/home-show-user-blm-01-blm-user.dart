@@ -47,7 +47,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
     homeAddress = newValue.address;
     emailAddress = newValue.email;
     contactNumber = newValue.phoneNumber;
-    setState(() {});
+    // setState(() {});
   }
 
   void initState(){

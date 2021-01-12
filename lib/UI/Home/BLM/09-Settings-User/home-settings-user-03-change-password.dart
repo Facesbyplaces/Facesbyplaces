@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-03-change-password.dart';
-import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
@@ -81,8 +81,10 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                       if(result){
                         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
 
-                        Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
-                        Navigator.popAndPushNamed(context, route.settings.name);
+                        // Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
+                        // Navigator.popAndPushNamed(context, route.settings.name);
+
+                        Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
                       }else{
                         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                       }

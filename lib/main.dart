@@ -1,10 +1,13 @@
+import 'UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
 import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
+import 'UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
+import 'UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
 import 'UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
@@ -83,6 +86,7 @@ void main() async{
           '/regular/verify-email': (BuildContext context) => RegularVerifyEmail(),
           '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(),
           
+          
 
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
           '/home/blm/donation': (BuildContext context) => HomeBLMUserDonate(),
@@ -94,6 +98,10 @@ void main() async{
           '/home/blm/create-memorial-3': (BuildContext context) => HomeBLMCreateMemorial3(),
           '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
           '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(),
+          '/home/blm/profile-settings': (BuildContext context) => HomeBLMUserProfileDetails(),
+          '/home/blm/managed-profile': (BuildContext context) => HomeBLMProfile(),
+
+          
           
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
           '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
@@ -106,6 +114,7 @@ void main() async{
           '/home/regular/donation': (BuildContext context) => HomeRegularUserDonate(),
           '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
           '/home/regular/search': (BuildContext context) => HomeRegularSearch(),
+          '/home/regular/profile-settings': (BuildContext context) => HomeRegularUserProfileDetails(),
 
         },
       ),

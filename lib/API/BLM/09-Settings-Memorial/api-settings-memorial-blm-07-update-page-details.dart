@@ -37,9 +37,17 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
       ),  
     );
 
+    print('The access token in blm update account details is ${response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '')}');
+    print('The uid in blm update account details is ${response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '')}');
+    print('The client in blm update account details is ${response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '')}');
 
     if(response.statusCode == 200){
       result = true;
+      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
+        sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
+        sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
+        sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
+      }
     }
 
     

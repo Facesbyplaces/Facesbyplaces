@@ -35,6 +35,11 @@ Future<bool> apiBLMUpdateAccountDetails({String firstName, String lastName, Stri
 
     if(response.statusCode == 200){
       result = true;
+      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
+        sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
+        sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
+        sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
+      }
     }
     
   }catch(e){

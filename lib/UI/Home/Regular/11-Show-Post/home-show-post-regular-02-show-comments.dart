@@ -122,8 +122,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   void onLoading() async{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
+
       var newValue1 = await apiRegularShowListOfComments(postId: postId, page: page1);
-      context.hideLoaderOverlay();
+      
       itemRemaining = newValue1.itemsRemaining;
       count = count + newValue1.commentsList.length;
 
@@ -133,9 +134,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
         commentsNumberOfLikes.add(commentLikeStatus.numberOfLikes);
         
         if(repliesRemaining != 0){
-          context.showLoaderOverlay();
+          
           var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.commentsList[i].commentId, page: page2);
-          context.hideLoaderOverlay();
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
@@ -199,6 +199,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
       page1++;
       
       refreshController.loadComplete();
+      context.hideLoaderOverlay();
     }else{
       refreshController.loadNoData();
     }

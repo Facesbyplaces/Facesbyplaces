@@ -21,6 +21,10 @@ Future<bool> apiRegularLogin({String email, String password}) async{
 
       final sharedPrefs = await SharedPreferences.getInstance();
 
+      print('The access token in login is ${response.headers['access-token']}');
+      print('The uid in login is ${response.headers['uid']}');
+      print('The client in login is ${response.headers['client']}');
+
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-access-token', response.headers['access-token']);
       sharedPrefs.setString('regular-uid', response.headers['uid']);    
