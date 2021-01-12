@@ -1,5 +1,5 @@
 class Api::V1::Users::ImageUploadController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_alm_user!
 
     def image_upload_params
         params.permit(:id, :image)

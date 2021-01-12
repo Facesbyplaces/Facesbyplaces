@@ -7,6 +7,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       end
     end
 
+    ## SIGN_IN AS GUEST
     def guest
       User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
     end
@@ -17,6 +18,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       render json: { success: true, user:  u, status: 200 }, status: 200
       u
     end
+    ##
 
     def create
       #Facebook Login
@@ -53,7 +55,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
-          @user.save!
+          @user.save
 
           Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
           super

@@ -299,6 +299,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
   end
 
   create_table "shares", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "content_type"
     t.integer "content_type_id"
     t.datetime "created_at", precision: 6, null: false
