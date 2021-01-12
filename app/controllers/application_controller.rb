@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
         end
 
         def user
-            current_user
+            current_alm_user || current_blm_user
         end
 
         def params_presence(data)
@@ -59,7 +59,20 @@ class ApplicationController < ActionController::Base
         end
         
         def set_current_user
-            AlmUser.current = current_user
+            AlmUser.current = current_alm_user
+            BlmUser.current = current_blm_user
             # current_user != nil ? User.current = current_user : ""
         end
+
+        def check_user
+            if current_alm_user != nil 
+                return true 
+            elsif current_blm_user != nil 
+                return true 
+            else 
+                return false 
+            end
+        end
+        
+        
 end

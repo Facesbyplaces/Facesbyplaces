@@ -1,5 +1,5 @@
 class Api::V1::Search::SearchController < ApplicationController
-    before_action :authenticate_user!, only: [:nearby, :suggested]
+    before_action :check_user, only: [:nearby, :suggested, :test]
 
     def posts
         postsId = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'Post').pluck('searchable_id')
@@ -185,5 +185,9 @@ class Api::V1::Search::SearchController < ApplicationController
                         each_serializer: PageownerSerializer
                     )
         }
+    end
+
+    def test
+        render json: {user: user().first_name, type: user().account_type}
     end
 end

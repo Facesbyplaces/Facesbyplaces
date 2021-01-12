@@ -13,9 +13,9 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
       @user = BlmUser.new(sign_up_params)
     end
 
-    super do |resource|
-      logger.info ">>>Error: #{resource.errors.full_messages}"
-        @user = resource
+    # super do |resource|
+    #   logger.info ">>>Error: #{resource.errors.full_messages}"
+    #     @user = resource
         code = rand(100..999)
         @user.verification_code = code
         @user.question = "What's the name of your first dog?"
@@ -31,7 +31,8 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
 
         # Tell the UserMailer to send a code to verify email after save
         VerificationMailer.verify_email(@user).deliver_now
-    end
+        render json: {status: :success}, status: 200
+    # end
   end
 
 end

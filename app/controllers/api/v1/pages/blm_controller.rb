@@ -1,7 +1,7 @@
 class Api::V1::Pages::BlmController < ApplicationController
-    before_action :authenticate_user!, except: [:show]
-    before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
+    before_action :check_user, except: [:show]
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
+    before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
 
     def show
         blm = Blm.find(params[:id])
@@ -261,7 +261,7 @@ class Api::V1::Pages::BlmController < ApplicationController
     private
 
     def verify_user_account_type
-        if user.account_type == 2
+        if user().account_type == 2
             render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."}
         end
     end

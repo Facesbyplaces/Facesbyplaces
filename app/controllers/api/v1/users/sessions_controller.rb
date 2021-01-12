@@ -1,10 +1,10 @@
 class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
     def render_create_success
-      user = @resource
-      if user.is_verified?
-        render json: { success: true, user:  user, status: 200 }, status: 200
-      end
+      # user = @resource
+      # if user.is_verified?
+      #   render json: { success: true, user:  user, status: 200 }, status: 200
+      # end
     end
 
     ## SIGN_IN AS GUEST

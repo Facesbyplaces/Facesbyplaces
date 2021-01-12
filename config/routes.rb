@@ -234,6 +234,8 @@ Rails.application.routes.draw do
         get 'nearby', to: 'search#nearby'
         # suggested
         get 'suggested', to: 'search#suggested'
+        # Test current_user
+        get 'test', to: 'search#test'
       end
       namespace :followers do
         get '/', to: 'followers#followStatus'
