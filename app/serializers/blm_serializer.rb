@@ -16,7 +16,7 @@ class BlmSerializer < ActiveModel::Serializer
       }
     when "followers"
       if object.currentUser
-        if object.followers.where(user_id: object.currentUser.id).first || object.relationships.where(user_id: object.currentUser.id).first 
+        if object.followers.where(account: object.currentUser).first || object.relationships.where(account: object.currentUser).first 
           {
             description:  object.description,
             location:     object.location,
@@ -30,7 +30,7 @@ class BlmSerializer < ActiveModel::Serializer
       end
     when "familyOrFriends"
       if object.currentUser
-        if object.relationships.where(user_id: object.currentUser.id).first 
+        if object.relationships.where(account: object.currentUser).first 
           {
             description:  object.description,
             location:     object.location,
@@ -121,8 +121,14 @@ class BlmSerializer < ActiveModel::Serializer
 
   def follower
     if object.currentUser
-      if object.accounts.where(account: object.currentUser).first
-        return true
+      if object.currentUser.account_type == 1
+        if object.blm_users.where(id: object.currentUser.id).first
+          return true
+        end
+      else
+        if object.alm_users.where(id: object.currentUser.id).first
+          return true
+        end
       end
     end
     

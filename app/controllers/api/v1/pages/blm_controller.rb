@@ -30,31 +30,39 @@ class Api::V1::Pages::BlmController < ApplicationController
             blm.hideFollowers = false
 
             # save blm
-            blm.save 
+            if blm.save 
 
-            # save the owner of the user
-            pageowner = Pageowner.new(account_type:  "BlmUser", account_id: user().id, view: 0)
-            blm.pageowner = pageowner
+                # save the owner of the user
+                pageowner = Pageowner.new(account_type:  "BlmUser", account_id: user().id, view: 0)
+                blm.pageowner = pageowner
 
-            # save relationship of the user to the page
-            relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
-            relationship.save 
+                # save relationship of the user to the page
+                relationship = blm.relationships.new(account: user(), relationship: params[:relationship])
+                if relationship.save 
 
-            # Make the user as admin of the 
-            user().add_role "pageadmin", blm
+                    # Make the user as admin of the 
+                    user().add_role "pageadmin", blm
 
-            # Tell the Mailer to send link to register stripe user account after save
-            redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
-            client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
-            SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, user(), blm.id).deliver_now
-            
-            render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
+                    # Tell the Mailer to send link to register stripe user account after save
+                    redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+                    client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+                    SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, user(), blm.id).deliver_now
+                    
+                    render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
 
-            # Notify all Users
-            users = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.user_id != #{user().id}").pluck('id') 
+                    # Notify all Users
+                    blmUsers = BlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'BlmUser' AND notifsettings.account_id != #{user().id}").pluck('id')
+                    almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).pluck('id') 
 
-            users.each do |id|
-                Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", postId: blm.id)
+                    # users.each do |id|
+                    #     Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", postId: blm.id)
+                    # end
+                else
+                    render json: {errors: relationship.errors}, status: 500
+                end
+            else  
+                render json: {errors: blm.errors}, status: 500
+                blm.destroy
             end
         else
             render json: {status: "#{check} is empty"}
@@ -77,7 +85,7 @@ class Api::V1::Pages::BlmController < ApplicationController
             blm.update(blm_details_params)
 
             # Update relationship of the current page admin to the page
-            blm.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
+            blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
             return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
         else
@@ -118,8 +126,8 @@ class Api::V1::Pages::BlmController < ApplicationController
     def setRelationship   # for friends and families
         blm = Blm.find(params[:id])
 
-        if blm.relationships.where(user_id: user().id).first
-            blm.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
+        if blm.relationships.where(account: user()).first
+            blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
             render json: {status: :success}
         else
@@ -129,12 +137,12 @@ class Api::V1::Pages::BlmController < ApplicationController
 
     def leaveBLM        # leave blm page for family and friends
         blm = Blm.find(params[:id])
-        if blm.relationships.where(user: user()).first != nil
+        if blm.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
             if user().has_role? :pageadmin, blm
-                if User.with_role(:pageadmin, blm).count != 1
+                if BlmUser.with_role(:pageadmin, blm).count != 1
                     # remove user from the page
-                    if blm.relationships.where(user: user()).first.destroy 
+                    if blm.relationships.where(account: user()).first.destroy 
                         # remove role as a page admin
                         user().remove_role :pageadmin, blm
                         render json: {}, status: 200
@@ -146,7 +154,7 @@ class Api::V1::Pages::BlmController < ApplicationController
                 end
             else
                 # remove user from the page
-                if blm.relationships.where(user: user()).first.destroy 
+                if blm.relationships.where(account: user()).first.destroy 
                     render json: {}, status: 200
                 else
                     render json: {}, status: 500
@@ -200,29 +208,33 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def followersIndex
-        blm = Blm.find(params[:id])
+        blmFollowersRaw = Follower.where(page_type: 'Blm', page_id: params[:id])
 
-        followers = blm.accounts.page(params[:page]).per(numberOfPage)
-        if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
+        blmFollowersRaw = blmFollowersRaw.page(params[:page]).per(numberOfPage)
+        if blmFollowersRaw.total_count == 0 || (blmFollowersRaw.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
-        elsif followers.total_count < numberOfPage
-            itemsremaining = followers.total_count 
+        elsif blmFollowersRaw.total_count < numberOfPage
+            itemsremaining = blmFollowersRaw.total_count 
         else
-            itemsremaining = followers.total_count - (params[:page].to_i * numberOfPage)
+            itemsremaining = blmFollowersRaw.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        blmFollowers = blmFollowersRaw.collect do |follower|
+            follower.account 
         end
 
         render json: {
             itemsremaining: itemsremaining,
             followers: ActiveModel::SerializableResource.new(
-                            followers, 
+                            blmFollowers, 
                             each_serializer: UserSerializer
                         )
         }
     end
 
     def adminIndex
-        adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
-        admins = Relationship.where(page_type: 'Blm', user_id: adminsRaw, page_id: params[:page_id])
+        adminsRaw = Blm.find(params[:page_id]).roles.first.blm_users.pluck('id')
+        admins = Relationship.where(page_type: 'Blm', page_id: params[:page_id], account_type: 'BlmUser', account_id: adminsRaw)
         admins = admins.page(params[:page]).per(numberOfPage)
 
         if admins.total_count == 0 || (admins.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -233,7 +245,7 @@ class Api::V1::Pages::BlmController < ApplicationController
             adminsitemsremaining = admins.total_count - (params[:page].to_i * numberOfPage)
         end
         
-        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND user_id NOT IN (?)", adminsRaw)
+        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'BlmUser' AND account_id NOT IN (?)", adminsRaw)
         family = familyRaw.page(params[:page]).per(numberOfPage)
 
         if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0

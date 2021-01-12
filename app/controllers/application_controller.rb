@@ -57,6 +57,15 @@ class ApplicationController < ActionController::Base
                 SELECT id, page_type, page_id, user_id FROM followers
             ) AS relationship"
         end
+
+        def user_sql
+            "(
+                SELECT id, 'BlmUser' AS user_type FROM blm_users
+                UNION
+                SELECT id, 'AlmUser' AS user_type FROM alm_users
+            ) AS user"
+        end
+        
         
         def set_current_user
             AlmUser.current = current_alm_user
@@ -73,6 +82,13 @@ class ApplicationController < ActionController::Base
                 return false 
             end
         end
+
+        def no_guest_users
+            if user().guest == true 
+                return render json: {error: "pls login"}, status: 422
+            end
+        end
+        
         
         
 end

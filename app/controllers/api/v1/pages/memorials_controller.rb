@@ -1,5 +1,5 @@
 class Api::V1::Pages::MemorialsController < ApplicationController
-    before_action :authenticate_user!, except: [:show]
+    before_action :check_user, except: [:show]
     before_action :authorize, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages]
     before_action :verify_user_account_type, only: [:editDetails, :updateDetails, :editImages, :delete, :setPrivacy, :updateImages, :create]
 
@@ -50,16 +50,17 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             # Tell the Mailer to send link to register stripe user account after save
             redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
             client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
-            SendStripeLinkMailer.send_memorial_link(redirect_uri, client_id, current_user, memorial.id).deliver_now
+            SendStripeLinkMailer.send_memorial_link(redirect_uri, client_id, user(), memorial.id).deliver_now
 
             render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
 
             # Notify all Users
-            users = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.user_id != #{user().id}").pluck('id') 
+            blmUsers = BlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).pluck('id')
+            almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'AlmUser' AND notifsettings.account_id != #{user().id}").pluck('id') 
 
-            users.each do |id|
-                Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", postId: memorial.id)
-            end
+            # users.each do |id|
+            #     Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", postId: memorial.id)
+            # end
         else
             render json: {status: "#{check} is empty"}
         end
