@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
         protect_from_forgery with: :null_session 
 
         rescue_from ActiveRecord::RecordNotFound, :with => :known_error
-        rescue_from PG::UniqueViolation, :with => :same_email
+        # rescue_from PG::UniqueViolation, :with => :same_email
 
         rescue_from CanCan::AccessDenied do |exception|
             render json: {status: exception.message}

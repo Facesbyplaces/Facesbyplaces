@@ -10,16 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_153106) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2021_01_12_024359) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -66,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
     t.string "address"
     t.boolean "hideBirthdate"
     t.boolean "hideBirthplace"
+    t.boolean "hideEmail"
     t.boolean "hideAddress"
     t.boolean "hidePhonenumber"
     t.string "google_id"
@@ -89,13 +87,32 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "name"
     t.string "nickname"
     t.string "image"
     t.string "email"
     t.json "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "guest", default: false
+    t.integer "account_type"
+    t.string "question"
+    t.datetime "birthdate"
+    t.string "birthplace"
+    t.string "address"
+    t.boolean "hideBirthdate"
+    t.boolean "hideBirthplace"
+    t.boolean "hideEmail"
+    t.boolean "hideAddress"
+    t.boolean "hidePhonenumber"
+    t.string "google_id"
+    t.string "apple_uid"
+    t.string "facebook_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "username"
+    t.integer "verification_code"
+    t.boolean "is_verified"
     t.index ["confirmation_token"], name: "index_blm_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_blm_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_blm_users_on_reset_password_token", unique: true
@@ -123,34 +140,34 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "post_id", null: false
+    t.integer "post_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.index ["account_type", "account_id"], name: "index_comments_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "commentslikes", force: :cascade do |t|
     t.string "commentable_type", null: false
-    t.bigint "commentable_id", null: false
+    t.integer "commentable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.index ["account_type", "account_id"], name: "index_commentslikes_on_account_type_and_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_commentslikes_on_commentable_type_and_commentable_id"
   end
 
   create_table "followers", force: :cascade do |t|
     t.string "page_type", null: false
-    t.bigint "page_id", null: false
+    t.integer "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.index ["account_type", "account_id"], name: "index_followers_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_followers_on_page_type_and_page_id"
   end
@@ -195,18 +212,18 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
     t.boolean "addFriends"
     t.boolean "addAdmin"
     t.string "account_type"
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_type", "account_id"], name: "index_notifsettings_on_account_type_and_account_id"
   end
 
   create_table "pageowners", force: :cascade do |t|
     t.string "page_type", null: false
-    t.bigint "page_id", null: false
+    t.integer "page_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "view"
     t.string "account_type"
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_type", "account_id"], name: "index_pageowners_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
   end
@@ -214,7 +231,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
   create_table "pg_search_documents", force: :cascade do |t|
     t.text "content"
     t.string "searchable_type"
-    t.bigint "searchable_id"
+    t.integer "searchable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
@@ -228,42 +245,42 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
     t.float "latitude"
     t.float "longitude"
     t.string "page_type", null: false
-    t.bigint "page_id", null: false
+    t.integer "page_id", null: false
     t.string "account_type"
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_type", "account_id"], name: "index_posts_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_posts_on_page_type_and_page_id"
   end
 
   create_table "postslikes", force: :cascade do |t|
-    t.bigint "post_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_type", "account_id"], name: "index_postslikes_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_postslikes_on_post_id"
   end
 
   create_table "relationships", force: :cascade do |t|
     t.string "page_type", null: false
-    t.bigint "page_id", null: false
+    t.integer "page_id", null: false
     t.string "relationship"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_type", "account_id"], name: "index_relationships_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_relationships_on_page_type_and_page_id"
   end
 
   create_table "replies", force: :cascade do |t|
-    t.bigint "comment_id", null: false
+    t.integer "comment_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.index ["account_type", "account_id"], name: "index_replies_on_account_type_and_account_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
   end
@@ -274,14 +291,14 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reportable_type", null: false
-    t.bigint "reportable_id", null: false
+    t.integer "reportable_id", null: false
     t.index ["reportable_type", "reportable_id"], name: "index_reports_on_reportable_type_and_reportable_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
@@ -307,23 +324,23 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
   end
 
   create_table "tagpeople", force: :cascade do |t|
-    t.bigint "post_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
-    t.bigint "account_id"
+    t.integer "account_id"
     t.index ["account_type", "account_id"], name: "index_tagpeople_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_tagpeople_on_post_id"
   end
 
   create_table "transactions", force: :cascade do |t|
     t.string "page_type", null: false
-    t.bigint "page_id", null: false
+    t.integer "page_id", null: false
     t.float "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.index ["account_type", "account_id"], name: "index_transactions_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_transactions_on_page_type_and_page_id"
   end
@@ -371,8 +388,8 @@ ActiveRecord::Schema.define(version: 2021_01_11_153106) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "role_id"
+    t.integer "user_id"
+    t.integer "role_id"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"

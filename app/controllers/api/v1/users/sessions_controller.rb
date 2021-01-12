@@ -172,17 +172,25 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         
       # Fbp Login
       else
-        user = AlmUser.find_by(email: params[:email]) # || BlmUser.find_by(email: params[:email])
         account_type = params[:account_type].to_i
-    
-        if user.account_type == account_type && user.is_verified?
-          super
-        elsif user.account_type != account_type
+
+        if account_type == 1
+          user = BlmUser.find_by(email: params[:email])
+        else
+          user = AlmUser.find_by(email: params[:email])
+        end 
+
+        # Check if account exist or not
+        if user == nil
           if account_type == 1
-            render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
+            return render json: { message: "BLM account not found. Register to login to the page.", status: 401 }, status: 401
           elsif account_type == 2
-            render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
+            return render json: { message: "ALM account not found. Register to login to the page.", status: 401 }, status: 401
           end
+        end 
+
+        if user.is_verified?
+          super
         else
           render json: {
               message: "Verify email to login to the app.",

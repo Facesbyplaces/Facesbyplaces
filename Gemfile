@@ -38,6 +38,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # DATABASE
+  gem 'sqlite3', '~> 1.4'
 
   # Use Dotenv for environment variables
   gem 'dotenv', '~> 2.2.1'
@@ -88,6 +90,4 @@ gem 'omniauth-apple'
 gem 'omniauth-google-oauth2'
 # Use ActiveRecord Sessions
 gem 'activerecord-session_store'
-        
-# DATABASE
-# gem 'sqlite3', '~> 1.4'
+      

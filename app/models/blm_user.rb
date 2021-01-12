@@ -2,6 +2,8 @@
 
 class BlmUser < ActiveRecord::Base
   rolify
+
+  has_many :authorizations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
