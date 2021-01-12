@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BlmUser < ActiveRecord::Base
-  rolify :role_cname => 'BlmUserRole'
+  rolify :role_cname => 'BlmUsersRole'
   rolify
 
   has_many :authorizations

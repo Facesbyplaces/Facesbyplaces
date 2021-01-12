@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AlmUser < ActiveRecord::Base
+  rolify :role_cname => 'AlmUsersRole'
   rolify :role_cname => 'AlmUserRole'
   rolify
 
