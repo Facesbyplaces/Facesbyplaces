@@ -206,7 +206,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       numberOfTagged,
                       (index) => GestureDetector(
                         onTap: (){
-
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: taggedId[index])));
                         },
                         child: RichText(

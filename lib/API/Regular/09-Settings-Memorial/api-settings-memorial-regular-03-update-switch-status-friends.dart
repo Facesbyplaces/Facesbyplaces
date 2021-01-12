@@ -8,6 +8,9 @@ Future<bool> apiRegularUpdateSwitchStatusFriends({int memorialId, bool status}) 
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The memorial id is $memorialId');
+  print('The status is $status');
+
   print('The access token in friends switch is $getAccessToken');
   print('The UID in friends switch is $getUID');
   print('The client in friends switch is $getClient');

@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:date_time_format/date_time_format.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -9,7 +10,9 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
+  final http.Response response = await http.get(
+    // 'http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
+    'http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -17,6 +20,9 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}
       'client': getClient,
     }
   );
+
+  print('The status code is ${response.statusCode}');
+  print('The status body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -40,11 +46,16 @@ class APIRegularShowUserInformation{
   APIRegularShowUserInformation({this.id, this.firstName, this.lastName, this.birthdate, this.birthplace, this.homeAddress, this.emailAddress, this.contactNumber, this.image});
 
   factory APIRegularShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
+
+    String newBirthdate = parsedJson['birthdate'];
+    DateTime dateTime = DateTime.parse(newBirthdate);
+
     return APIRegularShowUserInformation(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
-      birthdate: parsedJson['birthdate'],
+      // birthdate: parsedJson['birthdate'],
+      birthdate: dateTime.format(AmericanDateFormats.standardWithComma),
       birthplace: parsedJson['birthplace'],
       homeAddress: parsedJson['address'],
       emailAddress: parsedJson['email'],

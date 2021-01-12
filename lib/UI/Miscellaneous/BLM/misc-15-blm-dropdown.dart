@@ -11,6 +11,8 @@ class MiscBLMDropDownTemplate extends StatelessWidget{
 
   MiscBLMDropDownTemplate({this.postId, this.reportType});
 
+  final snackBar = SnackBar(content: Text('Link copied'));
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -45,6 +47,8 @@ class MiscBLMDropDownTemplate extends StatelessWidget{
                 );
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
+              }else{
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
             },
             

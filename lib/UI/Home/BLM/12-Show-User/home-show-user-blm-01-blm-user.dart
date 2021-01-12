@@ -1,6 +1,5 @@
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-04-show-other-details.dart';
-// import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-01-show-user-information.dart';
+import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-17-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -21,44 +20,15 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   final int userId;
   HomeBLMUserProfileState({this.userId});
 
-  String birthdate;
-  String birthplace;
-  String homeAddress;
-  String emailAddress;
-  String contactNumber;
-
   Future<APIBLMShowUserInformation> showProfile;
-  // Future<APIBLMShowOtherDetails> showDetails;
-
-  // Future<APIBLMShowUserInformation> getProfileInformation(int userId) async{
-  //   return await apiBLMShowUserInformation(userId: userId);
-  // }
 
   Future<APIBLMShowUserInformation> getProfileInformation() async{
-    // return await apiBLMShowProfileInformation();
-
     return await apiBLMShowUserInformation(userId: userId);
-  }
-
-  void getOtherDetails() async{
-    var newValue = await apiBLMShowOtherDetails(userId: userId);
-    birthdate = newValue.birthdate;
-    birthplace = newValue.birthplace;
-    homeAddress = newValue.address;
-    emailAddress = newValue.email;
-    contactNumber = newValue.phoneNumber;
-    // setState(() {});
   }
 
   void initState(){
     super.initState();
-    birthdate = '';
-    birthplace = '';
-    homeAddress = '';
-    emailAddress = '';
-    contactNumber = '';
     showProfile = getProfileInformation();
-    getOtherDetails();
   }
 
   @override
@@ -186,8 +156,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    // child: Text('${convertDate(birthdate)}',
-                                    child: Text('$birthdate',
+                                    child: Text('${convertDate(profile.data.birthdate)}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -218,7 +187,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('$birthplace',
+                                    child: Text('${profile.data.birthplace}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -250,7 +219,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   ),
                                   Expanded(
                                     child: 
-                                    Text('$homeAddress',
+                                    Text('${profile.data.homeAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -281,7 +250,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('$emailAddress',
+                                    child: Text('${profile.data.emailAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -312,7 +281,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('$contactNumber',
+                                    child: Text('${profile.data.contactNumber}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),

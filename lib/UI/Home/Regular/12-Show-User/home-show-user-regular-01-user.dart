@@ -1,8 +1,7 @@
-// import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-05-show-other-details.dart';
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-01-show-user-information.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-17-regular-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-21-regular-user-details.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/rendering.dart';
@@ -20,27 +19,15 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   final int userId;
   HomeRegularUserProfileState({this.userId});
 
-  String birthdate;
-  String birthplace;
-  String homeAddress;
-  String emailAddress;
-  String contactNumber;
-
   Future<APIRegularShowUserInformation> showProfile;
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
-
     return await apiRegularShowUserInformation(userId: userId);
-  }
-
-  void getOtherDetails() async{
-    setState(() {});
   }
 
   void initState(){
     super.initState();
     showProfile = getProfileInformation();
-    getOtherDetails();
   }
 
   @override
@@ -169,8 +156,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    // child: Text('${convertDate(birthdate)}',
-                                    child: Text('$birthdate',
+                                    child: Text('${profile.data.birthdate}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -201,7 +187,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('$birthplace',
+                                    child: Text('${profile.data.birthplace}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -233,7 +219,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   ),
                                   Expanded(
                                     child: 
-                                    Text('$homeAddress',
+                                    Text('${profile.data.homeAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -264,7 +250,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('$emailAddress',
+                                    child: Text('${profile.data.emailAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -295,7 +281,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('$contactNumber',
+                                    child: Text('${profile.data.contactNumber}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
