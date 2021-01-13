@@ -609,21 +609,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: feeds.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
-          ),
-        ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
       ),
     );
   }
@@ -671,21 +659,25 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: suggested.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
       ),
     );
   }
@@ -733,21 +725,25 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: nearby.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
       ),
     );
   }
@@ -795,21 +791,25 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: blm.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
       ),
     );
   }

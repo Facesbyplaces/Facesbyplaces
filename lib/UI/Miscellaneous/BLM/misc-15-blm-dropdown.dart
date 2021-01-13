@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
@@ -11,7 +12,7 @@ class MiscBLMDropDownTemplate extends StatelessWidget{
 
   MiscBLMDropDownTemplate({this.postId, this.reportType});
 
-  final snackBar = SnackBar(content: Text('Link copied'));
+  final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,8 @@ class MiscBLMDropDownTemplate extends StatelessWidget{
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
               }else{
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                // https://29cft.test-app.link/suCwfzCi6bb
+                FlutterClipboard.copy('https://29cft.test-app.link/suCwfzCi6bb').then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },
             

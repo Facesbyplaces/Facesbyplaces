@@ -35,10 +35,10 @@ Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) 
       // sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
       // sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
       // sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
-      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null || response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-        sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', ''));
-        sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', ''));    
-        sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[', '').replaceAll(']', ''));
+      if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
+        sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+        sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+        sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       }
     }
     
