@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -100,11 +101,18 @@ class APIRegularShowMemorialExtendedDetails{
   APIRegularShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
+    String newDOB = parsedJson['dob'];
+    DateTime dob = DateTime.parse(newDOB);
+
+    String newRIP = parsedJson['rip'];
+    DateTime rip = DateTime.parse(newRIP);
     return APIRegularShowMemorialExtendedDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
+      // dob: parsedJson['dob'],
+      // rip: parsedJson['rip'],
+      dob: dob.format(AmericanDateFormats.standardWithComma),
+      rip: rip.format(AmericanDateFormats.standardWithComma),
       cemetery: parsedJson['cemetery'],
       country: parsedJson['country'],
     );

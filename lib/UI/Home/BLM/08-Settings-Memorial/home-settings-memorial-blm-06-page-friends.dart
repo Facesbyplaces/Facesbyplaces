@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-10-show-friends-settings.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-17-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-07-search-user-settings.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -6,12 +7,13 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class BLMShowFriendsSettings{
+  final int userId;
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMShowFriendsSettings({this.firstName, this.lastName, this.image, this.relationship});
+  BLMShowFriendsSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeBLMPageFriends extends StatefulWidget{
@@ -44,6 +46,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
       for(int i = 0; i < newValue.friendsList.length; i++){
         friendsList.add(
           BLMShowFriendsSettings(
+            userId: newValue.friendsList[i].user.id,
             firstName: newValue.friendsList[i].user.firstName,
             lastName: newValue.friendsList[i].user.lastName,
             image: newValue.friendsList[i].user.image,
@@ -65,10 +68,10 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
 
   void initState(){
     super.initState();
-    onLoading1();
     friendsItemsRemaining = 1;
     friendsList = [];
     page = 1;
+    onLoading1();
   }
 
   @override
@@ -146,7 +149,14 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                       textColor: Color(0xffffffff),
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
+                        context.showLoaderOverlay();
+                        await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: friendsList[i].userId);
+                        context.hideLoaderOverlay();
 
+                        friendsItemsRemaining = 1;
+                        friendsList = [];
+                        page = 1;
+                        onLoading1();
                       },
                       child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
                       height: SizeConfig.blockSizeVertical * 5,

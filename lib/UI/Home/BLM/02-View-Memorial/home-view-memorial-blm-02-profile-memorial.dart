@@ -4,12 +4,15 @@ import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.da
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
+// import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:maps/maps.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class BLMProfilePosts{
@@ -379,7 +382,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Expanded(
-                                        child: Text(convertDate(profile.data.memorial.blmDetails.dob),
+                                        // child: Text(convertDate(profile.data.memorial.blmDetails.dob),
+                                        child: Text(profile.data.memorial.blmDetails.dob,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             color: Color(0xff000000),
@@ -396,7 +400,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Expanded(
-                                        child: Text(convertDate(profile.data.memorial.blmDetails.rip),
+                                        // child: Text(convertDate(profile.data.memorial.blmDetails.rip),
+                                        child: Text(profile.data.memorial.blmDetails.rip,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             color: Color(0xff000000),
@@ -414,7 +419,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Expanded(
                                         child: GestureDetector(
-                                          onTap: (){},
+                                          onTap: () async{
+                                            // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialLocation()));
+                                            final launcher = const GoogleMapsLauncher();
+                                            await launcher.launch(
+                                              geoPoint: GeoPoint(0.0, 0.0),
+                                            );
+                                          },
                                           child: Text(profile.data.memorial.blmDetails.location,
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 3.5,
@@ -658,7 +669,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      timeCreated: convertDate(posts[i].timeCreated),
+                                      // timeCreated: convertDate(posts[i].timeCreated),
+                                      timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
                                       managed: posts[i].managed,
                                       joined: posts[i].joined,
                                       profileImage: posts[i].profileImage,
@@ -671,41 +683,68 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
                                       contents: [
-                                        Column(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topLeft,
-                                              child: RichText(
-                                                maxLines: 4,
-                                                overflow: TextOverflow.clip,
-                                                textAlign: TextAlign.left,
-                                                text: TextSpan(
-                                                  text: posts[i].postBody,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Color(0xff000000),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-
-                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                          ],
-                                        ),
+                                        Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody,),),
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(
-                                          height: SizeConfig.blockSizeHorizontal * 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                          ),
-                                          child: CachedNetworkImage(
-                                            imageUrl: posts[i].imagesOrVideos[0],
-                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                            errorWidget: (context, url, error) => Icon(Icons.error),
-                                          ),
+                                          height: SizeConfig.blockSizeVertical * 30,
+                                          child: ((){
+                                            if(posts[i].imagesOrVideos != null){
+                                              if(posts[i].imagesOrVideos.length == 1){
+                                                return Container(
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: posts[i].imagesOrVideos[0],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                                  ),
+                                                );
+                                              }else if(posts[i].imagesOrVideos.length == 2){
+                                                return StaggeredGridView.countBuilder(
+                                                  padding: EdgeInsets.zero,
+                                                  physics: NeverScrollableScrollPhysics(),
+                                                  crossAxisCount: 4,
+                                                  itemCount: 2,
+                                                  itemBuilder: (BuildContext context, int index) => 
+                                                    CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: posts[i].imagesOrVideos[index],
+                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                    ),
+                                                  staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                                                  mainAxisSpacing: 4.0,
+                                                  crossAxisSpacing: 4.0,
+                                                );
+                                              }else{
+                                                return Container(
+                                                  child: StaggeredGridView.countBuilder(
+                                                    padding: EdgeInsets.zero,
+                                                    physics: NeverScrollableScrollPhysics(),
+                                                    crossAxisCount: 4,
+                                                    itemCount: 3,
+                                                    itemBuilder: (BuildContext context, int index) => 
+                                                      CachedNetworkImage(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl: posts[i].imagesOrVideos[index],
+                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      ),
+                                                    staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                                    mainAxisSpacing: 4.0,
+                                                    crossAxisSpacing: 4.0,
+                                                  ),
+                                                );
+                                              }
+                                            }else{
+                                              return Container(height: 0,);
+                                            }
+                                          }()),
                                         )
-                                        : Container(height: 0,),
+                                        : Container(
+                                          color: Colors.red,
+                                          height: 0,
+                                        ),
                                       ],
                                     );
                                   },

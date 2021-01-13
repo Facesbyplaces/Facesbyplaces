@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-10-show-family-settings.dart';
+import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-18-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -6,13 +7,14 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class RegularShowFamilySettings{
+  final int userId;
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
   final String email;
 
-  RegularShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship, this.email});
+  RegularShowFamilySettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.email});
 }
 
 class HomeRegularPageFamily extends StatefulWidget{
@@ -45,6 +47,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       for(int i = 0; i < newValue.familyList.length; i++){
         familyList.add(
           RegularShowFamilySettings(
+            userId: newValue.familyList[i].user.id,
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
@@ -67,10 +70,10 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
   void initState(){
     super.initState();
-    onLoading1();
     familyItemsRemaining = 1;
     familyList = [];
     page = 1;
+    onLoading1();
   }
 
   @override
@@ -151,7 +154,14 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                       textColor: Color(0xffffffff),
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
+                        context.showLoaderOverlay();
+                        await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId);
+                        context.hideLoaderOverlay();
 
+                        familyItemsRemaining = 1;
+                        familyList = [];
+                        page = 1;
+                        onLoading1();
                       },
                       child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
                       height: SizeConfig.blockSizeVertical * 5,

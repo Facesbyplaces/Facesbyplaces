@@ -1,5 +1,3 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-01-search-posts.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.dart';
@@ -10,6 +8,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -570,41 +569,68 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
               contents: [
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: RichText(
-                        maxLines: 4,
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.left,
-                        text: TextSpan(
-                          text: feeds[i].postBody,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                  ],
-                ),
+                Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeHorizontal * 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: feeds[i].imagesOrVideos[0],
-                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
+                  height: SizeConfig.blockSizeVertical * 30,
+                  child: ((){
+                    if(feeds[i].imagesOrVideos != null){
+                      if(feeds[i].imagesOrVideos.length == 1){
+                        return Container(
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: feeds[i].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                          ),
+                        );
+                      }else if(feeds[i].imagesOrVideos.length == 2){
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 2,
+                          itemBuilder: (BuildContext context, int index) => 
+                            CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: feeds[i].imagesOrVideos[index],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        );
+                      }else{
+                        return Container(
+                          child: StaggeredGridView.countBuilder(
+                            padding: EdgeInsets.zero,
+                            physics: NeverScrollableScrollPhysics(),
+                            crossAxisCount: 4,
+                            itemCount: 3,
+                            itemBuilder: (BuildContext context, int index) => 
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              ),
+                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 4.0,
+                          ),
+                        );
+                      }
+                    }else{
+                      return Container(height: 0,);
+                    }
+                  }()),
                 )
-                : Container(height: 0,),
+                : Container(
+                  color: Colors.red,
+                  height: 0,
+                ),
               ],
             );
           },
@@ -630,7 +656,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
+        child: MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
       ),
     );
   }
@@ -678,25 +704,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: suggested.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
+        child: MiscBLMEmptyDisplayTemplate(message: 'Suggested is empty',),
       ),
     );
   }
@@ -728,7 +738,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            return MiscRegularManageMemorialTab(
+            return MiscBLMManageMemorialTab(
                 index: i,
                 memorialName: nearby[i].memorialName,
                 description: nearby[i].memorialDescription,
@@ -744,25 +754,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: nearby.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
+        child: MiscBLMEmptyDisplayTemplate(message: 'Nearby is empty',),
       ),
     );
   }
@@ -794,7 +788,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            return MiscRegularManageMemorialTab(
+            return MiscBLMManageMemorialTab(
                 index: i,
                 memorialName: blm[i].memorialName,
                 description: blm[i].memorialDescription,
@@ -810,25 +804,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: blm.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
+        child: MiscBLMEmptyDisplayTemplate(message: 'BLM is empty',),
       ),
     );
   }

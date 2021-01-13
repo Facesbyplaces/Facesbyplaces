@@ -38,6 +38,7 @@ import 'UI/ui-02-login.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+// import 'package:maps/maps.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +46,11 @@ void main() async{
   final sharedPrefs = await SharedPreferences.getInstance();
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
+
+  // final launcher = const GoogleMapsLauncher();
+  // await launcher.launch(
+  //   geoPoint: GeoPoint(0.0, 0.0),
+  // );
 
   runApp(
     GlobalLoaderOverlay(

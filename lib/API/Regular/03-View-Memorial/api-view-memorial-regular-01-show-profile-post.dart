@@ -136,6 +136,12 @@ class APIRegularHomeProfilePostExtendedPageDetails{
   APIRegularHomeProfilePostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
 
   factory APIRegularHomeProfilePostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    // String newDOB = parsedJson['dob'];
+    // DateTime dob = DateTime.parse(newDOB);
+
+    // String newRIP = parsedJson['rip'];
+    // DateTime rip = DateTime.parse(newRIP);
+
     return APIRegularHomeProfilePostExtendedPageDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],

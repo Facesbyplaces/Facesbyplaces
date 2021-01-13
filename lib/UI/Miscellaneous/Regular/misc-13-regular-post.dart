@@ -194,6 +194,103 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
               ),
             ),
 
+                            // originalPost.data.post.imagesOrVideos != null
+                            // ? Container(
+                            //   // color: Colors.red,
+                            //   // height: SizeConfig.blockSizeVertical * 50,
+                            //   height: SizeConfig.blockSizeVertical * 30,
+                            //   child: ((){
+                            //     print('The length of images is ${originalPost.data.post.imagesOrVideos.length}');
+                            //     if(originalPost.data.post.imagesOrVideos != null){
+                            //       if(originalPost.data.post.imagesOrVideos.length == 1){
+                            //         return Container(
+                            //           child: CachedNetworkImage(
+                            //             fit: BoxFit.cover,
+                            //             imageUrl: originalPost.data.post.imagesOrVideos[0],
+                            //             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            //             errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                            //           ),
+                            //         );
+                            //       }else if(originalPost.data.post.imagesOrVideos.length == 2){
+                            //         return StaggeredGridView.countBuilder(
+                            //           padding: EdgeInsets.zero,
+                            //           physics: NeverScrollableScrollPhysics(),
+                            //           crossAxisCount: 4,
+                            //           itemCount: 2,
+                            //           itemBuilder: (BuildContext context, int index) => 
+                            //             CachedNetworkImage(
+                            //               fit: BoxFit.cover,
+                            //               imageUrl: originalPost.data.post.imagesOrVideos[index],
+                            //               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            //               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            //             ),
+                            //           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                            //           mainAxisSpacing: 4.0,
+                            //           crossAxisSpacing: 4.0,
+                            //         );
+                            //       }else{
+                            //         return Container(
+                            //           child: StaggeredGridView.countBuilder(
+                            //             padding: EdgeInsets.zero,
+                            //             physics: NeverScrollableScrollPhysics(),
+                            //             crossAxisCount: 4,
+                            //             itemCount: 3,
+                            //             itemBuilder: (BuildContext context, int index) => 
+                            //             GestureDetector(
+                            //               onTap: () async{
+                            //                 FullScreenMenu.show(
+                            //                   context,
+                            //                   backgroundColor: Color(0xff888888),
+                            //                   items: [
+                            //                     Center(
+                            //                       child: Container(
+                            //                         height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
+                            //                         child: CarouselSlider(
+                            //                           items: List.generate(
+                            //                             originalPost.data.post.imagesOrVideos.length, (next) =>
+                            //                             CachedNetworkImage(
+                            //                               fit: BoxFit.cover,
+                            //                               imageUrl: originalPost.data.post.imagesOrVideos[next],
+                            //                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            //                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            //                             ),
+                            //                           ),
+                            //                           options: CarouselOptions(
+                            //                             autoPlay: false,
+                            //                             enlargeCenterPage: true,
+                            //                             viewportFraction: 0.9,
+                            //                             aspectRatio: 2.0,
+                            //                             initialPage: 2,
+                            //                           ),
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                   ],
+                            //                 );
+                            //               },
+                            //               child: CachedNetworkImage(
+                            //                 fit: BoxFit.cover,
+                            //                 imageUrl: originalPost.data.post.imagesOrVideos[index],
+                            //                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            //                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            //               ),
+                            //             ),
+                            //             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                            //             mainAxisSpacing: 4.0,
+                            //             crossAxisSpacing: 4.0,
+                            //           ),
+                            //         );
+                            //       }
+                            //     }else{
+                            //       return Container(height: 0,);
+                            //     }
+                            //   }()),
+                            // )
+                            // : Container(
+                            //   color: Colors.red,
+                            //   height: 0,
+                            // ),
+
             numberOfTagged != 0
             ? Row(
               children: [

@@ -1,13 +1,16 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:full_screen_menu/full_screen_menu.dart';
 import 'home-show-post-regular-02-show-comments.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class HomeRegularShowOriginalPost extends StatefulWidget{
@@ -30,6 +33,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
   bool likePost;
   bool pressedLike;
   int likesCount;
+
+  CarouselController buttonCarouselController = CarouselController();
 
   void initState(){
     super.initState();
@@ -69,7 +74,9 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
               },
             ),
           ),
-          body: Container(
+          body: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Container(
             padding: EdgeInsets.all(5.0),
             height: SizeConfig.screenHeight,
             child: FutureBuilder<APIRegularShowOriginalPostMainMain>(
@@ -124,7 +131,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                           Expanded(
                                             child: Align(
                                               alignment: Alignment.topLeft,
-                                              child: Text(convertDate(originalPost.data.post.createAt),
+                                              child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)),
                                                 maxLines: 1,
                                                 style: TextStyle(
                                                   fontSize: SizeConfig.safeBlockHorizontal * 3,
@@ -147,17 +154,121 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                             originalPost.data.post.imagesOrVideos != null
                             ? Container(
-                              height: SizeConfig.blockSizeVertical * 50,
+                              height: SizeConfig.blockSizeVertical * 30,
                               child: ((){
                                 if(originalPost.data.post.imagesOrVideos != null){
-                                  return Container(
-                                    child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: originalPost.data.post.imagesOrVideos[0],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                                    ),
-                                  );
+                                  if(originalPost.data.post.imagesOrVideos.length == 1){
+                                    return Container(
+                                      child: CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: originalPost.data.post.imagesOrVideos[0],
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                      ),
+                                    );
+                                  }else if(originalPost.data.post.imagesOrVideos.length == 2){
+                                    return StaggeredGridView.countBuilder(
+                                      padding: EdgeInsets.zero,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      crossAxisCount: 4,
+                                      itemCount: 2,
+                                      itemBuilder: (BuildContext context, int index) => 
+                                        GestureDetector(
+                                          onTap: () async{
+                                            FullScreenMenu.show(
+                                              context,
+                                              backgroundColor: Color(0xff888888),
+                                              items: [
+                                                Center(
+                                                  child: Container(
+                                                    height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
+                                                    child: CarouselSlider(
+                                                      items: List.generate(
+                                                        originalPost.data.post.imagesOrVideos.length, (next) =>
+                                                        CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl: originalPost.data.post.imagesOrVideos[next],
+                                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                        ),
+                                                      ),
+                                                      options: CarouselOptions(
+                                                        autoPlay: false,
+                                                        enlargeCenterPage: true,
+                                                        viewportFraction: 0.9,
+                                                        aspectRatio: 2.0,
+                                                        initialPage: 2,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          ),
+                                        ),
+                                      staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                                      mainAxisSpacing: 4.0,
+                                      crossAxisSpacing: 4.0,
+                                    );
+                                  }else{
+                                    return Container(
+                                      child: StaggeredGridView.countBuilder(
+                                        padding: EdgeInsets.zero,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        crossAxisCount: 4,
+                                        itemCount: 3,
+                                        itemBuilder: (BuildContext context, int index) => 
+                                        GestureDetector(
+                                          onTap: () async{
+                                            FullScreenMenu.show(
+                                              context,
+                                              backgroundColor: Color(0xff888888),
+                                              items: [
+                                                Center(
+                                                  child: Container(
+                                                    height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
+                                                    child: CarouselSlider(
+                                                      items: List.generate(
+                                                        originalPost.data.post.imagesOrVideos.length, (next) =>
+                                                        CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl: originalPost.data.post.imagesOrVideos[next],
+                                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                        ),
+                                                      ),
+                                                      options: CarouselOptions(
+                                                        autoPlay: false,
+                                                        enlargeCenterPage: true,
+                                                        viewportFraction: 0.9,
+                                                        aspectRatio: 2.0,
+                                                        initialPage: 2,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          ),
+                                        ),
+                                        staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                        mainAxisSpacing: 4.0,
+                                        crossAxisSpacing: 4.0,
+                                      ),
+                                    );
+                                  }
                                 }else{
                                   return Container(height: 0,);
                                 }
@@ -289,6 +400,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                 }
               }
             ),
+          ),
           ),
         ),
       ),

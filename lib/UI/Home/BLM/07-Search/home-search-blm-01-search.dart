@@ -33,58 +33,70 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: TextFormField(
-              onFieldSubmitted: (String keyword) async{
-                Location.Location location = new Location.Location();
-
-                bool serviceEnabled = await location.serviceEnabled();
-                if (!serviceEnabled) {
-                  serviceEnabled = await location.requestService();
-                  if (!serviceEnabled) {
-                    return;
-                  }
-                }
-
-                Location.PermissionStatus permissionGranted = await location.hasPermission();
-                if (permissionGranted == Location.PermissionStatus.denied) {
-                  permissionGranted = await location.requestPermission();
-                  if (permissionGranted != Location.PermissionStatus.granted) {
-                    return;
-                  }
-                }
-
-                context.showLoaderOverlay();
-                Location.LocationData locationData = await location.getLocation();
-                List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                context.hideLoaderOverlay();
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
-                hintText: 'Search a Memorial',
-                hintStyle: TextStyle(
-                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+            flexibleSpace: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                Container(
+                  width: SizeConfig.screenWidth / 1.3,
+                  child: TextFormField(
+                    onFieldSubmitted: (String keyword) async{
+                      Location.Location location = new Location.Location();
+
+                      bool serviceEnabled = await location.serviceEnabled();
+                      if (!serviceEnabled) {
+                        serviceEnabled = await location.requestService();
+                        if (!serviceEnabled) {
+                          return;
+                        }
+                      }
+
+                      Location.PermissionStatus permissionGranted = await location.hasPermission();
+                      if (permissionGranted == Location.PermissionStatus.denied) {
+                        permissionGranted = await location.requestPermission();
+                        if (permissionGranted != Location.PermissionStatus.granted) {
+                          return;
+                        }
+                      }
+
+                      context.showLoaderOverlay();
+                      Location.LocationData locationData = await location.getLocation();
+                      List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                      context.hideLoaderOverlay();
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: 'Search a Memorial',
+                      hintStyle: TextStyle(
+                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                      ),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ),
                 ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-              ),
-            ),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                Expanded(child: Container()),
+              ],
+            ), 
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: SingleChildScrollView(

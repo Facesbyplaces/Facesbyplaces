@@ -1,3 +1,4 @@
+import 'package:date_time_format/date_time_format.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -94,12 +95,21 @@ class APIBLMShowMemorialExtendedDetails{
   APIBLMShowMemorialExtendedDetails({this.description, this.location, this.precinct, this.dob, this.rip, this.state, this.country});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
+    String newDOB = parsedJson['dob'];
+    DateTime dob = DateTime.parse(newDOB);
+
+    String newRIP = parsedJson['rip'];
+    DateTime rip = DateTime.parse(newRIP);
+
+
     return APIBLMShowMemorialExtendedDetails(
       description: parsedJson['description'],
       location: parsedJson['location'],
       precinct: parsedJson['precinct'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
+      // dob: parsedJson['dob'],
+      // rip: parsedJson['rip'],
+      dob: dob.format(AmericanDateFormats.standardWithComma),
+      rip: rip.format(AmericanDateFormats.standardWithComma),
       state: parsedJson['state'],
       country: parsedJson['country'],
     );

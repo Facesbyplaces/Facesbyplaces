@@ -5,8 +5,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:maps/maps.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -393,7 +394,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.memorialDetails.dob),
+                                      // Text(convertDate(profile.data.memorial.memorialDetails.dob),
+                                      Text(profile.data.memorial.memorialDetails.dob,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -408,7 +410,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(convertDate(profile.data.memorial.memorialDetails.rip),
+                                      // Text(convertDate(profile.data.memorial.memorialDetails.rip),
+                                      Text(profile.data.memorial.memorialDetails.rip,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -424,7 +427,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       GestureDetector(
-                                        onTap: (){},
+                                        onTap: () async{
+                                          final launcher = const GoogleMapsLauncher();
+                                          await launcher.launch(
+                                            geoPoint: GeoPoint(0.0, 0.0),
+                                          );
+                                        },
                                         child: Text(profile.data.memorial.memorialDetails.cemetery,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
@@ -690,48 +698,68 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
                                       contents: [
-                                        Column(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topLeft,
-                                              child: RichText(
-                                                maxLines: 4,
-                                                overflow: TextOverflow.clip,
-                                                textAlign: TextAlign.left,
-                                                text: TextSpan(
-                                                  text: posts[i].postBody,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    color: Color(0xff000000),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-
-                                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                          ],
-                                        ),
+                                        Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody,),),
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(
-                                          height: SizeConfig.blockSizeHorizontal * 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                          ),
+                                          height: SizeConfig.blockSizeVertical * 30,
                                           child: ((){
-                                            if(posts[i].imagesOrVideos[0] == null || posts[i].imagesOrVideos[0] == ''){
-                                              return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
+                                            if(posts[i].imagesOrVideos != null){
+                                              if(posts[i].imagesOrVideos.length == 1){
+                                                return Container(
+                                                  child: CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: posts[i].imagesOrVideos[0],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                                  ),
+                                                );
+                                              }else if(posts[i].imagesOrVideos.length == 2){
+                                                return StaggeredGridView.countBuilder(
+                                                  padding: EdgeInsets.zero,
+                                                  physics: NeverScrollableScrollPhysics(),
+                                                  crossAxisCount: 4,
+                                                  itemCount: 2,
+                                                  itemBuilder: (BuildContext context, int index) => 
+                                                    CachedNetworkImage(
+                                                      fit: BoxFit.cover,
+                                                      imageUrl: posts[i].imagesOrVideos[index],
+                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                    ),
+                                                  staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                                                  mainAxisSpacing: 4.0,
+                                                  crossAxisSpacing: 4.0,
+                                                );
+                                              }else{
+                                                return Container(
+                                                  child: StaggeredGridView.countBuilder(
+                                                    padding: EdgeInsets.zero,
+                                                    physics: NeverScrollableScrollPhysics(),
+                                                    crossAxisCount: 4,
+                                                    itemCount: 3,
+                                                    itemBuilder: (BuildContext context, int index) => 
+                                                      CachedNetworkImage(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl: posts[i].imagesOrVideos[index],
+                                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                      ),
+                                                    staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                                                    mainAxisSpacing: 4.0,
+                                                    crossAxisSpacing: 4.0,
+                                                  ),
+                                                );
+                                              }
                                             }else{
-                                              return CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: posts[i].imagesOrVideos[0],
-                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                                              );
+                                              return Container(height: 0,);
                                             }
                                           }()),
                                         )
-                                        : Container(height: 0,),
+                                        : Container(
+                                          color: Colors.red,
+                                          height: 0,
+                                        ),
                                       ],
                                     );
                                   },

@@ -4,6 +4,8 @@ import 'dart:convert';
 
 Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({int memorialId, int page}) async{
 
+  print('The memorial id in api is $memorialId');
+
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';

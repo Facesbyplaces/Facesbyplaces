@@ -50,7 +50,6 @@ class APIBLMShowUserInformation{
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
-      // birthdate: parsedJson['birthdate'],
       birthdate: dateTime.format(AmericanDateFormats.standardWithComma),
       birthplace: parsedJson['birthplace'],
       homeAddress: parsedJson['address'],

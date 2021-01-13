@@ -4,6 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-18-regular-image-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -170,41 +171,68 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               taggedId: feeds[i].taggedId,
               
               contents: [
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: RichText(
-                        maxLines: 4,
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.left,
-                        text: TextSpan(
-                          text: feeds[i].postBody,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                  ],
-                ),
+                Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeHorizontal * 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: feeds[i].imagesOrVideos[0],
-                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                  ),
+                  height: SizeConfig.blockSizeVertical * 30,
+                  child: ((){
+                    if(feeds[i].imagesOrVideos != null){
+                      if(feeds[i].imagesOrVideos.length == 1){
+                        return Container(
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: feeds[i].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                          ),
+                        );
+                      }else if(feeds[i].imagesOrVideos.length == 2){
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 2,
+                          itemBuilder: (BuildContext context, int index) => 
+                            CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: feeds[i].imagesOrVideos[index],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        );
+                      }else{
+                        return Container(
+                          child: StaggeredGridView.countBuilder(
+                            padding: EdgeInsets.zero,
+                            physics: NeverScrollableScrollPhysics(),
+                            crossAxisCount: 4,
+                            itemCount: 3,
+                            itemBuilder: (BuildContext context, int index) => 
+                              CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              ),
+                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 4.0,
+                          ),
+                        );
+                      }
+                    }else{
+                      return Container(height: 0,);
+                    }
+                  }()),
                 )
-                : Container(height: 0,),
+                : Container(
+                  color: Colors.red,
+                  height: 0,
+                ),
               ],
             );
             

@@ -26,9 +26,19 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       'tag_people': post.tagPeople,
     });
     
-    if(post.imagesOrVideos != null){
-      var file = await dio.MultipartFile.fromFile(post.imagesOrVideos.path, filename: post.imagesOrVideos.path);
-      formData.files.add(MapEntry('post[imagesOrVideos][]', file));
+    // if(post.imagesOrVideos != null){
+    //   var file = await dio.MultipartFile.fromFile(post.imagesOrVideos.path, filename: post.imagesOrVideos.path);
+    //   formData.files.add(MapEntry('post[imagesOrVideos][]', file));
+    // }
+
+    if(post.imagesOrVideos != null || post.imagesOrVideos != ['']){
+      for(int i = 0; i < post.imagesOrVideos.length - 1; i++){
+        if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
+          var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
+          formData.files.add(MapEntry('post[imagesOrVideos][]', file));
+        }
+      }
+
     }
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/posts', data: formData,
@@ -61,7 +71,7 @@ class APIRegularCreatePost{
   int pageId;
   String postBody;
   String location;
-  dynamic imagesOrVideos;
+  List<dynamic> imagesOrVideos;
   double latitude;
   double longitude;
   List<int> tagPeople;

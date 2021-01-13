@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-09-show-family-settings.dart';
+import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-17-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-07-search-user-settings.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -6,12 +7,13 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class BLMShowFamilySettings{
+  final int userId;
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMShowFamilySettings({this.firstName, this.lastName, this.image, this.relationship});
+  BLMShowFamilySettings({this.userId, this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeBLMPageFamily extends StatefulWidget{
@@ -44,6 +46,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
       for(int i = 0; i < newValue.familyList.length; i++){
         familyList.add(
           BLMShowFamilySettings(
+            userId: newValue.familyList[i].user.id,
             firstName: newValue.familyList[i].user.firstName,
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
@@ -65,10 +68,10 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
 
   void initState(){
     super.initState();
-    onLoading1();
     familyItemsRemaining = 1;
     familyList = [];
     page = 1;
+    onLoading1();
   }
 
   @override
@@ -146,7 +149,15 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                       textColor: Color(0xffffffff),
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
+                        // apiBLMDeleteMemorialFriendsOrFamily();
+                        context.showLoaderOverlay();
+                        await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId);
+                        context.hideLoaderOverlay();
 
+                        familyItemsRemaining = 1;
+                        familyList = [];
+                        page = 1;
+                        onLoading1();
                       },
                       child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
                       height: SizeConfig.blockSizeVertical * 5,

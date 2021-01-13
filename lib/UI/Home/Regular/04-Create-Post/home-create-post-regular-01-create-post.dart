@@ -45,9 +45,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   int currentIdSelected;
   Future listManagedPages;
   List<RegularTaggedUsers> users = [];
+  List<File> slideImages;
 
   void initState(){
     super.initState();
+    slideImages = [];
     managedPages = [];
     currentSelection = name;
     currentIdSelected = memorialId;
@@ -100,6 +102,15 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     }
   }
 
+  Future getSlideImage() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if(pickedFile != null){
+      setState(() {
+        slideImages.add(File(pickedFile.path));
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -124,13 +135,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
               GestureDetector(
                 onTap: () async{
 
-                  File newFile;
+                  // File newFile;
 
-                  if(imageFile != null){
-                    newFile = imageFile;
-                  }else if(videoFile != null){
-                    newFile = videoFile;
-                  }
+                  // if(imageFile != null){
+                  //   newFile = imageFile;
+                  // }else if(videoFile != null){
+                  //   newFile = videoFile;
+                  // }
 
                   Location.Location location = new Location.Location();
 
@@ -162,17 +173,20 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     }
                   }
 
+                  List<File> newFiles = [];
+
+                  newFiles.addAll(slideImages);
+
                   APIRegularCreatePost post = APIRegularCreatePost(
                     pageType: 'Memorial',
                     postBody: _key1.currentState.controller.text,
                     pageId: currentIdSelected,
                     location: newLocation,
-                    imagesOrVideos: newFile,
+                    imagesOrVideos: newFiles,
                     latitude: locationData.latitude,
                     longitude: locationData.longitude,
                     tagPeople: userIds,
                   );
-
                   
                   bool result = await apiRegularHomeCreatePost(post: post);
                   context.hideLoaderOverlay();
@@ -286,10 +300,95 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
+                  // Container(
+                  //   child: ((){
+                  //     if(imageFile != null){
+                  //       return Container(height: SizeConfig.blockSizeVertical * 25, width: SizeConfig.screenWidth, padding: EdgeInsets.only(left: 20.0, right: 20.0,), child: Image.asset(imageFile.path, fit: BoxFit.cover),);
+                  //     }else if(videoFile != null){
+                  //       return Container(
+                  //         height: SizeConfig.blockSizeVertical * 25, 
+                  //         width: SizeConfig.screenWidth, 
+                  //         padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                  //         child: GestureDetector(
+                  //           onTap: (){
+                  //             if(videoPlayerController.value.isPlaying){
+                  //               videoPlayerController.pause();
+                  //             }else{
+                  //               videoPlayerController.play();
+                  //             }
+                              
+                  //           },
+                  //           onDoubleTap: () async{
+                  //             await getVideo();
+                  //           },
+                  //           child: AspectRatio(
+                  //             aspectRatio: videoPlayerController.value.aspectRatio,
+                  //             child: VideoPlayer(videoPlayerController),
+                  //           ),
+                  //         ),
+                  //       );
+                  //     }
+                  //   }()),
+                  // ),
+
                   Container(
+                    // color: Colors.red,
                     child: ((){
-                      if(imageFile != null){
-                        return Container(height: SizeConfig.blockSizeVertical * 25, width: SizeConfig.screenWidth, padding: EdgeInsets.only(left: 20.0, right: 20.0,), child: Image.asset(imageFile.path, fit: BoxFit.cover),);
+                      if(slideImages.length != 0){
+                        return Container(
+                          // height: SizeConfig.blockSizeVertical * 32,
+                          height: SizeConfig.blockSizeVertical * 25, 
+                          width: SizeConfig.screenWidth,
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Container(
+                            height: SizeConfig.blockSizeVertical * 12,
+                            child: GridView.count(
+                              physics: ClampingScrollPhysics(),
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 4,
+                              mainAxisSpacing: 4,
+                              children: List.generate(slideImages.length, (index){
+                                return GestureDetector(
+                                  onDoubleTap: (){
+                                    setState(() {
+                                      slideImages.removeAt(index);
+                                    });
+                                  },
+                                  child: Container(
+                                    width: SizeConfig.blockSizeVertical * 10,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Color(0xffcccccc),
+                                      border: Border.all(color: Color(0xff000000),),
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(slideImages[index].path),
+                                      ),
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: SizeConfig.blockSizeVertical * 3,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              index.toString(),
+                                              style: TextStyle(
+                                                fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        );
                       }else if(videoFile != null){
                         return Container(
                           height: SizeConfig.blockSizeVertical * 25, 
@@ -379,7 +478,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 choice = 0;
                               }else{
                                 if(choice == 1){
-                                  await getImage();
+                                  // await getImage();
+                                  await getSlideImage();
                                 }else{
                                   await getVideo();
                                 }

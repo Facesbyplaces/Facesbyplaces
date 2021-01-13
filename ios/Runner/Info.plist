@@ -107,5 +107,7 @@
 		<string>29cft.app.link</string>
 		<string>29cft-alternate.app.link</string>
 	</array>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>
