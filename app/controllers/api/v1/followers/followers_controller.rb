@@ -1,5 +1,5 @@
 class Api::V1::Followers::FollowersController < ApplicationController
-    before_action :authenticate_user!
+    before_action :check_user
     before_action :no_guest_users
     
     def followStatus
@@ -12,7 +12,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
 
     def followOrUnfollow
         if params[:follow].downcase == 'true'
-            if Follower.where(account: user(), page_type: params[:page_type], page_id: params[:page_id]).first == nil && Relationship.where(page_type: params[:page_type], page_id: params[:page_id], user: user()).first == nil
+            if Follower.where(account: user(), page_type: params[:page_type], page_id: params[:page_id]).first == nil && Relationship.where(page_type: params[:page_type], page_id: params[:page_id], account: user()).first == nil
                 follower = Follower.new(follower_params)
                 follower.account = user()
                 if follower.save 

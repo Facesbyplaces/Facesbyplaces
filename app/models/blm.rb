@@ -19,7 +19,8 @@ class Blm < ApplicationRecord
 
   # Followers of this page
   has_many :followers, as: :page, dependent: :destroy
-  has_many :accounts, through: :followers
+  has_many :blm_users, through: :followers, source: "account", source_type: "BlmUser"
+  has_many :alm_users, through: :followers, source: "account", source_type: "AlmUser"
 
   # Report
   has_many :reports, as: :reportable, dependent: :destroy
