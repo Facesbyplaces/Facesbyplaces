@@ -143,13 +143,8 @@ ActiveRecord::Schema.define(version: 2021_01_13_002329) do
     t.string "last_name"
     t.string "phone_number"
     t.string "username"
-<<<<<<< HEAD
-    t.integer "verification_code"
-    t.boolean "is_verified"
-=======
     t.string "verification_code"
     t.boolean "is_verified", default: false
->>>>>>> b3e2cfa15b0a27e9625de11e534423cb0316c416
     t.index ["confirmation_token"], name: "index_blm_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_blm_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_blm_users_on_reset_password_token", unique: true
@@ -228,9 +223,9 @@ ActiveRecord::Schema.define(version: 2021_01_13_002329) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
-    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
+    t.string "stripe_connect_account_id"
     t.boolean "hideFamily"
     t.boolean "hideFriends"
     t.boolean "hideFollowers"
