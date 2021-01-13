@@ -1,16 +1,8 @@
 class Api::V1::Notifications::NotifsettingsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :check_user
 
     def notifSettingsStatus
-        render json: {
-            newMemorial: user().notifsetting.newMemorial,
-            newAcitivites: user().notifsetting.newActivities,
-            postLikes: user().notifsetting.postLikes,
-            postComments: user().notifsetting.postComments,
-            addFamily: user().notifsetting.addFamily,
-            addFriends: user().notifsetting.addFriends,
-            addAdmin: user().notifsetting.addAdmin,
-        }
+        render json: user().notifsetting
     end
 
     def newMemorial

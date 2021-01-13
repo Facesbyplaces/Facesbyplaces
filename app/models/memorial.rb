@@ -9,13 +9,15 @@ class Memorial < ApplicationRecord
   
     # Relationship of pages and users
     has_many :relationships, as: :page, dependent: :destroy
+    has_many :familiesAndFriends, foreign_key: "user_id", class_name: "Relationship"
   
     # Posts of this page
     has_many :posts, as: :page, dependent: :destroy
 
     # Followers of this page
     has_many :followers, as: :page, dependent: :destroy
-    has_many :accounts, through: :followers
+    has_many :blm_users, through: :followers, source: "account", source_type: "BlmUser"
+    has_many :alm_users, through: :followers, source: "account", source_type: "AlmUser"
 
     # Report
     has_many :reports, as: :reportable, dependent: :destroy

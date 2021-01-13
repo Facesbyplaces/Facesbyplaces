@@ -190,6 +190,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
+          render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
           super
         else
           render json: {

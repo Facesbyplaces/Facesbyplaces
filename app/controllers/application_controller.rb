@@ -68,8 +68,9 @@ class ApplicationController < ActionController::Base
         
         
         def set_current_user
-            AlmUser.current = current_alm_user
-            BlmUser.current = current_blm_user
+            # AlmUser.current = current_alm_user
+            # BlmUser.current = current_blm_user
+            User.current = current_alm_user || current_blm_user
             # current_user != nil ? User.current = current_user : ""
         end
 
