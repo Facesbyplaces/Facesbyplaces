@@ -221,9 +221,9 @@ ActiveRecord::Schema.define(version: 2021_01_12_070353) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "privacy"
+    t.string "stripe_connect_account_id"
     t.float "longitude"
     t.float "latitude"
-    t.string "stripe_connect_account_id"
     t.boolean "hideFamily"
     t.boolean "hideFriends"
     t.boolean "hideFollowers"
