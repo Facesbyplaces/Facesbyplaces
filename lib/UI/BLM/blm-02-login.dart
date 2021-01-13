@@ -444,7 +444,7 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                                 if(result){
                                   Navigator.pushReplacementNamed(context, '/home/blm');
                                 }else{
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                  await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email, password or type of account. Please try again.'));
                                 }
                               }
                             }, 

@@ -154,29 +154,20 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
           : Container(
             height: SizeConfig.screenHeight,
             child: SmartRefresher(
-              enablePullDown: false,
+              enablePullDown: true,
               enablePullUp: true,
-              header: MaterialClassicHeader(),
+              header: MaterialClassicHeader(
+                color: Color(0xffffffff),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
               footer: CustomFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
                 builder: (BuildContext context, LoadStatus mode){
-                  Widget body ;
-                  if(mode == LoadStatus.idle){
-                    body = Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
-                  else if(mode == LoadStatus.loading){
+                  Widget body;
+                  if(mode == LoadStatus.loading){
                     body = CircularProgressIndicator();
                   }
-                  else if(mode == LoadStatus.failed){
-                    body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
-                  else if(mode == LoadStatus.canLoading){
-                    body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
-                  else{
-                    body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
-                  return Container(height: 55.0, child: Center(child:body),);
+                  return Center(child: body);
                 },
               ),
               controller: refreshController,
@@ -184,9 +175,9 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
               onLoading: onLoading,
               child: ListView.separated(
                 padding: EdgeInsets.all(10.0),
-                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
                 itemBuilder: (c, i) {
-                  var container = GestureDetector(
+                  return GestureDetector(
                     onTap: (){
                       Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
                     },
@@ -218,7 +209,6 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                       ),
                     ),
                   );
-                  return container;
                 },
                 separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888)),
                 itemCount: users.length,

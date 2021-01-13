@@ -525,29 +525,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount1 != 0
       ? SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body =  Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+            if(mode == LoadStatus.loading){
+              body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,
@@ -642,29 +633,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount2 != 0
       ? SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.loading){
+            if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,
@@ -713,29 +695,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+            Widget body;
+            if(mode == LoadStatus.loading){
+              body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,
@@ -784,29 +757,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body ;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
+            Widget body;
+            if(mode == LoadStatus.loading){
+              body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more feed.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,

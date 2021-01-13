@@ -574,7 +574,7 @@ class RegularLoginState extends State<RegularLogin> with WidgetsBindingObserver{
                                 FlutterBranchSdk.logout();
                                 Navigator.pushReplacementNamed(context, '/home/regular');
                               }else{
-                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email, password or type of account. Please try again.'));
                               }
                             }
                             

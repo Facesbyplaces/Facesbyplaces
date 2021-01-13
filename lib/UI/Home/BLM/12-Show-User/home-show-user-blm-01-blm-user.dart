@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-01-show-user-information.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-17-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -156,7 +155,8 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${convertDate(profile.data.birthdate)}',
+                                    // child: Text('${convertDate(profile.data.birthdate)}',
+                                    child: Text('${profile.data.birthdate}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),

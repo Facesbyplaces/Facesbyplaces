@@ -22,6 +22,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   Future<APIRegularShowUserInformation> showProfile;
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
+    print('The user id used is $userId');
     return await apiRegularShowUserInformation(userId: userId);
   }
 

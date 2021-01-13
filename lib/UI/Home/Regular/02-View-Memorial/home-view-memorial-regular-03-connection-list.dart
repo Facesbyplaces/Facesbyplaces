@@ -314,29 +314,20 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   connectionListFamilyWidget(){
     return Container(
       child: SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.loading){
+            if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,
@@ -387,29 +378,20 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   connectionListFriendsWidget(){
     return Container(
       child: SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+            if(mode == LoadStatus.loading){
+              body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,
@@ -458,29 +440,20 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
   connectionListFollowersWidget(){
     return Container(
       child: SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+            if(mode == LoadStatus.loading){
+              body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.loading){
-              body =  CircularProgressIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,

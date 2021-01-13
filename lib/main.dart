@@ -68,7 +68,8 @@ void main() async{
         }()),
         initialRoute: '/',
         theme: ThemeData(
-          accentColor: Colors.red,
+          // accentColor: Colors.red,
+          accentColor: Color(0xff4EC9D4),
           cardColor: Colors.purple,
         ),
         routes: <String, WidgetBuilder>{

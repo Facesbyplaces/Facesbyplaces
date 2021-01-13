@@ -195,30 +195,20 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
           : Container(
             height: SizeConfig.screenHeight,
             child: SmartRefresher(
-              enablePullDown: false,
+              enablePullDown: true,
               enablePullUp: true,
-              header: MaterialClassicHeader(),
+              header: MaterialClassicHeader(
+                color: Color(0xffffffff),
+                backgroundColor: Color(0xff4EC9D4),
+              ),
               footer: CustomFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
                 builder: (BuildContext context, LoadStatus mode){
                   Widget body;
-                  if(mode == LoadStatus.idle){
-                    body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                  if(mode == LoadStatus.loading){
+                    body = CircularProgressIndicator();
                   }
-                  else if(mode == LoadStatus.loading){
-                    body =  CircularProgressIndicator();
-                  }
-                  else if(mode == LoadStatus.failed){
-                    body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
-                  else if(mode == LoadStatus.canLoading){
-                    body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                    page++;
-                  }
-                  else{
-                    body = Text('No more results.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                  }
-                  return Container(height: 55.0, child: Center(child: body),);
+                  return Center(child: body);
                 },
               ),
               controller: refreshController,
@@ -226,9 +216,9 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
               onLoading: onLoading,
               child: ListView.separated(
                 padding: EdgeInsets.all(10.0),
-                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
                 itemBuilder: (c, index){
-                  var container = GestureDetector(
+                  return GestureDetector(
                     onTap: () async{
                       if(isFamily){
 
@@ -301,7 +291,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                       ),
                     ),
                   );
-                  return container;
                 },
                 separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Color(0xff000000)),
                 itemCount: users.length,

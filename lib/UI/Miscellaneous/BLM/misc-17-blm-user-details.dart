@@ -551,29 +551,20 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
       ? SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.loading){
+            if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more post.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,
@@ -583,63 +574,60 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            return Container(
-              child: MiscBLMPost(
-                userId: posts[i].userId,
-                postId: posts[i].postId,
-                memorialId: posts[i].memorialId,
-                memorialName: posts[i].memorialName,
-                timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
-                managed: posts[i].managed,
-                joined: posts[i].joined,
-                profileImage: posts[i].profileImage,
-                numberOfComments: posts[i].numberOfComments,
-                numberOfLikes: posts[i].numberOfLikes,
-                likeStatus: posts[i].likeStatus,
+            return MiscBLMPost(
+              userId: posts[i].userId,
+              postId: posts[i].postId,
+              memorialId: posts[i].memorialId,
+              memorialName: posts[i].memorialName,
+              timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
+              managed: posts[i].managed,
+              joined: posts[i].joined,
+              profileImage: posts[i].profileImage,
+              numberOfComments: posts[i].numberOfComments,
+              numberOfLikes: posts[i].numberOfLikes,
+              likeStatus: posts[i].likeStatus,
 
-                numberOfTagged: posts[i].numberOfTagged,
-                taggedFirstName: posts[i].taggedFirstName,
-                taggedLastName: posts[i].taggedLastName,
-                taggedId: posts[i].taggedId,
-                contents: [
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: RichText(
-                          maxLines: 4,
-                          overflow: TextOverflow.clip,
-                          textAlign: TextAlign.left,
-                          text: TextSpan(
-                            text: posts[i].postBody,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xff000000),
-                            ),
+              numberOfTagged: posts[i].numberOfTagged,
+              taggedFirstName: posts[i].taggedFirstName,
+              taggedLastName: posts[i].taggedLastName,
+              taggedId: posts[i].taggedId,
+              contents: [
+                Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: RichText(
+                        maxLines: 4,
+                        overflow: TextOverflow.clip,
+                        textAlign: TextAlign.left,
+                        text: TextSpan(
+                          text: posts[i].postBody,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff000000),
                           ),
                         ),
                       ),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  ],
+                ),
 
-                  posts[i].imagesOrVideos != null
-                  ? Container(
-                    height: SizeConfig.blockSizeHorizontal * 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: posts[i].imagesOrVideos[0],
-                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  )
-                  : Container(height: 0,),
-                ],
-              ),
+                posts[i].imagesOrVideos != null
+                ? Container(
+                  height: SizeConfig.blockSizeHorizontal * 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: posts[i].imagesOrVideos[0],
+                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                )
+                : Container(height: 0,),
+              ],
             );
-            
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
           itemCount: posts.length,
@@ -856,29 +844,20 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     return Container(
       child: count != 0
       ? SmartRefresher(
-        enablePullDown: false,
+        enablePullDown: true,
         enablePullUp: true,
-        header: MaterialClassicHeader(),
+        header: MaterialClassicHeader(
+          color: Color(0xffffffff),
+          backgroundColor: Color(0xff4EC9D4),
+        ),
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
             Widget body;
-            if(mode == LoadStatus.idle){
-              body = Text('Pull up to load', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.loading){
+            if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
-            else if(mode == LoadStatus.failed){
-              body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = Text('Release to load more', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            else{
-              body = Text('No more memorials.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),);
-            }
-            return Container(height: 55.0, child: Center(child: body),);
+            return Center(child: body);
           },
         ),
         controller: refreshController,

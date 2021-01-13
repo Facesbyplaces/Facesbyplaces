@@ -679,30 +679,20 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               padding: EdgeInsets.all(10.0),
                               height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
                               child: SmartRefresher(
-                                enablePullDown: false,
+                                enablePullDown: true,
                                 enablePullUp: true,
-                                header: MaterialClassicHeader(),
+                                header: MaterialClassicHeader(
+                                  color: Color(0xffffffff),
+                                  backgroundColor: Color(0xff4EC9D4),
+                                ),
                                 footer: CustomFooter(
                                   loadStyle: LoadStyle.ShowWhenLoading,
                                   builder: (BuildContext context, LoadStatus mode){
                                     Widget body;
-                                    if(mode == LoadStatus.idle){
-                                      body =  Text('Pull up load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+                                    if(mode == LoadStatus.loading){
+                                      body = CircularProgressIndicator();
                                     }
-                                    else if(mode == LoadStatus.loading){
-                                      body =  CircularProgressIndicator();
-                                    }
-                                    else if(mode == LoadStatus.failed){
-                                      body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                                    }
-                                    else if(mode == LoadStatus.canLoading){
-                                      body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                                    }
-                                    else{
-                                      body = Text('End of result.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                                    }
-                                    return Container(height: 55.0, child: Center(child: body),
-                                    );
+                                    return Center(child: body);
                                   },
                                 ),
                                 controller: refreshController,

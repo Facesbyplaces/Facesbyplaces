@@ -93,28 +93,20 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       ),
       body: Container(
         child: SmartRefresher(
-          enablePullDown: false,
+          enablePullDown: true,
           enablePullUp: true,
-          header: MaterialClassicHeader(),
+          header: MaterialClassicHeader(
+            color: Color(0xffffffff),
+            backgroundColor: Color(0xff4EC9D4),
+          ),
           footer: CustomFooter(
             loadStyle: LoadStyle.ShowWhenLoading,
             builder: (BuildContext context, LoadStatus mode){
               Widget body;
-              if(mode == LoadStatus.idle){
-                body = Text('Pull up load.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
+              if(mode == LoadStatus.loading){
+                body = CircularProgressIndicator();
               }
-              else if(mode == LoadStatus.loading){
-                body =  CircularProgressIndicator();
-              }
-              else if(mode == LoadStatus.failed){
-                body = Text('Load Failed! Please try again.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              }
-              else if(mode == LoadStatus.canLoading){
-                body = Text('Release to load more.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              }else{
-                body = Text('End of list.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-              }
-              return Container(height: 55.0, child: Center(child: body),);
+              return Center(child: body);
             },
           ),
           controller: refreshController,
@@ -123,7 +115,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
           child: ListView.separated(
             physics: ClampingScrollPhysics(),
             itemBuilder: (c, i) {
-              var container = Container(
+              return Container(
                 padding: EdgeInsets.all(10.0),
                 child: Row(
                   children: [
@@ -172,9 +164,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                   ],
                 ),
               );
-
-              return container;
-              
             },
             separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
             itemCount: familyList.length,

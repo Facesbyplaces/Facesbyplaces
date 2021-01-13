@@ -5,6 +5,7 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-06-show-comment-or-reply-like-status.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-07-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-08-add-reply.dart';
+import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -282,29 +283,20 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
               Expanded(
                 child: SmartRefresher(
-                  enablePullDown: false,
+                  enablePullDown: true,
                   enablePullUp: true,
-                  header: MaterialClassicHeader(),
+                  header: MaterialClassicHeader(
+                    color: Color(0xffffffff),
+                    backgroundColor: Color(0xff4EC9D4),
+                  ),
                   footer: CustomFooter(
                     loadStyle: LoadStyle.ShowWhenLoading,
                     builder: (BuildContext context, LoadStatus mode){
                       Widget body;
-                      if(mode == LoadStatus.idle){
-                        body = Text('Pull up to load', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                      }
-                      else if(mode == LoadStatus.loading){
+                      if(mode == LoadStatus.loading){
                         body = CircularProgressIndicator();
                       }
-                      else if(mode == LoadStatus.failed){
-                        body = Text('Load Failed! Click retry!', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                      }
-                      else if(mode == LoadStatus.canLoading){
-                        body = Text('Release to load more', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                      }
-                      else{
-                        body = Text('End of conversation.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),);
-                      }
-                      return Container(height: 55.0, child: Center(child: body),);
+                      return Center(child: body);
                     },
                   ),
                   controller: refreshController,
@@ -327,18 +319,22 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                                 SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                currentUserId == comments[i].userId
-                                ? Expanded(
-                                  child: Text('You',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                                : Expanded(
-                                  child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      print('The user id of reply is ${comments[i].userId}');
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
+                                    },
+                                    child: currentUserId == comments[i].userId
+                                    ? Text('You',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    )
+                                    : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -478,18 +474,38 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        currentUserId == comments[i].listOfReplies[index].userId
-                                        ? Expanded(
-                                          child: Text('You',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        )
-                                        : Expanded(
-                                          child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
+                                        // currentUserId == comments[i].listOfReplies[index].userId
+                                        // ? Expanded(
+                                        //   child: Text('You',
+                                        //     style: TextStyle(
+                                        //       fontWeight: FontWeight.bold,
+                                        //     ),
+                                        //   ),
+                                        // )
+                                        // : Expanded(
+                                        //   child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
+                                        //     style: TextStyle(
+                                        //       fontWeight: FontWeight.bold,
+                                        //     ),
+                                        //   ),
+                                        // ),
+
+                                        Expanded(
+                                          child: GestureDetector(
+                                            onTap: (){
+                                              print('The user id of reply is ${comments[i].listOfReplies[index].userId}');
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
+                                            },
+                                            child: currentUserId == comments[i].listOfReplies[index].userId
+                                            ? Text('You',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            )
+                                            : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ),
