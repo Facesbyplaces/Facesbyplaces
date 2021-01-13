@@ -41,29 +41,29 @@ class Api::V1::Posts::PostsController < ApplicationController
             end
                 
             # Add to notification
-                # For followers
-                (post.page.users.uniq - [user()]).each do |user|
-                    # check if this user can get notification
-                    if user.notifsetting.newActivities == true
-                        # check if the user is in the tag people
-                        if people.include?("#{user.id}")
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                        else
-                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                        end
-                    end
-                end
+                # # For followers
+                # (post.page.users.uniq - [user()]).each do |user|
+                #     # check if this user can get notification
+                #     if user.notifsetting.newActivities == true
+                #         # check if the user is in the tag people
+                #         if people.include?("#{user.id}")
+                #             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                #         else
+                #             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                #         end
+                #     end
+                # end
 
-                # For families and friends
-                (post.page.relationships).each do |relationship|
-                    if relationship.user != user() && relationship.user.notifsetting.newActivities == true
-                        if people.include?("#{relationship.user.id}")
-                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                        else
-                            Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                        end
-                    end
-                end
+                # # For families and friends
+                # (post.page.relationships).each do |relationship|
+                #     if relationship.user != user() && relationship.user.notifsetting.newActivities == true
+                #         if people.include?("#{relationship.user.id}")
+                #             Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                #         else
+                #             Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                #         end
+                #     end
+                # end
 
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else
@@ -108,7 +108,7 @@ class Api::V1::Posts::PostsController < ApplicationController
     # pages that the user can manage
     def listOfPages
         if user().account_type == 1
-            pagesId = user().roles.joins("INNER JOIN blms ON roles.resource_id = blms.id").select('blms.id')
+            pagesId = user().roles.select('id')
 
             pages = pagesId.collect do |page|
                 page = Blm.find(page.id)
@@ -118,7 +118,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 )
             end
         else
-            pagesId = user().roles.joins("INNER JOIN memorials ON roles.resource_id = memorials.id").select('memorials.id')
+            pagesId = user().roles.select('id')
 
             pages = pagesId.collect do |page|
                 page = Memorial.find(page.id)

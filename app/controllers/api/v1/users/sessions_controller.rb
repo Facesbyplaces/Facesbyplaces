@@ -1,12 +1,5 @@
 class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
-    def render_create_success
-      # user = @resource
-      # if user.is_verified?
-      #   render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
-      # end
-    end
-
     ## SIGN_IN AS GUEST
     def guest
       User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
@@ -193,7 +186,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
-          render json: { success: true, user:  user, status: 200 }, status: 200
+          render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
           super
         else
           render json: {

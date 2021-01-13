@@ -123,8 +123,8 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def setRelationship   # for friends and families
         memorial = Memorial.find(params[:id])
 
-        if memorial.relationships.where(user_id: user().id).first
-            memorial.relationships.where(user_id: user().id).first.update(relationship: params[:relationship])
+        if memorial.relationships.where(account: user()).first
+            memorial.relationships.where(account: user()).first.update(relationship: params[:relationship])
 
             render json: {status: :success}
         else
@@ -134,12 +134,12 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
     def leaveMemorial       # leave memorial page for family and friends
         memorial = Memorial.find(params[:id])
-        if memorial.relationships.where(user: user()).first != nil
+        if memorial.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
             if user().has_role? :pageadmin, memorial
                 if User.with_role(:pageadmin, memorial).count != 1
                     # remove user from the page
-                    if memorial.relationships.where(user: user()).first.destroy 
+                    if memorial.relationships.where(account: user()).first.destroy 
                         # remove role as a page admin
                         user().remove_role :pageadmin, memorial
                         render json: {}, status: 200
@@ -151,7 +151,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
                 end
             else
                 # remove user from the page
-                if memorial.relationships.where(user: user()).first.destroy 
+                if memorial.relationships.where(account: user()).first.destroy 
                     render json: {}, status: 200
                 else
                     render json: {}, status: 500
@@ -205,29 +205,29 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def followersIndex
-        memorial = Memorial.find(params[:id])
+        memorialFollowersRaw = Follower.where(page_type: 'Memorial', page_id: params[:id])
 
-        followers = memorial.accounts.page(params[:page]).per(numberOfPage)
-        if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
+        memorialFollowersRaw = memorialFollowersRaw.page(params[:page]).per(numberOfPage)
+        if memorialFollowersRaw.total_count == 0 || (memorialFollowersRaw.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
-        elsif followers.total_count < numberOfPage
-            itemsremaining = followers.total_count 
+        elsif memorialFollowersRaw.total_count < numberOfPage
+            itemsremaining = memorialFollowersRaw.total_count 
         else
-            itemsremaining = followers.total_count - (params[:page].to_i * numberOfPage)
+            itemsremaining = memorialFollowersRaw.total_count - (params[:page].to_i * numberOfPage)
         end
 
         render json: {
             itemsremaining: itemsremaining,
             followers: ActiveModel::SerializableResource.new(
-                            followers, 
+                memorialFollowersRaw, 
                             each_serializer: UserSerializer
                         )
         }
     end
 
     def adminIndex
-        adminsRaw = Memorial.find(params[:page_id]).roles.first.users.pluck('id')
-        admins = Relationship.where(page_type: 'Memorial', user_id: adminsRaw, page_id: params[:page_id])
+        adminsRaw = Memorial.find(params[:page_id]).roles.first.alm_users.pluck('id')
+        admins = Relationship.where(page_type: 'Memorial', page_id: params[:page_id], account_type: 'AlmUser', account_id: adminsRaw)
         admins = admins.page(params[:page]).per(numberOfPage)
 
         if admins.total_count == 0 || (admins.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -238,7 +238,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             adminsitemsremaining = admins.total_count - (params[:page].to_i * numberOfPage)
         end
         
-        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND user_id NOT IN (?)", adminsRaw)
+        familyRaw = Memorial.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'AlmUser' AND account_id NOT IN (?)", adminsRaw)
         family = familyRaw.page(params[:page]).per(numberOfPage)
 
         if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0

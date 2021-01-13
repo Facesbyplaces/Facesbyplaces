@@ -23,10 +23,20 @@ class PostSerializer < ActiveModel::Serializer
   end
 
   def tag_people
-    ActiveModel::SerializableResource.new(
-      object.users, 
-      each_serializer: UserSerializer
-    )
+    tags = object.tagpeople.collect do |person|
+      if person.account_type == 1
+        person = BlmUser.find(person.id)
+      else
+        person = AlmUser.find(person.id)
+      end
+
+      ActiveModel::SerializableResource.new(
+        person, 
+        each_serializer: UserSerializer
+      )
+    end
+
+    return tags
   end
 
   def user

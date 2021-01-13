@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to        :page, polymorphic: true
-  belongs_to        :user
+  belongs_to        :account, polymorphic: true
   has_many_attached :imagesOrVideos
   has_many          :comments, dependent: :destroy
   has_many          :postslikes, dependent: :destroy

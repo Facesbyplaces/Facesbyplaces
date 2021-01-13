@@ -110,8 +110,14 @@ class MemorialSerializer < ActiveModel::Serializer
 
   def follower
     if object.currentUser
-      if object.users.where(account: object.currentUser).first
-        return true
+      if object.currentUser.account_type == 1
+        if object.blm_users.where(id: object.currentUser.id).first
+          return true
+        end
+      else
+        if object.alm_users.where(id: object.currentUser.id).first
+          return true
+        end
       end
     end
     
