@@ -1,5 +1,5 @@
 class Api::V1::Posts::CommentsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :check_user
     before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
 
     def addComment

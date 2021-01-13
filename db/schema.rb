@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2021_01_12_070353) do
     t.string "last_name"
     t.string "phone_number"
     t.string "username"
-    t.string "verification_code"
+    t.integer "verification_code"
     t.boolean "is_verified"
     t.index ["confirmation_token"], name: "index_blm_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_blm_users_on_email", unique: true

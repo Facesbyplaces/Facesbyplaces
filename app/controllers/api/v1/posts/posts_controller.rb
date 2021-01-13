@@ -1,5 +1,5 @@
 class Api::V1::Posts::PostsController < ApplicationController
-    before_action :authenticate_user!, except: [:index, :show, :pagePosts]
+    before_action :check_user, except: [:index, :show, :pagePosts]
     before_action :set_up, only: [:create]
 
     def index  

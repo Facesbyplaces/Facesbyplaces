@@ -1,25 +1,7 @@
 class Api::V1::Users::UsersController < ApplicationController
-    before_action :authenticate_user!
+    before_action :check_user
     
     def edit
-        if params[:account_type] == "1"
-            @user = BlmUser.find(params[:id])
-        else
-            @user = AlmUser.find(params[:id])
-        end
-        
-        render json: {
-            success: true, 
-            first_name: @user.first_name, 
-            last_name: @user.last_name, 
-            phone_number: @user.phone_number,
-            email: @user.email,
-            username: @user.username,
-            image: @user.image,
-            status: 200}, status: 200
-    end
-    
-    def show
         if params[:account_type] == "1"
             @user = BlmUser.find(params[:id])
         else

@@ -1,5 +1,5 @@
 class Api::V1::Mainpages::MainpagesController < ApplicationController
-    before_action :authenticate_user!
+    before_action :check_user
 
     # user's feed
     def feed

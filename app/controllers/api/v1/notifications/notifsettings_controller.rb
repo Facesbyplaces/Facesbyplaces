@@ -1,5 +1,5 @@
 class Api::V1::Notifications::NotifsettingsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :check_user
 
     def notifSettingsStatus
         render json: {

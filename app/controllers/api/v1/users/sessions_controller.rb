@@ -57,6 +57,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
           @user.save
+          render json: { success: true, user:  @user, status: 200 }, status: 200
           
           Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
           super
@@ -82,6 +83,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
           @user.save
+          render json: { success: true, user:  @user, status: 200 }, status: 200
           super
         else
 
@@ -191,6 +193,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
+          render json: { success: true, user:  user, status: 200 }, status: 200
           super
         else
           render json: {
