@@ -52,9 +52,9 @@ class ApplicationController < ActionController::Base
         
         def relationship_sql
             "(
-                SELECT id, page_type, page_id, user_id FROM relationships
+                SELECT id, page_type, page_id, account_type, account_id FROM relationships
                 UNION
-                SELECT id, page_type, page_id, user_id FROM followers
+                SELECT id, page_type, page_id, account_type, account_id FROM followers
             ) AS relationship"
         end
 
