@@ -250,7 +250,7 @@ Rails.application.routes.draw do
         post 'addFamily', to: 'pageadmin#addFamily'
         post 'addFriend', to: 'pageadmin#addFriend'
 
-        delete 'removeFamilyorFriend/:page_type/:page_id/:user_id', to: 'pageadmin#removeFamilyorFriend'
+        delete 'removeFamilyorFriend', to: 'pageadmin#removeFamilyorFriend'
 
         get 'editPost/:post_id/:page_type/:page_id', to: 'pageadmin#editPost'
         put 'updatePost', to: 'pageadmin#updatePost'
