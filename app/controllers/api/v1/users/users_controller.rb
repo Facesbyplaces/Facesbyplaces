@@ -81,7 +81,13 @@ class Api::V1::Users::UsersController < ApplicationController
     end
 
     def show
-        render json: UserSerializer.new( user() ).attributes
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        else
+            user = AlmUser.find(params[:user_id])
+        end
+
+        render json: UserSerializer.new( user ).attributes
     end
 
     def posts
