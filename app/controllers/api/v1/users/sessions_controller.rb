@@ -175,7 +175,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         
       # Fbp Login
       else
-        account_type = params[:account_type]
+        account_type = params[:account_type].to_i
 
         if account_type == 1
           user = BlmUser.find_by(email: params[:email])
