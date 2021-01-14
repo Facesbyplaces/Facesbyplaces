@@ -18,9 +18,10 @@ class BlmUser < ActiveRecord::Base
   has_many :postslikes, as: :account, dependent: :destroy
   has_many :comments, as: :account, dependent: :destroy
   has_many :commentslikes, as: :account, dependent: :destroy
-  has_many :notifsetting, as: :account, dependent: :destroy
+  has_one :notifsetting, as: :account, dependent: :destroy
   has_many :tagpeople, as: :account, dependent: :destroy
   has_many :transactions, as: :account, dependent: :destroy
+  has_many :notifications, as: :recipient, dependent: :destroy
 
   has_one_attached :image, dependent: :destroy
 

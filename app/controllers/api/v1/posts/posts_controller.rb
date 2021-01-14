@@ -28,9 +28,8 @@ class Api::V1::Posts::PostsController < ApplicationController
 
         if post.save
             # check if there are people that have been tagged
-            # params[:tag_people][0] != "" ? people = params[:tag_people] : people = []
-            people = params[:tag_people]
-            if people
+            people = params[:tag_people] || []
+            if people.count != 0
                 # save tagged people to database
                 people.each do |person|
                     tag = Tagperson.new(post_id: post.id, account: person)
@@ -41,29 +40,42 @@ class Api::V1::Posts::PostsController < ApplicationController
             end
                 
             # Add to notification
-                # # For followers
-                # (post.page.users.uniq - [user()]).each do |user|
-                #     # check if this user can get notification
-                #     if user.notifsetting.newActivities == true
-                #         # check if the user is in the tag people
-                #         if people.include?("#{user.id}")
-                #             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                #         else
-                #             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                #         end
-                #     end
-                # end
+                # For blm followers
+                (post.page.blm_users.uniq - [user()]).each do |user|
+                    # check if this user can get notification
+                    if user.notifsetting.newActivities == true
+                        # check if the user is in the tag people
+                        if people.include?("#{user.id}")
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                        end
+                    end
+                end
 
-                # # For families and friends
-                # (post.page.relationships).each do |relationship|
-                #     if relationship.user != user() && relationship.user.notifsetting.newActivities == true
-                #         if people.include?("#{relationship.user.id}")
-                #             Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                #         else
-                #             Notification.create(recipient: relationship.user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
-                #         end
-                #     end
-                # end
+                # For alm followers
+                (post.page.alm_users.uniq - [user()]).each do |user|
+                    # check if this user can get notification
+                    if user.notifsetting.newActivities == true
+                        # check if the user is in the tag people
+                        if people.include?("#{user.id}")
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                        end
+                    end
+                end
+
+                # For families and friends
+                (post.page.relationships).each do |relationship|
+                    if relationship.account != user() && relationship.account.notifsetting.newActivities == true
+                        if people.include?("#{relationship.user.id}")
+                            Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} tagged you in a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                        else
+                            Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} posted in #{post.page.name} #{post.page_type}", postId: post.id, read: false)
+                        end
+                    end
+                end
 
             render json: {post: PostSerializer.new( post ).attributes, status: :created}
         else

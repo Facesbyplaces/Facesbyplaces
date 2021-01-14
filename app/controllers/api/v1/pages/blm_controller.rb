@@ -51,12 +51,16 @@ class Api::V1::Pages::BlmController < ApplicationController
                     render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
 
                     # Notify all Users
-                    blmUsers = BlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'BlmUser' AND notifsettings.account_id != #{user().id}").pluck('id')
-                    almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).pluck('id') 
+                    blmUsers = BlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'BlmUser' AND notifsettings.account_id != #{user().id}")
+                    almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
 
-                    # users.each do |id|
-                    #     Notification.create(recipient_id: id, actor_id: user().id, read: false, action: "#{user().first_name} created a new page", postId: blm.id)
-                    # end
+                    blmUsers.each do |user|
+                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id)
+                    end
+
+                    almUsers.each do |user|
+                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id)
+                    end
                 else
                     render json: {errors: relationship.errors}, status: 500
                 end
