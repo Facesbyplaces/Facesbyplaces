@@ -27,7 +27,6 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
-        resources :image_upload, only: [:create, :update]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
@@ -35,6 +34,8 @@ Rails.application.routes.draw do
           post 'signin-guest',     to: 'sessions#guest'
         end
       
+        put 'image_upload', to: 'image_upload#update'
+
         put 'updateDetails', to: 'users#updateDetails'
         get 'getDetails', to: 'users#getDetails'
         put 'updateOtherInfos', to: 'users#updateOtherInfos'

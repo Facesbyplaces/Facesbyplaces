@@ -1,11 +1,17 @@
 class Api::V1::Users::ImageUploadController < ApplicationController
-    before_action :authenticate_alm_user!
+    before_action :check_user
 
     def image_upload_params
         params.permit(:id, :image)
     end
 
-    def update        
+    def update  
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        else
+            user = AlmUser.find(params[:user_id])
+        end      
+        
         user.update(image: params[:image])
 
         if user.errors.present?
