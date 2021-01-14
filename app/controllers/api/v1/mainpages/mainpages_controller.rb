@@ -6,7 +6,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
         if user().account_type == 1
             account = 'BlmUser'
         else
-            acount = 'AlmUser'
+            account = 'AlmUser'
         end
 
         posts = Post.joins("INNER JOIN #{pages_sql} ON pages.id = posts.page_id AND posts.page_type = pages.object_type INNER JOIN #{relationship_sql} ON relationship.account_id = #{user().id} AND relationship.account_type = '#{account}' AND relationship.page_type = pages.object_type AND relationship.page_id = pages.id")
