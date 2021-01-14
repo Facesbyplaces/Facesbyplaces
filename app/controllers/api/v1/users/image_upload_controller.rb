@@ -6,12 +6,7 @@ class Api::V1::Users::ImageUploadController < ApplicationController
     end
 
     def update  
-        if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
-        else
-            user = AlmUser.find(params[:user_id])
-        end      
-        
+        user = user()
         user.update(image: params[:image])
 
         if user.errors.present?
