@@ -73,11 +73,9 @@ class ApplicationController < ActionController::Base
         end
 
         def check_user
-            if current_alm_user != nil 
+            if user() != nil 
                 return true 
-            elsif current_blm_user != nil 
-                return true 
-            else 
+            else
                 return false 
             end
         end

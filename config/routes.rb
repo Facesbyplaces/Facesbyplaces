@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         end
       
         put 'image_upload', to: 'image_upload#update'
+        post 'image_upload', to: 'image_upload#create'
 
         put 'updateDetails', to: 'users#updateDetails'
         get 'getDetails', to: 'users#getDetails'
