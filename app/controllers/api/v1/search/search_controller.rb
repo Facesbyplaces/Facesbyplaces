@@ -48,9 +48,15 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def users
-        users = User.where("first_name LIKE :search or last_name LIKE :search or email LIKE :search or username LIKE :search", search: params[:keywords])
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'BlmUser']).map{|searchObject| 
+            if searchObject.searchable_type == 'BlmUser'
+                BlmUser.find(searchObject.searchable_id)
+            else
+                AlmUser.find(searchObject.searchable_id)
+            end
+        }.flatten.uniq
 
-        users = users.page(params[:page]).per(numberOfPage)
+        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
         if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif users.total_count < numberOfPage
@@ -76,9 +82,19 @@ class Api::V1::Search::SearchController < ApplicationController
         end 
 
         # get the followers of the page (users are the followers of the page)
-        followers = page.users.where("first_name LIKE :search or last_name LIKE :search or email LIKE :search or username LIKE :search", search: params[:keywords])
+        followers = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'BlmUser']).map{|searchObject| 
+            if searchObject.searchable.followers.where(page: page).first
+                if searchObject.searchable_type == 'BlmUser'
+                    BlmUser.find(searchObject.searchable_id)
+                else
+                    AlmUser.find(searchObject.searchable_id)
+                end
+            else
+                []
+            end
+        }.flatten.uniq
 
-        followers = followers.page(params[:page]).per(numberOfPage)
+        followers =  Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
         if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif followers.total_count < numberOfPage

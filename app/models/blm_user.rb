@@ -24,6 +24,10 @@ class BlmUser < ActiveRecord::Base
   has_many :notifications, as: :recipient, dependent: :destroy
 
   has_one_attached :image, dependent: :destroy
+  
+  # Search user
+  include PgSearch::Model
+  multisearchable against: [:first_name, :last_name, :phone_number, :email, :username, :birthdate, :birthplace]
 
   def self.new_with_session(params, session)
     super.tap do |user|
