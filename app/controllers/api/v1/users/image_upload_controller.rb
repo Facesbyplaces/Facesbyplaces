@@ -1,8 +1,8 @@
 class Api::V1::Users::ImageUploadController < ApplicationController
-    before_action :authenticate_alm_user!
+    before_action :check_user
 
     def image_upload_params
-        params.permit(:id, :image)
+        params.permit(:image)
     end
 
     def update        
@@ -11,7 +11,7 @@ class Api::V1::Users::ImageUploadController < ApplicationController
         if user.errors.present?
             render json: {success: false, errors: @image.errors.full_messages, status: 404}, status: 200
         else
-            render json: {success: true, message: "Successfully Uploaded Image", status: 200}, status: 200
+            render json: {success: true, user: user.image, message: "Successfully Uploaded Image", status: 200}, status: 200
         end
     end
 
