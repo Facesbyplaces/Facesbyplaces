@@ -244,396 +244,400 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
           ? Container(
             height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
             child: Column(
-            children: [
-              Container(
-                height: SizeConfig.blockSizeVertical * 5,
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+              children: [
+                Container(
+                  height: SizeConfig.blockSizeVertical * 5,
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
 
-                    Row(
-                      children: [
-                        Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
-
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                        Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                      ],
-                    ),
-
-                    SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                    Row(
-                      children: [
-                        Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
-
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                        Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              Expanded(
-                child: SmartRefresher(
-                  enablePullDown: true,
-                  enablePullUp: true,
-                  header: MaterialClassicHeader(
-                    color: Color(0xffffffff),
-                    backgroundColor: Color(0xff4EC9D4),
-                  ),
-                  footer: CustomFooter(
-                    loadStyle: LoadStyle.ShowWhenLoading,
-                    builder: (BuildContext context, LoadStatus mode){
-                      Widget body;
-                      if(mode == LoadStatus.loading){
-                        body = CircularProgressIndicator();
-                      }
-                      return Center(child: body);
-                    },
-                  ),
-                  controller: refreshController,
-                  onRefresh: onRefresh,
-                  onLoading: onLoading,
-                  child: ListView.separated(
-                    padding: EdgeInsets.all(10.0),
-                    physics: ClampingScrollPhysics(),
-                    itemBuilder: (c, i) {
-                      return Column(
+                      Row(
                         children: [
-                          Container(
-                            height: SizeConfig.blockSizeVertical * 5,
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
-                                  backgroundColor: Color(0xff888888),
-                                ),
+                          Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
 
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                userId == comments[i].userId
-                                ? Expanded(
-                                  child: Text('You',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                )
-                                : Expanded(
-                                  child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
+                          Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
-                                commentsLikes[i] == true
-                                ? IconButton(
-                                  icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () async{
-                                    setState(() {
-                                      commentsLikes[i] = false;
-                                      commentsNumberOfLikes[i]--;
-                                      
-                                    });
+                        ],
+                      ),
 
-                                    await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
-                                  },
-                                )
-                                : IconButton(
-                                  icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
-                                  padding: EdgeInsets.zero,
-                                  onPressed: () async{
-                                    setState(() {
-                                      commentsLikes[i] = true;
-                                      commentsNumberOfLikes[i]++;
-                                    });
+                      SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
 
-                                    await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
-                                  },
-                                ),
+                      Row(
+                        children: [
+                          Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
 
-                                Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                              ],
-                            ),
-                          ),
+                          Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
 
-                          Row(
-                            children: [
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
-
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Text(
-                                    comments[i].commentBody,
-                                    style: TextStyle(
-                                      color: Color(0xffffffff),
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xff4EC9D4),
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                          Row(
-                            children: [
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
-
-                              Text(timeago.format(DateTime.parse(comments[i].createdAt))),
-
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                              GestureDetector(
-                                onTap: () async{
-                                  setState(() {
-                                    isComment = false;
-                                    currentCommentId = comments[i].commentId;
-                                  });
-
-                                  await showMaterialModalBottomSheet(
-                                    expand: true,
-                                    context: context,
-                                    builder: (context) => Container(
-                                      padding: EdgeInsets.all(20.0),
-                                      child: TextFormField(
-                                        controller: controller,
-                                        cursorColor: Color(0xff000000),
-                                        keyboardType: TextInputType.text,
-                                        maxLines: 10,
-                                        decoration: InputDecoration(
-                                          labelText: 'Say something...',
-                                          labelStyle: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xffffffff),
-                                          ),
-                                          border: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                            ),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                            ),
-                                          ),
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Text('Reply',),
-                              ),
-
-                            ],
-                          ),
-
-                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                          comments[i].listOfReplies.length != 0
-                          ? Column(
-                              children: List.generate(comments[i].listOfReplies.length, (index) => 
-                              Column(
+                Expanded(
+                  child: SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: true,
+                    header: MaterialClassicHeader(
+                      color: Color(0xffffffff),
+                      backgroundColor: Color(0xff4EC9D4),
+                    ),
+                    footer: CustomFooter(
+                      loadStyle: LoadStyle.ShowWhenLoading,
+                      builder: (BuildContext context, LoadStatus mode){
+                        Widget body;
+                        if(mode == LoadStatus.loading){
+                          body = CircularProgressIndicator();
+                        }
+                        return Center(child: body);
+                      },
+                    ),
+                    controller: refreshController,
+                    onRefresh: onRefresh,
+                    onLoading: onLoading,
+                    child: ListView.separated(
+                      padding: EdgeInsets.all(10.0),
+                      physics: ClampingScrollPhysics(),
+                      itemBuilder: (c, i) {
+                        return Column(
+                          children: [
+                            Container(
+                              height: SizeConfig.blockSizeVertical * 5,
+                              child: Row(
                                 children: [
-                                  Container(
-                                    height: SizeConfig.blockSizeVertical * 5,
-                                    child: Row(
-                                      children: [
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
+                                  CircleAvatar(
+                                    backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                    backgroundColor: Color(0xff888888),
+                                  ),
 
-                                        CircleAvatar(
-                                          backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
-                                          backgroundColor: Color(0xff888888),
-                                        ),
+                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                        userId == comments[i].listOfReplies[index].userId
-                                        ? Expanded(
-                                          child: Text('You',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        )
-                                        : Expanded(
-                                          child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-
-                                        repliesLikes[i][index] == true
-                                        ? IconButton(
-                                          icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () async{
-                                            setState(() {
-                                              repliesLikes[i][index] = false;
-                                              repliesNumberOfLikes[i][index]--;
-                                              
-                                            });
-                                            await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
-                                          },
-                                        )
-                                        : IconButton(
-                                          icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,), 
-                                          padding: EdgeInsets.zero,
-                                          onPressed: () async{
-                                            setState(() {
-                                              repliesLikes[i][index] = true;
-                                              repliesNumberOfLikes[i][index]++;
-                                            });
-                                            await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
-                                          },
-                                        ),
-
-                                        Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                      ],
+                                  userId == comments[i].userId
+                                  ? Expanded(
+                                    child: Text('You',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  )
+                                  : Expanded(
+                                    child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
 
-                                  Row(
-                                    children: [
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
+                                  commentsLikes[i] == true
+                                  ? IconButton(
+                                    icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () async{
+                                      setState(() {
+                                        commentsLikes[i] = false;
+                                        commentsNumberOfLikes[i]--;
+                                        
+                                      });
 
-                                      Expanded(
-                                        child: Container(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Text(
-                                            comments[i].listOfReplies[index].replyBody,
-                                            style: TextStyle(
-                                              color: Color(0xffffffff),
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff4EC9D4),
-                                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
+                                    },
+                                  )
+                                  : IconButton(
+                                    icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
+                                    padding: EdgeInsets.zero,
+                                    onPressed: () async{
+                                      setState(() {
+                                        commentsLikes[i] = true;
+                                        commentsNumberOfLikes[i]++;
+                                      });
+
+                                      await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
+                                    },
                                   ),
 
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                  Row(
-                                    children: [
-
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
-
-                                      Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
-
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                                      GestureDetector(
-                                        onTap: () async{
-                                          controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
-                                          setState(() {
-                                            isComment = false;
-                                            currentCommentId = comments[i].commentId;
-                                          });
-                                          await showMaterialModalBottomSheet(
-                                            expand: true,
-                                            context: context,
-                                            builder: (context) => Container(
-                                              padding: EdgeInsets.all(20.0),
-                                              child: TextFormField(
-                                                controller: controller,
-                                                cursorColor: Color(0xff000000),
-                                                keyboardType: TextInputType.text,
-                                                maxLines: 10,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Say something...',
-                                                  labelStyle: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Color(0xffffffff),
-                                                  ),
-                                                  border: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                    ),
-                                                  ),
-                                                  focusedBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                    ),
-                                                  ),
-                                                  enabledBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Text('Reply',),
-                                      ),
-
-                                    ],
-                                  ),
-
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                  Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
 
                                 ],
                               ),
                             ),
-                          )
-                          : Container(
-                            height: 0,
-                          ),
 
-                        ],
-                      );
-                    },
-                    separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
-                    itemCount: comments.length,
+                            Row(
+                              children: [
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
+
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Text(
+                                      comments[i].commentBody,
+                                      style: TextStyle(
+                                        color: Color(0xffffffff),
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xff4EC9D4),
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                            Row(
+                              children: [
+
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
+
+                                Text(timeago.format(DateTime.parse(comments[i].createdAt))),
+
+                                SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
+
+                                GestureDetector(
+                                  onTap: () async{
+                                    setState(() {
+                                      isComment = false;
+                                      currentCommentId = comments[i].commentId;
+                                    });
+
+                                    await showMaterialModalBottomSheet(
+                                      expand: true,
+                                      context: context,
+                                      builder: (context) => Container(
+                                        padding: EdgeInsets.all(20.0),
+                                        child: TextFormField(
+                                          controller: controller,
+                                          cursorColor: Color(0xff000000),
+                                          keyboardType: TextInputType.text,
+                                          maxLines: 10,
+                                          decoration: InputDecoration(
+                                            labelText: 'Say something...',
+                                            labelStyle: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xffffffff),
+                                            ),
+                                            border: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                              ),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                              ),
+                                            ),
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Text('Reply',),
+                                ),
+
+                              ],
+                            ),
+
+                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                            comments[i].listOfReplies.length != 0
+                            ? Column(
+                                children: List.generate(comments[i].listOfReplies.length, (index) => 
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: SizeConfig.blockSizeVertical * 5,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
+
+                                          CircleAvatar(
+                                            backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
+                                            backgroundColor: Color(0xff888888),
+                                          ),
+
+                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+
+                                          userId == comments[i].listOfReplies[index].userId
+                                          ? Expanded(
+                                            child: Text('You',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          )
+                                          : Expanded(
+                                            child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+
+                                          repliesLikes[i][index] == true
+                                          ? IconButton(
+                                            icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
+                                            padding: EdgeInsets.zero,
+                                            onPressed: () async{
+                                              setState(() {
+                                                repliesLikes[i][index] = false;
+                                                repliesNumberOfLikes[i][index]--;
+                                                
+                                              });
+                                              await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
+                                            },
+                                          )
+                                          : IconButton(
+                                            icon: FaIcon(FontAwesomeIcons.peace, color: Colors.grey,), 
+                                            padding: EdgeInsets.zero,
+                                            onPressed: () async{
+                                              setState(() {
+                                                repliesLikes[i][index] = true;
+                                                repliesNumberOfLikes[i][index]++;
+                                              });
+                                              await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
+                                            },
+                                          ),
+
+                                          Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+
+                                        ],
+                                      ),
+                                    ),
+
+                                    Row(
+                                      children: [
+                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
+
+                                        Expanded(
+                                          child: Container(
+                                            padding: EdgeInsets.all(10.0),
+                                            child: Text(
+                                              comments[i].listOfReplies[index].replyBody,
+                                              style: TextStyle(
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff4EC9D4),
+                                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                    Row(
+                                      children: [
+
+                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
+
+                                        Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
+
+                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
+
+                                        GestureDetector(
+                                          onTap: () async{
+                                            controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
+                                            setState(() {
+                                              isComment = false;
+                                              currentCommentId = comments[i].commentId;
+                                            });
+                                            await showMaterialModalBottomSheet(
+                                              expand: true,
+                                              context: context,
+                                              builder: (context) => Container(
+                                                padding: EdgeInsets.all(20.0),
+                                                child: TextFormField(
+                                                  controller: controller,
+                                                  cursorColor: Color(0xff000000),
+                                                  keyboardType: TextInputType.text,
+                                                  maxLines: 10,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Say something...',
+                                                    labelStyle: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Color(0xffffffff),
+                                                    ),
+                                                    border: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                      ),
+                                                    ),
+                                                    focusedBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                      ),
+                                                    ),
+                                                    enabledBorder: UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Text('Reply',),
+                                        ),
+
+                                      ],
+                                    ),
+
+                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+
+                                  ],
+                                ),
+                              ),
+                            )
+                            : Container(
+                              height: 0,
+                            ),
+
+                          ],
+                        );
+                      },
+                      separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+                      itemCount: comments.length,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            )
           )
-          )
+          // : SingleChildScrollView(
+          //   physics: ClampingScrollPhysics(),
+          //   child: ContainerResponsive(
+          //     height: SizeConfig.screenHeight,
+          //     width: SizeConfig.screenWidth,
+          //     alignment: Alignment.center,
+          //     child: ContainerResponsive(
+          //       width: SizeConfig.screenWidth,
+          //       heightResponsive: false,
+          //       widthResponsive: true,
+          //       alignment: Alignment.center,
+          //       child: SingleChildScrollView(
+          //         physics: ClampingScrollPhysics(),
+          //         child: MiscBLMEmptyDisplayTemplate(message: 'Comment is empty',),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           : SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: ContainerResponsive(
-              height: SizeConfig.screenHeight,
-              width: SizeConfig.screenWidth,
-              alignment: Alignment.center,
-              child: ContainerResponsive(
-                width: SizeConfig.screenWidth,
-                heightResponsive: false,
-                widthResponsive: true,
-                alignment: Alignment.center,
-                child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
-                  child: MiscBLMEmptyDisplayTemplate(message: 'Comment is empty',),
-                ),
-              ),
-            ),
+            child: MiscBLMEmptyDisplayTemplate(message: 'Comment is empty',),
           ),
           bottomNavigationBar: Padding(
             padding: EdgeInsets.only(left: 20.0, right: 20.0,),

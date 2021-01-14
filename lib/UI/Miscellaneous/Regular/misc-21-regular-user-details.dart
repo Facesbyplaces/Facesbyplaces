@@ -190,7 +190,14 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                 APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: userId);
                 context.hideLoaderOverlay();
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                HomeRegularUserOtherDetails(
+                  userId: userId, 
+                  toggleBirthdate: result.hideBirthdate, 
+                  toggleBirthplace: result.hideBirthplace, 
+                  toggleAddress: result.hideAddress, 
+                  toggleEmail: result.hideEmail, 
+                  toggleNumber: result.hidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,

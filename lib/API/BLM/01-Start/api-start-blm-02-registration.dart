@@ -8,18 +8,19 @@ Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
 
   try{
     final http.Response response = await http.post(
-      // 'http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
       'http://fbp.dev1.koda.ws/blm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
-      // 'http://localhost:3000/blm_auth?first_name=paul&last_name=marcuelo&phone_number=09171058588&email=marcuelo1@gmail.com&username=marcuelo1&password=marcuelo2&account_type=1',
-      // blm_auth/sign_in?account_type=1&password=marcuelo2&email=marcuelo1@gmail.com
       headers: <String, String>{
         'Content-Type': 'application/json',
       }
     );
+
+    print('The status code of blm registration is ${response.statusCode}');
+    print('The status body of blm registration is ${response.body}');
+    print('The status headers of blm registration is ${response.headers}');
     
     if(response.statusCode == 200){
       var value = json.decode(response.body);
-      var user = value['data'];
+      var user = value['user'];
       int userId = user['id'];
       String verificationCode = user['verification_code'];
 
@@ -27,13 +28,9 @@ Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
 
       sharedPrefs.setInt('blm-user-id', userId);
       sharedPrefs.setString('blm-verification-code', verificationCode);
-      // sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-      // sharedPrefs.setString('blm-uid', response.headers['uid']);    
-      // sharedPrefs.setString('blm-client', response.headers['client']);
-      sharedPrefs.setString('regular-access-token', response.headers['blm-access-token']);
-      sharedPrefs.setString('regular-uid', response.headers['blm-uid']);    
-      sharedPrefs.setString('regular-client', response.headers['blm-client']);
-      sharedPrefs.setBool('blm-user-verify', true);
+      sharedPrefs.setString('blm-access-token', response.headers['access-token']);
+      sharedPrefs.setString('blm-uid', response.headers['uid']);    
+      sharedPrefs.setString('blm-client', response.headers['client']);
       
     }else{
       var value = json.decode(response.body);

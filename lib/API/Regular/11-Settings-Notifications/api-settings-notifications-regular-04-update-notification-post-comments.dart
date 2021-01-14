@@ -21,6 +21,8 @@ Future<bool> apiRegularUpdateNotificationPostComments({bool hide}) async{
       }
     );
 
+    print('The status code of notification 4 is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
       // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){

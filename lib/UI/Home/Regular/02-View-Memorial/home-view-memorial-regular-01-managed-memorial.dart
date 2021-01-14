@@ -9,6 +9,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.d
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -571,17 +572,33 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         physics: ClampingScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index){
-                                          return Container(
-                                            width: SizeConfig.blockSizeVertical * 12,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
-                                              color: Color(0xff888888),
-                                            ),
-                                            child: CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
-                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          return GestureDetector(
+                                            onTap: (){
+                                              FullScreenMenu.show(
+                                                context,
+                                                backgroundColor: Color(0xff888888),
+                                                items: [
+                                                  CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                            child: Container(
+                                              width: SizeConfig.blockSizeVertical * 12,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                color: Color(0xff888888),
+                                              ),
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
+                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              ),
                                             ),
                                           );
                                         }, 
@@ -699,7 +716,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     fit: BoxFit.cover,
                                                     imageUrl: posts[i].imagesOrVideos[0],
                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                    errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   ),
                                                 );
                                               }else if(posts[i].imagesOrVideos.length == 2){

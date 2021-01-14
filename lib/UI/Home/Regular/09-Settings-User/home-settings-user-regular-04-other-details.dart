@@ -23,7 +23,7 @@ class HomeRegularUserOtherDetails extends StatefulWidget{
 
   HomeRegularUserOtherDetails({this.userId, this.toggleBirthdate, this.toggleBirthplace, this.toggleAddress, this.toggleEmail, this.toggleNumber});
 
-  HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthdate, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
+  HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
 }
 
 class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails>{
@@ -53,8 +53,10 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
     otherDetails = getOtherDetails(userId);
     toggle1 = toggleBirthdate;
     toggle2 = toggleBirthplace;
-    toggle3 = toggleEmail;
-    toggle4 = toggleAddress;
+    // toggle3 = toggleEmail;
+    // toggle4 = toggleAddress;
+    toggle3 = toggleAddress;
+    toggle4 = toggleEmail;
     toggle5 = toggleNumber;
   }
 
@@ -112,7 +114,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   toggle1 = !toggle1;
                                 });
 
+                                context.showLoaderOverlay();
                                 await apiRegularHideBirthdate(hide: toggle1);
+                                context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),
                               color: toggle1 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -134,7 +138,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   toggle2 = !toggle2;
                                 });
 
+                                context.showLoaderOverlay();
                                 await apiRegularHideBirthplace(hide: toggle2);
+                                context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),
                               color: toggle2 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -155,8 +161,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 setState(() {
                                   toggle3 = !toggle3;
                                 });
-
-                                await apiRegularHideEmail(hide: toggle3);
+                                context.showLoaderOverlay();
+                                await apiRegularHideAddress(hide: toggle3);
+                                context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),
                               color: toggle3 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -178,7 +185,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   toggle4 = !toggle4;
                                 });
 
-                                await apiRegularHideAddress(hide: toggle4);
+                                context.showLoaderOverlay();
+                                await apiRegularHideEmail(hide: toggle4);
+                                context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),
                               color: toggle4 ? Color(0xff85DBF1) : Color(0xff888888),
@@ -200,7 +209,9 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                   toggle5 = !toggle5;
                                 });
 
+                                context.showLoaderOverlay();
                                 await apiRegularHidePhoneNumber(hide: toggle5);
+                                context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),
                               color: toggle5 ? Color(0xff85DBF1) : Color(0xff888888),

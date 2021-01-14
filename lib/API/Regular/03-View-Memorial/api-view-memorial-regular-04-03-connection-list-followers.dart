@@ -18,6 +18,9 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
     },
   );
 
+  print('The status code of connection list followers is ${response.statusCode}');
+  print('The status body of connection list followers is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularConnectionListFollowersMain.fromJson(newValue);

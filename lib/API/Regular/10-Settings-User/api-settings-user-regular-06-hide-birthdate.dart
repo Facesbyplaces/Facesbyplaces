@@ -20,6 +20,8 @@ Future<bool> apiRegularHideBirthdate({bool hide}) async{
       }
     );
 
+    print('The hide birthdate status code is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
       // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){

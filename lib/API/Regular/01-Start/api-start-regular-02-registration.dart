@@ -7,11 +7,7 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
   String result = 'Success';
 
   try{
-
     final http.Response response = await http.post(
-      // 'http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
-      
-      // 'http://fbp.dev1.koda.ws/auth/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
       'http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -37,6 +33,9 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
 
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-verification-code', verificationCode);
+      sharedPrefs.setString('regular-access-token', response.headers['regular-access-token']);
+      sharedPrefs.setString('regular-uid', response.headers['regular-uid']);    
+      sharedPrefs.setString('regular-client', response.headers['regular-client']);
 
 
       // sharedPrefs.setBool('regular-user-verify', true);
