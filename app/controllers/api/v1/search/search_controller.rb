@@ -101,7 +101,13 @@ class Api::V1::Search::SearchController < ApplicationController
 
         user_location = Geocoder.search([lat,lon])
 
-        blm = Blm.joins(:pageowner).where("pageowners.user_id != #{user().id}").near([lat,lon], 50)
+        if user().account_type == 1
+            account = 'BlmUser'
+        else
+            account = 'AlmUser'
+        end
+
+        blm = Blm.joins(:pageowner).where("pageowners.account_id != #{user().id} AND pageowners.account_type != '#{account}'").near([lat,lon], 50)
         
         blm = blm.page(params[:page]).per(numberOfPage)
         if blm.total_count == 0 || (blm.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -112,7 +118,7 @@ class Api::V1::Search::SearchController < ApplicationController
             blmitemsremaining = blm.total_count - (params[:page].to_i * numberOfPage)
         end
 
-        memorial = Memorial.joins(:pageowner).where("pageowners.user_id != #{user().id}").near([lat,lon], 50)
+        memorial = Memorial.joins(:pageowner).where("pageowners.account_id != #{user().id} AND pageowners.account_type != '#{account}'").near([lat,lon], 50)
         
         memorial = memorial.page(params[:page]).per(numberOfPage)
         if memorial.total_count == 0 || (memorial.total_count - (params[:page].to_i * numberOfPage)) < 0
