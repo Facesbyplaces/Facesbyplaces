@@ -1,10 +1,17 @@
+import 'dart:io';
+
+import 'package:badges/badges.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-12-update-user-profile-picture.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 // import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-17-regular-custom-drawings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-21-regular-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class HomeRegularUserProfileDetails extends StatefulWidget{
   final int userId;
@@ -18,9 +25,20 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
   HomeRegularUserProfileDetailsState({this.userId});
 
   Future showProfile;
+  final picker = ImagePicker();
+  File profileImage;
 
   Future<APIRegularShowProfileInformation> getProfileInformation() async{
     return await apiRegularShowProfileInformation();
+  }
+
+  Future getProfileImage() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if(pickedFile != null){
+      setState(() {
+        profileImage = File(pickedFile.path);
+      });
+    }
   }
 
   void initState(){
@@ -48,20 +66,74 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
 
+                      
+
                       Positioned(
                         top: SizeConfig.blockSizeVertical * 8,
                         left: SizeConfig.screenWidth / 4.2,
-                        child: CircleAvatar(
-                          radius: SizeConfig.blockSizeVertical * 15,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: ((){
-                            if(profile.data.image != null && profile.data.image != ''){
-                              return NetworkImage(profile.data.image);
-                            }else{
-                              return AssetImage('assets/icons/app-icon.png');
-                            }
-                          }()),
+                        child: Badge(
+                          // position: BadgePosition.topEnd(top: -3, end: -10),
+                          position: BadgePosition.topEnd(top: 5, end: 15),
+                          animationDuration: Duration(milliseconds: 300),
+                          animationType: BadgeAnimationType.fade,
+                          badgeColor: Colors.grey,
+                          badgeContent: Icon(Icons.camera, size: SizeConfig.blockSizeVertical * 5.5,),
+                          child: GestureDetector(
+                            onTap: () async{
+
+                              await getProfileImage();
+                              
+                              context.showLoaderOverlay();
+                              bool result = await apiRegularUpdateUserProfilePicture(image: profileImage, userId: userId);
+                              context.hideLoaderOverlay();
+
+                              if(result != true){
+                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                              }
+
+                              print('The result is $result');
+                              
+                            },
+                            child: CircleAvatar(
+                              radius: SizeConfig.blockSizeVertical * 15,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: ((){
+                                // ? AssetImage(profileImage.path)
+                                // : AssetImage('assets/icons/graveyard.png'),
+
+                                // if(profile.data.image != null && profile.data.image != ''){
+                                //   return NetworkImage(profile.data.image);
+                                // }else if(profileImage != null){
+                                //   return AssetImage(profileImage.path);
+                                // }else{
+                                //   return AssetImage('assets/icons/app-icon.png');
+                                // }
+
+                                if(profileImage != null){
+                                  return AssetImage(profileImage.path);
+                                }else if(profile.data.image != null && profile.data.image != ''){
+                                  return NetworkImage(profile.data.image);
+                                }else{
+                                  return AssetImage('assets/icons/app-icon.png');
+                                }
+
+
+                              }()),
+                            ),
+                          ),
                         ),
+                        
+                        // child: CircleAvatar(
+                        //   radius: SizeConfig.blockSizeVertical * 15,
+                        //   backgroundColor: Color(0xff888888),
+                        //   backgroundImage: ((){
+                        //     if(profile.data.image != null && profile.data.image != ''){
+                        //       return NetworkImage(profile.data.image);
+                        //     }else{
+                        //       return AssetImage('assets/icons/app-icon.png');
+                        //     }
+                        //   }()),
+                        // ),
                       ),
                     ],
                   ),

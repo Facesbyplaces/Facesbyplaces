@@ -173,7 +173,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 taggedLastName: posts[i].taggedLastName,
                 taggedId: posts[i].taggedId,
                 contents: [
-                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody,),),
+                  Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                   posts[i].imagesOrVideos != null
                   ? Container(

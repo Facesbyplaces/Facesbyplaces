@@ -568,7 +568,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
               contents: [
-                Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
+                Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                 feeds[i].imagesOrVideos != null
                 ? Container(

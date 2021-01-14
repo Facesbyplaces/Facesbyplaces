@@ -1,3 +1,5 @@
+
+
 import 'UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart';
@@ -41,6 +43,8 @@ import 'package:flutter/material.dart';
 // import 'package:maps/maps.dart';
 
 void main() async{
+  
+
   WidgetsFlutterBinding.ensureInitialized();
 
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -51,6 +55,7 @@ void main() async{
   // await launcher.launch(
   //   geoPoint: GeoPoint(0.0, 0.0),
   // );
+  // FlutterBranchSdk.validateSDKIntegration();
 
   runApp(
     GlobalLoaderOverlay(

@@ -13,6 +13,10 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
   // print('The uid is $getUID');
   // print('The client is $getClient');
 
+  print('The access token in show information is $getAccessToken');
+  print('The uid in show information is $getUID');
+  print('The client in show information is $getClient');
+
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -22,8 +26,8 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
     }
   );
 
-  // print('The response status code is ${response.statusCode}');
-  // print('The response status body is ${response.body}');
+  print('The response status code of show user information is ${response.statusCode}');
+  print('The response status body of show user information is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

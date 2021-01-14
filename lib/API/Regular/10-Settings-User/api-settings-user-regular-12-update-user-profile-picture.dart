@@ -1,25 +1,42 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+// /users/image_upload/20
 
-Future<bool> apiRegularUpdateNotificationPostComments({bool hide}) async{
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
+
+Future<bool> apiRegularUpdateUserProfilePicture({dynamic image, int userId}) async{
 
   bool result = false;
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The access token in user profile is $getAccessToken');
+  print('The uid in user profile is $getUID');
+  print('The client in user profile is $getClient');
 
   try{
-    final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/notifications/postComments?setting=$hide',
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'access-token': getAccessToken,
-        'uid': getUID,
-        'client': getClient,
-      }
+    var dioRequest = Dio();
+    var formData;
+    formData = FormData();
+
+    formData = FormData.fromMap({
+      'image': await MultipartFile.fromFile(image.path, filename: image.path),
+    });
+
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+      options: Options(
+        headers: <String, String>{
+          'access-token': getAccessToken,
+          'uid': getUID,
+          'client': getClient,
+        }
+      ),
     );
+
+    print('The response status code in update upload photo is ${response.statusCode}');
+    print('The response status data in update upload photo is ${response.data}');
+    print('The headers in update upload photo is ${response.headers}');
 
     if(response.statusCode == 200){
       result = true;
@@ -29,10 +46,10 @@ Future<bool> apiRegularUpdateNotificationPostComments({bool hide}) async{
       //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
       // }
     }
-      
+    
   }catch(e){
+    print('The e is $e');
     result = false;
   }
-
   return result;
 }

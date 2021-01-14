@@ -8,14 +8,12 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'blm-06-password-reset.dart';
 
 
 class BLMLogin extends StatefulWidget{
@@ -23,69 +21,10 @@ class BLMLogin extends StatefulWidget{
   BLMLoginState createState() => BLMLoginState();
 }
 
-class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
+class BLMLoginState extends State<BLMLogin>{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  String link = '';
-
-  void didChangeAppLifecycleState(AppLifecycleState state) async{
-    if(state == AppLifecycleState.detached || state == AppLifecycleState.paused || state == AppLifecycleState.resumed || state == AppLifecycleState.inactive){
-      initUnit();
-    }
-  }
-
-  initUnit() async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
-
-    print('The login is $login');
-
-    if(login){
-      Navigator.push(context, PageRouteBuilder(pageBuilder: (__, _, ___) => BLMPasswordReset()));
-    }
-  }
-
-
-  void initDeepLink(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'password-reset-blm-account',
-      title: 'Password Reset for BLM Accounts',
-      imageUrl: 'assets/icons/app-icon.png',
-      contentDescription: 'Password reset request for BLM accounts',
-      keywords: ['Password', 'Reset', 'BLM'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
-        ..addCustomMetadata('custom_number', 12345)
-        ..addCustomMetadata('custom_bool', true)
-        ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
-        ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
-    );
-
-    lp = BranchLinkProperties(
-        channel: 'email',
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp.addControlParam('url', 'https://29cft.test-app.link/suCwfzCi6bb');
-  }
-
-
-  void initState(){
-    super.initState();
-    initDeepLink();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -384,27 +323,27 @@ class BLMLoginState extends State<BLMLogin> with WidgetsBindingObserver{
                           GestureDetector(
                             onTap: () async{
 
-                              String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
+                              // String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
 
-                              if(email != null){
-                                DateTime date = DateTime.now();
-                                String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
-                                FlutterBranchSdk.setIdentity('id-$id');
+                              // if(email != null){
+                              //   DateTime date = DateTime.now();
+                              //   String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '');
+                              //   FlutterBranchSdk.setIdentity('id-$id');
 
-                                context.showLoaderOverlay();
-                                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                                context.hideLoaderOverlay();
+                              //   context.showLoaderOverlay();
+                              //   BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                              //   context.hideLoaderOverlay();
 
-                                if (response.success) {
-                                  setState(() {
-                                    link = response.result;
-                                  });
-                                  await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Success', content: response.result, color: Colors.green,));
-                                } else {
-                                  await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
-                                }
+                              //   if (response.success) {
+                              //     setState(() {
+                              //       link = response.result;
+                              //     });
+                              //     await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Success', content: response.result, color: Colors.green,));
+                              //   } else {
+                              //     await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                              //   }
 
-                              }
+                              // }
                             },
                             child: Align(
                               alignment: Alignment.centerRight, 

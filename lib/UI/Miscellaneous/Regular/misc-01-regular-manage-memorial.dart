@@ -82,6 +82,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     );
     return GestureDetector(
       onTap: () async{
+        print('The memorial id is $memorialId');
+        // print('The user id is $userId');
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));

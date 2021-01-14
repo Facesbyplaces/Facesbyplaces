@@ -4,14 +4,11 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -82,9 +79,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
   int page;
 
   String category;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  BranchContentMetaData metadata;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -158,39 +152,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
     page = 1;
     onLoading();
     showProfile = getProfileInformation(memorialId);
-    initDeepLinkData();
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  void initDeepLinkData(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'flutter/branch',
-      title: 'Flutter Branch Plugin',
-      imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
-      contentDescription: 'Flutter Branch Description',
-      keywords: ['Plugin', 'Branch', 'Flutter'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
-          ..addCustomMetadata('custom_number', 12345)
-          ..addCustomMetadata('custom_bool', true)
-          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
-          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
-    );
-
-    lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp.addControlParam('url2', 'https://29cft.test-app.link/mrY1OGhsjcb');
   }
 
   @override
@@ -371,49 +333,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-
-                                          DateTime date = DateTime.now();
-                                          String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-blm-memorial';
-                                          FlutterBranchSdk.setIdentity(id);
-
-                                          BranchResponse response =
-                                              await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                                          if (response.success) {
-                                            print('Link generated: ${response.result}');
-                                          } else {
-                                              print('Error : ${response.errorCode} - ${response.errorMessage}');
-                                          }
-
-                                          BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
-                                            buo: buo,
-                                            linkProperties: lp,
-                                            messageText: profile.data.memorial.blmName,
-                                            androidMessageTitle: 'Share ${profile.data.memorial.blmName} memorial',
-                                            androidSharingTitle: profile.data.memorial.blmName,
-                                          );
-
-
-                                          print('The value of deep link response is ${response.errorMessage}');
-                                          print('The value of deep link response is ${response.errorCode}');
-                                          print('The value of deep link response is ${response.result}');
-                                          print('The value of deep link response is ${response.success}');
-
-                                          if (response.success) {
-                                            print('deep link showShareSheet Sucess');
-                                          } else {
-                                            print('deep link Error : ${response.errorCode} - ${response.errorMessage}');
-                                          }
-
-                                          print('The value of response is ${shareResult.errorMessage}');
-                                          print('The value of response is ${shareResult.errorCode}');
-                                          print('The value of response is ${shareResult.result}');
-                                          print('The value of response is ${shareResult.success}');
-
-                                          if (shareResult.success) {
-                                            print('showShareSheet Sucess');
-                                          } else {
-                                            print('Error : ${shareResult.errorCode} - ${shareResult.errorMessage}');
-                                          }
 
                                       },
                                       child: CircleAvatar(
@@ -726,7 +645,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
                                       contents: [
-                                        Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody,),),
+                                        Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(

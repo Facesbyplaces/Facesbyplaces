@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/material.dart';
 
 class BLMPasswordReset extends StatefulWidget{
@@ -11,7 +10,6 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
   void initState(){
     super.initState();
-    FlutterBranchSdk.logout();
   }
   
   @override

@@ -8,14 +8,37 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
+  int prefsUserID = sharedPrefs.getInt('regular-user-id');
 
   try{
+    // var dioRequest = Dio();
+    // final formData = FormData.fromMap({
+    //   'image': await MultipartFile.fromFile(image.path, filename: image.path),
+    // });
+
+    // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload/:id', data: formData,
+    //   options: Options(
+    //     headers: <String, String>{
+    //       'access-token': getAccessToken,
+    //       'uid': getUID,
+    //       'client': getClient,
+    //     }
+    //   ),
+    // );
+
     var dioRequest = Dio();
-    final formData = FormData.fromMap({
+    var formData;
+    formData = FormData();
+
+    formData = FormData.fromMap({
+      'user_id': prefsUserID,
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 
-    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload/:id', data: formData,
+    
+
+    // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload/:id', data: formData,
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
       options: Options(
         headers: <String, String>{
           'access-token': getAccessToken,

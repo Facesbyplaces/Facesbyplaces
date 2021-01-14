@@ -192,45 +192,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               taggedLastName: posts[i].taggedLastName,
               taggedId: posts[i].taggedId,
               contents: [
-            //     Column(
-            //       children: [
-            //         Align(
-            //           alignment: Alignment.topLeft,
-            //           child: RichText(
-            //             maxLines: 4,
-            //             overflow: TextOverflow.clip,
-            //             textAlign: TextAlign.left,
-            //             text: TextSpan(
-            //               text: posts[i].postBody,
-            //               style: TextStyle(
-            //                 fontWeight: FontWeight.w300,
-            //                 color: Color(0xff000000),
-            //               ),
-            //             ),
-            //           ),
-            //         ),
 
-            //         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-            //       ],
-            //     ),
-
-            //     posts[i].imagesOrVideos != null
-            //     ? Container(
-            //       height: SizeConfig.blockSizeHorizontal * 50,
-            //       decoration: BoxDecoration(
-            //         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            //       ),
-            //       child: CachedNetworkImage(
-            //         imageUrl: posts[i].imagesOrVideos[0],
-            //         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-            //         errorWidget: (context, url, error) => Icon(Icons.error),
-            //       ),
-            //     )
-            //     : Container(height: 0,),
-            //   ],
-            // );
-
-                Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody,),),
+                Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                 posts[i].imagesOrVideos != null
                 ? Container(

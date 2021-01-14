@@ -9,21 +9,28 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({int mem
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
-  );
+  APIRegularShowFriendsSettingsMain returnValue;
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowFriendsSettingsMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the lists.');
+  try{
+    final http.Response response = await http.get(
+      'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/friends/index?page=$page',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      return APIRegularShowFriendsSettingsMain.fromJson(newValue);
+    }
+  }catch(e){
+    throw Exception('$e');
   }
+
+  return returnValue;
 }
 
 class APIRegularShowFriendsSettingsMain{

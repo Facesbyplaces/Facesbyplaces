@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-15-add-admin.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-16-remove-admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -45,27 +46,34 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     if(adminItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page1);
-      adminItemsRemaining = newValue.adminItemsRemaining;
+      context.hideLoaderOverlay();
 
-      for(int i = 0; i < newValue.adminList.length; i++){
-        adminList.add(
-          RegularShowAdminSettings(
-            userId: newValue.adminList[i].user.id,
-            firstName: newValue.adminList[i].user.firstName,
-            lastName: newValue.adminList[i].user.lastName,
-            image: newValue.adminList[i].user.image,
-            relationship: newValue.adminList[i].relationship,
-            email: newValue.adminList[i].user.email,
-          ),
-        );
+      if(newValue == null){
+        await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+      }else{
+        adminItemsRemaining = newValue.adminItemsRemaining;
+
+        for(int i = 0; i < newValue.adminList.length; i++){
+          adminList.add(
+            RegularShowAdminSettings(
+              userId: newValue.adminList[i].user.id,
+              firstName: newValue.adminList[i].user.firstName,
+              lastName: newValue.adminList[i].user.lastName,
+              image: newValue.adminList[i].user.image,
+              relationship: newValue.adminList[i].relationship,
+              email: newValue.adminList[i].user.email,
+            ),
+          );
+        }
+
+        if(mounted)
+        setState(() {});
+        page1++;
+        
+        refreshController.loadComplete();
       }
 
-      if(mounted)
-      setState(() {});
-      page1++;
       
-      refreshController.loadComplete();
-      context.hideLoaderOverlay();
     }else{
       refreshController.loadNoData();
     }
@@ -77,6 +85,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       context.showLoaderOverlay();
       var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
+
       familyItemsRemaining = newValue.familyItemsRemaining;
 
       for(int i = 0; i < newValue.familyList.length; i++){
@@ -97,7 +106,13 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       page2++;
       
       refreshController.loadComplete();
-      
+
+      // if(newValue == null){
+      //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+      // }else{
+        
+
+      // }
     }else{
       refreshController.loadNoData();
     }

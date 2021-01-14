@@ -4,28 +4,33 @@ import 'dart:convert';
 
 Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({int memorialId, int page}) async{
 
-  print('The memorial id in api is $memorialId');
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
-  );
+  APIRegularShowFamilySettingsMain returnValue;
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowFamilySettingsMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the lists.');
+  try{
+    final http.Response response = await http.get(
+      'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      return APIRegularShowFamilySettingsMain.fromJson(newValue);
+    }
+  }catch(e){
+    throw Exception('$e');
   }
+
+  return returnValue;
 }
 
 class APIRegularShowFamilySettingsMain{

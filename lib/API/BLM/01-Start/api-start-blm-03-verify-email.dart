@@ -7,7 +7,9 @@ Future<bool> apiBLMVerifyEmail({String verificationCode}) async{
   int prefsUserID = sharedPrefs.getInt('blm-user-id');
 
   final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode',
+    // 'http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode',
+    'http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=1',
+    // /users/verify?user_id=2&verification_code=368&account_type=2
     headers: <String, String>{
       'Content-Type': 'application/json',
     }

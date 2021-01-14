@@ -27,9 +27,9 @@
 			<string>google.com</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fbp</string>
 				<string>fb674832526555519</string>
 				<string>com.googleusercontent.apps.436631194271-pc53hk5b4ecam0ien8gekt9iv910bg9r</string>
-				<string>facesbyplaces</string>
 				<string>http</string>
 				<string>schemefacesbyplaces</string>
 			</array>
@@ -101,11 +101,11 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>branch_key</key>
-	<string>key_live_ojZbbbmuXFU4YLE3lDeonklaDzenB7dV</string>
+	<string>key_test_hn6mjU24QIaKTRR8HQ8NymeczriTvRAA</string>
 	<key>branch_universal_link_domains</key>
 	<array>
-		<string>29cft.app.link</string>
-		<string>29cft-alternate.app.link</string>
+		<string>4n5z1.test-app.link</string>
+		<string>4n5z1-alternate.test-app.link</string>
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>

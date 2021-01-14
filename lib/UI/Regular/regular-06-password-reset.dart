@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordReset extends StatefulWidget{
@@ -8,11 +7,6 @@ class RegularPasswordReset extends StatefulWidget{
 }
 
 class RegularPasswordResetState extends State<RegularPasswordReset>{
-
-  void initState(){
-    super.initState();
-    FlutterBranchSdk.logout();
-  }
 
   @override
   Widget build(BuildContext context) {

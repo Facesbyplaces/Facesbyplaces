@@ -6,7 +6,6 @@ import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-vie
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/material.dart';
 import 'misc-15-blm-dropdown.dart';
@@ -62,48 +61,12 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   int likesCount;
 
   String category;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  BranchContentMetaData metadata;
 
   void initState(){
     super.initState();
     likePost = likeStatus;
     pressedLike = false;
     likesCount = numberOfLikes;
-    initDeepLinkData();
-    WidgetsBinding.instance.addObserver(this);
-  }
-  
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  void initDeepLinkData(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'flutter/branch',
-      title: 'FacesbyPlace Post',
-      imageUrl: 'assets/icons/app-icon.png',
-      contentDescription: 'FacesbyPlaces post shared.',
-      keywords: ['FacesbyPlaces', 'Share', 'Post'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
-          ..addCustomMetadata('custom_number', 12345)
-          ..addCustomMetadata('custom_bool', true)
-          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
-          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
-    );
-
-    lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp.addControlParam('url', 'https://29cft.test-app.link/suCwfzCi6bb');
   }
 
   @override
@@ -293,48 +256,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                   Expanded(
                     child: GestureDetector(
                       onTap: () async{
-                        DateTime date = DateTime.now();
-                        String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-blm-memorial';
-                        FlutterBranchSdk.setIdentity(id);
 
-                        BranchResponse response =
-                            await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                        if (response.success) {
-                          print('Link generated: ${response.result}');
-                        } else {
-                            print('Error : ${response.errorCode} - ${response.errorMessage}');
-                        }
-
-                        BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
-                          buo: buo,
-                          linkProperties: lp,
-                          messageText: 'FacesbyPlaces Post',
-                          androidMessageTitle: 'New post from FacesbyPlaces. Click this link to view the post.',
-                          androidSharingTitle: 'FacesbyPlaces Post',
-                        );
-
-
-                        print('The value of deep link response is ${response.errorMessage}');
-                        print('The value of deep link response is ${response.errorCode}');
-                        print('The value of deep link response is ${response.result}');
-                        print('The value of deep link response is ${response.success}');
-
-                        if (response.success) {
-                          print('deep link showShareSheet Sucess');
-                        } else {
-                          print('deep link Error : ${response.errorCode} - ${response.errorMessage}');
-                        }
-
-                        print('The value of response is ${shareResult.errorMessage}');
-                        print('The value of response is ${shareResult.errorCode}');
-                        print('The value of response is ${shareResult.result}');
-                        print('The value of response is ${shareResult.success}');
-
-                        if (shareResult.success) {
-                          print('showShareSheet Sucess');
-                        } else {
-                          print('Error : ${shareResult.errorCode} - ${shareResult.errorMessage}');
-                        }
                       },
                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
                     ),

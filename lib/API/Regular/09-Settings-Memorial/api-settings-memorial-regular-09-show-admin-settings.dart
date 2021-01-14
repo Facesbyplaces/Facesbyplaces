@@ -9,21 +9,27 @@ Future<APIRegularShowAdminsSettingMain> apiRegularShowAdminSettings({int memoria
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
-  );
+  APIRegularShowAdminsSettingMain returnValue;
 
-  if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowAdminsSettingMain.fromJson(newValue);
-  }else{
-    throw Exception('Failed to get the lists.');
+  try{
+    final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    );
+
+    if(response.statusCode == 200){
+      var newValue = json.decode(response.body);
+      returnValue = APIRegularShowAdminsSettingMain.fromJson(newValue);
+    }
+  }catch(e){
+    throw Exception('$e');
   }
+
+  return returnValue;
 }
 
 

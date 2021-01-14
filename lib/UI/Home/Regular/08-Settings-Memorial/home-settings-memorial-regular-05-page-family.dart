@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-10-show-family-settings.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-18-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -42,27 +43,32 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiRegularShowFamilySettings(memorialId: memorialId, page: page);
-      familyItemsRemaining = newValue.itemsRemaining;
-
-      for(int i = 0; i < newValue.familyList.length; i++){
-        familyList.add(
-          RegularShowFamilySettings(
-            userId: newValue.familyList[i].user.id,
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
-            email: newValue.familyList[i].user.email,
-          ),
-        );
-      }
-
-      if(mounted)
-      setState(() {});
-      page++;
-      
-      refreshController.loadComplete();
       context.hideLoaderOverlay();
+
+      if(newValue == null){
+        await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+      }else{
+        familyItemsRemaining = newValue.itemsRemaining;
+
+        for(int i = 0; i < newValue.familyList.length; i++){
+          familyList.add(
+            RegularShowFamilySettings(
+              userId: newValue.familyList[i].user.id,
+              firstName: newValue.familyList[i].user.firstName,
+              lastName: newValue.familyList[i].user.lastName,
+              image: newValue.familyList[i].user.image,
+              relationship: newValue.familyList[i].relationship,
+              email: newValue.familyList[i].user.email,
+            ),
+          );
+        }
+
+        if(mounted)
+        setState(() {});
+        page++;
+        
+        refreshController.loadComplete();
+      }
     }else{
       refreshController.loadNoData();
     }

@@ -10,7 +10,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -64,7 +63,7 @@ class HomeRegularProfile extends StatefulWidget{
   HomeRegularProfileState createState() => HomeRegularProfileState(memorialId: memorialId, relationship: relationship, managed: managed);
 }
 
-class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBindingObserver{
+class HomeRegularProfileState extends State<HomeRegularProfile>{
   final int memorialId;
   final String relationship;
   final bool managed;
@@ -81,9 +80,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
   int page;
 
   String category;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  BranchContentMetaData metadata;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -159,39 +155,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
     page = 1;
     showProfile = getProfileInformation(memorialId);
     onLoading();
-    initDeepLinkData();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  void initDeepLinkData(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'flutter/branch',
-      title: 'Flutter Branch Plugin',
-      imageUrl: 'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
-      contentDescription: 'Flutter Branch Description',
-      keywords: ['Plugin', 'Branch', 'Flutter'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'abc')
-          ..addCustomMetadata('custom_number', 12345)
-          ..addCustomMetadata('custom_bool', true)
-          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
-          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
-    );
-
-    lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp.addControlParam('url2', 'https://29cft.test-app.link/mrY1OGhsjcb');
   }
 
   @override
@@ -374,49 +337,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-
-                                          DateTime date = DateTime.now();
-                                          String id = date.toString().replaceAll('-', '').replaceAll(' ', '').replaceAll(':', '').replaceAll('.', '') + 'id-share-alm-memorial';
-                                          FlutterBranchSdk.setIdentity(id);
-
-                                          BranchResponse response =
-                                              await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                                          if (response.success) {
-                                            print('Link generated: ${response.result}');
-                                          } else {
-                                              print('Error : ${response.errorCode} - ${response.errorMessage}');
-                                          }
-
-                                          BranchResponse shareResult = await FlutterBranchSdk.showShareSheet(
-                                            buo: buo,
-                                            linkProperties: lp,
-                                            messageText: profile.data.memorial.memorialName,
-                                            androidMessageTitle: 'Share ${profile.data.memorial.memorialName} memorial',
-                                            androidSharingTitle: profile.data.memorial.memorialName,
-                                          );
-
-
-                                          print('The value of deep link response is ${response.errorMessage}');
-                                          print('The value of deep link response is ${response.errorCode}');
-                                          print('The value of deep link response is ${response.result}');
-                                          print('The value of deep link response is ${response.success}');
-
-                                          if (response.success) {
-                                            print('deep link showShareSheet Sucess');
-                                          } else {
-                                            print('deep link Error : ${response.errorCode} - ${response.errorMessage}');
-                                          }
-
-                                          print('The value of response is ${shareResult.errorMessage}');
-                                          print('The value of response is ${shareResult.errorCode}');
-                                          print('The value of response is ${shareResult.result}');
-                                          print('The value of response is ${shareResult.success}');
-
-                                          if (shareResult.success) {
-                                            print('showShareSheet Sucess');
-                                          } else {
-                                            print('Error : ${shareResult.errorCode} - ${shareResult.errorMessage}');
-                                          }
 
                                       },
                                       child: CircleAvatar(
@@ -766,7 +686,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile> with WidgetsBind
                                         // )
                                         // : Container(height: 0,),
                                         
-                                        Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody,),),
+                                        Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(

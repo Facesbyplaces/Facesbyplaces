@@ -9,7 +9,8 @@ Future<bool> apiBLMLogout() async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.delete(
-    'http://fbp.dev1.koda.ws/auth/sign_out',
+    // 'http://fbp.dev1.koda.ws/auth/sign_out',
+    'http://fbp.dev1.koda.ws/blm_auth/sign_out',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
