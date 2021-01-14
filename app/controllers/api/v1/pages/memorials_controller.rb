@@ -141,7 +141,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         if memorial.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
             if user().has_role? :pageadmin, memorial
-                if User.with_role(:pageadmin, memorial).count != 1
+                if AlmUser.with_role(:pageadmin, memorial).count != 1
                     # remove user from the page
                     if memorial.relationships.where(account: user()).first.destroy 
                         # remove role as a page admin
