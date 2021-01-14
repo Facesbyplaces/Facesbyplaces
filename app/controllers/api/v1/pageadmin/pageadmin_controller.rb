@@ -3,40 +3,88 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
     before_action :set_up
 
     def addAdmin
-        # check if user is already a page admin
-        if User.with_role(:pageadmin, @page).where(id: @user.id).first == nil
-            case params[:page_type]
-            when "Blm"
-                if @user.account_type == 1
-                    # Check if the user if part of the family or friends
-                    if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
-                        # Add page admin rights to the user
-                        @user.add_role "pageadmin", @page
+        if params[:account_type] == "1"
+            # Alm User cant be page admin
+            if params[:page_type] == "Memorial"
+                return render json: {error: "User are not Blm User"}, status: 401
+            end
 
-                        render json: {}, status: 200
+            # check if user is already a page admin
+            if BlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil
+                case params[:page_type]
+                when "Blm"
+                    if @user.account_type == 1
+                        # Check if the user if part of the family or friends
+                        if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+                            # Add page admin rights to the user
+                            @user.add_role "pageadmin", @page
+    
+                            render json: {}, status: 200
+                        else
+                            render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+                        end
                     else
-                        render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+                        render json: {}, status: 401
                     end
-                else
-                    render json: {}, status: 401
-                end
-            when "Memorial"
-                if @user.account_type == 2
-                    # Check if the user if part of the family or friends
-                    if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
-                        # Add page admin rights to the user
-                        @user.add_role "pageadmin", @page
-
-                        render json: {}, status: 200
+                when "Memorial"
+                    if @user.account_type == 2
+                        # Check if the user if part of the family or friends
+                        if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+                            # Add page admin rights to the user
+                            @user.add_role "pageadmin", @page
+    
+                            render json: {}, status: 200
+                        else
+                            render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+                        end
                     else
-                        render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+                        render json: {}, status: 401
                     end
-                else
-                    render json: {}, status: 401
                 end
+            else
+                render json: {error: "user is already part of the admin"}, status: 409
             end
         else
-            render json: {}, status: 409
+            # Blm User cant be page admin
+            if params[:page_type] == "Blm"
+                return render json: {error: "User are not Alm User"}, status: 401
+            end
+
+            # check if user is already a page admin
+            if AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil
+                case params[:page_type]
+                when "Blm"
+                    if @user.account_type == 1
+                        # Check if the user if part of the family or friends
+                        if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+                            # Add page admin rights to the user
+                            @user.add_role "pageadmin", @page
+
+                            render json: {}, status: 200
+                        else
+                            render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+                        end
+                    else
+                        render json: {}, status: 401
+                    end
+                when "Memorial"
+                    if @user.account_type == 2
+                        # Check if the user if part of the family or friends
+                        if @page.relationships.where(account: @user).first && @user.notifsetting.addAdmin == true
+                            # Add page admin rights to the user
+                            @user.add_role "pageadmin", @page
+
+                            render json: {}, status: 200
+                        else
+                            render json: {error: "user is not part of the family or the user does not accept page admin invites"}, status: 406
+                        end
+                    else
+                        render json: {}, status: 401
+                    end
+                end
+            else
+                render json: {error: "user is already part of the admin"}, status: 409
+            end
         end
     end
     
@@ -45,13 +93,24 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             return render json: {error: "cannot remove pageowner"}, status: 422
         end
 
-        if User.with_role(:pageadmin, @page).where(id: @user.id).first != nil
-            # Remove page admin rights to the user
-            @user.remove_role "pageadmin", @page
+        if params[:account_type] == "1"
+            if BlmUser.with_role(:pageadmin, @page).where(id: @user.id).first != nil
+                # Remove page admin rights to the user
+                @user.remove_role "pageadmin", @page
 
-            render json: {status: "Removed Admin"}
+                render json: {status: "Removed Admin"}
+            else
+                render json: {}, status: 400
+            end
         else
-            render json: {}, status: 400
+            if AlmUser.with_role(:pageadmin, @page).where(id: @user.id).first != nil
+                # Remove page admin rights to the user
+                @user.remove_role "pageadmin", @page
+
+                render json: {status: "Removed Admin"}
+            else
+                render json: {}, status: 400
+            end
         end
     end
 
@@ -99,6 +158,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         if @page.pageowner.account == @user
             return render json: {error: "cannot remove pageowner"}, status: 422
         end
+
+        if @user.has_role? :pageadmin, @page 
+            return render json: {error: "cannot remove admin"}, status: 422
+        end
         
         # check if relation exist or not
         if @page.relationships.where(account: @user).first != nil
@@ -120,10 +183,10 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
     def updatePost
         post = Post.find(params[:post_id])
-        post_creator = post.user
+        post_creator = post.account
         
         if post.update(post_params)
-            post.user = post_creator
+            post.account = post_creator
             render json: {post: PostSerializer.new( post ).attributes, status: :updated}
         else
             render json: {errors: post.errors}
@@ -187,7 +250,11 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
 
         # Find the user 
         if params[:user_id]
-            @user = User.find(params[:user_id])
+            if params[:account_type] == "1"
+                @user = BlmUser.find(params[:user_id])
+            else
+                @user = AlmUser.find(params[:user_id])
+            end
         end
 
         if !user().has_role? :pageadmin, @page 

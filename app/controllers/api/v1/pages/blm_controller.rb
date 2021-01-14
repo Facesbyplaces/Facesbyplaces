@@ -212,19 +212,15 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def followersIndex
-        blmFollowersRaw = Follower.where(page_type: 'Blm', page_id: params[:id])
+        blmFollowersRaw = Follower.where(page_type: 'Blm', page_id: params[:id]).map{|follower| follower.account}
 
-        blmFollowersRaw = blmFollowersRaw.page(params[:page]).per(numberOfPage)
-        if blmFollowersRaw.total_count == 0 || (blmFollowersRaw.total_count - (params[:page].to_i * numberOfPage)) < 0
+        blmFollowers = Kaminari.paginate_array(blmFollowersRaw).page(params[:page]).per(numberOfPage)
+        if blmFollowers.total_count == 0 || (blmFollowers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
-        elsif blmFollowersRaw.total_count < numberOfPage
-            itemsremaining = blmFollowersRaw.total_count 
+        elsif blmFollowers.total_count < numberOfPage
+            itemsremaining = blmFollowers.total_count 
         else
-            itemsremaining = blmFollowersRaw.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        blmFollowers = blmFollowersRaw.collect do |follower|
-            follower.account 
+            itemsremaining = blmFollowers.total_count - (params[:page].to_i * numberOfPage)
         end
 
         render json: {

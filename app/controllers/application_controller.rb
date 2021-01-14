@@ -44,9 +44,9 @@ class ApplicationController < ActionController::Base
         
         def pages_sql
             "(
-                SELECT id, 'Memorial' AS object_type, name, country, description FROM memorials
+                SELECT id, 'Memorial' AS object_type FROM memorials
                 UNION
-                SELECT id, 'Blm' AS object_type, name, country, description FROM blms
+                SELECT id, 'Blm' AS object_type FROM blms
             ) AS pages"
         end
         
@@ -73,11 +73,9 @@ class ApplicationController < ActionController::Base
         end
 
         def check_user
-            if current_alm_user != nil 
+            if user() != nil 
                 return true 
-            elsif current_blm_user != nil 
-                return true 
-            else 
+            else
                 return false 
             end
         end

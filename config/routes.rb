@@ -27,7 +27,6 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
-        resources :image_upload, only: [:create, :update]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
@@ -35,6 +34,9 @@ Rails.application.routes.draw do
           post 'signin-guest',     to: 'sessions#guest'
         end
       
+        put 'image_upload', to: 'image_upload#update'
+        post 'image_upload', to: 'image_upload#create'
+
         put 'updateDetails', to: 'users#updateDetails'
         get 'getDetails', to: 'users#getDetails'
         put 'updateOtherInfos', to: 'users#updateOtherInfos'
@@ -248,7 +250,7 @@ Rails.application.routes.draw do
         post 'addFamily', to: 'pageadmin#addFamily'
         post 'addFriend', to: 'pageadmin#addFriend'
 
-        delete 'removeFamilyorFriend/:page_type/:page_id/:user_id', to: 'pageadmin#removeFamilyorFriend'
+        delete 'removeFamilyorFriend', to: 'pageadmin#removeFamilyorFriend'
 
         get 'editPost/:post_id/:page_type/:page_id', to: 'pageadmin#editPost'
         put 'updatePost', to: 'pageadmin#updatePost'

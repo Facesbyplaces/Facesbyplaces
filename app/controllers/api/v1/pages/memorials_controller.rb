@@ -141,7 +141,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         if memorial.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
             if user().has_role? :pageadmin, memorial
-                if User.with_role(:pageadmin, memorial).count != 1
+                if AlmUser.with_role(:pageadmin, memorial).count != 1
                     # remove user from the page
                     if memorial.relationships.where(account: user()).first.destroy 
                         # remove role as a page admin
@@ -209,21 +209,21 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def followersIndex
-        memorialFollowersRaw = Follower.where(page_type: 'Memorial', page_id: params[:id])
+        memorialFollowers = Follower.where(page_type: 'Memorial', page_id: params[:id]).map{|follower| follower.account}
 
-        memorialFollowersRaw = memorialFollowersRaw.page(params[:page]).per(numberOfPage)
-        if memorialFollowersRaw.total_count == 0 || (memorialFollowersRaw.total_count - (params[:page].to_i * numberOfPage)) < 0
+        memorialFollowers = Kaminari.paginate_array(memorialFollowers).page(params[:page]).per(numberOfPage)
+        if memorialFollowers.total_count == 0 || (memorialFollowers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
-        elsif memorialFollowersRaw.total_count < numberOfPage
-            itemsremaining = memorialFollowersRaw.total_count 
+        elsif memorialFollowers.total_count < numberOfPage
+            itemsremaining = memorialFollowers.total_count 
         else
-            itemsremaining = memorialFollowersRaw.total_count - (params[:page].to_i * numberOfPage)
+            itemsremaining = memorialFollowers.total_count - (params[:page].to_i * numberOfPage)
         end
 
         render json: {
             itemsremaining: itemsremaining,
             followers: ActiveModel::SerializableResource.new(
-                memorialFollowersRaw, 
+                            memorialFollowers, 
                             each_serializer: UserSerializer
                         )
         }
