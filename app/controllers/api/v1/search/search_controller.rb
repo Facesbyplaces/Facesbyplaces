@@ -94,7 +94,7 @@ class Api::V1::Search::SearchController < ApplicationController
             end
         }.flatten.uniq
 
-        followers =  Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
+        followers = Kaminari.paginate_array(followers).page(params[:page]).per(numberOfPage)
         if followers.total_count == 0 || (followers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif followers.total_count < numberOfPage

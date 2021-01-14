@@ -211,7 +211,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def followersIndex
         memorialFollowers = Follower.where(page_type: 'Memorial', page_id: params[:id]).map{|follower| follower.account}
 
-        memorialFollowers = memorialFollowers.page(params[:page]).per(numberOfPage)
+        memorialFollowers = Kaminari.paginate_array(memorialFollowers).page(params[:page]).per(numberOfPage)
         if memorialFollowers.total_count == 0 || (memorialFollowers.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif memorialFollowers.total_count < numberOfPage
