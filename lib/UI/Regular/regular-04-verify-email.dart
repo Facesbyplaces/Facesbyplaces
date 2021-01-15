@@ -76,7 +76,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                    Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.bloc<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: ScreenUtil().setHeight(30),),),),
+                                    Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.read<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: ScreenUtil().setHeight(30),),),),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -151,11 +151,11 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                       onPressed: () async{
 
                                         if(controller.text.length != 3){
-                                          context.bloc<BlocShowMessage>().showMessage();
+                                          context.read<BlocShowMessage>().showMessage();
                                           Duration duration = Duration(seconds: 2);
 
                                           Future.delayed(duration, (){
-                                            context.bloc<BlocShowMessage>().showMessage();
+                                            context.read<BlocShowMessage>().showMessage();
                                           });
                                         }else{
 
@@ -163,7 +163,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           bool result = await apiRegularVerifyEmail(verificationCode: controller.text);
                                           context.hideLoaderOverlay();
 
-                                          context.bloc<BlocUpdateButtonText>().reset();
+                                          context.read<BlocUpdateButtonText>().reset();
 
                                           if(result){
                                             Navigator.pushNamed(context, '/regular/upload-photo');

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
@@ -20,14 +18,13 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 
 
 class RegularLogin extends StatefulWidget{
 
   RegularLoginState createState() => RegularLoginState();
 }
-
-//  with WidgetsBindingObserver
 
 class RegularLoginState extends State<RegularLogin>{
 
@@ -42,16 +39,11 @@ class RegularLoginState extends State<RegularLogin>{
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
       if (data.containsKey("+clicked_branch_link") &&
           data["+clicked_branch_link"] == true) {
-          //Link clicked. Add logic to get link data
-          print('The value of clicked branch link is ${data["+clicked_branch_link"]}');
-          print('Custom string: ${data["custom_string"]}');
-          // print('The fbp canonical identifier: ${data["canonical_identifier"]}');
           initUnit();
       }
     }, onError: (error) {
       PlatformException platformException = error as PlatformException;
-      print(
-          'InitSession error: ${platformException.code} - ${platformException.message}');
+      print('InitSession error: ${platformException.code} - ${platformException.message}');
     });
 
   }
@@ -101,8 +93,6 @@ class RegularLoginState extends State<RegularLogin>{
   void initState(){
     super.initState();
     listenDeepLinkData();
-    // initUnit();
-    // WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -110,7 +100,6 @@ class RegularLoginState extends State<RegularLogin>{
     streamSubscription.cancel();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -467,7 +456,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
                                   context.hideLoaderOverlay();
                                   
-                                  // print('Link generated: ${response.result}');
+                                  print('Link generated: ${response.result}');
                                   if(result == true){
                                     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
                                   }else{
@@ -476,7 +465,6 @@ class RegularLoginState extends State<RegularLogin>{
                                   }
                                 } else {
                                   print('Error on generating link');
-                                  // print('Error : ${response.errorCode} - ${response.errorMessage}');
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
                                 }
 

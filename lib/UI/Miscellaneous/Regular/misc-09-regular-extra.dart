@@ -78,7 +78,7 @@ class MiscRegularUserProfileDraggableTabsList extends StatelessWidget{
                           }()),
                           splashColor: Color(0xff4EC9D4),
                           onPressed: (){
-                            context.bloc<BlocMiscRegularJoinMemorialButton>().modify(!joinButton);
+                            context.read<BlocMiscRegularJoinMemorialButton>().modify(!joinButton);
                           },
                           child: ((){
                             if(joinButton == true){

@@ -13,7 +13,7 @@ import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter_share/flutter_share.dart';
+// import 'package:flutter_share/flutter_share.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
@@ -336,12 +336,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        await FlutterShare.share(
-                                          title: 'Share',
-                                          text: 'Share the link',
-                                          linkUrl: 'https://flutter.dev/',
-                                          chooserTitle: 'Share link'
-                                        );
+                                        // await FlutterShare.share(
+                                        //   title: 'Share',
+                                        //   text: 'Share the link',
+                                        //   linkUrl: 'https://flutter.dev/',
+                                        //   chooserTitle: 'Share link'
+                                        // );
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,

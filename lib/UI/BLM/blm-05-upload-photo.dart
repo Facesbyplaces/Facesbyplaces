@@ -98,7 +98,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                 builder: (context, state){
                                   return GestureDetector(
                                     onTap: () async{
-                                      context.bloc<BlocUpdateButtonText>().add();
+                                      context.read<BlocUpdateButtonText>().add();
 
                                       var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog());
 
@@ -112,7 +112,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                         }
                                       }
 
-                                      context.bloc<BlocUpdateButtonText>().reset();
+                                      context.read<BlocUpdateButtonText>().reset();
                                       
                                     },
                                     child: Container(
@@ -182,7 +182,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                     bool result = await apiBLMUploadPhoto(image: _image);
                                     context.hideLoaderOverlay();
 
-                                    context.bloc<BlocUpdateButtonText>().reset();
+                                    context.read<BlocUpdateButtonText>().reset();
 
                                     if(result){
                                       Navigator.pushReplacementNamed(context, '/home/blm');
@@ -190,11 +190,11 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                       await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
                                     }
                                   }else{
-                                    context.bloc<BlocShowMessage>().showMessage();
+                                    context.read<BlocShowMessage>().showMessage();
                                     Duration duration = Duration(seconds: 2);
 
                                     Future.delayed(duration, (){
-                                      context.bloc<BlocShowMessage>().showMessage();
+                                      context.read<BlocShowMessage>().showMessage();
                                     });
                                   }
                                 }, 

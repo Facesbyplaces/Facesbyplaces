@@ -76,7 +76,7 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                    Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.bloc<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: ScreenUtil().setHeight(30),),),),
+                                    Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.read<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: ScreenUtil().setHeight(30),),),),
 
                                     SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
@@ -146,11 +146,11 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                       buttonTextStyle: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xffffffff),), 
                                       onPressed: () async{
                                         if(controller.text.length != 3){
-                                          context.bloc<BlocShowMessage>().showMessage();
+                                          context.read<BlocShowMessage>().showMessage();
                                           Duration duration = Duration(seconds: 2);
 
                                           Future.delayed(duration, (){
-                                            context.bloc<BlocShowMessage>().showMessage();
+                                            context.read<BlocShowMessage>().showMessage();
                                           });
                                         }else{
 
@@ -158,7 +158,7 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                           bool result = await apiBLMVerifyEmail(verificationCode: controller.text);
                                           context.hideLoaderOverlay();
 
-                                          context.bloc<BlocUpdateButtonText>().reset();
+                                          context.read<BlocUpdateButtonText>().reset();
 
                                           if(result){
                                             Navigator.pushNamed(context, '/blm/upload-photo'); 

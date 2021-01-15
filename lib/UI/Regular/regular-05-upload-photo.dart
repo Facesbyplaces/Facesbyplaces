@@ -98,7 +98,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
                               GestureDetector(
                                 onTap: () async{
-                                  context.bloc<BlocUpdateButtonText>().add();
+                                  context.read<BlocUpdateButtonText>().add();
 
                                   var choice = await showDialog(context: (context), builder: (build) => MiscRegularUploadFromDialog());
 
@@ -112,7 +112,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     }
                                   }
 
-                                  context.bloc<BlocUpdateButtonText>().reset();
+                                  context.read<BlocUpdateButtonText>().reset();
                                   
                                 },
                                 child: Container(
@@ -186,7 +186,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     bool result = await apiRegularUploadPhoto(image: _image);
                                     context.hideLoaderOverlay();
 
-                                    context.bloc<BlocUpdateButtonText>().reset();
+                                    context.read<BlocUpdateButtonText>().reset();
 
                                     if(result){
                                       Navigator.pushReplacementNamed(context, '/home/regular');
@@ -195,11 +195,11 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     }
 
                                   }else{
-                                    context.bloc<BlocShowMessage>().showMessage();
+                                    context.read<BlocShowMessage>().showMessage();
                                     Duration duration = Duration(seconds: 2);
 
                                     Future.delayed(duration, (){
-                                      context.bloc<BlocShowMessage>().showMessage();
+                                      context.read<BlocShowMessage>().showMessage();
                                     });
                                   }
                                 }, 

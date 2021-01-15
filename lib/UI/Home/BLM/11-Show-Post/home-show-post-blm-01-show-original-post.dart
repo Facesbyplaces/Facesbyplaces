@@ -11,7 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'home-show-post-blm-02-view-comments.dart';
-import 'package:flutter_share/flutter_share.dart';
+// import 'package:flutter_share/flutter_share.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
@@ -472,12 +472,12 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        await FlutterShare.share(
-                                          title: 'Share',
-                                          text: 'Share the link',
-                                          linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
-                                          chooserTitle: 'Share link'
-                                        );
+                                        // await FlutterShare.share(
+                                        //   title: 'Share',
+                                        //   text: 'Share the link',
+                                        //   linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
+                                        //   chooserTitle: 'Share link'
+                                        // );
                                       },
                                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
                                     ),

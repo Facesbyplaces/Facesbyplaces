@@ -75,15 +75,15 @@ class MiscBLMBottomSheet extends StatelessWidget {
 
             ],
             onPressed: (int index){
-              context.bloc<BlocHomeBLMUpdateToggle>().updateToggle(index);
+              context.read<BlocHomeBLMUpdateToggle>().updateToggle(index);
               switch(index){
-                case 0: context.bloc<BlocHomeBLMToggleBottom>().modify(0); break;
-                case 1: context.bloc<BlocHomeBLMToggleBottom>().modify(1); break;
-                case 2: context.bloc<BlocHomeBLMToggleBottom>().modify(2); break;
-                case 3: context.bloc<BlocHomeBLMToggleBottom>().modify(3); break;
+                case 0: context.read<BlocHomeBLMToggleBottom>().modify(0); break;
+                case 1: context.read<BlocHomeBLMToggleBottom>().modify(1); break;
+                case 2: context.read<BlocHomeBLMToggleBottom>().modify(2); break;
+                case 3: context.read<BlocHomeBLMToggleBottom>().modify(3); break;
               }
             },
-            isSelected: context.bloc<BlocHomeBLMUpdateToggle>().state,
+            isSelected: context.read<BlocHomeBLMUpdateToggle>().state,
           ),
           
           decoration: BoxDecoration(
@@ -180,7 +180,7 @@ class MiscBLMUserProfileDraggableTabsList extends StatelessWidget{
                           }()),
                           splashColor: Color(0xff4EC9D4),
                           onPressed: (){
-                            context.bloc<BlocMiscBLMJoinMemorialButton>().modify(!joinButton);
+                            context.read<BlocMiscBLMJoinMemorialButton>().modify(!joinButton);
                           },
                           child: ((){
                             if(joinButton == true){

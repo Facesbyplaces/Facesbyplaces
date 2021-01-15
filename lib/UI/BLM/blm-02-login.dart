@@ -2,11 +2,13 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-google.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -14,7 +16,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-
+import 'package:flutter/services.dart';
+import 'blm-06-password-reset.dart';
+import 'dart:async';
 
 class BLMLogin extends StatefulWidget{
 
@@ -25,6 +29,76 @@ class BLMLoginState extends State<BLMLogin>{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
+
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+  StreamSubscription<Map> streamSubscription;
+
+  void listenDeepLinkData(){
+    streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+      if (data.containsKey("+clicked_branch_link") &&
+          data["+clicked_branch_link"] == true) {
+          initUnit();
+      }
+    }, onError: (error) {
+      PlatformException platformException = error as PlatformException;
+      print('InitSession error: ${platformException.code} - ${platformException.message}');
+    });
+
+  }
+
+  void initBranchReferences(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Link', 'App'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'fbp-link')
+          ..addCustomMetadata('custom_number', 12345)
+          ..addCustomMetadata('custom_bool', true)
+          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
+          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+    );
+
+    lp = BranchLinkProperties(
+        channel: 'facebook',
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
+
+  initUnit() async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
+
+    print('The value of isUserIdentified for login is $login');
+
+    if(login){
+      var value1 = await FlutterBranchSdk.getLatestReferringParams();
+      var value2 = await FlutterBranchSdk.getFirstReferringParams();
+
+      print('The value of getLatestReferringParams is $value1');
+      print('The value of getFirstReferringParams is $value2');
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
+    }
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    listenDeepLinkData();
+  }
+
+  @override
+  void dispose() {
+    streamSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -342,6 +416,37 @@ class BLMLoginState extends State<BLMLogin>{
                               //   }
 
                               // }
+
+                              String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
+
+                              if(email != null){
+                                bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+                                if(validEmail == true){
+                                  initBranchReferences();
+
+                                  FlutterBranchSdk.setIdentity('alm-user-forgot-password');
+                                  BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                                  
+                                  if (response.success) {
+                                    context.showLoaderOverlay();
+                                    bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                                    context.hideLoaderOverlay();
+                                    
+                                    print('Link generated: ${response.result}');
+                                    if(result == true){
+                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
+                                    }else{
+                                      print('Error on requesting the api');
+                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
+                                    }
+                                  } else {
+                                    print('Error on generating link');
+                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+                                  }
+
+                                } 
+                              }
+
                             },
                             child: Align(
                               alignment: Alignment.centerRight, 
