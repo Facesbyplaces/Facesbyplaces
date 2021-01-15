@@ -8,7 +8,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       #Facebook Login
       account_type = params[:account_type].to_i
       if params[:facebook_id].present?
-        @user = AlmUser.where(email: params[:email], account_type: params[:account_type]).first # || BlmUser.where(email: params[:email], account_type: params[:account_type]).first
+        if account_type == 1
+          @user = User.where(email: params[:email], account_type: params[:account_type]).first
+        elsif account_type == 2
+          @user = AlmUser.where(email: params[:email], account_type: params[:account_type]).first
+        end
 
         if @user
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join

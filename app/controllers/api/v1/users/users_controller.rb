@@ -16,7 +16,7 @@ class Api::V1::Users::UsersController < ApplicationController
     
     def edit
         if params[:account_type] == "1"
-            @user = BlmUser.find(params[:id])
+            @user = User.find(params[:id])
         else
             @user = AlmUser.find(params[:id])
         end
@@ -43,7 +43,7 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def getDetails
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
+            user = User.find(params[:user_id])
         else
             user = AlmUser.find(params[:user_id])
         end
@@ -79,7 +79,7 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def getOtherInfos
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
+            user = User.find(params[:user_id])
         else
             user = AlmUser.find(params[:user_id])
         end
@@ -95,7 +95,7 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def show
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
+            user = User.find(params[:user_id])
         else
             user = AlmUser.find(params[:user_id])
         end
@@ -106,7 +106,7 @@ class Api::V1::Users::UsersController < ApplicationController
     def posts
         # Posts that they created or owned
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
+            user = User.find(params[:user_id])
         else
             user = AlmUser.find(params[:user_id])
         end
@@ -132,7 +132,7 @@ class Api::V1::Users::UsersController < ApplicationController
 
     def memorials
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
+            user = User.find(params[:user_id])
         else
             user = AlmUser.find(params[:user_id])
         end
