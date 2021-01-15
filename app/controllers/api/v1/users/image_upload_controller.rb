@@ -21,7 +21,7 @@ class Api::V1::Users::ImageUploadController < ApplicationController
                 render json: {success: true, message: "Successfully Uploaded Image", status: 200}, status: 200
             end
         else
-            render json: {error: "pls login"}, status: 422
+            render json: {error: "User not found. Sign in or Sign up to continue"}, status: 422
         end
     end
 

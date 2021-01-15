@@ -4,19 +4,6 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       # render json: { success: true, user:  @user, status: 200 }, status: 200
     end
 
-    ## SIGN_IN AS GUEST
-    def guest
-      User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
-    end
-    
-    def create_guest_user
-      u = User.create(:username => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com", :guest => true)
-      u.save(:validate => false)
-      render json: { success: true, user:  u, status: 200 }, status: 200
-      u
-    end
-    ##
-
     def create
       #Facebook Login
       account_type = params[:account_type].to_i
@@ -178,7 +165,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         account_type = params[:account_type].to_i
 
         if account_type == 1
-          user = BlmUser.find_by(email: params[:email])
+          user = User.find_by(email: params[:email])
         else
           user = AlmUser.find_by(email: params[:email])
         end 
@@ -193,7 +180,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
-          # render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
+          render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
           super
         else
           render json: {

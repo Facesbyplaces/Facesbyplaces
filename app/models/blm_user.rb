@@ -8,6 +8,7 @@ class BlmUser < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  extend Devise::Models
   include DeviseTokenAuth::Concerns::User
 
   has_many :pageowners, as: :account, dependent: :destroy

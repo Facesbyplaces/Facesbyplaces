@@ -7,7 +7,7 @@ class Api::V1::Users::VerifyController < ApplicationController
 
     def create
         if params[:account_type] == "1"
-            @user = BlmUser.find(params[:user_id])
+            @user = User.find(params[:user_id])
         else
             @user = AlmUser.find(params[:user_id])
         end

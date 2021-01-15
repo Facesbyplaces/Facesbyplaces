@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_14_001028) do
+ActiveRecord::Schema.define(version: 2021_01_15_123037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,6 +212,15 @@ ActiveRecord::Schema.define(version: 2021_01_14_001028) do
     t.index ["page_type", "page_id"], name: "index_followers_on_page_type_and_page_id"
   end
 
+  create_table "guest_users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.boolean "guest", default: false
+    t.boolean "validate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "memorials", force: :cascade do |t|
     t.string "birthplace"
     t.datetime "dob"
@@ -407,7 +416,7 @@ ActiveRecord::Schema.define(version: 2021_01_14_001028) do
     t.string "email"
     t.string "username"
     t.string "verification_code"
-    t.boolean "is_verified"
+    t.boolean "is_verified", default: false
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

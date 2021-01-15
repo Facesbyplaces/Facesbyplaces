@@ -7,10 +7,12 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
   def create
     account_type = params[:account_type].to_i
     
-    if account_type  == 2 
-      @user = AlmUser.new(sign_up_params)
+    if account_type  == 1 
+      # BLM USER SIGN_UP
+      @user = User.new(sign_up_params)
     else
-      @user = BlmUser.new(sign_up_params)
+      # ALM USER SIGN_UP
+      @user = AlmUser.new(sign_up_params)
     end
 
     super do |resource|
@@ -25,7 +27,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         @user.hideAddress = false 
         @user.hidePhonenumber = false 
         @user.is_verified = false
-        @user.save!
+        # @user.save!
         
 
         notifsetting = Notifsetting.new(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true)
@@ -34,6 +36,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
 
         # Tell the UserMailer to send a code to verify email after save
         VerificationMailer.verify_email(@user).deliver_now
+
         # render json: {
         #   status: :success,
         #   user: UserSerializer.new( @user ).attributes

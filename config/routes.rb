@@ -1,21 +1,28 @@
 Rails.application.routes.draw do
   
-  # devise_for :users, controllers: { callbacks: 'api/v1/users/omniauth_callback' }
+  # Route for BLM User
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+    registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
   }, :skip => [:omniauth_callbacks]
+
+  # mount_devise_token_auth_for 'BlmUser', at: 'blm_auth', controllers: {
+  #   # Define routes for BlmUser within this block.
+  #   registrations: 'api/v1/users/registrations',
+  #   sessions: 'api/v1/users/sessions',
+  # }, :skip => [:omniauth_callbacks]
   
+  # Route for ALM User
   mount_devise_token_auth_for 'AlmUser', at: 'alm_auth', controllers: {
     # Define routes for AlmUser within this block.
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
   }, :skip => [:omniauth_callbacks]
 
-  mount_devise_token_auth_for 'BlmUser', at: 'blm_auth', controllers: {
-    # Define routes for BlmUser within this block.
-    registrations: 'api/v1/users/registrations',
-    sessions: 'api/v1/users/sessions',
-  }, :skip => [:omniauth_callbacks]
+  mount_devise_token_auth_for 'User2', at: 'auth2'
+  as :user2 do
+    # Define routes for User2 within this block.
+  end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -30,9 +37,7 @@ Rails.application.routes.draw do
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
-        devise_scope :user do
-          post 'signin-guest',     to: 'sessions#guest'
-        end
+        post 'signin-guest', to: 'users#guest'
       
         put 'image_upload', to: 'image_upload#update'
         post 'image_upload', to: 'image_upload#create'
@@ -54,9 +59,7 @@ Rails.application.routes.draw do
 
         post 'changePassword', to: 'users#changePassword'
       end
-      devise_scope :user do
-        delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-      end
+      
       namespace :reports do 
         resources :report, only: [:create]
       end
