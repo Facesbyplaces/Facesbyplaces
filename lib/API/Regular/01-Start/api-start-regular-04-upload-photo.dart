@@ -8,6 +8,11 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
+  // int prefsUserID = sharedPrefs.getInt('regular-user-id');
+
+  print('The access token is $getAccessToken');
+  print('The getUID is $getUID');
+  print('The getClient is $getClient');
   
   try{
     var dioRequest = Dio();
@@ -15,6 +20,7 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
     formData = FormData();
 
     formData = FormData.fromMap({
+      // 'user_id': prefsUserID,
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 

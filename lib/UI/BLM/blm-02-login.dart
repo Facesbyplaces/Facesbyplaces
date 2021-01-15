@@ -48,9 +48,7 @@ class BLMLoginState extends State<BLMLogin>{
           body: Stack(
             children: [
 
-              SingleChildScrollView(
-                child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),
-              ),
+              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
               ContainerResponsive(
                 height: SizeConfig.screenHeight,

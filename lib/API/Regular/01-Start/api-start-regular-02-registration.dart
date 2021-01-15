@@ -17,13 +17,13 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
     print('The response code of registration is ${response.statusCode}');
     print('The response body of registration is ${response.body}');
     print('The headers is ${response.headers}');
-    print('The access token is ${response.headers['regular-access-token']}');
-    print('The uid is ${response.headers['regular-uid']}');
-    print('The client is ${response.headers['regular-client']}');
+    print('The access token is ${response.headers['access-token']}');
+    print('The uid is ${response.headers['uid']}');
+    print('The client is ${response.headers['client']}');
 
     if(response.statusCode == 200){
       var value = json.decode(response.body);
-      var user = value['user'];
+      var user = value['data'];
       int userId = user['id'];
       String verificationCode = user['verification_code'];
 
@@ -33,9 +33,9 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
 
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-verification-code', verificationCode);
-      sharedPrefs.setString('regular-access-token', response.headers['regular-access-token']);
-      sharedPrefs.setString('regular-uid', response.headers['regular-uid']);    
-      sharedPrefs.setString('regular-client', response.headers['regular-client']);
+      sharedPrefs.setString('regular-access-token', response.headers['access-token']);
+      sharedPrefs.setString('regular-uid', response.headers['uid']);    
+      sharedPrefs.setString('regular-client', response.headers['client']);
 
 
       // sharedPrefs.setBool('regular-user-verify', true);

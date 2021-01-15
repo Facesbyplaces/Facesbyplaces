@@ -8,6 +8,9 @@ Future<bool> apiHomeResetPassword({String email, String redirectLink}) async{
     }
   );
 
+  print('The reset password status code is ${response.statusCode}');
+  print('The reset password status body is ${response.body}');
+
   if(response.statusCode == 200){
     return true;
   }else{

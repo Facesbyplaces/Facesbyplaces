@@ -19,18 +19,6 @@ Future<bool> apiRegularVerifyEmail({String verificationCode}) async{
 
   if(response.statusCode == 200){
 
-    // sharedPrefs.setInt('regular-user-id', userId);
-    // sharedPrefs.setString('regular-verification-code', verificationCode);
-    // sharedPrefs.setString('regular-access-token', response.headers['regular-access-token']);
-    // sharedPrefs.setString('regular-uid', response.headers['regular-uid']);    
-    // sharedPrefs.setString('regular-client', response.headers['regular-client']);
-    // sharedPrefs.setBool('regular-user-verify', true);
-
-
-    // sharedPrefs.setString('regular-access-token', response.headers['regular-access-token']);
-    // sharedPrefs.setString('regular-uid', response.headers['regular-uid']);    
-    // sharedPrefs.setString('regular-client', response.headers['regular-client']);
-
     return true;
   }else{
     return false;

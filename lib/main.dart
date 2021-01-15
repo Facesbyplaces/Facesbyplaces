@@ -1,4 +1,4 @@
-
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 import 'UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
@@ -51,10 +51,10 @@ void main() async{
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
-  // final launcher = const GoogleMapsLauncher();
-  // await launcher.launch(
-  //   geoPoint: GeoPoint(0.0, 0.0),
-  // );
+  Map<dynamic, dynamic> params = await FlutterBranchSdk.getFirstReferringParams();
+
+  print('The params is $params');
+
   // FlutterBranchSdk.validateSDKIntegration();
 
   runApp(
