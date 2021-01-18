@@ -33,7 +33,7 @@ class Api::V1::Pages::BlmController < ApplicationController
             if blm.save 
 
                 # save the owner of the user
-                pageowner = Pageowner.new(account_type:  "BlmUser", account_id: user().id, view: 0)
+                pageowner = Pageowner.new(account_type:  "User", account_id: user().id, view: 0)
                 blm.pageowner = pageowner
 
                 # save relationship of the user to the page
@@ -51,7 +51,7 @@ class Api::V1::Pages::BlmController < ApplicationController
                     render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
 
                     # Notify all Users
-                    blmUsers = BlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'BlmUser' AND notifsettings.account_id != #{user().id}")
+                    blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
                     almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
 
                     blmUsers.each do |user|
@@ -144,7 +144,7 @@ class Api::V1::Pages::BlmController < ApplicationController
         if blm.relationships.where(account: user()).first != nil
             # check if the user is a pageadmin
             if user().has_role? :pageadmin, blm
-                if BlmUser.with_role(:pageadmin, blm).count != 1
+                if User.with_role(:pageadmin, blm).count != 1
                     # remove user from the page
                     if blm.relationships.where(account: user()).first.destroy 
                         # remove role as a page admin
@@ -233,8 +233,8 @@ class Api::V1::Pages::BlmController < ApplicationController
     end
 
     def adminIndex
-        adminsRaw = Blm.find(params[:page_id]).roles.first.blm_users.pluck('id')
-        admins = Relationship.where(page_type: 'Blm', page_id: params[:page_id], account_type: 'BlmUser', account_id: adminsRaw)
+        adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
+        admins = Relationship.where(page_type: 'Blm', page_id: params[:page_id], account_type: 'User', account_id: adminsRaw)
         admins = admins.page(params[:page]).per(numberOfPage)
 
         if admins.total_count == 0 || (admins.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -245,7 +245,7 @@ class Api::V1::Pages::BlmController < ApplicationController
             adminsitemsremaining = admins.total_count - (params[:page].to_i * numberOfPage)
         end
         
-        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'BlmUser' AND account_id NOT IN (?)", adminsRaw)
+        familyRaw = Blm.find(params[:page_id]).relationships.where("relationship != 'Friend' AND account_type = 'User' AND account_id NOT IN (?)", adminsRaw)
         family = familyRaw.page(params[:page]).per(numberOfPage)
 
         if family.total_count == 0 || (family.total_count - (params[:page].to_i * numberOfPage)) < 0
