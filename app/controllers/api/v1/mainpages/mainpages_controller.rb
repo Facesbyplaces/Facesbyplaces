@@ -4,7 +4,7 @@ class Api::V1::Mainpages::MainpagesController < ApplicationController
     # user's feed
     def feed
         if user().account_type == 1
-            account = 'BlmUser'
+            account = 'User'
         else
             account = 'AlmUser'
         end

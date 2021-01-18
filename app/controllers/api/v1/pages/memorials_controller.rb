@@ -55,15 +55,15 @@ class Api::V1::Pages::MemorialsController < ApplicationController
             render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
 
             # Notify all Users
-            blmUsers = BlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
+            blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true)
             almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'AlmUser' AND notifsettings.account_id != #{user().id}")
 
             blmUsers.each do |user|
-                Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id)
+                Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
             end
             
             almUsers.each do |user|
-                Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id)
+                Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
             end
         else
             render json: {status: "#{check} is empty"}

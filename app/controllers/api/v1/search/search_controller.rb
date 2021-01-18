@@ -48,9 +48,9 @@ class Api::V1::Search::SearchController < ApplicationController
     end
 
     def users
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'BlmUser']).map{|searchObject| 
-            if searchObject.searchable_type == 'BlmUser'
-                BlmUser.find(searchObject.searchable_id)
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
+            if searchObject.searchable_type == 'User'
+                User.find(searchObject.searchable_id)
             else
                 AlmUser.find(searchObject.searchable_id)
             end
@@ -82,10 +82,10 @@ class Api::V1::Search::SearchController < ApplicationController
         end 
 
         # get the followers of the page (users are the followers of the page)
-        followers = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'BlmUser']).map{|searchObject| 
+        followers = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
             if searchObject.searchable.followers.where(page: page).first
-                if searchObject.searchable_type == 'BlmUser'
-                    BlmUser.find(searchObject.searchable_id)
+                if searchObject.searchable_type == 'User'
+                    User.find(searchObject.searchable_id)
                 else
                     AlmUser.find(searchObject.searchable_id)
                 end
@@ -118,7 +118,7 @@ class Api::V1::Search::SearchController < ApplicationController
         user_location = Geocoder.search([lat,lon])
 
         if user().account_type == 1
-            account = 'BlmUser'
+            account = 'User'
         else
             account = 'AlmUser'
         end

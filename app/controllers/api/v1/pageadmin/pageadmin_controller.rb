@@ -10,7 +10,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
             end
 
             # check if user is already a page admin
-            if BlmUser.with_role(:pageadmin, @page).where(id: @user.id).first == nil
+            if User.with_role(:pageadmin, @page).where(id: @user.id).first == nil
                 case params[:page_type]
                 when "Blm"
                     if @user.account_type == 1
@@ -94,7 +94,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         end
 
         if params[:account_type] == "1"
-            if BlmUser.with_role(:pageadmin, @page).where(id: @user.id).first != nil
+            if User.with_role(:pageadmin, @page).where(id: @user.id).first != nil
                 # Remove page admin rights to the user
                 @user.remove_role "pageadmin", @page
 
@@ -251,7 +251,7 @@ class Api::V1::Pageadmin::PageadminController < ApplicationController
         # Find the user 
         if params[:user_id]
             if params[:account_type] == "1"
-                @user = BlmUser.find(params[:user_id])
+                @user = User.find(params[:user_id])
             else
                 @user = AlmUser.find(params[:user_id])
             end
