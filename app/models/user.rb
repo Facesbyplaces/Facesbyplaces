@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def blm_users
+    self.users
+ end
+
   def self.new_guest
       new { |u| u.guest = true }
   end
