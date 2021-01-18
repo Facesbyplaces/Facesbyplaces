@@ -1,38 +1,34 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-  rolify
+  rolify #:role_cname => 'BlmRole'
 
   has_many :authorizations
-  # validates :email, :presence => true, unless: :guest?
-  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :apple]
-  
+         :recoverable, :rememberable, :validatable
   extend Devise::Models
   include DeviseTokenAuth::Concerns::User
-  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :apple]
-  
-  # has_many :pages
-  has_many :posts, dependent: :destroy 
-  has_many :relationships, dependent: :destroy 
-  has_many :pageowners, dependent: :destroy 
-  has_many :followers, dependent: :destroy 
-  has_many :postslikes, dependent: :destroy
-  has_many :replies, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :commentslikes, dependent: :destroy
-  has_one :notifsetting, dependent: :destroy
-  has_many :tagpeople, dependent: :destroy
 
-  has_many :shares, dependent: :destroy
-  has_many :notifications, foreign_key: "recipient_id", dependent: :destroy
+  has_many :pageowners, as: :account, dependent: :destroy
+  has_many :followers, as: :account, dependent: :destroy
+  has_many :posts, as: :account, dependent: :destroy
+  has_many :relationships, as: :account, dependent: :destroy
+  has_many :replies, as: :account, dependent: :destroy
+  has_many :postslikes, as: :account, dependent: :destroy
+  has_many :comments, as: :account, dependent: :destroy
+  has_many :commentslikes, as: :account, dependent: :destroy
+  has_one :notifsetting, as: :account, dependent: :destroy
+  has_many :tagpeople, as: :account, dependent: :destroy
+  has_many :transactions, as: :account, dependent: :destroy
+  has_many :notifications, as: :recipient, dependent: :destroy
+
   has_one_attached :image, dependent: :destroy
-
-  # Transactions
-  has_many :transactions, dependent: :destroy
+  
+  # Search user
+  include PgSearch::Model
+  multisearchable against: [:first_name, :last_name, :phone_number, :email, :username, :birthdate, :birthplace]
 
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -53,10 +49,6 @@ class User < ActiveRecord::Base
 
   def blm_users
     self.users
- end
-
-  def self.new_guest
-      new { |u| u.guest = true }
   end
 
   def self.current
