@@ -230,7 +230,8 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     end
 
     def adminIndex
-        adminsRaw = Memorial.find(params[:page_id]).roles.first.alm_users.pluck('id')
+        adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:page_id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
+
         admins = Relationship.where(page_type: 'Memorial', page_id: params[:page_id], account_type: 'AlmUser', account_id: adminsRaw)
         admins = admins.page(params[:page]).per(numberOfPage)
 

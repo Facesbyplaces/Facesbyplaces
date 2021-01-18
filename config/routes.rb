@@ -63,9 +63,11 @@ Rails.application.routes.draw do
       namespace :reports do 
         resources :report, only: [:create]
       end
+
       namespace :shares do 
         get 'share', to: 'share#getLink'
       end
+
       namespace :mainpages do
         # user's feed
         get 'feed', to: 'mainpages#feed'
@@ -76,6 +78,7 @@ Rails.application.routes.draw do
         # user's notifications
         get 'notifications', to: 'mainpages#notifications'
       end
+
       namespace :pages do
         # memorial controller
           # Show memorial
@@ -158,6 +161,7 @@ Rails.application.routes.draw do
           # admin Index
           get 'blm/adminIndex/index', to: 'blm#adminIndex'
       end
+
       namespace :posts do
         # Post Index
         get '/', to: 'posts#index', as: 'postsIndex' 
@@ -191,6 +195,7 @@ Rails.application.routes.draw do
         # Delete reply
         delete 'reply', to: 'comments#deleteReply'
       end
+
       namespace :admin do
         # all users
         get 'users', to: 'admin#allUsers'
@@ -226,6 +231,7 @@ Rails.application.routes.draw do
         # show transaction
         get 'transactions/show', to: 'admin#show_transaction'
       end
+
       namespace :search do
         # search posts
         get 'posts', to: 'search#posts'
@@ -242,10 +248,12 @@ Rails.application.routes.draw do
         # Test current_user
         get 'test', to: 'search#test'
       end
+
       namespace :followers do
         get '/', to: 'followers#followStatus'
         put '/', to: 'followers#followOrUnfollow'
       end
+
       namespace :pageadmin do
         post '/', to: 'pageadmin#addAdmin'
         delete '/', to: 'pageadmin#removeAdmin'
@@ -265,6 +273,7 @@ Rails.application.routes.draw do
         put 'unhideOrHideFriends/:page_type/:page_id', to: 'pageadmin#unhideOrHideFriends'
         put 'unhideOrHideFollowers/:page_type/:page_id', to: 'pageadmin#unhideOrHideFollowers'
       end
+      
       namespace :notifications do
         get 'notifSettingsStatus', to: 'notifsettings#notifSettingsStatus'
 
