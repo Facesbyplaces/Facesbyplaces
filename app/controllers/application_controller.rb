@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
 
         def user_sql
             "(
-                SELECT id, 'BlmUser' AS user_type FROM blm_users
+                SELECT id, 'BlmUser' AS user_type FROM users
                 UNION
                 SELECT id, 'AlmUser' AS user_type FROM alm_users
             ) AS user"
