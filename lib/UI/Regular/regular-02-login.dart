@@ -1,17 +1,18 @@
-// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
+
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
+// import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -21,7 +22,6 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
 
 
 class RegularLogin extends StatefulWidget{
@@ -36,31 +36,6 @@ class RegularLoginState extends State<RegularLogin>{
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-  StreamSubscription<Map> streamSubscription;
-
-  void listenDeepLinkData(){
-    streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-      if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && data.containsKey("link-category")){
-        print('The link category is ${data["link-category"]}');
-        print('The link category is ${data['link-category']}');
-        print('The link category is ${data['link-post-id']}');
-        print('The link category is ${data['link-like-status']}');
-        print('The link category is ${data['link-number-of-likes']}');
-        print('The link category is ${data['link-type-of-account']}');
-        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes']);
-      }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
-        print('The link category is ${data['link-category']}');
-        print('The link category is ${data['link-memorial-id']}');
-        print('The link category is ${data['link-type-of-account']}');
-        initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
-      }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
-        initUnit();
-      }
-    }, onError: (error) {
-      PlatformException platformException = error as PlatformException;
-      print('InitSession error: ${platformException.code} - ${platformException.message}');
-    });
-  }
 
   void initBranchReferences(){
     buo = BranchUniversalObject(
@@ -71,11 +46,9 @@ class RegularLoginState extends State<RegularLogin>{
       keywords: ['FacesbyPlaces', 'Link', 'App'],
       publiclyIndex: true,
       locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'fbp-link')
-          ..addCustomMetadata('custom_number', 12345)
-          ..addCustomMetadata('custom_bool', true)
-          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
-          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('custom_string', 'fbp-link')
+        ..addCustomMetadata('reset-type', 'Regular')
     );
 
     lp = BranchLinkProperties(
@@ -107,52 +80,6 @@ class RegularLoginState extends State<RegularLogin>{
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
-  initUnit() async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
-
-    print('The value of isUserIdentified for login is $login');
-
-    if(login){
-      var value1 = await FlutterBranchSdk.getLatestReferringParams();
-      var value2 = await FlutterBranchSdk.getFirstReferringParams();
-
-      print('The value of getLatestReferringParams is $value1');
-      print('The value of getFirstReferringParams is $value2');
-
-      Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
-    }
-  }
-
-  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes}) async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
-
-    if(login){
-      FlutterBranchSdk.logout();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
-    }
-  }
-
-  initUnitShareMemorial({int memorialId, String pageType, bool follower}) async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
-
-    if(login){
-      FlutterBranchSdk.logout();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-    }
-  }
-
-  @override
-  void initState(){
-    super.initState();
-    listenDeepLinkData();
-  }
-
-  @override
-  void dispose() {
-    streamSubscription.cancel();
-    super.dispose();
   }
 
   @override
@@ -637,29 +564,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                         GestureDetector(
                           onTap: () async{
-                            // Navigator.pushReplacementNamed(context, '/home/regular');
-
-                            // initBranchReferences();
-                            initBranchShare();
-
-                            FlutterBranchSdk.setIdentity('alm-share-link');
-                            // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-
-                            BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                                buo: buo,
-                                linkProperties: lp,
-                                messageText: 'FacesbyPlaces App',
-                                androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                                androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
-
-                            if (response.success) {
-                              print('Link generated: ${response.result}');
-
-                              print('showShareSheet Sucess');
-                            } else {
-                              FlutterBranchSdk.logout();
-                              print('Error : ${response.errorCode} - ${response.errorMessage}');
-                            }
+                            Navigator.pushReplacementNamed(context, '/home/regular');
                           },
                           child: Text('Sign in as Guest',
                             style: TextStyle(

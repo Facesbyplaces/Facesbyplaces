@@ -19,6 +19,9 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({int page}) asy
     }
   );
 
+  print('The response status code of notifications is ${response.statusCode}');
+  print('The response status bofy of notifications is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMHomeTabNotificationMain.fromJson(newValue);

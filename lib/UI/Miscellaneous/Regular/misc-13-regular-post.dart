@@ -80,7 +80,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
         ..addCustomMetadata('link-post-id', postId)
         ..addCustomMetadata('link-like-status', likePost)
         ..addCustomMetadata('link-number-of-likes', likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Regular')
+        ..addCustomMetadata('link-type-of-account', 'Memorial')
     );
 
     lp = BranchLinkProperties(

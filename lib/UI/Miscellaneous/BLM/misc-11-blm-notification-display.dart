@@ -24,6 +24,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
       contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       tileColor: Color(0xffffffff),
       onTap: () async{
+        print('The post id is $postId');
         context.showLoaderOverlay();
         var result = await apiBLMShowOriginalPost(postId: postId);                
         context.hideLoaderOverlay();

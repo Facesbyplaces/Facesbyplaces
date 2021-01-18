@@ -18,6 +18,9 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost({int postId}) asyn
     }
   );
 
+  print('The status code of original post is ${response.statusCode}');
+  print('The status body of original post is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowOriginalPostMainMain.fromJson(newValue);

@@ -8,7 +8,8 @@ Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
 
   try{
     final http.Response response = await http.post(
-      'http://fbp.dev1.koda.ws/blm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
+      // 'http://fbp.dev1.koda.ws/blm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
+      'http://fbp.dev1.koda.ws/auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=1',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }
@@ -20,11 +21,15 @@ Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
     
     if(response.statusCode == 200){
       var value = json.decode(response.body);
-      var user = value['user'];
+      var user = value['data'];
       int userId = user['id'];
       String verificationCode = user['verification_code'];
 
       final sharedPrefs = await SharedPreferences.getInstance();
+
+      print('The access token in registration ${response.headers['access-token']}');
+      print('The uid in registration ${response.headers['uid']}');
+      print('The client in registration ${response.headers['client']}');
 
       sharedPrefs.setInt('blm-user-id', userId);
       sharedPrefs.setString('blm-verification-code', verificationCode);

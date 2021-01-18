@@ -6,7 +6,8 @@ Future<bool> apiBLMPasswordReset({String email, String redirectLink}) async{
     // 'http://fbp.dev1.koda.ws/auth/password?email=$email&redirect_url=$redirectLink',
     // 'http://fbp.dev1.koda.ws/alm_auth/password?email=$email&redirect_url=$redirectLink',
     // 'http://fbp.dev1.koda.ws/auth/password?email=$email&redirect_url=$redirectLink ',
-    'http://fbp.dev1.koda.ws/blm_auth/password?email=$email&redirect_url=$redirectLink',
+    // 'http://fbp.dev1.koda.ws/blm_auth/password?email=$email&redirect_url=$redirectLink',
+    'http://fbp.dev1.koda.ws/auth/password?email=$email&redirect_url=$redirectLink',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }

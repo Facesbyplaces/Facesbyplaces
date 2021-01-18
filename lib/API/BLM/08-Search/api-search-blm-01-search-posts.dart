@@ -19,6 +19,9 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({String keywords, int page}) asyn
     }
   );
 
+  print('The response status of search posts is ${response.statusCode}');
+  print('The response code of search posts is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchPostMain.fromJson(newValue);

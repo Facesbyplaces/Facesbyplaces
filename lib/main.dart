@@ -52,8 +52,11 @@ void main() async{
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
   Map<dynamic, dynamic> params = await FlutterBranchSdk.getFirstReferringParams();
+  Map<dynamic, dynamic> paramsLatest = await FlutterBranchSdk.getLatestReferringParams();
 
   print('The params is $params');
+
+  print('The latest paras is $paramsLatest');
 
   // FlutterBranchSdk.logout();
   // print('Logout!');

@@ -18,6 +18,9 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({int page}) async{
     }
   );
 
+  print('The response status of search suggested is ${response.statusCode}');
+  print('The response code of search suggested is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchSuggestedMain.fromJson(newValue);

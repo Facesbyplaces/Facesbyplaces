@@ -8,7 +8,7 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-  // int prefsUserID = sharedPrefs.getInt('regular-user-id');
+  int prefsUserID = sharedPrefs.getInt('regular-user-id');
 
   print('The access token is $getAccessToken');
   print('The getUID is $getUID');
@@ -20,7 +20,7 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
     formData = FormData();
 
     formData = FormData.fromMap({
-      // 'user_id': prefsUserID,
+      'user_id': prefsUserID,
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 
@@ -42,10 +42,10 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
     print('The response status data in upload photo is ${response.data}');
 
     if(response.statusCode == 200){
-      sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setBool('regular-user-session', true);
+      // sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+      // sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setBool('regular-user-session', true);
       result = true;
     }
     

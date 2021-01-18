@@ -9,7 +9,8 @@ Future<bool> apiBLMLogin({String email, String password}) async{
   try{
     final http.Response response = await http.post(
       // 'http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password&account_type=1',
-      'http://fbp.dev1.koda.ws/blm_auth/sign_in?account_type=1&password=$password&email=$email',
+      // 'http://fbp.dev1.koda.ws/blm_auth/sign_in?account_type=1&password=$password&email=$email',
+      'http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&password=$password&email=$email',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }

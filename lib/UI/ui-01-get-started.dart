@@ -4,6 +4,9 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'BLM/blm-06-password-reset.dart';
+import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
@@ -32,14 +35,14 @@ class UIGetStartedState extends State<UIGetStarted>{
         print('The link category is ${data['link-like-status']}');
         print('The link category is ${data['link-number-of-likes']}');
         print('The link category is ${data['link-type-of-account']}');
-        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes']);
+        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
       }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
         print('The link category is ${data['link-category']}');
         print('The link category is ${data['link-memorial-id']}');
         print('The link category is ${data['link-type-of-account']}');
         initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
       }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
-        initUnit();
+        initUnit(resetType: data["reset-type"]);
       }
     }, onError: (error) {
       PlatformException platformException = error as PlatformException;
@@ -47,29 +50,42 @@ class UIGetStartedState extends State<UIGetStarted>{
     });
   }
 
-  initUnit() async{
+  initUnit({String resetType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     print('The value of isUserIdentified for login is $login');
 
     if(login){
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
-      var value2 = await FlutterBranchSdk.getFirstReferringParams();
+      // var value2 = await FlutterBranchSdk.getFirstReferringParams();
 
-      print('The value of getLatestReferringParams is $value1');
-      print('The value of getFirstReferringParams is $value2');
+      // print('The value of getLatestReferringParams is $value1');
+      // print('The value of getFirstReferringParams is $value2');
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
+      print('The token is ${value1['token']}');
+
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
+      if(resetType == 'Regular'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
+      }
     }
   }
 
 
-  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes}) async{
+  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes, String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if(login){
       FlutterBranchSdk.logout();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+
+      if(pageType == 'Blm'){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+      }else{
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+      }
+      
     }
   }
 
@@ -78,7 +94,13 @@ class UIGetStartedState extends State<UIGetStarted>{
 
     if(login){
       FlutterBranchSdk.logout();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+
+      if(pageType == 'Blm'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      }
     }
   }
 

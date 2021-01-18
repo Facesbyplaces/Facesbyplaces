@@ -9,6 +9,10 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({int page}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  print('The access token in memorials list is $getAccessToken');
+  print('The uid in memorials list is $getUID');
+  print('The client in memorials list is $getClient');
+
   final http.Response response = await http.get(
     'http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
     headers: <String, String>{
@@ -18,6 +22,9 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({int page}) async{
       'client': getClient,
     }
   );
+
+  print('The memorials list code in blm is ${response.statusCode}');
+  print('The memorials list body in blm is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

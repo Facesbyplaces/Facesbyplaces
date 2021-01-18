@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
@@ -61,7 +63,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
         print('The link category is ${data['link-like-status']}');
         print('The link category is ${data['link-number-of-likes']}');
         print('The link category is ${data['link-type-of-account']}');
-        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes']);
+        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
       }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
         print('The link category is ${data['link-category']}');
         print('The link category is ${data['link-memorial-id']}');
@@ -75,12 +77,18 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     });
   }
 
-  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes}) async{
+  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes, String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if(login){
       FlutterBranchSdk.logout();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+
+      if(pageType == 'Blm'){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+      }else{
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+      }
     }
   }
 
@@ -89,7 +97,12 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
     if(login){
       FlutterBranchSdk.logout();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      
+      if(pageType == 'Blm'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      }else{
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+      }
     }
   }
 

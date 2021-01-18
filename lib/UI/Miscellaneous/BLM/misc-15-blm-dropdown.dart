@@ -5,14 +5,63 @@ import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
 // import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
-class MiscBLMDropDownTemplate extends StatelessWidget{
+// class MiscBLMDropDownTemplate extends StatelessWidget{
+class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;
+  final bool likePost;
+  final int likesCount;
   final String reportType;
 
-  MiscBLMDropDownTemplate({this.postId, this.reportType});
+  MiscBLMDropDownTemplate({this.postId, this.likePost, this.likesCount, this.reportType});
+
+  MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
+}
+
+class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
+
+  // final int postId;
+  // final String reportType;
+
+  // MiscBLMDropDownTemplate({this.postId, this.reportType});
+
+  final int postId;
+  final bool likePost;
+  final int likesCount;
+  final String reportType;
+
+  MiscBLMDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType});
 
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
+
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+
+  void initBranchShare(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Post')
+        ..addCustomMetadata('link-post-id', postId)
+        ..addCustomMetadata('link-like-status', likePost)
+        ..addCustomMetadata('link-number-of-likes', likesCount)
+        ..addCustomMetadata('link-type-of-account', 'Memorial')
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
 
   @override
   Widget build(BuildContext context) {

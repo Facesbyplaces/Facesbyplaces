@@ -19,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'blm-06-password-reset.dart';
-import 'dart:async';
 
 class BLMLogin extends StatefulWidget{
 
@@ -33,20 +32,6 @@ class BLMLoginState extends State<BLMLogin>{
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-  StreamSubscription<Map> streamSubscription;
-
-  void listenDeepLinkData(){
-    streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-      if (data.containsKey("+clicked_branch_link") &&
-          data["+clicked_branch_link"] == true) {
-          initUnit();
-      }
-    }, onError: (error) {
-      PlatformException platformException = error as PlatformException;
-      print('InitSession error: ${platformException.code} - ${platformException.message}');
-    });
-
-  }
 
   void initBranchReferences(){
     buo = BranchUniversalObject(
@@ -87,18 +72,6 @@ class BLMLoginState extends State<BLMLogin>{
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
     }
-  }
-
-  @override
-  void initState(){
-    super.initState();
-    listenDeepLinkData();
-  }
-
-  @override
-  void dispose() {
-    streamSubscription.cancel();
-    super.dispose();
   }
 
   @override

@@ -9,6 +9,8 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  int prefsUserID = sharedPrefs.getInt('blm-user-id');
+
   print('The access token is $getAccessToken');
   print('The uid is $getUID');
   print('The client is $getClient');
@@ -20,13 +22,15 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
     formData = FormData();
 
     formData = FormData.fromMap({
+      'user_id': prefsUserID,
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 
     
 
     // var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload/:id', data: formData,
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+    // var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
       options: Options(
         headers: <String, String>{
           'access-token': getAccessToken,
@@ -40,10 +44,10 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
     print('The status data of upload photo is is ${response.data}');
 
     if(response.statusCode == 200){
-      sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      sharedPrefs.setBool('blm-user-session', true);
+      // sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
+      // sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
+      // sharedPrefs.setBool('blm-user-session', true);
       result = true;
     }
   }catch(e){
