@@ -55,7 +55,13 @@ void main() async{
 
   print('The params is $params');
 
+  // FlutterBranchSdk.logout();
+  // print('Logout!');
+
   // FlutterBranchSdk.validateSDKIntegration();
+
+
+
 
   runApp(
     GlobalLoaderOverlay(
@@ -115,6 +121,7 @@ void main() async{
 
           
           
+          // '/home/regular': (BuildContext context) => HomeRegularScreen(isShared: false,),
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
           '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
           '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),

@@ -1,8 +1,11 @@
-import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
+// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
@@ -37,15 +40,26 @@ class RegularLoginState extends State<RegularLogin>{
 
   void listenDeepLinkData(){
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-      if (data.containsKey("+clicked_branch_link") &&
-          data["+clicked_branch_link"] == true) {
-          initUnit();
+      if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && data.containsKey("link-category")){
+        print('The link category is ${data["link-category"]}');
+        print('The link category is ${data['link-category']}');
+        print('The link category is ${data['link-post-id']}');
+        print('The link category is ${data['link-like-status']}');
+        print('The link category is ${data['link-number-of-likes']}');
+        print('The link category is ${data['link-type-of-account']}');
+        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes']);
+      }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
+        print('The link category is ${data['link-category']}');
+        print('The link category is ${data['link-memorial-id']}');
+        print('The link category is ${data['link-type-of-account']}');
+        initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
+      }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
+        initUnit();
       }
     }, onError: (error) {
       PlatformException platformException = error as PlatformException;
       print('InitSession error: ${platformException.code} - ${platformException.message}');
     });
-
   }
 
   void initBranchReferences(){
@@ -73,6 +87,28 @@ class RegularLoginState extends State<RegularLogin>{
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
+  void initBranchShare(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+          ..addCustomMetadata('link-category', 'Post')
+          ..addCustomMetadata('link-post-id', 1)
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
+
   initUnit() async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
@@ -86,6 +122,24 @@ class RegularLoginState extends State<RegularLogin>{
       print('The value of getFirstReferringParams is $value2');
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
+    }
+  }
+
+  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
+
+    if(login){
+      FlutterBranchSdk.logout();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+    }
+  }
+
+  initUnitShareMemorial({int memorialId, String pageType, bool follower}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
+
+    if(login){
+      FlutterBranchSdk.logout();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
     }
   }
 
@@ -447,13 +501,15 @@ class RegularLoginState extends State<RegularLogin>{
                               bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
                               if(validEmail == true){
                                 initBranchReferences();
+                                // initBranchShare();
 
                                 FlutterBranchSdk.setIdentity('alm-user-forgot-password');
                                 BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                                 
                                 if (response.success) {
                                   context.showLoaderOverlay();
-                                  bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                                  // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                                  bool result = await apiRegularPasswordReset(email: email, redirectLink: response.result);
                                   context.hideLoaderOverlay();
                                   
                                   print('Link generated: ${response.result}');
@@ -580,8 +636,30 @@ class RegularLoginState extends State<RegularLogin>{
                         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                         GestureDetector(
-                          onTap: (){
-                            Navigator.pushReplacementNamed(context, '/home/regular');
+                          onTap: () async{
+                            // Navigator.pushReplacementNamed(context, '/home/regular');
+
+                            // initBranchReferences();
+                            initBranchShare();
+
+                            FlutterBranchSdk.setIdentity('alm-share-link');
+                            // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+
+                            BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                buo: buo,
+                                linkProperties: lp,
+                                messageText: 'FacesbyPlaces App',
+                                androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations');
+
+                            if (response.success) {
+                              print('Link generated: ${response.result}');
+
+                              print('showShareSheet Sucess');
+                            } else {
+                              FlutterBranchSdk.logout();
+                              print('Error : ${response.errorCode} - ${response.errorMessage}');
+                            }
                           },
                           child: Text('Sign in as Guest',
                             style: TextStyle(

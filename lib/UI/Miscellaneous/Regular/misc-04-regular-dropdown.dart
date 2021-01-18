@@ -6,15 +6,59 @@ import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
 // import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
-class MiscRegularDropDownTemplate extends StatelessWidget{
+// class MiscRegularDropDownTemplate extends StatelessWidget{
 
+class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
+  final bool likePost;
+  final int likesCount;
   final String reportType;
 
-  MiscRegularDropDownTemplate({this.postId, this.reportType});
+  MiscRegularDropDownTemplate({this.postId, this.likePost, this.likesCount, this.reportType});
+
+  MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType);
+}
+
+class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate>{
+
+  final int postId;
+  final bool likePost;
+  final int likesCount;
+  final String reportType;
+
+  MiscRegularDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType});
 
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
+
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+
+  void initBranchShare(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Post')
+        ..addCustomMetadata('link-post-id', postId)
+        ..addCustomMetadata('link-like-status', likePost)
+        ..addCustomMetadata('link-number-of-likes', likesCount)
+        ..addCustomMetadata('link-type-of-account', 'Regular')
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +86,42 @@ class MiscRegularDropDownTemplate extends StatelessWidget{
             onChanged: (String listValue) async{
               dropDownList = listValue;
               if(dropDownList == 'Share'){
-                // await FlutterShare.share(
-                //   title: 'Share',
-                //   text: 'Share the link',
-                //   linkUrl: 'https://flutter.dev/',
-                //   chooserTitle: 'Share link'
-                // );
+                initBranchShare();
+
+                FlutterBranchSdk.setIdentity('alm-share-link');
+
+                BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                  buo: buo,
+                  linkProperties: lp,
+                  messageText: 'FacesbyPlaces App',
+                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                );
+
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                  print('showShareSheet Sucess');
+                  print('The post id is $postId');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: reportType,)));
               }else{
+                initBranchShare();
+                FlutterBranchSdk.setIdentity('alm-share-copied-link');
+
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
+
                 // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                FlutterClipboard.copy('https://29cft.test-app.link/suCwfzCi6bb').then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },
           );

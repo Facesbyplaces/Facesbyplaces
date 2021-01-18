@@ -2,7 +2,8 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-google.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
-import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-08-password-reset.dart';
+// import 'package:facesbyplaces/API/Home/api-01-home-reset-password.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
@@ -429,7 +430,8 @@ class BLMLoginState extends State<BLMLogin>{
                                   
                                   if (response.success) {
                                     context.showLoaderOverlay();
-                                    bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                                    // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                                    bool result = await apiBLMPasswordReset(email: email, redirectLink: response.result);
                                     context.hideLoaderOverlay();
                                     
                                     print('Link generated: ${response.result}');

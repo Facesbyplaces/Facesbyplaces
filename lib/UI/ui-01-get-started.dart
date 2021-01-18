@@ -1,12 +1,97 @@
+import 'dart:async';
+
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
 import 'package:flutter/material.dart';
 
+import 'Regular/regular-06-password-reset.dart';
+
 const double pi = 3.1415926535897932;
 
-class UIGetStarted extends StatelessWidget {
+// class UIGetStarted extends StatelessWidget {
+class UIGetStarted extends StatefulWidget{
+  
+  UIGetStartedState createState() => UIGetStartedState();
+}
+
+class UIGetStartedState extends State<UIGetStarted>{
+
+  StreamSubscription<Map> streamSubscription;
+
+  void listenDeepLinkData(){
+    streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+      if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
+        print('The link category is ${data['link-category']}');
+        print('The link category is ${data['link-post-id']}');
+        print('The link category is ${data['link-like-status']}');
+        print('The link category is ${data['link-number-of-likes']}');
+        print('The link category is ${data['link-type-of-account']}');
+        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes']);
+      }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
+        print('The link category is ${data['link-category']}');
+        print('The link category is ${data['link-memorial-id']}');
+        print('The link category is ${data['link-type-of-account']}');
+        initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
+      }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
+        initUnit();
+      }
+    }, onError: (error) {
+      PlatformException platformException = error as PlatformException;
+      print('InitSession error: ${platformException.code} - ${platformException.message}');
+    });
+  }
+
+  initUnit() async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
+
+    print('The value of isUserIdentified for login is $login');
+
+    if(login){
+      var value1 = await FlutterBranchSdk.getLatestReferringParams();
+      var value2 = await FlutterBranchSdk.getFirstReferringParams();
+
+      print('The value of getLatestReferringParams is $value1');
+      print('The value of getFirstReferringParams is $value2');
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
+    }
+  }
+
+
+  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
+
+    if(login){
+      FlutterBranchSdk.logout();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+    }
+  }
+
+  initUnitShareMemorial({int memorialId, String pageType, bool follower}) async{
+    bool login = await FlutterBranchSdk.isUserIdentified();
+
+    if(login){
+      FlutterBranchSdk.logout();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+    }
+  }
+
+  void initState(){
+    super.initState();
+    listenDeepLinkData();
+  }
+
+  @override
+  void dispose() {
+    streamSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
