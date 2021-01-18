@@ -6,6 +6,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
 
   def create
     account_type = params[:account_type].to_i
+    puts account_type
     
     if account_type  == 1 
       # BLM USER SIGN_UP
