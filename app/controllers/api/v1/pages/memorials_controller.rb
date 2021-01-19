@@ -8,6 +8,11 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         
         # add count to view of page
         page = Pageowner.where(page_type: 'Memorial', page_id: memorial.id).first
+
+        if page == nil
+            return render json: {errors: "Page not found"}, status: 400
+        end
+        
         if page.view == nil
             page.update(view: 1)
         else
