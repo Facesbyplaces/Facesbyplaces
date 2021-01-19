@@ -44,7 +44,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 
             # Add to notification
                 # For blm followers
-                (post.page.blm_users.uniq - [user()]).each do |user|
+                (post.page.users.uniq - [user()]).each do |user|
                     # check if this user can get notification
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
