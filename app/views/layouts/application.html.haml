@@ -1,0 +1,35 @@
+/ <!DOCTYPE html>
+/ <html>
+/   <head>
+/     <title>FbpApi</title>
+/     <%= csrf_meta_tags %>
+/     <%= csp_meta_tag %>
+
+/     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+/     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+/     # <%= javascript_include_tag 'https://checkout.stripe.com/checkout.js' %>
+/   </head>
+
+/   <body>
+/     <%= yield %>
+/   </body>
+/ </html>
+/  !!!
+%html
+  %head
+    %title FacesByPlaces
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all'
+    / = stylesheet_link_tag 'reset', media: 'all'
+    / = javascript_pack_tag 'application'
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+
+    / Basic
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    = stylesheet_link_tag "pages"
+  %body
+    = render "header"
+    = yield
+    = render "footer"
