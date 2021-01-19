@@ -42,11 +42,9 @@ class BLMLoginState extends State<BLMLogin>{
       keywords: ['FacesbyPlaces', 'Link', 'App'],
       publiclyIndex: true,
       locallyIndex: true,
-      contentMetadata: BranchContentMetaData()..addCustomMetadata('custom_string', 'fbp-link')
-          ..addCustomMetadata('custom_number', 12345)
-          ..addCustomMetadata('custom_bool', true)
-          ..addCustomMetadata('custom_list_number', [1,2,3,4,5 ])
-          ..addCustomMetadata('custom_list_string', ['a', 'b', 'c']),
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('custom_string', 'fbp-link')
+        ..addCustomMetadata('reset-type', 'Blm')
     );
 
     lp = BranchLinkProperties(
@@ -55,6 +53,7 @@ class BLMLoginState extends State<BLMLogin>{
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
+    // lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
@@ -382,7 +381,7 @@ class BLMLoginState extends State<BLMLogin>{
                                 if(validEmail == true){
                                   initBranchReferences();
 
-                                  FlutterBranchSdk.setIdentity('alm-user-forgot-password');
+                                  FlutterBranchSdk.setIdentity('blm-user-forgot-password');
                                   BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                                   
                                   if (response.success) {

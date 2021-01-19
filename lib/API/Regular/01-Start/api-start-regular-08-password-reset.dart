@@ -12,6 +12,7 @@ Future<bool> apiRegularPasswordReset({String email, String redirectLink}) async{
 
   print('The reset password in regular status code is ${response.statusCode}');
   print('The reset password in regular status body is ${response.body}');
+  print('The reset headers in regular status body is ${response.headers}');
 
   if(response.statusCode == 200){
     return true;

@@ -10,6 +10,10 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
+  for(int i = 0; i < post.tagPeople.length; i++){
+    print('The userId is ${post.tagPeople[i].userId} and the accountType is ${post.tagPeople[i].accountType}');
+  }
+
   try{
     var dioRequest = dio.Dio();
 
@@ -23,15 +27,26 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
       'post[location]': post.location,
       'post[latitude]': post.latitude,
       'post[longitude]': post.longitude,
-      'tag_people': post.tagPeople,
+      // 'tag_people': post.tagPeople,
     });
     
     // if(post.imagesOrVideos != null){
     //   var file = await dio.MultipartFile.fromFile(post.imagesOrVideos.path, filename: post.imagesOrVideos.path);
     //   formData.files.add(MapEntry('post[imagesOrVideos][]', file));
     // }
+    if(post.tagPeople != null){
+      for(int i = 0; i < post.tagPeople.length; i++){
+        if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
+          var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
+          formData.files.add(MapEntry('post[imagesOrVideos][]', file));
+        }
+      }
+
+    }
+
+    
     if(post.imagesOrVideos != null || post.imagesOrVideos != ['']){
-      for(int i = 0; i < post.imagesOrVideos.length - 1; i++){
+      for(int i = 0; i < post.imagesOrVideos.length; i++){
         if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
           formData.files.add(MapEntry('post[imagesOrVideos][]', file));
@@ -74,7 +89,8 @@ class APIBLMCreatePost{
   List<dynamic> imagesOrVideos;
   double latitude;
   double longitude;
-  List<int> tagPeople;
+  // List<int> tagPeople;
+  List<TaggedPeople> tagPeople;
   
   APIBLMCreatePost({
     this.pageType, 
@@ -85,5 +101,15 @@ class APIBLMCreatePost{
     this.latitude,
     this.longitude, 
     this.tagPeople,
+  });
+}
+
+class TaggedPeople{
+  int userId;
+  int accountType;
+
+  TaggedPeople({
+    this.userId,
+    this.accountType,
   });
 }

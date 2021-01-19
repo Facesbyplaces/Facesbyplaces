@@ -26,13 +26,18 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       'tag_people': post.tagPeople,
     });
     
-    // if(post.imagesOrVideos != null){
-    //   var file = await dio.MultipartFile.fromFile(post.imagesOrVideos.path, filename: post.imagesOrVideos.path);
-    //   formData.files.add(MapEntry('post[imagesOrVideos][]', file));
-    // }
+
+
+//  Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['product_id'] = this.product_id;
+//     data['quantity'] = this.quantity;
+//     data['payment'] = this.payment;
+//     return data;
+//   }
 
     if(post.imagesOrVideos != null || post.imagesOrVideos != ['']){
-      for(int i = 0; i < post.imagesOrVideos.length - 1; i++){
+      for(int i = 0; i < post.imagesOrVideos.length; i++){
         if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
           formData.files.add(MapEntry('post[imagesOrVideos][]', file));

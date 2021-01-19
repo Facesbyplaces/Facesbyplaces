@@ -58,6 +58,8 @@ class RegularLoginState extends State<RegularLogin>{
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    // lp.addControlParam('url', 'https://4n5z1.test-app.link/fK7y44Cwadb?bnc_validate=true');
+    // lp.addControlParam('\$uri_redirect_mode', '1');
   }
 
   @override

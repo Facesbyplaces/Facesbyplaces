@@ -1,3 +1,5 @@
+
+
 import 'package:http/http.dart' as http;
 
 Future<bool> apiBLMPasswordReset({String email, String redirectLink}) async{
@@ -15,8 +17,10 @@ Future<bool> apiBLMPasswordReset({String email, String redirectLink}) async{
 
   print('The reset password in regular status code is ${response.statusCode}');
   print('The reset password in regular status body is ${response.body}');
+  print('The reset password in regular status body is ${response.body}');
 
   if(response.statusCode == 200){
+
     return true;
   }else{
     return false;

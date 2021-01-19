@@ -13,8 +13,9 @@ import 'dart:io';
 class BLMTaggedUsers{
   String name;
   int userId;
+  int accountType;
 
-  BLMTaggedUsers({this.name, this.userId,});
+  BLMTaggedUsers({this.name, this.userId, this.accountType});
 }
 
 class BLMManagedPages{
@@ -165,11 +166,18 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                   Location.LocationData locationData = await location.getLocation();
 
-                  List<int> userIds = [];
+                  // List<int> userIds = [];
+                  List<TaggedPeople> userIds = [];
 
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
-                      userIds.add(users[i].userId);
+                      // userIds.add(users[i].userId);
+                      userIds.add(
+                        TaggedPeople(
+                          userId: users[i].userId,
+                          accountType: users[i].accountType,
+                        ),
+                      );
                     }
                   }
 
@@ -191,6 +199,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     latitude: locationData.latitude,
                     longitude: locationData.longitude,
                     tagPeople: userIds,
+
                   );
 
                   
@@ -288,6 +297,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         (index) => Chip(
                           labelPadding: const EdgeInsets.only(left: 8.0),
                           label: Text(users[index].name),
+                          // label: Text('${users[index].accountType}'),
                           deleteIcon: Icon(
                             Icons.close,
                             size: 18,

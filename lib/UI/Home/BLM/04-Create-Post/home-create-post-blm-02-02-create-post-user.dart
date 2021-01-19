@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/API/BLM/08-Search/api-23-blm-search-users.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'home-create-post-blm-01-create-post.dart';
@@ -9,8 +9,10 @@ class BLMSearchUsers{
   String firstName;
   String lastName;
   String email;
+  int accountType;
+  String image;
 
-  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.email});
+  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.email, this.accountType, this.image});
 }
 
 class HomeBLMCreatePostSearchUser extends StatefulWidget{
@@ -39,7 +41,16 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
       itemRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.users.length; i++){
-        users.add(BLMSearchUsers(userId: newValue.users[i].userId, firstName: newValue.users[i].firstName, lastName: newValue.users[i].lastName, email: newValue.users[i].email));
+        users.add(
+          BLMSearchUsers(
+            userId: newValue.users[i].userId, 
+            firstName: newValue.users[i].firstName, 
+            lastName: newValue.users[i].lastName, 
+            email: newValue.users[i].email,
+            accountType: newValue.users[i].accountType,
+            image: newValue.users[i].image,
+          )
+        );
       }
 
       if(mounted)
@@ -179,7 +190,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                 itemBuilder: (c, i) {
                   return GestureDetector(
                     onTap: (){
-                      Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
+                      Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
@@ -187,7 +198,11 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                       child: Row(
                         children: [
 
-                          CircleAvatar(backgroundImage: AssetImage('assets/icons/graveyard.png'), backgroundColor: Color(0xff888888)),
+                          CircleAvatar(
+                            // backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                            backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
+                            backgroundColor: Color(0xff888888),
+                          ),
 
                           SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 

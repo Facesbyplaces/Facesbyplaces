@@ -62,14 +62,17 @@ class UIGetStartedState extends State<UIGetStarted>{
       print('The value of getLatestReferringParams is $value1');
       print('The value of getFirstReferringParams is $value2');
 
+      print('The token of the link is ${value1['reset_password_token']}');
+      print('The reset type is $resetType');
+
       // print('The token is ${value1['token']}');
 
       // Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
       if(resetType == 'Regular'){
         FlutterBranchSdk.logout();
-        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
       }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset(resetToken: value1['reset_password_token'],)));
       }
     }
   }

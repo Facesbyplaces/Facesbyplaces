@@ -1,19 +1,25 @@
 // import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-change-password.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-09-password-change.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 // import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:loader_overlay/loader_overlay.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordReset extends StatefulWidget{
+  final String resetToken;
+  RegularPasswordReset({this.resetToken});
 
-  RegularPasswordResetState createState() => RegularPasswordResetState();
+  RegularPasswordResetState createState() => RegularPasswordResetState(resetToken: resetToken);
 }
 
 class RegularPasswordResetState extends State<RegularPasswordReset>{
+  final String resetToken;
+  RegularPasswordResetState({this.resetToken});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -79,18 +85,23 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
 
                       
 
-                      // if(_key1.currentState.controller.text == _key2.currentState.controller.text){
-                      //   context.showLoaderOverlay();
-                      //   bool result = await apiRegularChangePassword(currentPassword: _key1.currentState.controller.text, newPassword: _key2.currentState.controller.text);
-                      //   context.hideLoaderOverlay();
+                      if(_key1.currentState.controller.text == _key2.currentState.controller.text){
+                        context.showLoaderOverlay();
+                        bool result = await apiRegularPasswordChange(
+                          password: _key1.currentState.controller.text, 
+                          passwordConfirmation: _key2.currentState.controller.text,
+                          resetToken: resetToken,
+                          // resetToken: 'hmvZH4U6XeA6S7pKTqRP',
+                        );
+                        context.hideLoaderOverlay();
 
-                      //   if(result){
-                      //     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                      //     Navigator.pushReplacementNamed(context, '/home/regular');
-                      //   }else{
-                      //     await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
-                      //   }
-                      // }
+                        if(result){
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
+                          Navigator.pushReplacementNamed(context, '/home/regular');
+                        }else{
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        }
+                      }
 
                       // context.showLoaderOverlay();
                       // bool result = await apiRegularChangePassword(currentPassword: _key1.currentState.controller.text, newPassword: _key2.currentState.controller.text);

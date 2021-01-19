@@ -58,6 +58,8 @@ void main() async{
 
   print('The latest paras is $paramsLatest');
 
+  
+
   // FlutterBranchSdk.logout();
   // print('Logout!');
 

@@ -1,19 +1,25 @@
 // import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-change-password.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-09-password-change.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 // import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:loader_overlay/loader_overlay.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class BLMPasswordReset extends StatefulWidget{
+  final String resetToken;
+  BLMPasswordReset({this.resetToken});
 
   BLMPasswordResetState createState() => BLMPasswordResetState();
 }
 
 class BLMPasswordResetState extends State<BLMPasswordReset>{
+  final String resetToken;
+  BLMPasswordResetState({this.resetToken});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -76,6 +82,25 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                       color: Color(0xffffffff),
                     ),
                     onPressed: () async{
+
+
+                      if(_key1.currentState.controller.text == _key2.currentState.controller.text){
+                        context.showLoaderOverlay();
+                        bool result = await apiBLMPasswordChange(
+                          password: _key1.currentState.controller.text, 
+                          passwordConfirmation: _key2.currentState.controller.text,
+                          resetToken: resetToken,
+                          // resetToken: 'hmvZH4U6XeA6S7pKTqRP',
+                        );
+                        context.hideLoaderOverlay();
+
+                        if(result){
+                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
+                          Navigator.pushReplacementNamed(context, '/home/regular');
+                        }else{
+                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        }
+                      }
 
                       // if(_key1.currentState.controller.text == _key2.currentState.controller.text){
                       //   context.showLoaderOverlay();

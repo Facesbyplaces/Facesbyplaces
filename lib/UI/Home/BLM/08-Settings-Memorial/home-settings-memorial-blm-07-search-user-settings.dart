@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-11-add-family.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-12-add-friends.dart';
-import 'package:facesbyplaces/API/BLM/08-Search/api-23-blm-search-users.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
