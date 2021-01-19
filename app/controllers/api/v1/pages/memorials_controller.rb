@@ -118,7 +118,7 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         adminsRaw = AlmRole.where(resource_type: 'Memorial', resource_id: params[:id]).joins("INNER JOIN alm_users_alm_roles ON alm_roles.id = alm_users_alm_roles.alm_role_id").pluck("alm_users_alm_roles.alm_user_id")
 
         adminsRaw.each do |admin_id|
-            AlmUser.find(admin_id).destroy 
+            AlmUser.find(admin_id).roles.where(resource_type: 'Memorial', resource_id: params[:id]).first.destroy 
         end
         
         render json: {status: "deleted"}

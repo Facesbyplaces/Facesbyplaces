@@ -121,7 +121,7 @@ class Api::V1::Pages::BlmController < ApplicationController
         adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
 
         adminsRaw.each do |admin_id|
-            User.find(admin_id).destroy 
+            User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy 
         end
         
         render json: {status: "deleted"}
