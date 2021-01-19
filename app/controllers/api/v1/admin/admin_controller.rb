@@ -4,6 +4,60 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def allUsers
         users = User.all 
+        alm_users = AlmUser.all
+
+        # BLM Users
+        users = users.page(params[:page]).per(numberOfPage)
+        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif users.total_count < numberOfPage
+            itemsremaining = users.total 
+        else
+            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        # ALM Users
+        alm_users = alm_users.page(params[:page]).per(numberOfPage)
+        if alm_users.total_count == 0 || (alm_users.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif alm_users.total_count < numberOfPage
+            itemsremaining = alm_users.total 
+        else
+            itemsremaining = alm_users.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        blm_users: ActiveModel::SerializableResource.new(
+                                    users, 
+                                    each_serializer: UserSerializer
+                                ),
+                        alm_users: ActiveModel::SerializableResource.new(
+                                    alm_users, 
+                                    each_serializer: UserSerializer
+                        )
+                    }
+    end
+
+    def showBlmUser
+        user = User.find(params[:id]) 
+
+        render json: ActiveModel::SerializableResource.new(
+                        user, 
+                        each_serializer: UserSerializer
+                    )
+    end
+
+    def showAlmUser
+        user = AlmUser.find(params[:id]) 
+
+        render json: ActiveModel::SerializableResource.new(
+                        user, 
+                        each_serializer: UserSerializer
+                    )
+    end
+
+    def searchBlmUser
+        users = User.where('username LIKE :search or email LIKE :search or first_name LIKE :search or last_name LIKE :search', search: params[:keywords])
 
         users = users.page(params[:page]).per(numberOfPage)
         if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -22,17 +76,8 @@ class Api::V1::Admin::AdminController < ApplicationController
                     }
     end
 
-    def showUser
-        user = User.find(params[:id])
-
-        render json: ActiveModel::SerializableResource.new(
-                        user, 
-                        each_serializer: UserSerializer
-                    )
-    end
-
-    def searchUser
-        users = User.where('username LIKE :search or email LIKE :search or first_name LIKE :search or last_name LIKE :search', search: params[:keywords])
+    def searchAlmUser
+        users = AlmUser.where('username LIKE :search or email LIKE :search or first_name LIKE :search or last_name LIKE :search', search: params[:keywords])
 
         users = users.page(params[:page]).per(numberOfPage)
         if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0

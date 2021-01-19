@@ -191,12 +191,17 @@ Rails.application.routes.draw do
       end
 
       namespace :admin do
+
         # all users
         get 'users', to: 'admin#allUsers'
-        # view user
-        get 'users/:id', to: 'admin#showUser'
-        # search user
-        get 'search/user', to: 'admin#searchUser'
+        # view blm user
+        get 'users/blm/:id', to: 'admin#showBlmUser'
+        # view alm user
+        get 'users/alm/:id', to: 'admin#showAlmUser'
+        # search blm user
+        get 'search/blm_user', to: 'admin#searchBlmUser'
+        # search alm user
+        get 'search/alm_user', to: 'admin#searchAlmUser'
   
         # view post
         get 'posts/:id', to: 'admin#showPost'
