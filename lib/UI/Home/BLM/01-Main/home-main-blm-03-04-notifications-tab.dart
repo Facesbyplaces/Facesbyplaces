@@ -18,8 +18,9 @@ class BLMMainPagesNotifications{
   bool read;
   String action;
   int postId;
+  String notificationType;
 
-  BLMMainPagesNotifications({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.actorImage, this.read, this.action, this.postId});
+  BLMMainPagesNotifications({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.actorImage, this.read, this.action, this.postId, this.notificationType});
 }
 
 class HomeBLMNotificationsTab extends StatefulWidget{
@@ -69,6 +70,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             action: newValue.notification[i].action,
             postId: newValue.notification[i].postId,
             actorImage: newValue.notification[i].actor.image,
+            notificationType: newValue.notification[i].notificationType,
           ),
         );
       }
@@ -124,6 +126,8 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
               postId: notifications[i].postId,
               notification: notifications[i].action,
               dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
+              notificationType: notifications[i].notificationType,
+              readStatus: notifications[i].read,
             );
             
           },

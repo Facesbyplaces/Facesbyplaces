@@ -18,8 +18,8 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({int u
     }
   );
 
-  print('The status code of notification settings is ${response.statusCode}');
-  print('The status body of notification settings is ${response.body}');
+  // print('The status code of notification settings is ${response.statusCode}');
+  // print('The status body of notification settings is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

@@ -903,6 +903,23 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                       child: Row(
                         children: [
                           Expanded(child: Container(),),
+                          // Expanded(
+                          //   child: CircleAvatar(
+                          //     radius: SizeConfig.blockSizeVertical * 12,
+                          //     backgroundColor: Color(0xff04ECFF),
+                          //     child: Padding(
+                          //       padding: EdgeInsets.all(5),
+                          //       child: CircleAvatar(
+                          //         radius: SizeConfig.blockSizeVertical * 12,
+                          //         backgroundColor: Color(0xff888888),
+                          //         backgroundImage: CachedNetworkImageProvider(
+                          //           profile.data.memorial.memorialProfileImage,
+                          //           scale: 1.0,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Expanded(
                             child: CircleAvatar(
                               radius: SizeConfig.blockSizeVertical * 12,
@@ -912,10 +929,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  backgroundImage: CachedNetworkImageProvider(
-                                    profile.data.memorial.memorialProfileImage,
-                                    scale: 1.0,
-                                  ),
+                                  // backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                                  backgroundImage: profile.data.memorial.memorialProfileImage != null ? NetworkImage(profile.data.memorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),
                             ),

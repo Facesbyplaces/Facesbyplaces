@@ -36,7 +36,11 @@ class BLMSearchMainPosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
+
+  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class BLMSearchMainSuggested{
@@ -168,6 +172,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
+
+          pageType: newValue.searchPostList[i].page.pageType,
+          famOrFriends: newValue.searchPostList[i].page.famOrFriends,
+          relationship: newValue.searchPostList[i].page.relationship,
           ),    
         );
       }
@@ -568,6 +576,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
+
+              pageType: feeds[i].pageType,
+              famOrFriends: feeds[i].famOrFriends,
+              relationship: feeds[i].relationship,
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
@@ -713,7 +725,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchNearbyExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -763,7 +776,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchBLMExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(
         enablePullDown: true,

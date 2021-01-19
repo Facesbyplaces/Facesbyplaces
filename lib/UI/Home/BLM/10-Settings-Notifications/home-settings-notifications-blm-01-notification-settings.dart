@@ -8,6 +8,7 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-not
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMNotificationSettings extends StatefulWidget{
@@ -102,8 +103,10 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     setState(() {
                                       toggle1 = value;
                                     });
-                                    
+
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationMemorial(hide: toggle1);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),
@@ -122,8 +125,10 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                     setState(() {
                                       toggle2 = value;
                                     });
-                                    
+
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationActivities(hide: toggle2);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),
@@ -142,7 +147,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       toggle3 = value;
                                     });
                                     
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationPostLikes(hide: toggle3);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),
@@ -161,7 +168,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       toggle4 = value;
                                     });
                                     
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationPostComments(hide: toggle4);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),
@@ -200,7 +209,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       toggle5 = value;
                                     });
                                     
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationAddFamily(hide: toggle5);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),
@@ -219,7 +230,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       toggle6 = value;
                                     });
                                     
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationAddFriends(hide: toggle6);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),
@@ -238,7 +251,9 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                                       toggle7 = value;
                                     });
                                     
+                                    context.showLoaderOverlay();
                                     await apiBLMUpdateNotificationAddAdmin(hide: toggle7);
+                                    context.hideLoaderOverlay();
                                   },
                                   activeColor: Color(0xff2F353D),
                                   activeTrackColor: Color(0xff3498DB),

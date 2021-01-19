@@ -873,7 +873,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                                  // backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                                  backgroundImage: profile.data.memorial.memorialProfileImage != null ? NetworkImage(profile.data.memorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),
                             ),

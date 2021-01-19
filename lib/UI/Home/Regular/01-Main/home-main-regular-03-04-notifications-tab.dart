@@ -18,8 +18,9 @@ class RegularMainPagesNotifications{
   bool read;
   String action;
   int postId;
+  String notificationType;
 
-  RegularMainPagesNotifications({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.actorImage, this.read, this.action, this.postId});
+  RegularMainPagesNotifications({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.actorImage, this.read, this.action, this.postId, this.notificationType});
 }
 
 class HomeRegularNotificationsTab extends StatefulWidget{
@@ -69,6 +70,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             action: newValue.notification[i].action,
             postId: newValue.notification[i].postId,
             actorImage: newValue.notification[i].actor.image,
+            notificationType: newValue.notification[i].notificationType,
           ),
         );
       }
@@ -124,6 +126,8 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
               postId: notifications[i].postId,
               notification: notifications[i].action,
               dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
+              notificationType: notifications[i].notificationType,
+              readStatus: notifications[i].read,
             );
             
           },

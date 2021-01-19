@@ -9,9 +9,9 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
+  // print('The access token is $getAccessToken');
+  // print('The uid is $getUID');
+  // print('The client is $getClient');
   
 
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
@@ -23,8 +23,8 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
     }
   );
 
-  print('The status code of user information is ${response.statusCode}');
-  print('The status body of user information is ${response.body}');
+  // print('The status code of user information is ${response.statusCode}');
+  // print('The status body of user information is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

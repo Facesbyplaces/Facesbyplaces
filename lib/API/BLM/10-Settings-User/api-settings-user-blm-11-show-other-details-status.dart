@@ -9,7 +9,8 @@ Future<APIBLMShowOtherDetailsStatus> apiBLMShowOtherDetailsStatus({int userId}) 
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus',
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/users/otherDetailsStatus',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

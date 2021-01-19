@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
@@ -8,10 +8,11 @@ import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
-import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
+// import 'package:flutter/services.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -40,7 +41,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   Future drawerSettings;
   int unreadNotifications;
 
-  StreamSubscription<Map> streamSubscription;
+  // StreamSubscription<Map> streamSubscription;
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async{
     return await apiBLMShowProfileInformation();
@@ -54,53 +55,60 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
     });
   }
 
-  void listenDeepLinkData(){
-    streamSubscription = FlutterBranchSdk.initSession().listen((data) {
-      if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
-        print('The link category is ${data['link-category']}');
-        print('The link category is ${data['link-post-id']}');
-        print('The link category is ${data['link-like-status']}');
-        print('The link category is ${data['link-number-of-likes']}');
-        print('The link category is ${data['link-type-of-account']}');
-        initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes']);
-      }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
-        print('The link category is ${data['link-category']}');
-        print('The link category is ${data['link-memorial-id']}');
-        print('The link category is ${data['link-type-of-account']}');
-        initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
-      }
+  // void listenDeepLinkData(){
+  //   streamSubscription = FlutterBranchSdk.initSession().listen((data) {
+  //     if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
+  //       print('The link category is ${data['link-category']}');
+  //       print('The link category is ${data['link-post-id']}');
+  //       print('The link category is ${data['link-like-status']}');
+  //       print('The link category is ${data['link-number-of-likes']}');
+  //       print('The link category is ${data['link-type-of-account']}');
+  //       initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
+  //     }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
+  //       print('The link category is ${data['link-category']}');
+  //       print('The link category is ${data['link-memorial-id']}');
+  //       print('The link category is ${data['link-type-of-account']}');
+  //       initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
+  //     }
       
-    }, onError: (error) {
-      PlatformException platformException = error as PlatformException;
-      print('InitSession error: ${platformException.code} - ${platformException.message}');
-    });
-  }
+  //   }, onError: (error) {
+  //     PlatformException platformException = error as PlatformException;
+  //     print('InitSession error: ${platformException.code} - ${platformException.message}');
+  //   });
+  // }
 
-  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes}) async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
+  // initUnitSharePost({int postId, bool likeStatus, int numberOfLikes, String pageType}) async{
+  //   bool login = await FlutterBranchSdk.isUserIdentified();
 
-    if(login){
-      FlutterBranchSdk.logout();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
-    }
-  }
+  //   if(login){
+  //     FlutterBranchSdk.logout();
+  //     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
 
-  initUnitShareMemorial({int memorialId, String pageType, bool follower}) async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
+  //     if(pageType == 'Blm'){
+  //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+  //     }else{
+  //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+  //     }
+  //   }
+  // }
 
-    if(login){
-      FlutterBranchSdk.logout();
+  // initUnitShareMemorial({int memorialId, String pageType, bool follower}) async{
+  //   bool login = await FlutterBranchSdk.isUserIdentified();
 
-      if(pageType == 'Blm'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-      }else{
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-      }
-    }
-  }
+  //   if(login){
+  //     FlutterBranchSdk.logout();
+
+  //     if(pageType == 'Blm'){
+  //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+  //     }else{
+  //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
+  //     }
+  //   }
+  // }
 
   void initState(){
     super.initState();
+    // listenDeepLinkData();
     unreadNotifications = 0;
     getUnreadNotifications();
     toggleBottom = 0;
@@ -108,11 +116,11 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
     drawerSettings = getDrawerInformation();
   }
 
-  @override
-  void dispose() {
-    streamSubscription.cancel();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   streamSubscription.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

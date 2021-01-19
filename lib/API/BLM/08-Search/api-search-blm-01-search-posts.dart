@@ -102,12 +102,18 @@ class APIBLMSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  bool follower;
+  // bool follower;
+  // bool manage;
+  // String pageType;
+  // String privacy;
+
   bool manage;
+  bool famOrFriends;
+  bool follower;
   String pageType;
   String privacy;
 
-  APIBLMSearchPostExtendedPage({this.pageId, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
+  APIBLMSearchPostExtendedPage({this.pageId, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedPage(
@@ -119,8 +125,13 @@ class APIBLMSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      follower: parsedJson['follower'],
+      // follower: parsedJson['follower'],
+      // manage: parsedJson['manage'],
+      // pageType: parsedJson['page_type'],
+      // privacy: parsedJson['privacy'],
       manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
       pageType: parsedJson['page_type'],
       privacy: parsedJson['privacy'],
     );

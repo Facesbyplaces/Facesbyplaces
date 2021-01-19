@@ -64,6 +64,9 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
       ),  
     );
 
+    print('The status code in create memorial is ${response.statusCode}');
+    print('The status body in create memorial is ${response.data}');
+
     if(response.statusCode == 200){
       var value = response.data;
       var user = value['memorial'];
@@ -77,6 +80,7 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
       // }
     }
   }catch(e){
+    print('The e in create memorial is $e');
     result = 0;
   }
 

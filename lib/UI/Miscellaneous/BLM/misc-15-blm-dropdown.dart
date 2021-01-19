@@ -16,15 +16,10 @@ class MiscBLMDropDownTemplate extends StatefulWidget{
 
   MiscBLMDropDownTemplate({this.postId, this.likePost, this.likesCount, this.reportType});
 
-  MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState();
+  MiscBLMDropDownTemplateState createState() => MiscBLMDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType);
 }
 
 class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
-
-  // final int postId;
-  // final String reportType;
-
-  // MiscBLMDropDownTemplate({this.postId, this.reportType});
 
   final int postId;
   final bool likePost;
@@ -39,6 +34,8 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
   BranchLinkProperties lp;
 
   void initBranchShare(){
+    print('The post id for initBranchShare is $postId');
+
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
@@ -52,7 +49,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
         ..addCustomMetadata('link-post-id', postId)
         ..addCustomMetadata('link-like-status', likePost)
         ..addCustomMetadata('link-number-of-likes', likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Memorial')
+        ..addCustomMetadata('link-type-of-account', 'Blm')
     );
 
     lp = BranchLinkProperties(
@@ -89,17 +86,42 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
             onChanged: (String listValue) async{
               dropDownList = listValue;
               if(dropDownList == 'Share'){
-                // await FlutterShare.share(
-                //   title: 'Share',
-                //   text: 'Share the link',
-                //   linkUrl: 'https://flutter.dev/',
-                //   chooserTitle: 'Share link'
-                // );
+                initBranchShare();
+
+                FlutterBranchSdk.setIdentity('blm-share-link');
+
+                BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                  buo: buo,
+                  linkProperties: lp,
+                  messageText: 'FacesbyPlaces App',
+                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                );
+
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                  print('showShareSheet Sucess');
+                  print('The post id is $postId');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
               }else{
-                // https://29cft.test-app.link/suCwfzCi6bb
-                FlutterClipboard.copy('https://29cft.test-app.link/suCwfzCi6bb').then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+                initBranchShare();
+                FlutterBranchSdk.setIdentity('alm-share-copied-link');
+
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
+
+                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },
             

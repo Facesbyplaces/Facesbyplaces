@@ -83,6 +83,8 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 
             GestureDetector(
               onTap: (){
+                print('Navigate!');
+                print('The user id is $userId');
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: userId,)));
               },
               child: Container(

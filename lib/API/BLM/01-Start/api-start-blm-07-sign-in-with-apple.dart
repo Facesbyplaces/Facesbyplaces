@@ -12,6 +12,9 @@ Future<bool> apiBLMSignInWithApple({String userIdentification, String identityTo
     }
   );
 
+  print('The status code for sign in with apple in blm is ${response.statusCode}');
+  print('The status body for sign in with apple in blm is ${response.body}');
+
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     int userId = value['id'];

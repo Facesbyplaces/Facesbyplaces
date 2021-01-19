@@ -57,15 +57,16 @@ class UIGetStartedState extends State<UIGetStarted>{
 
     if(login){
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
-      // var value2 = await FlutterBranchSdk.getFirstReferringParams();
+      var value2 = await FlutterBranchSdk.getFirstReferringParams();
 
-      // print('The value of getLatestReferringParams is $value1');
-      // print('The value of getFirstReferringParams is $value2');
+      print('The value of getLatestReferringParams is $value1');
+      print('The value of getFirstReferringParams is $value2');
 
-      print('The token is ${value1['token']}');
+      // print('The token is ${value1['token']}');
 
       // Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
       if(resetType == 'Regular'){
+        FlutterBranchSdk.logout();
         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
       }else{
         Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
@@ -76,6 +77,11 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   initUnitSharePost({int postId, bool likeStatus, int numberOfLikes, String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
+
+    print('The post id is $postId');
+    print('The likeStatus is $likeStatus');
+    print('The post id is $numberOfLikes');
+    print('The post id is $postId');
 
     if(login){
       FlutterBranchSdk.logout();

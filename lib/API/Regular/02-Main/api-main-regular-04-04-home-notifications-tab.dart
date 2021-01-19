@@ -55,8 +55,9 @@ class APIRegularHomeTabNotificationExtended{
   bool read;
   String action;
   int postId;
+  String notificationType;
 
-  APIRegularHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actor, this.read, this.action, this.postId});
+  APIRegularHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actor, this.read, this.action, this.postId, this.notificationType});
 
   factory APIRegularHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -69,6 +70,7 @@ class APIRegularHomeTabNotificationExtended{
       read: parsedJson['read'],
       action: parsedJson['action'],
       postId: parsedJson['postId'],
+      notificationType: parsedJson['notif_type'],
     );
   }
 }

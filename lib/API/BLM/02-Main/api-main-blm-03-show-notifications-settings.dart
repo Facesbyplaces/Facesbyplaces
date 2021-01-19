@@ -40,7 +40,7 @@ class APIBLMShowNotificationStatus{
   factory APIBLMShowNotificationStatus.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowNotificationStatus(
       newMemorial: parsedJson['newMemorial'],
-      newActivities: parsedJson['newAcitivites'],
+      newActivities: parsedJson['newActivities'],
       postLikes: parsedJson['postLikes'],
       postComments: parsedJson['postComments'],
       addFamily: parsedJson['addFamily'],

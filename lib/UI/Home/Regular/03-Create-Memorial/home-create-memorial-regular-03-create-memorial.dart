@@ -106,7 +106,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               child: CircleAvatar(
                                 radius: SizeConfig.blockSizeVertical * 7,
                                 backgroundImage: profileImage != null
-                                ? AssetImage(profileImage.path)
+                                // ? AssetImage(profileImage.path)
+                                // : AssetImage('assets/icons/graveyard.png'),
+                                ? FileImage(profileImage)
                                 : AssetImage('assets/icons/graveyard.png'),
                               ),
                             ),

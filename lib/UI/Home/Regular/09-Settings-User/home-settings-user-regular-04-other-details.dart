@@ -13,6 +13,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
+import 'home-settings-user-regular-01-user-details.dart';
+
 class HomeRegularUserOtherDetails extends StatefulWidget{
   final int userId;
   final bool toggleBirthdate;
@@ -254,7 +256,10 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                                 if(result){
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the other details.', color: Colors.green,));
-                                  Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
+                                  // Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
+                                  // Navigator.pop(context);
+                                  // Navigator.pushNamed(context, '/home/regular/profile-settings');
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                 }

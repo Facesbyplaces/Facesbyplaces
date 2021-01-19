@@ -19,8 +19,8 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({int page}) asy
     }
   );
 
-  print('The response status code of notifications is ${response.statusCode}');
-  print('The response status bofy of notifications is ${response.body}');
+  // print('The response status code of notifications is ${response.statusCode}');
+  // print('The response status bofy of notifications is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -59,8 +59,9 @@ class APIBLMHomeTabNotificationExtended{
   bool read;
   String action;
   int postId;
+  String notificationType;
 
-  APIBLMHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actor, this.read, this.action, this.postId});
+  APIBLMHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actor, this.read, this.action, this.postId, this.notificationType});
 
   factory APIBLMHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -73,6 +74,7 @@ class APIBLMHomeTabNotificationExtended{
       read: parsedJson['read'],
       action: parsedJson['action'],
       postId: parsedJson['postId'],
+      notificationType: parsedJson['notif_type'],
     );
   }
 }

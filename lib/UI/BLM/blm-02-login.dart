@@ -18,7 +18,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'blm-06-password-reset.dart';
+// import 'blm-06-password-reset.dart';
 
 class BLMLogin extends StatefulWidget{
 
@@ -56,22 +56,6 @@ class BLMLoginState extends State<BLMLogin>{
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
-  initUnit() async{
-    bool login = await FlutterBranchSdk.isUserIdentified();
-
-    print('The value of isUserIdentified for login is $login');
-
-    if(login){
-      var value1 = await FlutterBranchSdk.getLatestReferringParams();
-      var value2 = await FlutterBranchSdk.getFirstReferringParams();
-
-      print('The value of getLatestReferringParams is $value1');
-      print('The value of getFirstReferringParams is $value2');
-
-      Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
-    }
   }
 
   @override

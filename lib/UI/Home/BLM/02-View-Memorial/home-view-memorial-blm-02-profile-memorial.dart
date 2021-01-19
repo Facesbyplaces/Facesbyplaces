@@ -6,6 +6,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:maps/maps.dart';
@@ -64,6 +65,9 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   bool empty;
   bool join;
   int page;
+
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -128,6 +132,30 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
     return await apiBLMShowMemorial(memorialId: memorialId);
   }
 
+  void initBranchShare(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Memorial')
+        ..addCustomMetadata('link-memorial-id', memorialId)
+        ..addCustomMetadata('link-type-of-account', 'Blm')
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
+
+
   void initState(){
     super.initState();
     join = newJoin;
@@ -156,6 +184,16 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
               return Stack(
                 children: [
 
+                  // Container(
+                  //   height: SizeConfig.screenHeight / 3,
+                  //   width: SizeConfig.screenWidth,
+                  //   child: CachedNetworkImage(
+                  //     fit: BoxFit.cover,
+                  //     imageUrl: profile.data.memorial.blmBackgroundImage,
+                  //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                  //     errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                  //   ),
+                  // ),
                   Container(
                     height: SizeConfig.screenHeight / 3,
                     width: SizeConfig.screenWidth,
@@ -163,7 +201,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                       fit: BoxFit.cover,
                       imageUrl: profile.data.memorial.blmBackgroundImage,
                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                      errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                     ),
                   ),
 
@@ -229,10 +267,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             ((){
-                              if(profile.data.memorial.blmDetails.description != ''){
+                              if(profile.data.memorial.blmDetails.description != '' || profile.data.memorial.blmDetails.description != null){
                                 return Container(
+                                  alignment: Alignment.center,
                                   padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                   child: Text(profile.data.memorial.blmDetails.description,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: SizeConfig.safeBlockHorizontal * 4,
                                       fontWeight: FontWeight.w300,
@@ -247,12 +287,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     children: [
                                       Container(
                                         height: SizeConfig.blockSizeHorizontal * 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage('assets/icons/regular-image4.png'),
-                                          ),
+                                        child: CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: profile.data.memorial.blmImagesOrVideos[0],
+                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
                                       ),
 
@@ -319,12 +358,25 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        // await FlutterShare.share(
-                                        //   title: 'Share',
-                                        //   text: 'Share the link',
-                                        //   linkUrl: 'https://flutter.dev/',
-                                        //   chooserTitle: 'Share link'
-                                        // );
+                                        initBranchShare();
+
+                                        FlutterBranchSdk.setIdentity('blm-share-link');
+
+                                        BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                          buo: buo,
+                                          linkProperties: lp,
+                                          messageText: 'FacesbyPlaces App',
+                                          androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                          androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                                        );
+
+                                        if (response.success) {
+                                          print('Link generated: ${response.result}');
+                                          print('showShareSheet Sucess');
+                                        } else {
+                                          FlutterBranchSdk.logout();
+                                          print('Error : ${response.errorCode} - ${response.errorMessage}');
+                                        }
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,
@@ -422,6 +474,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         child: GestureDetector(
                                           onTap: () async{
                                             // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialLocation()));
+
+
                                             final launcher = const GoogleMapsLauncher();
                                             await launcher.launch(
                                               geoPoint: GeoPoint(0.0, 0.0),
@@ -808,19 +862,34 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                           Expanded(
                             child: Container(),
                           ),
+                          // Expanded(
+                          //   child: CircleAvatar(
+                          //     radius: SizeConfig.blockSizeVertical * 12,
+                          //     backgroundColor: Color(0xff000000),
+                          //     child: Padding(
+                          //       padding: EdgeInsets.all(5),
+                          //       child: CircleAvatar(
+                          //         radius: SizeConfig.blockSizeVertical * 12,
+                          //         backgroundColor: Color(0xff888888),
+                          //         backgroundImage: CachedNetworkImageProvider(
+                          //           profile.data.memorial.blmProfileImage,
+                          //           scale: 1.0,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           Expanded(
                             child: CircleAvatar(
                               radius: SizeConfig.blockSizeVertical * 12,
-                              backgroundColor: Color(0xff000000),
+                              backgroundColor: Color(0xff04ECFF),
                               child: Padding(
                                 padding: EdgeInsets.all(5),
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  backgroundImage: CachedNetworkImageProvider(
-                                    profile.data.memorial.blmProfileImage,
-                                    scale: 1.0,
-                                  ),
+                                  // backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                                  backgroundImage: profile.data.memorial.blmProfileImage != null ? NetworkImage(profile.data.memorial.blmProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),
                             ),

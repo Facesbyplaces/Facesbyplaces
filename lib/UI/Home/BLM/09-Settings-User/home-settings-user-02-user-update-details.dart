@@ -9,6 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
+import 'home-settings-user-01-user-details.dart';
+
 class HomeBLMUserUpdateDetails extends StatefulWidget{
   final int userId;
   HomeBLMUserUpdateDetails({this.userId});
@@ -137,7 +139,8 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                     // Navigator.popAndPushNamed(context, route.settings.name);
 
                                     // '/home/blm/profile-settings'
-                                    Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
+                                    // Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
                                   }else{
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                   }

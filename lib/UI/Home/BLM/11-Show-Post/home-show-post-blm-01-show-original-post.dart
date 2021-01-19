@@ -5,6 +5,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-lik
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
@@ -35,6 +36,34 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
   bool likePost;
   bool pressedLike;
   int likesCount;
+
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+
+  void initBranchShare(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Post')
+        ..addCustomMetadata('link-post-id', postId)
+        ..addCustomMetadata('link-like-status', likePost)
+        ..addCustomMetadata('link-number-of-likes', likesCount)
+        ..addCustomMetadata('link-type-of-account', 'Memorial')
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
 
   void initState(){
     super.initState();
@@ -473,12 +502,26 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () async{
-                                        // await FlutterShare.share(
-                                        //   title: 'Share',
-                                        //   text: 'Share the link',
-                                        //   linkUrl: 'http://fbp.dev1.koda.ws/api/v1/posts/$postId',
-                                        //   chooserTitle: 'Share link'
-                                        // );
+                                        initBranchShare();
+
+                                        FlutterBranchSdk.setIdentity('alm-share-link');
+
+                                        BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                                          buo: buo,
+                                          linkProperties: lp,
+                                          messageText: 'FacesbyPlaces App',
+                                          androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                                          androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                                        );
+
+                                        if (response.success) {
+                                          print('Link generated: ${response.result}');
+                                          print('showShareSheet Sucess');
+                                          print('The post id is $postId');
+                                        } else {
+                                          FlutterBranchSdk.logout();
+                                          print('Error : ${response.errorCode} - ${response.errorMessage}');
+                                        }
                                       },
                                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
                                     ),

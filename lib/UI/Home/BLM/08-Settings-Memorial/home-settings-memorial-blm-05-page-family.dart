@@ -123,7 +123,8 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                     CircleAvatar(
                       maxRadius: SizeConfig.blockSizeVertical * 5,
                       backgroundColor: Color(0xff888888),
-                      backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                      // backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                      backgroundImage: familyList[i].image != null ? NetworkImage(familyList[i].image) : AssetImage('assets/icons/app-icon.png'),
                     ),
 
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),

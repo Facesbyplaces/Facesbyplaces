@@ -7,6 +7,8 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
+import 'home-settings-user-01-user-details.dart';
+
 class HomeBLMUserChangePassword extends StatefulWidget{
   final int userId;
   HomeBLMUserChangePassword({this.userId});
@@ -84,7 +86,8 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                         // Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
                         // Navigator.popAndPushNamed(context, route.settings.name);
 
-                        Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
+                        // Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
                       }else{
                         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                       }

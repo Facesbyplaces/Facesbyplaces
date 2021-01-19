@@ -11,6 +11,9 @@ Future<bool> apiBLMSignInWithGoogle({String firstName, String lastName, String e
     }
   );
 
+  print('The status code for sign in with google in blm is ${response.statusCode}');
+  print('The status body for sign in with google in blm is ${response.body}');
+
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     int userId = value['id'];

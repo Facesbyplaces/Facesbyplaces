@@ -140,7 +140,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       if(managed == true){
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
                       }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: true)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: joined)));
                       }
                       
                     },

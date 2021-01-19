@@ -671,6 +671,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
+            print('The memorial name in suggested is ${suggested[i].memorialName}');
+            print('The memorial id in suggested is ${suggested[i].memorialId}');
+            print('The pageType in suggested is ${suggested[i].pageType}');
             return MiscRegularManageMemorialTab(
               index: i,
               memorialName: suggested[i].memorialName,
@@ -712,7 +715,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchNearbyExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -778,7 +782,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
   searchBLMExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(
         enablePullDown: true,

@@ -10,6 +10,9 @@ Future<bool> apiRegularSignInWithApple({String userIdentification, String identi
     }
   );
 
+  print('The status code for sign in with apple in alm is ${response.statusCode}');
+  print('The status body for sign in with apple in alm is ${response.body}');
+
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     int userId = value['id'];

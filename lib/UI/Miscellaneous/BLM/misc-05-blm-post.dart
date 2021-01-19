@@ -5,6 +5,8 @@ import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-sho
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-view-comments.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -30,9 +32,13 @@ class MiscBLMPost extends StatefulWidget{
   final List<String> taggedLastName;
   final List<int> taggedId;
 
-  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId});
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  MiscBLMPostState createState() => MiscBLMPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId);
+  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+
+  MiscBLMPostState createState() => MiscBLMPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
 }
 
 class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
@@ -54,7 +60,11 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   final List<String> taggedLastName;
   final List<int> taggedId;
 
-  MiscBLMPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId});
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
+
+  MiscBLMPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 
   Future profileFollowing;
   bool likePost;
@@ -131,16 +141,36 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                 children: [
                   GestureDetector(
                     onTap: () async{
-                      if(managed == true){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
+                      // if(managed == true){
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
+                      // }else{
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: joined)));
+                      // }
+
+                      print('The page type is $pageType');
+                      print('The managed is $managed');
+                      print('The famOrFriends is $famOrFriends');
+                      print('The relationship is $relationship');
+
+                      if(pageType == 'Memorial'){
+                        if(managed == true || famOrFriends == true){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                        }
                       }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: true)));
+                        if(managed == true || famOrFriends == true){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                        }
                       }
                     },
                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
                   ),
                   Expanded(
                     child: Container(
+                      // color: Colors.blue,
                       padding: EdgeInsets.only(left: 10.0),
                       child: Column(
                         children: [

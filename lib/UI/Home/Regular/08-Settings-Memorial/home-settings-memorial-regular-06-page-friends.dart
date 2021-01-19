@@ -131,7 +131,8 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                     CircleAvatar(
                       maxRadius: SizeConfig.blockSizeVertical * 5,
                       backgroundColor: Color(0xff888888),
-                      backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                      // backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                      backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
                     ),
 
                     SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
