@@ -7,7 +7,8 @@ class Post < ApplicationRecord
 
   # tagging people
   has_many :tagpeople, dependent: :destroy
-  has_many :users, through: :tagpeople
+  has_many :users, through: :tagpeople, source: "account", source_type: "User"
+  has_many :alm_users, through: :tagpeople, source: "account", source_type: "AlmUser"
 
   # Report
   has_many :reports, as: :reportable, dependent: :destroy

@@ -8,6 +8,11 @@ class Api::V1::Pages::BlmController < ApplicationController
         
         # add count to view of page
         page = Pageowner.where(page_type: 'Blm', page_id: blm.id).first
+
+        if page == nil
+            return render json: {errors: "Page not found"}, status: 400
+        end
+        
         if page.view == nil
             page.update(view: 1)
         else
@@ -117,6 +122,12 @@ class Api::V1::Pages::BlmController < ApplicationController
     def delete
         blm = Blm.find(params[:id])
         blm.destroy()
+
+        adminsRaw = Blm.find(params[:page_id]).roles.first.users.pluck('id')
+
+        adminsRaw.each do |admin_id|
+            User.find(admin_id).roles.where(resource_type: 'Blm', resource_id: params[:id]).first.destroy 
+        end
         
         render json: {status: "deleted"}
     end

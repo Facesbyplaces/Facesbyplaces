@@ -32,7 +32,10 @@ class Api::V1::Posts::PostsController < ApplicationController
             if people.count != 0
                 # save tagged people to database
                 people.each do |person|
-                    tag = Tagperson.new(post_id: post.id, account: person)
+                    user_id = person[:user_id]
+                    account_type = person[:account_type]
+
+                    tag = Tagperson.new(post_id: post.id, account_type: account_type, account_id: user_id)
                     if !tag.save
                         return render json: {errors: tag.errors}, status: 500
                     end
@@ -41,7 +44,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 
             # Add to notification
                 # For blm followers
-                (post.page.blm_users.uniq - [user()]).each do |user|
+                (post.page.users.uniq - [user()]).each do |user|
                     # check if this user can get notification
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
@@ -169,13 +172,14 @@ class Api::V1::Posts::PostsController < ApplicationController
             if like.save 
                 # Add to notification
                     post = Post.find(params[:post_id])
-                    people = post.users
+                    people_blm_users = post.users
+                    people_alm_users = post.alm_users
                     # For followers
                     (post.page.accounts.uniq - [user()]).each do |user|
                         # check if the user can get notification from this api
                         if user.notifsetting.postLikes == true
                             # check if the user is in the tag people
-                            if people.include?("#{user.id}")
+                            if people_blm_users.include?(user) || people_alm_users.include?(user)
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false, notif_type: 'Post')
                             else
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
@@ -186,7 +190,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                     # For families and friends
                     (post.page.relationships).each do |relationship|
                         if relationship.account != user() && relationship.account.notifsetting.postLikes == true
-                            if people.include?("#{relationship.user.id}")
+                            if people_blm_users.include?(relationship.account) || people_alm_users.include?(relationship.account)
                                 Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false, notif_type: 'Post')
                             elsif relationship.account == post.account 
                                 Notification.create(recipient: relationship.account, actor: user(), action: "#{user().first_name} liked your post", postId: post.id, read: false, notif_type: 'Post')
