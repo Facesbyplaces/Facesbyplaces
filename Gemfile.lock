@@ -5,6 +5,14 @@ GIT
     google-id-token (1.4.2)
       jwt (>= 1)
 
+GIT
+  remote: https://github.com/haml/haml
+  revision: 8c591cb5419b277a14805b4b1c17da53fe55217f
+  specs:
+    haml (5.1.2)
+      temple (>= 0.8.0)
+      tilt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -273,6 +281,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
     stripe (5.28.0)
+    temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -319,6 +328,7 @@ DEPENDENCIES
   dotenv (~> 2.2.1)
   geocoder
   google-id-token!
+  haml!
   jbuilder (~> 2.7)
   kaminari
   listen (~> 3.2)
