@@ -16,7 +16,7 @@ class Memorial < ApplicationRecord
 
     # Followers of this page
     has_many :followers, as: :page, dependent: :destroy
-    has_many :users, through: :followers, source: "account", source_type: "BlmUser"
+    has_many :users, through: :followers, source: "account", source_type: "User"
     has_many :alm_users, through: :followers, source: "account", source_type: "AlmUser"
 
     # Report

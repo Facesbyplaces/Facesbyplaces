@@ -63,7 +63,7 @@ class BlmSerializer < ActiveModel::Serializer
       )
     end
   end
-  
+   
   def backgroundImage
     if object.backgroundImage.present?
       rails_blob_url(object.backgroundImage) 

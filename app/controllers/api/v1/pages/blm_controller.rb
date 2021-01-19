@@ -55,11 +55,11 @@ class Api::V1::Pages::BlmController < ApplicationController
                     almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
 
                     blmUsers.each do |user|
-                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id)
+                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
                     end
 
                     almUsers.each do |user|
-                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id)
+                        Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
                     end
                 else
                     render json: {errors: relationship.errors}, status: 500

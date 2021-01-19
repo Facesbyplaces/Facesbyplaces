@@ -5,12 +5,6 @@ Rails.application.routes.draw do
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
   }, :skip => [:omniauth_callbacks]
-
-  # mount_devise_token_auth_for 'BlmUser', at: 'blm_auth', controllers: {
-  #   # Define routes for BlmUser within this block.
-  #   registrations: 'api/v1/users/registrations',
-  #   sessions: 'api/v1/users/sessions',
-  # }, :skip => [:omniauth_callbacks]
   
   # Route for ALM User
   mount_devise_token_auth_for 'AlmUser', at: 'alm_auth', controllers: {
@@ -278,7 +272,7 @@ Rails.application.routes.draw do
         put 'unhideOrHideFriends/:page_type/:page_id', to: 'pageadmin#unhideOrHideFriends'
         put 'unhideOrHideFollowers/:page_type/:page_id', to: 'pageadmin#unhideOrHideFollowers'
       end
-      
+
       namespace :notifications do
         get 'notifSettingsStatus', to: 'notifsettings#notifSettingsStatus'
 
