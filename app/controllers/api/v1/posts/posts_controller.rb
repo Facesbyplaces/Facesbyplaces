@@ -32,7 +32,10 @@ class Api::V1::Posts::PostsController < ApplicationController
             if people.count != 0
                 # save tagged people to database
                 people.each do |person|
-                    tag = Tagperson.new(post_id: post.id, account: person)
+                    user_id = person[:user_id]
+                    account_type = person[:account_type]
+
+                    tag = Tagperson.new(post_id: post.id, account_type: account_type, account_id: user_id)
                     if !tag.save
                         return render json: {errors: tag.errors}, status: 500
                     end
