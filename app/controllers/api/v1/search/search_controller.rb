@@ -123,7 +123,8 @@ class Api::V1::Search::SearchController < ApplicationController
             account = 'AlmUser'
         end
 
-        blm = Blm.joins(:pageowner).where("pageowners.account_id != #{user().id} AND pageowners.account_type != '#{account}'").near([lat,lon], 50)
+        blm_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Blm').pluck('page_id') : []
+        blm = Blm.where.not(id: blm_pages_owned).near([lat,lon], 50)
         
         blm = blm.page(params[:page]).per(numberOfPage)
         if blm.total_count == 0 || (blm.total_count - (params[:page].to_i * numberOfPage)) < 0
@@ -134,7 +135,8 @@ class Api::V1::Search::SearchController < ApplicationController
             blmitemsremaining = blm.total_count - (params[:page].to_i * numberOfPage)
         end
 
-        memorial = Memorial.joins(:pageowner).where("pageowners.account_id != #{user().id} AND pageowners.account_type != '#{account}'").near([lat,lon], 50)
+        memorial_pages_owned = Pageowner.where(account: user()).first ? Pageowner.where(account: user(), page_type: 'Memorial').pluck('page_id') : []
+        memorial = Memorial.where.not(id: memorial_pages_owned).near([lat,lon], 50)
         
         memorial = memorial.page(params[:page]).per(numberOfPage)
         if memorial.total_count == 0 || (memorial.total_count - (params[:page].to_i * numberOfPage)) < 0
