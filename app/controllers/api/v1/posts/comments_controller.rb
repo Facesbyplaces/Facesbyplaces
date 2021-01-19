@@ -7,13 +7,27 @@ class Api::V1::Posts::CommentsController < ApplicationController
         comment.account = user()
         if comment.save
             # Add to notification
-                # For followers
-                (comment.post.page.accounts.uniq - [user()]).each do |user|
+                # For blm followers
+                (comment.post.page.users.uniq - [user()]).each do |user|
                     if user.notifsetting.postComments == true
                         # check if user owns the post
                         if user == comment.post.account 
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
-                        elsif comment.post.tagpeople.where(user_id: user.id).first
+                        elsif comment.post.tagpeople.where(account: user).first
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
+                        else
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                        end
+                    end
+                end
+
+                # For alm followers
+                (comment.post.page.alm_users.uniq - [user()]).each do |user|
+                    if user.notifsetting.postComments == true
+                        # check if user owns the post
+                        if user == comment.post.account 
+                            Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
+                        elsif comment.post.tagpeople.where(account: user).first
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
                         else
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
