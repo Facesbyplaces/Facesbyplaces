@@ -117,6 +117,8 @@ class Api::V1::Pages::BlmController < ApplicationController
     def delete
         blm = Blm.find(params[:id])
         blm.destroy()
+
+        user().remove_role :pageadmin, blm
         
         render json: {status: "deleted"}
     end

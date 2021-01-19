@@ -114,6 +114,8 @@ class Api::V1::Pages::MemorialsController < ApplicationController
     def delete
         memorial = Memorial.find(params[:id])
         memorial.destroy()
+
+        user().remove_role :pageadmin, memorial
         
         render json: {status: "deleted"}
     end
