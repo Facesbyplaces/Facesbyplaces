@@ -60,9 +60,9 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           payload = validator.check(params[:google_id], required_audience, required_audience)
           
           if params[:account_type] == "1"
-            @user = AlmUser.where(email: payload['email'], account_type: params[:account_type]).first 
+            @user = User.where(email: payload['email'], account_type: params[:account_type]).first 
           else
-            @user = User.where(email: payload['email'], account_type: params[:account_type]).first
+            @user = AlmUser.where(email: payload['email'], account_type: params[:account_type]).first
           end
 
         rescue GoogleIDToken::ValidationError => e
