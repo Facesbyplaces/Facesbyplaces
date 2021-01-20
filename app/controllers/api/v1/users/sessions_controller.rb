@@ -37,6 +37,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
           # image
           if params[:image].present? 
+            require 'open-uri'
             downloaded_image = URI.open(params[:image])
             filename = File.basename(URI.parse(params[:image]).path)
             @user.image.attach(io: downloaded_image  , filename: filename)
