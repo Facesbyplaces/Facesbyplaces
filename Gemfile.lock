@@ -281,6 +281,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
+    uri (0.10.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -344,6 +345,7 @@ DEPENDENCIES
   stripe
   turbolinks (~> 5)
   tzinfo-data
+  uri
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 3.1)
