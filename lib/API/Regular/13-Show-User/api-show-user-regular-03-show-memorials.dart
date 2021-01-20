@@ -18,6 +18,9 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
     }
   );
 
+  print('The status of code of show memorials is ${response.statusCode}');
+  print('The status of body of show memorials is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowUserMemorialsMain.fromJson(newValue);

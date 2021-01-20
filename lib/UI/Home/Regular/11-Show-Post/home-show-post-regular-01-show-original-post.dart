@@ -334,40 +334,51 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                               ],
                                             );
                                           },
-                                          child: index != 1
-                                          ? CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: originalPost.data.post.imagesOrVideos[index],
-                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                          )
-                                          :  Stack(
-                                            children: [
-                                              CachedNetworkImage(
+                                          child: ((){
+                                            if(index != 1){
+                                              return CachedNetworkImage(
                                                 fit: BoxFit.cover,
                                                 imageUrl: originalPost.data.post.imagesOrVideos[index],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                              ),
+                                              );
+                                            }else{
+                                              return originalPost.data.post.imagesOrVideos.length - 3 == 0
+                                              ? CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              )
+                                              : Stack(
+                                                children: [
+                                                  CachedNetworkImage(
+                                                    fit: BoxFit.cover,
+                                                    imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                  ),
 
-                                              Container(color: Colors.black.withOpacity(0.5),),
+                                                  Container(color: Colors.black.withOpacity(0.5),),
 
-                                              Center(
-                                                child: CircleAvatar(
-                                                  radius: SizeConfig.blockSizeVertical * 3,
-                                                  backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                  child: Text(
-                                                    index.toString(),
-                                                    style: TextStyle(
-                                                      fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Color(0xffffffff),
+                                                  Center(
+                                                    child: CircleAvatar(
+                                                      radius: SizeConfig.blockSizeVertical * 3,
+                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                      child: Text(
+                                                        '${originalPost.data.post.imagesOrVideos.length - 3}',
+                                                        style: TextStyle(
+                                                          fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Color(0xffffffff),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                                ],
+                                              );
+                                            }
+                                          }()),
                                         ),
                                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                                         mainAxisSpacing: 4.0,

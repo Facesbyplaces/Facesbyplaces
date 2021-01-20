@@ -622,12 +622,51 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             crossAxisCount: 4,
                             itemCount: 3,
                             itemBuilder: (BuildContext context, int index) => 
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                              ),
+                              ((){
+                                if(index != 1){
+                                  return CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return feeds[i].imagesOrVideos.length - 3 == 0
+                                  ? CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  )
+                                  : Stack(
+                                    children: [
+                                      CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: feeds[i].imagesOrVideos[index],
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      ),
+
+                                      Container(color: Colors.black.withOpacity(0.5),),
+
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text(
+                                            '${feeds[i].imagesOrVideos.length - 3}',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                              }()),
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,

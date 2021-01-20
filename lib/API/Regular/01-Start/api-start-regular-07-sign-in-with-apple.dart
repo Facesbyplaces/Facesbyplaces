@@ -4,7 +4,9 @@ import 'dart:convert';
 
 Future<bool> apiRegularSignInWithApple({String userIdentification, String identityToken}) async{
 
-  final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
+  final http.Response response = await http.post(
+    // 'http://fbp.dev1.koda.ws/auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
+    'http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&first_name=&last_name=&user_identification=$userIdentification&identity_token=$identityToken&image=',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }

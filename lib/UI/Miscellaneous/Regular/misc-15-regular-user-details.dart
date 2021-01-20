@@ -1,10 +1,10 @@
+import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-03-show-memorials.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-02-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-03-change-password.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-04-other-details.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-11-show-other-details-status.dart';
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-02-show-posts.dart';
-import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-03-show-user-memorials.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -785,7 +785,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
 
     if(blmFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
+      var newValue = await apiRegularShowUserMemorials(userId: userId, page: page1);
       context.hideLoaderOverlay();
 
       count = count + newValue.owned.length;
@@ -833,7 +833,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
 
     if(blmFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
-      var newValue = await apiBLMShowUserMemorials(page: page2);
+      var newValue = await apiRegularShowUserMemorials(page: page2);
       context.hideLoaderOverlay();
 
       count = count + newValue.followed.length;

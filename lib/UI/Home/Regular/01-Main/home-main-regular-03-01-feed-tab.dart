@@ -232,7 +232,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                   );
                                 }else{
-                                  return Stack(
+                                  return feeds[i].imagesOrVideos.length - 3 == 0
+                                  ? CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  )
+                                  : Stack(
                                     children: [
                                       CachedNetworkImage(
                                         fit: BoxFit.cover,
@@ -248,7 +255,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                           radius: SizeConfig.blockSizeVertical * 3,
                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
                                           child: Text(
-                                            index.toString(),
+                                            '${feeds[i].imagesOrVideos.length - 3}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 7,
                                               fontWeight: FontWeight.bold,
