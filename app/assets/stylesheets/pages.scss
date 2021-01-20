@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #1b1e22;
+  color: #ffffff;
+}
+.header {
+  float: left;
+  width: 100%;
+  .tabs-container, .logo-container {
+    float: left;
+    min-height: 50px;
+  }
+  .logo-container {
+    .logo {
+
+    }
+  }
+  .tabs-container {
+    float: right;
+    text-align: right;
+    padding: 2% 12% 0 0;
+    width: 81%;
+    .tab {
+      cursor: pointer;
+      float: right;
+      padding: 0 2% 0;
+      &:hover {
+        color: #04ecff;
+      }
+    }
+  }
+}
+.row {
+  float: left;
+  width: 100%;
+  .col {
+    float: left;
+    width: 100%;
+    min-height: 50px;
+  }
+  .col-2 {
+    width: 50%;
+  }
+}
+.bold {
+  font-weight: bold;
+}
+.home {
+  float: left;
+  width: 100%;
+  .main-container {
+    float: right;
+    width: 50%;
+    margin: 0;
+    text-align: center;
+    padding: 0 6% 0 0;
+    .main-title {
+      color: #04ecff;
+      font-size: 3em;
+      font-weight: bold;
+      p {
+        float: left;
+        width: 100%;
+        margin: 40px 0 0;
+        span {
+          color: #ffffff;
+        }
+      }
+    }
+    .text {
+      float: left;
+      width: 100%;
+      font-size: 1.5em;
+      color: #ffffff;
+      margin: 25px 0 0;
+      letter-spacing: 2px;
+      line-height: 30px;
+      span.title {
+        color: #04ecff;
+      }
+      &.second {
+        font-size: 1.15em;
+        letter-spacing: 3px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .row {
+    .col, .col-2 {
+      width: 90%;
+      padding: 0 5%;
+    }
+  }
+  .home {
+    .main-container {
+      width: 100%;
+    }
+  }
+}
