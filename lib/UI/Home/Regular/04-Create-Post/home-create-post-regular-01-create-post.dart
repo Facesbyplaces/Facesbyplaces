@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
@@ -136,14 +136,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
             actions: [
               GestureDetector(
                 onTap: () async{
-
-                  // File newFile;
-
-                  // if(imageFile != null){
-                  //   newFile = imageFile;
-                  // }else if(videoFile != null){
-                  //   newFile = videoFile;
-                  // }
 
                   Location.Location location = new Location.Location();
 
@@ -302,43 +294,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                  // Container(
-                  //   child: ((){
-                  //     if(imageFile != null){
-                  //       return Container(height: SizeConfig.blockSizeVertical * 25, width: SizeConfig.screenWidth, padding: EdgeInsets.only(left: 20.0, right: 20.0,), child: Image.asset(imageFile.path, fit: BoxFit.cover),);
-                  //     }else if(videoFile != null){
-                  //       return Container(
-                  //         height: SizeConfig.blockSizeVertical * 25, 
-                  //         width: SizeConfig.screenWidth, 
-                  //         padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                  //         child: GestureDetector(
-                  //           onTap: (){
-                  //             if(videoPlayerController.value.isPlaying){
-                  //               videoPlayerController.pause();
-                  //             }else{
-                  //               videoPlayerController.play();
-                  //             }
-                              
-                  //           },
-                  //           onDoubleTap: () async{
-                  //             await getVideo();
-                  //           },
-                  //           child: AspectRatio(
-                  //             aspectRatio: videoPlayerController.value.aspectRatio,
-                  //             child: VideoPlayer(videoPlayerController),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }
-                  //   }()),
-                  // ),
-
                   Container(
-                    // color: Colors.red,
                     child: ((){
                       if(slideImages.length != 0){
                         return Container(
-                          // height: SizeConfig.blockSizeVertical * 32,
                           height: SizeConfig.blockSizeVertical * 25, 
                           width: SizeConfig.screenWidth,
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -480,7 +439,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 choice = 0;
                               }else{
                                 if(choice == 1){
-                                  // await getImage();
                                   await getSlideImage();
                                 }else{
                                   await getVideo();

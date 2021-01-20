@@ -5,15 +5,14 @@ import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-reg
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-08-hide-email.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-09-hide-address.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-10-hide-phone-number.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-settings-user-regular-01-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-
-import 'home-settings-user-regular-01-user-details.dart';
 
 class HomeRegularUserOtherDetails extends StatefulWidget{
   final int userId;
@@ -55,8 +54,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
     otherDetails = getOtherDetails(userId);
     toggle1 = toggleBirthdate;
     toggle2 = toggleBirthplace;
-    // toggle3 = toggleEmail;
-    // toggle4 = toggleAddress;
     toggle3 = toggleAddress;
     toggle4 = toggleEmail;
     toggle5 = toggleNumber;
@@ -256,9 +253,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                                 if(result){
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the other details.', color: Colors.green,));
-                                  // Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
-                                  // Navigator.pop(context);
-                                  // Navigator.pushNamed(context, '/home/regular/profile-settings');
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));

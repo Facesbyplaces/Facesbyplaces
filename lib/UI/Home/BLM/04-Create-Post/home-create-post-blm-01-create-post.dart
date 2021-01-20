@@ -136,14 +136,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
               GestureDetector(
                 onTap: () async{
 
-                  // File newFile;
-
-                  // if(imageFile != null){
-                  //   newFile = imageFile;
-                  // }else if(videoFile != null){
-                  //   newFile = videoFile;
-                  // }
-
                   Location.Location location = new Location.Location();
 
                   bool serviceEnabled = await location.serviceEnabled();
@@ -166,12 +158,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                   Location.LocationData locationData = await location.getLocation();
 
-                  // List<int> userIds = [];
                   List<TaggedPeople> userIds = [];
 
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
-                      // userIds.add(users[i].userId);
                       userIds.add(
                         TaggedPeople(
                           userId: users[i].userId,
@@ -182,19 +172,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   }
 
                   List<File> newFiles = [];
-
                   newFiles.addAll(slideImages);
-
-                  // for(int i = 0; i < newFiles.length; i++){
-                  //   print('The newFiles is ${newFiles[i].path}');
-                  // }
 
                   APIBLMCreatePost post = APIBLMCreatePost(
                     pageType: 'Blm',
                     postBody: _key1.currentState.controller.text,
                     pageId: currentIdSelected,
                     location: newLocation,
-                    // imagesOrVideos: newFile,
                     imagesOrVideos: newFiles,
                     latitude: locationData.latitude,
                     longitude: locationData.longitude,
@@ -297,7 +281,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         (index) => Chip(
                           labelPadding: const EdgeInsets.only(left: 8.0),
                           label: Text(users[index].name),
-                          // label: Text('${users[index].accountType}'),
                           deleteIcon: Icon(
                             Icons.close,
                             size: 18,
@@ -317,11 +300,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                   Container(
-                    // color: Colors.red,
                     child: ((){
                       if(slideImages.length != 0){
                         return Container(
-                          // height: SizeConfig.blockSizeVertical * 32,
                           height: SizeConfig.blockSizeVertical * 25, 
                           width: SizeConfig.screenWidth,
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -463,7 +444,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 choice = 0;
                               }else{
                                 if(choice == 1){
-                                  // await getImage();
                                   await getSlideImage();
                                 }else{
                                   await getVideo();

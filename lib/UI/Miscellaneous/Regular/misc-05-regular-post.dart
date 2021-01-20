@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
@@ -13,7 +11,8 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'misc-04-regular-dropdown.dart';
+import 'misc-13-regular-dropdown.dart';
+import 'dart:async';
 
 class MiscRegularPost extends StatefulWidget{
   final List<Widget> contents;
@@ -32,7 +31,6 @@ class MiscRegularPost extends StatefulWidget{
   final List<String> taggedFirstName;
   final List<String> taggedLastName;
   final List<int> taggedId;
-
   final String pageType;
   final bool famOrFriends;
   final String relationship;
@@ -59,7 +57,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   final List<String> taggedFirstName;
   final List<String> taggedLastName;
   final List<int> taggedId;
-
   final String pageType;
   final bool famOrFriends;
   final String relationship;
@@ -70,8 +67,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   bool likePost;
   bool pressedLike;
   int likesCount;
-
-  String category;
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
@@ -162,10 +157,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       padding: EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: (){
-                          print('The page type is $pageType');
-                          print('The managed is $managed');
-                          print('The famOrFriends is $famOrFriends');
-
                           if(pageType == 'Memorial'){
                             if(managed == true || famOrFriends == true){
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));

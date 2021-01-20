@@ -15,7 +15,6 @@ import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:io';
 
-
 class HomeBLMCreateMemorial3 extends StatefulWidget{
 
   HomeBLMCreateMemorial3State createState() => HomeBLMCreateMemorial3State();
@@ -108,7 +107,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                                 radius: SizeConfig.blockSizeVertical * 7,
                                 backgroundImage: profileImage != null
                                 ? AssetImage(profileImage.path)
-                                : AssetImage('assets/icons/graveyard.png'),
+                                : AssetImage('assets/icons/cover-icon.png'),
                               ),
                             ),
                           ),

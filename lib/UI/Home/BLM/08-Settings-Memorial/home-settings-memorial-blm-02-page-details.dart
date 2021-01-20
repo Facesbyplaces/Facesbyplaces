@@ -159,32 +159,6 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                   context.hideLoaderOverlay();
 
                                   if(result){
-
-                                    // print('The result is $result');
-
-                                    // Navigator.pushReplacement(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
-                                    // );
-
-                                    // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-
-                                    // Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
-
-                                    // HomeBLMProfile
-
-                                    // ModalRoute.withName('newRoute')
-
-
-                                    // var route = <String, WidgetBuilder>{
-                                    // '/home/blm/managed-profile': (BuildContext context) => HomeBLMProfile(memorialId: memorialId, managed: true,),
-                                    // };
-
-                                    
-                                    // print('The value of navigator is ${route[0].toString()}');
-                                    // print('The value of navigator is ${route[1].toString()}');
-                                    // print('The value of navigator is ${route.toString()}');
-
                                     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
 
                                     Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true,));

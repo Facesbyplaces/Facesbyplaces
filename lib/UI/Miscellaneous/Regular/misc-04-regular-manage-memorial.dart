@@ -8,7 +8,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'misc-08-regular-dialog.dart';
+import 'misc-02-regular-dialog.dart';
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
   final int index;
@@ -82,8 +82,6 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     );
     return GestureDetector(
       onTap: () async{
-        print('The memorial id is $memorialId');
-        // print('The user id is $userId');
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));

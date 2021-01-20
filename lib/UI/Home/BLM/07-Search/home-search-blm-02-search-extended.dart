@@ -5,10 +5,10 @@ import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-04-search-suggest
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -709,7 +709,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchNearbyExtended(){
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
@@ -760,7 +759,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchBLMExtended(){
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(

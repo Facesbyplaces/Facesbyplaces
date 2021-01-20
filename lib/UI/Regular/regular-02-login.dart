@@ -1,20 +1,13 @@
-
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
-// import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
-// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
-// import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -164,7 +157,6 @@ class RegularLoginState extends State<RegularLogin>{
 
                                       context.showLoaderOverlay();
 
-
                                       final email = await fb.getUserEmail();
                                       final profile = await fb.getUserProfile();
                                       final image = await fb.getProfileImageUrl(width: 50, height: 50);
@@ -237,12 +229,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       print('The auth is ${auth.accessToken}}');
                                       print('The auth is ${auth.idToken}');
                                       print('The auth is ${auth.serverAuthCode}');
-
                                       print('The auth headers is $authHeaders');
-
                                       print('The client id is ${googleSignIn.clientId}');
-
-
                                       print('The headers is $authHeaders');
 
                                       
@@ -273,12 +261,8 @@ class RegularLoginState extends State<RegularLogin>{
                                       print('The auth is ${auth.accessToken}}');
                                       print('The auth is ${auth.idToken}');
                                       print('The auth is ${auth.serverAuthCode}');
-
                                       print('The auth headers is $authHeaders');
-
                                       print('The client id is ${googleSignIn.clientId}');
-
-
                                       print('The headers is $authHeaders');
 
                                       context.showLoaderOverlay();
@@ -374,72 +358,8 @@ class RegularLoginState extends State<RegularLogin>{
                         SizedBox(height: ScreenUtil().setHeight(20)),
 
                         GestureDetector(
-                          onTap: () async{
-
+                          onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
-
-                            // String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
-
-                            // if(email != null){
-                            //   bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
-                            //   if(validEmail == true){
-                            //     initBranchReferences();
-                            //     // initBranchShare();
-
-                            //     FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                            //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                                
-                            //     if (response.success) {
-                            //       context.showLoaderOverlay();
-                            //       // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
-                            //       bool result = await apiRegularPasswordReset(email: email, redirectLink: response.result);
-                            //       context.hideLoaderOverlay();
-                                  
-                            //       print('Link generated: ${response.result}');
-                            //       if(result == true){
-                            //         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
-                            //       }else{
-                            //         print('Error on requesting the api');
-                            //         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
-                            //       }
-                            //     } else {
-                            //       print('Error on generating link');
-                            //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-                            //     }
-
-                            //   } 
-                            // }
-
-
-
-
-
-                                // BranchResponse sheetResponse = await FlutterBranchSdk.showShareSheet(
-                                //     buo: buo,
-                                //     linkProperties: lp,
-                                //     messageText: 'My Share text',
-                                //     androidMessageTitle: 'My Message Title',
-                                //     androidSharingTitle: 'My Share with');
-
-                                // if (response.success) {
-                                //   print('showShareSheet Sucess');
-                                // } else {
-                                //   print('Error : ${sheetResponse.errorCode} - ${sheetResponse.errorMessage}');
-                                // }
-
-                                // if(result){
-                                //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
-                                // }else{
-                                //   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-                                // }
-
-                              // https://4n5z1.test-app.link/qtdaGGTx3cb
-
-                            // FlutterBranchSdk.logout();
-                            // print('logout!');
-
-
-
                           },
                           child: Align(
                             alignment: Alignment.centerRight, 

@@ -4,15 +4,15 @@ import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-03-show-switch-status.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
+import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -431,7 +431,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      // Text(convertDate(profile.data.memorial.memorialDetails.dob),
                                       Text(profile.data.memorial.memorialDetails.dob,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
@@ -447,7 +446,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      // Text(convertDate(profile.data.memorial.memorialDetails.rip),
                                       Text(profile.data.memorial.memorialDetails.rip,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
@@ -725,42 +723,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       relationship: posts[i].relationship,
 
                                       contents: [
-                                        // Column(
-                                        //   children: [
-                                        //     Align(
-                                        //       alignment: Alignment.topLeft,
-                                        //       child: RichText(
-                                        //         maxLines: 4,
-                                        //         overflow: TextOverflow.clip,
-                                        //         textAlign: TextAlign.left,
-                                        //         text: TextSpan(
-                                        //           text: posts[i].postBody,
-                                        //           style: TextStyle(
-                                        //             fontWeight: FontWeight.w300,
-                                        //             color: Color(0xff000000),
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ),
-
-                                        //     SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-                                        //   ],
-                                        // ),
-
-                                        // posts[i].imagesOrVideos != null
-                                        // ? Container(
-                                        //   height: SizeConfig.blockSizeHorizontal * 50,
-                                        //   decoration: BoxDecoration(
-                                        //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                                        //   ),
-                                        //   child: CachedNetworkImage(
-                                        //     imageUrl: posts[i].imagesOrVideos[0],
-                                        //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                        //     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                        //   ),
-                                        // )
-                                        // : Container(height: 0,),
-                                        
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
                                         posts[i].imagesOrVideos != null
@@ -917,23 +879,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                       child: Row(
                         children: [
                           Expanded(child: Container(),),
-                          // Expanded(
-                          //   child: CircleAvatar(
-                          //     radius: SizeConfig.blockSizeVertical * 12,
-                          //     backgroundColor: Color(0xff04ECFF),
-                          //     child: Padding(
-                          //       padding: EdgeInsets.all(5),
-                          //       child: CircleAvatar(
-                          //         radius: SizeConfig.blockSizeVertical * 12,
-                          //         backgroundColor: Color(0xff888888),
-                          //         backgroundImage: CachedNetworkImageProvider(
-                          //           profile.data.memorial.memorialProfileImage,
-                          //           scale: 1.0,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           Expanded(
                             child: CircleAvatar(
                               radius: SizeConfig.blockSizeVertical * 12,
@@ -943,7 +888,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  // backgroundImage: AssetImage('assets/icons/app-icon.png'),
                                   backgroundImage: profile.data.memorial.memorialProfileImage != null ? NetworkImage(profile.data.memorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),

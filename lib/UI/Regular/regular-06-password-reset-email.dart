@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
 
 class RegularPasswordResetEmail extends StatefulWidget{
 
@@ -115,14 +115,12 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
 
                             if(validEmail == true){
                               initBranchReferences();
-                              // initBranchShare();
 
                               FlutterBranchSdk.setIdentity('alm-user-forgot-password');
                               BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                               
                               if (response.success) {
                                 context.showLoaderOverlay();
-                                // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
                                 bool result = await apiRegularPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
                                 context.hideLoaderOverlay();
                                 
@@ -170,8 +168,6 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                   ),
                 ],
               ),
-
-
             ),
           ),
         ),

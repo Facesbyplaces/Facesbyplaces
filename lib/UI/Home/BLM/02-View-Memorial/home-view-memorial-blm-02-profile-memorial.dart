@@ -1,21 +1,19 @@
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
-import 'package:maps/maps.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-// import 'package:flutter_share/flutter_share.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
+import 'package:maps/maps.dart';
 
 class BLMProfilePosts{
   int userId;
@@ -156,8 +154,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
     );
 
     lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
+      feature: 'sharing',
+      stage: 'new share',
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
@@ -192,16 +190,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
               return Stack(
                 children: [
 
-                  // Container(
-                  //   height: SizeConfig.screenHeight / 3,
-                  //   width: SizeConfig.screenWidth,
-                  //   child: CachedNetworkImage(
-                  //     fit: BoxFit.cover,
-                  //     imageUrl: profile.data.memorial.blmBackgroundImage,
-                  //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                  //     errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                  //   ),
-                  // ),
                   Container(
                     height: SizeConfig.screenHeight / 3,
                     width: SizeConfig.screenWidth,
@@ -443,7 +431,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Expanded(
-                                        // child: Text(convertDate(profile.data.memorial.blmDetails.dob),
                                         child: Text(profile.data.memorial.blmDetails.dob,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
@@ -461,7 +448,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Expanded(
-                                        // child: Text(convertDate(profile.data.memorial.blmDetails.rip),
                                         child: Text(profile.data.memorial.blmDetails.rip,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
@@ -748,7 +734,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      // timeCreated: convertDate(posts[i].timeCreated),
                                       timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
                                       managed: posts[i].managed,
                                       joined: posts[i].joined,
@@ -871,26 +856,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                       width: SizeConfig.screenWidth,
                       child: Row(
                         children: [
-                          Expanded(
-                            child: Container(),
-                          ),
-                          // Expanded(
-                          //   child: CircleAvatar(
-                          //     radius: SizeConfig.blockSizeVertical * 12,
-                          //     backgroundColor: Color(0xff000000),
-                          //     child: Padding(
-                          //       padding: EdgeInsets.all(5),
-                          //       child: CircleAvatar(
-                          //         radius: SizeConfig.blockSizeVertical * 12,
-                          //         backgroundColor: Color(0xff888888),
-                          //         backgroundImage: CachedNetworkImageProvider(
-                          //           profile.data.memorial.blmProfileImage,
-                          //           scale: 1.0,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+                          Expanded(child: Container(),),
                           Expanded(
                             child: CircleAvatar(
                               radius: SizeConfig.blockSizeVertical * 12,
@@ -900,7 +866,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  // backgroundImage: AssetImage('assets/icons/app-icon.png'),
                                   backgroundImage: profile.data.memorial.blmProfileImage != null ? NetworkImage(profile.data.memorial.blmProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),

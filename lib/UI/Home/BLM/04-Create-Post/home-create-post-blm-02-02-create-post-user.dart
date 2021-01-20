@@ -199,7 +199,6 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                         children: [
 
                           CircleAvatar(
-                            // backgroundImage: AssetImage('assets/icons/graveyard.png'),
                             backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
                             backgroundColor: Color(0xff888888),
                           ),

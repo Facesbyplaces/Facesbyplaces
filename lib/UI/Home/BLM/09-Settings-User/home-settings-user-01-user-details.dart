@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-17-blm-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +76,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                           alignment: Alignment.centerLeft,
                             child: IconButton(
                             onPressed: (){
-                              // Navigator.of(context).pushNamedAndRemoveUntil('/home/blm', (Route<dynamic> route) => false);
                               Navigator.of(context).popAndPushNamed('/home/blm');
                             },
                             icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,), 

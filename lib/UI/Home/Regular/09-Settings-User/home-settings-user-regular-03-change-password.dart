@@ -1,13 +1,11 @@
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-change-password.dart';
-// import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-input-field.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'home-settings-user-regular-01-user-details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-
-import 'home-settings-user-regular-01-user-details.dart';
 
 class HomeRegularUserChangePassword extends StatefulWidget{
   final int userId;
@@ -82,13 +80,6 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
 
                       if(result){
                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-
-                        // Route route = MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
-                        // Navigator.popAndPushNamed(context, route.settings.name);
-
-                        // Navigator.popAndPushNamed(context, '/home/regular/profile-settings');
-                        // Navigator.pop(context);
-                        // Navigator.pushNamed(context, '/home/regular/profile-settings');
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
                       }else{
                         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));

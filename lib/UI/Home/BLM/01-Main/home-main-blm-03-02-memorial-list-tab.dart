@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -144,17 +144,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       if(mounted)
       setState(() {});
       page1++;
-
-      // if(blmFamilyItemsRemaining == 0){
-      //   addMemorials2();
-      //   setState(() {
-      //     flag1 = true;
-      //   });
-      //   onLoading();
-      // }
-
-      // refreshController.loadComplete();
-      
     }
 
     page1 = 1;
@@ -194,24 +183,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           flag1 = true;
         });
         onLoading();
-      }
-
-      
-      
+      } 
     }
-    
-    // else{
-    //   refreshController.loadNoData();
-    // }    
-    
-    // else{
-    //   refreshController.loadNoData();
-    // }
-
-    // addMemorials2();
-    // setState(() {
-    //   flag1 = true;
-    // });
 
     refreshController.loadComplete();
 

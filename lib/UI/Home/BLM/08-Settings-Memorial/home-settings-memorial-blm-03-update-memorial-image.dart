@@ -294,15 +294,6 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               context.hideLoaderOverlay();
 
                               if(result){
-
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),
-                                // );
-
-                                // Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-
-
                                 await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
 
                                 Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true,));

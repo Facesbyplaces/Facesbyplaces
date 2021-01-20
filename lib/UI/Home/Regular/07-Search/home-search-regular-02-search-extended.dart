@@ -2,13 +2,13 @@ import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -649,9 +649,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: feeds.length,
         ),
       )
-      : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
+      : SingleChildScrollView(physics: ClampingScrollPhysics(), child: MiscRegularEmptyDisplayTemplate(message: 'Post is empty',),
       ),
     );
   }
@@ -702,32 +700,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: suggested.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
-      //     ),
-      //   ),
-      // ),
-      : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
+      : SingleChildScrollView(physics: ClampingScrollPhysics(), child: MiscRegularEmptyDisplayTemplate(message: 'Suggested is empty',),
       ),
     );
   }
 
   searchNearbyExtended(){
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount3 != 0
       ? SmartRefresher(
@@ -769,32 +748,13 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: nearby.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
-      //     ),
-      //   ),
-      // ),
-      : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
+      : SingleChildScrollView(physics: ClampingScrollPhysics(), child: MiscRegularEmptyDisplayTemplate(message: 'Nearby is empty',),
       ),
     );
   }
 
   searchBLMExtended(){
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
       child: tabCount4 != 0
       ? SmartRefresher(
@@ -836,25 +796,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           itemCount: blm.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
-      //     ),
-      //   ),
-      // ),
-      : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
+      : SingleChildScrollView(physics: ClampingScrollPhysics(), child: MiscRegularEmptyDisplayTemplate(message: 'BLM is empty',),
       ),
     );
   }

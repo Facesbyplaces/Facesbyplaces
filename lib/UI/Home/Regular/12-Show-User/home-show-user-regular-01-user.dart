@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-01-show-user-information.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-17-regular-custom-drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-21-regular-user-details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-custom-drawings.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,7 +22,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   Future<APIRegularShowUserInformation> showProfile;
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
-    print('The user id used is $userId');
     return await apiRegularShowUserInformation(userId: userId);
   }
 

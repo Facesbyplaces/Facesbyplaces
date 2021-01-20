@@ -123,7 +123,6 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                     CircleAvatar(
                       maxRadius: SizeConfig.blockSizeVertical * 5,
                       backgroundColor: Color(0xff888888),
-                      // backgroundImage: AssetImage('assets/icons/graveyard.png'),
                       backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
                     ),
 

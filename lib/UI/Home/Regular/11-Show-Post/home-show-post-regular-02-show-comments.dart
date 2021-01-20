@@ -6,7 +6,7 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-06-
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-07-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-08-add-reply.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -473,22 +473,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                           ),
 
                                           SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                          // currentUserId == comments[i].listOfReplies[index].userId
-                                          // ? Expanded(
-                                          //   child: Text('You',
-                                          //     style: TextStyle(
-                                          //       fontWeight: FontWeight.bold,
-                                          //     ),
-                                          //   ),
-                                          // )
-                                          // : Expanded(
-                                          //   child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                          //     style: TextStyle(
-                                          //       fontWeight: FontWeight.bold,
-                                          //     ),
-                                          //   ),
-                                          // ),
 
                                           Expanded(
                                             child: GestureDetector(

@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-11-show-friends-settings.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-18-remove-friends-or-family.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -131,7 +131,6 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                     CircleAvatar(
                       maxRadius: SizeConfig.blockSizeVertical * 5,
                       backgroundColor: Color(0xff888888),
-                      // backgroundImage: AssetImage('assets/icons/graveyard.png'),
                       backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
                     ),
 

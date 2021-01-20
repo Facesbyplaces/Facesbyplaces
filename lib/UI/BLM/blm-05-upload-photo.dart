@@ -126,8 +126,6 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                                               ? Stack(
                                                 children: [
                                                   Container(color: Color(0xffffffff),),
-
-                                                  // Align(alignment: Alignment.center, child: Image.asset(_image.path),),
                                                 Align(
                                                   alignment: Alignment.center, 
                                                   child: Container(

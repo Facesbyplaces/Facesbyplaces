@@ -1,15 +1,15 @@
+import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-01-memorial-settings.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
-import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -203,16 +203,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
               return Stack(
                 children: [
 
-                  // Container(
-                  //   height: SizeConfig.screenHeight / 3,
-                  //   width: SizeConfig.screenWidth,
-                  //   child: CachedNetworkImage(
-                  //     fit: BoxFit.cover,
-                  //     imageUrl: profile.data.memorial.blmBackgroundImage,
-                  //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                  //     errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                  //   ),
-                  // ),
                   Container(
                     height: SizeConfig.screenHeight / 3,
                     width: SizeConfig.screenWidth,
@@ -434,7 +424,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      // Text(convertDate(profile.data.memorial.blmDetails.dob),
                                       Text(profile.data.memorial.blmDetails.dob,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
@@ -709,7 +698,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       postId: posts[i].postId,
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
-                                      // timeCreated: convertDate(posts[i].timeCreated),
                                       timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
                                       managed: posts[i].managed,
                                       joined: posts[i].joined,
@@ -883,23 +871,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                       child: Row(
                         children: [
                           Expanded(child: Container(),),
-                          // Expanded(
-                          //   child: CircleAvatar(
-                          //     radius: SizeConfig.blockSizeVertical * 12,
-                          //     backgroundColor: Color(0xff000000),
-                          //     child: Padding(
-                          //       padding: EdgeInsets.all(5),
-                          //       child: CircleAvatar(
-                          //         radius: SizeConfig.blockSizeVertical * 12,
-                          //         backgroundColor: Color(0xff888888),
-                          //         backgroundImage: CachedNetworkImageProvider(
-                          //           profile.data.memorial.blmProfileImage,
-                          //           scale: 1.0,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                           Expanded(
                             child: CircleAvatar(
                               radius: SizeConfig.blockSizeVertical * 12,
@@ -909,7 +880,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  // backgroundImage: AssetImage('assets/icons/app-icon.png'),
                                   backgroundImage: profile.data.memorial.blmProfileImage != null ? NetworkImage(profile.data.memorial.blmProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),

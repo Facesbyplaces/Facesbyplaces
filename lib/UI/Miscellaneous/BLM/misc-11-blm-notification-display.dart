@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
+import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -30,16 +30,8 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
     SizeConfig.init(context);
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-      // tileColor: Color(0xffffffff),
       tileColor: readStatus == true ? Color(0xffffffff) : Color(0xffdddddd),
       onTap: () async{
-        // print('The post id is $postId');
-        // context.showLoaderOverlay();
-        // var result = await apiBLMShowOriginalPost(postId: postId);                
-        // context.hideLoaderOverlay();
-
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: result.post.likeStatus, numberOfLikes: result.post.numberOfLikes)));
-
         if(notificationType == 'Memorial'){
           context.showLoaderOverlay();
           var memorialProfile = await apiRegularShowMemorial(memorialId: postId);

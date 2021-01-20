@@ -30,17 +30,8 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
     SizeConfig.init(context);
     return ListTile(
       contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-      // tileColor: Color(0xffffffff),
       tileColor: readStatus == true ? Color(0xffffffff) : Color(0xffdddddd),
       onTap: () async{
-        print('The notification type is $notificationType');
-        print('The post id or memorial id is $postId');
-
-        // context.showLoaderOverlay();
-        // var result = await apiRegularShowOriginalPost(postId: postId);                
-        // context.hideLoaderOverlay();
-
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: result.post.likeStatus, numberOfLikes: result.post.numberOfLikes)));
 
         if(notificationType == 'Memorial'){
           context.showLoaderOverlay();

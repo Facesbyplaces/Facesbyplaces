@@ -123,7 +123,6 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                     CircleAvatar(
                       maxRadius: SizeConfig.blockSizeVertical * 5,
                       backgroundColor: Color(0xff888888),
-                      // backgroundImage: AssetImage('assets/icons/graveyard.png'),
                       backgroundImage: familyList[i].image != null ? NetworkImage(familyList[i].image) : AssetImage('assets/icons/app-icon.png'),
                     ),
 
@@ -150,7 +149,6 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                       textColor: Color(0xffffffff),
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
-                        // apiBLMDeleteMemorialFriendsOrFamily();
                         context.showLoaderOverlay();
                         await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId);
                         context.hideLoaderOverlay();

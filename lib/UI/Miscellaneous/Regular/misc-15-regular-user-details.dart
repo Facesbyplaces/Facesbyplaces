@@ -1,35 +1,37 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-show-other-details-status.dart';
-import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-02-show-user-posts.dart';
-import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-02-user-update-details.dart';
-import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-03-change-password.dart';
-import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-04-other-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-02-user-update-details.dart';
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-03-change-password.dart';
+import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-04-other-details.dart';
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-11-show-other-details-status.dart';
+import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-02-show-posts.dart';
 import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-03-show-user-memorials.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'misc-14-regular-empty-display.dart';
 import 'package:flutter/material.dart';
 import '../../ui-01-get-started.dart';
-import 'misc-02-blm-dialog.dart';
-import 'misc-04-blm-manage-memorial.dart';
-import 'misc-05-blm-post.dart';
-import 'misc-07-blm-button.dart';
+import 'misc-04-regular-manage-memorial.dart';
+import 'misc-07-regular-button.dart';
+import 'misc-02-regular-dialog.dart';
+import 'misc-05-regular-post.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'misc-16-blm-empty-display.dart';
 
-
-class MiscBLMUserProfileDetailsDraggable extends StatefulWidget {
+class MiscRegularUserProfileDetailsDraggable extends StatefulWidget {
   final int userId;
-  MiscBLMUserProfileDetailsDraggable({this.userId});
+  MiscRegularUserProfileDetailsDraggable({this.userId});
 
   @override
-  MiscBLMUserProfileDetailsDraggableState createState() => MiscBLMUserProfileDetailsDraggableState(userId: userId);
+  MiscRegularUserProfileDetailsDraggableState createState() => MiscRegularUserProfileDetailsDraggableState(userId: userId);
 }
 
-class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDetailsDraggable> {
+class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserProfileDetailsDraggable> {
   final int userId;
-  MiscBLMUserProfileDetailsDraggableState({this.userId});
+  MiscRegularUserProfileDetailsDraggableState({this.userId});
 
   double height;
   Offset position;
@@ -83,9 +85,7 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 
             GestureDetector(
               onTap: (){
-                print('Navigate!');
-                print('The user id is $userId');
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: userId,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -129,7 +129,7 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: userId,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -174,10 +174,17 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
             GestureDetector(
               onTap: () async{
                 context.showLoaderOverlay();
-                APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: userId);
+                APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: userId);
                 context.hideLoaderOverlay();
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                HomeRegularUserOtherDetails(
+                  userId: userId, 
+                  toggleBirthdate: result.hideBirthdate, 
+                  toggleBirthplace: result.hideBirthplace, 
+                  toggleAddress: result.hideAddress, 
+                  toggleEmail: result.hideEmail, 
+                  toggleNumber: result.hidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -260,20 +267,44 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 
             Expanded(child: Container(),),
 
-            MiscBLMButtonTemplate(
+            MiscRegularButtonTemplate(
               buttonText: 'Logout',
               buttonTextStyle: TextStyle(
                 fontSize: SizeConfig.safeBlockHorizontal * 5, 
                 fontWeight: FontWeight.bold, 
                 color: Color(0xffffffff),
-              ), 
+              ),
               onPressed: () async{
 
-                bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+                bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                 if(logoutResult){
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
+                    context.showLoaderOverlay();
+                    bool result = await apiRegularLogout();
+
+                    GoogleSignIn googleSignIn = GoogleSignIn(
+                      scopes: [
+                        'profile',
+                        'email',
+                        'openid'
+                      ],
+                    );
+                    await googleSignIn.signOut();
+
+                    FacebookLogin fb = FacebookLogin();
+                    await fb.logOut();
+
+                    context.hideLoaderOverlay();
+
+                    if(result){
+                      Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                      Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                    }else{
+                      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                    }
                 }
+
+
 
               }, 
               width: SizeConfig.screenWidth / 2, 
@@ -295,17 +326,17 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
 }
 
 
-class MiscBLMUserProfileDraggableSwitchTabs extends StatefulWidget {
+class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget {
   final int userId;
-  MiscBLMUserProfileDraggableSwitchTabs({this.userId});
+  MiscRegularUserProfileDraggableSwitchTabs({this.userId});
 
   @override
-  MiscBLMUserProfileDraggableSwitchTabsState createState() => MiscBLMUserProfileDraggableSwitchTabsState(userId: userId);
+  MiscRegularUserProfileDraggableSwitchTabsState createState() => MiscRegularUserProfileDraggableSwitchTabsState(userId: userId);
 }
 
-class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfileDraggableSwitchTabs> {
+class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUserProfileDraggableSwitchTabs> {
   final int userId;
-  MiscBLMUserProfileDraggableSwitchTabsState({this.userId});
+  MiscRegularUserProfileDraggableSwitchTabsState({this.userId});
 
   double height;
   Offset position;
@@ -317,7 +348,7 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
     super.initState();
     height = SizeConfig.screenHeight;
     position = Offset(0.0, height - 100);
-    children = [MiscBLMDraggablePost(userId: userId,), MiscBLMDraggableMemorials(userId: userId,)];
+    children = [MiscRegularDraggablePost(userId: userId,), MiscRegularDraggableMemorials(userId: userId,)];
   }
 
   @override
@@ -428,7 +459,7 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
 
 
 
-class BLMMiscDraggablePost{
+class RegularMiscDraggablePost{
   int userId;
   int postId;
   int memorialId;
@@ -450,22 +481,22 @@ class BLMMiscDraggablePost{
   List<String> taggedImage;
   List<int> taggedId;
 
-  BLMMiscDraggablePost({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  RegularMiscDraggablePost({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
 }
 
-class MiscBLMDraggablePost extends StatefulWidget{
+class MiscRegularDraggablePost extends StatefulWidget{
   final int userId;
-  MiscBLMDraggablePost({this.userId});
+  MiscRegularDraggablePost({this.userId});
 
-  MiscBLMDraggablePostState createState() => MiscBLMDraggablePostState(userId: userId);
+  MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState(userId: userId);
 }
 
-class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
+class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   final int userId;
-  MiscBLMDraggablePostState({this.userId});
+  MiscRegularDraggablePostState({this.userId});
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMMiscDraggablePost> posts;
+  List<RegularMiscDraggablePost> posts;
   int itemRemaining;
   int page;
   int count;
@@ -488,7 +519,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
     if(itemRemaining != 0){
       context.showLoaderOverlay();
 
-      var newValue = await apiBLMShowUserPosts(userId: userId, page: page);
+      var newValue = await apiRegularShowUserPosts(userId: userId, page: page);
       itemRemaining = newValue.itemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
@@ -505,7 +536,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
         }
 
-        posts.add(BLMMiscDraggablePost(
+        posts.add(RegularMiscDraggablePost(
           userId: newValue.familyMemorialList[i].page.pageCreator.id, 
           postId: newValue.familyMemorialList[i].id,
           memorialId: newValue.familyMemorialList[i].page.id,
@@ -576,7 +607,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           padding: EdgeInsets.all(10.0),
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            return MiscBLMPost(
+            return MiscRegularPost(
               userId: posts[i].userId,
               postId: posts[i].postId,
               memorialId: posts[i].memorialId,
@@ -630,6 +661,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
                 : Container(height: 0,),
               ],
             );
+            
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
           itemCount: posts.length,
@@ -646,7 +678,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           alignment: Alignment.center,
           child: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: MiscBLMEmptyDisplayTemplate(),
+            child: MiscRegularEmptyDisplayTemplate(),
           ),
         ),
       ),
@@ -654,16 +686,16 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   }
 }
 
-class MiscBLMDraggableMemorials extends StatefulWidget{
+class MiscRegularDraggableMemorials extends StatefulWidget{
   final int userId;
-  MiscBLMDraggableMemorials({this.userId});
+  MiscRegularDraggableMemorials({this.userId});
 
-  MiscBLMDraggableMemorialsState createState() => MiscBLMDraggableMemorialsState(userId: userId);
+  MiscRegularDraggableMemorialsState createState() => MiscRegularDraggableMemorialsState(userId: userId);
 }
 
-class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
+class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemorials>{
   final int userId;
-  MiscBLMDraggableMemorialsState({this.userId});
+  MiscRegularDraggableMemorialsState({this.userId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<Widget> finalMemorials;
@@ -756,12 +788,11 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
       context.hideLoaderOverlay();
 
-      // count = count + newValue.friendsMemorialList.blm.length;
       count = count + newValue.owned.length;
 
       for(int i = 0; i < newValue.owned.length; i++){
         finalMemorials.add(
-          MiscBLMManageMemorialTab(
+          MiscRegularManageMemorialTab(
             index: i,
             memorialName: newValue.owned[i].page.pageName,
             description: newValue.owned[i].page.pageDetails.description,
@@ -781,9 +812,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       page1++;
 
       if(blmFamilyItemsRemaining == 0){
-        print('Test test test!');
         addMemorials2();
-        print('Donee!');
         setState(() {
           flag1 = true;
         });
@@ -811,7 +840,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
 
       for(int i = 0; i < newValue.followed.length; i++){
         finalMemorials.add(
-          MiscBLMManageMemorialTab(
+          MiscRegularManageMemorialTab(
             index: i,
             memorialName: newValue.followed[i].page.pageName,
             description: newValue.owned[i].page.pageDetails.description,
@@ -885,7 +914,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
           alignment: Alignment.center,
           child: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
+            child: MiscRegularEmptyDisplayTemplate(message: 'Memorial is empty',),
           ),
         ),
       ),

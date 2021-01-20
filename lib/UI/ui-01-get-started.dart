@@ -1,23 +1,20 @@
-import 'dart:async';
-
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
-import 'BLM/blm-07-password-reset.dart';
-import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
+import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
-import 'package:flutter/material.dart';
-
 import 'Regular/regular-07-password-reset.dart';
+import 'BLM/blm-07-password-reset.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
 
 const double pi = 3.1415926535897932;
 
-// class UIGetStarted extends StatelessWidget {
 class UIGetStarted extends StatefulWidget{
   
   UIGetStartedState createState() => UIGetStartedState();
@@ -61,13 +58,9 @@ class UIGetStartedState extends State<UIGetStarted>{
 
       print('The value of getLatestReferringParams is $value1');
       print('The value of getFirstReferringParams is $value2');
-
       print('The token of the link is ${value1['reset_password_token']}');
       print('The reset type is $resetType');
 
-      // print('The token is ${value1['token']}');
-
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset()));
       if(resetType == 'Regular'){
         FlutterBranchSdk.logout();
         Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: value1['reset_password_token'],)));
@@ -103,8 +96,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
     if(login){
       FlutterBranchSdk.logout();
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
-
       if(pageType == 'Blm'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
       }else{

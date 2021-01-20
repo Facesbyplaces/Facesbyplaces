@@ -1,14 +1,10 @@
-// import 'package:clipboard/clipboard.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
-// import 'package:flutter_share/flutter_share.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-
-// class MiscRegularDropDownTemplate extends StatelessWidget{
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clipboard/clipboard.dart';
+import 'package:flutter/material.dart';
 
 class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
@@ -119,8 +115,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-
-                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },

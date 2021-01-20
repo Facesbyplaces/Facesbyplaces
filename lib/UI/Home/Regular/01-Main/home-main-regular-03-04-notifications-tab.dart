@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-notifications-tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-notifications.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-notification-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

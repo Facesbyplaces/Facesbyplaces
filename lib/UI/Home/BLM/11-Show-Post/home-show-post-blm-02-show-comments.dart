@@ -5,8 +5,8 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-add-comm
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-show-comment-or-reply-like-status.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-07-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-add-reply.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-empty-display.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -617,28 +617,8 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
               ],
             )
           )
-          // : SingleChildScrollView(
-          //   physics: ClampingScrollPhysics(),
-          //   child: ContainerResponsive(
-          //     height: SizeConfig.screenHeight,
-          //     width: SizeConfig.screenWidth,
-          //     alignment: Alignment.center,
-          //     child: ContainerResponsive(
-          //       width: SizeConfig.screenWidth,
-          //       heightResponsive: false,
-          //       widthResponsive: true,
-          //       alignment: Alignment.center,
-          //       child: SingleChildScrollView(
-          //         physics: ClampingScrollPhysics(),
-          //         child: MiscBLMEmptyDisplayTemplate(message: 'Comment is empty',),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          : SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscBLMEmptyDisplayTemplate(message: 'Comment is empty',),
-          ),
+          : SingleChildScrollView(physics: ClampingScrollPhysics(), child: MiscBLMEmptyDisplayTemplate(message: 'Comment is empty',),),
+          
           bottomNavigationBar: Padding(
             padding: EdgeInsets.only(left: 20.0, right: 20.0,),
             child: Row(

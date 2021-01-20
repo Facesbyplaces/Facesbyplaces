@@ -1,18 +1,17 @@
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
-import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-view-comments.dart';
-import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-blm-user.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-show-comments.dart';
+import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-post-like-or-unlike.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/material.dart';
-import 'misc-15-blm-dropdown.dart';
-
+import 'misc-13-blm-dropdown.dart';
 
 class MiscBLMPost extends StatefulWidget{
   final List<Widget> contents;
@@ -31,7 +30,6 @@ class MiscBLMPost extends StatefulWidget{
   final List<String> taggedFirstName;
   final List<String> taggedLastName;
   final List<int> taggedId;
-
   final String pageType;
   final bool famOrFriends;
   final String relationship;
@@ -59,7 +57,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   final List<String> taggedFirstName;
   final List<String> taggedLastName;
   final List<int> taggedId;
-
   final String pageType;
   final bool famOrFriends;
   final String relationship;
@@ -157,7 +154,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                   ),
                   Expanded(
                     child: Container(
-                      // color: Colors.blue,
                       padding: EdgeInsets.only(left: 10.0),
                       child: GestureDetector(
                         onTap: (){
@@ -235,7 +231,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                       numberOfTagged,
                       (index) => GestureDetector(
                         onTap: (){
-                          print('The user id is ${taggedId[index]}');
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index])));
                         },
                         child: RichText(

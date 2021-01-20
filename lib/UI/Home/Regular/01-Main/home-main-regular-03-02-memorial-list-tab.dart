@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-00-home-memorials-tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-19-regular-empty-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -144,17 +144,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       if(mounted)
       setState(() {});
       page1++;
-
-      // if(memorialFamilyItemsRemaining == 0){
-      //   addMemorials2();
-      //   setState(() {
-      //     flag1 = true;
-      //   });
-      //   onLoading();
-      // }
-
-      // refreshController.loadComplete();
-      
     }
 
     page1 = 1;
@@ -188,35 +177,16 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       setState(() {});
       page1++;
 
-      // if(blmFamilyItemsRemaining == 0){
-      //   addMemorials2();
-      //   setState(() {
-      //     flag1 = true;
-      //   });
-      //   onLoading();
-      // }
-
-      // refreshController.loadComplete();
-
       if(blmFamilyItemsRemaining == 0){
         addMemorials2();
         setState(() {
           flag1 = true;
         });
         onLoading();
-      }
-      
+      } 
     }
-    
-    
-    // else{
-    //   refreshController.loadNoData();
-    // }
 
-
-
-      refreshController.loadComplete();
-
+    refreshController.loadComplete();
   }
 
   void onLoading2() async{
@@ -228,8 +198,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
       memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
       count = count + newValue.friendsMemorialList.memorial.length;
-
-      
 
       for(int i = 0; i < newValue.friendsMemorialList.memorial.length; i++){
         finalMemorials.add(
@@ -251,8 +219,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       if(mounted)
       setState(() {});
       page2++;
-
-      // refreshController.loadComplete();
     }
 
     page2 = 1;
@@ -285,13 +251,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       if(mounted)
       setState(() {});
       page2++;
-
-      // refreshController.loadComplete();
     }
-    
-    // else{
-    //   refreshController.loadNoData();
-    // }
 
     refreshController.loadComplete();
   }

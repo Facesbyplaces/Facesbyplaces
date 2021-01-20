@@ -1,13 +1,11 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
-// import 'package:flutter_share/flutter_share.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clipboard/clipboard.dart';
+import 'package:flutter/material.dart';
 
-// class MiscBLMDropDownTemplate extends StatelessWidget{
 class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;
   final bool likePost;
@@ -34,8 +32,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
   BranchLinkProperties lp;
 
   void initBranchShare(){
-    print('The post id for initBranchShare is $postId');
-
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
       title: 'FacesbyPlaces Link',
@@ -110,7 +106,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
               }else{
                 initBranchShare();
-                FlutterBranchSdk.setIdentity('alm-share-copied-link');
+                FlutterBranchSdk.setIdentity('blm-share-copied-link');
 
                 BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                 if (response.success) {
@@ -119,8 +115,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-
-                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },

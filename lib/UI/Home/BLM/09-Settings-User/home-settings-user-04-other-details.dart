@@ -1,4 +1,3 @@
-// import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-04-show-other-details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-05-update-other-details.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-06-hide-birthdate.dart';
@@ -12,9 +11,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:flutter/material.dart';
-
 import 'home-settings-user-01-user-details.dart';
+import 'package:flutter/material.dart';
 
 class HomeBLMUserOtherDetails extends StatefulWidget{
   final int userId;
@@ -255,11 +253,6 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                                 if(result){
                                   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the other details.', color: Colors.green,));
-                                  
-                                  // Route route = MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId), settings: RouteSettings(name: '/profile-settings'));
-                                  // Navigator.popAndPushNamed(context, route.settings.name);
-
-                                  // Navigator.popAndPushNamed(context, '/home/blm/profile-settings');
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
