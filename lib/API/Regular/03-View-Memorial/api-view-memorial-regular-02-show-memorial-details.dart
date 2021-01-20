@@ -109,8 +109,6 @@ class APIRegularShowMemorialExtendedDetails{
     return APIRegularShowMemorialExtendedDetails(
       description: parsedJson['description'],
       birthPlace: parsedJson['birthplace'],
-      // dob: parsedJson['dob'],
-      // rip: parsedJson['rip'],
       dob: dob.format(AmericanDateFormats.standardWithComma),
       rip: rip.format(AmericanDateFormats.standardWithComma),
       cemetery: parsedJson['cemetery'],

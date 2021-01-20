@@ -14,13 +14,6 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
       }
     );
 
-    print('The response code of registration is ${response.statusCode}');
-    print('The response body of registration is ${response.body}');
-    print('The headers is ${response.headers}');
-    print('The access token is ${response.headers['access-token']}');
-    print('The uid is ${response.headers['uid']}');
-    print('The client is ${response.headers['client']}');
-
     if(response.statusCode == 200){
       var value = json.decode(response.body);
       var user = value['data'];
@@ -29,16 +22,11 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
 
       final sharedPrefs = await SharedPreferences.getInstance();
 
-      
-
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-verification-code', verificationCode);
       sharedPrefs.setString('regular-access-token', response.headers['access-token']);
       sharedPrefs.setString('regular-uid', response.headers['uid']);    
       sharedPrefs.setString('regular-client', response.headers['client']);
-
-
-      // sharedPrefs.setBool('regular-user-verify', true);
 
     }else{
       var value = json.decode(response.body);

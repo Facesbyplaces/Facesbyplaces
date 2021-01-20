@@ -9,8 +9,7 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({String keywords, int page}) asyn
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({String keywords, int page}) asyn
       'client': getClient,
     }
   );
-
-  print('The response status of search posts is ${response.statusCode}');
-  print('The response code of search posts is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -102,11 +98,6 @@ class APIBLMSearchPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  // bool follower;
-  // bool manage;
-  // String pageType;
-  // String privacy;
-
   bool manage;
   bool famOrFriends;
   bool follower;
@@ -125,10 +116,6 @@ class APIBLMSearchPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      // follower: parsedJson['follower'],
-      // manage: parsedJson['manage'],
-      // pageType: parsedJson['page_type'],
-      // privacy: parsedJson['privacy'],
       manage: parsedJson['manage'],
       famOrFriends: parsedJson['famOrFriends'],
       follower: parsedJson['follower'],

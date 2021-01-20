@@ -10,9 +10,7 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
-    'http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

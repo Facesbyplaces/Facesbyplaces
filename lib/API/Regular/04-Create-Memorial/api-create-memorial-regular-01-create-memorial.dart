@@ -64,20 +64,12 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
       ),  
     );
 
-    print('The status code in create memorial is ${response.statusCode}');
-    print('The status body in create memorial is ${response.data}');
-
     if(response.statusCode == 200){
       var value = response.data;
       var user = value['memorial'];
       int userId = user['id'];
       
       result = userId;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
   }catch(e){
     print('The e in create memorial is $e');

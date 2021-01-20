@@ -12,8 +12,7 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({int memor
   APIRegularShowFamilySettingsMain returnValue;
 
   try{
-    final http.Response response = await http.get(
-      'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
+    final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

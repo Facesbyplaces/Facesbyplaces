@@ -12,9 +12,7 @@ Future<bool> apiBLMAddMemorialAdmin({String pageType, int pageId, int userId}) a
 
   try{
     var dioRequest = dio.Dio();
-
-    var formData;
-    formData = FormData();
+    var formData = FormData();
 
     formData = FormData.fromMap({
       'page_type': pageType,
@@ -34,11 +32,6 @@ Future<bool> apiBLMAddMemorialAdmin({String pageType, int pageId, int userId}) a
 
     if(response.statusCode == 200){
       result = true;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
   }catch(e){
     result = false;

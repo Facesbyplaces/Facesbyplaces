@@ -11,8 +11,7 @@ Future<bool> apiBLMHideBirthdate({bool hide}) async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-    final http.Response response = await http.put(
-      'http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideBirthdate?hide=$hide',
+    final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideBirthdate?hide=$hide',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
@@ -23,11 +22,6 @@ Future<bool> apiBLMHideBirthdate({bool hide}) async{
 
     if(response.statusCode == 200){
       result = true;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
       
   }catch(e){

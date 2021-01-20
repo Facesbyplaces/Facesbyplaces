@@ -8,10 +8,6 @@ Future<bool> apiRegularUpdateSwitchStatusFamily({int memorialId, bool status}) a
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The access token in family switch is $getAccessToken');
-  print('The UID in family switch is $getUID');
-  print('The client in family switch is $getClient');
-
   final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/pageadmin/unhideOrHideFamily/Memorial/$memorialId?hide=$status',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -21,18 +17,7 @@ Future<bool> apiRegularUpdateSwitchStatusFamily({int memorialId, bool status}) a
     }
   );
 
-  print('The family switch status is ${response.statusCode}');
-
   if(response.statusCode == 200){
-    // print('The access token as updated is ${response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '')}');
-    // print('The uid as updated is ${response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '')}');
-    // print('The client as updated is ${response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '')}');
-
-    // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-    //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-    //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-    //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-    // }
     return true;
   }else{
     return false;

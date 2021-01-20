@@ -25,16 +25,6 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       'post[longitude]': post.longitude,
       'tag_people': post.tagPeople,
     });
-    
-
-
-//  Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['product_id'] = this.product_id;
-//     data['quantity'] = this.quantity;
-//     data['payment'] = this.payment;
-//     return data;
-//   }
 
     if(post.imagesOrVideos != null || post.imagesOrVideos != ['']){
       for(int i = 0; i < post.imagesOrVideos.length; i++){
@@ -58,11 +48,6 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
 
     if(response.statusCode == 200){
       result = true;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
   }catch(e){
     result = false;

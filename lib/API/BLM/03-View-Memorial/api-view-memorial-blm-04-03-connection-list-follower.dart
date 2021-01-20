@@ -9,11 +9,7 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({int mem
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  print('The memorial id is $memorialId');
-  print('The page is $page');
-
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/followers/index?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/followers/index?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -21,9 +17,6 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({int mem
       'client': getClient,
     },
   );
-
-  print('The status code is ${response.statusCode}');
-  print('The status code is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

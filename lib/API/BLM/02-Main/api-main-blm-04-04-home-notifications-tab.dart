@@ -9,8 +9,7 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({int page}) asy
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({int page}) asy
       'client': getClient,
     }
   );
-
-  // print('The response status code of notifications is ${response.statusCode}');
-  // print('The response status bofy of notifications is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

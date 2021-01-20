@@ -9,8 +9,7 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

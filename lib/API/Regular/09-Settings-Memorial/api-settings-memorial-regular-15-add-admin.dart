@@ -12,7 +12,6 @@ Future<bool> apiRegularAddMemorialAdmin({String pageType, int pageId, int userId
 
   try{
     var dioRequest = dio.Dio();
-
     var formData = FormData();
 
     formData = FormData.fromMap({
@@ -32,11 +31,6 @@ Future<bool> apiRegularAddMemorialAdmin({String pageType, int pageId, int userId
     );
 
     if(response.statusCode == 200){
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
       result = true;
     }
   }catch(e){

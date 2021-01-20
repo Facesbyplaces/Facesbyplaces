@@ -12,9 +12,8 @@ Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) 
 
   try{
     var dioRequest = Dio();
+    var formData = FormData();
 
-    var formData;
-    formData = FormData();
     formData.files.addAll([
       MapEntry('current_password', MultipartFile.fromString(currentPassword),),
       MapEntry('new_password', MultipartFile.fromString(newPassword)),
@@ -32,11 +31,6 @@ Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) 
 
     if(response.statusCode == 200){
       result = true;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
     
   }catch(e){

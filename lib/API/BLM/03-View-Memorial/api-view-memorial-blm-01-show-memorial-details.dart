@@ -106,8 +106,6 @@ class APIBLMShowMemorialExtendedDetails{
       description: parsedJson['description'],
       location: parsedJson['location'],
       precinct: parsedJson['precinct'],
-      // dob: parsedJson['dob'],
-      // rip: parsedJson['rip'],
       dob: dob.format(AmericanDateFormats.standardWithComma),
       rip: rip.format(AmericanDateFormats.standardWithComma),
       state: parsedJson['state'],

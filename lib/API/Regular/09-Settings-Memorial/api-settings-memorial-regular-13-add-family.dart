@@ -12,9 +12,8 @@ Future<bool> apiRegularAddFamily({int memorialId, int userId, String relationshi
 
   try{
     var dioRequest = Dio();
+    var formData = FormData();
 
-    var formData;
-    formData = FormData();
     formData.files.addAll([
       MapEntry('page_type', MultipartFile.fromString('Memorial'),),
       MapEntry('page_id', MultipartFile.fromString(memorialId.toString())),
@@ -34,11 +33,6 @@ Future<bool> apiRegularAddFamily({int memorialId, int userId, String relationshi
 
     if(response.statusCode == 200){
       result = true;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
     
   }catch(e){

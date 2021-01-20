@@ -8,16 +8,11 @@ Future<bool> apiRegularLogin({String email, String password}) async{
 
   try{
     
-    final http.Response response = await http.post(
-      // 'http://fbp.dev1.koda.ws/auth/sign_in?email=$email&password=$password&account_type=2',
-      'http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email',
+    final http.Response response = await http.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }
     );
-
-    print('The response code of login is ${response.statusCode}');
-    print('The response body of login is ${response.body}');
 
     if(response.statusCode == 200){
       var value = json.decode(response.body);
@@ -25,10 +20,6 @@ Future<bool> apiRegularLogin({String email, String password}) async{
       int userId = user['id'];
 
       final sharedPrefs = await SharedPreferences.getInstance();
-
-      print('The access token in login is ${response.headers['access-token']}');
-      print('The uid in login is ${response.headers['uid']}');
-      print('The client in login is ${response.headers['client']}');
 
       sharedPrefs.setInt('regular-user-id', userId);
       sharedPrefs.setString('regular-access-token', response.headers['access-token']);

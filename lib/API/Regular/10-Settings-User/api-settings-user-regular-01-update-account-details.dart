@@ -12,9 +12,8 @@ Future<bool> apiRegularUpdateAccountDetails({String firstName, String lastName, 
 
   try{
     var dioRequest = Dio();
+    var formData = FormData();
 
-    var formData;
-    formData = FormData();
     formData.files.addAll([
       MapEntry('first_name', MultipartFile.fromString(firstName),),
       MapEntry('last_name', MultipartFile.fromString(lastName)),
@@ -33,18 +32,8 @@ Future<bool> apiRegularUpdateAccountDetails({String firstName, String lastName, 
       ),
     );
 
-    print('The access token in update account details is ${response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '')}');
-    print('The uid in update account details is ${response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '')}');
-    print('The client in update account details is ${response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '')}');
-
     if(response.statusCode == 200){
       result = true;
-
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('regular-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('regular-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('regular-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
     
   }catch(e){

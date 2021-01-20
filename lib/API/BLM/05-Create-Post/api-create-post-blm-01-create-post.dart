@@ -29,20 +29,16 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
       'post[longitude]': post.longitude,
       // 'tag_people': post.tagPeople,
     });
-    
-    // if(post.imagesOrVideos != null){
-    //   var file = await dio.MultipartFile.fromFile(post.imagesOrVideos.path, filename: post.imagesOrVideos.path);
-    //   formData.files.add(MapEntry('post[imagesOrVideos][]', file));
-    // }
-    if(post.tagPeople != null){
-      for(int i = 0; i < post.tagPeople.length; i++){
-        if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
-          formData.files.add(MapEntry('post[imagesOrVideos][]', file));
-        }
-      }
 
-    }
+    // if(post.tagPeople != null){
+    //   for(int i = 0; i < post.tagPeople.length; i++){
+    //     if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
+    //       var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
+    //       formData.files.add(MapEntry('post[imagesOrVideos][]', file));
+    //     }
+    //   }
+
+    // }
 
     
     if(post.imagesOrVideos != null || post.imagesOrVideos != ['']){
@@ -67,11 +63,6 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
 
     if(response.statusCode == 200){
       result = true;
-      // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-      //   sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      //   sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-      //   sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-      // }
     }
   }catch(e){
     print('The value of e is ${e.toString()}');

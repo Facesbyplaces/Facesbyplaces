@@ -9,9 +9,7 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({int userId}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId',
-    'http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,8 +17,6 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({int userId}) async{
       'client': getClient,
     }
   );
-
-  print('');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

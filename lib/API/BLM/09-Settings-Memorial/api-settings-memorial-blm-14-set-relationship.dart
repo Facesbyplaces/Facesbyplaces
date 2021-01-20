@@ -8,8 +8,7 @@ Future<bool> apiBLMMemorialSetRelationship({int memorialId, String relationship}
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/api/v1/pages/blm/relationship',
+  final http.Response response = await http.post('http://fbp.dev1.koda.ws/api/v1/pages/blm/relationship',
     headers: <String, String>{
       'access-token': getAccessToken,
       'uid': getUID,
@@ -22,11 +21,6 @@ Future<bool> apiBLMMemorialSetRelationship({int memorialId, String relationship}
   );
 
   if(response.statusCode == 200){
-    // if(response.headers['access-token'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['uid'].toString().replaceAll('[', '').replaceAll(']', '') != null && response.headers['client'].toString().replaceAll('[', '').replaceAll(']', '') != null){
-    //   sharedPrefs.setString('blm-access-token', response.headers['access-token'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-    //   sharedPrefs.setString('blm-uid', response.headers['uid'].toString().replaceAll('[' ,'',).replaceAll(']', ''));    
-    //   sharedPrefs.setString('blm-client', response.headers['client'].toString().replaceAll('[' ,'',).replaceAll(']', ''));
-    // }
     return true;
   }else{
     return false;

@@ -650,22 +650,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           itemCount: feeds.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     height: SizeConfig.screenHeight + ScreenUtil().setHeight(55),
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),

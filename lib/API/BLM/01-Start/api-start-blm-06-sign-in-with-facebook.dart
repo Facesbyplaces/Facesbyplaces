@@ -4,15 +4,11 @@ import 'dart:convert';
 
 Future<bool> apiBLMSignInWithFacebook({String firstName, String lastName, String email, String username, String facebookId, String image}) async{
 
-  final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
+  final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&first_name=$firstName&last_name=$lastName&email=$email&username=$username&facebook_id=$facebookId&image=$image',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }
   );
-
-  print('The status code for sign in with facebook in blm is ${response.statusCode}');
-  print('The status body for sign in with facebook in blm is ${response.body}');
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);

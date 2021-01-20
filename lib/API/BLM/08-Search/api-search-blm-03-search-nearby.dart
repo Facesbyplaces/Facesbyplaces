@@ -9,8 +9,7 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby({int page, double latitude, doub
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,9 +17,6 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby({int page, double latitude, doub
       'client': getClient,
     }
   );
-
-  print('The response status of search nearby is ${response.statusCode}');
-  print('The response code of search nearby is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
