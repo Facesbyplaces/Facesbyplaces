@@ -96,8 +96,13 @@ class APIRegularShowOriginalPostMainExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularShowOriginalPostMainExtendedPageCreator pageCreator;
+  bool manage;
+  bool famOrFriends;
+  bool follower;
+  String pageType;
+  String privacy;
 
-  APIRegularShowOriginalPostMainExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularShowOriginalPostMainExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIRegularShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPage(
@@ -109,7 +114,11 @@ class APIRegularShowOriginalPostMainExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

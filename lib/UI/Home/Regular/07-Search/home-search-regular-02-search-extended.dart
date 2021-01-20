@@ -36,7 +36,11 @@ class RegularSearchMainPosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class RegularSearchMainSuggested{
@@ -167,6 +171,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
+
+          pageType: feeds[i].pageType,
+          famOrFriends: feeds[i].famOrFriends,
+          relationship: feeds[i].relationship,
           ),    
         );
       }
@@ -567,6 +575,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
+
+              pageType: feeds[i].pageType,
+              famOrFriends: feeds[i].famOrFriends,
+              relationship: feeds[i].relationship,
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
@@ -581,7 +593,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           ),
                         );
                       }else if(feeds[i].imagesOrVideos.length == 2){

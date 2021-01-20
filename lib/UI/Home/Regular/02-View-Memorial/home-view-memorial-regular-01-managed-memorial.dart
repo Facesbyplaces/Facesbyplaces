@@ -53,7 +53,11 @@ class RegularProfilePosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId,});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class HomeRegularProfile extends StatefulWidget{
@@ -131,6 +135,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
+
+          pageType: newValue.familyMemorialList[i].postPage.pageType,
+          famOrFriends: newValue.familyMemorialList[i].postPage.famOrFriends,
+          relationship: newValue.familyMemorialList[i].postPage.relationship,
 
           ),
         );
@@ -712,6 +720,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
 
+                                      pageType: posts[i].pageType,
+                                      famOrFriends: posts[i].famOrFriends,
+                                      relationship: posts[i].relationship,
+
                                       contents: [
                                         // Column(
                                         //   children: [
@@ -864,7 +876,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                           child: Container(
                             padding: EdgeInsets.only(right: 20.0),
                             alignment: Alignment.centerRight,
-                            child: MaterialButton(
+                            child: managed == true
+                            ? MaterialButton(
                               onPressed: () async{
 
                                 final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
@@ -888,7 +901,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   color: Color(0xffffffff),
                                 ),
                               ),
-                            ),
+                            )
+                            : Container(height: 0,),
                           ),
                         ),
                       ],

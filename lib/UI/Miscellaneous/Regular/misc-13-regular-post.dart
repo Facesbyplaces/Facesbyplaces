@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
@@ -31,9 +33,13 @@ class MiscRegularPost extends StatefulWidget{
   final List<String> taggedLastName;
   final List<int> taggedId;
 
-  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId});
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
 
-  MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId);
+  MiscRegularPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+
+  MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
 }
 
 class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObserver{
@@ -54,7 +60,11 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   final List<String> taggedLastName;
   final List<int> taggedId;
 
-  MiscRegularPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId});
+  final String pageType;
+  final bool famOrFriends;
+  final String relationship;
+
+  MiscRegularPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 
   Future profileFollowing;
   bool likePost;
@@ -150,34 +160,55 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                   Expanded(
                     child: Container(
                       padding: EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Align(alignment: Alignment.bottomLeft,
-                              child: Text(memorialName,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff000000),
+                      child: GestureDetector(
+                        onTap: (){
+                          print('The page type is $pageType');
+                          print('The managed is $managed');
+                          print('The famOrFriends is $famOrFriends');
+
+                          if(pageType == 'Memorial'){
+                            if(managed == true || famOrFriends == true){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                            }else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                            }
+                          }else{
+                            if(managed == true || famOrFriends == true){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                            }else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                            }
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Align(alignment: Alignment.bottomLeft,
+                                child: Text(memorialName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff000000),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(timeCreated,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xffaaaaaa)
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(timeCreated,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xffaaaaaa)
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -192,103 +223,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                 children: contents,
               ),
             ),
-
-                            // originalPost.data.post.imagesOrVideos != null
-                            // ? Container(
-                            //   // color: Colors.red,
-                            //   // height: SizeConfig.blockSizeVertical * 50,
-                            //   height: SizeConfig.blockSizeVertical * 30,
-                            //   child: ((){
-                            //     print('The length of images is ${originalPost.data.post.imagesOrVideos.length}');
-                            //     if(originalPost.data.post.imagesOrVideos != null){
-                            //       if(originalPost.data.post.imagesOrVideos.length == 1){
-                            //         return Container(
-                            //           child: CachedNetworkImage(
-                            //             fit: BoxFit.cover,
-                            //             imageUrl: originalPost.data.post.imagesOrVideos[0],
-                            //             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            //             errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
-                            //           ),
-                            //         );
-                            //       }else if(originalPost.data.post.imagesOrVideos.length == 2){
-                            //         return StaggeredGridView.countBuilder(
-                            //           padding: EdgeInsets.zero,
-                            //           physics: NeverScrollableScrollPhysics(),
-                            //           crossAxisCount: 4,
-                            //           itemCount: 2,
-                            //           itemBuilder: (BuildContext context, int index) => 
-                            //             CachedNetworkImage(
-                            //               fit: BoxFit.cover,
-                            //               imageUrl: originalPost.data.post.imagesOrVideos[index],
-                            //               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            //               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            //             ),
-                            //           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                            //           mainAxisSpacing: 4.0,
-                            //           crossAxisSpacing: 4.0,
-                            //         );
-                            //       }else{
-                            //         return Container(
-                            //           child: StaggeredGridView.countBuilder(
-                            //             padding: EdgeInsets.zero,
-                            //             physics: NeverScrollableScrollPhysics(),
-                            //             crossAxisCount: 4,
-                            //             itemCount: 3,
-                            //             itemBuilder: (BuildContext context, int index) => 
-                            //             GestureDetector(
-                            //               onTap: () async{
-                            //                 FullScreenMenu.show(
-                            //                   context,
-                            //                   backgroundColor: Color(0xff888888),
-                            //                   items: [
-                            //                     Center(
-                            //                       child: Container(
-                            //                         height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
-                            //                         child: CarouselSlider(
-                            //                           items: List.generate(
-                            //                             originalPost.data.post.imagesOrVideos.length, (next) =>
-                            //                             CachedNetworkImage(
-                            //                               fit: BoxFit.cover,
-                            //                               imageUrl: originalPost.data.post.imagesOrVideos[next],
-                            //                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            //                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            //                             ),
-                            //                           ),
-                            //                           options: CarouselOptions(
-                            //                             autoPlay: false,
-                            //                             enlargeCenterPage: true,
-                            //                             viewportFraction: 0.9,
-                            //                             aspectRatio: 2.0,
-                            //                             initialPage: 2,
-                            //                           ),
-                            //                         ),
-                            //                       ),
-                            //                     ),
-                            //                   ],
-                            //                 );
-                            //               },
-                            //               child: CachedNetworkImage(
-                            //                 fit: BoxFit.cover,
-                            //                 imageUrl: originalPost.data.post.imagesOrVideos[index],
-                            //                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            //                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            //               ),
-                            //             ),
-                            //             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                            //             mainAxisSpacing: 4.0,
-                            //             crossAxisSpacing: 4.0,
-                            //           ),
-                            //         );
-                            //       }
-                            //     }else{
-                            //       return Container(height: 0,);
-                            //     }
-                            //   }()),
-                            // )
-                            // : Container(
-                            //   color: Colors.red,
-                            //   height: 0,
-                            // ),
 
             numberOfTagged != 0
             ? Row(

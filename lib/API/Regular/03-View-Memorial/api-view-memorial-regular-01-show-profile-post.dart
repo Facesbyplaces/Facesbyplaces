@@ -100,12 +100,13 @@ class APIRegularHomeProfilePostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeProfilePostExtendedPageCreator pageCreator;
-  bool follower;
   bool manage;
+  bool famOrFriends;
+  bool follower;
   String pageType;
   String privacy;
 
-  APIRegularHomeProfilePostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
+  APIRegularHomeProfilePostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIRegularHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPage(
@@ -117,8 +118,9 @@ class APIRegularHomeProfilePostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIRegularHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      follower: parsedJson['follower'],
       manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
       pageType: parsedJson['page_type'],
       privacy: parsedJson['privacy'],
     );

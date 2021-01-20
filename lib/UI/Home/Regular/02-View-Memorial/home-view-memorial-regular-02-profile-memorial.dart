@@ -39,7 +39,11 @@ class RegularProfilePosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId,});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  RegularProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class HomeRegularMemorialProfile extends StatefulWidget{
@@ -115,6 +119,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
+
+          pageType: newValue.familyMemorialList[i].postPage.pageType,
+          famOrFriends: newValue.familyMemorialList[i].postPage.famOrFriends,
+          relationship: newValue.familyMemorialList[i].postPage.relationship,
           ),
         );
       }
@@ -755,6 +763,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                       taggedFirstName: posts[i].taggedFirstName,
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
+
+                                      pageType: posts[i].pageType,
+                                      famOrFriends: posts[i].famOrFriends,
+                                      relationship: posts[i].relationship,
                                       contents: [
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

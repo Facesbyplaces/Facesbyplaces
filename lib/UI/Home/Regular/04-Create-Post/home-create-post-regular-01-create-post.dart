@@ -58,7 +58,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   void getManagedPages() async{
     context.showLoaderOverlay();
+    print('Hnngggg');
     var newValue = await apiRegularShowListOfManagedPages();
+    print('hereee');
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.pagesList.length; i++){

@@ -96,8 +96,13 @@ class APIBLMShowOriginalPostMainExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMShowOriginalPostMainExtendedPageCreator pageCreator;
+  bool manage;
+  bool famOrFriends;
+  bool follower;
+  String pageType;
+  String privacy;
 
-  APIBLMShowOriginalPostMainExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIBLMShowOriginalPostMainExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIBLMShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostMainExtendedPage(
@@ -109,7 +114,11 @@ class APIBLMShowOriginalPostMainExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      
+      manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
+      pageType: parsedJson['page_type'],
+      privacy: parsedJson['privacy'],
     );
   }
 }

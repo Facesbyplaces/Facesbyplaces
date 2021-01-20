@@ -1,6 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-post-like-or-unlike.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-dropdown.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -148,49 +152,78 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                           children: [
                             Container(
                               height: SizeConfig.blockSizeVertical * 10,
+                              // color: Colors.red,
                               child: Row(
                                 children: [
                                   GestureDetector(
                                     onTap: () async{
-                                      
+                                      if(originalPost.data.post.page.pageType == 'Memorial'){
+                                        if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                        }else{
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                        }
+                                      }else{
+                                        if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                        }else{
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                        }
+                                      }
                                     },
                                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.post.page.profileImage != null ? NetworkImage(originalPost.data.post.page.profileImage) : AssetImage('assets/icons/app-icon.png')),
                                   ),
                                   Expanded(
                                     child: Container(
                                       padding: EdgeInsets.only(left: 10.0),
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: Align(alignment: Alignment.bottomLeft,
-                                              child: Text(originalPost.data.post.page.name,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xff000000),
+                                      child: GestureDetector(
+                                        onTap: (){
+                                          if(originalPost.data.post.page.pageType == 'Memorial'){
+                                            if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                            }else{
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                            }
+                                          }else{
+                                            if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                            }else{
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                            }
+                                          }
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              child: Align(alignment: Alignment.bottomLeft,
+                                                child: Text(originalPost.data.post.page.name,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xff000000),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)),
-                                                maxLines: 1,
-                                                style: TextStyle(
-                                                  fontSize: SizeConfig.safeBlockHorizontal * 3,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Color(0xffaaaaaa)
+                                            Expanded(
+                                              child: Align(
+                                                alignment: Alignment.topLeft,
+                                                child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)),
+                                                  maxLines: 1,
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Color(0xffaaaaaa)
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  // MiscRegularDropDownTemplate(postId: postId, reportType: 'Post',),
                                   MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post',),
                                 ],
                               ),
@@ -302,11 +335,39 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                               ],
                                             );
                                           },
-                                          child: CachedNetworkImage(
+                                          child: index != 1
+                                          ? CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl: originalPost.data.post.imagesOrVideos[index],
                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                          )
+                                          :  Stack(
+                                            children: [
+                                              CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                              ),
+
+                                              Container(color: Colors.black.withOpacity(0.5),),
+
+                                              Center(
+                                                child: CircleAvatar(
+                                                  radius: SizeConfig.blockSizeVertical * 3,
+                                                  backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                                  child: Text(
+                                                    index.toString(),
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color(0xffffffff),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
@@ -450,7 +511,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                               height: SizeConfig.blockSizeVertical * 10,
                               child: GestureDetector(
                                 onTap: (){
-                                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegularLogin()));
                                   Navigator.pushReplacementNamed(context, '/regular/login');
                                 },
                                 child: Center(
@@ -462,8 +522,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                           ],
                         ),
                       ),
-
-                      // Flexible(child: Container(color: Colors.transparent,),),
                     ],
                   );
                 }else if(originalPost.hasError){

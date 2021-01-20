@@ -100,12 +100,14 @@ class APIBLMHomeTabPostExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  bool follower;
   bool manage;
+  bool famOrFriends;
+  bool follower;
   String pageType;
   String privacy;
 
-  APIBLMHomeTabPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
+
+  APIBLMHomeTabPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
 
   factory APIBLMHomeTabPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPage(
@@ -117,8 +119,9 @@ class APIBLMHomeTabPostExtendedPage{
       imagesOrVideos: parsedJson['imagesOrVideos'],
       relationship: parsedJson['relationship'],
       pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      follower: parsedJson['follower'],
       manage: parsedJson['manage'],
+      famOrFriends: parsedJson['famOrFriends'],
+      follower: parsedJson['follower'],
       pageType: parsedJson['page_type'],
       privacy: parsedJson['privacy'],
     );

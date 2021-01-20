@@ -31,7 +31,11 @@ class BLMMainPagesFeeds{
   List<String> taggedImage;
   List<int> taggedId;
 
-  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
@@ -102,8 +106,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
-          ),
 
+          pageType: newValue.familyMemorialList[i].page.pageType,
+          famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
+          relationship: newValue.familyMemorialList[i].page.relationship,
+
+          ),
         );
 
       }
@@ -169,6 +177,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
+
+              pageType: feeds[i].pageType,
+              famOrFriends: feeds[i].famOrFriends,
+              relationship: feeds[i].relationship,
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
 
@@ -183,7 +195,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                             fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           ),
                         );
                       }else if(feeds[i].imagesOrVideos.length == 2){

@@ -71,8 +71,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   bool pressedLike;
   int likesCount;
 
-  // String category;
-
   BranchUniversalObject buo;
   BranchLinkProperties lp;
 
@@ -141,17 +139,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                 children: [
                   GestureDetector(
                     onTap: () async{
-                      // if(managed == true){
-                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId,)));
-                      // }else{
-                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, newJoin: joined)));
-                      // }
-
-                      print('The page type is $pageType');
-                      print('The managed is $managed');
-                      print('The famOrFriends is $famOrFriends');
-                      print('The relationship is $relationship');
-
                       if(pageType == 'Memorial'){
                         if(managed == true || famOrFriends == true){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
@@ -172,34 +159,51 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     child: Container(
                       // color: Colors.blue,
                       padding: EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Align(alignment: Alignment.bottomLeft,
-                              child: Text(memorialName,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff000000),
+                      child: GestureDetector(
+                        onTap: (){
+                          if(pageType == 'Memorial'){
+                            if(managed == true || famOrFriends == true){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                            }else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                            }
+                          }else{
+                            if(managed == true || famOrFriends == true){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                            }else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                            }
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Align(alignment: Alignment.bottomLeft,
+                                child: Text(memorialName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff000000),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(timeCreated,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xffaaaaaa)
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(timeCreated,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xffaaaaaa)
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

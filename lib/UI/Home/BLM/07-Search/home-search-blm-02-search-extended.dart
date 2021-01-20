@@ -36,9 +36,9 @@ class BLMSearchMainPosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  final String pageType;
-  final bool famOrFriends;
-  final String relationship;
+  String pageType;
+  bool famOrFriends;
+  String relationship;
 
   BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
@@ -594,7 +594,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           ),
                         );
                       }else if(feeds[i].imagesOrVideos.length == 2){

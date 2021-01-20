@@ -37,7 +37,11 @@ class BLMProfilePosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class HomeBLMMemorialProfile extends StatefulWidget{
@@ -114,6 +118,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
+
+          pageType: newValue.familyMemorialList[i].page.pageType,
+          famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
+          relationship: newValue.familyMemorialList[i].page.relationship,
           ),
         );
       }
@@ -753,6 +761,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       taggedFirstName: posts[i].taggedFirstName,
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
+
+                                      pageType: posts[i].pageType,
+                                      famOrFriends: posts[i].famOrFriends,
+                                      relationship: posts[i].relationship,
                                       contents: [
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 

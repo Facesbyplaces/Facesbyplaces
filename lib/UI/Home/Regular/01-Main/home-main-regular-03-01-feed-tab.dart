@@ -31,7 +31,11 @@ class RegularMainPagesFeeds{
   List<String> taggedImage;
   List<int> taggedId;
 
-  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -93,7 +97,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
-          
+
+          pageType: newValue.familyMemorialList[i].page.pageType,
+          famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
+          relationship: newValue.familyMemorialList[i].page.relationship,
           ),    
         );
       }
@@ -169,6 +176,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
+
+              pageType: feeds[i].pageType,
+              famOrFriends: feeds[i].famOrFriends,
+              relationship: feeds[i].relationship,
               
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
@@ -184,7 +195,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             fit: BoxFit.cover,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           ),
                         );
                       }else if(feeds[i].imagesOrVideos.length == 2){
@@ -212,12 +223,44 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             crossAxisCount: 4,
                             itemCount: 3,
                             itemBuilder: (BuildContext context, int index) => 
-                              CachedNetworkImage(
-                                fit: BoxFit.cover,
-                                imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                              ),
+                              ((){
+                                if(index != 1){
+                                  return CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return Stack(
+                                    children: [
+                                      CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: feeds[i].imagesOrVideos[index],
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      ),
+
+                                      Container(color: Colors.black.withOpacity(0.5),),
+
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text(
+                                            index.toString(),
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }
+                              }()),
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,

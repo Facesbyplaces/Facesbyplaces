@@ -32,6 +32,10 @@ class RegularMainPagesPosts{
   List<String> taggedImage;
   List<int> taggedId;
 
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
   RegularMainPagesPosts({
     this.userId, 
     this.postId, 
@@ -50,7 +54,10 @@ class RegularMainPagesPosts{
     this.taggedFirstName, 
     this.taggedLastName, 
     this.taggedImage, 
-    this.taggedId
+    this.taggedId,
+    this.pageType, 
+    this.famOrFriends, 
+    this.relationship,
   });
 }
 
@@ -206,7 +213,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                             fit: BoxFit.cover,
                             imageUrl: posts[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           ),
                         );
                       }else if(posts[i].imagesOrVideos.length == 2){

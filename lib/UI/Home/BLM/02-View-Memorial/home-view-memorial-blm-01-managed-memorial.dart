@@ -52,7 +52,11 @@ class BLMProfilePosts{
   List<String> taggedImage;
   List<int> taggedId;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  String pageType;
+  bool famOrFriends;
+  String relationship;
+
+  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
 }
 
 class HomeBLMProfile extends StatefulWidget{
@@ -127,6 +131,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
+
+          pageType: newValue.familyMemorialList[i].page.pageType,
+          famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
+          relationship: newValue.familyMemorialList[i].page.relationship,
           ),
         );
       }
@@ -714,6 +722,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       taggedFirstName: posts[i].taggedFirstName,
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
+
+                                      pageType: posts[i].pageType,
+                                      famOrFriends: posts[i].famOrFriends,
+                                      relationship: posts[i].relationship,
                                       contents: [
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
@@ -831,7 +843,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                           child: Container(
                             padding: EdgeInsets.only(right: 20.0),
                             alignment: Alignment.centerRight,
-                            child: MaterialButton(
+                            child: managed == true
+                            ? MaterialButton(
                               onPressed: () async{
 
                                 final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
@@ -854,7 +867,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   color: Color(0xffffffff),
                                 ),
                               ),
-                            ),
+                            )
+                            : Container(height: 0,),
                           ),
                         ),
                       ],

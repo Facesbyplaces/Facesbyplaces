@@ -97,8 +97,9 @@ class APIRegularHomeTabFeedExtendedPage{
   dynamic imagesOrVideos;
   String relationship;
   APIRegularHomeTabFeedExtendedPageCreator pageCreator;
-  bool follower;
   bool manage;
+  bool famOrFriends;
+  bool follower;
   String pageType;
   String privacy;
 
