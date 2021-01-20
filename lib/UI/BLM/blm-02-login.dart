@@ -18,6 +18,8 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+
+import 'blm-06-password-reset-email.dart';
 // import 'blm-06-password-reset.dart';
 
 class BLMLogin extends StatefulWidget{
@@ -352,6 +354,8 @@ class BLMLoginState extends State<BLMLogin>{
                           GestureDetector(
                             onTap: () async{
 
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordResetEmail()));
+
                               // String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Invalid email or password. Please try again.'));
 
                               // if(email != null){
@@ -374,36 +378,36 @@ class BLMLoginState extends State<BLMLogin>{
 
                               // }
 
-                              String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
+                              // String email = await showDialog(context: (context), builder: (build) => MiscBLMAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
 
-                              if(email != null){
-                                bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
-                                if(validEmail == true){
-                                  initBranchReferences();
+                              // if(email != null){
+                              //   bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+                              //   if(validEmail == true){
+                              //     initBranchReferences();
 
-                                  FlutterBranchSdk.setIdentity('blm-user-forgot-password');
-                                  BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                              //     FlutterBranchSdk.setIdentity('blm-user-forgot-password');
+                              //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                                   
-                                  if (response.success) {
-                                    context.showLoaderOverlay();
-                                    // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
-                                    bool result = await apiBLMPasswordReset(email: email, redirectLink: response.result);
-                                    context.hideLoaderOverlay();
+                              //     if (response.success) {
+                              //       context.showLoaderOverlay();
+                              //       // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                              //       bool result = await apiBLMPasswordReset(email: email, redirectLink: response.result);
+                              //       context.hideLoaderOverlay();
                                     
-                                    print('Link generated: ${response.result}');
-                                    if(result == true){
-                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
-                                    }else{
-                                      print('Error on requesting the api');
-                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
-                                    }
-                                  } else {
-                                    print('Error on generating link');
-                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-                                  }
+                              //       print('Link generated: ${response.result}');
+                              //       if(result == true){
+                              //         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
+                              //       }else{
+                              //         print('Error on requesting the api');
+                              //         await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
+                              //       }
+                              //     } else {
+                              //       print('Error on generating link');
+                              //       await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+                              //     }
 
-                                } 
-                              }
+                              //   } 
+                              // }
 
                             },
                             child: Align(

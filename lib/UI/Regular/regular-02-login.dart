@@ -3,7 +3,7 @@ import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.da
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
+// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-08-password-reset.dart';
 // import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
@@ -12,8 +12,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 // import 'package:facesbyplaces/UI/Regular/regular-06-password-reset.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -34,33 +35,6 @@ class RegularLoginState extends State<RegularLogin>{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-
-  void initBranchReferences(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Link', 'App'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('custom_string', 'fbp-link')
-        ..addCustomMetadata('reset-type', 'Regular')
-    );
-
-    lp = BranchLinkProperties(
-        channel: 'facebook',
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-    // lp.addControlParam('url', 'https://4n5z1.test-app.link/fK7y44Cwadb?bnc_validate=true');
-    // lp.addControlParam('\$uri_redirect_mode', '1');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -402,37 +376,43 @@ class RegularLoginState extends State<RegularLogin>{
                         GestureDetector(
                           onTap: () async{
 
-                            String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordResetEmail()));
 
-                            if(email != null){
-                              bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
-                              if(validEmail == true){
-                                initBranchReferences();
-                                // initBranchShare();
+                            // String email = await showDialog(context: (context), builder: (build) => MiscRegularAlertInputEmailDialog(title: 'Email', content: 'Input email address.'));
 
-                                FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                            // if(email != null){
+                            //   bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+                            //   if(validEmail == true){
+                            //     initBranchReferences();
+                            //     // initBranchShare();
+
+                            //     FlutterBranchSdk.setIdentity('alm-user-forgot-password');
+                            //     BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                                 
-                                if (response.success) {
-                                  context.showLoaderOverlay();
-                                  // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
-                                  bool result = await apiRegularPasswordReset(email: email, redirectLink: response.result);
-                                  context.hideLoaderOverlay();
+                            //     if (response.success) {
+                            //       context.showLoaderOverlay();
+                            //       // bool result = await apiHomeResetPassword(email: email, redirectLink: response.result);
+                            //       bool result = await apiRegularPasswordReset(email: email, redirectLink: response.result);
+                            //       context.hideLoaderOverlay();
                                   
-                                  print('Link generated: ${response.result}');
-                                  if(result == true){
-                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
-                                  }else{
-                                    print('Error on requesting the api');
-                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
-                                  }
-                                } else {
-                                  print('Error on generating link');
-                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
-                                }
+                            //       print('Link generated: ${response.result}');
+                            //       if(result == true){
+                            //         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'An email has been sent to $email containing instructions for resetting your password.', color: Colors.green,));
+                            //       }else{
+                            //         print('Error on requesting the api');
+                            //         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
+                            //       }
+                            //     } else {
+                            //       print('Error on generating link');
+                            //       await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
+                            //     }
 
-                              } 
-                            }
+                            //   } 
+                            // }
+
+
+
+
 
                                 // BranchResponse sheetResponse = await FlutterBranchSdk.showShareSheet(
                                 //     buo: buo,

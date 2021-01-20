@@ -4,7 +4,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'BLM/blm-06-password-reset.dart';
+import 'BLM/blm-07-password-reset.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
@@ -13,7 +13,7 @@ import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
 import 'package:flutter/material.dart';
 
-import 'Regular/regular-06-password-reset.dart';
+import 'Regular/regular-07-password-reset.dart';
 
 const double pi = 3.1415926535897932;
 
