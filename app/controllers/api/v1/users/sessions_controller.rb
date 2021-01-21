@@ -127,7 +127,11 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
       elsif params[:user_identification].present? && params[:identity_token].present?
         apple = AppleAuth::UserIdentity.new(params[:user_identification], params[:identity_token]).validate!
         
-        @user = AlmUser.where(email: apple[:email], account_type: params[:account_type]).first # || BlmUser.where(email: apple[:email], account_type: params[:account_type]).first
+        if account_type == 2
+          @user = AlmUser.where(email: apple[:email], account_type: params[:account_type]).first 
+        else
+          @user = BlmUser.where(email: apple[:email], account_type: params[:account_type]).first
+        end
 
         if @user 
           params[:email] = @user.email
