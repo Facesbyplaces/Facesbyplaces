@@ -298,5 +298,6 @@ Rails.application.routes.draw do
     get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
 
   root 'pages#home'
+  get 'about', to: 'pages#about'
   
  end
