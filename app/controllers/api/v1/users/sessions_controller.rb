@@ -130,7 +130,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         if account_type == 2
           @user = AlmUser.where(email: apple[:email], account_type: params[:account_type]).first 
         else
-          @user = BlmUser.where(email: apple[:email], account_type: params[:account_type]).first
+          @user = User.where(email: apple[:email], account_type: params[:account_type]).first
         end
 
         if @user 
