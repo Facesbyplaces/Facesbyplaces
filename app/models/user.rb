@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :tagpeople, as: :account, dependent: :destroy
   has_many :transactions, as: :account, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
+  has_many :notification_actors, class_name: 'Notification', as: :actor, dependent: :destroy
 
   has_one_attached :image, dependent: :destroy
   

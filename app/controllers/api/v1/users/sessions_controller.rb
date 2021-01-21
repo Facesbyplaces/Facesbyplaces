@@ -37,6 +37,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
           # image
           if params[:image].present? 
+            require 'open-uri'
             downloaded_image = URI.open(params[:image])
             filename = File.basename(URI.parse(params[:image]).path)
             @user.image.attach(io: downloaded_image  , filename: filename)
@@ -58,7 +59,12 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
         begin
           payload = validator.check(params[:google_id], required_audience, required_audience)
-          @user = AlmUser.where(email: payload['email'], account_type: params[:account_type]).first # || BlmUser.where(email: payload['email'], account_type: params[:account_type]).first
+          
+          if params[:account_type] == "1"
+            @user = User.where(email: payload['email'], account_type: params[:account_type]).first 
+          else
+            @user = AlmUser.where(email: payload['email'], account_type: params[:account_type]).first
+          end
 
         rescue GoogleIDToken::ValidationError => e
           @user = nil
@@ -98,16 +104,17 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
             # image
             if params[:image].present? 
+              require 'open-uri'
               downloaded_image = URI.open(params[:image])
               filename = File.basename(URI.parse(params[:image]).path)
               @user.image.attach(io: downloaded_image  , filename: filename)
             end
 
-            @user.save!
             params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
             @user.password = @user.password_confirmation = params[:password]
-            @user.save
-            render json: { success: true, user:  @user, status: 200 }, status: 200
+
+            @user.save!
+            # render json: { success: true, user:  @user, status: 200 }, status: 200
 
             Notifsetting.create(newMemorial: true, newActivities: true, postLikes: true, postComments: true, addFamily: true, addFriends: true, addAdmin: true, account: @user)
             super
