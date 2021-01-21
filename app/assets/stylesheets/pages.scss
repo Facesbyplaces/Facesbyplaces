@@ -6,7 +6,9 @@ body {
 }
 .header {
   float: left;
+  position: absolute;
   width: 100%;
+  background-color: rgba(0,0,0,0.2);
   .tabs-container, .logo-container {
     float: left;
     min-height: 50px;
@@ -22,8 +24,10 @@ body {
     padding: 2% 12% 0 0;
     width: 81%;
     .tab {
+      color: #ffffff;
       cursor: pointer;
       float: right;
+      text-decoration: none;
       padding: 0 2% 0;
       &:hover {
         color: #04ecff;
@@ -49,6 +53,7 @@ body {
 .home {
   float: left;
   width: 100%;
+  padding: 5% 0 0;
   .main-container {
     float: right;
     width: 50%;
@@ -87,6 +92,67 @@ body {
   }
 }
 
+.about {
+  float: left;
+  padding: 5% 0;
+  width: 100%;
+  background: #ffffff;
+  .title-container {
+    float: left;
+    width: 100%;
+    padding: 80px 0 50px;
+    background: #000000;
+    .title {
+      float: left;
+      color: #ffffff;
+      width: 100%;
+      font-size: 2em;
+      text-align: center;
+    }
+  }
+  .body {
+    float: left;
+    width: 80%;
+    padding: 0 10%;
+    .title, .main-text {
+      float: left;
+      width: 100%;
+      font-size: 1.5em;
+      color: #000000;
+      text-align: center;
+      margin: 40px 0;
+    }
+    .main-text {
+      font-size: 0.8em;
+      margin: 10px 0;
+      line-height: 20px;
+    }
+    .image-container {
+      float: left;
+      width: 25%;
+      margin: 0 2.5%;
+      min-height: 50px;
+      .image {
+        float: left;
+        width: 80%;
+        height: 300px;
+        background: #d0d0d0;
+      }
+    }
+    .section-container {
+      float: left;
+      width: 65%;
+      padding: 5% 2.5% 0;
+      .title {
+        font-size: 1.3em;
+        margin: 25px 0;
+      }
+      .main-text {
+        text-align: left;
+      }
+    }
+  }
+}
 @media only screen and (max-width: 800px) {
   .row {
     .col, .col-2 {
