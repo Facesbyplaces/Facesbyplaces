@@ -13,8 +13,8 @@ Future<bool> apiRegularSignInWithApple({String userIdentification, String identi
   );
 
   print('The status code for sign in with apple is ${response.statusCode}');
-  print('The status body for sign in with apple is ${response.body}');
-  print('The status headers for sign in with apple is ${response.headers}');
+  // print('The status body for sign in with apple is ${response.body}');
+  // print('The status headers for sign in with apple is ${response.headers}');
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);

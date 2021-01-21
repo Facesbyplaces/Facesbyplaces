@@ -2,6 +2,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-search-regular-02-search-extended.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
@@ -63,8 +64,10 @@ class HomeRegularSearch extends StatelessWidget{
                         }
                       }
 
+                      context.showLoaderOverlay();
                       Location.LocationData locationData = await location.getLocation();
                       List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                      context.hideLoaderOverlay();
 
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                     },

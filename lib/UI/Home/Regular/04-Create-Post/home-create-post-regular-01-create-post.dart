@@ -13,15 +13,17 @@ import 'dart:io';
 class RegularTaggedUsers{
   String name;
   int userId;
+  int accountType;
 
-  RegularTaggedUsers({this.name, this.userId,});
+  RegularTaggedUsers({this.name, this.userId, this.accountType});
 }
 
 class RegularManagedPages{
   String name;
   int pageId;
+  String image;
 
-  RegularManagedPages({this.name, this.pageId});
+  RegularManagedPages({this.name, this.pageId, this.image});
 }
 
 class HomeRegularCreatePost extends StatefulWidget{
@@ -58,13 +60,17 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   void getManagedPages() async{
     context.showLoaderOverlay();
-    print('Hnngggg');
     var newValue = await apiRegularShowListOfManagedPages();
-    print('hereee');
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.pagesList.length; i++){
-      managedPages.add(RegularManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
+      managedPages.add(
+        RegularManagedPages(
+          name: newValue.pagesList[i].name, 
+          pageId: newValue.pagesList[i].id,
+          image: newValue.pagesList[i].profileImage,
+        ),
+      );
     }
     setState(() {});
   }
@@ -114,6 +120,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   }
 
   @override
+  void dispose() {
+    videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return WillPopScope(
@@ -159,16 +171,20 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   Location.LocationData locationData = await location.getLocation();
 
-                  List<int> userIds = [];
-
+                  List<RegularTaggedPeople> userIds = [];
+                  
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
-                      userIds.add(users[i].userId);
+                      userIds.add(
+                        RegularTaggedPeople(
+                          userId: users[i].userId,
+                          accountType: users[i].accountType,
+                        ),
+                      );
                     }
                   }
 
                   List<File> newFiles = [];
-
                   newFiles.addAll(slideImages);
 
                   APIRegularCreatePost post = APIRegularCreatePost(
@@ -239,7 +255,11 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
+                                  // CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
+                                  CircleAvatar(
+                                    backgroundColor: Color(0xff888888),
+                                    backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
+                                  ),
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 

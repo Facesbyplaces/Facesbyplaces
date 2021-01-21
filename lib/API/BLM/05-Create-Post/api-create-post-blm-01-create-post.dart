@@ -10,15 +10,22 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  for(int i = 0; i < post.tagPeople.length; i++){
-    print('The userId is ${post.tagPeople[i].userId} and the accountType is ${post.tagPeople[i].accountType}');
-  }
-
   try{
     var dioRequest = dio.Dio();
+    var formData = FormData();
 
-    var formData;
-    formData = FormData();
+    List<Map<String, dynamic>> tagPeopleValue = [];
+
+    print('The length of tag people is ${post.tagPeople.length}');
+
+    for(int i = 0; i < post.tagPeople.length; i++){
+      print('The index is $i and the user id is ${post.tagPeople[i].userId}');
+      print('The index is $i and the account type is ${post.tagPeople[i].accountType}');
+      tagPeopleValue.add({'user_id': post.tagPeople[i].userId, 'account_type': post.tagPeople[i].accountType});
+    }
+
+    print('The length of tagPeopleValue is ${tagPeopleValue.length}');
+    print('The tagPeopleValue is $tagPeopleValue');
 
     formData = FormData.fromMap({
       'post[page_type]': post.pageType,
@@ -28,18 +35,8 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
       'post[latitude]': post.latitude,
       'post[longitude]': post.longitude,
       // 'tag_people': post.tagPeople,
+      'tag_people': tagPeopleValue,
     });
-
-    // if(post.tagPeople != null){
-    //   for(int i = 0; i < post.tagPeople.length; i++){
-    //     if(post.imagesOrVideos[i].path != null || post.imagesOrVideos != ['']){
-    //       var file = await dio.MultipartFile.fromFile(post.imagesOrVideos[i].path, filename: post.imagesOrVideos[i].path);
-    //       formData.files.add(MapEntry('post[imagesOrVideos][]', file));
-    //     }
-    //   }
-
-    // }
-
     
     if(post.imagesOrVideos != null || post.imagesOrVideos != ['']){
       for(int i = 0; i < post.imagesOrVideos.length; i++){
@@ -61,6 +58,9 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
       ),  
     );
 
+    print('The status code of create post is ${response.statusCode}');
+    print('The status code of create post is ${response.data}');
+
     if(response.statusCode == 200){
       result = true;
     }
@@ -81,7 +81,7 @@ class APIBLMCreatePost{
   double latitude;
   double longitude;
   // List<int> tagPeople;
-  List<TaggedPeople> tagPeople;
+  List<BLMTaggedPeople> tagPeople;
   
   APIBLMCreatePost({
     this.pageType, 
@@ -95,11 +95,11 @@ class APIBLMCreatePost{
   });
 }
 
-class TaggedPeople{
+class BLMTaggedPeople{
   int userId;
   int accountType;
 
-  TaggedPeople({
+  BLMTaggedPeople({
     this.userId,
     this.accountType,
   });

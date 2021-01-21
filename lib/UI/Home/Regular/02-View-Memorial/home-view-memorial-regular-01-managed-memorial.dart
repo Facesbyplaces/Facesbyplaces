@@ -11,6 +11,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:video_player/video_player.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -85,10 +86,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   bool empty;
   int page;
 
-  // String category;
-
   BranchUniversalObject buo;
   BranchLinkProperties lp;
+
+  VideoPlayerController videoPlayerController;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -194,6 +195,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   }
 
   @override
+  void dispose() {
+    videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     ResponsiveWidgets.init(context,
@@ -287,47 +294,58 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                             SizedBox(height: ScreenUtil().setHeight(20)),
 
-                            ((){
-                              if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
-                                return Container(
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Text(profile.data.memorial.memorialDetails.description,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xff000000),
-                                    ),
-                                  ),
-                                );
-                              }else if(profile.data.memorial.memorialImagesOrVideos != null){
-                                return Container(
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        height: SizeConfig.blockSizeHorizontal * 40,
-                                        child: CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: profile.data.memorial.memorialImagesOrVideos[0],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            Column(
+                              children: [
+                                ((){
+                                  
+                                  // print('The images or videos is ${profile.data.memorial.memorialImagesOrVideos}');
+                                  if(profile.data.memorial.memorialImagesOrVideos != null){
+                                    videoPlayerController = VideoPlayerController.network(profile.data.memorial.memorialImagesOrVideos[0]);
+                                    return Container(
+                                      height: SizeConfig.blockSizeVertical * 34.5,
+                                      child: profile.data.memorial.memorialImagesOrVideos == null 
+                                      ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
+                                      : GestureDetector(
+                                        onTap: (){
+                                          if(videoPlayerController.value.isPlaying){
+                                            videoPlayerController.pause();
+                                            print('Paused!');
+                                          }else{
+                                            videoPlayerController.play();
+                                            print('Played!');
+                                          }
+                                        },
+                                        child: AspectRatio(
+                                          aspectRatio: videoPlayerController.value.aspectRatio,
+                                          child: VideoPlayer(videoPlayerController),
                                         ),
                                       ),
+                                    );
+                                  }else{
+                                    return Container(height: 0,);
+                                  }
+                                }()),
 
-                                      Positioned(
-                                        top: SizeConfig.blockSizeVertical * 7,
-                                        left: SizeConfig.screenWidth / 2.8,
-                                        child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                                ((){
+                                  if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                      child: Text(profile.data.memorial.memorialDetails.description,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff000000),
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                );
-                              }else{
-                                return Container(height: 0,);
-                              }
-                            }()),
+                                    );
+                                  }else{
+                                    return Container(height: 0,);
+                                  }
+                                }()),
+                              ],
+                            ),
 
                             SizedBox(height: ScreenUtil().setHeight(20)),
 

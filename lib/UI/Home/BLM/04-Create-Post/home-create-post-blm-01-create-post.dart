@@ -21,8 +21,9 @@ class BLMTaggedUsers{
 class BLMManagedPages{
   String name;
   int pageId;
+  String image;
 
-  BLMManagedPages({this.name, this.pageId});
+  BLMManagedPages({this.name, this.pageId, this.image});
 }
 
 class HomeBLMCreatePost extends StatefulWidget{
@@ -63,7 +64,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     context.hideLoaderOverlay();
 
     for(int i = 0; i < newValue.pagesList.length; i++){
-      managedPages.add(BLMManagedPages(name: newValue.pagesList[i].name, pageId: newValue.pagesList[i].id));
+      managedPages.add(
+        BLMManagedPages(
+          name: newValue.pagesList[i].name, 
+          pageId: newValue.pagesList[i].id,
+          image: newValue.pagesList[i].profileImage,
+        )
+      );
     }
     setState(() {});
   }
@@ -113,6 +120,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   }
 
   @override
+  void dispose() {
+    videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return WillPopScope(
@@ -158,12 +171,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                   Location.LocationData locationData = await location.getLocation();
 
-                  List<TaggedPeople> userIds = [];
+                  List<BLMTaggedPeople> userIds = [];
 
                   if(users.length != 0){
                     for(int i = 0; i < users.length; i++){
                       userIds.add(
-                        TaggedPeople(
+                        BLMTaggedPeople(
                           userId: users[i].userId,
                           accountType: users[i].accountType,
                         ),
@@ -183,7 +196,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     latitude: locationData.latitude,
                     longitude: locationData.longitude,
                     tagPeople: userIds,
-
                   );
 
                   
@@ -244,7 +256,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
+                                  // CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
+
+                                  CircleAvatar(
+                                    backgroundColor: Color(0xff888888),
+                                    backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
+                                  ),
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 

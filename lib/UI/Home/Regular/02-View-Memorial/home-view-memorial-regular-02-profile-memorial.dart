@@ -4,9 +4,12 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-foll
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:video_player/video_player.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
@@ -73,6 +76,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
+
+  VideoPlayerController videoPlayerController;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -178,8 +183,18 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   }
 
   @override
+  void dispose() {
+    videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -202,7 +217,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                           fit: BoxFit.cover,
                           imageUrl: profile.data.memorial.memorialBackgroundImage,
                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                          errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                         );
                       }
                     }()),
@@ -269,47 +284,100 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                            ((){
-                              if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
-                                return Container(
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Text(profile.data.memorial.memorialDetails.description,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                      fontWeight: FontWeight.w300,
-                                      color: Color(0xff000000),
-                                    ),
-                                  ),
-                                );
-                              }else if(profile.data.memorial.memorialImagesOrVideos != null){
-                                return Container(
-                                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        height: SizeConfig.blockSizeHorizontal * 40,
-                                        child: CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: profile.data.memorial.memorialImagesOrVideos[0],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            Column(
+                              children: [
+                                ((){
+                                  
+                                  // print('The images or videos is ${profile.data.memorial.memorialImagesOrVideos}');
+                                  if(profile.data.memorial.memorialImagesOrVideos != null){
+                                    videoPlayerController = VideoPlayerController.network(profile.data.memorial.memorialImagesOrVideos[0]);
+                                    return Container(
+                                      height: SizeConfig.blockSizeVertical * 34.5,
+                                      child: profile.data.memorial.memorialImagesOrVideos == null 
+                                      ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
+                                      : GestureDetector(
+                                        onTap: (){
+                                          if(videoPlayerController.value.isPlaying){
+                                            videoPlayerController.pause();
+                                            print('Paused!');
+                                          }else{
+                                            videoPlayerController.play();
+                                            print('Played!');
+                                          }
+                                        },
+                                        child: AspectRatio(
+                                          aspectRatio: videoPlayerController.value.aspectRatio,
+                                          child: VideoPlayer(videoPlayerController),
                                         ),
                                       ),
+                                    );
+                                  }else{
+                                    return Container(height: 0,);
+                                  }
+                                }()),
 
-                                      Positioned(
-                                        top: SizeConfig.blockSizeVertical * 7,
-                                        left: SizeConfig.screenWidth / 2.8,
-                                        child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                                ((){
+                                  if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                      child: Text(profile.data.memorial.memorialDetails.description,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          fontWeight: FontWeight.w300,
+                                          color: Color(0xff000000),
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                );
-                              }else{
-                                return Container(height: 0,);
-                              }
-                            }()),
+                                    );
+                                  }else{
+                                    return Container(height: 0,);
+                                  }
+                                }()),
+                              ],
+                            ),
+
+                            // ((){
+                            //   if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
+                            //     return Container(
+                            //       alignment: Alignment.center,
+                            //       padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            //       child: Text(profile.data.memorial.memorialDetails.description,
+                            //         textAlign: TextAlign.center,
+                            //         style: TextStyle(
+                            //           fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            //           fontWeight: FontWeight.w300,
+                            //           color: Color(0xff000000),
+                            //         ),
+                            //       ),
+                            //     );
+                            //   }else if(profile.data.memorial.memorialImagesOrVideos != null){
+                            //     return Container(
+                            //       padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            //       child: Stack(
+                            //         children: [
+                            //           Container(
+                            //             height: SizeConfig.blockSizeHorizontal * 40,
+                            //             child: CachedNetworkImage(
+                            //               fit: BoxFit.cover,
+                            //               imageUrl: profile.data.memorial.memorialImagesOrVideos[0],
+                            //               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            //               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            //             ),
+                            //           ),
+
+                            //           Positioned(
+                            //             top: SizeConfig.blockSizeVertical * 7,
+                            //             left: SizeConfig.screenWidth / 2.8,
+                            //             child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     );
+                            //   }else{
+                            //     return Container(height: 0,);
+                            //   }
+                            // }()),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -902,6 +970,15 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                     ),
                   ),
 
+                  Container(
+                    padding: EdgeInsets.only(right: 20.0),
+                    height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: MiscRegularDropDownMemorialTemplate(memorialName: profile.data.memorial.memorialName, memorialId: memorialId, pageType: pageType, reportType: 'Memorial',),
+                    ),
+                  ),
+
                   Positioned(
                     top: SizeConfig.screenHeight / 5,
                     child: Container(
@@ -927,7 +1004,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             ),
                           ),
                           Expanded(
-                            child: Container(),
+                            child: Container(
+                              // profile.data.memoria
+                              // child: MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Memorial',),
+                              // child: MiscRegularDropDownTemplate(postId: profile.data.memorial.memorialId, reportType: 'Memorial',),
+                            ),
                           ),
                         ],
                       ),

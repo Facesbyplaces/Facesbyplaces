@@ -85,6 +85,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
         print('The page type is $pageType');
         print('The managed is $managed');
         print('The famOrFriends is $famOrFriends');
+            // print('The memorial name in suggested is ${suggested[i].memorialName}');
+            // print('The memorial id in suggested is ${suggested[i].memorialId}');
+            // print('The pageType in suggested is ${suggested[i].pageType}');
 
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){

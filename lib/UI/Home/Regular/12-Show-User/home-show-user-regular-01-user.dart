@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-01-show-user-information.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-custom-drawings.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -102,8 +103,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                     width: SizeConfig.screenWidth,
                     child: Column(
                       children: [
-                        Text(
-                          '${profile.data.firstName + ' ' + profile.data.lastName}',
+                        Text('${profile.data.firstName + ' ' + profile.data.lastName}',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                             fontWeight: FontWeight.bold,
@@ -218,8 +218,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: 
-                                    Text('${profile.data.homeAddress}',
+                                    child: Text('${profile.data.homeAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -304,7 +303,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
               ],
             );
           }else if(profile.hasError){
-            return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
+            return MiscRegularErrorMessageTemplate();
           }else{
             return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
           }

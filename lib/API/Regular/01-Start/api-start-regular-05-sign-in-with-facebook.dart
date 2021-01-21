@@ -13,7 +13,7 @@ Future<bool> apiRegularSignInWithFacebook({String firstName, String lastName, St
   );
 
   print('The status code for sign in with facebook is ${response.statusCode}');
-  print('The status body for sign in with facebook is ${response.body}');
+  // print('The status body for sign in with facebook is ${response.body}');
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);

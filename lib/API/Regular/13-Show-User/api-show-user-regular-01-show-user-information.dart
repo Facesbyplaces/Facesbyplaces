@@ -19,6 +19,9 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}
     }
   );
 
+  print('The status code of show user information is ${response.statusCode}');
+  print('The status code of show user information is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowUserInformation.fromJson(newValue);
@@ -42,19 +45,27 @@ class APIRegularShowUserInformation{
 
   factory APIRegularShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
 
-    String newBirthdate = parsedJson['birthdate'];
-    DateTime dateTime = DateTime.parse(newBirthdate);
+    DateTime dateTime;
+    String newBirthdate;
+
+    if(parsedJson['birthdate'] != null){
+      String newValue = parsedJson['birthdate'];
+      dateTime = DateTime.parse(newValue);
+      newBirthdate = dateTime.format(AmericanDateFormats.standardWithComma);
+    }else{
+      newBirthdate = '';
+    }
 
     return APIRegularShowUserInformation(
       id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      birthdate: dateTime.format(AmericanDateFormats.standardWithComma),
-      birthplace: parsedJson['birthplace'],
-      homeAddress: parsedJson['address'],
-      emailAddress: parsedJson['email'],
-      contactNumber: parsedJson['phone_number'],
-      image: parsedJson['image'],
+      firstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      lastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      birthdate: newBirthdate,
+      birthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
+      homeAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
+      emailAddress: parsedJson['email'] != null ? parsedJson['email'] : '',
+      contactNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
+      image: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

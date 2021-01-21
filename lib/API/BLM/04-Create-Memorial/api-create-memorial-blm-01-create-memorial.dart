@@ -46,7 +46,7 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial memorial}) async{
     }
     
     if(memorial.imagesOrVideos != null || memorial.imagesOrVideos != ['']){
-      for(int i = 0; i < memorial.imagesOrVideos.length - 1; i++){
+      for(int i = 0; i < memorial.imagesOrVideos.length; i++){
         if(memorial.imagesOrVideos[i].path != null || memorial.imagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos[i].path, filename: memorial.imagesOrVideos[i].path);
           formData.files.add(MapEntry('blm[imagesOrVideos][]', file));

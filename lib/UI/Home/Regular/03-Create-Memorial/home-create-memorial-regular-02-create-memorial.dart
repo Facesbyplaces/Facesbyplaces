@@ -165,8 +165,12 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     }else{
                       List<File> newFiles = [];
 
-                      newFiles.addAll(slideImages);
                       newFiles.add(videoFile);
+                      newFiles.addAll(slideImages);
+
+                      for(int i = 0; i < newFiles.length; i++){
+                        print('The newFiles is ${newFiles[i]}');
+                      }
 
                       newValue.description = controllerStory.text;
                       newValue.memorialName = _key1.currentState.controller.text;

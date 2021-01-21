@@ -19,6 +19,8 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) asyn
     }
   );
 
+  // print('The status body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowMemorialMain.fromJson(newValue);
@@ -66,8 +68,13 @@ class APIRegularShowMemorialExtended{
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
+      print('The value of imagesOrVideos is ${parsedJson['imagesOrVideos']}');
       newList1 = List<dynamic>.from(list);
     }
+
+    // for(int i = 0; i < newList1.length; i++){
+    //   print('The value is ${newList1[i]}');
+    // }
 
     return APIRegularShowMemorialExtended(
       memorialId: parsedJson['id'],

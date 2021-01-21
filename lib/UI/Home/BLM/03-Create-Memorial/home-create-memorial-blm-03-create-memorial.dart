@@ -256,7 +256,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                   onPressed: () async{
 
                     if(profileImage == null){
-                      final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
+                      final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                       final Uint8List list = bytes.buffer.asUint8List();
 
                       final tempDir = await getTemporaryDirectory();

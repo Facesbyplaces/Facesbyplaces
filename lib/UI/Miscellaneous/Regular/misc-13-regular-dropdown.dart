@@ -2,9 +2,12 @@ import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-r
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
@@ -104,6 +107,175 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 }
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: reportType,)));
+              }else{
+                initBranchShare();
+                FlutterBranchSdk.setIdentity('alm-share-copied-link');
+
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+              }
+            },
+          );
+        },
+      ),  
+    );
+  }
+}
+
+
+class MiscRegularDropDownMemorialTemplate extends StatefulWidget{
+  final String memorialName;
+  final int memorialId;
+  final String pageType;
+  final String reportType;
+
+  MiscRegularDropDownMemorialTemplate({this.memorialName, this.memorialId, this.pageType, this.reportType});
+
+  MiscRegularDropDownMemorialTemplateState createState() => MiscRegularDropDownMemorialTemplateState(memorialName: memorialName, memorialId: memorialId, pageType: pageType, reportType: reportType);
+}
+
+class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDownMemorialTemplate>{
+  final String memorialName;
+  final int memorialId;
+  final String pageType;
+  final String reportType;
+
+  MiscRegularDropDownMemorialTemplateState({this.memorialName, this.memorialId, this.pageType, this.reportType});
+
+  final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
+
+  BranchUniversalObject buo;
+  BranchLinkProperties lp;
+
+  File shareImage;
+
+  void initBranchShare(){
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Memorial')
+        ..addCustomMetadata('link-memorial-id', memorialId)
+        ..addCustomMetadata('link-type-of-account', pageType)
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return BlocProvider(
+      create: (BuildContext context) => BlocMiscRegularDropDown(),
+      child: BlocBuilder<BlocMiscRegularDropDown, String>(
+        builder: (context, dropDownList){
+          return DropdownButton<String>(
+            underline: Container(height: 0),
+            icon: Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+              color: Color(0xff888888)
+            ),
+            // items: <String>['Copy Link', 'Share', 'Report'].map((String value){
+              items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Container(
+                  child: Text(value),
+                ),
+              );
+            }).toList(),
+            onChanged: (String listValue) async{
+              dropDownList = listValue;
+              if(dropDownList == 'Share'){
+                initBranchShare();
+
+                FlutterBranchSdk.setIdentity('alm-share-link');
+
+                BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                  buo: buo,
+                  linkProperties: lp,
+                  messageText: 'FacesbyPlaces App',
+                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                );
+
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                  print('showShareSheet Sucess');
+                  print('The post id is $memorialId');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
+              }else if(dropDownList == 'Report'){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: memorialId, reportType: reportType,)));
+              }else if(dropDownList == 'QR Code'){
+                initBranchShare();
+                FlutterBranchSdk.setIdentity('alm-share-qr-code-link');
+
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                if (response.success) {
+                  print('Link generated: ${response.result}');
+                } else {
+                  FlutterBranchSdk.logout();
+                  print('Error : ${response.errorCode} - ${response.errorMessage}');
+                }
+
+                FullScreenMenu.show(
+                  context,
+                  backgroundColor: Color(0xffffffff),
+                  items: [
+                    Center(
+                      child: Container(
+                        height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
+                        child: QrImage(
+                          data: '${response.result}',
+                          version: QrVersions.auto,
+                          size: 320,
+                          gapless: false,
+                        ),
+                      ),
+                    ),
+
+                    Center(
+                      child: Text('$memorialName',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xff000000),
+                        ), 
+                      ),
+                    ),
+
+                    Center(
+                      child: Text('QR Code',
+                        style: TextStyle(
+                          fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xff000000),
+                        ), 
+                      ),
+                    ),
+                  ],
+                );
               }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('alm-share-copied-link');

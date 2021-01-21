@@ -340,7 +340,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                   child: CachedNetworkImage(
                     imageUrl: posts[i].imagesOrVideos[0],
                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                   ),
                 )
                 : Container(height: 0,),

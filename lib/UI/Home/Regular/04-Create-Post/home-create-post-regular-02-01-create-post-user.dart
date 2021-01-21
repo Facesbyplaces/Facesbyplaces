@@ -9,8 +9,10 @@ class RegularSearchUsers{
   String firstName;
   String lastName;
   String email;
+  int accountType;
+  String image;
 
-  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.email});
+  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.email, this.accountType, this.image});
 }
 
 class HomeRegularCreatePostSearchUser extends StatefulWidget{
@@ -39,7 +41,16 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
       itemRemaining = newValue.itemsRemaining;
 
       for(int i = 0; i < newValue.users.length; i++){
-        users.add(RegularSearchUsers(userId: newValue.users[i].userId, firstName: newValue.users[i].firstName, lastName: newValue.users[i].lastName, email: newValue.users[i].email));
+        users.add(
+          RegularSearchUsers(
+            userId: newValue.users[i].userId, 
+            firstName: newValue.users[i].firstName, 
+            lastName: newValue.users[i].lastName, 
+            email: newValue.users[i].email,
+            accountType: newValue.users[i].accountType,
+            image: newValue.users[i].image,
+          ),
+        );
       }
 
       if(mounted)
@@ -179,7 +190,7 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                 itemBuilder: (c, i) {
                   return GestureDetector(
                     onTap: (){
-                      Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId));
+                      Navigator.pop(context, RegularTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),

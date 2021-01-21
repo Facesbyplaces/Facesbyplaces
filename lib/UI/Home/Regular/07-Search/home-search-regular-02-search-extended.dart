@@ -720,9 +720,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-            print('The memorial name in suggested is ${suggested[i].memorialName}');
-            print('The memorial id in suggested is ${suggested[i].memorialId}');
-            print('The pageType in suggested is ${suggested[i].pageType}');
             return MiscRegularManageMemorialTab(
               index: i,
               memorialName: suggested[i].memorialName,
@@ -772,15 +769,15 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscRegularManageMemorialTab(
-                index: i,
-                memorialName: nearby[i].memorialName,
-                description: nearby[i].memorialDescription,
-                image: nearby[i].image,
-                memorialId: nearby[i].memorialId,
-                managed: nearby[i].managed,
-                follower: nearby[i].follower,
-                pageType: nearby[i].pageType,
-                relationship: nearby[i].relationship,
+              index: i,
+              memorialName: nearby[i].memorialName,
+              description: nearby[i].memorialDescription,
+              image: nearby[i].image,
+              memorialId: nearby[i].memorialId,
+              managed: nearby[i].managed,
+              follower: nearby[i].follower,
+              pageType: nearby[i].pageType,
+              relationship: nearby[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
