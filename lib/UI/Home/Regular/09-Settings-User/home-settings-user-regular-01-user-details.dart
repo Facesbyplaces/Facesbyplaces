@@ -2,7 +2,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-12-update-user-profile-picture.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-custom-drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-user-details.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-16-regular-user-settings.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';

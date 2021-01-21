@@ -12,9 +12,15 @@ Future<bool> apiRegularSignInWithApple({String userIdentification, String identi
     }
   );
 
+  print('The status code for sign in with apple is ${response.statusCode}');
+  print('The status body for sign in with apple is ${response.body}');
+  print('The status headers for sign in with apple is ${response.headers}');
+
   if(response.statusCode == 200){
     var value = json.decode(response.body);
-    int userId = value['id'];
+    var newValue = value['user'];
+    int userId = newValue['id'];
+    // int userId = value['id'];
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('regular-user-id', userId);

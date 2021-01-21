@@ -9,6 +9,10 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
+  print('The access token is $getAccessToken');
+  print('The uid is $getUID');
+  print('The client is $getClient');
+
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -19,7 +23,8 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
   );
 
   print('The status of code of show memorials is ${response.statusCode}');
-  print('The status of body of show memorials is ${response.body}');
+  // print('The status of headers of show memorials is ${response.headers}');
+  // print('The status of body of show memorials is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -32,10 +37,12 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
 
 
 class APIRegularShowUserMemorialsMain{
+  int ownedItemsRemaining;
+  int followedItemsRemaining;
   List<APIRegularShowUserMemorialsExtended> owned;
   List<APIRegularShowUserMemorialsExtended> followed;
 
-  APIRegularShowUserMemorialsMain({this.owned, this.followed});
+  APIRegularShowUserMemorialsMain({this.ownedItemsRemaining, this.followedItemsRemaining, this.owned, this.followed});
 
   factory APIRegularShowUserMemorialsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -47,6 +54,8 @@ class APIRegularShowUserMemorialsMain{
     List<APIRegularShowUserMemorialsExtended> newFollowedList = followedList.map((e) => APIRegularShowUserMemorialsExtended.fromJson(e)).toList();
 
     return APIRegularShowUserMemorialsMain(
+      ownedItemsRemaining: parsedJson['ownedItemsRemaining'],
+      followedItemsRemaining: parsedJson['followedItemsRemaining'],
       owned: newOwnedList,
       followed: newFollowedList,
     );
@@ -130,7 +139,6 @@ class APIRegularShowUserMemorialsExtendedPageCreator{
   APIRegularShowUserMemorialsExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
   factory APIRegularShowUserMemorialsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    print('The creator!');
     return APIRegularShowUserMemorialsExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],

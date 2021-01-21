@@ -8,6 +8,10 @@ Future<bool> apiBLMPasswordReset({String email, String redirectLink}) async{
     }
   );
 
+  print('The status code for password reset is ${response.statusCode}');
+  print('The status body for password reset is ${response.body}');
+  print('The status headers for password reset is ${response.headers}');
+
   if(response.statusCode == 200){
 
     return true;
