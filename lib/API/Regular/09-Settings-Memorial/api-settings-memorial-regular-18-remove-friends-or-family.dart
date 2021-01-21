@@ -8,7 +8,9 @@ Future<bool> apiRegularDeleteMemorialFriendsOrFamily({int memorialId, int userId
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.delete('http://fbp.dev1.koda.ws/api/v1/pageadmin/removeFamilyorFriend/Memorial/$memorialId/$userId',
+  final http.Response response = await http.delete(
+    // 'http://fbp.dev1.koda.ws/api/v1/pageadmin/removeFamilyorFriend/Memorial/$memorialId/$userId',
+    'http://fbp.dev1.koda.ws/api/v1/pageadmin/removeFamilyorFriend?page_type=Memorial&page_id=$memorialId&user_id=$userId&account_type=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

@@ -1,13 +1,21 @@
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 import 'dart:io';
+
+import 'misc-07-regular-button.dart';
 
 class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
@@ -155,6 +163,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
   File shareImage;
 
+  GlobalKey qrKey = new GlobalKey();
+
   void initBranchShare(){
     buo = BranchUniversalObject(
       canonicalIdentifier: 'FacesbyPlaces',
@@ -176,6 +186,29 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+  }
+
+  Future<void> shareQRCode() async {
+    try {
+      RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
+      var image = await boundary.toImage();
+      ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
+      Uint8List pngBytes = byteData.buffer.asUint8List();
+
+      final tempDir = await getTemporaryDirectory();
+      final file = await new File('${tempDir.path}/qr-image.png').create();
+      await file.writeAsBytes(pngBytes);
+
+      Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
+
+      // final channel = const MethodChannel('channel:me.alfian.share/share');
+      // channel.invokeMethod('shareFile', 'image.png');
+
+
+
+    } catch(e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -247,6 +280,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                       child: Container(
                         height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
                         child: QrImage(
+                          key: qrKey,
                           data: '${response.result}',
                           version: QrVersions.auto,
                           size: 320,
@@ -255,24 +289,62 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                       ),
                     ),
 
-                    Center(
-                      child: Text('$memorialName',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                          fontWeight: FontWeight.bold, 
-                          color: Color(0xff000000),
-                        ), 
-                      ),
+                    Column(
+                      children: [
+                        Text('$memorialName',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontWeight: FontWeight.bold, 
+                            color: Color(0xff000000),
+                          ), 
+                        ),
+
+                        Text('QR Code',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontWeight: FontWeight.bold, 
+                            color: Color(0xff000000),
+                          ), 
+                        ),
+
+                      ],
                     ),
 
-                    Center(
-                      child: Text('QR Code',
-                        style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                          fontWeight: FontWeight.bold, 
-                          color: Color(0xff000000),
-                        ), 
-                      ),
+                    // Center(
+                    //   child: Text('$memorialName',
+                    //     style: TextStyle(
+                    //       fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                    //       fontWeight: FontWeight.bold, 
+                    //       color: Color(0xff000000),
+                    //     ), 
+                    //   ),
+                    // ),
+
+                    // Center(
+                    //   child: Text('QR Code',
+                    //     style: TextStyle(
+                    //       fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                    //       fontWeight: FontWeight.bold, 
+                    //       color: Color(0xff000000),
+                    //     ), 
+                    //   ),
+                    // ),
+
+                    MiscRegularButtonTemplate(
+                      buttonText: 'Share',
+                      buttonTextStyle: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                        fontWeight: FontWeight.bold, 
+                        color: Color(0xffffffff),
+                      ), 
+                      onPressed: () async{
+
+                        shareQRCode();
+
+                      }, 
+                      width: SizeConfig.screenWidth / 2, 
+                      height: SizeConfig.blockSizeVertical * 7, 
+                      buttonColor: Color(0xff04ECFF),
                     ),
                   ],
                 );

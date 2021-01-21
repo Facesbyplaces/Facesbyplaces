@@ -161,8 +161,14 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
                         context.showLoaderOverlay();
-                        await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId);
+                        bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId);
                         context.hideLoaderOverlay();
+
+                        if(result == true){
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully removed a user from Family list.', color: Colors.green,));
+                        }else{
+                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        }
 
                         familyItemsRemaining = 1;
                         familyList = [];
