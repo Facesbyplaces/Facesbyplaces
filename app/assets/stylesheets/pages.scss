@@ -9,20 +9,22 @@ body {
   position: absolute;
   width: 100%;
   background-color: rgba(0,0,0,0.2);
-  .tabs-container, .logo-container {
-    float: left;
-    min-height: 50px;
-  }
   .logo-container {
+    float: left;
+    margin: 15px 0 0 6%;
     .logo {
-
+      height: 80px;
+      width: 70px;
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+      background-image: url(asset_path("logo.png"));
     }
   }
   .tabs-container {
     float: right;
     text-align: right;
-    padding: 2% 12% 0 0;
-    width: 81%;
+    padding: 2% 11% 0 0;
+    width: 70%;
     .tab {
       color: #ffffff;
       cursor: pointer;
@@ -54,6 +56,26 @@ body {
   float: left;
   width: 100%;
   padding: 5% 0 0;
+
+  background-image: url(asset_path("background_candles.png"));
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: 0 40%;
+  .home-page-image-container {
+    float: left;
+    width: 44%;
+    height: 89%;
+    position: relative;
+    .home-page-image {
+      float: left;
+      width: 90%;
+      height: 500px;
+      margin: 15% 0 0 15%;
+      background-image: url(asset_path("home_page_image.png"));
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+  }
   .main-container {
     float: right;
     width: 50%;
@@ -87,6 +109,28 @@ body {
       &.second {
         font-size: 1.15em;
         letter-spacing: 3px;
+      }
+    }
+    .social-buttons {
+      float: left;
+      width: 100%;
+      .googleplay, .appstore {
+        float: left;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-image: url(asset_path("googleplay_cropped.png"));
+      }
+      .googleplay {
+        height: 60px;
+        width: 25%;
+        margin: 11px 0 0 24%;
+      }
+      .appstore {
+        float: right;
+        width: 27%;
+        height: 59px;
+        background-image: url(asset_path("appstore.png"));
+        margin: 10px 23% 0 0;
       }
     }
   }
