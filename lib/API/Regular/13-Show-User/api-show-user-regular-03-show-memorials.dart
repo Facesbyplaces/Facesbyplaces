@@ -13,7 +13,9 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
   print('The uid is $getUID');
   print('The client is $getClient');
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page',
+  final http.Response response = await http.get(
+    // 'http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page',
+    'http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -24,7 +26,7 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
 
   print('The status of code of show memorials is ${response.statusCode}');
   // print('The status of headers of show memorials is ${response.headers}');
-  // print('The status of body of show memorials is ${response.body}');
+  print('The status of body of show memorials is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

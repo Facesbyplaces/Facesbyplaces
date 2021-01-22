@@ -13,8 +13,9 @@ class BLMShowFamilySettings{
   final String lastName;
   final String image;
   final String relationship;
+  final int accountType;
 
-  BLMShowFamilySettings({this.userId, this.firstName, this.lastName, this.image, this.relationship});
+  BLMShowFamilySettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.accountType});
 }
 
 class HomeBLMPageFamily extends StatefulWidget{
@@ -52,6 +53,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
             lastName: newValue.familyList[i].user.lastName,
             image: newValue.familyList[i].user.image,
             relationship: newValue.familyList[i].relationship,
+            accountType: newValue.familyList[i].user.accountType,
           ),
         );
       }
@@ -151,7 +153,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
                         context.showLoaderOverlay();
-                        bool result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId);
+                        bool result = await apiBLMDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId, accountType: familyList[i].accountType);
                         context.hideLoaderOverlay();
 
                         if(result == true){

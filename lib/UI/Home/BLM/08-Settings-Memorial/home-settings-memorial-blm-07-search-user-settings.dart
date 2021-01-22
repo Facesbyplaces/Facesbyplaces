@@ -75,6 +75,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
             firstName: newValue.users[i].firstName,
             lastName: newValue.users[i].lastName,
             email: newValue.users[i].email,
+            image: newValue.users[i].image,
           ),
         );
       }
@@ -255,7 +256,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                           CircleAvatar(
                             maxRadius: SizeConfig.blockSizeVertical * 5,
                             backgroundColor: Color(0xff888888),
-                            backgroundImage: AssetImage('assets/icons/graveyard.png'),
+                            backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
                           ),
 
                           SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),

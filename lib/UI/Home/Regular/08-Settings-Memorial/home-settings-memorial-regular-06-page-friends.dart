@@ -13,9 +13,9 @@ class RegularShowFriendsSettings{
   final String lastName;
   final String image;
   final String relationship;
-  final String email;
+  final int accountType;
 
-  RegularShowFriendsSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.email});
+  RegularShowFriendsSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.accountType});
 }
 
 class HomeRegularPageFriends extends StatefulWidget{
@@ -58,7 +58,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
               lastName: newValue.friendsList[i].user.lastName,
               image: newValue.friendsList[i].user.image,
               relationship: newValue.friendsList[i].relationship,
-              email: newValue.friendsList[i].user.email,
+              accountType: newValue.friendsList[i].user.accountType,
             ),
           );
         }
@@ -158,7 +158,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                       splashColor: Color(0xff04ECFF),
                       onPressed: () async{
                         context.showLoaderOverlay();
-                        bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: friendsList[i].userId);
+                        bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: friendsList[i].userId, accountType: friendsList[i].accountType);
                         context.hideLoaderOverlay();
 
                         if(result == true){

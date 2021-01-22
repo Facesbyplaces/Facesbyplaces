@@ -226,6 +226,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                 Container(
                   child: Wrap(
+                    direction: Axis.vertical,
                     spacing: 5.0,
                     children: List.generate(
                       numberOfTagged,

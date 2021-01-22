@@ -9,7 +9,7 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({int userId, int pag
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

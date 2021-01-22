@@ -222,6 +222,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                 Container(
                   child: Wrap(
+                    direction: Axis.vertical,
                     spacing: 5.0,
                     children: List.generate(
                       numberOfTagged,

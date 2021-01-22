@@ -1,4 +1,4 @@
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-search-users.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-add-family.dart';
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-14-add-friends.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
@@ -38,7 +38,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   List<RegularSearchUsers> users;
   int itemRemaining;
   String keywords;
-    bool empty;
+  bool empty;
   int page;
 
   void initState(){
@@ -75,6 +75,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
             firstName: newValue.users[i].firstName,
             lastName: newValue.users[i].lastName,
             email: newValue.users[i].email,
+            image: newValue.users[i].image,
           ),
         );
       }
@@ -254,10 +255,8 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         children: [
                           CircleAvatar(
                             maxRadius: SizeConfig.blockSizeVertical * 5,
-                            backgroundColor: Color(0xff888888), 
-                            backgroundImage: users[index].image != null 
-                            ? NetworkImage(users[index].image) 
-                            : AssetImage('assets/icons/app-icon.png'),
+                            backgroundColor: Color(0xff888888),
+                            backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
                           ),
 
 

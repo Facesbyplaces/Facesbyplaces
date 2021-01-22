@@ -65,8 +65,10 @@ class APIBLMShowFriendsSettingsExtendedDetails{
   String firstName;
   String lastName;
   dynamic image;
+  String email;
+  int accountType;
 
-  APIBLMShowFriendsSettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIBLMShowFriendsSettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image, this.email, this.accountType});
 
   factory APIBLMShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFriendsSettingsExtendedDetails(
@@ -74,6 +76,8 @@ class APIBLMShowFriendsSettingsExtendedDetails{
       firstName: parsedJson['first_name'],
       lastName: parsedJson['last_name'],
       image: parsedJson['image'],
+      email: parsedJson['email'],
+      accountType: parsedJson['account_type'],
     );
   }
 }
