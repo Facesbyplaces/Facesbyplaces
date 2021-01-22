@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:flutter_pay/flutter_pay.dart';
 import 'package:flutter/material.dart';
+import 'package:stripe_payment/stripe_payment.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
 
@@ -12,11 +12,13 @@ class HomeRegularUserDonate extends StatefulWidget{
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
   int donateToggle;
+  Token paymentToken;
 
   @override
   initState() {
     super.initState();
     donateToggle = 0;
+    StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_aSaULNS8cJU6Tvo20VAXy6rp", merchantId: "merchant.com.app.facesbyplaces", androidPayMode: 'test'));
   }
 
   @override
@@ -120,46 +122,129 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       color: Color(0xffffffff),
                     ), 
                     onPressed: () async{
+                      // if (Platform.isIOS) {
+                      //   _controller.jumpTo(450);
+                      // }
 
-                      FlutterPay flutterPay = FlutterPay();
 
-                      bool isAvailable = await flutterPay.canMakePayments();
+                        // double amount;
 
-                      if(isAvailable == true){
-                        flutterPay.setEnvironment(
-                          environment: PaymentEnvironment.Production,
-                        );
 
-                        PaymentItem item = PaymentItem(
-                          name: 'Donation', 
-                          price: ((){
+                        // switch(donateToggle){
+                        //   case 0: return amount = 0.99; break;
+                        //   case 1: return amount = 5.00; break;
+                        //   case 2: return amount =15.00; break;
+                        //   case 3: return amount =25.00; break;
+                        //   case 4: return amount =50.00; break;
+                        //   case 5: return amount =100.00; break;
+                        // }
+
+                        // print('The amount is $amount');
+
+                      paymentToken = await StripePayment.paymentRequestWithNativePay(
+                        androidPayOptions: AndroidPayPaymentRequest(
+                          totalPrice: ((){
                             switch(donateToggle){
-                              case 0: return 0.99; break;
-                              case 1: return 5.00; break;
-                              case 2: return 15.00; break;
-                              case 3: return 25.00; break;
-                              case 4: return 50.00; break;
-                              case 5: return 100.00; break;
+                              case 0: return '0.99'; break;
+                              case 1: return '5.00'; break;
+                              case 2: return '15.00'; break;
+                              case 3: return '25.00'; break;
+                              case 4: return '50.00'; break;
+                              case 5: return '100.00'; break;
                             }
                           }()),
-                        );
-
-                        String token = await flutterPay.makePayment(
-                          merchantIdentifier: 'merchant.com.app.facesbyplaces',
                           currencyCode: 'USD',
+                        ),
+                        applePayOptions: ApplePayPaymentOptions(
                           countryCode: 'US',
-                          allowedPaymentNetworks: [
-                            PaymentNetwork.visa, 
-                            PaymentNetwork.masterCard,
+                          currencyCode: 'USD',
+                          items: [
+                            ApplePayItem(
+                              label: 'Donation',
+                              amount: ((){
+                                switch(donateToggle){
+                                  case 0: return '0.99'; break;
+                                  case 1: return '5.00'; break;
+                                  case 2: return '15.00'; break;
+                                  case 3: return '25.00'; break;
+                                  case 4: return '50.00'; break;
+                                  case 5: return '100.00'; break;
+                                }
+                              }()),
+                            )
                           ],
-                          paymentItems: [item],
-                          merchantName: 'FacesbyPlaces', 
-                          gatewayName: 'Stripe',
-                        );
+                        ),
+                      );
 
-                        print('The token is $token');
+                      print('The token is $paymentToken');
+                      print('The token is ${paymentToken.tokenId}');
 
-                      }
+                      StripePayment.completeNativePayRequest();
+
+
+                      // .catchError();
+
+
+
+                      // =================================================================================================================================
+
+
+                      
+                        // Future<String> get receiptPayment async {
+                        //   /* custom receipt w/ useReceiptNativePay */
+                        //   const receipt = <String, double>{"Nice Hat": 5.00, "Used Hat" : 1.50};
+                        //   var aReceipt = Receipt(receipt, "Hat Store");
+                        //   return await StripeNative.useReceiptNativePay(aReceipt);
+                        // }
+
+
+
+
+
+
+
+
+                      // =================================================================================================================================
+
+                      // FlutterPay flutterPay = FlutterPay();
+
+                      // bool isAvailable = await flutterPay.canMakePayments();
+
+                      // if(isAvailable == true){
+                      //   flutterPay.setEnvironment(
+                      //     environment: PaymentEnvironment.Production,
+                      //   );
+
+                      //   PaymentItem item = PaymentItem(
+                      //     name: 'Donation', 
+                      //     price: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return 0.99; break;
+                      //         case 1: return 5.00; break;
+                      //         case 2: return 15.00; break;
+                      //         case 3: return 25.00; break;
+                      //         case 4: return 50.00; break;
+                      //         case 5: return 100.00; break;
+                      //       }
+                      //     }()),
+                      //   );
+
+                      //   String token = await flutterPay.makePayment(
+                      //     merchantIdentifier: 'merchant.com.app.facesbyplaces',
+                      //     currencyCode: 'USD',
+                      //     countryCode: 'US',
+                      //     allowedPaymentNetworks: [
+                      //       PaymentNetwork.visa, 
+                      //       PaymentNetwork.masterCard,
+                      //     ],
+                      //     paymentItems: [item],
+                      //     merchantName: 'FacesbyPlaces', 
+                      //     gatewayName: 'Stripe',
+                      //   );
+
+                      //   print('The token is $token');
+
+                      // }
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 

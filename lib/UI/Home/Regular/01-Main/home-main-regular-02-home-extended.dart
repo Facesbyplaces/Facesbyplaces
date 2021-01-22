@@ -6,7 +6,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dar
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -132,14 +132,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
           floatingActionButton: FloatingActionButton(
             backgroundColor: Color(0xffffffff),
             onPressed: () async{
-              String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                "#ff6666", 
-                'Cancel', 
-                true, 
-                ScanMode.QR
-              );
+              // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+              //   "#ff6666", 
+              //   'Cancel', 
+              //   true, 
+              //   ScanMode.QR
+              // );
 
-              print('The result of scanning in alm extended is $barcodeScanRes');
+              // print('The result of scanning in alm extended is $barcodeScanRes');
             },
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),

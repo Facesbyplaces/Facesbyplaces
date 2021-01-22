@@ -5,7 +5,7 @@ import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -132,14 +132,14 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
           floatingActionButton: FloatingActionButton(
             backgroundColor: Color(0xffffffff),
             onPressed: () async{
-              String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                "#ff6666", 
-                'Cancel', 
-                true, 
-                ScanMode.QR
-              );
+              // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+              //   "#ff6666", 
+              //   'Cancel', 
+              //   true, 
+              //   ScanMode.QR
+              // );
 
-              print('The result of scanning in blm extended is $barcodeScanRes');
+              // print('The result of scanning in blm extended is $barcodeScanRes');
             },
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),
