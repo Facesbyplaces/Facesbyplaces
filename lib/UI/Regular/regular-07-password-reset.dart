@@ -110,8 +110,12 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                             color: Color(0xffffffff),
                           ),
                           onPressed: () async{
-                            
-                            if(_key1.currentState.controller.text == _key2.currentState.controller.text){
+
+                            if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                            }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
+                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
+                            }else{
                               context.showLoaderOverlay();
                               bool result = await apiRegularPasswordChange(
                                 password: _key1.currentState.controller.text, 

@@ -111,7 +111,28 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           ),
                           onPressed: () async{
                             
-                            if(_key1.currentState.controller.text == _key2.currentState.controller.text){
+                            // if(_key1.currentState.controller.text == _key2.currentState.controller.text){
+                            //   context.showLoaderOverlay();
+                            //   bool result = await apiBLMPasswordChange(
+                            //     password: _key1.currentState.controller.text, 
+                            //     passwordConfirmation: _key2.currentState.controller.text,
+                            //     resetToken: resetToken,
+                            //   );
+                            //   context.hideLoaderOverlay();
+
+                            //   if(result){
+                            //     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
+                            //     Navigator.pushReplacementNamed(context, '/home/blm');
+                            //   }else{
+                            //     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                            //   }
+                            // }
+
+                            if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                              await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                            }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
+                              await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
+                            }else{
                               context.showLoaderOverlay();
                               bool result = await apiBLMPasswordChange(
                                 password: _key1.currentState.controller.text, 
@@ -127,6 +148,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                 await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                               }
                             }
+                            
                             
                           },
                           width: SizeConfig.screenWidth / 2, 

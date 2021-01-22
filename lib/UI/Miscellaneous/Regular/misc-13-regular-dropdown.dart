@@ -1,6 +1,3 @@
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
@@ -12,10 +9,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'misc-07-regular-button.dart';
 import 'package:share/share.dart';
+import 'dart:typed_data';
+import 'dart:ui';
 import 'dart:io';
 
-import 'misc-07-regular-button.dart';
 
 class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
@@ -188,6 +187,26 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
+  // Future<void> shareQRCode() async { 
+  //   try {
+  //     // _RenderLayoutBuilder
+      
+  //       RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject(); 
+  //       // RenderRepaintBoundary boundary = qrKey.currentContext.findAncestorRenderObjectOfType();
+  //       var image = await boundary.toImage();
+  //       // var image = await boundary.showOnScreen();
+  //       ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
+  //       Uint8List pngBytes = byteData.buffer.asUint8List();       
+  //       final tempDir = await getTemporaryDirectory();
+  //       final file = await new File('${tempDir.path}/image.png').create();
+  //       await file.writeAsBytes(pngBytes);
+  //       // final channel = const MethodChannel('channel:me.alfian.share/share');
+  //       // channel.invokeMethod('shareFile', 'image.png');
+  //     } catch(e) {
+  //       print(e.toString());
+  //   }
+  // }
+
   Future<void> shareQRCode() async {
     try {
       RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
@@ -198,6 +217,16 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
       final tempDir = await getTemporaryDirectory();
       final file = await new File('${tempDir.path}/qr-image.png').create();
       await file.writeAsBytes(pngBytes);
+
+      print(pngBytes);
+
+      // Future.delayed(const Duration(milliseconds: 20), () async {
+      //   RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
+      //   ui.Image image = await boundary.toImage();
+      //   ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      //   Uint8List pngBytes = byteData.buffer.asUint8List();
+      //   print(pngBytes);
+      // });
 
       Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
 
@@ -279,12 +308,14 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                     Center(
                       child: Container(
                         height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
-                        child: QrImage(
+                        child: RepaintBoundary(
                           key: qrKey,
-                          data: '${response.result}',
-                          version: QrVersions.auto,
-                          size: 320,
-                          gapless: false,
+                          child: QrImage(
+                            data: '${response.result}',
+                            version: QrVersions.auto,
+                            size: 320,
+                            gapless: false,
+                          ),
                         ),
                       ),
                     ),
@@ -338,9 +369,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                         color: Color(0xffffffff),
                       ), 
                       onPressed: () async{
-
-                        shareQRCode();
-
+                        await shareQRCode();
                       }, 
                       width: SizeConfig.screenWidth / 2, 
                       height: SizeConfig.blockSizeVertical * 7, 

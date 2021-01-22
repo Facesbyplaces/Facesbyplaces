@@ -17,17 +17,17 @@ Future<bool> apiRegularPasswordChange({String password, String passwordConfirmat
   print('The status headers of password change is ${response.headers}');
 
   if(response.statusCode == 200){
-      var value = json.decode(response.body);
-      var user = value['user'];
-      int userId = user['id'];
+    var value = json.decode(response.body);
+    var user = value['data'];
+    int userId = user['id'];
 
-      final sharedPrefs = await SharedPreferences.getInstance();
+    final sharedPrefs = await SharedPreferences.getInstance();
 
-      sharedPrefs.setInt('regular-user-id', userId);
-      sharedPrefs.setString('regular-access-token', response.headers['access-token']);
-      sharedPrefs.setString('regular-uid', response.headers['uid']);    
-      sharedPrefs.setString('regular-client', response.headers['client']);
-      sharedPrefs.setBool('regular-user-session', true);
+    sharedPrefs.setInt('regular-user-id', userId);
+    sharedPrefs.setString('regular-access-token', response.headers['access-token']);
+    sharedPrefs.setString('regular-uid', response.headers['uid']);    
+    sharedPrefs.setString('regular-client', response.headers['client']);
+    sharedPrefs.setBool('regular-user-session', true);
 
     return true;
   }else{

@@ -325,7 +325,7 @@ class BLMLoginState extends State<BLMLogin>{
                               bool result = await apiBLMSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
 
                               if(result == true){
-                                Navigator.pushReplacementNamed(context, '/home/regular');
+                                Navigator.pushReplacementNamed(context, '/home/blm');
                               }else{
                                 await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
                               }

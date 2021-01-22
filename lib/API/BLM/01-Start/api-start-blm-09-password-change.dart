@@ -16,17 +16,17 @@ Future<bool> apiBLMPasswordChange({String password, String passwordConfirmation,
   print('The status headers for password change is ${response.headers}');
 
   if(response.statusCode == 200){
-      var value = json.decode(response.body);
-      var user = value['data'];
-      int userId = user['id'];
+    var value = json.decode(response.body);
+    var user = value['data'];
+    int userId = user['id'];
 
-      final sharedPrefs = await SharedPreferences.getInstance();
+    final sharedPrefs = await SharedPreferences.getInstance();
 
-      sharedPrefs.setInt('blm-user-id', userId);
-      sharedPrefs.setString('blm-access-token', response.headers['access-token']);
-      sharedPrefs.setString('blm-uid', response.headers['uid']);    
-      sharedPrefs.setString('blm-client', response.headers['client']);
-      sharedPrefs.setBool('blm-user-session', true);
+    sharedPrefs.setInt('blm-user-id', userId);
+    sharedPrefs.setString('blm-access-token', response.headers['access-token']);
+    sharedPrefs.setString('blm-uid', response.headers['uid']);    
+    sharedPrefs.setString('blm-client', response.headers['client']);
+    sharedPrefs.setBool('blm-user-session', true);
     return true;
   }else{
     return false;
