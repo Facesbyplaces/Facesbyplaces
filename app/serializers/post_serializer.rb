@@ -25,9 +25,9 @@ class PostSerializer < ActiveModel::Serializer
   def tag_people
     tags = object.tagpeople.collect do |person|
       if person.account_type == 1
-        person = BlmUser.find(person.id)
+        person = User.find(person.account_id)
       else
-        person = AlmUser.find(person.id)
+        person = AlmUser.find(person.account_id)
       end
 
       ActiveModel::SerializableResource.new(
