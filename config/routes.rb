@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     # Define routes for AlmUser within this block.
     registrations: 'api/v1/users/registrations',
     sessions: 'api/v1/users/sessions',
+    passwords: 'api/v1/users/passwords',
   }, :skip => [:omniauth_callbacks]
 
   mount_devise_token_auth_for 'User2', at: 'auth2'
