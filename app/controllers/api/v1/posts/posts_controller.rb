@@ -57,7 +57,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 
             # Add to notification
                 # For blm followers
-                (post.page.users.uniq - [user()]).each do |user|
+                (post.page.users.uniq - user_in_page(1)).each do |user|
                     # check if this user can get notification
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
@@ -70,7 +70,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 end
 
                 # For alm followers
-                (post.page.alm_users.uniq - [user()]).each do |user|
+                (post.page.alm_users.uniq - user_in_page(2)).each do |user|
                     # check if this user can get notification
                     if user.notifsetting.newActivities == true
                         # check if the user is in the tag people
@@ -187,8 +187,20 @@ class Api::V1::Posts::PostsController < ApplicationController
                     post = Post.find(params[:post_id])
                     people_blm_users = post.users
                     people_alm_users = post.alm_users
-                    # For followers
-                    (post.page.accounts.uniq - [user()]).each do |user|
+                    # For blm followers
+                    (post.page.users.uniq - user_in_page(1)).each do |user|
+                        # check if the user can get notification from this api
+                        if user.notifsetting.postLikes == true
+                            # check if the user is in the tag people
+                            if people_blm_users.include?(user) || people_alm_users.include?(user)
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post that you're tagged in", postId: post.id, read: false, notif_type: 'Post')
+                            else
+                                Notification.create(recipient: user, actor: user(), action: "#{user().first_name} liked a post in #{post.page.name} #{post.page_type}", postId: post.id, read: false, notif_type: 'Post')
+                            end
+                        end
+                    end
+                    # For alm followers
+                    (post.page.alm_users.uniq - user_in_page(2)).each do |user|
                         # check if the user can get notification from this api
                         if user.notifsetting.postLikes == true
                             # check if the user is in the tag people
@@ -219,6 +231,14 @@ class Api::V1::Posts::PostsController < ApplicationController
             end
         else
             render json: {}, status: 409
+        end
+    end
+
+    def user_in_page(account_type)
+        if user().account_type == account_type
+            return [user()]
+        else
+            return []
         end
     end
 
