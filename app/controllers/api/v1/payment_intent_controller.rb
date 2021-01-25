@@ -37,8 +37,7 @@ class Api::V1::PaymentIntentController < ApplicationController
         render json: {
           memorial_stripe_account: @memorial.stripe_connect_account_id,
           publishable_key: Rails.configuration.stripe[:publishable_key],
-          client_secret: payment_intent[:client_secret],
-          id: payment_intent[:id]
+          payment_intent: payment_intent
         }, status: 200
     end
     
