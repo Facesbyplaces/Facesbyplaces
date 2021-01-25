@@ -334,7 +334,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate()));
+                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate()));
+
+                                        print('The page type in memorial is $pageType');
+                                        // Navigator.pushNamed(context, '/home/regular/donation');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserDonate(pageType: pageType, pageId: memorialId,)));
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,

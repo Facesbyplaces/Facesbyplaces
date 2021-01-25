@@ -1,6 +1,6 @@
-import 'dart:convert';
-
-import 'package:clipboard/clipboard.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-02-read-unread-notifications.dart';
@@ -8,6 +8,7 @@ import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-use
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
+import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -27,8 +28,6 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'dart:async';
 
-// import 'home-main-regular-04-qr-code.dart';
-
 class HomeRegularScreenExtended extends StatefulWidget{
 
   HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState();
@@ -41,9 +40,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   Future drawerSettings;
   int unreadNotifications;
 
-  String _scanBarcode = 'Unknown';
-
-  // final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
+  String _scanBarcode = 'Error';
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{
     return await apiRegularShowProfileInformation();
@@ -61,8 +58,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          "#ff6666", "Cancel", true, ScanMode.QR);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
       print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -77,16 +73,32 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
       _scanBarcode = barcodeScanRes;
     });
 
-    // FlutterClipboard.copy(_scanBarcode).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
-
-
-
     print('The _scanBarcode is $_scanBarcode');
-    Map newMap = json.decode(_scanBarcode);
+    List<dynamic> newValue = _scanBarcode.split('-');
 
-    print('The newMap is $newMap');
+    print('The newValue is $newValue');
+    print('The newValue is ${newValue[0]}');
+    print('The newValue is ${newValue[1]}');
+    print('The newValue is ${newValue[2]}');
 
-
+    if(_scanBarcode != 'Error'){
+      if(newValue[0] == 'Memorial'){
+        if(newValue[2] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+        }
+      }else{
+        print('The newValue[4] in alm is ${newValue[4]}');
+        if(newValue[4] == 'Blm'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: int.parse(newValue[1]), likeStatus: int.parse(newValue[2]) == 1 ? true : false, numberOfLikes: int.parse(newValue[3]),)));
+        }else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: int.parse(newValue[1]), likeStatus: int.parse(newValue[2]) == 1 ? true : false, numberOfLikes: int.parse(newValue[3]))));
+        }
+      }
+    }else{
+      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+    }
   }
 
   void initState(){

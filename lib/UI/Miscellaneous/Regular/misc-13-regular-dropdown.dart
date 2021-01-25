@@ -21,10 +21,11 @@ class MiscRegularDropDownTemplate extends StatefulWidget{
   final bool likePost;
   final int likesCount;
   final String reportType;
+  final String pageType;
 
-  MiscRegularDropDownTemplate({this.postId, this.likePost, this.likesCount, this.reportType});
+  MiscRegularDropDownTemplate({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
 
-  MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType);
+  MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType, pageType: pageType);
 }
 
 class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate>{
@@ -33,10 +34,13 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
   final bool likePost;
   final int likesCount;
   final String reportType;
+  final String pageType;
 
-  MiscRegularDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType});
+  MiscRegularDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
 
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
+
+  GlobalKey qrKey = new GlobalKey();
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
@@ -66,6 +70,26 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
+  Future<void> shareQRCode() async {
+    try {
+      RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
+      var image = await boundary.toImage();
+      ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
+      Uint8List pngBytes = byteData.buffer.asUint8List();
+
+      final tempDir = await getTemporaryDirectory();
+      final file = await new File('${tempDir.path}/qr-image.png').create();
+      await file.writeAsBytes(pngBytes);
+
+      print(pngBytes);
+
+      Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the post from FacesbyPlaces');
+
+    } catch(e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -81,7 +105,8 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               fontSize: SizeConfig.safeBlockHorizontal * 3.5,
               color: Color(0xff888888)
             ),
-            items: <String>['Copy Link', 'Share', 'Report'].map((String value){
+            // items: <String>['Copy Link', 'Share', 'Report'].map((String value){
+            items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
                 child: Container(
@@ -114,6 +139,66 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 }
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: reportType,)));
+              }else if(dropDownList == 'QR Code'){
+                // String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-Memorial'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+                String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-$pageType'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+
+                FullScreenMenu.show(
+                  context,
+                  backgroundColor: Color(0xffffffff),
+                  items: [
+                    Center(
+                      child: Container(
+                        height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
+                        child: RepaintBoundary(
+                          key: qrKey,
+                          child: QrImage(
+                            data: qrData,
+                            version: QrVersions.auto,
+                            size: 320,
+                            gapless: false,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Column(
+                      children: [
+                        Text('FacesbyPlaces Post',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontWeight: FontWeight.bold, 
+                            color: Color(0xff000000),
+                          ), 
+                        ),
+
+                        Text('QR Code',
+                          style: TextStyle(
+                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontWeight: FontWeight.bold, 
+                            color: Color(0xff000000),
+                          ), 
+                        ),
+
+                      ],
+                    ),
+
+                    MiscRegularButtonTemplate(
+                      buttonText: 'Share',
+                      buttonTextStyle: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                        fontWeight: FontWeight.bold, 
+                        color: Color(0xffffffff),
+                      ), 
+                      onPressed: () async{
+                        await shareQRCode();
+                      }, 
+                      width: SizeConfig.screenWidth / 2, 
+                      height: SizeConfig.blockSizeVertical * 7, 
+                      buttonColor: Color(0xff04ECFF),
+                    ),
+                  ],
+                );
               }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('alm-share-copied-link');
@@ -290,42 +375,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: memorialId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
-                // initBranchShare();
-                // FlutterBranchSdk.setIdentity('alm-share-qr-code-link');
-
-                // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                // if (response.success) {
-                //   print('Link generated: ${response.result}');
-                // } else {
-                //   FlutterBranchSdk.logout();
-                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
-                // }
-
-
-
-                // ..addCustomMetadata('link-category', 'Memorial')
-                // ..addCustomMetadata('link-memorial-id', memorialId)
-                // // ..addCustomMetadata('link-type-of-account', 'Regular')
-                // ..addCustomMetadata('link-type-of-account', pageType)
-
-                // Map<String, dynamic>
-                // Map<String, dynamic> qrData = {
-                //   'link-category': 'Memorial',
-                //   'link-memorial-id': '$memorialId',
-                //   'link-type-of-account': '$pageType',
-                // };
-
-                String qrData = '{link-category : Memorial, link-memorial-id : $memorialId, link-type-of-account : $pageType, sample-value : 1}';
-
-                print('The qrData is $qrData');
-                
-                // qrData.addAll(
-                //   {
-                //     'link-category': 'Memorial',
-                //     'link-memorial-id': memorialId,
-                //     'link-type-of-account': pageType,
-                //   }
-                // );
+                String qrData = 'Memorial-$memorialId-$pageType'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
 
                 FullScreenMenu.show(
                   context,
@@ -337,8 +387,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                         child: RepaintBoundary(
                           key: qrKey,
                           child: QrImage(
-                            // data: '${response.result}',
-                            data: qrData.toString(),
+                            data: qrData,
                             version: QrVersions.auto,
                             size: 320,
                             gapless: false,
@@ -367,26 +416,6 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
                       ],
                     ),
-
-                    // Center(
-                    //   child: Text('$memorialName',
-                    //     style: TextStyle(
-                    //       fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                    //       fontWeight: FontWeight.bold, 
-                    //       color: Color(0xff000000),
-                    //     ), 
-                    //   ),
-                    // ),
-
-                    // Center(
-                    //   child: Text('QR Code',
-                    //     style: TextStyle(
-                    //       fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                    //       fontWeight: FontWeight.bold, 
-                    //       color: Color(0xff000000),
-                    //     ), 
-                    //   ),
-                    // ),
 
                     MiscRegularButtonTemplate(
                       buttonText: 'Share',

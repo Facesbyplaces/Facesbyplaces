@@ -6,11 +6,19 @@ import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
+  final String pageType;
+  final int pageId;
 
-  HomeBLMUserDonateState createState() => HomeBLMUserDonateState();
+  HomeBLMUserDonate({this.pageType, this.pageId});
+
+  HomeBLMUserDonateState createState() => HomeBLMUserDonateState(pageType: pageType, pageId: pageId);
 }
 
 class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
+  final String pageType;
+  final int pageId;
+
+  HomeBLMUserDonateState({this.pageType, this.pageId});
 
   int donateToggle;
   Token paymentToken;
@@ -19,7 +27,10 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   initState() {
     super.initState();
     donateToggle = 0;
-    StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_aSaULNS8cJU6Tvo20VAXy6rp", merchantId: "merchant.com.app.facesbyplaces", androidPayMode: 'test'));
+    StripePayment.setOptions(StripeOptions(
+      publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
+      merchantId: "merchant.com.app.facesbyplaces", 
+      androidPayMode: 'test'));
   }
 
   @override
@@ -115,6 +126,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     onPressed: () async{
+                      
+
                       paymentToken = await StripePayment.paymentRequestWithNativePay(
                         androidPayOptions: AndroidPayPaymentRequest(
                           totalPrice: ((){
@@ -166,96 +179,9 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         case 5: amount = 100.00; break;
                       }
 
-                      print('The amount is $amount');
-
-                      print('New BLM!');
-
                       context.showLoaderOverlay();
-                      // APIBLMDonateMain resultToken = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
-                      // APIBLMDonateMain resultToken = await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
-                      APIBLMDonateMain resultToken = await apiBLMDonate(pageType: 'Blm', pageId: 6, amount: amount, token: paymentToken.tokenId);
+                      await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
                       context.hideLoaderOverlay();
-
-
-
-
-
-                      // FlutterPay flutterPay = FlutterPay();
-
-                      // bool isAvailable = await flutterPay.canMakePayments();
-
-                      // print('The value is $isAvailable');
-
-                      // if(isAvailable == true){
-                      //   PaymentItem item = PaymentItem(
-                      //     name: 'Donation', 
-                      //     price: ((){
-                      //       switch(donateToggle){
-                      //         case 0: return 0.99; break;
-                      //         case 1: return 5.00; break;
-                      //         case 2: return 15.00; break;
-                      //         case 3: return 25.00; break;
-                      //         case 4: return 50.00; break;
-                      //         case 5: return 100.00; break;
-                      //       }
-                      //     }()),
-                      //   );
-
-                      //   String token = await flutterPay.makePayment(
-                      //     merchantIdentifier: 'merchant.com.app.facesbyplaces',
-                      //     currencyCode: 'USD',
-                      //     countryCode: 'US',
-                      //     allowedPaymentNetworks: [
-                      //       PaymentNetwork.visa, 
-                      //       PaymentNetwork.masterCard,
-                      //     ],
-                      //     paymentItems: [item],
-                      //     merchantName: 'FacesbyPlaces', 
-                      //     gatewayName: 'Stripe',
-                      //   );
-
-                      //   print('The token is $token');
-                      // }
-
-                      paymentToken = await StripePayment.paymentRequestWithNativePay(
-                        androidPayOptions: AndroidPayPaymentRequest(
-                          totalPrice: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99'; break;
-                              case 1: return '5.00'; break;
-                              case 2: return '15.00'; break;
-                              case 3: return '25.00'; break;
-                              case 4: return '50.00'; break;
-                              case 5: return '100.00'; break;
-                            }
-                          }()),
-                          currencyCode: 'USD',
-                        ),
-                        applePayOptions: ApplePayPaymentOptions(
-                          countryCode: 'US',
-                          currencyCode: 'USD',
-                          items: [
-                            ApplePayItem(
-                              label: 'Donation',
-                              amount: ((){
-                                switch(donateToggle){
-                                  case 0: return '0.99'; break;
-                                  case 1: return '5.00'; break;
-                                  case 2: return '15.00'; break;
-                                  case 3: return '25.00'; break;
-                                  case 4: return '50.00'; break;
-                                  case 5: return '100.00'; break;
-                                }
-                              }()),
-                            )
-                          ],
-                        ),
-                      );
-
-                      print('The token is $paymentToken');
-                      print('The token is ${paymentToken.tokenId}');
-
-                      StripePayment.completeNativePayRequest();
 
 
                     }, 

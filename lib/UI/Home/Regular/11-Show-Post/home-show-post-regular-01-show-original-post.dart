@@ -403,6 +403,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                                 Container(
                                   child: Wrap(
+                                    direction: Axis.vertical,
                                     spacing: 5.0,
                                     children: List.generate(
                                       originalPost.data.post.postTagged.length,

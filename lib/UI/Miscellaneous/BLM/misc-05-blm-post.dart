@@ -203,7 +203,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                       ),
                     ),
                   ),
-                  MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post',),
+                  MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: pageType,),
                 ],
               ),
             ),

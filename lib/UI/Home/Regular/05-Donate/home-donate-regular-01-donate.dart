@@ -190,7 +190,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       print('The amount is $amount');
 
                       context.showLoaderOverlay();
-                      APIRegularDonateMain resultToken = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
                       context.hideLoaderOverlay();
 
                       // print('The result of donation is $resultToken');
