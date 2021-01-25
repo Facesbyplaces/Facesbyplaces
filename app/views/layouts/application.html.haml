@@ -31,4 +31,5 @@
   %body
     = render "header"
     = yield
-    = render "footer"
+    - if !(controller_name == "pages" && action_name == "home")
+      = render "footer"

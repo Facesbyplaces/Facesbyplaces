@@ -37,6 +37,19 @@ body {
     }
   }
 }
+.footer {
+  float: left;
+  width: 100%;
+  background: #30343D 0% 0% no-repeat padding-box;
+  .text {
+    text-align: center;
+    float: left;
+    width: 100%;
+    font-size: 3vh;
+    margin: 30px 0;
+    color: #ffffff;
+  }
+}
 .row {
   float: left;
   width: 100%;
@@ -138,20 +151,34 @@ body {
 
 .about {
   float: left;
-  padding: 5% 0;
   width: 100%;
   background: #ffffff;
   .title-container {
     float: left;
     width: 100%;
-    padding: 80px 0 50px;
-    background: #000000;
+    padding: 9% 0 4%;
+    background: #3b3b3b;
+    // background-size: 100% auto;
+    // background-repeat: no-repeat;
+    // background-position: center;
+    // background-image: url(asset_path("about_main_background_image.svg"));
     .title {
       float: left;
       color: #ffffff;
       width: 100%;
       font-size: 2em;
       text-align: center;
+    }
+    .title-image-container {
+      float: left;
+      width: 12%;
+      height: 20px;
+      margin: 0px 0 0 44%;
+      text-align: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      background-image: url(asset_path("title_border.png"));
     }
   }
   .body {
@@ -180,7 +207,15 @@ body {
         float: left;
         width: 80%;
         height: 300px;
-        background: #d0d0d0;
+      }
+      .image_1, .image_2 {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(asset_path("about_image_1.png"));
+      }
+      .image_2 {
+        background-image: url(asset_path("about_image_2.png"));
       }
     }
     .section-container {
@@ -204,9 +239,78 @@ body {
       padding: 0 5%;
     }
   }
+  .header {
+    .logo-container {
+      float: left;
+      margin: 15px 0 0 3%;
+      width: 27%;
+      .logo {
+        padding-top: 45%;
+        width: 30%;
+        height: 0;
+      }
+    }
+    .tabs-container { 
+      padding: 2% 10% 0 0;
+      width: 60%;
+    }
+  }
   .home {
+    background-color: #000000;
+    background-size: 100%;
     .main-container {
       width: 100%;
+      padding: 0;
+    }
+    .home-page-image-container {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      .home-page-image {
+        width: 90%;
+        margin: 20% 5% 0;
+      }
+    }
+  }
+  .about {
+    .title-container {
+      padding: 20% 0 4%;
+      .title-image-container {
+        width: 30%;
+        height: 0;
+        padding-top: 3%;
+        margin: 0px 0 0 35%;
+      }
+    }
+    .body {
+      width: 90%;
+      padding: 0 5%;
+      .title {
+        font-size: 3.5vh;
+      }
+      .main-text {
+        font-size: 2.5vh;
+        margin: 10px 0 20px;
+      }
+      .image-container {
+        display: none;
+      }
+      .section-container {
+        width: 100%;
+        .image_1, .image_2 {
+          float: left;
+          width: 90%;
+          margin: 2% 5%;
+          padding-top: 90%;
+          background-size: 100% auto;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-image: url(asset_path("about_image_1.png"));
+        }
+        .image_2 {
+          background-image: url(asset_path("about_image_2.png"));
+        }
+      }
     }
   }
 }
