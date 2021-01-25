@@ -21,12 +21,14 @@ class Api::V1::PaymentIntentController < ApplicationController
         #   confirm: true    
         # }, stripe_account: @memorial.stripe_connect_account_id)
 
+        token = Stripe::Token.retrieve(params[:token])
+
         payment_intent = Stripe::Charge.create({
           currency: 'usd',
           amount: @amount.to_i,
           currency: 'usd',
           description: "Donation for #{@memorial.name}",
-          source: params[:token],
+          source: token,
         }, stripe_account: @memorial.stripe_connect_account_id)
 
         # save to transaction
