@@ -29,7 +29,7 @@ class Api::V1::PaymentIntentController < ApplicationController
         # }, stripe_account: @memorial.stripe_connect_account_id)
 
         # save to transaction
-        Transaction.create(page: @memorial, user: user(), amount: @amount)
+        Transaction.create(page: @memorial, account: user(), amount: @amount)
 
         render json: {
           memorial_stripe_account: @memorial.stripe_connect_account_id,
