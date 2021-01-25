@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-04-update-other-details.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-05-show-other-details.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-06-hide-birthdate.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-07-hide-birthplace.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-08-hide-email.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-06-update-other-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-02-show-other-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-07-hide-birthdate.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-08-hide-birthplace.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-10-hide-email.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-09-hide-address.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-10-hide-phone-number.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-11-hide-phone-number.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';

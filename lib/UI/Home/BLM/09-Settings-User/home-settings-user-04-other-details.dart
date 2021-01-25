@@ -1,10 +1,10 @@
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-04-show-other-details.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-05-update-other-details.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-06-hide-birthdate.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-07-hide-birthplace.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-08-hide-email.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-02-show-other-details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-06-update-other-details.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-07-hide-birthdate.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-08-hide-birthplace.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-10-hide-email.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-09-hide-address.dart';
-import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-10-hide-phone-number.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-11-hide-phone-number.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';

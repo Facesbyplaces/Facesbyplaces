@@ -64,8 +64,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       CustomPaint(size: Size.infinite, painter: MiscRegularCurvePainter(),),
 
-                      
-
                       Positioned(
                         top: SizeConfig.blockSizeVertical * 8,
                         left: SizeConfig.screenWidth / 4.2,

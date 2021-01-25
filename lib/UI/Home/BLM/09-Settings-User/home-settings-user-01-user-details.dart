@@ -1,9 +1,15 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-12-update-user-profile-picture.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
+import 'dart:io';
 
 class HomeBLMUserProfileDetails extends StatefulWidget{
   final int userId;
@@ -17,9 +23,20 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   HomeBLMUserProfileDetailsState({this.userId});
 
   Future showProfile;
+  final picker = ImagePicker();
+  File profileImage;
 
   Future<APIBLMShowProfileInformation> getProfileInformation() async{
     return await apiBLMShowProfileInformation();
+  }
+
+  Future getProfileImage() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if(pickedFile != null){
+      setState(() {
+        profileImage = File(pickedFile.path);
+      });
+    }
   }
 
   void initState(){
@@ -50,16 +67,43 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       Positioned(
                         top: SizeConfig.blockSizeVertical * 8,
                         left: SizeConfig.screenWidth / 4.2,
-                        child: CircleAvatar(
-                          radius: SizeConfig.blockSizeVertical * 15,
-                          backgroundColor: Color(0xff888888),
-                          backgroundImage: ((){
-                            if(profile.data.image != null && profile.data.image != ''){
-                              return NetworkImage(profile.data.image);
-                            }else{
-                              return AssetImage('assets/icons/app-icon.png');
-                            }
-                          }()),
+                        child: Badge(
+                          // position: BadgePosition.topEnd(top: -3, end: -10),
+                          position: BadgePosition.topEnd(top: 5, end: 15),
+                          animationDuration: Duration(milliseconds: 300),
+                          animationType: BadgeAnimationType.fade,
+                          badgeColor: Colors.grey,
+                          badgeContent: Icon(Icons.camera, size: SizeConfig.blockSizeVertical * 5.5,),
+                          child: GestureDetector(
+                            onTap: () async{
+
+                              await getProfileImage();
+                              
+                              context.showLoaderOverlay();
+                              bool result = await apiBLMUpdateUserProfilePicture(image: profileImage, userId: userId);
+                              context.hideLoaderOverlay();
+
+                              if(result != true){
+                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                              }
+
+                              print('The result is $result');
+                              
+                            },
+                            child: CircleAvatar(
+                              radius: SizeConfig.blockSizeVertical * 15,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: ((){
+                                if(profileImage != null){
+                                  return AssetImage(profileImage.path);
+                                }else if(profile.data.image != null && profile.data.image != ''){
+                                  return NetworkImage(profile.data.image);
+                                }else{
+                                  return AssetImage('assets/icons/app-icon.png');
+                                }
+                              }()),
+                            ),
+                          ),
                         ),
                       ),
                     ],

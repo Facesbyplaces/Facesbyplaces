@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-01-search-posts.dart';
-import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-blm.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-04-search-blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.dart';
-import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-04-search-suggested.dart';
+import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-suggested.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';

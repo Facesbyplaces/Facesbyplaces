@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-01-update-account-details.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-02-show-account-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-04-update-account-details.dart';
+import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-01-show-account-details.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';

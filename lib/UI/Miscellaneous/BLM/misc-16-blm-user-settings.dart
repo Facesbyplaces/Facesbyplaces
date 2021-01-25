@@ -1,28 +1,25 @@
+import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-03-show-other-details-status.dart';
+import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-02-user-update-details.dart';
+import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-03-change-password.dart';
+import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-04-other-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-02-user-update-details.dart';
-import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-03-change-password.dart';
-import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-04-other-details.dart';
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
-import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-show-other-details-status.dart';
-import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 import '../../ui-01-get-started.dart';
-import 'misc-07-regular-button.dart';
-import 'misc-02-regular-dialog.dart';
+import 'misc-02-blm-dialog.dart';
+import 'misc-07-blm-button.dart';
 
-class MiscRegularUserProfileDetailsDraggable extends StatefulWidget {
+class MiscBLMUserProfileDetailsDraggable extends StatefulWidget {
   final int userId;
-  MiscRegularUserProfileDetailsDraggable({this.userId});
+  MiscBLMUserProfileDetailsDraggable({this.userId});
 
   @override
-  MiscRegularUserProfileDetailsDraggableState createState() => MiscRegularUserProfileDetailsDraggableState(userId: userId);
+  MiscBLMUserProfileDetailsDraggableState createState() => MiscBLMUserProfileDetailsDraggableState(userId: userId);
 }
 
-class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserProfileDetailsDraggable> {
+class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDetailsDraggable> {
   final int userId;
-  MiscRegularUserProfileDetailsDraggableState({this.userId});
+  MiscBLMUserProfileDetailsDraggableState({this.userId});
 
   double height;
   Offset position;
@@ -76,7 +73,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
 
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: userId,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserUpdateDetails(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -120,7 +117,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
 
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: userId,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserChangePassword(userId: userId,)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -165,17 +162,10 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
             GestureDetector(
               onTap: () async{
                 context.showLoaderOverlay();
-                APIRegularShowOtherDetailsStatus result = await apiRegularShowOtherDetailsStatus(userId: userId);
+                APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: userId);
                 context.hideLoaderOverlay();
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                HomeRegularUserOtherDetails(
-                  userId: userId, 
-                  toggleBirthdate: result.hideBirthdate, 
-                  toggleBirthplace: result.hideBirthplace, 
-                  toggleAddress: result.hideAddress, 
-                  toggleEmail: result.hideEmail, 
-                  toggleNumber: result.hidePhoneNumber)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,
@@ -258,44 +248,20 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
 
             Expanded(child: Container(),),
 
-            MiscRegularButtonTemplate(
+            MiscBLMButtonTemplate(
               buttonText: 'Logout',
               buttonTextStyle: TextStyle(
                 fontSize: SizeConfig.safeBlockHorizontal * 5, 
                 fontWeight: FontWeight.bold, 
                 color: Color(0xffffffff),
-              ),
+              ), 
               onPressed: () async{
 
-                bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
+                bool logoutResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                 if(logoutResult){
-                    context.showLoaderOverlay();
-                    bool result = await apiRegularLogout();
-
-                    GoogleSignIn googleSignIn = GoogleSignIn(
-                      scopes: [
-                        'profile',
-                        'email',
-                        'openid'
-                      ],
-                    );
-                    await googleSignIn.signOut();
-
-                    FacebookLogin fb = FacebookLogin();
-                    await fb.logOut();
-
-                    context.hideLoaderOverlay();
-
-                    if(result){
-                      Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                      Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                    }else{
-                      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
-                    }
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => UIGetStarted()), (route) => false);
                 }
-
-
 
               }, 
               width: SizeConfig.screenWidth / 2, 

@@ -1,5 +1,5 @@
-import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-02-show-posts.dart';
-import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-03-show-memorials.dart';
+import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-02-show-user-posts.dart';
+import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-03-show-user-memorials.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';

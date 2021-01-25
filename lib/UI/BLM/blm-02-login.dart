@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-facebook.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-google.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-facebook.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-google.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';

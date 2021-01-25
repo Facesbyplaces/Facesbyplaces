@@ -1,6 +1,6 @@
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-suggested.dart';
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-nearby.dart';
-import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-posts.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search-suggested.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-nearby.dart';
+import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';

@@ -3,8 +3,8 @@ import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-creat
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-03-create-memorial.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
-import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-location.dart';
-import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-user.dart';
+import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
+import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart';
 import 'UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'UI/Home/Regular/05-Donate/home-donate-regular-02-paypal-screen.dart';
 import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
