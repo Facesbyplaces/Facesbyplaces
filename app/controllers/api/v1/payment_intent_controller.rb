@@ -15,8 +15,7 @@ class Api::V1::PaymentIntentController < ApplicationController
         token = Stripe::Token.retrieve(params[:token])
 
         payment_intent = Stripe::PaymentIntent.create({
-          payment_method: token,
-          payment_method_types: ['card'],
+          token: token,
           amount: @amount.to_i,
           currency: 'usd',
           description: "Donation for #{@memorial.name}",
