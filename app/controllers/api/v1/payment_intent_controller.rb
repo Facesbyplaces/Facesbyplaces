@@ -30,15 +30,19 @@ class Api::V1::PaymentIntentController < ApplicationController
           description: "Donation for #{@memorial.name}",
           source: token,
         }, stripe_account: @memorial.stripe_connect_account_id)
+        
+        if payment_intent.status == 'succeeded'
+          # save to transaction
+          Transaction.create(page: @memorial, account: user(), amount: @amount)
 
-        # save to transaction
-        Transaction.create(page: @memorial, account: user(), amount: @amount)
-
-        render json: {
-          memorial_stripe_account: @memorial.stripe_connect_account_id,
-          publishable_key: Rails.configuration.stripe[:publishable_key],
-          payment_intent: payment_intent
-        }, status: 200
+          render json: {
+            memorial_stripe_account: @memorial.stripe_connect_account_id,
+            publishable_key: Rails.configuration.stripe[:publishable_key],
+            payment_intent: payment_intent
+          }, status: 200
+        else 
+          render json: {status: "Transaction Failed"}, status: 422
+        end
     end
     
 end
