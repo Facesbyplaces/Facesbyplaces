@@ -290,16 +290,42 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: memorialId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
-                initBranchShare();
-                FlutterBranchSdk.setIdentity('alm-share-qr-code-link');
+                // initBranchShare();
+                // FlutterBranchSdk.setIdentity('alm-share-qr-code-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                } else {
-                  FlutterBranchSdk.logout();
-                  print('Error : ${response.errorCode} - ${response.errorMessage}');
-                }
+                // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                // if (response.success) {
+                //   print('Link generated: ${response.result}');
+                // } else {
+                //   FlutterBranchSdk.logout();
+                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                // }
+
+
+
+                // ..addCustomMetadata('link-category', 'Memorial')
+                // ..addCustomMetadata('link-memorial-id', memorialId)
+                // // ..addCustomMetadata('link-type-of-account', 'Regular')
+                // ..addCustomMetadata('link-type-of-account', pageType)
+
+                // Map<String, dynamic>
+                // Map<String, dynamic> qrData = {
+                //   'link-category': 'Memorial',
+                //   'link-memorial-id': '$memorialId',
+                //   'link-type-of-account': '$pageType',
+                // };
+
+                String qrData = '{link-category : Memorial, link-memorial-id : $memorialId, link-type-of-account : $pageType, sample-value : 1}';
+
+                print('The qrData is $qrData');
+                
+                // qrData.addAll(
+                //   {
+                //     'link-category': 'Memorial',
+                //     'link-memorial-id': memorialId,
+                //     'link-type-of-account': pageType,
+                //   }
+                // );
 
                 FullScreenMenu.show(
                   context,
@@ -311,7 +337,8 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                         child: RepaintBoundary(
                           key: qrKey,
                           child: QrImage(
-                            data: '${response.result}',
+                            // data: '${response.result}',
+                            data: qrData.toString(),
                             version: QrVersions.auto,
                             size: 320,
                             gapless: false,

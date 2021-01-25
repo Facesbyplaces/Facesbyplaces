@@ -1,15 +1,25 @@
+import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
+  final String pageType;
+  final int pageId;
 
-  HomeRegularUserDonateState createState() => HomeRegularUserDonateState();
+  HomeRegularUserDonate({this.pageType, this.pageId});
+
+  HomeRegularUserDonateState createState() => HomeRegularUserDonateState(pageType: pageType, pageId: pageId);
 }
 
 class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
+  final String pageType;
+  final int pageId;
+
+  HomeRegularUserDonateState({this.pageType, this.pageId});
 
   int donateToggle;
   Token paymentToken;
@@ -18,7 +28,10 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   initState() {
     super.initState();
     donateToggle = 0;
-    StripePayment.setOptions(StripeOptions(publishableKey: "pk_test_aSaULNS8cJU6Tvo20VAXy6rp", merchantId: "merchant.com.app.facesbyplaces", androidPayMode: 'test'));
+    StripePayment.setOptions(StripeOptions(
+      publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
+      merchantId: "merchant.com.app.facesbyplaces", 
+      androidPayMode: 'test'));
   }
 
   @override
@@ -122,24 +135,6 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       color: Color(0xffffffff),
                     ), 
                     onPressed: () async{
-                      // if (Platform.isIOS) {
-                      //   _controller.jumpTo(450);
-                      // }
-
-
-                        // double amount;
-
-
-                        // switch(donateToggle){
-                        //   case 0: return amount = 0.99; break;
-                        //   case 1: return amount = 5.00; break;
-                        //   case 2: return amount =15.00; break;
-                        //   case 3: return amount =25.00; break;
-                        //   case 4: return amount =50.00; break;
-                        //   case 5: return amount =100.00; break;
-                        // }
-
-                        // print('The amount is $amount');
 
                       paymentToken = await StripePayment.paymentRequestWithNativePay(
                         androidPayOptions: AndroidPayPaymentRequest(
@@ -180,6 +175,56 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       print('The token is ${paymentToken.tokenId}');
 
                       StripePayment.completeNativePayRequest();
+
+                      double amount;
+
+                      switch(donateToggle){
+                        case 0: amount = 0.99; break;
+                        case 1: amount = 5.00; break;
+                        case 2: amount = 15.00; break;
+                        case 3: amount = 25.00; break;
+                        case 4: amount = 50.00; break;
+                        case 5: amount = 100.00; break;
+                      }
+
+                      print('The amount is $amount');
+
+                      context.showLoaderOverlay();
+                      APIRegularDonateMain resultToken = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      context.hideLoaderOverlay();
+
+                      // print('The result of donation is $resultToken');
+
+                      // if(resultToken != null){
+                      //   var paymentMethod = await StripePayment.createPaymentMethod(
+                      //     PaymentMethodRequest(
+                      //       card: CreditCard(
+                      //         token: paymentToken.tokenId,
+                      //       ),
+                      //     ),
+                      //   );
+
+                      //   print('The paymentMethod is $paymentMethod');
+                      //   print('The paymentMethod is ${paymentMethod.id}');
+                      //   print('The secret key is ${resultToken.clientSecret}');
+
+                      //   var paymentIntent = await StripePayment.confirmPaymentIntent(
+                      //     PaymentIntent(
+                      //       clientSecret: resultToken.clientSecret,
+                      //       paymentMethodId: paymentMethod.id,
+                      //     ),
+                      //   );
+
+                      //   // print('The paymentIntent is $paymentIntent');
+                      //   // print('The paymentIntent is ${paymentIntent.paymentIntentId}');
+                      //   // print('The paymentIntent is ${paymentIntent.paymentMethodId}');
+                      //   print('The paymentIntent is ${paymentIntent.status}');
+
+                      // }
+
+
+                      
+
 
 
                       // .catchError();

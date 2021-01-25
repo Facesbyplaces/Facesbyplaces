@@ -1,6 +1,7 @@
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
@@ -157,7 +158,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
       contentMetadata: BranchContentMetaData()
         ..addCustomMetadata('link-category', 'Memorial')
         ..addCustomMetadata('link-memorial-id', memorialId)
-        ..addCustomMetadata('link-type-of-account', 'Regular')
+        // ..addCustomMetadata('link-type-of-account', 'Regular')
+        ..addCustomMetadata('link-type-of-account', pageType)
     );
 
     lp = BranchLinkProperties(
@@ -387,7 +389,9 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.pushNamed(context, '/home/regular/donation');
+                                        print('The page type in memorial is $pageType');
+                                        // Navigator.pushNamed(context, '/home/regular/donation');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate(pageType: pageType, pageId: memorialId,)));
                                       },
                                       child: CircleAvatar(
                                         radius: SizeConfig.blockSizeVertical * 3,

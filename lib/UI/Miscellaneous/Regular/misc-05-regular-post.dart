@@ -142,10 +142,24 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                   GestureDetector(
                     onTap: () async{
 
-                      if(managed == true){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
+                      // if(managed == true){
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
+                      // }else{
+                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: joined)));
+                      // }
+
+                      if(pageType == 'Memorial'){
+                        if(managed == true || famOrFriends == true){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                        }
                       }else{
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: joined)));
+                        if(managed == true || famOrFriends == true){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                        }
                       }
                       
                     },

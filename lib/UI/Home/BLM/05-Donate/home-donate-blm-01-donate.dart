@@ -1,5 +1,7 @@
+import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
 
@@ -113,6 +115,70 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     onPressed: () async{
+                      paymentToken = await StripePayment.paymentRequestWithNativePay(
+                        androidPayOptions: AndroidPayPaymentRequest(
+                          totalPrice: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99'; break;
+                              case 1: return '5.00'; break;
+                              case 2: return '15.00'; break;
+                              case 3: return '25.00'; break;
+                              case 4: return '50.00'; break;
+                              case 5: return '100.00'; break;
+                            }
+                          }()),
+                          currencyCode: 'USD',
+                        ),
+                        applePayOptions: ApplePayPaymentOptions(
+                          countryCode: 'US',
+                          currencyCode: 'USD',
+                          items: [
+                            ApplePayItem(
+                              label: 'Donation',
+                              amount: ((){
+                                switch(donateToggle){
+                                  case 0: return '0.99'; break;
+                                  case 1: return '5.00'; break;
+                                  case 2: return '15.00'; break;
+                                  case 3: return '25.00'; break;
+                                  case 4: return '50.00'; break;
+                                  case 5: return '100.00'; break;
+                                }
+                              }()),
+                            )
+                          ],
+                        ),
+                      );
+
+                      print('The token is $paymentToken');
+                      print('The token is ${paymentToken.tokenId}');
+
+                      StripePayment.completeNativePayRequest();
+
+                      double amount;
+
+                      switch(donateToggle){
+                        case 0: amount = 0.99; break;
+                        case 1: amount = 5.00; break;
+                        case 2: amount = 15.00; break;
+                        case 3: amount = 25.00; break;
+                        case 4: amount = 50.00; break;
+                        case 5: amount = 100.00; break;
+                      }
+
+                      print('The amount is $amount');
+
+                      print('New BLM!');
+
+                      context.showLoaderOverlay();
+                      // APIBLMDonateMain resultToken = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      // APIBLMDonateMain resultToken = await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      APIBLMDonateMain resultToken = await apiBLMDonate(pageType: 'Blm', pageId: 6, amount: amount, token: paymentToken.tokenId);
+                      context.hideLoaderOverlay();
+
+
+
+
 
                       // FlutterPay flutterPay = FlutterPay();
 

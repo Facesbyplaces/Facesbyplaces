@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:clipboard/clipboard.dart';
 import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-02-read-unread-notifications.dart';
@@ -6,7 +9,8 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dar
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
-// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -23,6 +27,8 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'dart:async';
 
+// import 'home-main-regular-04-qr-code.dart';
+
 class HomeRegularScreenExtended extends StatefulWidget{
 
   HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState();
@@ -35,6 +41,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   Future drawerSettings;
   int unreadNotifications;
 
+  String _scanBarcode = 'Unknown';
+
+  // final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
+
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{
     return await apiRegularShowProfileInformation();
   }
@@ -45,6 +55,38 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     setState(() {
       unreadNotifications = value;
     });
+  }
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancel", true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+
+    // FlutterClipboard.copy(_scanBarcode).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+
+
+
+    print('The _scanBarcode is $_scanBarcode');
+    Map newMap = json.decode(_scanBarcode);
+
+    print('The newMap is $newMap');
+
+
   }
 
   void initState(){
@@ -140,6 +182,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
               // );
 
               // print('The result of scanning in alm extended is $barcodeScanRes');
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularQRCode()));
+
+              scanQR();
             },
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),
