@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
         protect_from_forgery with: :null_session 
 
         rescue_from ActiveRecord::RecordNotFound, :with => :known_error
+        rescue_from Stripe::InvalidRequestError, :with => :invalid_stripe_transaction
         # rescue_from PG::UniqueViolation, :with => :same_email
 
         rescue_from CanCan::AccessDenied do |exception|
@@ -15,6 +16,10 @@ class ApplicationController < ActionController::Base
         
         def known_error(exception)
                 return render json: {errors: exception}, status: 400
+        end
+
+        def invalid_stripe_transaction
+            return render json: {errors: exception}, status: 400
         end
 
         def same_email(exception)
