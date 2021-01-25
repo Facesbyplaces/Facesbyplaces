@@ -16,6 +16,7 @@ class Api::V1::PaymentIntentController < ApplicationController
           amount: @amount.to_i,
           currency: 'usd',
           description: "Donation for #{@memorial.name}",
+          source: params[:token]
         }, stripe_account: @memorial.stripe_connect_account_id)
 
         # token = Stripe::Token.retrieve(params[:token])
