@@ -63,4 +63,6 @@ gem 'activerecord-session_store'
 
 gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'haml', git: 'https://github.com/haml/haml'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
       
