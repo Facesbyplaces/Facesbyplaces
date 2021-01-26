@@ -4,6 +4,7 @@ import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-mem
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
@@ -690,7 +691,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                             postCount != 0
                             ? Container(
                               padding: EdgeInsets.all(10.0),
-                              height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                              // height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                              height: SizeConfig.screenHeight,
                               child: SmartRefresher(
                                 enablePullDown: true,
                                 enablePullUp: true,
@@ -847,11 +849,26 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 ),
                               ),
                             )
-                            : Container(
-                              padding: EdgeInsets.all(10.0),
-                              height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
-                              child: Center(
-                                child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
+                            // : Container(
+                            //   padding: EdgeInsets.all(10.0),
+                            //   height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                            //   child: Center(
+                            //     child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
+                            //   ),
+                            // ),
+                            : ContainerResponsive(
+                              height: SizeConfig.screenHeight,
+                              width: SizeConfig.screenWidth,
+                              alignment: Alignment.center,
+                              child: ContainerResponsive(
+                                width: SizeConfig.screenWidth,
+                                heightResponsive: false,
+                                widthResponsive: true,
+                                alignment: Alignment.center,
+                                child: SingleChildScrollView(
+                                  physics: ClampingScrollPhysics(),
+                                  child: MiscBLMEmptyDisplayTemplate(),
+                                ),
                               ),
                             ),
 

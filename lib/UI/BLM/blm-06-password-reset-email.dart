@@ -74,76 +74,79 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
               child: Stack(
                 children: [
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                    child: Column(
-                      children: [
+                  SingleChildScrollView(
+                    physics: ClampingScrollPhysics(),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                      child: Column(
+                        children: [
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 20,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 20,),
 
-                        Center(child: Text('Verify Email', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                          Center(child: Text('Verify Email', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                        Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                          Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                        MiscBLMInputFieldTemplate(
-                          key: _key1, 
-                          labelText: 'Email Address', 
-                          type: TextInputType.emailAddress, 
-                          labelTextStyle: TextStyle(
-                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
-                            fontWeight: FontWeight.w400, 
-                            color: Color(0xff000000),
+                          MiscBLMInputFieldTemplate(
+                            key: _key1, 
+                            labelText: 'Email Address', 
+                            type: TextInputType.emailAddress, 
+                            labelTextStyle: TextStyle(
+                              fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w400, 
+                              color: Color(0xff000000),
+                            ),
                           ),
-                        ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                        MiscBLMButtonTemplate(
-                          buttonText: 'Next',
-                          buttonTextStyle: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xffffffff),
-                          ),
-                          onPressed: () async{
+                          MiscBLMButtonTemplate(
+                            buttonText: 'Next',
+                            buttonTextStyle: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                              fontWeight: FontWeight.bold, 
+                              color: Color(0xffffffff),
+                            ),
+                            onPressed: () async{
 
-                            bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text);
+                              bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text);
 
-                            if(validEmail == true){
-                              initBranchReferences();
+                              if(validEmail == true){
+                                initBranchReferences();
 
-                              FlutterBranchSdk.setIdentity('blm-user-forgot-password');
-                              BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                              
-                              if (response.success) {
-                                context.showLoaderOverlay();
-                                bool result = await apiBLMPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
-                                context.hideLoaderOverlay();
+                                FlutterBranchSdk.setIdentity('blm-user-forgot-password');
+                                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
                                 
-                                print('Link generated: ${response.result}');
-                                if(result == true){
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'An email has been sent to ${_key1.currentState.controller.text} containing instructions for resetting your password.', color: Colors.green,));
-                                }else{
-                                  print('Error on requesting the api');
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
+                                if (response.success) {
+                                  context.showLoaderOverlay();
+                                  bool result = await apiBLMPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
+                                  context.hideLoaderOverlay();
+                                  
+                                  print('Link generated: ${response.result}');
+                                  if(result == true){
+                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'An email has been sent to ${_key1.currentState.controller.text} containing instructions for resetting your password.', color: Colors.green,));
+                                  }else{
+                                    print('Error on requesting the api');
+                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));  
+                                  }
+                                } else {
+                                  print('Error on generating link');
+                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
                                 }
-                              } else {
-                                print('Error on generating link');
-                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.',));
                               }
-                            }
 
-                          },
-                          width: SizeConfig.screenWidth / 2, 
-                          height: SizeConfig.blockSizeVertical * 7, 
-                          buttonColor: Color(0xff04ECFF),
-                        ),
+                            },
+                            width: SizeConfig.screenWidth / 2, 
+                            height: SizeConfig.blockSizeVertical * 7, 
+                            buttonColor: Color(0xff04ECFF),
+                          ),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 

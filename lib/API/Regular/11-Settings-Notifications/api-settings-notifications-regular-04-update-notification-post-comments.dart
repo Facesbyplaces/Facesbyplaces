@@ -21,6 +21,8 @@ Future<bool> apiRegularUpdateNotificationPostComments({bool hide}) async{
       }
     );
 
+    print('The notification setting 4 is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

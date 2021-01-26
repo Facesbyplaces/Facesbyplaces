@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-add-friends.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -94,6 +95,10 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -107,61 +112,73 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: TextFormField(
-              onChanged: (newPlaces){
-                setState(() {
-                  keywords = newPlaces;
-                });                
+            flexibleSpace: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                ),
+                Container(
+                  width: SizeConfig.screenWidth / 1.3,
+                  child: TextFormField(
+                    onChanged: (newPlaces){
+                      setState(() {
+                        keywords = newPlaces;
+                      });                
 
-                if(newPlaces != ''){
-                  setState(() {
-                    empty = false;
-                    itemRemaining = 1;
-                    page = 1;
-                    keywords = '';
-                  });
-                }else{
-                  empty = true;
-                  setState(() {
-                    users = [];
-                  });
-                }
-                
-              },
-              onFieldSubmitted: (newPlaces){
-                setState(() {
-                  keywords = newPlaces;
-                });
+                      if(newPlaces != ''){
+                        setState(() {
+                          empty = false;
+                          itemRemaining = 1;
+                          page = 1;
+                          keywords = '';
+                        });
+                      }else{
+                        empty = true;
+                        setState(() {
+                          users = [];
+                        });
+                      }
+                      
+                    },
+                    onFieldSubmitted: (newPlaces){
+                      setState(() {
+                        keywords = newPlaces;
+                      });
 
-                if(newPlaces != ''){
-                  onLoading();
-                }                
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
-                hintText: 'Search User',
-                hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      if(newPlaces != ''){
+                        onLoading();
+                      }                
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: 'Search User',
+                      hintStyle: TextStyle(
+                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                      ),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ),
                 ),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-              ),
-            ),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                Expanded(child: Container()),
+              ],
+            ), 
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: empty

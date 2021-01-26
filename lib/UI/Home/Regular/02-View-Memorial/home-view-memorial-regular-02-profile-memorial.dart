@@ -6,6 +6,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-dropdown.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -789,7 +790,8 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             postCount != 0
                             ? Container(
                               padding: EdgeInsets.all(10.0),
-                              height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                              // height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                              height: SizeConfig.screenHeight,
                               child: SmartRefresher(
                                 enablePullDown: true,
                                 enablePullUp: true,
@@ -946,11 +948,26 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                 ),
                               ),
                             )
-                            : Container(
-                              padding: EdgeInsets.all(10.0),
-                              height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
-                              child: Center(
-                                child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
+                            // : Container(
+                            //   padding: EdgeInsets.all(10.0),
+                            //   height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
+                            //   child: Center(
+                            //     child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
+                            //   ),
+                            // ),
+                            : ContainerResponsive(
+                              height: SizeConfig.screenHeight,
+                              width: SizeConfig.screenWidth,
+                              alignment: Alignment.center,
+                              child: ContainerResponsive(
+                                width: SizeConfig.screenWidth,
+                                heightResponsive: false,
+                                widthResponsive: true,
+                                alignment: Alignment.center,
+                                child: SingleChildScrollView(
+                                  physics: ClampingScrollPhysics(),
+                                  child: MiscRegularEmptyDisplayTemplate(),
+                                ),
                               ),
                             ),
 

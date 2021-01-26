@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 
 class HomeRegularCreatePostSearchLocation extends StatefulWidget{
 
@@ -22,6 +23,10 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -35,47 +40,101 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
         },
         child: Scaffold(
           appBar: AppBar(
-            title: TextFormField(
-              onChanged: (newPlaces){
-                if(newPlaces == ''){
-                  setState(() {
-                    empty = true;
-                    places = [];
-                  });
-                }else{
-                  setState(() {
-                    empty = false;
-                    places.add(newPlaces);
-                  });
-                }                
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
-                hintText: 'Search Location',
-                hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+            flexibleSpace: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                Container(
+                  width: SizeConfig.screenWidth / 1.3,
+                  child: TextFormField(
+                    onChanged: (newPlaces){
+                      if(newPlaces == ''){
+                        setState(() {
+                          empty = true;
+                          places = [];
+                        });
+                      }else{
+                        setState(() {
+                          empty = false;
+                          places.add(newPlaces);
+                        });
+                      }                
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: 'Search Location',
+                      hintStyle: TextStyle(
+                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                      ),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ),
                 ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-              ),
-            ),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                Expanded(child: Container()),
+              ],
+            ), 
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
+          // appBar: AppBar(
+          //   title: TextFormField(
+          //     onChanged: (newPlaces){
+          //       if(newPlaces == ''){
+          //         setState(() {
+          //           empty = true;
+          //           places = [];
+          //         });
+          //       }else{
+          //         setState(() {
+          //           empty = false;
+          //           places.add(newPlaces);
+          //         });
+          //       }                
+          //     },
+          //     decoration: InputDecoration(
+          //       contentPadding: EdgeInsets.all(15.0),
+          //       filled: true,
+          //       fillColor: Color(0xffffffff),
+          //       focusColor: Color(0xffffffff),
+          //       hintText: 'Search Location',
+          //       hintStyle: TextStyle(
+          //         fontSize: SizeConfig.safeBlockHorizontal * 4,
+          //       ),
+          //       prefixIcon: Icon(Icons.search, color: Colors.grey),
+          //       border: OutlineInputBorder(
+          //         borderSide: BorderSide(color: Color(0xffffffff)),
+          //         borderRadius: BorderRadius.all(Radius.circular(25)),
+          //       ),
+          //       enabledBorder:  OutlineInputBorder(
+          //         borderSide: BorderSide(color: Color(0xffffffff)),
+          //         borderRadius: BorderRadius.all(Radius.circular(25)),
+          //       ),
+          //       focusedBorder:  OutlineInputBorder(
+          //         borderSide: BorderSide(color: Color(0xffffffff)),
+          //         borderRadius: BorderRadius.all(Radius.circular(25)),
+          //       ),
+          //     ),
+          //   ),
+          //   leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+          //   backgroundColor: Color(0xff04ECFF),
+          // ),
           body: empty
           ? SingleChildScrollView(
             physics: ClampingScrollPhysics(),

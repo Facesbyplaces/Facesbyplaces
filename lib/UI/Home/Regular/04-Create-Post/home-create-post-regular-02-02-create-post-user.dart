@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-create-post-regular-01-create-post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,10 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -87,50 +92,62 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
         },
         child: Scaffold(
           appBar: AppBar(
-            title: TextFormField(
-              onChanged: (newPlace){
-                if(newPlace == ''){
-                  setState(() {
-                    empty = true;
-                    users = [];
-                    itemRemaining = 1;
-                    page = 1;
-                  });
-                }
-              },
-              onFieldSubmitted: (newPlace){
-                setState(() {
-                  controller.text = newPlace;
-                  empty = false;
-                });
+            flexibleSpace: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                ),
+                Container(
+                  width: SizeConfig.screenWidth / 1.3,
+                  child: TextFormField(
+                    onChanged: (newPlace){
+                      if(newPlace == ''){
+                        setState(() {
+                          empty = true;
+                          users = [];
+                          itemRemaining = 1;
+                          page = 1;
+                        });
+                      }
+                    },
+                    onFieldSubmitted: (newPlace){
+                      setState(() {
+                        controller.text = newPlace;
+                        empty = false;
+                      });
 
-                onLoading();
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
-                hintText: 'Search User',
-                hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      onLoading();
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: 'Search User',
+                      hintStyle: TextStyle(
+                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                      ),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ),
                 ),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-              ),
-            ),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                Expanded(child: Container()),
+              ],
+            ), 
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: empty

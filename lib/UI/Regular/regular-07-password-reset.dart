@@ -59,86 +59,89 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
               child: Stack(
                 children: [
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                    child: Column(
-                      children: [
+                  SingleChildScrollView(
+                    physics: ClampingScrollPhysics(),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                      child: Column(
+                        children: [
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 20,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 20,),
 
-                        Center(child: Text('Change Password', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                          Center(child: Text('Change Password', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                        Center(child: Text('Please enter your new password.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                          Center(child: Text('Please enter your new password.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                        MiscRegularInputFieldTemplate(
-                          key: _key1, 
-                          labelText: 'New Password', 
-                          type: TextInputType.emailAddress, 
-                          labelTextStyle: TextStyle(
-                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
-                            fontWeight: FontWeight.w400, 
-                            color: Color(0xff000000),
+                          MiscRegularInputFieldTemplate(
+                            key: _key1, 
+                            labelText: 'New Password', 
+                            type: TextInputType.emailAddress, 
+                            labelTextStyle: TextStyle(
+                              fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w400, 
+                              color: Color(0xff000000),
+                            ),
+                            obscureText: true,
                           ),
-                          obscureText: true,
-                        ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                        MiscRegularInputFieldTemplate(
-                          key: _key2, 
-                          labelText: 'Confirm Password', 
-                          type: TextInputType.emailAddress, 
-                          labelTextStyle: TextStyle(
-                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
-                            fontWeight: FontWeight.w400, 
-                            color: Color(0xff000000),
+                          MiscRegularInputFieldTemplate(
+                            key: _key2, 
+                            labelText: 'Confirm Password', 
+                            type: TextInputType.emailAddress, 
+                            labelTextStyle: TextStyle(
+                              fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                              fontWeight: FontWeight.w400, 
+                              color: Color(0xff000000),
+                            ),
+                            obscureText: true,
                           ),
-                          obscureText: true,
-                        ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
-                        MiscRegularButtonTemplate(
-                          buttonText: 'Change',
-                          buttonTextStyle: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xffffffff),
-                          ),
-                          onPressed: () async{
+                          MiscRegularButtonTemplate(
+                            buttonText: 'Change',
+                            buttonTextStyle: TextStyle(
+                              fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                              fontWeight: FontWeight.bold, 
+                              color: Color(0xffffffff),
+                            ),
+                            onPressed: () async{
 
-                            if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
-                            }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
-                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
-                            }else{
-                              context.showLoaderOverlay();
-                              bool result = await apiRegularPasswordChange(
-                                password: _key1.currentState.controller.text, 
-                                passwordConfirmation: _key2.currentState.controller.text,
-                                resetToken: resetToken,
-                              );
-                              context.hideLoaderOverlay();
-
-                              if(result){
-                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                                Navigator.pushReplacementNamed(context, '/home/regular');
+                              if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                              }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
+                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
                               }else{
-                                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
-                              }
-                            }
-                            
-                          },
-                          width: SizeConfig.screenWidth / 2, 
-                          height: SizeConfig.blockSizeVertical * 7, 
-                          buttonColor: Color(0xff04ECFF),
-                        ),
+                                context.showLoaderOverlay();
+                                bool result = await apiRegularPasswordChange(
+                                  password: _key1.currentState.controller.text, 
+                                  passwordConfirmation: _key2.currentState.controller.text,
+                                  resetToken: resetToken,
+                                );
+                                context.hideLoaderOverlay();
 
-                      ],
+                                if(result){
+                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
+                                  Navigator.pushReplacementNamed(context, '/home/regular');
+                                }else{
+                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                }
+                              }
+                              
+                            },
+                            width: SizeConfig.screenWidth / 2, 
+                            height: SizeConfig.blockSizeVertical * 7, 
+                            buttonColor: Color(0xff04ECFF),
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
 

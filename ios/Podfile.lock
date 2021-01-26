@@ -386,7 +386,6 @@ PODS:
   - libPhoneNumber-iOS (0.9.15)
   - location (0.0.1):
     - Flutter
-  - MTBBarcodeScanner (5.0.11)
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -395,9 +394,6 @@ PODS:
   - path_provider (0.0.1):
     - Flutter
   - PromisesObjC (1.2.11)
-  - qr_code_scanner (0.2.0):
-    - Flutter
-    - MTBBarcodeScanner
   - share (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
@@ -437,7 +433,6 @@ DEPENDENCIES:
   - libphonenumber (from `.symlinks/plugins/libphonenumber/ios`)
   - location (from `.symlinks/plugins/location/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
@@ -473,7 +468,6 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - libPhoneNumber-iOS
-    - MTBBarcodeScanner
     - nanopb
     - PromisesObjC
     - Stripe
@@ -507,8 +501,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/location/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  qr_code_scanner:
-    :path: ".symlinks/plugins/qr_code_scanner/ios"
   share:
     :path: ".symlinks/plugins/share/ios"
   shared_preferences:
@@ -564,11 +556,9 @@ SPEC CHECKSUMS:
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
-  MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
-  qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sign_in_with_apple: 34f3f5456a45fd7ac5fb42905e2ad31dae061b4a

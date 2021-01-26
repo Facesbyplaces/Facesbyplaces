@@ -65,6 +65,7 @@ class APIRegularHomeTabFeedExtended{
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
+      print('The images or videos ${parsedJson['imagesOrVideos']}');
       newList1 = List<dynamic>.from(list);
     }
 

@@ -20,6 +20,8 @@ Future<bool> apiRegularUpdateNotificationPostLikes({bool hide}) async{
       }
     );
 
+    print('The notification setting 3 is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

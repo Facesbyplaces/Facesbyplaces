@@ -2,6 +2,7 @@ import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.da
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-10-sign-in-as-guest.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
@@ -444,7 +445,9 @@ class RegularLoginState extends State<RegularLogin>{
 
                         GestureDetector(
                           onTap: () async{
+
                             Navigator.pushReplacementNamed(context, '/home/regular');
+                            
                           },
                           child: Text('Sign in as Guest',
                             style: TextStyle(

@@ -20,6 +20,8 @@ Future<bool> apiRegularUpdateNotificationActivities({bool hide}) async{
       }
     );
 
+    print('The notification setting 2 is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }
