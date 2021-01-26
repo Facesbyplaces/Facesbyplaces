@@ -6,11 +6,7 @@
   <body>
     <h1>Welcome to Faces By Places, <%= @user.username %></h1>
     <p>
-      You have successfully signed up to Faces By Places,
-      your username is: <%= @user.username %>.<br>
-    </p>
-    <p>
-      To login to the app, just use this code <b><%= @user.verification_code %></b> to be verified.
+      Hey <%= @user.username %>, you're almost ready to start enjoying Faces By Places. Simply use this code <b><%= @user.verification_code %></b> to be verified.
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>

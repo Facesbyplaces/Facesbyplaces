@@ -97,68 +97,6 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.index ["alm_user_id"], name: "index_alm_users_alm_roles_on_alm_user_id"
   end
 
-  create_table "blm_roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_blm_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["name"], name: "index_blm_roles_on_name"
-    t.index ["resource_type", "resource_id"], name: "index_blm_roles_on_resource_type_and_resource_id"
-  end
-
-  create_table "blm_users", force: :cascade do |t|
-    t.string "provider", default: "email", null: false
-    t.string "uid", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.boolean "allow_password_change", default: false
-    t.datetime "remember_created_at"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.string "image"
-    t.string "email"
-    t.json "tokens"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "guest", default: false
-    t.integer "account_type"
-    t.string "question"
-    t.datetime "birthdate"
-    t.string "birthplace"
-    t.string "address"
-    t.boolean "hideBirthdate"
-    t.boolean "hideBirthplace"
-    t.boolean "hideEmail"
-    t.boolean "hideAddress"
-    t.boolean "hidePhonenumber"
-    t.string "google_id"
-    t.string "apple_uid"
-    t.string "facebook_id"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.string "username"
-    t.string "verification_code"
-    t.boolean "is_verified", default: false
-    t.index ["confirmation_token"], name: "index_blm_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_blm_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_blm_users_on_reset_password_token", unique: true
-    t.index ["uid", "provider"], name: "index_blm_users_on_uid_and_provider", unique: true
-  end
-
-  create_table "blm_users_blm_roles", id: false, force: :cascade do |t|
-    t.bigint "blm_user_id"
-    t.bigint "blm_role_id"
-    t.index ["blm_role_id"], name: "index_blm_users_blm_roles_on_blm_role_id"
-    t.index ["blm_user_id", "blm_role_id"], name: "index_blm_users_blm_roles_on_blm_user_id_and_blm_role_id"
-    t.index ["blm_user_id"], name: "index_blm_users_blm_roles_on_blm_user_id"
-  end
-
   create_table "blms", force: :cascade do |t|
     t.string "location"
     t.string "precinct"

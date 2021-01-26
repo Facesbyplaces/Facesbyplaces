@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
+        resources :resend_verification_code, only: [:create]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
