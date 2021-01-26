@@ -20,6 +20,8 @@ Future<bool> apiBLMUpdateNotificationMemorial({bool hide}) async{
         'client': getClient,
       }
     );
+
+    print('The notification setting 1 is ${response.statusCode}');
   
     if(response.statusCode == 200){
       result = true;

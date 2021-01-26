@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,8 +16,9 @@ class BLMSearchUsers{
   final String lastName;
   final String image;
   final String email;
+  final int accountType;
 
-  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email});
+  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email, this.accountType});
 }
 
 class HomeBLMSearchUser extends StatefulWidget{
@@ -76,6 +78,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
             lastName: newValue.users[i].lastName,
             email: newValue.users[i].email,
             image: newValue.users[i].image,
+            accountType: newValue.users[i].accountType,
           ),
         );
       }
@@ -94,6 +97,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
+    ResponsiveWidgets.init(context,
+      height: SizeConfig.screenHeight,
+      width: SizeConfig.screenWidth,
+    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -107,61 +114,73 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: TextFormField(
-              onChanged: (newPlaces){
-                setState(() {
-                  keywords = newPlaces;
-                });                
+            flexibleSpace: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                ),
+                Container(
+                  width: SizeConfig.screenWidth / 1.3,
+                  child: TextFormField(
+                    onChanged: (newPlaces){
+                      setState(() {
+                        keywords = newPlaces;
+                      });                
 
-                if(newPlaces != ''){
-                  setState(() {
-                    empty = false;
-                    itemRemaining = 1;
-                    page = 1;
-                    keywords = '';
-                  });
-                }else{
-                  empty = true;
-                  setState(() {
-                    users = [];
-                  });
-                }
-                
-              },
-              onFieldSubmitted: (newPlaces){
-                setState(() {
-                  keywords = newPlaces;
-                });
+                      if(newPlaces != ''){
+                        setState(() {
+                          empty = false;
+                          itemRemaining = 1;
+                          page = 1;
+                          keywords = '';
+                        });
+                      }else{
+                        empty = true;
+                        setState(() {
+                          users = [];
+                        });
+                      }
+                      
+                    },
+                    onFieldSubmitted: (newPlaces){
+                      setState(() {
+                        keywords = newPlaces;
+                      });
 
-                if(newPlaces != ''){
-                  onLoading();
-                }                
-              },
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(15.0),
-                filled: true,
-                fillColor: Color(0xffffffff),
-                focusColor: Color(0xffffffff),
-                hintText: 'Search User',
-                hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                      if(newPlaces != ''){
+                        onLoading();
+                      }                
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15.0),
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      focusColor: Color(0xffffffff),
+                      hintText: 'Search User',
+                      hintStyle: TextStyle(
+                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                      ),
+                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      enabledBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      focusedBorder:  OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffffffff)),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                    ),
+                  ),
                 ),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                enabledBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-                focusedBorder:  OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xffffffff)),
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
-                ),
-              ),
-            ),
-            leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
+                Expanded(child: Container()),
+              ],
+            ), 
+            leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
           body: empty
@@ -226,7 +245,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
 
                         context.showLoaderOverlay();
-                        bool result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice);
+                        bool result = await apiBLMAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
                         context.hideLoaderOverlay();
 
                         if(result){
@@ -237,7 +256,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         }
                       }else{
                         context.showLoaderOverlay();
-                        bool result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId);
+                        bool result = await apiBLMAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
                         context.hideLoaderOverlay();
 
                         if(result){

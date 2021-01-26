@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMAddFriends({int memorialId, int userId}) async{
+Future<bool> apiBLMAddFriends({int memorialId, int userId, int accountType}) async{
 
   bool result = false;
 
@@ -20,6 +20,7 @@ Future<bool> apiBLMAddFriends({int memorialId, int userId}) async{
       MapEntry('page_id', MultipartFile.fromString(memorialId.toString())),
       MapEntry('user_id', MultipartFile.fromString(userId.toString()),),
       MapEntry('relationship', MultipartFile.fromString('Friend'),),
+      MapEntry('account_type', MultipartFile.fromString(accountType.toString()),),
     ]);
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend', data: formData,

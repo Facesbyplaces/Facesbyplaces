@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'dart:convert';
 
-Future<APIRegularDonateMain> apiRegularDonate({String pageType, int pageId, double amount, String token}) async{
+Future<bool> apiRegularDonate({String pageType, int pageId, double amount, String token}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -35,28 +35,30 @@ Future<APIRegularDonateMain> apiRegularDonate({String pageType, int pageId, doub
   print('The donation in regular donate is ${response.body}');
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularDonateMain.fromJson(newValue);
+    // var newValue = json.decode(response.body);
+    // return APIRegularDonateMain.fromJson(newValue);
+    return true;
   }else{
-    throw Exception('Failed to process donation.');
+    // throw Exception('Failed to process donation.');
+    return false;
   }
 }
 
-class APIRegularDonateMain{
-  String stripeAccount;
-  String pKey;
-  String clientSecret;
-  String paymentIntent;
+// class APIRegularDonateMain{
+//   String stripeAccount;
+//   String pKey;
+//   String clientSecret;
+//   String paymentIntent;
 
-  APIRegularDonateMain({this.stripeAccount, this.pKey, this.clientSecret, this.paymentIntent});
+//   APIRegularDonateMain({this.stripeAccount, this.pKey, this.clientSecret, this.paymentIntent});
 
-  factory APIRegularDonateMain.fromJson(Map<String, dynamic> parsedJson){
+//   factory APIRegularDonateMain.fromJson(Map<String, dynamic> parsedJson){
 
-    return APIRegularDonateMain(
-      stripeAccount: parsedJson['memorial_stripe_account'] != null ? parsedJson['memorial_stripe_account'] : '',
-      pKey: parsedJson['publishable_key'] != null ? parsedJson['publishable_key'] : '',
-      clientSecret: parsedJson['client_secret'] != null ? parsedJson['client_secret'] : '',
-      paymentIntent: parsedJson['id'] != null ? parsedJson['id'] : '',
-    );
-  }
-}
+//     return APIRegularDonateMain(
+//       stripeAccount: parsedJson['memorial_stripe_account'] != null ? parsedJson['memorial_stripe_account'] : '',
+//       pKey: parsedJson['publishable_key'] != null ? parsedJson['publishable_key'] : '',
+//       clientSecret: parsedJson['client_secret'] != null ? parsedJson['client_secret'] : '',
+//       paymentIntent: parsedJson['id'] != null ? parsedJson['id'] : '',
+//     );
+//   }
+// }

@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiRegularAddFriends({int memorialId, int userId}) async{
+Future<bool> apiRegularAddFriends({int memorialId, int userId, int accountType}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -20,6 +20,7 @@ Future<bool> apiRegularAddFriends({int memorialId, int userId}) async{
       'page_id': '$memorialId',
       'user_id': '$userId',
       'relationship': 'Friend',
+      'account_type': '$accountType',
     }
   );
 

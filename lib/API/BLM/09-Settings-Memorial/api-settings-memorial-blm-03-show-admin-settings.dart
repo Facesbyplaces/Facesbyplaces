@@ -18,6 +18,9 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({int memorialId, int
     }
   );
 
+  print('The show admin status code is ${response.statusCode}');
+  print('The show admin status body is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowAdminsSettingMain.fromJson(newValue);

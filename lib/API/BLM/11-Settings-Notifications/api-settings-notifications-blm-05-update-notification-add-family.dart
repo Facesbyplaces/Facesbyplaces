@@ -21,6 +21,8 @@ Future<bool> apiBLMUpdateNotificationAddFamily({bool hide}) async{
       }
     );
 
+    print('The notification setting 5 is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

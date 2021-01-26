@@ -16,8 +16,9 @@ class RegularSearchUsers{
   final String lastName;
   final String image;
   final String email;
+  final int accountType;
 
-  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email});
+  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email, this.accountType});
 }
 
 class HomeRegularSearchUser extends StatefulWidget{
@@ -77,6 +78,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
             lastName: newValue.users[i].lastName,
             email: newValue.users[i].email,
             image: newValue.users[i].image,
+            accountType: newValue.users[i].accountType,
           ),
         );
       }
@@ -243,7 +245,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
                         context.showLoaderOverlay();
-                        bool result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice);
+                        bool result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
                         context.hideLoaderOverlay();
 
                         if(result){
@@ -254,7 +256,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                         }
                       }else{
                         context.showLoaderOverlay();
-                        bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId);
+                        bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
                         context.hideLoaderOverlay();
 
                         if(result){

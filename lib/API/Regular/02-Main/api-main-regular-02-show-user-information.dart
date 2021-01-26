@@ -39,8 +39,9 @@ class APIRegularShowProfileInformation{
   String lastName;
   String image;
   String email;
+  bool guest;
 
-  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image, this.email});
+  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image, this.email, this.guest});
 
   factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -52,6 +53,7 @@ class APIRegularShowProfileInformation{
       lastName: newValue['last_name'],
       image: newValue['image'],
       email: newValue['email'],
+      guest: newValue['guest'],
     );
   }
 }

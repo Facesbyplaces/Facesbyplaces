@@ -304,128 +304,189 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
             future: drawerSettings,
             builder: (context, manageDrawer){
               if(manageDrawer.hasData){
-                return Drawer(
-                  child: ContainerResponsive(
-                    height: SizeConfig.screenHeight,
-                    width: SizeConfig.screenWidth,
-                    alignment: Alignment.center,
+                if(manageDrawer.data.guest != true){
+                  return Drawer(
                     child: ContainerResponsive(
+                      height: SizeConfig.screenHeight,
                       width: SizeConfig.screenWidth,
-                      heightResponsive: false,
-                      widthResponsive: true,
-                      alignment: Alignment.topCenter,
-                      color: Color(0xff4EC9D4),
-                      child: SingleChildScrollView(
-                        physics: ClampingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                      alignment: Alignment.center,
+                      child: ContainerResponsive(
+                        width: SizeConfig.screenWidth,
+                        heightResponsive: false,
+                        widthResponsive: true,
+                        alignment: Alignment.topCenter,
+                        color: Color(0xff4EC9D4),
+                        child: SingleChildScrollView(
+                          physics: ClampingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              SizedBox(height: ScreenUtil().setHeight(20)),
 
-                            CircleAvatar(
-                              radius: ScreenUtil().setHeight(100),
-                              backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                  return NetworkImage(manageDrawer.data.image);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
-                            ),
+                              CircleAvatar(
+                                radius: ScreenUtil().setHeight(100),
+                                backgroundColor: Color(0xff888888),
+                                backgroundImage: ((){
+                                  if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
+                                    return NetworkImage(manageDrawer.data.image);
+                                  }else{
+                                    return AssetImage('assets/icons/app-icon.png');
+                                  }
+                                }()),
+                              ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: ScreenUtil().setHeight(20)),
 
-                            Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                              Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                            SizedBox(height: ScreenUtil().setHeight(45)),
+                              SizedBox(height: ScreenUtil().setHeight(45)),
 
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                              child: Text('Home', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                            ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Home', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
 
-                            SizedBox(height: ScreenUtil().setHeight(25)),
+                              SizedBox(height: ScreenUtil().setHeight(25)),
 
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.pop(context);
-                                Navigator.pushNamed(context, '/home/blm/create-memorial');
-                              },
-                              child: Text('Create Memorial Page', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                            ),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, '/home/blm/create-memorial');
+                                },
+                                child: Text('Create Memorial Page', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: ScreenUtil().setHeight(20)),
 
-                            GestureDetector(
-                              onTap: () async{
-                                context.showLoaderOverlay();
-                                APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.userId);
-                                context.hideLoaderOverlay();
+                              GestureDetector(
+                                onTap: () async{
+                                  context.showLoaderOverlay();
+                                  APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.userId);
+                                  context.hideLoaderOverlay();
 
-                                Navigator.pop(context);
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(
-                                  newMemorial: result.newMemorial,
-                                  newActivities: result.newActivities,
-                                  postLikes: result.postLikes,
-                                  postComments: result.postComments,
-                                  addFamily: result.addFamily,
-                                  addFriends: result.addFriends,
-                                  addAdmin: result.addAdmin,
-                                )));
-                              },
-                              child: Text('Notification Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                            ),
+                                  Navigator.pop(context);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(
+                                    newMemorial: result.newMemorial,
+                                    newActivities: result.newActivities,
+                                    postLikes: result.postLikes,
+                                    postComments: result.postComments,
+                                    addFamily: result.addFamily,
+                                    addFriends: result.addFriends,
+                                    addAdmin: result.addAdmin,
+                                  )));
+                                },
+                                child: Text('Notification Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: ScreenUtil().setHeight(20)),
 
-                            GestureDetector(
-                              onTap: () async{
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
-                              },
-                              child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                            ),
+                              GestureDetector(
+                                onTap: () async{
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
+                                },
+                                child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: ScreenUtil().setHeight(20)),
 
-                            GestureDetector(
-                              onTap: () async{
+                              GestureDetector(
+                                onTap: () async{
 
-                                context.showLoaderOverlay();
-                                bool result = await apiBLMLogout();
+                                  context.showLoaderOverlay();
+                                  bool result = await apiBLMLogout();
 
-                                GoogleSignIn googleSignIn = GoogleSignIn(
-                                  scopes: [
-                                    'profile',
-                                    'email',
-                                    'openid'
-                                  ],
-                                );
-                                await googleSignIn.signOut();
+                                  GoogleSignIn googleSignIn = GoogleSignIn(
+                                    scopes: [
+                                      'profile',
+                                      'email',
+                                      'openid'
+                                    ],
+                                  );
+                                  await googleSignIn.signOut();
 
-                                FacebookLogin fb = FacebookLogin();
-                                await fb.logOut();
+                                  FacebookLogin fb = FacebookLogin();
+                                  await fb.logOut();
 
-                                context.hideLoaderOverlay();
+                                  context.hideLoaderOverlay();
 
-                                if(result){
-                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                }else{
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
-                                }
-                                
-                              },
-                              child: Text('Log Out', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                            ),
-                            
-                          ],
+                                  if(result){
+                                    Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                  }else{
+                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                                  }
+                                  
+                                },
+                                child: Text('Log Out', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
+                              
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
+                  );
+                }else{
+                  return Drawer(
+                    child: ContainerResponsive(
+                      height: SizeConfig.screenHeight,
+                      width: SizeConfig.screenWidth,
+                      alignment: Alignment.center,
+                      child: ContainerResponsive(
+                        width: SizeConfig.screenWidth,
+                        heightResponsive: false,
+                        widthResponsive: true,
+                        alignment: Alignment.topCenter,
+                        color: Color(0xff4EC9D4),
+                        child: SingleChildScrollView(
+                          physics: ClampingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              SizedBox(height: ScreenUtil().setHeight(20)),
+
+                              CircleAvatar(
+                                radius: ScreenUtil().setHeight(100),
+                                backgroundColor: Color(0xff888888),
+                                backgroundImage: ((){
+                                  if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
+                                    return NetworkImage(manageDrawer.data.image);
+                                  }else{
+                                    return AssetImage('assets/icons/app-icon.png');
+                                  }
+                                }()),
+                              ),
+
+                              SizedBox(height: ScreenUtil().setHeight(20)),
+
+                              Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+
+                              SizedBox(height: ScreenUtil().setHeight(45)),
+
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Home', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
+
+                              SizedBox(height: ScreenUtil().setHeight(25)),
+
+                              GestureDetector(
+                                onTap: (){
+                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                },
+                                child: Text('Sign up or Sign in', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                              ),
+                              
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
               }else if(manageDrawer.hasError){
                 return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
               }else{

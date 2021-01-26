@@ -18,6 +18,9 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({int userId, int pag
     }
   );
 
+  print('The user memorials is ${response.statusCode}');
+  print('The user memorials is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowUserMemorialsMain.fromJson(newValue);
@@ -28,11 +31,19 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({int userId, int pag
 
 
 
+
+
+
+
+
+
 class APIBLMShowUserMemorialsMain{
+  int ownedItemsRemaining;
+  int followedItemsRemaining;
   List<APIBLMShowUserMemorialsExtended> owned;
   List<APIBLMShowUserMemorialsExtended> followed;
 
-  APIBLMShowUserMemorialsMain({this.owned, this.followed});
+  APIBLMShowUserMemorialsMain({this.ownedItemsRemaining, this.followedItemsRemaining, this.owned, this.followed});
 
   factory APIBLMShowUserMemorialsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -44,6 +55,8 @@ class APIBLMShowUserMemorialsMain{
     List<APIBLMShowUserMemorialsExtended> newFollowedList = followedList.map((e) => APIBLMShowUserMemorialsExtended.fromJson(e)).toList();
 
     return APIBLMShowUserMemorialsMain(
+      ownedItemsRemaining: parsedJson['ownedItemsRemaining'],
+      followedItemsRemaining: parsedJson['followedItemsRemaining'],
       owned: newOwnedList,
       followed: newFollowedList,
     );
@@ -127,7 +140,6 @@ class APIBLMShowUserMemorialsExtendedPageCreator{
   APIBLMShowUserMemorialsExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
 
   factory APIBLMShowUserMemorialsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    print('The creator!');
     return APIBLMShowUserMemorialsExtendedPageCreator(
       id: parsedJson['id'],
       firstName: parsedJson['first_name'],

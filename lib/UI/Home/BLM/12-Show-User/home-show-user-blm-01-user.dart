@@ -82,16 +82,17 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          padding: EdgeInsets.only(right: 10.0),
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            alignment: Alignment.centerRight,
-                            padding: EdgeInsets.zero,
-                            onPressed: (){},
-                            icon: Icon(Icons.more_vert, color: Color(0xffffffff), size: ScreenUtil().setHeight(30)),
-                          ),
-                        ),
+                        // child: Container(
+                        //   padding: EdgeInsets.only(right: 10.0),
+                        //   alignment: Alignment.centerRight,
+                        //   child: IconButton(
+                        //     alignment: Alignment.centerRight,
+                        //     padding: EdgeInsets.zero,
+                        //     onPressed: (){},
+                        //     icon: Icon(Icons.more_vert, color: Color(0xffffffff), size: ScreenUtil().setHeight(30)),
+                        //   ),
+                        // ),
+                        child: Container(height: 0,),
                       ),
                     ],
                   ),

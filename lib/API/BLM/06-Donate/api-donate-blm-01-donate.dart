@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'dart:convert';
 
-Future<APIBLMDonateMain> apiBLMDonate({String pageType, int pageId, double amount, String token}) async{
+Future<bool> apiBLMDonate({String pageType, int pageId, double amount, String token}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -35,28 +35,30 @@ Future<APIBLMDonateMain> apiBLMDonate({String pageType, int pageId, double amoun
   print('The donation in blm donate is ${response.body}');
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMDonateMain.fromJson(newValue);
+    // var newValue = json.decode(response.body);
+    // return APIBLMDonateMain.fromJson(newValue);
+    return true;
   }else{
-    throw Exception('Failed to process donation.');
+    // throw Exception('Failed to process donation.');
+    return false;
   }
 }
 
-class APIBLMDonateMain{
-  String stripeAccount;
-  String pKey;
-  String clientSecret;
-  String paymentIntent;
+// class APIBLMDonateMain{
+//   String stripeAccount;
+//   String pKey;
+//   String clientSecret;
+//   String paymentIntent;
 
-  APIBLMDonateMain({this.stripeAccount, this.pKey, this.clientSecret, this.paymentIntent});
+//   APIBLMDonateMain({this.stripeAccount, this.pKey, this.clientSecret, this.paymentIntent});
 
-  factory APIBLMDonateMain.fromJson(Map<String, dynamic> parsedJson){
+//   factory APIBLMDonateMain.fromJson(Map<String, dynamic> parsedJson){
 
-    return APIBLMDonateMain(
-      stripeAccount: parsedJson['memorial_stripe_account'] != null ? parsedJson['memorial_stripe_account'] : '',
-      pKey: parsedJson['publishable_key'] != null ? parsedJson['publishable_key'] : '',
-      clientSecret: parsedJson['client_secret'] != null ? parsedJson['client_secret'] : '',
-      paymentIntent: parsedJson['id'] != null ? parsedJson['id'] : '',
-    );
-  }
-}
+//     return APIBLMDonateMain(
+//       stripeAccount: parsedJson['memorial_stripe_account'] != null ? parsedJson['memorial_stripe_account'] : '',
+//       pKey: parsedJson['publishable_key'] != null ? parsedJson['publishable_key'] : '',
+//       clientSecret: parsedJson['client_secret'] != null ? parsedJson['client_secret'] : '',
+//       paymentIntent: parsedJson['id'] != null ? parsedJson['id'] : '',
+//     );
+//   }
+// }

@@ -75,7 +75,8 @@ void main() async{
         initialRoute: '/',
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
-          cardColor: Colors.purple,
+          // cardColor: Colors.purple,
+          cardColor: Color(0xff4EC9D4),
         ),
         routes: <String, WidgetBuilder>{
           '/login': (BuildContext context) => UILogin01(),

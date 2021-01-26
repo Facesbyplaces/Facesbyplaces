@@ -24,7 +24,7 @@ class HomeBLMUserOtherDetails extends StatefulWidget{
 
   HomeBLMUserOtherDetails({this.userId, this.toggleBirthdate, this.toggleBirthplace, this.toggleAddress, this.toggleEmail, this.toggleNumber});
 
-  HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthdate, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
+  HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
 }
 
 class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
@@ -54,8 +54,8 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
     otherDetails = getOtherDetails(userId);
     toggle1 = toggleBirthdate;
     toggle2 = toggleBirthplace;
-    toggle3 = toggleEmail;
-    toggle4 = toggleAddress;
+    toggle3 = toggleAddress;
+    toggle4 = toggleEmail;
     toggle5 = toggleNumber;
   }
 
@@ -161,8 +161,12 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                   toggle3 = !toggle3;
                                 });
 
+                                // context.showLoaderOverlay();
+                                // await apiBLMHideEmail(hide: toggle3);
+                                // context.hideLoaderOverlay();
+
                                 context.showLoaderOverlay();
-                                await apiBLMHideEmail(hide: toggle3);
+                                await apiBLMHideAddress(hide: toggle3);
                                 context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),
@@ -185,8 +189,11 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                                   toggle4 = !toggle4;
                                 });
 
+                                // context.showLoaderOverlay();
+                                // await apiBLMHideAddress(hide: toggle4);
+                                // context.hideLoaderOverlay();
                                 context.showLoaderOverlay();
-                                await apiBLMHideAddress(hide: toggle4);
+                                await apiBLMHideEmail(hide: toggle4);
                                 context.hideLoaderOverlay();
                               },
                               icon: Icon(Icons.remove_red_eye_rounded),

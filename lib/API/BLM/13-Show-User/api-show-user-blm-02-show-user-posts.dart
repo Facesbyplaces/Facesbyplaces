@@ -18,6 +18,9 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({int userId, int page}) asy
     }
   );
 
+  print('The user posts is ${response.statusCode}');
+  print('The user posts is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowUsersPostsMain.fromJson(newValue);

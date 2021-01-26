@@ -5,6 +5,7 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-add-comm
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-04-show-comment-or-reply-like-status.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-07-add-reply.dart';
+import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -316,22 +317,44 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                  userId == comments[i].userId
-                                  ? Expanded(
-                                    child: Text('You',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  )
-                                  : Expanded(
-                                    child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                        // print('The user id of reply is ${comments[i].userId}');
+                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
+
+                                  // userId == comments[i].userId
+                                  // ? Expanded(
+                                  //   child: Text('You',
+                                  //     style: TextStyle(
+                                  //       fontWeight: FontWeight.bold,
+                                  //     ),
+                                  //   ),
+                                  // )
+                                  // : Expanded(
+                                  //   child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
+                                  //     style: TextStyle(
+                                  //       fontWeight: FontWeight.bold,
+                                  //     ),
+                                  //   ),
+                                  // ),
+
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        print('The user id of reply is ${comments[i].userId}');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId)));
+                                      },
+                                      child: currentUserId == comments[i].userId
+                                      ? Text('You',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                      : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
-
                                   commentsLikes[i] == true
                                   ? IconButton(
                                     icon: FaIcon(FontAwesomeIcons.peace, color: Colors.red,), 
@@ -467,18 +490,38 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                                           SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                          userId == comments[i].listOfReplies[index].userId
-                                          ? Expanded(
-                                            child: Text('You',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          )
-                                          : Expanded(
-                                            child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                          // userId == comments[i].listOfReplies[index].userId
+                                          // ? Expanded(
+                                          //   child: Text('You',
+                                          //     style: TextStyle(
+                                          //       fontWeight: FontWeight.bold,
+                                          //     ),
+                                          //   ),
+                                          // )
+                                          // : Expanded(
+                                          //   child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
+                                          //     style: TextStyle(
+                                          //       fontWeight: FontWeight.bold,
+                                          //     ),
+                                          //   ),
+                                          // ),
+
+                                          Expanded(
+                                            child: GestureDetector(
+                                              onTap: (){
+                                                print('The user id of reply is ${comments[i].listOfReplies[index].userId}');
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId)));
+                                              },
+                                              child: currentUserId == comments[i].listOfReplies[index].userId
+                                              ? Text('You',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              )
+                                              : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ),
                                           ),

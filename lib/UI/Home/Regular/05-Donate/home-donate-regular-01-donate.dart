@@ -1,6 +1,8 @@
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
@@ -190,8 +192,31 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       print('The amount is $amount');
 
                       context.showLoaderOverlay();
-                      await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
                       context.hideLoaderOverlay();
+
+
+                      if(result == true){
+                        showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.BOTTOM_RIGHT,
+                              description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context);
+                              },
+                          ),
+                        );
+                      }else{
+                        await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                      }
 
                       // print('The result of donation is $resultToken');
 

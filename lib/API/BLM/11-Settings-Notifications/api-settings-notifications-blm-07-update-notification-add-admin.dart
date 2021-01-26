@@ -21,6 +21,8 @@ Future<bool> apiBLMUpdateNotificationAddAdmin({bool hide}) async{
       }
     );
 
+    print('The notification setting 7 is ${response.statusCode}');
+
     if(response.statusCode == 200){
       result = true;
     }

@@ -1,6 +1,8 @@
 import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:flutter/material.dart';
@@ -180,9 +182,32 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       }
 
                       context.showLoaderOverlay();
-                      await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      bool result = await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
                       context.hideLoaderOverlay();
 
+                      print('The result is $result');
+
+                      if(result == true){
+                        showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.BOTTOM_RIGHT,
+                              description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context);
+                              },
+                          ),
+                        );
+                      }else{
+                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                      }
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 

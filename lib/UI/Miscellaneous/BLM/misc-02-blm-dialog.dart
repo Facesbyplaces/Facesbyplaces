@@ -299,104 +299,104 @@ class MiscBLMAlertDialog extends StatelessWidget{
   }
 }
 
-class MiscBLMAlertInputEmailDialog extends StatefulWidget{
-  final String title;
-  final String content;
-  final String confirmText;
-  final Color color;
+// class MiscBLMAlertInputEmailDialog extends StatefulWidget{
+//   final String title;
+//   final String content;
+//   final String confirmText;
+//   final Color color;
 
-  MiscBLMAlertInputEmailDialog({
-    this.title = '',
-    this.content = '',
-    this.confirmText = 'OK',
-    this.color = Colors.green,
-  });
+//   MiscBLMAlertInputEmailDialog({
+//     this.title = '',
+//     this.content = '',
+//     this.confirmText = 'OK',
+//     this.color = Colors.green,
+//   });
 
-  MiscBLMAlertInputEmailDialogState createState() => MiscBLMAlertInputEmailDialogState(title: title, content: content, confirmText: confirmText, color: color);
-}
+//   MiscBLMAlertInputEmailDialogState createState() => MiscBLMAlertInputEmailDialogState(title: title, content: content, confirmText: confirmText, color: color);
+// }
 
-class MiscBLMAlertInputEmailDialogState extends State<MiscBLMAlertInputEmailDialog>{
+// class MiscBLMAlertInputEmailDialogState extends State<MiscBLMAlertInputEmailDialog>{
 
-  final String title;
-  final String content;
-  final String confirmText;
-  final Color color;
+//   final String title;
+//   final String content;
+//   final String confirmText;
+//   final Color color;
 
-  MiscBLMAlertInputEmailDialogState({
-    this.title,
-    this.content,
-    this.confirmText,
-    this.color,
-  });
+//   MiscBLMAlertInputEmailDialogState({
+//     this.title,
+//     this.content,
+//     this.confirmText,
+//     this.color,
+//   });
   
-  TextEditingController controller;
+//   TextEditingController controller;
 
-  void initState(){
-    super.initState();
-    controller = TextEditingController(text: '');
-  }
+//   void initState(){
+//     super.initState();
+//     controller = TextEditingController(text: '');
+//   }
 
-  Widget build(BuildContext context){
-    SizeConfig.init(context);
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5))
-      ),
-      child: Container(
-        height: SizeConfig.screenHeight / 4,
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(title,
-                style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 5,
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
-              ),
-            ),
+//   Widget build(BuildContext context){
+//     SizeConfig.init(context);
+//     return Dialog(
+//       shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.all(Radius.circular(5))
+//       ),
+//       child: Container(
+//         height: SizeConfig.screenHeight / 4,
+//         padding: EdgeInsets.all(20.0),
+//         child: Column(
+//           children: [
+//             Align(
+//               alignment: Alignment.centerLeft,
+//               child: Text(title,
+//                 style: TextStyle(
+//                   fontSize: SizeConfig.safeBlockHorizontal * 5,
+//                   fontWeight: FontWeight.bold,
+//                   color: color,
+//                 ),
+//               ),
+//             ),
             
-            Expanded(
-              child: TextFormField(
-                controller: controller,
-                keyboardType: TextInputType.emailAddress,
-                cursorColor: Color(0xff000000),
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Input Email',
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xff000000),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+//             Expanded(
+//               child: TextFormField(
+//                 controller: controller,
+//                 keyboardType: TextInputType.emailAddress,
+//                 cursorColor: Color(0xff000000),
+//                 decoration: InputDecoration(
+//                   alignLabelWithHint: true,
+//                   labelText: 'Input Email',
+//                   focusedBorder: UnderlineInputBorder(
+//                     borderSide: BorderSide(
+//                       color: Color(0xff000000),
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
 
-            GestureDetector(
-              onTap: (){
-                Navigator.pop(context, controller.text);
-              },
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(confirmText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold,
-                    color: color,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//             GestureDetector(
+//               onTap: (){
+//                 Navigator.pop(context, controller.text);
+//               },
+//               child: Align(
+//                 alignment: Alignment.centerRight,
+//                 child: Text(confirmText,
+//                   textAlign: TextAlign.center,
+//                   style: TextStyle(
+//                     fontSize: SizeConfig.safeBlockHorizontal * 4,
+//                     fontWeight: FontWeight.bold,
+//                     color: color,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class MiscBLMConfirmDialog extends StatelessWidget{
 
@@ -425,7 +425,7 @@ class MiscBLMConfirmDialog extends StatelessWidget{
       ),
       child: Container(
         height: SizeConfig.screenHeight / 4,
-        padding: EdgeInsets.all(20.0),
+        // padding: EdgeInsets.all(20.0),
         child: Column(
           children: [
             Expanded(
