@@ -1,5 +1,5 @@
 class Api::V1::Users::ImageShowController < ApplicationController
-    before_action :check_user
+    before_action :check_user 
 
     def index
         render json: {

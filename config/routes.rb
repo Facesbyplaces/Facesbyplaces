@@ -32,7 +32,8 @@ Rails.application.routes.draw do
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
-        post 'signin-guest', to: 'users#guest'
+        post 'signin-blm-guest', to: 'users#blm_guest'
+        post 'signin-alm-guest', to: 'users#alm_guest'
       
         put 'image_upload', to: 'image_upload#update'
         post 'image_upload', to: 'image_upload#create'
