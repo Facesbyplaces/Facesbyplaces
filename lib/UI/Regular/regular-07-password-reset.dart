@@ -128,7 +128,10 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
 
                                 if(result){
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                                  Navigator.pushReplacementNamed(context, '/home/regular');
+                                  // Navigator.pushReplacementNamed(context, '/home/regular');
+                                  // Navigator.pushReplacementNamed(context, '/regular/login');
+                                  Navigator.popUntil(context, ModalRoute.withName('/regular/login'));
+                                  // '/regular/login'
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                 }

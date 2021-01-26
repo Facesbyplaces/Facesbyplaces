@@ -145,7 +145,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
 
                                 if(result){
                                   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                                  Navigator.pushReplacementNamed(context, '/home/blm');
+                                  // Navigator.pushReplacementNamed(context, '/home/blm');
+                                  Navigator.popUntil(context, ModalRoute.withName('/blm/login'));
                                 }else{
                                   await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
                                 }
