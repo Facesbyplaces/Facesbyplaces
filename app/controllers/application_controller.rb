@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
         end
        
         def create_guest_user
-            u = User.create(:username => "guest", :first_name => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+            u = User.create(:username => "guest", :first_name => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com", :guest => true)
             u.save(:validate => false)
             u
         end
