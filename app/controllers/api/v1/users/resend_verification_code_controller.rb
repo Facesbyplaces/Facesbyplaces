@@ -9,18 +9,14 @@ class Api::V1::Users::ResendVerificationCodeController < ApplicationController
             @user = AlmUser.find(params[:user_id])
         end
 
-        if @user.is_verified?
-            render json: { success: true, message:  "An email has been sent to #{@user.email} containing instructions for email verification." }, status: 409
-        else
-            # Set User's Code
-            code = rand(100..999)
-            @user.verification_code = code
-            @user.save!
+        # Set User's Code
+        code = rand(100..999)
+        @user.verification_code = code
+        @user.save!
 
-            # Tell the UserMailer to send a code to verify email after save
-            ResendVerificationMailer.resend_verify_email(@user).deliver_now
-            render json: { success: true, message:  "An email has been sent to #{@user.email} containing instructions for email verification." }, status: 200
-        end
+        # Tell the UserMailer to send a code to verify email after save
+        ResendVerificationMailer.resend_verify_email(@user).deliver_now
+        render json: { success: true, message:  "An email has been sent to #{@user.email} containing instructions for email verification." }, status: 200
 
     end
 
