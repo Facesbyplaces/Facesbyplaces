@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-03-verify-email.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-verification-code-resend.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
@@ -133,7 +134,17 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                               decoration: TextDecoration.underline,
                                             ),
                                             recognizer: TapGestureRecognizer()
-                                              ..onTap = (){}
+                                              ..onTap = () async{
+                                                context.showLoaderOverlay();
+                                                bool result = await apiRegularVerificationCodeResend();
+                                                context.hideLoaderOverlay();
+
+                                                if(result == true){
+                                                  await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Another code has been sent to your email address. Please check your inbox.', confirmText: 'OK', color: Colors.green,),);
+                                                }else{
+                                                  await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
+                                                }
+                                              }
                                           ),
                                         ],
                                       ),

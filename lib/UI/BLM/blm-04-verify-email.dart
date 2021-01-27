@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-03-verify-email.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-11-verification-code-resend.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
@@ -133,7 +134,17 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                               decoration: TextDecoration.underline,
                                             ),
                                             recognizer: TapGestureRecognizer()
-                                              ..onTap = (){}
+                                              ..onTap = () async{
+                                                context.showLoaderOverlay();
+                                                bool result = await apiBLMVerificationCodeResend();
+                                                context.hideLoaderOverlay();
+
+                                                if(result == true){
+                                                  await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Another code has been sent to your email address. Please check your inbox.', confirmText: 'OK', color: Colors.green,),);
+                                                }else{
+                                                  await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
+                                                }
+                                              }
                                           ),
                                         ],
                                       ),

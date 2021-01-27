@@ -444,9 +444,7 @@ class RegularLoginState extends State<RegularLogin>{
 
                         GestureDetector(
                           onTap: () async{
-
                             Navigator.pushReplacementNamed(context, '/home/regular');
-                            
                           },
                           child: Text('Sign in as Guest',
                             style: TextStyle(

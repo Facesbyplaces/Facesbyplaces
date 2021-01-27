@@ -48,6 +48,7 @@ class _UINotificationsState extends State<UINotifications> {
   void initState(){
     super.initState();
     pushNotificationService.initialise();
+    // String token = FirebaseInstanceId. getInstance(). getToken()
   }
   
   @override
