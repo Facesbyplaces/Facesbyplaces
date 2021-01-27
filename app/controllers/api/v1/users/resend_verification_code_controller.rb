@@ -15,7 +15,7 @@ class Api::V1::Users::ResendVerificationCodeController < ApplicationController
         @user.save!
 
         # Tell the UserMailer to send a code to verify email after save
-        VerificationMailer.verify_email(@user).deliver_now
+        ResendVerificationMailer.verify_email(@user).deliver_now
         render json: { success: true, message:  "An email has been sent to #{@user.email} containing instructions for email verification." }, status: 200        
         
     end

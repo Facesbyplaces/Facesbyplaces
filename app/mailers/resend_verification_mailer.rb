@@ -1,4 +1,4 @@
-class VerificationMailer < ApplicationMailer
+class ResendVerificationMailer < ApplicationMailer
     default from: 'facesbyplaces.mailer@gmail.com'
  
   def resend_verify_email(user)
