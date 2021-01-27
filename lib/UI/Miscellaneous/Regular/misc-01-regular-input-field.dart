@@ -384,7 +384,7 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
     return InputDecorator(
       decoration: InputDecoration(
         alignLabelWithHint: true,
-        labelText: 'Relationship',
+        labelText: 'Security Question',
         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(

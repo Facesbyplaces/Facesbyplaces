@@ -38,6 +38,7 @@ import 'UI/BLM/blm-04-verify-email.dart';
 import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
+import 'UI/ui-03-notifications.dart';
 // import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 void main() async{
@@ -63,15 +64,16 @@ void main() async{
       ),
       child: MaterialApp(
         title: 'Faces by Places',
-        home: ((){
-          if(blmSession){
-            return HomeBLMScreen();
-          }else if(regularSession){
-            return HomeRegularScreen();
-          }else{
-            return UIGetStarted();
-          }
-        }()),
+        // home: ((){
+        //   if(blmSession){
+        //     return HomeBLMScreen();
+        //   }else if(regularSession){
+        //     return HomeRegularScreen();
+        //   }else{
+        //     return UIGetStarted();
+        //   }
+        // }()),
+        home: UINotifications(),
         initialRoute: '/',
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
