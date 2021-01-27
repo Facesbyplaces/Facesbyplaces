@@ -32,8 +32,6 @@ group :test do
   gem 'webdrivers'
 end
 
-group :production do
-end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
@@ -62,7 +60,6 @@ gem 'omniauth-apple'
 gem 'omniauth-google-oauth2'
 gem 'activerecord-session_store'
 
-gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'haml', git: 'https://github.com/haml/haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
