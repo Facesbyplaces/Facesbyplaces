@@ -2,6 +2,17 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:overlay_support/overlay_support.dart';
+
+class PushNotificationMessage {
+  final String title;
+  final String body;
+  PushNotificationMessage({
+    @required this.title,
+    @required this.body,
+  });
+}
+
 class PushNotificationService {
   final FirebaseMessaging _fcm;
 
@@ -21,12 +32,29 @@ class PushNotificationService {
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage: $message");
+        // notification = PushNotificationMessage(
+        //   title: message['notification']['title'],
+        //   body: message['notification']['body'],
+        // );
+
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
       },
     );
   }
@@ -48,6 +76,7 @@ class _UINotificationsState extends State<UINotifications> {
   void initState(){
     super.initState();
     pushNotificationService.initialise();
+    // pushNotificationService._fcm.
     // String token = FirebaseInstanceId. getInstance(). getToken()
   }
   

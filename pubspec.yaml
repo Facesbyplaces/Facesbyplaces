@@ -74,6 +74,7 @@ dependencies:
   mime: ^0.9.7
   giffy_dialog: ^1.8.0
   firebase_messaging: ^7.0.3
+  overlay_support: ^1.0.5
 
 dev_dependencies:
   flutter_test:
