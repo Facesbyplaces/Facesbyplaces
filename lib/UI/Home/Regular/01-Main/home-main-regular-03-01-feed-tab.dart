@@ -191,6 +191,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 //   print('The value of images or videos is ${feeds[i].imagesOrVideos}');
                 // }()),
 
+                SizedBox(height: ScreenUtil().setHeight(45)),
+
                 feeds[i].imagesOrVideos != null
                 ? Container(
                   height: SizeConfig.blockSizeVertical * 30,

@@ -582,6 +582,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
+                SizedBox(height: ScreenUtil().setHeight(45)),
+
                 feeds[i].imagesOrVideos != null
                 ? Container(
                   height: SizeConfig.blockSizeVertical * 30,

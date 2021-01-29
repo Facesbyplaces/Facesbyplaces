@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-push-notifications.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
@@ -7,13 +8,55 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+import 'dart:io';
 
 const double pi = 3.1415926535897932;
+
+class PushNotificationService {
+  final FirebaseMessaging _fcm;
+
+  PushNotificationService(this._fcm);
+
+  Future initialise() async {
+    if (Platform.isIOS) {
+      _fcm.requestNotificationPermissions(IosNotificationSettings());
+    }
+
+    String token = await _fcm.getToken();
+    print("FirebaseMessaging token: $token");
+
+    _fcm.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
+      },
+    );
+  }
+}
 
 class UIGetStarted extends StatefulWidget{
   
@@ -23,20 +66,16 @@ class UIGetStarted extends StatefulWidget{
 class UIGetStartedState extends State<UIGetStarted>{
 
   StreamSubscription<Map> streamSubscription;
+  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final pushNotificationService = PushNotificationService(_firebaseMessaging);
+
+  // var pushNotificationService;
 
   void listenDeepLinkData(){
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
       if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Post')){
-        print('The link category is ${data['link-category']}');
-        print('The link category is ${data['link-post-id']}');
-        print('The link category is ${data['link-like-status']}');
-        print('The link category is ${data['link-number-of-likes']}');
-        print('The link category is ${data['link-type-of-account']}');
         initUnitSharePost(postId: data['link-post-id'], likeStatus: data['link-like-status'], numberOfLikes: data['link-number-of-likes'], pageType: data['link-type-of-account']);
       }else if((data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) && (data.containsKey("link-category") && data["link-category"] == 'Memorial')){
-        print('The link category is ${data['link-category']}');
-        print('The link category is ${data['link-memorial-id']}');
-        print('The link category is ${data['link-type-of-account']}');
         initUnitShareMemorial(memorialId: data['link-memorial-id'], pageType: data['link-type-of-account'], follower: false);
       }else if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true){
         initUnit(resetType: data["reset-type"]);
@@ -50,16 +89,8 @@ class UIGetStartedState extends State<UIGetStarted>{
   initUnit({String resetType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
-    print('The value of isUserIdentified for login is $login');
-
     if(login){
       var value1 = await FlutterBranchSdk.getLatestReferringParams();
-      var value2 = await FlutterBranchSdk.getFirstReferringParams();
-
-      print('The value of getLatestReferringParams is $value1');
-      print('The value of getFirstReferringParams is $value2');
-      print('The token of the link is ${value1['reset_password_token']}');
-      print('The reset type is $resetType');
 
       if(resetType == 'Regular'){
         FlutterBranchSdk.logout();
@@ -73,11 +104,6 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   initUnitSharePost({int postId, bool likeStatus, int numberOfLikes, String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
-
-    print('The post id is $postId');
-    print('The likeStatus is $likeStatus');
-    print('The post id is $numberOfLikes');
-    print('The post id is $postId');
 
     if(login){
       FlutterBranchSdk.logout();
@@ -104,8 +130,26 @@ class UIGetStartedState extends State<UIGetStarted>{
     }
   }
 
+  pushNotifications() async{
+    return await sendAndRetrieveMessage();
+    // var pushNotificationMessage = await sendAndRetrieveMessage();
+
+    // print('The pushNotificationMessage is $pushNotificationMessage');
+
+    // FirebaseMessaging
+
+    // pushNotificationService
+
+    // final pushNotificationService = PushNotificationService();
+    // pushNotificationMessage
+  }
+
   void initState(){
     super.initState();
+    pushNotifications();
+    // pushNotificationService.initialise();
+    
+    
     listenDeepLinkData();
   }
 

@@ -187,6 +187,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
+                  SizedBox(height: ScreenUtil().setHeight(45)),
+
                   posts[i].imagesOrVideos != null
                   ? Container(
                     height: SizeConfig.blockSizeVertical * 30,

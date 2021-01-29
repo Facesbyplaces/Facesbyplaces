@@ -229,6 +229,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
               ),
             ),
 
+            SizedBox(height: ScreenUtil().setHeight(45)),
+
             numberOfTagged != 0
             ? Row(
               children: [

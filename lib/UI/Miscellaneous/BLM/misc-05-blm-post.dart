@@ -217,7 +217,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
               ),
             ),
 
-            SizedBox(height: ScreenUtil().setHeight(5)),
+            SizedBox(height: ScreenUtil().setHeight(45)),
 
             numberOfTagged != 0
             ? Row(

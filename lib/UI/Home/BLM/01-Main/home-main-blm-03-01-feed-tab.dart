@@ -184,6 +184,8 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
 
+                SizedBox(height: ScreenUtil().setHeight(45)),
+
                 feeds[i].imagesOrVideos != null
                 ? Container(
                   height: SizeConfig.blockSizeVertical * 30,
