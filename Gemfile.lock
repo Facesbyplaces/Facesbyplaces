@@ -179,7 +179,6 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
-    mysql2 (0.5.3)
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -208,6 +207,7 @@ GEM
     orm_adapter (0.5.0)
     pager_api (0.3.2)
     pagy (3.10.0)
+    pg (1.2.3)
     pg_search (2.3.5)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
@@ -341,13 +341,13 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   listen (~> 3.2)
-  mysql2 (~> 0.5.2)
   omniauth
   omniauth-apple
   omniauth-facebook
   omniauth-google-oauth2
   pager_api
   pagy
+  pg
   pg_search (~> 2.3, >= 2.3.2)
   puma (~> 4.1)
   rack-cors
