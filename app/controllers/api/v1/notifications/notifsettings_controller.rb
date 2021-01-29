@@ -75,6 +75,16 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
         render json: {}, status: 200
     end
 
+    def push_notif
+        notification = user().notifications.where(read: false).first 
+
+        render json: {notification: ActiveModel::SerializableResource.new(
+                                        notification, 
+                                        each_serializer: NotificationSerializer
+                                    )
+                    }, status: 200
+    end
+
     # Mark Notifications as read
     def read
         unreadNotifs = user.notifications.where(read: false)
