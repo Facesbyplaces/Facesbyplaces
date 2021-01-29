@@ -29,10 +29,12 @@ Rails.application.routes.draw do
       
       namespace :users do 
         resources :verify, only: [:create]
+        resources :resend_verification_code, only: [:create]
         resources :create_account_user, only: [:create]
         resources :image_show, only: [:index]
 
-        post 'signin-guest', to: 'users#guest'
+        post 'signin-blm-guest', to: 'users#blm_guest'
+        post 'signin-alm-guest', to: 'users#alm_guest'
       
         put 'image_upload', to: 'image_upload#update'
         post 'image_upload', to: 'image_upload#create'
@@ -304,5 +306,8 @@ Rails.application.routes.draw do
   # shares controller
     #user's shares
     get 'shares/:userId', to: 'shares#index', as: 'sharesIndex' 
+
+  root 'pages#home'
+  get 'about', to: 'pages#about'
   
  end

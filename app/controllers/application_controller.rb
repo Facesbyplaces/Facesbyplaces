@@ -12,10 +12,24 @@ class ApplicationController < ActionController::Base
             render json: {status: exception.message}
         end
 
+        def current_user
+            super || guest_user
+        end
+      
         private
+
+        def guest_user
+            User.find(session[:guest_user_id].nil? ? session[:guest_user_id] = create_guest_user.id : session[:guest_user_id])
+        end
+       
+        def create_guest_user
+            u = User.create(:username => "guest", :first_name => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com", :guest => true)
+            u.save(:validate => false)
+            u
+        end
         
         def known_error(exception)
-                return render json: {errors: exception}, status: 400
+            return render json: {errors: exception}, status: 400
         end
 
         def invalid_stripe_transaction
@@ -85,12 +99,15 @@ class ApplicationController < ActionController::Base
             end
         end
 
+        def is_guest_user?
+            # Someone is logged in AND (we have a guest id AND that id matches the current user)
+            current_user && (session[:guest_user_id] && session[:guest_user_id] == current_user.id)
+        end
+
         def no_guest_users
             if user().guest == true 
                 return render json: {error: "pls login"}, status: 422
             end
         end
-        
-        
         
 end

@@ -5,4 +5,5 @@ class VerificationMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Verification Code')
   end
+  
 end

@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">/</link>
+  </head>
+  <body style="background-color: #f4f0ed; padding: 20px 0; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;">
+    <div class="mail-container" style="width: 700px; margin: auto">
+      <div class="header" style="background-color: #04ECFF; height: 130px; text-align: center; border-radius: 15px 15px 0 0;">
+        # <%= image_tag image_path("appicon-gray.png"), style: "width: auto; height: 90%; margin-top: 6px;" %>  
+      </div>
+      <div class="body" style="background-color: #fff; padding: 40px 30px; text-align: center; border-radius: 0 0 10px 10px;">
+        <h1 style="margin: 0; font-weight: 200;">
+          Welcome to Faces By Places!
+        </h1>
+        <div style="width: 450px; margin: auto">
+        <p style="text-align: center; font-size: 15px; line-height: 1.8;">
+          Hey <%= @user.username %>, you're almost ready to start enjoying Faces By Places. Simply use this code to be verified:
+        </p>
+        </div>
+        <div style="background-color: #FFB112; width: 100px; margin: auto">
+          <h1 style="color: #fff; margin: auto"><b><%= @user.verification_code %></b></h1>
+        </div
+      </div>
+    </div>
+    
+  </body>
+</html>

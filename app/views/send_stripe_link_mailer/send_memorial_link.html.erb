@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,6 +20,40 @@
     <br>
     <br>
       <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
+-->
+
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">/</link>
+  </head>
+  <body style="background-color: #f4f0ed; padding: 20px 0; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;">
+    <div class="mail-container" style="width: 700px; margin: auto">
+      <div class="header" style="background-color: #04ECFF; height: 130px; text-align: center; border-radius: 15px 15px 0 0;">
+        <!-- <%= image_tag image_path("appicon-gray.png"), style: "width: auto; height: 90%; margin-top: 6px;" %>  -->
+      </div>
+      <div class="body" style="background-color: #fff; padding: 40px 30px; text-align: left; border-radius: 0 0 10px 10px;">
+        <h1 style="margin: 0; font-weight: 200;">
+          Hey <%= @user.username %>, you have successfully created a Memorial!
+        </h1>
+        <div style="width: 600px; margin: auto">
+        <p style="text-align: left; font-size: 15px; line-height: 1.8;">
+          To be able to receive donations from loved ones, register your own stripe account by clicking the button. 
+          The link below will expire within 7 days. This process is optional. If you do not wish to continue, please ignore this message.
+        </p>
+        </div>
+        <div style="background-color: #FFB112; width: 300px;">
+          <h2 style="color: #fff; text-align: center;">
+            <b>
+              <a href='https://dashboard.stripe.com/oauth/authorize?redirect_uri=<%=@redirect_uri%>&client_id=<%=@client_id%>&state=memorial_<%=@memorial%>&response_type=code&scope=read_write' style='text-decoration : none; color : #fff;'>Create Stripe Account</a>
+            </b>
+          </h2>
+        </div>
+      </div>
+    </div>
+    
   </body>
 </html>
 
