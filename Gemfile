@@ -61,7 +61,6 @@ gem 'omniauth-google-oauth2'
 gem 'activerecord-session_store'
 
 # gem 'mysql2', '~> 0.5.2'
-gem 'pg'
 gem 'haml', git: 'https://github.com/haml/haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
