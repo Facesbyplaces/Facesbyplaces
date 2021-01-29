@@ -287,6 +287,8 @@ Rails.application.routes.draw do
         put 'addFriends', to: 'notifsettings#addFriends'
         put 'addAdmin', to: 'notifsettings#addAdmin'
 
+        get 'push_notif', to: 'notifsettings#push_notif'
+
         # read all notifications
         get 'read', to: 'notifsettings#read'
 
