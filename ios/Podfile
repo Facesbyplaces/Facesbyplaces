@@ -7,7 +7,6 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
-pod 'Firebase'
 pod 'Firebase/Messaging'
 
 project 'Runner', {

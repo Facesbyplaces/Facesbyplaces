@@ -240,8 +240,6 @@ PODS:
     - FBSDKLoginKit/Login (= 8.2.0)
   - FBSDKLoginKit/Login (8.2.0):
     - FBSDKCoreKit (~> 8.2.0)
-  - Firebase (6.33.0):
-    - Firebase/Core (= 6.33.0)
   - Firebase/Analytics (6.33.0):
     - Firebase/Core
   - Firebase/Auth (6.33.0):
@@ -443,7 +441,6 @@ DEPENDENCIES:
   - apple_maps_flutter (from `.symlinks/plugins/apple_maps_flutter/ios`)
   - camera (from `.symlinks/plugins/camera/ios`)
   - cryptography_flutter (from `.symlinks/plugins/cryptography_flutter/ios`)
-  - Firebase
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Firestore
@@ -609,6 +606,6 @@ SPEC CHECKSUMS:
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
-PODFILE CHECKSUM: 8f7d890469d35bf095fe593c04647b42003a3a5f
+PODFILE CHECKSUM: c62146cc4148f81f0d8472532a4e70ad7f8544c3
 
 COCOAPODS: 1.10.1
