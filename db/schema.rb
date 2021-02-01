@@ -181,8 +181,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.string "actor_type", null: false
     t.bigint "actor_id", null: false
     t.string "notif_type"
+    t.bigint "user_id", null: false
     t.index ["actor_type", "actor_id"], name: "index_notifications_on_actor_type_and_actor_id"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "notifsettings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -386,6 +388,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "blms", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "memorials", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "memorials"
   add_foreign_key "postslikes", "posts"
   add_foreign_key "replies", "comments"
