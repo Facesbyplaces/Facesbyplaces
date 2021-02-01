@@ -112,6 +112,8 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.boolean "hideFamily"
     t.boolean "hideFriends"
     t.boolean "hideFollowers"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_blms_on_user_id"
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -121,8 +123,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_comments_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "commentslikes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -132,8 +136,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_commentslikes_on_account_type_and_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_commentslikes_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_commentslikes_on_user_id"
   end
 
   create_table "followers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -143,8 +149,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_followers_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_followers_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_followers_on_user_id"
   end
 
   create_table "memorials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -164,6 +172,8 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.boolean "hideFamily"
     t.boolean "hideFriends"
     t.boolean "hideFollowers"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_memorials_on_user_id"
   end
 
   create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -177,8 +187,13 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.string "actor_type", null: false
     t.bigint "actor_id", null: false
     t.string "notif_type"
+    t.bigint "user_id", null: false
+    t.string "notify_type", null: false
+    t.bigint "notify_id", null: false
     t.index ["actor_type", "actor_id"], name: "index_notifications_on_actor_type_and_actor_id"
+    t.index ["notify_type", "notify_id"], name: "index_notifications_on_notify_type_and_notify_id"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "notifsettings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -193,7 +208,12 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.boolean "addAdmin"
     t.string "account_type"
     t.bigint "account_id"
+    t.string "ignore_type", null: false
+    t.bigint "ignore_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_notifsettings_on_account_type_and_account_id"
+    t.index ["ignore_type", "ignore_id"], name: "index_notifsettings_on_ignore_type_and_ignore_id"
+    t.index ["user_id"], name: "index_notifsettings_on_user_id"
   end
 
   create_table "pageowners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -204,8 +224,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.integer "view"
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_pageowners_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_pageowners_on_user_id"
   end
 
   create_table "pg_search_documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -228,7 +250,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.bigint "page_id", null: false
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "memorial_id", null: false
+    t.integer "user_id"
     t.index ["account_type", "account_id"], name: "index_posts_on_account_type_and_account_id"
+    t.index ["memorial_id"], name: "index_posts_on_memorial_id"
     t.index ["page_type", "page_id"], name: "index_posts_on_page_type_and_page_id"
   end
 
@@ -238,8 +263,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_postslikes_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_postslikes_on_post_id"
+    t.index ["user_id"], name: "index_postslikes_on_user_id"
   end
 
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -250,8 +277,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_relationships_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_relationships_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "replies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -261,8 +290,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_replies_on_account_type_and_account_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -309,8 +340,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_tagpeople_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_tagpeople_on_post_id"
+    t.index ["user_id"], name: "index_tagpeople_on_user_id"
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -321,8 +354,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_transactions_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_transactions_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -376,8 +411,22 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "blms", "users"
   add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "commentslikes", "users"
+  add_foreign_key "followers", "users"
+  add_foreign_key "memorials", "users"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifsettings", "users"
+  add_foreign_key "pageowners", "users"
+  add_foreign_key "posts", "memorials"
   add_foreign_key "postslikes", "posts"
+  add_foreign_key "postslikes", "users"
+  add_foreign_key "relationships", "users"
   add_foreign_key "replies", "comments"
+  add_foreign_key "replies", "users"
   add_foreign_key "tagpeople", "posts"
+  add_foreign_key "tagpeople", "users"
+  add_foreign_key "transactions", "users"
 end
