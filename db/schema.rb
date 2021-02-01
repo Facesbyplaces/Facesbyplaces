@@ -340,8 +340,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_tagpeople_on_account_type_and_account_id"
     t.index ["post_id"], name: "index_tagpeople_on_post_id"
+    t.index ["user_id"], name: "index_tagpeople_on_user_id"
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -423,4 +425,5 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "users"
   add_foreign_key "tagpeople", "posts"
+  add_foreign_key "tagpeople", "users"
 end
