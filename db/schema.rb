@@ -284,8 +284,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_replies_on_account_type_and_account_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -410,5 +412,6 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "postslikes", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "replies", "comments"
+  add_foreign_key "replies", "users"
   add_foreign_key "tagpeople", "posts"
 end
