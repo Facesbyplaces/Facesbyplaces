@@ -60,6 +60,6 @@ production:
   encoding: utf8
   database: facesb9_db
   pool: 5
-  username: facesb9_fbp
-  password: facesbyplaces
+  username: deploy
+  password:
   socket: /tmp/mysql.sock
