@@ -216,8 +216,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.integer "view"
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_pageowners_on_account_type_and_account_id"
     t.index ["page_type", "page_id"], name: "index_pageowners_on_page_type_and_page_id"
+    t.index ["user_id"], name: "index_pageowners_on_user_id"
   end
 
   create_table "pg_search_documents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -395,6 +397,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "comments", "posts"
   add_foreign_key "memorials", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "pageowners", "users"
   add_foreign_key "posts", "memorials"
   add_foreign_key "postslikes", "posts"
   add_foreign_key "replies", "comments"
