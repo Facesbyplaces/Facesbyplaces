@@ -55,12 +55,11 @@ production:
   # database: fbp
   # username: fbp
   # password: facesbyplaces
+
   adapter: mysql2
   encoding: utf8
-  reconnect: false
   database: facesb9_db
   pool: 5
-  username: root
+  username: facesb9_fbp
   password:
-  host: localhost
   socket: /tmp/mysql.sock
