@@ -61,5 +61,5 @@ production:
   database: facesb9_db
   pool: 5
   username: facesb9_fbp
-  password:
+  password: facesbyplaces
   socket: /tmp/mysql.sock
