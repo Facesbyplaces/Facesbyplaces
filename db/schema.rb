@@ -136,8 +136,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "account_type", null: false
     t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
     t.index ["account_type", "account_id"], name: "index_commentslikes_on_account_type_and_account_id"
     t.index ["commentable_type", "commentable_id"], name: "index_commentslikes_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_commentslikes_on_user_id"
   end
 
   create_table "followers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -406,6 +408,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "blms", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "commentslikes", "users"
   add_foreign_key "followers", "users"
   add_foreign_key "memorials", "users"
   add_foreign_key "notifications", "users"
