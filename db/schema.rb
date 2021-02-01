@@ -230,7 +230,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.bigint "page_id", null: false
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "memorial_id", null: false
+    t.integer "user_id"
     t.index ["account_type", "account_id"], name: "index_posts_on_account_type_and_account_id"
+    t.index ["memorial_id"], name: "index_posts_on_memorial_id"
     t.index ["page_type", "page_id"], name: "index_posts_on_page_type_and_page_id"
   end
 
@@ -380,6 +383,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blms", "users"
   add_foreign_key "comments", "posts"
+  add_foreign_key "posts", "memorials"
   add_foreign_key "postslikes", "posts"
   add_foreign_key "replies", "comments"
   add_foreign_key "tagpeople", "posts"
