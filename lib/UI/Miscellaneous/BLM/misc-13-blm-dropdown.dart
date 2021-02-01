@@ -211,7 +211,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },
             
@@ -474,7 +474,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
               }
             },
           );

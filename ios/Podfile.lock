@@ -256,14 +256,6 @@ PODS:
   - Firebase/Messaging (6.33.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 4.7.0)
-  - firebase_core (0.5.3):
-    - Firebase/CoreOnly (~> 6.33.0)
-    - Flutter
-  - firebase_messaging (7.0.3):
-    - Firebase/CoreOnly (~> 6.33.0)
-    - Firebase/Messaging (~> 6.33.0)
-    - firebase_core
-    - Flutter
   - FirebaseAnalytics (6.8.3):
     - FirebaseCore (~> 6.10)
     - FirebaseInstallations (~> 1.6)
@@ -325,8 +317,6 @@ PODS:
     - Flutter
   - flutter_login_facebook (0.3.0):
     - FBSDKLoginKit (~> 8.0)
-    - Flutter
-  - flutter_pay (0.0.1):
     - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -445,13 +435,10 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
   - Firebase/Messaging
-  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_barcode_scanner (from `.symlinks/plugins/flutter_barcode_scanner/ios`)
   - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
-  - flutter_pay (from `.symlinks/plugins/flutter_pay/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
@@ -507,10 +494,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/camera/ios"
   cryptography_flutter:
     :path: ".symlinks/plugins/cryptography_flutter/ios"
-  firebase_core:
-    :path: ".symlinks/plugins/firebase_core/ios"
-  firebase_messaging:
-    :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
   flutter_barcode_scanner:
@@ -519,8 +502,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_branch_sdk/ios"
   flutter_login_facebook:
     :path: ".symlinks/plugins/flutter_login_facebook/ios"
-  flutter_pay:
-    :path: ".symlinks/plugins/flutter_pay/ios"
   geocoding:
     :path: ".symlinks/plugins/geocoding/ios"
   google_sign_in:
@@ -561,8 +542,6 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
-  firebase_core: 5d6a02f3d85acd5f8321c2d6d62877626a670659
-  firebase_messaging: 0aea2cd5885b65e19ede58ee3507f485c992cc75
   FirebaseAnalytics: 5dd088bd2e67bb9d13dbf792d1164ceaf3052193
   FirebaseAuth: c92d49ada7948d1a23466e3db17bc4c2039dddc3
   FirebaseCore: d889d9e12535b7f36ac8bfbf1713a0836a3012cd
@@ -571,11 +550,10 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseInstanceID: bd3ffc24367f901a43c063b36c640b345a4a5dd1
   FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_barcode_scanner: fc42adac0732eca7bd9d3d676b215bce5903f269
   flutter_branch_sdk: ecbe8c173d747c9f8d18a74e72de96cc9159375f
   flutter_login_facebook: 86e1415ecde2d59ca72c5760fd53d1d1952017fb
-  flutter_pay: b9fda1c5be6ddc7af769f26553e9c648fc551263
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
   google_sign_in: 6bd214b9c154f881422f5fe27b66aaa7bbd580cc
@@ -606,6 +584,6 @@ SPEC CHECKSUMS:
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
-PODFILE CHECKSUM: c62146cc4148f81f0d8472532a4e70ad7f8544c3
+PODFILE CHECKSUM: d8807efaea0dece0cfa4c8f1bd0d9a98c0ea6427
 
 COCOAPODS: 1.10.1
