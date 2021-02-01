@@ -182,7 +182,10 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.bigint "actor_id", null: false
     t.string "notif_type"
     t.bigint "user_id", null: false
+    t.string "notify_type", null: false
+    t.bigint "notify_id", null: false
     t.index ["actor_type", "actor_id"], name: "index_notifications_on_actor_type_and_actor_id"
+    t.index ["notify_type", "notify_id"], name: "index_notifications_on_notify_type_and_notify_id"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
