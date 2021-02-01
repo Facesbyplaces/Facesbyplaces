@@ -202,7 +202,12 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
     t.boolean "addAdmin"
     t.string "account_type"
     t.bigint "account_id"
+    t.bigint "user_id", null: false
+    t.string "ignore_type", null: false
+    t.bigint "ignore_id", null: false
     t.index ["account_type", "account_id"], name: "index_notifsettings_on_account_type_and_account_id"
+    t.index ["ignore_type", "ignore_id"], name: "index_notifsettings_on_ignore_type_and_ignore_id"
+    t.index ["user_id"], name: "index_notifsettings_on_user_id"
   end
 
   create_table "pageowners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -392,6 +397,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_080547) do
   add_foreign_key "comments", "posts"
   add_foreign_key "memorials", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "notifsettings", "users"
   add_foreign_key "posts", "memorials"
   add_foreign_key "postslikes", "posts"
   add_foreign_key "replies", "comments"
