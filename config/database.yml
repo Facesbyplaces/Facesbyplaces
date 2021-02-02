@@ -4,14 +4,14 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-# default: &default
-#   adapter: postgresql
-#   encoding: unicode
-#   host: localhost
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#   username: postgres
-#   password: postgres
-#   timeout: 5000
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: postgres
+  timeout: 5000
 
 development:
   # <<: *default
@@ -20,46 +20,47 @@ development:
   # timeout: 5000
   # database: db/development.sqlite3
 
-  # adapter: postgresql
-  # encoding: unicode
-  # database: kk40
-  # pool: 5
-  # username: kk40
-  # password:
-  # timeout: 5000
-
-  adapter: mysql2
-  encoding: utf8
-  database: facesb9_db
+  adapter: postgresql
+  encoding: unicode
+  database: kk40
   pool: 5
-  username: facesb9_fbp
-  password: facesbyplaces
-  socket: /tmp/mysql.sock
+  username: kk40
+  password:
+  timeout: 5000
+
+
+  # adapter: mysql2
+  # encoding: utf8
+  # database: facesb9_db
+  # pool: 5
+  # username: facesb9_fbp
+  # password: facesbyplaces
+  # socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  # <<: *default
-  # database: db/test.sqlite3
-  adapter: mysql2
-  encoding: utf8
-  database: sample_sqlite3_test
-  pool: 5
-  username: mysql
-  password: mysql
-  socket: /tmp/mysql.sock
+  <<: *default
+  database: db/test.sqlite3
+  # adapter: mysql2
+  # encoding: utf8
+  # database: sample_sqlite3_test
+  # pool: 5
+  # username: mysql
+  # password: mysql
+  # socket: /tmp/mysql.sock
 
 production:
-  # <<: *default
-  # database: fbp
-  # username: fbp
-  # password: facesbyplaces
-
-  adapter: mysql2
-  encoding: utf8
-  database: facesb9_db
-  pool: 5
-  username: facesb9_fbp
+  <<: *default
+  database: fbp
+  username: fbp
   password: facesbyplaces
-  socket: /tmp/mysql.sock
+
+  # adapter: mysql2
+  # encoding: utf8
+  # database: facesb9_db
+  # pool: 5
+  # username: facesb9_fbp
+  # password: facesbyplaces
+  # socket: /tmp/mysql.sock
