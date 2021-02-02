@@ -1,6 +1,6 @@
 class Api::V1::Admin::AdminController < ApplicationController
     before_action :check_user
-    # before_action :admin_only
+    before_action :admin_only
 
     def allUsers
         users = User.all 

@@ -12,18 +12,16 @@
 #     user.update(hideBirthdate: false, hideBirthplace: false, hideEmail: false, hideAddress: false, hidePhonenumber: false,)
 # end
 
-comments = Comment.all 
+# Admin
+admin = User.new(
+            first_name: "Paul",
+            last_name: "Marcuelo",
+            account_type: 1,
+            phone_number: '09053536495',
+            email: "admin@gmail.com",
+            username: "admin",
+            password: 'admin123'
+        )
 
-comments.each do |comment|
-    if comment.user.guest == true 
-        comment.destroy 
-    end
-end
-
-replies = Reply.all 
-
-replies.each do |reply|
-    if reply.user.guest == true 
-        reply.destroy 
-    end
-end
+admin.save 
+admin.add_role :admin
