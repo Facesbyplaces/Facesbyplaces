@@ -187,14 +187,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
           floatingActionButton: FloatingActionButton(
             backgroundColor: Color(0xffffffff),
             onPressed: () async{
-              // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-              //   "#ff6666", 
-              //   'Cancel', 
-              //   true, 
-              //   ScanMode.QR
-              // );
-
-              // print('The result of scanning in blm extended is $barcodeScanRes');
               scanQR();
             },
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),

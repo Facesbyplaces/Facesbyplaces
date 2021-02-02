@@ -186,16 +186,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
           floatingActionButton: FloatingActionButton(
             backgroundColor: Color(0xffffffff),
             onPressed: () async{
-              // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-              //   "#ff6666", 
-              //   'Cancel', 
-              //   true, 
-              //   ScanMode.QR
-              // );
-
-              // print('The result of scanning in alm extended is $barcodeScanRes');
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularQRCode()));
-
               scanQR();
             },
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
