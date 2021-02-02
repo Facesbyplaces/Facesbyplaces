@@ -8,7 +8,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
@@ -19,44 +19,44 @@ import 'dart:io';
 
 const double pi = 3.1415926535897932;
 
-// class PushNotificationService {
-//   final FirebaseMessaging _fcm;
+class PushNotificationService {
+  final FirebaseMessaging _fcm;
 
-//   PushNotificationService(this._fcm);
+  PushNotificationService(this._fcm);
 
-//   Future initialise() async {
-//     if (Platform.isIOS) {
-//       _fcm.requestNotificationPermissions(IosNotificationSettings());
-//     }
+  Future initialise() async {
+    if (Platform.isIOS) {
+      _fcm.requestNotificationPermissions(IosNotificationSettings());
+    }
 
-//     String token = await _fcm.getToken();
-//     print("FirebaseMessaging token: $token");
+    String token = await _fcm.getToken();
+    print("FirebaseMessaging token: $token");
 
-//     _fcm.configure(
-//       onMessage: (Map<String, dynamic> message) async {
-//         print("onMessage: $message");
-//         showSimpleNotification(
-//           Container(child: Text(message['notification']['body'])),
-//           position: NotificationPosition.top,
-//         );
-//       },
-//       onLaunch: (Map<String, dynamic> message) async {
-//         print("onLaunch: $message");
-//         showSimpleNotification(
-//           Container(child: Text(message['notification']['body'])),
-//           position: NotificationPosition.top,
-//         );
-//       },
-//       onResume: (Map<String, dynamic> message) async {
-//         print("onResume: $message");
-//         showSimpleNotification(
-//           Container(child: Text(message['notification']['body'])),
-//           position: NotificationPosition.top,
-//         );
-//       },
-//     );
-//   }
-// }
+    _fcm.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        showSimpleNotification(
+          Container(child: Text(message['notification']['body'])),
+          position: NotificationPosition.top,
+        );
+      },
+    );
+  }
+}
 
 class UIGetStarted extends StatefulWidget{
   
@@ -66,8 +66,8 @@ class UIGetStarted extends StatefulWidget{
 class UIGetStartedState extends State<UIGetStarted>{
 
   StreamSubscription<Map> streamSubscription;
-  // static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-  // final pushNotificationService = PushNotificationService(_firebaseMessaging);
+  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final pushNotificationService = PushNotificationService(_firebaseMessaging);
 
   // var pushNotificationService;
 
@@ -130,26 +130,26 @@ class UIGetStartedState extends State<UIGetStarted>{
     }
   }
 
-  // pushNotifications() async{
-  //   // return await sendAndRetrieveMessage();
-  //   await sendAndRetrieveMessage();
+  pushNotifications() async{
+    // return await sendAndRetrieveMessage();
+    await sendAndRetrieveMessage();
 
-  //   // var pushNotificationMessage = await sendAndRetrieveMessage();
+    // var pushNotificationMessage = await sendAndRetrieveMessage();
 
-  //   // print('The pushNotificationMessage is $pushNotificationMessage');
+    // print('The pushNotificationMessage is $pushNotificationMessage');
 
-  //   // FirebaseMessaging
+    // FirebaseMessaging
 
-  //   // pushNotificationService
+    // pushNotificationService
 
-  //   // final pushNotificationService = PushNotificationService();
-  //   // pushNotificationMessage
-  // }
+    // final pushNotificationService = PushNotificationService();
+    // pushNotificationMessage
+  }
 
   void initState(){
     super.initState();
-    // pushNotifications();
-    // pushNotificationService.initialise();
+    pushNotifications();
+    pushNotificationService.initialise();
     
     
     listenDeepLinkData();
