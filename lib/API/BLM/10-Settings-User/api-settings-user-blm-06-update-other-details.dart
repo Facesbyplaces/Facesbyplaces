@@ -25,6 +25,7 @@ Future<bool> apiBLMUpdateOtherDetails({String birthdate, String birthplace, Stri
     }
     
   }catch(e){
+    print('Error in settings update other details: $e');
     result = false;
   }
 

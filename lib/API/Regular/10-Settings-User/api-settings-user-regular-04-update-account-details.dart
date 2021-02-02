@@ -37,6 +37,7 @@ Future<bool> apiRegularUpdateAccountDetails({String firstName, String lastName, 
     }
     
   }catch(e){
+    print('Error in settings update account details: $e');
     result = false;
   }
 

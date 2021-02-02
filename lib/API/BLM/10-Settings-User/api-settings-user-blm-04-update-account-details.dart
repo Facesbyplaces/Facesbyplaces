@@ -38,6 +38,7 @@ Future<bool> apiBLMUpdateAccountDetails({String firstName, String lastName, Stri
     }
     
   }catch(e){
+    print('Error in settings update account details: $e');
     result = false;
   }
 

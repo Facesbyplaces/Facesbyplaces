@@ -18,8 +18,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({String keywords, int pag
     }
   );
 
-  print('The status code of search posts is ${response.statusCode}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchPostMain.fromJson(newValue);

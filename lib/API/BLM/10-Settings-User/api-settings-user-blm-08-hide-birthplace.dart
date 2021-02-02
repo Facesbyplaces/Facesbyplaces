@@ -25,6 +25,7 @@ Future<bool> apiBLMHideBirthplace({bool hide}) async{
     }
       
   }catch(e){
+    print('Error in settings hide birthplace: $e');
     result = false;
   }
 

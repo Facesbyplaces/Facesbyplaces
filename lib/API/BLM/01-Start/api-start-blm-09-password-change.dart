@@ -1,7 +1,6 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Future<bool> apiBLMPasswordChange({String password, String passwordConfirmation, String resetToken}) async{
 
@@ -10,10 +9,6 @@ Future<bool> apiBLMPasswordChange({String password, String passwordConfirmation,
       'Content-Type': 'application/json',
     }
   );
-
-  print('The status code for password change is ${response.statusCode}');
-  print('The status body for password change is ${response.body}');
-  print('The status headers for password change is ${response.headers}');
 
   if(response.statusCode == 200){
     var value = json.decode(response.body);

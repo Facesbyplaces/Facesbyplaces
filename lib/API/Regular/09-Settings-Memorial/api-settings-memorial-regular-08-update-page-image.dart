@@ -39,6 +39,7 @@ Future<bool> apiRegularUpdatePageImages({int memorialId, dynamic backgroundImage
       result = true;
     }
   }catch(e){
+    print('Error in update page image: $e');
     result = false;
   }
   return result;

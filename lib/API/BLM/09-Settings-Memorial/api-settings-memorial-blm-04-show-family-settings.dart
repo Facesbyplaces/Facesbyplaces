@@ -27,10 +27,10 @@ Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({int memorialId, i
 }
 
 class APIBLMShowFamilySettingsMain{
-  int itemsRemaining;
-  List<APIBLMShowFamilySettingsExtended> familyList;
+  int blmItemsRemaining;
+  List<APIBLMShowFamilySettingsExtended> blmFamilyList;
 
-  APIBLMShowFamilySettingsMain({this.itemsRemaining, this.familyList});
+  APIBLMShowFamilySettingsMain({this.blmItemsRemaining, this.blmFamilyList});
 
   factory APIBLMShowFamilySettingsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,46 +38,46 @@ class APIBLMShowFamilySettingsMain{
     List<APIBLMShowFamilySettingsExtended> familyList = newList1.map((i) => APIBLMShowFamilySettingsExtended.fromJson(i)).toList();
 
     return APIBLMShowFamilySettingsMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      familyList: familyList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFamilyList: familyList,
     );
   }
 }
 
 
 class APIBLMShowFamilySettingsExtended{
-  APIBLMShowFamilySettingsExtendedDetails user;
-  String relationship;
+  APIBLMShowFamilySettingsExtendedDetails showFamilySettingsUser;
+  String showFamilySettingsRelationship;
 
-  APIBLMShowFamilySettingsExtended({this.user, this.relationship});
+  APIBLMShowFamilySettingsExtended({this.showFamilySettingsUser, this.showFamilySettingsRelationship});
 
   factory APIBLMShowFamilySettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtended(
-      user: APIBLMShowFamilySettingsExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
+      showFamilySettingsUser: APIBLMShowFamilySettingsExtendedDetails.fromJson(parsedJson['user']),
+      showFamilySettingsRelationship: parsedJson['relationship'],
     );
   }
 }
 
 class APIBLMShowFamilySettingsExtendedDetails{
 
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
-  String email;
-  int accountType;
+  int showFamilySettingsDetailsId;
+  String showFamilySettingsDetailsFirstName;
+  String showFamilySettingsDetailsLastName;
+  dynamic showFamilySettingsDetailsImage;
+  String showFamilySettingsDetailsEmail;
+  int showFamilySettingsDetailsAccountType;
 
-  APIBLMShowFamilySettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image, this.email, this.accountType});
+  APIBLMShowFamilySettingsExtendedDetails({this.showFamilySettingsDetailsId, this.showFamilySettingsDetailsFirstName, this.showFamilySettingsDetailsLastName, this.showFamilySettingsDetailsImage, this.showFamilySettingsDetailsEmail, this.showFamilySettingsDetailsAccountType});
 
   factory APIBLMShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtendedDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
-      email: parsedJson['email'],
-      accountType: parsedJson['account_type'],
+      showFamilySettingsDetailsId: parsedJson['id'],
+      showFamilySettingsDetailsFirstName: parsedJson['first_name'],
+      showFamilySettingsDetailsLastName: parsedJson['last_name'],
+      showFamilySettingsDetailsImage: parsedJson['image'],
+      showFamilySettingsDetailsEmail: parsedJson['email'],
+      showFamilySettingsDetailsAccountType: parsedJson['account_type'],
     );
   }
 }

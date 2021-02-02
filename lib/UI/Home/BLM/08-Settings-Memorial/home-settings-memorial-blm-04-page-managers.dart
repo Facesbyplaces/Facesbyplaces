@@ -45,17 +45,17 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
     if(adminItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMShowAdminSettings(memorialId: memorialId, page: page1);
-      adminItemsRemaining = newValue.adminItemsRemaining;
+      adminItemsRemaining = newValue.blmAdminItemsRemaining;
 
-      for(int i = 0; i < newValue.adminList.length; i++){
+      for(int i = 0; i < newValue.blmAdminList.length; i++){
         adminList.add(
           BLMShowAdminSettings(
-            userId: newValue.adminList[i].user.id,
-            firstName: newValue.adminList[i].user.firstName,
-            lastName: newValue.adminList[i].user.lastName,
-            image: newValue.adminList[i].user.image,
-            relationship: newValue.adminList[i].relationship,
-            email: newValue.adminList[i].user.email,
+            userId: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
+            firstName: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
+            lastName: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
+            image: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
+            relationship: newValue.blmAdminList[i].showAdminsSettingsRelationship,
+            email: newValue.blmAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
           ),
         );
       }
@@ -77,17 +77,17 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
       context.showLoaderOverlay();
       var newValue = await apiBLMShowAdminSettings(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
-      familyItemsRemaining = newValue.familyItemsRemaining;
+      familyItemsRemaining = newValue.blmFamilyItemsRemaining;
 
-      for(int i = 0; i < newValue.familyList.length; i++){
+      for(int i = 0; i < newValue.blmFamilyList.length; i++){
         familyList.add(
           BLMShowAdminSettings(
-            userId: newValue.familyList[i].user.id,
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
-            email: newValue.familyList[i].user.email,
+            userId: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
+            firstName: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
+            lastName: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
+            image: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
+            relationship: newValue.blmFamilyList[i].showAdminsSettingsRelationship,
+            email: newValue.blmFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
           ),
         );
       }

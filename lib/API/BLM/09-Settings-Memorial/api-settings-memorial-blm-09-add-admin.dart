@@ -34,6 +34,7 @@ Future<bool> apiBLMAddMemorialAdmin({String pageType, int pageId, int userId}) a
       result = true;
     }
   }catch(e){
+    print('Error in add memorial admin: $e');
     result = false;
   }
 

@@ -35,6 +35,7 @@ Future<bool> apiRegularAddComment({int postId, dynamic commentBody}) async{
       result = true;
     }
   }catch(e){
+    print('Error in show post - add comment: $e');
     result = false;
   }
 

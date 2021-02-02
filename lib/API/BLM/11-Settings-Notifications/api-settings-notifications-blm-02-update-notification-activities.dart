@@ -21,13 +21,12 @@ Future<bool> apiBLMUpdateNotificationActivities({bool hide}) async{
       }
     );
 
-    print('The notification setting 2 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+print('Error in notification update activities: $e');
     result = false;
   }
 

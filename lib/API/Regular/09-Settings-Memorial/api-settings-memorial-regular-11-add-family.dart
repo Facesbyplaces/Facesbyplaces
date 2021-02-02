@@ -37,6 +37,7 @@ Future<bool> apiRegularAddFamily({int memorialId, int userId, String relationshi
     }
     
   }catch(e){
+    print('Error in add family member: $e');
     result = false;
   }
 

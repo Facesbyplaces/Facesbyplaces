@@ -38,7 +38,7 @@ Future<bool> apiBLMUpdatePageImages({int memorialId, dynamic backgroundImage, dy
       result = true;
     }
   }catch(e){
-    print('The e is $e');
+    print('Error in page update page image: $e');
     result = false;
   }
   return result;

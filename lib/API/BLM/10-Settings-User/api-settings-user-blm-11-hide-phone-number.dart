@@ -26,6 +26,7 @@ Future<bool> apiBLMHidePhoneNumber({bool hide}) async{
     }
       
   }catch(e){
+    print('Error in settings hide phone number: $e');
     result = false;
   }
 

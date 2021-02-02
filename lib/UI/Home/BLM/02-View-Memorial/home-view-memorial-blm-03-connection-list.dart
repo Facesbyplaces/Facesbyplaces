@@ -56,15 +56,15 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       var newValue = await apiBLMConnectionListFamily(memorialId: memorialId, page: page1);
       context.hideLoaderOverlay();
 
-      itemRemaining1 = newValue.itemsRemaining;
+      itemRemaining1 = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.familyList.length; i++){
+      for(int i = 0; i < newValue.blmFamilyList.length; i++){
         listsFamily.add(
           BLMConnectionListItem(
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
+            firstName: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsFirstName,
+            lastName: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsLastName,
+            image: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsImage,
+            relationship: newValue.blmFamilyList[i].connectionListFamilyRelationship,
           ),    
         );
 
@@ -87,14 +87,14 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       var newValue = await apiBLMConnectionListFriends(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
 
-      itemRemaining2 = newValue.itemsRemaining;
+      itemRemaining2 = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.friendsList.length; i++){
+      for(int i = 0; i < newValue.blmFriendsList.length; i++){
         listsFriends.add(
           BLMConnectionListItem(
-            firstName: newValue.friendsList[i].user.firstName,
-            lastName: newValue.friendsList[i].user.lastName,
-            image: newValue.friendsList[i].user.image,
+            firstName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsFirstName,
+            lastName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsLastName,
+            image: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsImage,
           ),    
         );
       }
@@ -116,14 +116,14 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       var newValue = await apiBLMConnectionListFollowers(memorialId: memorialId, page: page3);
       context.hideLoaderOverlay();
 
-      itemRemaining3 = newValue.itemsRemaining;
+      itemRemaining3 = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.followersList.length; i++){
+      for(int i = 0; i < newValue.blmFollowersList.length; i++){
         listsFollowers.add(
           BLMConnectionListItem(
-            firstName: newValue.followersList[i].firstName,
-            lastName: newValue.followersList[i].lastName,
-            image: newValue.followersList[i].image,
+            firstName: newValue.blmFollowersList[i].connectionListFollowersFirstName,
+            lastName: newValue.blmFollowersList[i].connectionListFollowersLastName,
+            image: newValue.blmFollowersList[i].connectionListFollowersImage,
           ),    
         );
       }

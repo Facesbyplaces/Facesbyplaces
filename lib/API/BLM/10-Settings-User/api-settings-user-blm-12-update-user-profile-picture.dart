@@ -32,7 +32,7 @@ Future<bool> apiBLMUpdateUserProfilePicture({dynamic image, int userId}) async{
     }
     
   }catch(e){
-    print('The e is $e');
+    print('Error in settings update user profile picture: $e');
     result = false;
   }
   return result;

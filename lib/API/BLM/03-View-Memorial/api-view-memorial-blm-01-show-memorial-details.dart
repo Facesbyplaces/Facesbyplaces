@@ -23,117 +23,116 @@ Future<APIBLMShowMemorialMain> apiBLMShowMemorial({int memorialId}) async{
     var newValue = json.decode(response.body);
     return APIBLMShowMemorialMain.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the events');
+    throw Exception('Failed to show the memorial details');
   }
 }
 
 class APIBLMShowMemorialMain{
 
-  APIBLMShowMemorialExtended memorial;
+  APIBLMShowMemorialExtended blmMemorial;
 
-  APIBLMShowMemorialMain({this.memorial});
+  APIBLMShowMemorialMain({this.blmMemorial});
 
   factory APIBLMShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialMain(
-      memorial: APIBLMShowMemorialExtended.fromJson(parsedJson['blm']),
+      blmMemorial: APIBLMShowMemorialExtended.fromJson(parsedJson['blm']),
     );
   }
 }
 
 
 class APIBLMShowMemorialExtended{
-  int blmId;
-  String blmName;
-  APIBLMShowMemorialExtendedDetails blmDetails;
-  String blmBackgroundImage;
-  String blmProfileImage;
-  dynamic blmImagesOrVideos;
-  String blmRelationship;
-  APIBLMShowMemorialExtendedPageCreator blmPageCreator;
-  bool blmManage;
-  bool blmFamOrFriends;
-  bool blmFollower;
-  int blmPostsCount;
-  int blmFamilyCount;
-  int blmFriendsCount;
-  int blmFollowersCount;
+  int memorialId;
+  String memorialName;
+  APIBLMShowMemorialExtendedDetails memorialDetails;
+  String memorialBackgroundImage;
+  String memorialProfileImage;
+  dynamic memorialImagesOrVideos;
+  String memorialRelationship;
+  APIBLMShowMemorialExtendedPageCreator memorialPageCreator;
+  bool memorialManage;
+  bool memorialFamOrFriends;
+  bool memorialFollower;
+  int memorialPostsCount;
+  int memorialFamilyCount;
+  int memorialFriendsCount;
+  int memorialFollowersCount;
 
-  APIBLMShowMemorialExtended({this.blmId, this.blmName, this.blmDetails, this.blmBackgroundImage, this.blmProfileImage, this.blmImagesOrVideos, this.blmRelationship, this.blmPageCreator, this.blmManage, this.blmFamOrFriends, this.blmFollower, this.blmPostsCount, this.blmFamilyCount, this.blmFriendsCount, this.blmFollowersCount});
+  APIBLMShowMemorialExtended({this.memorialId, this.memorialName, this.memorialDetails, this.memorialBackgroundImage, this.memorialProfileImage, this.memorialImagesOrVideos, this.memorialRelationship, this.memorialPageCreator, this.memorialManage, this.memorialFamOrFriends, this.memorialFollower, this.memorialPostsCount, this.memorialFamilyCount, this.memorialFriendsCount, this.memorialFollowersCount});
 
   factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMShowMemorialExtended(
-      blmId: parsedJson['id'],
-      blmName: parsedJson['name'],
-      blmDetails: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      blmBackgroundImage: parsedJson['backgroundImage'],
-      blmProfileImage: parsedJson['profileImage'],
-      blmImagesOrVideos: parsedJson['imagesOrVideos'],
-      blmRelationship: parsedJson['relationship'],
-      blmPageCreator: APIBLMShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      blmManage: parsedJson['manage'],
-      blmFamOrFriends: parsedJson['famOrFriends'],
-      blmFollower: parsedJson['follower'],
-      blmPostsCount: parsedJson['postsCount'],
-      blmFamilyCount: parsedJson['familyCount'],
-      blmFriendsCount: parsedJson['friendsCount'],
-      blmFollowersCount: parsedJson['followersCount'],
+      memorialId: parsedJson['id'],
+      memorialName: parsedJson['name'],
+      memorialDetails: APIBLMShowMemorialExtendedDetails.fromJson(parsedJson['details']),
+      memorialBackgroundImage: parsedJson['backgroundImage'],
+      memorialProfileImage: parsedJson['profileImage'],
+      memorialImagesOrVideos: parsedJson['imagesOrVideos'],
+      memorialRelationship: parsedJson['relationship'],
+      memorialPageCreator: APIBLMShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      memorialManage: parsedJson['manage'],
+      memorialFamOrFriends: parsedJson['famOrFriends'],
+      memorialFollower: parsedJson['follower'],
+      memorialPostsCount: parsedJson['postsCount'],
+      memorialFamilyCount: parsedJson['familyCount'],
+      memorialFriendsCount: parsedJson['friendsCount'],
+      memorialFollowersCount: parsedJson['followersCount'],
     );
   }
 }
 
 
 class APIBLMShowMemorialExtendedDetails{
-  String description;
-  String location;
-  String precinct;
-  String dob;
-  String rip;
-  String state;
-  String country;
+  String memorialDetailsDescription;
+  String memorialDetailsLocation;
+  String memorialDetailsPrecinct;
+  String memorialDetailsDob;
+  String memorialDetailsRip;
+  String memorialDetailsState;
+  String memorialDetailsCountry;
 
-  APIBLMShowMemorialExtendedDetails({this.description, this.location, this.precinct, this.dob, this.rip, this.state, this.country});
+  APIBLMShowMemorialExtendedDetails({this.memorialDetailsDescription, this.memorialDetailsLocation, this.memorialDetailsPrecinct, this.memorialDetailsDob, this.memorialDetailsRip, this.memorialDetailsState, this.memorialDetailsCountry});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
+
     String newDOB = parsedJson['dob'];
     DateTime dob = DateTime.parse(newDOB);
-
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
 
-
     return APIBLMShowMemorialExtendedDetails(
-      description: parsedJson['description'],
-      location: parsedJson['location'],
-      precinct: parsedJson['precinct'],
-      dob: dob.format(AmericanDateFormats.standardWithComma),
-      rip: rip.format(AmericanDateFormats.standardWithComma),
-      state: parsedJson['state'],
-      country: parsedJson['country'],
+      memorialDetailsDescription: parsedJson['description'],
+      memorialDetailsLocation: parsedJson['location'],
+      memorialDetailsPrecinct: parsedJson['precinct'],
+      memorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
+      memorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
+      memorialDetailsState: parsedJson['state'],
+      memorialDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIBLMShowMemorialExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int memorialPageCreatorId;
+  String memorialPageCreatorFirstName;
+  String memorialPageCreatorLastName;
+  String memorialPageCreatorPhoneNumber;
+  String memorialPageCreatorEmail;
+  String memorialPageCreatorUserName;
+  dynamic memorialPageCreatorImage;
 
-  APIBLMShowMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image,});
+  APIBLMShowMemorialExtendedPageCreator({this.memorialPageCreatorId, this.memorialPageCreatorFirstName, this.memorialPageCreatorLastName, this.memorialPageCreatorPhoneNumber, this.memorialPageCreatorEmail, this.memorialPageCreatorUserName, this.memorialPageCreatorImage,});
 
   factory APIBLMShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image'],
+      memorialPageCreatorId: parsedJson['id'],
+      memorialPageCreatorFirstName: parsedJson['first_name'],
+      memorialPageCreatorLastName: parsedJson['last_name'],
+      memorialPageCreatorPhoneNumber: parsedJson['phone_number'],
+      memorialPageCreatorEmail: parsedJson['email'],
+      memorialPageCreatorUserName: parsedJson['username'],
+      memorialPageCreatorImage: parsedJson['image'],
     );
   }
 }

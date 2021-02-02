@@ -72,7 +72,7 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
       result = userId;
     }
   }catch(e){
-    print('The e in create memorial is $e');
+    print('Error in create memorial: $e');
     result = 0;
   }
 

@@ -20,13 +20,12 @@ Future<bool> apiRegularUpdateNotificationAddFamily({bool hide}) async{
       }
     );
 
-    print('The notification setting 5 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+    print('Error in notification update add family: $e');
     result = false;
   }
 

@@ -27,33 +27,33 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost({int postId}) asyn
 }
 
 class APIBLMShowOriginalPostMainMain{
-  APIBLMShowOriginalPostMainExtended post;
+  APIBLMShowOriginalPostMainExtended blmPost;
   
-  APIBLMShowOriginalPostMainMain({this.post});
+  APIBLMShowOriginalPostMainMain({this.blmPost});
 
   factory APIBLMShowOriginalPostMainMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostMainMain(
-      post: APIBLMShowOriginalPostMainExtended.fromJson(parsedJson['post'])
+      blmPost: APIBLMShowOriginalPostMainExtended.fromJson(parsedJson['post'])
     );
   }
 }
 
 
 class APIBLMShowOriginalPostMainExtended{
-  int id;
-  APIBLMShowOriginalPostMainExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIBLMHomeProfilePostExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int showOriginalPostId;
+  APIBLMShowOriginalPostMainExtendedPage showOriginalPostPage;
+  String showOriginalPostBody;
+  String showOriginalPostLocation;
+  double showOriginalPostLatitude;
+  double showOriginalPostLongitude;
+  List<dynamic> showOriginalPostImagesOrVideos;
+  List<APIBLMHomeProfilePostExtendedTagged> showOriginalPostPostTagged;
+  String showOriginalPostCreateAt;
+  int showOriginalPostNumberOfLikes;
+  int showOriginalPostNumberOfComments;
+  bool showOriginalPostLikeStatus;
 
-  APIBLMShowOriginalPostMainExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMShowOriginalPostMainExtended({this.showOriginalPostId, this.showOriginalPostPage, this.showOriginalPostBody, this.showOriginalPostLocation, this.showOriginalPostLatitude, this.showOriginalPostLongitude, this.showOriginalPostImagesOrVideos, this.showOriginalPostPostTagged, this.showOriginalPostCreateAt, this.showOriginalPostNumberOfLikes, this.showOriginalPostNumberOfComments, this.showOriginalPostLikeStatus});
 
   factory APIBLMShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -68,76 +68,76 @@ class APIBLMShowOriginalPostMainExtended{
     List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();    
     
     return APIBLMShowOriginalPostMainExtended(
-      id: parsedJson['id'],
-      page: APIBLMShowOriginalPostMainExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      showOriginalPostId: parsedJson['id'],
+      showOriginalPostPage: APIBLMShowOriginalPostMainExtendedPage.fromJson(parsedJson['page']),
+      showOriginalPostBody: parsedJson['body'],
+      showOriginalPostLocation: parsedJson['location'],
+      showOriginalPostLatitude: parsedJson['latitude'],
+      showOriginalPostLongitude: parsedJson['longitude'],
+      showOriginalPostImagesOrVideos: newList,
+      showOriginalPostPostTagged: taggedList,
+      showOriginalPostCreateAt: parsedJson['created_at'],
+      showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
+      showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
+      showOriginalPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIBLMShowOriginalPostMainExtendedPage{
-  int id;
-  String name;
-  APIRegularShowOriginalPostMainExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIBLMShowOriginalPostMainExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int showOriginalPostPageId;
+  String showOriginalPostPageName;
+  APIRegularShowOriginalPostMainExtendedPageDetails showOriginalPostPageDetails;
+  dynamic showOriginalPostPageBackgroundImage;
+  dynamic showOriginalPostPageProfileImage;
+  dynamic showOriginalPostPageImagesOrVideos;
+  String showOriginalPostPageRelationship;
+  APIBLMShowOriginalPostMainExtendedPageCreator showOriginalPostPagePageCreator;
+  bool showOriginalPostPageManage;
+  bool showOriginalPostPageFamOrFriends;
+  bool showOriginalPostPageFollower;
+  String showOriginalPostPagePageType;
+  String showOriginalPostPagePrivacy;
 
-  APIBLMShowOriginalPostMainExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIBLMShowOriginalPostMainExtendedPage({this.showOriginalPostPageId, this.showOriginalPostPageName, this.showOriginalPostPageDetails, this.showOriginalPostPageBackgroundImage, this.showOriginalPostPageProfileImage, this.showOriginalPostPageImagesOrVideos, this.showOriginalPostPageRelationship, this.showOriginalPostPagePageCreator, this.showOriginalPostPageManage, this.showOriginalPostPageFamOrFriends, this.showOriginalPostPageFollower, this.showOriginalPostPagePageType, this.showOriginalPostPagePrivacy});
 
   factory APIBLMShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostMainExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularShowOriginalPostMainExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIBLMShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      showOriginalPostPageId: parsedJson['id'],
+      showOriginalPostPageName: parsedJson['name'],
+      showOriginalPostPageDetails: APIRegularShowOriginalPostMainExtendedPageDetails.fromJson(parsedJson['details']),
+      showOriginalPostPageBackgroundImage: parsedJson['backgroundImage'],
+      showOriginalPostPageProfileImage: parsedJson['profileImage'],
+      showOriginalPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      showOriginalPostPageRelationship: parsedJson['relationship'],
+      showOriginalPostPagePageCreator: APIBLMShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      showOriginalPostPageManage: parsedJson['manage'],
+      showOriginalPostPageFamOrFriends: parsedJson['famOrFriends'],
+      showOriginalPostPageFollower: parsedJson['follower'],
+      showOriginalPostPagePageType: parsedJson['page_type'],
+      showOriginalPostPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularShowOriginalPostMainExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String showOriginalPostPageDetailsDescription;
+  String showOriginalPostPageDetailsBirthPlace;
+  String showOriginalPostPageDetailsDob;
+  String showOriginalPostPageDetailsRip;
+  String showOriginalPostPageDetailsCemetery;
+  String showOriginalPostPageDetailsCountry;
 
-  APIRegularShowOriginalPostMainExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularShowOriginalPostMainExtendedPageDetails({this.showOriginalPostPageDetailsDescription, this.showOriginalPostPageDetailsBirthPlace, this.showOriginalPostPageDetailsDob, this.showOriginalPostPageDetailsRip, this.showOriginalPostPageDetailsCemetery, this.showOriginalPostPageDetailsCountry});
 
   factory APIRegularShowOriginalPostMainExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      showOriginalPostPageDetailsDescription: parsedJson['description'],
+      showOriginalPostPageDetailsBirthPlace: parsedJson['birthplace'],
+      showOriginalPostPageDetailsDob: parsedJson['dob'],
+      showOriginalPostPageDetailsRip: parsedJson['rip'],
+      showOriginalPostPageDetailsCemetery: parsedJson['cemetery'],
+      showOriginalPostPageDetailsCountry: parsedJson['country'],
     );
   }
 }

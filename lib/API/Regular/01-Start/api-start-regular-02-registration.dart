@@ -36,7 +36,7 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
       result = message;
     }
   }catch(e){
-    print('The e is $e');
+    print('Error in registration: $e');
     result = 'Something went wrong. Please try again.';
   }
 

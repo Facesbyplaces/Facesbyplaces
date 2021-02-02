@@ -36,6 +36,7 @@ Future<bool> apiBLMAddReply({int commentId, dynamic replyBody}) async{
       result = true;
     }
   }catch(e){
+    print('Error in show post - add reply: $e');
     result = false;
   }
 

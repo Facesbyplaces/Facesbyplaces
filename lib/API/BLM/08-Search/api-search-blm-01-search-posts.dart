@@ -27,38 +27,38 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({String keywords, int page}) asyn
 }
 
 class APIBLMSearchPostMain{
-  int itemsRemaining;
-  List<APIBLMSearchPostExtended> searchPostList;
+  int blmItemsRemaining;
+  List<APIBLMSearchPostExtended> blmSearchPostList;
 
-  APIBLMSearchPostMain({this.itemsRemaining, this.searchPostList});
+  APIBLMSearchPostMain({this.blmItemsRemaining, this.blmSearchPostList});
 
   factory APIBLMSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMSearchPostExtended> familyMemorials = newList.map((i) => APIBLMSearchPostExtended.fromJson(i)).toList();
 
     return APIBLMSearchPostMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      searchPostList: familyMemorials,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmSearchPostList: familyMemorials,
     );
   }
 }
 
 
 class APIBLMSearchPostExtended{
-  int postId;
-  APIBLMSearchPostExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIBLMHomeProfilePostExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int searchPostPostId;
+  APIBLMSearchPostExtendedPage searchPostPage;
+  String searchPostBody;
+  String searchPostLocation;
+  double searchPostLatitude;
+  double searchPostLongitude;
+  List<dynamic> searchPostImagesOrVideos;
+  List<APIBLMHomeProfilePostExtendedTagged> searchPostPostTagged;
+  String searchPostCreateAt;
+  int searchPostNumberOfLikes;
+  int searchPostNumberOfComments;
+  bool searchPostLikeStatus;
 
-  APIBLMSearchPostExtended({this.postId, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMSearchPostExtended({this.searchPostPostId, this.searchPostPage, this.searchPostBody, this.searchPostLocation, this.searchPostLatitude, this.searchPostLongitude, this.searchPostImagesOrVideos, this.searchPostPostTagged, this.searchPostCreateAt, this.searchPostNumberOfLikes, this.searchPostNumberOfComments, this.searchPostLikeStatus});
 
   factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -73,100 +73,100 @@ class APIBLMSearchPostExtended{
     List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();
     
     return APIBLMSearchPostExtended(
-      postId: parsedJson['id'],
-      page: APIBLMSearchPostExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      searchPostPostId: parsedJson['id'],
+      searchPostPage: APIBLMSearchPostExtendedPage.fromJson(parsedJson['page']),
+      searchPostBody: parsedJson['body'],
+      searchPostLocation: parsedJson['location'],
+      searchPostLatitude: parsedJson['latitude'],
+      searchPostLongitude: parsedJson['longitude'],
+      searchPostImagesOrVideos: newList,
+      searchPostPostTagged: taggedList,
+      searchPostCreateAt: parsedJson['created_at'],
+      searchPostNumberOfLikes: parsedJson['numberOfLikes'],
+      searchPostNumberOfComments: parsedJson['numberOfComments'],
+      searchPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIBLMSearchPostExtendedPage{
-  int pageId;
-  String name;
-  APIBLMPostExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int searchPostPagePageId;
+  String searchPostPageName;
+  APIBLMPostExtendedPageDetails searchPostPageDetails;
+  dynamic searchPostPageBackgroundImage;
+  dynamic searchPostPageProfileImage;
+  dynamic searchPostPageImagesOrVideos;
+  String searchPostPageRelationship;
+  APIBLMHomeTabPostExtendedPageCreator searchPostPagePageCreator;
+  bool searchPostPageManage;
+  bool searchPostPageFamOrFriends;
+  bool searchPostPageFollower;
+  String searchPostPagePageType;
+  String searchPostPagePrivacy;
 
-  APIBLMSearchPostExtendedPage({this.pageId, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIBLMSearchPostExtendedPage({this.searchPostPagePageId, this.searchPostPageName, this.searchPostPageDetails, this.searchPostPageBackgroundImage, this.searchPostPageProfileImage, this.searchPostPageImagesOrVideos, this.searchPostPageRelationship, this.searchPostPagePageCreator, this.searchPostPageManage, this.searchPostPageFamOrFriends, this.searchPostPageFollower, this.searchPostPagePageType, this.searchPostPagePrivacy});
 
   factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedPage(
-      pageId: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIBLMPostExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      searchPostPagePageId: parsedJson['id'],
+      searchPostPageName: parsedJson['name'],
+      searchPostPageDetails: APIBLMPostExtendedPageDetails.fromJson(parsedJson['details']),
+      searchPostPageBackgroundImage: parsedJson['backgroundImage'],
+      searchPostPageProfileImage: parsedJson['profileImage'],
+      searchPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      searchPostPageRelationship: parsedJson['relationship'],
+      searchPostPagePageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchPostPageManage: parsedJson['manage'],
+      searchPostPageFamOrFriends: parsedJson['famOrFriends'],
+      searchPostPageFollower: parsedJson['follower'],
+      searchPostPagePageType: parsedJson['page_type'],
+      searchPostPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIBLMPostExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String searchPostPageDetailsDescription;
+  String searchPostPageDetailsBirthPlace;
+  String searchPostPageDetailsDob;
+  String searchPostPageDetailsRip;
+  String searchPostPageDetailsCemetery;
+  String searchPostPageDetailsCountry;
 
-  APIBLMPostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIBLMPostExtendedPageDetails({this.searchPostPageDetailsDescription, this.searchPostPageDetailsBirthPlace, this.searchPostPageDetailsDob, this.searchPostPageDetailsRip, this.searchPostPageDetailsCemetery, this.searchPostPageDetailsCountry});
 
   factory APIBLMPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMPostExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      searchPostPageDetailsDescription: parsedJson['description'],
+      searchPostPageDetailsBirthPlace: parsedJson['birthplace'],
+      searchPostPageDetailsDob: parsedJson['dob'],
+      searchPostPageDetailsRip: parsedJson['rip'],
+      searchPostPageDetailsCemetery: parsedJson['cemetery'],
+      searchPostPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIBLMHomeTabPostExtendedPageCreator{
-  int creatorId;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int searchPostPageCreatorCreatorId;
+  String searchPostPageCreatorFirstName;
+  String searchPostPageCreatorLastName;
+  String searchPostPageCreatorPhoneNumber;
+  String searchPostPageCreatorEmail;
+  String searchPostPageCreatorUserName;
+  dynamic searchPostPageCreatorImage;
 
-  APIBLMHomeTabPostExtendedPageCreator({this.creatorId, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMHomeTabPostExtendedPageCreator({this.searchPostPageCreatorCreatorId, this.searchPostPageCreatorFirstName, this.searchPostPageCreatorLastName, this.searchPostPageCreatorPhoneNumber, this.searchPostPageCreatorEmail, this.searchPostPageCreatorUserName, this.searchPostPageCreatorImage});
 
   factory APIBLMHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPageCreator(
-      creatorId: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      searchPostPageCreatorCreatorId: parsedJson['id'],
+      searchPostPageCreatorFirstName: parsedJson['first_name'],
+      searchPostPageCreatorLastName: parsedJson['last_name'],
+      searchPostPageCreatorPhoneNumber: parsedJson['phone_number'],
+      searchPostPageCreatorEmail: parsedJson['email'],
+      searchPostPageCreatorUserName: parsedJson['username'],
+      searchPostPageCreatorImage: parsedJson['image']
     );
   }
 }

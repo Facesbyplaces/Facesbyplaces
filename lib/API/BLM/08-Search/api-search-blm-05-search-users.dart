@@ -27,41 +27,41 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({String keywords, int page}) asy
 }
 
 class APIBLMSearchUsersMain{
-  int itemsRemaining;
-  List<APIBLMSearchUsersExtended> users;
+  int blmItemsRemaining;
+  List<APIBLMSearchUsersExtended> blmUsers;
 
-  APIBLMSearchUsersMain({this.itemsRemaining, this.users});
+  APIBLMSearchUsersMain({this.blmItemsRemaining, this.blmUsers});
 
   factory APIBLMSearchUsersMain.fromJson(Map<String, dynamic> parsedJson){
     var newValue = parsedJson['users'] as List;
     List<APIBLMSearchUsersExtended> newBLMList = newValue.map((e) => APIBLMSearchUsersExtended.fromJson(e)).toList();
 
     return APIBLMSearchUsersMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      users: newBLMList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmUsers: newBLMList,
     );
   }
 }
 
 class APIBLMSearchUsersExtended{
-  int userId;
-  String firstName;
-  String lastName;
-  String email;
-  int accountType;
-  String image;
+  int searchUsersUserId;
+  String searchUsersFirstName;
+  String searchUsersLastName;
+  String searchUsersEmail;
+  int searchUsersAccountType;
+  String searchUsersImage;
 
-  APIBLMSearchUsersExtended({this.userId, this.firstName, this.lastName, this.email, this.accountType, this.image});
+  APIBLMSearchUsersExtended({this.searchUsersUserId, this.searchUsersFirstName, this.searchUsersLastName, this.searchUsersEmail, this.searchUsersAccountType, this.searchUsersImage});
 
   factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMSearchUsersExtended(
-      userId: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      email: parsedJson['email'],
-      accountType: parsedJson['account_type'],
-      image: parsedJson['image'],
+      searchUsersUserId: parsedJson['id'],
+      searchUsersFirstName: parsedJson['first_name'],
+      searchUsersLastName: parsedJson['last_name'],
+      searchUsersEmail: parsedJson['email'],
+      searchUsersAccountType: parsedJson['account_type'],
+      searchUsersImage: parsedJson['image'],
     );
   }
 }

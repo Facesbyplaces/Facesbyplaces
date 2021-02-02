@@ -25,6 +25,7 @@ Future<bool> apiRegularHideAddress({bool hide}) async{
     }
       
   }catch(e){
+    print('Error in settings hide address: $e');
     result = false;
   }
 

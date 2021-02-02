@@ -18,10 +18,6 @@ Future<bool> apiRegularVerificationCodeResend() async{
     }
   );
 
-  print('The status code for password change is ${response.statusCode}');
-  print('The status body for password change is ${response.body}');
-  print('The status headers for password change is ${response.headers}');
-
   if(response.statusCode == 200){
     return true;
   }else{

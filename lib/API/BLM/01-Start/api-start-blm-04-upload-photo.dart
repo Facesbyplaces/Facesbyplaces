@@ -35,7 +35,7 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
       result = true;
     }
   }catch(e){
-    print('The e is $e');
+    print('Error in upload photo: $e');
     result = false;
   }
   return result;

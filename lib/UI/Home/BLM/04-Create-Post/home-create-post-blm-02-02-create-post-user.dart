@@ -38,17 +38,17 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
   void onLoading() async{
     if(itemRemaining != 0){
       var newValue = await apiBLMSearchUsers(keywords: controller.text, page: page);
-      itemRemaining = newValue.itemsRemaining;
+      itemRemaining = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.users.length; i++){
+      for(int i = 0; i < newValue.blmUsers.length; i++){
         users.add(
           BLMSearchUsers(
-            userId: newValue.users[i].userId, 
-            firstName: newValue.users[i].firstName, 
-            lastName: newValue.users[i].lastName, 
-            email: newValue.users[i].email,
-            accountType: newValue.users[i].accountType,
-            image: newValue.users[i].image,
+            userId: newValue.blmUsers[i].searchUsersUserId, 
+            firstName: newValue.blmUsers[i].searchUsersFirstName, 
+            lastName: newValue.blmUsers[i].searchUsersLastName,
+            email: newValue.blmUsers[i].searchUsersEmail,
+            accountType: newValue.blmUsers[i].searchUsersAccountType,
+            image: newValue.blmUsers[i].searchUsersImage,
           )
         );
       }

@@ -25,6 +25,7 @@ Future<bool> apiRegularHideBirthdate({bool hide}) async{
     }
       
   }catch(e){
+    print('Error in settings hide birthdate: $e');
     result = false;
   }
 

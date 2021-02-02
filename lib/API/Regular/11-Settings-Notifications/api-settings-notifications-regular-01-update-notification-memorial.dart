@@ -20,13 +20,12 @@ Future<bool> apiRegularUpdateNotificationMemorial({bool hide}) async{
       }
     );
 
-    print('The notification setting 1 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+    print('Error in notification update memorial: $e');
     result = false;
   }
 

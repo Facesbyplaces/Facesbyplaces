@@ -34,7 +34,7 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
     }
     
   }catch(e){
-    print('The e is $e');
+    print('Error in upload photo: $e');
     result = false;
   }
   return result;

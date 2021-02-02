@@ -22,27 +22,25 @@ Future<APIBLMShowSwitchStatus> apiBLMShowSwitchStatus({int memorialId}) async{
     var newValue = json.decode(response.body);
     return APIBLMShowSwitchStatus.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the lists.');
+    throw Exception('Failed to show switch status');
   }
 }
 
-
-
 class APIBLMShowSwitchStatus{
-  bool family;
-  bool friends;
-  bool followers;
-  bool success;
+  bool switchStatusFamily;
+  bool switchStatusFriends;
+  bool switchStatusFollowers;
+  bool switchStatusSuccess;
 
-  APIBLMShowSwitchStatus({this.family, this.friends, this.followers, this.success});
+  APIBLMShowSwitchStatus({this.switchStatusFamily, this.switchStatusFriends, this.switchStatusFollowers, this.switchStatusSuccess});
 
   factory APIBLMShowSwitchStatus.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMShowSwitchStatus(
-      family: parsedJson['family'],
-      friends: parsedJson['friends'],
-      followers: parsedJson['followers'],
-      success: true,
+      switchStatusFamily: parsedJson['family'],
+      switchStatusFriends: parsedJson['friends'],
+      switchStatusFollowers: parsedJson['followers'],
+      switchStatusSuccess: true,
     );
   }
 }

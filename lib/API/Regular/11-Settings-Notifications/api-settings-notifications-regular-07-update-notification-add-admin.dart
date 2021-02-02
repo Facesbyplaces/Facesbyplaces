@@ -20,13 +20,12 @@ Future<bool> apiRegularUpdateNotificationAddAdmin({bool hide}) async{
       }
     );
 
-    print('The notification setting 7 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+    print('Error in notification update add admin: $e');
     result = false;
   }
 

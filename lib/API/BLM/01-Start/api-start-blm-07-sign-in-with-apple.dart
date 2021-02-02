@@ -10,21 +10,11 @@ Future<bool> apiBLMSignInWithApple({String userIdentification, String identityTo
     }
   );
 
-  print('The status code for sign in with apple in blm is ${response.statusCode}');
-  // print('The status body for sign in with apple in blm is ${response.body}');
-  // print('The status headers for sign in with apple in blm is ${response.headers}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     var newValue = value['user'];
     int userId = newValue['id'];
-    // int userId = value['user'];
     final sharedPrefs = await SharedPreferences.getInstance();
-
-    print('The id is $userId');
-    print('The access token is ${response.headers['access-token']}');
-    print('The uid is ${response.headers['uid']}');
-    print('The client is ${response.headers['client']}');
 
     sharedPrefs.setInt('blm-user-id', userId);
     sharedPrefs.setString('blm-access-token', response.headers['access-token']);

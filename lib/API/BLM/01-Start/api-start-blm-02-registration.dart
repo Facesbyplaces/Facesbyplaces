@@ -35,6 +35,7 @@ Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
       result = message;
     }
   }catch(e){
+    print('Error in registration: $e');
     result = 'Something went wrong. Please try again.';
   }
 

@@ -26,6 +26,7 @@ Future<bool> apiBLMHideEmail({bool hide}) async{
     }
       
   }catch(e){
+    print('Error in settings hide email: $e');
     result = false;
   }
 

@@ -43,7 +43,7 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
 
     
   }catch(e){
-    print('The page details is $e');
+    print('Error in page update details: $e');
     result = false;
   }
 

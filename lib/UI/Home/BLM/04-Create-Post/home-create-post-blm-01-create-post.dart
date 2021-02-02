@@ -64,12 +64,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     var newValue = await apiBLMShowListOfManagedPages();
     context.hideLoaderOverlay();
 
-    for(int i = 0; i < newValue.pagesList.length; i++){
+    for(int i = 0; i < newValue.blmPagesList.length; i++){
       managedPages.add(
         BLMManagedPages(
-          name: newValue.pagesList[i].name, 
-          pageId: newValue.pagesList[i].id,
-          image: newValue.pagesList[i].profileImage,
+          name: newValue.blmPagesList[i].blmManagedPagesName, 
+          pageId: newValue.blmPagesList[i].blmManagedPagesId,
+          image: newValue.blmPagesList[i].blmManagedPagesProfileImage,
         )
       );
     }
@@ -191,14 +191,14 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   newFiles.addAll(slideImages);
 
                   APIBLMCreatePost post = APIBLMCreatePost(
-                    pageType: 'Blm',
-                    postBody: _key1.currentState.controller.text,
-                    pageId: currentIdSelected,
-                    location: newLocation,
-                    imagesOrVideos: newFiles,
-                    latitude: locationData.latitude,
-                    longitude: locationData.longitude,
-                    tagPeople: userIds,
+                    blmPostPageType: 'Blm',
+                    blmPostPostBody: _key1.currentState.controller.text,
+                    blmPostPageId: currentIdSelected,
+                    blmPostLocation: newLocation,
+                    blmPostImagesOrVideos: newFiles,
+                    blmPostLatitude: locationData.latitude,
+                    blmPostLongitude: locationData.longitude,
+                    blmPostTagPeople: userIds,
                   );
 
                   

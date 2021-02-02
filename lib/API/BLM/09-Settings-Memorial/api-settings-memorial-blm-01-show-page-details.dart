@@ -28,89 +28,89 @@ Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({int memorialId}) async{
 
 class APIBLMShowPageDetailsMain{
 
-  APIBLMShowPageDetailsExtended memorial;
+  APIBLMShowPageDetailsExtended blmMemorial;
 
-  APIBLMShowPageDetailsMain({this.memorial});
+  APIBLMShowPageDetailsMain({this.blmMemorial});
 
   factory APIBLMShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsMain(
-      memorial: APIBLMShowPageDetailsExtended.fromJson(parsedJson['blm']),
+      blmMemorial: APIBLMShowPageDetailsExtended.fromJson(parsedJson['blm']),
     );
   }
 }
 
 
 class APIBLMShowPageDetailsExtended{
-  int id;
-  String name;
-  APIBLMShowPageDetailsExtendedDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIBLMShowPageDetailsExtendedPageCreator pageCreator;
+  int showPageDetailsId;
+  String showPageDetailsName;
+  APIBLMShowPageDetailsExtendedDetails showPageDetailsDetails;
+  dynamic showPageDetailsBackgroundImage;
+  dynamic showPageDetailsProfileImage;
+  dynamic showPageDetailsImagesOrVideos;
+  String showPageDetailsRelationship;
+  APIBLMShowPageDetailsExtendedPageCreator showPageDetailsPageCreator;
 
-  APIBLMShowPageDetailsExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIBLMShowPageDetailsExtended({this.showPageDetailsId, this.showPageDetailsName, this.showPageDetailsDetails, this.showPageDetailsBackgroundImage, this.showPageDetailsProfileImage, this.showPageDetailsImagesOrVideos, this.showPageDetailsRelationship, this.showPageDetailsPageCreator});
 
   factory APIBLMShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtended(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIBLMShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIBLMShowPageDetailsExtendedPageCreator.fromJson(parsedJson['page_creator'])
+      showPageDetailsId: parsedJson['id'],
+      showPageDetailsName: parsedJson['name'],
+      showPageDetailsDetails: APIBLMShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
+      showPageDetailsBackgroundImage: parsedJson['backgroundImage'],
+      showPageDetailsProfileImage: parsedJson['profileImage'],
+      showPageDetailsImagesOrVideos: parsedJson['imagesOrVideos'],
+      showPageDetailsRelationship: parsedJson['relationship'],
+      showPageDetailsPageCreator: APIBLMShowPageDetailsExtendedPageCreator.fromJson(parsedJson['page_creator'])
     );
   }
 }
 
 
 class APIBLMShowPageDetailsExtendedDetails{
-  String description;
-  String location;
-  String precinct;
-  String dob;
-  String rip;
-  String state;
-  String country;
+  String showPageDetailsDetailsDescription;
+  String showPageDetailsDetailsLocation;
+  String showPageDetailsDetailsPrecinct;
+  String showPageDetailsDetailsDob;
+  String showPageDetailsDetailsRip;
+  String showPageDetailsDetailsState;
+  String showPageDetailsDetailsCountry;
 
-  APIBLMShowPageDetailsExtendedDetails({this.description, this.location, this.precinct, this.dob, this.rip, this.state, this.country});
+  APIBLMShowPageDetailsExtendedDetails({this.showPageDetailsDetailsDescription, this.showPageDetailsDetailsLocation, this.showPageDetailsDetailsPrecinct, this.showPageDetailsDetailsDob, this.showPageDetailsDetailsRip, this.showPageDetailsDetailsState, this.showPageDetailsDetailsCountry});
 
   factory APIBLMShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedDetails(
-      description: parsedJson['description'],
-      location: parsedJson['location'],
-      precinct: parsedJson['precinct'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      state: parsedJson['state'],
-      country: parsedJson['country'],
+      showPageDetailsDetailsDescription: parsedJson['description'],
+      showPageDetailsDetailsLocation: parsedJson['location'],
+      showPageDetailsDetailsPrecinct: parsedJson['precinct'],
+      showPageDetailsDetailsDob: parsedJson['dob'],
+      showPageDetailsDetailsRip: parsedJson['rip'],
+      showPageDetailsDetailsState: parsedJson['state'],
+      showPageDetailsDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIBLMShowPageDetailsExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showPageDetailsPageCreatorId;
+  String showPageDetailsPageCreatorFirstName;
+  String showPageDetailsPageCreatorLastName;
+  String showPageDetailsPageCreatorPhoneNumber;
+  String showPageDetailsPageCreatorEmail;
+  String showPageDetailsPageCreatorUserName;
+  dynamic showPageDetailsPageCreatorImage;
 
-  APIBLMShowPageDetailsExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMShowPageDetailsExtendedPageCreator({this.showPageDetailsPageCreatorId, this.showPageDetailsPageCreatorFirstName, this.showPageDetailsPageCreatorLastName, this.showPageDetailsPageCreatorPhoneNumber, this.showPageDetailsPageCreatorEmail, this.showPageDetailsPageCreatorUserName, this.showPageDetailsPageCreatorImage});
 
   factory APIBLMShowPageDetailsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      showPageDetailsPageCreatorId: parsedJson['id'],
+      showPageDetailsPageCreatorFirstName: parsedJson['first_name'],
+      showPageDetailsPageCreatorLastName: parsedJson['last_name'],
+      showPageDetailsPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showPageDetailsPageCreatorEmail: parsedJson['email'],
+      showPageDetailsPageCreatorUserName: parsedJson['username'],
+      showPageDetailsPageCreatorImage: parsedJson['image']
     );
   }
 }

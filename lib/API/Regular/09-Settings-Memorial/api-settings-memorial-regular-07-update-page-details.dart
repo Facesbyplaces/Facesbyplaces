@@ -39,6 +39,7 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
     }
     
   }catch(e){
+    print('Error in update page details: $e');
     result = false;
   }
 

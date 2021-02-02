@@ -22,15 +22,15 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({int memorialI
     var newValue = json.decode(response.body);
     return APIBLMConnectionListFamilyMain.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the lists.');
+    throw Exception('Failed to show list of family members');
   }
 }
 
 class APIBLMConnectionListFamilyMain{
-  int itemsRemaining;
-  List<APIBLMConnectionListFamilyExtended> familyList;
+  int blmItemsRemaining;
+  List<APIBLMConnectionListFamilyExtended> blmFamilyList;
 
-  APIBLMConnectionListFamilyMain({this.itemsRemaining, this.familyList});
+  APIBLMConnectionListFamilyMain({this.blmItemsRemaining, this.blmFamilyList});
 
   factory APIBLMConnectionListFamilyMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,42 +38,42 @@ class APIBLMConnectionListFamilyMain{
     List<APIBLMConnectionListFamilyExtended> familyList = newList1.map((i) => APIBLMConnectionListFamilyExtended.fromJson(i)).toList();
 
     return APIBLMConnectionListFamilyMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      familyList: familyList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFamilyList: familyList,
     );
   }
 }
 
 
 class APIBLMConnectionListFamilyExtended{
-  APIBLMConnectionListFamilyExtendedDetails user;
-  String relationship;
+  APIBLMConnectionListFamilyExtendedDetails connectionListFamilyUser;
+  String connectionListFamilyRelationship;
 
-  APIBLMConnectionListFamilyExtended({this.user, this.relationship});
+  APIBLMConnectionListFamilyExtended({this.connectionListFamilyUser, this.connectionListFamilyRelationship});
 
   factory APIBLMConnectionListFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFamilyExtended(
-      user: APIBLMConnectionListFamilyExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
+      connectionListFamilyUser: APIBLMConnectionListFamilyExtendedDetails.fromJson(parsedJson['user']),
+      connectionListFamilyRelationship: parsedJson['relationship'],
     );
   }
 }
 
 class APIBLMConnectionListFamilyExtendedDetails{
 
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
+  int connectionListFamilyDetailsId;
+  String connectionListFamilyDetailsFirstName;
+  String connectionListFamilyDetailsLastName;
+  dynamic connectionListFamilyDetailsImage;
 
-  APIBLMConnectionListFamilyExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIBLMConnectionListFamilyExtendedDetails({this.connectionListFamilyDetailsId, this.connectionListFamilyDetailsFirstName, this.connectionListFamilyDetailsLastName, this.connectionListFamilyDetailsImage});
 
   factory APIBLMConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFamilyExtendedDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
+      connectionListFamilyDetailsId: parsedJson['id'],
+      connectionListFamilyDetailsFirstName: parsedJson['first_name'],
+      connectionListFamilyDetailsLastName: parsedJson['last_name'],
+      connectionListFamilyDetailsImage: parsedJson['image'],
     );
   }
 }

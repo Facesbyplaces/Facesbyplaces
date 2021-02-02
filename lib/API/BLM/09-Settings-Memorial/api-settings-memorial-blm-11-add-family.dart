@@ -33,15 +33,12 @@ Future<bool> apiBLMAddFamily({int memorialId, int userId, String relationship, i
       ),  
     );
 
-    print('The response status code is ${response.statusCode}');
-    print('The response status body is ${response.data}');
-
-
     if(response.statusCode == 200){
       result = true;
     }
     
   }catch(e){
+    print('Error in add family member: $e');
     result = false;
   }
 

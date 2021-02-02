@@ -289,24 +289,24 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     Location.LocationData locationData = await location.getLocation();
 
                     APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
-                      relationship: newValue.relationship,
-                      locationOfIncident: newValue.location,
-                      precinct: newValue.precinct,
-                      dob: convertDate(newValue.dob),
-                      rip: convertDate(newValue.rip),
-                      country: newValue.country,
-                      state: newValue.state,
-                      memorialName: newValue.blmName,
-                      description: newValue.description,
-                      backgroundImage: backgroundImage,
-                      profileImage: profileImage,
-                      imagesOrVideos: newValue.imagesOrVideos,
-                      latitude: locationData.latitude.toString(),
-                      longitude: locationData.longitude.toString()
+                      blmRelationship: newValue.relationship,
+                      blmLocationOfIncident: newValue.location,
+                      blmPrecinct: newValue.precinct,
+                      blmDob: convertDate(newValue.dob),
+                      blmRip: convertDate(newValue.rip),
+                      blmCountry: newValue.country,
+                      blmState: newValue.state,
+                      blmMemorialName: newValue.blmName,
+                      blmDescription: newValue.description,
+                      blmBackgroundImage: backgroundImage,
+                      blmProfileImage: profileImage,
+                      blmImagesOrVideos: newValue.imagesOrVideos,
+                      blmLatitude: locationData.latitude.toString(),
+                      blmLongitude: locationData.longitude.toString()
                     );
 
                     context.showLoaderOverlay();
-                    int result = await apiBLMCreateMemorial(memorial: memorial);
+                    int result = await apiBLMCreateMemorial(blmMemorial: memorial);
                     context.hideLoaderOverlay();
 
                     if(result != 0){

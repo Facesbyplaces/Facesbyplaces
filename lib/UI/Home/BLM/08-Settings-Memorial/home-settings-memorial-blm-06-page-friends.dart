@@ -43,17 +43,17 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
     if(friendsItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMShowFriendsSettings(memorialId: memorialId, page: page);
-      friendsItemsRemaining = newValue.itemsRemaining;
+      friendsItemsRemaining = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.friendsList.length; i++){
+      for(int i = 0; i < newValue.blmFriendsList.length; i++){
         friendsList.add(
           BLMShowFriendsSettings(
-            userId: newValue.friendsList[i].user.id,
-            firstName: newValue.friendsList[i].user.firstName,
-            lastName: newValue.friendsList[i].user.lastName,
-            image: newValue.friendsList[i].user.image,
-            relationship: newValue.friendsList[i].relationship,
-            accountType: newValue.friendsList[i].user.accountType,
+            userId: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId,
+            firstName: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName,
+            lastName: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName,
+            image: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,
+            relationship: newValue.blmFriendsList[i].showFriendsSettingsRelationship,
+            accountType: newValue.blmFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType,
           ),
         );
       }

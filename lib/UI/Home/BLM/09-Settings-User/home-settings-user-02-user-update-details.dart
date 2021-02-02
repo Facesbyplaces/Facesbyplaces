@@ -79,23 +79,23 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                     child: Column(
                       children: [
 
-                        MiscBLMInputFieldTemplate(key: _key1, labelText: 'First Name', displayText: details.data.firstName,),
+                        MiscBLMInputFieldTemplate(key: _key1, labelText: 'First Name', displayText: details.data.showAccountDetailsFirstName,),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', displayText: details.data.lastName,),
+                        MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', displayText: details.data.showAccountDetailsLastName,),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        MiscBLMInputFieldTemplate(key: _key3, labelText: 'Email Address', displayText: details.data.email, type: TextInputType.emailAddress,),
+                        MiscBLMInputFieldTemplate(key: _key3, labelText: 'Email Address', displayText: details.data.showAccountDetailsEmail, type: TextInputType.emailAddress,),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        MiscBLMPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data.phoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                        MiscBLMPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data.question,),
+                        MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data.showAccountDetailsQuestion,),
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
@@ -110,11 +110,11 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                           ), 
                           onPressed: () async{
                               if(
-                                details.data.firstName != _key1.currentState.controller.text ||
-                                details.data.lastName !=  _key2.currentState.controller.text ||
-                                details.data.email != _key3.currentState.controller.text ||
-                                details.data.phoneNumber != _key4.currentState.controller.text || 
-                                details.data.question != _key5.currentState.currentSelection
+                                details.data.showAccountDetailsFirstName != _key1.currentState.controller.text ||
+                                details.data.showAccountDetailsLastName !=  _key2.currentState.controller.text ||
+                                details.data.showAccountDetailsEmail != _key3.currentState.controller.text ||
+                                details.data.showAccountDetailsPhoneNumber != _key4.currentState.controller.text || 
+                                details.data.showAccountDetailsQuestion != _key5.currentState.currentSelection
                               ){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 

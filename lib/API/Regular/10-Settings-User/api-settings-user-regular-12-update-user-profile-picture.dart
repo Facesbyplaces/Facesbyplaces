@@ -32,7 +32,7 @@ Future<bool> apiRegularUpdateUserProfilePicture({dynamic image, int userId}) asy
     }
     
   }catch(e){
-    print('The e is $e');
+    print('Error in settings update user profile $e');
     result = false;
   }
   return result;

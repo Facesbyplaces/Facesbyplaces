@@ -18,9 +18,6 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
     }
   );
 
-  print('The status code of show user is ${response.statusCode}');
-  print('The status body of show user is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowProfileInformation.fromJson(newValue);

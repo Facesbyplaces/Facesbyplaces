@@ -43,13 +43,13 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
           var blmProfile = await apiBLMShowMemorial(memorialId: postId);
           context.hideLoaderOverlay();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.memorial.blmFollower,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
         }else if(notificationType == 'Post'){
           context.showLoaderOverlay();
           var result = await apiBLMShowOriginalPost(postId: postId);                
           context.hideLoaderOverlay();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: result.post.likeStatus, numberOfLikes: result.post.numberOfLikes)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: result.blmPost.showOriginalPostLikeStatus, numberOfLikes: result.blmPost.showOriginalPostNumberOfLikes)));
         }
       },
       leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),

@@ -38,8 +38,6 @@ import 'UI/BLM/blm-04-verify-email.dart';
 import 'UI/BLM/blm-05-upload-photo.dart';
 import 'UI/ui-01-get-started.dart';
 import 'UI/ui-02-login.dart';
-// import 'UI/ui-03-notifications.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,11 +45,6 @@ void main() async{
   final sharedPrefs = await SharedPreferences.getInstance();
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
-  
-  // FlutterBranchSdk.logout();
-  // print('Logout!');
-
-  // FlutterBranchSdk.validateSDKIntegration();
 
   runApp(
     GlobalLoaderOverlay(
@@ -73,11 +66,9 @@ void main() async{
             return UIGetStarted();
           }
         }()),
-        // home: UINotifications(),
         initialRoute: '/',
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
-          // cardColor: Colors.purple,
           cardColor: Color(0xff4EC9D4),
         ),
         routes: <String, WidgetBuilder>{

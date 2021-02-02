@@ -27,9 +27,9 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
 }
 
 class APIBLMShowListOfManagedPages{
-  List<APIBLMShowListOfManagedPagesExtended> pagesList;
+  List<APIBLMShowListOfManagedPagesExtended> blmPagesList;
 
-  APIBLMShowListOfManagedPages({this.pagesList});
+  APIBLMShowListOfManagedPages({this.blmPagesList});
 
   factory APIBLMShowListOfManagedPages.fromJson(Map<String, dynamic> parsedJson){
 
@@ -37,24 +37,24 @@ class APIBLMShowListOfManagedPages{
     List<APIBLMShowListOfManagedPagesExtended> pagesList = newList1.map((i) => APIBLMShowListOfManagedPagesExtended.fromJson(i)).toList();
 
     return APIBLMShowListOfManagedPages(
-      pagesList: pagesList,
+      blmPagesList: pagesList,
     );
   }
 }
 
 
 class APIBLMShowListOfManagedPagesExtended{
-  int id;
-  String name;
-  dynamic profileImage;
+  int blmManagedPagesId;
+  String blmManagedPagesName;
+  dynamic blmManagedPagesProfileImage;
 
-  APIBLMShowListOfManagedPagesExtended({this.id, this.name, this.profileImage});
+  APIBLMShowListOfManagedPagesExtended({this.blmManagedPagesId, this.blmManagedPagesName, this.blmManagedPagesProfileImage});
 
   factory APIBLMShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfManagedPagesExtended(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      profileImage: parsedJson['profileImage'],
+      blmManagedPagesId: parsedJson['id'],
+      blmManagedPagesName: parsedJson['name'],
+      blmManagedPagesProfileImage: parsedJson['profileImage'],
     );
   }
 }

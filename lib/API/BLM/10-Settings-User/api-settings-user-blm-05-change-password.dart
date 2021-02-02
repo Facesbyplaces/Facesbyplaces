@@ -34,6 +34,7 @@ Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) 
     }
     
   }catch(e){
+    print('Error in settings change password: $e');
     result = false;
   }
 

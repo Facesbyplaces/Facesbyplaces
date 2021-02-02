@@ -136,7 +136,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                       onTap: () async{
                                         
                                       },
-                                      child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.post.page.profileImage != null ? NetworkImage(originalPost.data.post.page.profileImage) : AssetImage('assets/icons/app-icon.png')),
+                                      child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
                                     ),
                                     Expanded(
                                       child: Container(
@@ -145,7 +145,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                           children: [
                                             Expanded(
                                               child: Align(alignment: Alignment.bottomLeft,
-                                                child: Text(originalPost.data.post.page.name,
+                                                child: Text(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageName,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -158,7 +158,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                             Expanded(
                                               child: Align(
                                                 alignment: Alignment.topLeft,
-                                                child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)),
+                                                child: Text(timeago.format(DateTime.parse(originalPost.data.blmPost.showOriginalPostCreateAt)),
                                                   maxLines: 1,
                                                   style: TextStyle(
                                                     fontSize: SizeConfig.safeBlockHorizontal * 3,
@@ -177,23 +177,23 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                 ),
                               ),
 
-                              Container(alignment: Alignment.centerLeft, child: Text(originalPost.data.post.body),),
+                              Container(alignment: Alignment.centerLeft, child: Text(originalPost.data.blmPost.showOriginalPostBody),),
 
-                              originalPost.data.post.imagesOrVideos != null
+                              originalPost.data.blmPost.showOriginalPostImagesOrVideos != null
                               ? Container(
                                 height: SizeConfig.blockSizeVertical * 30,
                                 child: ((){
-                                  if(originalPost.data.post.imagesOrVideos != null){
-                                    if(originalPost.data.post.imagesOrVideos.length == 1){
+                                  if(originalPost.data.blmPost.showOriginalPostImagesOrVideos != null){
+                                    if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 1){
                                       return Container(
                                         child: CachedNetworkImage(
                                           fit: BoxFit.cover,
-                                          imageUrl: originalPost.data.post.imagesOrVideos[0],
+                                          imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[0],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                         ),
                                       );
-                                    }else if(originalPost.data.post.imagesOrVideos.length == 2){
+                                    }else if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 2){
                                       return StaggeredGridView.countBuilder(
                                         padding: EdgeInsets.zero,
                                         physics: NeverScrollableScrollPhysics(),
@@ -211,10 +211,10 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
                                                       child: CarouselSlider(
                                                         items: List.generate(
-                                                          originalPost.data.post.imagesOrVideos.length, (next) =>
+                                                          originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
                                                           CachedNetworkImage(
                                                             fit: BoxFit.cover,
-                                                            imageUrl: originalPost.data.post.imagesOrVideos[next],
+                                                            imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                           ),
@@ -234,7 +234,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                             },
                                             child: CachedNetworkImage(
                                               fit: BoxFit.cover,
-                                              imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                              imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                             ),
@@ -262,10 +262,10 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
                                                       child: CarouselSlider(
                                                         items: List.generate(
-                                                          originalPost.data.post.imagesOrVideos.length, (next) =>
+                                                          originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
                                                           CachedNetworkImage(
                                                             fit: BoxFit.cover,
-                                                            imageUrl: originalPost.data.post.imagesOrVideos[next],
+                                                            imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                           ),
@@ -287,15 +287,15 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                               if(index != 1){
                                                 return CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                  imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 );
                                               }else{
-                                                return originalPost.data.post.imagesOrVideos.length - 3 == 0
+                                                return originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3 == 0
                                                 ? CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                  imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 )
@@ -303,7 +303,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                   children: [
                                                     CachedNetworkImage(
                                                       fit: BoxFit.cover,
-                                                      imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                      imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                     ),
@@ -315,7 +315,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                         radius: SizeConfig.blockSizeVertical * 3,
                                                         backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                         child: Text(
-                                                          '${originalPost.data.post.imagesOrVideos.length - 3}',
+                                                          '${originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3}',
                                                           style: TextStyle(
                                                             fontSize: SizeConfig.safeBlockHorizontal * 7,
                                                             fontWeight: FontWeight.bold,
@@ -342,7 +342,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                               )
                               : Container(color: Colors.red, height: 0,),
 
-                              originalPost.data.post.postTagged.length != 0
+                              originalPost.data.blmPost.showOriginalPostPostTagged.length != 0
                               ? Row(
                                 children: [
                                   Text('with'),
@@ -352,22 +352,22 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                       direction: Axis.vertical,
                                       spacing: 5.0,
                                       children: List.generate(
-                                        originalPost.data.post.postTagged.length,
+                                        originalPost.data.blmPost.showOriginalPostPostTagged.length,
                                         (index) => GestureDetector(
                                           onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.post.postTagged[index].taggedId)));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].taggedId)));
                                           },
                                           child: RichText(
                                             text: TextSpan(
                                               style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                               children: <TextSpan>[
-                                                TextSpan(text: originalPost.data.post.postTagged[index].taggedFirstName,),
+                                                TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].taggedFirstName,),
 
                                                 TextSpan(text: ' '),
 
-                                                TextSpan(text: originalPost.data.post.postTagged[index].taggedLastName,),
+                                                TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].taggedLastName,),
 
-                                                index < originalPost.data.post.postTagged.length - 1
+                                                index < originalPost.data.blmPost.showOriginalPostPostTagged.length - 1
                                                 ? TextSpan(text: ',')
                                                 : TextSpan(text: ''),
                                               ],
@@ -422,7 +422,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                     GestureDetector(
                                       onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.post.page.id)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId)));
                                       },
                                       child: Row(
                                         children: [
@@ -430,7 +430,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                           SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                          Text('${originalPost.data.post.numberOfComments}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                          Text('${originalPost.data.blmPost.showOriginalPostNumberOfComments}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                                         ],
                                       ),
                                     ),

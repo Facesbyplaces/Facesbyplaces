@@ -110,7 +110,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               image: backgroundImage != null
                               ? AssetImage(backgroundImage.path)
                               : CachedNetworkImageProvider(
-                                memorialImageSettings.data.memorial.backgroundImage.toString(),
+                                memorialImageSettings.data.blmMemorial.showPageImagesBackgroundImage.toString(),
                               ),
                             ),
                           ),
@@ -133,7 +133,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                         backgroundImage: profileImage != null
                                         ? AssetImage(profileImage.path)
                                         : CachedNetworkImageProvider(
-                                          memorialImageSettings.data.memorial.profileImage.toString()
+                                          memorialImageSettings.data.blmMemorial.showPageImagesProfileImage.toString()
                                         ),
                                       ),
                                     ),

@@ -82,39 +82,39 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                         physics: ClampingScrollPhysics(),
                         children: [
 
-                          MiscBLMInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.memorial.name,),
+                          MiscBLMInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.blmMemorial.showPageDetailsName,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldTemplate(key: _key2, labelText: 'Description', displayText: memorialSettings.data.memorial.details.description,),
+                          MiscBLMInputFieldTemplate(key: _key2, labelText: 'Description', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldDropDown(key: _key3, displayText: memorialSettings.data.memorial.relationship,),
+                          MiscBLMInputFieldDropDown(key: _key3, displayText: memorialSettings.data.blmMemorial.showPageDetailsRelationship,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldTemplate(key: _key4, labelText: 'Location', displayText: memorialSettings.data.memorial.details.location,),
+                          MiscBLMInputFieldTemplate(key: _key4, labelText: 'Location', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldDateTimeTemplate(key: _key5, labelText: 'DOB', displayText: memorialSettings.data.memorial.details.dob,),
+                          MiscBLMInputFieldDateTimeTemplate(key: _key5, labelText: 'DOB', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldDateTimeTemplate(key: _key6, labelText: 'RIP', displayText: memorialSettings.data.memorial.details.rip,),
+                          MiscBLMInputFieldDateTimeTemplate(key: _key6, labelText: 'RIP', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldTemplate(key: _key7, labelText: 'State', displayText: memorialSettings.data.memorial.details.state,),
+                          MiscBLMInputFieldTemplate(key: _key7, labelText: 'State', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldTemplate(key: _key8, labelText: 'Country', displayText: memorialSettings.data.memorial.details.country,),
+                          MiscBLMInputFieldTemplate(key: _key8, labelText: 'Country', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscBLMInputFieldTemplate(key: _key9, labelText: 'Precinct', displayText: memorialSettings.data.memorial.details.precinct,),
+                          MiscBLMInputFieldTemplate(key: _key9, labelText: 'Precinct', displayText: memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct,),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
@@ -128,15 +128,15 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                             onPressed: () async{
 
                               if(
-                                memorialSettings.data.memorial.name != _key1.currentState.controller.text ||
-                                memorialSettings.data.memorial.details.description !=  _key2.currentState.controller.text ||
-                                memorialSettings.data.memorial.relationship != _key3.currentState.currentSelection ||
-                                memorialSettings.data.memorial.details.location != _key4.currentState.controller.text ||
-                                convertDate(memorialSettings.data.memorial.details.dob) != convertDate(_key5.currentState.controller.text) ||
-                                convertDate(memorialSettings.data.memorial.details.rip) != convertDate(_key6.currentState.controller.text) ||
-                                memorialSettings.data.memorial.details.state != _key7.currentState.controller.text ||
-                                memorialSettings.data.memorial.details.country != _key8.currentState.controller.text ||
-                                memorialSettings.data.memorial.details.precinct != _key9.currentState.controller.text
+                                memorialSettings.data.blmMemorial.showPageDetailsName != _key1.currentState.controller.text ||
+                                memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription !=  _key2.currentState.controller.text ||
+                                memorialSettings.data.blmMemorial.showPageDetailsRelationship != _key3.currentState.currentSelection ||
+                                memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState.controller.text ||
+                                convertDate(memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key5.currentState.controller.text) ||
+                                convertDate(memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key6.currentState.controller.text) ||
+                                memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState.controller.text ||
+                                memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState.controller.text ||
+                                memorialSettings.data.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState.controller.text
                               ){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 

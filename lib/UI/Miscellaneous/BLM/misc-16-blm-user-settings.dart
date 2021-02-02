@@ -165,7 +165,7 @@ class MiscBLMUserProfileDetailsDraggableState extends State<MiscBLMUserProfileDe
                 APIBLMShowOtherDetailsStatus result = await apiBLMShowOtherDetailsStatus(userId: userId);
                 context.hideLoaderOverlay();
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: userId, toggleBirthdate: result.hideBirthdate, toggleBirthplace: result.hideBirthplace, toggleAddress: result.hideAddress, toggleEmail: result.hideEmail, toggleNumber: result.hidePhoneNumber)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserOtherDetails(userId: userId, toggleBirthdate: result.showOtherdetailsStatusHideBirthdate, toggleBirthplace: result.showOtherdetailsStatusHideBirthplace, toggleAddress: result.showOtherdetailsStatusHideAddress, toggleEmail: result.showOtherdetailsStatusHideEmail, toggleNumber: result.showOtherdetailsStatusHidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,

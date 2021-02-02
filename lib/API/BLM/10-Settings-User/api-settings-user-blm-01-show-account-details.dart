@@ -27,21 +27,21 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({int userId}) async{
 }
 
 class APIBLMShowAccountDetails{
-  String firstName;
-  String lastName;
-  String email;
-  String phoneNumber;
-  String question;
+  String showAccountDetailsFirstName;
+  String showAccountDetailsLastName;
+  String showAccountDetailsEmail;
+  String showAccountDetailsPhoneNumber;
+  String showAccountDetailsQuestion;
   
-  APIBLMShowAccountDetails({this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
+  APIBLMShowAccountDetails({this.showAccountDetailsFirstName, this.showAccountDetailsLastName, this.showAccountDetailsEmail, this.showAccountDetailsPhoneNumber, this.showAccountDetailsQuestion});
 
   factory APIBLMShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAccountDetails(
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      email: parsedJson['email'],
-      phoneNumber: parsedJson['phone_number'],
-      question: parsedJson['question'],
+      showAccountDetailsFirstName: parsedJson['first_name'],
+      showAccountDetailsLastName: parsedJson['last_name'],
+      showAccountDetailsEmail: parsedJson['email'],
+      showAccountDetailsPhoneNumber: parsedJson['phone_number'],
+      showAccountDetailsQuestion: parsedJson['question'],
     );
   }
 }

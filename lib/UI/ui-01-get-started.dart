@@ -6,9 +6,9 @@ import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'Regular/regular-07-password-reset.dart';
 import 'BLM/blm-07-password-reset.dart';
@@ -68,8 +68,6 @@ class UIGetStartedState extends State<UIGetStarted>{
   StreamSubscription<Map> streamSubscription;
   static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final pushNotificationService = PushNotificationService(_firebaseMessaging);
-
-  // var pushNotificationService;
 
   void listenDeepLinkData(){
     streamSubscription = FlutterBranchSdk.initSession().listen((data) {
@@ -131,19 +129,7 @@ class UIGetStartedState extends State<UIGetStarted>{
   }
 
   pushNotifications() async{
-    // return await sendAndRetrieveMessage();
     await sendAndRetrieveMessage();
-
-    // var pushNotificationMessage = await sendAndRetrieveMessage();
-
-    // print('The pushNotificationMessage is $pushNotificationMessage');
-
-    // FirebaseMessaging
-
-    // pushNotificationService
-
-    // final pushNotificationService = PushNotificationService();
-    // pushNotificationMessage
   }
 
   void initState(){

@@ -41,8 +41,6 @@ class APIBLMShowUserInformation{
   APIBLMShowUserInformation({this.id, this.firstName, this.lastName, this.birthdate, this.birthplace, this.homeAddress, this.emailAddress, this.contactNumber, this.image});
 
   factory APIBLMShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
-    // String newBirthdate = parsedJson['birthdate'];
-    // DateTime dateTime = DateTime.parse(newBirthdate);
 
     DateTime dateTime;
     String newBirthdate;
@@ -56,15 +54,6 @@ class APIBLMShowUserInformation{
     }
 
     return APIBLMShowUserInformation(
-      // id: parsedJson['id'],
-      // firstName: parsedJson['first_name'],
-      // lastName: parsedJson['last_name'],
-      // birthdate: dateTime.format(AmericanDateFormats.standardWithComma),
-      // birthplace: parsedJson['birthplace'],
-      // homeAddress: parsedJson['address'],
-      // emailAddress: parsedJson['email'],
-      // contactNumber: parsedJson['phone_number'],
-      // image: parsedJson['image'],
       firstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
       lastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
       birthdate: newBirthdate,

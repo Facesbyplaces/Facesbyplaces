@@ -18,9 +18,6 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({int userId, int pag
     }
   );
 
-  print('The user memorials is ${response.statusCode}');
-  print('The user memorials is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowUserMemorialsMain.fromJson(newValue);

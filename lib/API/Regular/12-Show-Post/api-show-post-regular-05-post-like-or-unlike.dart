@@ -35,6 +35,7 @@ Future<bool> apiRegularLikeOrUnlikePost({int postId, bool like}) async{
       result = true;
     }
   }catch(e){
+    print('Error in show post - post like or unlike: $e');
     result = false;
   }
 

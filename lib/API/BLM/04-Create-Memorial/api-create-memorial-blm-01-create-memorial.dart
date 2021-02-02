@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial memorial}) async{
+Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial blmMemorial}) async{
   
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -16,43 +16,42 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial memorial}) async{
     var formData;
     formData = FormData();
     formData.files.addAll([
-      MapEntry('blm[name]', MultipartFile.fromString(memorial.memorialName,),),
-      MapEntry('blm[description]', MultipartFile.fromString(memorial.description,),),
-      MapEntry('blm[location]', MultipartFile.fromString(memorial.locationOfIncident,),),
-      MapEntry('blm[dob]', MultipartFile.fromString(memorial.dob,),),
-      MapEntry('blm[rip]', MultipartFile.fromString(memorial.rip,),),
-      MapEntry('blm[state]', MultipartFile.fromString(memorial.state,),),
-      MapEntry('blm[country]', MultipartFile.fromString(memorial.country,),),
-      MapEntry('blm[precinct]', MultipartFile.fromString(memorial.precinct,),),
-      MapEntry('relationship', MultipartFile.fromString(memorial.relationship,),),
+      MapEntry('blm[name]', MultipartFile.fromString(blmMemorial.blmMemorialName,),),
+      MapEntry('blm[description]', MultipartFile.fromString(blmMemorial.blmDescription,),),
+      MapEntry('blm[location]', MultipartFile.fromString(blmMemorial.blmLocationOfIncident,),),
+      MapEntry('blm[dob]', MultipartFile.fromString(blmMemorial.blmDob,),),
+      MapEntry('blm[rip]', MultipartFile.fromString(blmMemorial.blmRip,),),
+      MapEntry('blm[state]', MultipartFile.fromString(blmMemorial.blmState,),),
+      MapEntry('blm[country]', MultipartFile.fromString(blmMemorial.blmCountry,),),
+      MapEntry('blm[precinct]', MultipartFile.fromString(blmMemorial.blmPrecinct,),),
+      MapEntry('relationship', MultipartFile.fromString(blmMemorial.blmRelationship,),),
     ]);
 
-    if(memorial.latitude != null){
-      MapEntry('blm[latitude]', MultipartFile.fromString(memorial.latitude,),);
+    if(blmMemorial.blmLatitude != null){
+      MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),);
     }
 
-    if(memorial.longitude != null){
-      MapEntry('blm[longitude]', MultipartFile.fromString(memorial.longitude,),);
+    if(blmMemorial.blmLongitude != null){
+      MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),);
     }
 
-    if(memorial.backgroundImage != null || memorial.backgroundImage != ''){
-      var file = await dio.MultipartFile.fromFile(memorial.backgroundImage.path, filename: memorial.backgroundImage.path);
+    if(blmMemorial.blmBackgroundImage != null || blmMemorial.blmBackgroundImage != ''){
+      var file = await dio.MultipartFile.fromFile(blmMemorial.blmBackgroundImage.path, filename: blmMemorial.blmBackgroundImage.path);
       formData.files.add(MapEntry('blm[backgroundImage]', file));
     }
     
-    if(memorial.profileImage != null || memorial.profileImage != ''){
-      var file = await dio.MultipartFile.fromFile(memorial.profileImage.path, filename: memorial.profileImage.path);
+    if(blmMemorial.blmProfileImage != null || blmMemorial.blmProfileImage != ''){
+      var file = await dio.MultipartFile.fromFile(blmMemorial.blmProfileImage.path, filename: blmMemorial.blmProfileImage.path);
       formData.files.add(MapEntry('blm[profileImage]', file));
     }
     
-    if(memorial.imagesOrVideos != null || memorial.imagesOrVideos != ['']){
-      for(int i = 0; i < memorial.imagesOrVideos.length; i++){
-        if(memorial.imagesOrVideos[i].path != null || memorial.imagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos[i].path, filename: memorial.imagesOrVideos[i].path);
+    if(blmMemorial.blmImagesOrVideos != null || blmMemorial.blmImagesOrVideos != ['']){
+      for(int i = 0; i < blmMemorial.blmImagesOrVideos.length; i++){
+        if(blmMemorial.blmImagesOrVideos[i].path != null || blmMemorial.blmImagesOrVideos != ['']){
+          var file = await dio.MultipartFile.fromFile(blmMemorial.blmImagesOrVideos[i].path, filename: blmMemorial.blmImagesOrVideos[i].path);
           formData.files.add(MapEntry('blm[imagesOrVideos][]', file));
         }
       }
-
     }
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/blm', data: formData,
@@ -80,35 +79,35 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial memorial}) async{
 }
 
 class APIBLMCreateMemorial{
-  String memorialName;
-  String description;
-  String locationOfIncident;
-  String dob;
-  String rip;
-  String state;
-  String country;
-  String precinct;
-  String relationship;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  List<dynamic> imagesOrVideos;
-  String latitude;
-  String longitude;
+  String blmMemorialName;
+  String blmDescription;
+  String blmLocationOfIncident;
+  String blmDob;
+  String blmRip;
+  String blmState;
+  String blmCountry;
+  String blmPrecinct;
+  String blmRelationship;
+  dynamic blmBackgroundImage;
+  dynamic blmProfileImage;
+  List<dynamic> blmImagesOrVideos;
+  String blmLatitude;
+  String blmLongitude;
 
   APIBLMCreateMemorial({
-    this.memorialName, 
-    this.description, 
-    this.locationOfIncident, 
-    this.dob, 
-    this.rip, 
-    this.state, 
-    this.country, 
-    this.precinct, 
-    this.relationship, 
-    this.backgroundImage, 
-    this.profileImage, 
-    this.imagesOrVideos,
-    this.latitude,
-    this.longitude,
+    this.blmMemorialName, 
+    this.blmDescription, 
+    this.blmLocationOfIncident, 
+    this.blmDob, 
+    this.blmRip, 
+    this.blmState, 
+    this.blmCountry, 
+    this.blmPrecinct, 
+    this.blmRelationship, 
+    this.blmBackgroundImage, 
+    this.blmProfileImage, 
+    this.blmImagesOrVideos,
+    this.blmLatitude,
+    this.blmLongitude,
   });
 }

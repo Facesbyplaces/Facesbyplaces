@@ -103,7 +103,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                         Row(
                           children: [
-                            Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.birthdate,),),
+                            Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.blmShowOtherDetailsBirthdate,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -127,7 +127,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                         Row(
                           children: [
-                            Expanded(child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.birthplace,),),
+                            Expanded(child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.blmShowOtherDetailsBirthplace,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -151,7 +151,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                         Row(
                           children: [
-                            Expanded(child: MiscBLMInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.address,),),
+                            Expanded(child: MiscBLMInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.blmShowOtherDetailsAddress,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -179,7 +179,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                         Row(
                           children: [
-                            Expanded(child: MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.email, type: TextInputType.emailAddress,),),
+                            Expanded(child: MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.blmShowOtherDetailsEmail, type: TextInputType.emailAddress,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -206,7 +206,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                         Row(
                           children: [
-                            Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.phoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),),
+                            Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -238,11 +238,11 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           onPressed: () async{
 
                             if(
-                              details.data.birthdate != _key1.currentState.controller.text ||
-                              details.data.birthplace !=  _key2.currentState.controller.text ||
-                              details.data.address != _key3.currentState.controller.text ||
-                              details.data.email != _key4.currentState.controller.text ||
-                              details.data.phoneNumber != _key5.currentState.controller.text
+                              details.data.blmShowOtherDetailsBirthdate != _key1.currentState.controller.text ||
+                              details.data.blmShowOtherDetailsBirthplace !=  _key2.currentState.controller.text ||
+                              details.data.blmShowOtherDetailsAddress != _key3.currentState.controller.text ||
+                              details.data.blmShowOtherDetailsEmail != _key4.currentState.controller.text ||
+                              details.data.blmShowOtherDetailsPhoneNumber != _key5.currentState.controller.text
                             ){
                               bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 

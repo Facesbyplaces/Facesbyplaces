@@ -12,10 +12,6 @@ Future<bool> apiRegularPasswordChange({String password, String passwordConfirmat
     }
   );
 
-  print('The status code of password change is ${response.statusCode}');
-  print('The status body of password change is ${response.body}');
-  print('The status headers of password change is ${response.headers}');
-
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     var user = value['data'];

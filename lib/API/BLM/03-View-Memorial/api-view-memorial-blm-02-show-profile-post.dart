@@ -22,45 +22,44 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({int memorialId, int page}) 
     var newValue = json.decode(response.body);
     return APIBLMHomeProfilePostMain.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Failed to show profile posts');
   }
-
 }
 
 
 class APIBLMHomeProfilePostMain{
-  int itemsRemaining;
-  List<APIBLMHomeProfilePostExtended> familyMemorialList;
+  int blmItemsRemaining;
+  List<APIBLMHomeProfilePostExtended> blmFamilyMemorialList;
 
-  APIBLMHomeProfilePostMain({this.itemsRemaining, this.familyMemorialList});
+  APIBLMHomeProfilePostMain({this.blmItemsRemaining, this.blmFamilyMemorialList});
 
   factory APIBLMHomeProfilePostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMHomeProfilePostExtended> familyMemorials = newList.map((i) => APIBLMHomeProfilePostExtended.fromJson(i)).toList();
 
     return APIBLMHomeProfilePostMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      familyMemorialList: familyMemorials,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFamilyMemorialList: familyMemorials,
     );
   }
 }
 
 
 class APIBLMHomeProfilePostExtended{
-  int id;
-  APIBLMHomeProfilePostExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIBLMHomeProfilePostExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int profilePostId;
+  APIBLMHomeProfilePostExtendedPage profilePostPage;
+  String profilePostBody;
+  String profilePostLocation;
+  double profilePostLatitude;
+  double profilePostLongitude;
+  List<dynamic> profilePostImagesOrVideos;
+  List<APIBLMHomeProfilePostExtendedTagged> profilePostPostTagged;
+  String profilePostCreateAt;
+  int profilePostNumberOfLikes;
+  int profilePostNumberOfComments;
+  bool profilePostLikeStatus;
 
-  APIBLMHomeProfilePostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMHomeProfilePostExtended({this.profilePostId, this.profilePostPage, this.profilePostBody, this.profilePostLocation, this.profilePostLatitude, this.profilePostLongitude, this.profilePostImagesOrVideos, this.profilePostPostTagged, this.profilePostCreateAt, this.profilePostNumberOfLikes, this.profilePostNumberOfComments, this.profilePostLikeStatus});
 
   factory APIBLMHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -75,118 +74,118 @@ class APIBLMHomeProfilePostExtended{
     List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();
     
     return APIBLMHomeProfilePostExtended(
-      id: parsedJson['id'],
-      page: APIBLMHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      profilePostId: parsedJson['id'],
+      profilePostPage: APIBLMHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
+      profilePostBody: parsedJson['body'],
+      profilePostLocation: parsedJson['location'],
+      profilePostLatitude: parsedJson['latitude'],
+      profilePostLongitude: parsedJson['longitude'],
+      profilePostImagesOrVideos: newList1,
+      profilePostPostTagged: taggedList,
+      profilePostCreateAt: parsedJson['created_at'],
+      profilePostNumberOfLikes: parsedJson['numberOfLikes'],
+      profilePostNumberOfComments: parsedJson['numberOfComments'],
+      profilePostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIBLMHomeProfilePostExtendedPage{
-  int id;
-  String name;
-  APIBLMHomeProfilePostExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIBLMHomeProfilePostExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int profilePageId;
+  String profilePageName;
+  APIBLMHomeProfilePostExtendedPageDetails profilePageDetails;
+  dynamic profilePageBackgroundImage;
+  dynamic profilePageProfileImage;
+  dynamic profilePageImagesOrVideos;
+  String profilePageRelationship;
+  APIBLMHomeProfilePostExtendedPageCreator profilePagePageCreator;
+  bool profilePageManage;
+  bool profilePageFamOrFriends;
+  bool profilePageFollower;
+  String profilePagePageType;
+  String profilePagePrivacy;
 
-  APIBLMHomeProfilePostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIBLMHomeProfilePostExtendedPage({this.profilePageId, this.profilePageName, this.profilePageDetails, this.profilePageBackgroundImage, this.profilePageProfileImage, this.profilePageImagesOrVideos, this.profilePageRelationship, this.profilePagePageCreator, this.profilePageManage, this.profilePageFamOrFriends, this.profilePageFollower, this.profilePagePageType, this.profilePagePrivacy});
 
   factory APIBLMHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIBLMHomeProfilePostExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIBLMHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      profilePageId: parsedJson['id'],
+      profilePageName: parsedJson['name'],
+      profilePageDetails: APIBLMHomeProfilePostExtendedPageDetails.fromJson(parsedJson['details']),
+      profilePageBackgroundImage: parsedJson['backgroundImage'],
+      profilePageProfileImage: parsedJson['profileImage'],
+      profilePageImagesOrVideos: parsedJson['imagesOrVideos'],
+      profilePageRelationship: parsedJson['relationship'],
+      profilePagePageCreator: APIBLMHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      profilePageManage: parsedJson['manage'],
+      profilePageFamOrFriends: parsedJson['famOrFriends'],
+      profilePageFollower: parsedJson['follower'],
+      profilePagePageType: parsedJson['page_type'],
+      profilePagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIBLMHomeProfilePostExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String profilePageDetailsDescription;
+  String profilePageDetailsBirthPlace;
+  String profilePageDetailsDob;
+  String profilePageDetailsRip;
+  String profilePageDetailsCemetery;
+  String profilePageDetailsCountry;
 
-  APIBLMHomeProfilePostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIBLMHomeProfilePostExtendedPageDetails({this.profilePageDetailsDescription, this.profilePageDetailsBirthPlace, this.profilePageDetailsDob, this.profilePageDetailsRip, this.profilePageDetailsCemetery, this.profilePageDetailsCountry});
 
   factory APIBLMHomeProfilePostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      profilePageDetailsDescription: parsedJson['description'],
+      profilePageDetailsBirthPlace: parsedJson['birthplace'],
+      profilePageDetailsDob: parsedJson['dob'],
+      profilePageDetailsRip: parsedJson['rip'],
+      profilePageDetailsCemetery: parsedJson['cemetery'],
+      profilePageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIBLMHomeProfilePostExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int profilePageCreatorId;
+  String profilePageCreatorFirstName;
+  String profilePageCreatorLastName;
+  String profilePageCreatorPhoneNumber;
+  String profilePageCreatorEmail;
+  String profilePageCreatorUserName;
+  dynamic profilePageCreatorImage;
 
-  APIBLMHomeProfilePostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMHomeProfilePostExtendedPageCreator({this.profilePageCreatorId, this.profilePageCreatorFirstName, this.profilePageCreatorLastName, this.profilePageCreatorPhoneNumber, this.profilePageCreatorEmail, this.profilePageCreatorUserName, this.profilePageCreatorImage});
 
   factory APIBLMHomeProfilePostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      profilePageCreatorId: parsedJson['id'],
+      profilePageCreatorFirstName: parsedJson['first_name'],
+      profilePageCreatorLastName: parsedJson['last_name'],
+      profilePageCreatorPhoneNumber: parsedJson['phone_number'],
+      profilePageCreatorEmail: parsedJson['email'],
+      profilePageCreatorUserName: parsedJson['username'],
+      profilePageCreatorImage: parsedJson['image']
     );
   }
 }
 
 class APIBLMHomeProfilePostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  int profilePageTaggedId;
+  String profilePageTaggedFirstName;
+  String profilePageTaggedLastName;
+  String profilePageTaggedImage;
 
-  APIBLMHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIBLMHomeProfilePostExtendedTagged({this.profilePageTaggedId, this.profilePageTaggedFirstName, this.profilePageTaggedLastName, this.profilePageTaggedImage});
 
   factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+      profilePageTaggedId: parsedJson['id'],
+      profilePageTaggedFirstName: parsedJson['first_name'],
+      profilePageTaggedLastName: parsedJson['last_name'],
+      profilePageTaggedImage: parsedJson['image']
     );
   }
 }

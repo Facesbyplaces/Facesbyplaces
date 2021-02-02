@@ -34,6 +34,7 @@ Future<bool> apiRegularAddMemorialAdmin({String pageType, int pageId, int userId
       result = true;
     }
   }catch(e){
+    print('Error in add admin: $e');
     result = false;
   }
 

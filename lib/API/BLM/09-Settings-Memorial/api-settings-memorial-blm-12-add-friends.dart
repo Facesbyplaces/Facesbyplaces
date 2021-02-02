@@ -38,7 +38,7 @@ Future<bool> apiBLMAddFriends({int memorialId, int userId, int accountType}) asy
     }
     
   }catch(e){
-    print('The e is $e');
+    print('Error in add friends: $e');
     result = false;
   }
 

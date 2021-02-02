@@ -27,10 +27,10 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({int mem
 }
 
 class APIBLMConnectionListFollowersMain{
-  int itemsRemaining;
-  List<APIBLMConnectionListFollowersExtendedDetails> followersList;
+  int blmItemsRemaining;
+  List<APIBLMConnectionListFollowersExtendedDetails> blmFollowersList;
 
-  APIBLMConnectionListFollowersMain({this.itemsRemaining, this.followersList});
+  APIBLMConnectionListFollowersMain({this.blmItemsRemaining, this.blmFollowersList});
 
   factory APIBLMConnectionListFollowersMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,27 +38,27 @@ class APIBLMConnectionListFollowersMain{
     List<APIBLMConnectionListFollowersExtendedDetails> familyList = newList1.map((i) => APIBLMConnectionListFollowersExtendedDetails.fromJson(i)).toList();
 
     return APIBLMConnectionListFollowersMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      followersList: familyList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFollowersList: familyList,
     );
   }
 }
 
 class APIBLMConnectionListFollowersExtendedDetails{
 
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
+  int connectionListFollowersId;
+  String connectionListFollowersFirstName;
+  String connectionListFollowersLastName;
+  dynamic connectionListFollowersImage;
 
-  APIBLMConnectionListFollowersExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIBLMConnectionListFollowersExtendedDetails({this.connectionListFollowersId, this.connectionListFollowersFirstName, this.connectionListFollowersLastName, this.connectionListFollowersImage});
 
   factory APIBLMConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFollowersExtendedDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
+      connectionListFollowersId: parsedJson['id'],
+      connectionListFollowersFirstName: parsedJson['first_name'],
+      connectionListFollowersLastName: parsedJson['last_name'],
+      connectionListFollowersImage: parsedJson['image'],
     );
   }
 }

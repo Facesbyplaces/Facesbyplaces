@@ -38,6 +38,7 @@ Future<bool> apiRegularUpdateOtherDetails({String birthdate, String birthplace, 
     }
     
   }catch(e){
+    print('Error in settings update other details: $e');
     result = false;
   }
 

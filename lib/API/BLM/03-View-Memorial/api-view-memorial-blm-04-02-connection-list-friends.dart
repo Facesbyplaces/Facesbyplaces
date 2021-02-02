@@ -27,10 +27,10 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({int memoria
 }
 
 class APIBLMConnectionListFriendsMain{
-  int itemsRemaining;
-  List<APIBLMConnectionListFriendsExtended> friendsList;
+  int blmItemsRemaining;
+  List<APIBLMConnectionListFriendsExtended> blmFriendsList;
 
-  APIBLMConnectionListFriendsMain({this.itemsRemaining, this.friendsList});
+  APIBLMConnectionListFriendsMain({this.blmItemsRemaining, this.blmFriendsList});
 
   factory APIBLMConnectionListFriendsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,42 +38,42 @@ class APIBLMConnectionListFriendsMain{
     List<APIBLMConnectionListFriendsExtended> familyList = newList1.map((i) => APIBLMConnectionListFriendsExtended.fromJson(i)).toList();
 
     return APIBLMConnectionListFriendsMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      friendsList: familyList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFriendsList: familyList,
     );
   }
 }
 
 
 class APIBLMConnectionListFriendsExtended{
-  APIBLMConnectionListFriendsExtendedDetails user;
-  String relationship;
+  APIBLMConnectionListFriendsExtendedDetails connectionListFriendsUser;
+  String connectionListFriendsRelationship;
 
-  APIBLMConnectionListFriendsExtended({this.user, this.relationship});
+  APIBLMConnectionListFriendsExtended({this.connectionListFriendsUser, this.connectionListFriendsRelationship});
 
   factory APIBLMConnectionListFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtended(
-      user: APIBLMConnectionListFriendsExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
+      connectionListFriendsUser: APIBLMConnectionListFriendsExtendedDetails.fromJson(parsedJson['user']),
+      connectionListFriendsRelationship: parsedJson['relationship'],
     );
   }
 }
 
 class APIBLMConnectionListFriendsExtendedDetails{
 
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
+  int connectionListFriendsDetailsId;
+  String connectionListFriendsDetailsFirstName;
+  String connectionListFriendsDetailsLastName;
+  dynamic connectionListFriendsDetailsImage;
 
-  APIBLMConnectionListFriendsExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIBLMConnectionListFriendsExtendedDetails({this.connectionListFriendsDetailsId, this.connectionListFriendsDetailsFirstName, this.connectionListFriendsDetailsLastName, this.connectionListFriendsDetailsImage});
 
   factory APIBLMConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtendedDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
+      connectionListFriendsDetailsId: parsedJson['id'],
+      connectionListFriendsDetailsFirstName: parsedJson['first_name'],
+      connectionListFriendsDetailsLastName: parsedJson['last_name'],
+      connectionListFriendsDetailsImage: parsedJson['image'],
     );
   }
 }

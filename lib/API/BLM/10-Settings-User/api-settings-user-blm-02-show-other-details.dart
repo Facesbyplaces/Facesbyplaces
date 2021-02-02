@@ -27,21 +27,21 @@ Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({int userId}) async{
 }
 
 class APIBLMShowOtherDetails{
-  String birthdate;
-  String birthplace;
-  String email;
-  String address;
-  String phoneNumber;
+  String blmShowOtherDetailsBirthdate;
+  String blmShowOtherDetailsBirthplace;
+  String blmShowOtherDetailsEmail;
+  String blmShowOtherDetailsAddress;
+  String blmShowOtherDetailsPhoneNumber;
 
-  APIBLMShowOtherDetails({this.birthdate, this.birthplace, this.email, this.address, this.phoneNumber});
+  APIBLMShowOtherDetails({this.blmShowOtherDetailsBirthdate, this.blmShowOtherDetailsBirthplace, this.blmShowOtherDetailsEmail, this.blmShowOtherDetailsAddress, this.blmShowOtherDetailsPhoneNumber});
 
   factory APIBLMShowOtherDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOtherDetails(
-      birthdate: parsedJson['birthdate'] != null ? parsedJson['birthdate'] : '',
-      birthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
-      email: parsedJson['email'] != null ? parsedJson['email'] : '',
-      address: parsedJson['address'] != null ? parsedJson['address'] : '',
-      phoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
+      blmShowOtherDetailsBirthdate: parsedJson['birthdate'] != null ? parsedJson['birthdate'] : '',
+      blmShowOtherDetailsBirthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
+      blmShowOtherDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      blmShowOtherDetailsAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
+      blmShowOtherDetailsPhoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
     );
   }
 }

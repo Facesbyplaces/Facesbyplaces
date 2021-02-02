@@ -17,17 +17,9 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
     var formData = FormData();
     List<Map<String, dynamic>> tagPeopleValue = [];
 
-    print('The length of tag people is ${post.tagPeople.length}');
-
     for(int i = 0; i < post.tagPeople.length; i++){
-      print('The index is $i and the user id is ${post.tagPeople[i].userId}');
-      print('The index is $i and the account type is ${post.tagPeople[i].accountType}');
       tagPeopleValue.add({'user_id': post.tagPeople[i].userId, 'account_type': post.tagPeople[i].accountType});
     }
-
-    print('The length of tagPeopleValue is ${tagPeopleValue.length}');
-    print('The tagPeopleValue is $tagPeopleValue');
-  
 
     formData = FormData.fromMap({
       'post[page_type]': post.pageType,
@@ -36,7 +28,6 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       'post[location]': post.location,
       'post[latitude]': post.latitude,
       'post[longitude]': post.longitude,
-      // 'tag_people': post.tagPeople,
       'tag_people': tagPeopleValue,
     });
 
@@ -49,9 +40,7 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       }
     }
 
-    var response = await dioRequest.post(
-      'http://fbp.dev1.koda.ws/api/v1/posts', data: formData,
-      // '', data: formData,
+    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/posts', data: formData,
       options: Options(
         headers: <String, String>{
           'access-token': getAccessToken,
@@ -61,14 +50,11 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       ),  
     );
 
-    print('The status code of create post is ${response.statusCode}');
-    print('The status code of create post is ${response.data}');
-
     if(response.statusCode == 200){
       result = true;
     }
   }catch(e){
-    print('The e is $e');
+    print('Error in create post: $e');
     result = false;
   }
 
@@ -83,7 +69,6 @@ class APIRegularCreatePost{
   List<dynamic> imagesOrVideos;
   double latitude;
   double longitude;
-  // List<int> tagPeople;
   List<RegularTaggedPeople> tagPeople;
   
   APIRegularCreatePost({

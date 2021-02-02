@@ -35,6 +35,7 @@ Future<bool> apiRegularChangePassword({String currentPassword, String newPasswor
     }
     
   }catch(e){
+    print('Error in settings change password: $e');
     result = false;
   }
 

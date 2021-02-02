@@ -26,6 +26,7 @@ Future<bool> apiBLMHideAddress({bool hide}) async{
     }
       
   }catch(e){
+    print('Error in settings hide address: $e');
     result = false;
   }
 

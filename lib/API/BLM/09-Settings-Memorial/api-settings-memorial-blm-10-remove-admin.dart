@@ -36,6 +36,7 @@ Future<bool> apiBLMDeleteMemorialAdmin({String pageType, int pageId, int userId}
       result = true;
     }
   }catch(e){
+    print('Error in delete memorial admin: $e');
     result = false;
   }
 

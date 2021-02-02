@@ -34,6 +34,7 @@ Future<bool> apiRegularDeleteMemorialAdmin({String pageType, int pageId, int use
       result = true;
     }
   }catch(e){
+    print('Error in remove admin: $e');
     result = false;
   }
 

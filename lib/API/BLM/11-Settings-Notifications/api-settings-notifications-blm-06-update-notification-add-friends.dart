@@ -21,13 +21,12 @@ Future<bool> apiBLMUpdateNotificationAddFriends({bool hide}) async{
       }
     );
 
-    print('The notification setting 6 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+    print('Error in notification update add friends: $e');
     result = false;
   }
 

@@ -18,9 +18,6 @@ Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({int page}) async{
     }
   );
 
-  print('The status code of feed is ${response.statusCode}');
-  print('The status body of feed is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMHomeTabFeedMain.fromJson(newValue);

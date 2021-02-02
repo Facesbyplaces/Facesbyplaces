@@ -18,9 +18,6 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({int memorialId, int
     }
   );
 
-  print('The show admin status code is ${response.statusCode}');
-  print('The show admin status body is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMShowAdminsSettingMain.fromJson(newValue);
@@ -30,12 +27,12 @@ Future<APIBLMShowAdminsSettingMain> apiBLMShowAdminSettings({int memorialId, int
 }
 
 class APIBLMShowAdminsSettingMain{
-  int adminItemsRemaining;
-  int familyItemsRemaining;
-  List<APIBLMShowAdminsSettingExtended> adminList;
-  List<APIBLMShowAdminsSettingExtended> familyList;
+  int blmAdminItemsRemaining;
+  int blmFamilyItemsRemaining;
+  List<APIBLMShowAdminsSettingExtended> blmAdminList;
+  List<APIBLMShowAdminsSettingExtended> blmFamilyList;
 
-  APIBLMShowAdminsSettingMain({this.adminItemsRemaining, this.familyItemsRemaining, this.adminList, this.familyList});
+  APIBLMShowAdminsSettingMain({this.blmAdminItemsRemaining, this.blmFamilyItemsRemaining, this.blmAdminList, this.blmFamilyList});
 
   factory APIBLMShowAdminsSettingMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -46,45 +43,45 @@ class APIBLMShowAdminsSettingMain{
     List<APIBLMShowAdminsSettingExtended> newList2 = familyList.map((i) => APIBLMShowAdminsSettingExtended.fromJson(i)).toList();
 
     return APIBLMShowAdminsSettingMain(
-      adminItemsRemaining: parsedJson['adminsitemsremaining'],
-      familyItemsRemaining: parsedJson['familyitemsremaining'],
-      adminList: newList1,
-      familyList: newList2,
+      blmAdminItemsRemaining: parsedJson['adminsitemsremaining'],
+      blmFamilyItemsRemaining: parsedJson['familyitemsremaining'],
+      blmAdminList: newList1,
+      blmFamilyList: newList2,
     );
   }
 }
 
 class APIBLMShowAdminsSettingExtended{
 
-  APIBLMShowAdminsSettingExtendedUser user;
-  String relationship;
+  APIBLMShowAdminsSettingExtendedUser showAdminsSettingsUser;
+  String showAdminsSettingsRelationship;
 
-  APIBLMShowAdminsSettingExtended({this.user, this.relationship});
+  APIBLMShowAdminsSettingExtended({this.showAdminsSettingsUser, this.showAdminsSettingsRelationship});
 
   factory APIBLMShowAdminsSettingExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtended(
-      user: APIBLMShowAdminsSettingExtendedUser.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship']
+      showAdminsSettingsUser: APIBLMShowAdminsSettingExtendedUser.fromJson(parsedJson['user']),
+      showAdminsSettingsRelationship: parsedJson['relationship']
     );
   }
 }
 
 class APIBLMShowAdminsSettingExtendedUser{
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
-  String email;
+  int showAdminsSettingsUserId;
+  String showAdminsSettingsUserFirstName;
+  String showAdminsSettingsUserLastName;
+  dynamic showAdminsSettingsUserImage;
+  String showAdminsSettingsUserEmail;
 
-  APIBLMShowAdminsSettingExtendedUser({this.id, this.firstName, this.lastName, this.image, this.email});
+  APIBLMShowAdminsSettingExtendedUser({this.showAdminsSettingsUserId, this.showAdminsSettingsUserFirstName, this.showAdminsSettingsUserLastName, this.showAdminsSettingsUserImage, this.showAdminsSettingsUserEmail});
 
   factory APIBLMShowAdminsSettingExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAdminsSettingExtendedUser(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
-      email: parsedJson['email'],
+      showAdminsSettingsUserId: parsedJson['id'],
+      showAdminsSettingsUserFirstName: parsedJson['first_name'],
+      showAdminsSettingsUserLastName: parsedJson['last_name'],
+      showAdminsSettingsUserImage: parsedJson['image'],
+      showAdminsSettingsUserEmail: parsedJson['email'],
     );
   }
 }

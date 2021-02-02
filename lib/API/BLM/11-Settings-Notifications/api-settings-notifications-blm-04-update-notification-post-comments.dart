@@ -21,13 +21,12 @@ Future<bool> apiBLMUpdateNotificationPostComments({bool hide}) async{
       }
     );
 
-    print('The notification setting 4 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+    print('Error in notification update post comments: $e');
     result = false;
   }
 

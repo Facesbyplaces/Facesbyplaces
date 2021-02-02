@@ -19,9 +19,6 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}
     }
   );
 
-  print('The status code of show user information is ${response.statusCode}');
-  print('The status code of show user information is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularShowUserInformation.fromJson(newValue);

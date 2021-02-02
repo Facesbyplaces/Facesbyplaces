@@ -21,13 +21,12 @@ Future<bool> apiBLMUpdateNotificationPostLikes({bool hide}) async{
       }
     );
 
-    print('The notification setting 3 is ${response.statusCode}');
-
     if(response.statusCode == 200){
       result = true;
     }
       
   }catch(e){
+    print('Error in notification update post likes: $e');
     result = false;
   }
 

@@ -43,17 +43,17 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
     if(familyItemsRemaining != 0){
       context.showLoaderOverlay();
       var newValue = await apiBLMShowFamilySettings(memorialId: memorialId, page: page);
-      familyItemsRemaining = newValue.itemsRemaining;
+      familyItemsRemaining = newValue.blmItemsRemaining;
 
-      for(int i = 0; i < newValue.familyList.length; i++){
+      for(int i = 0; i < newValue.blmFamilyList.length; i++){
         familyList.add(
           BLMShowFamilySettings(
-            userId: newValue.familyList[i].user.id,
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
-            accountType: newValue.familyList[i].user.accountType,
+            userId: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId,
+            firstName: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName,
+            lastName: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName,
+            image: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage,
+            relationship: newValue.blmFamilyList[i].showFamilySettingsRelationship,
+            accountType: newValue.blmFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType,
           ),
         );
       }
