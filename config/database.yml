@@ -32,8 +32,8 @@ development:
   encoding: utf8
   database: facesb9_db
   pool: 5
-  username: root
-  password:
+  username: facesb9_fbp
+  password: facesbyplaces
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
