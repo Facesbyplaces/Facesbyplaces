@@ -11,9 +11,8 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
@@ -98,7 +97,24 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
         }
       }
     }else{
-      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+      await showDialog(
+        context: context,
+        builder: (_) => 
+          AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          entryAnimation: EntryAnimation.DEFAULT,
+          description: Text('Something went wrong. Please try again.',
+            textAlign: TextAlign.center,
+            style: TextStyle(),
+          ),
+          onlyOkButton: true,
+          buttonOkColor: Colors.red,
+          onOkButtonPressed: () {
+            Navigator.pop(context, true);
+          },
+        )
+      );
     }
   }
 
@@ -406,7 +422,24 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                     Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                                     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                   }else{
-                                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Something went wrong. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
                                   }
                                   
                                 },

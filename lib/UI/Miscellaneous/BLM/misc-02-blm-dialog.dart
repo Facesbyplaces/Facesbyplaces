@@ -227,114 +227,19 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
   }
 }
 
-class MiscBLMAlertDialog extends StatelessWidget{
+// class MiscBLMAlertDialog extends StatelessWidget{
 
-  final String title;
-  final String content;
-  final String confirmText;
-  final Color color;
-
-  MiscBLMAlertDialog({
-    this.title = '',
-    this.content = '',
-    this.confirmText = 'OK',
-    this.color = Colors.red,
-  });
-
-  Widget build(BuildContext context){
-    SizeConfig.init(context);
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5))
-      ),
-      child: Container(
-        height: SizeConfig.screenHeight / 4,
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(title,
-                style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 5,
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
-              ),
-            ),
-            
-            Expanded(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(content,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff000000),
-                  ),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: (){
-                Navigator.pop(context, true);
-              },
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Text(confirmText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
-                    fontWeight: FontWeight.bold,
-                    color: color,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// class MiscBLMAlertInputEmailDialog extends StatefulWidget{
 //   final String title;
 //   final String content;
 //   final String confirmText;
 //   final Color color;
 
-//   MiscBLMAlertInputEmailDialog({
+//   MiscBLMAlertDialog({
 //     this.title = '',
 //     this.content = '',
 //     this.confirmText = 'OK',
-//     this.color = Colors.green,
+//     this.color = Colors.red,
 //   });
-
-//   MiscBLMAlertInputEmailDialogState createState() => MiscBLMAlertInputEmailDialogState(title: title, content: content, confirmText: confirmText, color: color);
-// }
-
-// class MiscBLMAlertInputEmailDialogState extends State<MiscBLMAlertInputEmailDialog>{
-
-//   final String title;
-//   final String content;
-//   final String confirmText;
-//   final Color color;
-
-//   MiscBLMAlertInputEmailDialogState({
-//     this.title,
-//     this.content,
-//     this.confirmText,
-//     this.color,
-//   });
-  
-//   TextEditingController controller;
-
-//   void initState(){
-//     super.initState();
-//     controller = TextEditingController(text: '');
-//   }
 
 //   Widget build(BuildContext context){
 //     SizeConfig.init(context);
@@ -359,25 +264,21 @@ class MiscBLMAlertDialog extends StatelessWidget{
 //             ),
             
 //             Expanded(
-//               child: TextFormField(
-//                 controller: controller,
-//                 keyboardType: TextInputType.emailAddress,
-//                 cursorColor: Color(0xff000000),
-//                 decoration: InputDecoration(
-//                   alignLabelWithHint: true,
-//                   labelText: 'Input Email',
-//                   focusedBorder: UnderlineInputBorder(
-//                     borderSide: BorderSide(
-//                       color: Color(0xff000000),
-//                     ),
+//               child: Align(
+//                 alignment: Alignment.centerLeft,
+//                 child: Text(content,
+//                   textAlign: TextAlign.left,
+//                   style: TextStyle(
+//                     fontSize: SizeConfig.safeBlockHorizontal * 4,
+//                     fontWeight: FontWeight.w400,
+//                     color: Color(0xff000000),
 //                   ),
 //                 ),
 //               ),
 //             ),
-
 //             GestureDetector(
 //               onTap: (){
-//                 Navigator.pop(context, controller.text);
+//                 Navigator.pop(context, true);
 //               },
 //               child: Align(
 //                 alignment: Alignment.centerRight,

@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-08-update-page-image.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-02-show-page-images.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
@@ -294,12 +294,46 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                               context.hideLoaderOverlay();
 
                               if(result){
-                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the account details.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.green,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
 
                                 Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true,));
                                 Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                               }else{
-                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }
                             }
 

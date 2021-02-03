@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -111,9 +111,25 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                 MiscBLMButtonTemplate(
                   onPressed: () async{
 
-                    if(_key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 
-                    _key5.currentState.controller.text == '' || _key6.currentState.controller.text == '' || _key7.currentState.controller.text == ''){
-                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                    if(_key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == '' || _key7.currentState.controller.text == ''){
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Please complete the form before submitting.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
                     }else{
                       Navigator.pushNamed(
                         context, '/home/blm/create-memorial-2',

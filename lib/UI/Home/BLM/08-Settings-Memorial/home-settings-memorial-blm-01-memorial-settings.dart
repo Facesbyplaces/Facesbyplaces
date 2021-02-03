@@ -5,6 +5,7 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-setting-detail.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'home-settings-memorial-blm-02-page-details.dart';
 import 'home-settings-memorial-blm-03-update-memorial-image.dart';
 import 'home-settings-memorial-blm-04-page-managers.dart';
@@ -195,7 +196,24 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
               if(result){
                 Navigator.popAndPushNamed(context, '/home/blm');
               }else{
-                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
+                );
               }
             }
           }, 

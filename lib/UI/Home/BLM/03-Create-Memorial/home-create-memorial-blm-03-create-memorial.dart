@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/BLM/04-Create-Memorial/api-create-memorial-blm-01-create-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -10,6 +9,7 @@ import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
@@ -313,7 +313,24 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                       Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result,));
                       Navigator.pushReplacement(context, newRoute);
                     }else{
-                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
                     }
                       
                   }, 

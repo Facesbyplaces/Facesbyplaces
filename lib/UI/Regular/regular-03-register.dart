@@ -254,7 +254,7 @@ class RegularRegister extends StatelessWidget{
                                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                           title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                           entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Invalid phone number. Please try again.',
+                                          description: Text('$result',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(),
                                           ),

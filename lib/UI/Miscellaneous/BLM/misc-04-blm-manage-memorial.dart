@@ -5,6 +5,7 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -167,7 +168,24 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         if(result){
                           Navigator.popAndPushNamed(context, '/home/blm');
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }
                     },
@@ -197,7 +215,24 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                         if(result){
                           Navigator.popAndPushNamed(context, '/home/blm');
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }
                     },
@@ -223,7 +258,24 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       if(result){
                         Navigator.popAndPushNamed(context, '/home/blm');
                       }else{
-                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
                       }
                     },
                     child: Text('Join', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),

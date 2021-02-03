@@ -6,9 +6,10 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:image_picker/image_picker.dart';
-import 'package:mime/mime.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:mime/mime.dart';
 import 'dart:io';
 
 class BLMTaggedUsers{
@@ -76,23 +77,11 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     setState(() {});
   }
 
-  // File imageFile;
   File videoFile;
   final picker = ImagePicker();
   VideoPlayerController videoPlayerController;
   String newLocation = '';
   String person = '';
-
-  // Future getImage() async{
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-  //   if(pickedFile != null){
-  //     setState(() {
-  //       imageFile = File(pickedFile.path);
-  //       videoFile = null;
-  //     });
-  //   }
-  // }
 
   Future getVideo() async{
     final pickedFile = await picker.getVideo(source: ImageSource.gallery);
@@ -102,7 +91,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         slideImages.add(File(pickedFile.path));
 
         videoFile = File(pickedFile.path);
-        // imageFile = null;
         videoPlayerController = VideoPlayerController.file(videoFile)
         ..initialize().then((_){
           setState(() {
@@ -208,7 +196,24 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   if(result){
                     Navigator.popAndPushNamed(context, '/home/blm');
                   }else{
-                    await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Something went wrong. Please try again.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
                   }
 
                 }, 
@@ -259,8 +264,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  // CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
-
                                   CircleAvatar(
                                     backgroundColor: Color(0xff888888),
                                     backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
@@ -401,116 +404,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                       }else{
                         return Container(height: 0,);
                       }
-                      
-                      // else if(videoFile != null){
-                      //   return Container(
-                      //     height: SizeConfig.blockSizeVertical * 25, 
-                      //     width: SizeConfig.screenWidth, 
-                      //     padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                      //     child: GestureDetector(
-                      //       onTap: (){
-                      //         if(videoPlayerController.value.isPlaying){
-                      //           videoPlayerController.pause();
-                      //         }else{
-                      //           videoPlayerController.play();
-                      //         }
-                              
-                      //       },
-                      //       onDoubleTap: () async{
-                      //         await getVideo();
-                      //       },
-                      //       child: AspectRatio(
-                      //         aspectRatio: videoPlayerController.value.aspectRatio,
-                      //         child: VideoPlayer(videoPlayerController),
-                      //       ),
-                      //     ),
-                      //   );
-                      // }
                     }()),
                   ),
-
-                  // Container(
-                  //   child: ((){
-                  //     if(slideImages.length != 0){
-                  //       return Container(
-                  //         height: SizeConfig.blockSizeVertical * 25, 
-                  //         width: SizeConfig.screenWidth,
-                  //         padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                  //         child: Container(
-                  //           height: SizeConfig.blockSizeVertical * 12,
-                  //           child: GridView.count(
-                  //             physics: ClampingScrollPhysics(),
-                  //             crossAxisCount: 4,
-                  //             crossAxisSpacing: 4,
-                  //             mainAxisSpacing: 4,
-                  //             children: List.generate(slideImages.length, (index){
-                  //               return GestureDetector(
-                  //                 onDoubleTap: (){
-                  //                   setState(() {
-                  //                     slideImages.removeAt(index);
-                  //                   });
-                  //                 },
-                  //                 child: Container(
-                  //                   width: SizeConfig.blockSizeVertical * 10,
-                  //                   decoration: BoxDecoration(
-                  //                     borderRadius: BorderRadius.circular(10),
-                  //                     color: Color(0xffcccccc),
-                  //                     border: Border.all(color: Color(0xff000000),),
-                  //                     image: DecorationImage(
-                  //                       fit: BoxFit.cover,
-                  //                       image: AssetImage(slideImages[index].path),
-                  //                     ),
-                  //                   ),
-                  //                   child: Stack(
-                  //                     children: [
-                  //                       Center(
-                  //                         child: CircleAvatar(
-                  //                           radius: SizeConfig.blockSizeVertical * 3,
-                  //                           backgroundColor: Color(0xffffffff).withOpacity(.5),
-                  //                           child: Text(
-                  //                             index.toString(),
-                  //                             style: TextStyle(
-                  //                               fontSize: SizeConfig.safeBlockHorizontal * 7,
-                  //                               fontWeight: FontWeight.bold,
-                  //                               color: Color(0xffffffff),
-                  //                             ),
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               );
-                  //             }),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }else if(videoFile != null){
-                  //       return Container(
-                  //         height: SizeConfig.blockSizeVertical * 25, 
-                  //         width: SizeConfig.screenWidth, 
-                  //         padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                  //         child: GestureDetector(
-                  //           onTap: (){
-                  //             if(videoPlayerController.value.isPlaying){
-                  //               videoPlayerController.pause();
-                  //             }else{
-                  //               videoPlayerController.play();
-                  //             }
-                              
-                  //           },
-                  //           onDoubleTap: () async{
-                  //             await getVideo();
-                  //           },
-                  //           child: AspectRatio(
-                  //             aspectRatio: videoPlayerController.value.aspectRatio,
-                  //             child: VideoPlayer(videoPlayerController),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }
-                  //   }()),
-                  // ),
 
                   Container(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0,),
@@ -574,7 +469,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 choice = 0;
                               }else{
                                 if(choice == 1){
-                                  // await getSlideImage();
                                   await getSlideFiles();
                                 }else{
                                   await getVideo();

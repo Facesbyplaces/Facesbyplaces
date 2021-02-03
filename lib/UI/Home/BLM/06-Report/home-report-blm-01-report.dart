@@ -1,9 +1,9 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/API/BLM/07-Report/api-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMReport extends StatelessWidget{
@@ -73,7 +73,24 @@ class HomeBLMReport extends StatelessWidget{
                     onPressed: () async{
 
                       if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                        await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Please complete the form before submitting.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
                       }else{
 
                         context.showLoaderOverlay();
@@ -81,10 +98,44 @@ class HomeBLMReport extends StatelessWidget{
                         context.hideLoaderOverlay();
 
                         if(result){
-                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully submitted a report. Your report will be reviewed by the administrator.', color: Colors.green,));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.green,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                           Navigator.pushReplacementNamed(context, '/home/blm');
                         }else{
-                          await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }
 

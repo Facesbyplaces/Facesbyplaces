@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-12-update-user-profile-picture.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-16-blm-user-settings.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'dart:io';
@@ -84,7 +84,24 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                               context.hideLoaderOverlay();
 
                               if(result != true){
-                                await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }
 
                               print('The result is $result');

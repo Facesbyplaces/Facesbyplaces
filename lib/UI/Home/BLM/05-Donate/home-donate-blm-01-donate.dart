@@ -1,10 +1,9 @@
 import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserDonate extends StatefulWidget{
@@ -206,7 +205,24 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                           ),
                         );
                       }else{
-                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
                       }
 
                     }, 

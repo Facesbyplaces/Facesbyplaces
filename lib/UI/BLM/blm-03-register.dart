@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-02-registration.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -101,13 +101,63 @@ class BLMRegister extends StatelessWidget{
                                     bool validEmail = false;
                                     validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState.controller.text );
 
-                                    if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' ||
-                                      _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
-                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                    if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' || _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
+                                      await showDialog(
+                                        context: context,
+                                        builder: (_) => 
+                                          AssetGiffyDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          description: Text('Please complete the form before submitting.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(),
+                                          ),
+                                          onlyOkButton: true,
+                                          buttonOkColor: Colors.red,
+                                          onOkButtonPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                        )
+                                      );
                                     }else if(!validEmail){
-                                      await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                                      await showDialog(
+                                        context: context,
+                                        builder: (_) => 
+                                          AssetGiffyDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          description: Text('Invalid email address. Please try again.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(),
+                                          ),
+                                          onlyOkButton: true,
+                                          buttonOkColor: Colors.red,
+                                          onOkButtonPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                        )
+                                      );
                                     }else if(!_key3.currentState.valid){
-                                      await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Invalid phone number. Please try again.', confirmText: 'OK',),);
+                                      await showDialog(
+                                        context: context,
+                                        builder: (_) => 
+                                          AssetGiffyDialog(
+                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                          entryAnimation: EntryAnimation.DEFAULT,
+                                          description: Text('Invalid phone number. Please try again.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(),
+                                          ),
+                                          onlyOkButton: true,
+                                          buttonOkColor: Colors.red,
+                                          onOkButtonPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                        )
+                                      );
                                     }else{
 
                                       APIBLMAccountRegistration account = APIBLMAccountRegistration(
@@ -128,7 +178,24 @@ class BLMRegister extends StatelessWidget{
                                         String verificationCode = sharedPrefs.getString('blm-verification-code');
                                         Navigator.pushNamed(context, '/blm/verify-email', arguments: verificationCode);
                                       }else{
-                                        await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: result));
+                                        await showDialog(
+                                          context: context,
+                                          builder: (_) => 
+                                            AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('$result',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(),
+                                            ),
+                                            onlyOkButton: true,
+                                            buttonOkColor: Colors.red,
+                                            onOkButtonPressed: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                          )
+                                        );
                                       }
                                     }
 

@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-09-password-change.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class BLMPasswordReset extends StatefulWidget{
@@ -112,28 +112,45 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                               color: Color(0xffffffff),
                             ),
                             onPressed: () async{
-                              
-                              // if(_key1.currentState.controller.text == _key2.currentState.controller.text){
-                              //   context.showLoaderOverlay();
-                              //   bool result = await apiBLMPasswordChange(
-                              //     password: _key1.currentState.controller.text, 
-                              //     passwordConfirmation: _key2.currentState.controller.text,
-                              //     resetToken: resetToken,
-                              //   );
-                              //   context.hideLoaderOverlay();
-
-                              //   if(result){
-                              //     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                              //     Navigator.pushReplacementNamed(context, '/home/blm');
-                              //   }else{
-                              //     await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
-                              //   }
-                              // }
 
                               if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                                await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Please complete the form before submitting.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
-                                await showDialog(context: context, builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Passwords don\'t match. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }else{
                                 context.showLoaderOverlay();
                                 bool result = await apiBLMPasswordChange(
@@ -144,14 +161,46 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                 context.hideLoaderOverlay();
 
                                 if(result){
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                                  // Navigator.pushReplacementNamed(context, '/home/blm');
-                                  Navigator.popUntil(context, ModalRoute.withName('/blm/login'));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Successfully updated the password.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.green,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
+                                  Navigator.popUntil(context, ModalRoute.withName('/regular/login'));
                                 }else{
-                                  await showDialog(context: (context), builder: (build) => MiscBLMAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
                                 }
                               }
-                              
                               
                             },
                             width: SizeConfig.screenWidth / 2, 
