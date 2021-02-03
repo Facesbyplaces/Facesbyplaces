@@ -18,6 +18,12 @@ Rails.application.routes.draw do
   as :user2 do
     # Define routes for User2 within this block.
   end
+
+  mount_devise_token_auth_for 'Admin', at: 'admin_auth', controllers: {
+    # Define routes for Admin within this block.
+    registrations: 'api/v1/admin/registrations',
+    sessions: 'api/v1/admin/sessions',
+  }, :skip => [:omniauth_callbacks]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
