@@ -7,6 +7,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -136,12 +137,46 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                   context.hideLoaderOverlay();
 
                                   if(result){
-                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the account details.', color: Colors.green,));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Successfully updated the account details.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.green,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
 
                                     Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true,));
                                     Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                                   }else{
-                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Something went wrong. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
                                   }
                                 }
                               }

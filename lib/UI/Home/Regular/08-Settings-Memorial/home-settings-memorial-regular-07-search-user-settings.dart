@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-add-friends.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';
@@ -252,7 +253,24 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }else{
                         context.showLoaderOverlay();
@@ -263,7 +281,24 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
                           Navigator.popUntil(context, ModalRoute.withName('newRoute'));
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'This user may not accept invite requests as of the moment. Please try again later.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
 
                       }

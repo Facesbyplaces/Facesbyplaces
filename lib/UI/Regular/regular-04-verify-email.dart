@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-03-verify-email.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-verification-code-resend.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -9,6 +8,7 @@ import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -140,9 +140,44 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                                 context.hideLoaderOverlay();
 
                                                 if(result == true){
-                                                  await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Another code has been sent to your email address. Please check your inbox.', confirmText: 'OK', color: Colors.green,),);
+                                                  // await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Another code has been sent to your email address. Please check your inbox.', confirmText: 'OK', color: Colors.green,),);
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => 
+                                                      AssetGiffyDialog(
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      description: Text('Another code has been sent to your email address. Please check your inbox.',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(),
+                                                      ),
+                                                      onlyOkButton: true,
+                                                      buttonOkColor: Colors.green,
+                                                      onOkButtonPressed: () {
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    )
+                                                  );
                                                 }else{
-                                                  await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', confirmText: 'OK',),);
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (_) => 
+                                                      AssetGiffyDialog(
+                                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                      entryAnimation: EntryAnimation.DEFAULT,
+                                                      description: Text('Something went wrong. Please try again.',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(),
+                                                      ),
+                                                      onlyOkButton: true,
+                                                      buttonOkColor: Colors.red,
+                                                      onOkButtonPressed: () {
+                                                        Navigator.pop(context, true);
+                                                      },
+                                                    )
+                                                  );
                                                 }
                                               }
                                           ),
@@ -179,9 +214,25 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           if(result){
                                             Navigator.pushNamed(context, '/regular/upload-photo');
                                           }else{
-                                            await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.', color: Colors.red,));
+                                            await showDialog(
+                                              context: context,
+                                              builder: (_) => 
+                                                AssetGiffyDialog(
+                                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                entryAnimation: EntryAnimation.DEFAULT,
+                                                description: Text('Something went wrong. Please try again.',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(),
+                                                ),
+                                                onlyOkButton: true,
+                                                buttonOkColor: Colors.red,
+                                                onOkButtonPressed: () {
+                                                  Navigator.pop(context, true);
+                                                },
+                                              )
+                                            );
                                           }
-                                          
                                         }
 
                                       }, 
@@ -193,7 +244,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                 ),
                               ),
                             ),
-
                           ],
                         );
                       },

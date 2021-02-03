@@ -1,11 +1,11 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-09-password-change.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularPasswordReset extends StatefulWidget{
@@ -114,9 +114,44 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                             onPressed: () async{
 
                               if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Please complete the form before submitting.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
-                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
+                                // await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Passwords don\'t match. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }else{
                                 context.showLoaderOverlay();
                                 bool result = await apiRegularPasswordChange(
@@ -127,13 +162,45 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                 context.hideLoaderOverlay();
 
                                 if(result){
-                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
-                                  // Navigator.pushReplacementNamed(context, '/home/regular');
-                                  // Navigator.pushReplacementNamed(context, '/regular/login');
+                                  // await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Successfully updated the password.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.green,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
                                   Navigator.popUntil(context, ModalRoute.withName('/regular/login'));
-                                  // '/regular/login'
                                 }else{
-                                  await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
                                 }
                               }
                               

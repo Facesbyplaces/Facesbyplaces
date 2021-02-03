@@ -1,9 +1,9 @@
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-search-regular-02-search-extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +60,24 @@ class HomeRegularSearch extends StatelessWidget{
                       if (permissionGranted == Location.PermissionStatus.denied) {
                         permissionGranted = await location.requestPermission();
                         if (permissionGranted != Location.PermissionStatus.granted) {
-                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'FacesbyPlaces needs to access the location. Turn on the access on the settings.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }
 

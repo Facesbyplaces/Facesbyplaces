@@ -7,8 +7,8 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-foll
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-import 'misc-02-regular-dialog.dart';
 
 class MiscRegularManageMemorialTab extends StatefulWidget{
   final int index;
@@ -164,7 +164,27 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     splashColor: Color(0xff4EC9D4),
                     onPressed: () async{
 
-                      bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
+                      bool confirmResult = await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Are you sure you want to leave this page?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: false,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                          onCancelButtonPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                        )
+                      );
+
                       if(confirmResult){
 
                         context.showLoaderOverlay();
@@ -174,7 +194,24 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         if(result){
                           Navigator.popAndPushNamed(context, '/home/regular');
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }
                     },
@@ -194,7 +231,27 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                     splashColor: Color(0xff4EC9D4),
                     onPressed: () async{
 
-                      bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Leave page', content: 'Are you sure you want to leave this page?',),);
+                      bool confirmResult = await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Are you sure you want to leave this page?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: false,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                          onCancelButtonPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                        )
+                      );
+
                       if(confirmResult){
 
                         context.showLoaderOverlay();
@@ -204,7 +261,24 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                         if(result){
                           Navigator.popAndPushNamed(context, '/home/regular');
                         }else{
-                          await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
                         }
                       }
                     },
@@ -230,7 +304,24 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
                       if(result){
                         Navigator.popAndPushNamed(context, '/home/regular');
                       }else{
-                        await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Something went wrong. Please try again.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
                       }
                     },
                     child: Text('Join', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),),),

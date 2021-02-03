@@ -5,6 +5,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'home-settings-memorial-regular-02-page-details.dart';
 import 'home-settings-memorial-regular-03-update-memorial-image.dart';
 import 'home-settings-memorial-regular-04-page-managers.dart';
@@ -192,7 +193,24 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
               if(result){
                 Navigator.popAndPushNamed(context, '/home/regular');
               }else{
-                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
+                );
               }
             }
           }, 

@@ -4,7 +4,6 @@ import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -13,6 +12,7 @@ import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -141,7 +141,24 @@ class RegularLoginState extends State<RegularLogin>{
                                       if(apiResult == true){
                                         Navigator.pushReplacementNamed(context, '/home/regular');
                                       }else{
-                                        await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        await showDialog(
+                                          context: context,
+                                          builder: (_) => 
+                                            AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('Invalid email or password. Please try again.',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(),
+                                            ),
+                                            onlyOkButton: true,
+                                            buttonOkColor: Colors.red,
+                                            onOkButtonPressed: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                          )
+                                        );
                                       }
 
                                     }else{
@@ -250,7 +267,24 @@ class RegularLoginState extends State<RegularLogin>{
                                       if(result == true){
                                         Navigator.pushReplacementNamed(context, '/home/regular');
                                       }else{
-                                        await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        await showDialog(
+                                          context: context,
+                                          builder: (_) => 
+                                            AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('Invalid email or password. Please try again.',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(),
+                                            ),
+                                            onlyOkButton: true,
+                                            buttonOkColor: Colors.red,
+                                            onOkButtonPressed: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                          )
+                                        );
                                       }
 
                                     }else{
@@ -281,7 +315,24 @@ class RegularLoginState extends State<RegularLogin>{
                                       if(result == true){
                                         Navigator.pushReplacementNamed(context, '/home/regular');
                                       }else{
-                                        await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                                        await showDialog(
+                                          context: context,
+                                          builder: (_) => 
+                                            AssetGiffyDialog(
+                                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                            entryAnimation: EntryAnimation.DEFAULT,
+                                            description: Text('Invalid email or password. Please try again.',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(),
+                                            ),
+                                            onlyOkButton: true,
+                                            buttonOkColor: Colors.red,
+                                            onOkButtonPressed: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                          )
+                                        );
                                       }
                                     }
                                     
@@ -323,7 +374,24 @@ class RegularLoginState extends State<RegularLogin>{
                             if(result == true){
                               Navigator.pushReplacementNamed(context, '/home/regular');
                             }else{
-                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email or password. Please try again.'));
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Invalid email or password. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
                             }
 
                           },
@@ -388,19 +456,75 @@ class RegularLoginState extends State<RegularLogin>{
                             validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
 
                             if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
-                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Please complete the form before submitting.', confirmText: 'OK',),);
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Please complete the form before submitting.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
                             }else if(!validEmail){
-                              await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email address. Please try again.', confirmText: 'OK',),);
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Invalid email address. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
                             }else{
+
+                              print('The email is ${_key1.currentState.controller.text}');
+                              print('The password is ${_key2.currentState.controller.text}');
 
                               context.showLoaderOverlay();
                               bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text);
                               context.hideLoaderOverlay();
 
+                              print('The result is $result');
+
                               if(result){
                                 Navigator.pushReplacementNamed(context, '/home/regular');
                               }else{
-                                await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Invalid email, password or type of account. Please try again.'));
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Invalid email, password or type of account. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }
                             }
                             

@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -166,9 +167,43 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
               if(result == true){
-                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the relationship setting.', color: Colors.green,));
+                await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Successfully updated the relationship setting.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.green,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
+                );
               }else{
-                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
+                );
               }
             }
           },
@@ -187,7 +222,25 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
               if(result){
                 Navigator.popAndPushNamed(context, '/home/regular');
               }else{
-                await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                // await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
+                await showDialog(
+                  context: context,
+                  builder: (_) => 
+                    AssetGiffyDialog(
+                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    entryAnimation: EntryAnimation.DEFAULT,
+                    description: Text('Something went wrong. Please try again.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    onlyOkButton: true,
+                    buttonOkColor: Colors.red,
+                    onOkButtonPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                  )
+                );
               }
             }
           },

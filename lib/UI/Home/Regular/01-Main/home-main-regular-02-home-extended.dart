@@ -9,11 +9,9 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dar
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -23,7 +21,9 @@ import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
 import 'home-main-regular-03-03-post-tab.dart';
 import 'home-main-regular-03-04-notifications-tab.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import '../../../ui-01-get-started.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'dart:async';
@@ -97,7 +97,24 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
         }
       }
     }else{
-      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+      await showDialog(
+        context: context,
+        builder: (_) => 
+          AssetGiffyDialog(
+          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+          entryAnimation: EntryAnimation.DEFAULT,
+          description: Text('Something went wrong. Please try again.',
+            textAlign: TextAlign.center,
+            style: TextStyle(),
+          ),
+          onlyOkButton: true,
+          buttonOkColor: Colors.red,
+          onOkButtonPressed: () {
+            Navigator.pop(context, true);
+          },
+        )
+      );
     }
   }
 
@@ -406,7 +423,24 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                                     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                                   }else{
-                                    await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Something went wrong. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
                                   }
                                   
                                 },

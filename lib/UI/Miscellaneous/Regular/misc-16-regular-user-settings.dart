@@ -1,12 +1,13 @@
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-02-user-update-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-03-change-password.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-04-other-details.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-show-other-details-status.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../ui-01-get-started.dart';
 import 'misc-07-regular-button.dart';
@@ -291,7 +292,24 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                       Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                     }else{
-                      await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again'));
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
                     }
                 }
 
