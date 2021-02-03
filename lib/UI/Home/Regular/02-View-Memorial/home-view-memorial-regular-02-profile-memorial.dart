@@ -89,46 +89,46 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   void onLoading() async{
     if(itemRemaining != 0){
       var newValue = await apiRegularProfilePost(memorialId: memorialId, page: page);
-      itemRemaining = newValue.itemsRemaining;
-      postCount = newValue.familyMemorialList.length;
+      itemRemaining = newValue.almItemsRemaining;
+      postCount = newValue.almFamilyMemorialList.length;
 
       List<String> newList1 = [];
       List<String> newList2 = [];
       List<String> newList3 = [];
       List<int> newList4 = [];
 
-      for(int i = 0; i < newValue.familyMemorialList.length; i++){
-        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
-          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
-          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
-          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
-          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+      for(int i = 0; i < newValue.almFamilyMemorialList.length; i++){
+        for(int j = 0; j < newValue.almFamilyMemorialList[i].homeProfilePostTagged.length; j++){
+          newList1.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedFirstName);
+          newList2.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedLastName);
+          newList3.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedImage);
+          newList4.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedId);
         }
 
         posts.add(RegularProfilePosts(
-          userId: newValue.familyMemorialList[i].postPage.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].postId,
-          memorialId: newValue.familyMemorialList[i].postPage.id,
-          timeCreated: newValue.familyMemorialList[i].postCreatedAt,
-          memorialName: newValue.familyMemorialList[i].postPage.name,
-          postBody: newValue.familyMemorialList[i].postBody,
-          profileImage: newValue.familyMemorialList[i].postPage.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].postImagesOrVideos,
-          managed: newValue.familyMemorialList[i].postPage.manage,
-          joined: newValue.familyMemorialList[i].postPage.follower,
-          numberOfComments: newValue.familyMemorialList[i].postNumberOfComments,
-          numberOfLikes: newValue.familyMemorialList[i].postNumberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].postLikeStatus,
+          userId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageCreator.homeProfilePostPageCreatorId, 
+          postId: newValue.almFamilyMemorialList[i].homeProfilePostId,
+          memorialId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageId,
+          timeCreated: newValue.almFamilyMemorialList[i].homeProfilePostCreatedAt,
+          memorialName: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageName,
+          postBody: newValue.almFamilyMemorialList[i].homeProfilePostBody,
+          profileImage: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageProfileImage,
+          imagesOrVideos: newValue.almFamilyMemorialList[i].homeProfilePostImagesOrVideos,
+          managed: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageManage,
+          joined: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFollower,
+          numberOfComments: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfComments,
+          numberOfLikes: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfLikes,
+          likeStatus: newValue.almFamilyMemorialList[i].homeProfilePostLikeStatus,
 
-          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          numberOfTagged: newValue.almFamilyMemorialList[i].homeProfilePostTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
 
-          pageType: newValue.familyMemorialList[i].postPage.pageType,
-          famOrFriends: newValue.familyMemorialList[i].postPage.famOrFriends,
-          relationship: newValue.familyMemorialList[i].postPage.relationship,
+          pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageType,
+          famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFamOrFriends,
+          relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageRelationship,
           ),
         );
       }
@@ -213,12 +213,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                     height: SizeConfig.screenHeight / 3,
                     width: SizeConfig.screenWidth,
                     child: ((){
-                      if(profile.data.memorial.memorialBackgroundImage == null || profile.data.memorial.memorialBackgroundImage == ''){
+                      if(profile.data.almMemorial.showMemorialBackgroundImage == null || profile.data.almMemorial.showMemorialBackgroundImage == ''){
                         return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
                       }else{
                         return CachedNetworkImage(
                           fit: BoxFit.cover,
-                          imageUrl: profile.data.memorial.memorialBackgroundImage,
+                          imageUrl: profile.data.almMemorial.showMemorialBackgroundImage,
                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                         );
@@ -244,7 +244,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                             Center(
                               child: Text(
-                                profile.data.memorial.memorialName,
+                                profile.data.almMemorial.showMemorialName,
                                 textAlign: TextAlign.center,
                                 maxLines: 5,
                                 overflow: TextOverflow.clip,
@@ -273,7 +273,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
                                   Expanded(
-                                    child: Text('${profile.data.memorial.memorialFollowersCount}',
+                                    child: Text('${profile.data.almMemorial.showMemorialFollowersCount}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 4,
                                         fontWeight: FontWeight.w500,
@@ -290,13 +290,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             Column(
                               children: [
                                 ((){
-                                  
-                                  // print('The images or videos is ${profile.data.memorial.memorialImagesOrVideos}');
-                                  if(profile.data.memorial.memorialImagesOrVideos != null){
-                                    videoPlayerController = VideoPlayerController.network(profile.data.memorial.memorialImagesOrVideos[0]);
+                                  if(profile.data.almMemorial.showMemorialImagesOrVideos != null){
+                                    videoPlayerController = VideoPlayerController.network(profile.data.almMemorial.showMemorialImagesOrVideos[0]);
                                     return Container(
                                       height: SizeConfig.blockSizeVertical * 34.5,
-                                      child: profile.data.memorial.memorialImagesOrVideos == null 
+                                      child: profile.data.almMemorial.showMemorialImagesOrVideos == null 
                                       ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
                                       : GestureDetector(
                                         onTap: (){
@@ -320,11 +318,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                 }()),
 
                                 ((){
-                                  if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
+                                  if(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription != '' || profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription != null){
                                     return Container(
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                      child: Text(profile.data.memorial.memorialDetails.description,
+                                      child: Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
@@ -340,48 +338,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                               ],
                             ),
 
-                            // ((){
-                            //   if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
-                            //     return Container(
-                            //       alignment: Alignment.center,
-                            //       padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            //       child: Text(profile.data.memorial.memorialDetails.description,
-                            //         textAlign: TextAlign.center,
-                            //         style: TextStyle(
-                            //           fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            //           fontWeight: FontWeight.w300,
-                            //           color: Color(0xff000000),
-                            //         ),
-                            //       ),
-                            //     );
-                            //   }else if(profile.data.memorial.memorialImagesOrVideos != null){
-                            //     return Container(
-                            //       padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                            //       child: Stack(
-                            //         children: [
-                            //           Container(
-                            //             height: SizeConfig.blockSizeHorizontal * 40,
-                            //             child: CachedNetworkImage(
-                            //               fit: BoxFit.cover,
-                            //               imageUrl: profile.data.memorial.memorialImagesOrVideos[0],
-                            //               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            //               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            //             ),
-                            //           ),
-
-                            //           Positioned(
-                            //             top: SizeConfig.blockSizeVertical * 7,
-                            //             left: SizeConfig.screenWidth / 2.8,
-                            //             child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 10,),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //     );
-                            //   }else{
-                            //     return Container(height: 0,);
-                            //   }
-                            // }()),
-
                             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                             Container(
@@ -390,8 +346,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        print('The page type in memorial is $pageType');
-                                        // Navigator.pushNamed(context, '/home/regular/donation');
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate(pageType: pageType, pageId: memorialId,)));
                                       },
                                       child: CircleAvatar(
@@ -501,7 +455,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.memorialDetails.birthPlace,
+                                      Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsBirthPlace,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -516,7 +470,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.memorialDetails.dob,
+                                      Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDob,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -531,7 +485,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.memorialDetails.rip,
+                                      Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsRip,
                                         style: TextStyle(
                                           fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           color: Color(0xff000000),
@@ -553,7 +507,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                             geoPoint: GeoPoint(0.0, 0.0),
                                           );
                                         },
-                                        child: Text(profile.data.memorial.memorialDetails.cemetery,
+                                        child: Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsCemetery,
                                           style: TextStyle(
                                             fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             color: Color(0xff3498DB),
@@ -583,7 +537,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.memorialPostsCount.toString(),
+                                          Text(profile.data.almMemorial.showMemorialPostsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -614,7 +568,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.memorialFamilyCount.toString(),
+                                          Text(profile.data.almMemorial.showMemorialFamilyCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -645,7 +599,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.memorialFriendsCount.toString(),
+                                          Text(profile.data.almMemorial.showMemorialFriendsCount.toString(),
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -676,7 +630,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('${profile.data.memorial.memorialFollowersCount}',
+                                          Text('${profile.data.almMemorial.showMemorialFollowersCount}',
                                             style: TextStyle(
                                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                                               fontWeight: FontWeight.bold,
@@ -722,7 +676,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                profile.data.memorial.memorialImagesOrVideos != null
+                                profile.data.almMemorial.showMemorialImagesOrVideos != null
                                 ? Column(
                                   children: [
                                     Container(
@@ -741,7 +695,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 items: [
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
+                                                    imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   ),
@@ -755,12 +709,12 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                 color: Color(0xff888888),
                                               ),
                                               child: ((){
-                                                if(profile.data.memorial.memorialImagesOrVideos[index] == null || profile.data.memorial.memorialImagesOrVideos[index] == ''){
+                                                if(profile.data.almMemorial.showMemorialImagesOrVideos[index] == null || profile.data.almMemorial.showMemorialImagesOrVideos[index] == ''){
                                                   return Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,);
                                                 }else{
                                                   return CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
+                                                    imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   );
@@ -772,7 +726,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                         separatorBuilder: (context, index){
                                           return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
                                         },
-                                        itemCount: profile.data.memorial.memorialImagesOrVideos.length,
+                                        itemCount: profile.data.almMemorial.showMemorialImagesOrVideos.length,
                                       ),
                                     ),
 
@@ -790,7 +744,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                             postCount != 0
                             ? Container(
                               padding: EdgeInsets.all(10.0),
-                              // height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
                               height: SizeConfig.screenHeight,
                               child: SmartRefresher(
                                 enablePullDown: true,
@@ -950,13 +903,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                 ),
                               ),
                             )
-                            // : Container(
-                            //   padding: EdgeInsets.all(10.0),
-                            //   height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
-                            //   child: Center(
-                            //     child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
-                            //   ),
-                            // ),
                             : ContainerResponsive(
                               height: SizeConfig.screenHeight,
                               width: SizeConfig.screenWidth,
@@ -998,7 +944,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                     height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: MiscRegularDropDownMemorialTemplate(memorialName: profile.data.memorial.memorialName, memorialId: memorialId, pageType: pageType, reportType: 'Memorial',),
+                      child: MiscRegularDropDownMemorialTemplate(memorialName: profile.data.almMemorial.showMemorialName, memorialId: memorialId, pageType: pageType, reportType: 'Memorial',),
                     ),
                   ),
 
@@ -1021,16 +967,14 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  backgroundImage: profile.data.memorial.memorialProfileImage != null ? NetworkImage(profile.data.memorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
+                                  backgroundImage: profile.data.almMemorial.showMemorialProfileImage != null ? NetworkImage(profile.data.almMemorial.showMemorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),
                             ),
                           ),
                           Expanded(
                             child: Container(
-                              // profile.data.memoria
-                              // child: MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Memorial',),
-                              // child: MiscRegularDropDownTemplate(postId: profile.data.memorial.memorialId, reportType: 'Memorial',),
+                              child: MiscRegularDropDownTemplate(postId: profile.data.almMemorial.showMemorialId, reportType: 'Memorial',),
                             ),
                           ),
                         ],

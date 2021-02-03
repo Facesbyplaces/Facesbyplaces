@@ -125,40 +125,40 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
       context.showLoaderOverlay();
       
       var newValue1 = await apiBLMShowListOfComments(postId: postId, page: page1);
-      itemRemaining = newValue1.itemsRemaining;
-      count = count + newValue1.commentsList.length;
+      itemRemaining = newValue1.bmlItemsRemaining;
+      count = count + newValue1.bmlCommentsList.length;
 
-      for(int i = 0; i < newValue1.commentsList.length; i++){
-        var commentLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.commentsList[i].commentId);
-        commentsLikes.add(commentLikeStatus.likeStatus);
-        commentsNumberOfLikes.add(commentLikeStatus.numberOfLikes);
+      for(int i = 0; i < newValue1.bmlCommentsList.length; i++){
+        var commentLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.bmlCommentsList[i].showListCommentsCommentId);
+        commentsLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
+        commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
-          var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.commentsList[i].commentId, page: page2);
+          var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.bmlCommentsList[i].showListCommentsCommentId, page: page2);
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
           List<int> newReplyId = [];
 
-          for(int j = 0; j < newValue2.repliesList.length; j++){
+          for(int j = 0; j < newValue2.blmRepliesList.length; j++){
 
-            var replyLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.repliesList[j].replyId);
-            newRepliesLikes.add(replyLikeStatus.likeStatus);
-            newRepliesNumberOfLikes.add(replyLikeStatus.numberOfLikes);
-            newReplyId.add(newValue2.repliesList[j].replyId);
+            var replyLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.blmRepliesList[j].showListRepliesReplyId);
+            newRepliesLikes.add(replyLikeStatus.showCommentOrReplyLikeStatus);
+            newRepliesNumberOfLikes.add(replyLikeStatus.showCommentOrReplyNumberOfLikes);
+            newReplyId.add(newValue2.blmRepliesList[j].showListRepliesReplyId);
 
             replies.add(
               BLMOriginalReply(
-                replyId: newValue2.repliesList[j].replyId,
-                commentId: newValue2.repliesList[j].commentId,
-                userId: newValue2.repliesList[j].user.userId,
-                replyBody: newValue2.repliesList[j].replyBody,
-                createdAt: newValue2.repliesList[j].createdAt,
-                firstName: newValue2.repliesList[j].user.firstName,
-                lastName: newValue2.repliesList[j].user.lastName,
-                replyLikes: replyLikeStatus.likeStatus,
-                replyNumberOfLikes: replyLikeStatus.numberOfLikes,
-                image: newValue2.repliesList[j].user.image,
+                replyId: newValue2.blmRepliesList[j].showListRepliesReplyId,
+                commentId: newValue2.blmRepliesList[j].showListRepliesCommentId,
+                userId: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserUserId,
+                replyBody: newValue2.blmRepliesList[j].showListRepliesReplyBody,
+                createdAt: newValue2.blmRepliesList[j].showListRepliesCreatedAt,
+                firstName: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserFirstName,
+                lastName: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserLastName,
+                replyLikes: replyLikeStatus.showCommentOrReplyLikeStatus,
+                replyNumberOfLikes: replyLikeStatus.showCommentOrReplyNumberOfLikes,
+                image: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserImage,
               ),
             );
           }
@@ -166,7 +166,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
           repliesLikes.add(newRepliesLikes);
           repliesNumberOfLikes.add(newRepliesNumberOfLikes);
 
-          repliesRemaining = newValue2.itemsRemaining;
+          repliesRemaining = newValue2.blmItemsRemaining;
           page2++;
         }
 
@@ -175,16 +175,16 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
         
         comments.add(
           BLMOriginalComment(
-            commentId: newValue1.commentsList[i].commentId,
-            postId: newValue1.commentsList[i].postId,
-            userId: newValue1.commentsList[i].user.userId,
-            commentBody: newValue1.commentsList[i].commentBody,
-            createdAt: newValue1.commentsList[i].createdAt,
-            firstName: newValue1.commentsList[i].user.firstName,
-            lastName: newValue1.commentsList[i].user.lastName,
-            image: newValue1.commentsList[i].user.image,
-            commentLikes: commentLikeStatus.likeStatus,
-            commentNumberOfLikes: commentLikeStatus.numberOfLikes,
+            commentId: newValue1.bmlCommentsList[i].showListCommentsCommentId,
+            postId: newValue1.bmlCommentsList[i].showListCommentsPostId,
+            userId: newValue1.bmlCommentsList[i].showListCommentsUser.showListCommentsUserUserId,
+            commentBody: newValue1.bmlCommentsList[i].showListCommentsCommentBody,
+            createdAt: newValue1.bmlCommentsList[i].showListCommentsCreatedAt,
+            firstName: newValue1.bmlCommentsList[i].showListCommentsUser.showListCommentsUserFirstName,
+            lastName: newValue1.bmlCommentsList[i].showListCommentsUser.showListCommentsUserLastName,
+            image: newValue1.bmlCommentsList[i].showListCommentsUser.showListCommentsUserImage,
+            commentLikes: commentLikeStatus.showCommentOrReplyLikeStatus,
+            commentNumberOfLikes: commentLikeStatus.showCommentOrReplyNumberOfLikes,
             listOfReplies: replies
           ),    
         );

@@ -100,47 +100,47 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   void onLoading() async{
     if(itemRemaining != 0){
       var newValue = await apiRegularProfilePost(memorialId: memorialId, page: page);
-      itemRemaining = newValue.itemsRemaining;
-      postCount = newValue.familyMemorialList.length;
+      itemRemaining = newValue.almItemsRemaining;
+      postCount = newValue.almFamilyMemorialList.length;
 
       List<String> newList1 = [];
       List<String> newList2 = [];
       List<String> newList3 = [];
       List<int> newList4 = [];
 
-      for(int i = 0; i < newValue.familyMemorialList.length; i++){
-        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
-          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
-          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
-          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
-          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+      for(int i = 0; i < newValue.almFamilyMemorialList.length; i++){
+        for(int j = 0; j < newValue.almFamilyMemorialList[i].homeProfilePostTagged.length; j++){
+          newList1.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedFirstName);
+          newList2.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedLastName);
+          newList3.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedImage);
+          newList4.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedId);
         }
 
         posts.add(RegularProfilePosts(
-          userId: newValue.familyMemorialList[i].postPage.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].postId,
-          memorialId: newValue.familyMemorialList[i].postPage.id,
-          timeCreated: newValue.familyMemorialList[i].postCreatedAt,
-          memorialName: newValue.familyMemorialList[i].postPage.name,
-          postBody: newValue.familyMemorialList[i].postBody,
-          profileImage: newValue.familyMemorialList[i].postPage.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].postImagesOrVideos,
+          userId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageCreator.homeProfilePostPageCreatorId, 
+          postId: newValue.almFamilyMemorialList[i].homeProfilePostId,
+          memorialId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageId,
+          timeCreated: newValue.almFamilyMemorialList[i].homeProfilePostCreatedAt,
+          memorialName: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageName,
+          postBody: newValue.almFamilyMemorialList[i].homeProfilePostBody,
+          profileImage: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageProfileImage,
+          imagesOrVideos: newValue.almFamilyMemorialList[i].homeProfilePostImagesOrVideos,
           
-          managed: newValue.familyMemorialList[i].postPage.manage,
-          joined: newValue.familyMemorialList[i].postPage.follower,
-          numberOfComments: newValue.familyMemorialList[i].postNumberOfComments,
-          numberOfLikes: newValue.familyMemorialList[i].postNumberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].postLikeStatus,
+          managed: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageManage,
+          joined: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFollower,
+          numberOfComments: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfComments,
+          numberOfLikes: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfLikes,
+          likeStatus: newValue.almFamilyMemorialList[i].homeProfilePostLikeStatus,
 
-          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          numberOfTagged: newValue.almFamilyMemorialList[i].homeProfilePostTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
 
-          pageType: newValue.familyMemorialList[i].postPage.pageType,
-          famOrFriends: newValue.familyMemorialList[i].postPage.famOrFriends,
-          relationship: newValue.familyMemorialList[i].postPage.relationship,
+          pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageType,
+          famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFamOrFriends,
+          relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageRelationship,
 
           ),
         );
@@ -224,7 +224,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                     width: SizeConfig.screenWidth,
                     child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      imageUrl: profile.data.memorial.memorialBackgroundImage,
+                      imageUrl: profile.data.almMemorial.showMemorialBackgroundImage,
                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                     ),
@@ -247,7 +247,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                             SizedBox(height: ScreenUtil().setHeight(105)),
 
                             Center(
-                              child: Text(profile.data.memorial.memorialName,
+                              child: Text(profile.data.almMemorial.showMemorialName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
@@ -281,7 +281,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   SizedBox(width: ScreenUtil().setWidth(10)),
 
                                   Expanded(
-                                    child: Text('${profile.data.memorial.memorialFollowersCount}',
+                                    child: Text('${profile.data.almMemorial.showMemorialFollowersCount}',
                                       style: TextStyle(
                                         fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                         fontWeight: FontWeight.w500,
@@ -298,13 +298,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                             Column(
                               children: [
                                 ((){
-                                  
-                                  // print('The images or videos is ${profile.data.memorial.memorialImagesOrVideos}');
-                                  if(profile.data.memorial.memorialImagesOrVideos != null){
-                                    videoPlayerController = VideoPlayerController.network(profile.data.memorial.memorialImagesOrVideos[0]);
+                                  if(profile.data.almMemorial.showMemorialImagesOrVideos != null){
+                                    videoPlayerController = VideoPlayerController.network(profile.data.almMemorial.showMemorialImagesOrVideos[0]);
                                     return Container(
                                       height: SizeConfig.blockSizeVertical * 34.5,
-                                      child: profile.data.memorial.memorialImagesOrVideos == null 
+                                      child: profile.data.almMemorial.showMemorialImagesOrVideos == null 
                                       ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
                                       : GestureDetector(
                                         onTap: (){
@@ -328,11 +326,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 }()),
 
                                 ((){
-                                  if(profile.data.memorial.memorialDetails.description != '' || profile.data.memorial.memorialDetails.description != null){
+                                  if(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription != '' || profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription != null){
                                     return Container(
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                      child: Text(profile.data.memorial.memorialDetails.description,
+                                      child: Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
@@ -368,8 +366,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             APIRegularShowSwitchStatus result = await apiRegularShowSwitchStatus(memorialId: memorialId);
                                             context.hideLoaderOverlay();
 
-                                            if(result.success){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, memorialName: profile.data.memorial.memorialName, switchFamily: result.family, switchFriends: result.friends, switchFollowers: result.followers,)));
+                                            if(result.showSwitchStatusSuccess){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettings(memorialId: memorialId, memorialName: profile.data.almMemorial.showMemorialName, switchFamily: result.showSwitchStatusFamily, switchFriends: result.showSwitchStatusFriends, switchFollowers: result.showSwitchStatusFollowers,)));
                                             }
                                           }else{
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialSettingsWithHidden(memorialId: memorialId, relationship: relationship,)));
@@ -435,7 +433,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Icon(Icons.place, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.memorialDetails.country,
+                                      Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsCountry,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                           color: Color(0xff000000),
@@ -450,7 +448,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Icon(Icons.star, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.memorialDetails.dob,
+                                      Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDob,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                           color: Color(0xff000000),
@@ -465,7 +463,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     children: [
                                       Image.asset('assets/icons/grave_logo.png', height: ScreenUtil().setHeight(25),),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-                                      Text(profile.data.memorial.memorialDetails.rip,
+                                      Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsRip,
                                         style: TextStyle(
                                           fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                           color: Color(0xff000000),
@@ -493,7 +491,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.memorialPostsCount.toString(),
+                                          Text(profile.data.almMemorial.showMemorialPostsCount.toString(),
                                             style: TextStyle(
                                               fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
@@ -524,7 +522,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text('${profile.data.memorial.memorialFamilyCount}',
+                                          Text('${profile.data.almMemorial.showMemorialFamilyCount}',
                                             style: TextStyle(
                                               fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
@@ -555,7 +553,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.memorialFriendsCount.toString(),
+                                          Text(profile.data.almMemorial.showMemorialFriendsCount.toString(),
                                             style: TextStyle(
                                               fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
@@ -586,7 +584,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         children: [
                                           SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                          Text(profile.data.memorial.memorialFollowersCount.toString(),
+                                          Text(profile.data.almMemorial.showMemorialFollowersCount.toString(),
                                             style: TextStyle(
                                               fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                               fontWeight: FontWeight.bold,
@@ -632,7 +630,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                 SizedBox(height: ScreenUtil().setHeight(20)),
 
-                                profile.data.memorial.memorialImagesOrVideos != null
+                                profile.data.almMemorial.showMemorialImagesOrVideos != null
                                 ? Column(
                                   children: [
                                     Container(
@@ -651,7 +649,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                 items: [
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
+                                                    imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   ),
@@ -666,7 +664,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                               ),
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: profile.data.memorial.memorialImagesOrVideos[index],
+                                                imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               ),
@@ -676,7 +674,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         separatorBuilder: (context, index){
                                           return SizedBox(width: ScreenUtil().setHeight(20));
                                         },
-                                        itemCount: profile.data.memorial.memorialImagesOrVideos.length,
+                                        itemCount: profile.data.almMemorial.showMemorialImagesOrVideos.length,
                                       ),
                                     ),
 
@@ -693,7 +691,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                             postCount != 0
                             ? Container(
                               padding: EdgeInsets.all(10.0),
-                              // height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
                               height: SizeConfig.screenHeight,
                               child: SmartRefresher(
                                 enablePullDown: true,
@@ -925,7 +922,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 final file = await new File('${tempDir.path}/regular-post-image.png').create();
                                 file.writeAsBytesSync(list);
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.memorial.memorialName, memorialId: profile.data.memorial.memorialId)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.almMemorial.showMemorialName, memorialId: profile.data.almMemorial.showMemorialId)));
 
                               },
                               shape: StadiumBorder(),
@@ -964,7 +961,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 child: CircleAvatar(
                                   radius: SizeConfig.blockSizeVertical * 12,
                                   backgroundColor: Color(0xff888888),
-                                  backgroundImage: profile.data.memorial.memorialProfileImage != null ? NetworkImage(profile.data.memorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
+                                  backgroundImage: profile.data.almMemorial.showMemorialProfileImage != null ? NetworkImage(profile.data.almMemorial.showMemorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
                               ),
                             ),

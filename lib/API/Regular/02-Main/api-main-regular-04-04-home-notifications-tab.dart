@@ -28,10 +28,10 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({int pa
 
 
 class APIRegularHomeTabNotificationMain{
-  int itemsRemaining;
-  List<APIRegularHomeTabNotificationExtended> notification;
+  int almItemsRemaining;
+  List<APIRegularHomeTabNotificationExtended> almNotification;
 
-  APIRegularHomeTabNotificationMain({this.itemsRemaining, this.notification});
+  APIRegularHomeTabNotificationMain({this.almItemsRemaining, this.almNotification});
 
   factory APIRegularHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -39,55 +39,53 @@ class APIRegularHomeTabNotificationMain{
     List<APIRegularHomeTabNotificationExtended> newNotification = newList.map((i) => APIRegularHomeTabNotificationExtended.fromJson(i)).toList();
 
     return APIRegularHomeTabNotificationMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      notification: newNotification,
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almNotification: newNotification,
     );
   }
 }
 
 
 class APIRegularHomeTabNotificationExtended{
-  int id;
-  String createdAt;
-  String updatedAt;
-  int recipientId;
-  APIRegularHomeTabNotificationExtendedActor actor;
-  bool read;
-  String action;
-  int postId;
-  String notificationType;
+  int homeTabNotificationId;
+  String homeTabNotificationCreatedAt;
+  String homeTabNotificationUpdatedAt;
+  int homeTabNotificationRecipientId;
+  APIRegularHomeTabNotificationExtendedActor homeTabNotificationActor;
+  bool homeTabNotificationRead;
+  String homeTabNotificationAction;
+  int homeTabNotificationPostId;
+  String homeTabNotificationNotificationType;
 
-  APIRegularHomeTabNotificationExtended({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actor, this.read, this.action, this.postId, this.notificationType});
+  APIRegularHomeTabNotificationExtended({this.homeTabNotificationId, this.homeTabNotificationCreatedAt, this.homeTabNotificationUpdatedAt, this.homeTabNotificationRecipientId, this.homeTabNotificationActor, this.homeTabNotificationRead, this.homeTabNotificationAction, this.homeTabNotificationPostId, this.homeTabNotificationNotificationType});
 
   factory APIRegularHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
     return APIRegularHomeTabNotificationExtended(
-      id: parsedJson['id'],
-      createdAt: parsedJson['created_at'],
-      updatedAt: parsedJson['updated_at'],
-      recipientId: parsedJson['recipient_id'],
-      actor: APIRegularHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
-      read: parsedJson['read'],
-      action: parsedJson['action'],
-      postId: parsedJson['postId'],
-      notificationType: parsedJson['notif_type'],
+      homeTabNotificationId: parsedJson['id'],
+      homeTabNotificationCreatedAt: parsedJson['created_at'],
+      homeTabNotificationUpdatedAt: parsedJson['updated_at'],
+      homeTabNotificationRecipientId: parsedJson['recipient_id'],
+      homeTabNotificationActor: APIRegularHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
+      homeTabNotificationRead: parsedJson['read'],
+      homeTabNotificationAction: parsedJson['action'],
+      homeTabNotificationPostId: parsedJson['postId'],
+      homeTabNotificationNotificationType: parsedJson['notif_type'],
     );
   }
 }
 
-
-
 class APIRegularHomeTabNotificationExtendedActor{
-  int id;
-  String image;
+  int homeTabNotificationActorId;
+  String homeTabNotificationActorImage;
 
-  APIRegularHomeTabNotificationExtendedActor({this.id, this.image});
+  APIRegularHomeTabNotificationExtendedActor({this.homeTabNotificationActorId, this.homeTabNotificationActorImage});
 
   factory APIRegularHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
 
     return APIRegularHomeTabNotificationExtendedActor(
-      id: parsedJson['id'],
-      image: parsedJson['image'],
+      homeTabNotificationActorId: parsedJson['id'],
+      homeTabNotificationActorImage: parsedJson['image'],
     );
   }
 }

@@ -27,10 +27,10 @@ Future<APIRegularShowListOfReplies> apiRegularShowListOfReplies({int postId, int
 }
 
 class APIRegularShowListOfReplies{
-  int itemsRemaining;
-  List<APIRegularShowListOfRepliesExtended> repliesList;
+  int almItemsRemaining;
+  List<APIRegularShowListOfRepliesExtended> almRepliesList;
 
-  APIRegularShowListOfReplies({this.itemsRemaining, this.repliesList});
+  APIRegularShowListOfReplies({this.almItemsRemaining, this.almRepliesList});
 
   factory APIRegularShowListOfReplies.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,47 +38,47 @@ class APIRegularShowListOfReplies{
     List<APIRegularShowListOfRepliesExtended> repliesList = newList1.map((i) => APIRegularShowListOfRepliesExtended.fromJson(i)).toList();
 
     return APIRegularShowListOfReplies(
-      itemsRemaining: parsedJson['itemsremaining'],
-      repliesList: repliesList,
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almRepliesList: repliesList,
     );
   }
 }
 
 
 class APIRegularShowListOfRepliesExtended{
-  int replyId;
-  int commentId;
-  APIRegularShowListOfCommentsExtendedUser user;
-  String replyBody;
-  String createdAt;
+  int showListOfRepliesReplyId;
+  int showListOfRepliesCommentId;
+  APIRegularShowListOfCommentsExtendedUser showListOfRepliesUser;
+  String showListOfRepliesReplyBody;
+  String showListOfRepliesCreatedAt;
 
-  APIRegularShowListOfRepliesExtended({this.replyId, this.commentId, this.replyBody, this.user, this.createdAt});
+  APIRegularShowListOfRepliesExtended({this.showListOfRepliesReplyId, this.showListOfRepliesCommentId, this.showListOfRepliesReplyBody, this.showListOfRepliesUser, this.showListOfRepliesCreatedAt});
 
   factory APIRegularShowListOfRepliesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfRepliesExtended(
-      replyId: parsedJson['id'],
-      commentId: parsedJson['comment_id'],
-      user: APIRegularShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
-      replyBody: parsedJson['body'],
-      createdAt: parsedJson['created_at'],
+      showListOfRepliesReplyId: parsedJson['id'],
+      showListOfRepliesCommentId: parsedJson['comment_id'],
+      showListOfRepliesUser: APIRegularShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
+      showListOfRepliesReplyBody: parsedJson['body'],
+      showListOfRepliesCreatedAt: parsedJson['created_at'],
     );
   }
 }
 
 class APIRegularShowListOfCommentsExtendedUser{
-  int userId;
-  String firstName;
-  String lastName;
-  dynamic image;
+  int showListOfCommentsUserId;
+  String showListOfCommentsUserFirstName;
+  String showListOfCommentsUserLastName;
+  dynamic showListOfCommentsUserImage;
 
-  APIRegularShowListOfCommentsExtendedUser({this.userId, this.firstName, this.lastName, this.image});
+  APIRegularShowListOfCommentsExtendedUser({this.showListOfCommentsUserId, this.showListOfCommentsUserFirstName, this.showListOfCommentsUserLastName, this.showListOfCommentsUserImage});
 
   factory APIRegularShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfCommentsExtendedUser(
-      userId: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
+      showListOfCommentsUserId: parsedJson['id'],
+      showListOfCommentsUserFirstName: parsedJson['first_name'],
+      showListOfCommentsUserLastName: parsedJson['last_name'],
+      showListOfCommentsUserImage: parsedJson['image'],
     );
   }
 }

@@ -48,17 +48,17 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       if(newValue == null){
         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
       }else{
-        familyItemsRemaining = newValue.itemsRemaining;
+        familyItemsRemaining = newValue.almItemsRemaining;
 
-        for(int i = 0; i < newValue.familyList.length; i++){
+        for(int i = 0; i < newValue.almFamilyList.length; i++){
           familyList.add(
             RegularShowFamilySettings(
-              userId: newValue.familyList[i].user.id,
-              firstName: newValue.familyList[i].user.firstName,
-              lastName: newValue.familyList[i].user.lastName,
-              image: newValue.familyList[i].user.image,
-              relationship: newValue.familyList[i].relationship,
-              accountType: newValue.familyList[i].user.accountType,
+              userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId,
+              firstName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName,
+              lastName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName,
+              image: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage,
+              relationship: newValue.almFamilyList[i].showFamilySettingsRelationship,
+              accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType,
             ),
           );
         }

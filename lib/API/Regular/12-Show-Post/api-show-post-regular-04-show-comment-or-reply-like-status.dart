@@ -27,16 +27,16 @@ Future<APIRegularShowCommentOrReplyLikeStatus> apiRegularShowCommentOrReplyLikeS
 }
 
 class APIRegularShowCommentOrReplyLikeStatus{
-  bool likeStatus;
-  int numberOfLikes;
+  bool showCommentOrReplyLikeStatus;
+  int showCommentOrReplyNumberOfLikes;
 
-  APIRegularShowCommentOrReplyLikeStatus({this.likeStatus, this.numberOfLikes});
+  APIRegularShowCommentOrReplyLikeStatus({this.showCommentOrReplyLikeStatus, this.showCommentOrReplyNumberOfLikes});
 
   factory APIRegularShowCommentOrReplyLikeStatus.fromJson(Map<String, dynamic> parsedJson){
 
     return APIRegularShowCommentOrReplyLikeStatus(
-      likeStatus: parsedJson['like'],
-      numberOfLikes: parsedJson['numberOfLikes'],
+      showCommentOrReplyLikeStatus: parsedJson['like'],
+      showCommentOrReplyNumberOfLikes: parsedJson['numberOfLikes'],
     );
   }
 }

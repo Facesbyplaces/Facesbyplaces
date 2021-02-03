@@ -28,38 +28,38 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({int userId, int page}) asy
 
 
 class APIBLMShowUsersPostsMain{
-  int itemsRemaining;
-  List<APIBLMShowUsersPostsExtended> familyMemorialList;
+  int blmItemsRemaining;
+  List<APIBLMShowUsersPostsExtended> blmFamilyMemorialList;
 
-  APIBLMShowUsersPostsMain({this.familyMemorialList, this.itemsRemaining});
+  APIBLMShowUsersPostsMain({this.blmItemsRemaining, this.blmFamilyMemorialList,});
 
   factory APIBLMShowUsersPostsMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMShowUsersPostsExtended> familyMemorials = newList.map((i) => APIBLMShowUsersPostsExtended.fromJson(i)).toList();
 
     return APIBLMShowUsersPostsMain(
-      familyMemorialList: familyMemorials,
-      itemsRemaining: parsedJson['itemsremaining'],
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFamilyMemorialList: familyMemorials,
     );
   }
 }
 
 
 class APIBLMShowUsersPostsExtended{
-  int id;
-  APIBLMShowUsersPostsExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIBLMShowUsersPostsExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int showUsersPostsId;
+  APIBLMShowUsersPostsExtendedPage showUsersPostsPage;
+  String showUsersPostsBody;
+  String showUsersPostsLocation;
+  double showUsersPostsLatitude;
+  double showUsersPostsLongitude;
+  List<dynamic> showUsersPostsImagesOrVideos;
+  List<APIBLMShowUsersPostsExtendedTagged> showUsersPostsPostTagged;
+  String showUsersPostsCreateAt;
+  int showUsersPostsNumberOfLikes;
+  int showUsersPostsNumberOfComments;
+  bool showUsersPostsLikeStatus;
 
-  APIBLMShowUsersPostsExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMShowUsersPostsExtended({this.showUsersPostsId, this.showUsersPostsPage, this.showUsersPostsBody, this.showUsersPostsLocation, this.showUsersPostsLatitude, this.showUsersPostsLongitude, this.showUsersPostsImagesOrVideos, this.showUsersPostsPostTagged, this.showUsersPostsCreateAt, this.showUsersPostsNumberOfLikes, this.showUsersPostsNumberOfComments, this.showUsersPostsLikeStatus});
 
   factory APIBLMShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -74,18 +74,18 @@ class APIBLMShowUsersPostsExtended{
     List<APIBLMShowUsersPostsExtendedTagged> taggedList = newList2.map((i) => APIBLMShowUsersPostsExtendedTagged.fromJson(i)).toList();
     
     return APIBLMShowUsersPostsExtended(
-      id: parsedJson['id'],
-      page: APIBLMShowUsersPostsExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      showUsersPostsId: parsedJson['id'],
+      showUsersPostsPage: APIBLMShowUsersPostsExtendedPage.fromJson(parsedJson['page']),
+      showUsersPostsBody: parsedJson['body'],
+      showUsersPostsLocation: parsedJson['location'],
+      showUsersPostsLatitude: parsedJson['latitude'],
+      showUsersPostsLongitude: parsedJson['longitude'],
+      showUsersPostsImagesOrVideos: newList1,
+      showUsersPostsPostTagged: taggedList,
+      showUsersPostsCreateAt: parsedJson['created_at'],
+      showUsersPostsNumberOfLikes: parsedJson['numberOfLikes'],
+      showUsersPostsNumberOfComments: parsedJson['numberOfComments'],
+      showUsersPostsLikeStatus: parsedJson['likeStatus'],
     );
   }
 }

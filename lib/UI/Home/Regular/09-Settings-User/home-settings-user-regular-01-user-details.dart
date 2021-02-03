@@ -96,8 +96,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               backgroundImage: ((){
                                 if(profileImage != null){
                                   return AssetImage(profileImage.path);
-                                }else if(profile.data.image != null && profile.data.image != ''){
-                                  return NetworkImage(profile.data.image);
+                                }else if(profile.data.showProfileInformationImage != null && profile.data.showProfileInformationImage != ''){
+                                  return NetworkImage(profile.data.showProfileInformationImage);
                                 }else{
                                   return AssetImage('assets/icons/app-icon.png');
                                 }
@@ -140,7 +140,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                     child: Column(
                       children: [
                         Center(
-                          child: Text(profile.data.firstName + ' ' + profile.data.lastName,
+                          child: Text(profile.data.showProfileInformationFirstName + ' ' + profile.data.showProfileInformationLastName,
                             style: TextStyle(
                               fontSize: SizeConfig.safeBlockHorizontal * 5,
                               fontWeight: FontWeight.bold,
@@ -152,7 +152,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
                         Center(
-                          child: Text(profile.data.email,
+                          child: Text(profile.data.showProfileInformationEmail,
                             style: TextStyle(
                               fontSize: SizeConfig.safeBlockHorizontal * 4,
                               fontWeight: FontWeight.w300,

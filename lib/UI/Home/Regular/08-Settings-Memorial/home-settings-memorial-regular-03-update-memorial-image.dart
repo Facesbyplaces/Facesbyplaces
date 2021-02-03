@@ -110,7 +110,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               image: backgroundImage != null
                               ? AssetImage(backgroundImage.path)
                               : CachedNetworkImageProvider(
-                                memorialImageSettings.data.memorial.backgroundImage.toString(),
+                                memorialImageSettings.data.almMemorial.showPageImagesBackgroundImage.toString(),
                               ),
                             ),
                           ),
@@ -133,7 +133,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                         backgroundImage: profileImage != null
                                         ? AssetImage(profileImage.path)
                                         : CachedNetworkImageProvider(
-                                          memorialImageSettings.data.memorial.profileImage.toString()
+                                          memorialImageSettings.data.almMemorial.showPageImagesProfileImage.toString()
                                         ),
                                       ),
                                     ),

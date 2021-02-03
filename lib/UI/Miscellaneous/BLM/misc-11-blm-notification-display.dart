@@ -37,7 +37,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
           var memorialProfile = await apiRegularShowMemorial(memorialId: postId);
           context.hideLoaderOverlay();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.memorial.memorialFollower,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
         }else if(notificationType == 'Blm'){
           context.showLoaderOverlay();
           var blmProfile = await apiBLMShowMemorial(memorialId: postId);

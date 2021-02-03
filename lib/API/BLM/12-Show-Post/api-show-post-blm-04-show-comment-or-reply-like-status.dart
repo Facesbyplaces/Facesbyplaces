@@ -29,16 +29,16 @@ Future<APIBLMShowCommentOrReplyLikeStatus> apiBLMShowCommentOrReplyLikeStatus({S
 
 
 class APIBLMShowCommentOrReplyLikeStatus{
-  bool likeStatus;
-  int numberOfLikes;
+  bool showCommentOrReplyLikeStatus;
+  int showCommentOrReplyNumberOfLikes;
 
-  APIBLMShowCommentOrReplyLikeStatus({this.likeStatus, this.numberOfLikes});
+  APIBLMShowCommentOrReplyLikeStatus({this.showCommentOrReplyLikeStatus, this.showCommentOrReplyNumberOfLikes});
 
   factory APIBLMShowCommentOrReplyLikeStatus.fromJson(Map<String, dynamic> parsedJson){
 
     return APIBLMShowCommentOrReplyLikeStatus(
-      likeStatus: parsedJson['like'],
-      numberOfLikes: parsedJson['numberOfLikes'],
+      showCommentOrReplyLikeStatus: parsedJson['like'],
+      showCommentOrReplyNumberOfLikes: parsedJson['numberOfLikes'],
     );
   }
 }

@@ -27,20 +27,20 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({int memorialId}) 
 }
 
 class APIRegularShowSwitchStatus{
-  bool family;
-  bool friends;
-  bool followers;
-  bool success;
+  bool showSwitchStatusFamily;
+  bool showSwitchStatusFriends;
+  bool showSwitchStatusFollowers;
+  bool showSwitchStatusSuccess;
 
-  APIRegularShowSwitchStatus({this.family, this.friends, this.followers, this.success});
+  APIRegularShowSwitchStatus({this.showSwitchStatusFamily, this.showSwitchStatusFriends, this.showSwitchStatusFollowers, this.showSwitchStatusSuccess});
 
   factory APIRegularShowSwitchStatus.fromJson(Map<String, dynamic> parsedJson){
 
     return APIRegularShowSwitchStatus(
-      family: parsedJson['family'],
-      friends: parsedJson['friends'],
-      followers: parsedJson['followers'],
-      success: true,
+      showSwitchStatusFamily: parsedJson['family'],
+      showSwitchStatusFriends: parsedJson['friends'],
+      showSwitchStatusFollowers: parsedJson['followers'],
+      showSwitchStatusSuccess: true,
     );
   }
 }

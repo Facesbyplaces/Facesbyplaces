@@ -289,19 +289,19 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     Location.LocationData locationData = await location.getLocation();
 
                     APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                      relationship: newValue.relationship,
-                      birthPlace: newValue.birthplace,
-                      dob: convertDate(newValue.dob),
-                      rip: convertDate(newValue.rip),
-                      cemetery: newValue.cemetery,
-                      country: newValue.country,
-                      memorialName: newValue.memorialName,
-                      description: newValue.description,
-                      backgroundImage: backgroundImage,
-                      profileImage: profileImage,
-                      imagesOrVideos: newValue.imagesOrVideos,
-                      latitude: locationData.latitude.toString(),
-                      longitude: locationData.longitude.toString()
+                      almRelationship: newValue.relationship,
+                      almBirthPlace: newValue.birthplace,
+                      almDob: convertDate(newValue.dob),
+                      almRip: convertDate(newValue.rip),
+                      almCemetery: newValue.cemetery,
+                      almCountry: newValue.country,
+                      almMemorialName: newValue.memorialName,
+                      almDescription: newValue.description,
+                      almBackgroundImage: backgroundImage,
+                      almProfileImage: profileImage,
+                      almImagesOrVideos: newValue.imagesOrVideos,
+                      almLatitude: locationData.latitude.toString(),
+                      almLongitude: locationData.longitude.toString()
                     );
 
                     context.showLoaderOverlay();

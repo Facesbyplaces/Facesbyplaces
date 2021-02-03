@@ -27,10 +27,10 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({int m
 }
 
 class APIRegularConnectionListFamilyMain{
-  int itemsRemaining;
-  List<APIRegularConnectionListFamilyExtended> familyList;
+  int almItemsRemaining;
+  List<APIRegularConnectionListFamilyExtended> almFamilyList;
 
-  APIRegularConnectionListFamilyMain({this.itemsRemaining, this.familyList});
+  APIRegularConnectionListFamilyMain({this.almItemsRemaining, this.almFamilyList});
 
   factory APIRegularConnectionListFamilyMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,42 +38,42 @@ class APIRegularConnectionListFamilyMain{
     List<APIRegularConnectionListFamilyExtended> familyList = newList1.map((i) => APIRegularConnectionListFamilyExtended.fromJson(i)).toList();
 
     return APIRegularConnectionListFamilyMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      familyList: familyList,
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almFamilyList: familyList,
     );
   }
 }
 
 
 class APIRegularConnectionListFamilyExtended{
-  APIRegularConnectionListFamilyExtendedDetails user;
-  String relationship;
+  APIRegularConnectionListFamilyExtendedDetails connectionListFamilyUser;
+  String connectionListFamilyRelationship;
 
-  APIRegularConnectionListFamilyExtended({this.user, this.relationship});
+  APIRegularConnectionListFamilyExtended({this.connectionListFamilyUser, this.connectionListFamilyRelationship});
 
   factory APIRegularConnectionListFamilyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFamilyExtended(
-      user: APIRegularConnectionListFamilyExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
+      connectionListFamilyUser: APIRegularConnectionListFamilyExtendedDetails.fromJson(parsedJson['user']),
+      connectionListFamilyRelationship: parsedJson['relationship'],
     );
   }
 }
 
 class APIRegularConnectionListFamilyExtendedDetails{
 
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
+  int connectionListFamilyDetailsId;
+  String connectionListFamilyDetailsFirstName;
+  String connectionListFamilyDetailsLastName;
+  dynamic connectionListFamilyDetailsImage;
 
-  APIRegularConnectionListFamilyExtendedDetails({this.id, this.firstName, this.lastName, this.image});
+  APIRegularConnectionListFamilyExtendedDetails({this.connectionListFamilyDetailsId, this.connectionListFamilyDetailsFirstName, this.connectionListFamilyDetailsLastName, this.connectionListFamilyDetailsImage});
 
   factory APIRegularConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFamilyExtendedDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
+      connectionListFamilyDetailsId: parsedJson['id'],
+      connectionListFamilyDetailsFirstName: parsedJson['first_name'],
+      connectionListFamilyDetailsLastName: parsedJson['last_name'],
+      connectionListFamilyDetailsImage: parsedJson['image'],
     );
   }
 }

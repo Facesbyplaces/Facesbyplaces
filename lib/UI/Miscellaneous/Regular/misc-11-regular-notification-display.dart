@@ -38,7 +38,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
           var memorialProfile = await apiRegularShowMemorial(memorialId: postId);
           context.hideLoaderOverlay();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.memorial.memorialFollower,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: memorialProfile.almMemorial.showMemorialFollower,)));
         }else if(notificationType == 'Blm'){
           context.showLoaderOverlay();
           var blmProfile = await apiBLMShowMemorial(memorialId: postId);
@@ -50,7 +50,7 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
           var result = await apiRegularShowOriginalPost(postId: postId);                
           context.hideLoaderOverlay();
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: result.post.likeStatus, numberOfLikes: result.post.numberOfLikes)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: result.almPost.showOriginalPostLikeStatus, numberOfLikes: result.almPost.showOriginalPostNumberOfLikes)));
         }
       },
       leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),

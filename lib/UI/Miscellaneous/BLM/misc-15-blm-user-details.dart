@@ -203,39 +203,39 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       context.showLoaderOverlay();
 
       var newValue = await apiBLMShowUserPosts(userId: userId, page: page);
-      itemRemaining = newValue.itemsRemaining;
-      count = count + newValue.familyMemorialList.length;
+      itemRemaining = newValue.blmItemsRemaining;
+      count = count + newValue.blmFamilyMemorialList.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.length; i++){
+      for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         List<String> newList1 = [];
         List<String> newList2 = [];
         List<String> newList3 = [];
         List<int> newList4 = [];
 
-        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
-          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
-          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
-          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
-          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        for(int j = 0; j < newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged.length; j++){
+          newList1.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedFirstName);
+          newList2.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedLastName);
+          newList3.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedImage);
+          newList4.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedId);
         }
 
         posts.add(BLMMiscDraggablePost(
-          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].id,
-          memorialId: newValue.familyMemorialList[i].page.id,
-          timeCreated: newValue.familyMemorialList[i].createAt,
-          memorialName: newValue.familyMemorialList[i].page.name,
-          postBody: newValue.familyMemorialList[i].body,
-          profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+          userId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.pageCreator.id, 
+          postId: newValue.blmFamilyMemorialList[i].showUsersPostsId,
+          memorialId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.id,
+          timeCreated: newValue.blmFamilyMemorialList[i].showUsersPostsCreateAt,
+          memorialName: newValue.blmFamilyMemorialList[i].showUsersPostsPage.name,
+          postBody: newValue.blmFamilyMemorialList[i].showUsersPostsBody,
+          profileImage: newValue.blmFamilyMemorialList[i].showUsersPostsPage.profileImage,
+          imagesOrVideos: newValue.blmFamilyMemorialList[i].showUsersPostsImagesOrVideos,
 
-          managed: newValue.familyMemorialList[i].page.manage,
-          joined: newValue.familyMemorialList[i].page.follower,
-          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
-          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].likeStatus,
+          managed: newValue.blmFamilyMemorialList[i].showUsersPostsPage.manage,
+          joined: newValue.blmFamilyMemorialList[i].showUsersPostsPage.follower,
+          numberOfComments: newValue.blmFamilyMemorialList[i].showUsersPostsNumberOfComments,
+          numberOfLikes: newValue.blmFamilyMemorialList[i].showUsersPostsNumberOfLikes,
+          likeStatus: newValue.blmFamilyMemorialList[i].showUsersPostsLikeStatus,
 
-          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+          numberOfTagged: newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
           taggedImage: newList3,
@@ -472,22 +472,22 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page1);
       context.hideLoaderOverlay();
 
-      ownedItemsRemaining = newValue.ownedItemsRemaining;
-      count = count + newValue.owned.length;
+      ownedItemsRemaining = newValue.blmOwnedItemsRemaining;
+      count = count + newValue.blmOwned.length;
 
-      for(int i = 0; i < newValue.owned.length; i++){
+      for(int i = 0; i < newValue.blmOwned.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialName: newValue.owned[i].page.pageName,
-            description: newValue.owned[i].page.pageDetails.description,
-            image: newValue.owned[i].page.pageProfileImage,
-            memorialId: newValue.owned[i].page.pageId, 
-            managed: newValue.owned[i].page.pageManage,
-            follower: newValue.owned[i].page.pageFollower,
-            famOrFriends: newValue.owned[i].page.pageFamOrFriends,
-            pageType: newValue.owned[i].page.pageType,
-            relationship: newValue.owned[i].page.pageRelationship,
+            memorialName: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageName,
+            description: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageDetails.showUserMemorialsPageDetailsDescription,
+            image: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageProfileImage,
+            memorialId: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageId,
+            managed: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageManage,
+            follower: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageFollower,
+            famOrFriends: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageFamOrFriends,
+            pageType: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageType,
+            relationship: newValue.blmOwned[i].showUserMemorialsPage.showUserMemorialsPageRelationship,
           ),
         );
       }
@@ -521,22 +521,22 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       var newValue = await apiBLMShowUserMemorials(userId: userId, page: page2);
       context.hideLoaderOverlay();
 
-      followedItemsRemaining = newValue.followedItemsRemaining;
-      count = count + newValue.followed.length;
+      followedItemsRemaining = newValue.blmFollowedItemsRemaining;
+      count = count + newValue.blmFollowed.length;
 
-      for(int i = 0; i < newValue.followed.length; i++){
+      for(int i = 0; i < newValue.blmFollowed.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialName: newValue.followed[i].page.pageName,
-            description: newValue.owned[i].page.pageDetails.description,
-            image: newValue.followed[i].page.pageProfileImage,
-            memorialId: newValue.followed[i].page.pageId, 
-            managed: newValue.followed[i].page.pageManage,
-            follower: newValue.followed[i].page.pageFollower,
-            famOrFriends: newValue.followed[i].page.pageFamOrFriends,
-            pageType: newValue.followed[i].page.pageType,
-            relationship: newValue.followed[i].page.pageRelationship,
+            memorialName: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageName,
+            description: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageDetails.showUserMemorialsPageDetailsDescription,
+            image: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageProfileImage,
+            memorialId: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageId,
+            managed: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageManage,
+            follower: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageFollower,
+            famOrFriends: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageFamOrFriends,
+            pageType: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageType,
+            relationship: newValue.blmFollowed[i].showUserMemorialsPage.showUserMemorialsPageRelationship,
           ),
         );
       }

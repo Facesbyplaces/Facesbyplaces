@@ -103,7 +103,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                         Row(
                           children: [
-                            Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.birthdate,),),
+                            Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.showOtherDetailsBirthdate,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -127,7 +127,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                         Row(
                           children: [
-                            Expanded(child: MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.birthplace,),),
+                            Expanded(child: MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.showOtherDetailsBirthplace,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -151,7 +151,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                         Row(
                           children: [
-                            Expanded(child: MiscRegularInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.address,),),
+                            Expanded(child: MiscRegularInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.showOtherDetailsAddress,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -174,7 +174,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                         Row(
                           children: [
-                            Expanded(child: MiscRegularInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.email, type: TextInputType.emailAddress,),),
+                            Expanded(child: MiscRegularInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.showOtherDetailsEmail, type: TextInputType.emailAddress,),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -198,7 +198,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                         Row(
                           children: [
-                            Expanded(child: MiscRegularPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.phoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),),
+                            Expanded(child: MiscRegularPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.showOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),),
 
                             SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -230,11 +230,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                           onPressed: () async{
 
                             if(
-                              details.data.birthdate != _key1.currentState.controller.text ||
-                              details.data.birthplace !=  _key2.currentState.controller.text ||
-                              details.data.address != _key3.currentState.controller.text ||
-                              details.data.email != _key4.currentState.controller.text ||
-                              details.data.phoneNumber != _key5.currentState.controller.text
+                              details.data.showOtherDetailsBirthdate != _key1.currentState.controller.text ||
+                              details.data.showOtherDetailsBirthplace !=  _key2.currentState.controller.text ||
+                              details.data.showOtherDetailsAddress != _key3.currentState.controller.text ||
+                              details.data.showOtherDetailsEmail != _key4.currentState.controller.text ||
+                              details.data.showOtherDetailsPhoneNumber != _key5.currentState.controller.text
                             ){
                               bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 

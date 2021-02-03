@@ -56,21 +56,21 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       var newValue = await apiRegularHomeNotificationsTab(page: page);
       context.hideLoaderOverlay();
 
-      itemRemaining = newValue.itemsRemaining;
-      count = count + newValue.notification.length;
+      itemRemaining = newValue.almItemsRemaining;
+      count = count + newValue.almNotification.length;
 
-      for(int i = 0; i < newValue.notification.length; i++){
+      for(int i = 0; i < newValue.almNotification.length; i++){
         notifications.add(
           RegularMainPagesNotifications(
-            id: newValue.notification[i].id,
-            createdAt: newValue.notification[i].createdAt,
-            updatedAt: newValue.notification[i].updatedAt,
-            actorId: newValue.notification[i].actor.id,
-            read: newValue.notification[i].read,
-            action: newValue.notification[i].action,
-            postId: newValue.notification[i].postId,
-            actorImage: newValue.notification[i].actor.image,
-            notificationType: newValue.notification[i].notificationType,
+            id: newValue.almNotification[i].homeTabNotificationId,
+            createdAt: newValue.almNotification[i].homeTabNotificationCreatedAt,
+            updatedAt: newValue.almNotification[i].homeTabNotificationUpdatedAt,
+            actorId: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
+            read: newValue.almNotification[i].homeTabNotificationRead,
+            action: newValue.almNotification[i].homeTabNotificationAction,
+            postId: newValue.almNotification[i].homeTabNotificationPostId,
+            actorImage: newValue.almNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
+            notificationType: newValue.almNotification[i].homeTabNotificationNotificationType,
           ),
         );
       }

@@ -27,21 +27,21 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({int userId}) asyn
 }
 
 class APIRegularShowOtherDetails{
-  String birthdate;
-  String birthplace;
-  String email;
-  String address;
-  String phoneNumber;
+  String showOtherDetailsBirthdate;
+  String showOtherDetailsBirthplace;
+  String showOtherDetailsEmail;
+  String showOtherDetailsAddress;
+  String showOtherDetailsPhoneNumber;
 
-  APIRegularShowOtherDetails({this.birthdate, this.birthplace, this.email, this.address, this.phoneNumber});
+  APIRegularShowOtherDetails({this.showOtherDetailsBirthdate, this.showOtherDetailsBirthplace, this.showOtherDetailsEmail, this.showOtherDetailsAddress, this.showOtherDetailsPhoneNumber});
 
   factory APIRegularShowOtherDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOtherDetails(
-      birthdate: parsedJson['birthdate'],
-      birthplace: parsedJson['birthplace'],
-      email: parsedJson['email'],
-      address: parsedJson['address'],
-      phoneNumber: parsedJson['phone_number'],
+      showOtherDetailsBirthdate: parsedJson['birthdate'],
+      showOtherDetailsBirthplace: parsedJson['birthplace'],
+      showOtherDetailsEmail: parsedJson['email'],
+      showOtherDetailsAddress: parsedJson['address'],
+      showOtherDetailsPhoneNumber: parsedJson['phone_number'],
     );
   }
 }

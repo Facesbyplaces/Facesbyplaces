@@ -27,39 +27,39 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({String keywords, int pag
 }
 
 class APIRegularSearchPostMain{
-  int itemsRemaining;
-  List<APIRegularSearchPostExtended> searchPostList;
+  int almItemsRemaining;
+  List<APIRegularSearchPostExtended> almSearchPostList;
 
-  APIRegularSearchPostMain({this.itemsRemaining, this.searchPostList});
+  APIRegularSearchPostMain({this.almItemsRemaining, this.almSearchPostList});
 
   factory APIRegularSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIRegularSearchPostExtended> searchPostList = newList.map((i) => APIRegularSearchPostExtended.fromJson(i)).toList();
 
     return APIRegularSearchPostMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      searchPostList: searchPostList,
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almSearchPostList: searchPostList,
     );
   }
 }
 
 
 class APIRegularSearchPostExtended{
-  int postId;
-  APIRegularSearchPostExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIRegularHomeTabPostExtendedTagged> postTagged;
-  List<dynamic> tagPeople;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int searchPostId;
+  APIRegularSearchPostExtendedPage searchPostPage;
+  String searchPostBody;
+  String searchPostLocation;
+  double searchPostLatitude;
+  double searchPostLongitude;
+  List<dynamic> searchPostImagesOrVideos;
+  List<APIRegularSearchPostExtendedTagged> searchPostPostTagged;
+  List<dynamic> searchPostTagPeople;
+  String searchPostCreateAt;
+  int searchPostNumberOfLikes;
+  int searchPostNumberOfComments;
+  bool searchPostLikeStatus;
 
-  APIRegularSearchPostExtended({this.postId, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.tagPeople, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIRegularSearchPostExtended({this.searchPostId, this.searchPostPage, this.searchPostBody, this.searchPostLocation, this.searchPostLatitude, this.searchPostLongitude, this.searchPostImagesOrVideos, this.searchPostPostTagged, this.searchPostTagPeople, this.searchPostCreateAt, this.searchPostNumberOfLikes, this.searchPostNumberOfComments, this.searchPostLikeStatus});
 
   factory APIRegularSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -71,121 +71,121 @@ class APIRegularSearchPostExtended{
     }
 
     var newList2 = parsedJson['tag_people'] as List;
-    List<APIRegularHomeTabPostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeTabPostExtendedTagged.fromJson(i)).toList();
+    List<APIRegularSearchPostExtendedTagged> taggedList = newList2.map((i) => APIRegularSearchPostExtendedTagged.fromJson(i)).toList();
     
     return APIRegularSearchPostExtended(
-      postId: parsedJson['id'],
-      page: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      searchPostId: parsedJson['id'],
+      searchPostPage: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page']),
+      searchPostBody: parsedJson['body'],
+      searchPostLocation: parsedJson['location'],
+      searchPostLatitude: parsedJson['latitude'],
+      searchPostLongitude: parsedJson['longitude'],
+      searchPostImagesOrVideos: newList1,
+      searchPostPostTagged: taggedList,
+      searchPostCreateAt: parsedJson['created_at'],
+      searchPostNumberOfLikes: parsedJson['numberOfLikes'],
+      searchPostNumberOfComments: parsedJson['numberOfComments'],
+      searchPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIRegularSearchPostExtendedPage{
-  int pageId;
-  String name;
-  APIRegularPostExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularHomeTabPostExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int searchPostPageId;
+  String searchPostPageName;
+  APIRegularSearchPostExtendedPageDetails searchPostPageDetails;
+  dynamic searchPostPageBackgroundImage;
+  dynamic searchPostPageProfileImage;
+  dynamic searchPostPageImagesOrVideos;
+  String searchPostPageRelationship;
+  APIRegularSearchPostExtendedPageCreator searchPostPagePageCreator;
+  bool searchPostPageManage;
+  bool searchPostPageFamOrFriends;
+  bool searchPostPageFollower;
+  String searchPostPagePageType;
+  String searchPostPagePrivacy;
 
-  APIRegularSearchPostExtendedPage({this.pageId, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIRegularSearchPostExtendedPage({this.searchPostPageId, this.searchPostPageName, this.searchPostPageDetails, this.searchPostPageBackgroundImage, this.searchPostPageProfileImage, this.searchPostPageImagesOrVideos, this.searchPostPageRelationship, this.searchPostPagePageCreator, this.searchPostPageManage, this.searchPostPageFamOrFriends, this.searchPostPageFollower, this.searchPostPagePageType, this.searchPostPagePrivacy});
 
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPage(
-      pageId: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularPostExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      searchPostPageId: parsedJson['id'],
+      searchPostPageName: parsedJson['name'],
+      searchPostPageDetails: APIRegularSearchPostExtendedPageDetails.fromJson(parsedJson['details']),
+      searchPostPageBackgroundImage: parsedJson['backgroundImage'],
+      searchPostPageProfileImage: parsedJson['profileImage'],
+      searchPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      searchPostPageRelationship: parsedJson['relationship'],
+      searchPostPagePageCreator: APIRegularSearchPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchPostPageManage: parsedJson['manage'],
+      searchPostPageFamOrFriends: parsedJson['famOrFriends'],
+      searchPostPageFollower: parsedJson['follower'],
+      searchPostPagePageType: parsedJson['page_type'],
+      searchPostPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
-class APIRegularPostExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+class APIRegularSearchPostExtendedPageDetails{
+  String searchPostPageDetailsDescription;
+  String searchPostPageDetailsBirthPlace;
+  String searchPostPageDetailsDob;
+  String searchPostPageDetailsRip;
+  String searchPostPageDetailsCemetery;
+  String searchPostPageDetailsCountry;
 
-  APIRegularPostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularSearchPostExtendedPageDetails({this.searchPostPageDetailsDescription, this.searchPostPageDetailsBirthPlace, this.searchPostPageDetailsDob, this.searchPostPageDetailsRip, this.searchPostPageDetailsCemetery, this.searchPostPageDetailsCountry});
 
-  factory APIRegularPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularPostExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+  factory APIRegularSearchPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchPostExtendedPageDetails(
+      searchPostPageDetailsDescription: parsedJson['description'],
+      searchPostPageDetailsBirthPlace: parsedJson['birthplace'],
+      searchPostPageDetailsDob: parsedJson['dob'],
+      searchPostPageDetailsRip: parsedJson['rip'],
+      searchPostPageDetailsCemetery: parsedJson['cemetery'],
+      searchPostPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
-class APIRegularHomeTabPostExtendedPageCreator{
-  int creatorId;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+class APIRegularSearchPostExtendedPageCreator{
+  int searchPostPageCreatorId;
+  String searchPostPageCreatorFirstName;
+  String searchPostPageCreatorLastName;
+  String searchPostPageCreatorPhoneNumber;
+  String searchPostPageCreatorEmail;
+  String searchPostPageCreatorUserName;
+  dynamic searchPostPageCreatorImage;
 
-  APIRegularHomeTabPostExtendedPageCreator({this.creatorId, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularSearchPostExtendedPageCreator({this.searchPostPageCreatorId, this.searchPostPageCreatorFirstName, this.searchPostPageCreatorLastName, this.searchPostPageCreatorPhoneNumber, this.searchPostPageCreatorEmail, this.searchPostPageCreatorUserName, this.searchPostPageCreatorImage});
 
-  factory APIRegularHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabPostExtendedPageCreator(
-      creatorId: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+  factory APIRegularSearchPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchPostExtendedPageCreator(
+      searchPostPageCreatorId: parsedJson['id'],
+      searchPostPageCreatorFirstName: parsedJson['first_name'],
+      searchPostPageCreatorLastName: parsedJson['last_name'],
+      searchPostPageCreatorPhoneNumber: parsedJson['phone_number'],
+      searchPostPageCreatorEmail: parsedJson['email'],
+      searchPostPageCreatorUserName: parsedJson['username'],
+      searchPostPageCreatorImage: parsedJson['image']
     );
   }
 }
 
-class APIRegularHomeTabPostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+class APIRegularSearchPostExtendedTagged{
+  int searchPostTaggedId;
+  String searchPostTaggedFirstName;
+  String searchPostTaggedLastName;
+  String searchPostTaggedImage;
 
-  APIRegularHomeTabPostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIRegularSearchPostExtendedTagged({this.searchPostTaggedId, this.searchPostTaggedFirstName, this.searchPostTaggedLastName, this.searchPostTaggedImage});
 
-  factory APIRegularHomeTabPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabPostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+  factory APIRegularSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchPostExtendedTagged(
+      searchPostTaggedId: parsedJson['id'],
+      searchPostTaggedFirstName: parsedJson['first_name'],
+      searchPostTaggedLastName: parsedJson['last_name'],
+      searchPostTaggedImage: parsedJson['image']
     );
   }
 }

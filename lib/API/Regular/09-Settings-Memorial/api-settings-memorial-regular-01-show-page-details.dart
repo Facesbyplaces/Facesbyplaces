@@ -29,86 +29,86 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({int memorialId}
 
 class APIRegularShowPageDetailsMain{
 
-  APIRegularShowPageDetailsExtended memorial;
+  APIRegularShowPageDetailsExtended almMemorial;
 
-  APIRegularShowPageDetailsMain({this.memorial});
+  APIRegularShowPageDetailsMain({this.almMemorial});
 
   factory APIRegularShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsMain(
-      memorial: APIRegularShowPageDetailsExtended.fromJson(parsedJson['memorial']),
+      almMemorial: APIRegularShowPageDetailsExtended.fromJson(parsedJson['memorial']),
     );
   }
 }
 
 
 class APIRegularShowPageDetailsExtended{
-  int id;
-  String name;
-  APIRegularShowPageDetailsExtendedDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularShowPageDetailsExtendedPageCreator pageCreator;
+  int showPageDetailsId;
+  String showPageDetailsName;
+  APIRegularShowPageDetailsExtendedDetails showPageDetailsDetails;
+  dynamic showPageDetailsBackgroundImage;
+  dynamic showPageDetailsProfileImage;
+  dynamic showPageDetailsImagesOrVideos;
+  String showPageDetailsRelationship;
+  APIRegularShowPageDetailsExtendedPageCreator showPageDetailsPageCreator;
 
-  APIRegularShowPageDetailsExtended({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator});
+  APIRegularShowPageDetailsExtended({this.showPageDetailsId, this.showPageDetailsName, this.showPageDetailsDetails, this.showPageDetailsBackgroundImage, this.showPageDetailsProfileImage, this.showPageDetailsImagesOrVideos, this.showPageDetailsRelationship, this.showPageDetailsPageCreator});
 
   factory APIRegularShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtended(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularShowPageDetailsExtendedPageCreator.fromJson(parsedJson['page_creator'])
+      showPageDetailsId: parsedJson['id'],
+      showPageDetailsName: parsedJson['name'],
+      showPageDetailsDetails: APIRegularShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
+      showPageDetailsBackgroundImage: parsedJson['backgroundImage'],
+      showPageDetailsProfileImage: parsedJson['profileImage'],
+      showPageDetailsImagesOrVideos: parsedJson['imagesOrVideos'],
+      showPageDetailsRelationship: parsedJson['relationship'],
+      showPageDetailsPageCreator: APIRegularShowPageDetailsExtendedPageCreator.fromJson(parsedJson['page_creator'])
     );
   }
 }
 
 class APIRegularShowPageDetailsExtendedDetails{
-  String description;
-  String cemetery;
-  String dob;
-  String rip;
-  String state;
-  String country;
+  String showPageDetailsDetailsDescription;
+  String showPageDetailsDetailsCemetery;
+  String showPageDetailsDetailsDob;
+  String showPageDetailsDetailsRip;
+  String showPageDetailsDetailsState;
+  String showPageDetailsDetailsCountry;
 
-  APIRegularShowPageDetailsExtendedDetails({this.description, this.cemetery, this.dob, this.rip, this.state, this.country});
+  APIRegularShowPageDetailsExtendedDetails({this.showPageDetailsDetailsDescription, this.showPageDetailsDetailsCemetery, this.showPageDetailsDetailsDob, this.showPageDetailsDetailsRip, this.showPageDetailsDetailsState, this.showPageDetailsDetailsCountry});
 
   factory APIRegularShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedDetails(
-      description: parsedJson['description'],
-      cemetery: parsedJson['cemetery'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      state: parsedJson['state'],
-      country: parsedJson['country'],
+      showPageDetailsDetailsDescription: parsedJson['description'],
+      showPageDetailsDetailsCemetery: parsedJson['cemetery'],
+      showPageDetailsDetailsDob: parsedJson['dob'],
+      showPageDetailsDetailsRip: parsedJson['rip'],
+      showPageDetailsDetailsState: parsedJson['state'],
+      showPageDetailsDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularShowPageDetailsExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showPageDetailsPageCreatorId;
+  String showPageDetailsPageCreatorFirstName;
+  String showPageDetailsPageCreatorLastName;
+  String showPageDetailsPageCreatorPhoneNumber;
+  String showPageDetailsPageCreatorEmail;
+  String showPageDetailsPageCreatorUserName;
+  dynamic showPageDetailsPageCreatorImage;
 
-  APIRegularShowPageDetailsExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularShowPageDetailsExtendedPageCreator({this.showPageDetailsPageCreatorId, this.showPageDetailsPageCreatorFirstName, this.showPageDetailsPageCreatorLastName, this.showPageDetailsPageCreatorPhoneNumber, this.showPageDetailsPageCreatorEmail, this.showPageDetailsPageCreatorUserName, this.showPageDetailsPageCreatorImage});
 
   factory APIRegularShowPageDetailsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      showPageDetailsPageCreatorId: parsedJson['id'],
+      showPageDetailsPageCreatorFirstName: parsedJson['first_name'],
+      showPageDetailsPageCreatorLastName: parsedJson['last_name'],
+      showPageDetailsPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showPageDetailsPageCreatorEmail: parsedJson['email'],
+      showPageDetailsPageCreatorUserName: parsedJson['username'],
+      showPageDetailsPageCreatorImage: parsedJson['image']
     );
   }
 }

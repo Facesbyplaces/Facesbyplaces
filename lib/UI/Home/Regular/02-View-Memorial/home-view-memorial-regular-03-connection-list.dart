@@ -55,15 +55,15 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       var newValue = await apiRegularConnectionListFamily(memorialId: memorialId, page: page1);
       context.hideLoaderOverlay();
 
-      itemRemaining1 = newValue.itemsRemaining;
+      itemRemaining1 = newValue.almItemsRemaining;
 
-      for(int i = 0; i < newValue.familyList.length; i++){
+      for(int i = 0; i < newValue.almFamilyList.length; i++){
         listsFamily.add(
           RegularConnectionListItem(
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
+            firstName: newValue.almFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsFirstName,
+            lastName: newValue.almFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsLastName,
+            image: newValue.almFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsImage,
+            relationship: newValue.almFamilyList[i].connectionListFamilyRelationship,
           ),    
         );
       }
@@ -85,14 +85,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       var newValue = await apiRegularConnectionListFriends(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
 
-      itemRemaining2 = newValue.itemsRemaining;
+      itemRemaining2 = newValue.almItemsRemaining;
 
-      for(int i = 0; i < newValue.friendsList.length; i++){
+      for(int i = 0; i < newValue.almFriendsList.length; i++){
         listsFriends.add(
           RegularConnectionListItem(
-            firstName: newValue.friendsList[i].user.firstName,
-            lastName: newValue.friendsList[i].user.lastName,
-            image: newValue.friendsList[i].user.image,
+            firstName: newValue.almFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsFirstName,
+            lastName: newValue.almFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsLastName,
+            image: newValue.almFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsImage,
           ),    
         );
       }
@@ -114,14 +114,14 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       var newValue = await apiRegularConnectionListFollowers(memorialId: memorialId, page: page3);
       context.hideLoaderOverlay();
 
-      itemRemaining3 = newValue.itemsRemaining;
+      itemRemaining3 = newValue.almItemsRemaining;
 
-      for(int i = 0; i < newValue.followersList.length; i++){
+      for(int i = 0; i < newValue.almFollowersList.length; i++){
         listsFollowers.add(
           RegularConnectionListItem(
-            firstName: newValue.followersList[i].firstName,
-            lastName: newValue.followersList[i].lastName,
-            image: newValue.followersList[i].image,
+            firstName: newValue.almFollowersList[i].connectionListFollowersDetailsFirstName,
+            lastName: newValue.almFollowersList[i].connectionListFollowersDetailsLastName,
+            image: newValue.almFollowersList[i].connectionListFollowersDetailsImage,
           ),    
         );
       }

@@ -27,25 +27,25 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({int u
 }
 
 class APIRegularShowNotificationStatus{
-  bool newMemorial;
-  bool newActivities;
-  bool postLikes;
-  bool postComments;
-  bool addFamily;
-  bool addFriends;
-  bool addAdmin;
+  bool showNotificationStatusNewMemorial;
+  bool showNotificationStatusNewActivities;
+  bool showNotificationStatusPostLikes;
+  bool showNotificationStatusPostComments;
+  bool showNotificationStatusAddFamily;
+  bool showNotificationStatusAddFriends;
+  bool showNotificationStatusAddAdmin;
 
-  APIRegularShowNotificationStatus({this.newMemorial, this.newActivities, this.postLikes, this.postComments, this.addFamily, this.addFriends, this.addAdmin});
+  APIRegularShowNotificationStatus({this.showNotificationStatusNewMemorial, this.showNotificationStatusNewActivities, this.showNotificationStatusPostLikes, this.showNotificationStatusPostComments, this.showNotificationStatusAddFamily, this.showNotificationStatusAddFriends, this.showNotificationStatusAddAdmin});
 
   factory APIRegularShowNotificationStatus.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowNotificationStatus(
-      newMemorial: parsedJson['newMemorial'],
-      newActivities: parsedJson['newActivities'],
-      postLikes: parsedJson['postLikes'],
-      postComments: parsedJson['postComments'],
-      addFamily: parsedJson['addFamily'],
-      addFriends: parsedJson['addFriends'],
-      addAdmin: parsedJson['addAdmin'],
+      showNotificationStatusNewMemorial: parsedJson['newMemorial'],
+      showNotificationStatusNewActivities: parsedJson['newActivities'],
+      showNotificationStatusPostLikes: parsedJson['postLikes'],
+      showNotificationStatusPostComments: parsedJson['postComments'],
+      showNotificationStatusAddFamily: parsedJson['addFamily'],
+      showNotificationStatusAddFriends: parsedJson['addFriends'],
+      showNotificationStatusAddAdmin: parsedJson['addAdmin'],
     );
   }
 }

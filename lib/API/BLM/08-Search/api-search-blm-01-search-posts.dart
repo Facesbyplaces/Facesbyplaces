@@ -52,7 +52,7 @@ class APIBLMSearchPostExtended{
   double searchPostLatitude;
   double searchPostLongitude;
   List<dynamic> searchPostImagesOrVideos;
-  List<APIBLMHomeProfilePostExtendedTagged> searchPostPostTagged;
+  List<APIBLMSearchPostExtendedTagged> searchPostPostTagged;
   String searchPostCreateAt;
   int searchPostNumberOfLikes;
   int searchPostNumberOfComments;
@@ -70,7 +70,7 @@ class APIBLMSearchPostExtended{
     }
 
     var newList2 = parsedJson['tag_people'] as List;
-    List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();
+    List<APIBLMSearchPostExtendedTagged> taggedList = newList2.map((i) => APIBLMSearchPostExtendedTagged.fromJson(i)).toList();
     
     return APIBLMSearchPostExtended(
       searchPostPostId: parsedJson['id'],
@@ -92,12 +92,12 @@ class APIBLMSearchPostExtended{
 class APIBLMSearchPostExtendedPage{
   int searchPostPagePageId;
   String searchPostPageName;
-  APIBLMPostExtendedPageDetails searchPostPageDetails;
+  APIBLMSearchPostExtendedPageDetails searchPostPageDetails;
   dynamic searchPostPageBackgroundImage;
   dynamic searchPostPageProfileImage;
   dynamic searchPostPageImagesOrVideos;
   String searchPostPageRelationship;
-  APIBLMHomeTabPostExtendedPageCreator searchPostPagePageCreator;
+  APIBLMSearchPostExtendedPageCreator searchPostPagePageCreator;
   bool searchPostPageManage;
   bool searchPostPageFamOrFriends;
   bool searchPostPageFollower;
@@ -110,12 +110,12 @@ class APIBLMSearchPostExtendedPage{
     return APIBLMSearchPostExtendedPage(
       searchPostPagePageId: parsedJson['id'],
       searchPostPageName: parsedJson['name'],
-      searchPostPageDetails: APIBLMPostExtendedPageDetails.fromJson(parsedJson['details']),
+      searchPostPageDetails: APIBLMSearchPostExtendedPageDetails.fromJson(parsedJson['details']),
       searchPostPageBackgroundImage: parsedJson['backgroundImage'],
       searchPostPageProfileImage: parsedJson['profileImage'],
       searchPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
       searchPostPageRelationship: parsedJson['relationship'],
-      searchPostPagePageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchPostPagePageCreator: APIBLMSearchPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchPostPageManage: parsedJson['manage'],
       searchPostPageFamOrFriends: parsedJson['famOrFriends'],
       searchPostPageFollower: parsedJson['follower'],
@@ -125,7 +125,7 @@ class APIBLMSearchPostExtendedPage{
   }
 }
 
-class APIBLMPostExtendedPageDetails{
+class APIBLMSearchPostExtendedPageDetails{
   String searchPostPageDetailsDescription;
   String searchPostPageDetailsBirthPlace;
   String searchPostPageDetailsDob;
@@ -133,10 +133,10 @@ class APIBLMPostExtendedPageDetails{
   String searchPostPageDetailsCemetery;
   String searchPostPageDetailsCountry;
 
-  APIBLMPostExtendedPageDetails({this.searchPostPageDetailsDescription, this.searchPostPageDetailsBirthPlace, this.searchPostPageDetailsDob, this.searchPostPageDetailsRip, this.searchPostPageDetailsCemetery, this.searchPostPageDetailsCountry});
+  APIBLMSearchPostExtendedPageDetails({this.searchPostPageDetailsDescription, this.searchPostPageDetailsBirthPlace, this.searchPostPageDetailsDob, this.searchPostPageDetailsRip, this.searchPostPageDetailsCemetery, this.searchPostPageDetailsCountry});
 
-  factory APIBLMPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMPostExtendedPageDetails(
+  factory APIBLMSearchPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchPostExtendedPageDetails(
       searchPostPageDetailsDescription: parsedJson['description'],
       searchPostPageDetailsBirthPlace: parsedJson['birthplace'],
       searchPostPageDetailsDob: parsedJson['dob'],
@@ -147,7 +147,7 @@ class APIBLMPostExtendedPageDetails{
   }
 }
 
-class APIBLMHomeTabPostExtendedPageCreator{
+class APIBLMSearchPostExtendedPageCreator{
   int searchPostPageCreatorCreatorId;
   String searchPostPageCreatorFirstName;
   String searchPostPageCreatorLastName;
@@ -156,10 +156,10 @@ class APIBLMHomeTabPostExtendedPageCreator{
   String searchPostPageCreatorUserName;
   dynamic searchPostPageCreatorImage;
 
-  APIBLMHomeTabPostExtendedPageCreator({this.searchPostPageCreatorCreatorId, this.searchPostPageCreatorFirstName, this.searchPostPageCreatorLastName, this.searchPostPageCreatorPhoneNumber, this.searchPostPageCreatorEmail, this.searchPostPageCreatorUserName, this.searchPostPageCreatorImage});
+  APIBLMSearchPostExtendedPageCreator({this.searchPostPageCreatorCreatorId, this.searchPostPageCreatorFirstName, this.searchPostPageCreatorLastName, this.searchPostPageCreatorPhoneNumber, this.searchPostPageCreatorEmail, this.searchPostPageCreatorUserName, this.searchPostPageCreatorImage});
 
-  factory APIBLMHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMHomeTabPostExtendedPageCreator(
+  factory APIBLMSearchPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchPostExtendedPageCreator(
       searchPostPageCreatorCreatorId: parsedJson['id'],
       searchPostPageCreatorFirstName: parsedJson['first_name'],
       searchPostPageCreatorLastName: parsedJson['last_name'],
@@ -171,16 +171,16 @@ class APIBLMHomeTabPostExtendedPageCreator{
   }
 }
 
-class APIBLMHomeProfilePostExtendedTagged{
+class APIBLMSearchPostExtendedTagged{
   int taggedId;
   String taggedFirstName;
   String taggedLastName;
   String taggedImage;
 
-  APIBLMHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIBLMSearchPostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
 
-  factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMHomeProfilePostExtendedTagged(
+  factory APIBLMSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchPostExtendedTagged(
       taggedId: parsedJson['id'],
       taggedFirstName: parsedJson['first_name'],
       taggedLastName: parsedJson['last_name'],

@@ -27,37 +27,37 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({int page}) async{
 }
 
 class APIRegularHomeTabFeedMain{
-  int itemsRemaining;
-  List<APIRegularHomeTabFeedExtended> familyMemorialList;
+  int almItemsRemaining;
+  List<APIRegularHomeTabFeedExtended> almFamilyMemorialList;
 
-  APIRegularHomeTabFeedMain({this.familyMemorialList, this.itemsRemaining});
+  APIRegularHomeTabFeedMain({this.almItemsRemaining, this.almFamilyMemorialList});
 
   factory APIRegularHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIRegularHomeTabFeedExtended> familyMemorials = newList.map((i) => APIRegularHomeTabFeedExtended.fromJson(i)).toList();
 
     return APIRegularHomeTabFeedMain(
-      familyMemorialList: familyMemorials,
-      itemsRemaining: parsedJson['itemsremaining'],
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almFamilyMemorialList: familyMemorials,
     );
   }
 }
 
 class APIRegularHomeTabFeedExtended{
-  int id;
-  APIRegularHomeTabFeedExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIRegularHomeProfilePostExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int homeTabFeedId;
+  APIRegularHomeTabFeedExtendedPage homeTabFeedPage;
+  String homeTabFeedBody;
+  String homeTabFeedLocation;
+  double homeTabFeedLatitude;
+  double homeTabFeedLongitude;
+  List<dynamic> homeTabFeedImagesOrVideos;
+  List<APIRegularHomeTabFeedExtendedTagged> homeTabFeedPostTagged;
+  String homeTabFeedCreateAt;
+  int homeTabFeedNumberOfLikes;
+  int homeTabFeedNumberOfComments;
+  bool homeTabFeedLikeStatus;
 
-  APIRegularHomeTabFeedExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIRegularHomeTabFeedExtended({this.homeTabFeedId, this.homeTabFeedPage, this.homeTabFeedBody, this.homeTabFeedLocation, this.homeTabFeedLatitude, this.homeTabFeedLongitude, this.homeTabFeedImagesOrVideos, this.homeTabFeedPostTagged, this.homeTabFeedCreateAt, this.homeTabFeedNumberOfLikes, this.homeTabFeedNumberOfComments, this.homeTabFeedLikeStatus});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -65,125 +65,124 @@ class APIRegularHomeTabFeedExtended{
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
-      print('The images or videos ${parsedJson['imagesOrVideos']}');
       newList1 = List<dynamic>.from(list);
     }
 
     var newList2 = parsedJson['tag_people'] as List;
-    List<APIRegularHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeProfilePostExtendedTagged.fromJson(i)).toList();
+    List<APIRegularHomeTabFeedExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeTabFeedExtendedTagged.fromJson(i)).toList();
     
     return APIRegularHomeTabFeedExtended(
-      id: parsedJson['id'],
-      page: APIRegularHomeTabFeedExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      homeTabFeedId: parsedJson['id'],
+      homeTabFeedPage: APIRegularHomeTabFeedExtendedPage.fromJson(parsedJson['page']),
+      homeTabFeedBody: parsedJson['body'],
+      homeTabFeedLocation: parsedJson['location'],
+      homeTabFeedLatitude: parsedJson['latitude'],
+      homeTabFeedLongitude: parsedJson['longitude'],
+      homeTabFeedImagesOrVideos: newList1,
+      homeTabFeedPostTagged: taggedList,
+      homeTabFeedCreateAt: parsedJson['created_at'],
+      homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],
+      homeTabFeedNumberOfComments: parsedJson['numberOfComments'],
+      homeTabFeedLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIRegularHomeTabFeedExtendedPage{
-  int id;
-  String name;
-  APIRegularHomeTabFeedExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularHomeTabFeedExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int homeTabFeedPageId;
+  String homeTabFeedPageName;
+  APIRegularHomeTabFeedExtendedPageDetails homeTabFeedPageDetails;
+  dynamic homeTabFeedPageBackgroundImage;
+  dynamic homeTabFeedPageProfileImage;
+  dynamic homeTabFeedPageImagesOrVideos;
+  String homeTabFeedPageRelationship;
+  APIRegularHomeTabFeedExtendedPageCreator homeTabFeedPagePageCreator;
+  bool homeTabFeedPageManage;
+  bool homeTabFeedPageFamOrFriends;
+  bool homeTabFeedPageFollower;
+  String homeTabFeedPagePageType;
+  String homeTabFeedPagePrivacy;
 
-  APIRegularHomeTabFeedExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
+  APIRegularHomeTabFeedExtendedPage({this.homeTabFeedPageId, this.homeTabFeedPageName, this.homeTabFeedPageDetails, this.homeTabFeedPageBackgroundImage, this.homeTabFeedPageProfileImage, this.homeTabFeedPageImagesOrVideos, this.homeTabFeedPageRelationship, this.homeTabFeedPagePageCreator, this.homeTabFeedPageFollower, this.homeTabFeedPageManage, this.homeTabFeedPagePageType, this.homeTabFeedPagePrivacy});
 
   factory APIRegularHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularHomeTabFeedExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      follower: parsedJson['follower'],
-      manage: parsedJson['manage'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      homeTabFeedPageId: parsedJson['id'],
+      homeTabFeedPageName: parsedJson['name'],
+      homeTabFeedPageDetails: APIRegularHomeTabFeedExtendedPageDetails.fromJson(parsedJson['details']),
+      homeTabFeedPageBackgroundImage: parsedJson['backgroundImage'],
+      homeTabFeedPageProfileImage: parsedJson['profileImage'],
+      homeTabFeedPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      homeTabFeedPageRelationship: parsedJson['relationship'],
+      homeTabFeedPagePageCreator: APIRegularHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      homeTabFeedPageFollower: parsedJson['follower'],
+      homeTabFeedPageManage: parsedJson['manage'],
+      homeTabFeedPagePageType: parsedJson['page_type'],
+      homeTabFeedPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularHomeTabFeedExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String homeTabFeedPageDetailsDescription;
+  String homeTabFeedPageDetailsBirthPlace;
+  String homeTabFeedPageDetailsDob;
+  String homeTabFeedPageDetailsRip;
+  String homeTabFeedPageDetailsCemetery;
+  String homeTabFeedPageDetailsCountry;
 
-  APIRegularHomeTabFeedExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularHomeTabFeedExtendedPageDetails({this.homeTabFeedPageDetailsDescription, this.homeTabFeedPageDetailsBirthPlace, this.homeTabFeedPageDetailsDob, this.homeTabFeedPageDetailsRip, this.homeTabFeedPageDetailsCemetery, this.homeTabFeedPageDetailsCountry});
 
   factory APIRegularHomeTabFeedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      homeTabFeedPageDetailsDescription: parsedJson['description'],
+      homeTabFeedPageDetailsBirthPlace: parsedJson['birthplace'],
+      homeTabFeedPageDetailsDob: parsedJson['dob'],
+      homeTabFeedPageDetailsRip: parsedJson['rip'],
+      homeTabFeedPageDetailsCemetery: parsedJson['cemetery'],
+      homeTabFeedPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularHomeTabFeedExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int homeTabFeedPageCreatorId;
+  String homeTabFeedPageCreatorFirstName;
+  String homeTabFeedPageCreatorLastName;
+  String homeTabFeedPageCreatorPhoneNumber;
+  String homeTabFeedPageCreatorEmail;
+  String homeTabFeedPageCreatorUserName;
+  dynamic homeTabFeedPageCreatorImage;
 
-  APIRegularHomeTabFeedExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularHomeTabFeedExtendedPageCreator({this.homeTabFeedPageCreatorId, this.homeTabFeedPageCreatorFirstName, this.homeTabFeedPageCreatorLastName, this.homeTabFeedPageCreatorPhoneNumber, this.homeTabFeedPageCreatorEmail, this.homeTabFeedPageCreatorUserName, this.homeTabFeedPageCreatorImage});
 
   factory APIRegularHomeTabFeedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      homeTabFeedPageCreatorId: parsedJson['id'],
+      homeTabFeedPageCreatorFirstName: parsedJson['first_name'],
+      homeTabFeedPageCreatorLastName: parsedJson['last_name'],
+      homeTabFeedPageCreatorPhoneNumber: parsedJson['phone_number'],
+      homeTabFeedPageCreatorEmail: parsedJson['email'],
+      homeTabFeedPageCreatorUserName: parsedJson['username'],
+      homeTabFeedPageCreatorImage: parsedJson['image']
     );
   }
 }
 
-class APIRegularHomeProfilePostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+class APIRegularHomeTabFeedExtendedTagged{
+  int homeTabFeedTaggedId;
+  String homeTabFeedTaggedFirstName;
+  String homeTabFeedTaggedLastName;
+  String homeTabFeedTaggedImage;
 
-  APIRegularHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIRegularHomeTabFeedExtendedTagged({this.homeTabFeedTaggedId, this.homeTabFeedTaggedFirstName, this.homeTabFeedTaggedLastName, this.homeTabFeedTaggedImage});
 
-  factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeProfilePostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+  factory APIRegularHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularHomeTabFeedExtendedTagged(
+      homeTabFeedTaggedId: parsedJson['id'],
+      homeTabFeedTaggedFirstName: parsedJson['first_name'],
+      homeTabFeedTaggedLastName: parsedJson['last_name'],
+      homeTabFeedTaggedImage: parsedJson['image']
     );
   }
 }

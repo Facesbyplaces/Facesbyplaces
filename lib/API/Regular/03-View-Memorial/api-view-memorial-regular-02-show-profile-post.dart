@@ -28,38 +28,38 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({int memorialId, int
 
 
 class APIRegularHomeProfilePostMain{
-  int itemsRemaining;
-  List<APIRegularHomeProfilePostExtended> familyMemorialList;
+  int almItemsRemaining;
+  List<APIRegularHomeProfilePostExtended> almFamilyMemorialList;
 
-  APIRegularHomeProfilePostMain({this.itemsRemaining, this.familyMemorialList});
+  APIRegularHomeProfilePostMain({this.almItemsRemaining, this.almFamilyMemorialList});
 
   factory APIRegularHomeProfilePostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIRegularHomeProfilePostExtended> familyMemorials = newList.map((i) => APIRegularHomeProfilePostExtended.fromJson(i)).toList();
 
     return APIRegularHomeProfilePostMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      familyMemorialList: familyMemorials,
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almFamilyMemorialList: familyMemorials,
     );
   }
 }
 
 
 class APIRegularHomeProfilePostExtended{
-  int postId;
-  APIRegularHomeProfilePostExtendedPage postPage;
-  String postBody;
-  String postLocation;
-  double postLatitude;
-  double postLongitude;
-  List<dynamic> postImagesOrVideos;
-  List<APIRegularHomeProfilePostExtendedTagged> postTagged;
-  String postCreatedAt;
-  int postNumberOfLikes;
-  int postNumberOfComments;
-  bool postLikeStatus;
+  int homeProfilePostId;
+  APIRegularHomeProfilePostExtendedPage homeProfilePostPage;
+  String homeProfilePostBody;
+  String homeProfilePostLocation;
+  double homeProfilePostLatitude;
+  double homeProfilePostLongitude;
+  List<dynamic> homeProfilePostImagesOrVideos;
+  List<APIRegularHomeProfilePostExtendedTagged> homeProfilePostTagged;
+  String homeProfilePostCreatedAt;
+  int homeProfilePostNumberOfLikes;
+  int homeProfilePostNumberOfComments;
+  bool homeProfilePostLikeStatus;
 
-  APIRegularHomeProfilePostExtended({this.postId, this.postPage, this.postBody, this.postLocation, this.postLatitude, this.postLongitude, this.postImagesOrVideos, this.postTagged, this.postCreatedAt, this.postNumberOfLikes, this.postNumberOfComments, this.postLikeStatus});
+  APIRegularHomeProfilePostExtended({this.homeProfilePostId, this.homeProfilePostPage, this.homeProfilePostBody, this.homeProfilePostLocation, this.homeProfilePostLatitude, this.homeProfilePostLongitude, this.homeProfilePostImagesOrVideos, this.homeProfilePostTagged, this.homeProfilePostCreatedAt, this.homeProfilePostNumberOfLikes, this.homeProfilePostNumberOfComments, this.homeProfilePostLikeStatus});
 
   factory APIRegularHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -74,118 +74,118 @@ class APIRegularHomeProfilePostExtended{
     List<APIRegularHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeProfilePostExtendedTagged.fromJson(i)).toList();
     
     return APIRegularHomeProfilePostExtended(
-      postId: parsedJson['id'],
-      postPage: APIRegularHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
-      postBody: parsedJson['body'],
-      postLocation: parsedJson['location'],
-      postLatitude: parsedJson['latitude'],
-      postLongitude: parsedJson['longitude'],
-      postImagesOrVideos: newList1,
-      postTagged: taggedList,
-      postCreatedAt: parsedJson['created_at'],
-      postNumberOfLikes: parsedJson['numberOfLikes'],
-      postNumberOfComments: parsedJson['numberOfComments'],
-      postLikeStatus: parsedJson['likeStatus'],
+      homeProfilePostId: parsedJson['id'],
+      homeProfilePostPage: APIRegularHomeProfilePostExtendedPage.fromJson(parsedJson['page']),
+      homeProfilePostBody: parsedJson['body'],
+      homeProfilePostLocation: parsedJson['location'],
+      homeProfilePostLatitude: parsedJson['latitude'],
+      homeProfilePostLongitude: parsedJson['longitude'],
+      homeProfilePostImagesOrVideos: newList1,
+      homeProfilePostTagged: taggedList,
+      homeProfilePostCreatedAt: parsedJson['created_at'],
+      homeProfilePostNumberOfLikes: parsedJson['numberOfLikes'],
+      homeProfilePostNumberOfComments: parsedJson['numberOfComments'],
+      homeProfilePostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIRegularHomeProfilePostExtendedPage{
-  int id;
-  String name;
-  APIRegularHomeProfilePostExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularHomeProfilePostExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int homeProfilePostPageId;
+  String homeProfilePostPageName;
+  APIRegularHomeProfilePostExtendedPageDetails homeProfilePostPageDetails;
+  dynamic homeProfilePostPageBackgroundImage;
+  dynamic homeProfilePostPageProfileImage;
+  dynamic homeProfilePostPageImagesOrVideos;
+  String homeProfilePostPageRelationship;
+  APIRegularHomeProfilePostExtendedPageCreator homeProfilePostPagePageCreator;
+  bool homeProfilePostPageManage;
+  bool homeProfilePostPageFamOrFriends;
+  bool homeProfilePostPageFollower;
+  String homeProfilePostPagePageType;
+  String homeProfilePostPagePrivacy;
 
-  APIRegularHomeProfilePostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIRegularHomeProfilePostExtendedPage({this.homeProfilePostPageId, this.homeProfilePostPageName, this.homeProfilePostPageDetails, this.homeProfilePostPageBackgroundImage, this.homeProfilePostPageProfileImage, this.homeProfilePostPageImagesOrVideos, this.homeProfilePostPageRelationship, this.homeProfilePostPagePageCreator, this.homeProfilePostPageManage, this.homeProfilePostPageFamOrFriends, this.homeProfilePostPageFollower, this.homeProfilePostPagePageType, this.homeProfilePostPagePrivacy});
 
   factory APIRegularHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularHomeProfilePostExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      homeProfilePostPageId: parsedJson['id'],
+      homeProfilePostPageName: parsedJson['name'],
+      homeProfilePostPageDetails: APIRegularHomeProfilePostExtendedPageDetails.fromJson(parsedJson['details']),
+      homeProfilePostPageBackgroundImage: parsedJson['backgroundImage'],
+      homeProfilePostPageProfileImage: parsedJson['profileImage'],
+      homeProfilePostPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      homeProfilePostPageRelationship: parsedJson['relationship'],
+      homeProfilePostPagePageCreator: APIRegularHomeProfilePostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      homeProfilePostPageManage: parsedJson['manage'],
+      homeProfilePostPageFamOrFriends: parsedJson['famOrFriends'],
+      homeProfilePostPageFollower: parsedJson['follower'],
+      homeProfilePostPagePageType: parsedJson['page_type'],
+      homeProfilePostPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularHomeProfilePostExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String homeProfilePostPageDetailsDescription;
+  String homeProfilePostPageDetailsBirthPlace;
+  String homeProfilePostPageDetailsDob;
+  String homeProfilePostPageDetailsRip;
+  String homeProfilePostPageDetailsCemetery;
+  String homeProfilePostPageDetailsCountry;
 
-  APIRegularHomeProfilePostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularHomeProfilePostExtendedPageDetails({this.homeProfilePostPageDetailsDescription, this.homeProfilePostPageDetailsBirthPlace, this.homeProfilePostPageDetailsDob, this.homeProfilePostPageDetailsRip, this.homeProfilePostPageDetailsCemetery, this.homeProfilePostPageDetailsCountry});
 
   factory APIRegularHomeProfilePostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      homeProfilePostPageDetailsDescription: parsedJson['description'],
+      homeProfilePostPageDetailsBirthPlace: parsedJson['birthplace'],
+      homeProfilePostPageDetailsDob: parsedJson['dob'],
+      homeProfilePostPageDetailsRip: parsedJson['rip'],
+      homeProfilePostPageDetailsCemetery: parsedJson['cemetery'],
+      homeProfilePostPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularHomeProfilePostExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int homeProfilePostPageCreatorId;
+  String homeProfilePostPageCreatorFirstName;
+  String homeProfilePostPageCreatorLastName;
+  String homeProfilePostPageCreatorPhoneNumber;
+  String homeProfilePostPageCreatorEmail;
+  String homeProfilePostPageCreatorUserName;
+  dynamic homeProfilePostPageCreatorImage;
 
-  APIRegularHomeProfilePostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularHomeProfilePostExtendedPageCreator({this.homeProfilePostPageCreatorId, this.homeProfilePostPageCreatorFirstName, this.homeProfilePostPageCreatorLastName, this.homeProfilePostPageCreatorPhoneNumber, this.homeProfilePostPageCreatorEmail, this.homeProfilePostPageCreatorUserName, this.homeProfilePostPageCreatorImage});
 
   factory APIRegularHomeProfilePostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      homeProfilePostPageCreatorId: parsedJson['id'],
+      homeProfilePostPageCreatorFirstName: parsedJson['first_name'],
+      homeProfilePostPageCreatorLastName: parsedJson['last_name'],
+      homeProfilePostPageCreatorPhoneNumber: parsedJson['phone_number'],
+      homeProfilePostPageCreatorEmail: parsedJson['email'],
+      homeProfilePostPageCreatorUserName: parsedJson['username'],
+      homeProfilePostPageCreatorImage: parsedJson['image']
     );
   }
 }
 
 class APIRegularHomeProfilePostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  int homeProfilePostTaggedId;
+  String homeProfilePostTaggedFirstName;
+  String homeProfilePostTaggedLastName;
+  String homeProfilePostTaggedImage;
 
-  APIRegularHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIRegularHomeProfilePostExtendedTagged({this.homeProfilePostTaggedId, this.homeProfilePostTaggedFirstName, this.homeProfilePostTaggedLastName, this.homeProfilePostTaggedImage});
 
   factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+      homeProfilePostTaggedId: parsedJson['id'],
+      homeProfilePostTaggedFirstName: parsedJson['first_name'],
+      homeProfilePostTaggedLastName: parsedJson['last_name'],
+      homeProfilePostTaggedImage: parsedJson['image']
     );
   }
 }

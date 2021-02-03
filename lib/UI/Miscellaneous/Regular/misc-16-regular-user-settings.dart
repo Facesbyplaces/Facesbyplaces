@@ -171,11 +171,11 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                 Navigator.push(context, MaterialPageRoute(builder: (context) => 
                 HomeRegularUserOtherDetails(
                   userId: userId, 
-                  toggleBirthdate: result.hideBirthdate, 
-                  toggleBirthplace: result.hideBirthplace, 
-                  toggleAddress: result.hideAddress, 
-                  toggleEmail: result.hideEmail, 
-                  toggleNumber: result.hidePhoneNumber)));
+                  toggleBirthdate: result.showOtherDetailsStatusHideBirthdate, 
+                  toggleBirthplace: result.showOtherDetailsStatusHideBirthplace, 
+                  toggleAddress: result.showOtherDetailsStatusHideAddress, 
+                  toggleEmail: result.showOtherDetailsStatusHideEmail, 
+                  toggleNumber: result.showOtherDetailsStatusHidePhoneNumber)));
               },
               child: Container(
                 height: SizeConfig.blockSizeVertical * 10,

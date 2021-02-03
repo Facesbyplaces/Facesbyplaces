@@ -93,7 +93,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       context.showLoaderOverlay();
       var newValue = await apiRegularHomePostTab(page: page);
       context.hideLoaderOverlay();
-      itemRemaining = newValue.itemsRemaining;
+      itemRemaining = newValue.almItemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
       for(int i = 0; i < newValue.familyMemorialList.length; i++){
@@ -101,31 +101,31 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
         List<String> newList2 = [];
         List<String> newList3 = [];
         List<int> newList4 = [];
-        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
-          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
-          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
-          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
-          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        for(int j = 0; j < newValue.familyMemorialList[i].homeTabPostPostTagged.length; j++){
+          newList1.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedFirstName);
+          newList2.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedLastName);
+          newList3.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedImage);
+          newList4.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedId);
         }
 
         posts.add(
           RegularMainPagesPosts(
-            userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-            postId: newValue.familyMemorialList[i].id,
-            memorialId: newValue.familyMemorialList[i].page.id,
-            timeCreated: newValue.familyMemorialList[i].createAt,
-            memorialName: newValue.familyMemorialList[i].page.name,
-            postBody: newValue.familyMemorialList[i].body,
-            profileImage: newValue.familyMemorialList[i].page.profileImage,
-            imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+            userId: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPagePageCreator.homeTabPostPageCreatorId, 
+            postId: newValue.familyMemorialList[i].homeTabPostId,
+            memorialId: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageId,
+            timeCreated: newValue.familyMemorialList[i].homeTabPostCreateAt,
+            memorialName: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageName,
+            postBody: newValue.familyMemorialList[i].homeTabPostBody,
+            profileImage: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageProfileImage,
+            imagesOrVideos: newValue.familyMemorialList[i].homeTabPostImagesOrVideos,
 
-            managed: newValue.familyMemorialList[i].page.manage,
-            joined: newValue.familyMemorialList[i].page.follower,
-            numberOfComments: newValue.familyMemorialList[i].numberOfComments,
-            numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
-            likeStatus: newValue.familyMemorialList[i].likeStatus,
+            managed: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageManage,
+            joined: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageFollower,
+            numberOfComments: newValue.familyMemorialList[i].homeTabPostNumberOfComments,
+            numberOfLikes: newValue.familyMemorialList[i].homeTabPostNumberOfLikes,
+            likeStatus: newValue.familyMemorialList[i].homeTabPostLikeStatus,
 
-            numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+            numberOfTagged: newValue.familyMemorialList[i].homeTabPostPostTagged.length,
             taggedFirstName: newList1,
             taggedLastName: newList2,
             taggedImage: newList3,

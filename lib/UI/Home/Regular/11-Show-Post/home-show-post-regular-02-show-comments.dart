@@ -116,8 +116,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   void loadUserInformation() async{
     var currentLoggedInUser = await apiRegularShowProfileInformation();
 
-   currentUserId = currentLoggedInUser.userId;
-   currentUserImage = currentLoggedInUser.image;
+   currentUserId = currentLoggedInUser.showProfileInformationUserId;
+   currentUserImage = currentLoggedInUser.showProfileInformationImage;
   }
 
   void onLoading() async{
@@ -126,41 +126,41 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
       var newValue1 = await apiRegularShowListOfComments(postId: postId, page: page1);
       
-      itemRemaining = newValue1.itemsRemaining;
-      count = count + newValue1.commentsList.length;
+      itemRemaining = newValue1.almItemsRemaining;
+      count = count + newValue1.almCommentsList.length;
 
-      for(int i = 0; i < newValue1.commentsList.length; i++){
-        var commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.commentsList[i].commentId);
-        commentsLikes.add(commentLikeStatus.likeStatus);
-        commentsNumberOfLikes.add(commentLikeStatus.numberOfLikes);
+      for(int i = 0; i < newValue1.almCommentsList.length; i++){
+        var commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.almCommentsList[i].showListOfCommentsCommentId);
+        commentsLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
+        commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
           
-          var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.commentsList[i].commentId, page: page2);
+          var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
           List<int> newReplyId = [];
 
-          for(int j = 0; j < newValue2.repliesList.length; j++){
+          for(int j = 0; j < newValue2.almRepliesList.length; j++){
 
-            var replyLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.repliesList[j].replyId);
-            newRepliesLikes.add(replyLikeStatus.likeStatus);
-            newRepliesNumberOfLikes.add(replyLikeStatus.numberOfLikes);
-            newReplyId.add(newValue2.repliesList[j].replyId);
+            var replyLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.almRepliesList[j].showListOfRepliesReplyId);
+            newRepliesLikes.add(replyLikeStatus.showCommentOrReplyLikeStatus);
+            newRepliesNumberOfLikes.add(replyLikeStatus.showCommentOrReplyNumberOfLikes);
+            newReplyId.add(newValue2.almRepliesList[j].showListOfRepliesReplyId);
 
             replies.add(
               RegularOriginalReply(
-                replyId: newValue2.repliesList[j].replyId,
-                commentId: newValue2.repliesList[j].commentId,
-                userId: newValue2.repliesList[j].user.userId,
-                replyBody: newValue2.repliesList[j].replyBody,
-                createdAt: newValue2.repliesList[j].createdAt,
-                firstName: newValue2.repliesList[j].user.firstName,
-                lastName: newValue2.repliesList[j].user.lastName,
-                replyLikes: replyLikeStatus.likeStatus,
-                replyNumberOfLikes: replyLikeStatus.numberOfLikes,
-                image: newValue2.repliesList[j].user.image,
+                replyId: newValue2.almRepliesList[j].showListOfRepliesReplyId,
+                commentId: newValue2.almRepliesList[j].showListOfRepliesCommentId,
+                userId: newValue2.almRepliesList[j].showListOfRepliesUser.showListOfCommentsUserId,
+                replyBody: newValue2.almRepliesList[j].showListOfRepliesReplyBody,
+                createdAt: newValue2.almRepliesList[j].showListOfRepliesCreatedAt,
+                firstName: newValue2.almRepliesList[j].showListOfRepliesUser.showListOfCommentsUserFirstName,
+                lastName: newValue2.almRepliesList[j].showListOfRepliesUser.showListOfCommentsUserLastName,
+                replyLikes: replyLikeStatus.showCommentOrReplyLikeStatus,
+                replyNumberOfLikes: replyLikeStatus.showCommentOrReplyNumberOfLikes,
+                image: newValue2.almRepliesList[j].showListOfRepliesUser.showListOfCommentsUserImage,
               ),
             );
           }
@@ -168,7 +168,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
           repliesLikes.add(newRepliesLikes);
           repliesNumberOfLikes.add(newRepliesNumberOfLikes);
 
-          repliesRemaining = newValue2.itemsRemaining;
+          repliesRemaining = newValue2.almItemsRemaining;
           page2++;
         }
 
@@ -177,16 +177,16 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
         
         comments.add(
           RegularOriginalComment(
-            commentId: newValue1.commentsList[i].commentId,
-            postId: newValue1.commentsList[i].postId,
-            userId: newValue1.commentsList[i].user.userId,
-            commentBody: newValue1.commentsList[i].commentBody,
-            createdAt: newValue1.commentsList[i].createdAt,
-            firstName: newValue1.commentsList[i].user.firstName,
-            lastName: newValue1.commentsList[i].user.lastName,
-            image: newValue1.commentsList[i].user.image,
-            commentLikes: commentLikeStatus.likeStatus,
-            commentNumberOfLikes: commentLikeStatus.numberOfLikes,
+            commentId: newValue1.almCommentsList[i].showListOfCommentsCommentId,
+            postId: newValue1.almCommentsList[i].showListOfCommentsPostId,
+            userId: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId,
+            commentBody: newValue1.almCommentsList[i].showListOfCommentsCommentBody,
+            createdAt: newValue1.almCommentsList[i].showListOfCommentsCreatedAt,
+            firstName: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserFirstName,
+            lastName: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserLastName,
+            image: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage,
+            commentLikes: commentLikeStatus.showCommentOrReplyLikeStatus,
+            commentNumberOfLikes: commentLikeStatus.showCommentOrReplyNumberOfLikes,
             listOfReplies: replies
           ),    
         );

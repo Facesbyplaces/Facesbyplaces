@@ -28,29 +28,29 @@ Future<APIRegularHomeTabMemorialMain> apiRegularHomeMemorialsTab({int page}) asy
 
 class APIRegularHomeTabMemorialMain{
 
-  APIRegularHomeTabMemorialExtended familyMemorialList;
-  APIRegularHomeTabMemorialExtended friendsMemorialList;
+  APIRegularHomeTabMemorialExtended almFamilyMemorialList;
+  APIRegularHomeTabMemorialExtended almFriendsMemorialList;
 
-  APIRegularHomeTabMemorialMain({this.familyMemorialList, this.friendsMemorialList});
+  APIRegularHomeTabMemorialMain({this.almFamilyMemorialList, this.almFriendsMemorialList});
 
   factory APIRegularHomeTabMemorialMain.fromJson(Map<String, dynamic> parsedJson){
 
     return APIRegularHomeTabMemorialMain(
-      familyMemorialList: APIRegularHomeTabMemorialExtended.fromJson(parsedJson['family']),
-      friendsMemorialList: APIRegularHomeTabMemorialExtended.fromJson(parsedJson['friends']),
+      almFamilyMemorialList: APIRegularHomeTabMemorialExtended.fromJson(parsedJson['family']),
+      almFriendsMemorialList: APIRegularHomeTabMemorialExtended.fromJson(parsedJson['friends']),
     );
   }
 }
 
 class APIRegularHomeTabMemorialExtended{
-  int blmFamilyItemsRemaining;
-  int memorialFamilyItemsRemaining;
-  int blmFriendsItemsRemaining;
-  int memorialFriendsItemsRemaining;
-  List<APIRegularHomeTabMemorialExtendedPage> blm;
-  List<APIRegularHomeTabMemorialExtendedPage> memorial;
+  int blmHomeTabMemorialFamilyItemsRemaining;
+  int memorialHomeTabMemorialFamilyItemsRemaining;
+  int blmHomeTabMemorialFriendsItemsRemaining;
+  int memorialHomeTabMemorialFriendsItemsRemaining;
+  List<APIRegularHomeTabMemorialExtendedPage> blmHomeTabMemorialPage;
+  List<APIRegularHomeTabMemorialExtendedPage> memorialHomeTabMemorialPage;
 
-  APIRegularHomeTabMemorialExtended({this.blm, this.memorial, this.blmFamilyItemsRemaining, this.memorialFamilyItemsRemaining, this.blmFriendsItemsRemaining, this.memorialFriendsItemsRemaining});
+  APIRegularHomeTabMemorialExtended({this.blmHomeTabMemorialPage, this.memorialHomeTabMemorialPage, this.blmHomeTabMemorialFamilyItemsRemaining, this.memorialHomeTabMemorialFamilyItemsRemaining, this.blmHomeTabMemorialFriendsItemsRemaining, this.memorialHomeTabMemorialFriendsItemsRemaining});
 
   factory APIRegularHomeTabMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -61,94 +61,94 @@ class APIRegularHomeTabMemorialExtended{
     List<APIRegularHomeTabMemorialExtendedPage> newMemorialList = memorialList.map((e) => APIRegularHomeTabMemorialExtendedPage.fromJson(e)).toList();
 
     return APIRegularHomeTabMemorialExtended(
-      blm: newBLMList,
-      memorial: newMemorialList,
-      blmFamilyItemsRemaining: parsedJson['blmFamilyItemsRemaining'],
-      memorialFamilyItemsRemaining: parsedJson['memorialFamilyItemsRemaining'],
-      blmFriendsItemsRemaining: parsedJson['blmFriendsItemsRemaining'],
-      memorialFriendsItemsRemaining: parsedJson['memorialFriendsItemsRemaining']
+      blmHomeTabMemorialPage: newBLMList,
+      memorialHomeTabMemorialPage: newMemorialList,
+      blmHomeTabMemorialFamilyItemsRemaining: parsedJson['blmFamilyItemsRemaining'],
+      memorialHomeTabMemorialFamilyItemsRemaining: parsedJson['memorialFamilyItemsRemaining'],
+      blmHomeTabMemorialFriendsItemsRemaining: parsedJson['blmFriendsItemsRemaining'],
+      memorialHomeTabMemorialFriendsItemsRemaining: parsedJson['memorialFriendsItemsRemaining']
     );
   }
 }
 
 class APIRegularHomeTabMemorialExtendedPage{
-  int id;
-  String name;
-  APIRegularHomeTabMemorialExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularHomeTabMemorialExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int blmHomeTabMemorialPageId;
+  String blmHomeTabMemorialPageName;
+  APIRegularHomeTabMemorialExtendedPageDetails blmHomeTabMemorialPageDetails;
+  dynamic blmHomeTabMemorialPageBackgroundImage;
+  dynamic blmHomeTabMemorialPageProfileImage;
+  dynamic blmHomeTabMemorialPageImagesOrVideos;
+  String blmHomeTabMemorialPageRelationship;
+  APIRegularHomeTabMemorialExtendedPageCreator blmHomeTabMemorialPagePageCreator;
+  bool blmHomeTabMemorialPageManage;
+  bool blmHomeTabMemorialPageFamOrFriends;
+  bool blmHomeTabMemorialPageFollower;
+  String blmHomeTabMemorialPagePageType;
+  String blmHomeTabMemorialPagePrivacy;
 
-  APIRegularHomeTabMemorialExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIRegularHomeTabMemorialExtendedPage({this.blmHomeTabMemorialPageId, this.blmHomeTabMemorialPageName, this.blmHomeTabMemorialPageDetails, this.blmHomeTabMemorialPageBackgroundImage, this.blmHomeTabMemorialPageProfileImage, this.blmHomeTabMemorialPageImagesOrVideos, this.blmHomeTabMemorialPageRelationship, this.blmHomeTabMemorialPagePageCreator, this.blmHomeTabMemorialPageManage, this.blmHomeTabMemorialPageFamOrFriends, this.blmHomeTabMemorialPageFollower, this.blmHomeTabMemorialPagePageType, this.blmHomeTabMemorialPagePrivacy});
 
   factory APIRegularHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularHomeTabMemorialExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      blmHomeTabMemorialPageId: parsedJson['id'],
+      blmHomeTabMemorialPageName: parsedJson['name'],
+      blmHomeTabMemorialPageDetails: APIRegularHomeTabMemorialExtendedPageDetails.fromJson(parsedJson['details']),
+      blmHomeTabMemorialPageBackgroundImage: parsedJson['backgroundImage'],
+      blmHomeTabMemorialPageProfileImage: parsedJson['profileImage'],
+      blmHomeTabMemorialPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      blmHomeTabMemorialPageRelationship: parsedJson['relationship'],
+      blmHomeTabMemorialPagePageCreator: APIRegularHomeTabMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      blmHomeTabMemorialPageManage: parsedJson['manage'],
+      blmHomeTabMemorialPageFamOrFriends: parsedJson['famOrFriends'],
+      blmHomeTabMemorialPageFollower: parsedJson['follower'],
+      blmHomeTabMemorialPagePageType: parsedJson['page_type'],
+      blmHomeTabMemorialPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularHomeTabMemorialExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String blmHomeTabMemorialPageDetailsDescription;
+  String blmHomeTabMemorialPageDetailsBirthPlace;
+  String blmHomeTabMemorialPageDetailsDob;
+  String blmHomeTabMemorialPageDetailsRip;
+  String blmHomeTabMemorialPageDetailsCemetery;
+  String blmHomeTabMemorialPageDetailsCountry;
 
-  APIRegularHomeTabMemorialExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularHomeTabMemorialExtendedPageDetails({this.blmHomeTabMemorialPageDetailsDescription, this.blmHomeTabMemorialPageDetailsBirthPlace, this.blmHomeTabMemorialPageDetailsDob, this.blmHomeTabMemorialPageDetailsRip, this.blmHomeTabMemorialPageDetailsCemetery, this.blmHomeTabMemorialPageDetailsCountry});
 
   factory APIRegularHomeTabMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      blmHomeTabMemorialPageDetailsDescription: parsedJson['description'],
+      blmHomeTabMemorialPageDetailsBirthPlace: parsedJson['birthplace'],
+      blmHomeTabMemorialPageDetailsDob: parsedJson['dob'],
+      blmHomeTabMemorialPageDetailsRip: parsedJson['rip'],
+      blmHomeTabMemorialPageDetailsCemetery: parsedJson['cemetery'],
+      blmHomeTabMemorialPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularHomeTabMemorialExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int blmHomeTabMemorialPageCreatorId;
+  String blmHomeTabMemorialPageCreatorFirstName;
+  String blmHomeTabMemorialPageCreatorLastName;
+  String blmHomeTabMemorialPageCreatorPhoneNumber;
+  String blmHomeTabMemorialPageCreatorEmail;
+  String blmHomeTabMemorialPageCreatorUserName;
+  dynamic blmHomeTabMemorialPageCreatorImage;
 
-  APIRegularHomeTabMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularHomeTabMemorialExtendedPageCreator({this.blmHomeTabMemorialPageCreatorId, this.blmHomeTabMemorialPageCreatorFirstName, this.blmHomeTabMemorialPageCreatorLastName, this.blmHomeTabMemorialPageCreatorPhoneNumber, this.blmHomeTabMemorialPageCreatorEmail, this.blmHomeTabMemorialPageCreatorUserName, this.blmHomeTabMemorialPageCreatorImage});
 
   factory APIRegularHomeTabMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabMemorialExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      blmHomeTabMemorialPageCreatorId: parsedJson['id'],
+      blmHomeTabMemorialPageCreatorFirstName: parsedJson['first_name'],
+      blmHomeTabMemorialPageCreatorLastName: parsedJson['last_name'],
+      blmHomeTabMemorialPageCreatorPhoneNumber: parsedJson['phone_number'],
+      blmHomeTabMemorialPageCreatorEmail: parsedJson['email'],
+      blmHomeTabMemorialPageCreatorUserName: parsedJson['username'],
+      blmHomeTabMemorialPageCreatorImage: parsedJson['image']
     );
   }
 }

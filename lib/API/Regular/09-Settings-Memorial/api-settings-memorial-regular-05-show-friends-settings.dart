@@ -33,10 +33,10 @@ Future<APIRegularShowFriendsSettingsMain> apiRegularShowFriendsSettings({int mem
 }
 
 class APIRegularShowFriendsSettingsMain{
-  int itemsRemaining;
-  List<APIRegularShowFriendsSettingsExtended> friendsList;
+  int almItemsRemaining;
+  List<APIRegularShowFriendsSettingsExtended> almFriendsList;
 
-  APIRegularShowFriendsSettingsMain({this.itemsRemaining, this.friendsList});
+  APIRegularShowFriendsSettingsMain({this.almItemsRemaining, this.almFriendsList});
 
   factory APIRegularShowFriendsSettingsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -44,46 +44,46 @@ class APIRegularShowFriendsSettingsMain{
     List<APIRegularShowFriendsSettingsExtended> familyList = newList1.map((i) => APIRegularShowFriendsSettingsExtended.fromJson(i)).toList();
 
     return APIRegularShowFriendsSettingsMain(
-      itemsRemaining: parsedJson['itemsremaining'],
-      friendsList: familyList,
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almFriendsList: familyList,
     );
   }
 }
 
 
 class APIRegularShowFriendsSettingsExtended{
-  APIRegularShowFriendsSettingsExtendedDetails user;
-  String relationship;
+  APIRegularShowFriendsSettingsExtendedDetails showFriendsSettingsUser;
+  String showFriendsSettingsRelationship;
 
-  APIRegularShowFriendsSettingsExtended({this.user, this.relationship});
+  APIRegularShowFriendsSettingsExtended({this.showFriendsSettingsUser, this.showFriendsSettingsRelationship});
 
   factory APIRegularShowFriendsSettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFriendsSettingsExtended(
-      user: APIRegularShowFriendsSettingsExtendedDetails.fromJson(parsedJson['user']),
-      relationship: parsedJson['relationship'],
+      showFriendsSettingsUser: APIRegularShowFriendsSettingsExtendedDetails.fromJson(parsedJson['user']),
+      showFriendsSettingsRelationship: parsedJson['relationship'],
     );
   }
 }
 
 class APIRegularShowFriendsSettingsExtendedDetails{
 
-  int id;
-  String firstName;
-  String lastName;
-  dynamic image;
-  String email;
-  int accountType;
+  int showFriendsSettingsDetailsId;
+  String showFriendsSettingsDetailsFirstName;
+  String showFriendsSettingsDetailsLastName;
+  dynamic showFriendsSettingsDetailsImage;
+  String showFriendsSettingsDetailsEmail;
+  int showFriendsSettingsDetailsAccountType;
 
-  APIRegularShowFriendsSettingsExtendedDetails({this.id, this.firstName, this.lastName, this.image, this.email, this.accountType});
+  APIRegularShowFriendsSettingsExtendedDetails({this.showFriendsSettingsDetailsId, this.showFriendsSettingsDetailsFirstName, this.showFriendsSettingsDetailsLastName, this.showFriendsSettingsDetailsImage, this.showFriendsSettingsDetailsEmail, this.showFriendsSettingsDetailsAccountType});
 
   factory APIRegularShowFriendsSettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowFriendsSettingsExtendedDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
-      email: parsedJson['email'],
-      accountType: parsedJson['account_type'],
+      showFriendsSettingsDetailsId: parsedJson['id'],
+      showFriendsSettingsDetailsFirstName: parsedJson['first_name'],
+      showFriendsSettingsDetailsLastName: parsedJson['last_name'],
+      showFriendsSettingsDetailsImage: parsedJson['image'],
+      showFriendsSettingsDetailsEmail: parsedJson['email'],
+      showFriendsSettingsDetailsAccountType: parsedJson['account_type'],
     );
   }
 }

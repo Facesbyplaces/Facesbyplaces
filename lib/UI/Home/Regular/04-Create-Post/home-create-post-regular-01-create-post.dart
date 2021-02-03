@@ -64,19 +64,18 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
     var newValue = await apiRegularShowListOfManagedPages();
     context.hideLoaderOverlay();
 
-    for(int i = 0; i < newValue.pagesList.length; i++){
+    for(int i = 0; i < newValue.almPagesList.length; i++){
       managedPages.add(
         RegularManagedPages(
-          name: newValue.pagesList[i].name, 
-          pageId: newValue.pagesList[i].id,
-          image: newValue.pagesList[i].profileImage,
+          name: newValue.almPagesList[i].showListOfManagedPagesName,
+          pageId: newValue.almPagesList[i].showListOfManagedPagesId,
+          image: newValue.almPagesList[i].showListOfManagedPagesProfileImage,
         ),
       );
     }
     setState(() {});
   }
 
-  // File imageFile;
   File videoFile;
   final picker = ImagePicker();
   VideoPlayerController videoPlayerController;
@@ -202,14 +201,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   }
 
                   APIRegularCreatePost post = APIRegularCreatePost(
-                    pageType: 'Memorial',
-                    postBody: _key1.currentState.controller.text,
-                    pageId: currentIdSelected,
-                    location: newLocation,
-                    imagesOrVideos: newFiles,
-                    latitude: locationData.latitude,
-                    longitude: locationData.longitude,
-                    tagPeople: userIds,
+                    blmPageType: 'Memorial',
+                    blmPostBody: _key1.currentState.controller.text,
+                    blmPageId: currentIdSelected,
+                    blmLocation: newLocation,
+                    blmImagesOrVideos: newFiles,
+                    blmLatitude: locationData.latitude,
+                    blmLongitude: locationData.longitude,
+                    blmTagPeople: userIds,
                   );
                   
                   bool result = await apiRegularHomeCreatePost(post: post);

@@ -39,17 +39,17 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
   void onLoading() async{
     if(itemRemaining != 0){
       var newValue = await apiRegularSearchUsers(keywords: controller.text, page: page);
-      itemRemaining = newValue.itemsRemaining;
+      itemRemaining = newValue.almItemsRemaining;
 
-      for(int i = 0; i < newValue.users.length; i++){
+      for(int i = 0; i < newValue.almSearchUsers.length; i++){
         users.add(
           RegularSearchUsers(
-            userId: newValue.users[i].userId, 
-            firstName: newValue.users[i].firstName, 
-            lastName: newValue.users[i].lastName, 
-            email: newValue.users[i].email,
-            accountType: newValue.users[i].accountType,
-            image: newValue.users[i].image,
+            userId: newValue.almSearchUsers[i].searchUsersId, 
+            firstName: newValue.almSearchUsers[i].searchUsersFirstName, 
+            lastName: newValue.almSearchUsers[i].searchUsersLastName,
+            email: newValue.almSearchUsers[i].searchUsersEmail,
+            accountType: newValue.almSearchUsers[i].searchUsersAccountType,
+            image: newValue.almSearchUsers[i].searchUsersImage,
           ),
         );
       }

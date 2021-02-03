@@ -28,17 +28,17 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId}) async{
 }
 
 class APIBLMShowUserInformation{
-  int id;
-  String firstName;
-  String lastName;
-  String birthdate;
-  String birthplace;
-  String homeAddress;
-  String emailAddress;
-  String contactNumber;
-  String image;
+  int showUserInformationId;
+  String showUserInformationFirstName;
+  String showUserInformationLastName;
+  String showUserInformationBirthdate;
+  String showUserInformationBirthplace;
+  String showUserInformationHomeAddress;
+  String showUserInformationEmailAddress;
+  String showUserInformationContactNumber;
+  String showUserInformationImage;
   
-  APIBLMShowUserInformation({this.id, this.firstName, this.lastName, this.birthdate, this.birthplace, this.homeAddress, this.emailAddress, this.contactNumber, this.image});
+  APIBLMShowUserInformation({this.showUserInformationId, this.showUserInformationFirstName, this.showUserInformationLastName, this.showUserInformationBirthdate, this.showUserInformationBirthplace, this.showUserInformationHomeAddress, this.showUserInformationEmailAddress, this.showUserInformationContactNumber, this.showUserInformationImage});
 
   factory APIBLMShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -54,14 +54,14 @@ class APIBLMShowUserInformation{
     }
 
     return APIBLMShowUserInformation(
-      firstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
-      lastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
-      birthdate: newBirthdate,
-      birthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
-      homeAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
-      emailAddress: parsedJson['email'] != null ? parsedJson['email'] : '',
-      contactNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
-      image: parsedJson['image'] != null ? parsedJson['image'] : '',
+      showUserInformationFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showUserInformationLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showUserInformationBirthdate: newBirthdate,
+      showUserInformationBirthplace: parsedJson['birthplace'] != null ? parsedJson['birthplace'] : '',
+      showUserInformationHomeAddress: parsedJson['address'] != null ? parsedJson['address'] : '',
+      showUserInformationEmailAddress: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showUserInformationContactNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
+      showUserInformationImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

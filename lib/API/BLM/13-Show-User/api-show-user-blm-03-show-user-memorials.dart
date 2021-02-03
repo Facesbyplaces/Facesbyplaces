@@ -26,21 +26,13 @@ Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({int userId, int pag
   }
 }
 
-
-
-
-
-
-
-
-
 class APIBLMShowUserMemorialsMain{
-  int ownedItemsRemaining;
-  int followedItemsRemaining;
-  List<APIBLMShowUserMemorialsExtended> owned;
-  List<APIBLMShowUserMemorialsExtended> followed;
+  int blmOwnedItemsRemaining;
+  int blmFollowedItemsRemaining;
+  List<APIBLMShowUserMemorialsExtended> blmOwned;
+  List<APIBLMShowUserMemorialsExtended> blmFollowed;
 
-  APIBLMShowUserMemorialsMain({this.ownedItemsRemaining, this.followedItemsRemaining, this.owned, this.followed});
+  APIBLMShowUserMemorialsMain({this.blmOwnedItemsRemaining, this.blmFollowedItemsRemaining, this.blmOwned, this.blmFollowed});
 
   factory APIBLMShowUserMemorialsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -52,99 +44,99 @@ class APIBLMShowUserMemorialsMain{
     List<APIBLMShowUserMemorialsExtended> newFollowedList = followedList.map((e) => APIBLMShowUserMemorialsExtended.fromJson(e)).toList();
 
     return APIBLMShowUserMemorialsMain(
-      ownedItemsRemaining: parsedJson['ownedItemsRemaining'],
-      followedItemsRemaining: parsedJson['followedItemsRemaining'],
-      owned: newOwnedList,
-      followed: newFollowedList,
+      blmOwnedItemsRemaining: parsedJson['ownedItemsRemaining'],
+      blmFollowedItemsRemaining: parsedJson['followedItemsRemaining'],
+      blmOwned: newOwnedList,
+      blmFollowed: newFollowedList,
     );
   }
 }
 
 class APIBLMShowUserMemorialsExtended{
 
-  APIBLMShowUserMemorialsExtendedPage page;
+  APIBLMShowUserMemorialsExtendedPage showUserMemorialsPage;
 
-  APIBLMShowUserMemorialsExtended({this.page});
+  APIBLMShowUserMemorialsExtended({this.showUserMemorialsPage});
 
   factory APIBLMShowUserMemorialsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtended(
-      page: APIBLMShowUserMemorialsExtendedPage.fromJson(parsedJson['page']),
+      showUserMemorialsPage: APIBLMShowUserMemorialsExtendedPage.fromJson(parsedJson['page']),
     );
   }
 }
 
 class APIBLMShowUserMemorialsExtendedPage{
-  int pageId;
-  String pageName;
-  APIBLMShowUserMemorialsExtendedPageDetails pageDetails;
-  dynamic pageBackgroundImage;
-  dynamic pageProfileImage;
-  dynamic pageImagesOrVideos;
-  String pageRelationship;
-  APIBLMShowUserMemorialsExtendedPageCreator pageCreator;
-  bool pageManage;
-  bool pageFamOrFriends;
-  bool pageFollower;
-  String pageType;
-  String pagePrivacy;
+  int showUserMemorialsPageId;
+  String showUserMemorialsPageName;
+  APIBLMShowUserMemorialsExtendedPageDetails showUserMemorialsPageDetails;
+  dynamic showUserMemorialsPageBackgroundImage;
+  dynamic showUserMemorialsPageProfileImage;
+  dynamic showUserMemorialsPageImagesOrVideos;
+  String showUserMemorialsPageRelationship;
+  APIBLMShowUserMemorialsExtendedPageCreator showUserMemorialsPageCreator;
+  bool showUserMemorialsPageManage;
+  bool showUserMemorialsPageFamOrFriends;
+  bool showUserMemorialsPageFollower;
+  String showUserMemorialsPageType;
+  String showUserMemorialsPagePrivacy;
 
-  APIBLMShowUserMemorialsExtendedPage({this.pageId, this.pageName, this.pageDetails, this.pageBackgroundImage, this.pageProfileImage, this.pageImagesOrVideos, this.pageRelationship, this.pageCreator, this.pageManage, this.pageFamOrFriends, this.pageFollower, this.pageType, this.pagePrivacy});
+  APIBLMShowUserMemorialsExtendedPage({this.showUserMemorialsPageId, this.showUserMemorialsPageName, this.showUserMemorialsPageDetails, this.showUserMemorialsPageBackgroundImage, this.showUserMemorialsPageProfileImage, this.showUserMemorialsPageImagesOrVideos, this.showUserMemorialsPageRelationship, this.showUserMemorialsPageCreator, this.showUserMemorialsPageManage, this.showUserMemorialsPageFamOrFriends, this.showUserMemorialsPageFollower, this.showUserMemorialsPageType, this.showUserMemorialsPagePrivacy});
 
   factory APIBLMShowUserMemorialsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPage(
-      pageId: parsedJson['id'],
-      pageName: parsedJson['name'],
-      pageDetails: APIBLMShowUserMemorialsExtendedPageDetails.fromJson(parsedJson['details']),
-      pageBackgroundImage: parsedJson['backgroundImage'],
-      pageProfileImage: parsedJson['profileImage'],
-      pageImagesOrVideos: parsedJson['imagesOrVideos'],
-      pageRelationship: parsedJson['relationship'],
-      pageCreator: APIBLMShowUserMemorialsExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      pageManage: parsedJson['manage'],
-      pageFamOrFriends: parsedJson['famOrFriends'],
-      pageFollower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      pagePrivacy: parsedJson['privacy'],
+      showUserMemorialsPageId: parsedJson['id'],
+      showUserMemorialsPageName: parsedJson['name'],
+      showUserMemorialsPageDetails: APIBLMShowUserMemorialsExtendedPageDetails.fromJson(parsedJson['details']),
+      showUserMemorialsPageBackgroundImage: parsedJson['backgroundImage'],
+      showUserMemorialsPageProfileImage: parsedJson['profileImage'],
+      showUserMemorialsPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      showUserMemorialsPageRelationship: parsedJson['relationship'],
+      showUserMemorialsPageCreator: APIBLMShowUserMemorialsExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      showUserMemorialsPageManage: parsedJson['manage'],
+      showUserMemorialsPageFamOrFriends: parsedJson['famOrFriends'],
+      showUserMemorialsPageFollower: parsedJson['follower'],
+      showUserMemorialsPageType: parsedJson['page_type'],
+      showUserMemorialsPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIBLMShowUserMemorialsExtendedPageDetails{
-  String description;
-  String dob;
-  String rip;
+  String showUserMemorialsPageDetailsDescription;
+  String showUserMemorialsPageDetailsDob;
+  String showUserMemorialsPageDetailsRip;
 
-  APIBLMShowUserMemorialsExtendedPageDetails({this.description, this.dob, this.rip,});
+  APIBLMShowUserMemorialsExtendedPageDetails({this.showUserMemorialsPageDetailsDescription, this.showUserMemorialsPageDetailsDob, this.showUserMemorialsPageDetailsRip,});
   
   factory APIBLMShowUserMemorialsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPageDetails(
-      description: parsedJson['description'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
+      showUserMemorialsPageDetailsDescription: parsedJson['description'],
+      showUserMemorialsPageDetailsDob: parsedJson['dob'],
+      showUserMemorialsPageDetailsRip: parsedJson['rip'],
     );
   }
 }
 
 class APIBLMShowUserMemorialsExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showUserMemorialsPageCreatorId;
+  String showUserMemorialsPageCreatorFirstName;
+  String showUserMemorialsPageCreatorLastName;
+  String showUserMemorialsPageCreatorPhoneNumber;
+  String showUserMemorialsPageCreatorEmail;
+  String showUserMemorialsPageCreatorUserName;
+  dynamic showUserMemorialsPageCreatorImage;
 
-  APIBLMShowUserMemorialsExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMShowUserMemorialsExtendedPageCreator({this.showUserMemorialsPageCreatorId, this.showUserMemorialsPageCreatorFirstName, this.showUserMemorialsPageCreatorLastName, this.showUserMemorialsPageCreatorPhoneNumber, this.showUserMemorialsPageCreatorEmail, this.showUserMemorialsPageCreatorUserName, this.showUserMemorialsPageCreatorImage});
 
   factory APIBLMShowUserMemorialsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      showUserMemorialsPageCreatorId: parsedJson['id'],
+      showUserMemorialsPageCreatorFirstName: parsedJson['first_name'],
+      showUserMemorialsPageCreatorLastName: parsedJson['last_name'],
+      showUserMemorialsPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showUserMemorialsPageCreatorEmail: parsedJson['email'],
+      showUserMemorialsPageCreatorUserName: parsedJson['username'],
+      showUserMemorialsPageCreatorImage: parsedJson['image']
     );
   }
 }

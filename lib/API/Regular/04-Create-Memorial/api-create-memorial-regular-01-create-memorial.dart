@@ -16,39 +16,39 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
     var formData;
     formData = FormData();
     formData.files.addAll([
-      MapEntry('memorial[name]', MultipartFile.fromString(memorial.memorialName,),),
-      MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.birthPlace,),),
-      MapEntry('memorial[dob]', MultipartFile.fromString(memorial.dob,),),
-      MapEntry('memorial[rip]', MultipartFile.fromString(memorial.rip,),),
-      MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.cemetery)),
-      MapEntry('memorial[country]', MultipartFile.fromString(memorial.country,),),
-      MapEntry('memorial[description]', MultipartFile.fromString(memorial.description,),),
-      MapEntry('relationship', MultipartFile.fromString(memorial.relationship,),),
+      MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
+      MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
+      MapEntry('memorial[dob]', MultipartFile.fromString(memorial.almDob,),),
+      MapEntry('memorial[rip]', MultipartFile.fromString(memorial.almRip,),),
+      MapEntry('memorial[cemetery]', MultipartFile.fromString(memorial.almCemetery)),
+      MapEntry('memorial[country]', MultipartFile.fromString(memorial.almCountry,),),
+      MapEntry('memorial[description]', MultipartFile.fromString(memorial.almDescription,),),
+      MapEntry('relationship', MultipartFile.fromString(memorial.almRelationship,),),
     ]);
 
-    if(memorial.latitude != null){
-      MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.latitude,),);
+    if(memorial.almLatitude != null){
+      MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
     }
 
-    if(memorial.longitude != null){
-      MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.longitude,),);
+    if(memorial.almLongitude != null){
+      MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
     }
 
-    if(memorial.backgroundImage != null || memorial.backgroundImage != ''){
-      var file = await dio.MultipartFile.fromFile(memorial.backgroundImage.path, filename: memorial.backgroundImage.path);
+    if(memorial.almBackgroundImage != null || memorial.almBackgroundImage != ''){
+      var file = await dio.MultipartFile.fromFile(memorial.almBackgroundImage.path, filename: memorial.almBackgroundImage.path);
       formData.files.add(MapEntry('memorial[backgroundImage]', file));
     }
     
-    if(memorial.profileImage != null || memorial.profileImage != ''){
-      var file = await dio.MultipartFile.fromFile(memorial.profileImage.path, filename: memorial.profileImage.path);
+    if(memorial.almProfileImage != null || memorial.almProfileImage != ''){
+      var file = await dio.MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
       formData.files.add(MapEntry('memorial[profileImage]', file));
     }
     
-    if(memorial.imagesOrVideos != null || memorial.imagesOrVideos != ['']){
+    if(memorial.almImagesOrVideos != null || memorial.almImagesOrVideos != ['']){
 
-      for(int i = 0; i < memorial.imagesOrVideos.length; i++){
-        if(memorial.imagesOrVideos[i].path != null || memorial.imagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(memorial.imagesOrVideos[i].path, filename: memorial.imagesOrVideos[i].path);
+      for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
+        if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
+          var file = await dio.MultipartFile.fromFile(memorial.almImagesOrVideos[i].path, filename: memorial.almImagesOrVideos[i].path);
           formData.files.add(MapEntry('memorial[imagesOrVideos][]', file));
         }
       }
@@ -80,33 +80,33 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
 }
 
 class APIRegularCreateMemorial{
-  String memorialName;
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
-  String relationship;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  List<dynamic> imagesOrVideos;
-  String latitude;
-  String longitude;
+  String almMemorialName;
+  String almDescription;
+  String almBirthPlace;
+  String almDob;
+  String almRip;
+  String almCemetery;
+  String almCountry;
+  String almRelationship;
+  dynamic almBackgroundImage;
+  dynamic almProfileImage;
+  List<dynamic> almImagesOrVideos;
+  String almLatitude;
+  String almLongitude;
 
   APIRegularCreateMemorial({
-    this.memorialName, 
-    this.description, 
-    this.birthPlace, 
-    this.dob, 
-    this.rip, 
-    this.cemetery,
-    this.country, 
-    this.relationship, 
-    this.backgroundImage, 
-    this.profileImage, 
-    this.imagesOrVideos,
-    this.latitude,
-    this.longitude,
+    this.almMemorialName, 
+    this.almDescription, 
+    this.almBirthPlace, 
+    this.almDob, 
+    this.almRip, 
+    this.almCemetery,
+    this.almCountry, 
+    this.almRelationship, 
+    this.almBackgroundImage, 
+    this.almProfileImage, 
+    this.almLatitude,
+    this.almImagesOrVideos,
+    this.almLongitude,
   });
 }

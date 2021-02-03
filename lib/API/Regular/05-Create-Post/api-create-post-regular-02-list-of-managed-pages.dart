@@ -27,9 +27,9 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
 }
 
 class APIRegularShowListOfManagedPages{
-  List<APIRegularShowListOfManagedPagesExtended> pagesList;
+  List<APIRegularShowListOfManagedPagesExtended> almPagesList;
 
-  APIRegularShowListOfManagedPages({this.pagesList});
+  APIRegularShowListOfManagedPages({this.almPagesList});
 
   factory APIRegularShowListOfManagedPages.fromJson(Map<String, dynamic> parsedJson){
 
@@ -37,24 +37,24 @@ class APIRegularShowListOfManagedPages{
     List<APIRegularShowListOfManagedPagesExtended> pagesList = newList1.map((i) => APIRegularShowListOfManagedPagesExtended.fromJson(i)).toList();
 
     return APIRegularShowListOfManagedPages(
-      pagesList: pagesList,
+      almPagesList: pagesList,
     );
   }
 }
 
 
 class APIRegularShowListOfManagedPagesExtended{
-  int id;
-  String name;
-  dynamic profileImage;
+  int showListOfManagedPagesId;
+  String showListOfManagedPagesName;
+  dynamic showListOfManagedPagesProfileImage;
 
-  APIRegularShowListOfManagedPagesExtended({this.id, this.name, this.profileImage});
+  APIRegularShowListOfManagedPagesExtended({this.showListOfManagedPagesId, this.showListOfManagedPagesName, this.showListOfManagedPagesProfileImage});
 
   factory APIRegularShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfManagedPagesExtended(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      profileImage: parsedJson['profileImage'],
+      showListOfManagedPagesId: parsedJson['id'],
+      showListOfManagedPagesName: parsedJson['name'],
+      showListOfManagedPagesProfileImage: parsedJson['profileImage'],
     );
   }
 }

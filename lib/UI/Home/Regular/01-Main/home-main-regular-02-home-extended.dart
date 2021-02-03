@@ -141,8 +141,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         icon: CircleAvatar(
                           backgroundColor: Color(0xff888888),
                           backgroundImage: ((){
-                            if(profileImage.data.image != null && profileImage.data.image != ''){
-                              return NetworkImage(profileImage.data.image);
+                            if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
+                              return NetworkImage(profileImage.data.showProfileInformationImage);
                             }else{
                               return AssetImage('assets/icons/app-icon.png');
                             }
@@ -296,7 +296,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
             future: drawerSettings,
             builder: (context, manageDrawer){
               if(manageDrawer.hasData){
-                if(manageDrawer.data.guest != true){
+                if(manageDrawer.data.showProfileInformationGuest != true){
                   return Drawer(
                     child: ContainerResponsive(
                       height: SizeConfig.screenHeight,
@@ -318,8 +318,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 radius: ScreenUtil().setHeight(100),
                                 backgroundColor: Color(0xff888888),
                                 backgroundImage: ((){
-                                  if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                    return NetworkImage(manageDrawer.data.image);
+                                  if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                    return NetworkImage(manageDrawer.data.showProfileInformationImage);
                                   }else{
                                     return AssetImage('assets/icons/app-icon.png');
                                   }
@@ -328,7 +328,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                               SizedBox(height: ScreenUtil().setHeight(20)),
 
-                              Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                              Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                               SizedBox(height: ScreenUtil().setHeight(45)),
 
@@ -354,18 +354,18 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               GestureDetector(
                                 onTap: () async{
                                   context.showLoaderOverlay();
-                                  APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data.userId);
+                                  APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data.showProfileInformationUserId);
                                   context.hideLoaderOverlay();
 
                                   Navigator.pop(context);
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularNotificationSettings(
-                                    newMemorial: result.newMemorial,
-                                    newActivities: result.newActivities,
-                                    postLikes: result.postLikes,
-                                    postComments: result.postComments,
-                                    addFamily: result.addFamily,
-                                    addFriends: result.addFriends,
-                                    addAdmin: result.addAdmin,
+                                    newMemorial: result.showNotificationStatusNewMemorial,
+                                    newActivities: result.showNotificationStatusNewActivities,
+                                    postLikes: result.showNotificationStatusPostLikes,
+                                    postComments: result.showNotificationStatusPostComments,
+                                    addFamily: result.showNotificationStatusAddFamily,
+                                    addFriends: result.showNotificationStatusAddFriends,
+                                    addAdmin: result.showNotificationStatusAddAdmin,
                                   )));
                                 },
                                 child: Text('Notification Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
@@ -375,7 +375,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                               GestureDetector(
                                 onTap: () async{
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.userId)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
                                 },
                                 child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                               ),
@@ -441,8 +441,8 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 radius: ScreenUtil().setHeight(100),
                                 backgroundColor: Color(0xff888888),
                                 backgroundImage: ((){
-                                  if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                    return NetworkImage(manageDrawer.data.image);
+                                  if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                    return NetworkImage(manageDrawer.data.showProfileInformationImage);
                                   }else{
                                     return AssetImage('assets/icons/app-icon.png');
                                   }
@@ -451,7 +451,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                               SizedBox(height: ScreenUtil().setHeight(20)),
 
-                              Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                              Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                               SizedBox(height: ScreenUtil().setHeight(45)),
 

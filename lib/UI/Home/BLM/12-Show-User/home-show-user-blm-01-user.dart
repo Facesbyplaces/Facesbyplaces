@@ -58,7 +58,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: profile.data.image != null ? NetworkImage(profile.data.image) : AssetImage('assets/icons/app-icon.png')),
+                        child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
                       ),
 
                     ],
@@ -104,7 +104,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                     width: SizeConfig.screenWidth,
                     child: Column(
                       children: [
-                        Text('${profile.data.firstName + ' ' + profile.data.lastName}',
+                        Text('${profile.data.showUserInformationFirstName + ' ' + profile.data.showUserInformationLastName}',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                             fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                         SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                        Text('${profile.data.emailAddress}',
+                        Text('${profile.data.showUserInformationEmailAddress}',
                           style: TextStyle(
                             fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                             fontWeight: FontWeight.w300,
@@ -157,8 +157,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    // child: Text('${convertDate(profile.data.birthdate)}',
-                                    child: Text('${profile.data.birthdate}',
+                                    child: Text('${profile.data.showUserInformationBirthdate}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -189,7 +188,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.birthplace}',
+                                    child: Text('${profile.data.showUserInformationBirthplace}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -221,7 +220,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   ),
                                   Expanded(
                                     child: 
-                                    Text('${profile.data.homeAddress}',
+                                    Text('${profile.data.showUserInformationHomeAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -252,7 +251,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.emailAddress}',
+                                    child: Text('${profile.data.showUserInformationEmailAddress}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),
@@ -283,7 +282,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.contactNumber}',
+                                    child: Text('${profile.data.showUserInformationContactNumber}',
                                       style: TextStyle(
                                         fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                         color: Color(0xff000000),

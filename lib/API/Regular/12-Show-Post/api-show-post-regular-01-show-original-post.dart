@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost({int postId}) async{
+Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({int postId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -20,7 +20,7 @@ Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost({int postI
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIRegularShowOriginalPostMainMain.fromJson(newValue);
+    return APIRegularShowOriginalPostMain.fromJson(newValue);
   }else{
     throw Exception('Failed to get the post');
   }
@@ -28,35 +28,34 @@ Future<APIRegularShowOriginalPostMainMain> apiRegularShowOriginalPost({int postI
 
 
 
-class APIRegularShowOriginalPostMainMain{
-  APIRegularShowOriginalPostMainExtended post;
-  
+class APIRegularShowOriginalPostMain{
+  APIRegularShowOriginalPostMainExtended almPost;
 
-  APIRegularShowOriginalPostMainMain({this.post});
+  APIRegularShowOriginalPostMain({this.almPost});
 
-  factory APIRegularShowOriginalPostMainMain.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularShowOriginalPostMainMain(
-      post: APIRegularShowOriginalPostMainExtended.fromJson(parsedJson['post'])
+  factory APIRegularShowOriginalPostMain.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowOriginalPostMain(
+      almPost: APIRegularShowOriginalPostMainExtended.fromJson(parsedJson['post'])
     );
   }
 }
 
 
 class APIRegularShowOriginalPostMainExtended{
-  int id;
-  APIRegularShowOriginalPostMainExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIRegularHomeProfilePostExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int showOriginalPostId;
+  APIRegularShowOriginalPostMainExtendedPage showOriginalPostPage;
+  String showOriginalPostBody;
+  String showOriginalPostLocation;
+  double showOriginalPostLatitude;
+  double showOriginalPostLongitude;
+  List<dynamic> showOriginalPostImagesOrVideos;
+  List<APIRegularHomeProfilePostExtendedTagged> showOriginalPostPostTagged;
+  String showOriginalPostCreateAt;
+  int showOriginalPostNumberOfLikes;
+  int showOriginalPostNumberOfComments;
+  bool showOriginalPostLikeStatus;
 
-  APIRegularShowOriginalPostMainExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIRegularShowOriginalPostMainExtended({this.showOriginalPostId, this.showOriginalPostPage, this.showOriginalPostBody, this.showOriginalPostLocation, this.showOriginalPostLatitude, this.showOriginalPostLongitude, this.showOriginalPostImagesOrVideos, this.showOriginalPostPostTagged, this.showOriginalPostCreateAt, this.showOriginalPostNumberOfLikes, this.showOriginalPostNumberOfComments, this.showOriginalPostLikeStatus});
 
   factory APIRegularShowOriginalPostMainExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -71,118 +70,118 @@ class APIRegularShowOriginalPostMainExtended{
     List<APIRegularHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeProfilePostExtendedTagged.fromJson(i)).toList();    
 
     return APIRegularShowOriginalPostMainExtended(
-      id: parsedJson['id'],
-      page: APIRegularShowOriginalPostMainExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      showOriginalPostId: parsedJson['id'],
+      showOriginalPostPage: APIRegularShowOriginalPostMainExtendedPage.fromJson(parsedJson['page']),
+      showOriginalPostBody: parsedJson['body'],
+      showOriginalPostLocation: parsedJson['location'],
+      showOriginalPostLatitude: parsedJson['latitude'],
+      showOriginalPostLongitude: parsedJson['longitude'],
+      showOriginalPostImagesOrVideos: newList1,
+      showOriginalPostPostTagged: taggedList,
+      showOriginalPostCreateAt: parsedJson['created_at'],
+      showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
+      showOriginalPostNumberOfComments: parsedJson['numberOfComments'],
+      showOriginalPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIRegularShowOriginalPostMainExtendedPage{
-  int id;
-  String name;
-  APIRegularShowOriginalPostMainExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularShowOriginalPostMainExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int showOriginalPostPageId;
+  String showOriginalPostPageName;
+  APIRegularShowOriginalPostMainExtendedPageDetails showOriginalPostPageDetails;
+  dynamic showOriginalPostPageBackgroundImage;
+  dynamic showOriginalPostPageProfileImage;
+  dynamic showOriginalPostPageImagesOrVideos;
+  String showOriginalPostPageRelationship;
+  APIRegularShowOriginalPostMainExtendedPageCreator showOriginalPostPagePageCreator;
+  bool showOriginalPostPageManage;
+  bool showOriginalPostPageFamOrFriends;
+  bool showOriginalPostPageFollower;
+  String showOriginalPostPagePageType;
+  String showOriginalPostPagePrivacy;
 
-  APIRegularShowOriginalPostMainExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIRegularShowOriginalPostMainExtendedPage({this.showOriginalPostPageId, this.showOriginalPostPageName, this.showOriginalPostPageDetails, this.showOriginalPostPageBackgroundImage, this.showOriginalPostPageProfileImage, this.showOriginalPostPageImagesOrVideos, this.showOriginalPostPageRelationship, this.showOriginalPostPagePageCreator, this.showOriginalPostPageManage, this.showOriginalPostPageFamOrFriends, this.showOriginalPostPageFollower, this.showOriginalPostPagePageType, this.showOriginalPostPagePrivacy});
 
   factory APIRegularShowOriginalPostMainExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularShowOriginalPostMainExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      showOriginalPostPageId: parsedJson['id'],
+      showOriginalPostPageName: parsedJson['name'],
+      showOriginalPostPageDetails: APIRegularShowOriginalPostMainExtendedPageDetails.fromJson(parsedJson['details']),
+      showOriginalPostPageBackgroundImage: parsedJson['backgroundImage'],
+      showOriginalPostPageProfileImage: parsedJson['profileImage'],
+      showOriginalPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      showOriginalPostPageRelationship: parsedJson['relationship'],
+      showOriginalPostPagePageCreator: APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      showOriginalPostPageManage: parsedJson['manage'],
+      showOriginalPostPageFamOrFriends: parsedJson['famOrFriends'],
+      showOriginalPostPageFollower: parsedJson['follower'],
+      showOriginalPostPagePageType: parsedJson['page_type'],
+      showOriginalPostPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularShowOriginalPostMainExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String showOriginalPostPageDetailsDescription;
+  String showOriginalPostPageDetailsBirthPlace;
+  String showOriginalPostPageDetailsDob;
+  String showOriginalPostPageDetailsRip;
+  String showOriginalPostPageDetailsCemetery;
+  String showOriginalPostPageDetailsCountry;
 
-  APIRegularShowOriginalPostMainExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularShowOriginalPostMainExtendedPageDetails({this.showOriginalPostPageDetailsDescription, this.showOriginalPostPageDetailsBirthPlace, this.showOriginalPostPageDetailsDob, this.showOriginalPostPageDetailsRip, this.showOriginalPostPageDetailsCemetery, this.showOriginalPostPageDetailsCountry});
 
   factory APIRegularShowOriginalPostMainExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      showOriginalPostPageDetailsDescription: parsedJson['description'],
+      showOriginalPostPageDetailsBirthPlace: parsedJson['birthplace'],
+      showOriginalPostPageDetailsDob: parsedJson['dob'],
+      showOriginalPostPageDetailsRip: parsedJson['rip'],
+      showOriginalPostPageDetailsCemetery: parsedJson['cemetery'],
+      showOriginalPostPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularShowOriginalPostMainExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showOriginalPostPageCreatorId;
+  String showOriginalPostPageCreatorFirstName;
+  String showOriginalPostPageCreatorLastName;
+  String showOriginalPostPageCreatorPhoneNumber;
+  String showOriginalPostPageCreatorEmail;
+  String showOriginalPostPageCreatorUserName;
+  dynamic showOriginalPostPageCreatorImage;
 
-  APIRegularShowOriginalPostMainExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularShowOriginalPostMainExtendedPageCreator({this.showOriginalPostPageCreatorId, this.showOriginalPostPageCreatorFirstName, this.showOriginalPostPageCreatorLastName, this.showOriginalPostPageCreatorPhoneNumber, this.showOriginalPostPageCreatorEmail, this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage});
 
   factory APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      showOriginalPostPageCreatorId: parsedJson['id'],
+      showOriginalPostPageCreatorFirstName: parsedJson['first_name'],
+      showOriginalPostPageCreatorLastName: parsedJson['last_name'],
+      showOriginalPostPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showOriginalPostPageCreatorEmail: parsedJson['email'],
+      showOriginalPostPageCreatorUserName: parsedJson['username'],
+      showOriginalPostPageCreatorImage: parsedJson['image']
     );
   }
 }
 
 class APIRegularHomeProfilePostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  int showOriginalPostTaggedId;
+  String showOriginalPostTaggedFirstName;
+  String showOriginalPostTaggedLastName;
+  String showOriginalPostTaggedImage;
 
-  APIRegularHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIRegularHomeProfilePostExtendedTagged({this.showOriginalPostTaggedId, this.showOriginalPostTaggedFirstName, this.showOriginalPostTaggedLastName, this.showOriginalPostTaggedImage});
 
   factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+      showOriginalPostTaggedId: parsedJson['id'],
+      showOriginalPostTaggedFirstName: parsedJson['first_name'],
+      showOriginalPostTaggedLastName: parsedJson['last_name'],
+      showOriginalPostTaggedImage: parsedJson['image']
     );
   }
 }

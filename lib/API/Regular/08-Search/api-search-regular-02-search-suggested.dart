@@ -27,10 +27,10 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({int page}) asyn
 }
 
 class APIRegularSearchSuggestedMain{
-  int itemsRemaining;
-  List<APIRegularSearchSuggestedExtended> pages;
+  int almItemsRemaining;
+  List<APIRegularSearchSuggestedExtended> almSearchSuggestedPages;
 
-  APIRegularSearchSuggestedMain({this.itemsRemaining, this.pages});
+  APIRegularSearchSuggestedMain({this.almItemsRemaining, this.almSearchSuggestedPages});
 
   factory APIRegularSearchSuggestedMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,108 +38,108 @@ class APIRegularSearchSuggestedMain{
     List<APIRegularSearchSuggestedExtended> pagesList = newList.map((i) => APIRegularSearchSuggestedExtended.fromJson(i)).toList();
 
     return APIRegularSearchSuggestedMain(
-      itemsRemaining: parsedJson['itemsRemaining'],
-      pages: pagesList,
+      almItemsRemaining: parsedJson['itemsRemaining'],
+      almSearchSuggestedPages: pagesList,
     );
   }
 }
 
 class APIRegularSearchSuggestedExtended{
-  int id;
-  APIRegularSearchPostExtendedPage page;
+  int searchSuggestedId;
+  APIRegularSearchSuggestedExtendedPage searchSuggestedPage;
 
-  APIRegularSearchSuggestedExtended({this.id, this.page});
+  APIRegularSearchSuggestedExtended({this.searchSuggestedId, this.searchSuggestedPage});
 
   factory APIRegularSearchSuggestedExtended.fromJson(Map<String, dynamic> parsedJson){
     
     return APIRegularSearchSuggestedExtended(
-      id: parsedJson['id'],
-      page: APIRegularSearchPostExtendedPage.fromJson(parsedJson['page'])
+      searchSuggestedId: parsedJson['id'],
+      searchSuggestedPage: APIRegularSearchSuggestedExtendedPage.fromJson(parsedJson['page'])
     );
   }
 }
 
 
-class APIRegularSearchPostExtendedPage{
-  int id;
-  String name;
-  APIRegularPostExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularHomeTabPostExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+class APIRegularSearchSuggestedExtendedPage{
+  int searchSuggestedPageId;
+  String searchSuggestedPageName;
+  APIRegularSearchSuggestedExtendedPageDetails searchSuggestedPageDetails;
+  dynamic searchSuggestedPageBackgroundImage;
+  dynamic searchSuggestedPageProfileImage;
+  dynamic searchSuggestedPageImagesOrVideos;
+  String searchSuggestedPageRelationship;
+  APIRegularSearchSuggestedExtendedPageCreator searchSuggestedPagePageCreator;
+  bool searchSuggestedPageManage;
+  bool searchSuggestedPageFamOrFriends;
+  bool searchSuggestedPageFollower;
+  String searchSuggestedPagePageType;
+  String searchSuggestedPagePrivacy;
 
-  APIRegularSearchPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIRegularSearchSuggestedExtendedPage({this.searchSuggestedPageId, this.searchSuggestedPageName, this.searchSuggestedPageDetails, this.searchSuggestedPageBackgroundImage, this.searchSuggestedPageProfileImage, this.searchSuggestedPageImagesOrVideos, this.searchSuggestedPageRelationship, this.searchSuggestedPagePageCreator, this.searchSuggestedPageManage, this.searchSuggestedPageFamOrFriends, this.searchSuggestedPageFollower, this.searchSuggestedPagePageType, this.searchSuggestedPagePrivacy});
 
-  factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularSearchPostExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularPostExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+  factory APIRegularSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchSuggestedExtendedPage(
+      searchSuggestedPageId: parsedJson['id'],
+      searchSuggestedPageName: parsedJson['name'],
+      searchSuggestedPageDetails: APIRegularSearchSuggestedExtendedPageDetails.fromJson(parsedJson['details']),
+      searchSuggestedPageBackgroundImage: parsedJson['backgroundImage'],
+      searchSuggestedPageProfileImage: parsedJson['profileImage'],
+      searchSuggestedPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      searchSuggestedPageRelationship: parsedJson['relationship'],
+      searchSuggestedPagePageCreator: APIRegularSearchSuggestedExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchSuggestedPageManage: parsedJson['manage'],
+      searchSuggestedPageFamOrFriends: parsedJson['famOrFriends'],
+      searchSuggestedPageFollower: parsedJson['follower'],
+      searchSuggestedPagePageType: parsedJson['page_type'],
+      searchSuggestedPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
-class APIRegularPostExtendedPageDetails{
-  String description;
-  String location;
-  String precinct;
-  String dob;
-  String rip;
-  String state;
-  String country;
+class APIRegularSearchSuggestedExtendedPageDetails{
+  String searchSuggestedPageDetailsDescription;
+  String searchSuggestedPageDetailsLocation;
+  String searchSuggestedPageDetailsPrecinct;
+  String searchSuggestedPageDetailsDob;
+  String searchSuggestedPageDetailsRip;
+  String searchSuggestedPageDetailsState;
+  String searchSuggestedPageDetailsCountry;
 
-  APIRegularPostExtendedPageDetails({this.description, this.location, this.precinct, this.dob, this.rip, this.state, this.country});
+  APIRegularSearchSuggestedExtendedPageDetails({this.searchSuggestedPageDetailsDescription, this.searchSuggestedPageDetailsLocation, this.searchSuggestedPageDetailsPrecinct, this.searchSuggestedPageDetailsDob, this.searchSuggestedPageDetailsRip, this.searchSuggestedPageDetailsState, this.searchSuggestedPageDetailsCountry});
 
-  factory APIRegularPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularPostExtendedPageDetails(
-      description: parsedJson['description'],
-      location: parsedJson['location'],
-      precinct: parsedJson['precinct'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      state: parsedJson['state'],
-      country: parsedJson['country'],
+  factory APIRegularSearchSuggestedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchSuggestedExtendedPageDetails(
+      searchSuggestedPageDetailsDescription: parsedJson['description'],
+      searchSuggestedPageDetailsLocation: parsedJson['location'],
+      searchSuggestedPageDetailsPrecinct: parsedJson['precinct'],
+      searchSuggestedPageDetailsDob: parsedJson['dob'],
+      searchSuggestedPageDetailsRip: parsedJson['rip'],
+      searchSuggestedPageDetailsState: parsedJson['state'],
+      searchSuggestedPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
-class APIRegularHomeTabPostExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+class APIRegularSearchSuggestedExtendedPageCreator{
+  int serachSuggestedPageCreatorId;
+  String serachSuggestedPageCreatorFirstName;
+  String serachSuggestedPageCreatorLastName;
+  String serachSuggestedPageCreatorPhoneNumber;
+  String serachSuggestedPageCreatorEmail;
+  String serachSuggestedPageCreatorUserName;
+  dynamic serachSuggestedPageCreatorImage;
 
-  APIRegularHomeTabPostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularSearchSuggestedExtendedPageCreator({this.serachSuggestedPageCreatorId, this.serachSuggestedPageCreatorFirstName, this.serachSuggestedPageCreatorLastName, this.serachSuggestedPageCreatorPhoneNumber, this.serachSuggestedPageCreatorEmail, this.serachSuggestedPageCreatorUserName, this.serachSuggestedPageCreatorImage});
 
-  factory APIRegularHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabPostExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+  factory APIRegularSearchSuggestedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularSearchSuggestedExtendedPageCreator(
+      serachSuggestedPageCreatorId: parsedJson['id'],
+      serachSuggestedPageCreatorFirstName: parsedJson['first_name'],
+      serachSuggestedPageCreatorLastName: parsedJson['last_name'],
+      serachSuggestedPageCreatorPhoneNumber: parsedJson['phone_number'],
+      serachSuggestedPageCreatorEmail: parsedJson['email'],
+      serachSuggestedPageCreatorUserName: parsedJson['username'],
+      serachSuggestedPageCreatorImage: parsedJson['image']
     );
   }
 }

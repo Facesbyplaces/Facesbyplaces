@@ -29,10 +29,10 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
 
 
 class APIBLMShowListOfComments{
-  int itemsRemaining;
-  List<APIBLMShowListOfCommentsExtended> commentsList;
+  int bmlItemsRemaining;
+  List<APIBLMShowListOfCommentsExtended> bmlCommentsList;
 
-  APIBLMShowListOfComments({this.itemsRemaining, this.commentsList});
+  APIBLMShowListOfComments({this.bmlItemsRemaining, this.bmlCommentsList});
 
   factory APIBLMShowListOfComments.fromJson(Map<String, dynamic> parsedJson){
 
@@ -40,47 +40,47 @@ class APIBLMShowListOfComments{
     List<APIBLMShowListOfCommentsExtended> commentsList = newList1.map((i) => APIBLMShowListOfCommentsExtended.fromJson(i)).toList();
 
     return APIBLMShowListOfComments(
-      itemsRemaining: parsedJson['itemsremaining'],
-      commentsList: commentsList,
+      bmlItemsRemaining: parsedJson['itemsremaining'],
+      bmlCommentsList: commentsList,
     );
   }
 }
 
 
 class APIBLMShowListOfCommentsExtended{
-  int commentId;
-  int postId;
-  APIBLMShowListOfCommentsExtendedUser user;
-  String commentBody;
-  String createdAt;
+  int showListCommentsCommentId;
+  int showListCommentsPostId;
+  APIBLMShowListOfCommentsExtendedUser showListCommentsUser;
+  String showListCommentsCommentBody;
+  String showListCommentsCreatedAt;
 
-  APIBLMShowListOfCommentsExtended({this.commentId, this.postId, this.commentBody, this.user, this.createdAt});
+  APIBLMShowListOfCommentsExtended({this.showListCommentsCommentId, this.showListCommentsPostId, this.showListCommentsCommentBody, this.showListCommentsUser, this.showListCommentsCreatedAt});
 
   factory APIBLMShowListOfCommentsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfCommentsExtended(
-      commentId: parsedJson['id'],
-      postId: parsedJson['post_id'],
-      user: APIBLMShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
-      commentBody: parsedJson['body'],
-      createdAt: parsedJson['created_at'],
+      showListCommentsCommentId: parsedJson['id'],
+      showListCommentsPostId: parsedJson['post_id'],
+      showListCommentsUser: APIBLMShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
+      showListCommentsCommentBody: parsedJson['body'],
+      showListCommentsCreatedAt: parsedJson['created_at'],
     );
   }
 }
 
 class APIBLMShowListOfCommentsExtendedUser{
-  int userId;
-  String firstName;
-  String lastName;
-  dynamic image;
+  int showListCommentsUserUserId;
+  String showListCommentsUserFirstName;
+  String showListCommentsUserLastName;
+  dynamic showListCommentsUserImage;
 
-  APIBLMShowListOfCommentsExtendedUser({this.userId, this.firstName, this.lastName, this.image});
+  APIBLMShowListOfCommentsExtendedUser({this.showListCommentsUserUserId, this.showListCommentsUserFirstName, this.showListCommentsUserLastName, this.showListCommentsUserImage});
 
   factory APIBLMShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfCommentsExtendedUser(
-      userId: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      image: parsedJson['image'],
+      showListCommentsUserUserId: parsedJson['id'],
+      showListCommentsUserFirstName: parsedJson['first_name'],
+      showListCommentsUserLastName: parsedJson['last_name'],
+      showListCommentsUserImage: parsedJson['image'],
     );
   }
 }

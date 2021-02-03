@@ -29,36 +29,36 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) asyn
 
 class APIRegularShowMemorialMain{
 
-  APIRegularShowMemorialExtended memorial;
+  APIRegularShowMemorialExtended almMemorial;
 
-  APIRegularShowMemorialMain({this.memorial});
+  APIRegularShowMemorialMain({this.almMemorial});
 
   factory APIRegularShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowMemorialMain(
-      memorial: APIRegularShowMemorialExtended.fromJson(parsedJson['memorial']),
+      almMemorial: APIRegularShowMemorialExtended.fromJson(parsedJson['memorial']),
     );
   }
 }
 
 
 class APIRegularShowMemorialExtended{
-  int memorialId;
-  String memorialName;
-  APIRegularShowMemorialExtendedDetails memorialDetails;
-  String memorialBackgroundImage;
-  String memorialProfileImage;
-  List<dynamic> memorialImagesOrVideos;
-  String memorialRelationship;
-  APIRegularShowMemorialExtendedPageCreator memorialPageCreator;
-  bool memorialManage;
-  bool memorialFamOrFriends;
-  bool memorialFollower;
-  int memorialPostsCount;
-  int memorialFamilyCount;
-  int memorialFriendsCount;
-  int memorialFollowersCount;
+  int showMemorialId;
+  String showMemorialName;
+  APIRegularShowMemorialExtendedDetails showMemorialDetails;
+  String showMemorialBackgroundImage;
+  String showMemorialProfileImage;
+  List<dynamic> showMemorialImagesOrVideos;
+  String showMemorialRelationship;
+  APIRegularShowMemorialExtendedPageCreator showMemorialPageCreator;
+  bool showMemorialManage;
+  bool showMemorialFamOrFriends;
+  bool showMemorialFollower;
+  int showMemorialPostsCount;
+  int showMemorialFamilyCount;
+  int showMemorialFriendsCount;
+  int showMemorialFollowersCount;
 
-  APIRegularShowMemorialExtended({this.memorialId, this.memorialName, this.memorialDetails, this.memorialBackgroundImage, this.memorialProfileImage, this.memorialImagesOrVideos, this. memorialRelationship, this.memorialPageCreator, this.memorialManage, this.memorialFamOrFriends, this.memorialFollower, this.memorialPostsCount, this.memorialFamilyCount, this.memorialFriendsCount, this.memorialFollowersCount});
+  APIRegularShowMemorialExtended({this.showMemorialId, this.showMemorialName, this.showMemorialDetails, this.showMemorialBackgroundImage, this.showMemorialProfileImage, this.showMemorialImagesOrVideos, this.showMemorialRelationship, this.showMemorialPageCreator, this.showMemorialManage, this.showMemorialFamOrFriends, this.showMemorialFollower, this.showMemorialPostsCount, this.showMemorialFamilyCount, this.showMemorialFriendsCount, this.showMemorialFollowersCount});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -70,35 +70,35 @@ class APIRegularShowMemorialExtended{
     }
 
     return APIRegularShowMemorialExtended(
-      memorialId: parsedJson['id'],
-      memorialName: parsedJson['name'],
-      memorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
-      memorialBackgroundImage: parsedJson['backgroundImage'],
-      memorialProfileImage: parsedJson['profileImage'],
-      memorialImagesOrVideos: newList1,
-      memorialRelationship: parsedJson['relationship'],
-      memorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      memorialManage: parsedJson['manage'],
-      memorialFamOrFriends: parsedJson['famOrFriends'],
-      memorialFollower: parsedJson['follower'],
-      memorialPostsCount: parsedJson['postsCount'],
-      memorialFamilyCount: parsedJson['familyCount'],
-      memorialFriendsCount: parsedJson['friendsCount'],
-      memorialFollowersCount: parsedJson['followersCount'],
+      showMemorialId: parsedJson['id'],
+      showMemorialName: parsedJson['name'],
+      showMemorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
+      showMemorialBackgroundImage: parsedJson['backgroundImage'],
+      showMemorialProfileImage: parsedJson['profileImage'],
+      showMemorialImagesOrVideos: newList1,
+      showMemorialRelationship: parsedJson['relationship'],
+      showMemorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      showMemorialManage: parsedJson['manage'],
+      showMemorialFamOrFriends: parsedJson['famOrFriends'],
+      showMemorialFollower: parsedJson['follower'],
+      showMemorialPostsCount: parsedJson['postsCount'],
+      showMemorialFamilyCount: parsedJson['familyCount'],
+      showMemorialFriendsCount: parsedJson['friendsCount'],
+      showMemorialFollowersCount: parsedJson['followersCount'],
     );
   }
 }
 
 
 class APIRegularShowMemorialExtendedDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String showMemorialDetailsDescription;
+  String showMemorialDetailsBirthPlace;
+  String showMemorialDetailsDob;
+  String showMemorialDetailsRip;
+  String showMemorialDetailsCemetery;
+  String showMemorialDetailsCountry;
 
-  APIRegularShowMemorialExtendedDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularShowMemorialExtendedDetails({this.showMemorialDetailsDescription, this.showMemorialDetailsBirthPlace, this.showMemorialDetailsDob, this.showMemorialDetailsRip, this.showMemorialDetailsCemetery, this.showMemorialDetailsCountry});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     String newDOB = parsedJson['dob'];
@@ -107,36 +107,36 @@ class APIRegularShowMemorialExtendedDetails{
     String newRIP = parsedJson['rip'];
     DateTime rip = DateTime.parse(newRIP);
     return APIRegularShowMemorialExtendedDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: dob.format(AmericanDateFormats.standardWithComma),
-      rip: rip.format(AmericanDateFormats.standardWithComma),
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      showMemorialDetailsDescription: parsedJson['description'],
+      showMemorialDetailsBirthPlace: parsedJson['birthplace'],
+      showMemorialDetailsDob: dob.format(AmericanDateFormats.standardWithComma),
+      showMemorialDetailsRip: rip.format(AmericanDateFormats.standardWithComma),
+      showMemorialDetailsCemetery: parsedJson['cemetery'],
+      showMemorialDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularShowMemorialExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showMemorialPageCreatorId;
+  String showMemorialPageCreatorFirstName;
+  String showMemorialPageCreatorLastName;
+  String showMemorialPageCreatorPhoneNumber;
+  String showMemorialPageCreatorEmail;
+  String showMemorialPageCreatorUserName;
+  dynamic showMemorialPageCreatorImage;
 
-  APIRegularShowMemorialExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image,});
+  APIRegularShowMemorialExtendedPageCreator({this.showMemorialPageCreatorId, this.showMemorialPageCreatorFirstName, this.showMemorialPageCreatorLastName, this.showMemorialPageCreatorPhoneNumber, this.showMemorialPageCreatorEmail, this.showMemorialPageCreatorUserName, this.showMemorialPageCreatorImage,});
 
   factory APIRegularShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowMemorialExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image'],
+      showMemorialPageCreatorId: parsedJson['id'],
+      showMemorialPageCreatorFirstName: parsedJson['first_name'],
+      showMemorialPageCreatorLastName: parsedJson['last_name'],
+      showMemorialPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showMemorialPageCreatorEmail: parsedJson['email'],
+      showMemorialPageCreatorUserName: parsedJson['username'],
+      showMemorialPageCreatorImage: parsedJson['image'],
     );
   }
 }

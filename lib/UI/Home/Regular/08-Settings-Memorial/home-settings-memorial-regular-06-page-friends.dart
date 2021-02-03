@@ -48,17 +48,17 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       if(newValue == null){
         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
       }else{
-        friendsItemsRemaining = newValue.itemsRemaining;
+        friendsItemsRemaining = newValue.almItemsRemaining;
 
-        for(int i = 0; i < newValue.friendsList.length; i++){
+        for(int i = 0; i < newValue.almFriendsList.length; i++){
           friendsList.add(
             RegularShowFriendsSettings(
-              userId: newValue.friendsList[i].user.id,
-              firstName: newValue.friendsList[i].user.firstName,
-              lastName: newValue.friendsList[i].user.lastName,
-              image: newValue.friendsList[i].user.image,
-              relationship: newValue.friendsList[i].relationship,
-              accountType: newValue.friendsList[i].user.accountType,
+              userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId,
+              firstName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName,
+              lastName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName,
+              image: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,
+              relationship: newValue.almFriendsList[i].showFriendsSettingsRelationship,
+              accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType,
             ),
           );
         }

@@ -79,27 +79,27 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                         physics: ClampingScrollPhysics(),
                         children: [
 
-                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.memorial.name),
+                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.almMemorial.showPageDetailsName),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscRegularInputFieldDropDown(key: _key2, displayText: memorialSettings.data.memorial.relationship),
+                          MiscRegularInputFieldDropDown(key: _key2, displayText: memorialSettings.data.almMemorial.showPageDetailsRelationship),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data.memorial.details.dob),
+                          MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data.memorial.details.rip),
+                          MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscRegularInputFieldTemplate(key: _key5, labelText: 'Country', displayText: memorialSettings.data.memorial.details.country),
+                          MiscRegularInputFieldTemplate(key: _key5, labelText: 'Country', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                          MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery', displayText: memorialSettings.data.memorial.details.cemetery),
+                          MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
@@ -113,12 +113,12 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             onPressed: () async{
 
                               if(
-                                memorialSettings.data.memorial.name != _key1.currentState.controller.text ||
-                                memorialSettings.data.memorial.relationship != _key2.currentState.currentSelection ||
-                                convertDate(memorialSettings.data.memorial.details.dob) != convertDate(_key3.currentState.controller.text) ||
-                                convertDate(memorialSettings.data.memorial.details.rip) != convertDate(_key4.currentState.controller.text) ||
-                                memorialSettings.data.memorial.details.country !=  _key5.currentState.controller.text ||
-                                memorialSettings.data.memorial.details.cemetery !=  _key6.currentState.controller.text
+                                memorialSettings.data.almMemorial.showPageDetailsName != _key1.currentState.controller.text ||
+                                memorialSettings.data.almMemorial.showPageDetailsRelationship != _key2.currentState.currentSelection ||
+                                convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key3.currentState.controller.text) ||
+                                convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key4.currentState.controller.text) ||
+                                memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry !=  _key5.currentState.controller.text ||
+                                memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery !=  _key6.currentState.controller.text
                               ){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 

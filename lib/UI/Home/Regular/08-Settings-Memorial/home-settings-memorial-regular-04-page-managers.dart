@@ -51,17 +51,17 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       if(newValue == null){
         await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Something went wrong. Please try again.'));
       }else{
-        adminItemsRemaining = newValue.adminItemsRemaining;
+        adminItemsRemaining = newValue.almAdminItemsRemaining;
 
-        for(int i = 0; i < newValue.adminList.length; i++){
+        for(int i = 0; i < newValue.almAdminList.length; i++){
           adminList.add(
             RegularShowAdminSettings(
-              userId: newValue.adminList[i].user.id,
-              firstName: newValue.adminList[i].user.firstName,
-              lastName: newValue.adminList[i].user.lastName,
-              image: newValue.adminList[i].user.image,
-              relationship: newValue.adminList[i].relationship,
-              email: newValue.adminList[i].user.email,
+              userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
+              firstName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
+              lastName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
+              image: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
+              relationship: newValue.almAdminList[i].showAdminsSettingsRelationship,
+              email: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
             ),
           );
         }
@@ -86,17 +86,17 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
       var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page2);
       context.hideLoaderOverlay();
 
-      familyItemsRemaining = newValue.familyItemsRemaining;
+      familyItemsRemaining = newValue.almFamilyItemsRemaining;
 
-      for(int i = 0; i < newValue.familyList.length; i++){
+      for(int i = 0; i < newValue.almFamilyList.length; i++){
         familyList.add(
           RegularShowAdminSettings(
-            userId: newValue.familyList[i].user.id,
-            firstName: newValue.familyList[i].user.firstName,
-            lastName: newValue.familyList[i].user.lastName,
-            image: newValue.familyList[i].user.image,
-            relationship: newValue.familyList[i].relationship,
-            email: newValue.familyList[i].user.email,
+            userId: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
+            firstName: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
+            lastName: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
+            image: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
+            relationship: newValue.almFamilyList[i].showAdminsSettingsRelationship,
+            email: newValue.almFamilyList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
           ),
         );
       }

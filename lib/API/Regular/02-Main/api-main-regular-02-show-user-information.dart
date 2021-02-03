@@ -27,26 +27,26 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
 }
 
 class APIRegularShowProfileInformation{
-  int userId;
-  String firstName;
-  String lastName;
-  String image;
-  String email;
-  bool guest;
+  int showProfileInformationUserId;
+  String showProfileInformationFirstName;
+  String showProfileInformationLastName;
+  String showProfileInformationImage;
+  String showProfileInformationEmail;
+  bool showProfileInformationGuest;
 
-  APIRegularShowProfileInformation({this.userId, this.firstName, this.lastName, this.image, this.email, this.guest});
+  APIRegularShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest});
 
   factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
     var newValue = parsedJson['user'];
 
     return APIRegularShowProfileInformation(
-      userId: newValue['id'],
-      firstName: newValue['first_name'],
-      lastName: newValue['last_name'],
-      image: newValue['image'],
-      email: newValue['email'],
-      guest: newValue['guest'],
+      showProfileInformationUserId: newValue['id'],
+      showProfileInformationFirstName: newValue['first_name'],
+      showProfileInformationLastName: newValue['last_name'],
+      showProfileInformationImage: newValue['image'],
+      showProfileInformationEmail: newValue['email'],
+      showProfileInformationGuest: newValue['guest'],
     );
   }
 }

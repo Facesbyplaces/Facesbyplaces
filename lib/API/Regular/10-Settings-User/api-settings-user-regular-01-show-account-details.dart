@@ -22,28 +22,28 @@ Future<APIRegularShowAccountDetails> apiRegularShowAccountDetails({int userId}) 
     var newValue = json.decode(response.body);
     return APIRegularShowAccountDetails.fromJson(newValue);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Failed to show account details');
   }
 }
 
 class APIRegularShowAccountDetails{
-  int id;
-  String firstName;
-  String lastName;
-  String email;
-  String phoneNumber;
-  String question;
+  int showAccountDetailsId;
+  String showAccountDetailsFirstName;
+  String showAccountDetailsLastName;
+  String showAccountDetailsEmail;
+  String showAccountDetailsPhoneNumber;
+  String showAccountDetailsQuestion;
   
-  APIRegularShowAccountDetails({this.id, this.firstName, this.lastName, this.email, this.phoneNumber, this.question});
+  APIRegularShowAccountDetails({this.showAccountDetailsId, this.showAccountDetailsFirstName, this.showAccountDetailsLastName, this.showAccountDetailsEmail, this.showAccountDetailsPhoneNumber, this.showAccountDetailsQuestion});
 
   factory APIRegularShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowAccountDetails(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      email: parsedJson['email'],
-      phoneNumber: parsedJson['phone_number'],
-      question: parsedJson['question'],
+      showAccountDetailsId: parsedJson['id'],
+      showAccountDetailsFirstName: parsedJson['first_name'],
+      showAccountDetailsLastName: parsedJson['last_name'],
+      showAccountDetailsEmail: parsedJson['email'],
+      showAccountDetailsPhoneNumber: parsedJson['phone_number'],
+      showAccountDetailsQuestion: parsedJson['question'],
     );
   }
 }

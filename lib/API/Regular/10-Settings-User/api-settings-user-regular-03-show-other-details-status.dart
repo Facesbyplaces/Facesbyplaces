@@ -27,21 +27,21 @@ Future<APIRegularShowOtherDetailsStatus> apiRegularShowOtherDetailsStatus({int u
 }
 
 class APIRegularShowOtherDetailsStatus{
-  bool hideBirthdate;
-  bool hideBirthplace;
-  bool hideEmail;
-  bool hideAddress;
-  bool hidePhoneNumber;
+  bool showOtherDetailsStatusHideBirthdate;
+  bool showOtherDetailsStatusHideBirthplace;
+  bool showOtherDetailsStatusHideEmail;
+  bool showOtherDetailsStatusHideAddress;
+  bool showOtherDetailsStatusHidePhoneNumber;
 
-  APIRegularShowOtherDetailsStatus({this.hideBirthdate, this.hideBirthplace, this.hideEmail, this.hideAddress, this.hidePhoneNumber});
+  APIRegularShowOtherDetailsStatus({this.showOtherDetailsStatusHideBirthdate, this.showOtherDetailsStatusHideBirthplace, this.showOtherDetailsStatusHideEmail, this.showOtherDetailsStatusHideAddress, this.showOtherDetailsStatusHidePhoneNumber});
 
   factory APIRegularShowOtherDetailsStatus.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOtherDetailsStatus(
-      hideBirthdate: parsedJson['hideBirthdate'],
-      hideBirthplace: parsedJson['hideBirthplace'],
-      hideEmail: parsedJson['hideEmail'],
-      hideAddress: parsedJson['hideAddress'],
-      hidePhoneNumber: parsedJson['hidePhonenumber'],
+      showOtherDetailsStatusHideBirthdate: parsedJson['hideBirthdate'],
+      showOtherDetailsStatusHideBirthplace: parsedJson['hideBirthplace'],
+      showOtherDetailsStatusHideEmail: parsedJson['hideEmail'],
+      showOtherDetailsStatusHideAddress: parsedJson['hideAddress'],
+      showOtherDetailsStatusHidePhoneNumber: parsedJson['hidePhonenumber'],
     );
   }
 }

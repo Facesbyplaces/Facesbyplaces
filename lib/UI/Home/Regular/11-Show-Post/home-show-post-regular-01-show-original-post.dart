@@ -81,7 +81,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
     showOriginalPost = getOriginalPost(postId);
   }
 
-  Future<APIRegularShowOriginalPostMainMain> getOriginalPost(postId) async{
+  Future<APIRegularShowOriginalPostMain> getOriginalPost(postId) async{
     return await apiRegularShowOriginalPost(postId: postId);
   }
   
@@ -126,7 +126,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
           body: Container(
             padding: EdgeInsets.all(5.0),
             height: SizeConfig.screenHeight - AppBar().preferredSize.height,
-            child: FutureBuilder<APIRegularShowOriginalPostMainMain>(
+            child: FutureBuilder<APIRegularShowOriginalPostMain>(
               future: showOriginalPost,
               builder: (context, originalPost){
                 if(originalPost.hasData){
@@ -156,38 +156,38 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                 children: [
                                   GestureDetector(
                                     onTap: () async{
-                                      if(originalPost.data.post.page.pageType == 'Memorial'){
-                                        if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                      if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                        if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                         }else{
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                         }
                                       }else{
-                                        if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                        if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                         }else{
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                         }
                                       }
                                     },
-                                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.post.page.profileImage != null ? NetworkImage(originalPost.data.post.page.profileImage) : AssetImage('assets/icons/app-icon.png')),
+                                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
                                   ),
                                   Expanded(
                                     child: Container(
                                       padding: EdgeInsets.only(left: 10.0),
                                       child: GestureDetector(
                                         onTap: (){
-                                          if(originalPost.data.post.page.pageType == 'Memorial'){
-                                            if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                          if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                            if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                             }else{
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                             }
                                           }else{
-                                            if(originalPost.data.post.page.manage == true || originalPost.data.post.page.famOrFriends == true){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.post.page.id, relationship: originalPost.data.post.page.relationship, managed: originalPost.data.post.page.manage)));
+                                            if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                             }else{
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.post.page.id, pageType: originalPost.data.post.page.pageType, newJoin: originalPost.data.post.page.follower,)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                             }
                                           }
                                         },
@@ -195,7 +195,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                           children: [
                                             Expanded(
                                               child: Align(alignment: Alignment.bottomLeft,
-                                                child: Text(originalPost.data.post.page.name,
+                                                child: Text(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageName,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     fontSize: SizeConfig.safeBlockHorizontal * 4,
@@ -208,7 +208,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                             Expanded(
                                               child: Align(
                                                 alignment: Alignment.topLeft,
-                                                child: Text(timeago.format(DateTime.parse(originalPost.data.post.createAt)),
+                                                // showOriginalPostPage
+                                                child: Text(timeago.format(DateTime.parse(originalPost.data.almPost.showOriginalPostCreateAt)),
                                                   maxLines: 1,
                                                   style: TextStyle(
                                                     fontSize: SizeConfig.safeBlockHorizontal * 3,
@@ -228,23 +229,23 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                               ),
                             ),
 
-                            Container(alignment: Alignment.centerLeft, child: Text(originalPost.data.post.body),),
+                            Container(alignment: Alignment.centerLeft, child: Text(originalPost.data.almPost.showOriginalPostBody),),
 
-                            originalPost.data.post.imagesOrVideos != null
+                            originalPost.data.almPost.showOriginalPostImagesOrVideos != null
                             ? Container(
                               height: SizeConfig.blockSizeVertical * 30,
                               child: ((){
-                                if(originalPost.data.post.imagesOrVideos != null){
-                                  if(originalPost.data.post.imagesOrVideos.length == 1){
+                                if(originalPost.data.almPost.showOriginalPostImagesOrVideos != null){
+                                  if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length == 1){
                                     return Container(
                                       child: CachedNetworkImage(
                                         fit: BoxFit.cover,
-                                        imageUrl: originalPost.data.post.imagesOrVideos[0],
+                                        imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[0],
                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                         errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
                                       ),
                                     );
-                                  }else if(originalPost.data.post.imagesOrVideos.length == 2){
+                                  }else if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length == 2){
                                     return StaggeredGridView.countBuilder(
                                       padding: EdgeInsets.zero,
                                       physics: NeverScrollableScrollPhysics(),
@@ -262,10 +263,10 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                                     height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
                                                     child: CarouselSlider(
                                                       items: List.generate(
-                                                        originalPost.data.post.imagesOrVideos.length, (next) =>
+                                                        originalPost.data.almPost.showOriginalPostImagesOrVideos.length, (next) =>
                                                         CachedNetworkImage(
                                                           fit: BoxFit.cover,
-                                                          imageUrl: originalPost.data.post.imagesOrVideos[next],
+                                                          imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[next],
                                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                         ),
@@ -285,7 +286,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                           },
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
-                                            imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                            imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                           ),
@@ -313,10 +314,10 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                                     height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
                                                     child: CarouselSlider(
                                                       items: List.generate(
-                                                        originalPost.data.post.imagesOrVideos.length, (next) =>
+                                                        originalPost.data.almPost.showOriginalPostImagesOrVideos.length, (next) =>
                                                         CachedNetworkImage(
                                                           fit: BoxFit.cover,
-                                                          imageUrl: originalPost.data.post.imagesOrVideos[next],
+                                                          imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[next],
                                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                         ),
@@ -338,15 +339,15 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                             if(index != 1){
                                               return CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               );
                                             }else{
-                                              return originalPost.data.post.imagesOrVideos.length - 3 == 0
+                                              return originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3 == 0
                                               ? CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                               )
@@ -354,7 +355,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                                 children: [
                                                   CachedNetworkImage(
                                                     fit: BoxFit.cover,
-                                                    imageUrl: originalPost.data.post.imagesOrVideos[index],
+                                                    imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                   ),
@@ -366,7 +367,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                                       radius: SizeConfig.blockSizeVertical * 3,
                                                       backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                       child: Text(
-                                                        '${originalPost.data.post.imagesOrVideos.length - 3}',
+                                                        '${originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3}',
                                                         style: TextStyle(
                                                           fontSize: SizeConfig.safeBlockHorizontal * 7,
                                                           fontWeight: FontWeight.bold,
@@ -396,7 +397,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                               height: 0,
                             ),
 
-                            originalPost.data.post.postTagged.length != 0
+                            originalPost.data.almPost.showOriginalPostPostTagged.length != 0
                             ? Row(
                               children: [
                                 Text('with'),
@@ -406,22 +407,22 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                     direction: Axis.vertical,
                                     spacing: 5.0,
                                     children: List.generate(
-                                      originalPost.data.post.postTagged.length,
+                                      originalPost.data.almPost.showOriginalPostPostTagged.length,
                                       (index) => GestureDetector(
                                         onTap: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.post.postTagged[index].taggedId)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId)));
                                         },
                                         child: RichText(
                                           text: TextSpan(
                                             style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                             children: <TextSpan>[
-                                              TextSpan(text: originalPost.data.post.postTagged[index].taggedFirstName,),
+                                              TextSpan(text: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
 
                                               TextSpan(text: ' '),
 
-                                              TextSpan(text: originalPost.data.post.postTagged[index].taggedLastName,),
+                                              TextSpan(text: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
 
-                                              index < originalPost.data.post.postTagged.length - 1
+                                              index < originalPost.data.almPost.showOriginalPostPostTagged.length - 1
                                               ? TextSpan(text: ',')
                                               : TextSpan(text: ''),
                                             ],
@@ -476,7 +477,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.post.numberOfComments,)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.almPost.showOriginalPostNumberOfComments,)));
                                     },
                                     child: Row(
                                       children: [
@@ -484,7 +485,7 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        Text('${originalPost.data.post.numberOfComments}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                        Text('${originalPost.data.almPost.showOriginalPostNumberOfComments}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
                                       ],
                                     ),
                                   ),

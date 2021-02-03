@@ -28,38 +28,38 @@ Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({int userId, int pa
 
 
 class APIRegularShowUsersPostsMain{
-  int itemsRemaining;
-  List<APIRegularShowUsersPostsExtended> familyMemorialList;
+  int almItemsRemaining;
+  List<APIRegularShowUsersPostsExtended> almFamilyMemorialList;
 
-  APIRegularShowUsersPostsMain({this.familyMemorialList, this.itemsRemaining});
+  APIRegularShowUsersPostsMain({this.almItemsRemaining, this.almFamilyMemorialList});
 
   factory APIRegularShowUsersPostsMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIRegularShowUsersPostsExtended> familyMemorials = newList.map((i) => APIRegularShowUsersPostsExtended.fromJson(i)).toList();
 
     return APIRegularShowUsersPostsMain(
-      familyMemorialList: familyMemorials,
-      itemsRemaining: parsedJson['itemsremaining'],
+      almItemsRemaining: parsedJson['itemsremaining'],
+      almFamilyMemorialList: familyMemorials,
     );
   }
 }
 
 
 class APIRegularShowUsersPostsExtended{
-  int id;
-  APIRegularShowUsersPostsExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIRegularShowUsersPostsExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int showUsersPostsId;
+  APIRegularShowUsersPostsExtendedPage showUsersPostsPage;
+  String showUsersPostsBody;
+  String showUsersPostsLocation;
+  double showUsersPostsLatitude;
+  double showUsersPostsLongitude;
+  List<dynamic> showUsersPostsImagesOrVideos;
+  List<APIRegularShowUsersPostsExtendedTagged> showUsersPostsPostTagged;
+  String showUsersPostsCreatedAt;
+  int showUsersPostsNumberOfLikes;
+  int showUsersPostsNumberOfComments;
+  bool showUsersPostsLikeStatus;
 
-  APIRegularShowUsersPostsExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIRegularShowUsersPostsExtended({this.showUsersPostsId, this.showUsersPostsPage, this.showUsersPostsBody, this.showUsersPostsLocation, this.showUsersPostsLatitude, this.showUsersPostsLongitude, this.showUsersPostsImagesOrVideos, this.showUsersPostsPostTagged, this.showUsersPostsCreatedAt, this.showUsersPostsNumberOfLikes, this.showUsersPostsNumberOfComments, this.showUsersPostsLikeStatus});
 
   factory APIRegularShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -74,117 +74,117 @@ class APIRegularShowUsersPostsExtended{
     List<APIRegularShowUsersPostsExtendedTagged> taggedList = newList2.map((i) => APIRegularShowUsersPostsExtendedTagged.fromJson(i)).toList();
     
     return APIRegularShowUsersPostsExtended(
-      id: parsedJson['id'],
-      page: APIRegularShowUsersPostsExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      showUsersPostsId: parsedJson['id'],
+      showUsersPostsPage: APIRegularShowUsersPostsExtendedPage.fromJson(parsedJson['page']),
+      showUsersPostsBody: parsedJson['body'],
+      showUsersPostsLocation: parsedJson['location'],
+      showUsersPostsLatitude: parsedJson['latitude'],
+      showUsersPostsLongitude: parsedJson['longitude'],
+      showUsersPostsImagesOrVideos: newList1,
+      showUsersPostsPostTagged: taggedList,
+      showUsersPostsCreatedAt: parsedJson['created_at'],
+      showUsersPostsNumberOfLikes: parsedJson['numberOfLikes'],
+      showUsersPostsNumberOfComments: parsedJson['numberOfComments'],
+      showUsersPostsLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIRegularShowUsersPostsExtendedPage{
-  int id;
-  String name;
-  APIRegularShowUsersPostsExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIRegularShowUsersPostsExtendedPageCreator pageCreator;
-  bool follower;
-  bool manage;
-  String pageType;
-  String privacy;
+  int showUsersPostsPageId;
+  String showUsersPostsPageName;
+  APIRegularShowUsersPostsExtendedPageDetails showUsersPostsPageDetails;
+  dynamic showUsersPostsPageBackgroundImage;
+  dynamic showUsersPostsPageProfileImage;
+  dynamic showUsersPostsPageImagesOrVideos;
+  String showUsersPostsPageRelationship;
+  APIRegularShowUsersPostsExtendedPageCreator showUsersPostsPagePageCreator;
+  bool showUsersPostsPageFollower;
+  bool showUsersPostsPageManage;
+  String showUsersPostsPagePageType;
+  String showUsersPostsPagePrivacy;
 
-  APIRegularShowUsersPostsExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.follower, this.manage, this.pageType, this.privacy});
+  APIRegularShowUsersPostsExtendedPage({this.showUsersPostsPageId, this.showUsersPostsPageName, this.showUsersPostsPageDetails, this.showUsersPostsPageBackgroundImage, this.showUsersPostsPageProfileImage, this.showUsersPostsPageImagesOrVideos, this.showUsersPostsPageRelationship, this.showUsersPostsPagePageCreator, this.showUsersPostsPageFollower, this.showUsersPostsPageManage, this.showUsersPostsPagePageType, this.showUsersPostsPagePrivacy});
 
   factory APIRegularShowUsersPostsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIRegularShowUsersPostsExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIRegularShowUsersPostsExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      follower: parsedJson['follower'],
-      manage: parsedJson['manage'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      showUsersPostsPageId: parsedJson['id'],
+      showUsersPostsPageName: parsedJson['name'],
+      showUsersPostsPageDetails: APIRegularShowUsersPostsExtendedPageDetails.fromJson(parsedJson['details']),
+      showUsersPostsPageBackgroundImage: parsedJson['backgroundImage'],
+      showUsersPostsPageProfileImage: parsedJson['profileImage'],
+      showUsersPostsPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      showUsersPostsPageRelationship: parsedJson['relationship'],
+      showUsersPostsPagePageCreator: APIRegularShowUsersPostsExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      showUsersPostsPageFollower: parsedJson['follower'],
+      showUsersPostsPageManage: parsedJson['manage'],
+      showUsersPostsPagePageType: parsedJson['page_type'],
+      showUsersPostsPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularShowUsersPostsExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String showUsersPostsPageDetailsDescription;
+  String showUsersPostsPageDetailsBirthPlace;
+  String showUsersPostsPageDetailsDob;
+  String showUsersPostsPageDetailsRip;
+  String showUsersPostsPageDetailsCemetery;
+  String showUsersPostsPageDetailsCountry;
 
-  APIRegularShowUsersPostsExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIRegularShowUsersPostsExtendedPageDetails({this.showUsersPostsPageDetailsDescription, this.showUsersPostsPageDetailsBirthPlace, this.showUsersPostsPageDetailsDob, this.showUsersPostsPageDetailsRip, this.showUsersPostsPageDetailsCemetery, this.showUsersPostsPageDetailsCountry});
 
   factory APIRegularShowUsersPostsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      showUsersPostsPageDetailsDescription: parsedJson['description'],
+      showUsersPostsPageDetailsBirthPlace: parsedJson['birthplace'],
+      showUsersPostsPageDetailsDob: parsedJson['dob'],
+      showUsersPostsPageDetailsRip: parsedJson['rip'],
+      showUsersPostsPageDetailsCemetery: parsedJson['cemetery'],
+      showUsersPostsPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIRegularShowUsersPostsExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showUsersPostsPageCreatorId;
+  String showUsersPostsPageCreatorFirstName;
+  String showUsersPostsPageCreatorLastName;
+  String showUsersPostsPageCreatorPhoneNumber;
+  String showUsersPostsPageCreatorEmail;
+  String showUsersPostsPageCreatorUserName;
+  dynamic showUsersPostsPageCreatorImage;
 
-  APIRegularShowUsersPostsExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIRegularShowUsersPostsExtendedPageCreator({this.showUsersPostsPageCreatorId, this.showUsersPostsPageCreatorFirstName, this.showUsersPostsPageCreatorLastName, this.showUsersPostsPageCreatorPhoneNumber, this.showUsersPostsPageCreatorEmail, this.showUsersPostsPageCreatorUserName, this.showUsersPostsPageCreatorImage});
 
   factory APIRegularShowUsersPostsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      showUsersPostsPageCreatorId: parsedJson['id'],
+      showUsersPostsPageCreatorFirstName: parsedJson['first_name'],
+      showUsersPostsPageCreatorLastName: parsedJson['last_name'],
+      showUsersPostsPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showUsersPostsPageCreatorEmail: parsedJson['email'],
+      showUsersPostsPageCreatorUserName: parsedJson['username'],
+      showUsersPostsPageCreatorImage: parsedJson['image']
     );
   }
 }
 
 
 class APIRegularShowUsersPostsExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  int showUsersPostsTaggedId;
+  String showUsersPostsTaggedFirstName;
+  String showUsersPostsTaggedLastName;
+  String showUsersPostsTaggedImage;
 
-  APIRegularShowUsersPostsExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIRegularShowUsersPostsExtendedTagged({this.showUsersPostsTaggedId, this.showUsersPostsTaggedFirstName, this.showUsersPostsTaggedLastName, this.showUsersPostsTaggedImage});
 
   factory APIRegularShowUsersPostsExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+      showUsersPostsTaggedId: parsedJson['id'],
+      showUsersPostsTaggedFirstName: parsedJson['first_name'],
+      showUsersPostsTaggedLastName: parsedJson['last_name'],
+      showUsersPostsTaggedImage: parsedJson['image']
     );
   }
 }
