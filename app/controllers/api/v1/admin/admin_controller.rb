@@ -38,17 +38,12 @@ class Api::V1::Admin::AdminController < ApplicationController
                     }
     end
 
-    def showBlmUser
-        user = User.find(params[:id]) 
-
-        render json: ActiveModel::SerializableResource.new(
-                        user, 
-                        each_serializer: UserSerializer
-                    )
-    end
-
-    def showAlmUser
-        user = AlmUser.find(params[:id]) 
+    def showUser
+        if params[:account_type] == '1'
+            user = User.find(params[:id]) 
+        else
+            user = AlmUser.find(params[:id]) 
+        end
 
         render json: ActiveModel::SerializableResource.new(
                         user, 
@@ -57,9 +52,11 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     def searchBlmUser
-        users = User.where('username LIKE :search or email LIKE :search or first_name LIKE :search or last_name LIKE :search', search: params[:keywords])
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'User').map{|searchObject| 
+            User.find(searchObject.searchable_id)
+        }.flatten.uniq
 
-        users = users.page(params[:page]).per(numberOfPage)
+        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
         if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif users.total_count < numberOfPage
@@ -77,9 +74,11 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     def searchAlmUser
-        users = AlmUser.where('username LIKE :search or email LIKE :search or first_name LIKE :search or last_name LIKE :search', search: params[:keywords])
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'AlmUser').map{|searchObject| 
+            User.find(searchObject.searchable_id)
+        }.flatten.uniq
 
-        users = users.page(params[:page]).per(numberOfPage)
+        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
         if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif users.total_count < numberOfPage
@@ -98,7 +97,11 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def contactUser
         message = params[:message]
-        userEmail = User.find(params[:id]).email
+        if params[:account_type] == '1'
+            userEmail = User.find(params[:id]).email
+        else
+            userEmail = AlmUser.find(params[:id]).email
+        end
         subject = params[:subject]
 
         ContactUserMailer.with(message: message, email: userEmail, subject: subject).contact_user.deliver_later
@@ -109,7 +112,7 @@ class Api::V1::Admin::AdminController < ApplicationController
     def showPost
         post = Post.find(params[:id])
 
-        render json: post
+        render json: PostSerializer.new( post ).attributes
     end
 
     def deletePost
