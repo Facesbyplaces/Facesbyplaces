@@ -197,10 +197,8 @@ Rails.application.routes.draw do
 
         # all users
         get 'users', to: 'admin#allUsers'
-        # view blm user
-        get 'users/blm/:id', to: 'admin#showBlmUser'
-        # view alm user
-        get 'users/alm/:id', to: 'admin#showAlmUser'
+        # view user
+        get 'users/show', to: 'admin#showUser'
         # search blm user
         get 'search/blm_user', to: 'admin#searchBlmUser'
         # search alm user
