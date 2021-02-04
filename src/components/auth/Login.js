@@ -26,7 +26,7 @@ export default class Login extends Component {
   handleSubmit(event) {
     axios({
       method: "post",
-      url: "http://localhost:3001/admin_auth/sign_in",
+      url: "http://fbp-admin-portal.dev1.koda.ws/admin_auth/sign_in",
       data: qs.stringify({
         email: this.state.email,
         password: this.state.password,
