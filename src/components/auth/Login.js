@@ -26,8 +26,9 @@ export default class Login extends Component {
   handleSubmit(event) {
     axios({
       method: "post",
-      url: "http://fbp-admin-portal.dev1.koda.ws/admin_auth/sign_in",
+      url: "http://fbp.dev1.koda.ws/auth/sign_in",
       data: qs.stringify({
+        account_type: 1,
         email: this.state.email,
         password: this.state.password,
       }),
@@ -36,9 +37,8 @@ export default class Login extends Component {
       //   },
     })
       .then((response) => {
-        console.log(response);
-        console.log(response.headers["client"]);
-        if (response.data.loggedIn)
+        console.log(response.data.success);
+        if (response.data.success)
           this.props.handleSuccessfulAuth(
             response.data,
             response.headers["access-token"],
