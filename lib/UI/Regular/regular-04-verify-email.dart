@@ -140,7 +140,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                                 context.hideLoaderOverlay();
 
                                                 if(result == true){
-                                                  // await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Another code has been sent to your email address. Please check your inbox.', confirmText: 'OK', color: Colors.green,),);
                                                   await showDialog(
                                                     context: context,
                                                     builder: (_) => 

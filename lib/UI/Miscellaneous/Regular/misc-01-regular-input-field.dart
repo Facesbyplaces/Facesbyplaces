@@ -3,7 +3,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
-
 class MiscRegularInputFieldTemplate extends StatefulWidget{
   final String labelText;
   final TextStyle labelTextStyle;
@@ -94,10 +93,8 @@ class MiscRegularPhoneNumberTemplate extends StatefulWidget{
     this.displayText = '',
   }) : super(key: key);
   
-
   MiscRegularPhoneNumberTemplateState createState() => MiscRegularPhoneNumberTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
-
 
 class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTemplate>{
   final String labelText;
@@ -168,7 +165,6 @@ class MiscRegularInputFieldMultiTextTemplate extends StatefulWidget{
 
   MiscRegularInputFieldMultiTextTemplateState createState() => MiscRegularInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
 }
-
 
 class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInputFieldMultiTextTemplate>{
   final String labelText;
@@ -283,7 +279,6 @@ class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularI
     );
   }
 }
-
 
 class MiscRegularInputFieldDropDown extends StatefulWidget{
 
@@ -416,74 +411,6 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
   }
 }
 
-class RegularRelationshipItem{
-
-  final String name;
-  final String image;
-  
-  const RegularRelationshipItem({this.name, this.image});
-}
-
-
-class MiscRegularInputFieldDropDownUser extends StatefulWidget{
-
-  MiscRegularInputFieldDropDownUser({Key key}) : super(key: key);
-
-  @override
-  MiscRegularInputFieldDropDownUserState createState() => MiscRegularInputFieldDropDownUserState();
-}
-
-class MiscRegularInputFieldDropDownUserState extends State<MiscRegularInputFieldDropDownUser>{
-
-  List<RegularRelationshipItem> relationship = [
-    const RegularRelationshipItem(name: 'Richard Nedd Memories', image: 'assets/icons/profile2.png'),
-    const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png'),
-  ];
-
-  RegularRelationshipItem currentSelection = const RegularRelationshipItem(name: 'New Memorial', image: 'assets/icons/profile2.png');
-
-  @override
-  Widget build(BuildContext context){
-    return InputDecorator(
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<RegularRelationshipItem>(
-          value: currentSelection,
-          isDense: true,
-          onChanged: (RegularRelationshipItem newValue) {
-            setState(() {
-              currentSelection = newValue;
-            });
-          },
-          items: relationship.map((RegularRelationshipItem value) {
-            return DropdownMenuItem<RegularRelationshipItem>(
-              value: value,
-              child: Row(
-                children: [
-                  CircleAvatar(backgroundImage: AssetImage(value.image),),
-
-                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                  Text(value.name),
-                ],
-              ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
-  }
-}
-
 class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
 
   final String labelText;
@@ -495,22 +422,19 @@ class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
   MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
 
-
 class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
-    final String labelText;
-    final DateTimePickerType dateTimePickerType;
-    final String displayText;
+  final String labelText;
+  final DateTimePickerType dateTimePickerType;
+  final String displayText;
 
-    MiscRegularInputFieldDateTimeTemplateState({this.labelText, this.dateTimePickerType, this.displayText});
+  MiscRegularInputFieldDateTimeTemplateState({this.labelText, this.dateTimePickerType, this.displayText});
 
-    TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController();
 
-    void initState(){
-      super.initState();
-      controller = TextEditingController(text: displayText);
-    }
-
-  
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
 
   @override
   Widget build(BuildContext context) {

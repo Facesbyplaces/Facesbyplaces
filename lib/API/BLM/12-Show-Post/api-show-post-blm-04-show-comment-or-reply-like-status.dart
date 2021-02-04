@@ -26,8 +26,6 @@ Future<APIBLMShowCommentOrReplyLikeStatus> apiBLMShowCommentOrReplyLikeStatus({S
   }
 }
 
-
-
 class APIBLMShowCommentOrReplyLikeStatus{
   bool showCommentOrReplyLikeStatus;
   int showCommentOrReplyNumberOfLikes;

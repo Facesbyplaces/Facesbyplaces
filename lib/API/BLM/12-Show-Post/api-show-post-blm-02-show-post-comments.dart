@@ -26,8 +26,6 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
   }
 }
 
-
-
 class APIBLMShowListOfComments{
   int bmlItemsRemaining;
   List<APIBLMShowListOfCommentsExtended> bmlCommentsList;

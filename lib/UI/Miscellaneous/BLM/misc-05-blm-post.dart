@@ -280,8 +280,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                       });
 
                       await apiBLMLikeOrUnlikePost(postId: postId, like: likePost);
-
-                      print('Test!');
                     },
                     child: Row(
                       children: [
@@ -329,8 +327,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                         if (response.success) {
                           print('Link generated: ${response.result}');
-                          print('showShareSheet Sucess');
-                          print('The post id is $postId');
                         } else {
                           FlutterBranchSdk.logout();
                           print('Error : ${response.errorCode} - ${response.errorMessage}');

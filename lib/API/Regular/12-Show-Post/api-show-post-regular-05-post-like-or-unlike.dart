@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularLikeOrUnlikePost({int postId, bool like}) async{
 
   bool result = false;
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';

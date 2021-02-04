@@ -102,7 +102,6 @@ class APIRegularSearchBLMMemorialExtendedPage{
   }
 }
 
-
 class APIRegularSearchBLMMemorialExtendedPageDetails{
   String searchBLMMemorialPageDetailsDescription;
   String searchBLMMemorialPageDetailsBirthPlace;

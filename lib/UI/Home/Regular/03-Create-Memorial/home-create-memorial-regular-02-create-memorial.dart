@@ -2,8 +2,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'home-create-memorial-regular-01-create-memorial.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
   Future getVideo() async{
     final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-
     if(pickedFile != null){
       setState(() {
         videoFile = File(pickedFile.path);
@@ -184,10 +183,6 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                       newFiles.add(videoFile);
                       newFiles.addAll(slideImages);
-
-                      for(int i = 0; i < newFiles.length; i++){
-                        print('The newFiles is ${newFiles[i]}');
-                      }
 
                       newValue.description = controllerStory.text;
                       newValue.memorialName = _key1.currentState.controller.text;

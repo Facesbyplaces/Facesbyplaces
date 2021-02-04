@@ -44,7 +44,6 @@ class APIRegularConnectionListFamilyMain{
   }
 }
 
-
 class APIRegularConnectionListFamilyExtended{
   APIRegularConnectionListFamilyExtendedDetails connectionListFamilyUser;
   String connectionListFamilyRelationship;

@@ -44,7 +44,6 @@ class APIRegularConnectionListFriendsMain{
   }
 }
 
-
 class APIRegularConnectionListFriendsExtended{
   APIRegularConnectionListFriendsExtendedDetails connectionListFriendsUser;
   String connectionListFriendsRelationship;

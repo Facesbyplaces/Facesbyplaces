@@ -38,10 +38,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
   bool likePost;
   bool pressedLike;
   int likesCount;
-
   CarouselController buttonCarouselController = CarouselController();
   bool isLoggedIn;
-
   BranchUniversalObject buo;
   BranchLinkProperties lp;
 
@@ -63,8 +61,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
     );
 
     lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
+      feature: 'sharing',
+      stage: 'new share',
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
@@ -151,7 +149,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                           children: [
                             Container(
                               height: SizeConfig.blockSizeVertical * 10,
-                              // color: Colors.red,
                               child: Row(
                                 children: [
                                   GestureDetector(
@@ -208,7 +205,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                                             Expanded(
                                               child: Align(
                                                 alignment: Alignment.topLeft,
-                                                // showOriginalPostPage
                                                 child: Text(timeago.format(DateTime.parse(originalPost.data.almPost.showOriginalPostCreateAt)),
                                                   maxLines: 1,
                                                   style: TextStyle(
@@ -506,8 +502,6 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                                         if (response.success) {
                                           print('Link generated: ${response.result}');
-                                          print('showShareSheet Sucess');
-                                          print('The post id is $postId');
                                         } else {
                                           FlutterBranchSdk.logout();
                                           print('Error : ${response.errorCode} - ${response.errorMessage}');

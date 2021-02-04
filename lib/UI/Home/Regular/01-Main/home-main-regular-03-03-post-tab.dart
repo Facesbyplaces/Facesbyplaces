@@ -19,19 +19,16 @@ class RegularMainPagesPosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
-
   bool managed;
   bool joined;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
-
   int numberOfTagged;
   List<String> taggedFirstName;
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -93,6 +90,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       context.showLoaderOverlay();
       var newValue = await apiRegularHomePostTab(page: page);
       context.hideLoaderOverlay();
+
       itemRemaining = newValue.almItemsRemaining;
       count = count + newValue.familyMemorialList.length;
 
@@ -101,6 +99,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
         List<String> newList2 = [];
         List<String> newList3 = [];
         List<int> newList4 = [];
+
         for(int j = 0; j < newValue.familyMemorialList[i].homeTabPostPostTagged.length; j++){
           newList1.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedFirstName);
           newList2.add(newValue.familyMemorialList[i].homeTabPostPostTagged[j].homeTabPostTabTaggedLastName);
@@ -118,13 +117,11 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
             postBody: newValue.familyMemorialList[i].homeTabPostBody,
             profileImage: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageProfileImage,
             imagesOrVideos: newValue.familyMemorialList[i].homeTabPostImagesOrVideos,
-
             managed: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageManage,
             joined: newValue.familyMemorialList[i].homeTabPostPage.homeTabPostPageFollower,
             numberOfComments: newValue.familyMemorialList[i].homeTabPostNumberOfComments,
             numberOfLikes: newValue.familyMemorialList[i].homeTabPostNumberOfLikes,
             likeStatus: newValue.familyMemorialList[i].homeTabPostLikeStatus,
-
             numberOfTagged: newValue.familyMemorialList[i].homeTabPostPostTagged.length,
             taggedFirstName: newList1,
             taggedLastName: newList2,
@@ -186,14 +183,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               memorialId: posts[i].memorialId,
               memorialName: posts[i].memorialName,
               timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
-
               managed: posts[i].managed,
               joined: posts[i].joined,
               profileImage: posts[i].profileImage,
               numberOfComments: posts[i].numberOfComments,
               numberOfLikes: posts[i].numberOfLikes,
               likeStatus: posts[i].likeStatus,
-
               numberOfTagged: posts[i].numberOfTagged,
               taggedFirstName: posts[i].taggedFirstName,
               taggedLastName: posts[i].taggedLastName,
@@ -303,6 +298,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                   color: Colors.red,
                   height: 0,
                 ),
+                
               ]
             );
           },

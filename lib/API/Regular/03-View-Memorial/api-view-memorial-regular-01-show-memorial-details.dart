@@ -40,7 +40,6 @@ class APIRegularShowMemorialMain{
   }
 }
 
-
 class APIRegularShowMemorialExtended{
   int showMemorialId;
   String showMemorialName;
@@ -88,7 +87,6 @@ class APIRegularShowMemorialExtended{
     );
   }
 }
-
 
 class APIRegularShowMemorialExtendedDetails{
   String showMemorialDetailsDescription;

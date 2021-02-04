@@ -3,12 +3,12 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-add-friends.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RegularSearchUsers{
@@ -339,7 +339,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                             ],
                           ),
 
-                          
                         ],
                       ),
                     ),

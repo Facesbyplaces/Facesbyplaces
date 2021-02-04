@@ -164,11 +164,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         ),
                       );
 
-                      print('The token is $paymentToken');
-                      print('The token is ${paymentToken.tokenId}');
-
                       StripePayment.completeNativePayRequest();
-
                       double amount;
 
                       switch(donateToggle){
@@ -184,8 +180,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                       bool result = await apiBLMDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
                       context.hideLoaderOverlay();
 
-                      print('The result is $result');
-
                       if(result == true){
                         showDialog(
                         context: context,
@@ -193,15 +187,15 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                           AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.BOTTOM_RIGHT,
-                              description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context);
-                              },
+                            entryAnimation: EntryAnimation.BOTTOM_RIGHT,
+                            description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         );
                       }else{

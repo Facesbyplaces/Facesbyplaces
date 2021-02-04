@@ -23,19 +23,16 @@ class BLMSearchMainPosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
-
   bool managed;
   bool follower;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
-
   int numberOfTagged;
   List<String> taggedFirstName;
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -105,7 +102,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   final String currentLocation;
   HomeBLMPostState({this.keyword, this.newToggle, this.latitude, this.longitude, this.currentLocation});
 
-  
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<BLMSearchMainPosts> feeds = [];
   List<BLMSearchMainSuggested> suggested = [];
@@ -151,31 +147,29 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           newList4.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].taggedId);
         }
         
-        feeds.add(BLMSearchMainPosts(
-          userId: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageCreator.searchPostPageCreatorCreatorId, 
-          postId: newValue.blmSearchPostList[i].searchPostPostId,
-          memorialId: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageId,
-          timeCreated: newValue.blmSearchPostList[i].searchPostCreateAt,
-          memorialName: newValue.blmSearchPostList[i].searchPostPage.searchPostPageName,
-          postBody: newValue.blmSearchPostList[i].searchPostBody,
-          profileImage: newValue.blmSearchPostList[i].searchPostPage.searchPostPageProfileImage,
-          imagesOrVideos: newValue.blmSearchPostList[i].searchPostImagesOrVideos,
-
-          managed: newValue.blmSearchPostList[i].searchPostPage.searchPostPageManage,
-          follower: newValue.blmSearchPostList[i].searchPostPage.searchPostPageFollower,
-          numberOfComments: newValue.blmSearchPostList[i].searchPostNumberOfComments,
-          numberOfLikes: newValue.blmSearchPostList[i].searchPostNumberOfLikes,
-          likeStatus: newValue.blmSearchPostList[i].searchPostLikeStatus,
-
-          numberOfTagged: newValue.blmSearchPostList[i].searchPostPostTagged.length,
-          taggedFirstName: newList1,
-          taggedLastName: newList2,
-          taggedImage: newList3,
-          taggedId: newList4,
-
-          pageType: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageType,
-          famOrFriends: newValue.blmSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
-          relationship: newValue.blmSearchPostList[i].searchPostPage.searchPostPageRelationship,
+        feeds.add(
+          BLMSearchMainPosts(
+            userId: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageCreator.searchPostPageCreatorCreatorId, 
+            postId: newValue.blmSearchPostList[i].searchPostPostId,
+            memorialId: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageId,
+            timeCreated: newValue.blmSearchPostList[i].searchPostCreateAt,
+            memorialName: newValue.blmSearchPostList[i].searchPostPage.searchPostPageName,
+            postBody: newValue.blmSearchPostList[i].searchPostBody,
+            profileImage: newValue.blmSearchPostList[i].searchPostPage.searchPostPageProfileImage,
+            imagesOrVideos: newValue.blmSearchPostList[i].searchPostImagesOrVideos,
+            managed: newValue.blmSearchPostList[i].searchPostPage.searchPostPageManage,
+            follower: newValue.blmSearchPostList[i].searchPostPage.searchPostPageFollower,
+            numberOfComments: newValue.blmSearchPostList[i].searchPostNumberOfComments,
+            numberOfLikes: newValue.blmSearchPostList[i].searchPostNumberOfLikes,
+            likeStatus: newValue.blmSearchPostList[i].searchPostLikeStatus,
+            numberOfTagged: newValue.blmSearchPostList[i].searchPostPostTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
+            pageType: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageType,
+            famOrFriends: newValue.blmSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
+            relationship: newValue.blmSearchPostList[i].searchPostPage.searchPostPageRelationship,
           ),    
         );
       }
@@ -197,16 +191,17 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       tabCount2 = tabCount2 + newValue.blmPages.length;
 
       for(int i = 0; i < newValue.blmPages.length; i++){
-        suggested.add(BLMSearchMainSuggested(
-          memorialId: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageId,
-          memorialName: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageName,
-          memorialDescription: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
-          image: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageProfileImage,
-          managed: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageManage,
-          follower: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageFollower,
-          pageType: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPagePageType,
-          famOrFriends: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageFamOrFriends,
-          relationship: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageRelationship,
+        suggested.add(
+          BLMSearchMainSuggested(
+            memorialId: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageId,
+            memorialName: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageName,
+            memorialDescription: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
+            image: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageProfileImage,
+            managed: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageManage,
+            follower: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageFollower,
+            pageType: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPagePageType,
+            famOrFriends: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageFamOrFriends,
+            relationship: newValue.blmPages[i].searchSuggestedPage.searchSuggestedPageRelationship,
           ),    
         );
       }
@@ -230,16 +225,17 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       tabCount3 = tabCount3 + newValue.blmList.length;
 
       for(int i = 0; i < newValue.blmList.length; i++){
-        nearby.add(BLMSearchMainNearby(
-          memorialId: newValue.blmList[i].searchPostId,
-          memorialName: newValue.blmList[i].searchPostName,
-          memorialDescription: newValue.blmList[i].searchPostDetails.searchPostPageDetailsDescription,
-          image: newValue.blmList[i].searchPostProfileImage,
-          managed: newValue.blmList[i].searchPostManage,
-          follower: newValue.blmList[i].searchPostFollower,
-          pageType: newValue.blmList[i].searchPostPageType,
-          famOrFriends: newValue.blmList[i].searchPostFamOrFriends,
-          relationship: newValue.blmList[i].searchPostRelationship,
+        nearby.add(
+          BLMSearchMainNearby(
+            memorialId: newValue.blmList[i].searchPostId,
+            memorialName: newValue.blmList[i].searchPostName,
+            memorialDescription: newValue.blmList[i].searchPostDetails.searchPostPageDetailsDescription,
+            image: newValue.blmList[i].searchPostProfileImage,
+            managed: newValue.blmList[i].searchPostManage,
+            follower: newValue.blmList[i].searchPostFollower,
+            pageType: newValue.blmList[i].searchPostPageType,
+            famOrFriends: newValue.blmList[i].searchPostFamOrFriends,
+            relationship: newValue.blmList[i].searchPostRelationship,
           ),    
         );
       }
@@ -257,16 +253,17 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
       for(int i = 0; i < newValue.memorialList.length; i++){
-        nearby.add(BLMSearchMainNearby(
-          memorialId: newValue.memorialList[i].searchPostId,
-          memorialName: newValue.memorialList[i].searchPostName,
-          memorialDescription: newValue.memorialList[i].searchPostDetails.searchPostPageDetailsDescription,
-          image: newValue.blmList[i].searchPostProfileImage,
-          managed: newValue.blmList[i].searchPostManage,
-          follower: newValue.blmList[i].searchPostFollower,
-          pageType: newValue.blmList[i].searchPostPageType,
-          famOrFriends: newValue.blmList[i].searchPostFamOrFriends,
-          relationship: newValue.blmList[i].searchPostRelationship,
+        nearby.add(
+          BLMSearchMainNearby(
+            memorialId: newValue.memorialList[i].searchPostId,
+            memorialName: newValue.memorialList[i].searchPostName,
+            memorialDescription: newValue.memorialList[i].searchPostDetails.searchPostPageDetailsDescription,
+            image: newValue.blmList[i].searchPostProfileImage,
+            managed: newValue.blmList[i].searchPostManage,
+            follower: newValue.blmList[i].searchPostFollower,
+            pageType: newValue.blmList[i].searchPostPageType,
+            famOrFriends: newValue.blmList[i].searchPostFamOrFriends,
+            relationship: newValue.blmList[i].searchPostRelationship,
           ),    
         );
       }
@@ -289,16 +286,17 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       tabCount4 = tabCount4 + newValue.blmMemorialList.length;
 
       for(int i = 0; i < newValue.blmMemorialList.length; i++){
-        blm.add(BLMSearchMainBLM(
-          memorialId: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialId,
-          memorialName: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialName,
-          memorialDescription: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialDetails.searchMemorialPageDetailsDescription,
-          image: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialProfileImage,
-          managed: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialManage,
-          follower: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialFollower,
-          pageType: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialPageType,
-          famOrFriends: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialFamOrFriends,
-          relationship: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialRelationship,
+        blm.add(
+          BLMSearchMainBLM(
+            memorialId: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialId,
+            memorialName: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialName,
+            memorialDescription: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialDetails.searchMemorialPageDetailsDescription,
+            image: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialProfileImage,
+            managed: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialManage,
+            follower: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialFollower,
+            pageType: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialPageType,
+            famOrFriends: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialFamOrFriends,
+            relationship: newValue.blmMemorialList[i].searchMemorialPage.searchMemorialRelationship,
           ),    
         );
       }
@@ -564,19 +562,16 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-
               managed: feeds[i].managed,
               joined: feeds[i].follower,
               profileImage: feeds[i].profileImage,
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
-
               numberOfTagged: feeds[i].numberOfTagged,
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
-
               pageType: feeds[i].pageType,
               famOrFriends: feeds[i].famOrFriends,
               relationship: feeds[i].relationship,
@@ -776,15 +771,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscBLMManageMemorialTab(
-                index: i,
-                memorialName: nearby[i].memorialName,
-                description: nearby[i].memorialDescription,
-                image: nearby[i].image,
-                memorialId: nearby[i].memorialId,
-                managed: nearby[i].managed,
-                follower: nearby[i].follower,
-                pageType: nearby[i].pageType,
-                relationship: nearby[i].relationship,
+              index: i,
+              memorialName: nearby[i].memorialName,
+              description: nearby[i].memorialDescription,
+              image: nearby[i].image,
+              memorialId: nearby[i].memorialId,
+              managed: nearby[i].managed,
+              follower: nearby[i].follower,
+              pageType: nearby[i].pageType,
+              relationship: nearby[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
@@ -826,15 +821,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscBLMManageMemorialTab(
-                index: i,
-                memorialName: blm[i].memorialName,
-                description: blm[i].memorialDescription,
-                image: blm[i].image,
-                memorialId: blm[i].memorialId,
-                managed: blm[i].managed,
-                follower: blm[i].follower,
-                pageType: blm[i].pageType,
-                relationship: blm[i].relationship,
+              index: i,
+              memorialName: blm[i].memorialName,
+              description: blm[i].memorialDescription,
+              image: blm[i].image,
+              memorialId: blm[i].memorialId,
+              managed: blm[i].managed,
+              follower: blm[i].follower,
+              pageType: blm[i].pageType,
+              relationship: blm[i].relationship,
             );
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),

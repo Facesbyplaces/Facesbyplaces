@@ -50,7 +50,6 @@ class APIRegularSearchNearbyMain{
   }
 }
 
-
 class APIRegularSearchNearbyExtended{
   int serachNearbyId;
   String serachNearbyName;

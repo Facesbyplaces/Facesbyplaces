@@ -123,11 +123,9 @@ class BLMLoginState extends State<BLMLogin>{
                                       final fb = FacebookLogin();
 
                                       // await fb.logOut();
-                                      // print('heheheheh');
+                                      // print('facebook logout'); // TO LOGOUT THE FACEBOOK ACCOUNT FOR TESTING
 
                                       bool isLoggedIn = await fb.isLoggedIn;
-
-                                      print('The value of isLoggedIn is $isLoggedIn');
 
                                       if(isLoggedIn == true){
                                         context.showLoaderOverlay();
@@ -136,8 +134,6 @@ class BLMLoginState extends State<BLMLogin>{
                                         String email = await fb.getUserEmail();
                                         String image = await fb.getProfileImageUrl(width: 50, height: 50);
                                         FacebookAccessToken token = await fb.accessToken;
-
-                                        print('The access token is ${token.token}');
 
                                         bool apiResult = await apiBLMSignInWithFacebook(
                                           firstName: profile.firstName.toString(), 
@@ -148,8 +144,6 @@ class BLMLoginState extends State<BLMLogin>{
                                           image: image
                                         );
                                         context.hideLoaderOverlay();
-
-                                        print('The value of result is $apiResult');
 
                                         if(apiResult == true){
                                           Navigator.pushReplacementNamed(context, '/home/blm');
@@ -181,22 +175,10 @@ class BLMLoginState extends State<BLMLogin>{
                                           FacebookPermission.userFriends,
                                         ]);
 
-                                        print('The result status is ${result.status}');
-                                        print('The result access token is ${result.accessToken.token}');
-                                        print('The result error is ${result.error}');
-
                                         context.showLoaderOverlay();
-
-
                                         final email = await fb.getUserEmail();
                                         final profile = await fb.getUserProfile();
                                         final image = await fb.getProfileImageUrl(width: 50, height: 50);
-
-                                        print('The email is $email');
-                                        print('The firstName is ${profile.firstName}');
-                                        print('The lastName is ${profile.lastName}');
-                                        print('The image is $image');
-
                                         
                                         bool apiResult = await apiBLMSignInWithFacebook(
                                           firstName: profile.firstName.toString(), 
@@ -207,8 +189,6 @@ class BLMLoginState extends State<BLMLogin>{
                                           image: image,
                                         );
                                         context.hideLoaderOverlay();
-
-                                        print('The apiResult is $apiResult');
 
                                         if(apiResult == false){
                                           await fb.logOut();
@@ -244,27 +224,14 @@ class BLMLoginState extends State<BLMLogin>{
                                       );
 
                                       // await googleSignIn.signOut();
-                                      // print('google logout');
+                                      // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
 
                                       bool isLoggedIn = await googleSignIn.isSignedIn();
-
-                                      print('The value is $isLoggedIn');
 
                                       if(isLoggedIn == true){
                                         context.showLoaderOverlay();
                                         var accountSignedIn = await googleSignIn.signInSilently();
-                                        var authHeaders = await googleSignIn.currentUser.authHeaders;
                                         var auth = await googleSignIn.currentUser.authentication;
-
-
-                                        print('The auth is ${auth.accessToken}}');
-                                        print('The auth is ${auth.idToken}');
-                                        print('The auth is ${auth.serverAuthCode}');
-
-                                        print('The auth headers is $authHeaders');
-                                        print('The client id is ${googleSignIn.clientId}');
-                                        print('The headers is $authHeaders');
-
                                         
                                         bool result = await apiBLMSignInWithGoogle(
                                           firstName: accountSignedIn.displayName, 
@@ -275,9 +242,6 @@ class BLMLoginState extends State<BLMLogin>{
                                           image: accountSignedIn.photoUrl,
                                         );
                                         context.hideLoaderOverlay();
-
-                                        print('The value of result is $result');
-                                        print('The value is ${accountSignedIn.authHeaders}');
 
                                         if(result == true){
                                           Navigator.pushReplacementNamed(context, '/home/blm');
@@ -304,19 +268,9 @@ class BLMLoginState extends State<BLMLogin>{
 
                                       }else{
                                         GoogleSignInAccount signIn = await googleSignIn.signIn();
-                                        var authHeaders = await googleSignIn.currentUser.authHeaders;
                                         var auth = await googleSignIn.currentUser.authentication;
 
-                                        print('The auth is ${auth.accessToken}}');
-                                        print('The auth is ${auth.idToken}');
-                                        print('The auth is ${auth.serverAuthCode}');
-
-                                        print('The auth headers is $authHeaders');
-                                        print('The client id is ${googleSignIn.clientId}');
-                                        print('The headers is $authHeaders');
-
                                         context.showLoaderOverlay();
-                                        
                                         bool result = await apiBLMSignInWithGoogle(
                                           firstName: signIn.displayName, 
                                           lastName: '',

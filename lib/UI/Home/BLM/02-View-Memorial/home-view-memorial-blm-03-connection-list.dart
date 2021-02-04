@@ -28,7 +28,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   final int newToggle;
   HomeBLMConnectionListState({this.memorialId, this.newToggle});
 
-  
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<BLMConnectionListItem> listsFamily;
   List<BLMConnectionListItem> listsFriends;
@@ -67,7 +66,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             relationship: newValue.blmFamilyList[i].connectionListFamilyRelationship,
           ),    
         );
-
       }
 
       if(mounted)

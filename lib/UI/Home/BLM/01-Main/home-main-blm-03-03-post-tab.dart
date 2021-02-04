@@ -19,19 +19,16 @@ class BLMMainPagesPosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
-
   bool managed;
   bool joined;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
-
   int numberOfTagged;
   List<String> taggedFirstName;
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -96,19 +93,16 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
           postBody: newValue.familyMemorialList[i].body,
           profileImage: newValue.familyMemorialList[i].page.profileImage,
           imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
-
           managed: newValue.familyMemorialList[i].page.manage,
           joined: newValue.familyMemorialList[i].page.follower,
           numberOfComments: newValue.familyMemorialList[i].numberOfComments,
           numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
           likeStatus: newValue.familyMemorialList[i].likeStatus,
-
           numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
-
           pageType: newValue.familyMemorialList[i].page.pageType,
           famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
           relationship: newValue.familyMemorialList[i].page.relationship,
@@ -175,12 +169,10 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 numberOfComments: posts[i].numberOfComments,
                 numberOfLikes: posts[i].numberOfLikes,
                 likeStatus: posts[i].likeStatus,
-
                 numberOfTagged: posts[i].numberOfTagged,
                 taggedFirstName: posts[i].taggedFirstName,
                 taggedLastName: posts[i].taggedLastName,
                 taggedId: posts[i].taggedId,
-
                 pageType: posts[i].pageType,
                 famOrFriends: posts[i].famOrFriends,
                 relationship: posts[i].relationship,

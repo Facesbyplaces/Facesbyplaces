@@ -26,8 +26,6 @@ Future<APIBLMShowListOfReplies> apiBLMShowListOfReplies({int postId, int page}) 
   }
 }
 
-
-
 class APIBLMShowListOfReplies{
   int blmItemsRemaining;
   List<APIBLMShowListOfRepliesExtended> blmRepliesList;

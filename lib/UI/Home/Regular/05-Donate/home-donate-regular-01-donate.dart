@@ -1,10 +1,10 @@
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
@@ -29,10 +29,13 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   initState() {
     super.initState();
     donateToggle = 0;
-    StripePayment.setOptions(StripeOptions(
-      publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
-      merchantId: "merchant.com.app.facesbyplaces", 
-      androidPayMode: 'test'));
+    StripePayment.setOptions(
+      StripeOptions(
+        publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
+        merchantId: "merchant.com.app.facesbyplaces", 
+        androidPayMode: 'test',
+      ),
+    );
   }
 
   @override
@@ -172,11 +175,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                         ),
                       );
 
-                      print('The token is $paymentToken');
-                      print('The token is ${paymentToken.tokenId}');
-
                       StripePayment.completeNativePayRequest();
-
                       double amount;
 
                       switch(donateToggle){
@@ -188,12 +187,9 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                         case 5: amount = 100.00; break;
                       }
 
-                      print('The amount is $amount');
-
                       context.showLoaderOverlay();
                       bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
                       context.hideLoaderOverlay();
-
 
                       if(result == true){
                         await showDialog(

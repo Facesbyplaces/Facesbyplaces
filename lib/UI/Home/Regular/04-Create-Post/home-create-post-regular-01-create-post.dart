@@ -3,13 +3,13 @@ import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:image_picker/image_picker.dart';
-import 'package:mime/mime.dart';
 import 'package:video_player/video_player.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:mime/mime.dart';
 import 'dart:io';
 
 class RegularTaggedUsers{
@@ -83,27 +83,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   String newLocation = '';
   String person = '';
 
-  // Future getImage() async{
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-  //   if(pickedFile != null){
-  //     setState(() {
-  //       imageFile = File(pickedFile.path);
-  //       videoFile = null;
-  //     });
-  //   }
-  // }
-
   Future getVideo() async{
     final pickedFile = await picker.getVideo(source: ImageSource.gallery);
 
     if(pickedFile != null){
       setState(() {
         slideImages.add(File(pickedFile.path));
-
         videoFile = File(pickedFile.path);
-
-        // imageFile = null;
         videoPlayerController = VideoPlayerController.file(videoFile)
         ..initialize().then((_){
           setState(() {
@@ -174,7 +160,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   context.showLoaderOverlay();
 
                   Location.LocationData locationData = await location.getLocation();
-
                   List<RegularTaggedPeople> userIds = [];
                   
                   if(users.length != 0){
@@ -189,17 +174,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   }
 
                   List<File> newFiles = [];
-
-                  // if(videoFile != null){
-                  //   newFiles.add(videoFile);
-                  // }
-                  
                   newFiles.addAll(slideImages);
-
-                  // print('The slide images is ');
-                  for(int i = 0; i < slideImages.length; i++){
-                    print('The slide images is ${slideImages[i]}');
-                  }
 
                   APIRegularCreatePost post = APIRegularCreatePost(
                     blmPageType: 'Memorial',
@@ -286,11 +261,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  // CircleAvatar(backgroundImage: AssetImage('assets/icons/app-icon.png'), backgroundColor: Color(0xff888888)),
-                                  CircleAvatar(
-                                    backgroundColor: Color(0xff888888),
-                                    backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
-                                  ),
+                                  CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),),
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
 
@@ -327,10 +298,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         (index) => Chip(
                           labelPadding: const EdgeInsets.only(left: 8.0),
                           label: Text(users[index].name),
-                          deleteIcon: Icon(
-                            Icons.close,
-                            size: 18,
-                          ),
+                          deleteIcon: Icon(Icons.close, size: 18,),
                           onDeleted: () {
                             setState(() {
                               users.removeAt(index);
@@ -427,31 +395,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                       }else{
                         return Container(height: 0,);
                       }
-                      
-                      // else if(videoFile != null){
-                      //   return Container(
-                      //     height: SizeConfig.blockSizeVertical * 25, 
-                      //     width: SizeConfig.screenWidth, 
-                      //     padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                      //     child: GestureDetector(
-                      //       onTap: (){
-                      //         if(videoPlayerController.value.isPlaying){
-                      //           videoPlayerController.pause();
-                      //         }else{
-                      //           videoPlayerController.play();
-                      //         }
-                              
-                      //       },
-                      //       onDoubleTap: () async{
-                      //         await getVideo();
-                      //       },
-                      //       child: AspectRatio(
-                      //         aspectRatio: videoPlayerController.value.aspectRatio,
-                      //         child: VideoPlayer(videoPlayerController),
-                      //       ),
-                      //     ),
-                      //   );
-                      // }
                     }()),
                   ),
 
@@ -517,7 +460,6 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 choice = 0;
                               }else{
                                 if(choice == 1){
-                                  // await getSlideImage();
                                   await getSlideFiles();
                                 }else{
                                   await getVideo();

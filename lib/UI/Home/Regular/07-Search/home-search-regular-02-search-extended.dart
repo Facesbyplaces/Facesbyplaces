@@ -23,19 +23,16 @@ class RegularSearchMainPosts{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
-
   bool managed;
   bool follower;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
-
   int numberOfTagged;
   List<String> taggedFirstName;
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -85,7 +82,6 @@ class RegularSearchMainBLM{
   RegularSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
 }
 
-
 class HomeRegularPost extends StatefulWidget{
   final String keyword;
   final int newToggle;
@@ -104,7 +100,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   final double longitude;
   final String currentLocation;
   HomeRegularPostState({this.keyword, this.newToggle, this.latitude, this.longitude, this.currentLocation});
-
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<RegularSearchMainPosts> feeds = [];
@@ -143,6 +138,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         List<String> newList2 = [];
         List<String> newList3 = [];
         List<int> newList4 = [];
+
         for(int j = 0; j < newValue.almSearchPostList[i].searchPostPostTagged.length; j++){
           newList1.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedFirstName);
           newList2.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedLastName);
@@ -150,31 +146,29 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           newList4.add(newValue.almSearchPostList[i].searchPostPostTagged[j].searchPostTaggedId);
         }
         
-        feeds.add(RegularSearchMainPosts(
-          userId: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageCreator.searchPostPageCreatorId, 
-          postId: newValue.almSearchPostList[i].searchPostId,
-          memorialId: newValue.almSearchPostList[i].searchPostPage.searchPostPageId,
-          timeCreated: newValue.almSearchPostList[i].searchPostCreateAt,
-          memorialName: newValue.almSearchPostList[i].searchPostPage.searchPostPageName,
-          postBody: newValue.almSearchPostList[i].searchPostBody,
-          profileImage: newValue.almSearchPostList[i].searchPostPage.searchPostPageProfileImage,
-          imagesOrVideos: newValue.almSearchPostList[i].searchPostImagesOrVideos,
-
-          managed: newValue.almSearchPostList[i].searchPostPage.searchPostPageManage,
-          follower: newValue.almSearchPostList[i].searchPostPage.searchPostPageFollower,
-          numberOfComments: newValue.almSearchPostList[i].searchPostNumberOfComments,
-          numberOfLikes: newValue.almSearchPostList[i].searchPostNumberOfLikes,
-          likeStatus: newValue.almSearchPostList[i].searchPostLikeStatus,
-
-          numberOfTagged: newValue.almSearchPostList[i].searchPostPostTagged.length,
-          taggedFirstName: newList1,
-          taggedLastName: newList2,
-          taggedImage: newList3,
-          taggedId: newList4,
-
-          pageType: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageType,
-          famOrFriends: newValue.almSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
-          relationship: newValue.almSearchPostList[i].searchPostPage.searchPostPageRelationship,
+        feeds.add(
+          RegularSearchMainPosts(
+            userId: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageCreator.searchPostPageCreatorId, 
+            postId: newValue.almSearchPostList[i].searchPostId,
+            memorialId: newValue.almSearchPostList[i].searchPostPage.searchPostPageId,
+            timeCreated: newValue.almSearchPostList[i].searchPostCreateAt,
+            memorialName: newValue.almSearchPostList[i].searchPostPage.searchPostPageName,
+            postBody: newValue.almSearchPostList[i].searchPostBody,
+            profileImage: newValue.almSearchPostList[i].searchPostPage.searchPostPageProfileImage,
+            imagesOrVideos: newValue.almSearchPostList[i].searchPostImagesOrVideos,
+            managed: newValue.almSearchPostList[i].searchPostPage.searchPostPageManage,
+            follower: newValue.almSearchPostList[i].searchPostPage.searchPostPageFollower,
+            numberOfComments: newValue.almSearchPostList[i].searchPostNumberOfComments,
+            numberOfLikes: newValue.almSearchPostList[i].searchPostNumberOfLikes,
+            likeStatus: newValue.almSearchPostList[i].searchPostLikeStatus,
+            numberOfTagged: newValue.almSearchPostList[i].searchPostPostTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
+            pageType: newValue.almSearchPostList[i].searchPostPage.searchPostPagePageType,
+            famOrFriends: newValue.almSearchPostList[i].searchPostPage.searchPostPageFamOrFriends,
+            relationship: newValue.almSearchPostList[i].searchPostPage.searchPostPageRelationship,
           ),    
         );
       }
@@ -196,16 +190,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       tabCount2 = tabCount2 + newValue.almSearchSuggestedPages.length;
 
       for(int i = 0; i < newValue.almSearchSuggestedPages.length; i++){
-        suggested.add(RegularSearchMainSuggested(
-          memorialId: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageId,
-          memorialName: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageName,
-          memorialDescription: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
-          image: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageProfileImage,
-          managed: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageManage,
-          follower: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageFollower,
-          pageType: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPagePageType,
-          famOrFriends: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageFamOrFriends,
-          relationship: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageRelationship,
+        suggested.add(
+          RegularSearchMainSuggested(
+            memorialId: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageId,
+            memorialName: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageName,
+            memorialDescription: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageDetails.searchSuggestedPageDetailsDescription,
+            image: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageProfileImage,
+            managed: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageManage,
+            follower: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageFollower,
+            pageType: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPagePageType,
+            famOrFriends: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageFamOrFriends,
+            relationship: newValue.almSearchSuggestedPages[i].searchSuggestedPage.searchSuggestedPageRelationship,
           ),    
         );
       }
@@ -229,16 +224,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       tabCount3 = tabCount3 + newValue.blmList.length;
 
       for(int i = 0; i < newValue.blmList.length; i++){
-        nearby.add(RegularSearchMainNearby(
-          memorialId: newValue.blmList[i].serachNearbyId,
-          memorialName: newValue.blmList[i].serachNearbyName,
-          memorialDescription: newValue.blmList[i].serachNearbyDetails.serachNearbyPageDetailsDescription,
-          image: newValue.blmList[i].serachNearbyProfileImage,
-          managed: newValue.blmList[i].serachNearbyManage,
-          follower: newValue.blmList[i].serachNearbyFollower,
-          pageType: newValue.blmList[i].serachNearbyPageType,
-          famOrFriends: newValue.blmList[i].serachNearbyFamOrFriends,
-          relationship: newValue.blmList[i].serachNearbyRelationship,
+        nearby.add(
+          RegularSearchMainNearby(
+            memorialId: newValue.blmList[i].serachNearbyId,
+            memorialName: newValue.blmList[i].serachNearbyName,
+            memorialDescription: newValue.blmList[i].serachNearbyDetails.serachNearbyPageDetailsDescription,
+            image: newValue.blmList[i].serachNearbyProfileImage,
+            managed: newValue.blmList[i].serachNearbyManage,
+            follower: newValue.blmList[i].serachNearbyFollower,
+            pageType: newValue.blmList[i].serachNearbyPageType,
+            famOrFriends: newValue.blmList[i].serachNearbyFamOrFriends,
+            relationship: newValue.blmList[i].serachNearbyRelationship,
           ),    
         );
       }
@@ -256,16 +252,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
       for(int i = 0; i < newValue.memorialList.length; i++){
-        nearby.add(RegularSearchMainNearby(
-          memorialId: newValue.memorialList[i].serachNearbyId,
-          memorialName: newValue.memorialList[i].serachNearbyName,
-          memorialDescription: newValue.memorialList[i].serachNearbyDetails.serachNearbyPageDetailsDescription,
-          image: newValue.blmList[i].serachNearbyProfileImage,
-          managed: newValue.blmList[i].serachNearbyManage,
-          follower: newValue.blmList[i].serachNearbyFollower,
-          pageType: newValue.blmList[i].serachNearbyPageType,
-          famOrFriends: newValue.blmList[i].serachNearbyFamOrFriends,
-          relationship: newValue.blmList[i].serachNearbyRelationship,
+        nearby.add(
+          RegularSearchMainNearby(
+            memorialId: newValue.memorialList[i].serachNearbyId,
+            memorialName: newValue.memorialList[i].serachNearbyName,
+            memorialDescription: newValue.memorialList[i].serachNearbyDetails.serachNearbyPageDetailsDescription,
+            image: newValue.blmList[i].serachNearbyProfileImage,
+            managed: newValue.blmList[i].serachNearbyManage,
+            follower: newValue.blmList[i].serachNearbyFollower,
+            pageType: newValue.blmList[i].serachNearbyPageType,
+            famOrFriends: newValue.blmList[i].serachNearbyFamOrFriends,
+            relationship: newValue.blmList[i].serachNearbyRelationship,
           ),    
         );
       }
@@ -288,16 +285,17 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       tabCount4 = tabCount4 + newValue.almMemorialList.length;
 
       for(int i = 0; i < newValue.almMemorialList.length; i++){
-        blm.add(RegularSearchMainBLM(
-          memorialId: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageId,
-          memorialName: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageName,
-          memorialDescription: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageDetails.searchBLMMemorialPageDetailsDescription,
-          image: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageProfileImage,
-          managed: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageManage,
-          follower: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageFollower,
-          pageType: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPagePageType,
-          famOrFriends: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageFamOrFriends,
-          relationship: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageRelationship,
+        blm.add(
+          RegularSearchMainBLM(
+            memorialId: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageId,
+            memorialName: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageName,
+            memorialDescription: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageDetails.searchBLMMemorialPageDetailsDescription,
+            image: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageProfileImage,
+            managed: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageManage,
+            follower: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageFollower,
+            pageType: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPagePageType,
+            famOrFriends: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageFamOrFriends,
+            relationship: newValue.almMemorialList[i].searchBLMMemorialPage.searchBLMMemorialPageRelationship,
           ),    
         );
       }
@@ -563,19 +561,16 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-
               managed: feeds[i].managed,
               joined: feeds[i].follower,
               profileImage: feeds[i].profileImage,
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
-
               numberOfTagged: feeds[i].numberOfTagged,
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
-
               pageType: feeds[i].pageType,
               famOrFriends: feeds[i].famOrFriends,
               relationship: feeds[i].relationship,

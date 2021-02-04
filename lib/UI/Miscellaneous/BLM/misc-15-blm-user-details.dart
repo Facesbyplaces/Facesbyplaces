@@ -6,10 +6,10 @@ import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter/material.dart';
 import 'misc-04-blm-manage-memorial.dart';
 import 'misc-05-blm-post.dart';
 import 'misc-14-blm-empty-display.dart';
+import 'package:flutter/material.dart';
 
 class MiscBLMUserProfileDraggableSwitchTabs extends StatefulWidget {
   final int userId;
@@ -143,7 +143,6 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
 }
 
 
-
 class BLMMiscDraggablePost{
   int userId;
   int postId;
@@ -228,13 +227,11 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           postBody: newValue.blmFamilyMemorialList[i].showUsersPostsBody,
           profileImage: newValue.blmFamilyMemorialList[i].showUsersPostsPage.profileImage,
           imagesOrVideos: newValue.blmFamilyMemorialList[i].showUsersPostsImagesOrVideos,
-
           managed: newValue.blmFamilyMemorialList[i].showUsersPostsPage.manage,
           joined: newValue.blmFamilyMemorialList[i].showUsersPostsPage.follower,
           numberOfComments: newValue.blmFamilyMemorialList[i].showUsersPostsNumberOfComments,
           numberOfLikes: newValue.blmFamilyMemorialList[i].showUsersPostsNumberOfLikes,
           likeStatus: newValue.blmFamilyMemorialList[i].showUsersPostsLikeStatus,
-
           numberOfTagged: newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
@@ -302,7 +299,6 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
               numberOfComments: posts[i].numberOfComments,
               numberOfLikes: posts[i].numberOfLikes,
               likeStatus: posts[i].likeStatus,
-
               numberOfTagged: posts[i].numberOfTagged,
               taggedFirstName: posts[i].taggedFirstName,
               taggedLastName: posts[i].taggedLastName,
@@ -383,8 +379,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   List<Widget> finalMemorials;
   int ownedItemsRemaining;
   int followedItemsRemaining;
-  // int blmFamilyItemsRemaining;
-  // int blmFriendsItemsRemaining;
   int page1;
   int page2;
   bool flag1;
@@ -403,7 +397,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     onLoading();
   }
 
-  
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
@@ -433,7 +426,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       ),
     );
   }
-
 
   void addMemorials2(){
     finalMemorials.add(

@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-ori
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-dropdown.dart';
-import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
@@ -34,7 +34,6 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
   bool likePost;
   bool pressedLike;
   int likesCount;
-
   BranchUniversalObject buo;
   BranchLinkProperties lp;
 
@@ -190,7 +189,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                           fit: BoxFit.cover,
                                           imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[0],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Center(child: Icon(Icons.error),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                         ),
                                       );
                                     }else if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 2){
@@ -355,17 +354,17 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                         originalPost.data.blmPost.showOriginalPostPostTagged.length,
                                         (index) => GestureDetector(
                                           onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].taggedId)));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId)));
                                           },
                                           child: RichText(
                                             text: TextSpan(
                                               style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                               children: <TextSpan>[
-                                                TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].taggedFirstName,),
+                                                TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
 
                                                 TextSpan(text: ' '),
 
-                                                TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].taggedLastName,),
+                                                TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
 
                                                 index < originalPost.data.blmPost.showOriginalPostPostTagged.length - 1
                                                 ? TextSpan(text: ',')
@@ -451,8 +450,6 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                           if (response.success) {
                                             print('Link generated: ${response.result}');
-                                            print('showShareSheet Sucess');
-                                            print('The post id is $postId');
                                           } else {
                                             FlutterBranchSdk.logout();
                                             print('Error : ${response.errorCode} - ${response.errorMessage}');

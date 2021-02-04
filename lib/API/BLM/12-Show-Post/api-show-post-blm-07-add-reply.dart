@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiBLMAddReply({int commentId, dynamic replyBody}) async{
 
   bool result = false;
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';

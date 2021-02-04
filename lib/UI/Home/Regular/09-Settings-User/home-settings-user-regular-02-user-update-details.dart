@@ -110,69 +110,69 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                             color: Color(0xffffffff),
                           ), 
                           onPressed: () async{
-                              if(
-                                details.data.showAccountDetailsFirstName != _key1.currentState.controller.text ||
-                                details.data.showAccountDetailsLastName !=  _key2.currentState.controller.text ||
-                                details.data.showAccountDetailsEmail != _key3.currentState.controller.text ||
-                                details.data.showAccountDetailsPhoneNumber != _key4.currentState.controller.text ||
-                                details.data.showAccountDetailsQuestion != _key5.currentState.currentSelection
-                              ){
-                                bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                            if(
+                              details.data.showAccountDetailsFirstName != _key1.currentState.controller.text ||
+                              details.data.showAccountDetailsLastName !=  _key2.currentState.controller.text ||
+                              details.data.showAccountDetailsEmail != _key3.currentState.controller.text ||
+                              details.data.showAccountDetailsPhoneNumber != _key4.currentState.controller.text ||
+                              details.data.showAccountDetailsQuestion != _key5.currentState.currentSelection
+                            ){
+                              bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
-                                if(confirmResult){
+                              if(confirmResult){
 
-                                  context.showLoaderOverlay();
-                                  bool result = await apiRegularUpdateAccountDetails(
-                                    firstName: _key1.currentState.controller.text,
-                                    lastName: _key2.currentState.controller.text,
-                                    email: _key3.currentState.controller.text,
-                                    phoneNumber: _key4.currentState.controller.text,
-                                    question: _key5.currentState.currentSelection
+                                context.showLoaderOverlay();
+                                bool result = await apiRegularUpdateAccountDetails(
+                                  firstName: _key1.currentState.controller.text,
+                                  lastName: _key2.currentState.controller.text,
+                                  email: _key3.currentState.controller.text,
+                                  phoneNumber: _key4.currentState.controller.text,
+                                  question: _key5.currentState.currentSelection
+                                );
+                                context.hideLoaderOverlay();
+
+                                if(result){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Successfully updated the account details.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.green,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
                                   );
-                                  context.hideLoaderOverlay();
-
-                                  if(result){
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Successfully updated the account details.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.green,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Something went wrong. Please try again.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.red,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
                                 }
                               }
+                            }
                           }, 
                           width: SizeConfig.screenWidth / 2, 
                           height: SizeConfig.blockSizeVertical * 7, 

@@ -9,8 +9,8 @@ import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter/material.dart';
 
 class RegularMainPagesFeeds{
   int userId;
@@ -31,7 +31,6 @@ class RegularMainPagesFeeds{
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -51,7 +50,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   int itemRemaining;
   int page;
   int count;
-
   VideoPlayerController videoPlayerController;
 
   void onRefresh() async{
@@ -64,6 +62,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
       context.showLoaderOverlay();
       var newValue = await apiRegularHomeFeedTab(page: page);
       context.hideLoaderOverlay();
+
       itemRemaining = newValue.almItemsRemaining;
       count = count + newValue.almFamilyMemorialList.length;
 
@@ -79,31 +78,29 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           newList4.add(newValue.almFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedId);
         }
 
-        feeds.add(RegularMainPagesFeeds(
-          userId: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageCreator.homeTabFeedPageCreatorId, 
-          postId: newValue.almFamilyMemorialList[i].homeTabFeedId,
-          memorialId: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageId,
-          timeCreated: newValue.almFamilyMemorialList[i].homeTabFeedCreateAt,
-          memorialName: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageName,
-          postBody: newValue.almFamilyMemorialList[i].homeTabFeedBody,
-          profileImage: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageProfileImage,
-          imagesOrVideos: newValue.almFamilyMemorialList[i].homeTabFeedImagesOrVideos,
-          managed: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageManage,
-          joined: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFollower,
-          
-          numberOfComments: newValue.almFamilyMemorialList[i].homeTabFeedNumberOfComments,
-          numberOfLikes: newValue.almFamilyMemorialList[i].homeTabFeedNumberOfLikes,
-          likeStatus: newValue.almFamilyMemorialList[i].homeTabFeedLikeStatus,
-
-          numberOfTagged: newValue.almFamilyMemorialList[i].homeTabFeedPostTagged.length,
-          taggedFirstName: newList1,
-          taggedLastName: newList2,
-          taggedImage: newList3,
-          taggedId: newList4,
-
-          pageType: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageType,
-          famOrFriends: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFamOrFriends,
-          relationship: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageRelationship,
+        feeds.add(
+          RegularMainPagesFeeds(
+            userId: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageCreator.homeTabFeedPageCreatorId, 
+            postId: newValue.almFamilyMemorialList[i].homeTabFeedId,
+            memorialId: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageId,
+            timeCreated: newValue.almFamilyMemorialList[i].homeTabFeedCreateAt,
+            memorialName: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageName,
+            postBody: newValue.almFamilyMemorialList[i].homeTabFeedBody,
+            profileImage: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageProfileImage,
+            imagesOrVideos: newValue.almFamilyMemorialList[i].homeTabFeedImagesOrVideos,
+            managed: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageManage,
+            joined: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFollower,
+            numberOfComments: newValue.almFamilyMemorialList[i].homeTabFeedNumberOfComments,
+            numberOfLikes: newValue.almFamilyMemorialList[i].homeTabFeedNumberOfLikes,
+            likeStatus: newValue.almFamilyMemorialList[i].homeTabFeedLikeStatus,
+            numberOfTagged: newValue.almFamilyMemorialList[i].homeTabFeedPostTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
+            pageType: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageType,
+            famOrFriends: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFamOrFriends,
+            relationship: newValue.almFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageRelationship,
           ),    
         );
       }
@@ -167,29 +164,21 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               memorialId: feeds[i].memorialId,
               memorialName: feeds[i].memorialName,
               timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-
               managed: feeds[i].managed,
               joined: feeds[i].joined,
               profileImage: feeds[i].profileImage,
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
-
               numberOfTagged: feeds[i].numberOfTagged,
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
-
               pageType: feeds[i].pageType,
               famOrFriends: feeds[i].famOrFriends,
               relationship: feeds[i].relationship,
-              
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
-
-                // ((){
-                //   print('The value of images or videos is ${feeds[i].imagesOrVideos}');
-                // }()),
 
                 SizedBox(height: ScreenUtil().setHeight(45)),
 
@@ -197,34 +186,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 ? Container(
                   height: SizeConfig.blockSizeVertical * 30,
                   child: ((){
-                    // lookupMimeType(slideImages[index].path).contains('video') == true
-                    // if(feeds[i].imagesOrVideos != null){
-                    //   videoPlayerController = VideoPlayerController.network(feeds[i].imagesOrVideos[0]);
-                    //   return Container(
-                    //     height: SizeConfig.blockSizeVertical * 34.5,
-                    //     child: feeds[i].imagesOrVideos == null 
-                    //     ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
-                    //     : GestureDetector(
-                    //       onTap: (){
-                    //         if(videoPlayerController.value.isPlaying){
-                    //           videoPlayerController.pause();
-                    //           print('Paused!');
-                    //         }else{
-                    //           videoPlayerController.play();
-                    //           print('Played!');
-                    //         }
-                    //       },
-                    //       child: AspectRatio(
-                    //         aspectRatio: videoPlayerController.value.aspectRatio,
-                    //         child: VideoPlayer(videoPlayerController),
-                    //       ),
-                    //     ),
-                    //   );
-                    // }else{
-                    //   return Container(height: 0,);
-                    // }
-
-                    
                     if(feeds[i].imagesOrVideos != null){
                       if(feeds[i].imagesOrVideos.length == 1){
                         return Container(
@@ -235,34 +196,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                           ),
                         );
-
-                        // return lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true
-                        // ? GestureDetector(
-                        //   onTap: (){
-                        //     if(videoPlayerController.value.isPlaying){
-                        //       videoPlayerController.pause();
-                        //       print('Paused!');
-                        //     }else{
-                        //       videoPlayerController.play();
-                        //       print('Played!');
-                        //     }
-                        //   },
-                        //   child: Container(
-                        //     color: Colors.red,
-                        //     // child: AspectRatio(
-                        //     //   aspectRatio: videoPlayerController.value.aspectRatio,
-                        //     //   child: VideoPlayer(videoPlayerController),
-                        //     // ),
-                        //   ),
-                        // )
-                        // : Container(
-                        //   child: CachedNetworkImage(
-                        //     fit: BoxFit.cover,
-                        //     imageUrl: feeds[i].imagesOrVideos[0],
-                        //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                        //     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                        //   ),
-                        // );
                       }else if(feeds[i].imagesOrVideos.length == 2){
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
@@ -276,35 +209,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                             ),
-
-
-                            // lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
-                            // ? GestureDetector(
-                            //   onTap: (){
-                            //     if(videoPlayerController.value.isPlaying){
-                            //       videoPlayerController.pause();
-                            //       print('Paused!');
-                            //     }else{
-                            //       videoPlayerController.play();
-                            //       print('Played!');
-                            //     }
-                            //   },
-                            //   child: Container(
-                            //     color: Colors.red,
-                            //     // child: AspectRatio(
-                            //     //   aspectRatio: videoPlayerController.value.aspectRatio,
-                            //     //   child: VideoPlayer(videoPlayerController),
-                            //     // ),
-                            //   ),
-                            // )
-                            // : Container(
-                            //   child: CachedNetworkImage(
-                            //     fit: BoxFit.cover,
-                            //     imageUrl: feeds[i].imagesOrVideos[index],
-                            //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            //     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                            //   ),
-                            // ),
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
@@ -317,125 +221,51 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             crossAxisCount: 4,
                             itemCount: 3,
                             itemBuilder: (BuildContext context, int index) => 
-                                ((){
-                                  if(index != 1){
-                                    return CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    );
+                              ((){
+                                if(index != 1){
+                                  return CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  );
+                                }else{
+                                  return feeds[i].imagesOrVideos.length - 3 == 0
+                                  ? CachedNetworkImage(
+                                    fit: BoxFit.cover,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                  )
+                                  : Stack(
+                                    children: [
+                                      CachedNetworkImage(
+                                        fit: BoxFit.cover,
+                                        imageUrl: feeds[i].imagesOrVideos[index],
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                      ),
 
-                                    // return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
-                                    // ? GestureDetector(
-                                    //   onTap: (){
-                                    //     if(videoPlayerController.value.isPlaying){
-                                    //       videoPlayerController.pause();
-                                    //       print('Paused!');
-                                    //     }else{
-                                    //       videoPlayerController.play();
-                                    //       print('Played!');
-                                    //     }
-                                    //   },
-                                    //   child: Container(
-                                    //     color: Colors.red,
-                                    //     // child: AspectRatio(
-                                    //     //   aspectRatio: videoPlayerController.value.aspectRatio,
-                                    //     //   child: VideoPlayer(videoPlayerController),
-                                    //     // ),
-                                    //   ),
-                                    // )
-                                    // : Container(
-                                    //   child: CachedNetworkImage(
-                                    //     fit: BoxFit.cover,
-                                    //     imageUrl: feeds[i].imagesOrVideos[index],
-                                    //     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                    //     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    //   ),
-                                    // );
-                                  }else{
-                                    return feeds[i].imagesOrVideos.length - 3 == 0
-                                    ? CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                    )
-                                    : Stack(
-                                      children: [
-                                        CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                        ),
+                                      Container(color: Colors.black.withOpacity(0.5),),
 
-                                        Container(color: Colors.black.withOpacity(0.5),),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: SizeConfig.blockSizeVertical * 3,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              '${feeds[i].imagesOrVideos.length - 3}',
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
-                                              ),
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text(
+                                            '${feeds[i].imagesOrVideos.length - 3}',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    );
-                                  }
-                                }()),
-
-                              // ((){
-                              //   if(index != 1){
-                              //     return CachedNetworkImage(
-                              //       fit: BoxFit.cover,
-                              //       imageUrl: feeds[i].imagesOrVideos[index],
-                              //       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              //       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                              //     );
-                              //   }else{
-                              //     return feeds[i].imagesOrVideos.length - 3 == 0
-                              //     ? CachedNetworkImage(
-                              //       fit: BoxFit.cover,
-                              //       imageUrl: feeds[i].imagesOrVideos[index],
-                              //       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              //       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                              //     )
-                              //     : Stack(
-                              //       children: [
-                              //         CachedNetworkImage(
-                              //           fit: BoxFit.cover,
-                              //           imageUrl: feeds[i].imagesOrVideos[index],
-                              //           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              //           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                              //         ),
-
-                              //         Container(color: Colors.black.withOpacity(0.5),),
-
-                              //         Center(
-                              //           child: CircleAvatar(
-                              //             radius: SizeConfig.blockSizeVertical * 3,
-                              //             backgroundColor: Color(0xffffffff).withOpacity(.5),
-                              //             child: Text(
-                              //               '${feeds[i].imagesOrVideos.length - 3}',
-                              //               style: TextStyle(
-                              //                 fontSize: SizeConfig.safeBlockHorizontal * 7,
-                              //                 fontWeight: FontWeight.bold,
-                              //                 color: Color(0xffffffff),
-                              //               ),
-                              //             ),
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     );
-                              //   }
-                              // }()),
+                                      ),
+                                    ],
+                                  );
+                                }
+                              }()),
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
@@ -447,10 +277,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     }
                   }()),
                 )
-                : Container(
-                  color: Colors.red,
-                  height: 0,
-                ),
+                : Container(height: 0,),
               ],
             );
             

@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularUpdatePageImages({int memorialId, dynamic backgroundImage, dynamic profileImage}) async{
 
   bool result = false;
-  
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';

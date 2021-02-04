@@ -7,8 +7,7 @@ Future<String> apiRegularRegistration({APIRegularAccountRegistration account}) a
   String result = 'Success';
 
   try{
-    final http.Response response = await http.post(
-      'http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
+    final http.Response response = await http.post('http://fbp.dev1.koda.ws/alm_auth?first_name=${account.firstName}&last_name=${account.lastName}&phone_number=${account.phoneNumber}&email=${account.email}&username=${account.username}&password=${account.password}&account_type=2',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }

@@ -28,7 +28,6 @@ class RegularLoginState extends State<RegularLogin>{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -110,11 +109,9 @@ class RegularLoginState extends State<RegularLogin>{
                                     final fb = FacebookLogin();
 
                                     // await fb.logOut();
-                                    // print('heheheheh');
+                                    // print('facebook logout'); // TO LOGOUT THE FACEBOOK ACCOUNT FOR TESTING
 
                                     bool isLoggedIn = await fb.isLoggedIn;
-
-                                    print('The value of isLoggedIn is $isLoggedIn');
 
                                     if(isLoggedIn == true){
                                       context.showLoaderOverlay();
@@ -123,8 +120,6 @@ class RegularLoginState extends State<RegularLogin>{
                                       String email = await fb.getUserEmail();
                                       String image = await fb.getProfileImageUrl(width: 50, height: 50);
                                       FacebookAccessToken token = await fb.accessToken;
-
-                                      print('The access token is ${token.token}');
 
                                       bool apiResult = await apiRegularSignInWithFacebook(
                                         firstName: profile.firstName.toString(), 
@@ -135,8 +130,6 @@ class RegularLoginState extends State<RegularLogin>{
                                         image: image
                                       );
                                       context.hideLoaderOverlay();
-
-                                      print('The value of result is $apiResult');
 
                                       if(apiResult == true){
                                         Navigator.pushReplacementNamed(context, '/home/regular');
@@ -168,21 +161,11 @@ class RegularLoginState extends State<RegularLogin>{
                                         FacebookPermission.userFriends,
                                       ]);
 
-                                      print('The result status is ${result.status}');
-                                      print('The result access token is ${result.accessToken.token}');
-                                      print('The result error is ${result.error}');
-
                                       context.showLoaderOverlay();
 
                                       final email = await fb.getUserEmail();
                                       final profile = await fb.getUserProfile();
                                       final image = await fb.getProfileImageUrl(width: 50, height: 50);
-
-                                      print('The email is $email');
-                                      print('The firstName is ${profile.firstName}');
-                                      print('The lastName is ${profile.lastName}');
-                                      print('The image is $image');
-
                                       
                                       bool apiResult = await apiRegularSignInWithFacebook(
                                         firstName: profile.firstName.toString(), 
@@ -193,8 +176,6 @@ class RegularLoginState extends State<RegularLogin>{
                                         image: image,
                                       );
                                       context.hideLoaderOverlay();
-
-                                      print('The apiResult is $apiResult');
 
                                       if(apiResult == false){
                                         await fb.logOut();
@@ -230,26 +211,14 @@ class RegularLoginState extends State<RegularLogin>{
                                     );
 
                                     // await googleSignIn.signOut();
-                                    // print('google logout');
+                                    // print('google logout'); // TO LOGOUT THE GOOGLE ACCOUNT FOR TESTING
 
                                     bool isLoggedIn = await googleSignIn.isSignedIn();
-
-                                    print('The value is $isLoggedIn');
 
                                     if(isLoggedIn == true){
                                       context.showLoaderOverlay();
                                       var accountSignedIn = await googleSignIn.signInSilently();
-                                      var authHeaders = await googleSignIn.currentUser.authHeaders;
                                       var auth = await googleSignIn.currentUser.authentication;
-
-
-                                      print('The auth is ${auth.accessToken}}');
-                                      print('The auth is ${auth.idToken}');
-                                      print('The auth is ${auth.serverAuthCode}');
-                                      print('The auth headers is $authHeaders');
-                                      print('The client id is ${googleSignIn.clientId}');
-                                      print('The headers is $authHeaders');
-
                                       
                                       bool result = await apiRegularSignInWithGoogle(
                                         firstName: accountSignedIn.displayName, 
@@ -260,9 +229,6 @@ class RegularLoginState extends State<RegularLogin>{
                                         image: accountSignedIn.photoUrl,
                                       );
                                       context.hideLoaderOverlay();
-
-                                      print('The value of result is $result');
-                                      print('The value is ${accountSignedIn.authHeaders}');
 
                                       if(result == true){
                                         Navigator.pushReplacementNamed(context, '/home/regular');
@@ -289,19 +255,9 @@ class RegularLoginState extends State<RegularLogin>{
 
                                     }else{
                                       GoogleSignInAccount signIn = await googleSignIn.signIn();
-                                      var authHeaders = await googleSignIn.currentUser.authHeaders;
                                       var auth = await googleSignIn.currentUser.authentication;
 
-                                      print('The auth is ${auth.accessToken}}');
-                                      print('The auth is ${auth.idToken}');
-                                      print('The auth is ${auth.serverAuthCode}');
-                                      print('The auth headers is $authHeaders');
-                                      print('The client id is ${googleSignIn.clientId}');
-                                      print('The headers is $authHeaders');
-
                                       context.showLoaderOverlay();
-                                      
-
                                       bool result = await apiRegularSignInWithGoogle(
                                         firstName: signIn.displayName, 
                                         lastName: '',
@@ -356,18 +312,6 @@ class RegularLoginState extends State<RegularLogin>{
                                 AppleIDAuthorizationScopes.fullName,
                               ],
                             );
-
-                            
-
-                            print('The credential is $credential');
-                            print('The credential is ${credential.authorizationCode}');
-                            print('The credential is ${credential.email}');
-                            print('The credential is ${credential.familyName}');
-                            print('The credential is ${credential.givenName}');
-                            print('The credential is ${credential.identityToken}');
-                            print('The credential is ${credential.state}');
-                            print('The credential is ${credential.userIdentifier}');
-
 
                             bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
 
@@ -495,14 +439,9 @@ class RegularLoginState extends State<RegularLogin>{
                               );
                             }else{
 
-                              print('The email is ${_key1.currentState.controller.text}');
-                              print('The password is ${_key2.currentState.controller.text}');
-
                               context.showLoaderOverlay();
                               bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text);
                               context.hideLoaderOverlay();
-
-                              print('The result is $result');
 
                               if(result){
                                 Navigator.pushReplacementNamed(context, '/home/regular');

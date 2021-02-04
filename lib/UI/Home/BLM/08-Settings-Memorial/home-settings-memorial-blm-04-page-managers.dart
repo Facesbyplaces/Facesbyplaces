@@ -196,7 +196,6 @@ class HomeBLMPageManagersState extends State<HomeBLMPageManagers>{
                               await apiBLMDeleteMemorialAdmin(pageType: 'Blm', pageId: memorialId, userId: adminList[i].userId);
                               context.hideLoaderOverlay();
 
-
                               adminList = [];
                               familyList = [];
                               adminItemsRemaining = 1;

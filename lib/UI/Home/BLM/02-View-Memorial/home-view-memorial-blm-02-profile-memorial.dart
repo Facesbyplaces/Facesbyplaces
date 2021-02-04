@@ -38,7 +38,6 @@ class BLMProfilePosts{
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -71,10 +70,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   bool empty;
   bool join;
   int page;
-
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-
   VideoPlayerController videoPlayerController;
 
   void onRefresh() async{
@@ -116,13 +113,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           numberOfComments: newValue.blmFamilyMemorialList[i].profilePostNumberOfComments,
           numberOfLikes: newValue.blmFamilyMemorialList[i].profilePostNumberOfLikes,
           likeStatus: newValue.blmFamilyMemorialList[i].profilePostLikeStatus,
-
           numberOfTagged: newValue.blmFamilyMemorialList[i].profilePostPostTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
-
           pageType: newValue.blmFamilyMemorialList[i].profilePostPage.profilePagePageType,
           famOrFriends: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageFamOrFriends,
           relationship: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageRelationship,
@@ -391,7 +386,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                         if (response.success) {
                                           print('Link generated: ${response.result}');
-                                          print('showShareSheet Sucess');
                                         } else {
                                           FlutterBranchSdk.logout();
                                           print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -761,12 +755,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                       numberOfComments: posts[i].numberOfComments,
                                       numberOfLikes: posts[i].numberOfLikes,
                                       likeStatus: posts[i].likeStatus,
-
                                       numberOfTagged: posts[i].numberOfTagged,
                                       taggedFirstName: posts[i].taggedFirstName,
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
-
                                       pageType: posts[i].pageType,
                                       famOrFriends: posts[i].famOrFriends,
                                       relationship: posts[i].relationship,

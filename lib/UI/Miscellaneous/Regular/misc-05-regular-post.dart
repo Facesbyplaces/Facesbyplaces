@@ -142,12 +142,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                   GestureDetector(
                     onTap: () async{
 
-                      // if(managed == true){
-                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId,)));
-                      // }else{
-                      //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, newJoin: joined)));
-                      // }
-
                       if(pageType == 'Memorial'){
                         if(managed == true || famOrFriends == true){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
@@ -163,7 +157,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       }
                       
                     },
-
                     child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
                   ),
                   Expanded(
@@ -340,8 +333,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                         );
 
                         if (response.success) {
-                          print('Link generated: ${response.result}');
-                          print('showShareSheet Sucess');
                           print('The post id is $postId');
                         } else {
                           FlutterBranchSdk.logout();

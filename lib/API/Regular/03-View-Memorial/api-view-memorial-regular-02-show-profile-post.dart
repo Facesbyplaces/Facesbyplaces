@@ -26,7 +26,6 @@ Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({int memorialId, int
   }
 }
 
-
 class APIRegularHomeProfilePostMain{
   int almItemsRemaining;
   List<APIRegularHomeProfilePostExtended> almFamilyMemorialList;
@@ -43,7 +42,6 @@ class APIRegularHomeProfilePostMain{
     );
   }
 }
-
 
 class APIRegularHomeProfilePostExtended{
   int homeProfilePostId;

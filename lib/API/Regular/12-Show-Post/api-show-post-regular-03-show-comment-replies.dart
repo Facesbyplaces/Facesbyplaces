@@ -44,7 +44,6 @@ class APIRegularShowListOfReplies{
   }
 }
 
-
 class APIRegularShowListOfRepliesExtended{
   int showListOfRepliesReplyId;
   int showListOfRepliesCommentId;

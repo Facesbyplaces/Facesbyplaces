@@ -164,8 +164,6 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                                   bool result = await apiBLMPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
                                   context.hideLoaderOverlay();
                                   
-                                  print('Link generated: ${response.result}');
-                                  
                                   if(result == true){
                                     await showDialog(
                                       context: context,

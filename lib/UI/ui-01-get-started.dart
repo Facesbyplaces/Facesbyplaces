@@ -34,21 +34,21 @@ class PushNotificationService {
 
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
+        print("onMessage notification: $message");
         showSimpleNotification(
           Container(child: Text(message['notification']['body'])),
           position: NotificationPosition.top,
         );
       },
       onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
+        print("onLaunch notification: $message");
         showSimpleNotification(
           Container(child: Text(message['notification']['body'])),
           position: NotificationPosition.top,
         );
       },
       onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
+        print("onResume notification: $message");
         showSimpleNotification(
           Container(child: Text(message['notification']['body'])),
           position: NotificationPosition.top,
@@ -136,8 +136,6 @@ class UIGetStartedState extends State<UIGetStarted>{
     super.initState();
     pushNotifications();
     pushNotificationService.initialise();
-    
-    
     listenDeepLinkData();
   }
 

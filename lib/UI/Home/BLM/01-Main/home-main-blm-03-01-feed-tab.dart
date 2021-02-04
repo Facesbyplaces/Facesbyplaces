@@ -30,7 +30,6 @@ class BLMMainPagesFeeds{
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -86,31 +85,29 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
         }
 
-        feeds.add(BLMMainPagesFeeds(
-          userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-          postId: newValue.familyMemorialList[i].id,
-          memorialId: newValue.familyMemorialList[i].page.id,
-          timeCreated: newValue.familyMemorialList[i].createAt,
-          memorialName: newValue.familyMemorialList[i].page.name,
-          postBody: newValue.familyMemorialList[i].body,
-          profileImage: newValue.familyMemorialList[i].page.profileImage,
-          imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
-          managed: newValue.familyMemorialList[i].page.manage,
-          joined: newValue.familyMemorialList[i].page.follower,
-          numberOfComments: newValue.familyMemorialList[i].numberOfComments,
-          numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
-          likeStatus: newValue.familyMemorialList[i].likeStatus,
-
-          numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
-          taggedFirstName: newList1,
-          taggedLastName: newList2,
-          taggedImage: newList3,
-          taggedId: newList4,
-
-          pageType: newValue.familyMemorialList[i].page.pageType,
-          famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
-          relationship: newValue.familyMemorialList[i].page.relationship,
-
+        feeds.add(
+          BLMMainPagesFeeds(
+            userId: newValue.familyMemorialList[i].page.pageCreator.id, 
+            postId: newValue.familyMemorialList[i].id,
+            memorialId: newValue.familyMemorialList[i].page.id,
+            timeCreated: newValue.familyMemorialList[i].createAt,
+            memorialName: newValue.familyMemorialList[i].page.name,
+            postBody: newValue.familyMemorialList[i].body,
+            profileImage: newValue.familyMemorialList[i].page.profileImage,
+            imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
+            managed: newValue.familyMemorialList[i].page.manage,
+            joined: newValue.familyMemorialList[i].page.follower,
+            numberOfComments: newValue.familyMemorialList[i].numberOfComments,
+            numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
+            likeStatus: newValue.familyMemorialList[i].likeStatus,
+            numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
+            pageType: newValue.familyMemorialList[i].page.pageType,
+            famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
+            relationship: newValue.familyMemorialList[i].page.relationship,
           ),
         );
 
@@ -172,12 +169,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               numberOfComments: feeds[i].numberOfComments,
               numberOfLikes: feeds[i].numberOfLikes,
               likeStatus: feeds[i].likeStatus,
-
               numberOfTagged: feeds[i].numberOfTagged,
               taggedFirstName: feeds[i].taggedFirstName,
               taggedLastName: feeds[i].taggedLastName,
               taggedId: feeds[i].taggedId,
-
               pageType: feeds[i].pageType,
               famOrFriends: feeds[i].famOrFriends,
               relationship: feeds[i].relationship,

@@ -120,7 +120,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         child: ListView.separated(
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
-
             return MiscRegularNotificationDisplayTemplate(
               imageIcon: notifications[i].actorImage,
               postId: notifications[i].postId,
@@ -129,7 +128,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
               notificationType: notifications[i].notificationType,
               readStatus: notifications[i].read,
             );
-            
           },
           separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
           itemCount: notifications.length,

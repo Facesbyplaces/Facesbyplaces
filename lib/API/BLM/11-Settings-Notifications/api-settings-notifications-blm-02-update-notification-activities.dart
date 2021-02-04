@@ -26,7 +26,7 @@ Future<bool> apiBLMUpdateNotificationActivities({bool hide}) async{
     }
       
   }catch(e){
-print('Error in notification update activities: $e');
+    print('Error in notification update activities: $e');
     result = false;
   }
 

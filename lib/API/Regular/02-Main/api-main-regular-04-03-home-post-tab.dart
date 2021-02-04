@@ -26,7 +26,6 @@ Future<APIRegularHomeTabPostMain> apiRegularHomePostTab({int page}) async{
   }
 }
 
-
 class APIRegularHomeTabPostMain{
   int almItemsRemaining;
   List<APIRegularHomeTabPostExtended> familyMemorialList;
@@ -43,7 +42,6 @@ class APIRegularHomeTabPostMain{
     );
   }
 }
-
 
 class APIRegularHomeTabPostExtended{
   int homeTabPostId;

@@ -25,10 +25,8 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
     this.displayText = '',
   }) : super(key: key);
   
-
   MiscBLMInputFieldTemplateState createState() => MiscBLMInputFieldTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
 }
-
 
 class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
   final String labelText;
@@ -94,7 +92,6 @@ class MiscBLMInputFieldMultiTextTemplate extends StatefulWidget{
 
   MiscBLMInputFieldMultiTextTemplateState createState() => MiscBLMInputFieldMultiTextTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
 }
-
 
 class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMultiTextTemplate>{
   final String labelText;

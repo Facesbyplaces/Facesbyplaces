@@ -68,7 +68,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         top: SizeConfig.blockSizeVertical * 8,
                         left: SizeConfig.screenWidth / 4.2,
                         child: Badge(
-                          // position: BadgePosition.topEnd(top: -3, end: -10),
                           position: BadgePosition.topEnd(top: 5, end: 15),
                           animationDuration: Duration(milliseconds: 300),
                           animationType: BadgeAnimationType.fade,
@@ -103,8 +102,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                                   )
                                 );
                               }
-
-                              print('The result is $result');
                               
                             },
                             child: CircleAvatar(

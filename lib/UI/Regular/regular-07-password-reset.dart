@@ -133,7 +133,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                   )
                                 );
                               }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
-                                // await showDialog(context: context, builder: (build) => MiscRegularAlertDialog(title: 'Error', content: 'Passwords don\'t match. Please try again.', confirmText: 'OK',),);
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
@@ -162,7 +161,6 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                 context.hideLoaderOverlay();
 
                                 if(result){
-                                  // await showDialog(context: (context), builder: (build) => MiscRegularAlertDialog(title: 'Success', content: 'Successfully updated the password.', color: Colors.green,));
                                     await showDialog(
                                       context: context,
                                       builder: (_) => 
@@ -209,7 +207,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                             height: SizeConfig.blockSizeVertical * 7, 
                             buttonColor: Color(0xff04ECFF),
                           ),
-
+                          
                         ],
                       ),
                     ),
@@ -231,13 +229,11 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                           ),
                         ),
                       ),
-
                     ],
                   ),
+
                 ],
               ),
-
-
             ),
           ),
         ),

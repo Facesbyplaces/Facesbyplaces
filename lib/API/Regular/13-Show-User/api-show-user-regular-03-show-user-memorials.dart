@@ -26,8 +26,6 @@ Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId,
   }
 }
 
-
-
 class APIRegularShowUserMemorialsMain{
   int almOwnedItemsRemaining;
   int almFollowedItemsRemaining;

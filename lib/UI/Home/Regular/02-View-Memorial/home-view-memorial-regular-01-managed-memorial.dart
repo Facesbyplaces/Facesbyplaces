@@ -12,7 +12,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:video_player/video_player.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -20,20 +19,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:io';
-
-class RegularRelationshipItemPost{
-
-  final String name;
-  final File image;
-  final int memorialId;
-  
-  const RegularRelationshipItemPost({this.name, this.image, this.memorialId});
-}
 
 class RegularProfilePosts{
   int userId;
@@ -54,7 +45,6 @@ class RegularProfilePosts{
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -86,10 +76,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   int postCount;
   bool empty;
   int page;
-
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-
   VideoPlayerController videoPlayerController;
 
   void onRefresh() async{
@@ -100,6 +88,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   void onLoading() async{
     if(itemRemaining != 0){
       var newValue = await apiRegularProfilePost(memorialId: memorialId, page: page);
+
       itemRemaining = newValue.almItemsRemaining;
       postCount = newValue.almFamilyMemorialList.length;
 
@@ -116,32 +105,29 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
           newList4.add(newValue.almFamilyMemorialList[i].homeProfilePostTagged[j].homeProfilePostTaggedId);
         }
 
-        posts.add(RegularProfilePosts(
-          userId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageCreator.homeProfilePostPageCreatorId, 
-          postId: newValue.almFamilyMemorialList[i].homeProfilePostId,
-          memorialId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageId,
-          timeCreated: newValue.almFamilyMemorialList[i].homeProfilePostCreatedAt,
-          memorialName: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageName,
-          postBody: newValue.almFamilyMemorialList[i].homeProfilePostBody,
-          profileImage: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageProfileImage,
-          imagesOrVideos: newValue.almFamilyMemorialList[i].homeProfilePostImagesOrVideos,
-          
-          managed: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageManage,
-          joined: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFollower,
-          numberOfComments: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfComments,
-          numberOfLikes: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfLikes,
-          likeStatus: newValue.almFamilyMemorialList[i].homeProfilePostLikeStatus,
-
-          numberOfTagged: newValue.almFamilyMemorialList[i].homeProfilePostTagged.length,
-          taggedFirstName: newList1,
-          taggedLastName: newList2,
-          taggedImage: newList3,
-          taggedId: newList4,
-
-          pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageType,
-          famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFamOrFriends,
-          relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageRelationship,
-
+        posts.add(
+          RegularProfilePosts(
+            userId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageCreator.homeProfilePostPageCreatorId, 
+            postId: newValue.almFamilyMemorialList[i].homeProfilePostId,
+            memorialId: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageId,
+            timeCreated: newValue.almFamilyMemorialList[i].homeProfilePostCreatedAt,
+            memorialName: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageName,
+            postBody: newValue.almFamilyMemorialList[i].homeProfilePostBody,
+            profileImage: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageProfileImage,
+            imagesOrVideos: newValue.almFamilyMemorialList[i].homeProfilePostImagesOrVideos,
+            managed: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageManage,
+            joined: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFollower,
+            numberOfComments: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfComments,
+            numberOfLikes: newValue.almFamilyMemorialList[i].homeProfilePostNumberOfLikes,
+            likeStatus: newValue.almFamilyMemorialList[i].homeProfilePostLikeStatus,
+            numberOfTagged: newValue.almFamilyMemorialList[i].homeProfilePostTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
+            pageType: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPagePageType,
+            famOrFriends: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageFamOrFriends,
+            relationship: newValue.almFamilyMemorialList[i].homeProfilePostPage.homeProfilePostPageRelationship,
           ),
         );
       }
@@ -176,8 +162,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     );
 
     lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
+      feature: 'sharing',
+      stage: 'new share',
       tags: ['one', 'two', 'three']
     );
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
@@ -404,7 +390,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                         if (response.success) {
                                           print('Link generated: ${response.result}');
-                                          print('showShareSheet Sucess');
                                         } else {
                                           FlutterBranchSdk.logout();
                                           print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -722,23 +707,19 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       memorialId: posts[i].memorialId,
                                       memorialName: posts[i].memorialName,
                                       timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
-
                                       managed: posts[i].managed,
                                       joined: posts[i].joined,
                                       profileImage: posts[i].profileImage,
                                       numberOfComments: posts[i].numberOfComments,
                                       numberOfLikes: posts[i].numberOfLikes,
                                       likeStatus: posts[i].likeStatus,
-
                                       numberOfTagged: posts[i].numberOfTagged,
                                       taggedFirstName: posts[i].taggedFirstName,
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
-
                                       pageType: posts[i].pageType,
                                       famOrFriends: posts[i].famOrFriends,
                                       relationship: posts[i].relationship,
-
                                       contents: [
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
@@ -851,13 +832,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 ),
                               ),
                             )
-                            // : Container(
-                            //   padding: EdgeInsets.all(10.0),
-                            //   height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
-                            //   child: Center(
-                            //     child: Text('Post is empty.', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),)),
-                            //   ),
-                            // ),
                             : ContainerResponsive(
                               height: SizeConfig.screenHeight,
                               width: SizeConfig.screenWidth,
@@ -873,7 +847,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 ),
                               ),
                             ),
-
 
                           ],
                         ),

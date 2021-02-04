@@ -75,8 +75,6 @@ class APIBLMHomeTabNotificationExtended{
   }
 }
 
-
-
 class APIBLMHomeTabNotificationExtendedActor{
   int id;
   String image;

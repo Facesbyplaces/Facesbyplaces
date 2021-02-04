@@ -29,31 +29,27 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   List<Widget> finalMemorials;
   int memorialFamilyItemsRemaining;
   int memorialFriendsItemsRemaining;
+  int blmFamilyItemsRemaining;
+  int blmFriendsItemsRemaining;
   int page1;
   int page2;
   bool flag1;
   int count;
-
-  int blmFamilyItemsRemaining;
-  int blmFriendsItemsRemaining;
 
   void initState(){
     super.initState();
     finalMemorials = [];
     memorialFamilyItemsRemaining = 1;
     memorialFriendsItemsRemaining = 1;
+    blmFamilyItemsRemaining = 1;
+    blmFriendsItemsRemaining = 1;
     page1 = 1;
     page2 = 1;
     count = 0;
     flag1 = false;
-
-    blmFamilyItemsRemaining = 1;
-    blmFriendsItemsRemaining = 1;
-
     addMemorials1();
     onLoading();
   }
-
   
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -83,7 +79,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     );
   }
 
-
   void addMemorials2(){
     finalMemorials.add(
       Container(
@@ -103,7 +98,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       ),
     );
   }
-
 
   void onLoading() async{
 

@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter/material.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:flutter/material.dart';
 
 class HomeRegularCreatePostSearchLocation extends StatefulWidget{
 
@@ -93,48 +93,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
-          // appBar: AppBar(
-          //   title: TextFormField(
-          //     onChanged: (newPlaces){
-          //       if(newPlaces == ''){
-          //         setState(() {
-          //           empty = true;
-          //           places = [];
-          //         });
-          //       }else{
-          //         setState(() {
-          //           empty = false;
-          //           places.add(newPlaces);
-          //         });
-          //       }                
-          //     },
-          //     decoration: InputDecoration(
-          //       contentPadding: EdgeInsets.all(15.0),
-          //       filled: true,
-          //       fillColor: Color(0xffffffff),
-          //       focusColor: Color(0xffffffff),
-          //       hintText: 'Search Location',
-          //       hintStyle: TextStyle(
-          //         fontSize: SizeConfig.safeBlockHorizontal * 4,
-          //       ),
-          //       prefixIcon: Icon(Icons.search, color: Colors.grey),
-          //       border: OutlineInputBorder(
-          //         borderSide: BorderSide(color: Color(0xffffffff)),
-          //         borderRadius: BorderRadius.all(Radius.circular(25)),
-          //       ),
-          //       enabledBorder:  OutlineInputBorder(
-          //         borderSide: BorderSide(color: Color(0xffffffff)),
-          //         borderRadius: BorderRadius.all(Radius.circular(25)),
-          //       ),
-          //       focusedBorder:  OutlineInputBorder(
-          //         borderSide: BorderSide(color: Color(0xffffffff)),
-          //         borderRadius: BorderRadius.all(Radius.circular(25)),
-          //       ),
-          //     ),
-          //   ),
-          //   leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
-          //   backgroundColor: Color(0xff04ECFF),
-          // ),
           body: empty
           ? SingleChildScrollView(
             physics: ClampingScrollPhysics(),

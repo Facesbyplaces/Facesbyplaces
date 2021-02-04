@@ -52,7 +52,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                   height: SizeConfig.screenHeight / 2.5,
                   child: Stack(
                     children: [
-
                       CustomPaint(size: Size.infinite, painter: MiscBLMCurvePainter(),),
 
                       Container(
@@ -60,7 +59,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                         alignment: Alignment.bottomCenter,
                         child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
                       ),
-
                     ],
                   ),
                 ),
@@ -82,16 +80,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                         ),
                       ),
                       Expanded(
-                        // child: Container(
-                        //   padding: EdgeInsets.only(right: 10.0),
-                        //   alignment: Alignment.centerRight,
-                        //   child: IconButton(
-                        //     alignment: Alignment.centerRight,
-                        //     padding: EdgeInsets.zero,
-                        //     onPressed: (){},
-                        //     icon: Icon(Icons.more_vert, color: Color(0xffffffff), size: ScreenUtil().setHeight(30)),
-                        //   ),
-                        // ),
                         child: Container(height: 0,),
                       ),
                     ],

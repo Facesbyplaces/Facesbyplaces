@@ -85,7 +85,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
   Future getVideo() async{
     final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-
     if(pickedFile != null){
       setState(() {
         slideImages.add(File(pickedFile.path));
@@ -161,7 +160,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                   context.showLoaderOverlay();
 
                   Location.LocationData locationData = await location.getLocation();
-
                   List<BLMTaggedPeople> userIds = [];
 
                   if(users.length != 0){
@@ -188,7 +186,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     blmPostLongitude: locationData.longitude,
                     blmPostTagPeople: userIds,
                   );
-
                   
                   bool result = await apiBLMHomeCreatePost(post: post);
                   context.hideLoaderOverlay();

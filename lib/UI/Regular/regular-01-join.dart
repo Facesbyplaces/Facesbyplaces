@@ -14,8 +14,6 @@ class RegularJoin extends StatelessWidget {
       width: SizeConfig.screenWidth,
     );
     return Scaffold(
-
-
       body: Stack(
         children: [
 

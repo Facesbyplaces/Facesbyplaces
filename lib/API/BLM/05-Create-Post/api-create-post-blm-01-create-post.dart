@@ -37,7 +37,6 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
           formData.files.add(MapEntry('post[imagesOrVideos][]', file));
         }
       }
-
     }
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/posts', data: formData,

@@ -3,8 +3,8 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-12-blm-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMMemorialSettingsWithHidden extends StatefulWidget{

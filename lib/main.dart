@@ -71,20 +71,20 @@ void main() async{
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),
         ),
-        routes: <String, WidgetBuilder>{
-          '/login': (BuildContext context) => UILogin01(),
+        routes: <String, WidgetBuilder>{ // NAMED ROUTES USED FOR NAVIGATING
+          '/login': (BuildContext context) => UILogin01(), // START
 
           '/blm/join': (BuildContext context) => BLMJoin(),
           '/blm/login': (BuildContext context) => BLMLogin(),
           '/blm/register': (BuildContext context) => BLMRegister(),
           '/blm/verify-email': (BuildContext context) => BLMVerifyEmail(),
-          '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(),
+          '/blm/upload-photo': (BuildContext context) => BLMUploadPhoto(), // BLM START
 
           '/regular/join': (BuildContext context) => RegularJoin(),
           '/regular/login': (BuildContext context) => RegularLogin(),
           '/regular/register': (BuildContext context) => RegularRegister(),
           '/regular/verify-email': (BuildContext context) => RegularVerifyEmail(),
-          '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(),
+          '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
 
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
           '/home/blm/donation': (BuildContext context) => HomeBLMUserDonate(),
@@ -97,7 +97,7 @@ void main() async{
           '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
           '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(),
           '/home/blm/profile-settings': (BuildContext context) => HomeBLMUserProfileDetails(),
-          '/home/blm/managed-profile': (BuildContext context) => HomeBLMProfile(),
+          '/home/blm/managed-profile': (BuildContext context) => HomeBLMProfile(), // BLM HOME SCREEN
 
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
           '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
@@ -110,7 +110,7 @@ void main() async{
           '/home/regular/donation': (BuildContext context) => HomeRegularUserDonate(),
           '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
           '/home/regular/search': (BuildContext context) => HomeRegularSearch(),
-          '/home/regular/profile-settings': (BuildContext context) => HomeRegularUserProfileDetails(),
+          '/home/regular/profile-settings': (BuildContext context) => HomeRegularUserProfileDetails(), // ALM HOME SCREEN
 
         },
       ),

@@ -1,13 +1,13 @@
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-05-bloc-regular-misc.dart';
-import 'package:flutter/rendering.dart';
+import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'misc-07-regular-button.dart';
 import 'package:share/share.dart';
@@ -38,7 +38,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
   MiscRegularDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
 
-  // final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   GlobalKey qrKey = new GlobalKey();
@@ -106,7 +105,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               fontSize: SizeConfig.safeBlockHorizontal * 3.5,
               color: Color(0xff888888)
             ),
-            // items: <String>['Copy Link', 'Share', 'Report'].map((String value){
             items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
@@ -130,9 +128,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
                 );
 
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                  print('showShareSheet Sucess');
+                if(response.success){
                   print('The post id is $postId');
                 } else {
                   FlutterBranchSdk.logout();
@@ -141,7 +137,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
-                // String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-Memorial'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
                 String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-$pageType'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 FullScreenMenu.show(
@@ -211,7 +206,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
 
                 FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
               }
@@ -275,26 +269,6 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-  // Future<void> shareQRCode() async { 
-  //   try {
-  //     // _RenderLayoutBuilder
-      
-  //       RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject(); 
-  //       // RenderRepaintBoundary boundary = qrKey.currentContext.findAncestorRenderObjectOfType();
-  //       var image = await boundary.toImage();
-  //       // var image = await boundary.showOnScreen();
-  //       ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
-  //       Uint8List pngBytes = byteData.buffer.asUint8List();       
-  //       final tempDir = await getTemporaryDirectory();
-  //       final file = await new File('${tempDir.path}/image.png').create();
-  //       await file.writeAsBytes(pngBytes);
-  //       // final channel = const MethodChannel('channel:me.alfian.share/share');
-  //       // channel.invokeMethod('shareFile', 'image.png');
-  //     } catch(e) {
-  //       print(e.toString());
-  //   }
-  // }
-
   Future<void> shareQRCode() async {
     try {
       RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
@@ -308,20 +282,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
       print(pngBytes);
 
-      // Future.delayed(const Duration(milliseconds: 20), () async {
-      //   RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
-      //   ui.Image image = await boundary.toImage();
-      //   ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      //   Uint8List pngBytes = byteData.buffer.asUint8List();
-      //   print(pngBytes);
-      // });
-
       Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
-
-      // final channel = const MethodChannel('channel:me.alfian.share/share');
-      // channel.invokeMethod('shareFile', 'image.png');
-
-
 
     } catch(e) {
       print(e.toString());
@@ -343,7 +304,6 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
               fontSize: SizeConfig.safeBlockHorizontal * 3.5,
               color: Color(0xff888888)
             ),
-            // items: <String>['Copy Link', 'Share', 'Report'].map((String value){
               items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
@@ -367,9 +327,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
                 );
 
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                  print('showShareSheet Sucess');
+                if(response.success){
                   print('The post id is $memorialId');
                 } else {
                   FlutterBranchSdk.logout();
@@ -447,7 +405,6 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
 
                 FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
               }

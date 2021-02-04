@@ -143,43 +143,43 @@ class APIRegularShowOriginalPostMainExtendedPageDetails{
 }
 
 class APIBLMShowOriginalPostMainExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int showOriginalPostPageCreatorId;
+  String showOriginalPostPageCreatorFirstName;
+  String showOriginalPostPageCreatorLastName;
+  String showOriginalPostPageCreatorPhoneNumber;
+  String showOriginalPostPageCreatorEmail;
+  String showOriginalPostPageCreatorUserName;
+  dynamic showOriginalPostPageCreatorImage;
 
-  APIBLMShowOriginalPostMainExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMShowOriginalPostMainExtendedPageCreator({this.showOriginalPostPageCreatorId, this.showOriginalPostPageCreatorFirstName, this.showOriginalPostPageCreatorLastName, this.showOriginalPostPageCreatorPhoneNumber, this.showOriginalPostPageCreatorEmail, this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage});
 
   factory APIBLMShowOriginalPostMainExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostMainExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      showOriginalPostPageCreatorId: parsedJson['id'],
+      showOriginalPostPageCreatorFirstName: parsedJson['first_name'],
+      showOriginalPostPageCreatorLastName: parsedJson['last_name'],
+      showOriginalPostPageCreatorPhoneNumber: parsedJson['phone_number'],
+      showOriginalPostPageCreatorEmail: parsedJson['email'],
+      showOriginalPostPageCreatorUserName: parsedJson['username'],
+      showOriginalPostPageCreatorImage: parsedJson['image']
     );
   }
 }
 
 class APIBLMHomeProfilePostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  int showOriginalPostTaggedId;
+  String showOriginalPostTaggedFirstName;
+  String showOriginalPostTaggedLastName;
+  String showOriginalPostTaggedImage;
 
-  APIBLMHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIBLMHomeProfilePostExtendedTagged({this.showOriginalPostTaggedId, this.showOriginalPostTaggedFirstName, this.showOriginalPostTaggedLastName, this.showOriginalPostTaggedImage});
 
   factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeProfilePostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+      showOriginalPostTaggedId: parsedJson['id'],
+      showOriginalPostTaggedFirstName: parsedJson['first_name'],
+      showOriginalPostTaggedLastName: parsedJson['last_name'],
+      showOriginalPostTaggedImage: parsedJson['image']
     );
   }
 }

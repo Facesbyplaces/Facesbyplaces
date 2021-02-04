@@ -22,8 +22,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
   VideoPlayerController videoPlayerController;
   List<File> slideImages;
   int toggle;
-
-
   File videoFile;
   File imageFile;
   File newFile;
@@ -31,7 +29,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
   Future getVideo() async{
     final pickedFile = await picker.getVideo(source: ImageSource.gallery);
-
     if(pickedFile != null){
       setState(() {
         videoFile = File(pickedFile.path);

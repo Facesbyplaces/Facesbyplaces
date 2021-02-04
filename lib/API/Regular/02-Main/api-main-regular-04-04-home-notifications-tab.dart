@@ -26,7 +26,6 @@ Future<APIRegularHomeTabNotificationMain> apiRegularHomeNotificationsTab({int pa
   }
 }
 
-
 class APIRegularHomeTabNotificationMain{
   int almItemsRemaining;
   List<APIRegularHomeTabNotificationExtended> almNotification;
@@ -44,7 +43,6 @@ class APIRegularHomeTabNotificationMain{
     );
   }
 }
-
 
 class APIRegularHomeTabNotificationExtended{
   int homeTabNotificationId;

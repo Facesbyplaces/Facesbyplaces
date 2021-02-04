@@ -12,9 +12,8 @@ Future<bool> apiRegularUpdatePageDetails({String name, String relationship, Stri
 
   try{
     var dioRequest = Dio();
-
-    var formData;
-    formData = FormData();
+    var formData = FormData();
+    
     formData.files.addAll([
       MapEntry('name', MultipartFile.fromString(name,),),
       MapEntry('relationship', MultipartFile.fromString(relationship,),),

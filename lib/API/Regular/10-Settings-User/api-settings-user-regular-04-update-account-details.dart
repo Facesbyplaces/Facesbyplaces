@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 Future<bool> apiRegularUpdateAccountDetails({String firstName, String lastName, String email, String phoneNumber, String question}) async{
 
   bool result = false;
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';

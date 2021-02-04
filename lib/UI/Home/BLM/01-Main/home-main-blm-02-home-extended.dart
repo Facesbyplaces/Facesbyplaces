@@ -9,21 +9,21 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';
 import 'home-main-blm-03-03-post-tab.dart';
 import 'home-main-blm-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'dart:async';
@@ -56,7 +56,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
   Future<void> scanQR() async {
     String barcodeScanRes;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
       print(barcodeScanRes);
@@ -64,22 +63,13 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
       barcodeScanRes = 'Failed to get platform version.';
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
       _scanBarcode = barcodeScanRes;
     });
 
-    print('The _scanBarcode is $_scanBarcode');
     List<dynamic> newValue = _scanBarcode.split('-');
-
-    print('The newValue is $newValue');
-    print('The newValue is ${newValue[0]}');
-    print('The newValue is ${newValue[1]}');
-    print('The newValue is ${newValue[2]}');
 
     if(_scanBarcode != 'Error'){
       if(newValue[0] == 'Memorial'){
@@ -89,7 +79,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
         }
       }else{
-        print('The newValue[4] in blm is ${newValue[4]}');
         if(newValue[4] == 'Blm'){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: int.parse(newValue[1]), likeStatus: int.parse(newValue[2]) == 1 ? true : false, numberOfLikes: int.parse(newValue[3]),)));
         }else{
@@ -261,10 +250,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         animationDuration: Duration(milliseconds: 300),
                         animationType: BadgeAnimationType.fade,
                         badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                        badgeContent: Text(
-                          '$unreadNotifications',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        badgeContent: Text('$unreadNotifications', style: TextStyle(color: Colors.white),),
                         child: Icon(MdiIcons.heart),
                       ),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),

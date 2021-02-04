@@ -43,7 +43,6 @@ class APIRegularSearchPostMain{
   }
 }
 
-
 class APIRegularSearchPostExtended{
   int searchPostId;
   APIRegularSearchPostExtendedPage searchPostPage;

@@ -12,9 +12,8 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
 
   try{
     var dioRequest = dio.Dio();
+    var formData = FormData();
 
-    var formData;
-    formData = FormData();
     formData.files.addAll([
       MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
       MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),

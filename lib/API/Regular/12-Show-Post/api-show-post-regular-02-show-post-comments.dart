@@ -26,8 +26,6 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({int postId, i
   }
 }
 
-
-
 class APIRegularShowListOfComments{
   int almItemsRemaining;
   List<APIRegularShowListOfCommentsExtended> almCommentsList;

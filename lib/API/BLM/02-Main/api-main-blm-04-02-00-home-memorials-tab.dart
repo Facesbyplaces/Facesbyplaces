@@ -26,8 +26,6 @@ Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({int page}) async{
   }
 }
 
-
-
 class APIBLMHomeTabMemorialMain{
 
   APIBLMHomeTabMemorialExtended familyMemorialList;

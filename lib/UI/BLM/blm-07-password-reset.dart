@@ -229,12 +229,10 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ],
               ),
-
 
             ),
           ),

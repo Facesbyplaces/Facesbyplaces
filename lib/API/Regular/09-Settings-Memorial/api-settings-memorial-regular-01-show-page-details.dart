@@ -26,11 +26,9 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({int memorialId}
   }
 }
 
-
 class APIRegularShowPageDetailsMain{
 
   APIRegularShowPageDetailsExtended almMemorial;
-
   APIRegularShowPageDetailsMain({this.almMemorial});
 
   factory APIRegularShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
@@ -39,7 +37,6 @@ class APIRegularShowPageDetailsMain{
     );
   }
 }
-
 
 class APIRegularShowPageDetailsExtended{
   int showPageDetailsId;

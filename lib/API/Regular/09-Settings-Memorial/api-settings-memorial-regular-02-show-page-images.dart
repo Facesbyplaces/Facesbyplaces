@@ -29,7 +29,6 @@ Future<APIRegularShowPageImagesMain> apiRegularShowPageImages({int memorialId}) 
 class APIRegularShowPageImagesMain{
 
   APIRegularShowPageImagesExtended almMemorial;
-
   APIRegularShowPageImagesMain({this.almMemorial});
 
   factory APIRegularShowPageImagesMain.fromJson(Map<String, dynamic> parsedJson){

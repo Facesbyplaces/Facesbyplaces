@@ -26,7 +26,6 @@ Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({int userId, int pa
   }
 }
 
-
 class APIRegularShowUsersPostsMain{
   int almItemsRemaining;
   List<APIRegularShowUsersPostsExtended> almFamilyMemorialList;
@@ -43,7 +42,6 @@ class APIRegularShowUsersPostsMain{
     );
   }
 }
-
 
 class APIRegularShowUsersPostsExtended{
   int showUsersPostsId;
@@ -169,7 +167,6 @@ class APIRegularShowUsersPostsExtendedPageCreator{
     );
   }
 }
-
 
 class APIRegularShowUsersPostsExtendedTagged{
   int showUsersPostsTaggedId;

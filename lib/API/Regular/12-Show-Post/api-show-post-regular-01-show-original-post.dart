@@ -26,8 +26,6 @@ Future<APIRegularShowOriginalPostMain> apiRegularShowOriginalPost({int postId}) 
   }
 }
 
-
-
 class APIRegularShowOriginalPostMain{
   APIRegularShowOriginalPostMainExtended almPost;
 
@@ -39,7 +37,6 @@ class APIRegularShowOriginalPostMain{
     );
   }
 }
-
 
 class APIRegularShowOriginalPostMainExtended{
   int showOriginalPostId;

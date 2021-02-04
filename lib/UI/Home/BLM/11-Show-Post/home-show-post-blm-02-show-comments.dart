@@ -63,7 +63,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   final int userId;
   final int numberOfLikes;
   final int numberOfComments;
- HomeBLMShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+  HomeBLMShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   static TextEditingController controller = TextEditingController();
@@ -82,7 +82,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   bool isComment;
   List<List<bool>> repliesLikes;
   List<List<int>> repliesNumberOfLikes;
-
   int currentCommentId;
   int currentUserId;
   String currentUserImage;
@@ -102,7 +101,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
     repliesLikes = [];
     repliesNumberOfLikes = [];
     isComment = true;
-
     onLoading();
     currentUser = getDrawerInformation();
   }
@@ -114,9 +112,8 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
   void loadUserInformation() async{
     var currentLoggedInUser = await apiBLMShowProfileInformation();
-
-   currentUserId = currentLoggedInUser.userId;
-   currentUserImage = currentLoggedInUser.image;
+    currentUserId = currentLoggedInUser.userId;
+    currentUserImage = currentLoggedInUser.image;
   }
 
   void onLoading() async{
@@ -165,7 +162,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
           repliesLikes.add(newRepliesLikes);
           repliesNumberOfLikes.add(newRepliesNumberOfLikes);
-
           repliesRemaining = newValue2.blmItemsRemaining;
           page2++;
         }
@@ -190,7 +186,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
         );
 
         replies = [];
-      
       }
 
       if(mounted)
@@ -317,29 +312,9 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                                   SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                        // print('The user id of reply is ${comments[i].userId}');
-                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
-
-                                  // userId == comments[i].userId
-                                  // ? Expanded(
-                                  //   child: Text('You',
-                                  //     style: TextStyle(
-                                  //       fontWeight: FontWeight.bold,
-                                  //     ),
-                                  //   ),
-                                  // )
-                                  // : Expanded(
-                                  //   child: Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                  //     style: TextStyle(
-                                  //       fontWeight: FontWeight.bold,
-                                  //     ),
-                                  //   ),
-                                  // ),
-
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        print('The user id of reply is ${comments[i].userId}');
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId)));
                                       },
                                       child: currentUserId == comments[i].userId
@@ -363,7 +338,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                       setState(() {
                                         commentsLikes[i] = false;
                                         commentsNumberOfLikes[i]--;
-                                        
                                       });
 
                                       await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
@@ -490,26 +464,9 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
 
                                           SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                                          // userId == comments[i].listOfReplies[index].userId
-                                          // ? Expanded(
-                                          //   child: Text('You',
-                                          //     style: TextStyle(
-                                          //       fontWeight: FontWeight.bold,
-                                          //     ),
-                                          //   ),
-                                          // )
-                                          // : Expanded(
-                                          //   child: Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                          //     style: TextStyle(
-                                          //       fontWeight: FontWeight.bold,
-                                          //     ),
-                                          //   ),
-                                          // ),
-
                                           Expanded(
                                             child: GestureDetector(
                                               onTap: (){
-                                                print('The user id of reply is ${comments[i].listOfReplies[index].userId}');
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId)));
                                               },
                                               child: currentUserId == comments[i].listOfReplies[index].userId
@@ -645,9 +602,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                 ),
                               ),
                             )
-                            : Container(
-                              height: 0,
-                            ),
+                            : Container(height: 0,),
 
                           ],
                         );
@@ -753,29 +708,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                       context.hideLoaderOverlay();
 
                       controller.clear();
-
-                      itemRemaining = 1;
-                      repliesRemaining = 1;
-                      comments = [];
-                      replies = [];
-                      numberOfReplies = 0;
-                      page1 = 1;
-                      page2 = 1;
-                      count = 0;
-                      commentsLikes = [];
-                      commentsNumberOfLikes = [];
-                      repliesLikes = [];
-                      repliesNumberOfLikes = [];
-                      isComment = true;                 
-
-                      onLoading();
-                    }else{
-                      context.showLoaderOverlay();
-                      apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
-                      context.hideLoaderOverlay();
-
-                      controller.clear();
-
                       itemRemaining = 1;
                       repliesRemaining = 1;
                       comments = [];
@@ -789,7 +721,26 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                       repliesLikes = [];
                       repliesNumberOfLikes = [];
                       isComment = true;
+                      onLoading();
+                    }else{
+                      context.showLoaderOverlay();
+                      apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
+                      context.hideLoaderOverlay();
 
+                      controller.clear();
+                      itemRemaining = 1;
+                      repliesRemaining = 1;
+                      comments = [];
+                      replies = [];
+                      numberOfReplies = 0;
+                      page1 = 1;
+                      page2 = 1;
+                      count = 0;
+                      commentsLikes = [];
+                      commentsNumberOfLikes = [];
+                      repliesLikes = [];
+                      repliesNumberOfLikes = [];
+                      isComment = true;
                       onLoading();
                     }
 

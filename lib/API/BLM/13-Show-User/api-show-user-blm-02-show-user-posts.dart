@@ -26,7 +26,6 @@ Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({int userId, int page}) asy
   }
 }
 
-
 class APIBLMShowUsersPostsMain{
   int blmItemsRemaining;
   List<APIBLMShowUsersPostsExtended> blmFamilyMemorialList;
@@ -43,7 +42,6 @@ class APIBLMShowUsersPostsMain{
     );
   }
 }
-
 
 class APIBLMShowUsersPostsExtended{
   int showUsersPostsId;
@@ -169,7 +167,6 @@ class APIBLMShowUsersPostsExtendedPageCreator{
     );
   }
 }
-
 
 class APIBLMShowUsersPostsExtendedTagged{
   int taggedId;

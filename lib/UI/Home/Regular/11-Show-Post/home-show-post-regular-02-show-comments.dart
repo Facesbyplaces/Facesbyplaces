@@ -79,10 +79,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   List<bool> commentsLikes;
   List<int> commentsNumberOfLikes;
   bool isComment;
-  
   List<List<bool>> repliesLikes;
   List<List<int>> repliesNumberOfLikes;
-
   int currentCommentId;
   int currentUserId;
   String currentUserImage;
@@ -102,7 +100,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     repliesLikes = [];
     repliesNumberOfLikes = [];
     isComment = true;
-
     loadUserInformation();
     onLoading();
     currentUser = getDrawerInformation();
@@ -115,9 +112,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
   void loadUserInformation() async{
     var currentLoggedInUser = await apiRegularShowProfileInformation();
-
-   currentUserId = currentLoggedInUser.showProfileInformationUserId;
-   currentUserImage = currentLoggedInUser.showProfileInformationImage;
+    currentUserId = currentLoggedInUser.showProfileInformationUserId;
+    currentUserImage = currentLoggedInUser.showProfileInformationImage;
   }
 
   void onLoading() async{
@@ -125,7 +121,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
       context.showLoaderOverlay();
 
       var newValue1 = await apiRegularShowListOfComments(postId: postId, page: page1);
-      
       itemRemaining = newValue1.almItemsRemaining;
       count = count + newValue1.almCommentsList.length;
 
@@ -167,7 +162,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
 
           repliesLikes.add(newRepliesLikes);
           repliesNumberOfLikes.add(newRepliesNumberOfLikes);
-
           repliesRemaining = newValue2.almItemsRemaining;
           page2++;
         }
@@ -192,7 +186,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
         );
 
         replies = [];
-      
       }
 
       if(mounted)
@@ -322,20 +315,11 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        print('The user id of reply is ${comments[i].userId}');
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
                                       },
                                       child: currentUserId == comments[i].userId
-                                      ? Text('You',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )
-                                      : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
+                                      : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
                                     ),
                                   ),
 
@@ -477,19 +461,11 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                           Expanded(
                                             child: GestureDetector(
                                               onTap: (){
-                                                print('The user id of reply is ${comments[i].listOfReplies[index].userId}');
                                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
                                               },
                                               child: currentUserId == comments[i].listOfReplies[index].userId
-                                              ? Text('You',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              )
-                                              : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
+                                              : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName, style: TextStyle(fontWeight: FontWeight.bold,),
                                               ),
                                             ),
                                           ),
@@ -613,9 +589,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                 ),
                               ),
                             )
-                            : Container(
-                              height: 0,
-                            ),
+                            : Container(height: 0,),
 
                           ],
                         );
@@ -723,29 +697,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                       context.hideLoaderOverlay();
 
                       controller.clear();
-
-                      itemRemaining = 1;
-                      repliesRemaining = 1;
-                      comments = [];
-                      replies = [];
-                      numberOfReplies = 0;
-                      page1 = 1;
-                      page2 = 1;
-                      count = 0;
-                      commentsLikes = [];
-                      commentsNumberOfLikes = [];
-                      repliesLikes = [];
-                      repliesNumberOfLikes = [];
-                      isComment = true;                 
-
-                      onLoading();
-                    }else{
-                      context.showLoaderOverlay();
-                      apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
-                      context.hideLoaderOverlay();
-
-                      controller.clear();
-
                       itemRemaining = 1;
                       repliesRemaining = 1;
                       comments = [];
@@ -759,7 +710,26 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                       repliesLikes = [];
                       repliesNumberOfLikes = [];
                       isComment = true;
+                      onLoading();
+                    }else{
+                      context.showLoaderOverlay();
+                      apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
+                      context.hideLoaderOverlay();
 
+                      controller.clear();
+                      itemRemaining = 1;
+                      repliesRemaining = 1;
+                      comments = [];
+                      replies = [];
+                      numberOfReplies = 0;
+                      page1 = 1;
+                      page2 = 1;
+                      count = 0;
+                      commentsLikes = [];
+                      commentsNumberOfLikes = [];
+                      repliesLikes = [];
+                      repliesNumberOfLikes = [];
+                      isComment = true;
                       onLoading();
                     }
 

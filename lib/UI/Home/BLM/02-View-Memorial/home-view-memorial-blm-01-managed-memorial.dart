@@ -11,29 +11,20 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:responsive_widgets/responsive_widgets.dart';
-import 'package:video_player/video_player.dart';
+import 'package:full_screen_menu/full_screen_menu.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:io';
-
-class BLMRelationshipItemPost{
-
-  final String name;
-  final File image;
-  final int memorialId;
-  
-  const BLMRelationshipItemPost({this.name, this.image, this.memorialId});
-}
 
 class BLMProfilePosts{
   int userId;
@@ -54,7 +45,6 @@ class BLMProfilePosts{
   List<String> taggedLastName;
   List<String> taggedImage;
   List<int> taggedId;
-
   String pageType;
   bool famOrFriends;
   String relationship;
@@ -89,7 +79,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-
   VideoPlayerController videoPlayerController;
 
   void onRefresh() async{
@@ -130,13 +119,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
           numberOfComments: newValue.blmFamilyMemorialList[i].profilePostNumberOfComments,
           numberOfLikes: newValue.blmFamilyMemorialList[i].profilePostNumberOfLikes,
           likeStatus: newValue.blmFamilyMemorialList[i].profilePostLikeStatus,
-
           numberOfTagged: newValue.blmFamilyMemorialList[i].profilePostPostTagged.length,
           taggedFirstName: newList1,
           taggedLastName: newList2,
           taggedImage: newList3,
           taggedId: newList4,
-
           pageType: newValue.blmFamilyMemorialList[i].profilePostPage.profilePagePageType,
           famOrFriends: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageFamOrFriends,
           relationship: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageRelationship,
@@ -404,7 +391,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                         if (response.success) {
                                           print('Link generated: ${response.result}');
-                                          print('showShareSheet Sucess');
                                         } else {
                                           FlutterBranchSdk.logout();
                                           print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -727,12 +713,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       numberOfComments: posts[i].numberOfComments,
                                       numberOfLikes: posts[i].numberOfLikes,
                                       likeStatus: posts[i].likeStatus,
-
                                       numberOfTagged: posts[i].numberOfTagged,
                                       taggedFirstName: posts[i].taggedFirstName,
                                       taggedLastName: posts[i].taggedLastName,
                                       taggedId: posts[i].taggedId,
-
                                       pageType: posts[i].pageType,
                                       famOrFriends: posts[i].famOrFriends,
                                       relationship: posts[i].relationship,
@@ -849,13 +833,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 ),
                               ),
                             )
-                            // : Container(
-                            //   padding: EdgeInsets.all(10.0),
-                            //   height: SizeConfig.screenHeight / 1.5 - kToolbarHeight,
-                            //   child: Center(
-                            //     child: Text('Post is empty.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),)),
-                            //   ),
-                            // ),
                             : ContainerResponsive(
                               height: SizeConfig.screenHeight,
                               width: SizeConfig.screenWidth,
@@ -871,7 +848,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 ),
                               ),
                             ),
-
 
                           ],
                         ),

@@ -1,21 +1,19 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-03-bloc-blm-misc.dart';
-import 'package:flutter/rendering.dart';
+import 'package:facesbyplaces/Bloc/bloc-02-bloc-blm-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:clipboard/clipboard.dart';
-import 'package:flutter/material.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:clipboard/clipboard.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
 import 'package:share/share.dart';
-
 import 'misc-07-blm-button.dart';
+import 'dart:typed_data';
+import 'dart:io';
+import 'dart:ui';
 
 class MiscBLMDropDownTemplate extends StatefulWidget{
   final int postId;
@@ -39,12 +37,10 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
   MiscBLMDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
 
-  // final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-
   GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
@@ -107,7 +103,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
               fontSize: SizeConfig.safeBlockHorizontal * 3.5,
               color: Color(0xff888888)
             ),
-            // items: <String>['Copy Link', 'Share', 'Report'].map((String value){
               items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
@@ -133,8 +128,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
                 if (response.success) {
                   print('Link generated: ${response.result}');
-                  print('showShareSheet Sucess');
-                  print('The post id is $postId');
                 } else {
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -142,7 +135,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
-                // String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-Memorial'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
                 String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-$pageType'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
                 FullScreenMenu.show(
@@ -212,12 +204,8 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
-
 
                 FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
-
-                
 
               }
             },
@@ -228,8 +216,6 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
     );
   }
 }
-
-
 
 class MiscBLMDropDownMemorialTemplate extends StatefulWidget{
   final String memorialName;
@@ -250,12 +236,10 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
 
   MiscBLMDropDownMemorialTemplateState({this.memorialName, this.memorialId, this.pageType, this.reportType});
 
-  // final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2),);
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-
   GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
@@ -294,20 +278,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
 
       print(pngBytes);
 
-      // Future.delayed(const Duration(milliseconds: 20), () async {
-      //   RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
-      //   ui.Image image = await boundary.toImage();
-      //   ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      //   Uint8List pngBytes = byteData.buffer.asUint8List();
-      //   print(pngBytes);
-      // });
-
       Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
-
-      // final channel = const MethodChannel('channel:me.alfian.share/share');
-      // channel.invokeMethod('shareFile', 'image.png');
-
-
 
     } catch(e) {
       print(e.toString());
@@ -329,7 +300,6 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
               fontSize: SizeConfig.safeBlockHorizontal * 3.5,
               color: Color(0xff888888)
             ),
-            // items: <String>['Copy Link', 'Share', 'Report'].map((String value){
               items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
               return DropdownMenuItem<String>(
                 value: value,
@@ -352,11 +322,8 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
                 );
-
                 if (response.success) {
                   print('Link generated: ${response.result}');
-                  print('showShareSheet Sucess');
-                  print('The post id is $memorialId');
                 } else {
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
@@ -422,55 +389,6 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                     ),
                   ],
                 );
-
-                // initBranchShare();
-                // FlutterBranchSdk.setIdentity('blm-share-qr-code-link');
-
-                // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
-                // if (response.success) {
-                //   print('Link generated: ${response.result}');
-                // } else {
-                //   FlutterBranchSdk.logout();
-                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
-                // }
-
-                // FullScreenMenu.show(
-                //   context,
-                //   backgroundColor: Color(0xffffffff),
-                //   items: [
-                //     Center(
-                //       child: Container(
-                //         height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
-                //         child: QrImage(
-                //           data: '${response.result}',
-                //           version: QrVersions.auto,
-                //           size: 320,
-                //           gapless: false,
-                //         ),
-                //       ),
-                //     ),
-
-                //     Center(
-                //       child: Text('$memorialName',
-                //         style: TextStyle(
-                //           fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                //           fontWeight: FontWeight.bold, 
-                //           color: Color(0xff000000),
-                //         ), 
-                //       ),
-                //     ),
-
-                //     Center(
-                //       child: Text('QR Code',
-                //         style: TextStyle(
-                //           fontSize: SizeConfig.safeBlockHorizontal * 5, 
-                //           fontWeight: FontWeight.bold, 
-                //           color: Color(0xff000000),
-                //         ), 
-                //       ),
-                //     ),
-                //   ],
-                // );
               }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('blm-share-copied-link');
@@ -482,7 +400,8 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   FlutterBranchSdk.logout();
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
-                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger.of(context).showSnackBar(snackBar));
+
+                FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
               }
             },
           );

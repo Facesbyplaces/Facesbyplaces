@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 Future<bool> apiRegularHideBirthdate({bool hide}) async{
 
   bool result = false;
-
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';

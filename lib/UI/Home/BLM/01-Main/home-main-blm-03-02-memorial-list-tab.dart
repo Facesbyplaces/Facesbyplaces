@@ -33,7 +33,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   int page2;
   bool flag1;
   int count;
-
   int memorialFamilyItemsRemaining;
   int memorialFriendsItemsRemaining;
 
@@ -42,14 +41,12 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     finalMemorials = [];
     blmFamilyItemsRemaining = 1;
     blmFriendsItemsRemaining = 1;
+    memorialFamilyItemsRemaining = 1;
+    memorialFriendsItemsRemaining = 1;
     page1 = 1;
     page2 = 1;
     count = 0;
     flag1 = false;
-    
-    memorialFamilyItemsRemaining = 1;
-    memorialFriendsItemsRemaining = 1;
-
     addMemorials1();
     onLoading();
   }
@@ -220,15 +217,8 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       if(mounted)
       setState(() {});
       page2++;
-
-      // refreshController.loadComplete();
     }
-    
-    // else{
-    //   refreshController.loadNoData();
-    // }
 
-    // print('The page is $page2');
     page2 = 1;
 
     if(memorialFriendsItemsRemaining != 0){
@@ -238,8 +228,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
       memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
       count = count + newValue.friendsMemorialList.memorial.length;
-
-      print('The length of friends memorial is ${newValue.friendsMemorialList.memorial.length}');
 
       for(int i = 0; i < newValue.friendsMemorialList.memorial.length; i++){
         finalMemorials.add(
@@ -261,14 +249,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       if(mounted)
       setState(() {});
       page2++;
-
-      // refreshController.loadComplete();
     }
-    
-    // else{
-    //   refreshController.loadNoData();
-    // }
-
     refreshController.loadComplete();
   }
 

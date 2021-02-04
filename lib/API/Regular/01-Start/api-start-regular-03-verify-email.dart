@@ -6,8 +6,7 @@ Future<bool> apiRegularVerifyEmail({String verificationCode}) async{
   final sharedPrefs = await SharedPreferences.getInstance();
   int prefsUserID = sharedPrefs.getInt('regular-user-id');
 
-  final http.Response response = await http.post(
-    'http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
+  final http.Response response = await http.post('http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=2',
     headers: <String, String>{
       'Content-Type': 'application/json',
     }
