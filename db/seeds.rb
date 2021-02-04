@@ -14,13 +14,14 @@
 
 # Admin
 admin = User.new(
-            first_name: "Paul",
-            last_name: "Marcuelo",
+            first_name: "Fyodor",
+            last_name: "Dostoevsky",
             account_type: 1,
             phone_number: '09053536495',
-            email: "admin@gmail.com",
+            email: "admin@email.com",
             username: "admin",
-            password: 'admin123'
+            password: 'admin123',
+            is_verified: true
         )
 
 admin.save 
