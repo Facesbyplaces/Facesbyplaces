@@ -49,7 +49,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
 
   MiscRegularButtonSignInWithTemplate({
     this.buttonText = '',
-    this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: Color(0xff000000),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),
     this.onPressed,
     this.width,
     this.height,
@@ -68,7 +68,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
         children: [
           Expanded(
             child: Container(
-              height: SizeConfig.blockSizeVertical * 4, 
+              height: 30,
               child: Image.asset(image),
             ),
           ),

@@ -8,7 +8,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-backgroun
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -16,6 +16,8 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'regular-07-password-reset.dart';
 
 
 class RegularLogin extends StatefulWidget{
@@ -31,10 +33,6 @@ class RegularLoginState extends State<RegularLogin>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -47,34 +45,46 @@ class RegularLoginState extends State<RegularLogin>{
           }
         },
         child: Scaffold(
-          body: Stack(
-            children: [
+          body: ResponsiveWrapper(
+            maxWidth: SizeConfig.screenWidth,
+            defaultScale: true,
+            breakpoints: [
+              ResponsiveBreakpoint.resize(480, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+            ],
+            child: Stack(
+              children: [
 
-              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+                SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-              ContainerResponsive(
-                height: SizeConfig.screenHeight,
-                width: SizeConfig.screenWidth,
-                alignment: Alignment.center,
-                child: ContainerResponsive(
-                  width: SizeConfig.screenWidth,
-                  heightResponsive: false,
-                  widthResponsive: true,
-                  alignment: Alignment.center,
-                  child: Container(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                    height: SizeConfig.screenHeight,
-                    child: SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
+                Container(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  height: SizeConfig.screenHeight,
+                  child: SingleChildScrollView(
+                    physics: ClampingScrollPhysics(),
                       child: Column(
                       
                       children: [
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40),
 
-                        Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: ScreenUtil().setHeight(30),),),),
+                        Align(
+                          alignment: Alignment.centerLeft, 
+                          child: IconButton(
+                            onPressed: (){
+                              Navigator.pop(context);
+                            }, 
+                            icon: Icon(
+                              Icons.arrow_back, 
+                              color: Color(0xff000000), 
+                              size: 30,
+                            ),
+                          ),
+                        ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                        SizedBox(height: 25),
 
                         Container(
                           padding: EdgeInsets.only(left: 20.0), 
@@ -82,14 +92,14 @@ class RegularLoginState extends State<RegularLogin>{
                           child: Text(
                             'Login', 
                             style: TextStyle(
-                              fontSize: ScreenUtil().setSp(26, allowFontScalingSelf: true),
+                              fontSize: 26,
                               fontWeight: FontWeight.bold, 
                               color: Color(0xff000000),
                             ),
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                        SizedBox(height: 25),
 
                         Padding(
                           padding: EdgeInsets.only(left: 20.0, right: 20.0,),
@@ -100,10 +110,12 @@ class RegularLoginState extends State<RegularLogin>{
                                   buttonText: 'Facebook', 
                                   buttonColor: Color(0xff3A559F), 
                                   buttonTextStyle: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w300, 
                                     color: Color(0xffffffff),
-                                  ), 
+                                  ),
+                                  width: SizeConfig.screenWidth / 1.5, 
+                                  height: 45,
                                   onPressed: () async{
 
                                     final fb = FacebookLogin();
@@ -185,22 +197,23 @@ class RegularLoginState extends State<RegularLogin>{
                                     }
 
                                   }, 
-                                  width: SizeConfig.screenWidth / 1.5, 
-                                  height: ScreenUtil().setHeight(45),
                                 ),
                               ),
 
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 10,),
+                              SizedBox(width: 50),
 
                               Expanded(
                                 child: MiscRegularButtonSignInWithTemplate(
                                   buttonText: 'Google', 
                                   buttonColor: Color(0xffF5F5F5),
                                   buttonTextStyle: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w300, 
                                     color: Color(0xff000000),
-                                  ), 
+                                  ),
+                                  width: SizeConfig.screenWidth / 1.5, 
+                                  height: 45,
+                                  image: 'assets/icons/google.png',
                                   onPressed: () async {
                                     GoogleSignIn googleSignIn = GoogleSignIn(
                                       scopes: [
@@ -292,19 +305,17 @@ class RegularLoginState extends State<RegularLogin>{
                                       }
                                     }
                                     
-                                  }, 
-                                  width: SizeConfig.screenWidth / 1.5, 
-                                  height: ScreenUtil().setHeight(45),
-                                  image: 'assets/icons/google.png',
+                                  },
                                 ),
                               ),
                             ],
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40),
 
                         SignInWithAppleButton(
+                          height: 45,
                           onPressed: () async {
                             final credential = await SignInWithApple.getAppleIDCredential(
                               scopes: [
@@ -337,17 +348,15 @@ class RegularLoginState extends State<RegularLogin>{
                                 )
                               );
                             }
-
                           },
-                          height: ScreenUtil().setHeight(45),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40),
 
                         Center(
                           child: Text('or log in with email', 
                             style: TextStyle(
-                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), 
+                              fontSize: 14,
                               fontWeight: FontWeight.w300, 
                               color: Color(0xff000000),
                             ),
@@ -363,11 +372,11 @@ class RegularLoginState extends State<RegularLogin>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                        SizedBox(height: 20),
 
                         Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscRegularInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
 
-                        SizedBox(height: ScreenUtil().setHeight(20)),
+                        SizedBox(height: 20),
 
                         GestureDetector(
                           onTap: (){
@@ -377,23 +386,26 @@ class RegularLoginState extends State<RegularLogin>{
                             alignment: Alignment.centerRight, 
                             child: Text('Forgot Password?', 
                               style: TextStyle(
-                                decoration: TextDecoration.underline, 
-                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                decoration: TextDecoration.underline,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
                         ),
 
-                        SizedBox(height: ScreenUtil().setHeight(20)),
+                        SizedBox(height: 20),
 
                         MiscRegularButtonTemplate(
                           buttonText: 'Login', 
                           buttonTextStyle: TextStyle(
-                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                            fontSize: 16,
                             fontWeight: FontWeight.bold, 
                             color: Color(0xffffffff),
-                          ), 
+                          ),
+                          width: SizeConfig.screenWidth / 2, 
+                          height: 45,
+                          buttonColor: Color(0xff4EC9D4),
                           onPressed: () async{
                             
                             bool validEmail = false;
@@ -467,13 +479,10 @@ class RegularLoginState extends State<RegularLogin>{
                               }
                             }
                             
-                          }, 
-                          width: SizeConfig.screenWidth / 2, 
-                          height: ScreenUtil().setHeight(45),
-                          buttonColor: Color(0xff4EC9D4),
+                          },
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40),
 
                         RichText(
                           text: TextSpan(
@@ -481,7 +490,7 @@ class RegularLoginState extends State<RegularLogin>{
                               TextSpan(
                                 text: 'Don\'t have an Account? ', 
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                               ),
@@ -489,7 +498,7 @@ class RegularLoginState extends State<RegularLogin>{
                               TextSpan(
                                 text: 'Sign Up', 
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xff4EC9D4),
                                 ),
@@ -503,15 +512,19 @@ class RegularLoginState extends State<RegularLogin>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                        SizedBox(height: 10),
 
                         GestureDetector(
                           onTap: () async{
-                            Navigator.pushReplacementNamed(context, '/home/regular');
+                            // Navigator.pushReplacementNamed(context, '/home/regular');
+
+                            // Navigator.pushNamed(context, '/regular/verify-email', arguments: '123');
+                            // Navigator.pushNamed(context, '/regular/upload-photo');
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: 'asdflkj',)));
                           },
                           child: Text('Sign in as Guest',
                             style: TextStyle(
-                              fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Color(0xff4EC9D4),
                               decoration: TextDecoration.underline,
@@ -519,7 +532,7 @@ class RegularLoginState extends State<RegularLogin>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                        SizedBox(height: 10),
 
                         RichText(
                           text: TextSpan(
@@ -527,7 +540,7 @@ class RegularLoginState extends State<RegularLogin>{
                               TextSpan(
                                 text: 'Connect    /    ', 
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w300,
                                   color: Color(0xff888888),
                                 ),
@@ -536,7 +549,7 @@ class RegularLoginState extends State<RegularLogin>{
                               TextSpan(
                                 text: 'Remember    /    ',
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w300,
                                   color: Color(0xff888888),
                                 ),
@@ -545,7 +558,7 @@ class RegularLoginState extends State<RegularLogin>{
                               TextSpan(
                                 text: 'Honor',
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w300,
                                   color: Color(0xff888888),
                                 ),
@@ -554,15 +567,14 @@ class RegularLoginState extends State<RegularLogin>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                        SizedBox(height: 20),
                         
                       ],
                     ),
-                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

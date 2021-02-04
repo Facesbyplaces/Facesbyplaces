@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,10 +27,6 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
     SizeConfig.init(context);
     String verificationCode = ModalRoute.of(context).settings.arguments;
     controller.text = verificationCode;
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocUpdateButtonText>(create: (context) => BlocUpdateButtonText(),),
@@ -48,15 +44,17 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
             }
           },
           child: Scaffold(
-            body: ContainerResponsive(
-              height: SizeConfig.screenHeight,
-              width: SizeConfig.screenWidth,
-              alignment: Alignment.center,
-              child: ContainerResponsive(
-                width: SizeConfig.screenWidth,
-                heightResponsive: false,
-                widthResponsive: true,
-                alignment: Alignment.center,
+            body: ResponsiveWrapper(
+              maxWidth: SizeConfig.screenWidth,
+              defaultScale: true,
+              breakpoints: [
+                ResponsiveBreakpoint.resize(480, name: MOBILE),
+                ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+                ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+              ],
+              child: Container(
+                height: SizeConfig.screenHeight,
                 child: BlocBuilder<BlocUpdateButtonText, int>(
                   builder: (context, textNumber){
                     return BlocBuilder<BlocShowMessage, bool>(
@@ -75,27 +73,28 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                 child: Column(
                                   children: [
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                    SizedBox(height: 20),
 
-                                    Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.read<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: ScreenUtil().setHeight(30),),),),
+                                    Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.read<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: 30),),),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                                    SizedBox(height: 40),
 
-                                    Center(child: Text('Verify Email', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                                    Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                                    SizedBox(height: 40),
 
-                                    Center(child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                                    Center(child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                                    SizedBox(height: 40),
 
                                     Padding(
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       child: PinPut(
+                                        fieldsAlignment: MainAxisAlignment.spaceEvenly,
                                         controller: controller,
                                         fieldsCount: 3,
                                         textStyle: TextStyle(
-                                          fontSize: ScreenUtil().setSp(56, allowFontScalingSelf: true),
+                                          fontSize: 56,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff000000)
                                         ),
@@ -111,7 +110,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                                    SizedBox(height: 80),
 
                                     RichText(
                                       text: TextSpan(
@@ -119,7 +118,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           TextSpan(
                                             text: 'Didn\'t receive a code? ', 
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
                                             ),
@@ -128,7 +127,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           TextSpan(
                                             text: 'Resend',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                               decoration: TextDecoration.underline,
@@ -184,12 +183,12 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 15,),
+                                    SizedBox(height: 120),
 
                                     MiscRegularButtonTemplate(
                                       buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
                                       buttonTextStyle: TextStyle(
-                                        fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold, 
                                         color: Color(0xffffffff),
                                       ),
@@ -236,9 +235,11 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
 
                                       }, 
                                       width: SizeConfig.screenWidth / 2, 
-                                      height: ScreenUtil().setHeight(45),
+                                      height: 45,
                                       buttonColor: Color(0xff04ECFF),
                                     ),
+
+                                    SizedBox(height: 40),
                                   ],
                                 ),
                               ),

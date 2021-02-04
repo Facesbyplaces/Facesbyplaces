@@ -245,11 +245,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   child: Column(
                     children: [
                       Badge(
-                        position: BadgePosition.topEnd(top: -3, end: -10),
+                        position: BadgePosition.topEnd(top: 0, end: -10),
                         animationDuration: Duration(milliseconds: 300),
                         animationType: BadgeAnimationType.fade,
                         badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                        badgeContent: Text('$unreadNotifications', style: TextStyle(color: Colors.white),),
+                        badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
                         child: Icon(MdiIcons.heart),
                       ),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),

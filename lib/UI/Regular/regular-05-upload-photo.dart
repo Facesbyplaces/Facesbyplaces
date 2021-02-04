@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
@@ -46,10 +46,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocUpdateButtonText>(create: (context) => BlocUpdateButtonText(),),
@@ -57,15 +53,17 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
       ],
       child: Scaffold(
         backgroundColor: Color(0xffffffff),
-        body: ContainerResponsive(
-          height: SizeConfig.screenHeight,
-          width: SizeConfig.screenWidth,
-          alignment: Alignment.center,
-          child: ContainerResponsive(
-            width: SizeConfig.screenWidth,
-            heightResponsive: false,
-            widthResponsive: true,
-            alignment: Alignment.center,
+        body: ResponsiveWrapper(
+          maxWidth: SizeConfig.screenWidth,
+          defaultScale: true,
+          breakpoints: [
+            ResponsiveBreakpoint.resize(480, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+            ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+          ],
+          child: Container(
+            height: SizeConfig.screenHeight,
             child: BlocBuilder<BlocUpdateButtonText, int>(
               builder: (context, textNumber){
                 return BlocBuilder<BlocShowMessage, bool>(
@@ -83,19 +81,19 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                           child: Column(
                             children: [
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                              SizedBox(height: 40),
 
                               Center(
                                 child: Text('Upload Photo', 
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true),
+                                    fontSize: 30,
                                     fontWeight: FontWeight.bold, 
                                     color: Color(0xff000000),
                                   ),
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                              SizedBox(height: 40),
 
                               GestureDetector(
                                 onTap: () async{
@@ -117,6 +115,12 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   
                                 },
                                 child: Container(
+                                  // height: 335,
+                                  // width: 335,
+                                  height: SizeConfig.screenWidth / 1.2,
+                                  // height: SizeConfig.screenHeight / 2,
+                                  width: SizeConfig.screenWidth / 1.2,
+                                  color: Color(0xffF9F8EE),
                                   child: Column(
                                     children: [
                                       Expanded(
@@ -153,8 +157,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                         child: Center(
                                           child: Text('Add a photo',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                                              fontWeight: FontWeight.w300,
+                                              fontSize: 18,
+                                              // fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
                                             ),
                                           ),
@@ -162,23 +166,23 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                       ),
                                     ],
                                   ),
-                                  height: ScreenUtil().setHeight(335),
-                                  width: SizeConfig.screenWidth / 1.2,
-                                  color: Color(0xffF9F8EE),
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                              SizedBox(height: 80),
 
                               MiscRegularButtonTemplate(
                                 buttonText: textNumber == 1
                                 ? 'Sign Up'
                                 : 'Next',
                                 buttonTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xffffffff),
-                                ), 
+                                ),
+                                width: SizeConfig.screenWidth / 2,
+                                height: 45,
+                                buttonColor: Color(0xff04ECFF),
                                 onPressed: () async{
                                   if(_image != null){
 
@@ -219,13 +223,10 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                       context.read<BlocShowMessage>().showMessage();
                                     });
                                   }
-                                }, 
-                                width: SizeConfig.screenWidth / 2, 
-                                height: ScreenUtil().setHeight(45),
-                                buttonColor: Color(0xff04ECFF),
+                                },
                               ),
 
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: 20),
 
                               RichText(
                                 text: TextSpan(
@@ -233,7 +234,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     TextSpan(
                                       text: 'Connect / ', 
                                       style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w300,
                                         color: Color(0xff888888),
                                       ),
@@ -242,7 +243,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     TextSpan(
                                       text: 'Remember / ',
                                       style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w300,
                                         color: Color(0xff888888),
                                       ),
@@ -251,7 +252,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                     TextSpan(
                                       text: 'Honor',
                                       style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w300,
                                         color: Color(0xff888888),
                                       ),
@@ -260,7 +261,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20),
 
                             ],
                           ),

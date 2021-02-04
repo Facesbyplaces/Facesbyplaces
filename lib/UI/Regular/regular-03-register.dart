@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -22,10 +22,6 @@ class RegularRegister extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -38,15 +34,17 @@ class RegularRegister extends StatelessWidget{
           }
         },
         child: Scaffold(
-          body: ContainerResponsive(
-            height: SizeConfig.screenHeight,
-            width: SizeConfig.screenWidth,
-            alignment: Alignment.center,
-            child: ContainerResponsive(
-              width: SizeConfig.screenWidth,
-              heightResponsive: false,
-              widthResponsive: true,
-              alignment: Alignment.center,
+          body: ResponsiveWrapper(
+            maxWidth: SizeConfig.screenWidth,
+            defaultScale: true,
+            breakpoints: [
+              ResponsiveBreakpoint.resize(480, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+            ],
+            child: Container(
+              height: SizeConfig.screenHeight,
               child: Stack(
                 children: [
 
@@ -86,84 +84,84 @@ class RegularRegister extends StatelessWidget{
                                 labelText: 'Your Name', 
                                 type: TextInputType.name, 
                                 labelTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
                                 ),
                               ),
                               
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20),
                               
                               MiscRegularInputFieldTemplate(
                                 key: _key2, 
                                 labelText: 'Last Name', 
                                 type: TextInputType.name, 
                                 labelTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
-                                  fontWeight: FontWeight.w400, 
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
                                   color: Colors.grey,
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20),
                               
                               MiscRegularPhoneNumberTemplate(
                                 key: _key3, 
                                 labelText: 'Mobile #', 
                                 type: TextInputType.phone, 
                                 labelTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20),
 
                               MiscRegularInputFieldTemplate(
                                 key: _key4, 
                                 labelText: 'Email Address', 
                                 type: TextInputType.emailAddress, 
                                 labelTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20),
 
                               MiscRegularInputFieldTemplate(
                                 key: _key5, 
                                 labelText: 'Username', 
                                 type: TextInputType.text, 
                                 labelTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
                                 ),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20),
 
                               MiscRegularInputFieldTemplate(
                                 key: _key6, 
                                 labelText: 'Password', 
                                 type: TextInputType.text, 
                                 labelTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w400, 
                                   color: Colors.grey,
                                 ), 
                                 obscureText: true,
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                              SizedBox(height: 40),
 
                               MiscRegularButtonTemplate(
                                 buttonText: 'Next', 
                                 buttonTextStyle: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xffffffff),
                                 ),
@@ -270,11 +268,11 @@ class RegularRegister extends StatelessWidget{
 
                                 }, 
                                 width: SizeConfig.screenWidth / 2, 
-                                height: ScreenUtil().setHeight(45),
+                                height: 45,
                                 buttonColor: Color(0xff04ECFF),
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                              SizedBox(height: 25),
 
                               RichText(
                                 text: TextSpan(
@@ -282,7 +280,7 @@ class RegularRegister extends StatelessWidget{
                                     TextSpan(
                                       text: 'Already have an account? ', 
                                       style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                        fontSize: 16,
                                         color: Color(0xff000000),
                                       ),
                                     ),
@@ -290,7 +288,7 @@ class RegularRegister extends StatelessWidget{
                                     TextSpan(
                                       text: 'Login', 
                                       style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                        fontSize: 16,
                                         color: Color(0xff04ECFF),
                                       ),
                                       recognizer: TapGestureRecognizer()
@@ -311,7 +309,7 @@ class RegularRegister extends StatelessWidget{
 
                   Column(
                     children: [
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: 20),
                       
                       Align(
                         alignment: Alignment.topLeft, 
@@ -322,7 +320,7 @@ class RegularRegister extends StatelessWidget{
                           icon: Icon(
                             Icons.arrow_back, 
                             color: Color(0xffffffff), 
-                            size: ScreenUtil().setHeight(30),
+                            size: 30,
                           ),
                         ),
                       ),

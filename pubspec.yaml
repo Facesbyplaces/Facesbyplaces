@@ -73,6 +73,7 @@ dependencies:
   giffy_dialog: ^1.8.0
   overlay_support: ^1.0.5
   firebase_messaging: ^7.0.3
+  responsive_framework: ^0.0.14
 
 dev_dependencies:
   flutter_test:
