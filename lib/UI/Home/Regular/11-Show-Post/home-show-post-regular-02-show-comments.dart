@@ -9,7 +9,7 @@ import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regula
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -206,10 +206,10 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

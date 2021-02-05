@@ -11,7 +11,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -190,10 +190,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -319,7 +319,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w300,
                                           color: Color(0xff000000),
                                         ),
@@ -723,7 +724,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       contents: [
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                                        SizedBox(height: ScreenUtil().setHeight(45)),
+                                        // SizedBox(height: ScreenUtil().setHeight(45)),
+                                        SizedBox(height: 45),
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(
@@ -833,20 +835,24 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 ),
                               ),
                             )
-                            : ContainerResponsive(
-                              height: SizeConfig.screenHeight,
-                              width: SizeConfig.screenWidth,
-                              alignment: Alignment.center,
-                              child: ContainerResponsive(
-                                width: SizeConfig.screenWidth,
-                                heightResponsive: false,
-                                widthResponsive: true,
-                                alignment: Alignment.center,
-                                child: SingleChildScrollView(
-                                  physics: ClampingScrollPhysics(),
-                                  child: MiscBLMEmptyDisplayTemplate(),
-                                ),
-                              ),
+                            // : ContainerResponsive(
+                            //   height: SizeConfig.screenHeight,
+                            //   width: SizeConfig.screenWidth,
+                            //   alignment: Alignment.center,
+                            //   child: ContainerResponsive(
+                            //     width: SizeConfig.screenWidth,
+                            //     heightResponsive: false,
+                            //     widthResponsive: true,
+                            //     alignment: Alignment.center,
+                            //     child: SingleChildScrollView(
+                            //       physics: ClampingScrollPhysics(),
+                            //       child: MiscBLMEmptyDisplayTemplate(),
+                            //     ),
+                            //   ),
+                            // ),
+                            : SingleChildScrollView(
+                              physics: ClampingScrollPhysics(),
+                              child: MiscBLMEmptyDisplayTemplate(),
                             ),
 
                           ],

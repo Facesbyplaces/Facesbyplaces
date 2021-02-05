@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -41,10 +41,10 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -67,19 +67,21 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
               ),
               child: Column(
                 children: [
-                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  // SizedBox(height: ScreenUtil().setHeight(20)),
+                  SizedBox(height: 20),
 
                   Row(
                     children: [
                       Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xff000000),), onPressed: (){Navigator.pop(context);},)),),
 
-                      Text('Send a Gift', style: TextStyle(fontSize: ScreenUtil().setSp(24, allowFontScalingSelf: true),),),
+                      Text('Send a Gift', style: TextStyle(fontSize: 24,),),
 
                       Expanded(child: Container(),)
                     ],
                   ),
 
-                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  // SizedBox(height: ScreenUtil().setHeight(20)),
+                  SizedBox(height: 20),
 
                   Expanded(
                     child: GridView.count(
@@ -99,20 +101,22 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                             child: Container(
                               child: Column(
                                 children: [
-                                  SizedBox(height: ScreenUtil().setHeight(10)),
+                                  // SizedBox(height: ScreenUtil().setHeight(10)),
+                                  SizedBox(height: 10),
 
                                   Expanded(child: Image.asset('assets/icons/gift.png'),),
 
-                                  SizedBox(height: ScreenUtil().setHeight(10)),
+                                  // SizedBox(height: ScreenUtil().setHeight(10)),
+                                  SizedBox(height: 10),
 
                                   ((){
                                     switch(index){
-                                      case 0: return Text('\$0.99', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold),); break;
-                                      case 1: return Text('\$5.00', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold),); break;
-                                      case 2: return Text('\$15.00', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold),); break;
-                                      case 3: return Text('\$25.00', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold),); break;
-                                      case 4: return Text('\$50.00', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold),); break;
-                                      case 5: return Text('\$100.00', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold),); break;
+                                      case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
                                     }
                                   }()),
                                 ],
@@ -128,13 +132,13 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ),
                   ),
 
-                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  SizedBox(height: 20),
 
                   MiscRegularButtonTemplate(
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     buttonTextStyle: TextStyle(
-                      fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                      fontSize: 16,
                       fontWeight: FontWeight.bold, 
                       color: Color(0xffffffff),
                     ), 
@@ -232,10 +236,10 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 
-                    height: ScreenUtil().setHeight(45),
+                    height: 45,
                   ),
 
-                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  SizedBox(height: 20),
 
                 ],
               ),

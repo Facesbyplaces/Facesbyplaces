@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-custom-dr
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +34,10 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Scaffold(
       body: FutureBuilder<APIRegularShowUserInformation>(
         future: showProfile,
@@ -58,7 +58,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
+                        child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
                       ),
 
                     ],
@@ -77,7 +77,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                             onPressed: (){
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: ScreenUtil().setHeight(30)), 
+                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 30), 
                           ),
                         ),
                       ),
@@ -96,7 +96,8 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       children: [
                         Text('${profile.data.showUserInformationFirstName + ' ' + profile.data.showUserInformationLastName}',
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                            // fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
                           ),
@@ -106,7 +107,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                         Text('${profile.data.showUserInformationEmailAddress}',
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                            fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Color(0xff000000),
                           ),
@@ -116,7 +117,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                         Text('About',
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff04ECFF),
                           ),

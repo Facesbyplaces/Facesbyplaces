@@ -2,7 +2,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-no
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-notification-display.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -90,10 +90,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -133,20 +133,24 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           itemCount: notifications.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
       ),
     );
   }

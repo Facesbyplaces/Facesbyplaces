@@ -13,7 +13,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
 import 'home-main-regular-03-03-post-tab.dart';
@@ -118,10 +118,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -166,11 +166,11 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 }
               },
             ),
-            title: Text('FacesByPlaces.com', style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xffffffff),),),
+            title: Text('FacesByPlaces.com', style: TextStyle(fontSize: 16, color: Color(0xffffffff),),),
             centerTitle: true,
             actions: [
               IconButton(
-                icon: Icon(Icons.search, color: Color(0xffffffff), size: ScreenUtil().setHeight(35)),
+                icon: Icon(Icons.search, color: Color(0xffffffff), size: 35),
                 onPressed: () async{
                   Navigator.pushNamed(context, '/home/regular/search');
                 },
@@ -197,7 +197,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomSheet: Container(
-            height: ScreenUtil().setHeight(65),
+            height: 65,
             alignment: Alignment.center,
             child: ToggleButtons(
               borderWidth: 0,
@@ -213,7 +213,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     children: [
                       Icon(MdiIcons.fire,),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Feed', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
+                      Text('Feed', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
                 ),
@@ -224,7 +224,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     children: [
                       Icon(MdiIcons.graveStone),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Memorials', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
+                      Text('Memorials', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
                 ),
@@ -235,7 +235,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     children: [
                       Icon(MdiIcons.post),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Post', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
+                      Text('Post', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
                 ),
@@ -253,7 +253,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         child: Icon(MdiIcons.heart),
                       ),
                       SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Notification', style: TextStyle(fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),),
+                      Text('Notification', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
                 ),
@@ -300,24 +300,29 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
               if(manageDrawer.hasData){
                 if(manageDrawer.data.showProfileInformationGuest != true){
                   return Drawer(
-                    child: ContainerResponsive(
-                      height: SizeConfig.screenHeight,
-                      width: SizeConfig.screenWidth,
-                      alignment: Alignment.center,
-                      child: ContainerResponsive(
-                        width: SizeConfig.screenWidth,
-                        heightResponsive: false,
-                        widthResponsive: true,
-                        alignment: Alignment.topCenter,
-                        color: Color(0xff4EC9D4),
-                        child: SingleChildScrollView(
+                    // child: ContainerResponsive(
+                    //   height: SizeConfig.screenHeight,
+                    //   width: SizeConfig.screenWidth,
+                    //   alignment: Alignment.center,
+                    //   child: ContainerResponsive(
+                    //     width: SizeConfig.screenWidth,
+                    //     heightResponsive: false,
+                    //     widthResponsive: true,
+                    //     alignment: Alignment.topCenter,
+                    //     color: Color(0xff4EC9D4),
+                    //     child: 
+                    //   ),
+                    // ),
+                    child: SingleChildScrollView(
                           physics: ClampingScrollPhysics(),
                           child: Column(
                             children: [
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                              // SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: 20),
 
                               CircleAvatar(
-                                radius: ScreenUtil().setHeight(100),
+                                // radius: ScreenUtil().setHeight(100),
+                                radius: 100,
                                 backgroundColor: Color(0xff888888),
                                 backgroundImage: ((){
                                   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
@@ -328,30 +333,34 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                 }()),
                               ),
 
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                              // SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: 20),
 
-                              Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                              Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                              SizedBox(height: ScreenUtil().setHeight(45)),
+                              // SizedBox(height: ScreenUtil().setHeight(45)),
+                              SizedBox(height: 45),
 
                               GestureDetector(
                                 onTap: (){
                                   Navigator.pop(context);
                                 },
-                                child: Text('Home', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                                child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                               ),
 
-                              SizedBox(height: ScreenUtil().setHeight(25)),
+                              // SizedBox(height: ScreenUtil().setHeight(25)),
+                              SizedBox(height: 25),
 
                               GestureDetector(
                                 onTap: (){
                                   Navigator.pop(context);
                                   Navigator.pushNamed(context, '/home/regular/create-memorial');
                                 },
-                                child: Text('Create Memorial Page', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                                child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                               ),
 
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                              // SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: 20),
 
                               GestureDetector(
                                 onTap: () async{
@@ -370,19 +379,21 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                     addAdmin: result.showNotificationStatusAddAdmin,
                                   )));
                                 },
-                                child: Text('Notification Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                                child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                               ),
 
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                              // SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: 20),
 
                               GestureDetector(
                                 onTap: () async{
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
                                 },
-                                child: Text('Profile Settings', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                                child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                               ),
 
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                              // SizedBox(height: ScreenUtil().setHeight(20)),
+                              SizedBox(height: 20),
 
                               GestureDetector(
                                 onTap: () async{
@@ -429,71 +440,75 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                                   }
                                   
                                 },
-                                child: Text('Log Out', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                                child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                               ),
                               
                             ],
                           ),
                         ),
-                      ),
-                    ),
                   );
                 }else{
                   return Drawer(
-                    child: ContainerResponsive(
-                      height: SizeConfig.screenHeight,
-                      width: SizeConfig.screenWidth,
-                      alignment: Alignment.center,
-                      child: ContainerResponsive(
-                        width: SizeConfig.screenWidth,
-                        heightResponsive: false,
-                        widthResponsive: true,
-                        alignment: Alignment.topCenter,
-                        color: Color(0xff4EC9D4),
-                        child: SingleChildScrollView(
-                          physics: ClampingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              SizedBox(height: ScreenUtil().setHeight(20)),
+                    // child: ContainerResponsive(
+                    //   height: SizeConfig.screenHeight,
+                    //   width: SizeConfig.screenWidth,
+                    //   alignment: Alignment.center,
+                    //   child: ContainerResponsive(
+                    //     width: SizeConfig.screenWidth,
+                    //     heightResponsive: false,
+                    //     widthResponsive: true,
+                    //     alignment: Alignment.topCenter,
+                    //     color: Color(0xff4EC9D4),
+                    //     child: 
+                    //   ),
+                    // ),
+                    child: SingleChildScrollView(
+                      physics: ClampingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          // SizedBox(height: ScreenUtil().setHeight(20)),
+                          SizedBox(height: 20,),
 
-                              CircleAvatar(
-                                radius: ScreenUtil().setHeight(100),
-                                backgroundColor: Color(0xff888888),
-                                backgroundImage: ((){
-                                  if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                    return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                                  }else{
-                                    return AssetImage('assets/icons/app-icon.png');
-                                  }
-                                }()),
-                              ),
-
-                              SizedBox(height: ScreenUtil().setHeight(20)),
-
-                              Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
-
-                              SizedBox(height: ScreenUtil().setHeight(45)),
-
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Home', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
-
-                              SizedBox(height: ScreenUtil().setHeight(25)),
-
-                              GestureDetector(
-                                onTap: (){
-                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                },
-                                child: Text('Sign up or Sign in', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
-                              
-                            ],
+                          CircleAvatar(
+                            // radius: ScreenUtil().setHeight(100),
+                            radius: 100,
+                            backgroundColor: Color(0xff888888),
+                            backgroundImage: ((){
+                              if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                              }else{
+                                return AssetImage('assets/icons/app-icon.png');
+                              }
+                            }()),
                           ),
-                        ),
+
+                          // SizedBox(height: ScreenUtil().setHeight(20)),
+                          SizedBox(height: 20,),
+
+                          Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+
+                          // SizedBox(height: ScreenUtil().setHeight(45)),
+                          SizedBox(height: 45,),
+
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                            child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                          ),
+
+                          // SizedBox(height: ScreenUtil().setHeight(25)),
+                          SizedBox(height: 25,),
+
+                          GestureDetector(
+                            onTap: (){
+                              Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                              Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                            },
+                            child: Text('Sign up or Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                          ),
+                          
+                        ],
                       ),
                     ),
                   );

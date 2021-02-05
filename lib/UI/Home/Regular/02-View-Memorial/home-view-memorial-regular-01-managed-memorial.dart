@@ -11,7 +11,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -190,10 +190,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -230,13 +230,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                         child: Column(
                           children: [
 
-                            SizedBox(height: ScreenUtil().setHeight(105)),
+                            // SizedBox(height: ScreenUtil().setHeight(105)),
+                            SizedBox(height: 105,),
 
                             Center(
                               child: Text(profile.data.almMemorial.showMemorialName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                  // fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xff000000),
                                 ),
@@ -245,7 +247,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20,),
 
                             Container(
                               width: SizeConfig.safeBlockHorizontal * 15,
@@ -264,12 +267,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
 
-                                  SizedBox(width: ScreenUtil().setWidth(10)),
+                                  // SizedBox(width: ScreenUtil().setWidth(10)),
+                                  SizedBox(height: 10,),
 
                                   Expanded(
                                     child: Text('${profile.data.almMemorial.showMemorialFollowersCount}',
                                       style: TextStyle(
-                                        fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                        fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xff000000),
                                       ),
@@ -279,7 +283,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20,),
 
                             Column(
                               children: [
@@ -319,7 +324,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       child: Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w300,
                                           color: Color(0xff000000),
                                         ),
@@ -332,7 +337,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ],
                             ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20,),
 
                             Container(
                               child: Row(
@@ -361,13 +367,15 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
-                                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                            // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                            fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
                                         minWidth: SizeConfig.screenWidth / 2,
-                                        height: ScreenUtil().setHeight(45),
+                                        // height: ScreenUtil().setHeight(45),
+                                        height: 45,
                                         shape: StadiumBorder(),
                                         color: Color(0xff2F353D),
                                       ),
@@ -397,9 +405,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                       },
                                       child: CircleAvatar(
-                                        radius: ScreenUtil().setHeight(25),
+                                        // radius: ScreenUtil().setHeight(25),
+                                        radius: 25,
                                         backgroundColor: Color(0xff3498DB),
-                                        child: Icon(Icons.share, color: Color(0xffffffff), size: ScreenUtil().setHeight(25),),
+                                        child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),
                                       ),
                                     ),
                                   ),
@@ -407,7 +416,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20,),
 
                             Padding(
                               padding: EdgeInsets.only(left: 20),
@@ -416,11 +426,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                   Row(
                                     children: [
-                                      Icon(Icons.place, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
+                                      Icon(Icons.place, color: Color(0xff000000), size: 25,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsCountry,
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -431,11 +441,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                   Row(
                                     children: [
-                                      Icon(Icons.star, color: Color(0xff000000), size: ScreenUtil().setHeight(25),),
+                                      Icon(Icons.star, color: Color(0xff000000), size: 25,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDob,
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -446,11 +456,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                   Row(
                                     children: [
-                                      Image.asset('assets/icons/grave_logo.png', height: ScreenUtil().setHeight(25),),
+                                      Image.asset('assets/icons/grave_logo.png', height: 25,),
                                       SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
                                       Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsRip,
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -461,7 +471,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20),
 
                             Container(
                               height: 50.0,
@@ -478,7 +488,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text(profile.data.almMemorial.showMemorialPostsCount.toString(),
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -486,7 +496,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text('Post',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -496,7 +506,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
                                   
-                                  Container(width: ScreenUtil().setHeight(2), color: Color(0xffeeeeee),),
+                                  Container(width: 2, color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -509,7 +519,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text('${profile.data.almMemorial.showMemorialFamilyCount}',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -517,7 +527,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text('Family',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -527,7 +537,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
 
-                                  Container(width: ScreenUtil().setHeight(2), color: Color(0xffeeeeee),),
+                                  Container(width: 2, color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -540,7 +550,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text(profile.data.almMemorial.showMemorialFriendsCount.toString(),
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -548,7 +558,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text('Friends',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -558,7 +568,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
 
-                                  Container(width: ScreenUtil().setHeight(2), color: Color(0xffeeeeee),),
+                                  Container(width: 2, color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -571,7 +581,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text(profile.data.almMemorial.showMemorialFollowersCount.toString(),
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -579,7 +589,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                           Text('Joined',
                                             style: TextStyle(
-                                              fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -592,13 +602,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            Container(height: ScreenUtil().setHeight(2), color: Color(0xffffffff),),
+                            Container(height: 2, color: Color(0xffffffff),),
 
-                            Container(height: ScreenUtil().setHeight(5), color: Color(0xffeeeeee),),
+                            Container(height: 5, color: Color(0xffeeeeee),),
 
                             Column(
                               children: [
-                                SizedBox(height: ScreenUtil().setHeight(20)),
+                                SizedBox(height: 20),
 
                                 Container(
                                   key: dataKey,
@@ -606,14 +616,14 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   alignment: Alignment.centerLeft,
                                   child: Text('Post',
                                     style: TextStyle(
-                                      fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xff000000),
                                     ),
                                   ),
                                 ),
 
-                                SizedBox(height: ScreenUtil().setHeight(20)),
+                                SizedBox(height: 20),
 
                                 profile.data.almMemorial.showMemorialImagesOrVideos != null
                                 ? Column(
@@ -657,13 +667,13 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           );
                                         }, 
                                         separatorBuilder: (context, index){
-                                          return SizedBox(width: ScreenUtil().setHeight(20));
+                                          return SizedBox(width: 20);
                                         },
                                         itemCount: profile.data.almMemorial.showMemorialImagesOrVideos.length,
                                       ),
                                     ),
 
-                                    SizedBox(height: ScreenUtil().setHeight(20)),
+                                    SizedBox(height: 20),
 
                                   ],
                                 )
@@ -671,7 +681,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ],
                             ),
 
-                            Container(height: ScreenUtil().setHeight(5), color: Color(0xffeeeeee),),
+                            Container(height: 5, color: Color(0xffeeeeee),),
 
                             postCount != 0
                             ? Container(
@@ -723,7 +733,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       contents: [
                                         Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                                        SizedBox(height: ScreenUtil().setHeight(45)),
+                                        SizedBox(height: 45),
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(
@@ -832,20 +842,24 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 ),
                               ),
                             )
-                            : ContainerResponsive(
-                              height: SizeConfig.screenHeight,
-                              width: SizeConfig.screenWidth,
-                              alignment: Alignment.center,
-                              child: ContainerResponsive(
-                                width: SizeConfig.screenWidth,
-                                heightResponsive: false,
-                                widthResponsive: true,
-                                alignment: Alignment.center,
-                                child: SingleChildScrollView(
-                                  physics: ClampingScrollPhysics(),
-                                  child: MiscRegularEmptyDisplayTemplate(),
-                                ),
-                              ),
+                            // : ContainerResponsive(
+                            //   height: SizeConfig.screenHeight,
+                            //   width: SizeConfig.screenWidth,
+                            //   alignment: Alignment.center,
+                            //   child: ContainerResponsive(
+                            //     width: SizeConfig.screenWidth,
+                            //     heightResponsive: false,
+                            //     widthResponsive: true,
+                            //     alignment: Alignment.center,
+                            //     child: SingleChildScrollView(
+                            //       physics: ClampingScrollPhysics(),
+                            //       child: MiscRegularEmptyDisplayTemplate(),
+                            //     ),
+                            //   ),
+                            // ),
+                            : SingleChildScrollView(
+                              physics: ClampingScrollPhysics(),
+                              child: MiscRegularEmptyDisplayTemplate(),
                             ),
 
                           ],
@@ -870,7 +884,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                                   Text('Back',
                                     style: TextStyle(
-                                      fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w500,
                                       color: Color(0xffffffff),
                                     ),
@@ -901,10 +915,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               shape: StadiumBorder(),
                               color: Colors.green,
                               splashColor: Colors.yellow,
-                              height: ScreenUtil().setHeight(45),
+                              // height: ScreenUtil().setHeight(45),
+                              height: 45,
                               child: Text('Create Post',
                                 style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xffffffff),
                                 ),
@@ -920,7 +935,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                   Positioned(
                     top: SizeConfig.screenHeight / 5,
                     child: Container(
-                      height: ScreenUtil().setHeight(160),
+                      // height: ScreenUtil().setHeight(160),
+                      height: 160,
                       width: SizeConfig.screenWidth,
                       child: Row(
                         children: [

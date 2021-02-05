@@ -9,7 +9,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-dis
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
@@ -322,10 +322,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -358,7 +358,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search Memorial',
                       hintStyle: TextStyle(
-                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontSize: 14,
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(
@@ -391,7 +391,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                   Container(
                     alignment: Alignment.center,
-                    height: ScreenUtil().setHeight(55),
+                    // height: ScreenUtil().setHeight(55),
+                    height: 55,
                     color: Color(0xffffffff),
                     child: DefaultTabController(
                       length: 4,
@@ -410,7 +411,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           Center(
                             child: Text('Post',
                               style: TextStyle(
-                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -418,7 +420,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                           Center(child: Text('Suggested',
                               style: TextStyle(
-                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -427,7 +430,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           Center(
                             child: Text('Nearby',
                               style: TextStyle(
-                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -436,7 +440,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                           Center(
                             child: Text('BLM',
                               style: TextStyle(
-                                fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -466,9 +471,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                 ((){
                                   if(currentLocation != null || currentLocation != ''){
-                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }else{
-                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }
                                 }()),
                               ],
@@ -490,9 +495,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
                                 ((){
                                   if(currentLocation != null || currentLocation != ''){
-                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                    return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }else{
-                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),),);
+                                    return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }
                                 }()),
                               ],
@@ -577,7 +582,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                SizedBox(height: ScreenUtil().setHeight(45)),
+                SizedBox(height: 45),
 
                 feeds[i].imagesOrVideos != null
                 ? Container(

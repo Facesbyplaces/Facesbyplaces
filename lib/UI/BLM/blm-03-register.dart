@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -22,10 +22,10 @@ class BLMRegister extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -38,16 +38,19 @@ class BLMRegister extends StatelessWidget{
           }
         },
         child: Scaffold(
-          body: ContainerResponsive(
-            height: SizeConfig.screenHeight,
-            width: SizeConfig.screenWidth,
-            alignment: Alignment.center,
-            child: ContainerResponsive(
-              width: SizeConfig.screenWidth,
-              heightResponsive: false,
-              widthResponsive: true,
-              alignment: Alignment.center,
-              child: Stack(
+          // body: ContainerResponsive(
+          //   height: SizeConfig.screenHeight,
+          //   width: SizeConfig.screenWidth,
+          //   alignment: Alignment.center,
+          //   child: ContainerResponsive(
+          //     width: SizeConfig.screenWidth,
+          //     heightResponsive: false,
+          //     widthResponsive: true,
+          //     alignment: Alignment.center,
+          //     child: 
+          //   ),
+          // ),
+          body: Stack(
                 children: [
 
                   SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
@@ -66,34 +69,34 @@ class BLMRegister extends StatelessWidget{
                             child: Column(
                               children: [
                           
-                                MiscBLMInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), fontWeight: FontWeight.w400, color: Colors.grey)),
+                                MiscBLMInputFieldTemplate(key: _key1, labelText: 'Your Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
                                 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                                 
-                                MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), fontWeight: FontWeight.w400, color: Colors.grey)),
+                                MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', type: TextInputType.name, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                MiscBLMPhoneNumberTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), fontWeight: FontWeight.w400, color: Colors.grey)),
+                                MiscBLMPhoneNumberTemplate(key: _key3, labelText: 'Mobile #', type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), fontWeight: FontWeight.w400, color: Colors.grey)),
+                                MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email Address', type: TextInputType.emailAddress, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                MiscBLMInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), fontWeight: FontWeight.w400, color: Colors.grey)),
+                                MiscBLMInputFieldTemplate(key: _key5, labelText: 'Username', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 2,),
 
-                                MiscBLMInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
+                                MiscBLMInputFieldTemplate(key: _key6, labelText: 'Password', type: TextInputType.text, labelTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey), obscureText: true,),
 
                                 SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
                                 MiscBLMButtonTemplate(
                                   buttonText: 'Next', 
                                   buttonTextStyle: TextStyle(
-                                    fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold, 
                                     color: Color(0xffffffff),
                                   ), 
@@ -201,7 +204,8 @@ class BLMRegister extends StatelessWidget{
 
                                   }, 
                                   width: SizeConfig.screenWidth / 2, 
-                                  height: ScreenUtil().setHeight(45), 
+                                  // height: ScreenUtil().setHeight(45), 
+                                  height: 45,
                                   buttonColor: Color(0xff000000),
                                 ),
 
@@ -213,7 +217,7 @@ class BLMRegister extends StatelessWidget{
                                       TextSpan(
                                         text: 'Already have an account? ', 
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          fontSize: 16,
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -221,7 +225,7 @@ class BLMRegister extends StatelessWidget{
                                       TextSpan(
                                         text: 'Login', 
                                         style: TextStyle(
-                                          fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                          fontSize: 16,
                                           color: Color(0xff04ECFF),
                                         ),
                                         recognizer: TapGestureRecognizer()
@@ -233,7 +237,8 @@ class BLMRegister extends StatelessWidget{
                                   ),
                                 ),
 
-                                SizedBox(height: ScreenUtil().setHeight(10)),
+                                // SizedBox(height: ScreenUtil().setHeight(10)),
+                                SizedBox(height: 10,),
 
                               ],
                             ),
@@ -248,14 +253,12 @@ class BLMRegister extends StatelessWidget{
                     children: [
                       SizedBox(height: SizeConfig.blockSizeVertical * 2,),
                       
-                      Align(alignment: Alignment.topLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: ScreenUtil().setHeight(30),),),),
+                      Align(alignment: Alignment.topLeft, child: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 30,),),),
                     ],
                   ),
 
                 ],
               ),
-            ),
-          ),
         ),
       ),
     );

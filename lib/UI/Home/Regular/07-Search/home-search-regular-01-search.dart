@@ -1,5 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-search-regular-02-search-extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
@@ -19,10 +19,10 @@ class HomeRegularSearch extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -95,7 +95,7 @@ class HomeRegularSearch extends StatelessWidget{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search a Memorial',
                       hintStyle: TextStyle(
-                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontSize: 14,
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(
@@ -129,11 +129,11 @@ class HomeRegularSearch extends StatelessWidget{
 
                   Expanded(child: Container(),),
 
-                  GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: ScreenUtil().setHeight(80), backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: ScreenUtil().setHeight(120)),),),),
+                  GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: 80, backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: 120),),),),
 
-                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  SizedBox(height: 20),
 
-                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                  Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
                   Expanded(child: Container(),),
 

@@ -8,7 +8,7 @@ import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regula
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-13-regular-dropdown.dart';
@@ -111,10 +111,10 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
@@ -136,7 +136,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
         child: Column(
           children: [
             Container(
-              height: ScreenUtil().setHeight(65),
+              // height: ScreenUtil().setHeight(65),
+              height: 65,
               child: Row(
                 children: [
                   GestureDetector(
@@ -185,7 +186,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                                 child: Text(memorialName,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                    // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xff000000),
                                   ),
@@ -198,7 +200,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                                 child: Text(timeCreated,
                                   maxLines: 1,
                                   style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                    // fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xffaaaaaa)
                                   ),
@@ -222,7 +225,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
               ),
             ),
 
-            SizedBox(height: ScreenUtil().setHeight(45)),
+            // SizedBox(height: ScreenUtil().setHeight(45)),
+            SizedBox(height: 45),
 
             numberOfTagged != 0
             ? Row(
@@ -266,7 +270,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             : Container(height: 0,),
 
             Container(
-              height: ScreenUtil().setHeight(65),
+              // height: ScreenUtil().setHeight(65),
+              height: 65,
               child: Row(
                 children: [
                   GestureDetector(
@@ -295,7 +300,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        Text('$likesCount', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),),
+                        Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
 
                       ],
                     ),
@@ -313,7 +318,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
-                        Text('$numberOfComments', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),),
+                        Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                       ],
                     ),
                   ),

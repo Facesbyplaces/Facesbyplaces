@@ -2,7 +2,7 @@ import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-02-show-use
 import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-03-show-user-memorials.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -256,10 +256,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -345,20 +345,24 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
           itemCount: posts.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscBLMEmptyDisplayTemplate(),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscBLMEmptyDisplayTemplate(),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscBLMEmptyDisplayTemplate(),
       ),
     );
   }
@@ -546,10 +550,10 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Container(
       child: count != 0
       ? SmartRefresher(
@@ -581,21 +585,26 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
           itemCount: finalMemorials.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
       ),
+
     );
   }
 }

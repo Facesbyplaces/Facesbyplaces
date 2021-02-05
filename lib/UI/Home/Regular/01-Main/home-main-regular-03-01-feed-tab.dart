@@ -5,7 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-image-dis
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -127,10 +127,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -180,7 +180,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                SizedBox(height: ScreenUtil().setHeight(45)),
+                // SizedBox(height: ScreenUtil().setHeight(45)),
+                SizedBox(height: 45),
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
@@ -286,21 +287,25 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           itemCount: feeds.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: 
+      //   ),
+      // ),
+      : SingleChildScrollView(
             physics: ClampingScrollPhysics(),
             child: Column(
               children: [
 
-                SizedBox(height: ScreenUtil().setHeight(45)),
+                // SizedBox(height: ScreenUtil().setHeight(45)),
+                SizedBox(height: 45),
 
                 Align(
                   alignment: Alignment.center,
@@ -309,20 +314,21 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     text: TextSpan(
                       children: <TextSpan>[
 
-                        TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                        TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
 
-                        TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                        TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
                       ],
                     ),
                   ),
                 ),
 
-                SizedBox(height: ScreenUtil().setHeight(25)),
+                // SizedBox(height: ScreenUtil().setHeight(25)),
+                SizedBox(height: 25),
 
-                ContainerResponsive(
+                Container(
                   width: SizeConfig.screenHeight,
-                  heightResponsive: false,
-                  widthResponsive: true,
+                  // heightResponsive: false,
+                  // widthResponsive: true,
                   child: Stack(
                     children: [
                       Positioned(
@@ -354,20 +360,23 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   ),
                 ),
 
-                SizedBox(height: ScreenUtil().setHeight(45)),
+                // SizedBox(height: ScreenUtil().setHeight(45)),
+                SizedBox(height: 45),
 
-                Center(child: Text('Feed is empty', style: TextStyle(fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
+                Center(child: Text('Feed is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
 
-                SizedBox(height: ScreenUtil().setHeight(20)),
+                // SizedBox(height: ScreenUtil().setHeight(20)),
+                SizedBox(height: 20),
 
-                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xff000000),),),),),
+                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),),
 
-                SizedBox(height: ScreenUtil().setHeight(25)),
+                // SizedBox(height: ScreenUtil().setHeight(25)),
+                SizedBox(height: 25),
 
                 MiscRegularButtonTemplate(
                   buttonText: 'Create', 
                   buttonTextStyle: TextStyle(
-                    fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                    fontSize: 16,
                     fontWeight: FontWeight.bold, 
                     color: Color(0xffffffff),
                   ), 
@@ -375,17 +384,17 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     Navigator.pushNamed(context, '/home/regular/create-memorial');
                   }, 
                   width: SizeConfig.screenWidth / 2, 
-                  height: ScreenUtil().setHeight(45),
+                  // height: ScreenUtil().setHeight(45),
+                  height: 45,
                   buttonColor: Color(0xff04ECFF),
                 ),
 
-                SizedBox(height: ScreenUtil().setHeight(20)),
+                // SizedBox(height: ScreenUtil().setHeight(20)),
+                SizedBox(height: 20),
                 
               ],
             ),
           ),
-        ),
-      ),
     );
   }
 }

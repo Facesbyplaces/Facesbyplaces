@@ -3,7 +3,7 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -98,10 +98,10 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -160,7 +160,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search User',
                       hintStyle: TextStyle(
-                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontSize: 14,
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(

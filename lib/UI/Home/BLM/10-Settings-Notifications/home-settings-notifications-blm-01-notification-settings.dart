@@ -7,7 +7,7 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-not
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -57,10 +57,10 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -75,7 +75,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Notification Settings', style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), color: Color(0xffffffff)),),
+            title: Text('Notification Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
@@ -95,7 +95,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             Row(
                               children: [
-                                Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
                                 Switch(
                                   value: toggle1,
@@ -117,7 +117,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             Row(
                               children: [
-                                Expanded(child: Text('New Activities', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('New Activities', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
                                 Switch(
                                   value: toggle2,
@@ -138,7 +138,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             Row(
                               children: [
-                                Expanded(child: Text('Post Likes', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
                                 
                                 Switch(
                                   value: toggle3,
@@ -159,7 +159,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             Row(
                               children: [
-                                Expanded(child: Text('Post Comments', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
                                 Switch(
                                   value: toggle4,
@@ -194,13 +194,13 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                            Text('Page Invites', style: TextStyle(fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                            Text('Page Invites', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
 
                             SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                             Row(
                               children: [
-                                Expanded(child: Text('Add as Family', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
                                 Switch(
                                   value: toggle5,
@@ -221,7 +221,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             Row(
                               children: [
-                                Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
                                 Switch(
                                   value: toggle6,
@@ -242,7 +242,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
 
                             Row(
                               children: [
-                                Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true), color: Color(0xff000000),),)),
+                                Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
                                 Switch(
                                   value: toggle7,

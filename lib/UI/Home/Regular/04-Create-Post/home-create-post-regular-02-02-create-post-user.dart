@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-create-post-regular-01-create-post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter/material.dart';
@@ -75,10 +75,10 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -126,7 +126,8 @@ class HomeRegularCreatePostSearchUserState extends State<HomeRegularCreatePostSe
                       focusColor: Color(0xffffffff),
                       hintText: 'Search User',
                       hintStyle: TextStyle(
-                        fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                        fontSize: 14,
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(

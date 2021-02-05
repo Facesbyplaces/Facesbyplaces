@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +34,10 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Scaffold(
       body: FutureBuilder<APIBLMShowUserInformation>(
         future: showProfile,
@@ -57,7 +57,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(radius: ScreenUtil().setHeight(100), backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
+                        child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
                       ),
                     ],
                   ),
@@ -75,7 +75,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                             onPressed: (){
                               Navigator.pop(context);
                             },
-                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: ScreenUtil().setHeight(30)), 
+                            icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 30), 
                           ),
                         ),
                       ),
@@ -94,7 +94,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                       children: [
                         Text('${profile.data.showUserInformationFirstName + ' ' + profile.data.showUserInformationLastName}',
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
                           ),
@@ -104,7 +104,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                         Text('${profile.data.showUserInformationEmailAddress}',
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
+                            fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Color(0xff000000),
                           ),
@@ -114,7 +114,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
 
                         Text('About',
                           style: TextStyle(
-                            fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff04ECFF),
                           ),

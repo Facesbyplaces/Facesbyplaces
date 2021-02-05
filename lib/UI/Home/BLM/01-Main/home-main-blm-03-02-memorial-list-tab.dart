@@ -2,7 +2,7 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-00-home-memoria
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -256,10 +256,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -292,20 +292,24 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           itemCount: finalMemorials.length,
         ),
       )
-      : ContainerResponsive(
-        height: SizeConfig.screenHeight,
-        width: SizeConfig.screenWidth,
-        alignment: Alignment.center,
-        child: ContainerResponsive(
-          width: SizeConfig.screenWidth,
-          heightResponsive: false,
-          widthResponsive: true,
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
-          ),
-        ),
+      // : ContainerResponsive(
+      //   height: SizeConfig.screenHeight,
+      //   width: SizeConfig.screenWidth,
+      //   alignment: Alignment.center,
+      //   child: ContainerResponsive(
+      //     width: SizeConfig.screenWidth,
+      //     heightResponsive: false,
+      //     widthResponsive: true,
+      //     alignment: Alignment.center,
+      //     child: SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
+      //     ),
+      //   ),
+      // ),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
       ),
     );
   }

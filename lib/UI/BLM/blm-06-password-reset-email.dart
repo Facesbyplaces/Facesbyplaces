@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:responsive_widgets/responsive_widgets.dart';
+// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +46,10 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    ResponsiveWidgets.init(context,
-      height: SizeConfig.screenHeight,
-      width: SizeConfig.screenWidth,
-    );
+    // ResponsiveWidgets.init(context,
+    //   height: SizeConfig.screenHeight,
+    //   width: SizeConfig.screenWidth,
+    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -62,16 +62,21 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
           }
         },
         child: Scaffold(
-          body: ContainerResponsive(
-            height: SizeConfig.screenHeight,
-            width: SizeConfig.screenWidth,
-            alignment: Alignment.center,
-            child: ContainerResponsive(
-              width: SizeConfig.screenWidth,
-              heightResponsive: false,
-              widthResponsive: true,
-              alignment: Alignment.center,
-              child: Stack(
+          // body: ContainerResponsive(
+          //   height: SizeConfig.screenHeight,
+          //   width: SizeConfig.screenWidth,
+          //   alignment: Alignment.center,
+          //   child: ContainerResponsive(
+          //     width: SizeConfig.screenWidth,
+          //     heightResponsive: false,
+          //     widthResponsive: true,
+          //     alignment: Alignment.center,
+          //     child: 
+
+
+          //   ),
+          // ),
+          body: Stack(
                 children: [
 
                   SingleChildScrollView(
@@ -83,11 +88,11 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 20,),
 
-                          Center(child: Text('Verify Email', style: TextStyle(fontSize: ScreenUtil().setSp(30, allowFontScalingSelf: true), fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                          Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-                          Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true), fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                          Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
                           SizedBox(height: SizeConfig.blockSizeVertical * 10,),
 
@@ -96,7 +101,8 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                             labelText: 'Email Address', 
                             type: TextInputType.emailAddress, 
                             labelTextStyle: TextStyle(
-                              fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                              // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                              fontSize: 16,
                               fontWeight: FontWeight.w400, 
                               color: Color(0xff000000),
                             ),
@@ -248,7 +254,8 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                           }, 
                           icon: Icon(
                             Icons.arrow_back, 
-                            size: ScreenUtil().setHeight(30),
+                            // size: ScreenUtil().setHeight(30),
+                            size: 30,
                           ),
                         ),
                       ),
@@ -257,10 +264,6 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                   ),
                 ],
               ),
-
-
-            ),
-          ),
         ),
       ),
     );
