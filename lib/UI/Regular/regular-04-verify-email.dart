@@ -99,13 +99,13 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                                           color: Color(0xff000000)
                                         ),
                                         followingFieldDecoration: BoxDecoration(
-                                          border: Border(bottom: BorderSide(color: Color(0xff000000), width: SizeConfig.blockSizeVertical * .1))
+                                          border: Border(bottom: BorderSide(color: Color(0xff000000),),)
                                         ),
                                         selectedFieldDecoration: BoxDecoration(
-                                          border: Border(bottom: BorderSide(color: Color(0xff000000), width: SizeConfig.blockSizeVertical * .1))
+                                          border: Border(bottom: BorderSide(color: Color(0xff000000),),)
                                         ),
                                         submittedFieldDecoration: BoxDecoration(
-                                          border: Border(bottom: BorderSide(color: Color(0xff000000), width: SizeConfig.blockSizeVertical * .1))
+                                          border: Border(bottom: BorderSide(color: Color(0xff000000),),)
                                         ),
                                       ),
                                     ),

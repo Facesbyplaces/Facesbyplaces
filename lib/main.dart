@@ -1,5 +1,3 @@
-import 'package:responsive_framework/responsive_framework.dart';
-
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
@@ -24,6 +22,7 @@ import 'UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
 import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';

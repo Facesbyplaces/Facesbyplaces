@@ -18,8 +18,14 @@ class MiscBLMImageDisplayTemplate extends StatelessWidget{
     return Container(
       // height: ScreenUtil().setHeight(100),
       // width: ScreenUtil().setWidth(100),
-      height: 100,
-      width: 100,
+      // height: 100,
+      // width: 100,
+      // height: 120,
+      // width: 120,
+      // width: SizeConfig.safeBlockHorizontal * 10,
+      // height: SizeConfig.safeBlockVertical * 10,
+      width: SizeConfig.blockSizeVertical * 15,
+      height: SizeConfig.blockSizeVertical * 15,
       color: Color(0xffF4F3EB),
       child: Padding(
         padding: EdgeInsets.all(5.0),

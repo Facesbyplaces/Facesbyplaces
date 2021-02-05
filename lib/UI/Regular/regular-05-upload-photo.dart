@@ -115,10 +115,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                   
                                 },
                                 child: Container(
-                                  // height: 335,
-                                  // width: 335,
                                   height: SizeConfig.screenWidth / 1.2,
-                                  // height: SizeConfig.screenHeight / 2,
                                   width: SizeConfig.screenWidth / 1.2,
                                   color: Color(0xffF9F8EE),
                                   child: Column(
@@ -148,7 +145,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                             children: [
                                               Container(color: Color(0xffffffff),),
 
-                                              Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: SizeConfig.safeBlockVertical * 30,),),
+                                              Align(alignment: Alignment.center, child: Icon(Icons.add, color: Color(0xffE3E3E3), size: 250,),),
                                             ],
                                           ),
                                         ),
@@ -158,7 +155,6 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                                           child: Text('Add a photo',
                                             style: TextStyle(
                                               fontSize: 18,
-                                              // fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
                                             ),
                                           ),

@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -16,7 +17,8 @@ class MiscRegularInputFieldTemplate extends StatefulWidget{
   MiscRegularInputFieldTemplate({
     Key key,
     this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    // this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.labelTextStyle,
     this.obscureText = false, 
     this.type = TextInputType.text, 
     this.maxLines = 1, 
@@ -50,23 +52,50 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: type,
-      maxLines: maxLines,
-      readOnly: readOnly,
-      cursorColor: Color(0xff000000),
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
+    return LayoutBuilder(
+      builder: (_, BoxConstraints constraints) {
+        ScreenUtil.init(
+          context: _,
+          constraints: constraints,
+          designSize: Size(360, 690),
+          allowFontScaling: false,
+        );
+        return TextFormField(
+          controller: controller,
+          obscureText: obscureText,
+          keyboardType: type,
+          maxLines: maxLines,
+          readOnly: readOnly,
+          cursorColor: Color(0xff000000),
+            // style: TextStyle(
+            //   fontSize: 12.ssp,
+            // ),
+          // style: labelTextStyle,
+          style: TextStyle(
+            fontSize: 14.ssp,
+            fontWeight: FontWeight.w400, 
+            color: Colors.grey,
           ),
-        ),
-      ),
+          decoration: InputDecoration(
+            alignLabelWithHint: true,
+            labelText: labelText,
+            // labelStyle: labelTextStyle,
+            // labelStyle: TextStyle(
+            //   fontSize: 12.ssp,
+            // ),
+            labelStyle: TextStyle(
+              fontSize: 14.ssp,
+              fontWeight: FontWeight.w400, 
+              color: Colors.grey,
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: Color(0xff000000),
+              ),
+            ),
+          ),
+        );
+      }
     );
   }
 }

@@ -67,7 +67,8 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
         children: [
           Expanded(
             child: Container(
-              height: SizeConfig.blockSizeVertical * 4, 
+              // height: SizeConfig.blockSizeVertical * 4, 
+              height: 30,
               child: Image.asset(image),
             ),
           ),

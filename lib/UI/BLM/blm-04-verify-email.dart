@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -27,10 +27,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
     SizeConfig.init(context);
     String verificationCode = ModalRoute.of(context).settings.arguments;
     controller.text = verificationCode;
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocUpdateButtonText>(create: (context) => BlocUpdateButtonText(),),
@@ -48,19 +44,18 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
             }
           },
           child: Scaffold(
-            // body: ContainerResponsive(
-            //   height: SizeConfig.screenHeight,
-            //   width: SizeConfig.screenWidth,
-            //   alignment: Alignment.center,
-            //   child: ContainerResponsive(
-            //     width: SizeConfig.screenWidth,
-            //     heightResponsive: false,
-            //     widthResponsive: true,
-            //     alignment: Alignment.center,
-            //     child: 
-            //   ),
-            // ),
-            body: BlocBuilder<BlocShowMessage, bool>(
+            body: ResponsiveWrapper(
+              maxWidth: SizeConfig.screenWidth,
+              defaultScale: true,
+              breakpoints: [
+                ResponsiveBreakpoint.resize(480, name: MOBILE),
+                ResponsiveBreakpoint.autoScale(800, name: TABLET),
+                ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+                ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+              ],
+              child: Container(
+                height: SizeConfig.screenHeight,
+                  child: BlocBuilder<BlocShowMessage, bool>(
                   builder: (context, showMessage){
                     return BlocBuilder<BlocUpdateButtonText, int>(
                       builder: (context, textNumber){
@@ -78,44 +73,44 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                 child: Column(
                                   children: [
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                    SizedBox(height: 20,),
 
                                     Align(alignment: Alignment.centerLeft, child: IconButton(onPressed: (){context.read<BlocUpdateButtonText>().reset(); Navigator.pop(context); }, icon: Icon(Icons.arrow_back, color: Color(0xff000000), size: 30,),),),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                                    SizedBox(height: 40,),
 
                                     Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                                    SizedBox(height: 40,),
 
                                     Center(child: Text('We have sent a verification code to your email address. Please enter the verification code to continue.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                                    SizedBox(height: 40,),
 
                                     Padding(
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       child: PinPut(
+                                        fieldsAlignment: MainAxisAlignment.spaceEvenly,
                                         controller: controller,
                                         fieldsCount: 3,
                                         textStyle: TextStyle(
-                                          // fontSize: ScreenUtil().setSp(56, allowFontScalingSelf: true),
                                           fontSize: 56,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff000000)
                                         ),
                                         followingFieldDecoration: BoxDecoration(
-                                          border: Border(bottom: BorderSide(color: Color(0xff000000), width: SizeConfig.blockSizeVertical * .1))
+                                          border: Border(bottom: BorderSide(color: Color(0xff000000),),)
                                         ),
                                         selectedFieldDecoration: BoxDecoration(
-                                          border: Border(bottom: BorderSide(color: Color(0xff000000), width: SizeConfig.blockSizeVertical * .1))
+                                          border: Border(bottom: BorderSide(color: Color(0xff000000),),)
                                         ),
                                         submittedFieldDecoration: BoxDecoration(
-                                          border: Border(bottom: BorderSide(color: Color(0xff000000), width: SizeConfig.blockSizeVertical * .1))
+                                          border: Border(bottom: BorderSide(color: Color(0xff000000),),)
                                         ),
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                                    SizedBox(height: 80,),
 
                                     RichText(
                                       text: TextSpan(
@@ -123,7 +118,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                           TextSpan(
                                             text: 'Didn\'t receive a code? ', 
                                             style: TextStyle(
-                                              // fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                               fontSize: 18,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xff000000),
@@ -133,7 +127,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                           TextSpan(
                                             text: 'Resend',
                                             style: TextStyle(
-                                              // fontSize: ScreenUtil().setSp(18, allowFontScalingSelf: true),
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
@@ -190,7 +183,7 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 15,),
+                                    SizedBox(height: 120),
 
                                     MiscBLMButtonTemplate(
                                       buttonText: controller.text.length != 3 ? 'Next' : 'Sign Up',
@@ -238,12 +231,10 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
 
                                       }, 
                                       width: SizeConfig.screenWidth / 2, 
-                                      // height: ScreenUtil().setHeight(45),
                                       height: 45,
                                       buttonColor: Color(0xff000000),
                                     ),
 
-                                    // SizedBox(height: ScreenUtil().setHeight(10)),
                                     SizedBox(height: 10,),
 
                                   ],
@@ -257,6 +248,8 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                     );
                   },
                 ),
+              ),
+            ),
           ),
         ),
       ),

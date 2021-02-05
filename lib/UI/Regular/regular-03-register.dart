@@ -299,6 +299,8 @@ class RegularRegister extends StatelessWidget{
                                   ],
                                 ),
                               ),
+
+                              SizedBox(height: 20),
                               
                             ],
                           ),

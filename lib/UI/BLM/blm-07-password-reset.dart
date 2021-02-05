@@ -7,6 +7,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class BLMPasswordReset extends StatefulWidget{
   final String resetToken;
@@ -47,73 +48,104 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
           }
         },
         child: Scaffold(
-          // body: ContainerResponsive(
-          //   height: SizeConfig.screenHeight,
-          //   width: SizeConfig.screenWidth,
-          //   alignment: Alignment.center,
-          //   child: ContainerResponsive(
-          //     width: SizeConfig.screenWidth,
-          //     heightResponsive: false,
-          //     widthResponsive: true,
-          //     alignment: Alignment.center,
-          //     child: 
-
-          //   ),
-          // ),
-          body: Stack(
+          body: ResponsiveWrapper(
+            maxWidth: SizeConfig.screenWidth,
+            defaultScale: true,
+            breakpoints: [
+              ResponsiveBreakpoint.resize(480, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+            ],
+            child: Container(
+              height: SizeConfig.screenHeight,
+              child: Stack(
                 children: [
 
                   SingleChildScrollView(
                     physics: ClampingScrollPhysics(),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                      // padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
                       child: Column(
                         children: [
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 20,),
+                          Column(
+                            children: [
+                              // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 40),
+                              
+                              Align(
+                                alignment: Alignment.topLeft, 
+                                child: IconButton(
+                                  onPressed: (){
+                                    Navigator.pop(context);
+                                  }, 
+                                  icon: Icon(
+                                    Icons.arrow_back, 
+                                    // size: ScreenUtil().setHeight(30),
+                                    size: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          // SizedBox(height: SizeConfig.blockSizeVertical * 20,),
+                          SizedBox(height: 80),
 
                           Center(child: Text('Change Password', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          SizedBox(height: 40,),
 
                           Center(child: Text('Please enter your new password.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          // SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: 80,),
 
-                          MiscBLMInputFieldTemplate(
-                            key: _key1, 
-                            labelText: 'New Password', 
-                            type: TextInputType.emailAddress, 
-                            labelTextStyle: TextStyle(
-                              // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400, 
-                              color: Color(0xff000000),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: MiscBLMInputFieldTemplate(
+                              key: _key1, 
+                              labelText: 'New Password', 
+                              type: TextInputType.emailAddress, 
+                              labelTextStyle: TextStyle(
+                                // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400, 
+                                color: Color(0xff000000),
+                              ),
+                              obscureText: true,
                             ),
-                            obscureText: true,
                           ),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                          SizedBox(height: 40,),
 
-                          MiscBLMInputFieldTemplate(
-                            key: _key2, 
-                            labelText: 'Confirm Password', 
-                            type: TextInputType.emailAddress, 
-                            labelTextStyle: TextStyle(
-                              // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400, 
-                              color: Color(0xff000000),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: MiscBLMInputFieldTemplate(
+                              key: _key2, 
+                              labelText: 'Confirm Password', 
+                              type: TextInputType.emailAddress, 
+                              labelTextStyle: TextStyle(
+                                // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400, 
+                                color: Color(0xff000000),
+                              ),
+                              obscureText: true,
                             ),
-                            obscureText: true,
                           ),
 
-                          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          // SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                          SizedBox(height: 80,),
 
                           MiscBLMButtonTemplate(
                             buttonText: 'Change',
                             buttonTextStyle: TextStyle(
-                              fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                              fontSize: 16, 
                               fontWeight: FontWeight.bold, 
                               color: Color(0xffffffff),
                             ),
@@ -210,36 +242,34 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                               
                             },
                             width: SizeConfig.screenWidth / 2, 
-                            height: SizeConfig.blockSizeVertical * 7, 
+                            height: 45, 
                             buttonColor: Color(0xff04ECFF),
                           ),
+
+                          SizedBox(height: 20),
 
                         ],
                       ),
                     ),
                   ),
 
-                  Column(
-                    children: [
-                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-                      
-                      Align(
-                        alignment: Alignment.topLeft, 
-                        child: IconButton(
-                          onPressed: (){
-                            Navigator.pop(context);
-                          }, 
-                          icon: Icon(
-                            Icons.arrow_back, 
-                            // size: ScreenUtil().setHeight(30),
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
+            ),
+          ),
+          // body: ContainerResponsive(
+          //   height: SizeConfig.screenHeight,
+          //   width: SizeConfig.screenWidth,
+          //   alignment: Alignment.center,
+          //   child: ContainerResponsive(
+          //     width: SizeConfig.screenWidth,
+          //     heightResponsive: false,
+          //     widthResponsive: true,
+          //     alignment: Alignment.center,
+          //     child: 
+
+          //   ),
+          // ),
         ),
       ),
     );

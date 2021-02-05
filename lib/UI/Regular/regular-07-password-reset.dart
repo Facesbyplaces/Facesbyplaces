@@ -92,30 +92,36 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
 
                           SizedBox(height: 80,),
 
-                          MiscRegularInputFieldTemplate(
-                            key: _key1, 
-                            labelText: 'New Password', 
-                            type: TextInputType.emailAddress, 
-                            labelTextStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400, 
-                              color: Color(0xff000000),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: MiscRegularInputFieldTemplate(
+                              key: _key1, 
+                              labelText: 'New Password', 
+                              type: TextInputType.emailAddress, 
+                              labelTextStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400, 
+                                color: Color(0xff000000),
+                              ),
+                              obscureText: true,
                             ),
-                            obscureText: true,
                           ),
 
                           SizedBox(height: 40,),
 
-                          MiscRegularInputFieldTemplate(
-                            key: _key2, 
-                            labelText: 'Confirm Password', 
-                            type: TextInputType.emailAddress, 
-                            labelTextStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400, 
-                              color: Color(0xff000000),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            child: MiscRegularInputFieldTemplate(
+                              key: _key2, 
+                              labelText: 'Confirm Password', 
+                              type: TextInputType.emailAddress, 
+                              labelTextStyle: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400, 
+                                color: Color(0xff000000),
+                              ),
+                              obscureText: true,
                             ),
-                            obscureText: true,
                           ),
 
                           SizedBox(height: 80,),

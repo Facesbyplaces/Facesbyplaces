@@ -15,19 +15,23 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
         borderRadius: BorderRadius.all(Radius.circular(5))
       ),
       child: Container(
-        height: SizeConfig.screenHeight / 4,
+        // height: SizeConfig.screenHeight / 4,
         padding: EdgeInsets.all(20.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text('Upload From',
               style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
-                fontWeight: FontWeight.w200,
+                // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                fontSize: 16,
+                fontWeight: FontWeight.w300,
                 color: Color(0xff000000),
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -35,14 +39,16 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_1,
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -50,7 +56,8 @@ class MiscBLMUploadFromDialog extends StatelessWidget{
               },
               child: Text(choice_2,
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -74,11 +81,14 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
       child: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text('Choose the relationship of this person:',
             textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
+                // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                fontSize: 16,
                 fontWeight: FontWeight.w200,
                 color: Color(0xff000000),
               ),
@@ -92,7 +102,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Father',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -107,7 +118,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Mother',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -122,7 +134,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Sister',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -137,7 +150,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Brother',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -152,7 +166,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Aunt',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -167,7 +182,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Uncle',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -182,7 +198,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Nephew',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -197,7 +214,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Grandfather',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),
@@ -212,7 +230,8 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               },
               child: Text('Grandmother',
                 style: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff000000).withOpacity(0.5),
                 ),

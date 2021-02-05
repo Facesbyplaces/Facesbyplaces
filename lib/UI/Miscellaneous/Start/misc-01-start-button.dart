@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MiscStartButtonIconTemplate extends StatelessWidget{
 
@@ -11,6 +12,7 @@ class MiscStartButtonIconTemplate extends StatelessWidget{
   final Color buttonColor;
   final Color backgroundColor;
   final Widget image;
+  // final String image;
 
   MiscStartButtonIconTemplate({
     this.buttonText = '',
@@ -30,27 +32,49 @@ class MiscStartButtonIconTemplate extends StatelessWidget{
       onPressed: onPressed,
       minWidth: width,
       height: height,
-      child: Row(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: CircleAvatar(
-              radius: SizeConfig.blockSizeVertical * 4.5,
-              backgroundColor: backgroundColor,
-              child: Center(child: image,),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-              alignment: Alignment.centerLeft,
-              child: Text(buttonText,
-                style: buttonTextStyle
+      child: LayoutBuilder(
+        builder: (_, BoxConstraints constraints) {
+          ScreenUtil.init(
+            context: _,
+            constraints: constraints,
+            designSize: Size(360, 690),
+            allowFontScaling: false,
+          );
+          return Row(
+            children: [
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: CircleAvatar(
+              //     // radius: 30,
+              //     minRadius: 15.w,
+              //     // minRadius: 1.w,
+              //     backgroundColor: backgroundColor,
+              //     child: Center(child: image,),
+              //   ),
+              // ),
+              CircleAvatar(
+                // radius: 30,
+                // minRadius: 20.w,
+                minRadius: 15.w,
+                backgroundColor: backgroundColor,
+                // backgroundImage: AssetImage(image),
+                child: Center(child: image,),
               ),
-            ),
-          ),
-        ],
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+                  // padding: EdgeInsets.all(10.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(buttonText,
+                    style: buttonTextStyle
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
       ),
+      // child: 
       shape: StadiumBorder(),
       color: buttonColor,
     );
