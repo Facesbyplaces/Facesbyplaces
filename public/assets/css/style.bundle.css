@@ -8067,6 +8067,10 @@ button.bg-white:focus {
   display: flex !important;
 }
 
+.pagination-width {
+  width: 100%;
+}
+
 .d-inline-flex {
   display: -webkit-inline-box !important;
   display: -ms-inline-flexbox !important;

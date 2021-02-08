@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
 
 export default function DataTable() {
+  const [page, setPage] = useState(1);
+  console.log("Page: ", page);
+
   return (
     <div className="table-responsive">
       <table
@@ -28,8 +31,93 @@ export default function DataTable() {
             </th>
           </tr>
         </thead>
-        <DataTableRowUserData />
+        <DataTableRowUserData page={page} />
       </table>
+      <div className="d-flex justify-content-between align-items-center flex-wrap">
+        <div className="d-flex align-items-center">
+          <a href="#" className="btn btn-icon btn-sm btn-light mr-2 my-1">
+            <i className="ki ki-bold-double-arrow-back icon-xs" />
+          </a>
+          <a href="#" className="btn btn-icon btn-sm btn-light mr-2 my-1">
+            <i className="ki ki-bold-arrow-back icon-xs" />
+          </a>
+          <a
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+            onClick={() => setPage(1)}
+          >
+            1
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(2)}
+          >
+            2
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(3)}
+          >
+            3
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(4)}
+          >
+            4
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(5)}
+          >
+            5
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(6)}
+          >
+            6
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(7)}
+          >
+            7
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(8)}
+          >
+            8
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(9)}
+          >
+            9
+          </a>
+          <a
+            href="#"
+            className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            onClick={() => setPage(10)}
+          >
+            10
+          </a>
+          <a href="#" className="btn btn-icon btn-sm btn-light mr-2 my-1">
+            <i className="ki ki-bold-arrow-next icon-xs" />
+          </a>
+          <a href="#" className="btn btn-icon btn-sm btn-light mr-2 my-1">
+            <i className="ki ki-bold-double-arrow-next icon-xs" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

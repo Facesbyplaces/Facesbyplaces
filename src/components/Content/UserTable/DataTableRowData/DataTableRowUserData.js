@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "../../../../auxiliary/axios";
 
-export default function DataTableRowUserData() {
+export default function DataTableRowUserData(props) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`/api/v1/admin/users`, { params: { page: 1 } })
+      .get(`/api/v1/admin/users`, { params: { page: props.page } })
       .then((response) => {
         setUsers(response.data.users);
         console.log("Response: ", response.data.users);
