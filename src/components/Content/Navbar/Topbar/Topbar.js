@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //React Icons
 import { GrClose } from "react-icons/gr";
-import { IconContext } from "react-icons";
 
 //Actions
 import { LogoutAction } from "../../../../redux/actions";
 
 export default function Topbar() {
+  const { user } = useSelector(({ auth_data }) => ({
+    user: auth_data.user,
+  }));
+
   const dispatch = useDispatch();
   const [sideBar, setSideBar] = useState(false);
+  const image = (user.image = !null);
 
   const onDivClick = (value) => {
     setSideBar(value);
@@ -19,6 +23,8 @@ export default function Topbar() {
   const onLogOutClicked = () => {
     dispatch(LogoutAction({}));
   };
+
+  console.log("Top Bar User", user);
 
   return (
     <div className="topbar">
@@ -31,11 +37,11 @@ export default function Topbar() {
             Hi,
           </span>
           <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-            Sean
+            {user.first_name}
           </span>
           <span className="symbol symbol-35 symbol-light-success">
             <span className="symbol-label font-size-h5 font-weight-bold">
-              S
+              {user.first_name.charAt(0)}
             </span>
           </span>
         </div>
@@ -62,12 +68,22 @@ export default function Topbar() {
           {/*begin::Header*/}
           <div className="d-flex align-items-center mt-5">
             <div className="symbol symbol-100 mr-5">
-              <div
-                className="symbol-label"
-                style={{
-                  backgroundImage: 'url("assets/media/users/300_16.jpg")',
-                }}
-              />
+              {image ? (
+                <div
+                  className="symbol-label"
+                  style={{
+                    backgroundImage: 'url("assets/media/users/300_16.jpg")',
+                  }}
+                />
+              ) : (
+                <div
+                  className="symbol-label"
+                  style={{
+                    backgroundImage: 'url("assets/media/users/blank.png")',
+                  }}
+                />
+              )}
+
               <i className="symbol-badge bg-success" />
             </div>
             <div className="d-flex flex-column">
@@ -75,7 +91,7 @@ export default function Topbar() {
                 href="#"
                 className="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
               >
-                Jenna Jones
+                {user.first_name} {user.last_name}
               </a>
               <div className="text-muted mt-1">Application Developer</div>
               <div className="navi mt-2">
@@ -116,7 +132,7 @@ export default function Topbar() {
                       </span>
                     </span>
                     <span className="navi-text text-muted text-hover-primary">
-                      jm@softplus.com
+                      {user.email}
                     </span>
                   </span>
                 </a>

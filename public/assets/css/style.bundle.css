@@ -67365,6 +67365,7 @@ code {
 }
 .input-icon .form-control {
   padding-left: calc(1.5em + 1.3rem + 2px);
+  width: 100%;
 }
 .input-icon.input-icon-right span {
   right: 0;

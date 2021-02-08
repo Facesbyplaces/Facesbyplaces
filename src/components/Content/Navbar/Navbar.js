@@ -18,7 +18,7 @@ export default function Navbar() {
             {/*begin::Header Nav*/}
             <ul className="menu-nav">
               <li className="menu-item menu-item-active" aria-haspopup="true">
-                <a href="index.html" className="menu-link">
+                <a href="/dashboard" className="menu-link">
                   <span className="menu-text">User</span>
                 </a>
               </li>
