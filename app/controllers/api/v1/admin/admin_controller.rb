@@ -3,7 +3,8 @@ class Api::V1::Admin::AdminController < ApplicationController
     before_action :admin_only
 
     def allUsers
-        users = User.all 
+        users = User.all.where.not(guest: true, username: "admin")
+        # _except(User.guest).order("users.id DESC")
         alm_users = AlmUser.all
 
         # BLM Users
@@ -26,15 +27,17 @@ class Api::V1::Admin::AdminController < ApplicationController
             itemsremaining = alm_users.total_count - (params[:page].to_i * numberOfPage)
         end
 
+        allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
+
         render json: {  itemsremaining:  itemsremaining,
-                        blm_users: ActiveModel::SerializableResource.new(
-                                    users, 
+                        users: ActiveModel::SerializableResource.new(
+                                    allUsers, 
                                     each_serializer: UserSerializer
                                 ),
-                        alm_users: ActiveModel::SerializableResource.new(
-                                    alm_users, 
-                                    each_serializer: UserSerializer
-                        )
+                        # alm_users: ActiveModel::SerializableResource.new(
+                        #             alm_users, 
+                        #             each_serializer: UserSerializer
+                        # )
                     }
     end
 
