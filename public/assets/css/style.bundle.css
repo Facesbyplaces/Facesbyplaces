@@ -94765,6 +94765,7 @@ body {
 .aside {
   width: 150px;
   background-color: #1f1e2e;
+  height: 100vh;
 }
 .aside .aside-menu.ps > .ps__rail-y {
   right: 4px;
