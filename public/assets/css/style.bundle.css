@@ -8073,7 +8073,7 @@ button.bg-white:focus {
   display: inline-flex !important;
 }
 
-.home {
+.loader-container {
   display: flex !important;
   justify-content: center;
   align-items: center;

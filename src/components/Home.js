@@ -63,7 +63,7 @@ export function Home() {
       {/*begin::Main*/}
       <div className="d-flex flex-column flex-root">
         {loading ? (
-          <div className="home">
+          <div className="loader-container">
             <HashLoader color={"#04ECFF"} loading={loading} size={90} />
           </div>
         ) : (

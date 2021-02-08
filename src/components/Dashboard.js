@@ -1,6 +1,7 @@
-import React from "react";
-import { LogoutAction } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+
+//Loader
+import HashLoader from "react-spinners/HashLoader";
 
 //Components
 import Navbar from "./Content/Navbar/Navbar";
@@ -11,11 +12,14 @@ import Footer from "./Footer";
 import UsersTable from "./Content/UserTable/UsersTable";
 
 const Dashboard = (props) => {
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
-  const onLogOutClicked = () => {
-    dispatch(LogoutAction({}));
-  };
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   return (
     <div>
@@ -67,38 +71,42 @@ const Dashboard = (props) => {
       {/*begin::Main*/}
 
       <div className="content-height d-flex flex-column flex-root">
-        {/*begin::Page*/}
-        <div className="d-flex flex-row flex-column-fluid page">
-          <SideBar />
-          {/*begin::Wrapper*/}
-          <div
-            className="d-flex flex-column flex-row-fluid wrapper"
-            id="kt_wrapper"
-          >
-            {/*begin::Header*/}
-            <div id="kt_header" className="header">
-              {/*begin::Container*/}
-              <div className="container-fluid d-flex align-items-stretch justify-content-between">
-                <Navbar />
-                <Topbar />
-              </div>
-              {/*end::Container*/}
-            </div>
-            {/*end::Header*/}
-
-            {/*begin::Content*/}
-            <div
-              className="content content-height d-flex flex-column flex-column-fluid"
-              id="kt_content"
-            >
-              <UsersTable />
-            </div>
-            {/*end::Content*/}
-            <Footer />
+        {loading ? (
+          <div className="loader-container">
+            <HashLoader color={"#04ECFF"} loading={loading} size={90} />
           </div>
-          {/*end::Wrapper*/}
-        </div>
-        {/*end::Page*/}
+        ) : (
+          <div className="d-flex flex-row flex-column-fluid page">
+            <SideBar />
+            {/*begin::Wrapper*/}
+            <div
+              className="d-flex flex-column flex-row-fluid wrapper"
+              id="kt_wrapper"
+            >
+              {/*begin::Header*/}
+              <div id="kt_header" className="header">
+                {/*begin::Container*/}
+                <div className="container-fluid d-flex align-items-stretch justify-content-between">
+                  <Navbar />
+                  <Topbar />
+                </div>
+                {/*end::Container*/}
+              </div>
+              {/*end::Header*/}
+
+              {/*begin::Content*/}
+              <div
+                className="content content-height d-flex flex-column flex-column-fluid"
+                id="kt_content"
+              >
+                <UsersTable />
+              </div>
+              {/*end::Content*/}
+              <Footer />
+            </div>
+            {/*end::Wrapper*/}
+          </div>
+        )}
       </div>
       {/*end::Main*/}
 
