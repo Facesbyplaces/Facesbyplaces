@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Login } from "./auth/Login";
 
+//Loader
+import HashLoader from "react-spinners/HashLoader";
+
 export function Home() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <div>
       {/*begin::Head*/}
@@ -50,39 +62,43 @@ export function Home() {
       {/*begin::Body*/}
       {/*begin::Main*/}
       <div className="d-flex flex-column flex-root">
-        {/*begin::Login*/}
-        <div
-          className="login login-3 login-signin-on d-flex flex-row-fluid"
-          id="kt_login"
-        >
+        {loading ? (
+          <div className="home">
+            <HashLoader color={"#04ECFF"} loading={loading} size={90} />
+          </div>
+        ) : (
           <div
-            className="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid"
-            style={{
-              backgroundImage: "url(assets/media/bg/background_candles.png)",
-              backgroundColor: "#1b1e22",
-            }}
+            className="login login-3 login-signin-on d-flex flex-row-fluid"
+            id="kt_login"
           >
-            <div className="login-form text-center text-white p-7 position-relative overflow-hidden">
-              {/*begin::Login Header*/}
-              <div className="d-flex flex-center mb-15 mt-5">
-                <a href="#">
-                  <img
-                    src="assets/media/logos/fbp-logo.png"
-                    className="max-h-200px"
-                    alt=""
-                  />
-                </a>
-              </div>
-              {/*end::Login Header*/}
-              <Login />
-              {/* // <Registration
+            <div
+              className="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid"
+              style={{
+                backgroundImage: "url(assets/media/bg/background_candles.png)",
+                backgroundColor: "#1b1e22",
+              }}
+            >
+              <div className="login-form text-center text-white p-7 position-relative overflow-hidden">
+                {/*begin::Login Header*/}
+                <div className="d-flex flex-center mb-15 mt-5">
+                  <a href="#">
+                    <img
+                      src="assets/media/logos/fbp-logo.png"
+                      className="max-h-200px"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                {/*end::Login Header*/}
+                <Login />
+                {/* // <Registration
                   //   handleSuccessfulAuth={this.handleSuccessfulAuth}
                   //   handleClick={this.handleClick}
                   // /> */}
+              </div>
             </div>
           </div>
-        </div>
-        {/*end::Login*/}
+        )}
       </div>
       {/*end::Main*/}
       {/*begin::Global Config(global config for global JS scripts)*/}
