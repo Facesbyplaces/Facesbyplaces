@@ -8,7 +8,6 @@ import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regula
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-13-regular-dropdown.dart';
@@ -111,10 +110,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
@@ -136,7 +131,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
         child: Column(
           children: [
             Container(
-              // height: ScreenUtil().setHeight(65),
               height: 65,
               child: Row(
                 children: [
@@ -218,12 +212,16 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
               ),
             ),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Column(
+            //     children: contents,
+            //   ),
+            // ),
+
+              Column(
                 children: contents,
               ),
-            ),
 
             // SizedBox(height: ScreenUtil().setHeight(45)),
             SizedBox(height: 45),
@@ -268,6 +266,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
               ],
             )
             : Container(height: 0,),
+
+            // SizedBox(height: 50),
 
             Container(
               // height: ScreenUtil().setHeight(65),
@@ -314,7 +314,8 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                     },
                     child: Row(
                       children: [
-                        Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                        // Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                        Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
 
@@ -346,6 +347,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                       },
                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
+                      // child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
                     ),
                   ),
                 ],

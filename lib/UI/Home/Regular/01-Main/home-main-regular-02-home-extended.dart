@@ -313,139 +313,143 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     //     child: 
                     //   ),
                     // ),
-                    child: SingleChildScrollView(
-                          physics: ClampingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              // SizedBox(height: ScreenUtil().setHeight(20)),
-                              SizedBox(height: 20),
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      color: Color(0xff4EC9D4),
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20),
 
-                              CircleAvatar(
-                                // radius: ScreenUtil().setHeight(100),
-                                radius: 100,
-                                backgroundColor: Color(0xff888888),
-                                backgroundImage: ((){
-                                  if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                    return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                                  }else{
-                                    return AssetImage('assets/icons/app-icon.png');
-                                  }
-                                }()),
-                              ),
+                            CircleAvatar(
+                              // radius: ScreenUtil().setHeight(100),
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: ((){
+                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                                }else{
+                                  return AssetImage('assets/icons/app-icon.png');
+                                }
+                              }()),
+                            ),
 
-                              // SizedBox(height: ScreenUtil().setHeight(20)),
-                              SizedBox(height: 20),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20),
 
-                              Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                              // SizedBox(height: ScreenUtil().setHeight(45)),
-                              SizedBox(height: 45),
+                            // SizedBox(height: ScreenUtil().setHeight(45)),
+                            SizedBox(height: 45),
 
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                              // SizedBox(height: ScreenUtil().setHeight(25)),
-                              SizedBox(height: 25),
+                            // SizedBox(height: ScreenUtil().setHeight(25)),
+                            SizedBox(height: 25),
 
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.pop(context);
-                                  Navigator.pushNamed(context, '/home/regular/create-memorial');
-                                },
-                                child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                                Navigator.pushNamed(context, '/home/regular/create-memorial');
+                              },
+                              child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                              // SizedBox(height: ScreenUtil().setHeight(20)),
-                              SizedBox(height: 20),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20),
 
-                              GestureDetector(
-                                onTap: () async{
-                                  context.showLoaderOverlay();
-                                  APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data.showProfileInformationUserId);
-                                  context.hideLoaderOverlay();
+                            GestureDetector(
+                              onTap: () async{
+                                context.showLoaderOverlay();
+                                APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data.showProfileInformationUserId);
+                                context.hideLoaderOverlay();
 
-                                  Navigator.pop(context);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularNotificationSettings(
-                                    newMemorial: result.showNotificationStatusNewMemorial,
-                                    newActivities: result.showNotificationStatusNewActivities,
-                                    postLikes: result.showNotificationStatusPostLikes,
-                                    postComments: result.showNotificationStatusPostComments,
-                                    addFamily: result.showNotificationStatusAddFamily,
-                                    addFriends: result.showNotificationStatusAddFriends,
-                                    addAdmin: result.showNotificationStatusAddAdmin,
-                                  )));
-                                },
-                                child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
+                                Navigator.pop(context);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularNotificationSettings(
+                                  newMemorial: result.showNotificationStatusNewMemorial,
+                                  newActivities: result.showNotificationStatusNewActivities,
+                                  postLikes: result.showNotificationStatusPostLikes,
+                                  postComments: result.showNotificationStatusPostComments,
+                                  addFamily: result.showNotificationStatusAddFamily,
+                                  addFriends: result.showNotificationStatusAddFriends,
+                                  addAdmin: result.showNotificationStatusAddAdmin,
+                                )));
+                              },
+                              child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                              // SizedBox(height: ScreenUtil().setHeight(20)),
-                              SizedBox(height: 20),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20),
 
-                              GestureDetector(
-                                onTap: () async{
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
-                                },
-                                child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
+                            GestureDetector(
+                              onTap: () async{
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
+                              },
+                              child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                              // SizedBox(height: ScreenUtil().setHeight(20)),
-                              SizedBox(height: 20),
+                            // SizedBox(height: ScreenUtil().setHeight(20)),
+                            SizedBox(height: 20),
 
-                              GestureDetector(
-                                onTap: () async{
+                            GestureDetector(
+                              onTap: () async{
 
-                                  context.showLoaderOverlay();
-                                  bool result = await apiRegularLogout();
+                                context.showLoaderOverlay();
+                                bool result = await apiRegularLogout();
 
-                                  GoogleSignIn googleSignIn = GoogleSignIn(
-                                    scopes: [
-                                      'profile',
-                                      'email',
-                                      'openid'
-                                    ],
+                                GoogleSignIn googleSignIn = GoogleSignIn(
+                                  scopes: [
+                                    'profile',
+                                    'email',
+                                    'openid'
+                                  ],
+                                );
+                                await googleSignIn.signOut();
+
+                                FacebookLogin fb = FacebookLogin();
+                                await fb.logOut();
+
+                                context.hideLoaderOverlay();
+
+                                if(result){
+                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
                                   );
-                                  await googleSignIn.signOut();
-
-                                  FacebookLogin fb = FacebookLogin();
-                                  await fb.logOut();
-
-                                  context.hideLoaderOverlay();
-
-                                  if(result){
-                                    Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Something went wrong. Please try again.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.red,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }
-                                  
-                                },
-                                child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                              ),
-                              
-                            ],
-                          ),
+                                }
+                                
+                              },
+                              child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
+                            
+                          ],
                         ),
+                      ),
+                    ),
                   );
                 }else{
                   return Drawer(

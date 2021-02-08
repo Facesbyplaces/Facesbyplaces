@@ -58,7 +58,7 @@ class BLMJoin extends StatelessWidget {
                           SizedBox(height: 10),
 
                           Container(
-                            height: 45.h,
+                            height: 45,
                             child: Row(
                               children: [
                                 Expanded(
@@ -103,14 +103,14 @@ class BLMJoin extends StatelessWidget {
                             ),
                           ),
 
-                          SizedBox(height: 50.h,),
+                          SizedBox(height: 50,),
 
                           Container(
                             // color: Colors.red,
                             // width: (SizeConfig.screenWidth / 1.2).h,
-                            width: 500.h,
+                            width: 500,
                             // height: (SizeConfig.screenWidth / 1.2).h,
-                            height: 500.h,
+                            height: 500,
                             child: Stack(
                               children: [
 
@@ -119,8 +119,8 @@ class BLMJoin extends StatelessWidget {
                                   child: Transform.rotate(
                                     angle: 75,
                                     child: Container(
-                                      height: 150.h,
-                                      width: 150.h,
+                                      height: 150,
+                                      width: 150,
                                       color: Color(0xffF4F3EB),
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -136,13 +136,13 @@ class BLMJoin extends StatelessWidget {
                                 Positioned(
                                   // top: ((SizeConfig.screenWidth / 1.2).h) / 7.5,
                                   // left: ((SizeConfig.screenWidth / 1.2).h) / 3.5,
-                                  left: 200.h,
+                                  left: 200,
                                   // left: ((SizeConfig.screenWidth / 1.2).h) / 2,
                                   child: Transform.rotate(
                                     angle: 101, 
                                     child: Container(
-                                      height: 150.h,
-                                      width: 150.h,
+                                      height: 150,
+                                      width: 150,
                                       color: Color(0xffF4F3EB),
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -161,8 +161,8 @@ class BLMJoin extends StatelessWidget {
                                   child: Transform.rotate(
                                     angle: 101, 
                                     child: Container(
-                                      height: 150.h,
-                                      width: 150.h,
+                                      height: 150,
+                                      width: 150,
                                       color: Color(0xffF4F3EB),
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -177,12 +177,12 @@ class BLMJoin extends StatelessWidget {
 
                                 Positioned(
                                   // top: ((SizeConfig.screenWidth / 1.2).h) / 3.5,
-                                  top: 200.h,
+                                  top: 200,
                                   child: Transform.rotate(
                                     angle: 101, 
                                     child: Container(
-                                      height: 150.h,
-                                      width: 150.h,
+                                      height: 150,
+                                      width: 150,
                                       color: Color(0xffF4F3EB),
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -216,11 +216,11 @@ class BLMJoin extends StatelessWidget {
 
                                 Positioned(
                                   // top: ((SizeConfig.screenWidth / 1.2).h) / 3.5,
-                                  top: 200.h,
+                                  top: 200,
                                   right: 0,
                                   child: Container(
-                                    height: 150.h,
-                                    width: 150.h,
+                                    height: 150,
+                                    width: 150,
                                     color: Color(0xffF4F3EB),
                                     child: Padding(
                                       padding: EdgeInsets.all(5.0),
@@ -235,8 +235,8 @@ class BLMJoin extends StatelessWidget {
                                 Positioned(
                                   bottom: 0,
                                   child: Container(
-                                    height: 150.h,
-                                    width: 150.h,
+                                    height: 150,
+                                    width: 150,
                                     color: Color(0xffF4F3EB),
                                     child: Padding(
                                       padding: EdgeInsets.all(5.0),
@@ -251,12 +251,12 @@ class BLMJoin extends StatelessWidget {
                                 Positioned(
                                   bottom: 0,
                                   // left: ((SizeConfig.screenWidth / 1.2).h) / 3.5,
-                                  left: 150.h,
+                                  left: 150,
                                   child: Transform.rotate(
                                     angle: 101, 
                                     child: Container(
-                                      height: 150.h,
-                                      width: 150.h,
+                                      height: 150,
+                                      width: 150,
                                       color: Color(0xffF4F3EB),
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -275,8 +275,8 @@ class BLMJoin extends StatelessWidget {
                                   child: Transform.rotate(
                                     angle: 101, 
                                     child: Container(
-                                      height: 150.h,
-                                      width: 150.h,
+                                      height: 150,
+                                      width: 150,
                                       color: Color(0xffF4F3EB),
                                       child: Padding(
                                         padding: EdgeInsets.all(5.0),
@@ -289,7 +289,7 @@ class BLMJoin extends StatelessWidget {
                                   ),
                                 ),
 
-                                Center(child: Image.asset('assets/icons/logo.png', height: 200.h, width: 200.h,),),                                
+                                Center(child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),),                                
 
                               ],
                             ),
@@ -345,7 +345,7 @@ class BLMJoin extends StatelessWidget {
                               Navigator.pushNamed(context, '/blm/login');
                             }, 
                             width: SizeConfig.screenWidth / 2, 
-                            height: 45.h,
+                            height: 45,
                             buttonColor: Color(0xff4EC9D4),
                           ),
 

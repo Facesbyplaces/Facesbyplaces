@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-01-home-feed-tab.dart';
+import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-image-display.dart';
@@ -183,21 +184,83 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 // SizedBox(height: ScreenUtil().setHeight(45)),
                 SizedBox(height: 45),
 
+                // Container(
+                //   color: Colors.red,
+                //   // height: SizeConfig.blockSizeVertical * 30,
+                //   height: 500,
+                //   child: 
+                // )
+
+                  // height: SizeConfig.blockSizeVertical * 30,
+                  // height: 500,
+                  // constraints: BoxConstraints.expand(height: 250),
+                  // child: Container(
+                  //   color: Colors.blue,
+                  //   height: 250,
+                  //   // constraints: BoxConstraints.tight(Size(SizeConfig.screenWidth , 250)),
+                  //   // constraints: BoxConstraints.tightFor(height: 500),
+                  //   // child: StaggeredGridView.countBuilder(
+                  //   //   padding: EdgeInsets.zero,
+                  //   //   physics: NeverScrollableScrollPhysics(),
+                  //   //   crossAxisCount: 4,
+                  //   //   itemCount: 2,
+                  //   //   itemBuilder: (BuildContext context, int index) => 
+                  //   //     CachedNetworkImage(
+                  //   //       // height: 250,
+                  //   //       // width: 250,
+                  //   //       fit: BoxFit.cover,
+                  //   //       imageUrl: feeds[i].imagesOrVideos[index],
+                  //   //       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                  //   //       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                  //   //     ),
+                  //   //   staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                  //   //   // staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
+                  //   //   mainAxisSpacing: 4.0,
+                  //   //   crossAxisSpacing: 4.0,
+                  //   // ),
+                  //   child: StaggeredGridView.countBuilder(
+                  //     padding: EdgeInsets.zero,
+                  //     physics: NeverScrollableScrollPhysics(),
+                  //     crossAxisCount: 4,
+                  //     itemCount: 2,
+                  //     itemBuilder: (BuildContext context, int index) => 
+                  //       CachedNetworkImage(
+                  //         height: 250,
+                  //         width: 250,
+                  //         fit: BoxFit.cover,
+                  //         imageUrl: feeds[i].imagesOrVideos[index],
+                  //         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                  //         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                  //       ),
+                  //     // staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2 * 250 / 250),
+                  //     staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
+                  //     mainAxisSpacing: 4.0,
+                  //     crossAxisSpacing: 4.0,
+                  //   ),
+                    
+                  // ),
+
+
+
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeVertical * 30,
+                  // color: Colors.red,
+                  height: 250,
                   child: ((){
                     if(feeds[i].imagesOrVideos != null){
                       if(feeds[i].imagesOrVideos.length == 1){
                         return Container(
+                          // height: 250,
                           child: CachedNetworkImage(
-                            fit: BoxFit.cover,
+                            // height: 250,
+                            fit: BoxFit.contain,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                           ),
                         );
                       }else if(feeds[i].imagesOrVideos.length == 2){
+                        // return Container();
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
@@ -205,12 +268,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) => 
                             CachedNetworkImage(
-                              fit: BoxFit.cover,
+                              height: 250,
+                              fit: BoxFit.contain,
                               imageUrl: feeds[i].imagesOrVideos[index],
                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                             ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          // staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -225,26 +290,29 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               ((){
                                 if(index != 1){
                                   return CachedNetworkImage(
-                                    fit: BoxFit.cover,
+                                    // height: 250,
+                                    fit: BoxFit.contain,
                                     imageUrl: feeds[i].imagesOrVideos[index],
                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                   );
                                 }else{
                                   return feeds[i].imagesOrVideos.length - 3 == 0
                                   ? CachedNetworkImage(
-                                    fit: BoxFit.cover,
+                                    // height: 250,
+                                    fit: BoxFit.contain,
                                     imageUrl: feeds[i].imagesOrVideos[index],
                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                   )
                                   : Stack(
                                     children: [
                                       CachedNetworkImage(
-                                        fit: BoxFit.cover,
+                                        // height: 250,
+                                        fit: BoxFit.contain,
                                         imageUrl: feeds[i].imagesOrVideos[index],
                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                       ),
 
                                       Container(color: Colors.black.withOpacity(0.5),),
@@ -268,6 +336,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 }
                               }()),
                             staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                            // staggeredTileBuilder: (int index) => StaggeredTile.count(4, 3 * 250 / 250),
+                            // staggeredTileBuilder: (int index) => StaggeredTile.fit(index.isEven ? 3 : 2),
+                            // staggeredTileBuilder: (int index) => StaggeredTile.extent(2, 250),
                             mainAxisSpacing: 4.0,
                             crossAxisSpacing: 4.0,
                           ),
@@ -279,6 +350,51 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                   }()),
                 )
                 : Container(height: 0,),
+
+                // SizedBox(height: 45),
+                // SizedBox(height: 20),
+
+                // feeds[i].numberOfTagged != 0
+                // ? Row(
+                //   children: [
+                //     Text('with'),
+
+                //     Container(
+                //       child: Wrap(
+                //         direction: Axis.vertical,
+                //         spacing: 5.0,
+                //         children: List.generate(
+                //           feeds[i].numberOfTagged,
+                //           (index) => GestureDetector(
+                //             onTap: (){
+                //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: feeds[i].taggedId[index])));
+                //             },
+                //             child: RichText(
+                //               text: TextSpan(
+                //                 style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                //                 children: <TextSpan>[
+                //                   TextSpan(text: feeds[i].taggedFirstName[index],),
+
+                //                   TextSpan(text: ' '),
+
+                //                   TextSpan(text: feeds[i].taggedLastName[index],),
+
+                //                   index < feeds[i].numberOfTagged - 1
+                //                   ? TextSpan(text: ',')
+                //                   : TextSpan(text: ''),
+                //                 ],
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //       padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
+                //       alignment: Alignment.centerLeft,
+                //     ),
+                //   ],
+                // )
+                // : Container(height: 0,),
+                
               ],
             );
             
