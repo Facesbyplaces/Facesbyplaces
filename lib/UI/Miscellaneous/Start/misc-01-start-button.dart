@@ -12,7 +12,6 @@ class MiscStartButtonIconTemplate extends StatelessWidget{
   final Color buttonColor;
   final Color backgroundColor;
   final Widget image;
-  // final String image;
 
   MiscStartButtonIconTemplate({
     this.buttonText = '',
@@ -37,33 +36,19 @@ class MiscStartButtonIconTemplate extends StatelessWidget{
           ScreenUtil.init(
             context: _,
             constraints: constraints,
-            designSize: Size(360, 690),
-            allowFontScaling: false,
+            designSize: Size(SizeConfig.screenWidth, SizeConfig.screenHeight),
+            allowFontScaling: true,
           );
           return Row(
             children: [
-              // Align(
-              //   alignment: Alignment.centerLeft,
-              //   child: CircleAvatar(
-              //     // radius: 30,
-              //     minRadius: 15.w,
-              //     // minRadius: 1.w,
-              //     backgroundColor: backgroundColor,
-              //     child: Center(child: image,),
-              //   ),
-              // ),
               CircleAvatar(
-                // radius: 30,
-                // minRadius: 20.w,
-                minRadius: 15.w,
+                minRadius: 35.r,
                 backgroundColor: backgroundColor,
-                // backgroundImage: AssetImage(image),
                 child: Center(child: image,),
               ),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-                  // padding: EdgeInsets.all(10.0),
                   alignment: Alignment.centerLeft,
                   child: Text(buttonText,
                     style: buttonTextStyle

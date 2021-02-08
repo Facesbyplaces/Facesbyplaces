@@ -16,8 +16,9 @@ class UILogin01 extends StatelessWidget {
           ScreenUtil.init(
             context: _,
             constraints: constraints,
-            designSize: Size(360, 690),
-            allowFontScaling: false,
+            // designSize: Size(360, 690),
+            designSize: Size(SizeConfig.screenWidth, SizeConfig.screenHeight),
+            allowFontScaling: true,
           );
           return ResponsiveWrapper(
             maxWidth: SizeConfig.screenWidth,
@@ -28,28 +29,28 @@ class UILogin01 extends StatelessWidget {
                 ResponsiveBreakpoint.resize(1000, name: DESKTOP),
                 ResponsiveBreakpoint.autoScale(2460, name: '4K'),
             ],
-            child: Padding(
+            child: Container(
+              height: SizeConfig.screenHeight,
               padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Container(
-                height: SizeConfig.screenHeight,
+              child: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
                 child: Column(
                   children: [
 
-                    Expanded(child: Container(),),
+                    SizedBox(height: 100.h,),
 
-                    Container(child: Image.asset('assets/icons/logo.png', height: 150.h, width: 150.h,),),
+                    Container(child: Image.asset('assets/icons/logo.png', height: 200.h, width: 200.h,),),
 
                     Center(child: Text('FacesByPlaces.com', style: TextStyle(fontSize: 18.ssp, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                    Expanded(child: Container(),),
+                    SizedBox(height: 100.h,),
 
                     Center(child: Text('Honor, Respect, Never Forget', textAlign: TextAlign.center, style: TextStyle(fontSize: 18.ssp, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
-
-                    Expanded(child: Container(),),
+                    SizedBox(height: 100.h,),
 
                     Center(child: Text('Black Lives Matter', style: TextStyle(fontSize: 18.ssp, color: Color(0xff000000),),),),
 
-                    SizedBox(height: 5),
+                    SizedBox(height: 5.h),
 
                     MiscStartButtonIconTemplate(
                       buttonText: 'Speak for a loved one killed by law enforcement', 
@@ -58,21 +59,8 @@ class UILogin01 extends StatelessWidget {
                       },
                       width: SizeConfig.screenWidth / 1.5,
                       buttonTextStyle: TextStyle(fontSize: 14.ssp, fontWeight: FontWeight.w300, color: Color(0xff000000),),
-                      // height: 35.h,
-                      // height: 40.h,
                       buttonColor: Color(0xffF2F2F2),
                       image: Container(height: 20.h, child: Image.asset('assets/icons/fist.png'),),
-                      // image: 'assets/icons/fist.png',
-                      // image:               Align(
-                      //   alignment: Alignment.centerLeft,
-                      //   child: CircleAvatar(
-                      //     // radius: 30,
-                      //     // minRadius: 20.w,
-                      //     // minRadius: 1.w,
-                      //     backgroundColor: backgroundColor,
-                      //     child: Center(child: image,),
-                      //   ),
-                      // ),
                     ),
 
                     SizedBox(height: 10.h),
@@ -92,10 +80,9 @@ class UILogin01 extends StatelessWidget {
                       buttonColor: Color(0xffE6FDFF),
                       backgroundColor: Color(0xff04ECFF),
                       image: Icon(Icons.favorite, size: 20.h, color: Color(0xffffffff),),
-                      // image: 'assets/icons/fist.png',
                     ),
                     
-                    SizedBox(height: 5),
+                    SizedBox(height: 5.h),
 
                     RichText(
                       text: TextSpan(
@@ -123,7 +110,7 @@ class UILogin01 extends StatelessWidget {
                       ),
                     ),
 
-                    Expanded(child: Container(),),
+                    SizedBox(height: 100.h,),
 
                   ],
                 ),

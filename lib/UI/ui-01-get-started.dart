@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-push-notifications.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
@@ -8,6 +7,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -155,8 +155,8 @@ class UIGetStartedState extends State<UIGetStarted>{
           ScreenUtil.init(
             context: _,
             constraints: constraints,
-            designSize: Size(360, 690),
-            allowFontScaling: false,
+            designSize: Size(SizeConfig.screenWidth, SizeConfig.screenHeight),
+            allowFontScaling: true,
           );
           return ResponsiveWrapper(
             maxWidth: SizeConfig.screenWidth,
@@ -190,8 +190,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                     child: Container(
                                       padding: EdgeInsets.all(5),
                                       color: Color(0xffffffff),
-                                      // height: 100.h,
-                                      // width: 100.w,
                                       height: 100.h,
                                       width: 100.h,
                                       child: Image.asset('assets/icons/frontpage-image3.png'),
@@ -205,8 +203,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                     child: Container(
                                       padding: EdgeInsets.all(5),
                                       color: Color(0xffffffff),
-                                      // height: 100.h,
-                                      // width: 100.w,
                                       height: 100.h,
                                       width: 100.h,
                                       child: Image.asset('assets/icons/frontpage-image4.png'),
@@ -218,8 +214,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: 100.h,
-                                    // width: 100.w,
                                     height: 100.h,
                                     width: 100.h,
                                     child: Image.asset('assets/icons/frontpage-image5.png'),
@@ -230,8 +224,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   child: Container(
                                     padding: EdgeInsets.all(5),
                                     color: Color(0xffffffff),
-                                    // height: 100.h,
-                                    // width: 100.w,
                                     height: 100.h,
                                     width: 100.h,
                                     child: Image.asset('assets/icons/frontpage-image7.png'),
@@ -244,9 +236,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   child: Transform.rotate(
                                     angle: pi / 30,
                                     child: Container(
-                                      // padding: EdgeInsets.all(5),
                                       color: Color(0xffffffff),
-                                      // color: Colors.red,
                                       height: 100.h,
                                       width: 100.h,
                                       child: Image.asset('assets/icons/frontpage-image3.png',),
@@ -558,7 +548,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   child: Transform.rotate(
                                     angle: -pi / 12,
                                     child: Container(
-                                      // padding: EdgeInsets.all(5),
                                       color: Color(0xffffffff),
                                       height: 100.h,
                                       width: 100.h,
@@ -572,7 +561,6 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   child: Transform.rotate(
                                     angle: 0,
                                     child: Container(
-                                      // padding: EdgeInsets.all(5),
                                       color: Color(0xffffffff),
                                       height: 100.h,
                                       width: 100.h,
