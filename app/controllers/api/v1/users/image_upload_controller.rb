@@ -1,5 +1,5 @@
 class Api::V1::Users::ImageUploadController < ApplicationController
-    before_action :check_user, except: [:create]
+    before_action :check_user
 
     def image_upload_params
         params.permit(:image)
