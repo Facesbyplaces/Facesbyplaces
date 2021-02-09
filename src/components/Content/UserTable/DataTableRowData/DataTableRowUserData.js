@@ -167,5 +167,25 @@ export default function DataTableRowUserData(props) {
     </tr>
   ));
 
-  return <tbody>{renderedUsers}</tbody>;
+  return (
+    <tbody>{renderedUsers}</tbody>
+    // <div>
+    //   {props.users.length == 0 ? (
+    //     <tbody>
+    //       <tr>
+    //         <td className="pl-0">
+    //           <a
+    //             href="#"
+    //             className="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"
+    //           >
+    //             No results found.
+    //           </a>
+    //         </td>
+    //       </tr>
+    //     </tbody>
+    //   ) : (
+    //     <tbody>{renderedUsers}</tbody>
+    //   )}
+    // </div>
+  );
 }
