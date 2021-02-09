@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:date_time_picker/date_time_picker.dart';

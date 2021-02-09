@@ -14,6 +14,9 @@ Future<bool> apiRegularLogin({String email, String password}) async{
       }
     );
 
+    print('The status code of login is ${response.statusCode}');
+    print('The status code of login is ${response.body}');
+
     if(response.statusCode == 200){
       var value = json.decode(response.body);
       var user = value['user'];

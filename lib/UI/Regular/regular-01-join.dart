@@ -2,7 +2,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class RegularJoin extends StatelessWidget {

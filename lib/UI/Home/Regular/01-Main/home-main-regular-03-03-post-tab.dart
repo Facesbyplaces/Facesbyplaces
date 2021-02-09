@@ -150,7 +150,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
     //   width: SizeConfig.screenWidth,
     // );
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -322,8 +323,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
       //     ),
       //   ),
       // ),
-      : SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+      // : SingleChildScrollView(
+      //   physics: ClampingScrollPhysics(),
+      //   child: MiscRegularEmptyDisplayTemplate(),
+      // ),
+      : Container(
+        height: SizeConfig.screenHeight - 85 - kToolbarHeight,
         child: MiscRegularEmptyDisplayTemplate(),
       ),
     );

@@ -8,7 +8,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-backgroun
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';

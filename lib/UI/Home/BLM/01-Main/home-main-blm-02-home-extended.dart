@@ -161,7 +161,23 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     },
                   );
                 }else if(profileImage.hasError){
-                  return Icon(Icons.error);
+                  // return Icon(Icons.error);
+                  return IconButton(
+                    icon: CircleAvatar(
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                      // backgroundImage: ((){
+                      //   if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
+                      //     return NetworkImage(profileImage.data.showProfileInformationImage);
+                      //   }else{
+                      //     return AssetImage('assets/icons/app-icon.png');
+                      //   }
+                      // }()),
+                    ),
+                    onPressed: () async{
+                      Scaffold.of(context).openDrawer();
+                    }
+                  );
                 }else{
                   return Container(child: CircularProgressIndicator(), padding: EdgeInsets.all(20.0),);
                 }
@@ -513,7 +529,65 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   );
                 }
               }else if(manageDrawer.hasError){
-                return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
+                // return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
+                return Drawer(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    color: Color(0xff4EC9D4),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20,),
+                        
+                        CircleAvatar(
+                          radius: 100,
+                          backgroundColor: Color(0xff888888),
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        ),
+
+                        // SizedBox(height: 45,),
+                        Expanded(child: Container(),),
+
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),), textAlign: TextAlign.center,),
+                        ),
+
+                        // SizedBox(height: 50,),
+                        Expanded(child: Container(),),
+
+                        // GestureDetector(
+                        //   onTap: (){
+                        //     Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                        //     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                        //   },
+                        //   child: Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                        // ),
+                        GestureDetector(
+                          onTap: (){
+                            // Navigator.pop(context);
+                            Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                            Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
+
+                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
+
+                              Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ],
+                          ),
+                        ),
+
+                        Expanded(child: Container(),),
+                        
+                      ],
+                    ),
+                  ),
+                );
               }else{
                 return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
               }

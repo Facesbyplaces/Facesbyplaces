@@ -258,7 +258,8 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     //   width: SizeConfig.screenWidth,
     // );
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,

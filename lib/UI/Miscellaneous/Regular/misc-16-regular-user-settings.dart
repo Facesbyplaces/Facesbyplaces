@@ -73,14 +73,16 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
         child: Column(
           children: [
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+            // SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+            SizedBox(height: 80,),
 
             GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserUpdateDetails(userId: userId,)));
               },
               child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
+                // height: SizeConfig.blockSizeVertical * 10,
+                height: 80,
                 color: Color(0xffffffff),
                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Column(
@@ -90,7 +92,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                         alignment: Alignment.bottomLeft,
                         child: Text('Update Details',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
                           ),
@@ -98,14 +101,16 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       ),
                     ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(height: 10,),
 
                     Expanded(
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text('Update your account details',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Color(0xffBDC3C7),
                           ),
@@ -113,7 +118,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       ),
                     ),
 
-                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                    Divider(height: 20, color: Color(0xff888888),)
                   ],
                 ),
               ),
@@ -124,7 +129,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: userId,)));
               },
               child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
+                // height: SizeConfig.blockSizeVertical * 10,
+                height: 80,
                 color: Color(0xffffffff),
                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Column(
@@ -134,7 +140,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                         alignment: Alignment.bottomLeft,
                         child: Text('Password',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
                           ),
@@ -142,14 +149,15 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       ),
                     ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(height: 10,),
 
                     Expanded(
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text('Change your login password',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Color(0xffBDC3C7),
                           ),
@@ -157,7 +165,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       ),
                     ),
 
-                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                    Divider(height: 20, color: Color(0xff888888),)
                   ],
                 ),
               ),
@@ -179,7 +187,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                   toggleNumber: result.showOtherDetailsStatusHidePhoneNumber)));
               },
               child: Container(
-                height: SizeConfig.blockSizeVertical * 10,
+                // height: SizeConfig.blockSizeVertical * 10,
+                height: 80,
                 color: Color(0xffffffff),
                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Column(
@@ -189,7 +198,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                         alignment: Alignment.bottomLeft,
                         child: Text('Other Info',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
                           ),
@@ -197,14 +207,16 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       ),
                     ),
 
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(height: 10,),
 
                     Expanded(
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text('Optional informations you can share',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                            fontSize: 14,
                             fontWeight: FontWeight.w300,
                             color: Color(0xffBDC3C7),
                           ),
@@ -212,14 +224,15 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       ),
                     ),
 
-                    Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),)
+                    Divider(height: 20, color: Color(0xff888888),)
                   ],
                 ),
               ),
             ),
 
             Container(
-              height: SizeConfig.blockSizeVertical * 10,
+              // height: SizeConfig.blockSizeVertical * 10,
+              height: 80,
               color: Color(0xffffffff),
               padding: EdgeInsets.only(left: 20.0, right: 20.0),
               child: Column(
@@ -229,7 +242,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                       alignment: Alignment.bottomLeft,
                       child: Text('Privacy Settings',
                         style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Color(0xff000000),
                         ),
@@ -237,14 +251,16 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                     ),
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  SizedBox(height: 10,),
 
                   Expanded(
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text('Control what others see',
                         style: TextStyle(
-                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                          // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                          fontSize: 14,
                           fontWeight: FontWeight.w300,
                           color: Color(0xffBDC3C7),
                         ),
@@ -252,7 +268,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
                     ),
                   ),
 
-                  Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888),),
+                  Divider(height: 20, color: Color(0xff888888),),
                 ]
               ),
             ),
@@ -262,7 +278,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
             MiscRegularButtonTemplate(
               buttonText: 'Logout',
               buttonTextStyle: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                fontSize: 16, 
                 fontWeight: FontWeight.bold, 
                 color: Color(0xffffffff),
               ),
@@ -316,14 +332,16 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
 
 
               }, 
-              width: SizeConfig.screenWidth / 2, 
-              height: SizeConfig.blockSizeVertical * 7, 
+              // width: SizeConfig.screenWidth / 2, 
+              // height: SizeConfig.blockSizeVertical * 7, 
+              width: 150,
+              height: 45,
               buttonColor: Color(0xff04ECFF),
             ),
 
             SizedBox(height: SizeConfig.blockSizeVertical * 2,),
             
-            Text('V.1.1.0', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
+            Text('V.1.1.0', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
 
             Expanded(child: Container(),),
 
