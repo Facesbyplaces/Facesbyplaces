@@ -6,18 +6,18 @@ import ReactPaginate from "react-paginate";
 
 export default function DataTable() {
   const [page, setPage] = useState(1);
+  const [clicked, setClicked] = useState(false);
   const [users, setUsers] = useState([]);
-  console.log("User count: ", users.length);
 
   useEffect(() => {
     fetchUsers(page);
   }, [users.id]);
 
-  // const handleClick = (page) => {
-  //   setPage(page);
-  //   setClicked(true);
-  //   fetchUsers(page);
-  // };
+  const handleClick = (page) => {
+    setPage(page);
+    setClicked(true);
+    fetchUsers(page);
+  };
 
   const fetchUsers = (page) => {
     axios
@@ -30,10 +30,8 @@ export default function DataTable() {
         console.log(error.response);
       });
   };
-  const pageCount = Math.ceil(users.length / 20);
-  const changePage = ({ selected }) => {
-    setPage(selected);
-  };
+
+  const paginationNum = () => {};
 
   return (
     <div className="table-responsive">
@@ -64,18 +62,123 @@ export default function DataTable() {
         <DataTableRowUserData users={users} />
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <ReactPaginate
-          previousLabel={"<<"}
-          nextLabel={">>"}
-          pageCount={pageCount}
-          onPageChange={changePage}
-          containerClassName={"d-flex mt-0"}
-          previousLinkClassName={"btn btn-icon btn-sm btn-light mr-2 my-1"}
-          nextLinkClassName={"btn btn-icon btn-sm btn-light mr-2 my-1"}
-          activeClassName={
-            "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-          }
-        />
+        <div className="d-flex align-items-center">
+          {/* <a href="#" className="btn btn-icon btn-sm btn-light mr-2 my-1">
+            <b>&#60;</b>
+          </a> */}
+          <a
+            className={
+              page == 1
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(1)}
+          >
+            1
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 2
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(2)}
+          >
+            2
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 3
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(3)}
+          >
+            3
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 4
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(4)}
+          >
+            4
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 5
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(5)}
+          >
+            5
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 6
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(6)}
+          >
+            6
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 7
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(7)}
+          >
+            7
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 8
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(8)}
+          >
+            8
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 9
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(9)}
+          >
+            9
+          </a>
+          <a
+            href="#"
+            className={
+              clicked && page == 10
+                ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
+                : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
+            }
+            onClick={() => handleClick(10)}
+          >
+            10
+          </a>
+          {/* <a href="#" className="btn btn-icon btn-sm btn-light mr-2 my-1">
+            <b>&#62;</b>
+          </a> */}
+        </div>
       </div>
     </div>
   );
