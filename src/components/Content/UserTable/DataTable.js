@@ -1,9 +1,37 @@
 import React, { useState, useEffect } from "react";
+import axios from "../../../auxiliary/axios";
+
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
 
 export default function DataTable() {
   const [page, setPage] = useState(1);
-  console.log("Page: ", page);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`/api/v1/admin/users`, { params: { page: page } })
+      .then((response) => {
+        setUsers(response.data.users);
+        console.log("Response: ", response.data.users);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, [users.id]);
+
+  const handleClick = (page) => {
+    setPage(page);
+
+    axios
+      .get(`/api/v1/admin/users`, { params: { page: page } })
+      .then((response) => {
+        setUsers(response.data.users);
+        console.log("Response: ", response.data.users);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
 
   return (
     <div className="table-responsive">
@@ -31,7 +59,7 @@ export default function DataTable() {
             </th>
           </tr>
         </thead>
-        <DataTableRowUserData page={page} />
+        <DataTableRowUserData users={users} />
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">
         <div className="d-flex align-items-center">
@@ -43,70 +71,70 @@ export default function DataTable() {
           </a>
           <a
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
-            onClick={() => setPage(1)}
+            onClick={() => handleClick(1)}
           >
             1
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(2)}
+            onClick={() => handleClick(2)}
           >
             2
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(3)}
+            onClick={() => handleClick(3)}
           >
             3
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(4)}
+            onClick={() => handleClick(4)}
           >
             4
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(5)}
+            onClick={() => handleClick(5)}
           >
             5
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(6)}
+            onClick={() => handleClick(6)}
           >
             6
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(7)}
+            onClick={() => handleClick(7)}
           >
             7
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(8)}
+            onClick={() => handleClick(8)}
           >
             8
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(9)}
+            onClick={() => handleClick(9)}
           >
             9
           </a>
           <a
             href="#"
             className="btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
-            onClick={() => setPage(10)}
+            onClick={() => handleClick(10)}
           >
             10
           </a>

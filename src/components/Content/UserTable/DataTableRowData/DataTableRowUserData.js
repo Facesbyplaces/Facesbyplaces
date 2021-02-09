@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../auxiliary/axios";
 
 export default function DataTableRowUserData(props) {
-  const [users, setUsers] = useState([]);
+  console.log("Props: ", props);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`/api/v1/admin/users`, { params: { page: props.page } })
-      .then((response) => {
-        setUsers(response.data.users);
-        console.log("Response: ", response.data.users);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  }, [users.id]);
-  console.log("Users: ", users);
+  // useEffect(() => {
+  //   axios
+  //     .get(`/api/v1/admin/users`, { params: { page: props.page } })
+  //     .then((response) => {
+  //       setUsers(response.data.users);
+  //       console.log("Response: ", response.data.users);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
+  // }, [users.id]);
+  // console.log("Users: ", users);
 
-  const renderedUsers = users.map((user) => (
+  const renderedUsers = props.users.map((user) => (
     <tr>
       <td className="pl-0 py-6">
         <label className="checkbox checkbox-lg checkbox-inline">

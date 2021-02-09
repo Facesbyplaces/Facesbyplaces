@@ -24,7 +24,7 @@ export default function Topbar() {
     dispatch(LogoutAction({}));
   };
 
-  // console.log("Top Bar User", user);
+  console.log("Top Bar User", user);
 
   return (
     <div className="topbar">
