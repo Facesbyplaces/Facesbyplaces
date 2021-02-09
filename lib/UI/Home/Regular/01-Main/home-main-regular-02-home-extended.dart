@@ -212,7 +212,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomSheet: Container(
+          bottomSheet: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
             height: 65,
             alignment: Alignment.center,
             child: ToggleButtons(
@@ -228,7 +230,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   child: Column(
                     children: [
                       Icon(MdiIcons.fire,),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      SizedBox(height: 5),
                       Text('Feed', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
@@ -239,7 +241,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   child: Column(
                     children: [
                       Icon(MdiIcons.graveStone),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      SizedBox(height: 5),
                       Text('Memorials', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
@@ -250,7 +252,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   child: Column(
                     children: [
                       Icon(MdiIcons.post),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      SizedBox(height: 5),
                       Text('Post', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
@@ -268,7 +270,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
                         child: Icon(MdiIcons.heart),
                       ),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
+                      SizedBox(height: 5),
                       Text('Notification', style: TextStyle(fontSize: 12,),),
                     ],
                   ),
@@ -310,25 +312,13 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
               ],
             ),
           ),
+          ),
           drawer: FutureBuilder<APIRegularShowProfileInformation>(
             future: drawerSettings,
             builder: (context, manageDrawer){
               if(manageDrawer.hasData){
                 if(manageDrawer.data.showProfileInformationGuest != true){
                   return Drawer(
-                    // child: ContainerResponsive(
-                    //   height: SizeConfig.screenHeight,
-                    //   width: SizeConfig.screenWidth,
-                    //   alignment: Alignment.center,
-                    //   child: ContainerResponsive(
-                    //     width: SizeConfig.screenWidth,
-                    //     heightResponsive: false,
-                    //     widthResponsive: true,
-                    //     alignment: Alignment.topCenter,
-                    //     color: Color(0xff4EC9D4),
-                    //     child: 
-                    //   ),
-                    // ),
                     child: Container(
                       alignment: Alignment.topCenter,
                       color: Color(0xff4EC9D4),

@@ -5,6 +5,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'home-settings-memorial-regular-02-page-details.dart';
 import 'home-settings-memorial-regular-03-update-memorial-image.dart';
 import 'home-settings-memorial-regular-04-page-managers.dart';
@@ -53,7 +54,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff04ECFF),
-        title:  Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),),
+        title:  Text('Memorial Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff),),),
         centerTitle: true,
           leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -62,58 +63,76 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           },
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            width: SizeConfig.screenWidth,
-            height: SizeConfig.blockSizeVertical * 8,
-            child: DefaultTabController(
-              length: 2,
-              child: TabBar(
-                labelColor: Color(0xff04ECFF),
-                unselectedLabelColor: Color(0xff000000),
-                indicatorColor: Color(0xff04ECFF),
-                onTap: (int index){
-                  setState(() {
-                    toggle = index;
-                  });
-                },
-                tabs: [
-
-                  Center(
-                    child: Text('Page',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-
-                  Center(child: Text('Privacy',
-                      style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
-            ),
-          ),
-
-          Expanded(
-            child: Container(
-              child: ((){
-                switch(toggle){
-                  case 0: return settingsTab1(memorialId); break;
-                  case 1: return settingsTab2(memorialId); break;
-                }
-              }()),
-            ),
-          ),
+      body: ResponsiveWrapper(
+        maxWidth: SizeConfig.screenWidth,
+        defaultScale: true,
+        breakpoints: [
+          ResponsiveBreakpoint.resize(480, name: MOBILE),
+          ResponsiveBreakpoint.autoScale(800, name: TABLET),
+          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+          ResponsiveBreakpoint.autoScale(2460, name: '4K'),
         ],
+        child: SingleChildScrollView(
+          child: Container(
+          // height: SizeConfig.screenHeight,
+          height: SizeConfig.screenHeight - kToolbarHeight,
+          child: Column(
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                width: SizeConfig.screenWidth,
+                // height: SizeConfig.blockSizeVertical * 8,
+                height: 70,
+                child: DefaultTabController(
+                  length: 2,
+                  child: TabBar(
+                    labelColor: Color(0xff04ECFF),
+                    unselectedLabelColor: Color(0xff000000),
+                    indicatorColor: Color(0xff04ECFF),
+                    onTap: (int index){
+                      setState(() {
+                        toggle = index;
+                      });
+                    },
+                    tabs: [
+
+                      Center(
+                        child: Text('Page',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+
+                      Center(
+                        child: Text('Privacy',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Container(
+                  child: ((){
+                    switch(toggle){
+                      case 0: return settingsTab1(memorialId); break;
+                      case 1: return settingsTab2(memorialId); break;
+                    }
+                  }()),
+                ),
+              ),
+            ],
+          ),
+        ),
+        ),
       ),
     );
   }
@@ -220,7 +239,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-        Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
+        // Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
+        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
@@ -335,7 +355,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
 
         SizedBox(height: SizeConfig.blockSizeVertical * 5,),
 
-        Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
+        // Container(height: 80, child: Image.asset('assets/icons/logo.png'),),
+        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
         SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 

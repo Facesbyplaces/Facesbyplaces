@@ -127,13 +127,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,

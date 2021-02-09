@@ -1,10 +1,8 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-03-home-post-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -145,13 +143,9 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -198,7 +192,6 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
                 Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                // SizedBox(height: ScreenUtil().setHeight(45)),
                 SizedBox(height: 45),
 
                 posts[i].imagesOrVideos != null
@@ -308,28 +301,42 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
           itemCount: posts.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(),
+      // : SingleChildScrollView(
+      //   child: Container(
+      //     height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+
+      //         Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+      //         SizedBox(height: 45,),
+
+      //         Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+      //       ],
       //     ),
       //   ),
       // ),
-      // : SingleChildScrollView(
-      //   physics: ClampingScrollPhysics(),
-      //   child: MiscRegularEmptyDisplayTemplate(),
-      // ),
-      : Container(
-        height: SizeConfig.screenHeight - 85 - kToolbarHeight,
-        child: MiscRegularEmptyDisplayTemplate(),
+      : SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+            ],
+          ),
+        ),
       ),
     );
   }

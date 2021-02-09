@@ -34,7 +34,8 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
   void initState(){
     super.initState();
     height = SizeConfig.screenHeight;
-    position = Offset(0.0, height - 100);
+    // position = Offset(0.0, height - 100);
+    position = Offset(0.0, height - 200);
   }
 
   @override
@@ -49,6 +50,7 @@ class MiscRegularUserProfileDetailsDraggableState extends State<MiscRegularUserP
           if(offset.dy > 10 && offset.dy < (SizeConfig.screenHeight - 100)){
             setState(() {
               position = offset;
+              // position.scale(offset.dy, offset.dx);
             });
           }
         },

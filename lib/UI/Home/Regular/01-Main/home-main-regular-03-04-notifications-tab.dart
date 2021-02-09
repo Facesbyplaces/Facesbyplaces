@@ -1,8 +1,6 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-notifications-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-11-regular-notification-display.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -90,13 +88,9 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
-      // height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -134,24 +128,42 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           itemCount: notifications.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
+      // : SingleChildScrollView(
+      //   child: Container(
+      //     height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+
+      //         Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+      //         SizedBox(height: 45,),
+
+      //         Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+      //       ],
       //     ),
       //   ),
       // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Notification is empty'),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+            ],
+          ),
+        ),
       ),
     );
   }
