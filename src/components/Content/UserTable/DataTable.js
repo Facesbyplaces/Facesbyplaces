@@ -6,18 +6,18 @@ import ReactPaginate from "react-paginate";
 
 export default function DataTable() {
   const [page, setPage] = useState(1);
-  const [clicked, setClicked] = useState(false);
   const [users, setUsers] = useState([]);
+  console.log("User count: ", users.length);
 
   useEffect(() => {
     fetchUsers(page);
   }, [users.id]);
 
-  const handleClick = (page) => {
-    setPage(page);
-    setClicked(true);
-    fetchUsers(page);
-  };
+  // const handleClick = (page) => {
+  //   setPage(page);
+  //   setClicked(true);
+  //   fetchUsers(page);
+  // };
 
   const fetchUsers = (page) => {
     axios
@@ -30,8 +30,7 @@ export default function DataTable() {
         console.log(error.response);
       });
   };
-  const usersPerPage = 20;
-  const pageCount = Math.ceil(users.length / usersPerPage);
+  const pageCount = Math.ceil(users.length / 20);
   const changePage = ({ selected }) => {
     setPage(selected);
   };
