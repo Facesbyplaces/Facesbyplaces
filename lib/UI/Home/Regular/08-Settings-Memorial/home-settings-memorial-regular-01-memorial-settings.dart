@@ -74,14 +74,12 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
         ],
         child: SingleChildScrollView(
           child: Container(
-          // height: SizeConfig.screenHeight,
           height: SizeConfig.screenHeight - kToolbarHeight,
           child: Column(
             children: [
               Container(
                 alignment: Alignment.centerLeft,
                 width: SizeConfig.screenWidth,
-                // height: SizeConfig.blockSizeVertical * 8,
                 height: 70,
                 child: DefaultTabController(
                   length: 2,
@@ -148,7 +146,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           },
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
@@ -158,7 +156,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Update Page image and background image',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
@@ -168,7 +166,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Add or remove admins of this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
@@ -178,7 +176,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Add or remove family of this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
@@ -188,7 +186,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Add or remove friends of this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscRegularSettingDetailTemplate(
           onTap: (){
@@ -198,7 +196,7 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Manage cards that receives the memorial gifts.',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscRegularSettingDetailTemplate(
           onTap: () async{
@@ -237,12 +235,11 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Completely remove the page. This is irreversible',
         ),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+        SizedBox(height: 10,),
 
-        // Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
         Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+        SizedBox(height: 30,),
 
       ],
     );
@@ -259,10 +256,10 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           contentDetail: 'Customize what others see on your page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          height: 80,
           color: Color(0xffffffff),
           child: Row(
             children: [
@@ -286,10 +283,10 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           ),
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          height: 80,
           color: Color(0xffffffff),
           child: Row(
             children: [
@@ -323,10 +320,10 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           ),
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          height: 80,
           color: Color(0xffffffff),
           child: Row(
             children: [
@@ -351,14 +348,13 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           ),
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+        SizedBox(height: 80),
 
-        // Container(height: 80, child: Image.asset('assets/icons/logo.png'),),
         Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+        SizedBox(height: 10),
 
       ],
     );

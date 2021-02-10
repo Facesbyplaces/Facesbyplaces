@@ -3,6 +3,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-12-add-friends.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 // import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';
@@ -98,10 +99,6 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -184,170 +181,173 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: empty
-          ? SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            padding: EdgeInsets.zero,
+          body: ResponsiveWrapper(
+            maxWidth: SizeConfig.screenWidth,
+            defaultScale: true,
+            breakpoints: [
+              ResponsiveBreakpoint.resize(480, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+            ],
             child: Container(
               height: SizeConfig.screenHeight - kToolbarHeight,
-              child: Column(
-                children: [
-                  Expanded(child: Container(),),
-
-                  Container(
-                    height: SizeConfig.blockSizeVertical * 30,
-                    width: SizeConfig.screenWidth / 2,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/icons/search-user.png'),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                  Text('Search a location to add on your post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                  Expanded(child: Container(),),
-                ],
-              ),
-            ),
-          )
-          : Container(
-            height: SizeConfig.screenHeight,
-            child: SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(
-                color: Color(0xffffffff),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-              footer: CustomFooter(
-                loadStyle: LoadStyle.ShowWhenLoading,
-                builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
-                  if(mode == LoadStatus.loading){
-                    body = CircularProgressIndicator();
-                  }
-                  return Center(child: body);
-                },
-              ),
-              controller: refreshController,
-              onRefresh: onRefresh,
-              onLoading: onLoading,
-              child: ListView.separated(
-                padding: EdgeInsets.all(10.0),
+              width: SizeConfig.screenWidth,
+              child: empty
+              ? SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
-                itemBuilder: (c, index){
-                  return GestureDetector(
-                    onTap: () async{
-                      if(isFamily){
+                padding: EdgeInsets.zero,
+                child: Column(
+                  children: [
+                    SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
 
-                        String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
+                    Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
-                        context.showLoaderOverlay();
-                        bool result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
-                        context.hideLoaderOverlay();
+                    SizedBox(height: 20,),
 
-                        if(result){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
-                          Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                        }else{
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('This user may not accept invite requests as of the moment. Please try again later.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                        }
-                      }else{
-                        context.showLoaderOverlay();
-                        bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
-                        context.hideLoaderOverlay();
+                    Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                        if(result){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
-                          Navigator.popUntil(context, ModalRoute.withName('newRoute'));
-                        }else{
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('This user may not accept invite requests as of the moment. Please try again later.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                        }
+                    SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
 
+                  ],
+                ),
+              )
+              : Container(
+                height: SizeConfig.screenHeight,
+                child: SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: true,
+                  header: MaterialClassicHeader(
+                    color: Color(0xffffffff),
+                    backgroundColor: Color(0xff4EC9D4),
+                  ),
+                  footer: CustomFooter(
+                    loadStyle: LoadStyle.ShowWhenLoading,
+                    builder: (BuildContext context, LoadStatus mode){
+                      Widget body;
+                      if(mode == LoadStatus.loading){
+                        body = CircularProgressIndicator();
                       }
+                      return Center(child: body);
                     },
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            maxRadius: SizeConfig.blockSizeVertical * 5,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
-                          ),
+                  ),
+                  controller: refreshController,
+                  onRefresh: onRefresh,
+                  onLoading: onLoading,
+                  child: ListView.separated(
+                    padding: EdgeInsets.all(10.0),
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (c, index){
+                      return GestureDetector(
+                        onTap: () async{
+                          if(isFamily){
 
+                            String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
+                            context.showLoaderOverlay();
+                            bool result = await apiRegularAddFamily(memorialId: memorialId, userId: users[index].userId, relationship: choice, accountType: users[index].accountType);
+                            context.hideLoaderOverlay();
 
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            if(result){
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFamily(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
+                              Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                            }else{
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
+                            }
+                          }else{
+                            context.showLoaderOverlay();
+                            bool result = await apiRegularAddFriends(memorialId: memorialId, userId: users[index].userId, accountType: users[index].accountType);
+                            context.hideLoaderOverlay();
+
+                            if(result){
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeRegularPageFriends(memorialId: memorialId,), settings: RouteSettings(name: 'newRoute')),);
+                              Navigator.popUntil(context, ModalRoute.withName('newRoute'));
+                            }else{
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('This user may not accept invite requests as of the moment. Please try again later.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
+                            }
+
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10.0),
+                          child: Row(
                             children: [
-                              RichText(
-                                textAlign: TextAlign.left,
-                                text: TextSpan(
-                                  children: <TextSpan>[
-                                    TextSpan(text: users[index].firstName, style: users[index].firstName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
-
-                                    TextSpan(text: ' '),
-
-                                    TextSpan(text: users[index].lastName, style: users[index].lastName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
-
-                                  ],
-                                ),
+                              CircleAvatar(
+                                maxRadius: 40,
+                                backgroundColor: Color(0xff888888),
+                                backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
                               ),
 
-                              Text(users[index].email, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888),),),
+                              SizedBox(width: 25,),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                    textAlign: TextAlign.left,
+                                    text: TextSpan(
+                                      children: <TextSpan>[
+                                        TextSpan(text: users[index].firstName, style: users[index].firstName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
+
+                                        TextSpan(text: ' '),
+
+                                        TextSpan(text: users[index].lastName, style: users[index].lastName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
+
+                                      ],
+                                    ),
+                                  ),
+
+                                  Text(users[index].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),
+
+                                ],
+                              ),
 
                             ],
                           ),
-
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Color(0xff000000)),
-                itemCount: users.length,
+                        ),
+                      );
+                    },
+                    separatorBuilder: (c, i) => Divider(height: 5, color: Color(0xff000000)),
+                    itemCount: users.length,
+                  ),
+                )
               ),
-            )
+            ),
           ),
         ),
       ),
