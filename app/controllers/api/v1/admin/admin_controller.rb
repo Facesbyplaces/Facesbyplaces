@@ -34,10 +34,7 @@ class Api::V1::Admin::AdminController < ApplicationController
                                     allUsers, 
                                     each_serializer: UserSerializer
                                 ),
-                        # alm_users: ActiveModel::SerializableResource.new(
-                        #             alm_users, 
-                        #             each_serializer: UserSerializer
-                        # )
+                        user: user,
                     }
     end
 
@@ -54,47 +51,73 @@ class Api::V1::Admin::AdminController < ApplicationController
                     )
     end
 
-    def searchBlmUser
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'User').map{|searchObject| 
-            User.find(searchObject.searchable_id)
+    # def searchBlmUser
+    #     users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'User').map{|searchObject| 
+    #         User.find(searchObject.searchable_id)
+    #     }.flatten.uniq
+
+    #     users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
+    #     if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+    #         itemsremaining = 0
+    #     elsif users.total_count < numberOfPage
+    #         itemsremaining = users.total 
+    #     else
+    #         itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+    #     end
+
+    #     render json: {  itemsremaining:  itemsremaining,
+    #                     users: ActiveModel::SerializableResource.new(
+    #                                 users, 
+    #                                 each_serializer: UserSerializer
+    #                             )
+    #                 }
+    # end
+
+    # def searchAlmUser
+    #     users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'AlmUser').map{|searchObject| 
+    #         User.find(searchObject.searchable_id)
+    #     }.flatten.uniq
+
+    #     users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
+    #     if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
+    #         itemsremaining = 0
+    #     elsif users.total_count < numberOfPage
+    #         itemsremaining = users.total 
+    #     else
+    #         itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
+    #     end
+
+    #     render json: {  itemsremaining:  itemsremaining,
+    #                     users: ActiveModel::SerializableResource.new(
+    #                                 users, 
+    #                                 each_serializer: UserSerializer
+    #                             )
+    #                 }
+    # end
+
+    def searchUsers
+        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
+            if searchObject.searchable_type == 'User'
+                User.find(searchObject.searchable_id)
+            else
+                AlmUser.find(searchObject.searchable_id)
+            end
         }.flatten.uniq
 
         users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
         if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
             itemsremaining = 0
         elsif users.total_count < numberOfPage
-            itemsremaining = users.total 
+            itemsremaining = users.total_count 
         else
             itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
         end
 
         render json: {  itemsremaining:  itemsremaining,
                         users: ActiveModel::SerializableResource.new(
-                                    users, 
-                                    each_serializer: UserSerializer
-                                )
-                    }
-    end
-
-    def searchAlmUser
-        users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'AlmUser').map{|searchObject| 
-            User.find(searchObject.searchable_id)
-        }.flatten.uniq
-
-        users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-        if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-            itemsremaining = 0
-        elsif users.total_count < numberOfPage
-            itemsremaining = users.total 
-        else
-            itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-        end
-
-        render json: {  itemsremaining:  itemsremaining,
-                        users: ActiveModel::SerializableResource.new(
-                                    users, 
-                                    each_serializer: UserSerializer
-                                )
+                            users, 
+                            each_serializer: UserSerializer
+                        )
                     }
     end
 
@@ -237,8 +260,8 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     private
     def admin_only
-        if !user().has_role? :admin 
-            return render json: {}, status: 401
+        if !user.has_role? :admin 
+            return render json: {status: "Must be an admin to continue", user: user}, status: 401
         end
     end
 end
