@@ -177,86 +177,27 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                // SizedBox(height: ScreenUtil().setHeight(45)),
                 SizedBox(height: 45),
-
-                // Container(
-                //   color: Colors.red,
-                //   // height: SizeConfig.blockSizeVertical * 30,
-                //   height: 500,
-                //   child: 
-                // )
-
-                  // height: SizeConfig.blockSizeVertical * 30,
-                  // height: 500,
-                  // constraints: BoxConstraints.expand(height: 250),
-                  // child: Container(
-                  //   color: Colors.blue,
-                  //   height: 250,
-                  //   // constraints: BoxConstraints.tight(Size(SizeConfig.screenWidth , 250)),
-                  //   // constraints: BoxConstraints.tightFor(height: 500),
-                  //   // child: StaggeredGridView.countBuilder(
-                  //   //   padding: EdgeInsets.zero,
-                  //   //   physics: NeverScrollableScrollPhysics(),
-                  //   //   crossAxisCount: 4,
-                  //   //   itemCount: 2,
-                  //   //   itemBuilder: (BuildContext context, int index) => 
-                  //   //     CachedNetworkImage(
-                  //   //       // height: 250,
-                  //   //       // width: 250,
-                  //   //       fit: BoxFit.cover,
-                  //   //       imageUrl: feeds[i].imagesOrVideos[index],
-                  //   //       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                  //   //       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                  //   //     ),
-                  //   //   staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                  //   //   // staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
-                  //   //   mainAxisSpacing: 4.0,
-                  //   //   crossAxisSpacing: 4.0,
-                  //   // ),
-                  //   child: StaggeredGridView.countBuilder(
-                  //     padding: EdgeInsets.zero,
-                  //     physics: NeverScrollableScrollPhysics(),
-                  //     crossAxisCount: 4,
-                  //     itemCount: 2,
-                  //     itemBuilder: (BuildContext context, int index) => 
-                  //       CachedNetworkImage(
-                  //         height: 250,
-                  //         width: 250,
-                  //         fit: BoxFit.cover,
-                  //         imageUrl: feeds[i].imagesOrVideos[index],
-                  //         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                  //         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                  //       ),
-                  //     // staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2 * 250 / 250),
-                  //     staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
-                  //     mainAxisSpacing: 4.0,
-                  //     crossAxisSpacing: 4.0,
-                  //   ),
-                    
-                  // ),
-
-
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  // color: Colors.red,
-                  height: 250,
+                  // color: Colors.red, 
+                  height: 250, 
+                  width: SizeConfig.screenWidth,
                   child: ((){
                     if(feeds[i].imagesOrVideos != null){
                       if(feeds[i].imagesOrVideos.length == 1){
                         return Container(
-                          // height: 250,
                           child: CachedNetworkImage(
-                            // height: 250,
                             fit: BoxFit.contain,
+                            height: 250,
+                            width: 250,
                             imageUrl: feeds[i].imagesOrVideos[0],
                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                           ),
                         );
                       }else if(feeds[i].imagesOrVideos.length == 2){
-                        // return Container();
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
@@ -264,14 +205,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           itemCount: 2,
                           itemBuilder: (BuildContext context, int index) => 
                             CachedNetworkImage(
-                              height: 250,
                               fit: BoxFit.contain,
+                              height: 250,
+                              width: 250,
                               imageUrl: feeds[i].imagesOrVideos[index],
                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                             ),
-                          // staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                          staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -279,16 +220,15 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                         return StaggeredGridView.countBuilder(
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
-                          // crossAxisCount: 4,
-                          // itemCount: 3,
-                          crossAxisCount: 2,
+                          crossAxisCount: 4,
                           itemCount: 3,
                           itemBuilder: (BuildContext context, int index) => 
                             ((){
                               if(index != 1){
                                 return CachedNetworkImage(
-                                  height: 250,
                                   fit: BoxFit.contain,
+                                  height: 250,
+                                  width: 250,
                                   imageUrl: feeds[i].imagesOrVideos[index],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -296,8 +236,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               }else{
                                 return feeds[i].imagesOrVideos.length - 3 > 0
                                 ? CachedNetworkImage(
-                                  height: 250,
                                   fit: BoxFit.contain,
+                                  height: 250,
+                                  width: 250,
                                   imageUrl: feeds[i].imagesOrVideos[index],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -305,8 +246,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 : Stack(
                                   children: [
                                     CachedNetworkImage(
-                                      height: 250,
                                       fit: BoxFit.contain,
+                                      height: 250,
+                                      width: 250,
                                       imageUrl: feeds[i].imagesOrVideos[index],
                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -338,7 +280,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           // staggeredTileBuilder: (int index) => StaggeredTile.count(4, 3 * 250 / 250),
                           // staggeredTileBuilder: (int index) => StaggeredTile.fit(index.isEven ? 3 : 2).,
                           // staggeredTileBuilder: (int index) => StaggeredTile.extent(2, 250),
-                          staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+                          // staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
                         );
@@ -348,52 +291,120 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     }
                   }()),
                 )
-                : Container(height: 0,),
+                : Container(height: 0),
 
-                // SizedBox(height: 45),
-                // SizedBox(height: 20),
+                
 
-                // feeds[i].numberOfTagged != 0
-                // ? Row(
-                //   children: [
-                //     Text('with'),
+                SizedBox(height: 45),
 
-                //     Container(
-                //       child: Wrap(
-                //         direction: Axis.vertical,
-                //         spacing: 5.0,
-                //         children: List.generate(
-                //           feeds[i].numberOfTagged,
-                //           (index) => GestureDetector(
-                //             onTap: (){
-                //               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: feeds[i].taggedId[index])));
-                //             },
-                //             child: RichText(
-                //               text: TextSpan(
-                //                 style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
-                //                 children: <TextSpan>[
-                //                   TextSpan(text: feeds[i].taggedFirstName[index],),
-
-                //                   TextSpan(text: ' '),
-
-                //                   TextSpan(text: feeds[i].taggedLastName[index],),
-
-                //                   index < feeds[i].numberOfTagged - 1
-                //                   ? TextSpan(text: ',')
-                //                   : TextSpan(text: ''),
-                //                 ],
-                //               ),
-                //             ),
+                // feeds[i].imagesOrVideos != null
+                // ? Container(
+                //   height: SizeConfig.blockSizeVertical * 30,
+                //   child: ((){
+                //     if(feeds[i].imagesOrVideos != null){
+                //       if(feeds[i].imagesOrVideos.length == 1){
+                //         return Container(
+                //           child: CachedNetworkImage(
+                //             fit: BoxFit.cover,
+                //             imageUrl: feeds[i].imagesOrVideos[0],
+                //             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                //             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                 //           ),
-                //         ),
-                //       ),
-                //       padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
-                //       alignment: Alignment.centerLeft,
-                //     ),
-                //   ],
+                //         );
+                //       }else if(feeds[i].imagesOrVideos.length == 2){
+                //         return StaggeredGridView.countBuilder(
+                //           padding: EdgeInsets.zero,
+                //           physics: NeverScrollableScrollPhysics(),
+                //           crossAxisCount: 4,
+                //           itemCount: 2,
+                //           itemBuilder: (BuildContext context, int index) => 
+                //             CachedNetworkImage(
+                //               fit: BoxFit.cover,
+                //               imageUrl: feeds[i].imagesOrVideos[index],
+                //               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                //               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                //             ),
+                //           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                //           mainAxisSpacing: 4.0,
+                //           crossAxisSpacing: 4.0,
+                //         );
+                //       }else{
+                //         return StaggeredGridView.countBuilder(
+                //           padding: EdgeInsets.zero,
+                //           physics: NeverScrollableScrollPhysics(),
+                //           crossAxisCount: 4,
+                //           itemCount: 3,
+                //           itemBuilder: (BuildContext context, int index) => 
+                //             ((){
+                //               if(index != 1){
+                //                 return CachedNetworkImage(
+                //                   fit: BoxFit.cover,
+                //                   imageUrl: feeds[i].imagesOrVideos[index],
+                //                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                //                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                //                 );
+                //               }else{
+                //                 return feeds[i].imagesOrVideos.length - 3 > 0
+                //                 ? CachedNetworkImage(
+                //                   fit: BoxFit.cover,
+                //                   imageUrl: feeds[i].imagesOrVideos[index],
+                //                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                //                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                //                 )
+                //                 : Stack(
+                //                   children: [
+                //                     CachedNetworkImage(
+                //                       fit: BoxFit.cover,
+                //                       imageUrl: feeds[i].imagesOrVideos[index],
+                //                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                //                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                //                     ),
+
+                //                     Container(color: Colors.black.withOpacity(0.5),),
+
+                //                     Center(
+                //                       child: CircleAvatar(
+                //                         radius: SizeConfig.blockSizeVertical * 3,
+                //                         backgroundColor: Color(0xffffffff).withOpacity(.5),
+                //                         child: Text(
+                //                           '${feeds[i].imagesOrVideos.length - 3}',
+                //                           style: TextStyle(
+                //                             fontSize: SizeConfig.safeBlockHorizontal * 7,
+                //                             fontWeight: FontWeight.bold,
+                //                             color: Color(0xffffffff),
+                //                           ),
+                //                         ),
+                //                       ),
+                //                     ),
+                //                   ],
+                //                 );
+                //               }
+                //             }()),
+                //             // StaggeredTile StaggeredTile.count(int crossAxisCellCount, num mainAxisCellCount)
+                //           // staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                          
+                //           // staggeredTileBuilder: (int index) => StaggeredTile.count(4, 3 * 250 / 250),
+                //           // staggeredTileBuilder: (int index) => StaggeredTile.fit(index.isEven ? 3 : 2).,
+                //           // staggeredTileBuilder: (int index) => StaggeredTile.extent(2, 250),
+                //           // staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+                //           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                //           mainAxisSpacing: 4.0,
+                //           crossAxisSpacing: 4.0,
+                //         );
+                //       }
+                //     }else{
+                //       return Container(height: 0,);
+                //     }
+                //   }()),
                 // )
                 // : Container(height: 0,),
+
+                // SizedBox(height: 50,),
+
+                // Container(color: Colors.red, height: 500, width: SizeConfig.screenWidth,),
+
                 
+
               ],
             );
             
@@ -402,18 +413,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
           itemCount: feeds.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: 
-      //   ),
-      // ),
       : SingleChildScrollView(
             physics: ClampingScrollPhysics(),
             child: Column(
@@ -438,7 +437,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 ),
 
                 // SizedBox(height: ScreenUtil().setHeight(25)),
-                SizedBox(height: 25),
+                SizedBox(height: 20),
 
                 Container(
                   width: SizeConfig.screenHeight,
@@ -476,7 +475,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 ),
 
                 // SizedBox(height: ScreenUtil().setHeight(45)),
-                SizedBox(height: 45),
+                SizedBox(height: 20),
 
                 Center(child: Text('Feed is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
 
@@ -486,7 +485,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),),
 
                 // SizedBox(height: ScreenUtil().setHeight(25)),
-                SizedBox(height: 25),
+                SizedBox(height: 20),
 
                 MiscRegularButtonTemplate(
                   buttonText: 'Create', 

@@ -119,10 +119,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -166,13 +162,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     icon: CircleAvatar(
                       backgroundColor: Color(0xff888888),
                       backgroundImage: AssetImage('assets/icons/app-icon.png'),
-                      // backgroundImage: ((){
-                      //   if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
-                      //     return NetworkImage(profileImage.data.showProfileInformationImage);
-                      //   }else{
-                      //     return AssetImage('assets/icons/app-icon.png');
-                      //   }
-                      // }()),
                     ),
                     onPressed: () async{
                       Scaffold.of(context).openDrawer();
@@ -213,102 +202,103 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomSheet: Container(
-            // height: ScreenUtil().setHeight(65),
-            height: 65,
-            alignment: Alignment.center,
-            child: ToggleButtons(
-              borderWidth: 0,
-              renderBorder: false,
-              selectedColor: Color(0xff04ECFF),
-              fillColor: Colors.transparent,
-              color: Color(0xffB1B1B1),
-              children: [
+          bottomSheet: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              height: 65,
+              alignment: Alignment.center,
+              child: ToggleButtons(
+                borderWidth: 0,
+                renderBorder: false,
+                selectedColor: Color(0xff04ECFF),
+                fillColor: Colors.transparent,
+                color: Color(0xffB1B1B1),
+                children: [
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.fire,),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Feed', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Icon(MdiIcons.fire,),
+                        SizedBox(height: 5),
+                        Text('Feed', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.graveStone),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Memorials', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Icon(MdiIcons.graveStone),
+                        SizedBox(height: 5),
+                        Text('Memorials', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.post),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Post', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Icon(MdiIcons.post),
+                        SizedBox(height: 5),
+                        Text('Post', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Badge(
-                        position: BadgePosition.topEnd(top: 0, end: -10),
-                        animationDuration: Duration(milliseconds: 300),
-                        animationType: BadgeAnimationType.fade,
-                        badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                        badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
-                        child: Icon(MdiIcons.heart),
-                      ),
-                      SizedBox(height: SizeConfig.blockSizeVertical * 1),
-                      Text('Notification', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Badge(
+                          position: BadgePosition.topEnd(top: 0, end: -10),
+                          animationDuration: Duration(milliseconds: 300),
+                          animationType: BadgeAnimationType.fade,
+                          badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
+                          badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
+                          child: Icon(MdiIcons.heart),
+                        ),
+                        SizedBox(height: 5),
+                        Text('Notification', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-              ],
-              onPressed: (int index) async{
-                setState(() {
-                  toggleBottom = index;
+                ],
+                onPressed: (int index) async{
+                  setState(() {
+                    toggleBottom = index;
 
-                  for(int i = 0; i < bottomTab.length; i++){
-                    if(i == toggleBottom){
-                      bottomTab[i] = true;
-                    }else{
-                      bottomTab[i] = false;
+                    for(int i = 0; i < bottomTab.length; i++){
+                      if(i == toggleBottom){
+                        bottomTab[i] = true;
+                      }else{
+                        bottomTab[i] = false;
+                      }
                     }
-                  }
-                });
+                  });
 
-                if(toggleBottom == 3){
-                  await apiBLMReadUnreadNotifications();
-                  unreadNotifications = 0;
-                  getUnreadNotifications();
-                }
-              },
-              isSelected: bottomTab
-            ),
-            
-            decoration: BoxDecoration(
-              color: Color(0xffffffff),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(0, 0)
-                ),
-              ],
+                  if(toggleBottom == 3){
+                    await apiBLMReadUnreadNotifications();
+                    unreadNotifications = 0;
+                    getUnreadNotifications();
+                  }
+                },
+                isSelected: bottomTab
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xffffffff),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                    offset: Offset(0, 0)
+                  ),
+                ],
+              ),
             ),
           ),
           drawer: FutureBuilder<APIBLMShowProfileInformation>(
@@ -317,219 +307,189 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
               if(manageDrawer.hasData){
                 if(manageDrawer.data.guest != true){
                   return Drawer(
-                    // child: ContainerResponsive(
-                    //   height: SizeConfig.screenHeight,
-                    //   width: SizeConfig.screenWidth,
-                    //   alignment: Alignment.center,
-                    //   child: ContainerResponsive(
-                    //     width: SizeConfig.screenWidth,
-                    //     heightResponsive: false,
-                    //     widthResponsive: true,
-                    //     alignment: Alignment.topCenter,
-                    //     color: Color(0xff4EC9D4),
-                    //     child: 
-                    //   ),
-                    // ),
-                    child: SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      color: Color(0xff4EC9D4),
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20),
 
-                          CircleAvatar(
-                            // radius: ScreenUtil().setHeight(100),
-                            radius: 100,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: ((){
-                              if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                return NetworkImage(manageDrawer.data.image);
-                              }else{
-                                return AssetImage('assets/icons/app-icon.png');
-                              }
-                            }()),
-                          ),
+                            CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: ((){
+                                if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
+                                  return NetworkImage(manageDrawer.data.image);
+                                }else{
+                                  return AssetImage('assets/icons/app-icon.png');
+                                }
+                              }()),
+                            ),
 
-                          // SizedBox(height: ScreenUtil().setHeight(20)),
-                          SizedBox(height: 20),
+                            SizedBox(height: 20),
 
-                          Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                          // SizedBox(height: ScreenUtil().setHeight(45)),
-                          SizedBox(height: 45),
+                            SizedBox(height: 45),
 
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                          // SizedBox(height: ScreenUtil().setHeight(25)),
-                          SizedBox(height: 25),
+                            SizedBox(height: 25),
 
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                              Navigator.pushNamed(context, '/home/blm/create-memorial');
-                            },
-                            child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                                Navigator.pushNamed(context, '/home/blm/create-memorial');
+                              },
+                              child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                          // SizedBox(height: ScreenUtil().setHeight(20)),
-                          SizedBox(height: 20),
+                            SizedBox(height: 20),
 
-                          GestureDetector(
-                            onTap: () async{
-                              context.showLoaderOverlay();
-                              APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.userId);
-                              context.hideLoaderOverlay();
+                            GestureDetector(
+                              onTap: () async{
+                                context.showLoaderOverlay();
+                                APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.userId);
+                                context.hideLoaderOverlay();
 
-                              Navigator.pop(context);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(
-                                newMemorial: result.newMemorial,
-                                newActivities: result.newActivities,
-                                postLikes: result.postLikes,
-                                postComments: result.postComments,
-                                addFamily: result.addFamily,
-                                addFriends: result.addFriends,
-                                addAdmin: result.addAdmin,
-                              )));
-                            },
-                            child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
+                                Navigator.pop(context);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(
+                                  newMemorial: result.newMemorial,
+                                  newActivities: result.newActivities,
+                                  postLikes: result.postLikes,
+                                  postComments: result.postComments,
+                                  addFamily: result.addFamily,
+                                  addFriends: result.addFriends,
+                                  addAdmin: result.addAdmin,
+                                )));
+                              },
+                              child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                          // SizedBox(height: ScreenUtil().setHeight(20)),
-                          SizedBox(height: 20),
+                            SizedBox(height: 20),
 
-                          GestureDetector(
-                            onTap: () async{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
-                            },
-                            child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
+                            GestureDetector(
+                              onTap: () async{
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
+                              },
+                              child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                          // SizedBox(height: ScreenUtil().setHeight(20)),
-                          SizedBox(height: 20),
+                            SizedBox(height: 20),
 
-                          GestureDetector(
-                            onTap: () async{
+                            GestureDetector(
+                              onTap: () async{
 
-                              context.showLoaderOverlay();
-                              bool result = await apiBLMLogout();
+                                context.showLoaderOverlay();
+                                bool result = await apiBLMLogout();
 
-                              GoogleSignIn googleSignIn = GoogleSignIn(
-                                scopes: [
-                                  'profile',
-                                  'email',
-                                  'openid'
-                                ],
-                              );
-                              await googleSignIn.signOut();
-
-                              FacebookLogin fb = FacebookLogin();
-                              await fb.logOut();
-
-                              context.hideLoaderOverlay();
-
-                              if(result){
-                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                              }else{
-                                await showDialog(
-                                  context: context,
-                                  builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  )
+                                GoogleSignIn googleSignIn = GoogleSignIn(
+                                  scopes: [
+                                    'profile',
+                                    'email',
+                                    'openid'
+                                  ],
                                 );
-                              }
-                              
-                            },
-                            child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
-                          
-                        ],
+                                await googleSignIn.signOut();
+
+                                FacebookLogin fb = FacebookLogin();
+                                await fb.logOut();
+
+                                context.hideLoaderOverlay();
+
+                                if(result){
+                                  Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                  Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
+                                
+                              },
+                              child: Text('Log Out', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
+                            
+                          ],
+                        ),
                       ),
                     ),
                   );
                 }else{
                   return Drawer(
-                    // child: ContainerResponsive(
-                    //   height: SizeConfig.screenHeight,
-                    //   width: SizeConfig.screenWidth,
-                    //   alignment: Alignment.center,
-                    //   child: ContainerResponsive(
-                    //     width: SizeConfig.screenWidth,
-                    //     heightResponsive: false,
-                    //     widthResponsive: true,
-                    //     alignment: Alignment.topCenter,
-                    //     color: Color(0xff4EC9D4),
-                    //     child: 
-                    //   ),
-                    // ),
-                    child: SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          // SizedBox(height: ScreenUtil().setHeight(20)),
-                          SizedBox(height: 20),
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      color: Color(0xff4EC9D4),
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20),
 
-                          CircleAvatar(
-                            // radius: ScreenUtil().setHeight(100),
-                            radius: 100,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: ((){
-                              if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                return NetworkImage(manageDrawer.data.image);
-                              }else{
-                                return AssetImage('assets/icons/app-icon.png');
-                              }
-                            }()),
-                          ),
+                            CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: ((){
+                                if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
+                                  return NetworkImage(manageDrawer.data.image);
+                                }else{
+                                  return AssetImage('assets/icons/app-icon.png');
+                                }
+                              }()),
+                            ),
 
-                          SizedBox(height: 20),
+                            SizedBox(height: 20),
 
-                          Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                          // SizedBox(height: ScreenUtil().setHeight(45)),
-                          SizedBox(height: 45),
+                            SizedBox(height: 45),
 
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                          // SizedBox(height: ScreenUtil().setHeight(25)),
-                          SizedBox(height: 25),
+                            SizedBox(height: 25),
 
-                          GestureDetector(
-                            onTap: (){
-                              Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                              Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                            },
-                            child: Text('Sign up or Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
-                          
-                        ],
+                            GestureDetector(
+                              onTap: (){
+                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                              },
+                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
+                            
+                          ],
+                        ),
                       ),
                     ),
                   );
                 }
               }else if(manageDrawer.hasError){
-                // return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
                 return Drawer(
                   child: Container(
                     alignment: Alignment.topCenter,
@@ -544,7 +504,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           backgroundImage: AssetImage('assets/icons/app-icon.png'),
                         ),
 
-                        // SizedBox(height: 45,),
                         Expanded(child: Container(),),
 
                         GestureDetector(
@@ -554,28 +513,19 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                           child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),), textAlign: TextAlign.center,),
                         ),
 
-                        // SizedBox(height: 50,),
                         Expanded(child: Container(),),
 
-                        // GestureDetector(
-                        //   onTap: (){
-                        //     Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                        //     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                        //   },
-                        //   child: Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                        // ),
                         GestureDetector(
                           onTap: (){
-                            // Navigator.pop(context);
                             Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                             Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
+                              Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
 
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
+                              SizedBox(width: 20),
 
                               Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ],

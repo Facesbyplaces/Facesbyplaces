@@ -299,7 +299,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
               },
               isSelected: bottomTab
             ),
-            
             decoration: BoxDecoration(
               color: Color(0xffffffff),
               boxShadow: <BoxShadow>[
@@ -326,11 +325,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                         physics: ClampingScrollPhysics(),
                         child: Column(
                           children: [
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20),
 
                             CircleAvatar(
-                              // radius: ScreenUtil().setHeight(100),
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: ((){
@@ -342,12 +339,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               }()),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20),
 
                             Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                            // SizedBox(height: ScreenUtil().setHeight(45)),
                             SizedBox(height: 45),
 
                             GestureDetector(
@@ -357,7 +352,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(25)),
                             SizedBox(height: 25),
 
                             GestureDetector(
@@ -368,7 +362,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               child: Text('Create Memorial Page', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20),
 
                             GestureDetector(
@@ -391,7 +384,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20),
 
                             GestureDetector(
@@ -401,7 +393,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                               child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20),
 
                             GestureDetector(
@@ -459,54 +450,57 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   );
                 }else{
                   return Drawer(
-                    child: SingleChildScrollView(
-                      physics: ClampingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20,),
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      color: Color(0xff4EC9D4),
+                      child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20,),
 
-                          CircleAvatar(
-                            radius: 100,
-                            backgroundColor: Color(0xff888888),
-                            backgroundImage: ((){
-                              if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                              }else{
-                                return AssetImage('assets/icons/app-icon.png');
-                              }
-                            }()),
-                          ),
+                            CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: ((){
+                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                                }else{
+                                  return AssetImage('assets/icons/app-icon.png');
+                                }
+                              }()),
+                            ),
 
-                          SizedBox(height: 20,),
+                            SizedBox(height: 20,),
 
-                          Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
-                          SizedBox(height: 45,),
+                            SizedBox(height: 45,),
 
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pop(context);
-                            },
-                            child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
+                            GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
 
-                          SizedBox(height: 25,),
+                            SizedBox(height: 25,),
 
-                          GestureDetector(
-                            onTap: (){
-                              Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                              Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                            },
-                            child: Text('Sign up or Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                          ),
-                          
-                        ],
+                            GestureDetector(
+                              onTap: (){
+                                Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                              },
+                              child: Text('Sign up or Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
+                            ),
+                            
+                          ],
+                        ),
                       ),
                     ),
                   );
                 }
               }else if(manageDrawer.hasError){
-                // return Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),);
                 return Drawer(
                   child: Container(
                     alignment: Alignment.topCenter,
@@ -521,7 +515,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           backgroundImage: AssetImage('assets/icons/app-icon.png'),
                         ),
 
-                        // SizedBox(height: 45,),
                         Expanded(child: Container(),),
 
                         GestureDetector(
@@ -531,45 +524,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                           child: Text('Something went wrong. Please try again.', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),), textAlign: TextAlign.center,),
                         ),
 
-                        // SizedBox(height: 50,),
                         Expanded(child: Container(),),
 
-                        // GestureDetector(
-                        //   onTap: (){
-                        //     Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                        //     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                        //   },
-                        //   child: Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
-                        // ),
-                        // GestureDetector(
-                        //   onTap: (){
-                        //     // Navigator.pop(context);
-                        //     Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                        //     Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                        //   },
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       Icon(Icons.directions_walk_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5,),
-
-                        //       SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
-
-                        //       Text('Go back'),
-                        //     ],
-                        //   ),
-                        // ),
                         GestureDetector(
                           onTap: (){
-                            // Navigator.pop(context);
                             Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                             Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 5,),
+                              Icon(Icons.directions_walk_rounded, color: Color(0xffffffff), size: 16,),
 
-                              SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
+                              SizedBox(width: 20),
 
                               Text('Go back', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ],

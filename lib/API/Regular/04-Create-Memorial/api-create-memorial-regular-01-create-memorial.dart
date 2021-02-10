@@ -14,6 +14,18 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
     var dioRequest = dio.Dio();
     var formData = FormData();
 
+    print('The value in api is ${memorial.almRelationship}');
+    print('The value in api is ${memorial.almBirthPlace}');
+    print('The value in api is ${memorial.almDob}');
+    print('The value in api is ${memorial.almRip}');
+    print('The value in api is ${memorial.almCemetery}');
+    print('The value in api is ${memorial.almDescription}');
+    print('The value in api is ${memorial.almBackgroundImage}');
+    print('The value in api is ${memorial.almProfileImage}');
+    print('The value in api is ${memorial.almImagesOrVideos}');
+    print('The value in api is ${memorial.almLatitude}');
+    print('The value in api is ${memorial.almLongitude}');
+
     formData.files.addAll([
       MapEntry('memorial[name]', MultipartFile.fromString(memorial.almMemorialName,),),
       MapEntry('memorial[birthplace]', MultipartFile.fromString(memorial.almBirthPlace,),),
@@ -39,11 +51,20 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
     }
     
     if(memorial.almProfileImage != null || memorial.almProfileImage != ''){
+      print('profile image!');
       var file = await dio.MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
       formData.files.add(MapEntry('memorial[profileImage]', file));
     }
+
+    print('The length of image is ${memorial.almImagesOrVideos.length}');
+
+    // if(memorial.almImagesOrVideos. == null){
+    //   print('Null!');
+    // }
+
+    print('Test!');
     
-    if(memorial.almImagesOrVideos != null || memorial.almImagesOrVideos != ['']){
+    if(memorial.almImagesOrVideos != null || memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
 
       for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
         if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
@@ -52,6 +73,8 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
         }
       }
     }
+
+    print('Nice!');
 
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/pages/memorials', data: formData,
       options: Options(
@@ -62,6 +85,8 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
         }
       ),  
     );
+
+    print('The status code of create memorial is ${response.statusCode}');
 
     if(response.statusCode == 200){
       var value = response.data;

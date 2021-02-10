@@ -129,6 +129,9 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 65,
@@ -219,11 +222,11 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             //   ),
             // ),
 
-              Column(
-                children: contents,
-              ),
+            Column(
+              children: contents,
+            ),
 
-            // SizedBox(height: ScreenUtil().setHeight(45)),
+            
             SizedBox(height: 45),
 
             numberOfTagged != 0

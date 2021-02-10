@@ -5,7 +5,6 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-01-home-feed-tab.d
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -126,10 +125,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -179,7 +174,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               contents: [
                 Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
 
-                // SizedBox(height: ScreenUtil().setHeight(45)),
                 SizedBox(height: 45,),
 
                 feeds[i].imagesOrVideos != null
@@ -288,24 +282,11 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
           itemCount: feeds.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: 
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
 
-            // SizedBox(height: ScreenUtil().setHeight(45)),
             SizedBox(height: 45,),
 
             Align(

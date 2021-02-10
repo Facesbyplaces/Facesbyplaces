@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 // import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
@@ -12,14 +13,12 @@ class HomeBLMSearch extends StatefulWidget{
 }
 
 class HomeBLMSearchState extends State<HomeBLMSearch>{
+  
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -78,7 +77,7 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                         // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontSize: 14,
                       ),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      // prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffffffff)),
                         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -90,6 +89,52 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                       focusedBorder:  OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffffffff)),
                         borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () async{
+                          Location.Location location = new Location.Location();
+
+                          bool serviceEnabled = await location.serviceEnabled();
+                          if (!serviceEnabled) {
+                            serviceEnabled = await location.requestService();
+                            if (!serviceEnabled) {
+                              return;
+                            }
+                          }
+
+                          Location.PermissionStatus permissionGranted = await location.hasPermission();
+                          if (permissionGranted == Location.PermissionStatus.denied) {
+                            permissionGranted = await location.requestPermission();
+                            if (permissionGranted != Location.PermissionStatus.granted) {
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
+                            }
+                          }
+
+                          context.showLoaderOverlay();
+                          Location.LocationData locationData = await location.getLocation();
+                          List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                          context.hideLoaderOverlay();
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                        },
+                        icon: Icon(Icons.search, color: Color(0xff888888),),
                       ),
                     ),
                   ),

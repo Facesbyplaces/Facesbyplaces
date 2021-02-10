@@ -189,7 +189,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20),
 
                             Center(
                               child: Text(profile.data.showProfileInformationEmail,
@@ -201,7 +201,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                            SizedBox(height: 40,),
 
                           ],
                         ),
@@ -210,12 +210,9 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                     SlidingUpPanel(
                       maxHeight: SizeConfig.screenHeight / 1.5,
-                      // minHeight: SizeConfig.screenHeight / 1.5,
                       panel: SingleChildScrollView(
                         physics: ClampingScrollPhysics(),
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        // padding: EdgeInsets.only(left: 40.0, right: 40.0),
-                        // padding: EdgeInsets.all(20.0),
                         child: Column(
                           children: [
 

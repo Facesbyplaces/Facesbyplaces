@@ -6,10 +6,8 @@ import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-04-
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-08-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-07-add-reply.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -62,7 +60,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   final int userId;
   final int numberOfLikes;
   final int numberOfComments;
- HomeRegularShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+  HomeRegularShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+
+  GlobalKey textFieldKey = GlobalKey();
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   static TextEditingController controller = TextEditingController();
@@ -206,10 +206,6 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -220,13 +216,13 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
           if(!currentFocus.hasPrimaryFocus){
             currentFocus.unfocus();
             isComment = true;
-            controller.clear();
+            // controller.clear();
           }
         },
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Comments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Comments', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
@@ -237,517 +233,459 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
             ),
           ),
           body: count != 0
-          ? Container(
-            height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
-            child: Column(
-              children: [
-                Container(
-                  height: SizeConfig.blockSizeVertical * 5,
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-
-                      Row(
+          ? FooterLayout(
+            child: SingleChildScrollView(
+              child: Container(
+                height: SizeConfig.screenHeight - kToolbarHeight,
+                width: SizeConfig.screenWidth,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 40,
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
 
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                          Row(
+                            children: [
+                              Icon(Icons.favorite_border_outlined, color: Color(0xff000000),),
 
-                          Text('$numberOfLikes', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                              SizedBox(width: 10,),
 
+                              Text('$numberOfLikes', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+
+                            ],
+                          ),
+
+                          SizedBox(width: 40,),
+
+                          Row(
+                            children: [
+                              Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
+
+                              SizedBox(width: 10,),
+
+                              Text('$numberOfComments', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                            ],
+                          ),
                         ],
                       ),
-
-                      SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                      Row(
-                        children: [
-                          Icon(Icons.chat_bubble_outline_outlined, color: Color(0xff000000),),
-
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                          Text('$numberOfComments', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                Expanded(
-                  child: SmartRefresher(
-                    enablePullDown: true,
-                    enablePullUp: true,
-                    header: MaterialClassicHeader(
-                      color: Color(0xffffffff),
-                      backgroundColor: Color(0xff4EC9D4),
                     ),
-                    footer: CustomFooter(
-                      loadStyle: LoadStyle.ShowWhenLoading,
-                      builder: (BuildContext context, LoadStatus mode){
-                        Widget body;
-                        if(mode == LoadStatus.loading){
-                          body = CircularProgressIndicator();
-                        }
-                        return Center(child: body);
-                      },
-                    ),
-                    controller: refreshController,
-                    onRefresh: onRefresh,
-                    onLoading: onLoading,
-                    child: ListView.separated(
-                      padding: EdgeInsets.all(10.0),
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (c, i) {
-                        return Column(
-                          children: [
-                            Container(
-                              height: SizeConfig.blockSizeVertical * 5,
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
-                                    backgroundColor: Color(0xff888888),
-                                  ),
 
-                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
-                                      },
-                                      child: currentUserId == comments[i].userId
-                                      ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
-                                      : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
-                                    ),
-                                  ),
-
-                                  commentsLikes[i] == true
-                                  ? IconButton(
-                                    icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
-                                    padding: EdgeInsets.zero,
-                                    onPressed: () async{
-                                      setState(() {
-                                        commentsLikes[i] = false;
-                                        commentsNumberOfLikes[i]--;
-                                        
-                                      });
-
-                                      await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
-                                    },
-                                  )
-                                  : IconButton(
-                                    icon: Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
-                                    padding: EdgeInsets.zero,
-                                    onPressed: () async{
-                                      setState(() {
-                                        commentsLikes[i] = true;
-                                        commentsNumberOfLikes[i]++;
-                                      });
-
-                                      await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
-                                    },
-                                  ),
-
-                                  Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                ],
-                              ),
-                            ),
-
-                            Row(
+                    Expanded(
+                      child: SmartRefresher(
+                        enablePullDown: true,
+                        enablePullUp: true,
+                        header: MaterialClassicHeader(
+                          color: Color(0xffffffff),
+                          backgroundColor: Color(0xff4EC9D4),
+                        ),
+                        footer: CustomFooter(
+                          loadStyle: LoadStyle.ShowWhenLoading,
+                          builder: (BuildContext context, LoadStatus mode){
+                            Widget body;
+                            if(mode == LoadStatus.loading){
+                              body = CircularProgressIndicator();
+                            }
+                            return Center(child: body);
+                          },
+                        ),
+                        controller: refreshController,
+                        onRefresh: onRefresh,
+                        onLoading: onLoading,
+                        child: ListView.separated(
+                          padding: EdgeInsets.all(10.0),
+                          physics: ClampingScrollPhysics(),
+                          itemBuilder: (c, i) {
+                            return Column(
                               children: [
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
-
-                                Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Text(
-                                      comments[i].commentBody,
-                                      style: TextStyle(
-                                        color: Color(0xffffffff),
+                                Container(
+                                  height: 40,
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                        backgroundColor: Color(0xff888888),
                                       ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xff4EC9D4),
-                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                      SizedBox(width: 10,),
 
-                            Row(
-                              children: [
-
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
-
-                                Text(timeago.format(DateTime.parse(comments[i].createdAt))),
-
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                                GestureDetector(
-                                  onTap: () async{
-                                    setState(() {
-                                      isComment = false;
-                                      currentCommentId = comments[i].commentId;
-                                    });
-
-                                    await showMaterialModalBottomSheet(
-                                      expand: true,
-                                      context: context,
-                                      builder: (context) => Container(
-                                        padding: EdgeInsets.all(20.0),
-                                        child: TextFormField(
-                                          controller: controller,
-                                          cursorColor: Color(0xff000000),
-                                          keyboardType: TextInputType.text,
-                                          maxLines: 10,
-                                          decoration: InputDecoration(
-                                            labelText: 'Say something...',
-                                            labelStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Color(0xffffffff),
-                                            ),
-                                            border: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                              ),
-                                            ),
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                              ),
-                                            ),
-                                            enabledBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Text('Reply',),
-                                ),
-
-                              ],
-                            ),
-
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                            comments[i].listOfReplies.length != 0
-                            ? Column(
-                                children: List.generate(comments[i].listOfReplies.length, (index) => 
-                                Column(
-                                  children: [
-                                    Container(
-                                      height: SizeConfig.blockSizeVertical * 5,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 12,),
-
-                                          CircleAvatar(
-                                            backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
-                                            backgroundColor: Color(0xff888888),
-                                          ),
-
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
-
-                                          Expanded(
-                                            child: GestureDetector(
-                                              onTap: (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
-                                              },
-                                              child: currentUserId == comments[i].listOfReplies[index].userId
-                                              ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
-                                              : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName, style: TextStyle(fontWeight: FontWeight.bold,),
-                                              ),
-                                            ),
-                                          ),
-
-                                          repliesLikes[i][index] == true
-                                          ? IconButton(
-                                            icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
-                                            padding: EdgeInsets.zero,
-                                            onPressed: () async{
-                                              setState(() {
-                                                repliesLikes[i][index] = false;
-                                                repliesNumberOfLikes[i][index]--;
-                                                
-                                              });
-                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
-                                            },
-                                          )
-                                          : IconButton(
-                                            icon: Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
-                                            padding: EdgeInsets.zero,
-                                            onPressed: () async{
-                                              setState(() {
-                                                repliesLikes[i][index] = true;
-                                                repliesNumberOfLikes[i][index]++;
-                                              });
-                                              await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
-                                            },
-                                          ),
-
-                                          Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
-
-                                        ],
-                                      ),
-                                    ),
-
-                                    Row(
-                                      children: [
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
-
-                                        Expanded(
-                                          child: Container(
-                                            padding: EdgeInsets.all(10.0),
-                                            child: Text(
-                                              comments[i].listOfReplies[index].replyBody,
-                                              style: TextStyle(
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Color(0xff4EC9D4),
-                                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                    Row(
-                                      children: [
-
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 24,),
-
-                                        Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
-
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 5,),
-
-                                        GestureDetector(
-                                          onTap: () async{
-                                            controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
-                                            setState(() {
-                                              isComment = false;
-                                              currentCommentId = comments[i].commentId;
-                                            });
-                                            await showMaterialModalBottomSheet(
-                                              expand: true,
-                                              context: context,
-                                              builder: (context) => Container(
-                                                padding: EdgeInsets.all(20.0),
-                                                child: TextFormField(
-                                                  controller: controller,
-                                                  cursorColor: Color(0xff000000),
-                                                  keyboardType: TextInputType.text,
-                                                  maxLines: 10,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Say something...',
-                                                    labelStyle: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Color(0xffffffff),
-                                                    ),
-                                                    border: UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                      ),
-                                                    ),
-                                                    focusedBorder: UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                      ),
-                                                    ),
-                                                    enabledBorder: UnderlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
                                           },
-                                          child: Text('Reply',),
+                                          child: currentUserId == comments[i].userId
+                                          ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
+                                          : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
                                         ),
+                                      ),
 
-                                      ],
+                                      commentsLikes[i] == true
+                                      ? IconButton(
+                                        icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () async{
+                                          setState(() {
+                                            commentsLikes[i] = false;
+                                            commentsNumberOfLikes[i]--;
+                                            
+                                          });
+
+                                          await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
+                                        },
+                                      )
+                                      : IconButton(
+                                        icon: Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                        padding: EdgeInsets.zero,
+                                        onPressed: () async{
+                                          setState(() {
+                                            commentsLikes[i] = true;
+                                            commentsNumberOfLikes[i]++;
+                                          });
+
+                                          await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
+                                        },
+                                      ),
+
+                                      Text('${commentsNumberOfLikes[i]}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+
+                                    ],
+                                  ),
+                                ),
+
+                                Row(
+                                  children: [
+                                    SizedBox(width: SizeConfig.screenWidth / 8,),
+
+                                    Expanded(
+                                      child: Container(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: Text(
+                                          comments[i].commentBody,
+                                          style: TextStyle(
+                                            color: Color(0xffffffff),
+                                          ),
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xff4EC9D4),
+                                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                        ),
+                                      ),
                                     ),
+                                  ],
+                                ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                SizedBox(height: 10,),
+
+                                Row(
+                                  children: [
+
+                                    SizedBox(width: SizeConfig.screenWidth / 8,),
+
+                                    Text(timeago.format(DateTime.parse(comments[i].createdAt))),
+
+                                    SizedBox(width: 40,),
+
+                                    GestureDetector(
+                                      onTap: () async{
+                                        if(controller.text != ''){
+                                          controller.clear();
+                                        }
+
+                                        setState(() {
+                                          isComment = false;
+                                          currentCommentId = comments[i].commentId;
+                                        });
+
+                                        await showModalBottomSheet(
+                                          context: context, 
+                                          builder: (context) => showKeyboard()
+                                        );
+                                      },
+                                      child: Text('Reply',),
+                                    ),
 
                                   ],
                                 ),
-                              ),
-                            )
-                            : Container(height: 0,),
 
-                          ],
-                        );
-                      },
-                      separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
-                      itemCount: comments.length,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          )
-          : SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: MiscRegularEmptyDisplayTemplate(message: 'Comment is empty',),
-          ),
-          bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-            child: Row(
-              children: [
+                                SizedBox(height: 10,),
 
-                CircleAvatar(
-                  backgroundColor: Color(0xff888888), 
-                  backgroundImage: currentUserImage != null && currentUserImage != ''
-                  ? NetworkImage(currentUserImage)
-                  : AssetImage('assets/icons/app-icon.png'),
-                ),
+                                comments[i].listOfReplies.length != 0
+                                ? Column(
+                                    children: List.generate(comments[i].listOfReplies.length, (index) => 
+                                    Column(
+                                      children: [
+                                        Container(
+                                          height: 40,
+                                          child: Row(
+                                            children: [
+                                              SizedBox(width: SizeConfig.screenWidth / 7,),
 
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: TextFormField(
-                      
-                      onTap: () async{
-                        await showMaterialModalBottomSheet(
-                          expand: true,
-                          context: context,
-                          builder: (context) => Container(
-                            padding: EdgeInsets.all(20.0),
-                            child: TextFormField(
-                              controller: controller,
-                              cursorColor: Color(0xff000000),
-                              keyboardType: TextInputType.text,
-                              maxLines: 10,
-                              decoration: InputDecoration(
-                                labelText: 'Say something...',
-                                labelStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xffffffff),
-                                ),
-                                border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
+                                              CircleAvatar(
+                                                backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
+                                                backgroundColor: Color(0xff888888),
+                                              ),
+
+                                              SizedBox(width: 10,),
+
+                                              Expanded(
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
+                                                  },
+                                                  child: currentUserId == comments[i].listOfReplies[index].userId
+                                                  ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
+                                                  : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName, style: TextStyle(fontWeight: FontWeight.bold,),
+                                                  ),
+                                                ),
+                                              ),
+
+                                              repliesLikes[i][index] == true
+                                              ? IconButton(
+                                                icon: Icon(Icons.favorite, color: Color(0xffE74C3C),), 
+                                                padding: EdgeInsets.zero,
+                                                onPressed: () async{
+                                                  setState(() {
+                                                    repliesLikes[i][index] = false;
+                                                    repliesNumberOfLikes[i][index]--;
+                                                    
+                                                  });
+                                                  await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
+                                                },
+                                              )
+                                              : IconButton(
+                                                icon: Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
+                                                padding: EdgeInsets.zero,
+                                                onPressed: () async{
+                                                  setState(() {
+                                                    repliesLikes[i][index] = true;
+                                                    repliesNumberOfLikes[i][index]++;
+                                                  });
+                                                  await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
+                                                },
+                                              ),
+
+                                              Text('${repliesNumberOfLikes[i][index]}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+
+                                            ],
+                                          ),
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            SizedBox(width: SizeConfig.screenWidth / 4,),
+
+                                            Expanded(
+                                              child: Container(
+                                                padding: EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  comments[i].listOfReplies[index].replyBody,
+                                                  style: TextStyle(
+                                                    color: Color(0xffffffff),
+                                                  ),
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xff4EC9D4),
+                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        SizedBox(height: 10,),
+
+                                        Row(
+                                          children: [
+
+                                            SizedBox(width: SizeConfig.screenWidth / 4,),
+
+                                            Text(timeago.format(DateTime.parse(comments[i].listOfReplies[index].createdAt))),
+
+                                            SizedBox(width: 40,),
+
+                                            GestureDetector(
+                                              onTap: () async{
+                                                if(controller.text != ''){
+                                                  controller.clear();
+                                                }
+
+                                                controller.text = comments[i].firstName + ' ' + comments[i].lastName + ' ';
+                                                setState(() {
+                                                  isComment = false;
+                                                  currentCommentId = comments[i].commentId;
+                                                  
+                                                });
+
+                                                await showModalBottomSheet(
+                                                  context: context, 
+                                                  builder: (context) => showKeyboard()
+                                                );
+                                              },
+                                              child: Text('Reply',),
+                                            ),
+
+                                          ],
+                                        ),
+
+                                        SizedBox(height: 10,),
+
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      readOnly: true,
-                      controller: controller,
-                      cursorColor: Color(0xff000000),
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        fillColor: Color(0xffBDC3C7),
-                        filled: true,
-                        labelText: 'Say something...',
-                        labelStyle: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xffffffff),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xffBDC3C7),
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xffBDC3C7),
-                          ),
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                                )
+                                : Container(height: 0,),
+
+                              ],
+                            );
+                          },
+                          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
+                          itemCount: comments.length,
                         ),
                       ),
                     ),
+                  ],
+                )
+              ),
+            ),
+            footer: showKeyboard(),
+          )
+          : FooterLayout(
+            footer: showKeyboard(),
+            child: Container(
+              height: (SizeConfig.screenHeight - kToolbarHeight),
+              width: SizeConfig.screenWidth,
+              child: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+
+                      SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+
+                      Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+                      SizedBox(height: 45,),
+
+                      Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+                      SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+                    ],
                   ),
                 ),
-
-                GestureDetector(
-                  onTap: () async{
-                    if(isComment == true){
-                      context.showLoaderOverlay();
-                      await apiRegularAddComment(postId: postId, commentBody: controller.text);
-                      context.hideLoaderOverlay();
-
-                      controller.clear();
-                      itemRemaining = 1;
-                      repliesRemaining = 1;
-                      comments = [];
-                      replies = [];
-                      numberOfReplies = 0;
-                      page1 = 1;
-                      page2 = 1;
-                      count = 0;
-                      commentsLikes = [];
-                      commentsNumberOfLikes = [];
-                      repliesLikes = [];
-                      repliesNumberOfLikes = [];
-                      isComment = true;
-                      onLoading();
-                    }else{
-                      context.showLoaderOverlay();
-                      apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
-                      context.hideLoaderOverlay();
-
-                      controller.clear();
-                      itemRemaining = 1;
-                      repliesRemaining = 1;
-                      comments = [];
-                      replies = [];
-                      numberOfReplies = 0;
-                      page1 = 1;
-                      page2 = 1;
-                      count = 0;
-                      commentsLikes = [];
-                      commentsNumberOfLikes = [];
-                      repliesLikes = [];
-                      repliesNumberOfLikes = [];
-                      isComment = true;
-                      onLoading();
-                    }
-
-                  },
-                  child: Text('Post',
-                    style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4,
-                      fontWeight: FontWeight.bold, 
-                      color: Color(0xff000000),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
-}
 
+  showKeyboard(){
+    return Padding(
+      padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+      child: Row(
+        children: [
+
+          CircleAvatar(
+            backgroundColor: Color(0xff888888), 
+            backgroundImage: currentUserImage != null && currentUserImage != ''
+            ? NetworkImage(currentUserImage)
+            : AssetImage('assets/icons/app-icon.png'),
+          ),
+
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: TextFormField(
+                controller: controller,
+                cursorColor: Color(0xff000000),
+                maxLines: 2,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  fillColor: Color(0xffBDC3C7),
+                  filled: true,
+                  labelText: 'Say something...',
+                  labelStyle: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xffffffff),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xffBDC3C7),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0xffBDC3C7),
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          GestureDetector(
+            onTap: () async{
+              if(isComment == true){
+                context.showLoaderOverlay();
+                await apiRegularAddComment(postId: postId, commentBody: controller.text);
+                context.hideLoaderOverlay();
+
+                controller.clear();
+                itemRemaining = 1;
+                repliesRemaining = 1;
+                comments = [];
+                replies = [];
+                numberOfReplies = 0;
+                page1 = 1;
+                page2 = 1;
+                count = 0;
+                commentsLikes = [];
+                commentsNumberOfLikes = [];
+                repliesLikes = [];
+                repliesNumberOfLikes = [];
+                isComment = true;
+                onLoading();
+              }else{
+                context.showLoaderOverlay();
+                apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
+                context.hideLoaderOverlay();
+
+                controller.clear();
+                itemRemaining = 1;
+                repliesRemaining = 1;
+                comments = [];
+                replies = [];
+                numberOfReplies = 0;
+                page1 = 1;
+                page2 = 1;
+                count = 0;
+                commentsLikes = [];
+                commentsNumberOfLikes = [];
+                repliesLikes = [];
+                repliesNumberOfLikes = [];
+                isComment = true;
+                onLoading();
+              }
+
+            },
+            child: Text('Post',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold, 
+                color: Color(0xff000000),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -130,7 +130,8 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
     //   width: SizeConfig.screenWidth,
     // );
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -305,9 +306,30 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
       //     ),
       //   ),
       // ),
+      // : SingleChildScrollView(
+      //   physics: ClampingScrollPhysics(),
+      //   child: MiscBLMEmptyDisplayTemplate(),
+      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscBLMEmptyDisplayTemplate(),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+            ],
+          ),
+        ),
       ),
     );
   }

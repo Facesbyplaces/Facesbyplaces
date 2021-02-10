@@ -188,8 +188,16 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                     }else{
                       List<File> newFiles = [];
 
-                      newFiles.add(videoFile);
-                      newFiles.addAll(slideImages);
+                      // newFiles.add(videoFile);
+                      // newFiles.addAll(slideImages);
+
+                      if(videoFile != null){
+                        newFiles.add(videoFile);
+                      }
+
+                      if(slideImages != null){
+                        newFiles.addAll(slideImages);
+                      }
 
                       newValue.description = controllerStory.text;
                       newValue.blmName = _key1.currentState.controller.text;

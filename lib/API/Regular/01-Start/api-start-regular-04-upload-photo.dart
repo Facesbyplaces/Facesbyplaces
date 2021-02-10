@@ -19,7 +19,7 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
     });
 
-    var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
+    var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/image_upload', data: formData,
       options: Options(
         headers: <String, String>{
           'access-token': getAccessToken,
