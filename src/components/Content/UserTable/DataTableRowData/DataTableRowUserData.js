@@ -10,13 +10,13 @@ export default function DataTableRowUserData(props) {
 
   const renderedUsers = props.users.map((user) => (
     <tr>
-      <td className="pl-0 py-6">
+      <td className="pl-2 py-6">
         <label className="checkbox checkbox-lg checkbox-inline">
           <input type="checkbox" defaultValue={1} />
           <span />
         </label>
       </td>
-      <td className="pl-0">
+      <td>
         <a
           href="#"
           className="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"
@@ -24,14 +24,19 @@ export default function DataTableRowUserData(props) {
           {user.id}
         </a>
       </td>
-      <td>
+      <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
           {user.email}
         </span>
       </td>
-      <td>
+      <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
           {user.first_name} {user.last_name}
+        </span>
+      </td>
+      <td>
+        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+          {user.username}
         </span>
       </td>
       <td>
@@ -50,7 +55,8 @@ export default function DataTableRowUserData(props) {
           </span>
         )}
       </td>
-      <td className="pr-0 text-right">
+      <td className="pr-2 text-left">
+        {/* View Icon */}
         <a href="#" className="btn btn-icon btn-light btn-hover-primary btn-sm">
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -93,6 +99,7 @@ export default function DataTableRowUserData(props) {
             {/*end::Svg Icon*/}
           </span>
         </a>
+        {/* Edit Icon */}
         <a
           href="#"
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"

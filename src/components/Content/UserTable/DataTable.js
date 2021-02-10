@@ -4,10 +4,32 @@ import axios from "../../../auxiliary/axios";
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
 import ReactPaginate from "react-paginate";
 
-export default function DataTable() {
+export default function DataTable({ search, setSearch, keywords }) {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
   const [users, setUsers] = useState([]);
+
+  console.log(search);
+
+  const handleSearch = () => {
+    axios
+      .get(`/api/v1/admin/users/search`, {
+        params: { keywords: keywords, page: page },
+      })
+      .then((response) => {
+        setUsers(response.data.users);
+        console.log("Response: ", response.data.users);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  if (search) {
+    handleSearch();
+    setSearch(false);
+    console.log("Search User: ", users);
+  }
 
   useEffect(() => {
     fetchUsers(page);
@@ -31,17 +53,15 @@ export default function DataTable() {
       });
   };
 
-  const paginationNum = () => {};
-
   return (
     <div className="table-responsive">
       <table
-        className="table table-head-custom table-vertical-center"
+        className="table table-hover table-head-custom table-vertical-center"
         id="kt_advance_table_widget_2"
       >
         <thead>
           <tr className="text-uppercase">
-            <th className="pl-0" style={{ width: "40px" }}>
+            <th className="pl-2" style={{ width: "40px" }}>
               <label className="checkbox checkbox-lg checkbox-inline mr-2">
                 <input type="checkbox" defaultValue={1} />
                 <span />
@@ -52,9 +72,10 @@ export default function DataTable() {
             </th>
             <th style={{ minWidth: "120px" }}>email</th>
             <th style={{ minWidth: "150px" }}>name</th>
+            <th style={{ minWidth: "150px" }}>username</th>
             <th style={{ minWidth: "150px" }}>phone number</th>
             <th style={{ minWidth: "130px" }}>type</th>
-            <th className="pr-0 text-right" style={{ minWidth: "160px" }}>
+            <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
               action
             </th>
           </tr>

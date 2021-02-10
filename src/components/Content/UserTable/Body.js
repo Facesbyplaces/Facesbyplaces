@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import DataTable from "./DataTable";
 
 export default function Body() {
+  const [search, setSearch] = useState(false);
+  const [keywords, setKeywords] = useState([]);
+
+  const handleClick = () => {
+    setSearch(true);
+  };
+
+  const handleChange = (e) => {
+    setKeywords(e.target.value);
+    setSearch(true);
+  };
+
   return (
     <div className="card-body">
       {/*begin: Search Form*/}
@@ -16,7 +28,8 @@ export default function Body() {
                     type="text"
                     className="form-control"
                     placeholder="Search..."
-                    id="kt_datatable_search_query"
+                    onChange={handleChange}
+                    value={keywords}
                   />
                   <span>
                     <i className="flaticon2-search-1 text-muted" />
@@ -26,7 +39,10 @@ export default function Body() {
             </div>
           </div>
           <div className="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-            <a href="#" className="btn btn-light-primary px-6 font-weight-bold">
+            <a
+              className="btn btn-light-primary px-6 font-weight-bold"
+              onClick={() => handleClick()}
+            >
               Search
             </a>
           </div>
@@ -36,7 +52,7 @@ export default function Body() {
 
       {/*begin: Datatable*/}
       <div className="">
-        <DataTable />
+        <DataTable search={search} setSearch={setSearch} keywords={keywords} />
       </div>
       {/*end: Datatable*/}
     </div>
