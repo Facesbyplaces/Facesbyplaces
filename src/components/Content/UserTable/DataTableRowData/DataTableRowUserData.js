@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { DeleteModal } from "./DeleteModal";
 
 export default function DataTableRowUserData(props) {
-  console.log("Props: ", props);
-  // const [users, setUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`/api/v1/admin/users`, { params: { page: props.page } })
-  //     .then((response) => {
-  //       setUsers(response.data.users);
-  //       console.log("Response: ", response.data.users);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //     });
-  // }, [users.id]);
-  // console.log("Users: ", users);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const renderedUsers = props.users.map((user) => (
     <tr>
@@ -135,7 +126,13 @@ export default function DataTableRowUserData(props) {
             {/*end::Svg Icon*/}
           </span>
         </a>
-        <a href="#" className="btn btn-icon btn-light btn-hover-primary btn-sm">
+        {/* Delete Icon */}
+        <a
+          className="btn btn-icon btn-light btn-hover-primary btn-sm"
+          data-toggle="modal"
+          data-target="#exampleModalSizeSm"
+          onClick={openModal}
+        >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg*/}
             <svg
@@ -163,6 +160,7 @@ export default function DataTableRowUserData(props) {
             {/*end::Svg Icon*/}
           </span>
         </a>
+        <DeleteModal showModal={showModal} setShowModal={setShowModal} />
       </td>
     </tr>
   ));

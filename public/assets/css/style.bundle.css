@@ -6982,11 +6982,10 @@ a.close.disabled {
   top: 0;
   left: 0;
   z-index: 1050;
-  display: none;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   outline: 0;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-dialog {
@@ -6994,7 +6993,20 @@ a.close.disabled {
   width: auto;
   margin: 0.5rem;
   pointer-events: none;
+  text-align: center;
 }
+
+.modal-title-dialog {
+  font-weight: 500;
+  font-size: 2rem;
+  color: #181c32;
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
+  text-align: center;
+}
+
 .modal.fade .modal-dialog {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   transition: -webkit-transform 0.3s ease-out;
@@ -7117,8 +7129,7 @@ a.close.disabled {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: 1.5rem 1.75rem;
-  border-bottom: 1px solid #ebedf3;
+  padding: 0 1.5rem 0 1.75rem;
   border-top-left-radius: 0.42rem;
   border-top-right-radius: 0.42rem;
 }
@@ -7128,8 +7139,12 @@ a.close.disabled {
 }
 
 .modal-title {
-  margin-bottom: 0;
   line-height: 1.5;
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none;
+  text-align: center;
 }
 
 .modal-body {
@@ -7137,7 +7152,7 @@ a.close.disabled {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.75rem;
+  padding: 0 1.75rem;
 }
 
 .modal-footer {
@@ -7151,9 +7166,8 @@ a.close.disabled {
   align-items: center;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 1.5rem;
-  border-top: 1px solid #ebedf3;
   border-bottom-right-radius: 0.42rem;
   border-bottom-left-radius: 0.42rem;
 }
@@ -67486,7 +67500,7 @@ code {
 }
 .modal .modal-header .modal-title {
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 2rem;
   color: #181c32;
 }
 .modal .modal-header .modal-title small {

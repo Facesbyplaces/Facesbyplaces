@@ -59,9 +59,7 @@ export default function Topbar() {
             className="btn btn-xs btn-icon btn-light btn-hover-primary"
             onClick={() => onDivClick(!sideBar)}
           >
-            <i className="ki ki-close icon-xs text-muted">
-              <GrClose />
-            </i>
+            <b className="ki ki-close icon-xs text-muted">&#88;</b>
           </a>
         </div>
         <div className="offcanvas-content pr-5 mr-n5">
