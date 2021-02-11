@@ -57,7 +57,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+        title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
         centerTitle: true,
         backgroundColor: Color(0xff04ECFF),
         leading: IconButton(
@@ -82,31 +82,31 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
               children: [
                 MiscBLMInputFieldDropDown(key: _key1,),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 MiscBLMInputFieldTemplate(key: _key2, labelText: 'Location of the incident'),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 MiscBLMInputFieldTemplate(key: _key3, labelText: 'Precinct / Station House (Optional)'),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 MiscBLMInputFieldDateTimeTemplate(key: _key4, labelText: 'DOB'),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 MiscBLMInputFieldDateTimeTemplate(key: _key5, labelText: 'RIP'),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 MiscBLMInputFieldTemplate(key: _key6, labelText: 'Country'),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 MiscBLMInputFieldTemplate(key: _key7, labelText: 'State'),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                SizedBox(height: 40,),
 
                 MiscBLMButtonTemplate(
                   onPressed: () async{
@@ -146,8 +146,10 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                     }
 
                   }, 
-                  width: SizeConfig.screenWidth / 2, 
-                  height: SizeConfig.blockSizeVertical * 7
+                  // width: SizeConfig.screenWidth / 2, 
+                  // height: SizeConfig.blockSizeVertical * 7
+                  width: 150,
+                  height: 45,
                 ),
               ],
             ),

@@ -64,6 +64,9 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial blmMemorial}) async{
       ),  
     );
 
+    print('The status code is ${response.statusCode}');
+    print('The status data is ${response.data}');
+
     if(response.statusCode == 200){
       var value = response.data;
       var user = value['blm'];
@@ -72,6 +75,7 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial blmMemorial}) async{
       result = memorialId;
     }
   }catch(e){
+    print('The error: $e');
     result = 0;
   }
 
