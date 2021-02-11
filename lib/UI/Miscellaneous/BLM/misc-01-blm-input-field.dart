@@ -57,20 +57,10 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
       maxLines: maxLines,
       readOnly: readOnly,
       cursorColor: Color(0xff000000),
-      // style: TextStyle(
-      //   fontSize: 14.ssp,
-      //   fontWeight: FontWeight.w400, 
-      //   color: Colors.grey,
-      // ),
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
-        // labelStyle: TextStyle(
-        //   fontSize: 14.ssp,
-        //   fontWeight: FontWeight.w400, 
-        //   color: Colors.grey,
-        // ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff000000),
@@ -390,7 +380,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
       decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
-        labelStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey,),
+        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff000000),

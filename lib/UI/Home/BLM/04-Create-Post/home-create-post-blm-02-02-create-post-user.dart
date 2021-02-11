@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-05-search-users.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'home-create-post-blm-01-create-post.dart';
 import 'package:flutter/material.dart';
@@ -113,9 +114,19 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                 focusColor: Color(0xffffffff),
                 hintText: 'Search User',
                 hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                 ),
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                suffixIcon: IconButton(
+                  onPressed: (){
+                    print('Search!');
+                    setState(() {
+                      empty = false;
+                    });
+
+                    onLoading();
+                  },
+                  icon: Icon(Icons.search, color: Colors.grey),
+                ),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xffffffff)),
                   borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -133,102 +144,97 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: empty
-          ? SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            padding: EdgeInsets.zero,
-            child: Container(
-              height: SizeConfig.screenHeight - kToolbarHeight,
+          body: Container(
+            height: SizeConfig.screenHeight - kToolbarHeight,
+            width: SizeConfig.screenWidth,
+            child: empty
+            ? SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  Expanded(child: Container(),),
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
 
-                  Container(
-                    height: SizeConfig.blockSizeVertical * 30,
-                    width: SizeConfig.screenWidth / 2,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/icons/search-user.png'),
-                      ),
-                    ),
-                  ),
+                  Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: 20,),
 
-                  Text('Search a location to add on your post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                  Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  Expanded(child: Container(),),
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
                 ],
               ),
-            ),
-          )
-          : Container(
-            height: SizeConfig.screenHeight,
-            child: SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(
-                color: Color(0xffffffff),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-              footer: CustomFooter(
-                loadStyle: LoadStyle.ShowWhenLoading,
-                builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
-                  if(mode == LoadStatus.loading){
-                    body = CircularProgressIndicator();
-                  }
-                  return Center(child: body);
-                },
-              ),
-              controller: refreshController,
-              onRefresh: onRefresh,
-              onLoading: onLoading,
-              child: ListView.separated(
-                padding: EdgeInsets.all(10.0),
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (c, i) {
-                  return GestureDetector(
-                    onTap: (){
-                      Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
-                      height: SizeConfig.blockSizeVertical * 10,
-                      child: Row(
-                        children: [
-
-                          CircleAvatar(
-                            backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
-                            backgroundColor: Color(0xff888888),
-                          ),
-
-                          SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(child: Container(),),
-
-                                Text('${users[i].firstName}' + ' ' + '${users[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
-
-                                Text('${users[i].email}', style: TextStyle(fontWeight: FontWeight.w400, fontSize: SizeConfig.safeBlockHorizontal * 3, color: Color(0xff888888)),),
-
-                                Expanded(child: Container(),),
-                              ],
+            )
+            : Container(
+              height: SizeConfig.screenHeight,
+              width: SizeConfig.screenWidth,
+              child: SmartRefresher(
+                enablePullDown: true,
+                enablePullUp: true,
+                header: MaterialClassicHeader(
+                  color: Color(0xffffffff),
+                  backgroundColor: Color(0xff4EC9D4),
+                ),
+                footer: CustomFooter(
+                  loadStyle: LoadStyle.ShowWhenLoading,
+                  builder: (BuildContext context, LoadStatus mode){
+                    Widget body;
+                    if(mode == LoadStatus.loading){
+                      body = CircularProgressIndicator();
+                    }
+                    return Center(child: body);
+                  },
+                ),
+                controller: refreshController,
+                onRefresh: onRefresh,
+                onLoading: onLoading,
+                child: ListView.separated(
+                  padding: EdgeInsets.all(10.0),
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (c, i) {
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context, BLMTaggedUsers(name: users[i].firstName + ' ' + users[i].lastName, userId: users[i].userId, accountType: users[i].accountType));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 40,
+                              backgroundColor: Color(0xff888888),
+                              backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
                             ),
-                          ),
-                        ],
+
+                            SizedBox(width: 25,),
+
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SubstringHighlight(
+                                    text: users[i].firstName + ' ' + users[i].lastName,
+                                    term: controller.text,
+                                    textStyle: TextStyle(color: Color(0xff000000),),
+                                    textStyleHighlight: TextStyle(color: Color(0xff04ECFF),),
+                                  ),
+
+                                  Text(users[i].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),
+
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Color(0xff888888)),
-                itemCount: users.length,
+                    );
+                  },
+                  separatorBuilder: (c, i) => Divider(height: 10, color: Color(0xff888888)),
+                  itemCount: users.length,
+                ),
               ),
             )
-          )
+          ),
         ),
       ),
     );

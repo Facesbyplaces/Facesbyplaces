@@ -37,7 +37,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff04ECFF),
-        title:  Text('Memorial Settings', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff),),),
+        title:  Text('Memorial Settings', style: TextStyle(fontSize: 16, color: Color(0xffffffff),),),
         centerTitle: true,
           leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -51,7 +51,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           Container(
             alignment: Alignment.centerLeft,
             width: SizeConfig.screenWidth,
-            height: SizeConfig.blockSizeVertical * 8,
+            height: 70,
             child: DefaultTabController(
               length: 2,
               child: TabBar(
@@ -68,7 +68,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
                   Center(
                     child: Text('Page',
                       style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -76,7 +76,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
 
                   Center(child: Text('Privacy',
                       style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -114,7 +114,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           },
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
           backgroundColor: Color(0xffaaaaaa),
@@ -125,7 +126,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Update Page image and background image',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
           backgroundColor: Color(0xffaaaaaa),
@@ -136,7 +138,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Add or remove admins of this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
           backgroundColor: Color(0xffaaaaaa),
@@ -146,7 +149,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Add or remove family of this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
           backgroundColor: Color(0xffaaaaaa),
@@ -156,7 +160,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Add or remove friends of this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         relationship != 'Friend'
         ? MiscBLMSettingDetailTemplate(
@@ -247,7 +252,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Leave this page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
           backgroundColor: Color(0xffaaaaaa),
@@ -257,7 +262,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Manage cards that receives the memorial gifts.',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
           backgroundColor: Color(0xffaaaaaa),
@@ -267,11 +272,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Completely remove the page. This is irreversible',
         ),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+        SizedBox(height: 10,),
 
-        Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
+        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+        SizedBox(height: 30,),
 
       ],
     );
@@ -289,10 +294,10 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Customize what others see on your page',
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          height: 80,
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -317,10 +322,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           ),
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          // height: SizeConfig.blockSizeVertical * 10,
+          height: 80,
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -349,10 +355,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           ),
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          height: SizeConfig.blockSizeVertical * 10,
+          // height: SizeConfig.blockSizeVertical * 10,
+          height: 80,
           color: Color(0xffaaaaaa),
           child: Row(
             children: [
@@ -376,13 +383,11 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           ),
         ),
 
-        Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+        SizedBox(height: 10,),
 
-        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+        Image.asset('assets/icons/logo.png', height: 100, width: 100,),
 
-        Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
-
-        SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+        SizedBox(height: 30,),
 
       ],
     );

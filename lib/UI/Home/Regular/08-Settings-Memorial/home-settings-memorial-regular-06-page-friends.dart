@@ -167,13 +167,13 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                       Expanded(
                         child: Container(
                           child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                            Text(friendsList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
-                          ],
-                        ),
+                              Text(friendsList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
+                            ],
+                          ),
                         ),
                       ),
 

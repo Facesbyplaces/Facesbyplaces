@@ -4,7 +4,7 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:substring_highlight/substring_highlight.dart';
 import 'home-settings-memorial-regular-05-page-family.dart';
 import 'home-settings-memorial-regular-06-page-friends.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -159,7 +159,19 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                       hintStyle: TextStyle(
                         fontSize: 14,
                       ),
-                      prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      // prefixIcon: Icon(Icons.search, color: Colors.grey),
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            keywords = controller.text;
+                          });
+
+                          if(controller.text != ''){
+                            onLoading();
+                          }
+                        },
+                        icon: Icon(Icons.search, color: Colors.grey),
+                      ),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffffffff)),
                         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -318,18 +330,11 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RichText(
-                                    textAlign: TextAlign.left,
-                                    text: TextSpan(
-                                      children: <TextSpan>[
-                                        TextSpan(text: users[index].firstName, style: users[index].firstName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
-
-                                        TextSpan(text: ' '),
-
-                                        TextSpan(text: users[index].lastName, style: users[index].lastName == keywords ? TextStyle(color: Color(0xff04ECFF)) : TextStyle(color: Color(0xff000000))),
-
-                                      ],
-                                    ),
+                                  SubstringHighlight(
+                                    text: users[index].firstName + ' ' + users[index].lastName,
+                                    term: keywords,
+                                    textStyle: TextStyle(color: Color(0xff000000),),
+                                    textStyleHighlight: TextStyle(color: Color(0xff04ECFF),),
                                   ),
 
                                   Text(users[index].email, style: TextStyle(fontSize: 12, color: Color(0xff888888),),),

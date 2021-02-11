@@ -245,7 +245,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Completely remove the page. This is irreversible',
         ),
 
-        // SizedBox(height: SizeConfig.blockSizeVertical * 5,),
         SizedBox(height: 10,),
 
         Image.asset('assets/icons/logo.png', height: 100, width: 100,),

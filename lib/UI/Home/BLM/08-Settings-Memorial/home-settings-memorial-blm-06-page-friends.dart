@@ -83,7 +83,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff04ECFF),
-        title: Text('Page Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+        title: Text('Page Friends', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
         centerTitle: true,
         leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
         actions: [
@@ -91,7 +91,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMSearchUser(isFamily: false, memorialId: memorialId,)));
             },
-            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),),
+            child: Center(child: Text('Add Friends', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),),
           ),
         ],
       ),
@@ -124,27 +124,27 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                 child: Row(
                   children: [
                     CircleAvatar(
-                      maxRadius: SizeConfig.blockSizeVertical * 5,
+                      maxRadius: 40,
                       backgroundColor: Color(0xff888888),
                       backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
                     ),
 
-                    SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
+                    SizedBox(width: 25,),
 
                     Expanded(
                       child: Container(
                         child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(friendsList[i].firstName + ' ' + friendsList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
 
-                          Text(friendsList[i].relationship, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff888888)),),
-                        ],
-                      ),
+                            Text(friendsList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
+                          ],
+                        ),
                       ),
                     ),
 
-                    SizedBox(width: SizeConfig.blockSizeHorizontal * 3,),
+                    SizedBox(width: 25,),
 
                     MaterialButton(
                       minWidth: SizeConfig.screenWidth / 3.5,
@@ -201,8 +201,8 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                         page = 1;
                         onLoading1();
                       },
-                      child: Text('Remove', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5,),),
-                      height: SizeConfig.blockSizeVertical * 5,
+                      child: Text('Remove', style: TextStyle(fontSize: 14,),),
+                      height: 40,
                       shape: StadiumBorder(
                         side: BorderSide(color: Color(0xffE74C3C)),
                       ),
@@ -213,7 +213,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                 ),
               );
             },
-            separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
+            separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
             itemCount: friendsList.length,
           ),
         ),

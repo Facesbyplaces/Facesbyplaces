@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-create-post.dart';
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -42,7 +41,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   final int memorialId;
   HomeBLMCreatePostState({this.name, this.memorialId});
 
-  final GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState>();
+  // final GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState>();
+  TextEditingController controller = TextEditingController();
 
   List<BLMManagedPages> managedPages;
   String currentSelection;
@@ -51,14 +51,18 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   List<BLMTaggedUsers> users = [];
   List<File> slideImages;
 
+  int maxLines;
+
   void initState(){
     super.initState();
     slideImages = [];
     managedPages = [];
     currentSelection = name;
     currentIdSelected = memorialId;
+    maxLines = 5;
     getManagedPages();
   }
+
 
   void getManagedPages() async{
     context.showLoaderOverlay();
@@ -131,7 +135,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Create Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Create Post', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             backgroundColor: Color(0xff04ECFF),
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
@@ -178,7 +182,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                   APIBLMCreatePost post = APIBLMCreatePost(
                     blmPostPageType: 'Blm',
-                    blmPostPostBody: _key1.currentState.controller.text,
+                    // blmPostPostBody: _key1.currentState.controller.text,
+                    blmPostPostBody: controller.text,
                     blmPostPageId: currentIdSelected,
                     blmPostLocation: newLocation,
                     blmPostImagesOrVideos: newFiles,
@@ -220,7 +225,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     child: Text('Post', 
                     style: TextStyle(
                       color: Color(0xffffffff), 
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,),
+                      fontSize: 20,),
                     ),
                   ),
                 ),
@@ -229,268 +234,314 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
           ),
           body: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: Container(
-              height: SizeConfig.screenHeight - kToolbarHeight,
+            child: SafeArea(
               child: Column(
-                children: [
+              children: [
 
-                  Container(
-                    child: InputDecorator(
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
+                Container(
+                  child: InputDecorator(
+                    decoration: InputDecoration(
+                      alignLabelWithHint: true,
+                      labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide.none,
                       ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<int>(
-                          value: currentIdSelected,
-                          isDense: true,
-                          onChanged: (int newValue) {
-                            setState(() {
-                              currentIdSelected = newValue;
-                            });
-                          },
-                          items: managedPages.map((BLMManagedPages value) {
-                            return DropdownMenuItem<int>(
-                              value: value.pageId,
-                              
-                              child: Row(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: Color(0xff888888),
-                                    backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
-                                  ),
-
-                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                                  Text(value.name),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide.none,
                       ),
                     ),
-                    decoration: BoxDecoration(
-                      color: Color(0xffffffff),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: Offset(0, 0)
-                        ),
-                      ],
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<int>(
+                        value: currentIdSelected,
+                        isDense: true,
+                        onChanged: (int newValue) {
+                          setState(() {
+                            currentIdSelected = newValue;
+                          });
+                        },
+                        items: managedPages.map((BLMManagedPages value) {
+                          return DropdownMenuItem<int>(
+                            value: value.pageId,
+                            
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: Color(0xff888888),
+                                  backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
+                                ),
+
+                                SizedBox(width: 20,),
+
+                                Text(value.name),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffffffff),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(0, 0)
+                      ),
+                    ],
+                  ),
+                ),
 
-                  Expanded(child: Padding(padding: EdgeInsets.all(20.0), child: MiscBLMInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 20),),),
-
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                  Container(
-                    child: Wrap(
-                      spacing: 5.0,
-                      children: List.generate(
-                        users.length, 
-                        (index) => Chip(
-                          labelPadding: const EdgeInsets.only(left: 8.0),
-                          label: Text(users[index].name),
-                          deleteIcon: Icon(
-                            Icons.close,
-                            size: 18,
+                // MiscBLMInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 1),
+                FocusScope(
+                  child: Focus(
+                    onFocusChange: (focus){
+                      // print('The focus is $focus');
+                      if(focus){
+                        setState(() {
+                          maxLines = 10;
+                        });
+                      }else{
+                        setState(() {
+                          maxLines = 5;
+                        });
+                      }
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: TextFormField(
+                        controller: controller,
+                        cursorColor: Color(0xff000000),
+                        maxLines: maxLines,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          fillColor: Color(0xffffffff),
+                          alignLabelWithHint: true,
+                          labelText: 'Speak out...',
+                          labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0xff000000),
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          onDeleted: () {
-                            setState(() {
-                              users.removeAt(index);
-                            });
-                          },
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                    alignment: Alignment.centerLeft,
                   ),
+                ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                SizedBox(height: 10,),
 
-                  Container(
-                    child: ((){
-                      if(slideImages.length != 0){
-                        return Container(
-                          height: SizeConfig.blockSizeVertical * 25, 
-                          width: SizeConfig.screenWidth,
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: Container(
-                            height: SizeConfig.blockSizeVertical * 12,
-                            child: GridView.count(
-                              physics: ClampingScrollPhysics(),
-                              crossAxisCount: 4,
-                              crossAxisSpacing: 4,
-                              mainAxisSpacing: 4,
-                              children: List.generate(slideImages.length, (index){
-                                return lookupMimeType(slideImages[index].path).contains('video') == true
-                                ? GestureDetector(
-                                  onDoubleTap: (){
-                                    setState(() {
-                                      slideImages.removeAt(index);
-                                    });
-                                  },
-                                  onTap: (){
-                                    if(videoPlayerController.value.isPlaying){
-                                      videoPlayerController.pause();
-                                      print('Paused!');
-                                    }else{
-                                      videoPlayerController.play();
-                                      print('Played!');
-                                    }
-                                  },
-                                  child: Container(
-                                    child: AspectRatio(
-                                      aspectRatio: videoPlayerController.value.aspectRatio,
-                                      child: VideoPlayer(videoPlayerController),
+                Container(
+                  child: Wrap(
+                    spacing: 5.0,
+                    children: List.generate(
+                      users.length, 
+                      (index) => Chip(
+                        labelPadding: const EdgeInsets.only(left: 8.0),
+                        label: Text(users[index].name),
+                        deleteIcon: Icon(
+                          Icons.close,
+                          size: 18,
+                        ),
+                        onDeleted: () {
+                          setState(() {
+                            users.removeAt(index);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                  alignment: Alignment.centerLeft,
+                ),
+
+                SizedBox(height: 10,),
+
+                Container(
+                  child: ((){
+                    if(slideImages.length != 0){
+                      return Container(
+                        height: 200,
+                        width: SizeConfig.screenWidth,
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                        child: Container(
+                          height: 100,
+                          child: GridView.count(
+                            physics: ClampingScrollPhysics(),
+                            crossAxisCount: 4,
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4,
+                            children: List.generate(slideImages.length, (index){
+                              return lookupMimeType(slideImages[index].path).contains('video') == true
+                              ? GestureDetector(
+                                onDoubleTap: (){
+                                  setState(() {
+                                    slideImages.removeAt(index);
+                                  });
+                                },
+                                onTap: (){
+                                  if(videoPlayerController.value.isPlaying){
+                                    videoPlayerController.pause();
+                                    print('Paused!');
+                                  }else{
+                                    videoPlayerController.play();
+                                    print('Played!');
+                                  }
+                                },
+                                child: Container(
+                                  child: AspectRatio(
+                                    aspectRatio: videoPlayerController.value.aspectRatio,
+                                    child: VideoPlayer(videoPlayerController),
+                                  ),
+                                ),
+                              )
+                              : GestureDetector(
+                                onDoubleTap: (){
+                                  setState(() {
+                                    slideImages.removeAt(index);
+                                  });
+                                },
+                                child: Container(
+                                  width: 80,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Color(0xffcccccc),
+                                    border: Border.all(color: Color(0xff000000),),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(slideImages[index].path),
                                     ),
                                   ),
-                                )
-                                : GestureDetector(
-                                  onDoubleTap: (){
-                                    setState(() {
-                                      slideImages.removeAt(index);
-                                    });
-                                  },
-                                  child: Container(
-                                    width: SizeConfig.blockSizeVertical * 10,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Color(0xffcccccc),
-                                      border: Border.all(color: Color(0xff000000),),
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(slideImages[index].path),
-                                      ),
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        Center(
-                                          child: CircleAvatar(
-                                            radius: SizeConfig.blockSizeVertical * 3,
-                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                            child: Text(
-                                              index.toString(),
-                                              style: TextStyle(
-                                                fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xffffffff),
-                                              ),
+                                  child: Stack(
+                                    children: [
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text(
+                                            '$index',
+                                            style: TextStyle(
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                              }),
-                            ),
+                                ),
+                              );
+                            }),
                           ),
-                        );
-                      }else{
-                        return Container(height: 0,);
-                      }
-                    }()),
-                  ),
+                        ),
+                      );
+                    }else{
+                      return Container(height: 0,);
+                    }
+                  }()),
+                ),
 
-                  Container(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                    height: SizeConfig.blockSizeVertical * 20,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () async{
-                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
+                Container(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                  height: 160,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () async{
+                            var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
 
-                              newLocation = result.toString();
-                            },
-                            child: Container(
-                              color: Colors.transparent,
-                              child: Row(
-                                children: [
-                                  Expanded(child: Text('Add a location'),),
-                                  Icon(Icons.place, color: Color(0xff4EC9D4),)
-                                ],
-                              ),
+                            newLocation = result.toString();
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            child: Row(
+                              children: [
+                                Expanded(child: Text('Add a location'),),
+                                Icon(Icons.place, color: Color(0xff4EC9D4),)
+                              ],
                             ),
                           ),
                         ),
+                      ),
 
-                        Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+                      Container(height: 1, color: Color(0xffeeeeee),),
 
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () async{
-                              
-                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () async{
+                            
+                            var result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
 
-                              if(result != null){
-                                users.add(result);
-                              }
+                            if(result != null){
+                              users.add(result);
+                            }
 
-                              setState(() {});
-                            },
-                            child: Container(
-                              color: Colors.transparent,
-                              child: Row(
-                                children: [
-                                  Expanded(child: Text('Tag a person you are with'),),
-                                  Icon(Icons.person, color: Color(0xff4EC9D4),)
-                                ],
-                              ),
+                            setState(() {});
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            child: Row(
+                              children: [
+                                Expanded(child: Text('Tag a person you are with'),),
+                                Icon(Icons.person, color: Color(0xff4EC9D4),)
+                              ],
                             ),
                           ),
                         ),
+                      ),
 
-                        Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+                      Container(height: 1, color: Color(0xffeeeeee),),
 
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () async{
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () async{
 
-                              var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
+                            var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
 
-                              if(choice == null){
-                                choice = 0;
+                            if(choice == null){
+                              choice = 0;
+                            }else{
+                              if(choice == 1){
+                                await getSlideFiles();
                               }else{
-                                if(choice == 1){
-                                  await getSlideFiles();
-                                }else{
-                                  await getVideo();
-                                }
+                                await getVideo();
                               }
-                              
-                            },
-                            child: Container(
-                              color: Colors.transparent,
-                              child: Row(
-                                children: [
-                                  Expanded(child: Text('Upload a Video / Image'),),
-                                  Icon(Icons.image, color: Color(0xff4EC9D4),)
-                                ],
-                              ),
+                            }
+                            
+                          },
+                          child: Container(
+                            color: Colors.transparent,
+                            child: Row(
+                              children: [
+                                Expanded(child: Text('Upload a Video / Image'),),
+                                Icon(Icons.image, color: Color(0xff4EC9D4),)
+                              ],
                             ),
                           ),
                         ),
+                      ),
 
-                      ],
-                    ),
+                    ],
                   ),
-                  
-                ],
-              ),
+                ),
+                
+              ],
+            ),
             ),
           ),
         ),

@@ -76,6 +76,7 @@ dependencies:
   flutter_screenutil: ^4.0.3
   sliding_up_panel: ^1.0.2
   keyboard_attachable: ^1.0.3
+  substring_highlight: ^0.1.2
 
 dev_dependencies:
   flutter_test:

@@ -56,7 +56,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
                 focusColor: Color(0xffffffff),
                 hintText: 'Search Location',
                 hintStyle: TextStyle(
-                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                  fontSize: 16,
                 ),
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
                 border: OutlineInputBorder(
@@ -76,53 +76,54 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: empty
-          ? SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: Container(
-              height: SizeConfig.screenHeight - kToolbarHeight,
+          body: Container(
+            height: SizeConfig.screenHeight - kToolbarHeight,
+            width: SizeConfig.screenWidth,
+            child: empty
+            ? SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  Expanded(child: Container(),),
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
 
-                  Icon(Icons.place_rounded, size: SizeConfig.blockSizeVertical * 30, color: Color(0xff888888),),
+                  Icon(Icons.place_rounded, size: 240, color: Color(0xff888888),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: 20,),
 
-                  Text('Search a location to add on your post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                  Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  Expanded(child: Container(),),
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
                 ],
               ),
-            ),
-          )
-          : ListView.separated(
-            physics: ClampingScrollPhysics(),
-            itemBuilder: (context, index){
-              return GestureDetector(
-                onTap: (){
-                  Navigator.pop(context, places[index]);
-                },
-                child: Container(
-                  height: SizeConfig.blockSizeVertical * 10,
-                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0,),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(child: Text(places[index], style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Colors.black),),),
+            )
+            : ListView.separated(
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (context, index){
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context, places[index]);
+                  },
+                  child: Container(
+                    height: 80,
+                    padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0,),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: Text(places[index], style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),),),
 
-                      Expanded(child: Text('Additional user information', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5, color: Color(0xff000000),),),),
+                        Expanded(child: Text('Additional user information', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),),
 
-                      Expanded(child: Text('Click to add on your post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, color: Color(0xff888888),),),),
-                    ],
+                        Expanded(child: Text('Click to add on your post', style: TextStyle(fontSize: 12, color: Color(0xff888888),),),),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }, 
-            separatorBuilder: (context, index){
-              return Divider(thickness: SizeConfig.blockSizeVertical * .1, color: Color(0xff888888),);
-            },
-            itemCount: places.length,
+                );
+              }, 
+              separatorBuilder: (context, index){
+                return Divider(thickness: 1, color: Color(0xff888888),);
+              },
+              itemCount: places.length,
+            ),
           ),
         ),
       ),
