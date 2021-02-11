@@ -3,7 +3,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';

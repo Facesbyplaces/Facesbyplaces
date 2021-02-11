@@ -473,7 +473,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
 
                                   GestureDetector(
                                     onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.almPost.showOriginalPostNumberOfComments,)));
+                                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, numberOfLikes: likesCount, numberOfComments: originalPost.data.almPost.showOriginalPostNumberOfComments,)));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, userId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId)));
                                     },
                                     child: Row(
                                       children: [

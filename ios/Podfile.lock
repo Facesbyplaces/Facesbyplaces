@@ -323,6 +323,8 @@ PODS:
   - flutter_branch_sdk (1.3.2):
     - Branch (~> 0.36.0)
     - Flutter
+  - flutter_keyboard_visibility (0.0.1):
+    - Flutter
   - flutter_login_facebook (0.3.0):
     - FBSDKLoginKit (~> 8.0)
     - Flutter
@@ -448,6 +450,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_barcode_scanner (from `.symlinks/plugins/flutter_barcode_scanner/ios`)
   - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
+  - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
@@ -514,6 +517,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_barcode_scanner/ios"
   flutter_branch_sdk:
     :path: ".symlinks/plugins/flutter_branch_sdk/ios"
+  flutter_keyboard_visibility:
+    :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_login_facebook:
     :path: ".symlinks/plugins/flutter_login_facebook/ios"
   geocoding:
@@ -569,6 +574,7 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_barcode_scanner: fc42adac0732eca7bd9d3d676b215bce5903f269
   flutter_branch_sdk: ecbe8c173d747c9f8d18a74e72de96cc9159375f
+  flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_login_facebook: 86e1415ecde2d59ca72c5760fd53d1d1952017fb
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58

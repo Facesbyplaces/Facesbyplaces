@@ -21,7 +21,8 @@ class MiscBLMSettingDetailTemplate extends StatelessWidget{
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: SizeConfig.blockSizeVertical * 10,
+        // height: SizeConfig.blockSizeVertical * 10,
+        height: 80,
         color: backgroundColor,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         child: Column(
@@ -31,7 +32,8 @@ class MiscBLMSettingDetailTemplate extends StatelessWidget{
                 alignment: Alignment.bottomLeft,
                 child: Text(titleDetail,
                   style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    // fontSize: SizeConfig.safeBlockHorizontal * 4,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Color(0xff000000),
                   ),
@@ -44,7 +46,8 @@ class MiscBLMSettingDetailTemplate extends StatelessWidget{
                 alignment: Alignment.topLeft,
                 child: Text(contentDetail,
                   style: TextStyle(
-                    fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                    // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                    fontSize: 14,
                     fontWeight: FontWeight.w300,
                     color: Color(0xffBDC3C7),
                   ),

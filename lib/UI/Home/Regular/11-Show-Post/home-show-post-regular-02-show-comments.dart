@@ -1,4 +1,5 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-show-post-comments.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-comment-replies.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-06-add-comment.dart';
@@ -47,20 +48,23 @@ class RegularOriginalReply{
 class HomeRegularShowCommentsList extends StatefulWidget{
   final int postId;
   final int userId;
-  final int numberOfLikes;
-  final int numberOfComments;
-  HomeRegularShowCommentsList({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+  // final int numberOfLikes;
+  // final int numberOfComments;
+  // HomeRegularShowCommentsList({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+  HomeRegularShowCommentsList({this.postId, this.userId});
 
   @override
-  HomeRegularShowCommentsListState createState() => HomeRegularShowCommentsListState(postId: postId, userId: userId, numberOfLikes: numberOfLikes, numberOfComments: numberOfComments);
+  // HomeRegularShowCommentsListState createState() => HomeRegularShowCommentsListState(postId: postId, userId: userId, numberOfLikes: numberOfLikes, numberOfComments: numberOfComments);
+  HomeRegularShowCommentsListState createState() => HomeRegularShowCommentsListState(postId: postId, userId: userId);
 }
 
 class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList>{
   final int postId;
   final int userId;
-  final int numberOfLikes;
-  final int numberOfComments;
-  HomeRegularShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+  // final int numberOfLikes;
+  // final int numberOfComments;
+  // HomeRegularShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
+  HomeRegularShowCommentsListState({this.postId, this.userId});
 
   GlobalKey textFieldKey = GlobalKey();
 
@@ -84,6 +88,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   int currentCommentId;
   int currentUserId;
   String currentUserImage;
+  int numberOfLikes;
+  int numberOfComments;
 
   void initState(){
     super.initState();
@@ -100,7 +106,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     repliesLikes = [];
     repliesNumberOfLikes = [];
     isComment = true;
-    loadUserInformation();
+    numberOfLikes = 0;
+    numberOfComments = 0;
+    getOriginalPostInformation();
     onLoading();
     currentUser = getDrawerInformation();
   }
@@ -110,10 +118,10 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
     refreshController.refreshCompleted();
   }
 
-  void loadUserInformation() async{
-    var currentLoggedInUser = await apiRegularShowProfileInformation();
-    currentUserId = currentLoggedInUser.showProfileInformationUserId;
-    currentUserImage = currentLoggedInUser.showProfileInformationImage;
+  void getOriginalPostInformation() async{
+    var originalPostInformation = await apiRegularShowOriginalPost(postId: postId);
+    numberOfLikes = originalPostInformation.almPost.showOriginalPostNumberOfLikes;
+    numberOfComments = originalPostInformation.almPost.showOriginalPostNumberOfComments;
   }
 
   void onLoading() async{
@@ -316,7 +324,9 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                           onTap: (){
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
                                           },
-                                          child: currentUserId == comments[i].userId
+                                          // child: currentUserId == comments[i].userId
+                                          // userId
+                                          child: userId == comments[i].userId
                                           ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
                                           : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
                                         ),
@@ -435,7 +445,8 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                                   onTap: (){
                                                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
                                                   },
-                                                  child: currentUserId == comments[i].listOfReplies[index].userId
+                                                  // child: currentUserId == comments[i].listOfReplies[index].userId
+                                                  child: userId == comments[i].listOfReplies[index].userId
                                                   ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
                                                   : Text(comments[i].listOfReplies[index].firstName + ' ' + comments[i].listOfReplies[index].lastName, style: TextStyle(fontWeight: FontWeight.bold,),
                                                   ),
@@ -586,105 +597,114 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
   }
 
   showKeyboard(){
-    return Padding(
-      padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-      child: Row(
-        children: [
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+        child: Row(
+          children: [
 
-          CircleAvatar(
-            backgroundColor: Color(0xff888888), 
-            backgroundImage: currentUserImage != null && currentUserImage != ''
-            ? NetworkImage(currentUserImage)
-            : AssetImage('assets/icons/app-icon.png'),
-          ),
+            CircleAvatar(
+              backgroundColor: Color(0xff888888), 
+              backgroundImage: currentUserImage != null && currentUserImage != ''
+              ? NetworkImage(currentUserImage)
+              : AssetImage('assets/icons/app-icon.png'),
+            ),
 
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10.0),
-              child: TextFormField(
-                controller: controller,
-                cursorColor: Color(0xff000000),
-                maxLines: 2,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  fillColor: Color(0xffBDC3C7),
-                  filled: true,
-                  labelText: 'Say something...',
-                  labelStyle: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xffffffff),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xffBDC3C7),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: TextFormField(
+                  controller: controller,
+                  cursorColor: Color(0xff000000),
+                  maxLines: 2,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    fillColor: Color(0xffBDC3C7),
+                    filled: true,
+                    labelText: 'Say something...',
+                    labelStyle: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xffffffff),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Color(0xffBDC3C7),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffBDC3C7),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffBDC3C7),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
 
-          GestureDetector(
-            onTap: () async{
-              if(isComment == true){
-                context.showLoaderOverlay();
-                await apiRegularAddComment(postId: postId, commentBody: controller.text);
-                context.hideLoaderOverlay();
+            GestureDetector(
+              onTap: () async{
+                if(isComment == true){
+                  context.showLoaderOverlay();
+                  await apiRegularAddComment(postId: postId, commentBody: controller.text);
+                  context.hideLoaderOverlay();
 
-                controller.clear();
-                itemRemaining = 1;
-                repliesRemaining = 1;
-                comments = [];
-                replies = [];
-                numberOfReplies = 0;
-                page1 = 1;
-                page2 = 1;
-                count = 0;
-                commentsLikes = [];
-                commentsNumberOfLikes = [];
-                repliesLikes = [];
-                repliesNumberOfLikes = [];
-                isComment = true;
-                onLoading();
-              }else{
-                context.showLoaderOverlay();
-                apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
-                context.hideLoaderOverlay();
+                  controller.clear();
+                  itemRemaining = 1;
+                  repliesRemaining = 1;
+                  comments = [];
+                  replies = [];
+                  numberOfReplies = 0;
+                  page1 = 1;
+                  page2 = 1;
+                  count = 0;
+                  commentsLikes = [];
+                  commentsNumberOfLikes = [];
+                  repliesLikes = [];
+                  repliesNumberOfLikes = [];
+                  isComment = true;
+                  numberOfLikes = 0;
+                  numberOfComments = 0;
+                  getOriginalPostInformation();
+                  onLoading();
+                }else{
+                  context.showLoaderOverlay();
+                  apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
+                  context.hideLoaderOverlay();
 
-                controller.clear();
-                itemRemaining = 1;
-                repliesRemaining = 1;
-                comments = [];
-                replies = [];
-                numberOfReplies = 0;
-                page1 = 1;
-                page2 = 1;
-                count = 0;
-                commentsLikes = [];
-                commentsNumberOfLikes = [];
-                repliesLikes = [];
-                repliesNumberOfLikes = [];
-                isComment = true;
-                onLoading();
-              }
+                  controller.clear();
+                  itemRemaining = 1;
+                  repliesRemaining = 1;
+                  comments = [];
+                  replies = [];
+                  numberOfReplies = 0;
+                  page1 = 1;
+                  page2 = 1;
+                  count = 0;
+                  commentsLikes = [];
+                  commentsNumberOfLikes = [];
+                  repliesLikes = [];
+                  repliesNumberOfLikes = [];
+                  isComment = true;
+                  numberOfLikes = 0;
+                  numberOfComments = 0;
+                  getOriginalPostInformation();
+                  onLoading();
+                }
 
-            },
-            child: Text('Post',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold, 
-                color: Color(0xff000000),
+              },
+              child: Text('Post',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold, 
+                  color: Color(0xff000000),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

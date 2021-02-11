@@ -11,7 +11,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -190,10 +189,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -230,13 +225,13 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                         child: Column(
                           children: [
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 12,),
+                            SizedBox(height: 120,),
 
                             Center(
                               child: Text(profile.data.blmMemorial.memorialName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                                  fontSize: 20, 
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xff000000),
                                 ),
@@ -245,32 +240,39 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20),
 
                             Container(
-                              width: SizeConfig.safeBlockHorizontal * 15,
-                              height: SizeConfig.blockSizeVertical * 5,
+                              // width: SizeConfig.safeBlockHorizontal * 15,
+                              width: 100,
+                              // height: SizeConfig.blockSizeVertical * 5,
+                              height: 40,
                               child: Row(
                                 children: [
                                   Expanded(
                                     child: CircleAvatar(
-                                      radius: SizeConfig.blockSizeVertical * 2,
+                                      // radius: SizeConfig.blockSizeVertical * 2,
+                                      radius: 15,
                                       backgroundColor: Color(0xff000000),
                                       child: CircleAvatar(
-                                        radius: SizeConfig.blockSizeVertical * 1,
+                                        // radius: SizeConfig.blockSizeVertical * 1,
+                                        radius: 10,
                                         backgroundColor: Colors.transparent,
                                         backgroundImage: AssetImage('assets/icons/fist.png'),
                                       ),
                                     ),
                                   ),
 
-                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                  // SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                  SizedBox(height: 20,),
 
                                   Expanded(
                                     child: Text('${profile.data.blmMemorial.memorialFollowersCount}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 4,
-                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20,
+                                        // fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.bold,
                                         color: Color(0xff000000),
                                       ),
                                     ),
@@ -279,7 +281,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20,),
 
                             Column(
                               children: [
@@ -287,9 +290,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   if(profile.data.blmMemorial.memorialImagesOrVideos != null){
                                     videoPlayerController = VideoPlayerController.network(profile.data.blmMemorial.memorialImagesOrVideos[0]);
                                     return Container(
-                                      height: SizeConfig.blockSizeVertical * 34.5,
+                                      // height: SizeConfig.blockSizeVertical * 34.5,
+                                      height: 280,
+                                      // color: Colors.red,
                                       child: profile.data.blmMemorial.memorialImagesOrVideos == null 
-                                      ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
+                                      ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
                                       : GestureDetector(
                                         onTap: (){
                                           if(videoPlayerController.value.isPlaying){
@@ -333,7 +338,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ],
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20,),
 
                             Container(
                               child: Row(
@@ -363,13 +369,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                            // fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
                                         minWidth: SizeConfig.screenWidth / 2,
-                                        height: SizeConfig.blockSizeVertical * 7,
+                                        // height: SizeConfig.blockSizeVertical * 7,
+                                        height: 45,
                                         shape: StadiumBorder(),
                                         color: Color(0xff2F353D),
                                       ),
@@ -398,9 +406,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                         }
                                       },
                                       child: CircleAvatar(
-                                        radius: SizeConfig.blockSizeVertical * 3,
+                                        // radius: SizeConfig.blockSizeVertical * 3,
+                                        radius: 25,
                                         backgroundColor: Color(0xff3498DB),
-                                        child: Icon(Icons.share, color: Color(0xffffffff), size: SizeConfig.blockSizeVertical * 3,),
+                                        child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),
                                       ),
                                     ),
                                   ),
@@ -408,7 +417,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20),
 
                             Padding(
                               padding: EdgeInsets.only(left: 20),
@@ -417,41 +427,43 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                   Row(
                                     children: [
-                                      Icon(Icons.place, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                      Icon(Icons.place, color: Color(0xff000000), size: 25,),
+                                      SizedBox(width: 20,),
                                       Text(profile.data.blmMemorial.memorialDetails.memorialDetailsCountry,
                                         style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
                                     ],
                                   ),
 
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                  SizedBox(height: 20),
 
                                   Row(
                                     children: [
-                                      Icon(Icons.star, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 3,),
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                      Icon(Icons.star, color: Color(0xff000000), size: 25,),
+                                      SizedBox(width: 20,),
                                       Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDob,
                                         style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
                                     ],
                                   ),
 
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                  // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                  SizedBox(height: 20),
 
                                   Row(
                                     children: [
-                                      Image.asset('assets/icons/grave_logo.png', height: SizeConfig.blockSizeVertical * 3,),
-                                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                      Image.asset('assets/icons/grave_logo.png', height: 25,),
+                                      SizedBox(width: 20,),
                                       Text(profile.data.blmMemorial.memorialDetails.memorialDetailsRip,
                                         style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -462,7 +474,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20),
 
                             Container(
                               height: 50.0,
@@ -475,11 +488,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       },
                                       child: Column(
                                         children: [
-                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                          // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                                           Text('${profile.data.blmMemorial.memorialPostsCount}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -487,7 +500,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                           Text('Post',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -497,7 +510,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     ),
                                   ),
                                   
-                                  Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  // Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  Container(width: 5, color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -506,11 +520,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       },
                                       child: Column(
                                         children: [
-                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                          // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                                           Text('${profile.data.blmMemorial.memorialFamilyCount}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -518,7 +532,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                           Text('Family',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -528,7 +542,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     ),
                                   ),
 
-                                  Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  // Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  Container(width: 5, color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -537,11 +552,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       },
                                       child: Column(
                                         children: [
-                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                          // SizedBox(height: 10,),
+                                          // SizedBox(height: 5),
 
                                           Text('${profile.data.blmMemorial.memorialFriendsCount}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -549,7 +565,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                           Text('Friends',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -559,7 +575,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                     ),
                                   ),
 
-                                  Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  // Container(width: SizeConfig.blockSizeHorizontal * .5, color: Color(0xffeeeeee),),
+                                  Container(width: 5, color: Color(0xffeeeeee),),
 
                                   Expanded(
                                     child: GestureDetector(
@@ -568,11 +585,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                       },
                                       child: Column(
                                         children: [
-                                          SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                          // SizedBox(height: 10,),
 
                                           Text('${profile.data.blmMemorial.memorialFollowersCount}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                              fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xff000000),
                                             ),
@@ -580,7 +597,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                           Text('Joined',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w300,
                                               color: Color(0xffaaaaaa),
                                             ),
@@ -593,13 +610,17 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ),
                             ),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffffffff),),
+                            // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffffffff),),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+
+                            Container(height: 5, color: Color(0xffffffff),),
+
+                            Container(height: 5, color: Color(0xffeeeeee),),
 
                             Column(
                               children: [
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                SizedBox(height: 20,),
 
                                 Container(
                                   key: dataKey,
@@ -607,21 +628,22 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   alignment: Alignment.centerLeft,
                                   child: Text('Post',
                                     style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xff000000),
                                     ),
                                   ),
                                 ),
 
-                                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                SizedBox(height: 20,),
 
                                 profile.data.blmMemorial.memorialImagesOrVideos != null
                                 ? Column(
                                   children: [
                                     Container(
                                       width: SizeConfig.screenWidth,
-                                      height: SizeConfig.blockSizeVertical * 12,
+                                      // height: SizeConfig.blockSizeVertical * 12,
+                                      height: 100,
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       child: ListView.separated(
                                         physics: ClampingScrollPhysics(),
@@ -643,7 +665,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                               );
                                             },
                                             child: Container(
-                                              width: SizeConfig.blockSizeVertical * 12,
+                                              // width: SizeConfig.blockSizeVertical * 12,
+                                              width: 100,
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(10),
                                                 color: Color(0xff888888),
@@ -658,13 +681,15 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                           );
                                         }, 
                                         separatorBuilder: (context, index){
-                                          return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                                          // return SizedBox(width: SizeConfig.blockSizeHorizontal * 2,);
+                                          return SizedBox(width: 20,);
                                         },
                                         itemCount: profile.data.blmMemorial.memorialImagesOrVideos.length,
                                       ),
                                     ),
 
-                                    SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                    // SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                    SizedBox(height: 20,),
 
                                   ],
                                 )
@@ -672,7 +697,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               ],
                             ),
 
-                            Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
+                            Container(height: 5, color: Color(0xffeeeeee),),
 
                             postCount != 0
                             ? Container(
@@ -729,7 +755,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
 
                                         posts[i].imagesOrVideos != null
                                         ? Container(
-                                          height: SizeConfig.blockSizeVertical * 30,
+                                          // height: SizeConfig.blockSizeVertical * 30,
+                                          height: 240,
                                           child: ((){
                                             if(posts[i].imagesOrVideos != null){
                                               if(posts[i].imagesOrVideos.length == 1){
@@ -800,7 +827,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                                                   child: Text(
                                                                     '${posts[i].imagesOrVideos.length - 3}',
                                                                     style: TextStyle(
-                                                                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                                      fontSize: 60,
                                                                       fontWeight: FontWeight.bold,
                                                                       color: Color(0xffffffff),
                                                                     ),
@@ -835,26 +862,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                 ),
                               ),
                             )
-                            // : ContainerResponsive(
-                            //   height: SizeConfig.screenHeight,
-                            //   width: SizeConfig.screenWidth,
-                            //   alignment: Alignment.center,
-                            //   child: ContainerResponsive(
-                            //     width: SizeConfig.screenWidth,
-                            //     heightResponsive: false,
-                            //     widthResponsive: true,
-                            //     alignment: Alignment.center,
-                            //     child: SingleChildScrollView(
-                            //       physics: ClampingScrollPhysics(),
-                            //       child: MiscBLMEmptyDisplayTemplate(),
-                            //     ),
-                            //   ),
-                            // ),
                             : SingleChildScrollView(
                               physics: ClampingScrollPhysics(),
                               child: MiscBLMEmptyDisplayTemplate(),
                             ),
-
                           ],
                         ),
                       ),
@@ -877,7 +888,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   Icon(Icons.arrow_back, color: Color(0xffffffff),), 
                                   Text('Back',
                                     style: TextStyle(
-                                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.w500,
                                       color: Color(0xffffffff),
                                     ),
@@ -910,7 +921,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                               splashColor: Colors.yellow,
                               child: Text('Create Post',
                                 style: TextStyle(
-                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xffffffff),
                                 ),
@@ -926,19 +937,22 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                   Positioned(
                     top: SizeConfig.screenHeight / 5,
                     child: Container(
-                      height: SizeConfig.blockSizeVertical * 18,
+                      // height: SizeConfig.blockSizeVertical * 18,
+                      height: 140,
                       width: SizeConfig.screenWidth,
                       child: Row(
                         children: [
                           Expanded(child: Container(),),
                           Expanded(
                             child: CircleAvatar(
-                              radius: SizeConfig.blockSizeVertical * 12,
+                              // radius: SizeConfig.blockSizeVertical * 12,
+                              radius: 100,
                               backgroundColor: Color(0xff04ECFF),
                               child: Padding(
                                 padding: EdgeInsets.all(5),
                                 child: CircleAvatar(
-                                  radius: SizeConfig.blockSizeVertical * 12,
+                                  // radius: SizeConfig.blockSizeVertical * 12,
+                                  radius: 100,
                                   backgroundColor: Color(0xff888888),
                                   backgroundImage: profile.data.blmMemorial.memorialProfileImage != null ? NetworkImage(profile.data.blmMemorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
                                 ),
