@@ -7,8 +7,6 @@ import { Routes } from "./routes/Routes";
 
 console.log("BASE_URL: ", process.env.REACT_APP_API_BASE_URL);
 export default function App({ store, persistor }) {
-  console.log(persistor);
-  console.log("Store: ", store);
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

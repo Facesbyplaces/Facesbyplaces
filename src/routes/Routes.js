@@ -13,6 +13,7 @@ import axios from "../auxiliary/axios";
 //COMPONENTS
 import { Home } from "../components/Home";
 import Dashboard from "../components/Dashboard";
+import User from "../components/Content/UserProfile/User";
 
 export const Routes = withRouter(({ history }) => {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ export const Routes = withRouter(({ history }) => {
         {isAuthorized && isTokenValid ? (
           <>
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/user" component={User} />
           </>
         ) : (
           <Redirect to="/admin" />

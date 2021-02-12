@@ -14,7 +14,7 @@ const initialAuthState = {
 };
 
 export const AuthReducer = persistReducer(
-  { storage, key: "xy-admin-auth" },
+  { storage, key: "fbp-admin-portal" },
   (state = initialAuthState, action) => {
     switch (action.type) {
       case "SIGN_IN":

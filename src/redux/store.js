@@ -3,10 +3,11 @@ import { persistStore } from "redux-persist";
 
 //REDUCERS
 import { AuthReducer } from "../redux/reducers/AuthReducer";
-console.log(AuthReducer);
+import { TabReducer } from "./reducers/TabReducer";
 
 const rootReducer = combineReducers({
   auth_data: AuthReducer,
+  tab: TabReducer,
 });
 
 const store = createStore(

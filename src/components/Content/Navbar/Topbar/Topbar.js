@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-//React Icons
-import { GrClose } from "react-icons/gr";
-
 //Actions
 import { LogoutAction } from "../../../../redux/actions";
 
@@ -24,7 +21,7 @@ export default function Topbar() {
     dispatch(LogoutAction({}));
   };
 
-  console.log("Top Bar User", user);
+  // console.log("Top Bar User", user);
 
   return (
     <div className="topbar">

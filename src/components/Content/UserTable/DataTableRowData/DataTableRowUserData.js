@@ -1,14 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { DeleteModal } from "./DeleteModal";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";
+import { ViewUserAction } from "../../../../redux/actions";
+import { EditUserAction } from "../../../../redux/actions";
 
 export default function DataTableRowUserData({ users, search }) {
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   const openModal = () => {
     setShowModal((prev) => !prev);
+  };
+
+  const handleViewClick = (id, account_type, option) => {
+    console.log(id, option);
+    dispatch(ViewUserAction({ id, account_type, option }));
+  };
+
+  const handleEditClick = (id, account_type, option) => {
+    dispatch(EditUserAction({ id, account_type, option }));
   };
 
   const renderedUsers = users.map((user) => (
@@ -59,8 +73,11 @@ export default function DataTableRowUserData({ users, search }) {
         )}
       </td>
       <td className="pr-2 text-left">
-        {/* View Icon */}
-        <a href="#" className="btn btn-icon btn-light btn-hover-primary btn-sm">
+        {/* View User Icon */}
+        <a
+          className="btn btn-icon btn-light btn-hover-primary btn-sm"
+          onClick={() => handleViewClick(user.id, user.account_type, "v")}
+        >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
             <svg
@@ -104,8 +121,8 @@ export default function DataTableRowUserData({ users, search }) {
         </a>
         {/* Edit Icon */}
         <a
-          href="#"
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+          onClick={() => handleEditClick(user.id, user.account_type, "e")}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}

@@ -30,9 +30,7 @@ export default function DataTable({ search, setSearch, keywords }) {
   }
 
   useEffect(() => {
-    setLoader(true);
     fetchUsers(page);
-    setLoader(false);
   }, [users.id]);
 
   const handleClick = (page) => {
@@ -42,9 +40,11 @@ export default function DataTable({ search, setSearch, keywords }) {
   };
 
   const fetchUsers = (page) => {
+    setLoader(true);
     axios
       .get(`/api/v1/admin/users`, { params: { page: page } })
       .then((response) => {
+        setLoader(false);
         setUsers(response.data.users);
         console.log("Response: ", response.data.users);
       })
