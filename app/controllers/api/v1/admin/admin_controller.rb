@@ -45,10 +45,7 @@ class Api::V1::Admin::AdminController < ApplicationController
             user = AlmUser.find(params[:id]) 
         end
 
-        render json: ActiveModel::SerializableResource.new(
-                        user, 
-                        each_serializer: UserSerializer
-                    )
+        render json: UserSerializer.new( user ).attributes
     end
 
     # def searchBlmUser
