@@ -2,6 +2,32 @@ class Api::V1::Posts::CommentsController < ApplicationController
     before_action :check_user
     before_action :no_guest_users, only: [:addComment, :addReply, :likeOrUnlike, :likeStatus]
 
+    def editComment
+        comment = Comment.find(params[:comment_id])
+
+        comment.update(body: params[:body])
+        comment.account = user()
+        
+        if comment
+            render json: {status: :success, comment: comment}
+        else
+            render json: {status: comment.errors}
+        end
+    end
+
+    def editReply
+        reply = Reply.find(params[:reply_id])
+
+        reply.update(body: params[:body])
+        reply.account = user()
+        
+        if reply
+            render json: {status: :success, reply: reply}
+        else
+            render json: {status: reply.errors}
+        end
+    end
+
     def addComment
         comment = Comment.new(comment_params)
         comment.account = user()
@@ -52,7 +78,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
                     end
                 end
 
-            render json: {status: :success}
+            render json: {status: :success, comment: comment}
         else
             render json: {status: comment.errors}
         end
@@ -88,7 +114,7 @@ class Api::V1::Posts::CommentsController < ApplicationController
                 end
             end
 
-            render json: {status: :success}
+            render json: {status: :success, reply: reply}
         else
             render json: {status: comment.errors}, status: 500
         end

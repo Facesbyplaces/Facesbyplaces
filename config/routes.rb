@@ -180,11 +180,14 @@ Rails.application.routes.draw do
         put '/likePost/unlikeOrLike', to: 'posts#unlikeOrLike'
         # List of pages that the user can post in
         get '/listPages/show', to: 'posts#listOfPages'
-
         # Add Comment to Post
         post '/comment', to: 'comments#addComment'
         # Add Reply to Comment
         post '/reply', to: 'comments#addReply'
+        # edit Comment
+        put 'comment', to: 'comments#editComment'
+        # edit reply
+        put 'reply', to: 'comments#editReply'
         # Like Status
         get '/comment/likeCommentStatus', to: 'comments#likeStatus'
         # Unlike or Like Comment or Reply
