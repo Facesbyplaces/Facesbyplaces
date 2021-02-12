@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "../../../auxiliary/axios";
 
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
-import ReactPaginate from "react-paginate";
+//Loader
 import HashLoader from "react-spinners/HashLoader";
 
 export default function DataTable({ search, setSearch, keywords }) {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [users, setUsers] = useState([]);
 
   const handleSearch = () => {
@@ -29,7 +30,9 @@ export default function DataTable({ search, setSearch, keywords }) {
   }
 
   useEffect(() => {
+    setLoader(true);
     fetchUsers(page);
+    setLoader(false);
   }, [users.id]);
 
   const handleClick = (page) => {
@@ -77,7 +80,29 @@ export default function DataTable({ search, setSearch, keywords }) {
             </th>
           </tr>
         </thead>
-        <DataTableRowUserData users={users} search={search} />
+        {loader ? (
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <div
+                  className="loader-container"
+                  style={{ width: "100%", height: "100vh" }}
+                >
+                  <HashLoader color={"#04ECFF"} loading={loader} size={70} />
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        ) : (
+          <DataTableRowUserData users={users} search={search} />
+        )}
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">
         <div className="d-flex align-items-center">

@@ -187,7 +187,7 @@ export default function DataTableRowUserData({ users, search }) {
             className="loader-container"
             style={{ width: "100%", height: "100vh" }}
           >
-            <HashLoader color={"#04ECFF"} loading={!search} size={70} />
+            <HashLoader color={"#04ECFF"} loading={search} size={70} />
           </div>
         </td>
         <td></td>
