@@ -1,9 +1,8 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-search-blm-02-search-extended.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
@@ -74,10 +73,8 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search a Memorial',
                       hintStyle: TextStyle(
-                        // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontSize: 14,
                       ),
-                      // prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffffffff)),
                         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -145,25 +142,22 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            child: Container(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              height: SizeConfig.screenHeight,
+          body: Container(
+            height: SizeConfig.screenHeight - kToolbarHeight,
+            width: SizeConfig.screenWidth,
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
 
-                  Expanded(child: Container(),),
+                  Icon(Icons.search, color: Color(0xff4EC9D4), size: 240),
 
-                  GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: 80, backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: 120),),),),
-
-                  // SizedBox(height: ScreenUtil().setHeight(20)),
                   SizedBox(height: 20,),
 
                   Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                  Expanded(child: Container(),),
-
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
                 ],
               ),
             ),

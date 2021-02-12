@@ -80,7 +80,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 Container(
                   alignment: Alignment.centerLeft,
                   width: SizeConfig.screenWidth,
-                  // height: SizeConfig.blockSizeVertical * 8,
                   height: 70,
                   child: DefaultTabController(
                     length: 2,
@@ -98,7 +97,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                         Center(
                           child: Text('Page',
                             style: TextStyle(
-                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                             ),
@@ -107,7 +105,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
 
                         Center(child: Text('Privacy',
                             style: TextStyle(
-                              // fontSize: SizeConfig.safeBlockHorizontal * 4,
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
                             ),
@@ -148,7 +145,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           },
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -159,7 +155,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Update Page image and background image',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -170,7 +165,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Add or remove admins of this page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -181,7 +175,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Add or remove family of this page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -192,7 +185,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Add or remove friends of this page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -203,7 +195,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Manage cards that receives the memorial gifts.',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -266,11 +257,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           contentDetail: 'Customize what others see on your page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: 80,
           color: Color(0xffffffff),
           child: Row(
@@ -295,11 +284,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           ),
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: 80,
           color: Color(0xffffffff),
           child: Row(
@@ -334,11 +321,9 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           ),
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: 80,
           color: Color(0xffffffff),
           child: Row(
@@ -363,16 +348,6 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
             ],
           ),
         ),
-
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
-        // Container(height: 5, color: Color(0xffeeeeee),),
-
-        // SizedBox(height: 40,),
-
-        // // Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
-        // Container(height: SizeConfig.blockSizeVertical * 10, child: Image.asset('assets/icons/logo.png'),),
-
-        // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
         SizedBox(height: 10,),
 

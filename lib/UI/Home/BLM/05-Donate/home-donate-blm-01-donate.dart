@@ -31,7 +31,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
     StripePayment.setOptions(StripeOptions(
       publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
       merchantId: "merchant.com.app.facesbyplaces", 
-      androidPayMode: 'test'));
+      androidPayMode: 'test'),
+    );
   }
 
   @override
@@ -59,20 +60,30 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
               ),
               child: Column(
                 children: [
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: 20,),
 
                   Row(
                     children: [
-                      Expanded(child: Align(alignment: Alignment.centerLeft, child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xff000000),), onPressed: (){Navigator.pop(context);},)),),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft, 
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back, color: Color(0xff000000),), 
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ),
 
-                      Text('Send a Gift', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 6),),
+                      Text('Send a Gift', style: TextStyle(fontSize: 24),),
 
                       Expanded(child: Container(),)
 
                     ],
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: 20,),
 
                   Expanded(
                     child: GridView.count(
@@ -92,20 +103,20 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                             child: Container(
                               child: Column(
                                 children: [
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                  SizedBox(height: 10,),
 
-                                  Image.asset('assets/icons/gift.png', height: SizeConfig.blockSizeVertical * 15, width: SizeConfig.blockSizeVertical * 15),
+                                  Image.asset('assets/icons/gift.png', height: 120, width: 120),
 
-                                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                                  SizedBox(height: 10,),
 
                                   ((){
                                     switch(index){
-                                      case 0: return Text('\$0.99', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold),); break;
-                                      case 1: return Text('\$5.00', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold),); break;
-                                      case 2: return Text('\$15.00', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold),); break;
-                                      case 3: return Text('\$25.00', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold),); break;
-                                      case 4: return Text('\$50.00', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold),); break;
-                                      case 5: return Text('\$100.00', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.bold),); break;
+                                      case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
                                     }
                                   }()),
                                 ],
@@ -121,14 +132,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     ),
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: 20,),
 
                   MiscBLMButtonTemplate(
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     onPressed: () async{
-                      
-
                       paymentToken = await StripePayment.paymentRequestWithNativePay(
                         androidPayOptions: AndroidPayPaymentRequest(
                           totalPrice: ((){
@@ -219,12 +228,12 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                         );
                       }
 
-                    }, 
+                    },
+                    height: 45,
                     width: SizeConfig.screenWidth / 2, 
-                    height: SizeConfig.blockSizeVertical * 7,
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                  SizedBox(height: 20,),
 
                 ],
               ),

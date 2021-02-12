@@ -41,16 +41,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   final int memorialId;
   HomeBLMCreatePostState({this.name, this.memorialId});
 
-  // final GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscBLMInputFieldMultiTextPostTemplateState>();
-  TextEditingController controller = TextEditingController();
-
   List<BLMManagedPages> managedPages;
   String currentSelection;
   int currentIdSelected;
   Future listManagedPages;
   List<BLMTaggedUsers> users = [];
   List<File> slideImages;
-
+  TextEditingController controller = TextEditingController();
   int maxLines;
 
   void initState(){
@@ -182,7 +179,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
 
                   APIBLMCreatePost post = APIBLMCreatePost(
                     blmPostPageType: 'Blm',
-                    // blmPostPostBody: _key1.currentState.controller.text,
                     blmPostPostBody: controller.text,
                     blmPostPageId: currentIdSelected,
                     blmPostLocation: newLocation,
@@ -236,312 +232,310 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
             physics: ClampingScrollPhysics(),
             child: SafeArea(
               child: Column(
-              children: [
+                children: [
 
-                Container(
-                  child: InputDecorator(
-                    decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<int>(
-                        value: currentIdSelected,
-                        isDense: true,
-                        onChanged: (int newValue) {
-                          setState(() {
-                            currentIdSelected = newValue;
-                          });
-                        },
-                        items: managedPages.map((BLMManagedPages value) {
-                          return DropdownMenuItem<int>(
-                            value: value.pageId,
-                            
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Color(0xff888888),
-                                  backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
-                                ),
-
-                                SizedBox(width: 20,),
-
-                                Text(value.name),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xffffffff),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: Offset(0, 0)
-                      ),
-                    ],
-                  ),
-                ),
-
-                // MiscBLMInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 1),
-                FocusScope(
-                  child: Focus(
-                    onFocusChange: (focus){
-                      // print('The focus is $focus');
-                      if(focus){
-                        setState(() {
-                          maxLines = 10;
-                        });
-                      }else{
-                        setState(() {
-                          maxLines = 5;
-                        });
-                      }
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: TextFormField(
-                        controller: controller,
-                        cursorColor: Color(0xff000000),
-                        maxLines: maxLines,
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          fillColor: Color(0xffffffff),
-                          alignLabelWithHint: true,
-                          labelText: 'Speak out...',
-                          labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xff000000),
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
+                  Container(
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide.none,
                         ),
                       ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 10,),
-
-                Container(
-                  child: Wrap(
-                    spacing: 5.0,
-                    children: List.generate(
-                      users.length, 
-                      (index) => Chip(
-                        labelPadding: const EdgeInsets.only(left: 8.0),
-                        label: Text(users[index].name),
-                        deleteIcon: Icon(
-                          Icons.close,
-                          size: 18,
-                        ),
-                        onDeleted: () {
-                          setState(() {
-                            users.removeAt(index);
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
-                  alignment: Alignment.centerLeft,
-                ),
-
-                SizedBox(height: 10,),
-
-                Container(
-                  child: ((){
-                    if(slideImages.length != 0){
-                      return Container(
-                        height: 200,
-                        width: SizeConfig.screenWidth,
-                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                        child: Container(
-                          height: 100,
-                          child: GridView.count(
-                            physics: ClampingScrollPhysics(),
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 4,
-                            mainAxisSpacing: 4,
-                            children: List.generate(slideImages.length, (index){
-                              return lookupMimeType(slideImages[index].path).contains('video') == true
-                              ? GestureDetector(
-                                onDoubleTap: (){
-                                  setState(() {
-                                    slideImages.removeAt(index);
-                                  });
-                                },
-                                onTap: (){
-                                  if(videoPlayerController.value.isPlaying){
-                                    videoPlayerController.pause();
-                                    print('Paused!');
-                                  }else{
-                                    videoPlayerController.play();
-                                    print('Played!');
-                                  }
-                                },
-                                child: Container(
-                                  child: AspectRatio(
-                                    aspectRatio: videoPlayerController.value.aspectRatio,
-                                    child: VideoPlayer(videoPlayerController),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<int>(
+                          value: currentIdSelected,
+                          isDense: true,
+                          onChanged: (int newValue) {
+                            setState(() {
+                              currentIdSelected = newValue;
+                            });
+                          },
+                          items: managedPages.map((BLMManagedPages value) {
+                            return DropdownMenuItem<int>(
+                              value: value.pageId,
+                              
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: Color(0xff888888),
+                                    backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
                                   ),
-                                ),
-                              )
-                              : GestureDetector(
-                                onDoubleTap: (){
-                                  setState(() {
-                                    slideImages.removeAt(index);
-                                  });
-                                },
-                                child: Container(
-                                  width: 80,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color(0xffcccccc),
-                                    border: Border.all(color: Color(0xff000000),),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(slideImages[index].path),
+
+                                  SizedBox(width: 20,),
+
+                                  Text(value.name),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0xffffffff),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: Offset(0, 0)
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  FocusScope(
+                    child: Focus(
+                      onFocusChange: (focus){
+                        if(focus){
+                          setState(() {
+                            maxLines = 10;
+                          });
+                        }else{
+                          setState(() {
+                            maxLines = 5;
+                          });
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          controller: controller,
+                          cursorColor: Color(0xff000000),
+                          maxLines: maxLines,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Color(0xffffffff),
+                            alignLabelWithHint: true,
+                            labelText: 'Speak out...',
+                            labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff000000),
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Container(
+                    child: Wrap(
+                      spacing: 5.0,
+                      children: List.generate(
+                        users.length, 
+                        (index) => Chip(
+                          labelPadding: const EdgeInsets.only(left: 8.0),
+                          label: Text(users[index].name),
+                          deleteIcon: Icon(
+                            Icons.close,
+                            size: 18,
+                          ),
+                          onDeleted: () {
+                            setState(() {
+                              users.removeAt(index);
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0,), 
+                    alignment: Alignment.centerLeft,
+                  ),
+
+                  SizedBox(height: 10,),
+
+                  Container(
+                    child: ((){
+                      if(slideImages.length != 0){
+                        return Container(
+                          height: 200,
+                          width: SizeConfig.screenWidth,
+                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                          child: Container(
+                            height: 100,
+                            child: GridView.count(
+                              physics: ClampingScrollPhysics(),
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 4,
+                              mainAxisSpacing: 4,
+                              children: List.generate(slideImages.length, (index){
+                                return lookupMimeType(slideImages[index].path).contains('video') == true
+                                ? GestureDetector(
+                                  onDoubleTap: (){
+                                    setState(() {
+                                      slideImages.removeAt(index);
+                                    });
+                                  },
+                                  onTap: (){
+                                    if(videoPlayerController.value.isPlaying){
+                                      videoPlayerController.pause();
+                                      print('Paused!');
+                                    }else{
+                                      videoPlayerController.play();
+                                      print('Played!');
+                                    }
+                                  },
+                                  child: Container(
+                                    child: AspectRatio(
+                                      aspectRatio: videoPlayerController.value.aspectRatio,
+                                      child: VideoPlayer(videoPlayerController),
                                     ),
                                   ),
-                                  child: Stack(
-                                    children: [
-                                      Center(
-                                        child: CircleAvatar(
-                                          radius: 25,
-                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                          child: Text(
-                                            '$index',
-                                            style: TextStyle(
-                                              fontSize: 40,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xffffffff),
+                                )
+                                : GestureDetector(
+                                  onDoubleTap: (){
+                                    setState(() {
+                                      slideImages.removeAt(index);
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Color(0xffcccccc),
+                                      border: Border.all(color: Color(0xff000000),),
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(slideImages[index].path),
+                                      ),
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '$index',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                          ),
-                        ),
-                      );
-                    }else{
-                      return Container(height: 0,);
-                    }
-                  }()),
-                ),
-
-                Container(
-                  padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                  height: 160,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async{
-                            var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
-
-                            newLocation = result.toString();
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Row(
-                              children: [
-                                Expanded(child: Text('Add a location'),),
-                                Icon(Icons.place, color: Color(0xff4EC9D4),)
-                              ],
+                                );
+                              }),
                             ),
                           ),
-                        ),
-                      ),
-
-                      Container(height: 1, color: Color(0xffeeeeee),),
-
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async{
-                            
-                            var result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
-
-                            if(result != null){
-                              users.add(result);
-                            }
-
-                            setState(() {});
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Row(
-                              children: [
-                                Expanded(child: Text('Tag a person you are with'),),
-                                Icon(Icons.person, color: Color(0xff4EC9D4),)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      Container(height: 1, color: Color(0xffeeeeee),),
-
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async{
-
-                            var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
-
-                            if(choice == null){
-                              choice = 0;
-                            }else{
-                              if(choice == 1){
-                                await getSlideFiles();
-                              }else{
-                                await getVideo();
-                              }
-                            }
-                            
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Row(
-                              children: [
-                                Expanded(child: Text('Upload a Video / Image'),),
-                                Icon(Icons.image, color: Color(0xff4EC9D4),)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-
-                    ],
+                        );
+                      }else{
+                        return Container(height: 0,);
+                      }
+                    }()),
                   ),
-                ),
-                
-              ],
-            ),
+
+                  Container(
+                    padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                    height: 160,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () async{
+                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-location');
+
+                              newLocation = result.toString();
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              child: Row(
+                                children: [
+                                  Expanded(child: Text('Add a location'),),
+                                  Icon(Icons.place, color: Color(0xff4EC9D4),)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Container(height: 1, color: Color(0xffeeeeee),),
+
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () async{
+                              
+                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
+
+                              if(result != null){
+                                users.add(result);
+                              }
+
+                              setState(() {});
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              child: Row(
+                                children: [
+                                  Expanded(child: Text('Tag a person you are with'),),
+                                  Icon(Icons.person, color: Color(0xff4EC9D4),)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Container(height: 1, color: Color(0xffeeeeee),),
+
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () async{
+
+                              var choice = await showDialog(context: (context), builder: (build) => MiscBLMUploadFromDialog(choice_1: 'Image', choice_2: 'Video',));
+
+                              if(choice == null){
+                                choice = 0;
+                              }else{
+                                if(choice == 1){
+                                  await getSlideFiles();
+                                }else{
+                                  await getVideo();
+                                }
+                              }
+                              
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              child: Row(
+                                children: [
+                                  Expanded(child: Text('Upload a Video / Image'),),
+                                  Icon(Icons.image, color: Color(0xff4EC9D4),)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  
+                ],
+              ),
             ),
           ),
         ),

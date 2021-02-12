@@ -32,44 +32,49 @@ class HomeBLMReport extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Report', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Report', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
                   icon: Icon(Icons.arrow_back),
-                  onPressed: () {Navigator.pop(context);},
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
                 );
               },
             ),
           ),
-          body: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              height: SizeConfig.screenHeight,
+          body: Container(
+            padding: EdgeInsets.all(20.0),
+            height: SizeConfig.screenHeight,
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
 
-                  Align(alignment: Alignment.centerLeft, child: Text('Inform us about what happened.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),),
+                  Align(alignment: Alignment.centerLeft, child: Text('Inform us about what happened.', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 3,),
+                  SizedBox(height: 25,),
 
                   MiscBLMInputFieldTemplate(key: _key1, labelText: 'Subject', type: TextInputType.text,),
                   
-                  SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                  SizedBox(height: 25,),
 
                   MiscBLMInputFieldMultiTextTemplate(key: _key2, labelText: 'Body',),
 
-                  Expanded(child: Container(),),
+                  SizedBox(height: 50,),
 
                   MiscBLMButtonTemplate(
                     buttonText: 'Report', 
                     buttonTextStyle: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                      fontSize: 16, 
                       fontWeight: FontWeight.bold, 
                       color: Color(0xffffffff),
                     ),
+                    width: SizeConfig.screenWidth / 2, 
+                    height: 45, 
+                    buttonColor: Color(0xff04ECFF),
                     onPressed: () async{
 
                       if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
@@ -140,12 +145,9 @@ class HomeBLMReport extends StatelessWidget{
                       }
 
                     }, 
-                    width: SizeConfig.screenWidth / 2, 
-                    height: SizeConfig.blockSizeVertical * 7, 
-                    buttonColor: Color(0xff04ECFF),
                   ),
 
-                  Expanded(child: Container(),),
+                  SizedBox(height: 25,),
 
                 ],
               ),

@@ -123,10 +123,6 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       width: SizeConfig.screenWidth,
@@ -178,12 +174,11 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                  // SizedBox(height: ScreenUtil().setHeight(45)),
                   SizedBox(height: 45),
 
                   posts[i].imagesOrVideos != null
                   ? Container(
-                    height: SizeConfig.blockSizeVertical * 30,
+                    height: 240,
                     child: ((){
                       if(posts[i].imagesOrVideos != null){
                         if(posts[i].imagesOrVideos.length == 1){
@@ -249,12 +244,12 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
 
                                         Center(
                                           child: CircleAvatar(
-                                            radius: SizeConfig.blockSizeVertical * 3,
+                                            radius: 25,
                                             backgroundColor: Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               '${posts[i].imagesOrVideos.length - 3}',
                                               style: TextStyle(
-                                                fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                fontSize: 40,
                                                 fontWeight: FontWeight.bold,
                                                 color: Color(0xffffffff),
                                               ),
@@ -285,29 +280,10 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
             );
             
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
           itemCount: posts.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscBLMEmptyDisplayTemplate(),
-      //     ),
-      //   ),
-      // ),
-      // : SingleChildScrollView(
-      //   physics: ClampingScrollPhysics(),
-      //   child: MiscBLMEmptyDisplayTemplate(),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

@@ -10,18 +10,6 @@ class UILogin01 extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Scaffold(
-      // body: LayoutBuilder(
-      //   builder: (_, BoxConstraints constraints) {
-      //     ScreenUtil.init(
-      //       context: _,
-      //       constraints: constraints,
-      //       // designSize: Size(360, 690),
-      //       designSize: Size(SizeConfig.screenWidth, SizeConfig.screenHeight),
-      //       allowFontScaling: true,
-      //     );
-      //     return 
-      //   }
-      // ),
       body: ResponsiveWrapper(
         maxWidth: SizeConfig.screenWidth,
         defaultScale: true,

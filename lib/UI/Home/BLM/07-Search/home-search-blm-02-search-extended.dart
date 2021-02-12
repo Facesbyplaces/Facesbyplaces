@@ -5,11 +5,9 @@ import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-suggest
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-14-blm-empty-display.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
@@ -323,10 +321,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -359,7 +353,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       focusColor: Color(0xffffffff),
                       hintText: 'Search Memorial',
                       hintStyle: TextStyle(
-                        // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                         fontSize: 14,
                       ),
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -386,14 +379,13 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           ),
           body: Stack(
             children: [
-              SingleChildScrollView(child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
               Column(
                 children: [
 
                   Container(
                     alignment: Alignment.center,
-                    // height: ScreenUtil().setHeight(55),
                     height: 55,
                     color: Color(0xffffffff),
                     child: DefaultTabController(
@@ -413,16 +405,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           Center(
                             child: Text('Post',
                               style: TextStyle(
-                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
 
-                          Center(child: Text('Suggested',
+                          Center(
+                            child: Text('Suggested',
                               style: TextStyle(
-                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -432,7 +423,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           Center(
                             child: Text('Nearby',
                               style: TextStyle(
-                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -442,7 +432,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                           Center(
                             child: Text('BLM',
                               style: TextStyle(
-                                // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -456,20 +445,20 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                   Container(
                     child: ((){
                       switch(toggle){
-                        case 0: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
-                        case 1: return Container(height: SizeConfig.blockSizeVertical * 2,); break;
+                        case 0: return Container(height: 20,); break;
+                        case 1: return Container(height: 20,); break;
                         case 2: return 
                         Container(
-                          height: SizeConfig.blockSizeVertical * 5,
+                          height: 40,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                SizedBox(width: 20,),
 
                                 Icon(Icons.location_pin, color: Color(0xff979797),),
 
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                SizedBox(width: 20,),
 
                                 ((){
                                   if(currentLocation != null || currentLocation != ''){
@@ -484,16 +473,16 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                         ); break;
                         case 3: return 
                         Container(
-                          height: SizeConfig.blockSizeVertical * 5,
+                          height: 40,
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: [
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                SizedBox(width: 20,),
 
                                 Icon(Icons.location_pin, color: Color(0xff979797),),
 
-                                SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                SizedBox(width: 20,),
 
                                 ((){
                                   if(currentLocation != null || currentLocation != ''){
@@ -536,7 +525,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchPostExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - kToolbarHeight - 55,
       child: tabCount1 != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -588,7 +577,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeVertical * 30,
+                  height: 240,
                   child: ((){
                     if(feeds[i].imagesOrVideos != null){
                       if(feeds[i].imagesOrVideos.length == 1){
@@ -654,12 +643,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
                                       Center(
                                         child: CircleAvatar(
-                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          radius: 25,
                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
                                           child: Text(
                                             '${feeds[i].imagesOrVideos.length - 3}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xffffffff),
                                             ),
@@ -688,20 +677,37 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               ],
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
           itemCount: feeds.length,
         ),
       )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscBLMEmptyDisplayTemplate(message: 'Post is empty',),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   searchSuggestedExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - kToolbarHeight - 75,
       child: tabCount2 != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -738,20 +744,37 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               relationship: suggested[i].relationship,
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
           itemCount: suggested.length,
         ),
       )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscBLMEmptyDisplayTemplate(message: 'Suggested is empty',),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Suggested is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   searchNearbyExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - kToolbarHeight - 75,
       child: tabCount3 != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -788,20 +811,37 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               relationship: nearby[i].relationship,
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
           itemCount: nearby.length,
         ),
       )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscBLMEmptyDisplayTemplate(message: 'Nearby is empty',),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            ],
+          ),
+        ),
       ),
     );
   }
 
   searchBLMExtended(){
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 11 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - kToolbarHeight - 75,
       child: tabCount4 != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -838,13 +878,30 @@ class HomeBLMPostState extends State<HomeBLMPost>{
               relationship: blm[i].relationship,
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
           itemCount: blm.length,
         ),
       )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscBLMEmptyDisplayTemplate(message: 'BLM is empty',),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('BLM is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            ],
+          ),
+        ),
       ),
     );
   }

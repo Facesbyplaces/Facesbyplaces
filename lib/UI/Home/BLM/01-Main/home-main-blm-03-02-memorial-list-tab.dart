@@ -254,10 +254,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       width: SizeConfig.screenWidth,
@@ -287,29 +283,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
           itemBuilder: (c, i) {
             return finalMemorials[i];
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
           itemCount: finalMemorials.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
-      //     ),
-      //   ),
-      // ),
-      // : SingleChildScrollView(
-      //   physics: ClampingScrollPhysics(),
-      //   child: MiscBLMEmptyDisplayTemplate(message: 'Memorial is empty',),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

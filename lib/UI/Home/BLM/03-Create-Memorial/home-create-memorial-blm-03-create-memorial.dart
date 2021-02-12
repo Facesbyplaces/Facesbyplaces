@@ -144,7 +144,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                 SizedBox(height: 20,),
 
-                Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
                 SizedBox(height: 40,),
 
@@ -248,7 +248,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                 SizedBox(height: 20,),
 
-                Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
                 SizedBox(height: 80,),
 

@@ -126,7 +126,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight - kToolbarHeight - 80,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -178,7 +178,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeVertical * 30,
+                  height: 240,
                   child: ((){
                     if(feeds[i].imagesOrVideos != null){
                       if(feeds[i].imagesOrVideos.length == 1){
@@ -244,12 +244,12 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
                                       Center(
                                         child: CircleAvatar(
-                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          radius: 25,
                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
                                           child: Text(
                                             '${feeds[i].imagesOrVideos.length - 3}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xffffffff),
                                             ),
@@ -278,7 +278,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               ],
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
           itemCount: feeds.length,
         ),
       )
@@ -303,61 +303,54 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
               ),
             ),
 
-            // SizedBox(height: ScreenUtil().setHeight(25)),
             SizedBox(height: 25,),
 
             Container(
               width: SizeConfig.screenHeight,
-              // heightResponsive: false,
-              // widthResponsive: true,
               child: Stack(
                 children: [
                   Positioned(
                     left: 0,
-                    top: SizeConfig.blockSizeVertical * 8,
-                    child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
+                    top: 70,
+                    child: MiscBLMImageDisplayFeedTemplate(frontSize: 65, backSize: 70,),
                   ),
 
                   Positioned(
                     right: 0,
-                    top: SizeConfig.blockSizeVertical * 8,
-                    child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
+                    top: 70,
+                    child: MiscBLMImageDisplayFeedTemplate(frontSize: 65, backSize: 70, backgroundColor: Color(0xff04ECFF),),
                   ),
 
                   Positioned(
-                    left: SizeConfig.blockSizeHorizontal * 12,
-                    top: SizeConfig.blockSizeVertical * 6,
-                    child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
+                    left: 50,
+                    top: 50,
+                    child: MiscBLMImageDisplayFeedTemplate(frontSize: 75, backSize: 80,),
                   ),
 
                   Positioned(
-                    right: SizeConfig.blockSizeHorizontal * 12,
-                    top: SizeConfig.blockSizeVertical * 6,
-                    child: MiscBLMImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
+                    right: 50,
+                    top: 50,
+                    child: MiscBLMImageDisplayFeedTemplate(frontSize: 75, backSize: 80, backgroundColor: Color(0xff04ECFF),),
                   ),
 
-                  Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+                  Center(child: Image.asset('assets/icons/logo.png', height: 240, width: 240,),),
                 ],
               ),
             ),
 
-            // SizedBox(height: ScreenUtil().setHeight(45)),
             SizedBox(height: 45,),
 
             Center(child: Text('Feed is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
 
-            // SizedBox(height: ScreenUtil().setHeight(20)),
             SizedBox(height: 20,),
 
             Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),),
 
-            // SizedBox(height: ScreenUtil().setHeight(25)),
             SizedBox(height: 25,),
 
             MiscBLMButtonTemplate(
               buttonText: 'Create', 
               buttonTextStyle: TextStyle(
-                // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                 fontSize: 16,
                 fontWeight: FontWeight.bold, 
                 color: Color(0xffffffff),
@@ -366,12 +359,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                 Navigator.pushNamed(context, '/home/blm/create-memorial');
               }, 
               width: SizeConfig.screenWidth / 2, 
-              // height: ScreenUtil().setHeight(45),
               height: 45,
               buttonColor: Color(0xff000000),
             ),
 
-            // SizedBox(height: ScreenUtil().setHeight(20)),
             SizedBox(height: 20,),
             
           ],

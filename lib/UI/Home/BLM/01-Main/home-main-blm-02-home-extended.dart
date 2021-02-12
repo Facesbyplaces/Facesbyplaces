@@ -13,7 +13,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -157,7 +156,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     },
                   );
                 }else if(profileImage.hasError){
-                  // return Icon(Icons.error);
                   return IconButton(
                     icon: CircleAvatar(
                       backgroundColor: Color(0xff888888),

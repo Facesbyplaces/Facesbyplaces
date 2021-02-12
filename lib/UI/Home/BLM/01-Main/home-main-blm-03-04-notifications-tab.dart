@@ -88,10 +88,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       width: SizeConfig.screenWidth,
@@ -130,29 +126,10 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             );
             
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
           itemCount: notifications.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscBLMEmptyDisplayTemplate(message: 'Notification is empty'),
-      //     ),
-      //   ),
-      // ),
-      // : SingleChildScrollView(
-      //   physics: ClampingScrollPhysics(),
-      //   child: MiscBLMEmptyDisplayTemplate(message: 'Notification is empty'),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

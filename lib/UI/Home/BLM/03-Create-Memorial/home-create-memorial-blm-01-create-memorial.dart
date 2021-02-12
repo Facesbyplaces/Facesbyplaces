@@ -146,9 +146,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                     }
 
                   }, 
-                  // width: SizeConfig.screenWidth / 2, 
-                  // height: SizeConfig.blockSizeVertical * 7
-                  width: 150,
+                  width: SizeConfig.screenWidth / 2,
                   height: 45,
                 ),
               ],
