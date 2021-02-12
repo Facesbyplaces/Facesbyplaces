@@ -3,13 +3,12 @@ import axios from "../../../auxiliary/axios";
 
 import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
 import ReactPaginate from "react-paginate";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function DataTable({ search, setSearch, keywords }) {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
   const [users, setUsers] = useState([]);
-
-  console.log(search);
 
   const handleSearch = () => {
     axios
@@ -18,17 +17,15 @@ export default function DataTable({ search, setSearch, keywords }) {
       })
       .then((response) => {
         setUsers(response.data.users);
-        console.log("Response: ", response.data.users);
       })
       .catch((error) => {
         console.log(error.response);
       });
+    setSearch(false);
   };
 
-  if (search) {
-    handleSearch();
-    setSearch(false);
-    console.log("Search User: ", users);
+  {
+    search ? handleSearch() : console.log("Search", search);
   }
 
   useEffect(() => {
@@ -80,7 +77,7 @@ export default function DataTable({ search, setSearch, keywords }) {
             </th>
           </tr>
         </thead>
-        <DataTableRowUserData users={users} />
+        <DataTableRowUserData users={users} search={search} />
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">
         <div className="d-flex align-items-center">

@@ -11,7 +11,7 @@ export default function Body() {
 
   const handleChange = (e) => {
     setKeywords(e.target.value);
-    setSearch(true);
+    // setSearch(true);
   };
 
   return (

@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DeleteModal } from "./DeleteModal";
 
-export default function DataTableRowUserData(props) {
+//Loader
+import HashLoader from "react-spinners/HashLoader";
+
+export default function DataTableRowUserData({ users, search }) {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
 
-  const renderedUsers = props.users.map((user) => (
+  const renderedUsers = users.map((user) => (
     <tr>
       <td className="pl-2 py-6">
         <label className="checkbox checkbox-lg checkbox-inline">
@@ -172,25 +175,45 @@ export default function DataTableRowUserData(props) {
     </tr>
   ));
 
-  return (
+  return search ? (
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <div
+            className="loader-container"
+            style={{ width: "100%", height: "100vh" }}
+          >
+            <HashLoader color={"#04ECFF"} loading={!search} size={70} />
+          </div>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  ) : (
     <tbody>{renderedUsers}</tbody>
-    // <div>
-    //   {props.users.length == 0 ? (
-    //     <tbody>
-    //       <tr>
-    //         <td className="pl-0">
-    //           <a
-    //             href="#"
-    //             className="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"
-    //           >
-    //             No results found.
-    //           </a>
-    //         </td>
-    //       </tr>
-    //     </tbody>
-    //   ) : (
-    //     <tbody>{renderedUsers}</tbody>
-    //   )}
-    // </div>
   );
+  // <div>
+  //   {props.users.length == 0 ? (
+  //     <tbody>
+  //       <tr>
+  //         <td className="pl-0">
+  //           <a
+  //             href="#"
+  //             className="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"
+  //           >
+  //             No results found.
+  //           </a>
+  //         </td>
+  //       </tr>
+  //     </tbody>
+  //   ) : (
+  //     <tbody>{renderedUsers}</tbody>
+  //   )}
+  // </div>
 }
