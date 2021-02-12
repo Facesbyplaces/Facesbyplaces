@@ -6,6 +6,10 @@ import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-add-comm
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-04-show-comment-or-reply-like-status.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-07-add-reply.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-09-delete-comment.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-10-edit-comment.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-11-delete-reply.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-12-edit-reply.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -243,7 +247,8 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
           ? FooterLayout(
             child: SingleChildScrollView(
               child: Container(
-                height: (SizeConfig.screenHeight - kToolbarHeight),
+                height: (SizeConfig.screenHeight - kToolbarHeight - 100),
+                // height: SizeConfig.screenHeight + kToolbarHeight + 40,
                 width: SizeConfig.screenWidth,
                 child: Column(
                   children: [
@@ -323,7 +328,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                           onTap: (){
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId)));
                                           },
-                                          // child: currentUserId == comments[i].userId
                                           child: userId == comments[i].userId
                                           ? Text('You',
                                             style: TextStyle(
@@ -383,12 +387,42 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                             ListTile(
                                               title: Text('Edit'),
                                               leading: Icon(Icons.edit),
-                                              onTap: () => Navigator.of(context).pop(),
+                                              onTap: () async{
+                                                await showModalBottomSheet(
+                                                  context: context, 
+                                                  builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
+                                                );
+                                              },
                                             ),
                                             ListTile(
                                               title: Text('Delete'),
                                               leading: Icon(Icons.delete),
-                                              onTap: () => Navigator.of(context).pop(),
+                                              onTap: () async{  
+                                                context.showLoaderOverlay();
+                                                bool result = await apiBLMDeleteComment(commentId: comments[i].commentId);
+                                                context.hideLoaderOverlay();
+
+                                                controller.clear();
+                                                itemRemaining = 1;
+                                                repliesRemaining = 1;
+                                                comments = [];
+                                                replies = [];
+                                                numberOfReplies = 0;
+                                                page1 = 1;
+                                                page2 = 1;
+                                                count = 0;
+                                                commentsLikes = [];
+                                                commentsNumberOfLikes = [];
+                                                repliesLikes = [];
+                                                repliesNumberOfLikes = [];
+                                                isComment = true;
+                                                numberOfLikes = 0;
+                                                numberOfComments = 0;
+                                                getOriginalPostInformation();
+                                                onLoading();
+
+                                                print('The result is $result');
+                                              },
                                             )
                                           ],
                                         ),
@@ -459,7 +493,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                     Column(
                                       children: [
                                         Container(
-                                          height: SizeConfig.blockSizeVertical * 5,
+                                          height: 40,
                                           child: Row(
                                             children: [
                                               SizedBox(width: SizeConfig.screenWidth / 7,),
@@ -476,7 +510,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                                   onTap: (){
                                                     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId)));
                                                   },
-                                                  // child: currentUserId == comments[i].listOfReplies[index].userId
                                                   child: userId == comments[i].listOfReplies[index].userId
                                                   ? Text('You',
                                                     style: TextStyle(
@@ -522,26 +555,83 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                           ),
                                         ),
 
-                                        Row(
-                                          children: [
-                                            SizedBox(width: SizeConfig.screenWidth / 4,),
+                                        GestureDetector(
+                                          onLongPress: () async{
+                                            print('Nice!');
+                                            await showMaterialModalBottomSheet(
+                                              context: context, 
+                                              builder: (context) => 
+                                                SafeArea(
+                                                top: false,
+                                                child: Column(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    ListTile(
+                                                      title: Text('Edit'),
+                                                      leading: Icon(Icons.edit),
+                                                      onTap: () async{
+                                                        await showModalBottomSheet(
+                                                          context: context, 
+                                                          builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
+                                                        );
+                                                      },
+                                                    ),
+                                                    ListTile(
+                                                      title: Text('Delete'),
+                                                      leading: Icon(Icons.delete),
+                                                      onTap: () async{  
+                                                        context.showLoaderOverlay();
+                                                        bool result = await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
+                                                        context.hideLoaderOverlay();
 
-                                            Expanded(
-                                              child: Container(
-                                                padding: EdgeInsets.all(10.0),
-                                                child: Text(
-                                                  comments[i].listOfReplies[index].replyBody,
-                                                  style: TextStyle(
-                                                    color: Color(0xffffffff),
+                                                        controller.clear();
+                                                        itemRemaining = 1;
+                                                        repliesRemaining = 1;
+                                                        comments = [];
+                                                        replies = [];
+                                                        numberOfReplies = 0;
+                                                        page1 = 1;
+                                                        page2 = 1;
+                                                        count = 0;
+                                                        commentsLikes = [];
+                                                        commentsNumberOfLikes = [];
+                                                        repliesLikes = [];
+                                                        repliesNumberOfLikes = [];
+                                                        isComment = true;
+                                                        numberOfLikes = 0;
+                                                        numberOfComments = 0;
+                                                        getOriginalPostInformation();
+                                                        onLoading();
+
+                                                        print('The result is $result');
+                                                      },
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            );
+                                          },
+                                          child: Row(
+                                            children: [
+                                              SizedBox(width: SizeConfig.screenWidth / 4,),
+
+                                              Expanded(
+                                                child: Container(
+                                                  padding: EdgeInsets.all(10.0),
+                                                  child: Text(
+                                                    comments[i].listOfReplies[index].replyBody,
+                                                    style: TextStyle(
+                                                      color: Color(0xffffffff),
+                                                    ),
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xff4EC9D4),
+                                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                                                   ),
                                                 ),
-                                                decoration: BoxDecoration(
-                                                  color: Color(0xff4EC9D4),
-                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
 
                                         SizedBox(height: 10,),
@@ -712,6 +802,128 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                   context.showLoaderOverlay();
                   apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
                   context.hideLoaderOverlay();
+
+                  controller.clear();
+                  itemRemaining = 1;
+                  repliesRemaining = 1;
+                  comments = [];
+                  replies = [];
+                  numberOfReplies = 0;
+                  page1 = 1;
+                  page2 = 1;
+                  count = 0;
+                  commentsLikes = [];
+                  commentsNumberOfLikes = [];
+                  repliesLikes = [];
+                  repliesNumberOfLikes = [];
+                  isComment = true;
+                  numberOfLikes = 0;
+                  numberOfComments = 0;
+                  getOriginalPostInformation();
+                  onLoading();
+                }
+
+              },
+              child: Text('Post',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold, 
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  showKeyboardEdit({bool isEdit, int editId}){ // isEdit - TRUE (COMMENT) | FALSE (REPLY)
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+        child: Row(
+          children: [
+            
+            CircleAvatar(
+              backgroundColor: Color(0xff888888), 
+              backgroundImage: currentUserImage != null && currentUserImage != ''
+              ? NetworkImage(currentUserImage)
+              : AssetImage('assets/icons/app-icon.png'),
+            ),
+
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: TextFormField(
+                  controller: controller,
+                  cursorColor: Color(0xff000000),
+                  maxLines: 2,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    fillColor: Color(0xffBDC3C7),
+                    filled: true,
+                    labelText: 'Say something...',
+                    labelStyle: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xffffffff),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffBDC3C7),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color(0xffBDC3C7),
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            GestureDetector(
+              onTap: () async{
+                if(isEdit == true){
+
+
+                  print('The controller is ${controller.text}');
+
+                  context.showLoaderOverlay();
+                  bool result = await apiBLMEditComment(commentId: editId, commentBody: controller.text);
+                  context.hideLoaderOverlay();
+                  print('The result is $result');
+
+                  controller.clear();
+                  itemRemaining = 1;
+                  repliesRemaining = 1;
+                  comments = [];
+                  replies = [];
+                  numberOfReplies = 0;
+                  page1 = 1;
+                  page2 = 1;
+                  count = 0;
+                  commentsLikes = [];
+                  commentsNumberOfLikes = [];
+                  repliesLikes = [];
+                  repliesNumberOfLikes = [];
+                  isComment = true;
+                  numberOfLikes = 0;
+                  numberOfComments = 0;
+                  getOriginalPostInformation();
+                  onLoading();
+                }else{
+                  print('The controller is ${controller.text}');
+                  
+                  context.showLoaderOverlay();
+                  bool result = await apiBLMEditReply(replyId: editId, replyBody: controller.text);
+                  context.hideLoaderOverlay();
+                  print('The result of edit reply is $result');
+                  
 
                   controller.clear();
                   itemRemaining = 1;

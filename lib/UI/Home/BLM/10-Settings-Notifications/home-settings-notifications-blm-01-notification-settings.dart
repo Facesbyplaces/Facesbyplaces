@@ -7,7 +7,6 @@ import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-not
 import 'package:facesbyplaces/API/BLM/11-Settings-Notifications/api-settings-notifications-blm-07-update-notification-add-admin.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -57,10 +56,6 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -183,7 +178,7 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                       ),
                     ),
 
-                    Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffffffff),),
+                    Container(height: 1, color: Color(0xffffffff),),
 
                     Expanded(
                       child: SingleChildScrollView(
@@ -192,11 +187,11 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                            SizedBox(height: 40,),
 
                             Text('Page Invites', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                            SizedBox(height: 10,),
 
                             Row(
                               children: [

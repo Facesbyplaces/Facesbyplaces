@@ -55,7 +55,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Account Details', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Account Details', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: Builder(
               builder: (BuildContext context) {
@@ -73,120 +73,115 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
             builder: (context, details){
               if(details.hasData){
                 return SingleChildScrollView(
+                  padding: EdgeInsets.all(20),
                   physics: ClampingScrollPhysics(),
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    height: SizeConfig.screenHeight,
-                    child: Column(
-                      children: [
+                  child: Column(
+                    children: [
 
-                        MiscBLMInputFieldTemplate(key: _key1, labelText: 'First Name', displayText: details.data.showAccountDetailsFirstName,),
+                      MiscBLMInputFieldTemplate(key: _key1, labelText: 'First Name', displayText: details.data.showAccountDetailsFirstName,),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: 20,),
 
-                        MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', displayText: details.data.showAccountDetailsLastName,),
+                      MiscBLMInputFieldTemplate(key: _key2, labelText: 'Last Name', displayText: details.data.showAccountDetailsLastName,),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: 20,),
 
-                        MiscBLMInputFieldTemplate(key: _key3, labelText: 'Email Address', displayText: details.data.showAccountDetailsEmail, type: TextInputType.emailAddress,),
+                      MiscBLMInputFieldTemplate(key: _key3, labelText: 'Email Address', displayText: details.data.showAccountDetailsEmail, type: TextInputType.emailAddress,),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: 20,),
 
-                        MiscBLMPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),
+                      MiscBLMPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: 20,),
 
-                        MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data.showAccountDetailsQuestion,),
+                      MiscBLMInputFieldSecurityQuestions(key: _key5, displayText: details.data.showAccountDetailsQuestion,),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                      SizedBox(height: 80,),
 
-                        Expanded(child: Container(),),
-
-                        MiscBLMButtonTemplate(
-                          buttonText: 'Update',
-                          buttonTextStyle: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xffffffff),
-                          ), 
-                          onPressed: () async{
-                              if(
-                                details.data.showAccountDetailsFirstName != _key1.currentState.controller.text ||
-                                details.data.showAccountDetailsLastName !=  _key2.currentState.controller.text ||
-                                details.data.showAccountDetailsEmail != _key3.currentState.controller.text ||
-                                details.data.showAccountDetailsPhoneNumber != _key4.currentState.controller.text || 
-                                details.data.showAccountDetailsQuestion != _key5.currentState.currentSelection
-                              ){
-                                bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
-
-                                if(confirmResult){
-
-                                  context.showLoaderOverlay();
-                                  bool result = await apiBLMUpdateAccountDetails(
-                                    firstName: _key1.currentState.controller.text,
-                                    lastName: _key2.currentState.controller.text,
-                                    email: _key3.currentState.controller.text,
-                                    phoneNumber: _key4.currentState.controller.text,
-                                    question: _key5.currentState.currentSelection,
-                                  );
-                                  context.hideLoaderOverlay();
-
-                                  if(result){
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Successfully updated the account details.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.green,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Something went wrong. Please try again.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.red,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }
-                                }
-                              }
-                          }, 
-                          width: SizeConfig.screenWidth / 2, 
-                          height: SizeConfig.blockSizeVertical * 7, 
-                          buttonColor: Color(0xff04ECFF),
+                      MiscBLMButtonTemplate(
+                        buttonText: 'Update',
+                        buttonTextStyle: TextStyle(
+                          fontSize: 16, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xffffffff),
                         ),
+                        width: SizeConfig.screenWidth / 2,
+                        height: 45,
+                        buttonColor: Color(0xff04ECFF),
+                        onPressed: () async{
+                          if(
+                            details.data.showAccountDetailsFirstName != _key1.currentState.controller.text ||
+                            details.data.showAccountDetailsLastName !=  _key2.currentState.controller.text ||
+                            details.data.showAccountDetailsEmail != _key3.currentState.controller.text ||
+                            details.data.showAccountDetailsPhoneNumber != _key4.currentState.controller.text || 
+                            details.data.showAccountDetailsQuestion != _key5.currentState.currentSelection
+                          ){
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
-                        Expanded(child: Container(),),
+                            if(confirmResult){
 
-                      ],
-                    ),
+                              context.showLoaderOverlay();
+                              bool result = await apiBLMUpdateAccountDetails(
+                                firstName: _key1.currentState.controller.text,
+                                lastName: _key2.currentState.controller.text,
+                                email: _key3.currentState.controller.text,
+                                phoneNumber: _key4.currentState.controller.text,
+                                question: _key5.currentState.currentSelection,
+                              );
+                              context.hideLoaderOverlay();
+
+                              if(result){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the account details.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.green,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
+                              }else{
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
+                              }
+                            }
+                          }
+                        },
+                      ),
+
+                      SizedBox(height: 20,),
+
+                    ],
                   ),
                 );
               }else if(details.hasError){
-                return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
               }else{
                 return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
               }

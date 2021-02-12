@@ -114,7 +114,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           },
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -126,7 +125,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Update Page image and background image',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -138,7 +136,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Add or remove admins of this page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -149,7 +146,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Add or remove family of this page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         MiscBLMSettingDetailTemplate(
@@ -160,7 +156,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           contentDetail: 'Add or remove friends of this page',
         ),
 
-        // Container(height: SizeConfig.blockSizeVertical * .5, color: Color(0xffeeeeee),),
         Container(height: 5, color: Color(0xffeeeeee),),
 
         relationship != 'Friend'
@@ -325,7 +320,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: 80,
           color: Color(0xffaaaaaa),
           child: Row(
@@ -358,7 +352,6 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
         Container(height: 5, color: Color(0xffeeeeee),),
 
         Container(
-          // height: SizeConfig.blockSizeVertical * 10,
           height: 80,
           color: Color(0xffaaaaaa),
           child: Row(

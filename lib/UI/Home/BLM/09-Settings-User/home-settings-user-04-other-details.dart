@@ -81,7 +81,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Other Details', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Other Details', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
@@ -96,219 +96,216 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
               if(details.hasData){
                 return SingleChildScrollView(
                   physics: ClampingScrollPhysics(),
-                  child: Container(
-                    height: SizeConfig.screenHeight,
-                    padding: EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
 
-                        Row(
-                          children: [
-                            Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.blmShowOtherDetailsBirthdate,),),
+                      Row(
+                        children: [
+                          Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.blmShowOtherDetailsBirthdate,),),
 
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                          SizedBox(width: 20,),
 
-                            IconButton(
-                              onPressed: () async{
-                                setState(() {
-                                  toggle1 = !toggle1;
-                                });
+                          IconButton(
+                            onPressed: () async{
+                              setState(() {
+                                toggle1 = !toggle1;
+                              });
 
-                                context.showLoaderOverlay();
-                                await apiBLMHideBirthdate(hide: toggle1);
-                                context.hideLoaderOverlay();
-                              },
-                              icon: Icon(Icons.remove_red_eye_rounded),
-                              color: toggle1 ? Color(0xff85DBF1) : Color(0xff888888),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                        Row(
-                          children: [
-                            Expanded(child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.blmShowOtherDetailsBirthplace,),),
-
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                            IconButton(
-                              onPressed: () async{
-                                setState(() {
-                                  toggle2 = !toggle2;
-                                });
-
-                                context.showLoaderOverlay();
-                                await apiBLMHideBirthplace(hide: toggle2);
-                                context.hideLoaderOverlay();
-                              },
-                              icon: Icon(Icons.remove_red_eye_rounded),
-                              color: toggle2 ? Color(0xff85DBF1) : Color(0xff888888),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                        Row(
-                          children: [
-                            Expanded(child: MiscBLMInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.blmShowOtherDetailsAddress,),),
-
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                            IconButton(
-                              onPressed: () async{
-                                setState(() {
-                                  toggle3 = !toggle3;
-                                });
-
-                                context.showLoaderOverlay();
-                                await apiBLMHideAddress(hide: toggle3);
-                                context.hideLoaderOverlay();
-                              },
-                              icon: Icon(Icons.remove_red_eye_rounded),
-                              color: toggle3 ? Color(0xff85DBF1) : Color(0xff888888),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                        Row(
-                          children: [
-                            Expanded(child: MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.blmShowOtherDetailsEmail, type: TextInputType.emailAddress,),),
-
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                            IconButton(
-                              onPressed: () async{
-                                setState(() {
-                                  toggle4 = !toggle4;
-                                });
-
-                                context.showLoaderOverlay();
-                                await apiBLMHideEmail(hide: toggle4);
-                                context.hideLoaderOverlay();
-                              },
-                              icon: Icon(Icons.remove_red_eye_rounded),
-                              color: toggle4 ? Color(0xff85DBF1) : Color(0xff888888),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
-
-                        Row(
-                          children: [
-                            Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.w400, color: Colors.grey)),),
-
-                            SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
-
-                            IconButton(
-                              onPressed: () async{
-                                setState(() {
-                                  toggle5 = !toggle5;
-                                });
-
-                                context.showLoaderOverlay();
-                                await apiBLMHidePhoneNumber(hide: toggle5);
-                                context.hideLoaderOverlay();
-                              },
-                              icon: Icon(Icons.remove_red_eye_rounded),
-                              color: toggle5 ? Color(0xff85DBF1) : Color(0xff888888),
-                            ),
-                          ],
-                        ),
-
-                        Expanded(child: Container(),),
-
-                        MiscBLMButtonTemplate(
-                          buttonText: 'Update', 
-                          buttonTextStyle: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xffffffff),
+                              context.showLoaderOverlay();
+                              await apiBLMHideBirthdate(hide: toggle1);
+                              context.hideLoaderOverlay();
+                            },
+                            icon: Icon(Icons.remove_red_eye_rounded),
+                            color: toggle1 ? Color(0xff85DBF1) : Color(0xff888888),
                           ),
-                          onPressed: () async{
+                        ],
+                      ),
 
-                            if(
-                              details.data.blmShowOtherDetailsBirthdate != _key1.currentState.controller.text ||
-                              details.data.blmShowOtherDetailsBirthplace !=  _key2.currentState.controller.text ||
-                              details.data.blmShowOtherDetailsAddress != _key3.currentState.controller.text ||
-                              details.data.blmShowOtherDetailsEmail != _key4.currentState.controller.text ||
-                              details.data.blmShowOtherDetailsPhoneNumber != _key5.currentState.controller.text
-                            ){
-                              bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                      SizedBox(height: 20,),
 
-                              if(confirmResult){
+                      Row(
+                        children: [
+                          Expanded(child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.blmShowOtherDetailsBirthplace,),),
 
-                                context.showLoaderOverlay();
-                                bool result = await apiBLMUpdateOtherDetails(
-                                  birthdate: _key1.currentState.controller.text,
-                                  birthplace: _key2.currentState.controller.text,
-                                  address: _key3.currentState.controller.text,
-                                  email: _key4.currentState.controller.text,
-                                  phoneNumber: _key5.currentState.controller.text,
+                          SizedBox(width: 20,),
+
+                          IconButton(
+                            onPressed: () async{
+                              setState(() {
+                                toggle2 = !toggle2;
+                              });
+
+                              context.showLoaderOverlay();
+                              await apiBLMHideBirthplace(hide: toggle2);
+                              context.hideLoaderOverlay();
+                            },
+                            icon: Icon(Icons.remove_red_eye_rounded),
+                            color: toggle2 ? Color(0xff85DBF1) : Color(0xff888888),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20,),
+
+                      Row(
+                        children: [
+                          Expanded(child: MiscBLMInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.blmShowOtherDetailsAddress,),),
+
+                          SizedBox(width: 20,),
+
+                          IconButton(
+                            onPressed: () async{
+                              setState(() {
+                                toggle3 = !toggle3;
+                              });
+
+                              context.showLoaderOverlay();
+                              await apiBLMHideAddress(hide: toggle3);
+                              context.hideLoaderOverlay();
+                            },
+                            icon: Icon(Icons.remove_red_eye_rounded),
+                            color: toggle3 ? Color(0xff85DBF1) : Color(0xff888888),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20,),
+
+                      Row(
+                        children: [
+                          Expanded(child: MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.blmShowOtherDetailsEmail, type: TextInputType.emailAddress,),),
+
+                          SizedBox(width: 20,),
+
+                          IconButton(
+                            onPressed: () async{
+                              setState(() {
+                                toggle4 = !toggle4;
+                              });
+
+                              context.showLoaderOverlay();
+                              await apiBLMHideEmail(hide: toggle4);
+                              context.hideLoaderOverlay();
+                            },
+                            icon: Icon(Icons.remove_red_eye_rounded),
+                            color: toggle4 ? Color(0xff85DBF1) : Color(0xff888888),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20,),
+
+                      Row(
+                        children: [
+                          Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),),
+
+                          SizedBox(width: 20,),
+
+                          IconButton(
+                            onPressed: () async{
+                              setState(() {
+                                toggle5 = !toggle5;
+                              });
+
+                              context.showLoaderOverlay();
+                              await apiBLMHidePhoneNumber(hide: toggle5);
+                              context.hideLoaderOverlay();
+                            },
+                            icon: Icon(Icons.remove_red_eye_rounded),
+                            color: toggle5 ? Color(0xff85DBF1) : Color(0xff888888),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 80,),
+
+                      MiscBLMButtonTemplate(
+                        buttonText: 'Update', 
+                        buttonTextStyle: TextStyle(
+                          fontSize: 16, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xffffffff),
+                        ),
+                        width: SizeConfig.screenWidth / 2,
+                        height: 45,
+                        buttonColor: Color(0xff04ECFF),
+                        onPressed: () async{
+
+                          if(
+                            details.data.blmShowOtherDetailsBirthdate != _key1.currentState.controller.text ||
+                            details.data.blmShowOtherDetailsBirthplace !=  _key2.currentState.controller.text ||
+                            details.data.blmShowOtherDetailsAddress != _key3.currentState.controller.text ||
+                            details.data.blmShowOtherDetailsEmail != _key4.currentState.controller.text ||
+                            details.data.blmShowOtherDetailsPhoneNumber != _key5.currentState.controller.text
+                          ){
+                            bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+
+                            if(confirmResult){
+
+                              context.showLoaderOverlay();
+                              bool result = await apiBLMUpdateOtherDetails(
+                                birthdate: _key1.currentState.controller.text,
+                                birthplace: _key2.currentState.controller.text,
+                                address: _key3.currentState.controller.text,
+                                email: _key4.currentState.controller.text,
+                                phoneNumber: _key5.currentState.controller.text,
+                              );
+                              context.hideLoaderOverlay();
+
+                              if(result){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Successfully updated the other details.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.green,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
                                 );
-                                context.hideLoaderOverlay();
 
-                                if(result){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => 
-                                      AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Successfully updated the other details.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: Colors.green,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    )
-                                  );
-
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
-                                }else{
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => 
-                                      AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    )
-                                  );
-                                }
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
+                              }else{
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('Something went wrong. Please try again.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.red,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }
                             }
-                          }, 
-                          width: SizeConfig.screenWidth / 2, 
-                          height: SizeConfig.blockSizeVertical * 7, 
-                          buttonColor: Color(0xff04ECFF),
-                        ),
+                          }
+                        },
+                      ),
 
-                        Expanded(child: Container(),),
+                      SizedBox(height: 20,),
 
-                      ],
-                    ),
+                    ],
                   ),
                 );
               }else if(details.hasError){
-                return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
               }else{
                 return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
               }

@@ -38,7 +38,7 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Change Password', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Change Password', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
@@ -49,86 +49,81 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
           ),
           body: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              height: SizeConfig.screenHeight,
-              child: Column(
-                children: [
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              children: [
 
-                  MiscBLMInputFieldTemplate(key: _key1, labelText: 'Current Password', obscureText: true,),
+                MiscBLMInputFieldTemplate(key: _key1, labelText: 'Current Password', obscureText: true,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
-                  MiscBLMInputFieldTemplate(key: _key2, labelText: 'New Password', obscureText: true,),
+                MiscBLMInputFieldTemplate(key: _key2, labelText: 'New Password', obscureText: true,),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 80,),
 
-                  Expanded(child: Container(),),
-
-                  MiscBLMButtonTemplate(
-                    buttonText: 'Update',
-                    buttonTextStyle: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                      fontWeight: FontWeight.bold, 
-                      color: Color(0xffffffff),
-                    ),
-                    onPressed: () async{
-
-                      context.showLoaderOverlay();
-                      bool result = await apiBLMChangePassword(currentPassword: _key1.currentState.controller.text, newPassword: _key2.currentState.controller.text);
-                      context.hideLoaderOverlay();
-
-                      if(result){
-                        await showDialog(
-                          context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Successfully updated the password.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(),
-                            ),
-                            onlyOkButton: true,
-                            buttonOkColor: Colors.green,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          )
-                        );
-
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
-                      }else{
-                        await showDialog(
-                          context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(),
-                            ),
-                            onlyOkButton: true,
-                            buttonOkColor: Colors.red,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          )
-                        );
-                      }
-                    }, 
-                    width: SizeConfig.screenWidth / 2, 
-                    height: SizeConfig.blockSizeVertical * 7, 
-                    buttonColor: Color(0xff04ECFF),
+                MiscBLMButtonTemplate(
+                  buttonText: 'Update',
+                  buttonTextStyle: TextStyle(
+                    fontSize: 16, 
+                    fontWeight: FontWeight.bold, 
+                    color: Color(0xffffffff),
                   ),
+                  width: SizeConfig.screenWidth / 2,
+                  height: 45,
+                  buttonColor: Color(0xff04ECFF),
+                  onPressed: () async{
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 20,),
+                    context.showLoaderOverlay();
+                    bool result = await apiBLMChangePassword(currentPassword: _key1.currentState.controller.text, newPassword: _key2.currentState.controller.text);
+                    context.hideLoaderOverlay();
 
-                ],
-              ),
+                    if(result){
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Successfully updated the password.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.green,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
+                    }else{
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+                    }
+                  },
+                ),
+
+                SizedBox(height: 20,),
+
+              ],
             ),
           ),
         ),

@@ -91,7 +91,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
-            title: Text('Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Post', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), 
@@ -128,7 +128,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                           child: Column(
                             children: [
                               Container(
-                                height: SizeConfig.blockSizeVertical * 10,
+                                height: 80,
                                 child: Row(
                                   children: [
                                     GestureDetector(
@@ -147,7 +147,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                 child: Text(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageName,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                    fontSize: SizeConfig.safeBlockHorizontal * 4,
+                                                    fontSize: 16,
                                                     fontWeight: FontWeight.bold,
                                                     color: Color(0xff000000),
                                                   ),
@@ -160,7 +160,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                 child: Text(timeago.format(DateTime.parse(originalPost.data.blmPost.showOriginalPostCreateAt)),
                                                   maxLines: 1,
                                                   style: TextStyle(
-                                                    fontSize: SizeConfig.safeBlockHorizontal * 3,
+                                                    fontSize: 14,
                                                     fontWeight: FontWeight.w400,
                                                     color: Color(0xffaaaaaa)
                                                   ),
@@ -180,7 +180,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                               originalPost.data.blmPost.showOriginalPostImagesOrVideos != null
                               ? Container(
-                                height: SizeConfig.blockSizeVertical * 30,
+                                height: 240,
                                 child: ((){
                                   if(originalPost.data.blmPost.showOriginalPostImagesOrVideos != null){
                                     if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 1){
@@ -207,7 +207,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                 items: [
                                                   Center(
                                                     child: Container(
-                                                      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
+                                                      height: SizeConfig.screenHeight - 240,
                                                       child: CarouselSlider(
                                                         items: List.generate(
                                                           originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
@@ -258,7 +258,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                                 items: [
                                                   Center(
                                                     child: Container(
-                                                      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 30,
+                                                      height: SizeConfig.screenHeight - 240,
                                                       child: CarouselSlider(
                                                         items: List.generate(
                                                           originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
@@ -311,12 +311,12 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
 
                                                     Center(
                                                       child: CircleAvatar(
-                                                        radius: SizeConfig.blockSizeVertical * 3,
+                                                        radius: 25,
                                                         backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                         child: Text(
                                                           '${originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3}',
                                                           style: TextStyle(
-                                                            fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                            fontSize: 40,
                                                             fontWeight: FontWeight.bold,
                                                             color: Color(0xffffffff),
                                                           ),
@@ -383,7 +383,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                               : Container(height: 0,),
 
                               Container(
-                                height: SizeConfig.blockSizeVertical * 10,
+                                height: 80,
                                 child: Row(
                                   children: [
                                     GestureDetector(
@@ -409,28 +409,27 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                           ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
                                           : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                                          SizedBox(width: 10,),
 
-                                          Text('$likesCount', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                          Text('$likesCount', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
                                         ],
                                       ),
                                     ),
 
-                                    SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                    SizedBox(width: 20,),
 
                                     GestureDetector(
                                       onTap: (){
-                                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, numberOfLikes: originalPost.data.blmPost.showOriginalPostNumberOfLikes, numberOfComments: originalPost.data.blmPost.showOriginalPostNumberOfComments, userId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId)));
                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId)));
                                       },
                                       child: Row(
                                         children: [
-                                          Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                                          Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                                          SizedBox(width: 10,),
 
-                                          Text('${originalPost.data.blmPost.showOriginalPostNumberOfComments}', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),
+                                          Text('${originalPost.data.blmPost.showOriginalPostNumberOfComments}', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
                                         ],
                                       ),
                                     ),
@@ -456,7 +455,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                             print('Error : ${response.errorCode} - ${response.errorMessage}');
                                           }
                                         },
-                                        child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
+                                        child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
                                       ),
                                     ),
                                   ],
@@ -471,7 +470,7 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                       ],
                     );
                   }else if(originalPost.hasError){
-                    return Container(child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
+                    return Container(child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
                   }else{
                     return Container(child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
                   }

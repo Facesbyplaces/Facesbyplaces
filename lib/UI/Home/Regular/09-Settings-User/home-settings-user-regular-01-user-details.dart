@@ -241,7 +241,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                       ),
                                     ),
 
-                                    // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                     SizedBox(height: 10,),
 
                                     Expanded(
@@ -249,7 +248,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                         alignment: Alignment.topLeft,
                                         child: Text('Update your account details',
                                           style: TextStyle(
-                                            // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w300,
                                             color: Color(0xffBDC3C7),
@@ -269,7 +267,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserChangePassword(userId: userId,)));
                               },
                               child: Container(
-                                // height: SizeConfig.blockSizeVertical * 10,
                                 height: 80,
                                 color: Color(0xffffffff),
                                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -280,7 +277,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                         alignment: Alignment.bottomLeft,
                                         child: Text('Password',
                                           style: TextStyle(
-                                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xff000000),
@@ -296,7 +292,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                         alignment: Alignment.topLeft,
                                         child: Text('Change your login password',
                                           style: TextStyle(
-                                            // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w300,
                                             color: Color(0xffBDC3C7),
@@ -327,7 +322,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                   toggleNumber: result.showOtherDetailsStatusHidePhoneNumber)));
                               },
                               child: Container(
-                                // height: SizeConfig.blockSizeVertical * 10,
                                 height: 80,
                                 color: Color(0xffffffff),
                                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -338,7 +332,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                         alignment: Alignment.bottomLeft,
                                         child: Text('Other Info',
                                           style: TextStyle(
-                                            // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xff000000),
@@ -347,7 +340,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                       ),
                                     ),
 
-                                    // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                     SizedBox(height: 10,),
 
                                     Expanded(
@@ -355,7 +347,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                         alignment: Alignment.topLeft,
                                         child: Text('Optional informations you can share',
                                           style: TextStyle(
-                                            // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w300,
                                             color: Color(0xffBDC3C7),
@@ -371,7 +362,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             ),
 
                             Container(
-                              // height: SizeConfig.blockSizeVertical * 10,
                               height: 80,
                               color: Color(0xffffffff),
                               padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -382,7 +372,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                       alignment: Alignment.bottomLeft,
                                       child: Text('Privacy Settings',
                                         style: TextStyle(
-                                          // fontSize: SizeConfig.safeBlockHorizontal * 4,
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff000000),
@@ -391,7 +380,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                     ),
                                   ),
 
-                                  // SizedBox(height: SizeConfig.blockSizeVertical * 1,),
                                   SizedBox(height: 10,),
 
                                   Expanded(
@@ -399,7 +387,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                       alignment: Alignment.topLeft,
                                       child: Text('Control what others see',
                                         style: TextStyle(
-                                          // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w300,
                                           color: Color(0xffBDC3C7),
@@ -413,8 +400,6 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               ),
                             ),
 
-                            // Expanded(child: Container(),),
-
                             MiscRegularButtonTemplate(
                               buttonText: 'Logout',
                               buttonTextStyle: TextStyle(
@@ -422,89 +407,77 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                                 fontWeight: FontWeight.bold, 
                                 color: Color(0xffffffff),
                               ),
+                              width: 150,
+                              height: 45,
                               onPressed: () async{
 
                                 bool logoutResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Log out', content: 'Are you sure you want to log out from this account?', confirmColor_1: Color(0xff000000), confirmColor_2: Color(0xff888888),));
 
                                 if(logoutResult){
-                                    context.showLoaderOverlay();
-                                    bool result = await apiRegularLogout();
+                                  context.showLoaderOverlay();
+                                  bool result = await apiRegularLogout();
 
-                                    GoogleSignIn googleSignIn = GoogleSignIn(
-                                      scopes: [
-                                        'profile',
-                                        'email',
-                                        'openid'
-                                      ],
+                                  GoogleSignIn googleSignIn = GoogleSignIn(
+                                    scopes: [
+                                      'profile',
+                                      'email',
+                                      'openid'
+                                    ],
+                                  );
+                                  await googleSignIn.signOut();
+
+                                  FacebookLogin fb = FacebookLogin();
+                                  await fb.logOut();
+
+                                  context.hideLoaderOverlay();
+
+                                  if(result){
+                                    Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
+                                    Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                  }else{
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Something went wrong. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
                                     );
-                                    await googleSignIn.signOut();
-
-                                    FacebookLogin fb = FacebookLogin();
-                                    await fb.logOut();
-
-                                    context.hideLoaderOverlay();
-
-                                    if(result){
-                                      Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
-                                      Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
-                                    }else{
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Something went wrong. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
+                                  }
                                 }
-
-
-
-                              }, 
-                              // width: SizeConfig.screenWidth / 2, 
-                              // height: SizeConfig.blockSizeVertical * 7, 
-                              width: 150,
-                              height: 45,
+                              },
                               buttonColor: Color(0xff04ECFF),
                             ),
 
-                            SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                            SizedBox(height: 20,),
                             
                             Text('V.1.1.0', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
-
-                            // Expanded(child: Container(),),
 
                           ],
                         ),
                       ),
                       collapsed: Container(
                         decoration: BoxDecoration(
-                          // color: Colors.blueGrey,
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(50.0),
-                            // topRight: Radius.circular(24.0),
                           ),
                         ),
                       ),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(50.0),
-                        // topRight: Radius.circular(24.0),
                       ),
                     ),
-                    
-                    // MiscRegularUserProfileDetailsDraggable(userId: userId,),
 
                   ],
                 );

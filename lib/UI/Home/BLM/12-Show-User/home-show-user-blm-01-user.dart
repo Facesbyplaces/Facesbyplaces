@@ -3,7 +3,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.d
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-15-blm-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +33,6 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Scaffold(
       body: FutureBuilder<APIBLMShowUserInformation>(
         future: showProfile,
@@ -100,7 +95,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                        SizedBox(height: 20,),
 
                         Text('${profile.data.showUserInformationEmailAddress}',
                           style: TextStyle(
@@ -110,7 +105,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40,),
 
                         Text('About',
                           style: TextStyle(
@@ -120,7 +115,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40,),
 
                         Padding(
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -131,13 +126,13 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Birthdate',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -147,7 +142,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationBirthdate}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     ),
@@ -155,20 +150,20 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.place, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Birthplace',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -178,7 +173,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationBirthplace}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
@@ -186,20 +181,20 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.home, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.home, color: Color(0xffBDC3C7), size: 20),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20),
 
                                         Text('Home Address',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -210,7 +205,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                     child: 
                                     Text('${profile.data.showUserInformationHomeAddress}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
@@ -218,20 +213,20 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.email, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20),
 
                                         Text('Email Address',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -241,7 +236,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationEmailAddress}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
@@ -249,20 +244,20 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.phone, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Contact Number',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -272,7 +267,7 @@ class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationContactNumber}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
