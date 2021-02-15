@@ -10,7 +10,6 @@ Future<bool> apiRegularUpdateOtherDetails({String birthdate, String birthplace, 
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    
     var dioRequest = Dio();
     var formData = FormData();
 

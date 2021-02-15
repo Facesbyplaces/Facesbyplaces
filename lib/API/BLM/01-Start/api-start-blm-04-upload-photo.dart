@@ -10,14 +10,6 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   int prefsUserID = sharedPrefs.getInt('blm-user-id');
 
-
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
-  print('The user id is $prefsUserID');
-  print('The image is $image');
-
   try{
 
     var dioRequest = Dio();

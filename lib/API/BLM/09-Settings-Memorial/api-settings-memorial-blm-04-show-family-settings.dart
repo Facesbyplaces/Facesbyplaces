@@ -44,7 +44,6 @@ class APIBLMShowFamilySettingsMain{
   }
 }
 
-
 class APIBLMShowFamilySettingsExtended{
   APIBLMShowFamilySettingsExtendedDetails showFamilySettingsUser;
   String showFamilySettingsRelationship;

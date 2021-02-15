@@ -44,7 +44,6 @@ class APIBLMShowFriendsSettingsMain{
   }
 }
 
-
 class APIBLMShowFriendsSettingsExtended{
   APIBLMShowFriendsSettingsExtendedDetails showFriendsSettingsUser;
   String showFriendsSettingsRelationship;

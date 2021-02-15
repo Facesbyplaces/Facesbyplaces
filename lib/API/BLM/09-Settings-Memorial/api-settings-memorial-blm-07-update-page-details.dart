@@ -12,9 +12,8 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
 
   try{
     var dioRequest = Dio();
-
-    var formData;
-    formData = FormData();
+    var formData = FormData();
+    
     formData.files.addAll([
       MapEntry('name', MultipartFile.fromString(name,),),
       MapEntry('description', MultipartFile.fromString(description,),),
@@ -40,7 +39,6 @@ Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String descri
     if(response.statusCode == 200){
       result = true;
     }
-
     
   }catch(e){
     print('Error in page update details: $e');

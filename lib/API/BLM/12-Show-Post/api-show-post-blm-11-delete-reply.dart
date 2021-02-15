@@ -17,9 +17,6 @@ Future<bool> apiBLMDeleteReply({int replyId}) async{
     },
   );
 
-  print('The status code of delete reply is ${response.statusCode}');
-  print('The status body of delete reply is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

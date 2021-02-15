@@ -22,6 +22,7 @@ Future<bool> apiBLMPasswordChange({String password, String passwordConfirmation,
     sharedPrefs.setString('blm-uid', response.headers['uid']);    
     sharedPrefs.setString('blm-client', response.headers['client']);
     sharedPrefs.setBool('blm-user-session', true);
+    
     return true;
   }else{
     return false;

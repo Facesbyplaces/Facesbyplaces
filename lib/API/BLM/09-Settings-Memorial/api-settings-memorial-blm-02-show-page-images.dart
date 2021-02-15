@@ -39,7 +39,6 @@ class APIBLMShowPageImagesMain{
   }
 }
 
-
 class APIBLMShowPageImagesExtended{
   int showPageImagesId;
   String showPageImagesName;
@@ -65,7 +64,6 @@ class APIBLMShowPageImagesExtended{
     );
   }
 }
-
 
 class APIBLMShowPageImagesExtendedDetails{
   String showPageImagesDetailsDescription;

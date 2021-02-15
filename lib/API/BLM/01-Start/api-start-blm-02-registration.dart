@@ -12,9 +12,6 @@ Future<String> apiBLMRegistration({APIBLMAccountRegistration account}) async{
         'Content-Type': 'application/json',
       }
     );
-
-    print('The status code of registration is ${response.statusCode}');
-    print('The status body of registration is ${response.body}');
     
     if(response.statusCode == 200){
       var value = json.decode(response.body);

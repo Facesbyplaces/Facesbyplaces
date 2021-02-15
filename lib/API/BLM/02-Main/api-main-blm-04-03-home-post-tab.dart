@@ -26,40 +26,38 @@ Future<APIBLMHomeTabPostMain> apiBLMHomePostTab({int page}) async{
   }
 }
 
-
 class APIBLMHomeTabPostMain{
-  int itemsRemaining;
-  List<APIBLMHomeTabPostExtended> familyMemorialList;
+  int blmItemsRemaining;
+  List<APIBLMHomeTabPostExtended> blmFamilyMemorialList;
 
-  APIBLMHomeTabPostMain({this.familyMemorialList, this.itemsRemaining});
+  APIBLMHomeTabPostMain({this.blmItemsRemaining, this.blmFamilyMemorialList});
 
   factory APIBLMHomeTabPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
     List<APIBLMHomeTabPostExtended> familyMemorials = newList.map((i) => APIBLMHomeTabPostExtended.fromJson(i)).toList();
 
     return APIBLMHomeTabPostMain(
-      familyMemorialList: familyMemorials,
-      itemsRemaining: parsedJson['itemsremaining'],
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmFamilyMemorialList: familyMemorials,
     );
   }
 }
 
-
 class APIBLMHomeTabPostExtended{
-  int id;
-  APIBLMHomeTabPostExtendedPage page;
-  String body;
-  String location;
-  double latitude;
-  double longitude;
-  List<dynamic> imagesOrVideos;
-  List<APIBLMHomeProfilePostExtendedTagged> postTagged;
-  String createAt;
-  int numberOfLikes;
-  int numberOfComments;
-  bool likeStatus;
+  int homeTabPostId;
+  APIBLMHomeTabPostExtendedPage homeTabPostPage;
+  String homeTabPostBody;
+  String homeTabPostLocation;
+  double homeTabPostLatitude;
+  double homeTabPostLongitude;
+  List<dynamic> homeTabPostImagesOrVideos;
+  List<APIBLMHomeTabPostExtendedTagged> homeTabPostPostTagged;
+  String homeTabPostCreatedAt;
+  int homeTabPostNumberOfLikes;
+  int homeTabPostNumberOfComments;
+  bool homeTabPostLikeStatus;
 
-  APIBLMHomeTabPostExtended({this.id, this.page, this.body, this.location, this.latitude, this.longitude, this.imagesOrVideos, this.postTagged, this.createAt, this.numberOfLikes, this.numberOfComments, this.likeStatus});
+  APIBLMHomeTabPostExtended({this.homeTabPostId, this.homeTabPostPage, this.homeTabPostBody, this.homeTabPostLocation, this.homeTabPostLatitude, this.homeTabPostLongitude, this.homeTabPostImagesOrVideos, this.homeTabPostPostTagged, this.homeTabPostCreatedAt, this.homeTabPostNumberOfLikes, this.homeTabPostNumberOfComments, this.homeTabPostLikeStatus});
 
   factory APIBLMHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -71,123 +69,121 @@ class APIBLMHomeTabPostExtended{
     }
 
     var newList2 = parsedJson['tag_people'] as List;
-    List<APIBLMHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeProfilePostExtendedTagged.fromJson(i)).toList();
+    List<APIBLMHomeTabPostExtendedTagged> taggedList = newList2.map((i) => APIBLMHomeTabPostExtendedTagged.fromJson(i)).toList();
     
     return APIBLMHomeTabPostExtended(
-      id: parsedJson['id'],
-      page: APIBLMHomeTabPostExtendedPage.fromJson(parsedJson['page']),
-      body: parsedJson['body'],
-      location: parsedJson['location'],
-      latitude: parsedJson['latitude'],
-      longitude: parsedJson['longitude'],
-      imagesOrVideos: newList1,
-      postTagged: taggedList,
-      createAt: parsedJson['created_at'],
-      numberOfLikes: parsedJson['numberOfLikes'],
-      numberOfComments: parsedJson['numberOfComments'],
-      likeStatus: parsedJson['likeStatus'],
+      homeTabPostId: parsedJson['id'],
+      homeTabPostPage: APIBLMHomeTabPostExtendedPage.fromJson(parsedJson['page']),
+      homeTabPostBody: parsedJson['body'],
+      homeTabPostLocation: parsedJson['location'],
+      homeTabPostLatitude: parsedJson['latitude'],
+      homeTabPostLongitude: parsedJson['longitude'],
+      homeTabPostImagesOrVideos: newList1,
+      homeTabPostPostTagged: taggedList,
+      homeTabPostCreatedAt: parsedJson['created_at'],
+      homeTabPostNumberOfLikes: parsedJson['numberOfLikes'],
+      homeTabPostNumberOfComments: parsedJson['numberOfComments'],
+      homeTabPostLikeStatus: parsedJson['likeStatus'],
     );
   }
 }
 
 class APIBLMHomeTabPostExtendedPage{
-  int id;
-  String name;
-  APIBLMHomeTabPostExtendedPageDetails details;
-  dynamic backgroundImage;
-  dynamic profileImage;
-  dynamic imagesOrVideos;
-  String relationship;
-  APIBLMHomeTabPostExtendedPageCreator pageCreator;
-  bool manage;
-  bool famOrFriends;
-  bool follower;
-  String pageType;
-  String privacy;
+  int homeTabPostPageId;
+  String homeTabPostPageName;
+  APIBLMHomeTabPostExtendedPageDetails homeTabPostPageDetails;
+  dynamic homeTabPostPageBackgroundImage;
+  dynamic homeTabPostPageProfileImage;
+  dynamic homeTabPostPageImagesOrVideos;
+  String homeTabPostPageRelationship;
+  APIBLMHomeTabPostExtendedPageCreator homeTabPostPagePageCreator;
+  bool homeTabPostPageManage;
+  bool homeTabPostPageFamOrFriends;
+  bool homeTabPostPageFollower;
+  String homeTabPostPagePageType;
+  String homeTabPostPagePrivacy;
 
-
-  APIBLMHomeTabPostExtendedPage({this.id, this.name, this.details, this.backgroundImage, this.profileImage, this.imagesOrVideos, this.relationship, this.pageCreator, this.manage, this.famOrFriends, this.follower, this.pageType, this.privacy});
+  APIBLMHomeTabPostExtendedPage({this.homeTabPostPageId, this.homeTabPostPageName, this.homeTabPostPageDetails, this.homeTabPostPageBackgroundImage, this.homeTabPostPageProfileImage, this.homeTabPostPageImagesOrVideos, this.homeTabPostPageRelationship, this.homeTabPostPagePageCreator, this.homeTabPostPageManage, this.homeTabPostPageFamOrFriends, this.homeTabPostPageFollower, this.homeTabPostPagePageType, this.homeTabPostPagePrivacy});
 
   factory APIBLMHomeTabPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPage(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      details: APIBLMHomeTabPostExtendedPageDetails.fromJson(parsedJson['details']),
-      backgroundImage: parsedJson['backgroundImage'],
-      profileImage: parsedJson['profileImage'],
-      imagesOrVideos: parsedJson['imagesOrVideos'],
-      relationship: parsedJson['relationship'],
-      pageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      manage: parsedJson['manage'],
-      famOrFriends: parsedJson['famOrFriends'],
-      follower: parsedJson['follower'],
-      pageType: parsedJson['page_type'],
-      privacy: parsedJson['privacy'],
+      homeTabPostPageId: parsedJson['id'],
+      homeTabPostPageName: parsedJson['name'],
+      homeTabPostPageDetails: APIBLMHomeTabPostExtendedPageDetails.fromJson(parsedJson['details']),
+      homeTabPostPageBackgroundImage: parsedJson['backgroundImage'],
+      homeTabPostPageProfileImage: parsedJson['profileImage'],
+      homeTabPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
+      homeTabPostPageRelationship: parsedJson['relationship'],
+      homeTabPostPagePageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      homeTabPostPageManage: parsedJson['manage'],
+      homeTabPostPageFamOrFriends: parsedJson['famOrFriends'],
+      homeTabPostPageFollower: parsedJson['follower'],
+      homeTabPostPagePageType: parsedJson['page_type'],
+      homeTabPostPagePrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIBLMHomeTabPostExtendedPageDetails{
-  String description;
-  String birthPlace;
-  String dob;
-  String rip;
-  String cemetery;
-  String country;
+  String homeTabPostPageDetailsDescription;
+  String homeTabPostPageDetailsBirthPlace;
+  String homeTabPostPageDetailsDob;
+  String homeTabPostPageDetailsRip;
+  String homeTabPostPageDetailsCemetery;
+  String homeTabPostPageDetailsCountry;
 
-  APIBLMHomeTabPostExtendedPageDetails({this.description, this.birthPlace, this.dob, this.rip, this.cemetery, this.country});
+  APIBLMHomeTabPostExtendedPageDetails({this.homeTabPostPageDetailsDescription, this.homeTabPostPageDetailsBirthPlace, this.homeTabPostPageDetailsDob, this.homeTabPostPageDetailsRip, this.homeTabPostPageDetailsCemetery, this.homeTabPostPageDetailsCountry});
 
   factory APIBLMHomeTabPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPageDetails(
-      description: parsedJson['description'],
-      birthPlace: parsedJson['birthplace'],
-      dob: parsedJson['dob'],
-      rip: parsedJson['rip'],
-      cemetery: parsedJson['cemetery'],
-      country: parsedJson['country'],
+      homeTabPostPageDetailsDescription: parsedJson['description'],
+      homeTabPostPageDetailsBirthPlace: parsedJson['birthplace'],
+      homeTabPostPageDetailsDob: parsedJson['dob'],
+      homeTabPostPageDetailsRip: parsedJson['rip'],
+      homeTabPostPageDetailsCemetery: parsedJson['cemetery'],
+      homeTabPostPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
 class APIBLMHomeTabPostExtendedPageCreator{
-  int id;
-  String firstName;
-  String lastName;
-  String phoneNumber;
-  String email;
-  String userName;
-  dynamic image;
+  int homeTabPostPageCreatorId;
+  String homeTabPostPageCreatorFirstName;
+  String homeTabPostPageCreatorLastName;
+  String homeTabPostPageCreatorPhoneNumber;
+  String homeTabPostPageCreatorEmail;
+  String homeTabPostPageCreatorUserName;
+  dynamic homeTabPostPageCreatorImage;
 
-  APIBLMHomeTabPostExtendedPageCreator({this.id, this.firstName, this.lastName, this.phoneNumber, this.email, this.userName, this.image});
+  APIBLMHomeTabPostExtendedPageCreator({this.homeTabPostPageCreatorId, this.homeTabPostPageCreatorFirstName, this.homeTabPostPageCreatorLastName, this.homeTabPostPageCreatorPhoneNumber, this.homeTabPostPageCreatorEmail, this.homeTabPostPageCreatorUserName, this.homeTabPostPageCreatorImage});
 
   factory APIBLMHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabPostExtendedPageCreator(
-      id: parsedJson['id'],
-      firstName: parsedJson['first_name'],
-      lastName: parsedJson['last_name'],
-      phoneNumber: parsedJson['phone_number'],
-      email: parsedJson['email'],
-      userName: parsedJson['username'],
-      image: parsedJson['image']
+      homeTabPostPageCreatorId: parsedJson['id'],
+      homeTabPostPageCreatorFirstName: parsedJson['first_name'],
+      homeTabPostPageCreatorLastName: parsedJson['last_name'],
+      homeTabPostPageCreatorPhoneNumber: parsedJson['phone_number'],
+      homeTabPostPageCreatorEmail: parsedJson['email'],
+      homeTabPostPageCreatorUserName: parsedJson['username'],
+      homeTabPostPageCreatorImage: parsedJson['image']
     );
   }
 }
 
+class APIBLMHomeTabPostExtendedTagged{
+  int homeTabPostTabTaggedId;
+  String homeTabPostTabTaggedFirstName;
+  String homeTabPostTabTaggedLastName;
+  String homeTabPostTabTaggedImage;
 
-class APIBLMHomeProfilePostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  APIBLMHomeTabPostExtendedTagged({this.homeTabPostTabTaggedId, this.homeTabPostTabTaggedFirstName, this.homeTabPostTabTaggedLastName, this.homeTabPostTabTaggedImage});
 
-  APIBLMHomeProfilePostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
-
-  factory APIBLMHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMHomeProfilePostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+  factory APIBLMHomeTabPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMHomeTabPostExtendedTagged(
+      homeTabPostTabTaggedId: parsedJson['id'],
+      homeTabPostTabTaggedFirstName: parsedJson['first_name'],
+      homeTabPostTabTaggedLastName: parsedJson['last_name'],
+      homeTabPostTabTaggedImage: parsedJson['image']
     );
   }
 }

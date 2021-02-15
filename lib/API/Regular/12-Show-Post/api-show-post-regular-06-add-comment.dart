@@ -19,7 +19,6 @@ Future<bool> apiRegularAddComment({int postId, dynamic commentBody}) async{
       'body': commentBody,
     });
 
-
     var response = await dioRequest.post('http://fbp.dev1.koda.ws/api/v1/posts/comment', data: formData,
       options: Options(
         headers: <String, String>{

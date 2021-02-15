@@ -11,7 +11,6 @@ Future<bool> apiBLMUpdateNotificationPostLikes({bool hide}) async{
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   try{
-
     final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/notifications/postLikes?setting=$hide',
       headers: <String, String>{
         'Content-Type': 'application/json',

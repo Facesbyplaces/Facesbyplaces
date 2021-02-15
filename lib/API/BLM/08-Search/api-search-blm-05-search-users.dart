@@ -18,15 +18,12 @@ Future<APIBLMSearchUsersMain> apiBLMSearchUsers({String keywords, int page}) asy
     }
   );
 
-  print('The status code is ${response.statusCode}');
-  print('The status code is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchUsersMain.fromJson(newValue);
   }else{
-      throw Exception('Failed to get the user information');
-    }
+    throw Exception('Failed to get the user information');
+  }
 }
 
 class APIBLMSearchUsersMain{

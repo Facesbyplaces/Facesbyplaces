@@ -20,9 +20,6 @@ Future<bool> apiRegularEditComment({int commentId, String commentBody}) async{
     }
   );
 
-  print('The status code of edit comment in regular is ${response.statusCode}');
-  print('The status body of edit comment in regular is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

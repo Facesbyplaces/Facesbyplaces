@@ -12,9 +12,8 @@ Future<bool> apiBLMAddFriends({int memorialId, int userId, int accountType}) asy
 
   try{
     var dioRequest = Dio();
-
-    var formData;
-    formData = FormData();
+    var formData = FormData();
+    
     formData.files.addAll([
       MapEntry('page_type', MultipartFile.fromString('Blm'),),
       MapEntry('page_id', MultipartFile.fromString(memorialId.toString())),

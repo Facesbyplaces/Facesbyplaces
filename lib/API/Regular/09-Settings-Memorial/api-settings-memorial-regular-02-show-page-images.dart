@@ -38,7 +38,6 @@ class APIRegularShowPageImagesMain{
   }
 }
 
-
 class APIRegularShowPageImagesExtended{
   int showPageImagesId;
   String showPageImagesName;
@@ -71,7 +70,6 @@ class APIRegularShowPageImagesExtended{
     );
   }
 }
-
 
 class APIRegularShowPageImagesExtendedDetails{
   String showPageImagesDetailsDescription;

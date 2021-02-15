@@ -43,7 +43,6 @@ class APIBLMSearchPostMain{
   }
 }
 
-
 class APIBLMSearchPostExtended{
   int searchPostPostId;
   APIBLMSearchPostExtendedPage searchPostPage;
@@ -172,19 +171,19 @@ class APIBLMSearchPostExtendedPageCreator{
 }
 
 class APIBLMSearchPostExtendedTagged{
-  int taggedId;
-  String taggedFirstName;
-  String taggedLastName;
-  String taggedImage;
+  int searchPostTaggedId;
+  String searchPostTaggedFirstName;
+  String searchPostTaggedLastName;
+  String searchPostTaggedImage;
 
-  APIBLMSearchPostExtendedTagged({this.taggedId, this.taggedFirstName, this.taggedLastName, this.taggedImage});
+  APIBLMSearchPostExtendedTagged({this.searchPostTaggedId, this.searchPostTaggedFirstName, this.searchPostTaggedLastName, this.searchPostTaggedImage});
 
   factory APIBLMSearchPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchPostExtendedTagged(
-      taggedId: parsedJson['id'],
-      taggedFirstName: parsedJson['first_name'],
-      taggedLastName: parsedJson['last_name'],
-      taggedImage: parsedJson['image']
+      searchPostTaggedId: parsedJson['id'],
+      searchPostTaggedFirstName: parsedJson['first_name'],
+      searchPostTaggedLastName: parsedJson['last_name'],
+      searchPostTaggedImage: parsedJson['image']
     );
   }
 }

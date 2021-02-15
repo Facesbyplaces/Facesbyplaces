@@ -11,7 +11,6 @@ Future<bool> apiRegularAddReply({int commentId, dynamic replyBody}) async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-
     var dioRequest = dio.Dio();
     var formData = FormData();
 

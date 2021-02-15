@@ -116,22 +116,22 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       var newValue = await apiBLMHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
 
-      blmFamilyItemsRemaining = newValue.familyMemorialList.blmFamilyItemsRemaining;
-      count = count + newValue.familyMemorialList.blm.length;
+      blmFamilyItemsRemaining = newValue.blmFamilyMemorialList.blmHomeTabMemorialFamilyItemsRemaining;
+      count = count + newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.blm.length; i++){
+      for(int i = 0; i < newValue.blmFamilyMemorialList.blmHomeTabMemorialPage.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialName: newValue.familyMemorialList.blm[i].name,
-            description: newValue.familyMemorialList.blm[i].details.description,
-            image: newValue.familyMemorialList.blm[i].profileImage,
-            memorialId: newValue.familyMemorialList.blm[i].id, 
-            managed: newValue.familyMemorialList.blm[i].manage,
-            follower: newValue.familyMemorialList.blm[i].follower,
-            famOrFriends: newValue.familyMemorialList.blm[i].famOrFriends,
-            pageType: newValue.familyMemorialList.blm[i].pageType,
-            relationship: newValue.familyMemorialList.blm[i].relationship,
+            memorialName: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.blmFamilyMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
           ),
         );
       }
@@ -148,22 +148,22 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       var newValue = await apiBLMHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
 
-      memorialFamilyItemsRemaining = newValue.familyMemorialList.memorialFamilyItemsRemaining;
-      count = count + newValue.familyMemorialList.memorial.length;
+      memorialFamilyItemsRemaining = newValue.blmFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
+      count = count + newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.memorial.length; i++){
+      for(int i = 0; i < newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialName: newValue.familyMemorialList.memorial[i].name,
-            description: newValue.familyMemorialList.memorial[i].details.description,
-            image: newValue.familyMemorialList.memorial[i].profileImage,
-            memorialId: newValue.familyMemorialList.memorial[i].id, 
-            managed: newValue.familyMemorialList.memorial[i].manage,
-            follower: newValue.familyMemorialList.memorial[i].follower,
-            famOrFriends: newValue.familyMemorialList.memorial[i].famOrFriends,
-            pageType: newValue.familyMemorialList.memorial[i].pageType,
-            relationship: newValue.familyMemorialList.memorial[i].relationship,
+            memorialName: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.blmFamilyMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
           ),
         );
       }
@@ -192,22 +192,22 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       var newValue = await apiBLMHomeMemorialsTab(page: page2);
       context.hideLoaderOverlay();
 
-      blmFriendsItemsRemaining = newValue.friendsMemorialList.blmFriendsItemsRemaining;
-      count = count + newValue.friendsMemorialList.blm.length;
+      blmFriendsItemsRemaining = newValue.blmFriendsMemorialList.blmHomeTabMemorialFriendsItemsRemaining;
+      count = count + newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length;
 
-      for(int i = 0; i < newValue.friendsMemorialList.blm.length; i++){
+      for(int i = 0; i < newValue.blmFriendsMemorialList.blmHomeTabMemorialPage.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialName: newValue.friendsMemorialList.blm[i].name,
-            description: newValue.friendsMemorialList.blm[i].details.description,
-            image: newValue.friendsMemorialList.blm[i].profileImage,
-            memorialId: newValue.friendsMemorialList.blm[i].id, 
-            managed: newValue.friendsMemorialList.blm[i].manage,
-            follower: newValue.friendsMemorialList.blm[i].follower,
-            famOrFriends: newValue.friendsMemorialList.blm[i].famOrFriends,
-            pageType: newValue.friendsMemorialList.blm[i].pageType,
-            relationship: newValue.friendsMemorialList.blm[i].relationship,
+            memorialName: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.blmFriendsMemorialList.blmHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
           ),
         );
       }
@@ -224,22 +224,22 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       var newValue = await apiBLMHomeMemorialsTab(page: page2);
       context.hideLoaderOverlay();
 
-      memorialFriendsItemsRemaining = newValue.friendsMemorialList.memorialFriendsItemsRemaining;
-      count = count + newValue.friendsMemorialList.memorial.length;
+      memorialFriendsItemsRemaining = newValue.blmFriendsMemorialList.memorialHomeTabMemorialFriendsItemsRemaining;
+      count = count + newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage.length;
 
-      for(int i = 0; i < newValue.friendsMemorialList.memorial.length; i++){
+      for(int i = 0; i < newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage.length; i++){
         finalMemorials.add(
           MiscBLMManageMemorialTab(
             index: i,
-            memorialName: newValue.friendsMemorialList.memorial[i].name,
-            description: newValue.friendsMemorialList.memorial[i].details.description,
-            image: newValue.friendsMemorialList.memorial[i].profileImage,
-            memorialId: newValue.friendsMemorialList.memorial[i].id, 
-            managed: newValue.friendsMemorialList.memorial[i].manage,
-            follower: newValue.friendsMemorialList.memorial[i].follower,
-            famOrFriends: newValue.friendsMemorialList.memorial[i].famOrFriends,
-            pageType: newValue.friendsMemorialList.memorial[i].pageType,
-            relationship: newValue.friendsMemorialList.memorial[i].relationship,
+            memorialName: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageName,
+            description: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageDetails.blmHomeTabMemorialPageDetailsDescription,
+            image: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageProfileImage,
+            memorialId: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageId,
+            managed: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageManage,
+            follower: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFollower,
+            famOrFriends: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageFamOrFriends,
+            pageType: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPagePageType,
+            relationship: newValue.blmFriendsMemorialList.memorialHomeTabMemorialPage[i].blmHomeTabMemorialPageRelationship,
           ),
         );
       }

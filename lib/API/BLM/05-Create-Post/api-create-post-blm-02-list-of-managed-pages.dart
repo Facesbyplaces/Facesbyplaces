@@ -42,7 +42,6 @@ class APIBLMShowListOfManagedPages{
   }
 }
 
-
 class APIBLMShowListOfManagedPagesExtended{
   int blmManagedPagesId;
   String blmManagedPagesName;

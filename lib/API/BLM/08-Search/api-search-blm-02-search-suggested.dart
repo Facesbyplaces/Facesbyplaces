@@ -46,7 +46,7 @@ class APIBLMSearchSuggestedMain{
 
 class APIBLMSearchSuggestedExtended{
   int searchSuggestedId;
-  APIBLMSearchPostExtendedPage searchSuggestedPage;
+  APIBLMSearchSuggestedExtendedPage searchSuggestedPage;
 
   APIBLMSearchSuggestedExtended({this.searchSuggestedId, this.searchSuggestedPage});
 
@@ -54,39 +54,38 @@ class APIBLMSearchSuggestedExtended{
     
     return APIBLMSearchSuggestedExtended(
       searchSuggestedId: parsedJson['id'],
-      searchSuggestedPage: APIBLMSearchPostExtendedPage.fromJson(parsedJson['page'])
+      searchSuggestedPage: APIBLMSearchSuggestedExtendedPage.fromJson(parsedJson['page'])
     );
   }
 }
 
-
-class APIBLMSearchPostExtendedPage{
+class APIBLMSearchSuggestedExtendedPage{
   int searchSuggestedPageId;
   String searchSuggestedPageName;
-  APIBLMPostExtendedPageDetails searchSuggestedPageDetails;
+  APIBLMSearchSuggestedPageDetails searchSuggestedPageDetails;
   dynamic searchSuggestedPageBackgroundImage;
   dynamic searchSuggestedPageProfileImage;
   dynamic searchSuggestedPageImagesOrVideos;
   String searchSuggestedPageRelationship;
-  APIBLMHomeTabPostExtendedPageCreator searchSuggestedPagePageCreator;
+  APIBLMSearchSuggestedExtendedPageCreator searchSuggestedPagePageCreator;
   bool searchSuggestedPageManage;
   bool searchSuggestedPageFamOrFriends;
   bool searchSuggestedPageFollower;
   String searchSuggestedPagePageType;
   String searchSuggestedPagePrivacy;
 
-  APIBLMSearchPostExtendedPage({this.searchSuggestedPageId, this.searchSuggestedPageName, this.searchSuggestedPageDetails, this.searchSuggestedPageBackgroundImage, this.searchSuggestedPageProfileImage, this.searchSuggestedPageImagesOrVideos, this.searchSuggestedPageRelationship, this.searchSuggestedPagePageCreator, this.searchSuggestedPageManage, this.searchSuggestedPageFamOrFriends, this.searchSuggestedPageFollower, this.searchSuggestedPagePageType, this.searchSuggestedPagePrivacy});
+  APIBLMSearchSuggestedExtendedPage({this.searchSuggestedPageId, this.searchSuggestedPageName, this.searchSuggestedPageDetails, this.searchSuggestedPageBackgroundImage, this.searchSuggestedPageProfileImage, this.searchSuggestedPageImagesOrVideos, this.searchSuggestedPageRelationship, this.searchSuggestedPagePageCreator, this.searchSuggestedPageManage, this.searchSuggestedPageFamOrFriends, this.searchSuggestedPageFollower, this.searchSuggestedPagePageType, this.searchSuggestedPagePrivacy});
 
-  factory APIBLMSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMSearchPostExtendedPage(
+  factory APIBLMSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchSuggestedExtendedPage(
       searchSuggestedPageId: parsedJson['id'],
       searchSuggestedPageName: parsedJson['name'],
-      searchSuggestedPageDetails: APIBLMPostExtendedPageDetails.fromJson(parsedJson['details']),
+      searchSuggestedPageDetails: APIBLMSearchSuggestedPageDetails.fromJson(parsedJson['details']),
       searchSuggestedPageBackgroundImage: parsedJson['backgroundImage'],
       searchSuggestedPageProfileImage: parsedJson['profileImage'],
       searchSuggestedPageImagesOrVideos: parsedJson['imagesOrVideos'],
       searchSuggestedPageRelationship: parsedJson['relationship'],
-      searchSuggestedPagePageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchSuggestedPagePageCreator: APIBLMSearchSuggestedExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchSuggestedPageManage: parsedJson['manage'],
       searchSuggestedPageFamOrFriends: parsedJson['famOrFriends'],
       searchSuggestedPageFollower: parsedJson['follower'],
@@ -96,7 +95,7 @@ class APIBLMSearchPostExtendedPage{
   }
 }
 
-class APIBLMPostExtendedPageDetails{
+class APIBLMSearchSuggestedPageDetails{
   String searchSuggestedPageDetailsDescription;
   String searchSuggestedPageDetailsLocation;
   String searchSuggestedPageDetailsPrecinct;
@@ -105,10 +104,10 @@ class APIBLMPostExtendedPageDetails{
   String searchSuggestedPageDetailsState;
   String searchSuggestedPageDetailsCountry;
 
-  APIBLMPostExtendedPageDetails({this.searchSuggestedPageDetailsDescription, this.searchSuggestedPageDetailsLocation, this.searchSuggestedPageDetailsPrecinct, this.searchSuggestedPageDetailsDob, this.searchSuggestedPageDetailsRip, this.searchSuggestedPageDetailsState, this.searchSuggestedPageDetailsCountry});
+  APIBLMSearchSuggestedPageDetails({this.searchSuggestedPageDetailsDescription, this.searchSuggestedPageDetailsLocation, this.searchSuggestedPageDetailsPrecinct, this.searchSuggestedPageDetailsDob, this.searchSuggestedPageDetailsRip, this.searchSuggestedPageDetailsState, this.searchSuggestedPageDetailsCountry});
 
-  factory APIBLMPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMPostExtendedPageDetails(
+  factory APIBLMSearchSuggestedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchSuggestedPageDetails(
       searchSuggestedPageDetailsDescription: parsedJson['description'],
       searchSuggestedPageDetailsLocation: parsedJson['location'],
       searchSuggestedPageDetailsPrecinct: parsedJson['precinct'],
@@ -120,7 +119,7 @@ class APIBLMPostExtendedPageDetails{
   }
 }
 
-class APIBLMHomeTabPostExtendedPageCreator{
+class APIBLMSearchSuggestedExtendedPageCreator{
   int searchSuggestedPageCreatorId;
   String searchSuggestedPageCreatorFirstName;
   String searchSuggestedPageCreatorLastName;
@@ -129,10 +128,10 @@ class APIBLMHomeTabPostExtendedPageCreator{
   String searchSuggestedPageCreatorUserName;
   dynamic searchSuggestedPageCreatorImage;
 
-  APIBLMHomeTabPostExtendedPageCreator({this.searchSuggestedPageCreatorId, this.searchSuggestedPageCreatorFirstName, this.searchSuggestedPageCreatorLastName, this.searchSuggestedPageCreatorPhoneNumber, this.searchSuggestedPageCreatorEmail, this.searchSuggestedPageCreatorUserName, this.searchSuggestedPageCreatorImage});
+  APIBLMSearchSuggestedExtendedPageCreator({this.searchSuggestedPageCreatorId, this.searchSuggestedPageCreatorFirstName, this.searchSuggestedPageCreatorLastName, this.searchSuggestedPageCreatorPhoneNumber, this.searchSuggestedPageCreatorEmail, this.searchSuggestedPageCreatorUserName, this.searchSuggestedPageCreatorImage});
 
-  factory APIBLMHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMHomeTabPostExtendedPageCreator(
+  factory APIBLMSearchSuggestedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchSuggestedExtendedPageCreator(
       searchSuggestedPageCreatorId: parsedJson['id'],
       searchSuggestedPageCreatorFirstName: parsedJson['first_name'],
       searchSuggestedPageCreatorLastName: parsedJson['last_name'],

@@ -54,21 +54,21 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       var newValue = await apiBLMHomeNotificationsTab(page: page);
       context.hideLoaderOverlay();
 
-      itemRemaining = newValue.itemsRemaining;
-      count = count + newValue.notification.length;
+      itemRemaining = newValue.blmItemsRemaining;
+      count = count + newValue.blmNotification.length;
 
-      for(int i = 0; i < newValue.notification.length; i++){
+      for(int i = 0; i < newValue.blmNotification.length; i++){
         notifications.add(
           BLMMainPagesNotifications(
-            id: newValue.notification[i].id,
-            createdAt: newValue.notification[i].createdAt,
-            updatedAt: newValue.notification[i].updatedAt,
-            actorId: newValue.notification[i].actor.id,
-            read: newValue.notification[i].read,
-            action: newValue.notification[i].action,
-            postId: newValue.notification[i].postId,
-            actorImage: newValue.notification[i].actor.image,
-            notificationType: newValue.notification[i].notificationType,
+            id: newValue.blmNotification[i].homeTabNotificationId,
+            createdAt: newValue.blmNotification[i].homeTabNotificationCreatedAt,
+            updatedAt: newValue.blmNotification[i].homeTabNotificationUpdatedAt,
+            actorId: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorId,
+            read: newValue.blmNotification[i].homeTabNotificationRead,
+            action: newValue.blmNotification[i].homeTabNotificationAction,
+            postId: newValue.blmNotification[i].homeTabNotificationPostId,
+            actorImage: newValue.blmNotification[i].homeTabNotificationActor.homeTabNotificationActorImage,
+            notificationType: newValue.blmNotification[i].homeTabNotificationNotificationType,
           ),
         );
       }

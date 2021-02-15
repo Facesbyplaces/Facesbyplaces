@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchPostMain> apiBLMSearchNearby({int page, double latitude, double longitude}) async{
+Future<APIBLMSearchNearbyMain> apiBLMSearchNearby({int page, double latitude, double longitude}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -20,28 +20,28 @@ Future<APIBLMSearchPostMain> apiBLMSearchNearby({int page, double latitude, doub
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIBLMSearchPostMain.fromJson(newValue);
+    return APIBLMSearchNearbyMain.fromJson(newValue);
   }else{
     throw Exception('Failed to get the feed');
   }
 }
 
-class APIBLMSearchPostMain{
+class APIBLMSearchNearbyMain{
   int blmItemsRemaining;
   int memorialItemsRemaining;
-  List<APIBLMSearchPostExtended> blmList;
-  List<APIBLMSearchPostExtended> memorialList;
+  List<APIBLMSearchNearbyExtended> blmList;
+  List<APIBLMSearchNearbyExtended> memorialList;
 
-  APIBLMSearchPostMain({this.blmItemsRemaining, this.memorialItemsRemaining, this.blmList, this.memorialList});
+  APIBLMSearchNearbyMain({this.blmItemsRemaining, this.memorialItemsRemaining, this.blmList, this.memorialList});
 
-  factory APIBLMSearchPostMain.fromJson(Map<String, dynamic> parsedJson){
+  factory APIBLMSearchNearbyMain.fromJson(Map<String, dynamic> parsedJson){
     var newList1 = parsedJson['blm'] as List;
     var newList2 = parsedJson['memorial'] as List;
 
-    List<APIBLMSearchPostExtended> blmList = newList1.map((i) => APIBLMSearchPostExtended.fromJson(i)).toList();
-    List<APIBLMSearchPostExtended> memorialList = newList2.map((e) => APIBLMSearchPostExtended.fromJson(e)).toList();
+    List<APIBLMSearchNearbyExtended> blmList = newList1.map((i) => APIBLMSearchNearbyExtended.fromJson(i)).toList();
+    List<APIBLMSearchNearbyExtended> memorialList = newList2.map((e) => APIBLMSearchNearbyExtended.fromJson(e)).toList();
 
-    return APIBLMSearchPostMain(
+    return APIBLMSearchNearbyMain(
       blmItemsRemaining: parsedJson['blmItemsRemaining'],
       memorialItemsRemaining: parsedJson['memorialItemsRemaining'],
       blmList: blmList,
@@ -50,88 +50,86 @@ class APIBLMSearchPostMain{
   }
 }
 
+class APIBLMSearchNearbyExtended{
+  int searchNearbyId;
+  String searchNearbyName;
+  APIBLMSearchNearbyExtendedPageDetails searchNearbyDetails;
+  dynamic searchNearbyBackgroundImage;
+  dynamic searchNearbyProfileImage;
+  dynamic searchNearbyImagesOrVideos;
+  String searchNearbyRelationship;
+  APIBLMSearchNearbyExtendedPageCreator searchNearbyPageCreator;
+  bool searchNearbyManage;
+  bool searchNearbyFamOrFriends;
+  bool searchNearbyFollower;
+  String searchNearbyPageType;
+  String searchNearbyPrivacy;
 
-class APIBLMSearchPostExtended{
-  int searchPostId;
-  String searchPostName;
-  APIBLMPostExtendedPageDetails searchPostDetails;
-  dynamic searchPostBackgroundImage;
-  dynamic searchPostProfileImage;
-  dynamic searchPostImagesOrVideos;
-  String searchPostRelationship;
-  APIBLMHomeTabPostExtendedPageCreator searchPostPageCreator;
-  bool searchPostManage;
-  bool searchPostFamOrFriends;
-  bool searchPostFollower;
-  String searchPostPageType;
-  String searchPostPrivacy;
+  APIBLMSearchNearbyExtended({this.searchNearbyId, this.searchNearbyName, this.searchNearbyDetails, this.searchNearbyBackgroundImage, this.searchNearbyProfileImage, this.searchNearbyImagesOrVideos, this.searchNearbyRelationship, this.searchNearbyPageCreator, this.searchNearbyManage, this.searchNearbyFamOrFriends, this.searchNearbyFollower, this.searchNearbyPageType, this.searchNearbyPrivacy});
 
-
-  APIBLMSearchPostExtended({this.searchPostId, this.searchPostName, this.searchPostDetails, this.searchPostBackgroundImage, this.searchPostProfileImage, this.searchPostImagesOrVideos, this.searchPostRelationship, this.searchPostPageCreator, this.searchPostManage, this.searchPostFamOrFriends, this.searchPostFollower, this.searchPostPageType, this.searchPostPrivacy});
-
-  factory APIBLMSearchPostExtended.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMSearchPostExtended(
-      searchPostId: parsedJson['id'],
-      searchPostName: parsedJson['name'],
-      searchPostDetails: APIBLMPostExtendedPageDetails.fromJson(parsedJson['details']),
-      searchPostBackgroundImage: parsedJson['backgroundImage'],
-      searchPostProfileImage: parsedJson['profileImage'],
-      searchPostImagesOrVideos: parsedJson['imagesOrVideos'],
-      searchPostRelationship: parsedJson['relationship'],
-      searchPostPageCreator: APIBLMHomeTabPostExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      searchPostManage: parsedJson['manage'],
-      searchPostFamOrFriends: parsedJson['famOrFriends'],
-      searchPostFollower: parsedJson['follower'],
-      searchPostPageType: parsedJson['page_type'],
-      searchPostPrivacy: parsedJson['privacy'],
+  factory APIBLMSearchNearbyExtended.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchNearbyExtended(
+      searchNearbyId: parsedJson['id'],
+      searchNearbyName: parsedJson['name'],
+      searchNearbyDetails: APIBLMSearchNearbyExtendedPageDetails.fromJson(parsedJson['details']),
+      searchNearbyBackgroundImage: parsedJson['backgroundImage'],
+      searchNearbyProfileImage: parsedJson['profileImage'],
+      searchNearbyImagesOrVideos: parsedJson['imagesOrVideos'],
+      searchNearbyRelationship: parsedJson['relationship'],
+      searchNearbyPageCreator: APIBLMSearchNearbyExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchNearbyManage: parsedJson['manage'],
+      searchNearbyFamOrFriends: parsedJson['famOrFriends'],
+      searchNearbyFollower: parsedJson['follower'],
+      searchNearbyPageType: parsedJson['page_type'],
+      searchNearbyPrivacy: parsedJson['privacy'],
     );
   }
 }
 
-class APIBLMPostExtendedPageDetails{
-  String searchPostPageDetailsDescription;
-  String searchPostPageDetailsLocation;
-  String searchPostPageDetailsPrecinct;
-  String searchPostPageDetailsDob;
-  String searchPostPageDetailsRip;
-  String searchPostPageDetailsState;
-  String searchPostPageDetailsCountry;
+class APIBLMSearchNearbyExtendedPageDetails{
+  String searchNearbyPageDetailsDescription;
+  String searchNearbyPageDetailsLocation;
+  String searchNearbyPageDetailsPrecinct;
+  String searchNearbyPageDetailsDob;
+  String searchNearbyPageDetailsRip;
+  String searchNearbyPageDetailsState;
+  String searchNearbyPageDetailsCountry;
 
-  APIBLMPostExtendedPageDetails({this.searchPostPageDetailsDescription, this.searchPostPageDetailsLocation, this.searchPostPageDetailsPrecinct, this.searchPostPageDetailsDob, this.searchPostPageDetailsRip, this.searchPostPageDetailsState, this.searchPostPageDetailsCountry});
+  APIBLMSearchNearbyExtendedPageDetails({this.searchNearbyPageDetailsDescription, this.searchNearbyPageDetailsLocation, this.searchNearbyPageDetailsPrecinct, this.searchNearbyPageDetailsDob, this.searchNearbyPageDetailsRip, this.searchNearbyPageDetailsState, this.searchNearbyPageDetailsCountry});
 
-  factory APIBLMPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMPostExtendedPageDetails(
-      searchPostPageDetailsDescription: parsedJson['description'],
-      searchPostPageDetailsLocation: parsedJson['location'],
-      searchPostPageDetailsPrecinct: parsedJson['precinct'],
-      searchPostPageDetailsDob: parsedJson['dob'],
-      searchPostPageDetailsRip: parsedJson['rip'],
-      searchPostPageDetailsState: parsedJson['state'],
-      searchPostPageDetailsCountry: parsedJson['country'],
+  factory APIBLMSearchNearbyExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchNearbyExtendedPageDetails(
+      searchNearbyPageDetailsDescription: parsedJson['description'],
+      searchNearbyPageDetailsLocation: parsedJson['location'],
+      searchNearbyPageDetailsPrecinct: parsedJson['precinct'],
+      searchNearbyPageDetailsDob: parsedJson['dob'],
+      searchNearbyPageDetailsRip: parsedJson['rip'],
+      searchNearbyPageDetailsState: parsedJson['state'],
+      searchNearbyPageDetailsCountry: parsedJson['country'],
     );
   }
 }
 
-class APIBLMHomeTabPostExtendedPageCreator{
-  int searchPostPageCreatorId;
-  String searchPostPageCreatorFirstName;
-  String searchPostPageCreatorLastName;
-  String searchPostPageCreatorPhoneNumber;
-  String searchPostPageCreatorEmail;
-  String searchPostPageCreatorUserName;
-  dynamic searchPostPageCreatorImage;
+class APIBLMSearchNearbyExtendedPageCreator{
+  int searchNearbyPageCreatorId;
+  String searchNearbyPageCreatorFirstName;
+  String searchNearbyPageCreatorLastName;
+  String searchNearbyPageCreatorPhoneNumber;
+  String searchNearbyPageCreatorEmail;
+  String searchNearbyPageCreatorUserName;
+  dynamic searchNearbyPageCreatorImage;
 
-  APIBLMHomeTabPostExtendedPageCreator({this.searchPostPageCreatorId, this.searchPostPageCreatorFirstName, this.searchPostPageCreatorLastName, this.searchPostPageCreatorPhoneNumber, this.searchPostPageCreatorEmail, this.searchPostPageCreatorUserName, this.searchPostPageCreatorImage});
+  APIBLMSearchNearbyExtendedPageCreator({this.searchNearbyPageCreatorId, this.searchNearbyPageCreatorFirstName, this.searchNearbyPageCreatorLastName, this.searchNearbyPageCreatorPhoneNumber, this.searchNearbyPageCreatorEmail, this.searchNearbyPageCreatorUserName, this.searchNearbyPageCreatorImage});
 
-  factory APIBLMHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMHomeTabPostExtendedPageCreator(
-      searchPostPageCreatorId: parsedJson['id'],
-      searchPostPageCreatorFirstName: parsedJson['first_name'],
-      searchPostPageCreatorLastName: parsedJson['last_name'],
-      searchPostPageCreatorPhoneNumber: parsedJson['phone_number'],
-      searchPostPageCreatorEmail: parsedJson['email'],
-      searchPostPageCreatorUserName: parsedJson['username'],
-      searchPostPageCreatorImage: parsedJson['image']
+  factory APIBLMSearchNearbyExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMSearchNearbyExtendedPageCreator(
+      searchNearbyPageCreatorId: parsedJson['id'],
+      searchNearbyPageCreatorFirstName: parsedJson['first_name'],
+      searchNearbyPageCreatorLastName: parsedJson['last_name'],
+      searchNearbyPageCreatorPhoneNumber: parsedJson['phone_number'],
+      searchNearbyPageCreatorEmail: parsedJson['email'],
+      searchNearbyPageCreatorUserName: parsedJson['username'],
+      searchNearbyPageCreatorImage: parsedJson['image']
     );
   }
 }

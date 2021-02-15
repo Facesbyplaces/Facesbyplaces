@@ -40,7 +40,6 @@ class APIBLMShowMemorialMain{
   }
 }
 
-
 class APIBLMShowMemorialExtended{
   int memorialId;
   String memorialName;
@@ -81,7 +80,6 @@ class APIBLMShowMemorialExtended{
     );
   }
 }
-
 
 class APIBLMShowMemorialExtendedDetails{
   String memorialDetailsDescription;

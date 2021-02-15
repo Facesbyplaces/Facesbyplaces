@@ -139,10 +139,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
         List<int> newList4 = [];
 
         for(int j = 0; j < newValue.blmSearchPostList[i].searchPostPostTagged.length; j++){
-          newList1.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].taggedFirstName);
-          newList2.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].taggedLastName);
-          newList3.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].taggedImage);
-          newList4.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].taggedId);
+          newList1.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].searchPostTaggedFirstName);
+          newList2.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].searchPostTaggedLastName);
+          newList3.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].searchPostTaggedImage);
+          newList4.add(newValue.blmSearchPostList[i].searchPostPostTagged[j].searchPostTaggedId);
         }
         
         feeds.add(
@@ -225,15 +225,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       for(int i = 0; i < newValue.blmList.length; i++){
         nearby.add(
           BLMSearchMainNearby(
-            memorialId: newValue.blmList[i].searchPostId,
-            memorialName: newValue.blmList[i].searchPostName,
-            memorialDescription: newValue.blmList[i].searchPostDetails.searchPostPageDetailsDescription,
-            image: newValue.blmList[i].searchPostProfileImage,
-            managed: newValue.blmList[i].searchPostManage,
-            follower: newValue.blmList[i].searchPostFollower,
-            pageType: newValue.blmList[i].searchPostPageType,
-            famOrFriends: newValue.blmList[i].searchPostFamOrFriends,
-            relationship: newValue.blmList[i].searchPostRelationship,
+            memorialId: newValue.blmList[i].searchNearbyId,
+            memorialName: newValue.blmList[i].searchNearbyName,
+            memorialDescription: newValue.blmList[i].searchNearbyDetails.searchNearbyPageDetailsDescription,
+            image: newValue.blmList[i].searchNearbyProfileImage,
+            managed: newValue.blmList[i].searchNearbyManage,
+            follower: newValue.blmList[i].searchNearbyFollower,
+            pageType: newValue.blmList[i].searchNearbyPageType,
+            famOrFriends: newValue.blmList[i].searchNearbyFamOrFriends,
+            relationship: newValue.blmList[i].searchNearbyRelationship,
           ),    
         );
       }
@@ -253,15 +253,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       for(int i = 0; i < newValue.memorialList.length; i++){
         nearby.add(
           BLMSearchMainNearby(
-            memorialId: newValue.memorialList[i].searchPostId,
-            memorialName: newValue.memorialList[i].searchPostName,
-            memorialDescription: newValue.memorialList[i].searchPostDetails.searchPostPageDetailsDescription,
-            image: newValue.blmList[i].searchPostProfileImage,
-            managed: newValue.blmList[i].searchPostManage,
-            follower: newValue.blmList[i].searchPostFollower,
-            pageType: newValue.blmList[i].searchPostPageType,
-            famOrFriends: newValue.blmList[i].searchPostFamOrFriends,
-            relationship: newValue.blmList[i].searchPostRelationship,
+            memorialId: newValue.memorialList[i].searchNearbyId,
+            memorialName: newValue.memorialList[i].searchNearbyName,
+            memorialDescription: newValue.memorialList[i].searchNearbyDetails.searchNearbyPageDetailsDescription,
+            image: newValue.blmList[i].searchNearbyProfileImage,
+            managed: newValue.blmList[i].searchNearbyManage,
+            follower: newValue.blmList[i].searchNearbyFollower,
+            pageType: newValue.blmList[i].searchNearbyPageType,
+            famOrFriends: newValue.blmList[i].searchNearbyFamOrFriends,
+            relationship: newValue.blmList[i].searchNearbyRelationship,
           ),    
         );
       }

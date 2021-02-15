@@ -27,25 +27,25 @@ Future<APIBLMShowNotificationStatus> apiBLMShowNotificationStatus({int userId}) 
 }
 
 class APIBLMShowNotificationStatus{
-  bool newMemorial;
-  bool newActivities;
-  bool postLikes;
-  bool postComments;
-  bool addFamily;
-  bool addFriends;
-  bool addAdmin;
+  bool showNotificationStatusNewMemorial;
+  bool showNotificationStatusNewActivities;
+  bool showNotificationStatusPostLikes;
+  bool showNotificationStatusPostComments;
+  bool showNotificationStatusAddFamily;
+  bool showNotificationStatusAddFriends;
+  bool showNotificationStatusAddAdmin;
 
-  APIBLMShowNotificationStatus({this.newMemorial, this.newActivities, this.postLikes, this.postComments, this.addFamily, this.addFriends, this.addAdmin});
+  APIBLMShowNotificationStatus({this.showNotificationStatusNewMemorial, this.showNotificationStatusNewActivities, this.showNotificationStatusPostLikes, this.showNotificationStatusPostComments, this.showNotificationStatusAddFamily, this.showNotificationStatusAddFriends, this.showNotificationStatusAddAdmin});
 
   factory APIBLMShowNotificationStatus.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowNotificationStatus(
-      newMemorial: parsedJson['newMemorial'],
-      newActivities: parsedJson['newActivities'],
-      postLikes: parsedJson['postLikes'],
-      postComments: parsedJson['postComments'],
-      addFamily: parsedJson['addFamily'],
-      addFriends: parsedJson['addFriends'],
-      addAdmin: parsedJson['addAdmin'],
+      showNotificationStatusNewMemorial: parsedJson['newMemorial'],
+      showNotificationStatusNewActivities: parsedJson['newActivities'],
+      showNotificationStatusPostLikes: parsedJson['postLikes'],
+      showNotificationStatusPostComments: parsedJson['postComments'],
+      showNotificationStatusAddFamily: parsedJson['addFamily'],
+      showNotificationStatusAddFriends: parsedJson['addFriends'],
+      showNotificationStatusAddAdmin: parsedJson['addAdmin'],
     );
   }
 }

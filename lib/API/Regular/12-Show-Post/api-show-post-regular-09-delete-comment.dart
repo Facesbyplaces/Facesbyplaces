@@ -17,9 +17,6 @@ Future<bool> apiRegularDeleteComment({int commentId}) async{
     },
   );
 
-  print('The status code of delete comment in regular is ${response.statusCode}');
-  print('The status body of delete comment in regular is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

@@ -26,7 +26,6 @@ Future<APIBLMHomeProfilePostMain> apiBLMProfilePost({int memorialId, int page}) 
   }
 }
 
-
 class APIBLMHomeProfilePostMain{
   int blmItemsRemaining;
   List<APIBLMHomeProfilePostExtended> blmFamilyMemorialList;
@@ -43,7 +42,6 @@ class APIBLMHomeProfilePostMain{
     );
   }
 }
-
 
 class APIBLMHomeProfilePostExtended{
   int profilePostId;

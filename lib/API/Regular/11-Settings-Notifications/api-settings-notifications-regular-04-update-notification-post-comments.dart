@@ -9,7 +9,6 @@ Future<bool> apiRegularUpdateNotificationPostComments({bool hide}) async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-
   try{
     final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/notifications/postComments?setting=$hide',
       headers: <String, String>{

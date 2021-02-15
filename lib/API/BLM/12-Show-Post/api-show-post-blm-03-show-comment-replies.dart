@@ -44,7 +44,6 @@ class APIBLMShowListOfReplies{
   }
 }
 
-
 class APIBLMShowListOfRepliesExtended{
   int showListRepliesReplyId;
   int showListRepliesCommentId;

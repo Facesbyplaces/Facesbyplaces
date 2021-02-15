@@ -12,9 +12,8 @@ Future<bool> apiBLMUpdateAccountDetails({String firstName, String lastName, Stri
 
   try{
     var dioRequest = Dio();
-
-    var formData;
-    formData = FormData();
+    var formData = FormData();
+    
     formData.files.addAll([
       MapEntry('first_name', MultipartFile.fromString(firstName),),
       MapEntry('last_name', MultipartFile.fromString(lastName)),

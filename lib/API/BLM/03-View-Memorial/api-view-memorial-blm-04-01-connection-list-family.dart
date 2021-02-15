@@ -44,7 +44,6 @@ class APIBLMConnectionListFamilyMain{
   }
 }
 
-
 class APIBLMConnectionListFamilyExtended{
   APIBLMConnectionListFamilyExtendedDetails connectionListFamilyUser;
   String connectionListFamilyRelationship;

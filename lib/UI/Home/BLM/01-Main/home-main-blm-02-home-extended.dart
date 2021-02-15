@@ -359,13 +359,13 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                                 Navigator.pop(context);
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMNotificationSettings(
-                                  newMemorial: result.newMemorial,
-                                  newActivities: result.newActivities,
-                                  postLikes: result.postLikes,
-                                  postComments: result.postComments,
-                                  addFamily: result.addFamily,
-                                  addFriends: result.addFriends,
-                                  addAdmin: result.addAdmin,
+                                  newMemorial: result.showNotificationStatusNewMemorial,
+                                  newActivities: result.showNotificationStatusNewActivities,
+                                  postLikes: result.showNotificationStatusPostLikes,
+                                  postComments: result.showNotificationStatusPostComments,
+                                  addFamily: result.showNotificationStatusAddFamily,
+                                  addFriends: result.showNotificationStatusAddFriends,
+                                  addAdmin: result.showNotificationStatusAddAdmin,
                                 )));
                               },
                               child: Text('Notification Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),

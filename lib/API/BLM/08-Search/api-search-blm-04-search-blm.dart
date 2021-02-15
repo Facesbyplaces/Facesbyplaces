@@ -101,7 +101,6 @@ class APIBLMSearchMemorialExtended{
   }
 }
 
-
 class APIBLMSearchMemorialExtendedPageDetails{
   String searchMemorialPageDetailsDescription;
   String searchMemorialPageDetailsBirthPlace;

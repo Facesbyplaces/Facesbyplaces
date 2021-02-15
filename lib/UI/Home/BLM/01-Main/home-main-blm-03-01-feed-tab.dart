@@ -68,45 +68,45 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       context.showLoaderOverlay();
       var newValue = await apiBLMHomeFeedTab(page: page);
       context.hideLoaderOverlay();
-      itemRemaining = newValue.itemsRemaining;
-      count = newValue.familyMemorialList.length;
+      itemRemaining = newValue.blmItemsRemaining;
+      count = newValue.blmFamilyMemorialList.length;
 
-      for(int i = 0; i < newValue.familyMemorialList.length; i++){
+      for(int i = 0; i < newValue.blmFamilyMemorialList.length; i++){
         List<String> newList1 = [];
         List<String> newList2 = [];
         List<String> newList3 = [];
         List<int> newList4 = [];
 
-        for(int j = 0; j < newValue.familyMemorialList[i].postTagged.length; j++){
-          newList1.add(newValue.familyMemorialList[i].postTagged[j].taggedFirstName);
-          newList2.add(newValue.familyMemorialList[i].postTagged[j].taggedLastName);
-          newList3.add(newValue.familyMemorialList[i].postTagged[j].taggedImage);
-          newList4.add(newValue.familyMemorialList[i].postTagged[j].taggedId);
+        for(int j = 0; j < newValue.blmFamilyMemorialList[i].homeTabFeedPostTagged.length; j++){
+          newList1.add(newValue.blmFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedFirstName);
+          newList2.add(newValue.blmFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedLastName);
+          newList3.add(newValue.blmFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedImage);
+          newList4.add(newValue.blmFamilyMemorialList[i].homeTabFeedPostTagged[j].homeTabFeedTaggedId);
         }
 
         feeds.add(
           BLMMainPagesFeeds(
-            userId: newValue.familyMemorialList[i].page.pageCreator.id, 
-            postId: newValue.familyMemorialList[i].id,
-            memorialId: newValue.familyMemorialList[i].page.id,
-            timeCreated: newValue.familyMemorialList[i].createAt,
-            memorialName: newValue.familyMemorialList[i].page.name,
-            postBody: newValue.familyMemorialList[i].body,
-            profileImage: newValue.familyMemorialList[i].page.profileImage,
-            imagesOrVideos: newValue.familyMemorialList[i].imagesOrVideos,
-            managed: newValue.familyMemorialList[i].page.manage,
-            joined: newValue.familyMemorialList[i].page.follower,
-            numberOfComments: newValue.familyMemorialList[i].numberOfComments,
-            numberOfLikes: newValue.familyMemorialList[i].numberOfLikes,
-            likeStatus: newValue.familyMemorialList[i].likeStatus,
-            numberOfTagged: newValue.familyMemorialList[i].postTagged.length,
+            userId: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageCreator.homeTabFeedPageCreatorId, 
+            postId: newValue.blmFamilyMemorialList[i].homeTabFeedId,
+            memorialId: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageId,
+            timeCreated: newValue.blmFamilyMemorialList[i].homeTabFeedCreatedAt,
+            memorialName: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageName,
+            postBody: newValue.blmFamilyMemorialList[i].homeTabFeedBody,
+            profileImage: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageProfileImage,
+            imagesOrVideos: newValue.blmFamilyMemorialList[i].homeTabFeedImagesOrVideos,
+            managed: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageManage,
+            joined: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFollower,
+            numberOfComments: newValue.blmFamilyMemorialList[i].homeTabFeedNumberOfComments,
+            numberOfLikes: newValue.blmFamilyMemorialList[i].homeTabFeedNumberOfLikes,
+            likeStatus: newValue.blmFamilyMemorialList[i].homeTabFeedLikeStatus,
+            numberOfTagged: newValue.blmFamilyMemorialList[i].homeTabFeedPostTagged.length,
             taggedFirstName: newList1,
             taggedLastName: newList2,
             taggedImage: newList3,
             taggedId: newList4,
-            pageType: newValue.familyMemorialList[i].page.pageType,
-            famOrFriends: newValue.familyMemorialList[i].page.famOrFriends,
-            relationship: newValue.familyMemorialList[i].page.relationship,
+            pageType: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPagePageType,
+            famOrFriends: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageFamOrFriends,
+            relationship: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageRelationship,
           ),
         );
 

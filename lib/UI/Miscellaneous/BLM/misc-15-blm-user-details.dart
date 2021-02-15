@@ -206,23 +206,23 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
         List<int> newList4 = [];
 
         for(int j = 0; j < newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged.length; j++){
-          newList1.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedFirstName);
-          newList2.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedLastName);
-          newList3.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedImage);
-          newList4.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].taggedId);
+          newList1.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].showUsersPostsTaggedFirstName);
+          newList2.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].showUsersPostsTaggedLastName);
+          newList3.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].showUsersPostsTaggedImage);
+          newList4.add(newValue.blmFamilyMemorialList[i].showUsersPostsPostTagged[j].showUsersPostsTaggedId);
         }
 
         posts.add(BLMMiscDraggablePost(
-          userId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.pageCreator.id, 
+          userId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPagePageCreator.showUsersPostsPageCreatorId, 
           postId: newValue.blmFamilyMemorialList[i].showUsersPostsId,
-          memorialId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.id,
+          memorialId: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageId,
           timeCreated: newValue.blmFamilyMemorialList[i].showUsersPostsCreateAt,
-          memorialName: newValue.blmFamilyMemorialList[i].showUsersPostsPage.name,
+          memorialName: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageName,
           postBody: newValue.blmFamilyMemorialList[i].showUsersPostsBody,
-          profileImage: newValue.blmFamilyMemorialList[i].showUsersPostsPage.profileImage,
+          profileImage: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageProfileImage,
           imagesOrVideos: newValue.blmFamilyMemorialList[i].showUsersPostsImagesOrVideos,
-          managed: newValue.blmFamilyMemorialList[i].showUsersPostsPage.manage,
-          joined: newValue.blmFamilyMemorialList[i].showUsersPostsPage.follower,
+          managed: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageManage,
+          joined: newValue.blmFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageFollower,
           numberOfComments: newValue.blmFamilyMemorialList[i].showUsersPostsNumberOfComments,
           numberOfLikes: newValue.blmFamilyMemorialList[i].showUsersPostsNumberOfLikes,
           likeStatus: newValue.blmFamilyMemorialList[i].showUsersPostsLikeStatus,

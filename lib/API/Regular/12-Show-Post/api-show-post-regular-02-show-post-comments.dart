@@ -44,7 +44,6 @@ class APIRegularShowListOfComments{
   }
 }
 
-
 class APIRegularShowListOfCommentsExtended{
   int showListOfCommentsCommentId;
   int showListOfCommentsPostId;

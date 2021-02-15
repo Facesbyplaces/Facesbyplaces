@@ -44,7 +44,6 @@ class APIBLMShowListOfComments{
   }
 }
 
-
 class APIBLMShowListOfCommentsExtended{
   int showListCommentsCommentId;
   int showListCommentsPostId;

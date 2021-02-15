@@ -20,9 +20,6 @@ Future<bool> apiBLMEditReply({int replyId, String replyBody}) async{
     }
   );
 
-  print('The status code of edit comment is ${response.statusCode}');
-  print('The status body of edit comment is ${response.body}');
-
   if(response.statusCode == 200){
     return true;
   }else{

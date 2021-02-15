@@ -9,13 +9,6 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
   int prefsUserID = sharedPrefs.getInt('regular-user-id');
-
-  print('The access token is $getAccessToken');
-  print('The uid is $getUID');
-  print('The client is $getClient');
-
-  print('The user id is $prefsUserID');
-  print('The image is $image');
   
   try{
     var dioRequest = Dio();
