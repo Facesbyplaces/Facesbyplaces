@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import HashLoader from "react-spinners/HashLoader";
 
 //Components
-import Navbar from "./Content/Navbar/Navbar";
-import SideBar from "./Content/SideBar/SideBar";
-import Topbar from "./Content/Navbar/Topbar/Topbar";
-import Footer from "./Content/Footer";
-import UsersTable from "./Content/UserTable/UsersTable";
-import Assets from "./Assets";
+import Navbar from "../UserDashboard/Navbar/Navbar";
+import SideBar from "./SideBar/SideBar";
+import Topbar from "../UserDashboard/Navbar/Topbar/Topbar";
+import Footer from "./Footer";
+import UsersTable from "../UserDashboard/UserTable/UsersTable";
+import Assets from "../../Assets";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);

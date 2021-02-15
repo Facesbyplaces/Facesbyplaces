@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TableUserAction } from "../../../redux/actions";
+import { TableUserAction } from "../../../../redux/actions";
 
 import Header from "./Header";
 import Body from "./Body";

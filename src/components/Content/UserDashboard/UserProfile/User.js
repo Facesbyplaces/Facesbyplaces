@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../auxiliary/axios";
+import axios from "../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { TableUserAction } from "../../../redux/actions";
+import { TableUserAction } from "../../../../redux/actions";
+import EditUser from "./EditUser";
+import ViewUser from "./ViewUser";
 
 export default function User() {
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
+  const [profile, setProfile] = useState(true);
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,
   }));
-
-  console.log(tab);
+  console.log(profile);
 
   const handleTableClick = () => {
     dispatch(TableUserAction());
+  };
+
+  const handleProfileClick = () => {
+    setProfile((prev) => !prev);
+    console.log(profile);
   };
 
   useEffect(() => {
@@ -30,6 +37,7 @@ export default function User() {
         console.log(error.response);
       });
   }, user.id);
+
   return (
     <div
       className="content content-height d-flex flex-column flex-column-fluid"
@@ -61,11 +69,6 @@ export default function User() {
                         backgroundImage: 'url("assets/media/users/300_16.jpg")',
                       }}
                     />
-                  </div>
-                  <div className="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
-                    <span className="font-size-h3 symbol-label font-weight-boldest">
-                      JM
-                    </span>
                   </div>
                 </div>
                 {/*end::Pic*/}
@@ -117,11 +120,11 @@ export default function User() {
                     </div>
                     <div className="my-lg-0 my-3">
                       {user.account_type == 1 ? (
-                        <a className="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
+                        <a className="btn btn-md btn-light-primary font-weight-bolder text-uppercase mr-3">
                           blm
                         </a>
                       ) : (
-                        <a className="btn btn-sm btn-light-warning font-weight-bolder text-uppercase">
+                        <a className="btn btn-md btn-light-warning font-weight-bolder text-uppercase">
                           alm
                         </a>
                       )}
@@ -132,11 +135,8 @@ export default function User() {
                   <div className="d-flex flex-wrap justify-content-between mt-1">
                     <div className="d-flex flex-column flex-grow-1 pr-8">
                       <div className="d-flex flex-wrap mb-4">
-                        <a
-                          href="#"
-                          className="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2"
-                        >
-                          <span className="svg-icon svg-icon-md svg-icon-info pr-1">
+                        <a className="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+                          <span className="svg-icon svg-icon-md svg-icon-info mr-1">
                             <svg
                               width="24px"
                               height="24px"
@@ -176,7 +176,7 @@ export default function User() {
                           {user.email}
                         </a>
                         <a className="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                          <span className="svg-icon svg-icon-md svg-icon-info pr-1">
+                          <span className="svg-icon svg-icon-md svg-icon-info mr-1">
                             <svg
                               width="24px"
                               height="24px"
@@ -222,7 +222,7 @@ export default function User() {
                           {user.phone_number}
                         </a>
                         <a className="text-dark-50 text-hover-primary font-weight-bold">
-                          <span className="svg-icon svg-icon-md svg-icon-info pr-1">
+                          <span className="svg-icon svg-icon-md svg-icon-info mr-1">
                             <svg
                               width="24px"
                               height="24px"
@@ -288,89 +288,109 @@ export default function User() {
               </div>
               {/*end::Details*/}
               <div className="separator separator-solid" />
-              {/*begin::Items*/}
-              <div className="d-flex align-items-center flex-wrap mt-8">
-                {/*begin::Item*/}
-                <div className="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                  <span className="mr-4">
-                    <i className="flaticon-piggy-bank display-4 text-muted font-weight-bold" />
-                  </span>
-                  <div className="d-flex flex-column text-dark-75">
-                    <span className="font-weight-bolder font-size-sm">
-                      Earnings
-                    </span>
-                    <span className="font-weight-bolder font-size-h5">
-                      <span className="text-dark-50 font-weight-bold">$</span>
-                      249,500
-                    </span>
-                  </div>
-                </div>
-                {/*end::Item*/}
-                {/*begin::Item*/}
-                <div className="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                  <span className="mr-4">
-                    <i className="flaticon-confetti display-4 text-muted font-weight-bold" />
-                  </span>
-                  <div className="d-flex flex-column text-dark-75">
-                    <span className="font-weight-bolder font-size-sm">
-                      Expenses
-                    </span>
-                    <span className="font-weight-bolder font-size-h5">
-                      <span className="text-dark-50 font-weight-bold">$</span>
-                      164,700
-                    </span>
-                  </div>
-                </div>
-                {/*end::Item*/}
-                {/*begin::Item*/}
-                <div className="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                  <span className="mr-4">
-                    <i className="flaticon-pie-chart display-4 text-muted font-weight-bold" />
-                  </span>
-                  <div className="d-flex flex-column text-dark-75">
-                    <span className="font-weight-bolder font-size-sm">Net</span>
-                    <span className="font-weight-bolder font-size-h5">
-                      <span className="text-dark-50 font-weight-bold">$</span>
-                      782,300
-                    </span>
-                  </div>
-                </div>
-                {/*end::Item*/}
-                {/*begin::Item*/}
-                <div className="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                  <span className="mr-4">
-                    <i className="flaticon-file-2 display-4 text-muted font-weight-bold" />
-                  </span>
-                  <div className="d-flex flex-column flex-lg-fill">
-                    <span className="text-dark-75 font-weight-bolder font-size-sm">
-                      73 Tasks
-                    </span>
-                    <a href="#" className="text-primary font-weight-bolder">
-                      View
+              <div className="header-menu header-menu-mobile header-menu-layout-default pt-5">
+                <ul className="menu-nav">
+                  <li
+                    className="menu-item menu-item-active"
+                    aria-haspopup="true"
+                  >
+                    <a className="menu-link">
+                      <span className="svg-icon svg-icon-md svg-icon-primary mr-2">
+                        {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
+                        <svg
+                          width="24px"
+                          height="24px"
+                          viewBox="0 0 24 24"
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                        >
+                          {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                          <title>Stockholm-icons / General / User</title>
+                          <desc>Created with Sketch.</desc>
+                          <defs />
+                          <g
+                            id="Stockholm-icons-/-General-/-User"
+                            stroke="none"
+                            strokeWidth={1}
+                            fill="none"
+                            fillRule="evenodd"
+                          >
+                            <polygon id="Shape" points="0 0 24 0 24 24 0 24" />
+                            <path
+                              d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+                              id="Mask"
+                              fill="#000000"
+                              fillRule="nonzero"
+                              opacity="0.3"
+                            />
+                            <path
+                              d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+                              id="Mask-Copy"
+                              fill="#000000"
+                              fillRule="nonzero"
+                            />
+                          </g>
+                        </svg>
+
+                        {/*end::Svg Icon*/}
+                      </span>
+
+                      <span className="menu-text" style={{ fontSize: "17px" }}>
+                        Profile
+                      </span>
                     </a>
-                  </div>
-                </div>
-                {/*end::Item*/}
-                {/*begin::Item*/}
-                <div className="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-                  <span className="mr-4">
-                    <i className="flaticon-chat-1 display-4 text-muted font-weight-bold" />
-                  </span>
-                  <div className="d-flex flex-column">
-                    <span className="text-dark-75 font-weight-bolder font-size-sm">
-                      648 Comments
-                    </span>
-                    <a href="#" className="text-primary font-weight-bolder">
-                      View
+                  </li>
+                  <li
+                    className="menu-item menu-item-submenu menu-item-rel"
+                    data-menu-toggle="click"
+                    aria-haspopup="true"
+                  >
+                    <a className="menu-link menu-toggle">
+                      <span className="menu-text" style={{ fontSize: "17px" }}>
+                        Features
+                      </span>
                     </a>
-                  </div>
-                </div>
-                {/*end::Item*/}
+                  </li>
+                  <li
+                    className="menu-item menu-item-submenu menu-item-rel"
+                    data-menu-toggle="click"
+                    aria-haspopup="true"
+                  >
+                    <a className="menu-link menu-toggle">
+                      <span className="menu-text" style={{ fontSize: "17px" }}>
+                        Crud
+                      </span>
+                    </a>
+                  </li>
+                  <li
+                    className="menu-item menu-item-submenu menu-item-rel"
+                    data-menu-toggle="click"
+                    aria-haspopup="true"
+                  >
+                    <a className="menu-link menu-toggle">
+                      <span className="menu-text" style={{ fontSize: "17px" }}>
+                        Apps
+                      </span>
+                    </a>
+                  </li>
+                  <li
+                    className="menu-item menu-item-submenu"
+                    data-menu-toggle="click"
+                    aria-haspopup="true"
+                  >
+                    <a className="menu-link menu-toggle">
+                      <span className="menu-text" style={{ fontSize: "17px" }}>
+                        Pages
+                      </span>
+                    </a>
+                  </li>
+                </ul>
               </div>
-              {/*begin::Items*/}
             </div>
           </div>
           {/*end::Card*/}
+          {profile ? <ViewUser user={user} /> : ""}
         </div>
         {/*end::Container*/}
       </div>

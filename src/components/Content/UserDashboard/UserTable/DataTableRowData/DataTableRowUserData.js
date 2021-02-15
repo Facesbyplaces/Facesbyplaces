@@ -5,8 +5,8 @@ import { DeleteModal } from "./DeleteModal";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";
-import { ViewUserAction } from "../../../../redux/actions";
-import { EditUserAction } from "../../../../redux/actions";
+import { ViewUserAction } from "../../../../../redux/actions";
+import { EditUserAction } from "../../../../../redux/actions";
 
 export default function DataTableRowUserData({ users, search }) {
   const [showModal, setShowModal] = useState(false);
