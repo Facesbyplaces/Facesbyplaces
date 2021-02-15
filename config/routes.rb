@@ -208,6 +208,8 @@ Rails.application.routes.draw do
         get 'users', to: 'admin#allUsers'
         # view user
         get 'users/show', to: 'admin#showUser'
+        # edit user
+        put 'users/edit', to: 'admin#editUser'
         #search user
         get 'users/search', to: 'admin#searchUsers'
 

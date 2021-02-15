@@ -48,6 +48,31 @@ class Api::V1::Admin::AdminController < ApplicationController
         render json: UserSerializer.new( user ).attributes
     end
 
+    def editUser
+        if params[:account_type] == '1'
+            user = User.find(params[:id])
+        else
+            user = AlmUser.find(params[:id])
+        end
+
+        if user != nil
+            user.update(
+                username: username,
+                first_name: firstName,
+                last_name: lastName,
+                phone_number: phoneNumber,
+                email: email )
+
+            if user.errors.present?
+                render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
+            else
+                render json: {success: true, message: "Successfully Edited User", user: user, status: 200}, status: 200
+            end
+        else
+            render json: {error: "pls login"}, status: 422
+        end
+    end
+
     # def searchBlmUser
     #     users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'User').map{|searchObject| 
     #         User.find(searchObject.searchable_id)
