@@ -285,7 +285,6 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
     return Column(
       children: [
         Container(
-          color: Colors.red,
           height: 260,
           width: SizeConfig.screenWidth,
           child: Container(

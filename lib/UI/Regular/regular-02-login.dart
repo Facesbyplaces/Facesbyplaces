@@ -522,10 +522,6 @@ class RegularLoginState extends State<RegularLogin>{
                       GestureDetector(
                         onTap: () async{
                           Navigator.pushReplacementNamed(context, '/home/regular');
-
-                          // Navigator.pushNamed(context, '/regular/verify-email', arguments: '123');
-                          // Navigator.pushNamed(context, '/regular/upload-photo');
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => RegularPasswordReset(resetToken: 'asdflkj',)));
                         },
                         child: Text('Sign in as Guest',
                           style: TextStyle(

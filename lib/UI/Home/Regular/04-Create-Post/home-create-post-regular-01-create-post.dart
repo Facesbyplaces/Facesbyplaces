@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/API/Regular/05-Create-Post/api-create-post-regular-02-list-of-managed-pages.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -42,7 +41,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   final int memorialId;
   HomeRegularCreatePostState({this.name, this.memorialId});
 
-  final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
+  // final GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState> _key1 = GlobalKey<MiscRegularInputFieldMultiTextPostTemplateState>();
 
   List<RegularManagedPages> managedPages;
   String currentSelection;
@@ -50,6 +49,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   Future listManagedPages;
   List<RegularTaggedUsers> users = [];
   List<File> slideImages;
+  TextEditingController controller = TextEditingController();
+  int maxLines;
 
   void initState(){
     super.initState();
@@ -131,7 +132,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Create Post', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xffffffff)),),
+            title: Text('Create Post', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             backgroundColor: Color(0xff04ECFF),
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
@@ -177,14 +178,14 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                   newFiles.addAll(slideImages);
 
                   APIRegularCreatePost post = APIRegularCreatePost(
-                    blmPageType: 'Memorial',
-                    blmPostBody: _key1.currentState.controller.text,
-                    blmPageId: currentIdSelected,
-                    blmLocation: newLocation,
-                    blmImagesOrVideos: newFiles,
-                    blmLatitude: locationData.latitude,
-                    blmLongitude: locationData.longitude,
-                    blmTagPeople: userIds,
+                    almPageType: 'Memorial',
+                    almPostBody: controller.text,
+                    almPageId: currentIdSelected,
+                    almLocation: newLocation,
+                    almImagesOrVideos: newFiles,
+                    almLatitude: locationData.latitude,
+                    almLongitude: locationData.longitude,
+                    almTagPeople: userIds,
                   );
                   
                   bool result = await apiRegularHomeCreatePost(post: post);
@@ -220,7 +221,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     child: Text('Post', 
                     style: TextStyle(
                       color: Color(0xffffffff), 
-                      fontSize: SizeConfig.safeBlockHorizontal * 5,),
+                      fontSize: 20,),
                     ),
                   ),
                 ),
@@ -229,8 +230,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
           ),
           body: SingleChildScrollView(
             physics: ClampingScrollPhysics(),
-            child: Container(
-              height: SizeConfig.screenHeight - kToolbarHeight,
+            child: SafeArea(
               child: Column(
                 children: [
 
@@ -263,7 +263,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                 children: [
                                   CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),),
 
-                                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                  SizedBox(width: 20,),
 
                                   Text(value.name, ),
                                 ],
@@ -286,9 +286,55 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     ),
                   ),
 
-                  Expanded(child: Padding(padding: EdgeInsets.all(20.0), child: MiscRegularInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 20),),),
+                  // Expanded(child: Padding(padding: EdgeInsets.all(20.0), child: MiscRegularInputFieldMultiTextPostTemplate(key: _key1, labelText: 'Speak out...', maxLines: 20),),),
+                  FocusScope(
+                    child: Focus(
+                      onFocusChange: (focus){
+                        if(focus){
+                          setState(() {
+                            maxLines = 10;
+                          });
+                        }else{
+                          setState(() {
+                            maxLines = 5;
+                          });
+                        }
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          controller: controller,
+                          cursorColor: Color(0xff000000),
+                          maxLines: maxLines,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Color(0xffffffff),
+                            alignLabelWithHint: true,
+                            labelText: 'Speak out...',
+                            labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff000000),
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  SizedBox(height: 10,),
 
                   Container(
                     child: Wrap(
@@ -311,17 +357,17 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     alignment: Alignment.centerLeft,
                   ),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                  SizedBox(height: 10,),
 
                   Container(
                     child: ((){
                       if(slideImages.length != 0){
                         return Container(
-                          height: SizeConfig.blockSizeVertical * 25, 
+                          height: 200,
                           width: SizeConfig.screenWidth,
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                           child: Container(
-                            height: SizeConfig.blockSizeVertical * 12,
+                            height: 100,
                             child: GridView.count(
                               physics: ClampingScrollPhysics(),
                               crossAxisCount: 4,
@@ -358,7 +404,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     });
                                   },
                                   child: Container(
-                                    width: SizeConfig.blockSizeVertical * 10,
+                                    width: 80,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Color(0xffcccccc),
@@ -372,12 +418,12 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       children: [
                                         Center(
                                           child: CircleAvatar(
-                                            radius: SizeConfig.blockSizeVertical * 3,
+                                            radius: 25,
                                             backgroundColor: Color(0xffffffff).withOpacity(.5),
                                             child: Text(
                                               index.toString(),
                                               style: TextStyle(
-                                                fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                fontSize: 40,
                                                 fontWeight: FontWeight.bold,
                                                 color: Color(0xffffffff),
                                               ),
@@ -400,7 +446,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
                   Container(
                     padding: EdgeInsets.only(left: 20.0, right: 20.0,),
-                    height: SizeConfig.blockSizeVertical * 20,
+                    height: 160,
                     child: Column(
                       children: [
                         Expanded(
@@ -422,7 +468,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           ),
                         ),
 
-                        Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+                        Container(height: 1, color: Color(0xffeeeeee),),
 
                         Expanded(
                           child: GestureDetector(
@@ -448,7 +494,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           ),
                         ),
 
-                        Container(height: SizeConfig.blockSizeVertical * .1, color: Color(0xffeeeeee),),
+                        Container(height: 1, color: Color(0xffeeeeee),),
 
                         Expanded(
                           child: GestureDetector(

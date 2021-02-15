@@ -52,7 +52,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
     RegularCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
+        title: Text('Create a Memorial Page for Friends and family.', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
         centerTitle: true,
         backgroundColor: Color(0xff04ECFF),
         leading: IconButton(
@@ -73,14 +73,14 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
               physics: ClampingScrollPhysics(),
               children: [
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
-                Text('Upload or Select an Image', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
+                Text('Upload or Select an Image', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 Container(
-                  height: SizeConfig.blockSizeVertical * 25,
+                  height: 200,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -99,12 +99,12 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         },
                         child: Center(
                           child: CircleAvatar(
-                            radius: SizeConfig.blockSizeVertical * 7,
+                            radius: 60,
                             backgroundColor: Color(0xffffffff),
                             child: Padding(
                               padding: EdgeInsets.all(5),
                               child: CircleAvatar(
-                                radius: SizeConfig.blockSizeVertical * 7,
+                                radius: 60,
                                 backgroundImage: profileImage != null
                                 ? FileImage(profileImage)
                                 : AssetImage('assets/icons/cover-icon.png'),
@@ -115,26 +115,26 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       ),
 
                       Positioned(
-                        bottom: SizeConfig.blockSizeVertical * 5,
+                        bottom: 40,
                         left: SizeConfig.screenWidth / 2,
                         child: CircleAvatar(
-                          radius: SizeConfig.blockSizeVertical * 3,
+                          radius: 25,
                           backgroundColor: Color(0xffffffff),
                           child: CircleAvatar(
-                            radius: SizeConfig.blockSizeVertical * 3,
+                            radius: 25,
                             backgroundColor: Colors.transparent,
-                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
+                            child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
                           ),
                         ),
                       ),
 
                       Positioned(
-                        top: SizeConfig.blockSizeVertical * 1,
-                        right: SizeConfig.blockSizeVertical * 1,
+                        top: 10,
+                        right: 10,
                         child: CircleAvatar(
-                          radius: SizeConfig.blockSizeVertical * 3,
+                          radius: 25,
                           backgroundColor: Color(0xffffffff),
-                          child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: SizeConfig.blockSizeVertical * 5.5,),
+                          child: Icon(Icons.camera, color: Color(0xffaaaaaa), size: 45,),
                         ),
                       ),
 
@@ -142,18 +142,18 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                   ),
                 ),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
-                Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                Text('Upload the best photo of the person in the memorial page.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                SizedBox(height: 40,),
 
-                Text('Choose Background', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 5, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
+                Text('Choose Background', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xff000000),),),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 Container(
-                  height: SizeConfig.blockSizeVertical * 12,
+                  height: 100,
                   child: ListView.separated(
                     physics: ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
@@ -169,9 +169,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                               await getBackgroundImage();
                             },
                             child: Container(
-                              width: SizeConfig.blockSizeVertical * 12,
-                              height: SizeConfig.blockSizeVertical * 12,    
-                              child: Icon(Icons.add_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 7,),
+                              width: 100,
+                              height: 100,  
+                              child: Icon(Icons.add_rounded, color: Color(0xff000000), size: 60,),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Color(0xffcccccc),
@@ -198,15 +198,15 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             child: backgroundImageToggle == index
                             ? Container(
                               padding: EdgeInsets.all(5),
-                              width: SizeConfig.blockSizeVertical * 12,
-                              height: SizeConfig.blockSizeVertical * 12,
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
                                 color: Color(0xff04ECFF),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Container(
-                                width: SizeConfig.blockSizeVertical * 10,
-                                height: SizeConfig.blockSizeVertical * 10,
+                                width: 100,
+                                height: 100,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
@@ -218,14 +218,14 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                             )
                             : Container(
                               padding: EdgeInsets.all(5),
-                              width: SizeConfig.blockSizeVertical * 12,
-                              height: SizeConfig.blockSizeVertical * 12,
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Container(
-                                width: SizeConfig.blockSizeVertical * 10,
-                                height: SizeConfig.blockSizeVertical * 10,
+                                width: 100,
+                                height: 100,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
@@ -240,17 +240,17 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       }());
                     }, 
                     separatorBuilder: (context, index){
-                      return SizedBox(width: SizeConfig.blockSizeHorizontal * 3,);
+                      return SizedBox(width: 25,);
                     },
                     itemCount: 5,
                   ),
                 ),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
-                Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
+                Text('Upload your own or select from the pre-mades.', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+                SizedBox(height: 80,),
 
                 MiscRegularButtonTemplate(
                   onPressed: () async{
@@ -331,10 +331,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         )
                       );
                     }
-                      
                   }, 
-                  width: SizeConfig.screenWidth / 2, 
-                  height: SizeConfig.blockSizeVertical * 7,
+                  width: 150,
+                  height: 45,
                 ),
 
               ],

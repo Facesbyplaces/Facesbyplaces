@@ -39,7 +39,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
               children: [
                 
                 Container(
-                  height: SizeConfig.blockSizeVertical * 30,
+                  height: 240,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/icons/paypal.png'),
@@ -49,7 +49,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
 
                 Text('Log in with Paypal', style: TextStyle(fontSize: 16, color: Color(0xff000000)),),
 
-                SizedBox(height: 45),
+                SizedBox(height: 40),
 
                 TextFormField(
                   controller: controller1,
@@ -82,7 +82,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                   ),
                 ),
 
-                SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                SizedBox(height: 20,),
 
                 TextFormField(
                   controller: controller2,
@@ -116,7 +116,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                   ),
                 ),
 
-                SizedBox(height: 45),
+                SizedBox(height: 40),
 
                 MaterialButton(
                   padding: EdgeInsets.zero,
@@ -130,14 +130,14 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
                     ), 
                   ),
                   minWidth: SizeConfig.screenWidth,
-                  height: 60,
+                  height: 70,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.0)
                   ),
                   color: Color(0xff0070BA),
                 ),
 
-                SizedBox(height: 45),
+                SizedBox(height: 20),
 
               ],
             ),

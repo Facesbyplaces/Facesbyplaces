@@ -180,11 +180,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     onLoading();
   }
 
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   videoPlayerController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -838,67 +838,69 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                     ],
                   ),
 
-                  Container(
+                  SafeArea(
+                    child: Container(
                     height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            child: GestureDetector(
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.arrow_back, color: Color(0xffffffff),), 
-                                  Text('Back',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xffffffff),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.arrow_back, color: Color(0xffffffff),), 
+                                    Text('Back',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xffffffff),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 20.0),
-                            alignment: Alignment.centerRight,
-                            child: managed == true
-                            ? MaterialButton(
-                              onPressed: () async{
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.only(right: 20.0),
+                              alignment: Alignment.centerRight,
+                              child: managed == true
+                              ? MaterialButton(
+                                onPressed: () async{
 
-                                final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
-                                final Uint8List list = bytes.buffer.asUint8List();
+                                  final ByteData bytes = await rootBundle.load('assets/icons/graveyard.png');
+                                  final Uint8List list = bytes.buffer.asUint8List();
 
-                                final tempDir = await getTemporaryDirectory();
-                                final file = await new File('${tempDir.path}/regular-post-image.png').create();
-                                file.writeAsBytesSync(list);
+                                  final tempDir = await getTemporaryDirectory();
+                                  final file = await new File('${tempDir.path}/regular-post-image.png').create();
+                                  file.writeAsBytesSync(list);
 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.almMemorial.showMemorialName, memorialId: profile.data.almMemorial.showMemorialId)));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularCreatePost(name: profile.data.almMemorial.showMemorialName, memorialId: profile.data.almMemorial.showMemorialId)));
 
-                              },
-                              shape: StadiumBorder(),
-                              color: Colors.green,
-                              splashColor: Colors.yellow,
-                              // height: ScreenUtil().setHeight(45),
-                              height: 45,
-                              child: Text('Create Post',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xffffffff),
+                                },
+                                shape: StadiumBorder(),
+                                color: Colors.green,
+                                splashColor: Colors.yellow,
+                                // height: ScreenUtil().setHeight(45),
+                                height: 45,
+                                child: Text('Create Post',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xffffffff),
+                                  ),
                                 ),
-                              ),
-                            )
-                            : Container(height: 0,),
+                              )
+                              : Container(height: 0,),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
 

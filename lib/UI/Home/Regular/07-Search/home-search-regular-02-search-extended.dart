@@ -321,10 +321,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

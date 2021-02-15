@@ -6,13 +6,6 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
-class RegularArguments {
-  final String title;
-  final int tab;
-
-  RegularArguments(this.title, this.tab);
-}
-
 class HomeRegularSearch extends StatelessWidget{
 
   final TextEditingController controller = TextEditingController();
@@ -162,24 +155,22 @@ class HomeRegularSearch extends StatelessWidget{
             leading: Container(),
             backgroundColor: Color(0xff04ECFF),
           ),
-          body: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
-            child: Container(
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              height: SizeConfig.screenHeight,
+          body: Container(
+            height: SizeConfig.screenHeight - kToolbarHeight,
+            width: SizeConfig.screenWidth,
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
 
-                  Expanded(child: Container(),),
+                  Icon(Icons.search, color: Color(0xff4EC9D4), size: 240),
 
-                  GestureDetector(onTap: (){}, child: Center(child: CircleAvatar(maxRadius: 80, backgroundColor: Color(0xffEFFEFF), child: Icon(Icons.search, color: Color(0xff4EC9D4), size: 120),),),),
-
-                  SizedBox(height: 20),
+                  SizedBox(height: 20,),
 
                   Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                  Expanded(child: Container(),),
-
+                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
                 ],
               ),
             ),

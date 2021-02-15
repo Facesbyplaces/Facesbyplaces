@@ -17,24 +17,24 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
     var formData = FormData();
     List<Map<String, dynamic>> tagPeopleValue = [];
 
-    for(int i = 0; i < post.blmTagPeople.length; i++){
-      tagPeopleValue.add({'user_id': post.blmTagPeople[i].userId, 'account_type': post.blmTagPeople[i].accountType});
+    for(int i = 0; i < post.almTagPeople.length; i++){
+      tagPeopleValue.add({'user_id': post.almTagPeople[i].userId, 'account_type': post.almTagPeople[i].accountType});
     }
 
     formData = FormData.fromMap({
-      'post[page_type]': post.blmPageType,
-      'post[page_id]': post.blmPageId,
-      'post[body]': post.blmPostBody,
-      'post[location]': post.blmLocation,
-      'post[latitude]': post.blmLatitude,
-      'post[longitude]': post.blmLongitude,
+      'post[page_type]': post.almPageType,
+      'post[page_id]': post.almPageId,
+      'post[body]': post.almPostBody,
+      'post[location]': post.almLocation,
+      'post[latitude]': post.almLatitude,
+      'post[longitude]': post.almLongitude,
       'tag_people': tagPeopleValue,
     });
 
-    if(post.blmImagesOrVideos != null || post.blmImagesOrVideos != ['']){
-      for(int i = 0; i < post.blmImagesOrVideos.length; i++){
-        if(post.blmImagesOrVideos[i].path != null || post.blmImagesOrVideos != ['']){
-          var file = await dio.MultipartFile.fromFile(post.blmImagesOrVideos[i].path, filename: post.blmImagesOrVideos[i].path);
+    if(post.almImagesOrVideos != null || post.almImagesOrVideos != ['']){
+      for(int i = 0; i < post.almImagesOrVideos.length; i++){
+        if(post.almImagesOrVideos[i].path != null || post.almImagesOrVideos != ['']){
+          var file = await dio.MultipartFile.fromFile(post.almImagesOrVideos[i].path, filename: post.almImagesOrVideos[i].path);
           formData.files.add(MapEntry('post[imagesOrVideos][]', file));
         }
       }
@@ -62,24 +62,24 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
 }
 
 class APIRegularCreatePost{
-  String blmPageType;
-  int blmPageId;
-  String blmPostBody;
-  String blmLocation;
-  List<dynamic> blmImagesOrVideos;
-  double blmLatitude;
-  double blmLongitude;
-  List<RegularTaggedPeople> blmTagPeople;
+  String almPageType;
+  int almPageId;
+  String almPostBody;
+  String almLocation;
+  List<dynamic> almImagesOrVideos;
+  double almLatitude;
+  double almLongitude;
+  List<RegularTaggedPeople> almTagPeople;
   
   APIRegularCreatePost({
-    this.blmPageType, 
-    this.blmPageId, 
-    this.blmPostBody,
-    this.blmLocation,
-    this.blmImagesOrVideos, 
-    this.blmLatitude,
-    this.blmLongitude, 
-    this.blmTagPeople,
+    this.almPageType,
+    this.almPageId, 
+    this.almPostBody,
+    this.almLocation,
+    this.almImagesOrVideos, 
+    this.almLatitude,
+    this.almLongitude, 
+    this.almTagPeople,
   });
 }
 

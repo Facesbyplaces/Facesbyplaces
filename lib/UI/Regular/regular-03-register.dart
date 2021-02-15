@@ -303,16 +303,18 @@ class RegularRegister extends StatelessWidget{
                   children: [
                     SizedBox(height: 20),
                     
-                    Align(
-                      alignment: Alignment.topLeft, 
-                      child: IconButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        }, 
-                        icon: Icon(
-                          Icons.arrow_back, 
-                          color: Color(0xffffffff), 
-                          size: 30,
+                    SafeArea(
+                      child: Align(
+                        alignment: Alignment.topLeft, 
+                        child: IconButton(
+                          onPressed: (){
+                            Navigator.pop(context);
+                          }, 
+                          icon: Icon(
+                            Icons.arrow_back, 
+                            color: Color(0xffffffff), 
+                            size: 30,
+                          ),
                         ),
                       ),
                     ),

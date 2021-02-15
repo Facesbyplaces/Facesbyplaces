@@ -77,7 +77,6 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: empty
             ? SingleChildScrollView(
