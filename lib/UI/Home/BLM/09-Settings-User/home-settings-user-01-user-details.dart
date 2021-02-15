@@ -120,8 +120,8 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                                 backgroundImage: ((){
                                   if(profileImage != null){
                                     return AssetImage(profileImage.path);
-                                  }else if(profile.data.image != null && profile.data.image != ''){
-                                    return NetworkImage(profile.data.image);
+                                  }else if(profile.data.showProfileInformationImage != null && profile.data.showProfileInformationImage != ''){
+                                    return NetworkImage(profile.data.showProfileInformationImage);
                                   }else{
                                     return AssetImage('assets/icons/app-icon.png');
                                   }
@@ -164,7 +164,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                       child: Column(
                         children: [
                           Center(
-                            child: Text(profile.data.firstName + ' ' + profile.data.lastName,
+                            child: Text(profile.data.showProfileInformationFirstName + ' ' + profile.data.showProfileInformationLastName,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -176,7 +176,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                           SizedBox(height: 20),
 
                           Center(
-                            child: Text(profile.data.email,
+                            child: Text(profile.data.showProfileInformationEmail,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,

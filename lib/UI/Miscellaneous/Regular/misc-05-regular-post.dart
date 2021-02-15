@@ -313,6 +313,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                   GestureDetector(
                     onTap: (){
+                      print('The user id is $userId');
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, userId: userId, numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, userId: userId)));
                     },

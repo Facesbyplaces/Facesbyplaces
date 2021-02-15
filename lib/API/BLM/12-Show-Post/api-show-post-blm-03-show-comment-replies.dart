@@ -48,7 +48,7 @@ class APIBLMShowListOfReplies{
 class APIBLMShowListOfRepliesExtended{
   int showListRepliesReplyId;
   int showListRepliesCommentId;
-  APIBLMShowListOfCommentsExtendedUser showListRepliesUser;
+  APIBLMShowListOfRepliesExtendedUser showListRepliesUser;
   String showListRepliesReplyBody;
   String showListRepliesCreatedAt;
 
@@ -58,23 +58,23 @@ class APIBLMShowListOfRepliesExtended{
     return APIBLMShowListOfRepliesExtended(
       showListRepliesReplyId: parsedJson['id'],
       showListRepliesCommentId: parsedJson['comment_id'],
-      showListRepliesUser: APIBLMShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
+      showListRepliesUser: APIBLMShowListOfRepliesExtendedUser.fromJson(parsedJson['user']),
       showListRepliesReplyBody: parsedJson['body'],
       showListRepliesCreatedAt: parsedJson['created_at'],
     );
   }
 }
 
-class APIBLMShowListOfCommentsExtendedUser{
+class APIBLMShowListOfRepliesExtendedUser{
   int showListRepliesUserUserId;
   String showListRepliesUserFirstName;
   String showListRepliesUserLastName;
   dynamic showListRepliesUserImage;
 
-  APIBLMShowListOfCommentsExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage});
+  APIBLMShowListOfRepliesExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage});
 
-  factory APIBLMShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowListOfCommentsExtendedUser(
+  factory APIBLMShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMShowListOfRepliesExtendedUser(
       showListRepliesUserUserId: parsedJson['id'],
       showListRepliesUserFirstName: parsedJson['first_name'],
       showListRepliesUserLastName: parsedJson['last_name'],

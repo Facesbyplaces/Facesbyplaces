@@ -142,8 +142,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                         icon: CircleAvatar(
                           backgroundColor: Color(0xff888888),
                           backgroundImage: ((){
-                            if(profileImage.data.image != null && profileImage.data.image != ''){
-                              return NetworkImage(profileImage.data.image);
+                            if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
+                              return NetworkImage(profileImage.data.showProfileInformationImage);
                             }else{
                               return AssetImage('assets/icons/app-icon.png');
                             }
@@ -303,7 +303,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
             future: drawerSettings,
             builder: (context, manageDrawer){
               if(manageDrawer.hasData){
-                if(manageDrawer.data.guest != true){
+                if(manageDrawer.data.showProfileInformationGuest != true){
                   return Drawer(
                     child: Container(
                       alignment: Alignment.topCenter,
@@ -318,8 +318,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: ((){
-                                if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                  return NetworkImage(manageDrawer.data.image);
+                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
                                 }else{
                                   return AssetImage('assets/icons/app-icon.png');
                                 }
@@ -328,7 +328,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                             SizedBox(height: 20),
 
-                            Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                             SizedBox(height: 45),
 
@@ -354,7 +354,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             GestureDetector(
                               onTap: () async{
                                 context.showLoaderOverlay();
-                                APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.userId);
+                                APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.showProfileInformationUserId);
                                 context.hideLoaderOverlay();
 
                                 Navigator.pop(context);
@@ -375,7 +375,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                             GestureDetector(
                               onTap: () async{
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.userId)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
                               },
                               child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
@@ -450,8 +450,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                               radius: 100,
                               backgroundColor: Color(0xff888888),
                               backgroundImage: ((){
-                                if(manageDrawer.data.image != null && manageDrawer.data.image != ''){
-                                  return NetworkImage(manageDrawer.data.image);
+                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
                                 }else{
                                   return AssetImage('assets/icons/app-icon.png');
                                 }
@@ -460,7 +460,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                             SizedBox(height: 20),
 
-                            Text(manageDrawer.data.firstName + ' ' + manageDrawer.data.lastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                             SizedBox(height: 45),
 

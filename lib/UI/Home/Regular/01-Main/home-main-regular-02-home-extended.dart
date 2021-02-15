@@ -13,7 +13,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
 import 'home-main-regular-03-03-post-tab.dart';
@@ -118,10 +117,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

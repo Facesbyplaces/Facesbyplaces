@@ -46,7 +46,7 @@ class APIRegularShowOriginalPostMainExtended{
   double showOriginalPostLatitude;
   double showOriginalPostLongitude;
   List<dynamic> showOriginalPostImagesOrVideos;
-  List<APIRegularHomeProfilePostExtendedTagged> showOriginalPostPostTagged;
+  List<APIRegularShowOriginalPostExtendedTagged> showOriginalPostPostTagged;
   String showOriginalPostCreateAt;
   int showOriginalPostNumberOfLikes;
   int showOriginalPostNumberOfComments;
@@ -64,7 +64,7 @@ class APIRegularShowOriginalPostMainExtended{
     }
     
     var newList2 = parsedJson['tag_people'] as List;
-    List<APIRegularHomeProfilePostExtendedTagged> taggedList = newList2.map((i) => APIRegularHomeProfilePostExtendedTagged.fromJson(i)).toList();    
+    List<APIRegularShowOriginalPostExtendedTagged> taggedList = newList2.map((i) => APIRegularShowOriginalPostExtendedTagged.fromJson(i)).toList();    
 
     return APIRegularShowOriginalPostMainExtended(
       showOriginalPostId: parsedJson['id'],
@@ -165,16 +165,16 @@ class APIRegularShowOriginalPostMainExtendedPageCreator{
   }
 }
 
-class APIRegularHomeProfilePostExtendedTagged{
+class APIRegularShowOriginalPostExtendedTagged{
   int showOriginalPostTaggedId;
   String showOriginalPostTaggedFirstName;
   String showOriginalPostTaggedLastName;
   String showOriginalPostTaggedImage;
 
-  APIRegularHomeProfilePostExtendedTagged({this.showOriginalPostTaggedId, this.showOriginalPostTaggedFirstName, this.showOriginalPostTaggedLastName, this.showOriginalPostTaggedImage});
+  APIRegularShowOriginalPostExtendedTagged({this.showOriginalPostTaggedId, this.showOriginalPostTaggedFirstName, this.showOriginalPostTaggedLastName, this.showOriginalPostTaggedImage});
 
-  factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeProfilePostExtendedTagged(
+  factory APIRegularShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowOriginalPostExtendedTagged(
       showOriginalPostTaggedId: parsedJson['id'],
       showOriginalPostTaggedFirstName: parsedJson['first_name'],
       showOriginalPostTaggedLastName: parsedJson['last_name'],

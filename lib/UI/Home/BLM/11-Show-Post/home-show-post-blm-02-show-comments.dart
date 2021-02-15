@@ -2,10 +2,10 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-informat
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-show-post-comments.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-03-show-comment-replies.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-add-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-04-show-comment-or-reply-like-status.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-comment-reply-like-or-unlike.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-add-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-07-add-reply.dart';
+import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-comment-reply-like-or-unlike.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-09-delete-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-10-edit-comment.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-11-delete-reply.dart';
@@ -54,22 +54,15 @@ class BLMOriginalReply{
 class HomeBLMShowCommentsList extends StatefulWidget{
   final int postId;
   final int userId;
-  // final int numberOfLikes;
-  // final int numberOfComments;
-  // HomeBLMShowCommentsList({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
   HomeBLMShowCommentsList({this.postId, this.userId});
 
   @override
-  // HomeBLMShowCommentsListState createState() => HomeBLMShowCommentsListState(postId: postId, userId: userId, numberOfLikes: numberOfLikes, numberOfComments: numberOfComments);
   HomeBLMShowCommentsListState createState() => HomeBLMShowCommentsListState(postId: postId, userId: userId);
 }
 
 class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   final int postId;
   final int userId;
-  // final int numberOfLikes;
-  // final int numberOfComments;
-  // HomeBLMShowCommentsListState({this.postId, this.userId, this.numberOfLikes, this.numberOfComments});
   HomeBLMShowCommentsListState({this.postId, this.userId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
@@ -82,14 +75,12 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
   int count;
   int numberOfReplies;
   int page2;
-  Future<APIBLMShowProfileInformation> currentUser;
   List<bool> commentsLikes;
   List<int> commentsNumberOfLikes;
   bool isComment;
   List<List<bool>> repliesLikes;
   List<List<int>> repliesNumberOfLikes;
   int currentCommentId;
-  int currentUserId;
   String currentUserImage;
   int numberOfLikes;
   int numberOfComments;
@@ -113,7 +104,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
     numberOfComments = 0;
     getOriginalPostInformation();
     onLoading();
-    currentUser = getDrawerInformation();
   }
 
   void onRefresh() async{
@@ -125,6 +115,11 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
     var originalPostInformation = await apiBLMShowOriginalPost(postId: postId);
     numberOfLikes = originalPostInformation.blmPost.showOriginalPostNumberOfLikes;
     numberOfComments = originalPostInformation.blmPost.showOriginalPostNumberOfComments;
+  }
+
+  void getProfilePicture() async{
+    var getProfilePicture = await apiBLMShowProfileInformation();
+    currentUserImage = getProfilePicture.showProfileInformationImage;
   }
 
   void onLoading() async{
@@ -208,10 +203,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
     }else{
       refreshController.loadNoData();
     }
-  }
-
-  Future<APIBLMShowProfileInformation> getDrawerInformation() async{
-    return await apiBLMShowProfileInformation();
   }
 
   @override
@@ -388,6 +379,8 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                               title: Text('Edit'),
                                               leading: Icon(Icons.edit),
                                               onTap: () async{
+                                                // unedited: comments[i].commentBody, 
+                                                controller.text = controller.text + comments[i].commentBody;
                                                 await showModalBottomSheet(
                                                   context: context, 
                                                   builder: (context) => showKeyboardEdit(isEdit: true, editId: comments[i].commentId),
@@ -570,6 +563,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                                       title: Text('Edit'),
                                                       leading: Icon(Icons.edit),
                                                       onTap: () async{
+                                                        controller.text = controller.text + comments[i].listOfReplies[index].replyBody;
                                                         await showModalBottomSheet(
                                                           context: context, 
                                                           builder: (context) => showKeyboardEdit(isEdit: false, editId: comments[i].listOfReplies[index].replyId),
@@ -889,8 +883,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             GestureDetector(
               onTap: () async{
                 if(isEdit == true){
-
-
                   print('The controller is ${controller.text}');
 
                   context.showLoaderOverlay();

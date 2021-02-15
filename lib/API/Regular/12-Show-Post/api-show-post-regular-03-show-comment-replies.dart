@@ -47,7 +47,7 @@ class APIRegularShowListOfReplies{
 class APIRegularShowListOfRepliesExtended{
   int showListOfRepliesReplyId;
   int showListOfRepliesCommentId;
-  APIRegularShowListOfCommentsExtendedUser showListOfRepliesUser;
+  APIRegularShowListOfRepliesExtendedUser showListOfRepliesUser;
   String showListOfRepliesReplyBody;
   String showListOfRepliesCreatedAt;
 
@@ -57,27 +57,27 @@ class APIRegularShowListOfRepliesExtended{
     return APIRegularShowListOfRepliesExtended(
       showListOfRepliesReplyId: parsedJson['id'],
       showListOfRepliesCommentId: parsedJson['comment_id'],
-      showListOfRepliesUser: APIRegularShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
+      showListOfRepliesUser: APIRegularShowListOfRepliesExtendedUser.fromJson(parsedJson['user']),
       showListOfRepliesReplyBody: parsedJson['body'],
       showListOfRepliesCreatedAt: parsedJson['created_at'],
     );
   }
 }
 
-class APIRegularShowListOfCommentsExtendedUser{
-  int showListOfCommentsUserId;
-  String showListOfCommentsUserFirstName;
-  String showListOfCommentsUserLastName;
-  dynamic showListOfCommentsUserImage;
+class APIRegularShowListOfRepliesExtendedUser{
+  int showListRepliesUserUserId;
+  String showListRepliesUserFirstName;
+  String showListRepliesUserLastName;
+  dynamic showListRepliesUserImage;
 
-  APIRegularShowListOfCommentsExtendedUser({this.showListOfCommentsUserId, this.showListOfCommentsUserFirstName, this.showListOfCommentsUserLastName, this.showListOfCommentsUserImage});
+  APIRegularShowListOfRepliesExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage});
 
-  factory APIRegularShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularShowListOfCommentsExtendedUser(
-      showListOfCommentsUserId: parsedJson['id'],
-      showListOfCommentsUserFirstName: parsedJson['first_name'],
-      showListOfCommentsUserLastName: parsedJson['last_name'],
-      showListOfCommentsUserImage: parsedJson['image'],
+  factory APIRegularShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
+    return APIRegularShowListOfRepliesExtendedUser(
+      showListRepliesUserUserId: parsedJson['id'],
+      showListRepliesUserFirstName: parsedJson['first_name'],
+      showListRepliesUserLastName: parsedJson['last_name'],
+      showListRepliesUserImage: parsedJson['image'],
     );
   }
 }
