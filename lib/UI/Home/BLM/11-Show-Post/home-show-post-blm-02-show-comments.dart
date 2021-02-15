@@ -190,7 +190,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             listOfReplies: replies
           ),    
         );
-
         replies = [];
       }
 
@@ -239,7 +238,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             child: SingleChildScrollView(
               child: Container(
                 height: (SizeConfig.screenHeight - kToolbarHeight - 100),
-                // height: SizeConfig.screenHeight + kToolbarHeight + 40,
                 width: SizeConfig.screenWidth,
                 child: Column(
                   children: [
@@ -379,7 +377,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                               title: Text('Edit'),
                                               leading: Icon(Icons.edit),
                                               onTap: () async{
-                                                // unedited: comments[i].commentBody, 
                                                 controller.text = controller.text + comments[i].commentBody;
                                                 await showModalBottomSheet(
                                                   context: context, 
@@ -392,7 +389,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                               leading: Icon(Icons.delete),
                                               onTap: () async{  
                                                 context.showLoaderOverlay();
-                                                bool result = await apiBLMDeleteComment(commentId: comments[i].commentId);
+                                                await apiBLMDeleteComment(commentId: comments[i].commentId);
                                                 context.hideLoaderOverlay();
 
                                                 controller.clear();
@@ -413,8 +410,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                                 numberOfComments = 0;
                                                 getOriginalPostInformation();
                                                 onLoading();
-
-                                                print('The result is $result');
                                               },
                                             )
                                           ],
@@ -575,7 +570,7 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                                       leading: Icon(Icons.delete),
                                                       onTap: () async{  
                                                         context.showLoaderOverlay();
-                                                        bool result = await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
+                                                        await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
                                                         context.hideLoaderOverlay();
 
                                                         controller.clear();
@@ -596,8 +591,6 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                                                         numberOfComments = 0;
                                                         getOriginalPostInformation();
                                                         onLoading();
-
-                                                        print('The result is $result');
                                                       },
                                                     )
                                                   ],
@@ -883,12 +876,9 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
             GestureDetector(
               onTap: () async{
                 if(isEdit == true){
-                  print('The controller is ${controller.text}');
-
                   context.showLoaderOverlay();
-                  bool result = await apiBLMEditComment(commentId: editId, commentBody: controller.text);
+                  await apiBLMEditComment(commentId: editId, commentBody: controller.text);
                   context.hideLoaderOverlay();
-                  print('The result is $result');
 
                   controller.clear();
                   itemRemaining = 1;
@@ -909,13 +899,9 @@ class HomeBLMShowCommentsListState extends State<HomeBLMShowCommentsList>{
                   getOriginalPostInformation();
                   onLoading();
                 }else{
-                  print('The controller is ${controller.text}');
-                  
                   context.showLoaderOverlay();
-                  bool result = await apiBLMEditReply(replyId: editId, replyBody: controller.text);
+                  await apiBLMEditReply(replyId: editId, replyBody: controller.text);
                   context.hideLoaderOverlay();
-                  print('The result of edit reply is $result');
-                  
 
                   controller.clear();
                   itemRemaining = 1;

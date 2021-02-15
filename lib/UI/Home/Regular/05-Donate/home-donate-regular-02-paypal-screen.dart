@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularPaypal extends StatefulWidget{
@@ -15,10 +14,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -37,19 +32,6 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
             centerTitle: true,
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
           ),
-          // body: ContainerResponsive(
-          //   height: SizeConfig.screenHeight,
-          //   width: SizeConfig.screenWidth,
-          //   alignment: Alignment.center,
-          //   child: ContainerResponsive(
-          //     width: SizeConfig.screenWidth,
-          //     heightResponsive: false,
-          //     widthResponsive: true,
-          //     alignment: Alignment.center,
-          //     color: Color(0xffECF0F1),
-          //     child: 
-          //   ),
-          // ),
           body: SingleChildScrollView(
             padding: EdgeInsets.only(left: 20.0, right: 20.0),
             physics: ClampingScrollPhysics(),

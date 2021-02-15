@@ -3,7 +3,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-custom-dr
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-15-regular-user-details.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +33,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Scaffold(
       body: FutureBuilder<APIRegularShowUserInformation>(
         future: showProfile,
@@ -96,7 +91,6 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       children: [
                         Text('${profile.data.showUserInformationFirstName + ' ' + profile.data.showUserInformationLastName}',
                           style: TextStyle(
-                            // fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),

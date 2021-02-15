@@ -36,7 +36,6 @@ class MiscRegularButtonTemplate extends StatelessWidget{
   }
 }
 
-
 class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
 
   final String buttonText;

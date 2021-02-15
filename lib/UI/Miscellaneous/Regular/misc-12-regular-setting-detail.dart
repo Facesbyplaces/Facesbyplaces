@@ -21,7 +21,6 @@ class MiscRegularSettingDetailTemplate extends StatelessWidget{
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        // height: SizeConfig.blockSizeVertical * 10,
         height: 80,
         color: backgroundColor,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -45,7 +44,6 @@ class MiscRegularSettingDetailTemplate extends StatelessWidget{
                 alignment: Alignment.topLeft,
                 child: Text(contentDetail,
                   style: TextStyle(
-                    // fontSize: SizeConfig.safeBlockHorizontal * 3.5,
                     fontWeight: FontWeight.w300,
                     color: Color(0xffBDC3C7),
                   ),

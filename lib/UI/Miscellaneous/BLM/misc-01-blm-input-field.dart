@@ -182,7 +182,6 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
     controller = TextEditingController(text: displayText);
   }
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -272,7 +271,6 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
   }
 }
 
-
 class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
 
   final String displayText;
@@ -353,7 +351,6 @@ class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
   MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
 
-
 class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDateTimeTemplate>{
   final String labelText;
   final DateTimePickerType dateTimePickerType;
@@ -384,75 +381,6 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
             color: Color(0xff000000),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MiscBLMInputFieldMultiTextPostTemplate extends StatefulWidget{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final Color backgroundColor;
-
-  MiscBLMInputFieldMultiTextPostTemplate({
-    Key key,
-    this.labelText = '',
-    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-    this.type = TextInputType.text, 
-    this.maxLines = 10,
-    this.readOnly = false,
-    this.backgroundColor = const Color(0xffffffff),
-  }) : super(key: key);
-
-  MiscBLMInputFieldMultiTextPostTemplateState createState() => MiscBLMInputFieldMultiTextPostTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
-}
-
-
-class MiscBLMInputFieldMultiTextPostTemplateState extends State<MiscBLMInputFieldMultiTextPostTemplate>{
-  final String labelText;
-  final TextStyle labelTextStyle;
-  final TextInputType type;
-  final int maxLines;
-  final bool readOnly;
-  final Color backgroundColor;
-
-  MiscBLMInputFieldMultiTextPostTemplateState({this.labelText, this.labelTextStyle, this.type, this.maxLines, this.readOnly, this.backgroundColor});
-
-  TextEditingController controller = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return TextFormField(
-      controller: controller,
-      cursorColor: Color(0xff000000),
-      maxLines: maxLines,
-      keyboardType: type,
-      readOnly: readOnly,
-      decoration: InputDecoration(
-        fillColor: backgroundColor,
-        alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.transparent,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.transparent,
           ),
         ),
       ),

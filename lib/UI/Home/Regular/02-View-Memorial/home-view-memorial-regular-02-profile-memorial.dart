@@ -9,7 +9,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-14-regular-empty-dis
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
@@ -188,10 +187,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -907,18 +902,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                 ),
                               ),
                             )
-                            // : ContainerResponsive(
-                            //   height: SizeConfig.screenHeight,
-                            //   width: SizeConfig.screenWidth,
-                            //   alignment: Alignment.center,
-                            //   child: ContainerResponsive(
-                            //     width: SizeConfig.screenWidth,
-                            //     heightResponsive: false,
-                            //     widthResponsive: true,
-                            //     alignment: Alignment.center,
-                            //     child: 
-                            //   ),
-                            // ),
                             : SingleChildScrollView(
                               physics: ClampingScrollPhysics(),
                               child: MiscRegularEmptyDisplayTemplate(),

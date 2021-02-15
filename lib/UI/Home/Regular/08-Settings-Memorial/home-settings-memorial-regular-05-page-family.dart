@@ -2,7 +2,6 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-13-remove-friends-or-family.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-memorial-regular-07-search-user-settings.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -118,140 +117,130 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
           ),
         ],
       ),
-      body: ResponsiveWrapper(
-        maxWidth: SizeConfig.screenWidth,
-        defaultScale: true,
-        breakpoints: [
-          ResponsiveBreakpoint.resize(480, name: MOBILE),
-          ResponsiveBreakpoint.autoScale(800, name: TABLET),
-          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-          ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-        ],
-        child: Container(
-          height: SizeConfig.screenHeight - kToolbarHeight,
-          child: SmartRefresher(
-            enablePullDown: true,
-            enablePullUp: true,
-            header: MaterialClassicHeader(
-              color: Color(0xffffffff),
-              backgroundColor: Color(0xff4EC9D4),
-            ),
-            footer: CustomFooter(
-              loadStyle: LoadStyle.ShowWhenLoading,
-              builder: (BuildContext context, LoadStatus mode){
-                Widget body;
-                if(mode == LoadStatus.loading){
-                  body = CircularProgressIndicator();
-                }
-                return Center(child: body);
-              },
-            ),
-            controller: refreshController,
-            onRefresh: onRefresh,
-            onLoading: onLoading1,
-            child: ListView.separated(
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (c, i) {
-                return Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
+      body: Container(
+        height: SizeConfig.screenHeight - kToolbarHeight,
+        child: SmartRefresher(
+          enablePullDown: true,
+          enablePullUp: true,
+          header: MaterialClassicHeader(
+            color: Color(0xffffffff),
+            backgroundColor: Color(0xff4EC9D4),
+          ),
+          footer: CustomFooter(
+            loadStyle: LoadStyle.ShowWhenLoading,
+            builder: (BuildContext context, LoadStatus mode){
+              Widget body;
+              if(mode == LoadStatus.loading){
+                body = CircularProgressIndicator();
+              }
+              return Center(child: body);
+            },
+          ),
+          controller: refreshController,
+          onRefresh: onRefresh,
+          onLoading: onLoading1,
+          child: ListView.separated(
+            physics: ClampingScrollPhysics(),
+            itemBuilder: (c, i) {
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
 
-                      CircleAvatar(
-                        maxRadius: 40,
-                        backgroundColor: Color(0xff888888), 
-                        backgroundImage: familyList[i].image != null 
-                        ? NetworkImage(familyList[i].image) 
-                        : AssetImage('assets/icons/app-icon.png'),
+                    CircleAvatar(
+                      maxRadius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: familyList[i].image != null 
+                      ? NetworkImage(familyList[i].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    ),
+
+                    SizedBox(width: 25,),
+
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
+
+                          Text(familyList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
+                        ],
                       ),
-
-                      SizedBox(width: 25,),
-
-                      Expanded(
-                        child: Container(
-                          child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(familyList[i].firstName + ' ' + familyList[i].lastName, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000)),),
-
-                            Text(familyList[i].relationship, style: TextStyle(fontSize: 12, color: Color(0xff888888)),),
-                          ],
-                        ),
-                        ),
                       ),
+                    ),
 
-                      SizedBox(width: 25,),
+                    SizedBox(width: 25,),
 
-                      MaterialButton(
-                        minWidth: SizeConfig.screenWidth / 3.5,
-                        padding: EdgeInsets.zero,
-                        textColor: Color(0xffffffff),
-                        splashColor: Color(0xff04ECFF),
-                        onPressed: () async{
-                          context.showLoaderOverlay();
-                          bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId, accountType: familyList[i].accountType);
-                          context.hideLoaderOverlay();
+                    MaterialButton(
+                      minWidth: SizeConfig.screenWidth / 3.5,
+                      padding: EdgeInsets.zero,
+                      textColor: Color(0xffffffff),
+                      splashColor: Color(0xff04ECFF),
+                      onPressed: () async{
+                        context.showLoaderOverlay();
+                        bool result = await apiRegularDeleteMemorialFriendsOrFamily(memorialId: memorialId, userId: familyList[i].userId, accountType: familyList[i].accountType);
+                        context.hideLoaderOverlay();
 
-                          if(result == true){
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Successfully removed a user from Family list.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.green,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
-                            );
-                          }else{
-                            await showDialog(
-                              context: context,
-                              builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('Something went wrong. Please try again.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
-                            );
-                          }
+                        if(result == true){
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Successfully removed a user from Family list.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.green,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }else{
+                          await showDialog(
+                            context: context,
+                            builder: (_) => 
+                              AssetGiffyDialog(
+                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              entryAnimation: EntryAnimation.DEFAULT,
+                              description: Text('Something went wrong. Please try again.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(),
+                              ),
+                              onlyOkButton: true,
+                              buttonOkColor: Colors.red,
+                              onOkButtonPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                            )
+                          );
+                        }
 
-                          familyItemsRemaining = 1;
-                          familyList = [];
-                          page = 1;
-                          onLoading1();
-                        },
-                        child: Text('Remove', style: TextStyle(fontSize: 14,),),
-                        height: 40,
-                        shape: StadiumBorder(
-                          side: BorderSide(color: Color(0xffE74C3C)),
-                        ),
-                          color: Color(0xffE74C3C),
+                        familyItemsRemaining = 1;
+                        familyList = [];
+                        page = 1;
+                        onLoading1();
+                      },
+                      child: Text('Remove', style: TextStyle(fontSize: 14,),),
+                      height: 40,
+                      shape: StadiumBorder(
+                        side: BorderSide(color: Color(0xffE74C3C)),
                       ),
+                        color: Color(0xffE74C3C),
+                    ),
 
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-              itemCount: familyList.length,
-            ),
+                  ],
+                ),
+              );
+            },
+            separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+            itemCount: familyList.length,
           ),
         ),
       ),

@@ -268,34 +268,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                             Column(
                               children: [
-                                // ((){
-                                //   if(profile.data.blmMemorial.memorialImagesOrVideos != null){
-                                //     videoPlayerController = VideoPlayerController.network(profile.data.blmMemorial.memorialImagesOrVideos[0]);
-                                //     return Container(
-                                //       height: 280,
-                                //       child: profile.data.blmMemorial.memorialImagesOrVideos == null 
-                                //       ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
-                                //       : GestureDetector(
-                                //         onTap: (){
-                                //           if(videoPlayerController.value.isPlaying){
-                                //             videoPlayerController.pause();
-                                //             print('Paused!');
-                                //           }else{
-                                //             videoPlayerController.play();
-                                //             print('Played!');
-                                //           }
-                                //         },
-                                //         child: AspectRatio(
-                                //           aspectRatio: videoPlayerController.value.aspectRatio,
-                                //           child: VideoPlayer(videoPlayerController),
-                                //         ),
-                                //       ),
-                                //     );
-                                //   }else{
-                                //     return Container(height: 0,);
-                                //   }
-                                // }()),
-
                                 ((){
                                   if(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != '' || profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != null){
                                     return Container(

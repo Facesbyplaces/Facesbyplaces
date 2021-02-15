@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularCreatePostSearchLocation extends StatefulWidget{
@@ -23,10 +22,6 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);

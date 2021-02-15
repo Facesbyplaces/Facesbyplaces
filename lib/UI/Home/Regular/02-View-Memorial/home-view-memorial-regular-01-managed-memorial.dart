@@ -11,7 +11,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-view-memorial-regular-03-connection-list.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -190,10 +189,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Scaffold(
       backgroundColor: Color(0xffaaaaaa),
       body: SingleChildScrollView(
@@ -230,14 +225,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                         child: Column(
                           children: [
 
-                            // SizedBox(height: ScreenUtil().setHeight(105)),
                             SizedBox(height: 105,),
 
                             Center(
                               child: Text(profile.data.almMemorial.showMemorialName,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  // fontSize: ScreenUtil().setSp(20, allowFontScalingSelf: true),
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold, 
                                   color: Color(0xff000000),
@@ -247,7 +240,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20,),
 
                             Container(
@@ -267,7 +259,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     ),
                                   ),
 
-                                  // SizedBox(width: ScreenUtil().setWidth(10)),
                                   SizedBox(height: 10,),
 
                                   Expanded(
@@ -283,7 +274,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20,),
 
                             Column(
@@ -337,7 +327,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ],
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20,),
 
                             Container(
@@ -367,14 +356,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         },
                                         child: Text('Manage',
                                           style: TextStyle(
-                                            // fontSize: ScreenUtil().setSp(16, allowFontScalingSelf: true),
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xffffffff),
                                           ),
                                         ),
                                         minWidth: SizeConfig.screenWidth / 2,
-                                        // height: ScreenUtil().setHeight(45),
                                         height: 45,
                                         shape: StadiumBorder(),
                                         color: Color(0xff2F353D),
@@ -405,7 +392,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                       },
                                       child: CircleAvatar(
-                                        // radius: ScreenUtil().setHeight(25),
                                         radius: 25,
                                         backgroundColor: Color(0xff3498DB),
                                         child: Icon(Icons.share, color: Color(0xffffffff), size: 25,),
@@ -416,7 +402,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               ),
                             ),
 
-                            // SizedBox(height: ScreenUtil().setHeight(20)),
                             SizedBox(height: 20,),
 
                             Padding(
@@ -842,21 +827,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 ),
                               ),
                             )
-                            // : ContainerResponsive(
-                            //   height: SizeConfig.screenHeight,
-                            //   width: SizeConfig.screenWidth,
-                            //   alignment: Alignment.center,
-                            //   child: ContainerResponsive(
-                            //     width: SizeConfig.screenWidth,
-                            //     heightResponsive: false,
-                            //     widthResponsive: true,
-                            //     alignment: Alignment.center,
-                            //     child: SingleChildScrollView(
-                            //       physics: ClampingScrollPhysics(),
-                            //       child: MiscRegularEmptyDisplayTemplate(),
-                            //     ),
-                            //   ),
-                            // ),
                             : SingleChildScrollView(
                               physics: ClampingScrollPhysics(),
                               child: MiscRegularEmptyDisplayTemplate(),
@@ -935,7 +905,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                   Positioned(
                     top: SizeConfig.screenHeight / 5,
                     child: Container(
-                      // height: ScreenUtil().setHeight(160),
                       height: 160,
                       width: SizeConfig.screenWidth,
                       child: Row(

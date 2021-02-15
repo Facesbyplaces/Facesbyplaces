@@ -74,7 +74,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         CustomPaint(size: Size.infinite, painter: MiscBLMCurvePainter(),),
 
                         Positioned(
-                          // bottom: 50,
                           bottom: 20,
                           left: (SizeConfig.screenWidth / 2) - 120,
                           child: Badge(

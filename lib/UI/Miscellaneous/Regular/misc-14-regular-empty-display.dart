@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularEmptyDisplayTemplate extends StatelessWidget{
@@ -15,16 +14,11 @@ class MiscRegularEmptyDisplayTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Column(
       children: [
 
         Center(child: Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),),
 
-        // SizedBox(height: ScreenUtil().setHeight(45)),
         SizedBox(height: 45,),
 
         Center(child: Text(message, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
@@ -33,7 +27,6 @@ class MiscRegularEmptyDisplayTemplate extends StatelessWidget{
 
         Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text(contentMessage, textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),),
 
-        // SizedBox(height: ScreenUtil().setHeight(20)),
         SizedBox(height: 20,)
 
       ],

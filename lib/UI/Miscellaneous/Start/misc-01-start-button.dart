@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MiscStartButtonIconTemplate extends StatelessWidget{
 
@@ -31,41 +30,29 @@ class MiscStartButtonIconTemplate extends StatelessWidget{
       onPressed: onPressed,
       minWidth: width,
       height: height,
-      child: LayoutBuilder(
-        builder: (_, BoxConstraints constraints) {
-          ScreenUtil.init(
-            context: _,
-            constraints: constraints,
-            designSize: Size(SizeConfig.screenWidth, SizeConfig.screenHeight),
-            allowFontScaling: true,
-          );
-          return Row(
-            children: [
-              CircleAvatar(
-                minRadius: 35.r,
-                backgroundColor: backgroundColor,
-                child: Center(child: image,),
+      child: Row(
+        children: [
+          CircleAvatar(
+            minRadius: 35,
+            backgroundColor: backgroundColor,
+            child: Center(child: image,),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0,),
+              alignment: Alignment.centerLeft,
+              child: Text(buttonText,
+                style: buttonTextStyle
               ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0,),
-                  alignment: Alignment.centerLeft,
-                  child: Text(buttonText,
-                    style: buttonTextStyle
-                  ),
-                ),
-              ),
-            ],
-          );
-        }
+            ),
+          ),
+        ],
       ),
-      // child: 
       shape: StadiumBorder(),
       color: buttonColor,
     );
   }
 }
-
 
 class MiscStartButtonTemplate extends StatelessWidget{
 

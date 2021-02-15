@@ -155,18 +155,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                     },
                   );
                 }else if(profileImage.hasError){
-                  // return Icon(Icons.error);
                   return IconButton(
                     icon: CircleAvatar(
                       backgroundColor: Color(0xff888888),
                       backgroundImage: AssetImage('assets/icons/app-icon.png'),
-                      // backgroundImage: ((){
-                      //   if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
-                      //     return NetworkImage(profileImage.data.showProfileInformationImage);
-                      //   }else{
-                      //     return AssetImage('assets/icons/app-icon.png');
-                      //   }
-                      // }()),
                     ),
                     onPressed: () async{
                       Scaffold.of(context).openDrawer();

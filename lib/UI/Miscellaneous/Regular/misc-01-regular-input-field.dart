@@ -228,10 +228,8 @@ class MiscRegularInputFieldMultiTextPostTemplate extends StatefulWidget{
     this.backgroundColor = const Color(0xffffffff),
   }) : super(key: key);
   
-
   MiscRegularInputFieldMultiTextPostTemplateState createState() => MiscRegularInputFieldMultiTextPostTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, type: type, maxLines: maxLines, readOnly: readOnly, backgroundColor: backgroundColor);
 }
-
 
 class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularInputFieldMultiTextPostTemplate>{
   final String labelText;

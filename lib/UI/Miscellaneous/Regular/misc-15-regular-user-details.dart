@@ -2,7 +2,7 @@ import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-02-
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-03-show-user-memorials.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -11,15 +11,14 @@ import 'package:flutter/material.dart';
 import 'misc-04-regular-manage-memorial.dart';
 import 'misc-05-regular-post.dart';
 
-class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget {
+class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget{
   final int userId;
   MiscRegularUserProfileDraggableSwitchTabs({this.userId});
 
-  @override
   MiscRegularUserProfileDraggableSwitchTabsState createState() => MiscRegularUserProfileDraggableSwitchTabsState(userId: userId);
 }
 
-class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUserProfileDraggableSwitchTabs> {
+class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUserProfileDraggableSwitchTabs>{
   final int userId;
   MiscRegularUserProfileDraggableSwitchTabsState({this.userId});
 
@@ -31,118 +30,111 @@ class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUs
   @override
   void initState(){
     super.initState();
-    height = SizeConfig.screenHeight;
-    position = Offset(0.0, height - 100);
     children = [MiscRegularDraggablePost(userId: userId,), MiscRegularDraggableMemorials(userId: userId,)];
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     SizeConfig.init(context);
-    return Positioned(
-      left: position.dx,
-      top: position.dy - SizeConfig.blockSizeVertical * 10,
-      child: Draggable(
-        feedback: draggable(),
-        onDraggableCanceled: (Velocity velocity, Offset offset){
-          if(offset.dy > 100 && offset.dy < (SizeConfig.screenHeight - 100)){
-            setState(() {
-              position = offset;
-            });
-          }
-        },
-        child: draggable(),
-        childWhenDragging: Container(),
-        axis: Axis.vertical,
-      ),
-    );
-  }
-
-  draggable(){
-    return Material(
-      child: Container(
+    return SlidingUpPanel(
+      onPanelOpened: (){
+        setState(() {
+          print('Opened!');
+        });
+      },
+      maxHeight: SizeConfig.screenHeight / 1.5,
+      header: Container(
+        height: 70,
         width: SizeConfig.screenWidth,
+        child: Container(
+          alignment: Alignment.center,
+          width: SizeConfig.screenWidth,
+          height: 70,
+          child: DefaultTabController(
+            length: 2,
+            initialIndex: currentIndex,
+            child: TabBar(
+              isScrollable: false,
+              labelColor: Color(0xff04ECFF),
+              unselectedLabelColor: Color(0xffCDEAEC),
+              indicatorColor: Color(0xff04ECFF),
+              onTap: (int number){
+                setState(() {
+                  currentIndex = number;
+                  print('The currentIndex is $currentIndex');
+                });
+              },
+              tabs: [
+
+                Container(
+                  width: SizeConfig.screenWidth / 2.5,
+                  child: Center(
+                    child: Text('Post',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+
+                Container(
+                  width: SizeConfig.screenWidth / 2.5,
+                  child: Center(
+                    child: Text('Memorials',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ),
         decoration: BoxDecoration(
           color: Color(0xffffffff),
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25),),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Color(0xffaaaaaa),
-              offset: Offset(0, 0),
-              blurRadius: 5.0
-            ),
-          ],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50.0),
+            topRight: Radius.circular(50.0),
+          ),
         ),
+      ),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50.0),
+        topRight: Radius.circular(50.0),
+      ),
+      panel: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         child: Column(
           children: [
-
-            Container(
-              alignment: Alignment.center,
-              width: SizeConfig.screenWidth,
-              height: SizeConfig.blockSizeVertical * 8,
-              child: DefaultTabController(
-                length: 2,
-                initialIndex: currentIndex,
-                child: TabBar(
-                  isScrollable: false,
-                  labelColor: Color(0xff04ECFF),
-                  unselectedLabelColor: Color(0xffCDEAEC),
-                  indicatorColor: Color(0xff04ECFF),
-                  onTap: (int number){
-                    setState(() {
-                      currentIndex = number;
-                    });
-                  },
-                  tabs: [
-
-                    Container(
-                      width: SizeConfig.screenWidth / 2.5,
-                      child: Center(
-                        child: Text('Post',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Container(
-                      width: SizeConfig.screenWidth / 2.5,
-                      child: Center(
-                        child: Text('Memorials',
-                          style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-            ),
+            Container(width: SizeConfig.screenWidth, height: 70,), // SERVES AS THE SPACE FOR THE CONTENT TO BE SHOW
 
             Container(
               width: SizeConfig.screenWidth,
-              height: (SizeConfig.screenHeight - position.dy),
               child: IndexedStack(
                 index: currentIndex,
                 children: children,
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 10,),
-            
           ],
+        ),
+      ),
+      collapsed: Container(
+        decoration: BoxDecoration(
+          color: Color(0xffffffff),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(50.0),
+            topRight: Radius.circular(50.0),
+          ),
         ),
       ),
     );
   }
 }
-
-
 
 class RegularMiscDraggablePost{
   int userId;
@@ -153,13 +145,11 @@ class RegularMiscDraggablePost{
   String postBody;
   dynamic profileImage;
   List<dynamic> imagesOrVideos;
-
   bool managed;
   bool joined;
   int numberOfLikes;
   int numberOfComments;
   bool likeStatus;
-
   int numberOfTagged;
   List<String> taggedFirstName;
   List<String> taggedLastName;
@@ -221,27 +211,26 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
           newList4.add(newValue.almFamilyMemorialList[i].showUsersPostsPostTagged[j].showUsersPostsTaggedId);
         }
 
-        posts.add(RegularMiscDraggablePost(
-          userId: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPagePageCreator.showUsersPostsPageCreatorId,
-          postId: newValue.almFamilyMemorialList[i].showUsersPostsId,
-          memorialId: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageId,
-          timeCreated: newValue.almFamilyMemorialList[i].showUsersPostsCreatedAt,
-          memorialName: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageName,
-          postBody: newValue.almFamilyMemorialList[i].showUsersPostsBody,
-          profileImage: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageProfileImage,
-          imagesOrVideos: newValue.almFamilyMemorialList[i].showUsersPostsImagesOrVideos,
-
-          managed: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageManage,
-          joined: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageFollower,
-          numberOfComments: newValue.almFamilyMemorialList[i].showUsersPostsNumberOfComments,
-          numberOfLikes: newValue.almFamilyMemorialList[i].showUsersPostsNumberOfLikes,
-          likeStatus: newValue.almFamilyMemorialList[i].showUsersPostsLikeStatus,
-
-          numberOfTagged: newValue.almFamilyMemorialList[i].showUsersPostsPostTagged.length,
-          taggedFirstName: newList1,
-          taggedLastName: newList2,
-          taggedImage: newList3,
-          taggedId: newList4,
+        posts.add(
+          RegularMiscDraggablePost(
+            userId: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPagePageCreator.showUsersPostsPageCreatorId,
+            postId: newValue.almFamilyMemorialList[i].showUsersPostsId,
+            memorialId: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageId,
+            timeCreated: newValue.almFamilyMemorialList[i].showUsersPostsCreatedAt,
+            memorialName: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageName,
+            postBody: newValue.almFamilyMemorialList[i].showUsersPostsBody,
+            profileImage: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageProfileImage,
+            imagesOrVideos: newValue.almFamilyMemorialList[i].showUsersPostsImagesOrVideos,
+            managed: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageManage,
+            joined: newValue.almFamilyMemorialList[i].showUsersPostsPage.showUsersPostsPageFollower,
+            numberOfComments: newValue.almFamilyMemorialList[i].showUsersPostsNumberOfComments,
+            numberOfLikes: newValue.almFamilyMemorialList[i].showUsersPostsNumberOfLikes,
+            likeStatus: newValue.almFamilyMemorialList[i].showUsersPostsLikeStatus,
+            numberOfTagged: newValue.almFamilyMemorialList[i].showUsersPostsPostTagged.length,
+            taggedFirstName: newList1,
+            taggedLastName: newList2,
+            taggedImage: newList3,
+            taggedId: newList4,
           ),    
         );
       }
@@ -261,10 +250,6 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
       height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
       child: count != 0
@@ -304,7 +289,6 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
               numberOfComments: posts[i].numberOfComments,
               numberOfLikes: posts[i].numberOfLikes,
               likeStatus: posts[i].likeStatus,
-
               numberOfTagged: posts[i].numberOfTagged,
               taggedFirstName: posts[i].taggedFirstName,
               taggedLastName: posts[i].taggedLastName,
@@ -352,21 +336,6 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
           itemCount: posts.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(),
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: MiscRegularEmptyDisplayTemplate(),
@@ -438,7 +407,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
     );
   }
 
-
   void addMemorials2(){
     finalMemorials.add(
       Container(
@@ -458,7 +426,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
       ),
     );
   }
-
 
   void onLoading() async{
 
@@ -550,10 +517,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return Container(
       child: count != 0
       ? SmartRefresher(
@@ -585,21 +548,6 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
           itemCount: finalMemorials.length,
         ),
       )
-      // : ContainerResponsive(
-      //   height: SizeConfig.screenHeight,
-      //   width: SizeConfig.screenWidth,
-      //   alignment: Alignment.center,
-      //   child: ContainerResponsive(
-      //     width: SizeConfig.screenWidth,
-      //     heightResponsive: false,
-      //     widthResponsive: true,
-      //     alignment: Alignment.center,
-      //     child: SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       child: MiscRegularEmptyDisplayTemplate(message: 'Memorial is empty',),
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: MiscRegularEmptyDisplayTemplate(message: 'Memorial is empty',),

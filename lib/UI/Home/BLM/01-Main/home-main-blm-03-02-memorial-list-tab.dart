@@ -49,7 +49,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     onLoading();
   }
 
-  
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
     refreshController.refreshCompleted();
@@ -78,7 +77,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     );
   }
 
-
   void addMemorials2(){
     finalMemorials.add(
       Container(
@@ -98,7 +96,6 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       ),
     );
   }
-
 
   void onLoading() async{
 

@@ -5,7 +5,6 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-image-dis
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -181,7 +180,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
                 feeds[i].imagesOrVideos != null
                 ? Container(
-                  // color: Colors.red, 
                   height: 250, 
                   width: SizeConfig.screenWidth,
                   child: ((){
@@ -223,64 +221,57 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           crossAxisCount: 4,
                           itemCount: 3,
                           itemBuilder: (BuildContext context, int index) => 
-                            ((){
-                              if(index != 1){
-                                return CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  height: 250,
-                                  width: 250,
-                                  imageUrl: feeds[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                );
-                              }else{
-                                return feeds[i].imagesOrVideos.length - 3 > 0
-                                ? CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  height: 250,
-                                  width: 250,
-                                  imageUrl: feeds[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                )
-                                : Stack(
-                                  children: [
-                                    CachedNetworkImage(
-                                      fit: BoxFit.contain,
-                                      height: 250,
-                                      width: 250,
-                                      imageUrl: feeds[i].imagesOrVideos[index],
-                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                    ),
+                          ((){
+                            if(index != 1){
+                              return CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                height: 250,
+                                width: 250,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              );
+                            }else{
+                              return feeds[i].imagesOrVideos.length - 3 > 0
+                              ? CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                height: 250,
+                                width: 250,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              )
+                              : Stack(
+                                children: [
+                                  CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    height: 250,
+                                    width: 250,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                  ),
 
-                                    Container(color: Colors.black.withOpacity(0.5),),
+                                  Container(color: Colors.black.withOpacity(0.5),),
 
-                                    Center(
-                                      child: CircleAvatar(
-                                        radius: SizeConfig.blockSizeVertical * 3,
-                                        backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                        child: Text(
-                                          '${feeds[i].imagesOrVideos.length - 3}',
-                                          style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xffffffff),
-                                          ),
+                                  Center(
+                                    child: CircleAvatar(
+                                      radius: SizeConfig.blockSizeVertical * 3,
+                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                      child: Text(
+                                        '${feeds[i].imagesOrVideos.length - 3}',
+                                        style: TextStyle(
+                                          fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xffffffff),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                );
-                              }
-                            }()),
-                            // StaggeredTile StaggeredTile.count(int crossAxisCellCount, num mainAxisCellCount)
-                          // staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          
-                          // staggeredTileBuilder: (int index) => StaggeredTile.count(4, 3 * 250 / 250),
-                          // staggeredTileBuilder: (int index) => StaggeredTile.fit(index.isEven ? 3 : 2).,
-                          // staggeredTileBuilder: (int index) => StaggeredTile.extent(2, 250),
-                          // staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+                                  ),
+                                ],
+                              );
+                            }
+                          }()),
                           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
                           mainAxisSpacing: 4.0,
                           crossAxisSpacing: 4.0,
@@ -293,117 +284,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 )
                 : Container(height: 0),
 
-                
-
                 SizedBox(height: 45),
-
-                // feeds[i].imagesOrVideos != null
-                // ? Container(
-                //   height: SizeConfig.blockSizeVertical * 30,
-                //   child: ((){
-                //     if(feeds[i].imagesOrVideos != null){
-                //       if(feeds[i].imagesOrVideos.length == 1){
-                //         return Container(
-                //           child: CachedNetworkImage(
-                //             fit: BoxFit.cover,
-                //             imageUrl: feeds[i].imagesOrVideos[0],
-                //             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                //             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                //           ),
-                //         );
-                //       }else if(feeds[i].imagesOrVideos.length == 2){
-                //         return StaggeredGridView.countBuilder(
-                //           padding: EdgeInsets.zero,
-                //           physics: NeverScrollableScrollPhysics(),
-                //           crossAxisCount: 4,
-                //           itemCount: 2,
-                //           itemBuilder: (BuildContext context, int index) => 
-                //             CachedNetworkImage(
-                //               fit: BoxFit.cover,
-                //               imageUrl: feeds[i].imagesOrVideos[index],
-                //               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                //               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                //             ),
-                //           staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                //           mainAxisSpacing: 4.0,
-                //           crossAxisSpacing: 4.0,
-                //         );
-                //       }else{
-                //         return StaggeredGridView.countBuilder(
-                //           padding: EdgeInsets.zero,
-                //           physics: NeverScrollableScrollPhysics(),
-                //           crossAxisCount: 4,
-                //           itemCount: 3,
-                //           itemBuilder: (BuildContext context, int index) => 
-                //             ((){
-                //               if(index != 1){
-                //                 return CachedNetworkImage(
-                //                   fit: BoxFit.cover,
-                //                   imageUrl: feeds[i].imagesOrVideos[index],
-                //                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                //                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                //                 );
-                //               }else{
-                //                 return feeds[i].imagesOrVideos.length - 3 > 0
-                //                 ? CachedNetworkImage(
-                //                   fit: BoxFit.cover,
-                //                   imageUrl: feeds[i].imagesOrVideos[index],
-                //                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                //                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                //                 )
-                //                 : Stack(
-                //                   children: [
-                //                     CachedNetworkImage(
-                //                       fit: BoxFit.cover,
-                //                       imageUrl: feeds[i].imagesOrVideos[index],
-                //                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                //                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                //                     ),
-
-                //                     Container(color: Colors.black.withOpacity(0.5),),
-
-                //                     Center(
-                //                       child: CircleAvatar(
-                //                         radius: SizeConfig.blockSizeVertical * 3,
-                //                         backgroundColor: Color(0xffffffff).withOpacity(.5),
-                //                         child: Text(
-                //                           '${feeds[i].imagesOrVideos.length - 3}',
-                //                           style: TextStyle(
-                //                             fontSize: SizeConfig.safeBlockHorizontal * 7,
-                //                             fontWeight: FontWeight.bold,
-                //                             color: Color(0xffffffff),
-                //                           ),
-                //                         ),
-                //                       ),
-                //                     ),
-                //                   ],
-                //                 );
-                //               }
-                //             }()),
-                //             // StaggeredTile StaggeredTile.count(int crossAxisCellCount, num mainAxisCellCount)
-                //           // staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          
-                //           // staggeredTileBuilder: (int index) => StaggeredTile.count(4, 3 * 250 / 250),
-                //           // staggeredTileBuilder: (int index) => StaggeredTile.fit(index.isEven ? 3 : 2).,
-                //           // staggeredTileBuilder: (int index) => StaggeredTile.extent(2, 250),
-                //           // staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-                //           staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                //           mainAxisSpacing: 4.0,
-                //           crossAxisSpacing: 4.0,
-                //         );
-                //       }
-                //     }else{
-                //       return Container(height: 0,);
-                //     }
-                //   }()),
-                // )
-                // : Container(height: 0,),
-
-                // SizedBox(height: 50,),
-
-                // Container(color: Colors.red, height: 500, width: SizeConfig.screenWidth,),
-
-                
 
               ],
             );
@@ -414,101 +295,92 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         ),
       )
       : SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: Column(
-              children: [
+        physics: ClampingScrollPhysics(),
+        child: Column(
+          children: [
 
-                // SizedBox(height: ScreenUtil().setHeight(45)),
-                SizedBox(height: 45),
+            SizedBox(height: 45),
 
-                Align(
-                  alignment: Alignment.center,
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: <TextSpan>[
+            Align(
+              alignment: Alignment.center,
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: <TextSpan>[
 
-                        TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                    TextSpan(text: 'Welcome to\n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
 
-                        TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-                      ],
-                    ),
-                  ),
+                    TextSpan(text: 'Faces by Places', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+                  ],
                 ),
-
-                // SizedBox(height: ScreenUtil().setHeight(25)),
-                SizedBox(height: 20),
-
-                Container(
-                  width: SizeConfig.screenHeight,
-                  // heightResponsive: false,
-                  // widthResponsive: true,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: SizeConfig.blockSizeVertical * 8,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
-                      ),
-
-                      Positioned(
-                        right: 0,
-                        top: SizeConfig.blockSizeVertical * 8,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
-                      ),
-
-                      Positioned(
-                        left: SizeConfig.blockSizeHorizontal * 12,
-                        top: SizeConfig.blockSizeVertical * 6,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
-                      ),
-
-                      Positioned(
-                        right: SizeConfig.blockSizeHorizontal * 12,
-                        top: SizeConfig.blockSizeVertical * 6,
-                        child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
-                      ),
-
-                      Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
-                    ],
-                  ),
-                ),
-
-                // SizedBox(height: ScreenUtil().setHeight(45)),
-                SizedBox(height: 20),
-
-                Center(child: Text('Feed is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
-
-                // SizedBox(height: ScreenUtil().setHeight(20)),
-                SizedBox(height: 20),
-
-                Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),),
-
-                // SizedBox(height: ScreenUtil().setHeight(25)),
-                SizedBox(height: 20),
-
-                MiscRegularButtonTemplate(
-                  buttonText: 'Create', 
-                  buttonTextStyle: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold, 
-                    color: Color(0xffffffff),
-                  ), 
-                  onPressed: (){
-                    Navigator.pushNamed(context, '/home/regular/create-memorial');
-                  }, 
-                  width: SizeConfig.screenWidth / 2, 
-                  // height: ScreenUtil().setHeight(45),
-                  height: 45,
-                  buttonColor: Color(0xff04ECFF),
-                ),
-
-                // SizedBox(height: ScreenUtil().setHeight(20)),
-                SizedBox(height: 20),
-                
-              ],
+              ),
             ),
-          ),
+
+            SizedBox(height: 20),
+
+            Container(
+              width: SizeConfig.screenHeight,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    top: SizeConfig.blockSizeVertical * 8,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
+                  ),
+
+                  Positioned(
+                    right: 0,
+                    top: SizeConfig.blockSizeVertical * 8,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
+                  ),
+
+                  Positioned(
+                    left: SizeConfig.blockSizeHorizontal * 12,
+                    top: SizeConfig.blockSizeVertical * 6,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
+                  ),
+
+                  Positioned(
+                    right: SizeConfig.blockSizeHorizontal * 12,
+                    top: SizeConfig.blockSizeVertical * 6,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
+                  ),
+
+                  Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            Center(child: Text('Feed is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
+
+            SizedBox(height: 20),
+
+            Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Center(child: Text('Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),),
+
+            SizedBox(height: 20),
+
+            MiscRegularButtonTemplate(
+              buttonText: 'Create', 
+              buttonTextStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold, 
+                color: Color(0xffffffff),
+              ), 
+              onPressed: (){
+                Navigator.pushNamed(context, '/home/regular/create-memorial');
+              }, 
+              width: SizeConfig.screenWidth / 2, 
+              height: 45,
+              buttonColor: Color(0xff04ECFF),
+            ),
+
+            SizedBox(height: 20),
+            
+          ],
+        ),
+      ),
     );
   }
 }

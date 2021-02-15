@@ -6,7 +6,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
   final int memorialId;
@@ -47,70 +46,60 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
           },
         ),
       ),
-      body: ResponsiveWrapper(
-        maxWidth: SizeConfig.screenWidth,
-        defaultScale: true,
-        breakpoints: [
-          ResponsiveBreakpoint.resize(480, name: MOBILE),
-          ResponsiveBreakpoint.autoScale(800, name: TABLET),
-          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-          ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-        ],
-        child: Container(
-          height: SizeConfig.screenHeight - kToolbarHeight,
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                width: SizeConfig.screenWidth,
-                height: SizeConfig.blockSizeVertical * 8,
-                child: DefaultTabController(
-                  length: 2,
-                  child: TabBar(
-                    labelColor: Color(0xff04ECFF),
-                    unselectedLabelColor: Color(0xff000000),
-                    indicatorColor: Color(0xff04ECFF),
-                    onTap: (int index){
-                      setState(() {
-                        toggle = index;
-                      });
-                    },
-                    tabs: [
+      body: Container(
+        height: SizeConfig.screenHeight - kToolbarHeight,
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              width: SizeConfig.screenWidth,
+              height: SizeConfig.blockSizeVertical * 8,
+              child: DefaultTabController(
+                length: 2,
+                child: TabBar(
+                  labelColor: Color(0xff04ECFF),
+                  unselectedLabelColor: Color(0xff000000),
+                  indicatorColor: Color(0xff04ECFF),
+                  onTap: (int index){
+                    setState(() {
+                      toggle = index;
+                    });
+                  },
+                  tabs: [
 
-                      Center(
-                        child: Text('Page',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    Center(
+                      child: Text('Page',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
+                    ),
 
-                      Center(child: Text('Privacy',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
+                    Center(child: Text('Privacy',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
+                    ),
 
-                    ],
-                  ),
+                  ],
                 ),
               ),
+            ),
 
-              Expanded(
-                child: Container(
-                  child: ((){
-                    switch(toggle){
-                      case 0: return settingsTab1(memorialId); break;
-                      case 1: return settingsTab2(memorialId); break;
-                    }
-                  }()),
-                ),
+            Expanded(
+              child: Container(
+                child: ((){
+                  switch(toggle){
+                    case 0: return settingsTab1(memorialId); break;
+                    case 1: return settingsTab2(memorialId); break;
+                  }
+                }()),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

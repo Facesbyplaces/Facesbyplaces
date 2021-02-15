@@ -109,7 +109,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
             relationship: newValue.blmFamilyMemorialList[i].homeTabFeedPage.homeTabFeedPageRelationship,
           ),
         );
-
       }
 
       if(mounted)

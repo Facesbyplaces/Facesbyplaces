@@ -15,7 +15,6 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
 
-
 class MiscRegularDropDownTemplate extends StatefulWidget{
   final int postId;
   final bool likePost;
@@ -216,7 +215,6 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
     );
   }
 }
-
 
 class MiscRegularDropDownMemorialTemplate extends StatefulWidget{
   final String memorialName;

@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'home-search-regular-02-search-extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
@@ -96,7 +95,6 @@ class HomeRegularSearch extends StatelessWidget{
                       hintStyle: TextStyle(
                         fontSize: 14,
                       ),
-                      // prefixIcon: Icon(Icons.search, color: Colors.grey),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffffffff)),
                         borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -150,8 +148,6 @@ class HomeRegularSearch extends StatelessWidget{
                           Location.LocationData locationData = await location.getLocation();
                           List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
                           context.hideLoaderOverlay();
-
-                          print('The keyword is ${controller.text}');
 
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                         },

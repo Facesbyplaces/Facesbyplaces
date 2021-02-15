@@ -322,8 +322,7 @@ class HomeRegularShowCommentsListState extends State<HomeRegularShowCommentsList
                                           },
                                           child: userId == comments[i].userId
                                           ? Text('You', style: TextStyle(fontWeight: FontWeight.bold,),)
-                                          // : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
-                                          : Text('$userId' + ' ' + '${comments[i].userId}', style: TextStyle(fontWeight: FontWeight.bold,),),
+                                          : Text('${comments[i].firstName}' + ' ' + '${comments[i].lastName}', style: TextStyle(fontWeight: FontWeight.bold,),),
                                         ),
                                       ),
 

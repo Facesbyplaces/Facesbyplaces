@@ -128,22 +128,6 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
           itemCount: notifications.length,
         ),
       )
-      // : SingleChildScrollView(
-      //   child: Container(
-      //     height: SizeConfig.screenHeight - 85 - kToolbarHeight,
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-
-      //         Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
-
-      //         SizedBox(height: 45,),
-
-      //         Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

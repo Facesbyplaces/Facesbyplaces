@@ -135,8 +135,6 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
   }
 }
 
-
-
 class BLMMiscDraggablePost{
   int userId;
   int postId;
@@ -245,7 +243,6 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       refreshController.loadNoData();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -441,7 +438,6 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     );
   }
 
-
   void onLoading() async{
 
     if(flag1 == false){
@@ -494,10 +490,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       
     }else{
       refreshController.loadNoData();
-    }
-
-
-    
+    }    
   }
 
   void onLoading2() async{

@@ -8,7 +8,6 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/material.dart';
 import 'misc-13-blm-dropdown.dart';
@@ -105,10 +104,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
   @override
   Widget build(BuildContext context){
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
@@ -130,7 +125,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
         child: Column(
           children: [
             Container(
-              // height: ScreenUtil().setHeight(65),
               height: 65,
               child: Row(
                 children: [
@@ -298,8 +292,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                   GestureDetector(
                     onTap: (){
-                      print('The user id of blm is $userId');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId, numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId,)));
                     },
                     child: Row(

@@ -183,7 +183,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                                 child: Text(memorialName,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                    // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xff000000),
@@ -197,7 +196,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                                 child: Text(timeCreated,
                                   maxLines: 1,
                                   style: TextStyle(
-                                    // fontSize: ScreenUtil().setSp(12, allowFontScalingSelf: true),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xffaaaaaa)
@@ -215,17 +213,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
               ),
             ),
 
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: Column(
-            //     children: contents,
-            //   ),
-            // ),
-
-            Column(
-              children: contents,
-            ),
-
+            Column(children: contents,),
             
             SizedBox(height: 45),
 
@@ -270,10 +258,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             )
             : Container(height: 0,),
 
-            // SizedBox(height: 50),
-
             Container(
-              // height: ScreenUtil().setHeight(65),
               height: 65,
               child: Row(
                 children: [
@@ -313,13 +298,10 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                   GestureDetector(
                     onTap: (){
-                      print('The user id is $userId');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, userId: userId, numberOfLikes: likesCount, numberOfComments: numberOfComments,)));
                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, userId: userId)));
                     },
                     child: Row(
                       children: [
-                        // Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
                         Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
                         SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
@@ -352,7 +334,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                       },
                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
-                      // child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
                     ),
                   ),
                 ],

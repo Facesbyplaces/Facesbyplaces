@@ -5,7 +5,6 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-01-leave-page.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
@@ -77,10 +76,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    // ResponsiveWidgets.init(context,
-    //   height: SizeConfig.screenHeight,
-    //   width: SizeConfig.screenWidth,
-    // );
     return GestureDetector(
       onTap: () async{
         if(pageType == 'Blm'){
@@ -98,7 +93,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
         }
       },
       child: Container(
-        // height: ScreenUtil().setHeight(80),
         height: 80,
         color: Color(0xffffffff),
         child: Row(
@@ -123,7 +117,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                            // fontSize: ScreenUtil().setSp(14, allowFontScalingSelf: true),
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Color(0xff000000),
@@ -192,7 +185,6 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       }
                     },
                     child: Text('Leave', style: TextStyle(fontSize: 14,),),
-                    // height: ScreenUtil().setHeight(35),
                     height: 35,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(5)),

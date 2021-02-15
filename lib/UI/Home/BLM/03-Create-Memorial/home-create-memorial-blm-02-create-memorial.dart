@@ -9,7 +9,6 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-
 class HomeBLMCreateMemorial2 extends StatefulWidget{
 
   HomeBLMCreateMemorial2State createState() => HomeBLMCreateMemorial2State();

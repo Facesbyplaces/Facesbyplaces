@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
 class BLMJoin extends StatelessWidget {
@@ -44,7 +43,7 @@ class BLMJoin extends StatelessWidget {
                           child: Center(
                             child: Text('BLACK',
                               style: TextStyle(
-                                fontSize: 24.ssp,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xff000000),
                               ),
@@ -56,7 +55,7 @@ class BLMJoin extends StatelessWidget {
                             alignment: Alignment.center,
                             child: Text('LIVES',
                               style: TextStyle(
-                                fontSize: 24.ssp,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xffffffff),
                               ),
@@ -71,7 +70,7 @@ class BLMJoin extends StatelessWidget {
                           child: Center(
                             child: Text('MATTER',
                               style: TextStyle(
-                                fontSize: 24.ssp,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xff000000),
                               ),
@@ -248,20 +247,19 @@ class BLMJoin extends StatelessWidget {
 
                   SizedBox(height: 50,),
 
-                  Center(child: Text('Remembering the Victims', style: TextStyle(fontSize: 18.ssp, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                  Center(child: Text('Remembering the Victims', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
                   SizedBox(height: SizeConfig.blockSizeVertical * 5,),
               
                   MiscBLMButtonTemplate(
                     buttonText: 'Join', 
                     buttonTextStyle: TextStyle(
-                      fontSize: 16.ssp,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold, 
                       color: Color(0xffffffff),
                     ), 
                     onPressed: (){
                       Navigator.pushNamed(context, '/blm/login');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => BLMPasswordReset()));
                     }, 
                     width: SizeConfig.screenWidth / 2, 
                     height: 45,

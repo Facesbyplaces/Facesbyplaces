@@ -498,5 +498,4 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
       )
     );
   }
-
 }

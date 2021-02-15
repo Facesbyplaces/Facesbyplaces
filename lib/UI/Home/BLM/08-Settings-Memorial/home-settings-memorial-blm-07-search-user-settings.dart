@@ -159,7 +159,6 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                         hintStyle: TextStyle(
                           fontSize: 14,
                         ),
-                        // prefixIcon: Icon(Icons.search, color: Colors.grey),
                         suffixIcon: IconButton(
                           onPressed: (){
                             setState(() {

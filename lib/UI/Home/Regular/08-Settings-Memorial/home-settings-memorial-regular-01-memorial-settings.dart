@@ -5,7 +5,6 @@ import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memo
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-setting-detail.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'home-settings-memorial-regular-02-page-details.dart';
 import 'home-settings-memorial-regular-03-update-memorial-image.dart';
 import 'home-settings-memorial-regular-04-page-managers.dart';
@@ -63,17 +62,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
           },
         ),
       ),
-      body: ResponsiveWrapper(
-        maxWidth: SizeConfig.screenWidth,
-        defaultScale: true,
-        breakpoints: [
-          ResponsiveBreakpoint.resize(480, name: MOBILE),
-          ResponsiveBreakpoint.autoScale(800, name: TABLET),
-          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-          ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-        ],
-        child: SingleChildScrollView(
-          child: Container(
+      body: SingleChildScrollView(
+        child: Container(
           height: SizeConfig.screenHeight - kToolbarHeight,
           child: Column(
             children: [
@@ -129,7 +119,6 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
               ),
             ],
           ),
-        ),
         ),
       ),
     );
