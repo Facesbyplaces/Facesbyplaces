@@ -52,16 +52,6 @@ export default function DataTableRowUserData({ users, search }) {
         </span>
       </td>
       <td>
-        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {user.username}
-        </span>
-      </td>
-      <td>
-        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {user.phone_number}
-        </span>
-      </td>
-      <td>
         {user.account_type == 1 ? (
           <span className="label label-lg label-light-primary label-inline">
             BLM

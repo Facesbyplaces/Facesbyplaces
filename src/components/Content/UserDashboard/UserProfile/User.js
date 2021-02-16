@@ -4,11 +4,11 @@ import axios from "../../../../auxiliary/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { TableUserAction } from "../../../../redux/actions";
 import EditUser from "./EditUser";
-import ViewUser from "./ViewUser";
 
 export default function User() {
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
+  const [image, setImage] = useState(null);
   const [profile, setProfile] = useState(true);
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,
@@ -30,7 +30,8 @@ export default function User() {
         params: { id: tab.id, account_type: tab.account_type },
       })
       .then((response) => {
-        setUser(response.data);
+        setUser(response.data.user);
+        setImage(response.data.image);
         console.log("Response: ", response.data);
       })
       .catch((error) => {
@@ -390,7 +391,7 @@ export default function User() {
             </div>
           </div>
           {/*end::Card*/}
-          {profile ? <ViewUser user={user} /> : ""}
+          {profile ? <EditUser user={user} image={image} /> : ""}
         </div>
         {/*end::Container*/}
       </div>
