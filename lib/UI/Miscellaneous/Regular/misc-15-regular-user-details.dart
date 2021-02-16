@@ -6,7 +6,6 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'misc-14-regular-empty-display.dart';
 import 'package:flutter/material.dart';
 import 'misc-04-regular-manage-memorial.dart';
 import 'misc-05-regular-post.dart';
@@ -112,12 +111,9 @@ class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUs
           children: [
             Container(width: SizeConfig.screenWidth, height: 70,), // SERVES AS THE SPACE FOR THE CONTENT TO BE SHOW
 
-            Container(
-              width: SizeConfig.screenWidth,
-              child: IndexedStack(
-                index: currentIndex,
-                children: children,
-              ),
+            IndexedStack(
+              index: currentIndex,
+              children: children,
             ),
 
           ],
@@ -251,7 +247,8 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 13 - AppBar().preferredSize.height,
+      height: SizeConfig.screenHeight / 1.5,
+      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -294,6 +291,8 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
               taggedLastName: posts[i].taggedLastName,
               taggedId: posts[i].taggedId,
               contents: [
+                // Container(height: 70),
+
                 Column(
                   children: [
                     Align(
@@ -311,13 +310,13 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                         ),
                       ),
                     ),
-                    SizedBox(height: SizeConfig.blockSizeVertical * 1,),
+                    SizedBox(height: 10,),
                   ],
                 ),
 
                 posts[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeHorizontal * 50,
+                  height: 400,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
@@ -332,13 +331,30 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
             );
             
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
           itemCount: posts.length,
         ),
       )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -388,18 +404,13 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         height: 80,
         padding: EdgeInsets.only(left: 20.0, right: 20.0),
         color: Color(0xffeeeeee),
-        child: Container(
-          height: 80,
-          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-          color: Color(0xffeeeeee),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text('Owned',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff000000),
-              ),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Owned',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff000000),
             ),
           ),
         ),
@@ -518,6 +529,8 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
+      height: SizeConfig.screenHeight / 1.5,
+      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -550,7 +563,24 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
       )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
-        child: MiscRegularEmptyDisplayTemplate(message: 'Memorial is empty',),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+
+              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+
+              Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+
+              SizedBox(height: 45,),
+
+              Text('Memorial is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+
+              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+            ],
+          ),
+        ),
       ),
     );
   }

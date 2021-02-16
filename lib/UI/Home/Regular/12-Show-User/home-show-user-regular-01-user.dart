@@ -53,7 +53,12 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
+                        // child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
+                        child: CircleAvatar(
+                          radius: 100, 
+                          backgroundColor: Color(0xff888888), 
+                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
+                        ),
                       ),
 
                     ],
@@ -97,7 +102,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                        SizedBox(height: 20,),
 
                         Text('${profile.data.showUserInformationEmailAddress}',
                           style: TextStyle(
@@ -107,7 +112,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40,),
 
                         Text('About',
                           style: TextStyle(
@@ -117,7 +122,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                           ),
                         ),
 
-                        SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                        SizedBox(height: 40,),
 
                         Padding(
                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -128,13 +133,13 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.star_outline, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Birthdate',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -144,7 +149,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationBirthdate}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     ),
@@ -152,20 +157,20 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.place, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.place, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Birthplace',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -175,7 +180,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationBirthplace}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
@@ -183,20 +188,20 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.home, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.home, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Home Address',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -206,7 +211,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationHomeAddress}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
@@ -214,20 +219,20 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.email, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.email, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Email Address',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -237,7 +242,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationEmailAddress}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )
@@ -245,20 +250,20 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                 ],
                               ),
 
-                              SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                              SizedBox(height: 20,),
 
                               Row(
                                 children: [
                                   Expanded(
                                     child: Row(
                                       children: [
-                                        Icon(Icons.phone, color: Color(0xffBDC3C7), size: SizeConfig.blockSizeVertical * 2,),
+                                        Icon(Icons.phone, color: Color(0xffBDC3C7), size: 20,),
 
-                                        SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                        SizedBox(width: 20,),
 
                                         Text('Contact Number',
                                           style: TextStyle(
-                                            fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                            fontSize: 14,
                                             color: Color(0xffBDC3C7),
                                           ),
                                         ),
@@ -268,7 +273,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                   Expanded(
                                     child: Text('${profile.data.showUserInformationContactNumber}',
                                       style: TextStyle(
-                                        fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+                                        fontSize: 14,
                                         color: Color(0xff000000),
                                       ),
                                     )

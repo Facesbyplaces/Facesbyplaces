@@ -1,6 +1,10 @@
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-05-post-like-or-unlike.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -133,41 +137,70 @@ class HomeBLMShowOriginalPostState extends State<HomeBLMShowOriginalPost>{
                                   children: [
                                     GestureDetector(
                                       onTap: () async{
-                                        
+                                        if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                          if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                          }else{
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                          }
+                                        }else{
+                                          if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                          }else{
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                          }
+                                        }
                                       },
                                       child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
                                     ),
                                     Expanded(
                                       child: Container(
                                         padding: EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          children: [
-                                            Expanded(
-                                              child: Align(alignment: Alignment.bottomLeft,
-                                                child: Text(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageName,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xff000000),
+                                        child: GestureDetector(
+                                          onTap: () async{
+                                            if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                              if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                              }else{
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                              }
+                                            }else{
+                                              if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                              }else{
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                              }
+                                            }
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                child: Align(alignment: Alignment.bottomLeft,
+                                                  child: Text(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageName,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color(0xff000000),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              child: Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Text(timeago.format(DateTime.parse(originalPost.data.blmPost.showOriginalPostCreateAt)),
-                                                  maxLines: 1,
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Color(0xffaaaaaa)
+                                              Expanded(
+                                                child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(timeago.format(DateTime.parse(originalPost.data.blmPost.showOriginalPostCreateAt)),
+                                                    maxLines: 1,
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: Color(0xffaaaaaa)
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),

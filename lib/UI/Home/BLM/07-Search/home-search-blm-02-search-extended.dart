@@ -670,10 +670,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                     }
                   }()),
                 )
-                : Container(
-                  color: Colors.red,
-                  height: 0,
-                ),
+                : Container(color: Colors.red, height: 0,),
               ],
             );
           },

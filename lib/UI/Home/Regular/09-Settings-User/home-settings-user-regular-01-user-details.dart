@@ -393,7 +393,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                               fontWeight: FontWeight.bold, 
                               color: Color(0xffffffff),
                             ),
-                            width: 150,
+                            width: SizeConfig.screenWidth / 2,
                             height: 45,
                             onPressed: () async{
 
@@ -468,7 +468,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                 ],
               );
             }else if(profile.hasError){
-              return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4, color: Color(0xff000000),),),));
+              return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
             }else{
               return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
             }

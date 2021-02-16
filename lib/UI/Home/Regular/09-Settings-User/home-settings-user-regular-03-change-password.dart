@@ -48,9 +48,8 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
             ),
           ),
           body: Container(
-            padding: EdgeInsets.all(20.0),
-            height: SizeConfig.screenHeight - kToolbarHeight,
             child: SingleChildScrollView(
+              padding: EdgeInsets.all(20.0),
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
@@ -117,7 +116,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                         );
                       }
                     }, 
-                    width: 150,
+                    width: SizeConfig.screenWidth / 2,
                     height: 45,
                     buttonColor: Color(0xff04ECFF),
                   ),
