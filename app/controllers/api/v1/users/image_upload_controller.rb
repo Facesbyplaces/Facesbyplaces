@@ -26,14 +26,22 @@ class Api::V1::Users::ImageUploadController < ApplicationController
     end
 
     def update
-        user = user()
+        
+        if params[:account_type] == "1"
+            user = BlmUser.find(params[:user_id])
+        elsif params[:account_type] == "1"
+            user = AlmUser.find(params[:user_id])
+        else
+            user = user()
+        end
+
         if user != nil
             user.update(image: params[:image])
 
             if user.errors.present?
                 render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
             else
-                render json: {success: true, message: "Successfully Uploaded Image", status: 200}, status: 200
+                render json: {success: true, message: "Successfully Uploaded Image", user: rails_blob_url(user.image), status: 200}, status: 200
             end
         else
             render json: {error: "pls login"}, status: 422

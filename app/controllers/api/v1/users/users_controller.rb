@@ -111,7 +111,9 @@ class Api::V1::Users::UsersController < ApplicationController
             user = AlmUser.find(params[:user_id])
         end
 
-        render json: UserSerializer.new( user ).attributes
+        render json: {image: rails_blob_url(user.image)}
+        
+        # UserSerializer.new( user ).attributes
     end
 
     def posts

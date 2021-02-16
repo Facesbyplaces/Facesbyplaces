@@ -16,12 +16,12 @@ class Api::V1::Followers::FollowersController < ApplicationController
                 follower = Follower.new(follower_params)
                 follower.account = user()
                 if follower.save 
-                    render json: {status: "Success"}
+                    render json: {status: "Success", follower: follower, user: user}
                 else
-                    render json: {}, status: 500
+                    render json: {success: false, errors: follower }, status: 500
                 end
             else
-                render json: {}, status: 409
+                render json: {success: false, errors: follower }, status: 409
             end
         else
             follower = Follower.where(page_type: params[:page_type], page_id: params[:page_id], account: user()).first
@@ -29,12 +29,13 @@ class Api::V1::Followers::FollowersController < ApplicationController
                 if follower.destroy 
                     render json: {status: "Unfollowed"}
                 else
-                    render json: {}, status: 500
+                    render json: {success: false, errors: follower }, status: 500
                 end
             else
-                render json: {}, status: 404
+                render json: {success: false, errors: follower }, status: 500
             end
         end
+
     end
 
     private

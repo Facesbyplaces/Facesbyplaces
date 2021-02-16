@@ -45,23 +45,49 @@ class Api::V1::Admin::AdminController < ApplicationController
             user = AlmUser.find(params[:id]) 
         end
 
-        render json: UserSerializer.new( user ).attributes
+        render json: { 
+            image:  rails_blob_url(user.image),
+            user:   UserSerializer.new( user ).attributes
+            
+        }
+        # UserSerializer.new( user ).attributes
+        # id:             user.id, 
+            # username:       user.username, 
+            # first_name:     user.first_name, 
+            # last_name:      user.last_name, 
+            # phone_number:   user.phone_number, 
     end
 
     def editUser
-        if params[:account_type] == '1'
+        if params[:account_type].to_i == 1
             user = User.find(params[:id])
         else
             user = AlmUser.find(params[:id])
         end
 
         if user != nil
-            user.update(
-                username: username,
-                first_name: firstName,
-                last_name: lastName,
-                phone_number: phoneNumber,
-                email: email )
+
+            # if params[:username] != nil && params[:first_name] != nil && params[:last_name] && params[:phone_number] != nil
+            #     user.update(
+            #         username: params[:username], 
+            #         first_name: params[:first_name], 
+            #         last_name: params[:last_name], 
+            #         phone_number: params[:phone_number]
+            #     )
+            # #No Username
+            # elsif params[:first_name] != nil && params[:last_name] && params[:phone_number] != nil
+            #     user.update(
+            #         first_name: params[:first_name], 
+            #         last_name: params[:last_name], 
+            #         phone_number: params[:phone_number]
+            #     )
+            # elsif params[:last_name] != nil
+            #     user.update(last_name: params[:last_name])
+            # elsif params[:phone_number] != nil
+            #     user.update(phone_number: params[:phone_number])
+            # end
+
+            user.update(editUser_params)
 
             if user.errors.present?
                 render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
@@ -72,50 +98,6 @@ class Api::V1::Admin::AdminController < ApplicationController
             render json: {error: "pls login"}, status: 422
         end
     end
-
-    # def searchBlmUser
-    #     users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'User').map{|searchObject| 
-    #         User.find(searchObject.searchable_id)
-    #     }.flatten.uniq
-
-    #     users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-    #     if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-    #         itemsremaining = 0
-    #     elsif users.total_count < numberOfPage
-    #         itemsremaining = users.total 
-    #     else
-    #         itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-    #     end
-
-    #     render json: {  itemsremaining:  itemsremaining,
-    #                     users: ActiveModel::SerializableResource.new(
-    #                                 users, 
-    #                                 each_serializer: UserSerializer
-    #                             )
-    #                 }
-    # end
-
-    # def searchAlmUser
-    #     users = PgSearch.multisearch(params[:keywords]).where(searchable_type: 'AlmUser').map{|searchObject| 
-    #         User.find(searchObject.searchable_id)
-    #     }.flatten.uniq
-
-    #     users = Kaminari.paginate_array(users).page(params[:page]).per(numberOfPage)
-    #     if users.total_count == 0 || (users.total_count - (params[:page].to_i * numberOfPage)) < 0
-    #         itemsremaining = 0
-    #     elsif users.total_count < numberOfPage
-    #         itemsremaining = users.total 
-    #     else
-    #         itemsremaining = users.total_count - (params[:page].to_i * numberOfPage)
-    #     end
-
-    #     render json: {  itemsremaining:  itemsremaining,
-    #                     users: ActiveModel::SerializableResource.new(
-    #                                 users, 
-    #                                 each_serializer: UserSerializer
-    #                             )
-    #                 }
-    # end
 
     def searchUsers
         users = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['AlmUser', 'User']).map{|searchObject| 
@@ -281,9 +263,12 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     private
+    def editUser_params
+        params.permit(:id, :account_type, :username, :first_name, :last_name, :phone_number)
+    end
     def admin_only
         if !user.has_role? :admin 
-            return render json: {status: "Must be an admin to continue", user: user}, status: 401
+            return render json: {status: "Must be an admin to continue"}, status: 401
         end
     end
 end
