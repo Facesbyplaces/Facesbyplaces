@@ -68,139 +68,136 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
               },
             ),
           ),
-          body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
-            child: FutureBuilder<APIRegularShowPageDetailsMain>(
-              future: futureMemorialSettings,
-              builder: (context, memorialSettings){
-                if(memorialSettings.hasData){
-                  return Stack(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                        child: ListView(
-                          physics: ClampingScrollPhysics(),
-                          children: [
+          body: FutureBuilder<APIRegularShowPageDetailsMain>(
+            future: futureMemorialSettings,
+            builder: (context, memorialSettings){
+              if(memorialSettings.hasData){
+                return Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                      child: ListView(
+                        physics: ClampingScrollPhysics(),
+                        children: [
 
-                            MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.almMemorial.showPageDetailsName),
+                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.almMemorial.showPageDetailsName),
 
-                            SizedBox(height: 20,),
+                          SizedBox(height: 20,),
 
-                            MiscRegularInputFieldDropDown(key: _key2, displayText: memorialSettings.data.almMemorial.showPageDetailsRelationship),
+                          MiscRegularInputFieldDropDown(key: _key2, displayText: memorialSettings.data.almMemorial.showPageDetailsRelationship),
 
-                            SizedBox(height: 20,),
+                          SizedBox(height: 20,),
 
-                            MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob),
+                          MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob),
 
-                            SizedBox(height: 20,),
+                          SizedBox(height: 20,),
 
-                            MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip),
+                          MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip),
 
-                            SizedBox(height: 20,),
+                          SizedBox(height: 20,),
 
-                            MiscRegularInputFieldTemplate(key: _key5, labelText: 'Country', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry),
+                          MiscRegularInputFieldTemplate(key: _key5, labelText: 'Country', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry),
 
-                            SizedBox(height: 20,),
+                          SizedBox(height: 20,),
 
-                            MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery),
+                          MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery),
 
-                            SizedBox(height: 80,),
+                          SizedBox(height: 80,),
 
-                            MiscRegularButtonTemplate(
-                              buttonText: 'Update', 
-                              buttonTextStyle: TextStyle(
-                                fontSize: 16, 
-                                fontWeight: FontWeight.bold, 
-                                color: Color(0xffffffff),
-                              ),
-                              onPressed: () async{
+                          MiscRegularButtonTemplate(
+                            buttonText: 'Update', 
+                            buttonTextStyle: TextStyle(
+                              fontSize: 16, 
+                              fontWeight: FontWeight.bold, 
+                              color: Color(0xffffffff),
+                            ),
+                            onPressed: () async{
 
-                                if(
-                                  memorialSettings.data.almMemorial.showPageDetailsName != _key1.currentState.controller.text ||
-                                  memorialSettings.data.almMemorial.showPageDetailsRelationship != _key2.currentState.currentSelection ||
-                                  convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key3.currentState.controller.text) ||
-                                  convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key4.currentState.controller.text) ||
-                                  memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry !=  _key5.currentState.controller.text ||
-                                  memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery !=  _key6.currentState.controller.text
-                                ){
-                                  bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
+                              if(
+                                memorialSettings.data.almMemorial.showPageDetailsName != _key1.currentState.controller.text ||
+                                memorialSettings.data.almMemorial.showPageDetailsRelationship != _key2.currentState.currentSelection ||
+                                convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key3.currentState.controller.text) ||
+                                convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key4.currentState.controller.text) ||
+                                memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry !=  _key5.currentState.controller.text ||
+                                memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery !=  _key6.currentState.controller.text
+                              ){
+                                bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
-                                  if(confirmResult){
-                                    context.showLoaderOverlay();
-                                    bool result = await apiRegularUpdatePageDetails(
-                                      name: _key1.currentState.controller.text,
-                                      relationship: _key2.currentState.currentSelection,
-                                      dob: convertDate(_key3.currentState.controller.text),
-                                      rip: convertDate(_key4.currentState.controller.text),
-                                      country: _key5.currentState.controller.text,
-                                      cemetery: _key6.currentState.controller.text,
-                                      memorialId: memorialId,
+                                if(confirmResult){
+                                  context.showLoaderOverlay();
+                                  bool result = await apiRegularUpdatePageDetails(
+                                    name: _key1.currentState.controller.text,
+                                    relationship: _key2.currentState.currentSelection,
+                                    dob: convertDate(_key3.currentState.controller.text),
+                                    rip: convertDate(_key4.currentState.controller.text),
+                                    country: _key5.currentState.controller.text,
+                                    cemetery: _key6.currentState.controller.text,
+                                    memorialId: memorialId,
+                                  );
+                                  context.hideLoaderOverlay();
+
+                                  if(result){
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Successfully updated the account details.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.green,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
                                     );
-                                    context.hideLoaderOverlay();
 
-                                    if(result){
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Successfully updated the account details.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.green,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-
-                                      Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true,));
-                                      Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
-                                    }else{
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Something went wrong. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
-                                      );
-                                    }
+                                    Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true,));
+                                    Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
+                                  }else{
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Something went wrong. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
                                   }
                                 }
+                              }
 
-                              }, 
-                              width: 150,
-                              height: 45,
-                              buttonColor: Color(0xff04ECFF),
-                            ),
+                            }, 
+                            width: 150,
+                            height: 45,
+                            buttonColor: Color(0xff04ECFF),
+                          ),
 
-                          ],
-                        ),
+                        ],
                       ),
-                    ],
-                  );
-                }else if(memorialSettings.hasError){
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
-                }else{
-                  return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
-                }
-              },
-            ),
+                    ),
+                  ],
+                );
+              }else if(memorialSettings.hasError){
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, color: Color(0xff000000),),),));
+              }else{
+                return Container(height: SizeConfig.screenHeight, child: Center(child: Container(child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,), color: Color(0xffffffff),),),);
+              }
+            },
           ),
         ),
       ),

@@ -266,13 +266,65 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                             SizedBox(height: 20,),
 
+                            // Column(
+                            //   children: [
+                            //     ((){
+                            //       if(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != '' || profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != null){
+                            //         return Container(
+                            //           alignment: Alignment.center,
+                            //           padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            //           child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription,
+                            //             textAlign: TextAlign.center,
+                            //             style: TextStyle(
+                            //               fontSize: 16,
+                            //               fontWeight: FontWeight.w300,
+                            //               color: Color(0xff000000),
+                            //             ),
+                            //           ),
+                            //         );
+                            //       }else{
+                            //         return Container(height: 0,);
+                            //       }
+                            //     }()),
+                            //   ],
+                            // ),
+
                             Column(
                               children: [
+                                ((){
+                                  if(profile.data.blmMemorial.memorialImagesOrVideos != null){
+                                    videoPlayerController = VideoPlayerController.network(profile.data.blmMemorial.memorialImagesOrVideos[0]);
+                                    return Container(
+                                      height: 280,
+                                      child: profile.data.blmMemorial.memorialImagesOrVideos == null 
+                                      ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
+                                      : GestureDetector(
+                                        onTap: (){
+                                          if(videoPlayerController.value.isPlaying){
+                                            videoPlayerController.pause();
+                                            print('Paused!');
+                                          }else{
+                                            videoPlayerController.play();
+                                            print('Played!');
+                                          }
+                                        },
+                                        child: AspectRatio(
+                                          aspectRatio: videoPlayerController.value.aspectRatio,
+                                          child: VideoPlayer(videoPlayerController),
+                                        ),
+                                      ),
+                                    );
+                                  }else{
+                                    return Container(height: 0,);
+                                  }
+                                }()),
+
                                 ((){
                                   if(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != '' || profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != null){
                                     return Container(
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                                      // child: Text(profile.data.blmMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                       child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(

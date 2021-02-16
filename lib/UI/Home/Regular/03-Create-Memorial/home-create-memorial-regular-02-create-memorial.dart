@@ -253,37 +253,62 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   shareStory2(){
     return Container(
       width: SizeConfig.screenWidth,
-      child: GestureDetector(
-        onTap: () async{
-          await getVideo();
-        },
-        child: Container(
-          height: 260,
-          decoration: BoxDecoration(
-            color: Color(0xffcccccc),
-            border: Border.all(color: Color(0xff000000),),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
-          child: videoFile == null 
-          ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
-          : GestureDetector(
-            onTap: (){
-              if(videoPlayerController.value.isPlaying){
-                videoPlayerController.pause();
-              }else{
-                videoPlayerController.play();
-              }
-              
-            },
-            onDoubleTap: () async{
+      child: Stack(
+        children: [
+
+          GestureDetector(
+            onTap: () async{
               await getVideo();
             },
-            child: AspectRatio(
-              aspectRatio: videoPlayerController.value.aspectRatio,
-              child: VideoPlayer(videoPlayerController),
+            child: Container(
+              height: 260,
+              width: SizeConfig.screenWidth,
+              decoration: BoxDecoration(
+                color: Color(0xffcccccc),
+                border: Border.all(color: Color(0xff000000),),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: videoFile == null 
+              ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
+              : GestureDetector(
+                onTap: (){
+                  if(videoPlayerController.value.isPlaying){
+                    videoPlayerController.pause();
+                  }else{
+                    videoPlayerController.play();
+                  }
+                  
+                },
+                onDoubleTap: () async{
+                  await getVideo();
+                },
+                child: AspectRatio(
+                  aspectRatio: videoPlayerController.value.aspectRatio,
+                  child: VideoPlayer(videoPlayerController),
+                ),
+              ),
             ),
           ),
-        ),
+
+          videoFile != null
+          ? Positioned(
+            right: 0,
+            child: IconButton(
+              iconSize: 25,
+              onPressed: (){
+                videoFile.delete();
+
+                setState(() {
+                  
+                });
+              },
+              icon: Icon(Icons.close),
+              color: Colors.red,
+            ),
+          )
+          : Container(height: 0,),
+
+        ],
       ),
     );
   }

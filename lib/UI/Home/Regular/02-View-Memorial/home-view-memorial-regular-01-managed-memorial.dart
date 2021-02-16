@@ -247,16 +247,16 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                 SizedBox(height: 20,),
 
                                 Container(
-                                  width: SizeConfig.safeBlockHorizontal * 15,
-                                  height: SizeConfig.blockSizeVertical * 5,
+                                  width: 100,
+                                  height: 40,
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: CircleAvatar(
-                                          radius: SizeConfig.blockSizeVertical * 2,
+                                          radius: 15,
                                           backgroundColor: Color(0xff000000),
                                           child: CircleAvatar(
-                                            radius: SizeConfig.blockSizeVertical * 1,
+                                            radius: 10,
                                             backgroundColor: Colors.transparent,
                                             backgroundImage: AssetImage('assets/icons/fist.png'),
                                           ),
@@ -286,9 +286,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       if(profile.data.almMemorial.showMemorialImagesOrVideos != null){
                                         videoPlayerController = VideoPlayerController.network(profile.data.almMemorial.showMemorialImagesOrVideos[0]);
                                         return Container(
-                                          height: SizeConfig.blockSizeVertical * 34.5,
+                                          height: 280,
                                           child: profile.data.almMemorial.showMemorialImagesOrVideos == null 
-                                          ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: SizeConfig.blockSizeVertical * 20,)
+                                          ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
                                           : GestureDetector(
                                             onTap: (){
                                               if(videoPlayerController.value.isPlaying){
@@ -416,7 +416,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       Row(
                                         children: [
                                           Icon(Icons.place, color: Color(0xff000000), size: 25,),
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                          SizedBox(width: 20,),
                                           Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsCountry,
                                             style: TextStyle(
                                               fontSize: 14,
@@ -426,12 +426,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         ],
                                       ),
 
-                                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                      SizedBox(height: 20,),
 
                                       Row(
                                         children: [
                                           Icon(Icons.star, color: Color(0xff000000), size: 25,),
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                          SizedBox(width: 20,),
                                           Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDob,
                                             style: TextStyle(
                                               fontSize: 14,
@@ -441,12 +441,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         ],
                                       ),
 
-                                      SizedBox(height: SizeConfig.blockSizeVertical * 2,),
+                                      SizedBox(height: 20,),
 
                                       Row(
                                         children: [
                                           Image.asset('assets/icons/grave_logo.png', height: 25,),
-                                          SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                                          SizedBox(width: 20,),
                                           Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsRip,
                                             style: TextStyle(
                                               fontSize: 14,
@@ -473,9 +473,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           },
                                           child: Column(
                                             children: [
-                                              SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
-                                              Text(profile.data.almMemorial.showMemorialPostsCount.toString(),
+                                              Text('${profile.data.almMemorial.showMemorialPostsCount}',
                                                 style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
@@ -485,7 +484,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                               Text('Post',
                                                 style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w300,
                                                   color: Color(0xffaaaaaa),
                                                 ),
@@ -495,7 +494,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         ),
                                       ),
                                       
-                                      Container(width: 2, color: Color(0xffeeeeee),),
+                                      Container(width: 5, color: Color(0xffeeeeee),),
 
                                       Expanded(
                                         child: GestureDetector(
@@ -504,7 +503,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           },
                                           child: Column(
                                             children: [
-                                              SizedBox(height: SizeConfig.blockSizeVertical * 1,),
 
                                               Text('${profile.data.almMemorial.showMemorialFamilyCount}',
                                                 style: TextStyle(
@@ -516,7 +514,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                               Text('Family',
                                                 style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w300,
                                                   color: Color(0xffaaaaaa),
                                                 ),
@@ -526,7 +524,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         ),
                                       ),
 
-                                      Container(width: 2, color: Color(0xffeeeeee),),
+                                      Container(width: 5, color: Color(0xffeeeeee),),
 
                                       Expanded(
                                         child: GestureDetector(
@@ -535,9 +533,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           },
                                           child: Column(
                                             children: [
-                                              SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                              Text(profile.data.almMemorial.showMemorialFriendsCount.toString(),
+                                              Text('${profile.data.almMemorial.showMemorialFriendsCount}',
                                                 style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
@@ -547,7 +543,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                               Text('Friends',
                                                 style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w300,
                                                   color: Color(0xffaaaaaa),
                                                 ),
@@ -557,7 +553,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                         ),
                                       ),
 
-                                      Container(width: 2, color: Color(0xffeeeeee),),
+                                      Container(width: 5, color: Color(0xffeeeeee),),
 
                                       Expanded(
                                         child: GestureDetector(
@@ -566,9 +562,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           },
                                           child: Column(
                                             children: [
-                                              SizedBox(height: SizeConfig.blockSizeVertical * 1,),
-
-                                              Text(profile.data.almMemorial.showMemorialFollowersCount.toString(),
+                                              Text('${profile.data.almMemorial.showMemorialFollowersCount}',
                                                 style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
@@ -578,7 +572,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                               Text('Joined',
                                                 style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: 14,
                                                   fontWeight: FontWeight.w300,
                                                   color: Color(0xffaaaaaa),
                                                 ),
@@ -591,7 +585,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   ),
                                 ),
 
-                                Container(height: 2, color: Color(0xffffffff),),
+                                Container(height: 5, color: Color(0xffffffff),),
 
                                 Container(height: 5, color: Color(0xffeeeeee),),
 
@@ -600,7 +594,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     SizedBox(height: 20),
 
                                     Container(
-                                      key: dataKey,
                                       padding: EdgeInsets.only(left: 20.0),
                                       alignment: Alignment.centerLeft,
                                       child: Text('Post',
@@ -619,7 +612,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                       children: [
                                         Container(
                                           width: SizeConfig.screenWidth,
-                                          height: SizeConfig.blockSizeVertical * 12,
+                                          height: 100,
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                           child: ListView.separated(
                                             physics: ClampingScrollPhysics(),
@@ -641,7 +634,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   );
                                                 },
                                                 child: Container(
-                                                  width: SizeConfig.blockSizeVertical * 12,
+                                                  width: 100,
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(10),
                                                     color: Color(0xff888888),
@@ -726,7 +719,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                     shape: StadiumBorder(),
                                     color: Colors.green,
                                     splashColor: Colors.yellow,
-                                    // height: ScreenUtil().setHeight(45),
                                     height: 45,
                                     child: Text('Create Post',
                                       style: TextStyle(
@@ -754,13 +746,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                               Expanded(child: Container(),),
                               Expanded(
                                 child: CircleAvatar(
-                                  // radius: SizeConfig.blockSizeVertical * 12,
                                   radius: 100,
                                   backgroundColor: Color(0xff04ECFF),
                                   child: Padding(
                                     padding: EdgeInsets.all(5),
                                     child: CircleAvatar(
-                                      // radius: SizeConfig.blockSizeVertical * 12,
                                       radius: 100,
                                       backgroundColor: Color(0xff888888),
                                       backgroundImage: profile.data.almMemorial.showMemorialProfileImage != null ? NetworkImage(profile.data.almMemorial.showMemorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
@@ -785,6 +775,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
             postCount != 0
             ? Container(
+              key: dataKey,
               color: Color(0xffffffff),
               padding: EdgeInsets.all(10.0),
               height: SizeConfig.screenHeight - 65,
@@ -838,7 +829,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                         posts[i].imagesOrVideos != null
                         ? Container(
-                          height: SizeConfig.blockSizeVertical * 30,
+                          height: 240,
                           child: ((){
                             if(posts[i].imagesOrVideos != null){
                               if(posts[i].imagesOrVideos.length == 1){
@@ -904,12 +895,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                                               Center(
                                                 child: CircleAvatar(
-                                                  radius: SizeConfig.blockSizeVertical * 3,
+                                                  radius: 25,
                                                   backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                   child: Text(
                                                     '${posts[i].imagesOrVideos.length - 3}',
                                                     style: TextStyle(
-                                                      fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                                      fontSize: 60,
                                                       fontWeight: FontWeight.bold,
                                                       color: Color(0xffffffff),
                                                     ),
@@ -938,7 +929,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                       ],
                     );
                   },
-                  separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+                  separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
                   itemCount: posts.length,
                 ),
               ),

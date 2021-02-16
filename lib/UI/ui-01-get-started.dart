@@ -1,5 +1,4 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-push-notifications.dart';
-import 'package:facesbyplaces/UI/sample.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
@@ -16,9 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:io';
-
-import 'another-sample.dart';
-import 'new-sample.dart';
 
 const double pi = 3.1415926535897932;
 

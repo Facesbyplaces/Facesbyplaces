@@ -46,38 +46,81 @@ class HomeRegularReport extends StatelessWidget{
             ),
           ),
           body: SingleChildScrollView(
+            padding: EdgeInsets.all(20.0),
             physics: ClampingScrollPhysics(),
-            child: Container(
-              padding: EdgeInsets.all(20.0),
-              height: SizeConfig.screenHeight,
-              child: Column(
-                children: [
+            child: Column(
+              children: [
 
-                  Align(alignment: Alignment.centerLeft, child: Text('Inform us about what happened.', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
+                Align(alignment: Alignment.centerLeft, child: Text('Inform us about what happened.', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),),
 
-                  SizedBox(height: 25,),
+                SizedBox(height: 25,),
 
-                  MiscRegularInputFieldTemplate(key: _key1, labelText: 'Subject', type: TextInputType.text,),
-                  
-                  SizedBox(height: 25,),
+                MiscRegularInputFieldTemplate(key: _key1, labelText: 'Subject', type: TextInputType.text,),
+                
+                SizedBox(height: 25,),
 
-                  MiscRegularInputFieldMultiTextTemplate(key: _key2, labelText: 'Body',),
+                MiscRegularInputFieldMultiTextTemplate(key: _key2, labelText: 'Body',),
 
-                  SizedBox(height: 50,),
+                SizedBox(height: 50,),
 
-                  MiscRegularButtonTemplate(
-                    buttonText: 'Report', 
-                    buttonTextStyle: TextStyle(
-                      fontSize: 16, 
-                      fontWeight: FontWeight.bold, 
-                      color: Color(0xffffffff),
-                    ),
-                    width: SizeConfig.screenWidth / 2, 
-                    height: 45, 
-                    buttonColor: Color(0xff04ECFF), 
-                    onPressed: () async{
+                MiscRegularButtonTemplate(
+                  buttonText: 'Report', 
+                  buttonTextStyle: TextStyle(
+                    fontSize: 16, 
+                    fontWeight: FontWeight.bold, 
+                    color: Color(0xffffffff),
+                  ),
+                  width: SizeConfig.screenWidth / 2, 
+                  height: 45, 
+                  buttonColor: Color(0xff04ECFF), 
+                  onPressed: () async{
 
-                      if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                    if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Please complete the form before submitting.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
+                          ),
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+                    }else{
+
+                      context.showLoaderOverlay();
+                      bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
+                      context.hideLoaderOverlay();
+
+                      if(result){
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.green,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                        Navigator.pushReplacementNamed(context, '/home/regular');
+                      }else{
                         await showDialog(
                           context: context,
                           builder: (_) => 
@@ -85,7 +128,7 @@ class HomeRegularReport extends StatelessWidget{
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                             title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Please complete the form before submitting.',
+                            description: Text('Something went wrong. Please try again.',
                               textAlign: TextAlign.center,
                               style: TextStyle(),
                             ),
@@ -96,60 +139,14 @@ class HomeRegularReport extends StatelessWidget{
                             },
                           )
                         );
-                      }else{
-
-                        context.showLoaderOverlay();
-                        bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
-                        context.hideLoaderOverlay();
-
-                        if(result){
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Successfully submitted a report. Your report will be reviewed by the administrator.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.green,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                          Navigator.pushReplacementNamed(context, '/home/regular');
-                        }else{
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Something went wrong. Please try again.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                        }
                       }
-                    }, 
-                  ),
+                    }
+                  }, 
+                ),
 
-                  SizedBox(height: 25,),
+                SizedBox(height: 25,),
 
-                ],
-              ),
+              ],
             ),
           ),
         ),

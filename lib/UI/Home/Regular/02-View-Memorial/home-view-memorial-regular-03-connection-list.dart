@@ -217,7 +217,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                     case 2: return 'Search Followers'; break;
                   }
                 }()),
-                hintStyle: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 4,),
+                hintStyle: TextStyle(fontSize: 16,),
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xffffffff)),
@@ -247,7 +247,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
               Container(
                 alignment: Alignment.center,
                 width: SizeConfig.screenWidth,
-                height: SizeConfig.blockSizeVertical * 8,
+                height: 70,
                 color: Color(0xffffffff),
                 child: DefaultTabController(
                   initialIndex: toggle,
@@ -266,7 +266,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       Center(
                         child: Text('Family',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -274,7 +274,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
 
                       Center(child: Text('Friends',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -283,7 +283,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                       Center(
                         child: Text('Followers',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 4,
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -345,7 +345,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 onSearch
                 ? Expanded(
                   child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 5,
+                    radius: 40,
                     backgroundColor: Color(0xff888888), 
                     backgroundImage: searches[index].image != null && searches[index].image != ''
                     ? NetworkImage(searches[index].image) 
@@ -354,7 +354,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 )
                 : Expanded(
                   child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 5,
+                    radius: 40,
                     backgroundColor: Color(0xff888888), 
                     backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
                     ? NetworkImage(listsFamily[index].image) 
@@ -363,10 +363,10 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 ),
 
                 onSearch
-                ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
-                : Text(listsFamily[index].firstName.toString() + ' ' + listsFamily[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+                ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+                : Text('${listsFamily[index].firstName} ${listsFamily[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
 
-                Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3, color: Color(0xff888888))),
+                Text('${listsFamily[index].relationship}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 12, color: Color(0xff888888))),
               ],
             ),
           ),
@@ -409,7 +409,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 onSearch
                 ? Expanded(
                   child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 5,
+                    radius: 40,
                     backgroundColor: Color(0xff888888), 
                     backgroundImage: searches[index].image != null && searches[index].image != ''
                     ? NetworkImage(searches[index].image) 
@@ -418,7 +418,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 )
                 : Expanded(
                   child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 5,
+                    radius: 40,
                     backgroundColor: Color(0xff888888), 
                     backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
                     ? NetworkImage(listsFriends[index].image) 
@@ -427,8 +427,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 ),
 
                 onSearch
-                ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
-                : Text(listsFriends[index].firstName.toString() + ' ' + listsFriends[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+                ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+                : Text('${listsFriends[index].firstName} ${listsFriends[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
               ],
             ),
           ),
@@ -471,7 +471,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 onSearch
                 ? Expanded(
                   child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 5,
+                    radius: 40,
                     backgroundColor: Color(0xff888888), 
                     backgroundImage: searches[index].image != null && searches[index].image != ''
                     ? NetworkImage(searches[index].image) 
@@ -480,7 +480,7 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 )
                 : Expanded(
                   child: CircleAvatar(
-                    radius: SizeConfig.blockSizeVertical * 5,
+                    radius: 40,
                     backgroundColor: Color(0xff888888), 
                     backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
                     ? NetworkImage(listsFollowers[index].image) 
@@ -489,8 +489,8 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 ),
 
                 onSearch
-                ? Text(searches[index].firstName.toString() + ' ' + searches[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5))
-                : Text(listsFollowers[index].firstName.toString() + ' ' + listsFollowers[index].lastName.toString(), textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: SizeConfig.safeBlockHorizontal * 3.5)),
+                ? Text('${searches[index].firstName} ${searches[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14))
+                : Text('${listsFollowers[index].firstName} ${listsFollowers[index].lastName}', textAlign: TextAlign.center, overflow: TextOverflow.clip, maxLines: 1, style: TextStyle(fontSize: 14)),
               ],
             ),
           ),
