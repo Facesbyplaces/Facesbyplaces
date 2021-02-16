@@ -174,117 +174,119 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
               famOrFriends: feeds[i].famOrFriends,
               relationship: feeds[i].relationship,
               contents: [
-                Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
-
-                SizedBox(height: 45),
+                Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),                
 
                 feeds[i].imagesOrVideos != null
-                ? Container(
-                  height: 250, 
-                  width: SizeConfig.screenWidth,
-                  child: ((){
-                    if(feeds[i].imagesOrVideos != null){
-                      if(feeds[i].imagesOrVideos.length == 1){
-                        return Container(
-                          child: CachedNetworkImage(
-                            fit: BoxFit.contain,
-                            height: 250,
-                            width: 250,
-                            imageUrl: feeds[i].imagesOrVideos[0],
-                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                          ),
-                        );
-                      }else if(feeds[i].imagesOrVideos.length == 2){
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 2,
-                          itemBuilder: (BuildContext context, int index) => 
-                            CachedNetworkImage(
-                              fit: BoxFit.contain,
-                              height: 250,
-                              width: 250,
-                              imageUrl: feeds[i].imagesOrVideos[index],
-                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                            ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                        );
-                      }else{
-                        return StaggeredGridView.countBuilder(
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: 4,
-                          itemCount: 3,
-                          itemBuilder: (BuildContext context, int index) => 
-                          ((){
-                            if(index != 1){
-                              return CachedNetworkImage(
+                ? Column(
+                  children: [
+                    SizedBox(height: 20),
+
+                    Container(
+                      height: 250, 
+                      width: SizeConfig.screenWidth,
+                      child: ((){
+                        if(feeds[i].imagesOrVideos != null){
+                          if(feeds[i].imagesOrVideos.length == 1){
+                            return Container(
+                              child: CachedNetworkImage(
                                 fit: BoxFit.contain,
                                 height: 250,
                                 width: 250,
-                                imageUrl: feeds[i].imagesOrVideos[index],
+                                imageUrl: feeds[i].imagesOrVideos[0],
                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                              );
-                            }else{
-                              return feeds[i].imagesOrVideos.length - 3 > 0
-                              ? CachedNetworkImage(
-                                fit: BoxFit.contain,
-                                height: 250,
-                                width: 250,
-                                imageUrl: feeds[i].imagesOrVideos[index],
-                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                              )
-                              : Stack(
-                                children: [
-                                  CachedNetworkImage(
+                              ),
+                            );
+                          }else if(feeds[i].imagesOrVideos.length == 2){
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              physics: NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 2,
+                              itemBuilder: (BuildContext context, int index) => 
+                                CachedNetworkImage(
+                                  fit: BoxFit.contain,
+                                  height: 250,
+                                  width: 250,
+                                  imageUrl: feeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                ),
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }else{
+                            return StaggeredGridView.countBuilder(
+                              padding: EdgeInsets.zero,
+                              physics: NeverScrollableScrollPhysics(),
+                              crossAxisCount: 4,
+                              itemCount: 3,
+                              itemBuilder: (BuildContext context, int index) => 
+                              ((){
+                                if(index != 1){
+                                  return CachedNetworkImage(
                                     fit: BoxFit.contain,
                                     height: 250,
                                     width: 250,
                                     imageUrl: feeds[i].imagesOrVideos[index],
                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                  ),
+                                  );
+                                }else{
+                                  return feeds[i].imagesOrVideos.length - 3 > 0
+                                  ? CachedNetworkImage(
+                                    fit: BoxFit.contain,
+                                    height: 250,
+                                    width: 250,
+                                    imageUrl: feeds[i].imagesOrVideos[index],
+                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                  )
+                                  : Stack(
+                                    children: [
+                                      CachedNetworkImage(
+                                        fit: BoxFit.contain,
+                                        height: 250,
+                                        width: 250,
+                                        imageUrl: feeds[i].imagesOrVideos[index],
+                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                      ),
 
-                                  Container(color: Colors.black.withOpacity(0.5),),
+                                      Container(color: Colors.black.withOpacity(0.5),),
 
-                                  Center(
-                                    child: CircleAvatar(
-                                      radius: SizeConfig.blockSizeVertical * 3,
-                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                      child: Text(
-                                        '${feeds[i].imagesOrVideos.length - 3}',
-                                        style: TextStyle(
-                                          fontSize: SizeConfig.safeBlockHorizontal * 7,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xffffffff),
+                                      Center(
+                                        child: CircleAvatar(
+                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                          child: Text(
+                                            '${feeds[i].imagesOrVideos.length - 3}',
+                                            style: TextStyle(
+                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-                          }()),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                          mainAxisSpacing: 4.0,
-                          crossAxisSpacing: 4.0,
-                        );
-                      }
-                    }else{
-                      return Container(height: 0,);
-                    }
-                  }()),
+                                    ],
+                                  );
+                                }
+                              }()),
+                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                              mainAxisSpacing: 4.0,
+                              crossAxisSpacing: 4.0,
+                            );
+                          }
+                        }else{
+                          return Container(height: 0,);
+                        }
+                      }()),
+                    ),
+                  ],
                 )
                 : Container(height: 0),
-
-                SizedBox(height: 45),
 
               ],
             );

@@ -225,7 +225,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                         child: Column(
                           children: [
 
-                            SizedBox(height: 120,),
+                            SizedBox(height: 150,),
 
                             Center(
                               child: Text(profile.data.blmMemorial.memorialName,

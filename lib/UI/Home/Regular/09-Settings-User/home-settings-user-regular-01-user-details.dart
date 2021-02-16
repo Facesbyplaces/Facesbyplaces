@@ -40,12 +40,16 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
     return await apiRegularShowProfileInformation();
   }
 
-  Future getProfileImage() async{
+  Future<bool> getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
     if(pickedFile != null){
       setState(() {
         profileImage = File(pickedFile.path);
       });
+      return true;
+    }else{
+      return false;
     }
   }
 
@@ -88,31 +92,52 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             child: GestureDetector(
                               onTap: () async{
 
-                                await getProfileImage();
-                                
-                                context.showLoaderOverlay();
-                                bool result = await apiRegularUpdateUserProfilePicture(image: profileImage, userId: userId);
-                                context.hideLoaderOverlay();
+                                bool getImage = await getProfileImage();
 
-                                if(result != true){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => 
-                                      AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    )
-                                  );
+                                if(getImage){
+                                  context.showLoaderOverlay();
+                                  bool result = await apiRegularUpdateUserProfilePicture(image: profileImage, userId: userId);
+                                  context.hideLoaderOverlay();
+
+                                  if(result != true){
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Something went wrong. Please try again.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.red,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
+                                  }else{
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => 
+                                        AssetGiffyDialog(
+                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        entryAnimation: EntryAnimation.DEFAULT,
+                                        description: Text('Successfully updated the profile picture.',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(),
+                                        ),
+                                        onlyOkButton: true,
+                                        buttonOkColor: Colors.green,
+                                        onOkButtonPressed: () {
+                                          Navigator.pop(context, true);
+                                        },
+                                      )
+                                    );
+                                  }
                                 }
                                 
                               },
@@ -195,10 +220,11 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                   ),
 
                   SlidingUpPanel(
+                    // maxHeight: SizeConfig.screenHeight / 1.5,
                     maxHeight: SizeConfig.screenHeight / 1.5,
                     panel: SingleChildScrollView(
                       physics: ClampingScrollPhysics(),
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      padding: EdgeInsets.only(left: 50.0, right: 50.0),
                       child: Column(
                         children: [
 
@@ -448,6 +474,8 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                           SizedBox(height: 20,),
                           
                           Text('V.1.1.0', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff888888),),),
+
+                          SizedBox(height: 20,),
 
                         ],
                       ),

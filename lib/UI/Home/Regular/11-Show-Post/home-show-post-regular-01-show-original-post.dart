@@ -391,6 +391,8 @@ class HomeRegularShowOriginalPostState extends State<HomeRegularShowOriginalPost
                               )
                               : Container(color: Colors.red, height: 0,),
 
+                              SizedBox(height: 20),
+
                               originalPost.data.almPost.showOriginalPostPostTagged.length != 0
                               ? Row(
                                 children: [

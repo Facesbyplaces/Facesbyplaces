@@ -57,166 +57,144 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
           }
         },
         child: Scaffold(
-          body: Container(
-            height: SizeConfig.screenHeight,
-            child: Stack(
-              children: [
+          body: Stack(
+            children: [
 
-                SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: Column(
-                      children: [
+              SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: Column(
+                    children: [
 
-                        Column(
-                          children: [
-                            SizedBox(height: 40),
-                            
-                            Align(
-                              alignment: Alignment.topLeft, 
-                              child: IconButton(
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                }, 
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  size: 30,
-                                ),
+                      Column(
+                        children: [
+                          SizedBox(height: 40),
+                          
+                          Align(
+                            alignment: Alignment.topLeft, 
+                            child: IconButton(
+                              onPressed: (){
+                                Navigator.pop(context);
+                              }, 
+                              icon: Icon(
+                                Icons.arrow_back,
+                                size: 30,
                               ),
                             ),
+                          ),
 
-                          ],
-                        ),
+                        ],
+                      ),
 
-                        SizedBox(height: 80,),
+                      SizedBox(height: 80,),
 
-                        Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
+                      Center(child: Text('Verify Email', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                        SizedBox(height: 40),
+                      SizedBox(height: 40),
 
-                        Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                      Center(child: Text('Please enter email address used on signing up.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                        SizedBox(height: 80,),
+                      SizedBox(height: 80,),
 
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                          child: MiscBLMInputFieldTemplate(
-                            key: _key1, 
-                            labelText: 'Email Address', 
-                            type: TextInputType.emailAddress, 
-                            labelTextStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400, 
-                              color: Color(0xff000000),
-                            ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                        child: MiscBLMInputFieldTemplate(
+                          key: _key1, 
+                          labelText: 'Email Address', 
+                          type: TextInputType.emailAddress, 
+                          labelTextStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400, 
+                            color: Color(0xff000000),
                           ),
                         ),
+                      ),
 
-                        SizedBox(height: 80,),
+                      SizedBox(height: 80,),
 
-                        MiscBLMButtonTemplate(
-                          buttonText: 'Next',
-                          buttonTextStyle: TextStyle(
-                            fontSize: 16, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xffffffff),
-                          ),
-                          width: SizeConfig.screenWidth / 2, 
-                          height: 45, 
-                          buttonColor: Color(0xff04ECFF),
-                          onPressed: () async{
+                      MiscBLMButtonTemplate(
+                        buttonText: 'Next',
+                        buttonTextStyle: TextStyle(
+                          fontSize: 16, 
+                          fontWeight: FontWeight.bold, 
+                          color: Color(0xffffffff),
+                        ),
+                        width: SizeConfig.screenWidth / 2, 
+                        height: 45, 
+                        buttonColor: Color(0xff04ECFF),
+                        onPressed: () async{
 
-                            bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text);
+                          bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text);
 
-                            if(_key1.currentState.controller.text == ''){
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Please complete the form before submitting.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
-                            }else if(!validEmail){
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Invalid email address. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
-                            }else{
-                              initBranchReferences();
+                          if(_key1.currentState.controller.text == ''){
+                            await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Please complete the form before submitting.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
+                            );
+                          }else if(!validEmail){
+                            await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('Invalid email address. Please try again.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
+                            );
+                          }else{
+                            initBranchReferences();
 
-                              FlutterBranchSdk.setIdentity('blm-user-forgot-password');
-                              BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                            FlutterBranchSdk.setIdentity('blm-user-forgot-password');
+                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                            
+                            if(response.success){
+                              context.showLoaderOverlay();
+                              bool result = await apiBLMPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
+                              context.hideLoaderOverlay();
                               
-                              if(response.success){
-                                context.showLoaderOverlay();
-                                bool result = await apiBLMPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
-                                context.hideLoaderOverlay();
-                                
-                                if(result == true){
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => 
-                                      AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('An email has been sent to ${_key1.currentState.controller.text} containing instructions for resetting your password.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: Colors.green,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    )
-                                  );
-                                }else{
-                                  await showDialog(
-                                    context: context,
-                                    builder: (_) => 
-                                      AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    )
-                                  );
-                                }
+                              if(result == true){
+                                await showDialog(
+                                  context: context,
+                                  builder: (_) => 
+                                    AssetGiffyDialog(
+                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    entryAnimation: EntryAnimation.DEFAULT,
+                                    description: Text('An email has been sent to ${_key1.currentState.controller.text} containing instructions for resetting your password.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(),
+                                    ),
+                                    onlyOkButton: true,
+                                    buttonOkColor: Colors.green,
+                                    onOkButtonPressed: () {
+                                      Navigator.pop(context, true);
+                                    },
+                                  )
+                                );
                               }else{
                                 await showDialog(
                                   context: context,
@@ -237,20 +215,39 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                                   )
                                 );
                               }
+                            }else{
+                              await showDialog(
+                                context: context,
+                                builder: (_) => 
+                                  AssetGiffyDialog(
+                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  entryAnimation: EntryAnimation.DEFAULT,
+                                  description: Text('Something went wrong. Please try again.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(),
+                                  ),
+                                  onlyOkButton: true,
+                                  buttonOkColor: Colors.red,
+                                  onOkButtonPressed: () {
+                                    Navigator.pop(context, true);
+                                  },
+                                )
+                              );
                             }
+                          }
 
-                          },
-                        ),
+                        },
+                      ),
 
-                        SizedBox(height: 20),
+                      SizedBox(height: 20),
 
-                      ],
-                    ),
+                    ],
                   ),
                 ),
+              ),
 
-              ],
-            ),
+            ],
           ),
         ),
       ),
