@@ -64,12 +64,22 @@ export default function User() {
                 <div className="flex-shrink-0 mr-7 mt-lg-0 mt-3">
                   <div className="symbol symbol-50 symbol-lg-120">
                     {/* <img src={user.image} alt="assets/media/users/300_16.jpg" /> */}
-                    <div
-                      className="symbol-label"
-                      style={{
-                        backgroundImage: `url(${image})`,
-                      }}
-                    />
+                    {image ? (
+                      <div
+                        className="symbol-label"
+                        style={{
+                          backgroundImage: `url(${image})`,
+                        }}
+                      />
+                    ) : (
+                      <div
+                        className="symbol-label"
+                        style={{
+                          backgroundImage:
+                            'url("assets/media/users/blank.png")',
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
                 {/*end::Pic*/}
