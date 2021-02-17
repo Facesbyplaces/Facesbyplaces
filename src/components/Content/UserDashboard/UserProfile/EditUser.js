@@ -135,7 +135,7 @@ export default function EditUser({ user, image }) {
                       <div
                         className="image-input image-input-empty image-input-outline"
                         style={{
-                          backgroundImage: { image },
+                          backgroundImage: `url(${image})`,
                         }}
                       >
                         <div className="image-input-wrapper" />

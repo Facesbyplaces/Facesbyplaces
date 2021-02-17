@@ -30,7 +30,7 @@ export default function User() {
         params: { id: tab.id, account_type: tab.account_type },
       })
       .then((response) => {
-        setUser(response.data.user);
+        setUser(response.data);
         setImage(response.data.image);
         console.log("Response: ", response.data);
       })
@@ -67,7 +67,7 @@ export default function User() {
                     <div
                       className="symbol-label"
                       style={{
-                        backgroundImage: 'url("assets/media/users/300_16.jpg")',
+                        backgroundImage: `url(${image})`,
                       }}
                     />
                   </div>
