@@ -72,8 +72,9 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5))
       ),
-      child: Container(
+      child: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
+        physics: ClampingScrollPhysics(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -87,7 +88,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            Expanded(child: Container(),),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -102,7 +103,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -117,7 +118,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -132,7 +133,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -147,7 +148,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -162,7 +163,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -177,7 +178,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -192,7 +193,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -207,7 +208,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+            SizedBox(height: 40,),
 
             GestureDetector(
               onTap: (){
@@ -222,7 +223,7 @@ class MiscBLMRelationshipFromDialog extends StatelessWidget{
               ),
             ),
 
-            Expanded(child: Container(),),
+            SizedBox(height: 40,),
           ],
         ),
       ),

@@ -6,7 +6,7 @@ class HomeBLMScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: HomeBLMScreenExtended(),
+      body: HomeBLMScreenExtended(newToggleBottom: 0,),
     );
   }
 }

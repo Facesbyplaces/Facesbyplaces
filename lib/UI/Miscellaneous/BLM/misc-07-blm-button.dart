@@ -12,7 +12,7 @@ class MiscBLMButtonTemplate extends StatelessWidget{
 
   MiscBLMButtonTemplate({
     this.buttonText = 'Next',
-    this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300,color: Color(0xffffffff),),
+    this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,color: Color(0xffffffff),),
     this.onPressed,
     this.width,
     this.height,

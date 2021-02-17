@@ -27,7 +27,7 @@ class HomeRegularPaypalState extends State<HomeRegularPaypal>{
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xff04ECFF),
+            backgroundColor: Color(0xffECF0F1),
             title: Text('Paypal', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
             centerTitle: true,
             leading: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),

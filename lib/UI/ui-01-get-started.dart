@@ -598,6 +598,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   ), 
                                   onPressed: (){
                                     Navigator.pushNamed(context, '/login');
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => RegularUploadPhoto()));
                                   },
                                   width: 200,
                                   height: 45,

@@ -53,7 +53,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
         }
       },
       leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),
-      title: Text(notification, style: TextStyle(fontWeight: FontWeight.w300, fontSize: SizeConfig.safeBlockHorizontal * 4),),
+      title: Text(notification, style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
       subtitle: Text(dateCreated),
     );
   }

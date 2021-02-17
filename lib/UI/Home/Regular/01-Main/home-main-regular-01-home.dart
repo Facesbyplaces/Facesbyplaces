@@ -6,7 +6,7 @@ class HomeRegularScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: HomeRegularScreenExtended(),
+      body: HomeRegularScreenExtended(newToggleBottom: 0,),
     );
   }
 }

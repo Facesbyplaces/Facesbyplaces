@@ -78,187 +78,178 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
             children: [
               MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),
 
-              Padding(
+              SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
                 padding: EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: ClampingScrollPhysics(),
-                        child: Column(
+                    Column(
+                      children: [
+
+                        Row(
                           children: [
+                            Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
-                            Row(
-                              children: [
-                                Expanded(child: Text('New Memorial Page', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            Switch(
+                              value: toggle1,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle1 = value;
+                                });
 
-                                Switch(
-                                  value: toggle1,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle1 = value;
-                                    });
-
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationMemorial(hide: toggle1);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-
-                              ],
-                            ),
-
-                            Row(
-                              children: [
-                                Expanded(child: Text('New Activities', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
-
-                                Switch(
-                                  value: toggle2,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle2 = value;
-                                    });
-
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationActivities(hide: toggle2);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-                              ],
-                            ),
-
-                            Row(
-                              children: [
-                                Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
-                                
-                                Switch(
-                                  value: toggle3,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle3 = value;
-                                    });
-                                    
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationPostLikes(hide: toggle3);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-                              ],
-                            ),
-
-                            Row(
-                              children: [
-                                Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
-
-                                Switch(
-                                  value: toggle4,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle4 = value;
-                                    });
-                                    
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationPostComments(hide: toggle4);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-                              ],
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationMemorial(hide: toggle1);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
                             ),
 
                           ],
                         ),
-                      ),
+
+                        Row(
+                          children: [
+                            Expanded(child: Text('New Activities', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+
+                            Switch(
+                              value: toggle2,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle2 = value;
+                                });
+
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationActivities(hide: toggle2);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Expanded(child: Text('Post Likes', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+                            
+                            Switch(
+                              value: toggle3,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle3 = value;
+                                });
+                                
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationPostLikes(hide: toggle3);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Expanded(child: Text('Post Comments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+
+                            Switch(
+                              value: toggle4,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle4 = value;
+                                });
+                                
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationPostComments(hide: toggle4);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
+                            ),
+                          ],
+                        ),
+
+                      ],
                     ),
 
-                    Container(height: 1, color: Color(0xffffffff),),
+                    Container(height: .5, color: Color(0xffffffff),),
 
-                    Expanded(
-                      child: SingleChildScrollView(
-                        physics: ClampingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+                        SizedBox(height: 40,),
+
+                        Text('Page Invites', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+
+                        SizedBox(height: 10,),
+
+                        Row(
                           children: [
+                            Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
 
-                            SizedBox(height: 40,),
-
-                            Text('Page Invites', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
-
-                            SizedBox(height: 10,),
-
-                            Row(
-                              children: [
-                                Expanded(child: Text('Add as Family', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
-
-                                Switch(
-                                  value: toggle5,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle5 = value;
-                                    });
-                                    
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationAddFamily(hide: toggle5);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-                              ],
+                            Switch(
+                              value: toggle5,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle5 = value;
+                                });
+                                
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationAddFamily(hide: toggle5);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
                             ),
-
-                            Row(
-                              children: [
-                                Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
-
-                                Switch(
-                                  value: toggle6,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle6 = value;
-                                    });
-                                    
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationAddFriends(hide: toggle6);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-                              ],
-                            ),
-
-                            Row(
-                              children: [
-                                Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
-
-                                Switch(
-                                  value: toggle7,
-                                  onChanged: (value) async{
-                                    setState(() {
-                                      toggle7 = value;
-                                    });
-                                    
-                                    context.showLoaderOverlay();
-                                    await apiBLMUpdateNotificationAddAdmin(hide: toggle7);
-                                    context.hideLoaderOverlay();
-                                  },
-                                  activeColor: Color(0xff2F353D),
-                                  activeTrackColor: Color(0xff3498DB),
-                                ),
-                              ],
-                            ),
-
                           ],
                         ),
-                      ),
+
+                        Row(
+                          children: [
+                            Expanded(child: Text('Add as Friend', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+
+                            Switch(
+                              value: toggle6,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle6 = value;
+                                });
+                                
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationAddFriends(hide: toggle6);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          children: [
+                            Expanded(child: Text('Add as Page Admin', style: TextStyle(fontSize: 14, color: Color(0xff000000),),)),
+
+                            Switch(
+                              value: toggle7,
+                              onChanged: (value) async{
+                                setState(() {
+                                  toggle7 = value;
+                                });
+                                
+                                context.showLoaderOverlay();
+                                await apiBLMUpdateNotificationAddAdmin(hide: toggle7);
+                                context.hideLoaderOverlay();
+                              },
+                              activeColor: Color(0xff2F353D),
+                              activeTrackColor: Color(0xff3498DB),
+                            ),
+                          ],
+                        ),
+
+                      ],
                     ),
                   ],
                 ),

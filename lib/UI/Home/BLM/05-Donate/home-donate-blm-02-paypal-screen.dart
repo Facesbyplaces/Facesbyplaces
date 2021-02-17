@@ -26,6 +26,7 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
           }
         },
         child: Scaffold(
+          backgroundColor: Color(0xffECF0F1),
           appBar: AppBar(
             backgroundColor: Color(0xff04ECFF),
             title: Text('Paypal', style: TextStyle(fontSize: 16, color: Color(0xffffffff)),),
@@ -38,116 +39,113 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
             ),
           ),
           body: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
             physics: ClampingScrollPhysics(),
-            child: Container(
-              color: Color(0xffECF0F1),
-              padding: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Column(
-                children: [
-                  
-                  Container(
-                    height: 240,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/icons/paypal.png'),
+            child: Column(
+              children: [
+                
+                Container(
+                  height: 240,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/icons/paypal.png'),
+                    ),
+                  ),
+                ),
+
+                Text('Log in with Paypal', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+
+                SizedBox(height: 40,),
+
+                TextFormField(
+                  controller: controller1,
+                  keyboardType: TextInputType.emailAddress,
+                  cursorColor: Color(0xff000000),
+                  decoration: InputDecoration(
+                    fillColor: Color(0xffffffff),
+                    filled: true,
+                    alignLabelWithHint: true,
+                    labelText: 'Email',
+                    labelStyle: TextStyle(fontSize: 16, color: Color(0xff888888)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Color(0xff000000),
                       ),
                     ),
                   ),
+                ),
 
-                  Text('Log in with Paypal', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
+                SizedBox(height: 20,),
 
-                  SizedBox(height: 40,),
-
-                  TextFormField(
-                    controller: controller1,
-                    keyboardType: TextInputType.emailAddress,
-                    cursorColor: Color(0xff000000),
-                    decoration: InputDecoration(
-                      fillColor: Color(0xffffffff),
-                      filled: true,
-                      alignLabelWithHint: true,
-                      labelText: 'Email',
-                      labelStyle: TextStyle(fontSize: 16, color: Color(0xff888888)),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Color(0xff000000),
-                        ),
+                TextFormField(
+                  controller: controller2,
+                  obscureText: true,
+                  keyboardType: TextInputType.text,
+                  cursorColor: Color(0xff000000),
+                  decoration: InputDecoration(
+                    fillColor: Color(0xffffffff),
+                    filled: true,
+                    alignLabelWithHint: true,
+                    labelText: 'Password',
+                    labelStyle: TextStyle(fontSize: 16, color: Color(0xff888888)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Color(0xff000000),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Color(0xff000000),
-                        ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Color(0xff000000),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Color(0xff000000),
-                        ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide(
+                        color: Color(0xff000000),
                       ),
                     ),
                   ),
+                ),
 
-                  SizedBox(height: 20,),
+                SizedBox(height: 40,),
 
-                  TextFormField(
-                    controller: controller2,
-                    obscureText: true,
-                    keyboardType: TextInputType.text,
-                    cursorColor: Color(0xff000000),
-                    decoration: InputDecoration(
-                      fillColor: Color(0xffffffff),
-                      filled: true,
-                      alignLabelWithHint: true,
-                      labelText: 'Password',
-                      labelStyle: TextStyle(fontSize: 16, color: Color(0xff888888)),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                        borderSide: BorderSide(
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
+                MaterialButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: (){},
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold, 
+                      color: Color(0xffffffff),
+                    ), 
                   ),
-
-                  SizedBox(height: 40,),
-
-                  MaterialButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: (){},
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 20, 
-                        fontWeight: FontWeight.bold, 
-                        color: Color(0xffffffff),
-                      ), 
-                    ),
-                    minWidth: SizeConfig.screenWidth,
-                    height: 70,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0)
-                    ),
-                    color: Color(0xff0070BA),
+                  minWidth: SizeConfig.screenWidth,
+                  height: 70,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)
                   ),
+                  color: Color(0xff0070BA),
+                ),
 
-                  SizedBox(height: 20,),
+                SizedBox(height: 20,),
 
-                ],
-              ),
+              ],
             ),
           ),
         ),

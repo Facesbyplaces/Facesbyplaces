@@ -52,7 +52,8 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
         child: Scaffold(
           backgroundColor: Color(0xff888888),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
+            // padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
+            padding: EdgeInsets.all(20.0),
             child: Container(
               decoration: BoxDecoration(
                 color: Color(0xffffffff),

@@ -28,11 +28,15 @@ import 'package:badges/badges.dart';
 import 'dart:async';
 
 class HomeRegularScreenExtended extends StatefulWidget{
+  final int newToggleBottom;
+  HomeRegularScreenExtended({this.newToggleBottom});
 
-  HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState();
+  HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState(newToggleBottom: newToggleBottom);
 }
 
 class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
+  final int newToggleBottom;
+  HomeRegularScreenExtendedState({this.newToggleBottom});
 
   int toggleBottom;
   List<bool> bottomTab;
@@ -109,8 +113,10 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
     super.initState();
     unreadNotifications = 0;
     getUnreadNotifications();
-    toggleBottom = 0;
-    bottomTab = [true, false, false, false];
+    // toggleBottom = 0;
+    // bottomTab = [true, false, false, false];
+    toggleBottom = newToggleBottom;
+    bottomTab = toggleBottom ==  0 ? [true, false, false, false] : [false, true, false, false];
     drawerSettings = getDrawerInformation();
   }
 

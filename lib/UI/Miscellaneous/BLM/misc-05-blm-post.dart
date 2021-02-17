@@ -104,6 +104,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
   @override
   Widget build(BuildContext context){
+    SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
@@ -123,6 +124,9 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               height: 65,
@@ -202,16 +206,18 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
               ),
             ),
 
-            SizedBox(height: 5),
+            // SizedBox(height: 5),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                children: contents,
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Column(
+            //     children: contents,
+            //   ),
+            // ),
 
-            SizedBox(height: 45),
+            // SizedBox(height: 45),
+
+            Column(children: contents,),
 
             numberOfTagged != 0
             ? Row(
@@ -255,7 +261,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
             : Container(height: 0,),
 
             Container(
-              height: SizeConfig.blockSizeVertical * 10,
+              height: 65,
               child: Row(
                 children: [
                   GestureDetector(
@@ -281,14 +287,14 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                         ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,)
                         : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: 10),
 
                         Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                       ],
                     ),
                   ),
 
-                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                  SizedBox(width: 20),
 
                   GestureDetector(
                     onTap: (){
@@ -296,9 +302,9 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     },
                     child: Row(
                       children: [
-                        Image.asset('assets/icons/comment_logo.png', width: SizeConfig.blockSizeHorizontal * 5, height: SizeConfig.blockSizeVertical * 5,),
+                        Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: 10),
 
                         Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                       ],
@@ -326,7 +332,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                           print('Error : ${response.errorCode} - ${response.errorMessage}');
                         }
                       },
-                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
+                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
                     ),
                   ),
                 ],

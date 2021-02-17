@@ -112,7 +112,6 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
             Container(width: SizeConfig.screenWidth, height: 70,), // SERVES AS THE SPACE FOR THE CONTENT TO BE SHOW
 
             Container(
-              width: SizeConfig.screenWidth,
               child: IndexedStack(
                 index: currentIndex,
                 children: children,

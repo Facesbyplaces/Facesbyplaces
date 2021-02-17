@@ -1,16 +1,16 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BlocShowMessage extends Cubit<bool>{
+// class BlocShowMessage extends Cubit<bool>{
 
-  BlocShowMessage() : super(false);
-  void showMessage() => emit(!state);  
-  void reset() => emit(false);
-}
+//   BlocShowMessage() : super(false);
+//   void showMessage() => emit(!state);  
+//   void reset() => emit(false);
+// }
 
-class BlocUpdateButtonText extends Cubit<int>{
+// class BlocUpdateButtonText extends Cubit<int>{
 
-  BlocUpdateButtonText() : super(0);
-  void add() => emit(state + 1);
-  void remove() => emit(state - 1);
-  void reset() => emit(0);
-}
+//   BlocUpdateButtonText() : super(0);
+//   void add() => emit(state + 1);
+//   void remove() => emit(state - 1);
+//   void reset() => emit(0);
+// }

@@ -67,7 +67,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
   Future showProfile;
   int itemRemaining;
   GlobalKey dataKey;
-  GlobalKey profileKey = GlobalKey<HomeRegularMemorialProfileState >();
+  GlobalKey profileKey = GlobalKey<HomeRegularMemorialProfileState>();
   int postCount;
   bool empty;
   bool join;
@@ -360,13 +360,35 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                               });
 
                                               context.showLoaderOverlay();
-                                              bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
+                                              bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: join);
                                               context.hideLoaderOverlay();
 
                                               print('The value of result is $result');
 
                                               if(result){
-                                                Navigator.popAndPushNamed(context, '/home/regular');
+                                                await showDialog(
+                                                  context: context,
+                                                  builder: (_) => 
+                                                    AssetGiffyDialog(
+                                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                                    entryAnimation: EntryAnimation.DEFAULT,
+                                                    description: join != true
+                                                    ? Text('Successfully unfollowed the page. You will no longer receive notifications from this page.',
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(),
+                                                    )
+                                                    : Text('Successfully followed the page. You will receive notifications from this page.',
+                                                      textAlign: TextAlign.center,
+                                                      style: TextStyle(),
+                                                    ),
+                                                    onlyOkButton: true,
+                                                    buttonOkColor: Colors.green,
+                                                    onOkButtonPressed: () {
+                                                      Navigator.pop(context, true);
+                                                    },
+                                                  )
+                                                );
                                               }else{
                                                 await showDialog(
                                                   context: context,

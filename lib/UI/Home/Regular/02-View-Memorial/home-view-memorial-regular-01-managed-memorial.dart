@@ -1,3 +1,4 @@
+import 'package:facesbyplaces/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart';
@@ -54,16 +55,20 @@ class HomeRegularProfile extends StatefulWidget{
   final int memorialId;
   final String relationship;
   final bool managed;
-  HomeRegularProfile({this.memorialId, this.relationship, this.managed,});
+  final bool newlyCreated;
 
-  HomeRegularProfileState createState() => HomeRegularProfileState(memorialId: memorialId, relationship: relationship, managed: managed);
+  HomeRegularProfile({this.memorialId, this.relationship, this.managed, this.newlyCreated});
+
+  HomeRegularProfileState createState() => HomeRegularProfileState(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: newlyCreated);
 }
 
 class HomeRegularProfileState extends State<HomeRegularProfile>{
   final int memorialId;
   final String relationship;
   final bool managed;
-  HomeRegularProfileState({this.memorialId, this.relationship, this.managed,});
+  final bool newlyCreated;
+
+  HomeRegularProfileState({this.memorialId, this.relationship, this.managed, this.newlyCreated});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
@@ -672,7 +677,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
 
                       SafeArea(
                         child: Container(
-                        height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
+                          height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
                           child: Row(
                             children: [
                               Expanded(
@@ -680,7 +685,12 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   padding: EdgeInsets.only(left: 20.0),
                                   child: GestureDetector(
                                     onTap: (){
-                                      Navigator.pop(context);
+                                      if(newlyCreated == true){
+                                        Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularScreenExtended(newToggleBottom: 1,),);
+                                        Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
+                                      }else{
+                                        Navigator.pop(context);
+                                      }
                                     },
                                     child: Row(
                                       children: [
