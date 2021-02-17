@@ -67139,14 +67139,14 @@ code {
     -webkit-box-shadow 0.15s ease;
 }
 .form-control.form-control-solid::-moz-placeholder {
-  color: #b5b5c3;
+  color: #3f4254;
   opacity: 1;
 }
 .form-control.form-control-solid:-ms-input-placeholder {
-  color: #b5b5c3;
+  color: #3f4254;
 }
 .form-control.form-control-solid::-webkit-input-placeholder {
-  color: #b5b5c3;
+  color: #3f4254;
 }
 .form-control.form-control-solid:active,
 .form-control.form-control-solid.active,

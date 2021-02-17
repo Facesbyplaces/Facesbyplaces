@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
 import { DeleteModal } from "./DeleteModal";
-
 //Loader
 import HashLoader from "react-spinners/HashLoader";
+
+import { useDispatch } from "react-redux";
 import { ViewUserAction } from "../../../../../redux/actions";
 import { EditUserAction } from "../../../../../redux/actions";
 

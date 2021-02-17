@@ -1,20 +1,58 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { ViewUserAction, EditUserAction } from "../../../../redux/actions";
 import axios from "../../../../auxiliary/axios";
 
 export default function EditUser({ user, image }) {
+  const dispatch = useDispatch();
+  const { tab } = useSelector(({ tab }) => ({
+    tab: tab,
+  }));
   const [edit, setEdit] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const imageUpload = null;
   // const [email, setEmail] = useState("");
 
   const handleSaveUserdata = () => {};
 
+  const imageUpload = () => {
+    console.log(selectedFile);
+    const formData = new FormData();
+    formData.append("selectedFile", selectedFile, selectedFile.name);
+    console.log("Form Data: ", formData);
+    axios
+      .put("/api/v1/users/image_upload", {
+        image: formData,
+        id: user.id,
+        account_type: user.account_type,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
   const fileSelectedHandler = (e) => {
     setSelectedFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    formData.append("user_id", user.id);
+    formData.append("account_type", user.account_type);
+    console.log("Form Data: ", formData);
+    axios
+      .put("/api/v1/users/image_upload", formData)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
 
   const handleUsernameChange = (e) => {
@@ -33,9 +71,15 @@ export default function EditUser({ user, image }) {
     setPhoneNumber(e.target.value);
   };
 
-  // const handleEmailChange = (e) => {
-  //   setEmail(e.target.value);
-  // };
+  const handleViewClick = (id, account_type, option) => {
+    setEdit((prev) => !prev);
+    dispatch(ViewUserAction({ id, account_type, option }));
+  };
+
+  const handleEditClick = (id, account_type, option) => {
+    setEdit((prev) => !prev);
+    dispatch(EditUserAction({ id, account_type, option }));
+  };
 
   const handleSubmit = (e) => {
     console.log("ID: ", user.id);
@@ -46,27 +90,6 @@ export default function EditUser({ user, image }) {
     console.log("Phone Number: ", phoneNumber);
     // console.log("Email: ", email);
     console.log("Image: ", selectedFile);
-    {
-      selectedFile
-        ? imageUpload.append("image", selectedFile)
-        : console.log("No image to append.");
-    }
-    {
-      selectedFile
-        ? axios
-            .put("/api/v1/users/image_upload", {
-              id: user.id,
-              account_type: user.account_type,
-              image: imageUpload,
-            })
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((error) => {
-              console.log(error.response);
-            })
-        : console.log("No attached image.");
-    }
 
     axios
       .put("/api/v1/admin/users/edit", {
@@ -100,7 +123,7 @@ export default function EditUser({ user, image }) {
                   <h3 className="card-label font-weight-bolder text-dark">
                     Personal Information
                   </h3>
-                  {edit ? (
+                  {edit || tab.option == "e" ? (
                     <span className="text-muted font-weight-bold font-size-sm mt-1">
                       Update user's personal information
                     </span>
@@ -136,91 +159,75 @@ export default function EditUser({ user, image }) {
                         className="image-input image-input-empty image-input-outline"
                         style={{
                           backgroundImage: image
-                            ? `url( ${image})`
+                            ? `url( ${image})` || `url( ${selectedFile})`
                             : `url( "assets/media/users/blank.png" )`,
                         }}
                       >
                         <div className="image-input-wrapper" />
-                        {/* <img
-                            className="image-input image-input-empty image-input-outline"
-                            src={image || user.image}
-                          /> */}
-                        <label
-                          className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                          data-action="change"
-                          data-toggle="tooltip"
-                          title
-                          data-original-title="Change avatar"
-                        >
-                          <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
-                            <svg
-                              width="24px"
-                              height="24px"
-                              viewBox="0 0 24 24"
-                              version="1.1"
-                              xmlns="http://www.w3.org/2000/svg"
-                              xmlnsXlink="http://www.w3.org/1999/xlink"
-                            >
-                              {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-                              <title>Stockholm-icons / Design / Edit</title>
-                              <desc>Created with Sketch.</desc>
-                              <defs />
-                              <g
-                                id="Stockholm-icons-/-Design-/-Edit"
-                                stroke="none"
-                                strokeWidth={1}
-                                fill="none"
-                                fillRule="evenodd"
+                        {edit || tab.option == "e" ? (
+                          <label
+                            className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                            data-action="change"
+                            data-toggle="tooltip"
+                            title
+                            data-original-title="Change avatar"
+                          >
+                            <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                              <svg
+                                width="24px"
+                                height="24px"
+                                viewBox="0 0 24 24"
+                                version="1.1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlnsXlink="http://www.w3.org/1999/xlink"
                               >
-                                <rect
-                                  id="bound"
-                                  x={0}
-                                  y={0}
-                                  width={24}
-                                  height={24}
-                                />
-                                <path
-                                  d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                                  id="Path-11"
-                                  fill="#000000"
-                                  fillRule="nonzero"
-                                  transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
-                                />
-                                <rect
-                                  id="Rectangle"
-                                  fill="#000000"
-                                  opacity="0.3"
-                                  x={5}
-                                  y={20}
-                                  width={15}
-                                  height={2}
-                                  rx={1}
-                                />
-                              </g>
-                            </svg>
-                          </span>
-                          <input
-                            type="file"
-                            name="profile_avatar"
-                            onChange={fileSelectedHandler}
-                          />
-                        </label>
-                        <span
-                          className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                          data-action="cancel"
-                          data-toggle="tooltip"
-                          title="Cancel avatar"
-                        >
-                          <i className="ki ki-bold-close icon-xs text-muted" />
-                        </span>
-                        <span
-                          className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                          data-action="remove"
-                          data-toggle="tooltip"
-                          title="Remove avatar"
-                        >
-                          <i className="ki ki-bold-close icon-xs text-muted" />
-                        </span>
+                                {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                                <title>Stockholm-icons / Design / Edit</title>
+                                <desc>Created with Sketch.</desc>
+                                <defs />
+                                <g
+                                  id="Stockholm-icons-/-Design-/-Edit"
+                                  stroke="none"
+                                  strokeWidth={1}
+                                  fill="none"
+                                  fillRule="evenodd"
+                                >
+                                  <rect
+                                    id="bound"
+                                    x={0}
+                                    y={0}
+                                    width={24}
+                                    height={24}
+                                  />
+                                  <path
+                                    d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                                    id="Path-11"
+                                    fill="#000000"
+                                    fillRule="nonzero"
+                                    transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
+                                  />
+                                  <rect
+                                    id="Rectangle"
+                                    fill="#000000"
+                                    opacity="0.3"
+                                    x={5}
+                                    y={20}
+                                    width={15}
+                                    height={2}
+                                    rx={1}
+                                  />
+                                </g>
+                              </svg>
+                            </span>
+                            <input
+                              type="file"
+                              accept=".png, .jpg, .jpeg"
+                              onChange={fileSelectedHandler}
+                            />
+                          </label>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>
@@ -231,9 +238,9 @@ export default function EditUser({ user, image }) {
                       Username
                     </label>
                     <div className="col-9">
-                      {edit ? (
+                      {edit || tab.option == "e" ? (
                         <input
-                          className="form-control form-control-lg form-control-solid"
+                          className="form-control form-control-lg form-control-solid placeholder-dark-75"
                           type="username"
                           name="username"
                           placeholder={user.username}
@@ -259,7 +266,7 @@ export default function EditUser({ user, image }) {
                       First Name
                     </label>
                     <div className="col-9">
-                      {edit ? (
+                      {edit || tab.option == "e" ? (
                         <input
                           className="form-control form-control-lg form-control-solid"
                           type="first_name"
@@ -287,7 +294,7 @@ export default function EditUser({ user, image }) {
                       Last Name
                     </label>
                     <div className="col-9">
-                      {edit ? (
+                      {edit || tab.option == "e" ? (
                         <input
                           className="form-control form-control-lg form-control-solid"
                           type="last_name"
@@ -355,7 +362,7 @@ export default function EditUser({ user, image }) {
                             </svg>
                           </span>
                         </div>
-                        {edit ? (
+                        {edit || tab.option == "e" ? (
                           <input
                             type="text"
                             className="form-control form-control-lg form-control-solid"
@@ -455,7 +462,7 @@ export default function EditUser({ user, image }) {
                       <div className="col-xl-7">
                         <div className="row">
                           <div className="col-3" />
-                          {edit ? (
+                          {edit || tab.option == "e" ? (
                             <div className="col-9">
                               <button
                                 type="submit"
@@ -466,7 +473,13 @@ export default function EditUser({ user, image }) {
                               </button>
                               <a
                                 className="btn btn-secondary font-weight-bold"
-                                onClick={() => setEdit((prev) => !prev)}
+                                onClick={() =>
+                                  handleViewClick(
+                                    user.id,
+                                    user.account_type,
+                                    "v"
+                                  )
+                                }
                               >
                                 Cancel
                               </a>
@@ -475,7 +488,13 @@ export default function EditUser({ user, image }) {
                             <div className="col-9">
                               <a
                                 className="btn btn-success btn-md btn-block font-weight-bold mr-2"
-                                onClick={() => setEdit((prev) => !prev)}
+                                onClick={() =>
+                                  handleEditClick(
+                                    user.id,
+                                    user.account_type,
+                                    "e"
+                                  )
+                                }
                               >
                                 Edit
                               </a>
