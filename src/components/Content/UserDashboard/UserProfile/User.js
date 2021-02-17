@@ -35,7 +35,7 @@ export default function User() {
         console.log("Response: ", response.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   }, user.id);
 
