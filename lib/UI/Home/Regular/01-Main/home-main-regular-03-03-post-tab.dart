@@ -196,7 +196,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
                 posts[i].imagesOrVideos != null
                 ? Container(
-                  height: SizeConfig.blockSizeVertical * 30,
+                  height: 240,
                   child: ((){
                     if(posts[i].imagesOrVideos != null){
                       if(posts[i].imagesOrVideos.length == 1){
@@ -262,12 +262,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
 
                                       Center(
                                         child: CircleAvatar(
-                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          radius: 25,
                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
                                           child: Text(
                                             '${posts[i].imagesOrVideos.length - 3}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xffffffff),
                                             ),
@@ -297,7 +297,7 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
               ]
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
           itemCount: posts.length,
         ),
       )

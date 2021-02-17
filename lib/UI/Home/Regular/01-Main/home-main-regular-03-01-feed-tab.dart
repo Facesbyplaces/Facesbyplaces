@@ -128,7 +128,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     SizeConfig.init(context);
     return Container(
       height: SizeConfig.screenHeight - 85 - kToolbarHeight,
-      width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -183,7 +182,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
                     Container(
                       height: 250, 
-                      width: SizeConfig.screenWidth,
                       child: ((){
                         if(feeds[i].imagesOrVideos != null){
                           if(feeds[i].imagesOrVideos.length == 1){
@@ -258,12 +256,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
                                       Center(
                                         child: CircleAvatar(
-                                          radius: SizeConfig.blockSizeVertical * 3,
+                                          radius: 25,
                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
                                           child: Text(
                                             '${feeds[i].imagesOrVideos.length - 3}',
                                             style: TextStyle(
-                                              fontSize: SizeConfig.safeBlockHorizontal * 7,
+                                              fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               color: Color(0xffffffff),
                                             ),
@@ -292,7 +290,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             );
             
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 2, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
           itemCount: feeds.length,
         ),
       )
@@ -326,34 +324,34 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                 children: [
                   Positioned(
                     left: 0,
-                    top: SizeConfig.blockSizeVertical * 8,
-                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8,),
+                    top: 70,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: 65, backSize: 70,),
                   ),
 
                   Positioned(
                     right: 0,
-                    top: SizeConfig.blockSizeVertical * 8,
-                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 7.5, backSize: SizeConfig.blockSizeVertical * 8, backgroundColor: Color(0xff04ECFF),),
+                    top: 70,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: 65, backSize: 70, backgroundColor: Color(0xff04ECFF),),
                   ),
 
                   Positioned(
-                    left: SizeConfig.blockSizeHorizontal * 12,
-                    top: SizeConfig.blockSizeVertical * 6,
-                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10,),
+                    left: 50,
+                    top: 50,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: 75, backSize: 80,),
                   ),
 
                   Positioned(
-                    right: SizeConfig.blockSizeHorizontal * 12,
-                    top: SizeConfig.blockSizeVertical * 6,
-                    child: MiscRegularImageDisplayFeedTemplate(frontSize: SizeConfig.blockSizeVertical * 9.5, backSize: SizeConfig.blockSizeVertical * 10, backgroundColor: Color(0xff04ECFF),),
+                    right: 50,
+                    top: 50,
+                    child: MiscRegularImageDisplayFeedTemplate(frontSize: 75, backSize: 80, backgroundColor: Color(0xff04ECFF),),
                   ),
 
-                  Center(child: Image.asset('assets/icons/logo.png', height: SizeConfig.blockSizeVertical * 30, width: SizeConfig.blockSizeVertical * 25,),),
+                  Center(child: Image.asset('assets/icons/logo.png', height: 240, width: 240,),),
                 ],
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 45),
 
             Center(child: Text('Feed is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),),
 

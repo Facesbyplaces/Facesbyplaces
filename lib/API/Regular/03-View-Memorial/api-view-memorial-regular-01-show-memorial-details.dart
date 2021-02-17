@@ -10,7 +10,8 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) asyn
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

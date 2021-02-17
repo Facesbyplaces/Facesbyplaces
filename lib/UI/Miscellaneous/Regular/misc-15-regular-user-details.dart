@@ -557,7 +557,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
           itemBuilder: (c, i) {
             return finalMemorials[i];
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * 1, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
           itemCount: finalMemorials.length,
         ),
       )

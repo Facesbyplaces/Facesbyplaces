@@ -40,6 +40,7 @@ class HomeRegularSearch extends StatelessWidget{
                       Location.Location location = new Location.Location();
 
                       bool serviceEnabled = await location.serviceEnabled();
+
                       if (!serviceEnabled) {
                         serviceEnabled = await location.requestService();
                         if (!serviceEnabled) {
@@ -48,36 +49,34 @@ class HomeRegularSearch extends StatelessWidget{
                       }
 
                       Location.PermissionStatus permissionGranted = await location.hasPermission();
-                      if (permissionGranted == Location.PermissionStatus.denied) {
-                        permissionGranted = await location.requestPermission();
-                        if (permissionGranted != Location.PermissionStatus.granted) {
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                        }
+
+                      if (permissionGranted != Location.PermissionStatus.granted) {
+                        await showDialog(
+                          context: context,
+                          builder: (_) => 
+                            AssetGiffyDialog(
+                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            entryAnimation: EntryAnimation.DEFAULT,
+                            description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(),
+                            ),
+                            onlyOkButton: true,
+                            buttonOkColor: Colors.red,
+                            onOkButtonPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                          )
+                        );
+                      }else{
+                        context.showLoaderOverlay();
+                        Location.LocationData locationData = await location.getLocation();
+                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                        context.hideLoaderOverlay();
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                       }
-
-                      context.showLoaderOverlay();
-                      Location.LocationData locationData = await location.getLocation();
-                      List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                      context.hideLoaderOverlay();
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                     },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(15.0),
@@ -105,6 +104,7 @@ class HomeRegularSearch extends StatelessWidget{
                           Location.Location location = new Location.Location();
 
                           bool serviceEnabled = await location.serviceEnabled();
+
                           if (!serviceEnabled) {
                             serviceEnabled = await location.requestService();
                             if (!serviceEnabled) {
@@ -113,36 +113,34 @@ class HomeRegularSearch extends StatelessWidget{
                           }
 
                           Location.PermissionStatus permissionGranted = await location.hasPermission();
-                          if (permissionGranted == Location.PermissionStatus.denied) {
-                            permissionGranted = await location.requestPermission();
-                            if (permissionGranted != Location.PermissionStatus.granted) {
-                              await showDialog(
-                                context: context,
-                                builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
-                              );
-                            }
+
+                          if (permissionGranted != Location.PermissionStatus.granted) {
+                            await showDialog(
+                              context: context,
+                              builder: (_) => 
+                                AssetGiffyDialog(
+                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                entryAnimation: EntryAnimation.DEFAULT,
+                                description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(),
+                                ),
+                                onlyOkButton: true,
+                                buttonOkColor: Colors.red,
+                                onOkButtonPressed: () {
+                                  Navigator.pop(context, true);
+                                },
+                              )
+                            );
+                          }else{
+                            context.showLoaderOverlay();
+                            Location.LocationData locationData = await location.getLocation();
+                            List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                            context.hideLoaderOverlay();
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                           }
-
-                          context.showLoaderOverlay();
-                          Location.LocationData locationData = await location.getLocation();
-                          List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                          context.hideLoaderOverlay();
-
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                         },
                         icon: Icon(Icons.search, color: Color(0xff888888),),
                       ),

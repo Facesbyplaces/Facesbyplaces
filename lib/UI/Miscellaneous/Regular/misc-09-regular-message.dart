@@ -1,86 +1,53 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
 
-class MiscRegularMessageTemplate extends StatelessWidget{
-
-  final String message;
-
-  MiscRegularMessageTemplate({this.message = 'Enter Verification Code'});
-
-  @override
-  Widget build(BuildContext context){
-    SizeConfig.init(context);
-    return Padding(
-      padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 8,),
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Container(
-          height: SizeConfig.blockSizeVertical * 5,
-          width: SizeConfig.screenWidth / 1.2,
-          child: Center(
-            child: Text(message, 
-              textAlign: TextAlign.center, 
-              style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4,
-                fontWeight: FontWeight.w300,
-                color: Color(0xffffffff),
-              ),
-            ),
-          ),
-          decoration: BoxDecoration(
-            color: Color(0xff000000),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class MiscRegularErrorMessageTemplate extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Container(
-      height: SizeConfig.screenHeight,
-      child: Column(
-        children: [
-          Expanded(child: Container(),),
+    return Align(
+      alignment: Alignment.center,
+      child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Column(
+          children: [
 
-          Center(child: Icon(Icons.error_outline_rounded, color: Colors.red, size: SizeConfig.blockSizeVertical * 15,),),
+            SizedBox(height: 30,),
 
-          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+            Image.asset('assets/icons/app-icon.png', width: 300, height: 300,),
 
-          Center(
-            child: Text('Something went wrong. Please try again.', 
-            textAlign: TextAlign.center, 
-              style: TextStyle(
-                fontSize: SizeConfig.safeBlockHorizontal * 4, 
-                color: Color(0xff000000),
+            SizedBox(height: 100,),
+
+            Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600, color: Colors.red),),
+            
+            SizedBox(height: 30,),
+
+            Text('Something went wrong. Please try again.', textAlign: TextAlign.center, style: TextStyle(fontSize: 16),),
+
+            SizedBox(height: 30,),
+
+            MaterialButton(
+              padding: EdgeInsets.zero,
+              onPressed: () async{
+                Navigator.pop(context);
+              },
+              child: Text('Go back',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xffffffff),
+                ),
               ),
+              minWidth: SizeConfig.screenWidth / 2,
+              height: 45,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              color: Colors.grey,
             ),
-          ),
 
-          SizedBox(height: SizeConfig.blockSizeVertical * 10,),
+            SizedBox(height: 30,),
 
-          GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.directions_walk_rounded, color: Color(0xff000000), size: SizeConfig.blockSizeVertical * 5,),
-
-                SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
-
-                Text('Go back'),
-              ],
-            ),
-          ),
-
-          Expanded(child: Container(),),
-        ],
+          ],
+        ),
       ),
     );
   }

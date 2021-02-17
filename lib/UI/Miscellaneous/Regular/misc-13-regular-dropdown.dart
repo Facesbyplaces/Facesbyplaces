@@ -101,7 +101,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
             icon: Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
             style: TextStyle(
               fontFamily: 'Roboto',
-              fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+              fontSize: 14,
               color: Color(0xff888888)
             ),
             items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
@@ -144,7 +144,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   items: [
                     Center(
                       child: Container(
-                        height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
+                        height: SizeConfig.screenHeight - 400,
                         child: RepaintBoundary(
                           key: qrKey,
                           child: QrImage(
@@ -161,7 +161,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                       children: [
                         Text('FacesbyPlaces Post',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontSize: 20, 
                             fontWeight: FontWeight.bold, 
                             color: Color(0xff000000),
                           ), 
@@ -169,7 +169,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
 
                         Text('QR Code',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontSize: 20, 
                             fontWeight: FontWeight.bold, 
                             color: Color(0xff000000),
                           ), 
@@ -181,15 +181,15 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                     MiscRegularButtonTemplate(
                       buttonText: 'Share',
                       buttonTextStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                        fontSize: 16, 
                         fontWeight: FontWeight.bold, 
                         color: Color(0xffffffff),
                       ), 
                       onPressed: () async{
                         await shareQRCode();
                       }, 
-                      width: SizeConfig.screenWidth / 2, 
-                      height: SizeConfig.blockSizeVertical * 7, 
+                      width: SizeConfig.screenWidth / 2,
+                      height: 45,
                       buttonColor: Color(0xff04ECFF),
                     ),
                   ],
@@ -299,7 +299,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
             icon: Center(child: Icon(Icons.more_vert, color: Color(0xffaaaaaa)),),
             style: TextStyle(
               fontFamily: 'Roboto',
-              fontSize: SizeConfig.safeBlockHorizontal * 3.5,
+              fontSize: 14,
               color: Color(0xff888888)
             ),
               items: <String>['Copy Link', 'Share', 'QR Code', 'Report'].map((String value){
@@ -342,7 +342,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   items: [
                     Center(
                       child: Container(
-                        height: SizeConfig.screenHeight - SizeConfig.blockSizeVertical * 50,
+                        height: SizeConfig.screenHeight - 400,
                         child: RepaintBoundary(
                           key: qrKey,
                           child: QrImage(
@@ -359,7 +359,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                       children: [
                         Text('$memorialName',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontSize: 20, 
                             fontWeight: FontWeight.bold, 
                             color: Color(0xff000000),
                           ), 
@@ -367,7 +367,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
 
                         Text('QR Code',
                           style: TextStyle(
-                            fontSize: SizeConfig.safeBlockHorizontal * 5, 
+                            fontSize: 20, 
                             fontWeight: FontWeight.bold, 
                             color: Color(0xff000000),
                           ), 
@@ -379,15 +379,15 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                     MiscRegularButtonTemplate(
                       buttonText: 'Share',
                       buttonTextStyle: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 4, 
+                        fontSize: 16, 
                         fontWeight: FontWeight.bold, 
                         color: Color(0xffffffff),
                       ), 
                       onPressed: () async{
                         await shareQRCode();
                       }, 
-                      width: SizeConfig.screenWidth / 2, 
-                      height: SizeConfig.blockSizeVertical * 7, 
+                      width: SizeConfig.screenWidth / 2,
+                      height: 45,
                       buttonColor: Color(0xff04ECFF),
                     ),
                   ],

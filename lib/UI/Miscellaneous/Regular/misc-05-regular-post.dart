@@ -290,7 +290,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                         ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
                         : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: 10),
 
                         Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
 
@@ -298,7 +298,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                     ),
                   ),
 
-                  SizedBox(width: SizeConfig.blockSizeHorizontal * 2,),
+                  SizedBox(width: 20),
 
                   GestureDetector(
                     onTap: (){
@@ -308,7 +308,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                       children: [
                         Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
-                        SizedBox(width: SizeConfig.blockSizeHorizontal * 1,),
+                        SizedBox(width: 10),
 
                         Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
                       ],
@@ -337,7 +337,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                         }
 
                       },
-                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: SizeConfig.blockSizeHorizontal * 13, height: SizeConfig.blockSizeVertical * 13,),),
+                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
                     ),
                   ),
                 ],

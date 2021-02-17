@@ -124,7 +124,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
               readStatus: notifications[i].read,
             );
           },
-          separatorBuilder: (c, i) => Divider(height: SizeConfig.blockSizeVertical * .5, color: Colors.transparent),
+          separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
           itemCount: notifications.length,
         ),
       )

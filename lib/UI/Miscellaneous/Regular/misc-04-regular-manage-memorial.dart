@@ -99,7 +99,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
             Padding(
               padding: EdgeInsets.only(left: 10.0), 
               child: CircleAvatar(
-                radius: SizeConfig.blockSizeVertical * 5, 
+                radius: 40,
                 backgroundColor: Color(0xff888888), 
                 backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
               ),
