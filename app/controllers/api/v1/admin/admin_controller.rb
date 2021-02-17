@@ -39,17 +39,14 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     def showUser
+        # image = user.image ? rails_blob_url(user.image) : nil
         if params[:account_type] == '1'
             user = User.find(params[:id]) 
         else
             user = AlmUser.find(params[:id]) 
         end
 
-        render json: { 
-            image:  rails_blob_url(user.image),
-            user:   UserSerializer.new( user ).attributes
-            
-        }
+        render json: UserSerializer.new( user ).attributes
         # UserSerializer.new( user ).attributes
         # id:             user.id, 
             # username:       user.username, 
