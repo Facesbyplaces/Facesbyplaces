@@ -1,6 +1,16 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { AddUserAction } from "../../../../redux/actions";
+
 export default function Header() {
+  const dispatch = useDispatch();
+
+  const handleAddClick = (option) => {
+    console.log(option);
+    dispatch(AddUserAction({ option }));
+  };
+
   return (
     <div className="card-header flex-wrap border-0 pt-6 pb-0">
       <div className="card-title">
@@ -13,7 +23,10 @@ export default function Header() {
       </div>
       <div className="card-toolbar">
         {/*begin::Button*/}
-        <a href="#" className="btn btn-primary font-weight-bolder">
+        <a
+          className="btn btn-primary font-weight-bolder"
+          onClick={() => handleAddClick("a")}
+        >
           <span className="svg-icon svg-icon-md">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg*/}
             <svg

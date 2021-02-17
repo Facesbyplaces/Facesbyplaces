@@ -16,8 +16,6 @@ export default function EditUser({ user, image }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   // const [email, setEmail] = useState("");
 
-  const handleSaveUserdata = () => {};
-
   const imageUpload = () => {
     console.log(selectedFile);
     const formData = new FormData();
@@ -467,7 +465,13 @@ export default function EditUser({ user, image }) {
                               <button
                                 type="submit"
                                 className="btn btn-success font-weight-bold mr-2"
-                                onClick={() => handleSaveUserdata()}
+                                onClick={() =>
+                                  handleViewClick(
+                                    user.id,
+                                    user.account_type,
+                                    "v"
+                                  )
+                                }
                               >
                                 Save changes
                               </button>

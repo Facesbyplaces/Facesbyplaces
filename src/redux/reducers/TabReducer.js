@@ -26,6 +26,11 @@ export const TabReducer = persistReducer(
 
         return action.data;
 
+      case "ADD_USER":
+        localStorage.setItem("tab", action.data.option);
+
+        return action.data;
+
       case "TABLE_USER":
         localStorage.removeItem("tab");
         localStorage.removeItem("id");

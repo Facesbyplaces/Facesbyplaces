@@ -5,6 +5,7 @@ import { TableUserAction } from "../../../../redux/actions";
 import Header from "./Header";
 import Body from "./Body";
 import User from "../UserProfile/User";
+import AddUser from "../UserProfile/AddUser";
 
 export default function UsersTable() {
   const dispatch = useDispatch();
@@ -26,19 +27,9 @@ export default function UsersTable() {
           case "v":
             return <User />;
           case "e":
-            return (
-              <User />
-              // <div>
-              //   <div className="pt-5 pl-8">
-              //     <a
-              //       className="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3"
-              //       onClick={() => handleTableClick()}
-              //     >
-              //       back
-              //     </a>
-              //   </div>
-              // </div>
-            );
+            return <User />;
+          case "a":
+            return <AddUser />;
           default:
             return (
               <div className="container">

@@ -19,6 +19,13 @@ export const TokenValidation = (token_valid) => {
   };
 };
 
+export const AddUserAction = (option) => {
+  return {
+    type: "VIEW_USER",
+    data: option,
+  };
+};
+
 export const ViewUserAction = (user) => {
   return {
     type: "VIEW_USER",
