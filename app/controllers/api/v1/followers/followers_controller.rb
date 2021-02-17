@@ -21,7 +21,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
                     render json: {success: false, errors: follower }, status: 500
                 end
             else
-                render json: {success: false, errors: follower }, status: 409
+                render json: {success: false, errors: "You either followed this page already or you are part of the family or a friend." }, status: 409
             end
         else
             follower = Follower.where(page_type: params[:page_type], page_id: params[:page_id], account: user()).first
@@ -32,7 +32,7 @@ class Api::V1::Followers::FollowersController < ApplicationController
                     render json: {success: false, errors: follower }, status: 500
                 end
             else
-                render json: {success: false, errors: follower }, status: 500
+                render json: {success: false, errors: "You are not a follower of this page." }, status: 409
             end
         end
 

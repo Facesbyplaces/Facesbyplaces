@@ -35,7 +35,17 @@ class Api::V1::Users::ImageUploadController < ApplicationController
             user = user()
         end
 
-        if user != nil
+        if params[:file]
+            # The data is a file upload coming from <input type="file" />
+            user.image.attach(params[:file])
+            # Generate a url for easy display on the front end 
+            image = url_for(user.image)
+            
+            # Now save that url in the profile
+            if user.update(image: photo)
+                render json: user, status: :ok
+              end
+        elsif user != nil
             user.update(image: params[:image])
 
             if user.errors.present?
