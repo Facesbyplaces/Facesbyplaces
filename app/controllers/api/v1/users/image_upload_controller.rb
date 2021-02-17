@@ -7,7 +7,7 @@ class Api::V1::Users::ImageUploadController < ApplicationController
 
     def create
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
+            user = User.find(params[:user_id])
         else
             user = AlmUser.find(params[:user_id])
         end
@@ -28,24 +28,14 @@ class Api::V1::Users::ImageUploadController < ApplicationController
     def update
         
         if params[:account_type] == "1"
-            user = BlmUser.find(params[:user_id])
-        elsif params[:account_type] == "1"
+            user = User.find(params[:user_id])
+        elsif params[:account_type] == "2"
             user = AlmUser.find(params[:user_id])
         else
             user = user()
         end
 
-        if params[:file]
-            # The data is a file upload coming from <input type="file" />
-            user.image.attach(params[:file])
-            # Generate a url for easy display on the front end 
-            image = url_for(user.image)
-            
-            # Now save that url in the profile
-            if user.update(image: photo)
-                render json: user, status: :ok
-              end
-        elsif user != nil
+        if user != nil
             user.update(image: params[:image])
 
             if user.errors.present?
