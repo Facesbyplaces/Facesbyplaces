@@ -62,30 +62,10 @@ class Api::V1::Admin::AdminController < ApplicationController
             user = AlmUser.find(params[:id])
         end
 
-        if user != nil
-
-            # if params[:username] != nil && params[:first_name] != nil && params[:last_name] && params[:phone_number] != nil
-            #     user.update(
-            #         username: params[:username], 
-            #         first_name: params[:first_name], 
-            #         last_name: params[:last_name], 
-            #         phone_number: params[:phone_number]
-            #     )
-            # #No Username
-            # elsif params[:first_name] != nil && params[:last_name] && params[:phone_number] != nil
-            #     user.update(
-            #         first_name: params[:first_name], 
-            #         last_name: params[:last_name], 
-            #         phone_number: params[:phone_number]
-            #     )
-            # elsif params[:last_name] != nil
-            #     user.update(last_name: params[:last_name])
-            # elsif params[:phone_number] != nil
-            #     user.update(phone_number: params[:phone_number])
-            # end
-
+        if user.errors.present?
+            render json: {success: false, errors: user.errors.full_messages }, status: 500
+        elsif user != nil
             user.update(editUser_params)
-
             if user.errors.present?
                 render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
             else
