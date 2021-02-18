@@ -18,6 +18,9 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({int memorialI
     }
   );
 
+  print('The status code of connection list family is ${response.statusCode}');
+  print('The status body of connection list family is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMConnectionListFamilyMain.fromJson(newValue);
@@ -64,8 +67,9 @@ class APIBLMConnectionListFamilyExtendedDetails{
   String connectionListFamilyDetailsFirstName;
   String connectionListFamilyDetailsLastName;
   dynamic connectionListFamilyDetailsImage;
+  int connectionListFamilyAccountType;
 
-  APIBLMConnectionListFamilyExtendedDetails({this.connectionListFamilyDetailsId, this.connectionListFamilyDetailsFirstName, this.connectionListFamilyDetailsLastName, this.connectionListFamilyDetailsImage});
+  APIBLMConnectionListFamilyExtendedDetails({this.connectionListFamilyDetailsId, this.connectionListFamilyDetailsFirstName, this.connectionListFamilyDetailsLastName, this.connectionListFamilyDetailsImage, this.connectionListFamilyAccountType});
 
   factory APIBLMConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFamilyExtendedDetails(
@@ -73,6 +77,7 @@ class APIBLMConnectionListFamilyExtendedDetails{
       connectionListFamilyDetailsFirstName: parsedJson['first_name'],
       connectionListFamilyDetailsLastName: parsedJson['last_name'],
       connectionListFamilyDetailsImage: parsedJson['image'],
+      connectionListFamilyAccountType: parsedJson['account_type'],
     );
   }
 }

@@ -18,6 +18,9 @@ Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({int mem
     },
   );
 
+  print('The status code of connection list followers is ${response.statusCode}');
+  print('The status body of connection list followers is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMConnectionListFollowersMain.fromJson(newValue);
@@ -50,8 +53,9 @@ class APIBLMConnectionListFollowersExtendedDetails{
   String connectionListFollowersFirstName;
   String connectionListFollowersLastName;
   dynamic connectionListFollowersImage;
+  int connectionListFollowersAccountType;
 
-  APIBLMConnectionListFollowersExtendedDetails({this.connectionListFollowersId, this.connectionListFollowersFirstName, this.connectionListFollowersLastName, this.connectionListFollowersImage});
+  APIBLMConnectionListFollowersExtendedDetails({this.connectionListFollowersId, this.connectionListFollowersFirstName, this.connectionListFollowersLastName, this.connectionListFollowersImage, this.connectionListFollowersAccountType});
 
   factory APIBLMConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFollowersExtendedDetails(
@@ -59,6 +63,7 @@ class APIBLMConnectionListFollowersExtendedDetails{
       connectionListFollowersFirstName: parsedJson['first_name'],
       connectionListFollowersLastName: parsedJson['last_name'],
       connectionListFollowersImage: parsedJson['image'],
+      connectionListFollowersAccountType: parsedJson['account_type'],
     );
   }
 }

@@ -10,13 +10,13 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:video_player/video_player.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:maps/maps.dart';
 
@@ -307,7 +307,6 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                         return Container(
                                           alignment: Alignment.center,
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                          // child: Text(profile.data.blmMemorial.showMemorialDetails.showMemorialDetailsDescription,
                                           child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription,
                                             textAlign: TextAlign.center,
                                             style: TextStyle(

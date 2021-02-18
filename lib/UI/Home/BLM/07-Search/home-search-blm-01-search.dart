@@ -43,7 +43,11 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                     onFieldSubmitted: (String keyword) async{
                       Location.Location location = new Location.Location();
 
+                      
+
                       bool serviceEnabled = await location.serviceEnabled();
+
+                      print('The serviceEnabled is $serviceEnabled');
 
                       if (!serviceEnabled) {
                         serviceEnabled = await location.requestService();
@@ -54,21 +58,26 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
 
                       Location.PermissionStatus permissionGranted = await location.hasPermission();
 
+                      print('The permissionGranted is $permissionGranted');
+
                       if (permissionGranted != Location.PermissionStatus.granted) {
                         await showDialog(
                           context: context,
                           builder: (_) => 
                             AssetGiffyDialog(
                             image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                             entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
                               textAlign: TextAlign.center,
                               style: TextStyle(),
                             ),
-                            onlyOkButton: true,
-                            buttonOkColor: Colors.red,
-                            onOkButtonPressed: () {
+                            buttonOkColor: Colors.green,
+                            onOkButtonPressed: () async{
+                              permissionGranted = await location.requestPermission();
+                              Navigator.pop(context, true);
+                            },
+                            onCancelButtonPressed: (){
                               Navigator.pop(context, true);
                             },
                           )

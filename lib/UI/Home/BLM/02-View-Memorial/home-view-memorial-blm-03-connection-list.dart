@@ -1,18 +1,22 @@
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-01-connection-list-family.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-02-connection-list-friends.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-04-03-connection-list-follower.dart';
+import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
+import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
 class BLMConnectionListItem{
+  final int id;
+  final int accountType;
   final String firstName;
   final String lastName;
   final String image;
   final String relationship;
 
-  BLMConnectionListItem({this.firstName, this.lastName, this.image, this.relationship});
+  BLMConnectionListItem({this.id, this.accountType, this.firstName, this.lastName, this.image, this.relationship});
 }
 
 class HomeBLMConnectionList extends StatefulWidget{
@@ -60,6 +64,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       for(int i = 0; i < newValue.blmFamilyList.length; i++){
         listsFamily.add(
           BLMConnectionListItem(
+            id: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsId,
+            accountType: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyAccountType,
             firstName: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsFirstName,
             lastName: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsLastName,
             image: newValue.blmFamilyList[i].connectionListFamilyUser.connectionListFamilyDetailsImage,
@@ -90,6 +96,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       for(int i = 0; i < newValue.blmFriendsList.length; i++){
         listsFriends.add(
           BLMConnectionListItem(
+            id: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsId,
+            accountType: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsAccountType,
             firstName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsFirstName,
             lastName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsLastName,
             image: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsImage,
@@ -119,6 +127,8 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
       for(int i = 0; i < newValue.blmFollowersList.length; i++){
         listsFollowers.add(
           BLMConnectionListItem(
+            id: newValue.blmFollowersList[i].connectionListFollowersId,
+            accountType: newValue.blmFollowersList[i].connectionListFollowersAccountType,
             firstName: newValue.blmFollowersList[i].connectionListFollowersFirstName,
             lastName: newValue.blmFollowersList[i].connectionListFollowersLastName,
             image: newValue.blmFollowersList[i].connectionListFollowersImage,
@@ -342,23 +352,38 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           children: List.generate(
             onSearch ? searches.length : listsFamily.length, (index) => Column(
               children: [
-                onSearch
-                ? Expanded(
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: searches[index].image != null && searches[index].image != ''
-                    ? NetworkImage(searches[index].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
-                  ),
-                )
-                : Expanded(
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
-                    ? NetworkImage(listsFamily[index].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      if(onSearch){
+                        if(searches[index].accountType == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id)));
+                        }
+                      }else{
+                        if(listsFamily[index].accountType == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id)));
+                        }
+                      }
+                    },
+                    child: onSearch
+                    ? CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: searches[index].image != null && searches[index].image != ''
+                      ? NetworkImage(searches[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    )
+                    : CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
+                      ? NetworkImage(listsFamily[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    ),
                   ),
                 ),
 
@@ -406,23 +431,38 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           children: List.generate(
             onSearch ? searches.length : listsFriends.length, (index) => Column(
               children: [
-                onSearch
-                ? Expanded(
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: searches[index].image != null && searches[index].image != ''
-                    ? NetworkImage(searches[index].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
-                  ),
-                )
-                : Expanded(
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
-                    ? NetworkImage(listsFriends[index].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      if(onSearch){
+                        if(searches[index].accountType == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id)));
+                        }
+                      }else{
+                        if(listsFriends[index].accountType == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id)));
+                        }
+                      }
+                    },
+                    child: onSearch
+                    ? CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: searches[index].image != null && searches[index].image != ''
+                      ? NetworkImage(searches[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    )
+                    : CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
+                      ? NetworkImage(listsFriends[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    ),
                   ),
                 ),
 
@@ -468,23 +508,38 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
           children: List.generate(
             onSearch ? searches.length : listsFollowers.length, (index) => Column(
               children: [
-                onSearch
-                ? Expanded(
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: searches[index].image != null && searches[index].image != ''
-                    ? NetworkImage(searches[index].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
-                  ),
-                )
-                : Expanded(
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
-                    ? NetworkImage(listsFollowers[index].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: (){
+                      if(onSearch){
+                        if(searches[index].accountType == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id)));
+                        }
+                      }else{
+                        if(listsFollowers[index].accountType == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id)));
+                        }else{
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id)));
+                        }
+                      }
+                    },
+                    child: onSearch
+                    ? CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: searches[index].image != null && searches[index].image != ''
+                      ? NetworkImage(searches[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    )
+                    : CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Color(0xff888888), 
+                      backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
+                      ? NetworkImage(listsFollowers[index].image) 
+                      : AssetImage('assets/icons/app-icon.png'),
+                    ),
                   ),
                 ),
 

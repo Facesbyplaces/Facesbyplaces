@@ -17,6 +17,9 @@ Future<APIRegularConnectionListFamilyMain> apiRegularConnectionListFamily({int m
       'client': getClient,
     }
   );
+
+  print('The status code of connection list family is ${response.statusCode}');
+  print('The status body of connection list family is ${response.body}');
   
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -64,8 +67,9 @@ class APIRegularConnectionListFamilyExtendedDetails{
   String connectionListFamilyDetailsFirstName;
   String connectionListFamilyDetailsLastName;
   dynamic connectionListFamilyDetailsImage;
+  int connectionListFamilyAccountType;
 
-  APIRegularConnectionListFamilyExtendedDetails({this.connectionListFamilyDetailsId, this.connectionListFamilyDetailsFirstName, this.connectionListFamilyDetailsLastName, this.connectionListFamilyDetailsImage});
+  APIRegularConnectionListFamilyExtendedDetails({this.connectionListFamilyDetailsId, this.connectionListFamilyDetailsFirstName, this.connectionListFamilyDetailsLastName, this.connectionListFamilyDetailsImage, this.connectionListFamilyAccountType});
 
   factory APIRegularConnectionListFamilyExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFamilyExtendedDetails(
@@ -73,6 +77,7 @@ class APIRegularConnectionListFamilyExtendedDetails{
       connectionListFamilyDetailsFirstName: parsedJson['first_name'],
       connectionListFamilyDetailsLastName: parsedJson['last_name'],
       connectionListFamilyDetailsImage: parsedJson['image'],
+      connectionListFamilyAccountType: parsedJson['account_type'],
     );
   }
 }

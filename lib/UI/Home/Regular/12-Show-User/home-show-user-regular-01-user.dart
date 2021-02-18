@@ -53,12 +53,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        // child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
-                        child: CircleAvatar(
-                          radius: 100, 
-                          backgroundColor: Color(0xff888888), 
-                          backgroundImage: AssetImage('assets/icons/app-icon.png'),
-                        ),
+                        child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
                       ),
 
                     ],

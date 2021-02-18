@@ -18,6 +18,9 @@ Future<APIRegularConnectionListFriendsMain> apiRegularConnectionListFriends({int
     }
   );
 
+  print('The status code of connection list friends is ${response.statusCode}');
+  print('The status body of connection list friends is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularConnectionListFriendsMain.fromJson(newValue);
@@ -64,8 +67,9 @@ class APIRegularConnectionListFriendsExtendedDetails{
   String connectionListFriendsDetailsFirstName;
   String connectionListFriendsDetailsLastName;
   dynamic connectionListFriendsDetailsImage;
+  int connectionListFriendsAccountType;
 
-  APIRegularConnectionListFriendsExtendedDetails({this.connectionListFriendsDetailsId, this.connectionListFriendsDetailsFirstName, this.connectionListFriendsDetailsLastName, this.connectionListFriendsDetailsImage});
+  APIRegularConnectionListFriendsExtendedDetails({this.connectionListFriendsDetailsId, this.connectionListFriendsDetailsFirstName, this.connectionListFriendsDetailsLastName, this.connectionListFriendsDetailsImage, this.connectionListFriendsAccountType});
 
   factory APIRegularConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularConnectionListFriendsExtendedDetails(
@@ -73,6 +77,7 @@ class APIRegularConnectionListFriendsExtendedDetails{
       connectionListFriendsDetailsFirstName: parsedJson['first_name'],
       connectionListFriendsDetailsLastName: parsedJson['last_name'],
       connectionListFriendsDetailsImage: parsedJson['image'],
+      connectionListFriendsAccountType: parsedJson['account_type'],
     );
   }
 }

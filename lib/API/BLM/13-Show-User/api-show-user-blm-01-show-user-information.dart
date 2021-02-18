@@ -10,7 +10,7 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId}) async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=1',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -18,6 +18,9 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId}) async{
       'client': getClient,
     }
   );
+
+  print('The user information code is ${response.statusCode}');
+  print('The user information body is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

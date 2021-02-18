@@ -17,6 +17,9 @@ Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({int memoria
       'client': getClient,
     }
   );
+
+  print('The status code of connection list friends is ${response.statusCode}');
+  print('The status body of connection list friends is ${response.body}');
   
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -64,8 +67,9 @@ class APIBLMConnectionListFriendsExtendedDetails{
   String connectionListFriendsDetailsFirstName;
   String connectionListFriendsDetailsLastName;
   dynamic connectionListFriendsDetailsImage;
+  int connectionListFriendsAccountType;
 
-  APIBLMConnectionListFriendsExtendedDetails({this.connectionListFriendsDetailsId, this.connectionListFriendsDetailsFirstName, this.connectionListFriendsDetailsLastName, this.connectionListFriendsDetailsImage});
+  APIBLMConnectionListFriendsExtendedDetails({this.connectionListFriendsDetailsId, this.connectionListFriendsDetailsFirstName, this.connectionListFriendsDetailsLastName, this.connectionListFriendsDetailsImage, this.connectionListFriendsAccountType});
 
   factory APIBLMConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtendedDetails(
@@ -73,6 +77,7 @@ class APIBLMConnectionListFriendsExtendedDetails{
       connectionListFriendsDetailsFirstName: parsedJson['first_name'],
       connectionListFriendsDetailsLastName: parsedJson['last_name'],
       connectionListFriendsDetailsImage: parsedJson['image'],
+      connectionListFriendsAccountType: parsedJson['account_type'],
     );
   }
 }
