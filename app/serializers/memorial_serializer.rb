@@ -11,7 +11,9 @@ class MemorialSerializer < ActiveModel::Serializer
         dob:            object.dob,
         rip:            object.rip,
         cemetery:       object.cemetery,
-        country:        object.country
+        country:        object.country,
+        longitude:      object.longitude,
+        latitude:       object.latitude
       }
     when "followers"
       if object.currentUser
@@ -22,7 +24,9 @@ class MemorialSerializer < ActiveModel::Serializer
             dob:            object.dob,
             rip:            object.rip,
             cemetery:       object.cemetery,
-            country:        object.country
+            country:        object.country,
+            longitude:      object.longitude,
+            latitude:       object.latitude
           }
         end
       end
@@ -35,7 +39,9 @@ class MemorialSerializer < ActiveModel::Serializer
             dob:            object.dob,
             rip:            object.rip,
             cemetery:       object.cemetery,
-            country:        object.country
+            country:        object.country,
+            longitude:      object.longitude,
+            latitude:       object.latitude
           }
         end
       end
