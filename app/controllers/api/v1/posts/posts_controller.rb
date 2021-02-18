@@ -225,12 +225,12 @@ class Api::V1::Posts::PostsController < ApplicationController
                         end
                     end
 
-                render json: {}, status: 200
+                render json: { user: user }, status: 200
             else
                 render json: {errors: like.errors}, status: 500
             end
         else
-            render json: {}, status: 409
+            render json: {error: 'Account required.'}, status: 409
         end
     end
 
@@ -251,7 +251,7 @@ class Api::V1::Posts::PostsController < ApplicationController
                 render json: {errors: unlike.errors}, status: 500
             end
         else
-            render json: {}, status: 404
+            render json: {error: "Account required."}, status: 404
         end
     end
 end
