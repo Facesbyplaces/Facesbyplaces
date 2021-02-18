@@ -39,7 +39,6 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
     }
     
     if(memorial.almProfileImage != null || memorial.almProfileImage != ''){
-      print('profile image!');
       var file = await dio.MultipartFile.fromFile(memorial.almProfileImage.path, filename: memorial.almProfileImage.path);
       formData.files.add(MapEntry('memorial[profileImage]', file));
     }

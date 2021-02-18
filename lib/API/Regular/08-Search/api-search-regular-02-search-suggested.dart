@@ -18,6 +18,9 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({int page}) asyn
     }
   );
 
+  print('The status code of suggested in alm is ${response.statusCode}');
+  // print('The status body of suggested in alm is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchSuggestedMain.fromJson(newValue);

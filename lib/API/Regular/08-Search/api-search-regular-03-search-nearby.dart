@@ -18,6 +18,9 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({int page, double lati
     }
   );
 
+  print('The status code of nearby in alm is ${response.statusCode}');
+  print('The status body of nearby in alm is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIRegularSearchNearbyMain.fromJson(newValue);
@@ -51,61 +54,61 @@ class APIRegularSearchNearbyMain{
 }
 
 class APIRegularSearchNearbyExtended{
-  int serachNearbyId;
-  String serachNearbyName;
-  APIRegularSearchNearbyExtendedPageDetails serachNearbyDetails;
-  dynamic serachNearbyBackgroundImage;
-  dynamic serachNearbyProfileImage;
-  dynamic serachNearbyImagesOrVideos;
-  String serachNearbyRelationship;
-  APIRegularSearchNearbyExtendedPageCreator serachNearbyPageCreator;
-  bool serachNearbyManage;
-  bool serachNearbyFamOrFriends;
-  bool serachNearbyFollower;
-  String serachNearbyPageType;
-  String serachNearbyPrivacy;
+  int searchNearbyId;
+  String searchNearbyName;
+  APIRegularSearchNearbyExtendedPageDetails searchNearbyDetails;
+  dynamic searchNearbyBackgroundImage;
+  dynamic searchNearbyProfileImage;
+  dynamic searchNearbyImagesOrVideos;
+  String searchNearbyRelationship;
+  APIRegularSearchNearbyExtendedPageCreator searchNearbyPageCreator;
+  bool searchNearbyManage;
+  bool searchNearbyFamOrFriends;
+  bool searchNearbyFollower;
+  String searchNearbyPageType;
+  String searchNearbyPrivacy;
 
-  APIRegularSearchNearbyExtended({this.serachNearbyId, this.serachNearbyName, this.serachNearbyDetails, this.serachNearbyBackgroundImage, this.serachNearbyProfileImage, this.serachNearbyImagesOrVideos, this.serachNearbyRelationship, this.serachNearbyPageCreator, this.serachNearbyManage, this.serachNearbyFamOrFriends, this.serachNearbyFollower, this.serachNearbyPageType, this.serachNearbyPrivacy});
+  APIRegularSearchNearbyExtended({this.searchNearbyId, this.searchNearbyName, this.searchNearbyDetails, this.searchNearbyBackgroundImage, this.searchNearbyProfileImage, this.searchNearbyImagesOrVideos, this.searchNearbyRelationship, this.searchNearbyPageCreator, this.searchNearbyManage, this.searchNearbyFamOrFriends, this.searchNearbyFollower, this.searchNearbyPageType, this.searchNearbyPrivacy});
 
   factory APIRegularSearchNearbyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchNearbyExtended(
-      serachNearbyId: parsedJson['id'],
-      serachNearbyName: parsedJson['name'],
-      serachNearbyDetails: APIRegularSearchNearbyExtendedPageDetails.fromJson(parsedJson['details']),
-      serachNearbyBackgroundImage: parsedJson['backgroundImage'],
-      serachNearbyProfileImage: parsedJson['profileImage'],
-      serachNearbyImagesOrVideos: parsedJson['imagesOrVideos'],
-      serachNearbyRelationship: parsedJson['relationship'],
-      serachNearbyPageCreator: APIRegularSearchNearbyExtendedPageCreator.fromJson(parsedJson['page_creator']),
-      serachNearbyManage: parsedJson['manage'],
-      serachNearbyFamOrFriends: parsedJson['famOrFriends'],
-      serachNearbyFollower: parsedJson['follower'],
-      serachNearbyPageType: parsedJson['page_type'],
-      serachNearbyPrivacy: parsedJson['privacy'],
+      searchNearbyId: parsedJson['id'],
+      searchNearbyName: parsedJson['name'],
+      searchNearbyDetails: APIRegularSearchNearbyExtendedPageDetails.fromJson(parsedJson['details']),
+      searchNearbyBackgroundImage: parsedJson['backgroundImage'],
+      searchNearbyProfileImage: parsedJson['profileImage'],
+      searchNearbyImagesOrVideos: parsedJson['imagesOrVideos'],
+      searchNearbyRelationship: parsedJson['relationship'],
+      // serachNearbyPageCreator: APIRegularSearchNearbyExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchNearbyManage: parsedJson['manage'],
+      searchNearbyFamOrFriends: parsedJson['famOrFriends'],
+      searchNearbyFollower: parsedJson['follower'],
+      searchNearbyPageType: parsedJson['page_type'],
+      searchNearbyPrivacy: parsedJson['privacy'],
     );
   }
 }
 
 class APIRegularSearchNearbyExtendedPageDetails{
-  String serachNearbyPageDetailsDescription;
-  String serachNearbyPageDetailsLocation;
-  String serachNearbyPageDetailsPrecinct;
-  String serachNearbyPageDetailsDob;
-  String serachNearbyPageDetailsRip;
-  String serachNearbyPageDetailsState;
-  String serachNearbyPageDetailsCountry;
+  String searchNearbyPageDetailsDescription;
+  String searchNearbyPageDetailsLocation;
+  String searchNearbyPageDetailsPrecinct;
+  String searchNearbyPageDetailsDob;
+  String searchNearbyPageDetailsRip;
+  String searchNearbyPageDetailsState;
+  String searchNearbyPageDetailsCountry;
 
-  APIRegularSearchNearbyExtendedPageDetails({this.serachNearbyPageDetailsDescription, this.serachNearbyPageDetailsLocation, this.serachNearbyPageDetailsPrecinct, this.serachNearbyPageDetailsDob, this.serachNearbyPageDetailsRip, this.serachNearbyPageDetailsState, this.serachNearbyPageDetailsCountry});
+  APIRegularSearchNearbyExtendedPageDetails({this.searchNearbyPageDetailsDescription, this.searchNearbyPageDetailsLocation, this.searchNearbyPageDetailsPrecinct, this.searchNearbyPageDetailsDob, this.searchNearbyPageDetailsRip, this.searchNearbyPageDetailsState, this.searchNearbyPageDetailsCountry});
 
   factory APIRegularSearchNearbyExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchNearbyExtendedPageDetails(
-      serachNearbyPageDetailsDescription: parsedJson['description'],
-      serachNearbyPageDetailsLocation: parsedJson['location'],
-      serachNearbyPageDetailsPrecinct: parsedJson['precinct'],
-      serachNearbyPageDetailsDob: parsedJson['dob'],
-      serachNearbyPageDetailsRip: parsedJson['rip'],
-      serachNearbyPageDetailsState: parsedJson['state'],
-      serachNearbyPageDetailsCountry: parsedJson['country'],
+      searchNearbyPageDetailsDescription: parsedJson['description'],
+      searchNearbyPageDetailsLocation: parsedJson['location'],
+      searchNearbyPageDetailsPrecinct: parsedJson['precinct'],
+      searchNearbyPageDetailsDob: parsedJson['dob'],
+      searchNearbyPageDetailsRip: parsedJson['rip'],
+      searchNearbyPageDetailsState: parsedJson['state'],
+      searchNearbyPageDetailsCountry: parsedJson['country'],
     );
   }
 }

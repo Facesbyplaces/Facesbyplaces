@@ -18,6 +18,9 @@ Future<APIBLMSearchNearbyMain> apiBLMSearchNearby({int page, double latitude, do
     }
   );
 
+  print('The status code of nearby in blm is ${response.statusCode}');
+  print('The status body of nearby in blm is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchNearbyMain.fromJson(newValue);
@@ -76,7 +79,7 @@ class APIBLMSearchNearbyExtended{
       searchNearbyProfileImage: parsedJson['profileImage'],
       searchNearbyImagesOrVideos: parsedJson['imagesOrVideos'],
       searchNearbyRelationship: parsedJson['relationship'],
-      searchNearbyPageCreator: APIBLMSearchNearbyExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      // searchNearbyPageCreator: APIBLMSearchNearbyExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchNearbyManage: parsedJson['manage'],
       searchNearbyFamOrFriends: parsedJson['famOrFriends'],
       searchNearbyFollower: parsedJson['follower'],

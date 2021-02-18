@@ -18,6 +18,9 @@ Future<APIBLMSearchPostMain> apiBLMSearchPosts({String keywords, int page}) asyn
     }
   );
 
+  print('The status code of posts in blm is ${response.statusCode}');
+  print('The status body of posts in blm is ${response.body}');
+
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMSearchPostMain.fromJson(newValue);

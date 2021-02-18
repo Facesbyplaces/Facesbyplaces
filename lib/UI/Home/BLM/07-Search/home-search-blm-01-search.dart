@@ -61,6 +61,27 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                       print('The permissionGranted is $permissionGranted');
 
                       if (permissionGranted != Location.PermissionStatus.granted) {
+                        // await showDialog(
+                        //   context: context,
+                        //   builder: (_) => 
+                        //     AssetGiffyDialog(
+                        //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        //     title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        //     entryAnimation: EntryAnimation.DEFAULT,
+                        //     description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                        //       textAlign: TextAlign.center,
+                        //       style: TextStyle(),
+                        //     ),
+                        //     buttonOkColor: Colors.green,
+                        //     onOkButtonPressed: () async{
+                        //       permissionGranted = await location.requestPermission();
+                        //       Navigator.pop(context, true);
+                        //     },
+                        //     onCancelButtonPressed: (){
+                        //       Navigator.pop(context, true);
+                        //     },
+                        //   )
+                        // );
                         await showDialog(
                           context: context,
                           builder: (_) => 
@@ -75,7 +96,22 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                             buttonOkColor: Colors.green,
                             onOkButtonPressed: () async{
                               permissionGranted = await location.requestPermission();
-                              Navigator.pop(context, true);
+                              // Navigator.pop(context, true);
+
+                              
+                              context.showLoaderOverlay();
+                              Location.LocationData locationData = await location.getLocation();
+                              List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                              context.hideLoaderOverlay();
+
+
+
+                              print('The current location in ALM is ${placemarks[0].name}');
+                              print('The current latitude in ALM is ${locationData.latitude}');
+                              print('The current longitude in ALM is ${locationData.longitude}');
+
+                              Navigator.pop(context);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                             },
                             onCancelButtonPressed: (){
                               Navigator.pop(context, true);
@@ -87,6 +123,8 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                         Location.LocationData locationData = await location.getLocation();
                         List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
                         context.hideLoaderOverlay();
+
+                        print('The current location in BLM is ${placemarks[0].name}');
 
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                       }

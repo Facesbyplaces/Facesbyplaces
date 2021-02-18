@@ -8,6 +8,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-backgroun
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -112,6 +113,8 @@ class RegularLoginState extends State<RegularLogin>{
 
                                   bool isLoggedIn = await fb.isLoggedIn;
 
+                                  print('The value of isLoggedIn in facebook is $isLoggedIn');
+
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
 
@@ -160,26 +163,28 @@ class RegularLoginState extends State<RegularLogin>{
                                       FacebookPermission.userFriends,
                                     ]);
 
-                                    context.showLoaderOverlay();
-
                                     final email = await fb.getUserEmail();
                                     final profile = await fb.getUserProfile();
                                     final image = await fb.getProfileImageUrl(width: 50, height: 50);
-                                    
-                                    bool apiResult = await apiRegularSignInWithFacebook(
-                                      firstName: profile.firstName.toString(), 
-                                      lastName: profile.lastName.toString(), 
-                                      email: email, 
-                                      username: email,
-                                      facebookId: result.accessToken.token,
-                                      image: image,
-                                    );
-                                    context.hideLoaderOverlay();
 
-                                    if(apiResult == false){
-                                      await fb.logOut();
-                                    }else{
-                                      Navigator.pushReplacementNamed(context, '/home/regular');
+                                    if(result.status != FacebookLoginStatus.cancel){
+                                      context.showLoaderOverlay();
+                                      
+                                      bool apiResult = await apiRegularSignInWithFacebook(
+                                        firstName: profile.firstName.toString(), 
+                                        lastName: profile.lastName.toString(), 
+                                        email: email, 
+                                        username: email,
+                                        facebookId: result.accessToken.token,
+                                        image: image,
+                                      );
+                                      context.hideLoaderOverlay();
+
+                                      if(apiResult == false){
+                                        await fb.logOut();
+                                      }else{
+                                        Navigator.pushReplacementNamed(context, '/home/regular');
+                                      }
                                     }
                                   }
 
@@ -311,7 +316,9 @@ class RegularLoginState extends State<RegularLogin>{
                             ],
                           );
 
+                          context.showLoaderOverlay();
                           bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
+                          context.hideLoaderOverlay();
 
                           if(result == true){
                             Navigator.pushReplacementNamed(context, '/home/regular');
@@ -521,6 +528,8 @@ class RegularLoginState extends State<RegularLogin>{
 
                       GestureDetector(
                         onTap: () async{
+                          final sharedPrefs = await SharedPreferences.getInstance();
+                          sharedPrefs.setBool('user-guest-session', true);
                           Navigator.pushReplacementNamed(context, '/home/regular');
                         },
                         child: Text('Sign in as Guest',

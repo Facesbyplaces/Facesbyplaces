@@ -2,14 +2,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({String keywords}) async{
+Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({String keywords, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -17,6 +17,9 @@ Future<APIBLMSearchMemorialMain> apiBLMSearchBLM({String keywords}) async{
       'client': getClient,
     }
   );
+
+  print('The status code of blm in blm is ${response.statusCode}');
+  print('The status body of blm in blm is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

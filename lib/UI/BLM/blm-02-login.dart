@@ -161,25 +161,28 @@ class BLMLoginState extends State<BLMLogin>{
                                       FacebookPermission.userFriends,
                                     ]);
 
-                                    context.showLoaderOverlay();
                                     final email = await fb.getUserEmail();
                                     final profile = await fb.getUserProfile();
                                     final image = await fb.getProfileImageUrl(width: 50, height: 50);
-                                    
-                                    bool apiResult = await apiBLMSignInWithFacebook(
-                                      firstName: profile.firstName.toString(), 
-                                      lastName: profile.lastName.toString(), 
-                                      email: email, 
-                                      username: email,
-                                      facebookId: result.accessToken.token,
-                                      image: image,
-                                    );
-                                    context.hideLoaderOverlay();
 
-                                    if(apiResult == false){
-                                      await fb.logOut();
-                                    }else{
-                                      Navigator.pushReplacementNamed(context, '/home/blm');
+                                    if(result.status != FacebookLoginStatus.cancel){
+                                      context.showLoaderOverlay();
+                                      
+                                      bool apiResult = await apiBLMSignInWithFacebook(
+                                        firstName: profile.firstName.toString(), 
+                                        lastName: profile.lastName.toString(), 
+                                        email: email, 
+                                        username: email,
+                                        facebookId: result.accessToken.token,
+                                        image: image,
+                                      );
+                                      context.hideLoaderOverlay();
+
+                                      if(apiResult == false){
+                                        await fb.logOut();
+                                      }else{
+                                        Navigator.pushReplacementNamed(context, '/home/blm');
+                                      }
                                     }
                                   }
                                 }, 
@@ -313,7 +316,9 @@ class BLMLoginState extends State<BLMLogin>{
                             ],
                           );
 
+                          context.showLoaderOverlay();
                           bool result = await apiBLMSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
+                          context.hideLoaderOverlay();
 
                           if(result == true){
                             Navigator.pushReplacementNamed(context, '/home/blm');

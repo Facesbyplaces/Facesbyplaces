@@ -25,6 +25,7 @@ Future<bool> apiRegularLogin({String email, String password}) async{
       sharedPrefs.setString('regular-uid', response.headers['uid']);    
       sharedPrefs.setString('regular-client', response.headers['client']);
       sharedPrefs.setBool('regular-user-session', true);
+      sharedPrefs.setBool('user-guest-session', false);
 
       return true;
     }

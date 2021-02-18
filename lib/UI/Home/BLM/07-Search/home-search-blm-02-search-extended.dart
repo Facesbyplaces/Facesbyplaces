@@ -215,7 +215,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   }
  
   void onLoading3() async{
-
     if(nearbyBlmItemsRemaining != 0){
 
       var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
@@ -241,10 +240,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       if(mounted)
       setState(() {});
       page3++;
-      
-      refreshController.loadComplete();
     }
-    else if(nearbyMemorialItemsRemaining != 0){
+
+    page3 = 1;
+    
+    if(nearbyMemorialItemsRemaining != 0){
 
       var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
@@ -256,12 +256,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             memorialId: newValue.memorialList[i].searchNearbyId,
             memorialName: newValue.memorialList[i].searchNearbyName,
             memorialDescription: newValue.memorialList[i].searchNearbyDetails.searchNearbyPageDetailsDescription,
-            image: newValue.blmList[i].searchNearbyProfileImage,
-            managed: newValue.blmList[i].searchNearbyManage,
-            follower: newValue.blmList[i].searchNearbyFollower,
-            pageType: newValue.blmList[i].searchNearbyPageType,
-            famOrFriends: newValue.blmList[i].searchNearbyFamOrFriends,
-            relationship: newValue.blmList[i].searchNearbyRelationship,
+            image: newValue.memorialList[i].searchNearbyProfileImage,
+            managed: newValue.memorialList[i].searchNearbyManage,
+            follower: newValue.memorialList[i].searchNearbyFollower,
+            pageType: newValue.memorialList[i].searchNearbyPageType,
+            famOrFriends: newValue.memorialList[i].searchNearbyFamOrFriends,
+            relationship: newValue.memorialList[i].searchNearbyRelationship,
           ),    
         );
       }
@@ -269,17 +269,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       if(mounted)
       setState(() {});
       page3++;
-      
-      refreshController.loadComplete();
     }
-    else{
-      refreshController.loadNoData();
-    }
+
+    refreshController.loadComplete();
   } 
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
-      var newValue = await apiBLMSearchBLM(keywords: keyword);
+      var newValue = await apiBLMSearchBLM(page: page4, keywords: keyword);
       blmItemRemaining = newValue.blmItemsRemaining;
       tabCount4 = tabCount4 + newValue.blmMemorialList.length;
 

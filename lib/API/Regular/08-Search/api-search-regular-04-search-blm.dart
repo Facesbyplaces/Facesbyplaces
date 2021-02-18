@@ -2,14 +2,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({String keywords}) async{
+Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({String keywords, int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm',
+  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -17,6 +17,9 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({String keywords}) a
       'client': getClient,
     }
   );
+
+  print('The status code of blm in alm is ${response.statusCode}');
+  // print('The status body of blm in alm is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -92,7 +95,7 @@ class APIRegularSearchBLMMemorialExtendedPage{
       searchBLMMemorialPageProfileImage: parsedJson['profileImage'],
       searchBLMMemorialPageImagesOrVideos: newList1,
       searchBLMMemorialPageRelationship: parsedJson['relationship'],
-      searchBLMMemorialPagePageCreator: APIRegularSearchBLMMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      // searchBLMMemorialPagePageCreator: APIRegularSearchBLMMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchBLMMemorialPageManage: parsedJson['manage'],
       searchBLMMemorialPageFamOrFriends: parsedJson['famOrFriends'],
       searchBLMMemorialPageFollower: parsedJson['follower'],

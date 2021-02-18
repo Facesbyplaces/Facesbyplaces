@@ -25,6 +25,7 @@ Future<bool> apiBLMLogin({String email, String password}) async{
       sharedPrefs.setString('blm-uid', response.headers['uid']);    
       sharedPrefs.setString('blm-client', response.headers['client']);
       sharedPrefs.setBool('blm-user-session', true);
+      sharedPrefs.setBool('user-guest-session', false);
 
       return true;
     }

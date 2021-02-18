@@ -348,20 +348,41 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     Location.PermissionStatus permissionGranted = await location.hasPermission();
 
                     if (permissionGranted != Location.PermissionStatus.granted) {
+                      // await showDialog(
+                      //   context: context,
+                      //   builder: (_) => 
+                      //     AssetGiffyDialog(
+                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //     title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //     entryAnimation: EntryAnimation.DEFAULT,
+                      //     description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                      //       textAlign: TextAlign.center,
+                      //       style: TextStyle(),
+                      //     ),
+                      //     onlyOkButton: true,
+                      //     buttonOkColor: Colors.red,
+                      //     onOkButtonPressed: () {
+                      //       Navigator.pop(context, true);
+                      //     },
+                      //   )
+                      // );
                       await showDialog(
                         context: context,
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                          description: Text('FacesbyPlaces needs to access the location for the memorial to be located. Do you wish to turn it on?',
                             textAlign: TextAlign.center,
                             style: TextStyle(),
                           ),
-                          onlyOkButton: true,
-                          buttonOkColor: Colors.red,
-                          onOkButtonPressed: () {
+                          buttonOkColor: Colors.green,
+                          onOkButtonPressed: () async{
+                            permissionGranted = await location.requestPermission();
+                            Navigator.pop(context, true);
+                          },
+                          onCancelButtonPressed: (){
                             Navigator.pop(context, true);
                           },
                         )
@@ -382,6 +403,9 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       Location.LocationData locationData = await location.getLocation();
 
+                      print('The latitude of the memorial is ${locationData.latitude}');
+                      print('The longitude of the memorial is ${locationData.longitude}');
+
                       APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
                         almRelationship: newValue.relationship,
                         almBirthPlace: newValue.birthplace,
@@ -394,8 +418,10 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         almBackgroundImage: backgroundImage,
                         almProfileImage: profileImage,
                         almImagesOrVideos: newValue.imagesOrVideos,
-                        almLatitude: locationData.latitude.toString(),
-                        almLongitude: locationData.longitude.toString()
+                        // almLatitude: locationData.latitude.toString(),
+                        // almLongitude: locationData.longitude.toString()
+                        almLatitude: '${locationData.latitude}',
+                        almLongitude: '${locationData.longitude}',
                       );
 
                       context.showLoaderOverlay();
