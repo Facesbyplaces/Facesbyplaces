@@ -210,14 +210,11 @@ Rails.application.routes.draw do
         get 'users/show', to: 'admin#showUser'
         # edit user
         put 'users/edit', to: 'admin#editUser'
-        #search user
+        # delete user
+        post 'users/delete', to: 'admin#deleteUser'
+        # search user
         get 'users/search', to: 'admin#searchUsers'
 
-        # search blm user
-        # get 'search/blm_user', to: 'admin#searchBlmUser'
-        # search alm user
-        # get 'search/alm_user', to: 'admin#searchAlmUser'
-  
         # view post
         get 'posts/:id', to: 'admin#showPost'
         # remove post

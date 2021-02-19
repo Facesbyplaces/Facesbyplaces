@@ -62,14 +62,31 @@ class Api::V1::Admin::AdminController < ApplicationController
             user = AlmUser.find(params[:id])
         end
 
-        if user.errors.present?
-            render json: {success: false, errors: user.errors.full_messages }, status: 500
-        elsif user != nil
+        if user != nil
             user.update(editUser_params)
             if user.errors.present?
                 render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
             else
                 render json: {success: true, message: "Successfully Edited User", user: user, status: 200}, status: 200
+            end
+        else
+            render json: {error: "pls login"}, status: 422
+        end
+    end
+
+    def deleteUser
+        if params[:account_type].to_i == 1
+            user = User.find(params[:id])
+        else
+            user = AlmUser.find(params[:id])
+        end
+
+        if user != nil
+            user.destroy!
+            if user.errors.present?
+                render json: {success: false, errors: user.errors.full_messages, status: 404}, status: 200
+            else
+                render json: {success: true, message: "Successfully Deleted User", user: user, status: 200}, status: 200
             end
         else
             render json: {error: "pls login"}, status: 422
