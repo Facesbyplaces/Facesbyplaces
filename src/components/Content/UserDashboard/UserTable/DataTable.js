@@ -72,6 +72,7 @@ export default function DataTable({ search, setSearch, keywords }) {
             </th>
             <th style={{ minWidth: "120px" }}>email</th>
             <th style={{ minWidth: "150px" }}>name</th>
+            <th style={{ minWidth: "150px" }}>verified</th>
             <th style={{ minWidth: "130px" }}>type</th>
             <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
               action

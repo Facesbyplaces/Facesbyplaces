@@ -119,7 +119,11 @@ export default function EditUser({ user, image }) {
         </div>
       ) : (
         <div className="card card-custom">
-          <SuccessModal showModal={showModal} setShowModal={setShowModal} />
+          <SuccessModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            action={tab.option}
+          />
           <form className="form" onSubmit={handleSubmit}>
             <div className="tab-content">
               {/*begin::Tab*/}

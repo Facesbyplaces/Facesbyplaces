@@ -4,16 +4,15 @@ import { DeleteModal } from "./DeleteModal";
 import HashLoader from "react-spinners/HashLoader";
 
 import { useDispatch } from "react-redux";
-import { ViewUserAction } from "../../../../../redux/actions";
-import { EditUserAction } from "../../../../../redux/actions";
+import {
+  ViewUserAction,
+  EditUserAction,
+  DeleteUserAction,
+} from "../../../../../redux/actions";
 
 export default function DataTableRowUserData({ users, search }) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
 
   const handleViewClick = (id, account_type, option) => {
     console.log(id, option);
@@ -22,6 +21,11 @@ export default function DataTableRowUserData({ users, search }) {
 
   const handleEditClick = (id, account_type, option) => {
     dispatch(EditUserAction({ id, account_type, option }));
+  };
+
+  const handleDeleteClick = (id, account_type, option) => {
+    dispatch(DeleteUserAction({ id, account_type, option }));
+    setShowModal((prev) => !prev);
   };
 
   const renderedUsers = users.map((user) => (
@@ -49,6 +53,23 @@ export default function DataTableRowUserData({ users, search }) {
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
           {user.first_name} {user.last_name}
         </span>
+      </td>
+      <td>
+        {user.is_verified ? (
+          <span
+            className="btn btn-hover-transparent-success font-weight-bold mr-2"
+            style={{ width: "65px", height: "38px" }}
+          >
+            true
+          </span>
+        ) : (
+          <span
+            className="btn btn-hover-transparent-danger font-weight-bold mr-2"
+            style={{ width: "65px", height: "38px" }}
+          >
+            false
+          </span>
+        )}
       </td>
       <td>
         {user.account_type == 1 ? (
@@ -147,7 +168,7 @@ export default function DataTableRowUserData({ users, search }) {
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           data-toggle="modal"
           data-target="#exampleModalSizeSm"
-          onClick={openModal}
+          onClick={() => handleDeleteClick(user.id, user.account_type)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg*/}
@@ -176,7 +197,11 @@ export default function DataTableRowUserData({ users, search }) {
             {/*end::Svg Icon*/}
           </span>
         </a>
-        <DeleteModal showModal={showModal} setShowModal={setShowModal} />
+        <DeleteModal
+          user={user.id}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </td>
     </tr>
   ));

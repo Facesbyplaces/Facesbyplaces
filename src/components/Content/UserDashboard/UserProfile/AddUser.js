@@ -13,11 +13,13 @@ export default function AddUser() {
   const [errors, setErrors] = useState("");
   const [accountType, setAccountType] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [image, setImage] = useState(null);
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,
@@ -28,21 +30,27 @@ export default function AddUser() {
   };
 
   const fileSelectedHandler = (e) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
     setSelectedFile(e.target.files[0]);
-    console.log(e.target.files[0]);
+    console.log(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const uploadImage = (user) => {
+    console.log(user);
     const formData = new FormData();
-    formData.append("image", e.target.files[0]);
-    // formData.append("user_id", user.id);
-    // formData.append("account_type", user.account_type);
-    // axios
-    //   .post("/api/v1/users/image_upload", formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     window.location.reload(false);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response);
-    //   });
+    formData.append("image", selectedFile);
+    formData.append("user_id", user.id);
+    formData.append("account_type", user.account_type);
+    console.log("Form Data: ", formData);
+    axios
+      .post("/api/v1/users/image_upload", formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+        setErrors(error.response.data.errors);
+      });
   };
 
   const handleEmailChange = (e) => {
@@ -78,6 +86,7 @@ export default function AddUser() {
   };
 
   const handleSubmit = (e) => {
+    setLoading(true);
     const url = accountType == 1 ? "/auth" : "/alm_auth";
     console.log("Username: ", username);
     console.log("First Name: ", firstName);
@@ -86,6 +95,7 @@ export default function AddUser() {
     console.log("Email: ", email);
     console.log("Password: ", password);
     console.log("Account Type: ", accountType);
+    console.log("Tab Option: ", tab);
 
     axios
       .post(url, {
@@ -99,15 +109,15 @@ export default function AddUser() {
       })
       .then((response) => {
         console.log(response.data);
-        setLoading(true);
+        uploadImage(response.data.data);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
         openModal();
       })
       .catch((error) => {
-        console.log(error.response.statusText);
-        setErrors(error.response.statusText);
+        console.log(error.response);
+        setErrors(error.response);
       });
 
     e.preventDefault();
@@ -164,7 +174,9 @@ export default function AddUser() {
                         <div
                           className="image-input image-input-empty image-input-outline"
                           style={{
-                            backgroundImage: `url( "assets/media/users/blank.png" )`,
+                            backgroundImage: image
+                              ? `url( ${image})`
+                              : `url( "assets/media/users/blank.png" )`,
                           }}
                         >
                           <div className="image-input-wrapper" />

@@ -13,7 +13,7 @@ export const TabReducer = persistReducer(
     switch (action.type) {
       case "VIEW_USER":
         localStorage.setItem("id", action.data.id);
-        localStorage.setItem("id", action.data.account_type);
+        localStorage.setItem("account_type", action.data.account_type);
         localStorage.setItem("tab", action.data.option);
         console.log(action.data);
 
@@ -21,12 +21,19 @@ export const TabReducer = persistReducer(
 
       case "EDIT_USER":
         localStorage.setItem("id", action.data.id);
-        localStorage.setItem("id", action.data.account_type);
+        localStorage.setItem("account_type", action.data.account_type);
         localStorage.setItem("tab", action.data.option);
 
         return action.data;
 
       case "ADD_USER":
+        localStorage.setItem("tab", action.data.option);
+
+        return action.data;
+
+      case "DELETE_USER":
+        localStorage.setItem("id", action.data.id);
+        localStorage.setItem("account_type", action.data.account_type);
         localStorage.setItem("tab", action.data.option);
 
         return action.data;

@@ -26,6 +26,13 @@ export const AddUserAction = (option) => {
   };
 };
 
+export const DeleteUserAction = (user) => {
+  return {
+    type: "VIEW_USER",
+    data: user,
+  };
+};
+
 export const ViewUserAction = (user) => {
   return {
     type: "VIEW_USER",

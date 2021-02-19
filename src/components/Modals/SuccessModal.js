@@ -14,6 +14,7 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
     setShowModal((prev) => !prev);
     dispatch(TableUserAction());
   };
+
   return (
     <>
       {showModal ? (
@@ -64,15 +65,25 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
                 <h2 className="modal-dialog">
                   <b>Success!</b>
                 </h2>
-                {action === "a" ? (
-                  <h5 className="modal-dialog">
-                    You have successfully added a user.
-                  </h5>
-                ) : (
-                  <h5 className="modal-dialog">
-                    You have successfully edited the user.
-                  </h5>
-                )}
+                {
+                  {
+                    a: (
+                      <h5 className="modal-dialog">
+                        You have successfully added a user.
+                      </h5>
+                    ),
+                    v: (
+                      <h5 className="modal-dialog">
+                        You have successfully edited a user.
+                      </h5>
+                    ),
+                    d: (
+                      <h5 className="modal-dialog">
+                        You have successfully deleted a user.
+                      </h5>
+                    ),
+                  }[action]
+                }
               </div>
               <div className="modal-footer">
                 <button
@@ -81,7 +92,7 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
                   style={{ width: "200px" }}
                   data-dismiss="modal"
                   onClick={
-                    action === "a"
+                    action === "a" || "d"
                       ? handleAddActionClick
                       : handleEditActionClick
                   }
