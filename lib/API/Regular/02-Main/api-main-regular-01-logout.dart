@@ -31,6 +31,8 @@ Future<bool> apiRegularLogout() async{
     sharedPrefs.remove('regular-client');
     sharedPrefs.remove('regular-user-session');
 
+    sharedPrefs.remove('user-guest-session');
+
     return true;
   }else{
     return false;

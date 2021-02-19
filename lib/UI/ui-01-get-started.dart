@@ -1,6 +1,5 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-push-notifications.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
@@ -598,8 +597,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                                     color: Color(0xffffffff),
                                   ), 
                                   onPressed: (){
-                                    // Navigator.pushNamed(context, '/login');
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
+                                    Navigator.pushNamed(context, '/login');
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
                                   },
                                   width: 200,
                                   height: 45,

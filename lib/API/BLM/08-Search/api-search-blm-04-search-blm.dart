@@ -94,7 +94,7 @@ class APIBLMSearchMemorialExtended{
       searchMemorialProfileImage: parsedJson['profileImage'],
       searchMemorialImagesOrVideos: newList1,
       searchMemorialRelationship: parsedJson['relationship'],
-      searchMemorialPageCreator: APIBLMSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      // searchMemorialPageCreator: APIBLMSearchMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchMemorialManage: parsedJson['manage'],
       searchMemorialFamOrFriends: parsedJson['famOrFriends'],
       searchMemorialFollower: parsedJson['follower'],

@@ -477,7 +477,6 @@ PODS:
 
 DEPENDENCIES:
   - apple_maps_flutter (from `.symlinks/plugins/apple_maps_flutter/ios`)
-  - BraintreeDropIn
   - camera (from `.symlinks/plugins/camera/ios`)
   - cryptography_flutter (from `.symlinks/plugins/cryptography_flutter/ios`)
   - Firebase/Analytics
@@ -653,6 +652,6 @@ SPEC CHECKSUMS:
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
-PODFILE CHECKSUM: 1a3f4621b5a48abc0ea13a62b959a8f7e7a0c634
+PODFILE CHECKSUM: d8807efaea0dece0cfa4c8f1bd0d9a98c0ea6427
 
 COCOAPODS: 1.10.1

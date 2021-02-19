@@ -7,6 +7,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
@@ -48,14 +49,23 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   int itemRemaining;
   int page;
   int count;
+  bool isGuestLoggedIn;
 
   void initState(){
     super.initState();
+    isGuestLoggedIn = false;
+    isGuest();
     page = 1;
     itemRemaining = 1;
     count = 0;
     feeds = [];
     onLoading();
+  }
+
+  void isGuest() async{
+    final sharedPrefs = await SharedPreferences.getInstance();
+    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+    print('The value of guest login is $isGuestLoggedIn');
   }
 
   void onRefresh() async{
@@ -347,7 +357,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
 
             SizedBox(height: 25,),
 
-            MiscBLMButtonTemplate(
+            isGuestLoggedIn
+            ? Container(height: 0,)
+            : MiscBLMButtonTemplate(
               buttonText: 'Create', 
               buttonTextStyle: TextStyle(
                 fontSize: 16,

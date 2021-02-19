@@ -7,6 +7,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,13 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   int page;
   int count;
   VideoPlayerController videoPlayerController;
+  bool isGuestLoggedIn;
+
+  void isGuest() async{
+    final sharedPrefs = await SharedPreferences.getInstance();
+    isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
+    print('The value of guest login is $isGuestLoggedIn');
+  }
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -116,6 +124,8 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
   void initState(){
     super.initState();
+    isGuestLoggedIn = false;
+    isGuest();
     itemRemaining = 1;
     feeds = [];
     page = 1;
@@ -361,7 +371,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
 
             SizedBox(height: 20),
 
-            MiscRegularButtonTemplate(
+            isGuestLoggedIn
+            ? Container(height: 0,)
+            : MiscRegularButtonTemplate(
               buttonText: 'Create', 
               buttonTextStyle: TextStyle(
                 fontSize: 16,
