@@ -1,52 +1,60 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../../../auxiliary/axios";
-
-import DataTableRowUserData from "./DataTableRowData/DataTableRowUserData";
+import axios from "../../../../../auxiliary/axios";
+//Data Table
+import DataTableRowMemorialData from "./DataTableRowData/DataTableRowMemorialData";
+import DataTableRowBlmData from "./DataTableRowData/DataTableRowBlmData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
-export default function DataTable({ search, setSearch, keywords }) {
+export default function MemorialDataTable({
+  search,
+  setSearch,
+  keywords,
+  pageType,
+}) {
   const [page, setPage] = useState(1);
   const [clicked, setClicked] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [memorials, setMemorials] = useState([]);
+  const [blms, setBlms] = useState([]);
 
-  const handleSearch = () => {
-    axios
-      .get(`/api/v1/admin/users/search`, {
-        params: { keywords: keywords, page: page },
-      })
-      .then((response) => {
-        setUsers(response.data.users);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-    setSearch(false);
-  };
+  // const handleSearch = () => {
+  //   axios
+  //     .get(`/api/v1/admin/users/search`, {
+  //       params: { keywords: keywords, page: page },
+  //     })
+  //     .then((response) => {
+  //       setUsers(response.data.users);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
+  //   setSearch(false);
+  // };
 
-  {
-    search ? handleSearch() : console.log("Search", search);
-  }
+  // {
+  //   search ? handleSearch() : console.log("Search", search);
+  // }
 
   useEffect(() => {
-    fetchUsers(page);
-  }, [users.id]);
+    fetchMemorials(page);
+  }, [memorials.id]);
 
   const handleClick = (page) => {
     setPage(page);
     setClicked(true);
-    fetchUsers(page);
+    fetchMemorials(page);
   };
 
-  const fetchUsers = (page) => {
+  const fetchMemorials = (page) => {
     setLoader(true);
     axios
-      .get(`/api/v1/admin/users`, { params: { page: page } })
+      .get(`/api/v1/admin/memorials`, { params: { page: page } })
       .then((response) => {
         setLoader(false);
-        setUsers(response.data.users);
-        console.log("Response: ", response.data.users);
+        setMemorials(response.data.memorials.alm);
+        setBlms(response.data.memorials.blm);
+        console.log("Response: ", response.data.memorials);
       })
       .catch((error) => {
         console.log(error.response);
@@ -68,12 +76,16 @@ export default function DataTable({ search, setSearch, keywords }) {
               </label>
             </th>
             <th className="pl-0" style={{ minWidth: "100px" }}>
-              user id
+              memorial id
             </th>
-            <th style={{ minWidth: "120px" }}>email</th>
+            {pageType === 2 ? (
+              <th style={{ minWidth: "120px" }}>birthplace</th>
+            ) : (
+              <th style={{ minWidth: "120px" }}>location</th>
+            )}
             <th style={{ minWidth: "150px" }}>name</th>
-            <th style={{ minWidth: "150px" }}>verified</th>
-            <th style={{ minWidth: "130px" }}>type</th>
+            <th style={{ minWidth: "150px" }}>privacy</th>
+            <th style={{ minWidth: "130px" }}>page type</th>
             <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
               action
             </th>
@@ -99,8 +111,10 @@ export default function DataTable({ search, setSearch, keywords }) {
               <td></td>
             </tr>
           </tbody>
+        ) : pageType == 2 ? (
+          <DataTableRowMemorialData memorials={memorials} search={search} />
         ) : (
-          <DataTableRowUserData users={users} search={search} />
+          <DataTableRowBlmData memorials={blms} search={search} />
         )}
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">
@@ -110,7 +124,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           </a> */}
           <a
             className={
-              page == 1
+              page === 1
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }
@@ -121,7 +135,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           <a
             href="#"
             className={
-              clicked && page == 2
+              clicked && page === 2
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }
@@ -132,7 +146,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           <a
             href="#"
             className={
-              clicked && page == 3
+              clicked && page === 3
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }
@@ -143,7 +157,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           <a
             href="#"
             className={
-              clicked && page == 4
+              clicked && page === 4
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }
@@ -154,7 +168,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           <a
             href="#"
             className={
-              clicked && page == 5
+              clicked && page === 5
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }
@@ -165,7 +179,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           <a
             href="#"
             className={
-              clicked && page == 6
+              clicked && page === 6
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }
@@ -176,7 +190,7 @@ export default function DataTable({ search, setSearch, keywords }) {
           <a
             href="#"
             className={
-              clicked && page == 7
+              clicked && page === 7
                 ? "btn btn-icon btn-sm border-0 btn-light mr-2 my-1 btn-hover-primary active"
                 : "btn btn-icon btn-sm border-0 btn-light mr-2 my-1"
             }

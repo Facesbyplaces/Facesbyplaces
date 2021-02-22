@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../auxiliary/axios";
+import axios from "../../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { TableUserAction } from "../../../../redux/actions";
+import { TableUserAction } from "../../../../../redux/actions";
 import EditUser from "./EditUser";
 
 export default function User() {

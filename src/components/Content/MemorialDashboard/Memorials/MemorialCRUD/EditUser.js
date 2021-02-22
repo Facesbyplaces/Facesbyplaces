@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ViewUserAction, EditUserAction } from "../../../../redux/actions";
-import axios from "../../../../auxiliary/axios";
-import { SuccessModal } from "../../../Modals/SuccessModal";
+import { ViewUserAction, EditUserAction } from "../../../../../redux/actions";
+import axios from "../../../../../auxiliary/axios";
+import { SuccessModal } from "../../../../Modals/SuccessModal";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";

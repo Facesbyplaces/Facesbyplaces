@@ -8,11 +8,13 @@ import {
   ViewUserAction,
   EditUserAction,
   DeleteUserAction,
-} from "../../../../../redux/actions";
+} from "../../../../../../redux/actions";
 
-export default function DataTableRowUserData({ users, search }) {
+export default function DataTableRowBlmData({ memorials, search }) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+
+  console.log(memorials);
 
   const handleViewClick = (id, account_type, option) => {
     console.log(id, option);
@@ -28,7 +30,7 @@ export default function DataTableRowUserData({ users, search }) {
     setShowModal((prev) => !prev);
   };
 
-  const renderedUsers = users.map((user) => (
+  const renderedMemorials = memorials.map((memorial) => (
     <tr>
       <td className="pl-2 py-6">
         <label className="checkbox checkbox-lg checkbox-inline">
@@ -41,52 +43,48 @@ export default function DataTableRowUserData({ users, search }) {
           href="#"
           className="text-dark-75 font-weight-bolder text-hover-primary font-size-lg"
         >
-          {user.id}
+          {memorial.id}
         </a>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {user.email}
+          {memorial.location}
         </span>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {user.first_name} {user.last_name}
+          {memorial.country}
         </span>
       </td>
       <td>
-        {user.is_verified ? (
+        {memorial.privacy === "public" ? (
           <span
             className="btn btn-hover-transparent-success font-weight-bold mr-2"
-            style={{ width: "65px", height: "38px" }}
+            style={{ width: "70px", height: "38px" }}
           >
-            true
+            public
           </span>
         ) : (
           <span
             className="btn btn-hover-transparent-danger font-weight-bold mr-2"
-            style={{ width: "65px", height: "38px" }}
+            style={{ width: "70px", height: "38px" }}
           >
-            false
+            private
           </span>
         )}
       </td>
       <td>
-        {user.account_type == 1 ? (
-          <span className="label label-lg label-light-primary label-inline">
-            BLM
-          </span>
-        ) : (
-          <span className="label label-lg label-light-warning label-inline">
-            ALM
-          </span>
-        )}
+        <span className="label label-lg label-light-primary label-inline">
+          BLM
+        </span>
       </td>
       <td className="pr-2 text-left">
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() => handleViewClick(user.id, user.account_type, "v")}
+          onClick={() =>
+            handleViewClick(memorial.id, memorial.account_type, "v")
+          }
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -132,7 +130,9 @@ export default function DataTableRowUserData({ users, search }) {
         {/* Edit Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-          onClick={() => handleEditClick(user.id, user.account_type, "e")}
+          onClick={() =>
+            handleEditClick(memorial.id, memorial.account_type, "e")
+          }
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}
@@ -168,7 +168,7 @@ export default function DataTableRowUserData({ users, search }) {
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           data-toggle="modal"
           data-target="#exampleModalSizeSm"
-          onClick={() => handleDeleteClick(user.id, user.account_type)}
+          onClick={() => handleDeleteClick(memorial.id, memorial.account_type)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg*/}
@@ -198,7 +198,7 @@ export default function DataTableRowUserData({ users, search }) {
           </span>
         </a>
         <DeleteModal
-          user={user.id}
+          user={memorial.id}
           showModal={showModal}
           setShowModal={setShowModal}
         />
@@ -227,7 +227,10 @@ export default function DataTableRowUserData({ users, search }) {
       </tr>
     </tbody>
   ) : (
-    <tbody>{renderedUsers}</tbody>
+    <tbody>
+      {/* <h1>Hi</h1> */}
+      {renderedMemorials}
+    </tbody>
   );
   // <div>
   //   {props.users.length == 0 ? (

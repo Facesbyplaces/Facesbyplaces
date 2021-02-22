@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import HashLoader from "react-spinners/HashLoader";
 
 //Components
-import Navbar from "../UserDashboard/Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
 import SideBar from "./SideBar/SideBar";
-import Topbar from "../UserDashboard/Navbar/Topbar/Topbar";
+import Topbar from "./Navbar/Topbar/Topbar";
 import Footer from "./Footer";
-import UsersTable from "../UserDashboard/UserTable/UsersTable";
+import UsersTable from "./Memorials/MemorialTable/MemorialsTable";
 import Assets from "../../Assets";
+import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
+// import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
@@ -50,7 +52,7 @@ const Dashboard = () => {
 
               {/*begin::Content*/}
 
-              <UsersTable />
+              <MemorialsTable />
 
               {/*end::Content*/}
               <Footer />

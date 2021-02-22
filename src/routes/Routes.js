@@ -12,7 +12,8 @@ import axios from "../auxiliary/axios";
 
 //COMPONENTS
 import { Home } from "../components/Home";
-import Dashboard from "../components/Content/UserDashboard/Dashboard";
+import UserDashboard from "../components/Content/UserDashboard/UserDashboard";
+import MemorialDashboard from "../components/Content/MemorialDashboard/MemorialDashboard";
 
 export const Routes = withRouter(({ history }) => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ export const Routes = withRouter(({ history }) => {
     <>
       <Switch>
         {isAuthorized && isTokenValid ? (
-          <Redirect from="/admin" to="/user" />
+          <Redirect from="/admin" to="/users" />
         ) : (
           <>
             <Redirect to="/admin" />
@@ -60,7 +61,8 @@ export const Routes = withRouter(({ history }) => {
         {/* <Route path="/logout" component={LogOut} /> */}
         {isAuthorized && isTokenValid ? (
           <>
-            <Route exact path="/user" component={Dashboard} />
+            <Route exact path="/users" component={UserDashboard} />
+            <Route exact path="/memorials" component={MemorialDashboard} />
           </>
         ) : (
           <Redirect to="/admin" />

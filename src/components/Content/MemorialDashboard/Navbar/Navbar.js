@@ -17,13 +17,13 @@ export default function Navbar() {
           >
             {/*begin::Header Nav*/}
             <ul className="menu-nav">
-              <li className="menu-item menu-item-active" aria-haspopup="true">
+              <li className="menu-item menu-item-submenu" aria-haspopup="true">
                 <a href="/users" className="menu-link">
                   <span className="menu-text">Users</span>
                 </a>
               </li>
               <li
-                className="menu-item menu-item-submenu menu-item-rel"
+                className="menu-item menu-item-active menu-item-rel"
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >

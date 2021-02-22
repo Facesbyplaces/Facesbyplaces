@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { TableUserAction } from "../../../../redux/actions";
+import { TableUserAction } from "../../../../../redux/actions";
 
 import Header from "./Header";
 import Body from "./Body";
 import User from "../UserProfile/User";
 import AddUser from "../UserProfile/AddUser";
-import { SuccessModal } from "../../../Modals/SuccessModal";
+import { SuccessModal } from "../../../../Modals/SuccessModal";
 
 export default function UsersTable() {
   const [showModal, setShowModal] = useState(true);

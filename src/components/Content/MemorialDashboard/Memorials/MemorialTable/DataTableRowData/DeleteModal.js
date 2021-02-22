@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { DeleteUserAction } from "../../../../../redux/actions";
-import axios from "../../../../../auxiliary/axios";
+import { DeleteUserAction } from "../../../../../../redux/actions";
+import axios from "../../../../../../auxiliary/axios";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";
