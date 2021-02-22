@@ -222,6 +222,8 @@ Rails.application.routes.draw do
         # search post
         get 'search/post', to: 'admin#searchPost'
   
+        # all memorials
+        get 'memorials', to: 'admin#allMemorials'
         # view memorial
         get 'memorials/:id/:page', to: 'admin#showMemorial'
         # remove memorial

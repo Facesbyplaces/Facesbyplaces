@@ -2,6 +2,7 @@ class Api::V1::Admin::AdminController < ApplicationController
     before_action :check_user
     before_action :admin_only
 
+    # USER
     def allUsers
         users = User.all.where.not(guest: true, username: "admin")
         # _except(User.guest).order("users.id DESC")
@@ -168,6 +169,59 @@ class Api::V1::Admin::AdminController < ApplicationController
                     }
     end
     
+    # Memorial
+     def allMemorials
+        # BLM Memorials
+        blm_memorials = Blm.all
+        #ALM Memorials
+        alm_memorials = Memorial.all
+
+        # BLM
+        blm_memorials = blm_memorials.page(params[:page]).per(numberOfPage)
+        if blm_memorials.total_count == 0 || (blm_memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsRemaining = 0
+        elsif blm_memorials.total_count < numberOfPage
+            itemsRemaining = blm_memorials.total_count 
+        else
+            itemsRemaining = blm_memorials.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        blmMemorials = ActiveModel::SerializableResource.new(
+                            blm_memorials, 
+                            each_serializer: BlmSerializer
+                        )
+
+         # ALM
+         alm_memorials = alm_memorials.page(params[:page]).per(numberOfPage)
+         if alm_memorials.total_count == 0 || (alm_memorials.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsRemaining = 0
+        elsif alm_memorials.total_count < numberOfPage
+            itemsRemaining = alm_memorials.total_count 
+        else
+            itemsRemaining = alm_memorials.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        almMemorials = ActiveModel::SerializableResource.new(
+                            alm_memorials, 
+                            each_serializer: MemorialSerializer
+                        )
+
+        # render json: {  itemsremaining:  itemsremaining,
+        #                 memorials: memorials, 
+        #                 user: user,
+        #             }
+
+        render json: {
+            itemsremaining:  itemsRemaining,
+            memorials: {
+                blm: blm_memorials,
+                alm: alm_memorials
+            },
+            user: user,
+        }
+        
+    end
+
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
 
