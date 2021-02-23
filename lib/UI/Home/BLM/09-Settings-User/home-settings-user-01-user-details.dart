@@ -37,12 +37,25 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
     return await apiBLMShowProfileInformation();
   }
 
-  Future getProfileImage() async{
+  // Future getProfileImage() async{
+  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  //   if(pickedFile != null){
+  //     setState(() {
+  //       profileImage = File(pickedFile.path);
+  //     });
+  //   }
+  // }
+
+  Future<bool> getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
     if(pickedFile != null){
       setState(() {
         profileImage = File(pickedFile.path);
       });
+      return true;
+    }else{
+      return false;
     }
   }
 
@@ -83,31 +96,79 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                           child: GestureDetector(
                             onTap: () async{
 
-                              await getProfileImage();
+                              // await getProfileImage();
                               
-                              context.showLoaderOverlay();
-                              bool result = await apiBLMUpdateUserProfilePicture(image: profileImage, userId: userId);
-                              context.hideLoaderOverlay();
+                              // context.showLoaderOverlay();
+                              // bool result = await apiBLMUpdateUserProfilePicture(image: profileImage, userId: userId);
+                              // context.hideLoaderOverlay();
 
-                              if(result != true){
-                                await showDialog(
-                                  context: context,
-                                  builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  )
-                                );
+                              // if(result != true){
+                              //   await showDialog(
+                              //     context: context,
+                              //     builder: (_) => 
+                              //       AssetGiffyDialog(
+                              //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              //       entryAnimation: EntryAnimation.DEFAULT,
+                              //       description: Text('Something went wrong. Please try again.',
+                              //         textAlign: TextAlign.center,
+                              //         style: TextStyle(),
+                              //       ),
+                              //       onlyOkButton: true,
+                              //       buttonOkColor: Colors.red,
+                              //       onOkButtonPressed: () {
+                              //         Navigator.pop(context, true);
+                              //       },
+                              //     )
+                              //   );
+                              // }
+
+                              bool getImage = await getProfileImage();
+
+                              if(getImage){
+                                context.showLoaderOverlay();
+                                bool result = await apiBLMUpdateUserProfilePicture(image: profileImage, userId: userId);
+                                context.hideLoaderOverlay();
+
+                                if(result != true){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Successfully updated the profile picture.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.green,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }
                               }
                               
                             },

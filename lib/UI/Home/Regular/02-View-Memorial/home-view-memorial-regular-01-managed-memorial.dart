@@ -21,6 +21,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:chewie/chewie.dart';
+import 'package:mime/mime.dart';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:io';
@@ -73,7 +75,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
   List<RegularProfilePosts> posts;
-  Future showProfile;
+  Future<APIRegularShowMemorialMain> showProfile;
   GlobalKey dataKey;
   GlobalKey profileKey = GlobalKey<HomeRegularProfileState>();
   int itemRemaining;
@@ -83,6 +85,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   BranchUniversalObject buo;
   BranchLinkProperties lp;
   VideoPlayerController videoPlayerController;
+  ChewieController chewieController1;
+  ChewieController chewieController2;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -181,15 +185,32 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     dataKey = GlobalKey();
     empty = true;
     page = 1;
-    showProfile = getProfileInformation(memorialId);
     onLoading();
+    showProfile = getProfileInformation(memorialId);
+    showProfile.then((value){
+      if(value.almMemorial.showMemorialImagesOrVideos[0] != null){
+        videoPlayerController = VideoPlayerController.network('${value.almMemorial.showMemorialImagesOrVideos[0]}');
+        chewieController1 = ChewieController(
+          videoPlayerController: videoPlayerController,
+          autoPlay: false,
+          looping: false,
+        );
+        chewieController2 = ChewieController(
+          videoPlayerController: videoPlayerController,
+          autoPlay: false,
+          looping: false,
+        );
+      }
+    });
   }
 
-  // @override
-  // void dispose() {
-  //   videoPlayerController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    videoPlayerController.dispose();
+    chewieController1.dispose();
+    chewieController2.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -288,31 +309,53 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   children: [
                                     ((){
                                       if(profile.data.almMemorial.showMemorialImagesOrVideos != null){
-                                        videoPlayerController = VideoPlayerController.network(profile.data.almMemorial.showMemorialImagesOrVideos[0]);
                                         return Container(
+                                          padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                                          width: SizeConfig.screenWidth,
                                           height: 280,
-                                          child: profile.data.almMemorial.showMemorialImagesOrVideos == null 
-                                          ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
-                                          : GestureDetector(
-                                            onTap: (){
-                                              if(videoPlayerController.value.isPlaying){
-                                                videoPlayerController.pause();
-                                                print('Paused!');
-                                              }else{
-                                                videoPlayerController.play();
-                                                print('Played!');
-                                              }
-                                            },
-                                            child: AspectRatio(
-                                              aspectRatio: videoPlayerController.value.aspectRatio,
-                                              child: VideoPlayer(videoPlayerController),
-                                            ),
+                                          child: Chewie(
+                                            controller: chewieController1,
                                           ),
+                                          // child: GestureDetector(
+                                          //   onTap: (){
+                                          //     if(videoPlayerController.value.isPlaying){
+                                          //       videoPlayerController.pause();
+                                          //       print('Paused!');
+                                          //     }else{
+                                          //       videoPlayerController.play();
+                                          //       print('Played!');
+                                          //     }
+                                          //   },
+                                          //   child: AspectRatio(
+                                          //     aspectRatio: videoPlayerController.value.aspectRatio,
+                                          //     child: VideoPlayer(videoPlayerController),
+                                          //   ),
+                                          // ),
+
+                                          // child: profile.data.almMemorial.showMemorialImagesOrVideos == null 
+                                          // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
+                                          // : GestureDetector(
+                                          //   onTap: (){
+                                          //     if(videoPlayerController.value.isPlaying){
+                                          //       videoPlayerController.pause();
+                                          //       print('Paused!');
+                                          //     }else{
+                                          //       videoPlayerController.play();
+                                          //       print('Played!');
+                                          //     }
+                                          //   },
+                                          //   child: AspectRatio(
+                                          //     aspectRatio: videoPlayerController.value.aspectRatio,
+                                          //     child: VideoPlayer(videoPlayerController),
+                                          //   ),
+                                          // ),
                                         );
                                       }else{
                                         return Container(height: 0,);
                                       }
                                     }()),
+
+                                    SizedBox(height: 20,),
 
                                     ((){
                                       if(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription != '' || profile.data.almMemorial.showMemorialDetails.showMemorialDetailsDescription != null){
@@ -622,35 +665,47 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                             physics: ClampingScrollPhysics(),
                                             scrollDirection: Axis.horizontal,
                                             itemBuilder: (context, index){
-                                              return GestureDetector(
-                                                onTap: (){
-                                                  FullScreenMenu.show(
-                                                    context,
-                                                    backgroundColor: Color(0xff888888),
-                                                    items: [
-                                                      CachedNetworkImage(
+                                              return ((){
+                                                if(lookupMimeType(profile.data.almMemorial.showMemorialImagesOrVideos[index]).contains('video') == true){
+                                                  return Container(
+                                                    child: Chewie(
+                                                      controller: chewieController2,
+                                                    ),
+                                                    width: 100, 
+                                                    height: 100,
+                                                  );
+                                                }else{
+                                                  return GestureDetector(
+                                                    onTap: (){
+                                                      FullScreenMenu.show(
+                                                        context,
+                                                        backgroundColor: Color(0xff888888),
+                                                        items: [
+                                                          CachedNetworkImage(
+                                                            fit: BoxFit.cover,
+                                                            imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
+                                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                    child: Container(
+                                                      width: 100,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        color: Color(0xff888888),
+                                                      ),
+                                                      child: CachedNetworkImage(
                                                         fit: BoxFit.cover,
                                                         imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       ),
-                                                    ],
+                                                    ),
                                                   );
-                                                },
-                                                child: Container(
-                                                  width: 100,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(10),
-                                                    color: Color(0xff888888),
-                                                  ),
-                                                  child: CachedNetworkImage(
-                                                    fit: BoxFit.cover,
-                                                    imageUrl: profile.data.almMemorial.showMemorialImagesOrVideos[index],
-                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                  ),
-                                                ),
-                                              );
+                                                }
+                                              }());
                                             }, 
                                             separatorBuilder: (context, index){
                                               return SizedBox(width: 20);

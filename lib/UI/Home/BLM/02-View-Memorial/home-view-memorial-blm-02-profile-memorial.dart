@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
@@ -10,6 +11,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
+import 'package:mime/mime.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -76,8 +78,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   int page;
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-  VideoPlayerController videoPlayerController;
   bool isGuestLoggedIn;
+
+  VideoPlayerController videoPlayerController;
+  ChewieController chewieController1;
+  ChewieController chewieController2;
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
@@ -188,13 +193,30 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
     dataKey = GlobalKey();
     onLoading();
     showProfile = getProfileInformation(memorialId);
+    showProfile.then((value){
+      if(value.almMemorial.showMemorialImagesOrVideos[0] != null){
+        videoPlayerController = VideoPlayerController.network('${value.almMemorial.showMemorialImagesOrVideos[0]}');
+        chewieController1 = ChewieController(
+          videoPlayerController: videoPlayerController,
+          autoPlay: false,
+          looping: false,
+        );
+        chewieController2 = ChewieController(
+          videoPlayerController: videoPlayerController,
+          autoPlay: false,
+          looping: false,
+        );
+      }
+    });
   }
 
-  // @override
-  // void dispose() {
-  //   videoPlayerController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    videoPlayerController.dispose();
+    chewieController1.dispose();
+    chewieController2.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -296,24 +318,31 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                             if(profile.data.blmMemorial.memorialImagesOrVideos != null){
                                               videoPlayerController = VideoPlayerController.network(profile.data.blmMemorial.memorialImagesOrVideos[0]);
                                               return Container(
+                                                padding: EdgeInsets.only(left: 20.0, right: 20.0,),
+                                                width: SizeConfig.screenWidth,
                                                 height: 280,
-                                                child: profile.data.blmMemorial.memorialImagesOrVideos == null 
-                                                ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
-                                                : GestureDetector(
-                                                  onTap: (){
-                                                    if(videoPlayerController.value.isPlaying){
-                                                      videoPlayerController.pause();
-                                                      print('Paused!');
-                                                    }else{
-                                                      videoPlayerController.play();
-                                                      print('Played!');
-                                                    }
-                                                  },
-                                                  child: AspectRatio(
-                                                    aspectRatio: videoPlayerController.value.aspectRatio,
-                                                    child: VideoPlayer(videoPlayerController),
-                                                  ),
+                                                child: Chewie(
+                                                  controller: chewieController1,
                                                 ),
+  
+                                                // height: 280,
+                                                // child: profile.data.blmMemorial.memorialImagesOrVideos == null 
+                                                // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
+                                                // : GestureDetector(
+                                                //   onTap: (){
+                                                //     if(videoPlayerController.value.isPlaying){
+                                                //       videoPlayerController.pause();
+                                                //       print('Paused!');
+                                                //     }else{
+                                                //       videoPlayerController.play();
+                                                //       print('Played!');
+                                                //     }
+                                                //   },
+                                                //   child: AspectRatio(
+                                                //     aspectRatio: videoPlayerController.value.aspectRatio,
+                                                //     child: VideoPlayer(videoPlayerController),
+                                                //   ),
+                                                // ),
                                               );
                                             }else{
                                               return Container(height: 0,);
@@ -739,34 +768,46 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   physics: ClampingScrollPhysics(),
                                                   scrollDirection: Axis.horizontal,
                                                   itemBuilder: (context, index){
-                                                    return GestureDetector(
-                                                      onTap: (){
-                                                        FullScreenMenu.show(
-                                                          context,
-                                                          backgroundColor: Color(0xff888888),
-                                                          items: [
-                                                            CachedNetworkImage(
-                                                              fit: BoxFit.cover,
+                                                    return ((){
+                                                      if(lookupMimeType(profile.data.blmMemorial.memorialImagesOrVideos[index]).contains('video') == true){
+                                                        return Container(
+                                                          child: Chewie(
+                                                            controller: chewieController2,
+                                                          ),
+                                                          width: 100, 
+                                                          height: 100,
+                                                        );
+                                                      }else{
+                                                        return GestureDetector(
+                                                          onTap: (){
+                                                            FullScreenMenu.show(
+                                                              context,
+                                                              backgroundColor: Color(0xff888888),
+                                                              items: [
+                                                                CachedNetworkImage(
+                                                                  fit: BoxFit.cover,
+                                                                  imageUrl: profile.data.blmMemorial.memorialImagesOrVideos[index],
+                                                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                          child: Container(
+                                                            width: 100,
+                                                            decoration: BoxDecoration(
+                                                              borderRadius: BorderRadius.circular(10),
+                                                              color: Color(0xff888888),
+                                                            ),
+                                                            child: CachedNetworkImage(
                                                               imageUrl: profile.data.blmMemorial.memorialImagesOrVideos[index],
                                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                             ),
-                                                          ],
+                                                          ),
                                                         );
-                                                      },
-                                                      child: Container(
-                                                        width: 100,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(10),
-                                                          color: Color(0xff888888),
-                                                        ),
-                                                        child: CachedNetworkImage(
-                                                          imageUrl: profile.data.blmMemorial.memorialImagesOrVideos[index],
-                                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
-                                                        ),
-                                                      ),
-                                                    );
+                                                      }
+                                                    }());
                                                   }, 
                                                   separatorBuilder: (context, index){
                                                     return SizedBox(width: 20,);

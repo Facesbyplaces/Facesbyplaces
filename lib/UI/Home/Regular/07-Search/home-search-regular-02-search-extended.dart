@@ -905,6 +905,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     return Container(
       height: SizeConfig.screenHeight - kToolbarHeight - 75,
       child: Stack(
+        alignment: Alignment.center,
         children: [
           IgnorePointer(
             ignoring: isGuestLoggedIn,
