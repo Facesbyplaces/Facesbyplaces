@@ -1,4 +1,3 @@
-import 'package:chewie/chewie.dart';
 import 'package:facesbyplaces/UI/Home/BLM/01-Main/home-main-blm-02-home-extended.dart';
 import 'package:facesbyplaces/UI/Home/BLM/08-Settings-Memorial/home-settings-memorial-blm-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
@@ -13,16 +12,16 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
-import 'package:mime/mime.dart';
 import 'home-view-memorial-blm-03-connection-list.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:mime/mime.dart';
 import 'dart:typed_data';
 import 'dart:async';
 import 'dart:io';
@@ -86,9 +85,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
   BranchUniversalObject buo;
   BranchLinkProperties lp;
 
-  VideoPlayerController videoPlayerController;
-  ChewieController chewieController1;
-  ChewieController chewieController2;
+  // VideoPlayerController videoPlayerController;
+  // ChewieController chewieController1;
+  // ChewieController chewieController2;
+
+  BetterPlayerController betterPlayerController1;
+  BetterPlayerController betterPlayerController2;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -187,30 +189,37 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
     page = 1;
     onLoading();
     showProfile = getProfileInformation(memorialId);
+    // showProfile.then((value){
+    //   if(value.almMemorial.showMemorialImagesOrVideos[0] != null){
+    //     videoPlayerController = VideoPlayerController.network('${value.almMemorial.showMemorialImagesOrVideos[0]}');
+    //     chewieController1 = ChewieController(
+    //       videoPlayerController: videoPlayerController,
+    //       autoPlay: false,
+    //       looping: false,
+    //     );
+    //     chewieController2 = ChewieController(
+    //       videoPlayerController: videoPlayerController,
+    //       autoPlay: false,
+    //       looping: false,
+    //     );
+    //   }
+    // });
     showProfile.then((value){
       if(value.almMemorial.showMemorialImagesOrVideos[0] != null){
-        videoPlayerController = VideoPlayerController.network('${value.almMemorial.showMemorialImagesOrVideos[0]}');
-        chewieController1 = ChewieController(
-          videoPlayerController: videoPlayerController,
-          autoPlay: false,
-          looping: false,
-        );
-        chewieController2 = ChewieController(
-          videoPlayerController: videoPlayerController,
-          autoPlay: false,
-          looping: false,
+        BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, '${value.almMemorial.showMemorialImagesOrVideos[0]}');
+        betterPlayerController1 = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 16 / 9,), betterPlayerDataSource: betterPlayerDataSource);
+        betterPlayerController2 = BetterPlayerController(
+          BetterPlayerConfiguration(
+            controlsConfiguration: BetterPlayerControlsConfiguration(
+              showControls: false,
+            ),
+            aspectRatio: 1 / 2,
+          ), 
+          betterPlayerDataSource: betterPlayerDataSource, 
         );
       }
     });
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    chewieController1.dispose();
-    chewieController2.dispose();
-    super.dispose();
   }
 
   @override
@@ -310,13 +319,12 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                   children: [
                                     ((){
                                       if(profile.data.blmMemorial.memorialImagesOrVideos != null){
-                                        videoPlayerController = VideoPlayerController.network(profile.data.blmMemorial.memorialImagesOrVideos[0]);
                                         return Container(
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                                           width: SizeConfig.screenWidth,
                                           height: 280,
-                                          child: Chewie(
-                                            controller: chewieController1,
+                                          child: BetterPlayer(
+                                            controller: betterPlayerController1,
                                           ),
 
                                           // height: 280,
@@ -662,8 +670,8 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                                               return ((){
                                                 if(lookupMimeType(profile.data.blmMemorial.memorialImagesOrVideos[index]).contains('video') == true){
                                                   return Container(
-                                                    child: Chewie(
-                                                      controller: chewieController2,
+                                                    child: BetterPlayer(
+                                                      controller: betterPlayerController2,
                                                     ),
                                                     width: 100, 
                                                     height: 100,
@@ -1004,21 +1012,33 @@ class HomeBLMProfileState extends State<HomeBLMProfile> with WidgetsBindingObser
                     ),
                   ),
 
+                  // MaterialButton(
+                  //   padding: EdgeInsets.zero,
+                  //   onPressed: () async{
+                  //     Scrollable.ensureVisible(profileKey.currentContext);
+                  //   },
+                  //   child: Text('Back to the top',
+                  //     style: TextStyle(
+                  //       fontSize: 16,
+                  //       fontWeight: FontWeight.w400,
+                  //       color: Color(0xff4EC9D4),
+                  //     ),
+                  //   ),
+                  //   minWidth: SizeConfig.screenWidth / 2,
+                  //   height: 45,
+                  //   color: Color(0xffffffff),
+                  // ),
+
                   MaterialButton(
                     padding: EdgeInsets.zero,
                     onPressed: () async{
                       Scrollable.ensureVisible(profileKey.currentContext);
                     },
-                    child: Text('Back to the top',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff4EC9D4),
-                      ),
-                    ),
+                    child: Icon(Icons.arrow_upward_rounded, color: Color(0xff4EC9D4,),),
                     minWidth: SizeConfig.screenWidth / 2,
                     height: 45,
                     color: Color(0xffffffff),
+                    shape: CircleBorder(),
                   ),
 
                   SizedBox(height: 20,),

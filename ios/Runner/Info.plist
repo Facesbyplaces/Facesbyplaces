@@ -27,27 +27,11 @@
             <string>google.com</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.436631194271-pc53hk5b4ecam0ien8gekt9iv910bg9r</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLName</key>
-            <string>facebook.com</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb674832526555519</string>
-            </array>
-        </dict>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLName</key>
-            <string>branch-url</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
                 <string>facesbyplaces-uri</string>
+                <string>fb674832526555519</string>
+                <string>com.googleusercontent.apps.436631194271-pc53hk5b4ecam0ien8gekt9iv910bg9r</string>
+                <string>http</string>
+                <string>schemefacesbyplaces</string>
             </array>
         </dict>
 	</array>

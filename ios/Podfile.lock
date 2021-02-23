@@ -219,6 +219,9 @@ PODS:
   - AppAuth/ExternalUserAgent (1.4.0)
   - apple_maps_flutter (0.0.1):
     - Flutter
+  - better_player (0.0.1):
+    - Flutter
+    - KTVHTTPCache (~> 2.0.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -228,6 +231,7 @@ PODS:
   - Branch (0.36.0)
   - camera (0.0.1):
     - Flutter
+  - CocoaAsyncSocket (7.6.5)
   - cryptography_flutter (0.1.0):
     - Flutter
   - FBSDKCoreKit (9.0.1):
@@ -401,6 +405,10 @@ PODS:
     - GTMSessionFetcher/Core (= 1.5.0)
   - image_picker (0.0.1):
     - Flutter
+  - KTVCocoaHTTPServer (1.0.0):
+    - CocoaAsyncSocket
+  - KTVHTTPCache (2.0.1):
+    - KTVCocoaHTTPServer
   - leveldb-library (1.22)
   - libphonenumber (0.0.1):
     - Flutter
@@ -441,6 +449,7 @@ PODS:
 
 DEPENDENCIES:
   - apple_maps_flutter (from `.symlinks/plugins/apple_maps_flutter/ios`)
+  - better_player (from `.symlinks/plugins/better_player/ios`)
   - camera (from `.symlinks/plugins/camera/ios`)
   - cryptography_flutter (from `.symlinks/plugins/cryptography_flutter/ios`)
   - Firebase/Analytics
@@ -476,6 +485,7 @@ SPEC REPOS:
     - AppAuth
     - BoringSSL-GRPC
     - Branch
+    - CocoaAsyncSocket
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -496,6 +506,8 @@ SPEC REPOS:
     - gRPC-Core
     - GTMAppAuth
     - GTMSessionFetcher
+    - KTVCocoaHTTPServer
+    - KTVHTTPCache
     - leveldb-library
     - libPhoneNumber-iOS
     - nanopb
@@ -506,6 +518,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   apple_maps_flutter:
     :path: ".symlinks/plugins/apple_maps_flutter/ios"
+  better_player:
+    :path: ".symlinks/plugins/better_player/ios"
   camera:
     :path: ".symlinks/plugins/camera/ios"
   cryptography_flutter:
@@ -559,9 +573,11 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   apple_maps_flutter: c59725efea39e13e703cde52a1d2b14866ad68a8
+  better_player: a4383402f457e53720525888c0fc5d337ef6ba11
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Branch: 8aebcb7a6465f19f9f4d315acced369ae078d3f2
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   cryptography_flutter: a2c541ba25ff28549f989f856dde126c961defcd
   FBSDKCoreKit: fada1a6a0076724678993ff05a633848765ff18c
   FBSDKLoginKit: d5ffe6d808897019ccf16feb6f0a7ab260bc5cd6
@@ -593,6 +609,8 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
+  KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
+  KTVHTTPCache: 588c3eb16f6bd1e6fde1e230dabfb7bd4e490a4d
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   libphonenumber: bd14d5abfc5939ab0b0767234e2d8e2593af258e
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75

@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
@@ -44,10 +45,14 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
   GlobalKey<MiscRegularInputFieldDropDownState> _key1 = GlobalKey<MiscRegularInputFieldDropDownState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key3 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
-  GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key4 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
+
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+
+  DateTime dob = DateTime.now();
+  DateTime rip = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +101,78 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
 
                     SizedBox(height: 20,),
 
-                    MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB'),
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
+                      controller: controller1,
+                      cursorColor: Color(0xff000000),
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'DOB',
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      selectableDayPredicate: (date) {
+
+                        if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                          print('The date is $date');
+                          print('The rip is $rip');
+                          print('True');
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          dob = DateTime.parse(changed);
+                        });
+
+                        print('The value of dob is $dob');
+                      },
+                    ),
 
                     SizedBox(height: 20,),
 
-                    MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP'),
+                    DateTimePicker(
+                      type: DateTimePickerType.date,
+                      controller: controller2,
+                      cursorColor: Color(0xff000000),
+                      firstDate: DateTime(1000),
+                      lastDate: DateTime.now(),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        labelText: 'RIP',
+                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      selectableDayPredicate: (date) {
+                        if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                          print('The date is $date');
+                          print('The dob is $dob');
+                          print('True');
+                          return true;
+                        }else{
+                          return false;
+                        }
+                      },
+                      onChanged: (changed){
+                        setState(() {
+                          rip = DateTime.parse(changed);
+                        });
+
+                        print('The value of rip is $rip');
+                      },
+                    ),
 
                     SizedBox(height: 20,),
 
@@ -115,8 +187,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                     MiscRegularButtonTemplate(
                       onPressed: () async{
 
-                        if(_key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || 
-                        _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
+                        if(_key2.currentState.controller.text == '' || controller1.text == '' || controller2.text == '' ||  _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
@@ -141,8 +212,8 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                             arguments: RegularCreateMemorialValues(
                               relationship: _key1.currentState.currentSelection,
                               birthplace: _key2.currentState.controller.text,
-                              dob: _key3.currentState.controller.text,
-                              rip: _key4.currentState.controller.text,
+                              dob: controller1.text,
+                              rip: controller2.text,
                               cemetery: _key5.currentState.controller.text,
                               country: _key6.currentState.controller.text,
                             ),

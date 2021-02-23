@@ -75,6 +75,7 @@ dependencies:
   keyboard_attachable: ^1.0.3
   substring_highlight: ^0.1.2
   chewie: ^0.12.2
+  better_player: ^0.0.57
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:better_player/better_player.dart';
 import 'package:facesbyplaces/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
@@ -18,10 +19,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:chewie/chewie.dart';
 import 'package:mime/mime.dart';
 import 'dart:typed_data';
 import 'dart:async';
@@ -84,9 +83,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
   int page;
   BranchUniversalObject buo;
   BranchLinkProperties lp;
-  VideoPlayerController videoPlayerController;
-  ChewieController chewieController1;
-  ChewieController chewieController2;
+
+  BetterPlayerController betterPlayerController1;
+  BetterPlayerController betterPlayerController2;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -189,27 +188,19 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
     showProfile = getProfileInformation(memorialId);
     showProfile.then((value){
       if(value.almMemorial.showMemorialImagesOrVideos[0] != null){
-        videoPlayerController = VideoPlayerController.network('${value.almMemorial.showMemorialImagesOrVideos[0]}');
-        chewieController1 = ChewieController(
-          videoPlayerController: videoPlayerController,
-          autoPlay: false,
-          looping: false,
-        );
-        chewieController2 = ChewieController(
-          videoPlayerController: videoPlayerController,
-          autoPlay: false,
-          looping: false,
+        BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, '${value.almMemorial.showMemorialImagesOrVideos[0]}');
+        betterPlayerController1 = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 16 / 9,), betterPlayerDataSource: betterPlayerDataSource);
+        betterPlayerController2 = BetterPlayerController(
+          BetterPlayerConfiguration(
+            controlsConfiguration: BetterPlayerControlsConfiguration(
+              showControls: false,
+            ),
+            aspectRatio: 1 / 2,
+          ), 
+          betterPlayerDataSource: betterPlayerDataSource, 
         );
       }
     });
-  }
-
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    chewieController1.dispose();
-    chewieController2.dispose();
-    super.dispose();
   }
 
   @override
@@ -313,42 +304,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                           padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                                           width: SizeConfig.screenWidth,
                                           height: 280,
-                                          child: Chewie(
-                                            controller: chewieController1,
+                                          child: BetterPlayer(
+                                            controller: betterPlayerController1,
                                           ),
-                                          // child: GestureDetector(
-                                          //   onTap: (){
-                                          //     if(videoPlayerController.value.isPlaying){
-                                          //       videoPlayerController.pause();
-                                          //       print('Paused!');
-                                          //     }else{
-                                          //       videoPlayerController.play();
-                                          //       print('Played!');
-                                          //     }
-                                          //   },
-                                          //   child: AspectRatio(
-                                          //     aspectRatio: videoPlayerController.value.aspectRatio,
-                                          //     child: VideoPlayer(videoPlayerController),
-                                          //   ),
-                                          // ),
-
-                                          // child: profile.data.almMemorial.showMemorialImagesOrVideos == null 
-                                          // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 80,)
-                                          // : GestureDetector(
-                                          //   onTap: (){
-                                          //     if(videoPlayerController.value.isPlaying){
-                                          //       videoPlayerController.pause();
-                                          //       print('Paused!');
-                                          //     }else{
-                                          //       videoPlayerController.play();
-                                          //       print('Played!');
-                                          //     }
-                                          //   },
-                                          //   child: AspectRatio(
-                                          //     aspectRatio: videoPlayerController.value.aspectRatio,
-                                          //     child: VideoPlayer(videoPlayerController),
-                                          //   ),
-                                          // ),
                                         );
                                       }else{
                                         return Container(height: 0,);
@@ -668,8 +626,8 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                               return ((){
                                                 if(lookupMimeType(profile.data.almMemorial.showMemorialImagesOrVideos[index]).contains('video') == true){
                                                   return Container(
-                                                    child: Chewie(
-                                                      controller: chewieController2,
+                                                    child: BetterPlayer(
+                                                      controller: betterPlayerController2,
                                                     ),
                                                     width: 100, 
                                                     height: 100,
@@ -1010,21 +968,33 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                     ),
                   ),
 
+                  // MaterialButton(
+                  //   padding: EdgeInsets.zero,
+                  //   onPressed: () async{
+                  //     Scrollable.ensureVisible(profileKey.currentContext);
+                  //   },
+                  //   child: Text('Back to the top',
+                  //     style: TextStyle(
+                  //       fontSize: 16,
+                  //       fontWeight: FontWeight.w400,
+                  //       color: Color(0xff4EC9D4),
+                  //     ),
+                  //   ),
+                  //   minWidth: SizeConfig.screenWidth / 2,
+                  //   height: 45,
+                  //   color: Color(0xffffffff),
+                  // ),
+
                   MaterialButton(
                     padding: EdgeInsets.zero,
                     onPressed: () async{
                       Scrollable.ensureVisible(profileKey.currentContext);
                     },
-                    child: Text('Back to the top',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff4EC9D4),
-                      ),
-                    ),
+                    child: Icon(Icons.arrow_upward_rounded, color: Color(0xff4EC9D4,),),
                     minWidth: SizeConfig.screenWidth / 2,
                     height: 45,
                     color: Color(0xffffffff),
+                    shape: CircleBorder(),
                   ),
 
                   SizedBox(height: 20,),
