@@ -598,7 +598,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   ), 
                                   onPressed: (){
                                     Navigator.pushNamed(context, '/login');
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserDonate()));
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FullScreenApp()));
                                   },
                                   width: 200,
                                   height: 45,

@@ -48,7 +48,11 @@ class HomeRegularSearch extends StatelessWidget{
                         }
                       }
 
+
+
                       Location.PermissionStatus permissionGranted = await location.hasPermission();
+
+                      print('The permission is $permissionGranted');
 
                       if (permissionGranted != Location.PermissionStatus.granted) {
                         await showDialog(

@@ -47,6 +47,9 @@ void main() async{
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
+  print('The blm session is $blmSession');
+  print('The regular session is $regularSession');
+
   runApp(
     GlobalLoaderOverlay(
       useDefaultLoading: false,
@@ -81,7 +84,7 @@ void main() async{
           ],
           background: Container(color: Color(0xFFF5F5F5))
         ),
-        initialRoute: '/start',
+        // initialRoute: '/start',
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),

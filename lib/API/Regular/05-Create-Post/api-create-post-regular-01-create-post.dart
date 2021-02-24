@@ -50,6 +50,9 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       ),  
     );
 
+    print('The response is ${response.statusCode}');
+    print('The response is ${response.data}');
+
     if(response.statusCode == 200){
       result = true;
     }
