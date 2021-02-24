@@ -232,6 +232,25 @@ class Api::V1::Admin::AdminController < ApplicationController
         end
     end
 
+    def updateMemorial
+        memorial = Memorial.find(params[:id])
+        # user = User.find(params[:user_id]) ? User.find(params[:user_id]) : AlmUser.find(params[:user_id])
+        
+        # check if data sent is empty or not
+        check = params_presence(params)
+        if check == true
+            # Update memorial details
+            memorial.update(memorial_details_params)
+
+            # Update relationship of the current page admin to the page
+            # memorial.relationships.where(account: user).first.update(relationship: params[:relationship])
+
+            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
+        else
+            return render json: {error: "#{check} is empty"}
+        end
+    end
+
     def searchMemorial
         memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
         
@@ -311,9 +330,15 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     private
+
     def editUser_params
         params.permit(:id, :account_type, :username, :first_name, :last_name, :phone_number)
     end
+
+    def memorial_details_params
+        params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :longitude, :latitude)
+    end
+
     def admin_only
         if !user.has_role? :admin 
             return render json: {status: "Must be an admin to continue"}, status: 401

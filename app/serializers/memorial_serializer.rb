@@ -8,8 +8,8 @@ class MemorialSerializer < ActiveModel::Serializer
       {
         description:    object.description,
         birthplace:     object.birthplace,
-        dob:            object.dob,
-        rip:            object.rip,
+        dob:            object.dob.to_date,
+        rip:            object.rip.to_date,
         cemetery:       object.cemetery,
         country:        object.country,
         longitude:      object.longitude,
@@ -21,8 +21,8 @@ class MemorialSerializer < ActiveModel::Serializer
           {
             description:    object.description,
             birthplace:     object.birthplace,
-            dob:            object.dob,
-            rip:            object.rip,
+            dob:            object.dob.to_date,
+            rip:            object.rip.to_date,
             cemetery:       object.cemetery,
             country:        object.country,
             longitude:      object.longitude,
@@ -36,8 +36,8 @@ class MemorialSerializer < ActiveModel::Serializer
           {
             description:    object.description,
             birthplace:     object.birthplace,
-            dob:            object.dob,
-            rip:            object.rip,
+            dob:            object.dob.to_date,
+            rip:            object.rip.to_date,
             cemetery:       object.cemetery,
             country:        object.country,
             longitude:      object.longitude,
