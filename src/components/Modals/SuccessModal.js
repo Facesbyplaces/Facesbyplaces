@@ -1,19 +1,27 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { TableUserAction } from "../../redux/actions";
+import { TableUserAction, ViewMemorialAction } from "../../redux/actions";
 
 export const SuccessModal = ({ showModal, setShowModal, action }) => {
   const dispatch = useDispatch();
 
-  const handleEditActionClick = () => {
-    setShowModal((prev) => !prev);
-    window.location.reload(false);
+  const handleActionClick = () => {
+    switch (action) {
+      case "a":
+        setShowModal((prev) => !prev);
+        dispatch(TableUserAction());
+      case "d":
+        setShowModal((prev) => !prev);
+        dispatch(TableUserAction());
+      case "e":
+        setShowModal((prev) => !prev);
+        window.location.reload(false);
+      default:
+        return "foo";
+    }
   };
 
-  const handleAddActionClick = () => {
-    setShowModal((prev) => !prev);
-    dispatch(TableUserAction());
-  };
+  console.log("Action: ", action);
 
   return (
     <>
@@ -77,6 +85,11 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
                         You have successfully edited a user.
                       </h5>
                     ),
+                    e: (
+                      <h5 className="modal-dialog">
+                        You have successfully edited a user.
+                      </h5>
+                    ),
                     d: (
                       <h5 className="modal-dialog">
                         You have successfully deleted a user.
@@ -91,11 +104,7 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
                   className="btn btn-md btn-primary font-weight-bold"
                   style={{ width: "200px" }}
                   data-dismiss="modal"
-                  onClick={
-                    action === "a" || "d"
-                      ? handleAddActionClick
-                      : handleEditActionClick
-                  }
+                  onClick={handleActionClick}
                 >
                   Okay
                 </button>

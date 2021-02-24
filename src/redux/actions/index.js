@@ -52,3 +52,24 @@ export const TableUserAction = () => {
     type: "TABLE_USER",
   };
 };
+
+export const DeleteMemorialAction = (memorial) => {
+  return {
+    type: "VIEW_MEMORIAL",
+    data: memorial,
+  };
+};
+
+export const ViewMemorialAction = (memorial) => {
+  return {
+    type: "VIEW_MEMORIAL",
+    data: memorial,
+  };
+};
+
+export const EditMemorialAction = (memorial) => {
+  return {
+    type: "EDIT_MEMORIAL",
+    data: memorial,
+  };
+};

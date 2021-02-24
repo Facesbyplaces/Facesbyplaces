@@ -4,10 +4,12 @@ import { persistStore } from "redux-persist";
 //REDUCERS
 import { AuthReducer } from "../redux/reducers/AuthReducer";
 import { TabReducer } from "./reducers/TabReducer";
+import { MemorialTabReducer } from "./reducers/MemorialTabReducer";
 
 const rootReducer = combineReducers({
   auth_data: AuthReducer,
   tab: TabReducer,
+  memorialTab: MemorialTabReducer,
 });
 
 const store = createStore(

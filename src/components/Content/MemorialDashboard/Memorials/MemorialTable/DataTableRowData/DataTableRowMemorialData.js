@@ -5,28 +5,33 @@ import HashLoader from "react-spinners/HashLoader";
 
 import { useDispatch } from "react-redux";
 import {
-  ViewUserAction,
-  EditUserAction,
-  DeleteUserAction,
+  ViewMemorialAction,
+  EditMemorialAction,
+  DeleteMemorialAction,
 } from "../../../../../../redux/actions";
 
-export default function DataTableRowMemorialData({ memorials, search }) {
+export default function DataTableRowMemorialData({
+  memorials,
+  search,
+  pageType,
+}) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+  const page_type = pageType === 2 ? "Memorial" : "Blm";
 
   console.log(memorials);
 
-  const handleViewClick = (id, account_type, option) => {
+  const handleViewClick = (id, page, option) => {
     console.log(id, option);
-    dispatch(ViewUserAction({ id, account_type, option }));
+    dispatch(ViewMemorialAction({ id, page, option }));
   };
 
-  const handleEditClick = (id, account_type, option) => {
-    dispatch(EditUserAction({ id, account_type, option }));
+  const handleEditClick = (id, page, option) => {
+    dispatch(EditMemorialAction({ id, page, option }));
   };
 
-  const handleDeleteClick = (id, account_type, option) => {
-    dispatch(DeleteUserAction({ id, account_type, option }));
+  const handleDeleteClick = (id, page, option) => {
+    dispatch(DeleteMemorialAction({ id, page, option }));
     setShowModal((prev) => !prev);
   };
 
@@ -82,9 +87,7 @@ export default function DataTableRowMemorialData({ memorials, search }) {
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() =>
-            handleViewClick(memorial.id, memorial.account_type, "v")
-          }
+          onClick={() => handleViewClick(memorial.id, page_type, "v")}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -97,11 +100,11 @@ export default function DataTableRowMemorialData({ memorials, search }) {
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
               {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-              <title>Stockholm-icons / General / User</title>
+              <title>Stockholm-icons / General / Heart</title>
               <desc>Created with Sketch.</desc>
               <defs />
               <g
-                id="Stockholm-icons-/-General-/-User"
+                id="Stockholm-icons-/-General-/-Heart"
                 stroke="none"
                 strokeWidth={1}
                 fill="none"
@@ -109,30 +112,20 @@ export default function DataTableRowMemorialData({ memorials, search }) {
               >
                 <polygon id="Shape" points="0 0 24 0 24 24 0 24" />
                 <path
-                  d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
-                  id="Mask"
-                  fill="#000000"
-                  fillRule="nonzero"
-                  opacity="0.3"
-                />
-                <path
-                  d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
-                  id="Mask-Copy"
+                  d="M16.5,4.5 C14.8905,4.5 13.00825,6.32463215 12,7.5 C10.99175,6.32463215 9.1095,4.5 7.5,4.5 C4.651,4.5 3,6.72217984 3,9.55040872 C3,12.6834696 6,16 12,19.5 C18,16 21,12.75 21,9.75 C21,6.92177112 19.349,4.5 16.5,4.5 Z"
+                  id="Shape"
                   fill="#000000"
                   fillRule="nonzero"
                 />
               </g>
             </svg>
-
             {/*end::Svg Icon*/}
           </span>
         </a>
         {/* Edit Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-          onClick={() =>
-            handleEditClick(memorial.id, memorial.account_type, "e")
-          }
+          onClick={() => handleEditClick(memorial.id, page_type, "e")}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}
@@ -168,7 +161,7 @@ export default function DataTableRowMemorialData({ memorials, search }) {
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
           data-toggle="modal"
           data-target="#exampleModalSizeSm"
-          onClick={() => handleDeleteClick(memorial.id, memorial.account_type)}
+          onClick={() => handleDeleteClick(memorial.id, page_type)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg*/}

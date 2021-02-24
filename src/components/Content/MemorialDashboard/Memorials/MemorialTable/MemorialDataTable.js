@@ -112,9 +112,17 @@ export default function MemorialDataTable({
             </tr>
           </tbody>
         ) : pageType == 2 ? (
-          <DataTableRowMemorialData memorials={memorials} search={search} />
+          <DataTableRowMemorialData
+            memorials={memorials}
+            search={search}
+            pageType={pageType}
+          />
         ) : (
-          <DataTableRowBlmData memorials={blms} search={search} />
+          <DataTableRowBlmData
+            memorials={blms}
+            search={search}
+            pageType={pageType}
+          />
         )}
       </table>
       <div className="d-flex justify-content-between align-items-center flex-wrap">
