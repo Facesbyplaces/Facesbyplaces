@@ -6,7 +6,7 @@ import Header from "./Header";
 import Body from "./Body";
 import User from "../UserProfile/User";
 import AddUser from "../UserProfile/AddUser";
-import { SuccessModal } from "../../../../Modals/SuccessModal";
+import { SuccessModal } from "../UserProfile/SuccessModal";
 
 export default function UsersTable() {
   const [showModal, setShowModal] = useState(true);
