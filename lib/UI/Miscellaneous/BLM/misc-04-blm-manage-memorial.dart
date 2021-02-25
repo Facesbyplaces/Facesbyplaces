@@ -100,7 +100,7 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
             Padding(
               padding: EdgeInsets.only(left: 10.0), 
               child: CircleAvatar(
-                radius: 40,
+                radius: 30,
                 backgroundColor: Color(0xff888888), 
                 backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
               ),
