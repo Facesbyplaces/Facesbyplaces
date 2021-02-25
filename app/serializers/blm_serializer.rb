@@ -9,10 +9,12 @@ class BlmSerializer < ActiveModel::Serializer
         description:  object.description,
         location:     object.location,
         precinct:     object.precinct,
-        dob:          object.dob,
-        rip:          object.rip,
+        dob:          object.dob.to_date,
+        rip:          object.rip.to_date,
         state:        object.state,
-        country:      object.country
+        country:      object.country,
+        longitude:      object.longitude,
+        latitude:       object.latitude
       }
     when "followers"
       if object.currentUser
@@ -21,10 +23,12 @@ class BlmSerializer < ActiveModel::Serializer
             description:  object.description,
             location:     object.location,
             precinct:     object.precinct,
-            dob:          object.dob,
-            rip:          object.rip,
+            dob:          object.dob.to_date,
+            rip:          object.rip.to_date,
             state:        object.state,
-            country:      object.country
+            country:      object.country,
+            longitude:      object.longitude,
+            latitude:       object.latitude
           }
         end
       end
@@ -35,10 +39,12 @@ class BlmSerializer < ActiveModel::Serializer
             description:  object.description,
             location:     object.location,
             precinct:     object.precinct,
-            dob:          object.dob,
-            rip:          object.rip,
+            dob:          object.dob.to_date,
+            rip:          object.rip.to_date,
             state:        object.state,
-            country:      object.country
+            country:      object.country,
+            longitude:      object.longitude,
+            latitude:       object.latitude
           }
         end
       end

@@ -224,7 +224,7 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
-
+        
         if memorial
             render json: memorial
         else
@@ -246,6 +246,24 @@ class Api::V1::Admin::AdminController < ApplicationController
             # memorial.relationships.where(account: user).first.update(relationship: params[:relationship])
 
             return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated details"}
+        else
+            return render json: {error: "#{check} is empty"}
+        end
+    end
+
+    def updateBlm
+        blm = Blm.find(params[:id])
+        
+        # check if data sent is empty or not
+        check = params_presence(params)
+        if check == true
+            # Update blm details
+            blm.update(blm_details_params)
+
+            # Update relationship of the current page admin to the page
+            # blm.relationships.where(account: user()).first.update(relationship: params[:relationship])
+
+            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
         end
@@ -337,6 +355,10 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def memorial_details_params
         params.permit(:birthplace, :dob, :rip, :cemetery, :country, :name, :description, :longitude, :latitude)
+    end
+
+    def blm_details_params
+        params.permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country, :longitude, :latitude)
     end
 
     def admin_only
