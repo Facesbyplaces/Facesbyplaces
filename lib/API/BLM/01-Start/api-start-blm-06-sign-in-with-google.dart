@@ -13,15 +13,14 @@ Future<bool> apiBLMSignInWithGoogle({String firstName, String lastName, String e
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     int userId = value['id'];
-    String verificationCode = value['verification_code'];
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('blm-user-id', userId);
-    sharedPrefs.setString('blm-verification-code', verificationCode);
     sharedPrefs.setString('blm-access-token', response.headers['access-token']);
     sharedPrefs.setString('blm-uid', response.headers['uid']);    
     sharedPrefs.setString('blm-client', response.headers['client']);
-    sharedPrefs.setBool('blm-user-verify', true);
+    sharedPrefs.setBool('blm-user-session', true);
+    sharedPrefs.setBool('user-guest-session', false);
 
     return true;
   }else{

@@ -206,17 +206,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
               ),
             ),
 
-            // SizedBox(height: 5),
-
-            // Align(
-            //   alignment: Alignment.centerLeft,
-            //   child: Column(
-            //     children: contents,
-            //   ),
-            // ),
-
-            // SizedBox(height: 45),
-
             Column(children: contents,),
 
             numberOfTagged != 0

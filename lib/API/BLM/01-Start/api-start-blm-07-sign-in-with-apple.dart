@@ -20,7 +20,8 @@ Future<bool> apiBLMSignInWithApple({String userIdentification, String identityTo
     sharedPrefs.setString('blm-access-token', response.headers['access-token']);
     sharedPrefs.setString('blm-uid', response.headers['uid']);    
     sharedPrefs.setString('blm-client', response.headers['client']);
-    sharedPrefs.setBool('blm-user-verify', true);
+    sharedPrefs.setBool('blm-user-session', true);
+    sharedPrefs.setBool('user-guest-session', false);
 
     return true;
   }else{

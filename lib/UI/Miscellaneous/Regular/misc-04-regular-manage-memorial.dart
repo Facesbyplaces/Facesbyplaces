@@ -94,236 +94,209 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
       child: Container(
         height: 80,
         color: Color(0xffffffff),
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 10.0), 
-              child: CircleAvatar(
-                radius: 30,
-                backgroundColor: Color(0xff888888), 
-                backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
-              ),
+        child: ListTile(
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundColor: Color(0xff888888), 
+            backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
+          ),
+          title: Text(memorialName,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff000000),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text(memorialName,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff000000),
-                          ),
-                        ),
+          ),
+          subtitle: Text(description,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w200,
+              color: Colors.grey,
+            ),
+          ),
+          trailing: ((){
+            if(managed == true || famOrFriends == true){
+              return MaterialButton(
+                elevation: 0,
+                padding: EdgeInsets.zero,
+                textColor: Color(0xffffffff),
+                splashColor: Color(0xff4EC9D4),
+                onPressed: () async{
+
+                  bool confirmResult = await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Are you sure you want to leave this page?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
                       ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(description,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w200,
-                            color: Colors.grey,
+                      onlyOkButton: false,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      onCancelButtonPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                    )
+                  );
+
+                  if(confirmResult){
+
+                    context.showLoaderOverlay();
+                    bool result = await apiRegularLeavePage(memorialId: memorialId);
+                    context.hideLoaderOverlay();
+
+                    if(result){
+                      Navigator.popAndPushNamed(context, '/home/regular');
+                    }else{
+                      await showDialog(
+                        context: context,
+                        builder: (_) => 
+                          AssetGiffyDialog(
+                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          entryAnimation: EntryAnimation.DEFAULT,
+                          description: Text('Something went wrong. Please try again.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(),
                           ),
-                        ),
-                      ),
-                    ),
-                  ],
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
+                          onOkButtonPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                        )
+                      );
+                    }
+                  }
+                },
+                child: Text('Leave', style: TextStyle(fontSize: 14,),),
+                height: 35,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  side: BorderSide(color: Color(0xff04ECFF)),
                 ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(right: 15.0),
-              child: ((){
-                if(managed == true || famOrFriends == true){
-                  return MaterialButton(
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
-                    textColor: Color(0xffffffff),
-                    splashColor: Color(0xff4EC9D4),
-                    onPressed: () async{
+                color: Color(0xff04ECFF),
+              );
+            }else if(follower == true){
+              return MaterialButton(
+                elevation: 0,
+                padding: EdgeInsets.zero,
+                textColor: Color(0xffffffff),
+                splashColor: Color(0xff4EC9D4),
+                onPressed: () async{
 
-                      bool confirmResult = await showDialog(
+                  bool confirmResult = await showDialog(
+                    context: context,
+                    builder: (_) => 
+                      AssetGiffyDialog(
+                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      entryAnimation: EntryAnimation.DEFAULT,
+                      description: Text('Are you sure you want to leave this page?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(),
+                      ),
+                      onlyOkButton: false,
+                      onOkButtonPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      onCancelButtonPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                    )
+                  );
+
+                  if(confirmResult){
+
+                    context.showLoaderOverlay();
+                    bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
+                    context.hideLoaderOverlay();
+
+                    if(result){
+                      Navigator.popAndPushNamed(context, '/home/regular');
+                    }else{
+                      await showDialog(
                         context: context,
                         builder: (_) => 
                           AssetGiffyDialog(
                           image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                           entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Are you sure you want to leave this page?',
+                          description: Text('Something went wrong. Please try again.',
                             textAlign: TextAlign.center,
                             style: TextStyle(),
                           ),
-                          onlyOkButton: false,
+                          onlyOkButton: true,
+                          buttonOkColor: Colors.red,
                           onOkButtonPressed: () {
                             Navigator.pop(context, true);
                           },
-                          onCancelButtonPressed: () {
-                            Navigator.pop(context, false);
-                          },
                         )
                       );
+                    }
+                  }
+                },
+                child: Text('Leave', style: TextStyle(fontSize: 14,),),
+                height: 35,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  side: BorderSide(color: Color(0xff04ECFF)),
+                ),
+                color: Color(0xff04ECFF),
+              );
+            }else{
+              return MaterialButton(
+                elevation: 0,
+                padding: EdgeInsets.zero,
+                textColor: Color(0xff4EC9D4),
+                splashColor: Color(0xff4EC9D4),
+                onPressed: () async{
+                  context.showLoaderOverlay();
+                  bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
+                  context.hideLoaderOverlay();
 
-                      if(confirmResult){
-
-                        context.showLoaderOverlay();
-                        bool result = await apiRegularLeavePage(memorialId: memorialId);
-                        context.hideLoaderOverlay();
-
-                        if(result){
-                          Navigator.popAndPushNamed(context, '/home/regular');
-                        }else{
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Something went wrong. Please try again.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                        }
-                      }
-                    },
-                    child: Text('Leave', style: TextStyle(fontSize: 14,),),
-                    height: 35,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      side: BorderSide(color: Color(0xff04ECFF)),
-                    ),
-                    color: Color(0xff04ECFF),
-                  );
-                }else if(follower == true){
-                  return MaterialButton(
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
-                    textColor: Color(0xffffffff),
-                    splashColor: Color(0xff4EC9D4),
-                    onPressed: () async{
-
-                      bool confirmResult = await showDialog(
-                        context: context,
-                        builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Are you sure you want to leave this page?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(),
-                          ),
-                          onlyOkButton: false,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                          onCancelButtonPressed: () {
-                            Navigator.pop(context, false);
-                          },
-                        )
-                      );
-
-                      if(confirmResult){
-
-                        context.showLoaderOverlay();
-                        bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: false);
-                        context.hideLoaderOverlay();
-
-                        if(result){
-                          Navigator.popAndPushNamed(context, '/home/regular');
-                        }else{
-                          await showDialog(
-                            context: context,
-                            builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Something went wrong. Please try again.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
-                          );
-                        }
-                      }
-                    },
-                    child: Text('Leave', style: TextStyle(fontSize: 14,),),
-                    height: 35,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      side: BorderSide(color: Color(0xff04ECFF)),
-                    ),
-                    color: Color(0xff04ECFF),
-                  );
-                }else{
-                  return MaterialButton(
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
-                    textColor: Color(0xff4EC9D4),
-                    splashColor: Color(0xff4EC9D4),
-                    onPressed: () async{
-                      context.showLoaderOverlay();
-                      bool result = await apiRegularModifyFollowPage(pageType: pageType, pageId: memorialId, follow: true);
-                      context.hideLoaderOverlay();
-
-                      if(result){
-                        Navigator.popAndPushNamed(context, '/home/regular');
-                      }else{
-                        await showDialog(
-                          context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(),
-                            ),
-                            onlyOkButton: true,
-                            buttonOkColor: Colors.red,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          )
-                        );
-                      }
-                    },
-                    child: Text('Join', style: TextStyle(fontSize: 14,),),
-                    height: 35,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      side: BorderSide(color: Color(0xff4EC9D4)),
-                    ),
-                    color: Color(0xffffffff),
-                  );
-                }
-              }()),
-            ),
-          ],
+                  if(result){
+                    Navigator.popAndPushNamed(context, '/home/regular');
+                  }else{
+                    await showDialog(
+                      context: context,
+                      builder: (_) => 
+                        AssetGiffyDialog(
+                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        entryAnimation: EntryAnimation.DEFAULT,
+                        description: Text('Something went wrong. Please try again.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(),
+                        ),
+                        onlyOkButton: true,
+                        buttonOkColor: Colors.red,
+                        onOkButtonPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                      )
+                    );
+                  }
+                },
+                child: Text('Join', style: TextStyle(fontSize: 14,),),
+                height: 35,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  side: BorderSide(color: Color(0xff4EC9D4)),
+                ),
+                color: Color(0xffffffff),
+              );
+            }
+          }()),
         ),
       ),
     );

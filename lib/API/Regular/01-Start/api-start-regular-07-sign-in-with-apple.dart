@@ -20,7 +20,8 @@ Future<bool> apiRegularSignInWithApple({String userIdentification, String identi
     sharedPrefs.setString('regular-access-token', response.headers['access-token']);
     sharedPrefs.setString('regular-uid', response.headers['uid']);    
     sharedPrefs.setString('regular-client', response.headers['client']);
-    sharedPrefs.setBool('regular-user-verify', true);
+    sharedPrefs.setBool('regular-user-session', true);
+    sharedPrefs.setBool('user-guest-session', false);
 
     return true;
   }else{

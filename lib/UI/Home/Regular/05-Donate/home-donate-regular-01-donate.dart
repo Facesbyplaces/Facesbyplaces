@@ -1,9 +1,9 @@
-import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
+// import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-import 'package:stripe_payment/stripe_payment.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:loader_overlay/loader_overlay.dart';
+// import 'package:stripe_payment/stripe_payment.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
@@ -22,19 +22,19 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   HomeRegularUserDonateState({this.pageType, this.pageId});
 
   int donateToggle;
-  Token paymentToken;
+  // Token paymentToken;
 
   @override
   initState() {
     super.initState();
     donateToggle = 0;
-    StripePayment.setOptions(
-      StripeOptions(
-        publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
-        merchantId: "merchant.com.app.facesbyplaces", 
-        androidPayMode: 'test',
-      ),
-    );
+    // StripePayment.setOptions(
+    //   StripeOptions(
+    //     publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
+    //     merchantId: "merchant.com.app.facesbyplaces", 
+    //     androidPayMode: 'test',
+    //   ),
+    // );
   }
 
   @override
@@ -136,95 +136,95 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ), 
                     onPressed: () async{
 
-                      paymentToken = await StripePayment.paymentRequestWithNativePay(
-                        androidPayOptions: AndroidPayPaymentRequest(
-                          totalPrice: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99'; break;
-                              case 1: return '5.00'; break;
-                              case 2: return '15.00'; break;
-                              case 3: return '25.00'; break;
-                              case 4: return '50.00'; break;
-                              case 5: return '100.00'; break;
-                            }
-                          }()),
-                          currencyCode: 'USD',
-                        ),
-                        applePayOptions: ApplePayPaymentOptions(
-                          countryCode: 'US',
-                          currencyCode: 'USD',
-                          items: [
-                            ApplePayItem(
-                              label: 'Donation',
-                              amount: ((){
-                                switch(donateToggle){
-                                  case 0: return '0.99'; break;
-                                  case 1: return '5.00'; break;
-                                  case 2: return '15.00'; break;
-                                  case 3: return '25.00'; break;
-                                  case 4: return '50.00'; break;
-                                  case 5: return '100.00'; break;
-                                }
-                              }()),
-                            )
-                          ],
-                        ),
-                      );
+                      // paymentToken = await StripePayment.paymentRequestWithNativePay(
+                      //   androidPayOptions: AndroidPayPaymentRequest(
+                      //     totalPrice: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99'; break;
+                      //         case 1: return '5.00'; break;
+                      //         case 2: return '15.00'; break;
+                      //         case 3: return '25.00'; break;
+                      //         case 4: return '50.00'; break;
+                      //         case 5: return '100.00'; break;
+                      //       }
+                      //     }()),
+                      //     currencyCode: 'USD',
+                      //   ),
+                      //   applePayOptions: ApplePayPaymentOptions(
+                      //     countryCode: 'US',
+                      //     currencyCode: 'USD',
+                      //     items: [
+                      //       ApplePayItem(
+                      //         label: 'Donation',
+                      //         amount: ((){
+                      //           switch(donateToggle){
+                      //             case 0: return '0.99'; break;
+                      //             case 1: return '5.00'; break;
+                      //             case 2: return '15.00'; break;
+                      //             case 3: return '25.00'; break;
+                      //             case 4: return '50.00'; break;
+                      //             case 5: return '100.00'; break;
+                      //           }
+                      //         }()),
+                      //       )
+                      //     ],
+                      //   ),
+                      // );
 
-                      StripePayment.completeNativePayRequest();
-                      double amount;
+                      // StripePayment.completeNativePayRequest();
+                      // double amount;
 
-                      switch(donateToggle){
-                        case 0: amount = 0.99; break;
-                        case 1: amount = 5.00; break;
-                        case 2: amount = 15.00; break;
-                        case 3: amount = 25.00; break;
-                        case 4: amount = 50.00; break;
-                        case 5: amount = 100.00; break;
-                      }
+                      // switch(donateToggle){
+                      //   case 0: amount = 0.99; break;
+                      //   case 1: amount = 5.00; break;
+                      //   case 2: amount = 15.00; break;
+                      //   case 3: amount = 25.00; break;
+                      //   case 4: amount = 50.00; break;
+                      //   case 5: amount = 100.00; break;
+                      // }
 
-                      context.showLoaderOverlay();
-                      bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
-                      context.hideLoaderOverlay();
+                      // context.showLoaderOverlay();
+                      // bool result = await apiRegularDonate(pageType: pageType, pageId: pageId, amount: amount, token: paymentToken.tokenId);
+                      // context.hideLoaderOverlay();
 
-                      if(result == true){
-                        await showDialog(
-                          context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                        );
-                      }else{
-                        await showDialog(
-                          context: context,
-                          builder: (_) => 
-                            AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('Something went wrong. Please try again.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(),
-                            ),
-                            onlyOkButton: true,
-                            buttonOkColor: Colors.red,
-                            onOkButtonPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                          )
-                        );
-                      }
+                      // if(result == true){
+                      //   await showDialog(
+                      //     context: context,
+                      //     builder: (_) => 
+                      //       AssetGiffyDialog(
+                      //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //         title: Text('Thank you', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //         entryAnimation: EntryAnimation.DEFAULT,
+                      //         description: Text('We appreciate your donation on this Memorial page. This will surely help the family during these times.',
+                      //           textAlign: TextAlign.center,
+                      //           style: TextStyle(),
+                      //         ),
+                      //         onlyOkButton: true,
+                      //         onOkButtonPressed: () {
+                      //           Navigator.pop(context);
+                      //         },
+                      //       ),
+                      //   );
+                      // }else{
+                      //   await showDialog(
+                      //     context: context,
+                      //     builder: (_) => 
+                      //       AssetGiffyDialog(
+                      //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //       entryAnimation: EntryAnimation.DEFAULT,
+                      //       description: Text('Something went wrong. Please try again.',
+                      //         textAlign: TextAlign.center,
+                      //         style: TextStyle(),
+                      //       ),
+                      //       onlyOkButton: true,
+                      //       buttonOkColor: Colors.red,
+                      //       onOkButtonPressed: () {
+                      //         Navigator.pop(context, true);
+                      //       },
+                      //     )
+                      //   );
+                      // }
 
                     }, 
                     width: SizeConfig.screenWidth / 2, 

@@ -13,14 +13,14 @@ Future<bool> apiRegularSignInWithGoogle({String firstName, String lastName, Stri
   if(response.statusCode == 200){
     var value = json.decode(response.body);
     int userId = value['id'];
-    String verificationCode = value['verification_code'];
     final sharedPrefs = await SharedPreferences.getInstance();
 
     sharedPrefs.setInt('regular-user-id', userId);
-    sharedPrefs.setString('regular-verification-code', verificationCode);
     sharedPrefs.setString('regular-access-token', response.headers['access-token']);
     sharedPrefs.setString('regular-uid', response.headers['uid']);    
     sharedPrefs.setString('regular-client', response.headers['client']);
+    sharedPrefs.setBool('regular-user-session', true);
+    sharedPrefs.setBool('user-guest-session', false);
 
     return true;
   }else{
