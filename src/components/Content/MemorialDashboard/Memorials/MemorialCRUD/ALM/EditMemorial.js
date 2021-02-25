@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../auxiliary/axios";
-import { SuccessModal } from "../../../../Modals/SuccessModal";
+import axios from "../../../../../../auxiliary/axios";
+import { SuccessModal } from "../../../../../Modals/SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  TableUserAction,
+  TableMemorialAction,
   ViewMemorialAction,
-} from "../../../../../redux/actions";
+} from "../../../../../../redux/actions";
 
 export default function EditMemorial() {
   const dispatch = useDispatch();
@@ -69,10 +69,10 @@ export default function EditMemorial() {
 
   // Tab Data
   const handleTableClick = () => {
-    dispatch(TableUserAction());
+    dispatch(TableMemorialAction());
   };
-  const handleViewClick = (id, page, option) => {
-    dispatch(ViewMemorialAction({ id, page, option }));
+  const handleViewClick = (id, page, option, type) => {
+    dispatch(ViewMemorialAction({ id, page, option, type }));
   };
 
   // Modal
@@ -177,11 +177,7 @@ export default function EditMemorial() {
 
   return (
     <div className="d-flex flex-column flex-column-fluid">
-      <SuccessModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        action={memorialTab.option}
-      />
+      <SuccessModal showModal={showModal} setShowModal={setShowModal} />
       <>
         {loading ? (
           <div className="loader-container">
@@ -598,7 +594,8 @@ export default function EditMemorial() {
                                           handleViewClick(
                                             memorial.id,
                                             memorial.page_type,
-                                            "v"
+                                            "v",
+                                            2
                                           )
                                         }
                                       >

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ViewUserAction, EditUserAction } from "../../../../../redux/actions";
 import axios from "../../../../../auxiliary/axios";
-import { SuccessModal } from "../../../../Modals/SuccessModal";
+import { SuccessModal } from "./SuccessModal";
 
 //Loader
 import HashLoader from "react-spinners/HashLoader";
@@ -84,7 +84,7 @@ export default function EditUser({ user, image }) {
     console.log("Last Name: ", last_name);
     console.log("Phone Number: ", phone_number);
     // console.log("Email: ", email);
-
+    setLoading(true);
     axios
       .put("/api/v1/admin/users/edit", {
         id: user.id,
@@ -96,12 +96,10 @@ export default function EditUser({ user, image }) {
       })
       .then((response) => {
         console.log(response.data);
-        setLoading(true);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
         openModal();
-        handleViewClick(user.id, user.account_type, "v");
       })
       .catch((error) => {
         console.log(error);
@@ -119,11 +117,7 @@ export default function EditUser({ user, image }) {
         </div>
       ) : (
         <div className="card card-custom">
-          <SuccessModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-            action={tab.option}
-          />
+          <SuccessModal showModal={showModal} setShowModal={setShowModal} />
           <form className="form" onSubmit={handleSubmit}>
             <div className="tab-content">
               {/*begin::Tab*/}

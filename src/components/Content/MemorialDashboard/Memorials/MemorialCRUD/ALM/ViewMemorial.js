@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../auxiliary/axios";
+import axios from "../../../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
-  TableUserAction,
+  TableMemorialAction,
   EditMemorialAction,
-} from "../../../../../redux/actions";
+} from "../../../../../../redux/actions";
 
 export default function ViewMemorial() {
   const dispatch = useDispatch();
@@ -17,11 +17,11 @@ export default function ViewMemorial() {
   }));
 
   const handleTableClick = () => {
-    dispatch(TableUserAction());
+    dispatch(TableMemorialAction());
   };
 
-  const handleEditClick = (id, page, option) => {
-    dispatch(EditMemorialAction({ id, page, option }));
+  const handleEditClick = (id, page, option, type) => {
+    dispatch(EditMemorialAction({ id, page, option, type }));
   };
 
   const renderedImagesOrVideos = () => {
@@ -384,7 +384,8 @@ export default function ViewMemorial() {
                                     handleEditClick(
                                       memorial.id,
                                       memorial.page_type,
-                                      "e"
+                                      "e",
+                                      2
                                     )
                                   }
                                 >

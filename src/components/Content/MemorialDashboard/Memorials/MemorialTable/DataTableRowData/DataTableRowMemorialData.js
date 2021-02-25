@@ -21,13 +21,13 @@ export default function DataTableRowMemorialData({
 
   console.log(memorials);
 
-  const handleViewClick = (id, page, option) => {
+  const handleViewClick = (id, page, option, type) => {
     console.log(id, option);
-    dispatch(ViewMemorialAction({ id, page, option }));
+    dispatch(ViewMemorialAction({ id, page, option, type }));
   };
 
-  const handleEditClick = (id, page, option) => {
-    dispatch(EditMemorialAction({ id, page, option }));
+  const handleEditClick = (id, page, option, type) => {
+    dispatch(EditMemorialAction({ id, page, option, type }));
   };
 
   const handleDeleteClick = (id, page, option) => {
@@ -87,7 +87,7 @@ export default function DataTableRowMemorialData({
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() => handleViewClick(memorial.id, page_type, "v")}
+          onClick={() => handleViewClick(memorial.id, page_type, "v", 2)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -125,7 +125,7 @@ export default function DataTableRowMemorialData({
         {/* Edit Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-          onClick={() => handleEditClick(memorial.id, page_type, "e")}
+          onClick={() => handleEditClick(memorial.id, page_type, "e", 2)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}

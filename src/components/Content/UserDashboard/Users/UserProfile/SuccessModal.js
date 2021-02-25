@@ -1,12 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { TableUserAction, ViewMemorialAction } from "../../redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { TableUserAction, ViewUserAction } from "../../../../../redux/actions";
 
-export const SuccessModal = ({ showModal, setShowModal, action }) => {
+export const SuccessModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
+  const { tab } = useSelector(({ tab }) => ({
+    tab: tab,
+  }));
 
-  const handleActionClick = () => {
-    switch (action) {
+  const handleActionClick = (id, account_type, option) => {
+    switch (tab.option) {
       case "a":
         setShowModal((prev) => !prev);
         dispatch(TableUserAction());
@@ -15,13 +18,14 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
         dispatch(TableUserAction());
       case "e":
         setShowModal((prev) => !prev);
+        dispatch(ViewUserAction({ id, account_type, option }));
         window.location.reload(false);
       default:
         return "foo";
     }
   };
 
-  console.log("Action: ", action);
+  console.log("Action: ", tab.option);
 
   return (
     <>
@@ -95,7 +99,7 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
                         You have successfully deleted a user.
                       </h5>
                     ),
-                  }[action]
+                  }[tab.option]
                 }
               </div>
               <div className="modal-footer">
@@ -104,7 +108,9 @@ export const SuccessModal = ({ showModal, setShowModal, action }) => {
                   className="btn btn-md btn-primary font-weight-bold"
                   style={{ width: "200px" }}
                   data-dismiss="modal"
-                  onClick={handleActionClick}
+                  onClick={() =>
+                    handleActionClick(tab.id, tab.account_type, "v")
+                  }
                 >
                   Okay
                 </button>

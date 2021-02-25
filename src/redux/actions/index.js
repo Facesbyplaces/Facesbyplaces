@@ -73,3 +73,9 @@ export const EditMemorialAction = (memorial) => {
     data: memorial,
   };
 };
+
+export const TableMemorialAction = () => {
+  return {
+    type: "TABLE_MEMORIAL",
+  };
+};
