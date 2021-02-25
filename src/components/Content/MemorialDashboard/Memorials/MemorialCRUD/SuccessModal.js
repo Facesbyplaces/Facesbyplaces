@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   TableMemorialAction,
   ViewMemorialAction,
-  TableUserAction,
-  ViewUserAction,
-} from "../../redux/actions";
+} from "../../../../../redux/actions";
 
 export const SuccessModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();

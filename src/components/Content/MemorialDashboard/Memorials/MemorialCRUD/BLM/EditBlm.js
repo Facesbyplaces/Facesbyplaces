@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../../../../../auxiliary/axios";
-import { SuccessModal } from "../../../../../Modals/SuccessModal";
+import { SuccessModal } from "../SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {

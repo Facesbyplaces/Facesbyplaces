@@ -4,7 +4,7 @@ import { TableUserAction } from "../../../../../../redux/actions";
 import axios from "../../../../../../auxiliary/axios";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
-import { SuccessModal } from "../../../../../Modals/SuccessModal";
+import { SuccessModal } from "../SuccessModal";
 
 export default function AddUser() {
   const dispatch = useDispatch();
