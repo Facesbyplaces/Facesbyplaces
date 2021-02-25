@@ -11,7 +11,7 @@ import AddMemorial from "../MemorialCRUD/ALM/AddMemorial";
 import ViewBlm from "../MemorialCRUD/BLM/ViewBlm";
 import EditBlm from "../MemorialCRUD/BLM/EditBlm";
 import AddBlm from "../MemorialCRUD/BLM/AddBlm";
-import { SuccessModal } from "../../../../Modals/SuccessModal";
+import { SuccessModal } from "../MemorialCRUD/SuccessModal";
 
 export default function MemorialsTable() {
   const [showModal, setShowModal] = useState(true);
