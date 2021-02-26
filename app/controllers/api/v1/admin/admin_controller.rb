@@ -170,6 +170,7 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
     
     # Memorial
+        # Index Memorials
      def allMemorials
         # BLM Memorials
         blm_memorials = Blm.all
@@ -221,7 +222,7 @@ class Api::V1::Admin::AdminController < ApplicationController
         }
         
     end
-
+    # Show Memorial
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
         
@@ -231,7 +232,7 @@ class Api::V1::Admin::AdminController < ApplicationController
             render json: {errors: "Page not found"}
         end
     end
-
+    # Update Memorial
     def updateMemorial
         memorial = Memorial.find(params[:id])
         # user = User.find(params[:user_id]) ? User.find(params[:user_id]) : AlmUser.find(params[:user_id])
@@ -250,7 +251,18 @@ class Api::V1::Admin::AdminController < ApplicationController
             return render json: {error: "#{check} is empty"}
         end
     end
-
+    def updateMemorialImages
+        memorial = Memorial.find(params[:id])
+        
+        # check if memorial is updated successfully
+        if memorial.update(memorial_images_params)
+            return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated images"}
+        else
+            return render json: {status: 'Error'}
+        end
+    end
+    
+    # Update BLM
     def updateBlm
         blm = Blm.find(params[:id])
         
@@ -267,7 +279,7 @@ class Api::V1::Admin::AdminController < ApplicationController
         else
             return render json: {error: "#{check} is empty"}
         end
-    end
+    end 
 
     def searchMemorial
         memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
@@ -351,6 +363,10 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def editUser_params
         params.permit(:id, :account_type, :username, :first_name, :last_name, :phone_number)
+    end
+
+    def memorial_images_params
+        params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
     def memorial_details_params
