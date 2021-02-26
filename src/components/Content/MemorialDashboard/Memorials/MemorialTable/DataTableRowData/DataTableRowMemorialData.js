@@ -190,11 +190,7 @@ export default function DataTableRowMemorialData({
             {/*end::Svg Icon*/}
           </span>
         </a>
-        <DeleteModal
-          user={memorial.id}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
+        <DeleteModal showModal={showModal} setShowModal={setShowModal} />
       </td>
     </tr>
   ));

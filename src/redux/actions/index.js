@@ -55,7 +55,7 @@ export const TableUserAction = () => {
 
 export const DeleteMemorialAction = (memorial) => {
   return {
-    type: "VIEW_MEMORIAL",
+    type: "DELETE_MEMORIAL",
     data: memorial,
   };
 };

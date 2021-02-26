@@ -187,14 +187,12 @@ export default function DataTableRowBlmData({ memorials, search, pageType }) {
             {/*end::Svg Icon*/}
           </span>
         </a>
-        <DeleteModal
-          user={memorial.id}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
+        <DeleteModal showModal={showModal} setShowModal={setShowModal} />
       </td>
     </tr>
   ));
+
+  console.log({ renderedMemorials });
 
   return search ? (
     <tbody>

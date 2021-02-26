@@ -21,7 +21,7 @@ export default function MemorialsTable() {
 
   return (
     <div
-      className="content-height d-flex flex-column flex-column-fluid"
+      className="content content-height d-flex flex-column flex-column-fluid"
       id="kt_content"
     >
       {(() => {
@@ -39,7 +39,6 @@ export default function MemorialsTable() {
                   <SuccessModal
                     showModal={showModal}
                     setShowModal={setShowModal}
-                    action={memorialTab.option}
                   />
                   <div className="card card-custom">
                     <Header />
@@ -71,7 +70,6 @@ export default function MemorialsTable() {
                   <SuccessModal
                     showModal={showModal}
                     setShowModal={setShowModal}
-                    action={memorialTab.option}
                   />
                   <div className="card card-custom">
                     <Header />

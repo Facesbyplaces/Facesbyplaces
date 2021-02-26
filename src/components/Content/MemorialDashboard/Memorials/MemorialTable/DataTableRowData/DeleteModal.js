@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { DeleteUserAction } from "../../../../../../redux/actions";
+import { DeleteMemorialAction } from "../../../../../../redux/actions";
 import axios from "../../../../../../auxiliary/axios";
 
 //Loader
@@ -9,23 +9,23 @@ import HashLoader from "react-spinners/HashLoader";
 export const DeleteModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { tab } = useSelector(({ tab }) => ({
-    tab: tab,
+  const { memorialTab } = useSelector(({ memorialTab }) => ({
+    memorialTab: memorialTab,
   }));
 
-  const handleDeleteUser = (id, account_type, option) => {
+  const handleDeleteMemorial = (id, page, option) => {
     setLoading(true);
-    console.log("ID: ", tab.id);
-    console.log("Account Type: ", tab.account_type);
+    console.log("ID: ", memorialTab.id);
+    console.log("Account Type: ", memorialTab.page);
     axios
-      .post("/api/v1/admin/users/delete", {
-        id: tab.id,
-        account_type: tab.account_type,
+      .delete(`/api/v1/admin/memorials/${memorialTab.id}/${memorialTab.page}`, {
+        id: memorialTab.id,
+        page: memorialTab.page,
       })
       .then((response) => {
         console.log(response.data);
         setLoading(false);
-        dispatch(DeleteUserAction({ id, account_type, option }));
+        dispatch(DeleteMemorialAction({ id, page, option }));
       })
       .catch((error) => {
         console.log(error.response);
@@ -89,8 +89,8 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
                 </div>
                 <div className="modal-body">
                   <h5 className="modal-dialog">
-                    Do you really want to delete this user? This process cannot
-                    be undone.
+                    Do you really want to delete this memorial? This process
+                    cannot be undone.
                   </h5>
                 </div>
                 <div className="modal-footer">
@@ -105,7 +105,7 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
                   <button
                     type="button"
                     className="btn btn-danger font-weight-bold"
-                    onClick={() => handleDeleteUser("", "", "d")}
+                    onClick={() => handleDeleteMemorial("", "", "d")}
                   >
                     Delete
                   </button>

@@ -10,23 +10,32 @@ export const SuccessModal = ({ showModal, setShowModal }) => {
   const { memorialTab } = useSelector(({ memorialTab }) => ({
     memorialTab: memorialTab,
   }));
-  const { tab } = useSelector(({ tab }) => ({
-    tab: tab,
-  }));
 
-  const handleActionClick = (id, page, option, type) => {
+  const handleAdd = () => {
+    console.log("ADD");
+    setShowModal((prev) => !prev);
+    dispatch(TableMemorialAction());
+  };
+  const handleDelete = () => {
+    console.log("DELETE");
+    setShowModal((prev) => !prev);
+    dispatch(TableMemorialAction());
+  };
+  const handleEdit = (id, page, type) => {
+    console.log("EDIT");
+    const option = "v";
+    setShowModal((prev) => !prev);
+    dispatch(ViewMemorialAction({ id, page, option, type }));
+  };
+
+  const handleActionClick = (id, page, type) => {
     switch (memorialTab.option) {
       case "a":
-        setShowModal((prev) => !prev);
-        dispatch(TableMemorialAction());
+        return handleAdd();
       case "d":
-        setShowModal((prev) => !prev);
-        dispatch(TableMemorialAction());
+        return handleDelete();
       case "e":
-        setShowModal((prev) => !prev);
-        dispatch(ViewMemorialAction({ id, page, option, type }));
-      default:
-        return "foo";
+        return handleEdit(id, page, type);
     }
   };
 
@@ -117,7 +126,6 @@ export const SuccessModal = ({ showModal, setShowModal }) => {
                     handleActionClick(
                       memorialTab.id,
                       memorialTab.page,
-                      "v",
                       memorialTab.type
                     )
                   }
