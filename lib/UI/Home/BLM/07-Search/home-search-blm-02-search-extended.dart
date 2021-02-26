@@ -599,7 +599,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             SizedBox(height: 20),
 
                             Container(
-                              height: 250, 
                               child: ((){
                                 if(feeds[i].imagesOrVideos != null){
                                   if(feeds[i].imagesOrVideos.length == 1){
@@ -625,14 +624,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                             
                                           ],
                                         ),
-                                        height: 250,
                                       );
                                     }else{
                                       return Container(
                                         child: CachedNetworkImage(
                                           fit: BoxFit.contain,
-                                          height: 250,
-                                          width: 250,
                                           imageUrl: feeds[i].imagesOrVideos[0],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -650,14 +646,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                         ? Container(
                                           child: Stack(
                                             children: [
-                                            BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                  showControls: false,
+                                              BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                    showControls: false,
+                                                  ),
+                                                  aspectRatio: 16 / 9,
                                                 ),
-                                                aspectRatio: 16 / 9,
                                               ),
-                                            ),
 
                                               Center(
                                                 child: CircleAvatar(
@@ -668,12 +664,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                               
                                             ],
                                           ),
-                                          height: 250,
                                         )
                                         : CachedNetworkImage(
                                           fit: BoxFit.contain,
-                                          height: 250,
-                                          width: 250,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -714,12 +707,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                                 
                                               ],
                                             ),
-                                            height: 250,
                                           )
                                           : CachedNetworkImage(
                                             fit: BoxFit.contain,
-                                            height: 250,
-                                            width: 250,
                                             imageUrl: feeds[i].imagesOrVideos[index],
                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -753,7 +743,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                                           
                                                         ],
                                                       ),
-                                                      height: 250,
                                                     ),
 
                                                     Container(color: Colors.black.withOpacity(0.5),),
@@ -779,8 +768,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                                   children: [
                                                     CachedNetworkImage(
                                                       fit: BoxFit.contain,
-                                                      height: 250,
-                                                      width: 250,
                                                       imageUrl: feeds[i].imagesOrVideos[index],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -828,13 +815,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                                       
                                                     ],
                                                   ),
-                                                  height: 250,
                                                 );
                                               }else{
                                                 return CachedNetworkImage(
                                                   fit: BoxFit.contain,
-                                                  height: 250,
-                                                  width: 250,
                                                   imageUrl: feeds[i].imagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),

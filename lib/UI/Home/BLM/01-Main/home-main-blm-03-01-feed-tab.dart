@@ -67,7 +67,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    print('The value of guest login is $isGuestLoggedIn');
   }
 
   void onRefresh() async{
@@ -191,7 +190,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                     SizedBox(height: 20,),
 
                     Container(
-                      height: 250, 
                       child: ((){
                         if(feeds[i].imagesOrVideos != null){
                           if(feeds[i].imagesOrVideos.length == 1){
@@ -217,14 +215,11 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                     
                                   ],
                                 ),
-                                height: 250,
                               );
                             }else{
                               return Container(
                                 child: CachedNetworkImage(
                                   fit: BoxFit.contain,
-                                  height: 250,
-                                  width: 250,
                                   imageUrl: feeds[i].imagesOrVideos[0],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -234,6 +229,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                           }else if(feeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
                               padding: EdgeInsets.zero,
+                              shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               crossAxisCount: 4,
                               itemCount: 2,
@@ -242,14 +238,14 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                 ? Container(
                                   child: Stack(
                                     children: [
-                                    BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                          showControls: false,
+                                      BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            showControls: false,
+                                          ),
+                                          aspectRatio: 16 / 9,
                                         ),
-                                        aspectRatio: 16 / 9,
                                       ),
-                                    ),
 
                                       Center(
                                         child: CircleAvatar(
@@ -260,12 +256,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                       
                                     ],
                                   ),
-                                  height: 250,
                                 )
                                 : CachedNetworkImage(
                                   fit: BoxFit.contain,
-                                  height: 250,
-                                  width: 250,
                                   imageUrl: feeds[i].imagesOrVideos[index],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -276,6 +269,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                             );
                           }else{
                             return StaggeredGridView.countBuilder(
+                              shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               physics: NeverScrollableScrollPhysics(),
                               crossAxisCount: 4,
@@ -306,12 +300,9 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                         
                                       ],
                                     ),
-                                    height: 250,
                                   )
                                   : CachedNetworkImage(
                                     fit: BoxFit.contain,
-                                    height: 250,
-                                    width: 250,
                                     imageUrl: feeds[i].imagesOrVideos[index],
                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -345,7 +336,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                                   
                                                 ],
                                               ),
-                                              height: 250,
                                             ),
 
                                             Container(color: Colors.black.withOpacity(0.5),),
@@ -371,8 +361,6 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                           children: [
                                             CachedNetworkImage(
                                               fit: BoxFit.contain,
-                                              height: 250,
-                                              width: 250,
                                               imageUrl: feeds[i].imagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -420,13 +408,10 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                               
                                             ],
                                           ),
-                                          height: 250,
                                         );
                                       }else{
                                         return CachedNetworkImage(
                                           fit: BoxFit.contain,
-                                          height: 250,
-                                          width: 250,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -445,7 +430,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                           return Container(height: 0,);
                         }
                       }()),
-                    )
+                    ),
 
                   ],
                 )

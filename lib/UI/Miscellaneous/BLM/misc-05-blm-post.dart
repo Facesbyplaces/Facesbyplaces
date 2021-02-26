@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
-import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-02-show-comments.dart';
+import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
@@ -107,7 +106,8 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: userId,)));
       },
       child: Container(
         padding: EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -208,6 +208,8 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
             Column(children: contents,),
 
+            // SizedBox(height: 20,),
+
             numberOfTagged != 0
             ? Row(
               children: [
@@ -287,7 +289,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId,)));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId,)));
                     },
                     child: Row(
                       children: [

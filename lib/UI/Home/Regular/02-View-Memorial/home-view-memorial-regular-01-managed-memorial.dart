@@ -837,7 +837,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                   SizedBox(height: 20),
 
                                   Container(
-                                    height: 250, 
                                     child: ((){
                                       if(posts[i].imagesOrVideos != null){
                                         if(posts[i].imagesOrVideos.length == 1){
@@ -863,14 +862,11 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                   
                                                 ],
                                               ),
-                                              height: 250,
                                             );
                                           }else{
                                             return Container(
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.contain,
-                                                height: 250,
-                                                width: 250,
                                                 imageUrl: posts[i].imagesOrVideos[0],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -906,12 +902,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                     
                                                   ],
                                                 ),
-                                                height: 250,
                                               )
                                               : CachedNetworkImage(
                                                 fit: BoxFit.contain,
-                                                height: 250,
-                                                width: 250,
                                                 imageUrl: posts[i].imagesOrVideos[index],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -952,12 +945,9 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                       
                                                     ],
                                                   ),
-                                                  height: 250,
                                                 )
                                                 : CachedNetworkImage(
                                                   fit: BoxFit.contain,
-                                                  height: 250,
-                                                  width: 250,
                                                   imageUrl: posts[i].imagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -991,7 +981,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                                 
                                                               ],
                                                             ),
-                                                            height: 250,
                                                           ),
 
                                                           Container(color: Colors.black.withOpacity(0.5),),
@@ -1017,8 +1006,6 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                         children: [
                                                           CachedNetworkImage(
                                                             fit: BoxFit.contain,
-                                                            height: 250,
-                                                            width: 250,
                                                             imageUrl: posts[i].imagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -1066,13 +1053,10 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                             
                                                           ],
                                                         ),
-                                                        height: 250,
                                                       );
                                                     }else{
                                                       return CachedNetworkImage(
                                                         fit: BoxFit.contain,
-                                                        height: 250,
-                                                        width: 250,
                                                         imageUrl: posts[i].imagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),

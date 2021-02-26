@@ -839,7 +839,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                   SizedBox(height: 20),
 
                                   Container(
-                                    height: 250, 
                                     child: ((){
                                       if(posts[i].imagesOrVideos != null){
                                         if(posts[i].imagesOrVideos.length == 1){
@@ -865,14 +864,11 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                   
                                                 ],
                                               ),
-                                              height: 250,
                                             );
                                           }else{
                                             return Container(
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.contain,
-                                                height: 250,
-                                                width: 250,
                                                 imageUrl: posts[i].imagesOrVideos[0],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -882,6 +878,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                         }else if(posts[i].imagesOrVideos.length == 2){
                                           return StaggeredGridView.countBuilder(
                                             padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
                                             physics: NeverScrollableScrollPhysics(),
                                             crossAxisCount: 4,
                                             itemCount: 2,
@@ -908,12 +905,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                     
                                                   ],
                                                 ),
-                                                height: 250,
                                               )
                                               : CachedNetworkImage(
                                                 fit: BoxFit.contain,
-                                                height: 250,
-                                                width: 250,
                                                 imageUrl: posts[i].imagesOrVideos[index],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -925,6 +919,7 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                         }else{
                                           return StaggeredGridView.countBuilder(
                                             padding: EdgeInsets.zero,
+                                            shrinkWrap: true,
                                             physics: NeverScrollableScrollPhysics(),
                                             crossAxisCount: 4,
                                             itemCount: 3,
@@ -954,12 +949,9 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                       
                                                     ],
                                                   ),
-                                                  height: 250,
                                                 )
                                                 : CachedNetworkImage(
                                                   fit: BoxFit.contain,
-                                                  height: 250,
-                                                  width: 250,
                                                   imageUrl: posts[i].imagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -993,7 +985,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                                 
                                                               ],
                                                             ),
-                                                            height: 250,
                                                           ),
 
                                                           Container(color: Colors.black.withOpacity(0.5),),
@@ -1019,8 +1010,6 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                         children: [
                                                           CachedNetworkImage(
                                                             fit: BoxFit.contain,
-                                                            height: 250,
-                                                            width: 250,
                                                             imageUrl: posts[i].imagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -1068,13 +1057,10 @@ class HomeBLMProfileState extends State<HomeBLMProfile>{
                                                             
                                                           ],
                                                         ),
-                                                        height: 250,
                                                       );
                                                     }else{
                                                       return CachedNetworkImage(
                                                         fit: BoxFit.contain,
-                                                        height: 250,
-                                                        width: 250,
                                                         imageUrl: posts[i].imagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),

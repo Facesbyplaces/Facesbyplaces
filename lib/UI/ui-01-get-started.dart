@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-12-push-notifications.dart';
+import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -106,7 +106,7 @@ class UIGetStartedState extends State<UIGetStarted>{
       FlutterBranchSdk.logout();
 
       if(pageType == 'Blm'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
       }else{
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likeStatus, numberOfLikes: numberOfLikes,)));
       }
@@ -598,7 +598,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                                   ), 
                                   onPressed: (){
                                     Navigator.pushNamed(context, '/login');
-                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => FullScreenApp()));
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context) => NewSample()));
                                   },
                                   width: 200,
                                   height: 45,

@@ -598,7 +598,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             SizedBox(height: 20),
 
                             Container(
-                              height: 250, 
                               child: ((){
                                 if(feeds[i].imagesOrVideos != null){
                                   if(feeds[i].imagesOrVideos.length == 1){
@@ -624,14 +623,11 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                             
                                           ],
                                         ),
-                                        height: 250,
                                       );
                                     }else{
                                       return Container(
                                         child: CachedNetworkImage(
                                           fit: BoxFit.contain,
-                                          height: 250,
-                                          width: 250,
                                           imageUrl: feeds[i].imagesOrVideos[0],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -667,12 +663,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                               
                                             ],
                                           ),
-                                          height: 250,
                                         )
                                         : CachedNetworkImage(
                                           fit: BoxFit.contain,
-                                          height: 250,
-                                          width: 250,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -713,12 +706,9 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                 
                                               ],
                                             ),
-                                            height: 250,
                                           )
                                           : CachedNetworkImage(
                                             fit: BoxFit.contain,
-                                            height: 250,
-                                            width: 250,
                                             imageUrl: feeds[i].imagesOrVideos[index],
                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -752,7 +742,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                           
                                                         ],
                                                       ),
-                                                      height: 250,
                                                     ),
 
                                                     Container(color: Colors.black.withOpacity(0.5),),
@@ -778,8 +767,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                   children: [
                                                     CachedNetworkImage(
                                                       fit: BoxFit.contain,
-                                                      height: 250,
-                                                      width: 250,
                                                       imageUrl: feeds[i].imagesOrVideos[index],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -827,13 +814,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                                       
                                                     ],
                                                   ),
-                                                  height: 250,
                                                 );
                                               }else{
                                                 return CachedNetworkImage(
                                                   fit: BoxFit.contain,
-                                                  height: 250,
-                                                  width: 250,
                                                   imageUrl: feeds[i].imagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),

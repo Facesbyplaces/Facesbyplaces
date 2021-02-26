@@ -58,7 +58,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
-    print('The value of guest login is $isGuestLoggedIn');
   }
 
   void onRefresh() async{
@@ -193,7 +192,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                     SizedBox(height: 20),
 
                     Container(
-                      height: 250, 
                       child: ((){
                         if(feeds[i].imagesOrVideos != null){
                           if(feeds[i].imagesOrVideos.length == 1){
@@ -219,14 +217,11 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                     
                                   ],
                                 ),
-                                height: 250,
                               );
                             }else{
                               return Container(
                                 child: CachedNetworkImage(
                                   fit: BoxFit.contain,
-                                  height: 250,
-                                  width: 250,
                                   imageUrl: feeds[i].imagesOrVideos[0],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -236,6 +231,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           }else if(feeds[i].imagesOrVideos.length == 2){
                             return StaggeredGridView.countBuilder(
                               padding: EdgeInsets.zero,
+                              shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               crossAxisCount: 4,
                               itemCount: 2,
@@ -244,14 +240,14 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                 ? Container(
                                   child: Stack(
                                     children: [
-                                    BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                          showControls: false,
+                                      BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                            showControls: false,
+                                          ),
+                                          aspectRatio: 16 / 9,
                                         ),
-                                        aspectRatio: 16 / 9,
                                       ),
-                                    ),
 
                                       Center(
                                         child: CircleAvatar(
@@ -262,12 +258,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                       
                                     ],
                                   ),
-                                  height: 250,
                                 )
                                 : CachedNetworkImage(
                                   fit: BoxFit.contain,
-                                  height: 250,
-                                  width: 250,
                                   imageUrl: feeds[i].imagesOrVideos[index],
                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -279,6 +272,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                           }else{
                             return StaggeredGridView.countBuilder(
                               padding: EdgeInsets.zero,
+                              shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               crossAxisCount: 4,
                               itemCount: 3,
@@ -308,12 +302,9 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                         
                                       ],
                                     ),
-                                    height: 250,
                                   )
                                   : CachedNetworkImage(
                                     fit: BoxFit.contain,
-                                    height: 250,
-                                    width: 250,
                                     imageUrl: feeds[i].imagesOrVideos[index],
                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -347,7 +338,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                                   
                                                 ],
                                               ),
-                                              height: 250,
                                             ),
 
                                             Container(color: Colors.black.withOpacity(0.5),),
@@ -373,8 +363,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                           children: [
                                             CachedNetworkImage(
                                               fit: BoxFit.contain,
-                                              height: 250,
-                                              width: 250,
                                               imageUrl: feeds[i].imagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -422,13 +410,10 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                               
                                             ],
                                           ),
-                                          height: 250,
                                         );
                                       }else{
                                         return CachedNetworkImage(
                                           fit: BoxFit.contain,
-                                          height: 250,
-                                          width: 250,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
