@@ -138,7 +138,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight - 85 - kToolbarHeight,
+      // height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       child: count != 0
       ? SmartRefresher(
         enablePullDown: true,
@@ -162,6 +162,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
         onLoading: onLoading,
         child: ListView.separated(
           padding: EdgeInsets.all(10.0),
+          // shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           itemBuilder: (c, i) {
             return MiscRegularPost(
@@ -196,26 +197,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                         if(feeds[i].imagesOrVideos != null){
                           if(feeds[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
-                              return Container(
-                                child: Stack(
-                                  children: [
-                                    BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    ),
-
-                                    Center(
-                                      child: CircleAvatar(
-                                        backgroundColor: Color(0xff00000000),
-                                        child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                      ),
-                                    ),
-                                    
-                                  ],
+                              return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
                                 ),
                               );
                             }else{
@@ -237,26 +224,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) =>  
                                 lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
-                                ? Container(
-                                  child: Stack(
-                                    children: [
-                                      BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                        betterPlayerConfiguration: BetterPlayerConfiguration(
-                                          controlsConfiguration: BetterPlayerControlsConfiguration(
-                                            showControls: false,
-                                          ),
-                                          aspectRatio: 16 / 9,
-                                        ),
-                                      ),
-
-                                      Center(
-                                        child: CircleAvatar(
-                                          backgroundColor: Color(0xff00000000),
-                                          child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                        ),
-                                      ),
-                                      
-                                    ],
+                                ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
                                   ),
                                 )
                                 : CachedNetworkImage(
@@ -280,27 +253,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               ((){
                                 if(index != 1){
                                   return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
-                                  ? Container(
-                                    child: Stack(
-                                      children: [
-                                        BetterPlayer.network(
-                                          '${feeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
-                                            aspectRatio: 16 / 9,
-                                          ),
-                                        ),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            backgroundColor: Color(0xff00000000),
-                                            child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                          ),
-                                        ),
-                                        
-                                      ],
+                                  ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
                                     ),
                                   )
                                   : CachedNetworkImage(
@@ -316,27 +274,12 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                       if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
                                         return Stack(
                                           children: [
-                                            Container(
-                                              child: Stack(
-                                                children: [
-                                                  BetterPlayer.network(
-                                                    '${feeds[i].imagesOrVideos[index]}',
-                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                        showControls: false,
-                                                      ),
-                                                      aspectRatio: 16 / 9,
-                                                    ),
-                                                  ),
-
-                                                  Center(
-                                                    child: CircleAvatar(
-                                                      backgroundColor: Color(0xff00000000),
-                                                      child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                                    ),
-                                                  ),
-                                                  
-                                                ],
+                                            BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
                                               ),
                                             ),
 
@@ -362,7 +305,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                         return Stack(
                                           children: [
                                             CachedNetworkImage(
-                                              fit: BoxFit.contain,
+                                              fit: BoxFit.fill,
                                               imageUrl: feeds[i].imagesOrVideos[index],
                                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
@@ -389,31 +332,17 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                       }
                                     }else{
                                       if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
-                                        return Container(
-                                          child: Stack(
-                                            children: [
-                                              BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                    showControls: false,
-                                                  ),
-                                                  aspectRatio: 16 / 9,
-                                                ),
-                                              ),
-
-                                              Center(
-                                                child: CircleAvatar(
-                                                  backgroundColor: Color(0xff00000000),
-                                                  child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                                ),
-                                              ),
-                                              
-                                            ],
+                                        return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
                                           ),
                                         );
                                       }else{
                                         return CachedNetworkImage(
-                                          fit: BoxFit.contain,
+                                          fit: BoxFit.fill,
                                           imageUrl: feeds[i].imagesOrVideos[index],
                                           placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                           errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),

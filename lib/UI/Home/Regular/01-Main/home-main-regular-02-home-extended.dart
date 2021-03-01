@@ -9,6 +9,7 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/Regular/14-Notifications/api-notifications-regular-02-read-unread-notifications.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -184,16 +185,21 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
               ),
             ],
           ),
-          body: Container(
-            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
-            child: ((){
-              switch(toggleBottom){
-                case 0: return HomeRegularFeedTab(); break;
-                case 1: return HomeRegularManageTab(); break;
-                case 2: return HomeRegularPostTab(); break;
-                case 3: return HomeRegularNotificationsTab(); break;
-              }
-            }()),
+          body: Stack(
+            children: [
+
+              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+
+              ((){
+                switch(toggleBottom){
+                  case 0: return HomeRegularFeedTab(); break;
+                  case 1: return HomeRegularManageTab(); break;
+                  case 2: return HomeRegularPostTab(); break;
+                  case 3: return HomeRegularNotificationsTab(); break;
+                }
+              }()),
+
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Color(0xffffffff),
@@ -203,105 +209,105 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomSheet: SingleChildScrollView(
+          bottomNavigationBar: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
-            height: 65,
-            alignment: Alignment.center,
-            child: ToggleButtons(
-              borderWidth: 0,
-              renderBorder: false,
-              selectedColor: Color(0xff04ECFF),
-              fillColor: Colors.transparent,
-              color: Color(0xffB1B1B1),
-              children: [
+              height: 65,
+              alignment: Alignment.center,
+              child: ToggleButtons(
+                borderWidth: 0,
+                renderBorder: false,
+                selectedColor: Color(0xff04ECFF),
+                fillColor: Colors.transparent,
+                color: Color(0xffB1B1B1),
+                children: [
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.fire,),
-                      SizedBox(height: 5),
-                      Text('Feed', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Icon(MdiIcons.fire,),
+                        SizedBox(height: 5),
+                        Text('Feed', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.graveStone),
-                      SizedBox(height: 5),
-                      Text('Memorials', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Icon(MdiIcons.graveStone),
+                        SizedBox(height: 5),
+                        Text('Memorials', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Icon(MdiIcons.post),
-                      SizedBox(height: 5),
-                      Text('Post', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Icon(MdiIcons.post),
+                        SizedBox(height: 5),
+                        Text('Post', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-                Container(
-                  width: SizeConfig.screenWidth / 4,
-                  child: Column(
-                    children: [
-                      Badge(
-                        position: BadgePosition.topEnd(top: 0, end: -10),
-                        animationDuration: Duration(milliseconds: 300),
-                        animationType: BadgeAnimationType.fade,
-                        badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                        badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
-                        child: Icon(MdiIcons.heart),
-                      ),
-                      SizedBox(height: 5),
-                      Text('Notification', style: TextStyle(fontSize: 12,),),
-                    ],
+                  Container(
+                    width: SizeConfig.screenWidth / 4,
+                    child: Column(
+                      children: [
+                        Badge(
+                          position: BadgePosition.topEnd(top: 0, end: -10),
+                          animationDuration: Duration(milliseconds: 300),
+                          animationType: BadgeAnimationType.fade,
+                          badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
+                          badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
+                          child: Icon(MdiIcons.heart),
+                        ),
+                        SizedBox(height: 5),
+                        Text('Notification', style: TextStyle(fontSize: 12,),),
+                      ],
+                    ),
                   ),
-                ),
 
-              ],
-              onPressed: (int index) async{
-                setState(() {
-                  toggleBottom = index;
+                ],
+                onPressed: (int index) async{
+                  setState(() {
+                    toggleBottom = index;
 
-                  for(int i = 0; i < bottomTab.length; i++){
-                    if(i == toggleBottom){
-                      bottomTab[i] = true;
-                    }else{
-                      bottomTab[i] = false;
+                    for(int i = 0; i < bottomTab.length; i++){
+                      if(i == toggleBottom){
+                        bottomTab[i] = true;
+                      }else{
+                        bottomTab[i] = false;
+                      }
                     }
+
+                  });
+
+                  if(toggleBottom == 3){
+                    await apiRegularReadUnreadNotifications();
+                    unreadNotifications = 0;
+                    getUnreadNotifications();
                   }
-
-                });
-
-                if(toggleBottom == 3){
-                  await apiRegularReadUnreadNotifications();
-                  unreadNotifications = 0;
-                  getUnreadNotifications();
-                }
-              },
-              isSelected: bottomTab
+                },
+                isSelected: bottomTab
+              ),
+              decoration: BoxDecoration(
+                color: Color(0xffffffff),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    spreadRadius: 1,
+                    offset: Offset(0, 0)
+                  ),
+                ],
+              ),
             ),
-            decoration: BoxDecoration(
-              color: Color(0xffffffff),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(0, 0)
-                ),
-              ],
-            ),
-          ),
           ),
           drawer: FutureBuilder<APIRegularShowProfileInformation>(
             future: drawerSettings,

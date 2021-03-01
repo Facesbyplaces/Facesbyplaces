@@ -24,7 +24,6 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:keyboard_attachable/keyboard_attachable.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -458,44 +457,63 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             itemBuilder: (BuildContext context, int index) => 
                                               GestureDetector(
                                                 onTap: () async{
-                                                  FullScreenMenu.show(
-                                                    context,
-                                                    backgroundColor: Color(0xff888888),
-                                                    items: [
-                                                      Center(
-                                                        child: Container(
-                                                          child: CarouselSlider(
-                                                            items: List.generate(
-                                                              originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                              lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
-                                                              ? Container(
-                                                                child: BetterPlayer.network(
-                                                                  '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                  showGeneralDialog(
+                                                    context: context,
+                                                    barrierColor: Colors.black12.withOpacity(0.5),
+                                                    barrierDismissible: true,
+                                                    barrierLabel: 'Dialog',
+                                                    transitionDuration: Duration(milliseconds: 400),
+                                                    pageBuilder: (_, __, ___) {
+                                                      return SizedBox.expand(
+                                                        child: SafeArea(
+                                                          child: Column(
+                                                            children: [
+                                                              Container(
+                                                                height: 50,
+                                                                padding: EdgeInsets.only(right: 20.0),
+                                                                alignment: Alignment.centerRight,
+                                                                child: GestureDetector(
+                                                                  onTap: (){
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: CarouselSlider(
+                                                                  items: List.generate(
+                                                                    originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                    lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                                    ? Container(
+                                                                      child: BetterPlayer.network(
+                                                                        '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                          ),
+                                                                          aspectRatio: 16 / 9,
+                                                                        ),
+                                                                      ),
+                                                                    )
+                                                                    : CachedNetworkImage(
+                                                                      fit: BoxFit.cover,
+                                                                      imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     ),
-                                                                    aspectRatio: 16 / 9,
+                                                                  ),
+                                                                  options: CarouselOptions(
+                                                                    autoPlay: false,
+                                                                    enlargeCenterPage: true,
+                                                                    viewportFraction: 0.9,
+                                                                    initialPage: 2,
                                                                   ),
                                                                 ),
-                                                              )
-                                                              : CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
-                                                            ),
-                                                            options: CarouselOptions(
-                                                              autoPlay: false,
-                                                              enlargeCenterPage: true,
-                                                              viewportFraction: 0.9,
-                                                              aspectRatio: 2.0,
-                                                              initialPage: 2,
-                                                            ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      );
+                                                    },
                                                   );
                                                 },
                                                 child: lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
@@ -545,46 +563,63 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                               itemBuilder: (BuildContext context, int index) => 
                                               GestureDetector(
                                                 onTap: () async{
-                                                  FullScreenMenu.show(
-                                                    context,
-                                                    backgroundColor: Color(0xff888888),
-                                                    items: [
-
-                                                      Center(
-                                                        child: Container(
-                                                          child: CarouselSlider(
-                                                            items: List.generate(
-                                                              originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                              lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
-                                                              ? Container(
-                                                                child: BetterPlayer.network(
-                                                                  '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
-                                                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                  showGeneralDialog(
+                                                    context: context,
+                                                    barrierColor: Colors.black12.withOpacity(0.5),
+                                                    barrierDismissible: true,
+                                                    barrierLabel: 'Dialog',
+                                                    transitionDuration: Duration(milliseconds: 400),
+                                                    pageBuilder: (_, __, ___) {
+                                                      return SizedBox.expand(
+                                                        child: SafeArea(
+                                                          child: Column(
+                                                            children: [
+                                                              Container(
+                                                                height: 50,
+                                                                padding: EdgeInsets.only(right: 20.0),
+                                                                alignment: Alignment.centerRight,
+                                                                child: GestureDetector(
+                                                                  onTap: (){
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                  child: Icon(Icons.close_rounded, color: Color(0xffffffff), size: 30,),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: CarouselSlider(
+                                                                  items: List.generate(
+                                                                    originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                    lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                                    ? Container(
+                                                                      child: BetterPlayer.network(
+                                                                        '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                        betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                                          controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                                          ),
+                                                                          aspectRatio: 16 / 9,
+                                                                        ),
+                                                                      ),
+                                                                    )
+                                                                    : CachedNetworkImage(
+                                                                      fit: BoxFit.cover,
+                                                                      imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                     ),
-                                                                    aspectRatio: 16 / 9,
+                                                                  ),
+                                                                  options: CarouselOptions(
+                                                                    autoPlay: false,
+                                                                    enlargeCenterPage: true,
+                                                                    viewportFraction: 0.9,
+                                                                    initialPage: 2,
                                                                   ),
                                                                 ),
-                                                                height: 250,
-                                                              )
-                                                              : CachedNetworkImage(
-                                                                fit: BoxFit.cover,
-                                                                imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
-                                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
-                                                            ),
-                                                            options: CarouselOptions(
-                                                              autoPlay: false,
-                                                              enlargeCenterPage: true,
-                                                              viewportFraction: 0.9,
-                                                              aspectRatio: 2.0,
-                                                              initialPage: 2,
-                                                            ),
+                                                            ],
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      );
+                                                    },
                                                   );
                                                 },
                                                 child: ((){

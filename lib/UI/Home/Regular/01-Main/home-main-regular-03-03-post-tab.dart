@@ -204,26 +204,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                         if(posts[i].imagesOrVideos != null){
                           if(posts[i].imagesOrVideos.length == 1){
                             if(lookupMimeType(posts[i].imagesOrVideos[0]).contains('video') == true){
-                              return Container(
-                                child: Stack(
-                                  children: [
-                                    BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    ),
-
-                                    Center(
-                                      child: CircleAvatar(
-                                        backgroundColor: Color(0xff00000000),
-                                        child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                      ),
-                                    ),
-                                    
-                                  ],
+                              return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
                                 ),
                               );
                             }else{
@@ -245,26 +231,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) =>  
                                 lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
-                                ? Container(
-                                  child: Stack(
-                                    children: [
-                                    BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
+                                ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      showControls: false,
                                     ),
-
-                                      Center(
-                                        child: CircleAvatar(
-                                          backgroundColor: Color(0xff00000000),
-                                          child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                        ),
-                                      ),
-                                      
-                                    ],
+                                    aspectRatio: 16 / 9,
                                   ),
                                 )
                                 : CachedNetworkImage(
@@ -288,27 +260,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                               ((){
                                 if(index != 1){
                                   return lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
-                                  ? Container(
-                                    child: Stack(
-                                      children: [
-                                        BetterPlayer.network(
-                                          '${posts[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
-                                            aspectRatio: 16 / 9,
-                                          ),
-                                        ),
-
-                                        Center(
-                                          child: CircleAvatar(
-                                            backgroundColor: Color(0xff00000000),
-                                            child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                          ),
-                                        ),
-                                        
-                                      ],
+                                  ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                    betterPlayerConfiguration: BetterPlayerConfiguration(
+                                      controlsConfiguration: BetterPlayerControlsConfiguration(
+                                        showControls: false,
+                                      ),
+                                      aspectRatio: 16 / 9,
                                     ),
                                   )
                                   : CachedNetworkImage(
@@ -324,27 +281,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                       if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
                                         return Stack(
                                           children: [
-                                            Container(
-                                              child: Stack(
-                                                children: [
-                                                  BetterPlayer.network(
-                                                    '${posts[i].imagesOrVideos[index]}',
-                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                        showControls: false,
-                                                      ),
-                                                      aspectRatio: 16 / 9,
-                                                    ),
-                                                  ),
-
-                                                  Center(
-                                                    child: CircleAvatar(
-                                                      backgroundColor: Color(0xff00000000),
-                                                      child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                                    ),
-                                                  ),
-                                                  
-                                                ],
+                                            BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                  showControls: false,
+                                                ),
+                                                aspectRatio: 16 / 9,
                                               ),
                                             ),
 
@@ -397,26 +339,12 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                                       }
                                     }else{
                                       if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
-                                        return Container(
-                                          child: Stack(
-                                            children: [
-                                              BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                    showControls: false,
-                                                  ),
-                                                  aspectRatio: 16 / 9,
-                                                ),
-                                              ),
-
-                                              Center(
-                                                child: CircleAvatar(
-                                                  backgroundColor: Color(0xff00000000),
-                                                  child: Icon(Icons.play_arrow_rounded, color: Color(0xffffffff),),
-                                                ),
-                                              ),
-                                              
-                                            ],
+                                        return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
                                           ),
                                         );
                                       }else{
@@ -440,7 +368,8 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
                           return Container(height: 0,);
                         }
                       }()),
-                    )
+                    ),
+                    
                   ],
                 )
                 : Container(height: 0),
