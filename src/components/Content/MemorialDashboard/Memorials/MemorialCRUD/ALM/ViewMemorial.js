@@ -45,7 +45,7 @@ export default function ViewMemorial() {
               height: "auto",
               width: "100%",
               backgroundColor: "#f3f6f9",
-              opacity: "1",
+              backgroundSize: "contain",
               margin: "auto",
             }}
           />
