@@ -462,7 +462,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     barrierColor: Colors.black12.withOpacity(0.5),
                                                     barrierDismissible: true,
                                                     barrierLabel: 'Dialog',
-                                                    transitionDuration: Duration(milliseconds: 400),
+                                                    transitionDuration: Duration(milliseconds: 0),
                                                     pageBuilder: (_, __, ___) {
                                                       return SizedBox.expand(
                                                         child: SafeArea(
@@ -568,7 +568,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     barrierColor: Colors.black12.withOpacity(0.5),
                                                     barrierDismissible: true,
                                                     barrierLabel: 'Dialog',
-                                                    transitionDuration: Duration(milliseconds: 400),
+                                                    transitionDuration: Duration(milliseconds: 0),
                                                     pageBuilder: (_, __, ___) {
                                                       return SizedBox.expand(
                                                         child: SafeArea(

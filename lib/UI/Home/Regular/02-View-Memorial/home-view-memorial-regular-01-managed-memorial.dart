@@ -658,7 +658,7 @@ class HomeRegularProfileState extends State<HomeRegularProfile>{
                                                               barrierColor: Colors.black12.withOpacity(0.7),
                                                               barrierDismissible: true,
                                                               barrierLabel: 'Dialog',
-                                                              transitionDuration: Duration(milliseconds: 400),
+                                                              transitionDuration: Duration(milliseconds: 0),
                                                               pageBuilder: (_, __, ___) {
                                                                 return SizedBox.expand(
                                                                   child: SafeArea(

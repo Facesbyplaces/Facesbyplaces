@@ -390,7 +390,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           ),
           body: Stack(
             children: [
-              SingleChildScrollView(child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
               Column(
                 children: [
@@ -511,30 +511,25 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                   ),
 
                   Expanded(
-                    child: Container(
-                      child: ((){
-                        switch(toggle){
-                          case 0: return searchPostExtended(); break;
-                          case 1: return searchSuggestedExtended(); break;
-                          case 2: return searchNearbyExtended(); break;
-                          case 3: return searchBLMExtended(); break;
-                        }
-                      }()),
+                    child: IgnorePointer(
+                      ignoring: isGuestLoggedIn,
+                      child: Container(
+                        child: isGuestLoggedIn
+                        ? BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: MiscRegularLoginToContinue(),
+                        )
+                        : ((){
+                          switch(toggle){
+                            case 0: return searchPostExtended(); break;
+                            case 1: return searchSuggestedExtended(); break;
+                            case 2: return searchNearbyExtended(); break;
+                            case 3: return searchBLMExtended(); break;
+                          }
+                        }()),
+                      ),
                     ),
                   ),
-                    // SingleChildScrollView(
-                    //   physics: isGuestLoggedIn ? NeverScrollableScrollPhysics() : ClampingScrollPhysics(),
-                    //   child: Container(
-                    //     child: ((){
-                    //       switch(toggle){
-                    //         case 0: return searchPostExtended(); break;
-                    //         case 1: return searchSuggestedExtended(); break;
-                    //         case 2: return searchNearbyExtended(); break;
-                    //         case 3: return searchBLMExtended(); break;
-                    //       }
-                    //     }()),
-                    //   ),
-                    // ),
 
                 ],
               ),
@@ -546,522 +541,450 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   }
 
   searchPostExtended(){
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IgnorePointer(
-          ignoring: isGuestLoggedIn,
-          child: Container(
-            child: tabCount1 != 0
-            ? SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(
-                color: Color(0xffffffff),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-              footer: CustomFooter(
-                loadStyle: LoadStyle.ShowWhenLoading,
-                builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
-                  if(mode == LoadStatus.loading){
-                    body = CircularProgressIndicator();
-                  }
-                  return Center(child: body);
-                },
-              ),
-              controller: refreshController,
-              onRefresh: onRefresh,
-              onLoading: onLoading1,
-              child: ListView.separated(
-                padding: EdgeInsets.all(10.0),
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (c, i) {
-                  return MiscRegularPost(
-                    userId: feeds[i].userId,
-                    postId: feeds[i].postId,
-                    memorialId: feeds[i].memorialId,
-                    memorialName: feeds[i].memorialName,
-                    timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-                    managed: feeds[i].managed,
-                    joined: feeds[i].follower,
-                    profileImage: feeds[i].profileImage,
-                    numberOfComments: feeds[i].numberOfComments,
-                    numberOfLikes: feeds[i].numberOfLikes,
-                    likeStatus: feeds[i].likeStatus,
-                    numberOfTagged: feeds[i].numberOfTagged,
-                    taggedFirstName: feeds[i].taggedFirstName,
-                    taggedLastName: feeds[i].taggedLastName,
-                    taggedId: feeds[i].taggedId,
-                    pageType: feeds[i].pageType,
-                    famOrFriends: feeds[i].famOrFriends,
-                    relationship: feeds[i].relationship,
-                    contents: [
-                      Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+    return tabCount1 != 0
+    ? SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: true,
+      header: MaterialClassicHeader(
+        color: Color(0xffffffff),
+        backgroundColor: Color(0xff4EC9D4),
+      ),
+      footer: CustomFooter(
+        loadStyle: LoadStyle.ShowWhenLoading,
+        builder: (BuildContext context, LoadStatus mode){
+          Widget body;
+          if(mode == LoadStatus.loading){
+            body = CircularProgressIndicator();
+          }
+          return Center(child: body);
+        },
+      ),
+      controller: refreshController,
+      onRefresh: onRefresh,
+      onLoading: onLoading1,
+      child: ListView.separated(
+        padding: EdgeInsets.all(10.0),
+        physics: ClampingScrollPhysics(),
+        itemBuilder: (c, i) {
+          return MiscRegularPost(
+            userId: feeds[i].userId,
+            postId: feeds[i].postId,
+            memorialId: feeds[i].memorialId,
+            memorialName: feeds[i].memorialName,
+            timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+            managed: feeds[i].managed,
+            joined: feeds[i].follower,
+            profileImage: feeds[i].profileImage,
+            numberOfComments: feeds[i].numberOfComments,
+            numberOfLikes: feeds[i].numberOfLikes,
+            likeStatus: feeds[i].likeStatus,
+            numberOfTagged: feeds[i].numberOfTagged,
+            taggedFirstName: feeds[i].taggedFirstName,
+            taggedLastName: feeds[i].taggedLastName,
+            taggedId: feeds[i].taggedId,
+            pageType: feeds[i].pageType,
+            famOrFriends: feeds[i].famOrFriends,
+            relationship: feeds[i].relationship,
+            contents: [
+              Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                      feeds[i].imagesOrVideos != null
-                      ? Column(
-                        children: [
-                          SizedBox(height: 20),
+              feeds[i].imagesOrVideos != null
+              ? Column(
+                children: [
+                  SizedBox(height: 20),
 
-                          Container(
-                            child: ((){
-                              if(feeds[i].imagesOrVideos != null){
-                                if(feeds[i].imagesOrVideos.length == 1){
-                                  if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
-                                    return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-                                      betterPlayerConfiguration: BetterPlayerConfiguration(
-                                        controlsConfiguration: BetterPlayerControlsConfiguration(
-                                          showControls: false,
-                                        ),
-                                        aspectRatio: 16 / 9,
-                                      ),
-                                    );
+                  Container(
+                    child: ((){
+                      if(feeds[i].imagesOrVideos != null){
+                        if(feeds[i].imagesOrVideos.length == 1){
+                          if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
+                            return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  showControls: false,
+                                ),
+                                aspectRatio: 16 / 9,
+                              ),
+                            );
+                          }else{
+                            return Container(
+                              child: CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                imageUrl: feeds[i].imagesOrVideos[0],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              ),
+                            );
+                          }
+                        }else if(feeds[i].imagesOrVideos.length == 2){
+                          return StaggeredGridView.countBuilder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            crossAxisCount: 4,
+                            itemCount: 2,
+                            itemBuilder: (BuildContext context, int index) =>  
+                              lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              ),
+                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 4.0,
+                          );
+                        }else{
+                          return StaggeredGridView.countBuilder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            crossAxisCount: 4,
+                            itemCount: 3,
+                            itemBuilder: (BuildContext context, int index) => 
+                            ((){
+                              if(index != 1){
+                                return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                                ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                  betterPlayerConfiguration: BetterPlayerConfiguration(
+                                    controlsConfiguration: BetterPlayerControlsConfiguration(
+                                      showControls: false,
+                                    ),
+                                    aspectRatio: 16 / 9,
+                                  ),
+                                )
+                                : CachedNetworkImage(
+                                  fit: BoxFit.contain,
+                                  imageUrl: feeds[i].imagesOrVideos[index],
+                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                );
+                                
+                              }else{
+                                return ((){
+                                  if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                      return Stack(
+                                        children: [
+                                          BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                                showControls: false,
+                                              ),
+                                              aspectRatio: 16 / 9,
+                                            ),
+                                          ),
+
+                                          Container(color: Colors.black.withOpacity(0.5),),
+
+                                          Center(
+                                            child: CircleAvatar(
+                                              radius: 25,
+                                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                              child: Text(
+                                                '${feeds[i].imagesOrVideos.length - 3}',
+                                                style: TextStyle(
+                                                  fontSize: 40,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xffffffff),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }else{
+                                      return Stack(
+                                        children: [
+                                          CachedNetworkImage(
+                                            fit: BoxFit.fill,
+                                            imageUrl: feeds[i].imagesOrVideos[index],
+                                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                          ),
+
+                                          Container(color: Colors.black.withOpacity(0.5),),
+
+                                          Center(
+                                            child: CircleAvatar(
+                                              radius: 25,
+                                              backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                              child: Text(
+                                                '${feeds[i].imagesOrVideos.length - 3}',
+                                                style: TextStyle(
+                                                  fontSize: 40,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xffffffff),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    }
                                   }else{
-                                    return Container(
-                                      child: CachedNetworkImage(
-                                        fit: BoxFit.contain,
-                                        imageUrl: feeds[i].imagesOrVideos[0],
-                                        placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                        errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                      ),
-                                    );
-                                  }
-                                }else if(feeds[i].imagesOrVideos.length == 2){
-                                  return StaggeredGridView.countBuilder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    crossAxisCount: 4,
-                                    itemCount: 2,
-                                    itemBuilder: (BuildContext context, int index) =>  
-                                      lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
-                                      ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                      return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                             showControls: false,
                                           ),
                                           aspectRatio: 16 / 9,
                                         ),
-                                      )
-                                      : CachedNetworkImage(
-                                        fit: BoxFit.contain,
+                                      );
+                                    }else{
+                                      return CachedNetworkImage(
+                                        fit: BoxFit.fill,
                                         imageUrl: feeds[i].imagesOrVideos[index],
                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                      ),
-                                    staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                                    mainAxisSpacing: 4.0,
-                                    crossAxisSpacing: 4.0,
-                                  );
-                                }else{
-                                  return StaggeredGridView.countBuilder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    crossAxisCount: 4,
-                                    itemCount: 3,
-                                    itemBuilder: (BuildContext context, int index) => 
-                                    ((){
-                                      if(index != 1){
-                                        return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
-                                        ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
-                                            aspectRatio: 16 / 9,
-                                          ),
-                                        )
-                                        : CachedNetworkImage(
-                                          fit: BoxFit.contain,
-                                          imageUrl: feeds[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                        );
-                                        
-                                      }else{
-                                        return ((){
-                                          if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                            if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
-                                              return Stack(
-                                                children: [
-                                                  BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                      controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                        showControls: false,
-                                                      ),
-                                                      aspectRatio: 16 / 9,
-                                                    ),
-                                                  ),
-
-                                                  Container(color: Colors.black.withOpacity(0.5),),
-
-                                                  Center(
-                                                    child: CircleAvatar(
-                                                      radius: 25,
-                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text(
-                                                        '${feeds[i].imagesOrVideos.length - 3}',
-                                                        style: TextStyle(
-                                                          fontSize: 40,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Color(0xffffffff),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            }else{
-                                              return Stack(
-                                                children: [
-                                                  CachedNetworkImage(
-                                                    fit: BoxFit.fill,
-                                                    imageUrl: feeds[i].imagesOrVideos[index],
-                                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                                  ),
-
-                                                  Container(color: Colors.black.withOpacity(0.5),),
-
-                                                  Center(
-                                                    child: CircleAvatar(
-                                                      radius: 25,
-                                                      backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                      child: Text(
-                                                        '${feeds[i].imagesOrVideos.length - 3}',
-                                                        style: TextStyle(
-                                                          fontSize: 40,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Color(0xffffffff),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            }
-                                          }else{
-                                            if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
-                                              return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-                                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                    showControls: false,
-                                                  ),
-                                                  aspectRatio: 16 / 9,
-                                                ),
-                                              );
-                                            }else{
-                                              return CachedNetworkImage(
-                                                fit: BoxFit.fill,
-                                                imageUrl: feeds[i].imagesOrVideos[index],
-                                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                              );
-                                            }
-                                          }
-                                        }());
-                                      }
-                                    }()),
-                                    staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                                    mainAxisSpacing: 4.0,
-                                    crossAxisSpacing: 4.0,
-                                  );
-                                }
-                              }else{
-                                return Container(height: 0,);
+                                      );
+                                    }
+                                  }
+                                }());
                               }
                             }()),
-                          ),
-                        ],
-                      )
-                      : Container(height: 0),
-                    ],
-                  );
-                },
-                separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
-                itemCount: feeds.length,
-              ),
-            )
-            : SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                            staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                            mainAxisSpacing: 4.0,
+                            crossAxisSpacing: 4.0,
+                          );
+                        }
+                      }else{
+                        return Container(height: 0,);
+                      }
+                    }()),
+                  ),
+                ],
+              )
+              : Container(height: 0),
+            ],
+          );
+        },
+        separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
+        itemCount: feeds.length,
+      ),
+    )
+    : SingleChildScrollView(
+      physics: ClampingScrollPhysics(),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-                    SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
 
-                    Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                    SizedBox(height: 45,),
+            SizedBox(height: 45,),
 
-                    Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-                    SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
-                  ],
-                ),
-              ),
-            ),
-          ),
+            SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+          ],
         ),
-
-        isGuestLoggedIn
-        ? BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: MiscRegularLoginToContinue(),
-        )
-        : Container(height: 0,),
-
-      ],
+      ),
     );
   }
 
   searchSuggestedExtended(){
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IgnorePointer(
-          ignoring: isGuestLoggedIn,
-          child: Container(
-            child: tabCount2 != 0
-            ? SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(
-                color: Color(0xffffffff),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-              footer: CustomFooter(
-                loadStyle: LoadStyle.ShowWhenLoading,
-                builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
-                  if(mode == LoadStatus.loading){
-                    body = CircularProgressIndicator();
-                  }
-                  return Center(child: body);
-                },
-              ),
-              controller: refreshController,
-              onRefresh: onRefresh,
-              onLoading: onLoading2,
-              child: ListView.separated(
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (c, i) {
-                  return MiscRegularManageMemorialTab(
-                    index: i,
-                    memorialName: suggested[i].memorialName,
-                    description: suggested[i].memorialDescription,
-                    image: suggested[i].image,
-                    memorialId: suggested[i].memorialId,
-                    managed: suggested[i].managed,
-                    follower: suggested[i].follower,
-                    pageType: suggested[i].pageType,
-                    relationship: suggested[i].relationship,
-                  );
-                },
-                separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-                itemCount: suggested.length,
-              ),
-            )
-            : SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+    return tabCount2 != 0
+    ? SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: true,
+      header: MaterialClassicHeader(
+        color: Color(0xffffffff),
+        backgroundColor: Color(0xff4EC9D4),
+      ),
+      footer: CustomFooter(
+        loadStyle: LoadStyle.ShowWhenLoading,
+        builder: (BuildContext context, LoadStatus mode){
+          Widget body;
+          if(mode == LoadStatus.loading){
+            body = CircularProgressIndicator();
+          }
+          return Center(child: body);
+        },
+      ),
+      controller: refreshController,
+      onRefresh: onRefresh,
+      onLoading: onLoading2,
+      child: ListView.separated(
+        physics: ClampingScrollPhysics(),
+        itemBuilder: (c, i) {
+          return MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: suggested[i].memorialName,
+            description: suggested[i].memorialDescription,
+            image: suggested[i].image,
+            memorialId: suggested[i].memorialId,
+            managed: suggested[i].managed,
+            follower: suggested[i].follower,
+            pageType: suggested[i].pageType,
+            relationship: suggested[i].relationship,
+          );
+        },
+        separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
+        itemCount: suggested.length,
+      ),
+    )
+    : SingleChildScrollView(
+      physics: ClampingScrollPhysics(),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-                    SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
 
-                    Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                    SizedBox(height: 45,),
+            SizedBox(height: 45,),
 
-                    Text('Suggested is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            Text('Suggested is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-                    SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
-                  ],
-                ),
-              ),
-            ),
-          ),
+            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+          ],
         ),
-
-        isGuestLoggedIn
-        ? BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: MiscRegularLoginToContinue(),
-        )
-        : Container(height: 0,),
-
-      ],
+      ),
     );
   }
 
   searchNearbyExtended(){
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IgnorePointer(
-          ignoring: isGuestLoggedIn,
-          child: Container(
-            child: tabCount3 != 0
-            ? SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(
-                color: Color(0xffffffff),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-              footer: CustomFooter(
-                loadStyle: LoadStyle.ShowWhenLoading,
-                builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
-                  if(mode == LoadStatus.loading){
-                    body = CircularProgressIndicator();
-                  }
-                  return Center(child: body);
-                },
-              ),
-              controller: refreshController,
-              onRefresh: onRefresh,
-              onLoading: onLoading3,
-              child: ListView.separated(
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (c, i) {
-                  return MiscRegularManageMemorialTab(
-                    index: i,
-                    memorialName: nearby[i].memorialName,
-                    description: nearby[i].memorialDescription,
-                    image: nearby[i].image,
-                    memorialId: nearby[i].memorialId,
-                    managed: nearby[i].managed,
-                    follower: nearby[i].follower,
-                    pageType: nearby[i].pageType,
-                    relationship: nearby[i].relationship,
-                  );
-                },
-                separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-                itemCount: nearby.length,
-              ),
-            )
-            : SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+    return tabCount3 != 0
+    ? SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: true,
+      header: MaterialClassicHeader(
+        color: Color(0xffffffff),
+        backgroundColor: Color(0xff4EC9D4),
+      ),
+      footer: CustomFooter(
+        loadStyle: LoadStyle.ShowWhenLoading,
+        builder: (BuildContext context, LoadStatus mode){
+          Widget body;
+          if(mode == LoadStatus.loading){
+            body = CircularProgressIndicator();
+          }
+          return Center(child: body);
+        },
+      ),
+      controller: refreshController,
+      onRefresh: onRefresh,
+      onLoading: onLoading3,
+      child: ListView.separated(
+        physics: ClampingScrollPhysics(),
+        itemBuilder: (c, i) {
+          return MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: nearby[i].memorialName,
+            description: nearby[i].memorialDescription,
+            image: nearby[i].image,
+            memorialId: nearby[i].memorialId,
+            managed: nearby[i].managed,
+            follower: nearby[i].follower,
+            pageType: nearby[i].pageType,
+            relationship: nearby[i].relationship,
+          );
+        },
+        separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
+        itemCount: nearby.length,
+      ),
+    )
+    : SingleChildScrollView(
+      physics: ClampingScrollPhysics(),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-                    SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
 
-                    Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                    SizedBox(height: 45,),
+            SizedBox(height: 45,),
 
-                    Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-                    SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
-                  ],
-                ),
-              ),
-            ),
-          ),
+            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+          ],
         ),
-
-        isGuestLoggedIn
-        ? BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: MiscRegularLoginToContinue(),
-        )
-        : Container(height: 0,),
-        
-      ],
+      ),
     );
   }
 
   searchBLMExtended(){
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        IgnorePointer(
-          ignoring: isGuestLoggedIn,
-          child: Container(
-            child: tabCount4 != 0
-            ? SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(
-                color: Color(0xffffffff),
-                backgroundColor: Color(0xff4EC9D4),
-              ),
-              footer: CustomFooter(
-                loadStyle: LoadStyle.ShowWhenLoading,
-                builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
-                  if(mode == LoadStatus.loading){
-                    body = CircularProgressIndicator();
-                  }
-                  return Center(child: body);
-                },
-              ),
-              controller: refreshController,
-              onRefresh: onRefresh,
-              onLoading: onLoading4,
-              child: ListView.separated(
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (c, i) {
-                  return MiscRegularManageMemorialTab(
-                    index: i,
-                    memorialName: blm[i].memorialName,
-                    description: blm[i].memorialDescription,
-                    image: blm[i].image,
-                    memorialId: blm[i].memorialId,
-                    managed: blm[i].managed,
-                    follower: blm[i].follower,
-                    pageType: blm[i].pageType,
-                    relationship: blm[i].relationship,
-                  );
-                },
-                separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-                itemCount: blm.length,
-              ),
-            )
-            : SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+    return tabCount4 != 0
+    ? SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: true,
+      header: MaterialClassicHeader(
+        color: Color(0xffffffff),
+        backgroundColor: Color(0xff4EC9D4),
+      ),
+      footer: CustomFooter(
+        loadStyle: LoadStyle.ShowWhenLoading,
+        builder: (BuildContext context, LoadStatus mode){
+          Widget body;
+          if(mode == LoadStatus.loading){
+            body = CircularProgressIndicator();
+          }
+          return Center(child: body);
+        },
+      ),
+      controller: refreshController,
+      onRefresh: onRefresh,
+      onLoading: onLoading4,
+      child: ListView.separated(
+        physics: ClampingScrollPhysics(),
+        itemBuilder: (c, i) {
+          return MiscRegularManageMemorialTab(
+            index: i,
+            memorialName: blm[i].memorialName,
+            description: blm[i].memorialDescription,
+            image: blm[i].image,
+            memorialId: blm[i].memorialId,
+            managed: blm[i].managed,
+            follower: blm[i].follower,
+            pageType: blm[i].pageType,
+            relationship: blm[i].relationship,
+          );
+        },
+        separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
+        itemCount: blm.length,
+      ),
+    )
+    : SingleChildScrollView(
+      physics: ClampingScrollPhysics(),
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-                    SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
 
-                    Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
+            Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
-                    SizedBox(height: 45,),
+            SizedBox(height: 45,),
 
-                    Text('BLM is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
+            Text('BLM is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-                    SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
-                  ],
-                ),
-              ),
-            ),
-          ),
+            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+          ],
         ),
-
-        isGuestLoggedIn
-        ? BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: MiscRegularLoginToContinue(),
-        )
-        : Container(height: 0,),
-
-      ],
+      ),
     );
   }
 }

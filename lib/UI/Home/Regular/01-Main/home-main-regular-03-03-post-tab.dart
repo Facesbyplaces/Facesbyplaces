@@ -146,7 +146,6 @@ class HomeRegularPostTabState extends State<HomeRegularPostTab>{
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight - 85 - kToolbarHeight,
       width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(

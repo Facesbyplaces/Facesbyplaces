@@ -9,6 +9,7 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-informat
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';
 import 'home-main-blm-03-03-post-tab.dart';
@@ -115,7 +117,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
     unreadNotifications = 0;
     getUnreadNotifications();
     toggleBottom = newToggleBottom;
-    // bottomTab = [true, false, false, false];
     bottomTab = toggleBottom ==  0 ? [true, false, false, false] : [false, true, false, false];
     drawerSettings = getDrawerInformation();
   }
@@ -186,16 +187,20 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
               ),
             ],
           ),
-          body: Container(
-            decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background2.png'), colorFilter: ColorFilter.srgbToLinearGamma(),),),
-            child: ((){
-              switch(toggleBottom){
-                case 0: return HomeBLMFeedTab(); break;
-                case 1: return HomeBLMManageTab(); break;
-                case 2: return HomeBLMPostTab(); break;
-                case 3: return HomeBLMNotificationsTab(); break;
-              }
-            }()),
+          body: Stack(
+            children: [
+
+              SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
+
+              ((){
+                switch(toggleBottom){
+                  case 0: return HomeBLMFeedTab(); break;
+                  case 1: return HomeBLMManageTab(); break;
+                  case 2: return HomeBLMPostTab(); break;
+                  case 3: return HomeBLMNotificationsTab(); break;
+                }
+              }()),
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Color(0xffffffff),
@@ -205,7 +210,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
             child: Icon(Icons.qr_code, color: Color(0xff4EC9D4),),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomSheet: SingleChildScrollView(
+          bottomNavigationBar: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
               height: 65,
@@ -479,7 +484,23 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             SizedBox(height: 25),
 
                             GestureDetector(
-                              onTap: (){
+                              onTap: () async{
+                                final sharedPrefs = await SharedPreferences.getInstance();
+
+                                sharedPrefs.remove('blm-user-id');
+                                sharedPrefs.remove('blm-access-token');
+                                sharedPrefs.remove('blm-uid');
+                                sharedPrefs.remove('blm-client');
+                                sharedPrefs.remove('blm-user-session');
+
+                                sharedPrefs.remove('regular-user-id');
+                                sharedPrefs.remove('regular-access-token');
+                                sharedPrefs.remove('regular-uid');
+                                sharedPrefs.remove('regular-client');
+                                sharedPrefs.remove('regular-user-session');
+
+                                sharedPrefs.remove('user-guest-session');
+
                                 Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                                 Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                               },

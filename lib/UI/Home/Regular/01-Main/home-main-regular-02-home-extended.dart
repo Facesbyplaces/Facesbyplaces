@@ -14,6 +14,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-regular-03-01-feed-tab.dart';
 import 'home-main-regular-03-02-memorial-list-tab.dart';
 import 'home-main-regular-03-03-post-tab.dart';
@@ -484,7 +485,23 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             SizedBox(height: 25,),
 
                             GestureDetector(
-                              onTap: (){
+                              onTap: () async{
+                                final sharedPrefs = await SharedPreferences.getInstance();
+
+                                sharedPrefs.remove('blm-user-id');
+                                sharedPrefs.remove('blm-access-token');
+                                sharedPrefs.remove('blm-uid');
+                                sharedPrefs.remove('blm-client');
+                                sharedPrefs.remove('blm-user-session');
+
+                                sharedPrefs.remove('regular-user-id');
+                                sharedPrefs.remove('regular-access-token');
+                                sharedPrefs.remove('regular-uid');
+                                sharedPrefs.remove('regular-client');
+                                sharedPrefs.remove('regular-user-session');
+
+                                sharedPrefs.remove('user-guest-session');
+
                                 Route newRoute = MaterialPageRoute(builder: (BuildContext context) => UIGetStarted());
                                 Navigator.pushAndRemoveUntil(context, newRoute, (route) => false);
                               },

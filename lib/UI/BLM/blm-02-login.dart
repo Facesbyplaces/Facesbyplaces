@@ -7,6 +7,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -493,7 +494,9 @@ class BLMLoginState extends State<BLMLogin>{
                       SizedBox(height: 10),
 
                       GestureDetector(
-                        onTap: (){
+                        onTap: () async{
+                          final sharedPrefs = await SharedPreferences.getInstance();
+                          sharedPrefs.setBool('user-guest-session', true);
                           Navigator.pushReplacementNamed(context, '/home/blm');
                         },
                         child: Text('Sign in as Guest',
