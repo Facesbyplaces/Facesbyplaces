@@ -35,9 +35,20 @@ export default function ViewMemorial() {
             width: "200px",
             backgroundColor: "#f3f6f9",
             opacity: "1",
+            margin: "auto",
           }}
         >
-          <img src={iOV} alt="image" />
+          <img
+            src={iOV}
+            alt="image"
+            style={{
+              height: "200px",
+              width: "200px",
+              backgroundColor: "#f3f6f9",
+              opacity: "1",
+              margin: "auto",
+            }}
+          />
         </div>
       </div>
     );
