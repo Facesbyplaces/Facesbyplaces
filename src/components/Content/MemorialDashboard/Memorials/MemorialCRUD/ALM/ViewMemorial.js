@@ -31,8 +31,8 @@ export default function ViewMemorial() {
         <div
           className="symbol symbol-lg-75"
           style={{
-            maxHeight: "200px",
-            maxWidth: "200px",
+            height: "200px",
+            width: "200px",
             backgroundColor: "#f3f6f9",
             opacity: "1",
             margin: "auto",

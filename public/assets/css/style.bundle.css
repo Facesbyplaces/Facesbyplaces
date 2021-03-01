@@ -76012,8 +76012,8 @@ code {
   }
   .symbol.symbol-lg-75 > img {
     width: 100%;
-    max-width: 75px;
-    height: 75px;
+    max-width: 200px;
+    height: 200px;
   }
   .symbol.symbol-lg-75 .symbol-label {
     width: 75px;
