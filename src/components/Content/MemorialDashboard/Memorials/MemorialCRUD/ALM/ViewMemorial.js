@@ -31,8 +31,8 @@ export default function ViewMemorial() {
         <div
           className="symbol symbol-lg-75"
           style={{
-            height: "200px",
-            width: "200px",
+            maxHeight: "200px",
+            maxWidth: "200px",
             backgroundColor: "#f3f6f9",
             opacity: "1",
             margin: "auto",
@@ -42,10 +42,8 @@ export default function ViewMemorial() {
             src={iOV}
             alt="image"
             style={{
-              height: "auto",
-              width: "100%",
+              height: "100%",
               backgroundColor: "#f3f6f9",
-              backgroundSize: "contain",
               margin: "auto",
             }}
           />
