@@ -2,9 +2,9 @@ import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-reg
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-dropdown.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -87,7 +87,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
     setState(() {
       isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? true;
     });
-    print('The value of guest login in ALM memorial is $isGuestLoggedIn');
   }
 
   void onRefresh() async{
@@ -195,7 +194,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-
   void initState(){
     super.initState();
     isGuestLoggedIn = false;
@@ -210,7 +208,6 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
     onLoading();
     showProfile = getProfileInformation(memorialId);
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/UI/Home/Regular/01-Main/home-main-regular-02-home-extended.dart';
-import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-08-memorial-settings-with-hidden.dart';
 import 'package:facesbyplaces/UI/Home/Regular/08-Settings-Memorial/home-settings-memorial-regular-01-memorial-settings.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-03-show-switch-status.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';

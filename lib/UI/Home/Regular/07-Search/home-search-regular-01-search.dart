@@ -48,11 +48,7 @@ class HomeRegularSearch extends StatelessWidget{
                         }
                       }
 
-
-
                       Location.PermissionStatus permissionGranted = await location.hasPermission();
-
-                      print('The permission is $permissionGranted');
 
                       if (permissionGranted != Location.PermissionStatus.granted) {
                         await showDialog(
@@ -69,19 +65,11 @@ class HomeRegularSearch extends StatelessWidget{
                             buttonOkColor: Colors.green,
                             onOkButtonPressed: () async{
                               permissionGranted = await location.requestPermission();
-                              // Navigator.pop(context, true);
-
 
                               context.showLoaderOverlay();
                               Location.LocationData locationData = await location.getLocation();
                               List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
                               context.hideLoaderOverlay();
-
-
-
-                              print('The current location in ALM is ${placemarks[0].name}');
-                              print('The current latitude in ALM is ${locationData.latitude}');
-                              print('The current longitude in ALM is ${locationData.longitude}');
 
                               Navigator.pop(context);
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
@@ -96,12 +84,6 @@ class HomeRegularSearch extends StatelessWidget{
                         Location.LocationData locationData = await location.getLocation();
                         List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
                         context.hideLoaderOverlay();
-
-
-
-                        print('The current location in ALM is ${placemarks[0].name}');
-                        print('The current latitude in ALM is ${locationData.latitude}');
-                        print('The current longitude in ALM is ${locationData.longitude}');
 
                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
                       }

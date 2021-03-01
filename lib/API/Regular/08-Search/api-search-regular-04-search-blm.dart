@@ -19,7 +19,6 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({String keywords, in
   );
 
   print('The status code of blm in alm is ${response.statusCode}');
-  // print('The status body of blm in alm is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

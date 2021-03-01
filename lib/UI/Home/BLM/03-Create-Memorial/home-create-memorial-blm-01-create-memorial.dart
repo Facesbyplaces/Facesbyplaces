@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -127,9 +127,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       selectableDayPredicate: (date) {
 
                         if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
-                          print('The date is $date');
-                          print('The rip is $rip');
-                          print('True');
                           return true;
                         }else{
                           return false;
@@ -139,8 +136,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         setState(() {
                           dob = DateTime.parse(changed);
                         });
-
-                        print('The value of dob is $dob');
                       },
                     ),
 
@@ -164,9 +159,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                       ),
                       selectableDayPredicate: (date) {
                         if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                          print('The date is $date');
-                          print('The dob is $dob');
-                          print('True');
                           return true;
                         }else{
                           return false;
@@ -176,8 +168,6 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         setState(() {
                           rip = DateTime.parse(changed);
                         });
-
-                        print('The value of rip is $rip');
                       },
                     ),
 

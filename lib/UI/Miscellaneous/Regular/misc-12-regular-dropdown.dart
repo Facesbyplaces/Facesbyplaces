@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Bloc/bloc-03-bloc-regular-misc.dart';
+import 'package:facesbyplaces/Bloc/bloc-02-bloc-regular-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:path_provider/path_provider.dart';
@@ -9,7 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'misc-07-regular-button.dart';
+import 'misc-06-regular-button.dart';
 import 'package:share/share.dart';
 import 'dart:typed_data';
 import 'dart:ui';

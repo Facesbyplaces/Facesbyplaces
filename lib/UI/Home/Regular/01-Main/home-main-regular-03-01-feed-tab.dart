@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-01-home-feed-tab.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-image-display.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-image-display.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';

@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-08-update-page-image.dart';
 import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial-blm-02-show-page-images.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

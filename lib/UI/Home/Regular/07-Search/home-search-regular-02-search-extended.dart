@@ -2,10 +2,10 @@ import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-manage-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-09-regular-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -316,7 +316,6 @@ class HomeRegularPostState extends State<HomeRegularPost>{
     setState(() {
       isGuestLoggedIn = sharedPrefs.getBool('user-guest-session') ?? false;
     });
-    print('The value of guest login is $isGuestLoggedIn');
   }
 
   void initState(){

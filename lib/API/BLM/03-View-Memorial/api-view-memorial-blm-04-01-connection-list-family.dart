@@ -18,9 +18,6 @@ Future<APIBLMConnectionListFamilyMain> apiBLMConnectionListFamily({int memorialI
     }
   );
 
-  print('The status code of connection list family is ${response.statusCode}');
-  print('The status body of connection list family is ${response.body}');
-
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
     return APIBLMConnectionListFamilyMain.fromJson(newValue);

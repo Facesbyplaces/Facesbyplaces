@@ -7,8 +7,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
-import 'misc-04-blm-manage-memorial.dart';
-import 'misc-05-blm-post.dart';
+import 'misc-03-blm-manage-memorial.dart';
+import 'misc-04-blm-post.dart';
 
 class MiscBLMUserProfileDraggableSwitchTabs extends StatefulWidget{
   final int userId;
@@ -36,11 +36,6 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return SlidingUpPanel(
-      onPanelOpened: (){
-        setState(() {
-          print('Opened!');
-        });
-      },
       maxHeight: SizeConfig.screenHeight / 1.5,
       header: Container(
         height: 70,
@@ -60,7 +55,6 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
               onTap: (int number){
                 setState(() {
                   currentIndex = number;
-                  print('The currentIndex is $currentIndex');
                 });
               },
               tabs: [

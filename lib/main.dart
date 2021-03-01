@@ -1,5 +1,3 @@
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
@@ -49,22 +47,8 @@ void main() async{
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
   final regularSession = sharedPrefs.getBool('regular-user-session') ?? false;
 
-  print('The blm session is $blmSession');
-  print('The regular session is $regularSession');
-
   runApp(
-     RefreshConfiguration(
-         headerBuilder: () => WaterDropHeader(),        // Configure the default header indicator. If you have the same header indicator for each page, you need to set this
-         footerBuilder:  () => ClassicFooter(),        // Configure default bottom indicator
-         headerTriggerDistance: 80.0,        // header trigger refresh trigger distance
-        //  springDescription:SpringDescription(stiffness: 170, damping: 16, mass: 1.9),         // custom spring back animate,the props meaning see the flutter api
-         maxOverScrollExtent :100, //The maximum dragging range of the head. Set this property if a rush out of the view area occurs
-         maxUnderScrollExtent:0, // Maximum dragging range at the bottom
-         enableScrollWhenRefreshCompleted: true, //This property is incompatible with PageView and TabBarView. If you need TabBarView to slide left and right, you need to set it to true.
-         enableLoadingWhenFailed : true, //In the case of load failure, users can still trigger more loads by gesture pull-up.
-         hideFooterWhenNotFull: false, // Disable pull-up to load more functionality when Viewport is less than one screen
-         enableBallisticLoad: true, // trigger load more by BallisticScrollActivity
-        child: GlobalLoaderOverlay(
+     GlobalLoaderOverlay(
       useDefaultLoading: false,
       overlayWidget: Container(
         color: Colors.grey,
@@ -97,7 +81,6 @@ void main() async{
           ],
           background: Container(color: Color(0xFFF5F5F5))
         ),
-        // initialRoute: '/start',
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),
@@ -146,10 +129,7 @@ void main() async{
 
         },
       ),
-    ),
-     ),
-
-    
+    ),    
   );
 }
 

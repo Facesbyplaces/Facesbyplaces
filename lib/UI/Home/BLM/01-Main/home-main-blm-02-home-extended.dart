@@ -1,14 +1,14 @@
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
-import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
-import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
+import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
+import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
+import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
+import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
@@ -85,7 +85,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
         if(newValue[4] == 'Blm'){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]),)));
         }else{
-          // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: int.parse(newValue[1]), likeStatus: int.parse(newValue[2]) == 1 ? true : false, numberOfLikes: int.parse(newValue[3]))));
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
         }
       }

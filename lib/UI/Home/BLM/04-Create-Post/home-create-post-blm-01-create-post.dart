@@ -1,15 +1,15 @@
-import 'package:badges/badges.dart';
-import 'package:better_player/better_player.dart';
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-01-create-post.dart';
 import 'package:facesbyplaces/API/BLM/05-Create-Post/api-create-post-blm-02-list-of-managed-pages.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
 
@@ -384,67 +384,6 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                               crossAxisSpacing: 4,
                               mainAxisSpacing: 4,
                               children: List.generate(slideImages.length, (index){
-                                // return lookupMimeType(slideImages[index].path).contains('video') == true
-                                // ? GestureDetector(
-                                //   onDoubleTap: (){
-                                //     setState(() {
-                                //       slideImages.removeAt(index);
-                                //     });
-                                //   },
-                                //   onTap: (){
-                                //     if(videoPlayerController.value.isPlaying){
-                                //       videoPlayerController.pause();
-                                //       print('Paused!');
-                                //     }else{
-                                //       videoPlayerController.play();
-                                //       print('Played!');
-                                //     }
-                                //   },
-                                //   child: Container(
-                                //     child: AspectRatio(
-                                //       aspectRatio: videoPlayerController.value.aspectRatio,
-                                //       child: VideoPlayer(videoPlayerController),
-                                //     ),
-                                //   ),
-                                // )
-                                // : GestureDetector(
-                                //   onDoubleTap: (){
-                                //     setState(() {
-                                //       slideImages.removeAt(index);
-                                //     });
-                                //   },
-                                //   child: Container(
-                                //     width: 80,
-                                //     decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(10),
-                                //       color: Color(0xffcccccc),
-                                //       border: Border.all(color: Color(0xff000000),),
-                                //       image: DecorationImage(
-                                //         fit: BoxFit.cover,
-                                //         image: AssetImage(slideImages[index].path),
-                                //       ),
-                                //     ),
-                                //     child: Stack(
-                                //       children: [
-                                //         Center(
-                                //           child: CircleAvatar(
-                                //             radius: 25,
-                                //             backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                //             child: Text(
-                                //               '$index',
-                                //               style: TextStyle(
-                                //                 fontSize: 40,
-                                //                 fontWeight: FontWeight.bold,
-                                //                 color: Color(0xffffffff),
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   ),
-                                // );
-
                                 return GestureDetector(
                                   onTap: (){
                                     setState(() {

@@ -6,8 +6,8 @@ import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-03-show-switch-status.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-09-blm-message.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';

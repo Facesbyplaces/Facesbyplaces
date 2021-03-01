@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-03-verify-email.dart';
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-verification-code-resend.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-10-verification-code-resend.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';

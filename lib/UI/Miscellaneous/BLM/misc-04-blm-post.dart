@@ -9,7 +9,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/material.dart';
-import 'misc-13-blm-dropdown.dart';
+import 'misc-12-blm-dropdown.dart';
 
 class MiscBLMPost extends StatefulWidget{
   final List<Widget> contents;
@@ -106,7 +106,6 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: userId,)));
       },
       child: Container(
@@ -287,19 +286,14 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
 
                   SizedBox(width: 20),
 
-                  GestureDetector(
-                    onTap: (){
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowCommentsList(postId: postId, userId: userId,)));
-                    },
-                    child: Row(
-                      children: [
-                        Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
+                  Row(
+                    children: [
+                      Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
-                        SizedBox(width: 10),
+                      SizedBox(width: 10),
 
-                        Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
-                      ],
-                    ),
+                      Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                    ],
                   ),
                   Expanded(
                     child: GestureDetector(

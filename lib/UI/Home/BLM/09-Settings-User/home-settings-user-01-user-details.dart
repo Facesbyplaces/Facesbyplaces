@@ -2,8 +2,8 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-informat
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-03-show-other-details-status.dart';
 import 'package:facesbyplaces/API/BLM/10-Settings-User/api-settings-user-blm-12-update-user-profile-picture.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-custom-drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-05-blm-custom-drawings.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/UI/ui-01-get-started.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -36,15 +36,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   Future<APIBLMShowProfileInformation> getProfileInformation() async{
     return await apiBLMShowProfileInformation();
   }
-
-  // Future getProfileImage() async{
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-  //   if(pickedFile != null){
-  //     setState(() {
-  //       profileImage = File(pickedFile.path);
-  //     });
-  //   }
-  // }
 
   Future<bool> getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -95,34 +86,6 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                           badgeContent: Icon(Icons.camera, size: 50,),
                           child: GestureDetector(
                             onTap: () async{
-
-                              // await getProfileImage();
-                              
-                              // context.showLoaderOverlay();
-                              // bool result = await apiBLMUpdateUserProfilePicture(image: profileImage, userId: userId);
-                              // context.hideLoaderOverlay();
-
-                              // if(result != true){
-                              //   await showDialog(
-                              //     context: context,
-                              //     builder: (_) => 
-                              //       AssetGiffyDialog(
-                              //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              //       entryAnimation: EntryAnimation.DEFAULT,
-                              //       description: Text('Something went wrong. Please try again.',
-                              //         textAlign: TextAlign.center,
-                              //         style: TextStyle(),
-                              //       ),
-                              //       onlyOkButton: true,
-                              //       buttonOkColor: Colors.red,
-                              //       onOkButtonPressed: () {
-                              //         Navigator.pop(context, true);
-                              //       },
-                              //     )
-                              //   );
-                              // }
-
                               bool getImage = await getProfileImage();
 
                               if(getImage){

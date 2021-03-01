@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-09-password-change.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:loader_overlay/loader_overlay.dart';

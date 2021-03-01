@@ -1,8 +1,8 @@
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -34,7 +34,6 @@ class RegularCreateMemorialValues{
     this.longitude,
   });
 }
-
 
 class HomeRegularCreateMemorial1 extends StatefulWidget{
 
@@ -120,9 +119,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       selectableDayPredicate: (date) {
 
                         if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
-                          print('The date is $date');
-                          print('The rip is $rip');
-                          print('True');
                           return true;
                         }else{
                           return false;
@@ -132,8 +128,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         setState(() {
                           dob = DateTime.parse(changed);
                         });
-
-                        print('The value of dob is $dob');
                       },
                     ),
 
@@ -157,9 +151,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                       ),
                       selectableDayPredicate: (date) {
                         if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                          print('The date is $date');
-                          print('The dob is $dob');
-                          print('True');
                           return true;
                         }else{
                           return false;
@@ -169,8 +160,6 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                         setState(() {
                           rip = DateTime.parse(changed);
                         });
-
-                        print('The value of rip is $rip');
                       },
                     ),
 

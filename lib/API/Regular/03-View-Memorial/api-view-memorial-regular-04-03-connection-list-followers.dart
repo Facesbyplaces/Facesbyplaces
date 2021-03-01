@@ -9,8 +9,6 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  print('The page id is $memorialId');
-
   final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/followers/index?page=$page',
     headers: <String, String>{
       'Content-Type': 'application/json',
@@ -19,9 +17,6 @@ Future<APIRegularConnectionListFollowersMain> apiRegularConnectionListFollowers(
       'client': getClient,
     },
   );
-
-  print('The status code of connection list followers is ${response.statusCode}');
-  print('The status body of connection list followers is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

@@ -1,5 +1,5 @@
 // import 'package:facesbyplaces/API/Regular/06-Donate/api-donate-regular-01-donate.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:stripe_payment/stripe_payment.dart';

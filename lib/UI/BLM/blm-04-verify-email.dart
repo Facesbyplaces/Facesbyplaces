@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-03-verify-email.dart';
-import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-11-verification-code-resend.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-background.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-10-verification-code-resend.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -39,8 +39,6 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
             children: [
 
               SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
-
-              // ((){ return showMessage ? MiscBLMMessageTemplate() : Container(); }()),
 
               SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
@@ -121,51 +119,51 @@ class BLMVerifyEmailState extends State<BLMVerifyEmail>{
                                 decoration: TextDecoration.underline,
                               ),
                               recognizer: TapGestureRecognizer()
-                                ..onTap = () async{
-                                  context.showLoaderOverlay();
-                                  bool result = await apiBLMVerificationCodeResend();
-                                  context.hideLoaderOverlay();
+                              ..onTap = () async{
+                                context.showLoaderOverlay();
+                                bool result = await apiBLMVerificationCodeResend();
+                                context.hideLoaderOverlay();
 
-                                  if(result == true){
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Another code has been sent to your email address. Please check your inbox.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.green,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }else{
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => 
-                                        AssetGiffyDialog(
-                                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                        entryAnimation: EntryAnimation.DEFAULT,
-                                        description: Text('Something went wrong. Please try again.',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(),
-                                        ),
-                                        onlyOkButton: true,
-                                        buttonOkColor: Colors.red,
-                                        onOkButtonPressed: () {
-                                          Navigator.pop(context, true);
-                                        },
-                                      )
-                                    );
-                                  }
+                                if(result == true){
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Another code has been sent to your email address. Please check your inbox.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.green,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (_) => 
+                                      AssetGiffyDialog(
+                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                      entryAnimation: EntryAnimation.DEFAULT,
+                                      description: Text('Something went wrong. Please try again.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(),
+                                      ),
+                                      onlyOkButton: true,
+                                      buttonOkColor: Colors.red,
+                                      onOkButtonPressed: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    )
+                                  );
                                 }
+                              }
                             ),
                           ],
                         ),

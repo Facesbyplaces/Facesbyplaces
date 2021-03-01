@@ -19,7 +19,6 @@ Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({int page, double lati
   );
 
   print('The status code of nearby in alm is ${response.statusCode}');
-  print('The status body of nearby in alm is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

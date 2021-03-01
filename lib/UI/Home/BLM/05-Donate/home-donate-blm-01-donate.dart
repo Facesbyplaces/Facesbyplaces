@@ -1,5 +1,5 @@
 // import 'package:facesbyplaces/API/BLM/06-Donate/api-donate-blm-01-donate.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
@@ -52,7 +52,6 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
         child: Scaffold(
           backgroundColor: Color(0xff888888),
           body: Padding(
-            // padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
             padding: EdgeInsets.all(20.0),
             child: Container(
               decoration: BoxDecoration(

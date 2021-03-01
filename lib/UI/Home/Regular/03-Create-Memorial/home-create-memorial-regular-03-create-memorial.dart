@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial-regular-01-create-memorial.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-background.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'home-create-memorial-regular-01-create-memorial.dart';
@@ -257,83 +257,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                   height: 45,
                   onPressed: () async{
 
-                    // if(profileImage == null){
-                    //   final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
-                    //   final Uint8List list = bytes.buffer.asUint8List();
-
-                    //   final tempDir = await getTemporaryDirectory();
-                    //   final file = await new File('${tempDir.path}/regular-profile-image.png').create();
-                    //   file.writeAsBytesSync(list);
-
-                    //   setState(() {
-                    //     profileImage = file;
-                    //   });
-                    // }
-
-                    // Location.Location location = new Location.Location();
-
-                    // bool serviceEnabled = await location.serviceEnabled();
-                    // if (!serviceEnabled) {
-                    //   serviceEnabled = await location.requestService();
-                    //   if (!serviceEnabled) {
-                    //     return;
-                    //   }
-                    // }
-
-                    // Location.PermissionStatus permissionGranted = await location.hasPermission();
-                    // if (permissionGranted == Location.PermissionStatus.denied) {
-                    //   permissionGranted = await location.requestPermission();
-                    //   if (permissionGranted != Location.PermissionStatus.granted) {
-                    //     return;
-                    //   }
-                    // }
-
-                    // Location.LocationData locationData = await location.getLocation();
-
-                    // APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
-                    //   almRelationship: newValue.relationship,
-                    //   almBirthPlace: newValue.birthplace,
-                    //   almDob: convertDate(newValue.dob),
-                    //   almRip: convertDate(newValue.rip),
-                    //   almCemetery: newValue.cemetery,
-                    //   almCountry: newValue.country,
-                    //   almMemorialName: newValue.memorialName,
-                    //   almDescription: newValue.description,
-                    //   almBackgroundImage: backgroundImage,
-                    //   almProfileImage: profileImage,
-                    //   almImagesOrVideos: newValue.imagesOrVideos,
-                    //   almLatitude: locationData.latitude.toString(),
-                    //   almLongitude: locationData.longitude.toString()
-                    // );
-
-                    // context.showLoaderOverlay();
-                    // int result = await apiRegularCreateMemorial(memorial: memorial);
-                    // context.hideLoaderOverlay();
-
-                    // if(result != 0){
-                    //   Route newRoute = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: result,));
-                    //   Navigator.pushReplacement(context, newRoute);
-                    // }else{
-                    //   await showDialog(
-                    //     context: context,
-                    //     builder: (_) => 
-                    //       AssetGiffyDialog(
-                    //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    //       entryAnimation: EntryAnimation.DEFAULT,
-                    //       description: Text('Something went wrong. Please try again.',
-                    //         textAlign: TextAlign.center,
-                    //         style: TextStyle(),
-                    //       ),
-                    //       onlyOkButton: true,
-                    //       buttonOkColor: Colors.red,
-                    //       onOkButtonPressed: () {
-                    //         Navigator.pop(context, true);
-                    //       },
-                    //     )
-                    //   );
-                    // }
-
                     Location.Location location = new Location.Location();
 
                     bool serviceEnabled = await location.serviceEnabled();
@@ -348,24 +271,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     Location.PermissionStatus permissionGranted = await location.hasPermission();
 
                     if (permissionGranted != Location.PermissionStatus.granted) {
-                      // await showDialog(
-                      //   context: context,
-                      //   builder: (_) => 
-                      //     AssetGiffyDialog(
-                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      //     title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      //     entryAnimation: EntryAnimation.DEFAULT,
-                      //     description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
-                      //       textAlign: TextAlign.center,
-                      //       style: TextStyle(),
-                      //     ),
-                      //     onlyOkButton: true,
-                      //     buttonOkColor: Colors.red,
-                      //     onOkButtonPressed: () {
-                      //       Navigator.pop(context, true);
-                      //     },
-                      //   )
-                      // );
                       await showDialog(
                         context: context,
                         builder: (_) => 
@@ -403,9 +308,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
 
                       Location.LocationData locationData = await location.getLocation();
 
-                      print('The latitude of the memorial is ${locationData.latitude}');
-                      print('The longitude of the memorial is ${locationData.longitude}');
-
                       APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
                         almRelationship: newValue.relationship,
                         almBirthPlace: newValue.birthplace,
@@ -418,8 +320,6 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         almBackgroundImage: backgroundImage,
                         almProfileImage: profileImage,
                         almImagesOrVideos: newValue.imagesOrVideos,
-                        // almLatitude: locationData.latitude.toString(),
-                        // almLongitude: locationData.longitude.toString()
                         almLatitude: '${locationData.latitude}',
                         almLongitude: '${locationData.longitude}',
                       );

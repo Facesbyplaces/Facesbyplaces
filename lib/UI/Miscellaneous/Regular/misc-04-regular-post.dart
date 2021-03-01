@@ -2,14 +2,14 @@ import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-bl
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'misc-13-regular-dropdown.dart';
+import 'misc-12-regular-dropdown.dart';
 import 'dart:async';
 
 class MiscRegularPost extends StatefulWidget{
@@ -94,7 +94,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
     lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
-
   void initState(){
     super.initState();
     likePost = likeStatus;
@@ -107,7 +106,6 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: postId, likeStatus: likePost, numberOfLikes: likesCount,)));
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId, userId: userId,)));
       },
       child: Container(
@@ -296,20 +294,14 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
 
                   SizedBox(width: 20),
 
-                  GestureDetector(
-                    onTap: (){
-                      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowCommentsList(postId: postId, userId: userId)));
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId, userId: userId,)));
-                    },
-                    child: Row(
-                      children: [
-                        Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
+                  Row(
+                    children: [
+                      Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
 
-                        SizedBox(width: 10),
+                      SizedBox(width: 10),
 
-                        Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
-                      ],
-                    ),
+                      Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                    ],
                   ),
                   Expanded(
                     child: GestureDetector(

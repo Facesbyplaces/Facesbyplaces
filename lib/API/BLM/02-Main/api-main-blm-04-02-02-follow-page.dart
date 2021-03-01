@@ -3,11 +3,6 @@ import 'package:http/http.dart' as http;
 
 Future<bool> apiBLMModifyFollowPage({String pageType, int pageId, bool follow}) async{
 
-  // final sharedPrefs = await SharedPreferences.getInstance();
-  // String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
-  // String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
-  // String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;

@@ -3,8 +3,8 @@ import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-03-show-other-details-status.dart';
 import 'package:facesbyplaces/API/Regular/10-Settings-User/api-settings-user-regular-12-update-user-profile-picture.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-custom-drawings.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-button.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-05-regular-custom-drawings.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'home-settings-user-regular-02-user-update-details.dart';

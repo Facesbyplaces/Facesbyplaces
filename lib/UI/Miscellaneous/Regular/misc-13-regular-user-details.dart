@@ -7,8 +7,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
-import 'misc-04-regular-manage-memorial.dart';
-import 'misc-05-regular-post.dart';
+import 'misc-03-regular-manage-memorial.dart';
+import 'misc-04-regular-post.dart';
 
 class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget{
   final int userId;

@@ -49,8 +49,6 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
           var result = await apiBLMShowOriginalPost(postId: postId);                
           context.hideLoaderOverlay();
 
-          
-
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: result.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorId,)));
         }
       },

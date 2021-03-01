@@ -19,7 +19,6 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({String keywords, int pag
   );
 
   print('The status code of posts in alm is ${response.statusCode}');
-  // print('The status body of posts in alm is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
