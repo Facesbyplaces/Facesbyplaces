@@ -1,21 +1,21 @@
+import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-01-show-original-post.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-02-show-post-comments.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-03-show-comment-replies.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-04-show-comment-or-reply-like-status.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-06-add-comment.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-07-add-reply.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-08-comment-reply-like-or-unlike.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-09-delete-comment.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-10-edit-comment.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-11-delete-reply.dart';
+import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-12-edit-reply.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-original-post.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-02-show-post-comments.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-03-show-comment-replies.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-04-show-comment-or-reply-like-status.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-06-add-comment.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-07-add-reply.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-08-comment-reply-like-or-unlike.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-09-delete-comment.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-10-edit-comment.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-11-delete-reply.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-12-edit-reply.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-13-blm-dropdown.dart';
+import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-13-regular-dropdown.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -34,7 +34,7 @@ import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'dart:ui';
 
-class BLMOriginalComment{
+class RegularOriginalComment{
   int commentId;
   int postId;
   int userId;
@@ -45,12 +45,12 @@ class BLMOriginalComment{
   dynamic image;
   bool commentLikes;
   int commentNumberOfLikes;
-  List<BLMOriginalReply> listOfReplies;
+  List<RegularOriginalReply> listOfReplies;
 
-  BLMOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.listOfReplies});
+  RegularOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.listOfReplies});
 }
 
-class BLMOriginalReply{
+class RegularOriginalReply{
   int replyId;
   int commentId;
   int userId;
@@ -62,28 +62,28 @@ class BLMOriginalReply{
   bool replyLikes;
   int replyNumberOfLikes;
 
-  BLMOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes});
+  RegularOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes});
 }
 
-class HomeBLMShowOriginalPostComments extends StatefulWidget{
+class HomeRegularShowOriginalPostComments extends StatefulWidget{
   final int postId;
   final int userId;
-  HomeBLMShowOriginalPostComments({this.postId, this.userId});
+  HomeRegularShowOriginalPostComments({this.postId, this.userId});
 
   @override
-  HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState(postId: postId, userId: userId);
+  HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId, userId: userId);
 }
 
-class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPostComments>{
+class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOriginalPostComments>{
   final int postId;
   final int userId;
-  HomeBLMShowOriginalPostCommentsState({this.postId, this.userId});
+  HomeRegularShowOriginalPostCommentsState({this.postId, this.userId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
-  List<BLMOriginalComment> comments;
-  List<BLMOriginalReply> replies;
+  List<RegularOriginalComment> comments;
+  List<RegularOriginalReply> replies;
   int itemRemaining;
   int repliesRemaining;
   int page1;
@@ -99,7 +99,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   String currentUserImage;
   int numberOfLikes;
   int numberOfComments;
-  GlobalKey profileKey = GlobalKey<HomeBLMShowOriginalPostCommentsState>();
+  GlobalKey profileKey = GlobalKey<HomeRegularShowOriginalPostCommentsState>();
   
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -107,13 +107,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   }
 
   void getOriginalPostInformation() async{
-    var originalPostInformation = await apiBLMShowOriginalPost(postId: postId);
-    numberOfLikes = originalPostInformation.blmPost.showOriginalPostNumberOfLikes;
-    numberOfComments = originalPostInformation.blmPost.showOriginalPostNumberOfComments;
+    var originalPostInformation = await apiRegularShowOriginalPost(postId: postId);
+    numberOfLikes = originalPostInformation.almPost.showOriginalPostNumberOfLikes;
+    numberOfComments = originalPostInformation.almPost.showOriginalPostNumberOfComments;
   }
 
   void getProfilePicture() async{
-    var getProfilePicture = await apiBLMShowProfileInformation();
+    var getProfilePicture = await apiRegularShowProfileInformation();
     currentUserImage = getProfilePicture.showProfileInformationImage;
   }
 
@@ -122,48 +122,48 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     if(itemRemaining != 0){
       context.showLoaderOverlay();
       
-      var newValue1 = await apiBLMShowListOfComments(postId: postId, page: page1);
-      itemRemaining = newValue1.blmItemsRemaining;
-      count = count + newValue1.blmCommentsList.length;
+      var newValue1 = await apiRegularShowListOfComments(postId: postId, page: page1);
+      itemRemaining = newValue1.almItemsRemaining;
+      count = count + newValue1.almCommentsList.length;
 
-      for(int i = 0; i < newValue1.blmCommentsList.length; i++){
-        var commentLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.blmCommentsList[i].showListCommentsCommentId);
+      for(int i = 0; i < newValue1.almCommentsList.length; i++){
+        var commentLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Comment', commentableId: newValue1.almCommentsList[i].showListOfCommentsCommentId);
         commentsLikes.add(commentLikeStatus.showCommentOrReplyLikeStatus);
         commentsNumberOfLikes.add(commentLikeStatus.showCommentOrReplyNumberOfLikes);
         
         if(repliesRemaining != 0){
-          var newValue2 = await apiBLMShowListOfReplies(postId: newValue1.blmCommentsList[i].showListCommentsCommentId, page: page2);
+          var newValue2 = await apiRegularShowListOfReplies(postId: newValue1.almCommentsList[i].showListOfCommentsCommentId, page: page2);
 
           List<bool> newRepliesLikes = [];
           List<int> newRepliesNumberOfLikes = [];
           List<int> newReplyId = [];
 
-          for(int j = 0; j < newValue2.blmRepliesList.length; j++){
+          for(int j = 0; j < newValue2.almRepliesList.length; j++){
 
-            var replyLikeStatus = await apiBLMShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.blmRepliesList[j].showListRepliesReplyId);
+            var replyLikeStatus = await apiRegularShowCommentOrReplyLikeStatus(commentableType: 'Reply', commentableId: newValue2.almRepliesList[j].showListOfRepliesReplyId);
             newRepliesLikes.add(replyLikeStatus.showCommentOrReplyLikeStatus);
             newRepliesNumberOfLikes.add(replyLikeStatus.showCommentOrReplyNumberOfLikes);
-            newReplyId.add(newValue2.blmRepliesList[j].showListRepliesReplyId);
+            newReplyId.add(newValue2.almRepliesList[j].showListOfRepliesReplyId);
 
             replies.add(
-              BLMOriginalReply(
-                replyId: newValue2.blmRepliesList[j].showListRepliesReplyId,
-                commentId: newValue2.blmRepliesList[j].showListRepliesCommentId,
-                userId: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserUserId,
-                replyBody: newValue2.blmRepliesList[j].showListRepliesReplyBody,
-                createdAt: newValue2.blmRepliesList[j].showListRepliesCreatedAt,
-                firstName: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserFirstName,
-                lastName: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserLastName,
+              RegularOriginalReply(
+                replyId: newValue2.almRepliesList[j].showListOfRepliesReplyId,
+                commentId: newValue2.almRepliesList[j].showListOfRepliesCommentId,
+                userId: newValue2.almRepliesList[j].showListOfRepliesUser.showListRepliesUserUserId,
+                replyBody: newValue2.almRepliesList[j].showListOfRepliesReplyBody,
+                createdAt: newValue2.almRepliesList[j].showListOfRepliesCreatedAt,
+                firstName: newValue2.almRepliesList[j].showListOfRepliesUser.showListRepliesUserFirstName,
+                lastName: newValue2.almRepliesList[j].showListOfRepliesUser.showListRepliesUserLastName,
                 replyLikes: replyLikeStatus.showCommentOrReplyLikeStatus,
                 replyNumberOfLikes: replyLikeStatus.showCommentOrReplyNumberOfLikes,
-                image: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserImage,
+                image: newValue2.almRepliesList[j].showListOfRepliesUser.showListRepliesUserImage,
               ),
             );
           }
 
           repliesLikes.add(newRepliesLikes);
           repliesNumberOfLikes.add(newRepliesNumberOfLikes);
-          repliesRemaining = newValue2.blmItemsRemaining;
+          repliesRemaining = newValue2.almItemsRemaining;
           page2++;
         }
 
@@ -171,15 +171,15 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         page2 = 1;
         
         comments.add(
-          BLMOriginalComment(
-            commentId: newValue1.blmCommentsList[i].showListCommentsCommentId,
-            postId: newValue1.blmCommentsList[i].showListCommentsPostId,
-            userId: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserUserId,
-            commentBody: newValue1.blmCommentsList[i].showListCommentsCommentBody,
-            createdAt: newValue1.blmCommentsList[i].showListCommentsCreatedAt,
-            firstName: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserFirstName,
-            lastName: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserLastName,
-            image: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserImage,
+          RegularOriginalComment(
+            commentId: newValue1.almCommentsList[i].showListOfCommentsCommentId,
+            postId: newValue1.almCommentsList[i].showListOfCommentsPostId,
+            userId: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserId,
+            commentBody: newValue1.almCommentsList[i].showListOfCommentsCommentBody,
+            createdAt: newValue1.almCommentsList[i].showListOfCommentsCreatedAt,
+            firstName: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserFirstName,
+            lastName: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserLastName,
+            image: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage,
             commentLikes: commentLikeStatus.showCommentOrReplyLikeStatus,
             commentNumberOfLikes: commentLikeStatus.showCommentOrReplyNumberOfLikes,
             listOfReplies: replies
@@ -216,8 +216,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     });
   }
 
-  Future<APIBLMShowOriginalPostMain> getOriginalPost(postId) async{
-    return await apiBLMShowOriginalPost(postId: postId);
+  Future<APIRegularShowOriginalPostMain> getOriginalPost(postId) async{
+    return await apiRegularShowOriginalPost(postId: postId);
   }
 
   void initBranchShare(){
@@ -299,7 +299,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
               },
             ),
             actions: [
-              MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post',),
+              MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post',),
             ],
           ),
           backgroundColor: Color(0xffffffff),
@@ -329,7 +329,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                 controller: _scrollController,
                 slivers: <Widget>[
                   SliverToBoxAdapter(
-                    child: FutureBuilder<APIBLMShowOriginalPostMain>(
+                    child: FutureBuilder<APIRegularShowOriginalPostMain>(
                       future: showOriginalPost,
                       builder: (context, originalPost){
                         if(originalPost.hasData){
@@ -343,38 +343,38 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                   children: [
                                     GestureDetector(
                                       onTap: () async{
-                                        if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                          if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                        if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                          if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                           }else{
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                           }
                                         }else{
-                                          if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                          if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                           }else{
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                           }
                                         }
                                       },
-                                      child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
+                                      child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
                                     ),
                                     Expanded(
                                       child: Container(
                                         padding: EdgeInsets.only(left: 10.0),
                                         child: GestureDetector(
                                           onTap: () async{
-                                            if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                              if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                            if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                              if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                               }else{
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                               }
                                             }else{
-                                              if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                              if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
                                               }else{
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                               }
                                             }
                                           },
@@ -382,7 +382,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             children: [
                                               Expanded(
                                                 child: Align(alignment: Alignment.bottomLeft,
-                                                  child: Text(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageName,
+                                                  child: Text(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageName,
                                                     overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontSize: 16,
@@ -395,7 +395,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                               Expanded(
                                                 child: Align(
                                                   alignment: Alignment.topLeft,
-                                                  child: Text(timeago.format(DateTime.parse(originalPost.data.blmPost.showOriginalPostCreateAt)),
+                                                  child: Text(timeago.format(DateTime.parse(originalPost.data.almPost.showOriginalPostCreateAt)),
                                                     maxLines: 1,
                                                     style: TextStyle(
                                                       fontSize: 14,
@@ -417,22 +417,22 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                               Container(
                                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                 alignment: Alignment.centerLeft, 
-                                child: Text(originalPost.data.blmPost.showOriginalPostBody),
+                                child: Text(originalPost.data.almPost.showOriginalPostBody),
                               ),
 
-                              originalPost.data.blmPost.showOriginalPostImagesOrVideos != null
+                              originalPost.data.almPost.showOriginalPostImagesOrVideos != null
                               ? Column(
                                 children: [
                                   SizedBox(height: 20),
 
                                   Container(
                                     child: ((){
-                                      if(originalPost.data.blmPost.showOriginalPostImagesOrVideos != null){
-                                        if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 1){
-                                          if(lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                      if(originalPost.data.almPost.showOriginalPostImagesOrVideos != null){
+                                        if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length == 1){
+                                          if(lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
                                             return Container(
                                               child: BetterPlayer.network(
-                                                '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                '${originalPost.data.almPost.showOriginalPostImagesOrVideos[0]}',
                                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                                   aspectRatio: 16 / 9,
                                                 ),
@@ -442,13 +442,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             return Container(
                                               child: CachedNetworkImage(
                                                 fit: BoxFit.contain,
-                                                imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[0],
+                                                imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[0],
                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                               ),
                                             );
                                           }
-                                        }else if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 2){
+                                        }else if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length == 2){
                                           return StaggeredGridView.countBuilder(
                                             padding: EdgeInsets.zero,
                                             shrinkWrap: true,
@@ -466,11 +466,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         child: Container(
                                                           child: CarouselSlider(
                                                             items: List.generate(
-                                                              originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                              lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                              originalPost.data.almPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                              lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
                                                               ? Container(
                                                                 child: BetterPlayer.network(
-                                                                  '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                  '${originalPost.data.almPost.showOriginalPostImagesOrVideos[next]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                     ),
@@ -480,7 +480,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               )
                                                               : CachedNetworkImage(
                                                                 fit: BoxFit.cover,
-                                                                imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[next],
                                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
@@ -498,11 +498,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     ],
                                                   );
                                                 },
-                                                child: lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
+                                                child: lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
                                                 ? Container(
                                                   child: Stack(
                                                     children: [
-                                                    BetterPlayer.network('${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                    BetterPlayer.network('${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                           showControls: false
@@ -524,7 +524,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 )
                                                 : CachedNetworkImage(
                                                   fit: BoxFit.cover,
-                                                  imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                  imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                 ),
@@ -554,11 +554,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         child: Container(
                                                           child: CarouselSlider(
                                                             items: List.generate(
-                                                              originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                              lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                              originalPost.data.almPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                              lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
                                                               ? Container(
                                                                 child: BetterPlayer.network(
-                                                                  '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                  '${originalPost.data.almPost.showOriginalPostImagesOrVideos[next]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                     ),
@@ -569,7 +569,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               )
                                                               : CachedNetworkImage(
                                                                 fit: BoxFit.cover,
-                                                                imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[next],
                                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                               ),
@@ -589,12 +589,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 },
                                                 child: ((){
                                                   if(index != 1){
-                                                    return lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
+                                                    return lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
                                                     ? Container(
                                                       child: Stack(
                                                         children: [
                                                           BetterPlayer.network(
-                                                            '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                            '${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false,
@@ -615,21 +615,21 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     )
                                                     : CachedNetworkImage(
                                                       fit: BoxFit.contain,
-                                                      imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                      imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                     );
                                                   }else{
                                                     return ((){
-                                                      if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
-                                                        if(lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                                      if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                        if(lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
                                                           return Stack(
                                                             children: [
                                                               Container(
                                                                 child: Stack(
                                                                   children: [
                                                                     BetterPlayer.network(
-                                                                      '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                      '${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                           showControls: false,
@@ -656,7 +656,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   radius: 25,
                                                                   backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                                   child: Text(
-                                                                    '${originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                    '${originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3}',
                                                                     style: TextStyle(
                                                                       fontSize: 40,
                                                                       fontWeight: FontWeight.bold,
@@ -672,7 +672,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                             children: [
                                                               CachedNetworkImage(
                                                                 fit: BoxFit.contain,
-                                                                imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                                 placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                 errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                               ),
@@ -684,7 +684,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   radius: 25,
                                                                   backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                                   child: Text(
-                                                                    '${originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                    '${originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3}',
                                                                     style: TextStyle(
                                                                       fontSize: 40,
                                                                       fontWeight: FontWeight.bold,
@@ -697,12 +697,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           );
                                                         }
                                                       }else{
-                                                        if(lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                                        if(lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
                                                           return Container(
                                                             child: Stack(
                                                               children: [
                                                                 BetterPlayer.network(
-                                                                  '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                  '${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
@@ -725,7 +725,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         }else{
                                                           return CachedNetworkImage(
                                                             fit: BoxFit.contain,
-                                                            imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                            imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                           );
@@ -753,7 +753,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                               )
                               : Container(color: Colors.red, height: 0,),
 
-                              originalPost.data.blmPost.showOriginalPostPostTagged.length != 0
+                              originalPost.data.almPost.showOriginalPostPostTagged.length != 0
                               ? Column(
                                 children: [
                                   SizedBox(height: 20),
@@ -767,22 +767,22 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                           direction: Axis.vertical,
                                           spacing: 5.0,
                                           children: List.generate(
-                                            originalPost.data.blmPost.showOriginalPostPostTagged.length,
+                                            originalPost.data.almPost.showOriginalPostPostTagged.length,
                                             (index) => GestureDetector(
                                               onTap: (){
-                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId)));
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId)));
                                               },
                                               child: RichText(
                                                 text: TextSpan(
                                                   style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                                   children: <TextSpan>[
-                                                    TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
+                                                    TextSpan(text: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
 
                                                     TextSpan(text: ' '),
 
-                                                    TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
+                                                    TextSpan(text: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
 
-                                                    index < originalPost.data.blmPost.showOriginalPostPostTagged.length - 1
+                                                    index < originalPost.data.almPost.showOriginalPostPostTagged.length - 1
                                                     ? TextSpan(text: ',')
                                                     : TextSpan(text: ''),
                                                   ],
@@ -862,7 +862,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId)));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
                                       },
                                       child: userId == comments[i].userId
                                       ? Text('You',
@@ -890,14 +890,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                               commentsNumberOfLikes[i]--;
                                             });
 
-                                            await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
+                                            await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: false);
                                           }else{
                                             setState(() {
                                               commentsLikes[i] = true;
                                               commentsNumberOfLikes[i]++;
                                             });
 
-                                            await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
+                                            await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Comment', commentableId: comments[i].commentId, likeStatus: true);
                                           }
                                         }, 
                                         icon: commentsLikes[i] == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
@@ -935,7 +935,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 leading: Icon(Icons.delete),
                                                 onTap: () async{  
                                                   context.showLoaderOverlay();
-                                                  await apiBLMDeleteComment(commentId: comments[i].commentId);
+                                                  await apiRegularDeleteComment(commentId: comments[i].commentId);
                                                   context.hideLoaderOverlay();
 
                                                   controller.clear();
@@ -1032,7 +1032,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: (){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
                                                 },
                                                 child: userId == comments[i].listOfReplies[index].userId
                                                 ? Text('You',
@@ -1060,14 +1060,14 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                         repliesNumberOfLikes[i][index]--;                                                      
                                                       });
 
-                                                      await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
+                                                      await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: false);
                                                     }else{
                                                       setState(() {
                                                         repliesLikes[i][index] = true;
                                                         repliesNumberOfLikes[i][index]++;
                                                       });
 
-                                                      await apiBLMLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
+                                                      await apiRegularLikeOrUnlikeCommentReply(commentableType: 'Reply', commentableId: comments[i].listOfReplies[index].replyId, likeStatus: true);
                                                     }
                                                   }, 
                                                   icon: repliesLikes[i][index] == true ? FaIcon(FontAwesomeIcons.peace, color: Colors.red,) : FaIcon(FontAwesomeIcons.peace, color: Colors.grey,),
@@ -1106,7 +1106,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           leading: Icon(Icons.delete),
                                                           onTap: () async{  
                                                             context.showLoaderOverlay();
-                                                            await apiBLMDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
+                                                            await apiRegularDeleteReply(replyId: comments[i].listOfReplies[index].replyId);
                                                             context.hideLoaderOverlay();
 
                                                             controller.clear();
@@ -1279,7 +1279,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
               onTap: () async{
                 if(isComment == true){
                   context.showLoaderOverlay();
-                  await apiBLMAddComment(postId: postId, commentBody: controller.text);
+                  await apiRegularAddComment(postId: postId, commentBody: controller.text);
                   context.hideLoaderOverlay();
 
                   controller.clear();
@@ -1302,7 +1302,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   onLoading();
                 }else{
                   context.showLoaderOverlay();
-                  apiBLMAddReply(commentId: currentCommentId, replyBody: controller.text);
+                  apiRegularAddReply(commentId: currentCommentId, replyBody: controller.text);
                   context.hideLoaderOverlay();
 
                   controller.clear();
@@ -1392,7 +1392,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
               onTap: () async{
                 if(isEdit == true){
                   context.showLoaderOverlay();
-                  await apiBLMEditComment(commentId: editId, commentBody: controller.text);
+                  await apiRegularEditComment(commentId: editId, commentBody: controller.text);
                   context.hideLoaderOverlay();
 
                   controller.clear();
@@ -1415,7 +1415,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                   onLoading();
                 }else{
                   context.showLoaderOverlay();
-                  await apiBLMEditReply(replyId: editId, replyBody: controller.text);
+                  await apiRegularEditReply(replyId: editId, replyBody: controller.text);
                   context.hideLoaderOverlay();
 
                   controller.clear();

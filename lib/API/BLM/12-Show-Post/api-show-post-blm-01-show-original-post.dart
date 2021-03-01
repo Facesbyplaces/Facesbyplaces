@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost({int postId}) async{
+Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({int postId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -20,19 +20,19 @@ Future<APIBLMShowOriginalPostMainMain> apiBLMShowOriginalPost({int postId}) asyn
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
-    return APIBLMShowOriginalPostMainMain.fromJson(newValue);
+    return APIBLMShowOriginalPostMain.fromJson(newValue);
   }else{
     throw Exception('Failed to get the post');
   }
 }
 
-class APIBLMShowOriginalPostMainMain{
+class APIBLMShowOriginalPostMain{
   APIBLMShowOriginalPostExtended blmPost;
   
-  APIBLMShowOriginalPostMainMain({this.blmPost});
+  APIBLMShowOriginalPostMain({this.blmPost});
 
-  factory APIBLMShowOriginalPostMainMain.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMShowOriginalPostMainMain(
+  factory APIBLMShowOriginalPostMain.fromJson(Map<String, dynamic> parsedJson){
+    return APIBLMShowOriginalPostMain(
       blmPost: APIBLMShowOriginalPostExtended.fromJson(parsedJson['post'])
     );
   }

@@ -27,10 +27,10 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
 }
 
 class APIBLMShowListOfComments{
-  int bmlItemsRemaining;
-  List<APIBLMShowListOfCommentsExtended> bmlCommentsList;
+  int blmItemsRemaining;
+  List<APIBLMShowListOfCommentsExtended> blmCommentsList;
 
-  APIBLMShowListOfComments({this.bmlItemsRemaining, this.bmlCommentsList});
+  APIBLMShowListOfComments({this.blmItemsRemaining, this.blmCommentsList});
 
   factory APIBLMShowListOfComments.fromJson(Map<String, dynamic> parsedJson){
 
@@ -38,8 +38,8 @@ class APIBLMShowListOfComments{
     List<APIBLMShowListOfCommentsExtended> commentsList = newList1.map((i) => APIBLMShowListOfCommentsExtended.fromJson(i)).toList();
 
     return APIBLMShowListOfComments(
-      bmlItemsRemaining: parsedJson['itemsremaining'],
-      bmlCommentsList: commentsList,
+      blmItemsRemaining: parsedJson['itemsremaining'],
+      blmCommentsList: commentsList,
     );
   }
 }

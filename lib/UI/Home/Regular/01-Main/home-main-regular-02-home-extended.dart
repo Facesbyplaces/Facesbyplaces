@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-sho
 import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
-import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post.dart';
+import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-01-logout.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-02-show-user-information.dart';
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-03-show-notification-settings.dart';
@@ -84,7 +84,9 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
         if(newValue[4] == 'Blm'){
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]))));
         }else{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: int.parse(newValue[1]), likeStatus: int.parse(newValue[2]) == 1 ? true : false, numberOfLikes: int.parse(newValue[3]))));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPost(postId: int.parse(newValue[1]), likeStatus: int.parse(newValue[2]) == 1 ? true : false, numberOfLikes: int.parse(newValue[3]))));
+          
         }
       }
     }else{
