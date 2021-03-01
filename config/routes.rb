@@ -230,8 +230,10 @@ Rails.application.routes.draw do
         put 'memorials/:id', to: 'admin#updateMemorial'
         # update memorial images
         put 'memorials/image/:id', to: 'admin#updateMemorialImages'
-        # update memorial
+        # update blm
         put 'blm/:id', to: 'admin#updateBlm'
+        # update blm images
+        put 'blm/image/:id', to: 'admin#updateBlmImages'
         # remove memorial
         delete 'memorials/:id/:page', to: 'admin#deleteMemorial'
         # search memorial

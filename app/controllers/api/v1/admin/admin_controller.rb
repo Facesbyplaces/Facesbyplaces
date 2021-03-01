@@ -253,8 +253,7 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
     def updateMemorialImages
         memorial = Memorial.find(params[:id])
-        
-        # check if memorial is updated successfully
+
         if memorial.update(memorial_images_params)
             return render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: "updated images"}
         else
@@ -278,6 +277,16 @@ class Api::V1::Admin::AdminController < ApplicationController
             return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated details"}
         else
             return render json: {error: "#{check} is empty"}
+        end
+    end
+    def updateBlmImages
+        blm = Blm.find(params[:id])
+        
+        # check if memorial is updated successfully
+        if blm.update(blm_images_params)
+            return render json: {blm: BlmSerializer.new( blm ).attributes, status: "updated images"}
+        else
+            return render json: {status: 'Error'}
         end
     end 
 
@@ -366,6 +375,10 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
 
     def memorial_images_params
+        params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
+    end
+
+    def blm_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
     end
 
