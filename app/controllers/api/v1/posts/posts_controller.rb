@@ -139,7 +139,7 @@ class Api::V1::Posts::PostsController < ApplicationController
             pagesId = user().roles.select('id')
 
             pages = pagesId.collect do |page|
-                page = Blm.find(page.id)
+                page = Blm.find(page.id).order(created_at: :desc)
                 ActiveModel::SerializableResource.new(
                     page, 
                     each_serializer: BlmSerializer
@@ -149,7 +149,7 @@ class Api::V1::Posts::PostsController < ApplicationController
             pagesId = user().roles.select('id')
 
             pages = pagesId.collect do |page|
-                page = Memorial.find(page.id)
+                page = Memorial.find(page.id).order(created_at: :desc)
                 ActiveModel::SerializableResource.new(
                     page, 
                     each_serializer: MemorialSerializer
