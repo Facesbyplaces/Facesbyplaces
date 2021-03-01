@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "../../../../../../auxiliary/axios";
 import { SuccessModal } from "../SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
@@ -16,14 +16,40 @@ export default function EditMemorial() {
   const [errors, setErrors] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
 
   // Fetched Data
   const [memorial, setMemorial] = useState([]);
   const [memorialDetails, setMemorialDetails] = useState([]);
-  const [imagesOrVideos, setImagesOrVideos] = useState([]);
-  const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState(false);
   const [pageCreator, setPageCreator] = useState([]);
+
+  // ProfileImage Variables
+  const [
+    profileImageTemporaryDisplay,
+    setProfileImageTemporaryDisplay,
+  ] = useState(null);
+  const [profileImageSelectedFile, setProfileImageSelectedFile] = useState(
+    null
+  );
+  // BackgroundImage Variables
+  const [
+    backgroundImageTemporaryDisplay,
+    setBackgroundImageTemporaryDisplay,
+  ] = useState(null);
+  const [
+    backgroundImageSelectedFile,
+    setBackgroundImageSelectedFile,
+  ] = useState(null);
+  // ImageOrVideos Variables
+  const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState([]);
+  const [imagesOrVideos, setImagesOrVideos] = useState([]);
+  const [
+    imagesOrVideosTemporaryImageDisplay,
+    setImagesOrVideosTemporaryImageDisplay,
+  ] = useState([]);
+  const [
+    imagesOrVideosFilesSelected,
+    setImagesOrVideosFilesSelected,
+  ] = useState(null);
 
   // Form Data
   const [birthPlace, setBirthPlace] = useState("");
@@ -37,25 +63,128 @@ export default function EditMemorial() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
 
-  const fileSelectedHandler = (e) => {
-    setSelectedFile(e.target.files[0]);
-    console.log(e.target.files[0]);
+  // Form Data Images
+  const imageOrVideosSelectedHandler = (e) => {
+    setImagesOrVideosTemporaryImageDisplay(
+      URL.createObjectURL(e.target.files[0])
+    );
+    setImagesOrVideosFilesSelected(e.target.files[0]);
+    console.log("Images Or Videos", imagesOrVideosFilesSelected);
+  };
+  const profileImageSelectedHandler = (e) => {
+    setProfileImageTemporaryDisplay(URL.createObjectURL(e.target.files[0]));
+    setProfileImageSelectedFile(e.target.files[0]);
+    console.log("Profile Image: ", profileImageSelectedFile);
+  };
+  const backgroundImageSelectedHandler = (e) => {
+    setBackgroundImageTemporaryDisplay(URL.createObjectURL(e.target.files[0]));
+    setBackgroundImageSelectedFile(e.target.files[0]);
+    // console.log(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const uploadImage = (memorial) => {
+    console.log("Images or Videos: ", imagesOrVideosFilesSelected);
     const formData = new FormData();
-    formData.append("image", e.target.files[0]);
-    // formData.append("user_id", user.id);
-    // formData.append("account_type", user.account_type);
+    profileImageSelectedFile != null
+      ? formData.append("profileImage", profileImageSelectedFile)
+      : console.log("No Profile Image Uploaded");
+    backgroundImageSelectedFile
+      ? formData.append("backgroundImage", backgroundImageSelectedFile)
+      : console.log("No Background Image Uploaded");
+    imagesOrVideosFilesSelected
+      ? formData.append("imagesOrVideos[]", imagesOrVideosFilesSelected)
+      : console.log("No Images or Videos Uploaded");
+    formData.append("memorial_id", memorial.id);
     console.log("Form Data: ", formData);
     axios
-      .put(`/api/v1/admin/memorials/${memorial.id}`, formData)
+      .put(`/api/v1/admin/memorials/image/${memorial.id}`, formData)
       .then((response) => {
         console.log(response.data);
-        window.location.reload(false);
       })
       .catch((error) => {
-        console.log(error.response);
-        setErrors(error.response);
+        console.log(error.response.data.errors);
+        setErrors(error.response.data.errors);
       });
   };
+
+  const renderedImagesOrVideos = imagesOrVideos.map((iOV) => {
+    return (
+      <div className="image-input image-input-empty image-input-outline pr-3 pb-3">
+        <div
+          className="card card-custom pb-3 card-stretch pr-3"
+          style={{
+            height: "200px",
+            width: "200px",
+            backgroundColor: "#f3f6f9",
+            backgroundImage: imagesOrVideosTemporaryImageDisplay
+              ? `url(${imagesOrVideosTemporaryImageDisplay})`
+              : `url( ${iOV})`,
+            backgroundSize: "cover",
+            opacity: "1",
+          }}
+        >
+          <label
+            className="btn btn-lg btn-icon btn-hover-text-primary"
+            data-action="change"
+            data-toggle="tooltip"
+            title
+            data-original-title="Change avatar"
+            style={{
+              marginTop: "90px",
+              marginRight: "85px",
+            }}
+          >
+            <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+              <svg
+                width="24px"
+                height="24px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+              >
+                {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                <title>Stockholm-icons / Design / Edit</title>
+                <desc>Created with Sketch.</desc>
+                <defs />
+                <g
+                  id="Stockholm-icons-/-Design-/-Edit"
+                  stroke="none"
+                  strokeWidth={1}
+                  fill="none"
+                  fillRule="evenodd"
+                >
+                  <rect id="bound" x={0} y={0} width={24} height={24} />
+                  <path
+                    d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                    id="Path-11"
+                    fill="#000000"
+                    fillRule="nonzero"
+                    transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
+                  />
+                  <rect
+                    id="Rectangle"
+                    fill="#000000"
+                    opacity="0.3"
+                    x={5}
+                    y={20}
+                    width={15}
+                    height={2}
+                    rx={1}
+                  />
+                </g>
+              </svg>
+            </span>
+            <input
+              type="file"
+              accept=".png, .jpg, .jpeg"
+              onChange={imageOrVideosSelectedHandler}
+            />
+          </label>
+        </div>
+      </div>
+    );
+  });
 
   // Form Data Handlers
   const handleBirthPlaceChange = (e) => {
@@ -101,24 +230,6 @@ export default function EditMemorial() {
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
-
-  const renderedImagesOrVideos = imagesOrVideos.map((iOV) => {
-    return (
-      <div className="card card-custom pb-3 card-stretch pr-3">
-        <div
-          className="symbol symbol-lg-75"
-          style={{
-            height: "200px",
-            width: "200px",
-            backgroundColor: "#f3f6f9",
-            opacity: "1",
-          }}
-        >
-          <img src={iOV} alt="image" />
-        </div>
-      </div>
-    );
-  });
 
   useEffect(() => {
     axios
@@ -168,6 +279,7 @@ export default function EditMemorial() {
     console.log("Latitude: ", memorialLatitude);
     console.log("Longitude: ", memorialLongitude);
     setLoading(true);
+
     axios
       .put(`/api/v1/admin/memorials/${memorial.id}`, {
         user_id: pageCreator,
@@ -184,6 +296,7 @@ export default function EditMemorial() {
       })
       .then((response) => {
         console.log(response.data);
+        uploadImage(response.data.memorial);
         setTimeout(() => {
           setLoading(false);
         }, 1000);
@@ -209,12 +322,75 @@ export default function EditMemorial() {
           <>
             {/*begin::Entry*/}
             {/*begin::Hero*/}
+            <div className="image-input image-input-outline image-input-circle">
+              <label
+                className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                data-action="change"
+                data-toggle="tooltip"
+                title
+                data-original-title="Change avatar"
+              >
+                <i className="fa fa-pen icon-sm text-muted" />
+                <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                  <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                  >
+                    Generator: Sketch 50.2 (55047) -
+                    http://www.bohemiancoding.com/sketch
+                    <title>Stockholm-icons / Design / Edit</title>
+                    <desc>Created with Sketch.</desc>
+                    <defs />
+                    <g
+                      id="Stockholm-icons-/-Design-/-Edit"
+                      stroke="none"
+                      strokeWidth={1}
+                      fill="none"
+                      fillRule="evenodd"
+                    >
+                      <rect id="bound" x={0} y={0} width={24} height={24} />
+                      <path
+                        d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                        id="Path-11"
+                        fill="#000000"
+                        fillRule="nonzero"
+                        transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
+                      />
+                      <rect
+                        id="Rectangle"
+                        fill="#000000"
+                        opacity="0.3"
+                        x={5}
+                        y={20}
+                        width={15}
+                        height={2}
+                        rx={1}
+                      />
+                    </g>
+                  </svg>
+                </span>
+
+                <input
+                  type="file"
+                  accept=".png, .jpg, .jpeg"
+                  onChange={backgroundImageSelectedHandler}
+                />
+                <input type="hidden" name="profile_avatar_remove" />
+              </label>
+            </div>
+
             <div
               className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
               style={{
                 backgroundImage: memorial.backgroundImage
                   ? `url( ${memorial.backgroundImage})`
-                  : `url("assets/media/bg/bg-1.jpg")`,
+                  : backgroundImageTemporaryDisplay
+                  ? `url( ${backgroundImageTemporaryDisplay})`
+                  : `url( "assets/media/bg/bg-1.jpg" )`,
                 height: "350px",
               }}
             >
@@ -246,6 +422,8 @@ export default function EditMemorial() {
                               style={{
                                 backgroundImage: memorial.profileImage
                                   ? `url( ${memorial.profileImage})`
+                                  : profileImageTemporaryDisplay
+                                  ? `url( ${profileImageTemporaryDisplay})`
                                   : `url( "assets/media/users/blank.png" )`,
                               }}
                             />
@@ -309,7 +487,7 @@ export default function EditMemorial() {
                               <input
                                 type="file"
                                 accept=".png, .jpg, .jpeg"
-                                // onChange={fileSelectedHandler}
+                                onChange={profileImageSelectedHandler}
                               />
                               <input
                                 type="hidden"
@@ -360,172 +538,91 @@ export default function EditMemorial() {
                             </div>
                             {/*end::Row*/}
                             {/*begin::Row*/}
-                            {imagesOrVideosEmpty ? (
-                              <div className="form-group row pl-4">
+                            <div className="form-group row pl-4">
+                              {renderedImagesOrVideos}
+                              <div className="image-input image-input-empty image-input-outline">
                                 <div
                                   className="card card-custom pb-3 card-stretch pr-3"
                                   style={{
                                     height: "200px",
                                     width: "200px",
                                     backgroundColor: "#f3f6f9",
+                                    backgroundImage: imagesOrVideosTemporaryImageDisplay
+                                      ? `url( ${imagesOrVideosTemporaryImageDisplay})`
+                                      : ``,
+                                    backgroundSize: "cover",
                                     opacity: "1",
                                   }}
                                 >
-                                  {/*begin::User*/}
-                                  <div className="card-body text-center pt-4">
-                                    {/*begin::User*/}
-                                    <div
-                                      className=""
-                                      style={{
-                                        marginTop: "70px",
-                                        marginLeft: "10px",
-                                      }}
-                                    >
-                                      <div className="symbol symbol-lg-75">
-                                        <span className="svg-icon svg-icon-xxl svg-icon-light-secondary ml-3 mr-3">
-                                          <svg
-                                            width="24px"
-                                            height="24px"
-                                            viewBox="0 0 24 24"
-                                            version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                          >
-                                            Generator: Sketch 50.2 (55047) -
-                                            http://www.bohemiancoding.com/sketch
-                                            <title>
-                                              Stockholm-icons / Design / Edit
-                                            </title>
-                                            <desc>Created with Sketch.</desc>
-                                            <defs />
-                                            <g
-                                              id="Stockholm-icons-/-Design-/-Edit"
-                                              stroke="none"
-                                              strokeWidth={1}
-                                              fill="none"
-                                              fillRule="evenodd"
-                                            >
-                                              <rect
-                                                id="bound"
-                                                x={0}
-                                                y={0}
-                                                width={24}
-                                                height={24}
-                                              />
-                                              <path
-                                                d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                                                id="Path-11"
-                                                fill="#000000"
-                                                fillRule="nonzero"
-                                                transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
-                                              />
-                                              <rect
-                                                id="Rectangle"
-                                                fill="#000000"
-                                                opacity="0.3"
-                                                x={5}
-                                                y={20}
-                                                width={15}
-                                                height={2}
-                                                rx={1}
-                                              />
-                                            </g>
-                                          </svg>
-                                        </span>
-                                        {/* <input
-                                          type="file"
-                                          accept=".png, .jpg, .jpeg"
-                                          onChange={fileSelectedHandler}
-                                        /> */}
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*end::User*/}
+                                  <label
+                                    className="btn btn-lg btn-icon btn-hover-text-primary"
+                                    data-action="change"
+                                    data-toggle="tooltip"
+                                    title
+                                    data-original-title="Change avatar"
+                                    style={{
+                                      marginTop: "90px",
+                                      marginRight: "85px",
+                                    }}
+                                  >
+                                    <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                                      <svg
+                                        width="24px"
+                                        height="24px"
+                                        viewBox="0 0 24 24"
+                                        version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                                      >
+                                        {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                                        <title>
+                                          Stockholm-icons / Design / Edit
+                                        </title>
+                                        <desc>Created with Sketch.</desc>
+                                        <defs />
+                                        <g
+                                          id="Stockholm-icons-/-Design-/-Edit"
+                                          stroke="none"
+                                          strokeWidth={1}
+                                          fill="none"
+                                          fillRule="evenodd"
+                                        >
+                                          <rect
+                                            id="bound"
+                                            x={0}
+                                            y={0}
+                                            width={24}
+                                            height={24}
+                                          />
+                                          <path
+                                            d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
+                                            id="Path-11"
+                                            fill="#000000"
+                                            fillRule="nonzero"
+                                            transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
+                                          />
+                                          <rect
+                                            id="Rectangle"
+                                            fill="#000000"
+                                            opacity="0.3"
+                                            x={5}
+                                            y={20}
+                                            width={15}
+                                            height={2}
+                                            rx={1}
+                                          />
+                                        </g>
+                                      </svg>
+                                    </span>
+                                    <input
+                                      type="file"
+                                      accept=".png, .jpg, .jpeg"
+                                      onChange={imageOrVideosSelectedHandler}
+                                    />
+                                  </label>
                                 </div>
                               </div>
-                            ) : (
-                              <div className="form-group row pl-4">
-                                {renderedImagesOrVideos}
-                                {/*begin: Pic*/}
-                                <div
-                                  className="card card-custom pb-3 card-stretch pr-3"
-                                  style={{
-                                    height: "200px",
-                                    width: "200px",
-                                    backgroundColor: "#f3f6f9",
-                                    opacity: "1",
-                                  }}
-                                >
-                                  {/*begin::User*/}
-                                  <div className="card-body text-center pt-4">
-                                    {/*begin::User*/}
-                                    <div
-                                      className=""
-                                      style={{
-                                        marginTop: "70px",
-                                        marginLeft: "10px",
-                                      }}
-                                    >
-                                      <div className="symbol symbol-lg-75">
-                                        <span className="svg-icon svg-icon-xxl svg-icon-light-secondary ml-3 mr-3">
-                                          <svg
-                                            width="24px"
-                                            height="24px"
-                                            viewBox="0 0 24 24"
-                                            version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlnsXlink="http://www.w3.org/1999/xlink"
-                                          >
-                                            Generator: Sketch 50.2 (55047) -
-                                            http://www.bohemiancoding.com/sketch
-                                            <title>
-                                              Stockholm-icons / Design / Edit
-                                            </title>
-                                            <desc>Created with Sketch.</desc>
-                                            <defs />
-                                            <g
-                                              id="Stockholm-icons-/-Design-/-Edit"
-                                              stroke="none"
-                                              strokeWidth={1}
-                                              fill="none"
-                                              fillRule="evenodd"
-                                            >
-                                              <rect
-                                                id="bound"
-                                                x={0}
-                                                y={0}
-                                                width={24}
-                                                height={24}
-                                              />
-                                              <path
-                                                d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                                                id="Path-11"
-                                                fill="#000000"
-                                                fillRule="nonzero"
-                                                transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
-                                              />
-                                              <rect
-                                                id="Rectangle"
-                                                fill="#000000"
-                                                opacity="0.3"
-                                                x={5}
-                                                y={20}
-                                                width={15}
-                                                height={2}
-                                                rx={1}
-                                              />
-                                            </g>
-                                          </svg>
-                                        </span>
-                                      </div>
-                                    </div>
-                                    {/* <img src="assets/media/bg/bg-1.jpg" alt="image" /> */}
-                                  </div>
-                                  {/*end::User*/}
-                                </div>
-                                {/*end::Pic*/}
-                              </div>
-                            )}
+                            </div>
                             {/*end::Group*/}
                             <div className="separator separator-solid my-10" />
                             {/*begin::Row*/}
