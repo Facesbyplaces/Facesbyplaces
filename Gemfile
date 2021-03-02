@@ -65,4 +65,5 @@ gem 'pg', '~> 0.18.4'
 gem 'haml', git: 'https://github.com/haml/haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'fcm', '~> 0.0.6'
       
