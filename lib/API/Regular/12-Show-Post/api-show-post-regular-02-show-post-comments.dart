@@ -69,8 +69,9 @@ class APIRegularShowListOfCommentsExtendedUser{
   String showListOfCommentsUserFirstName;
   String showListOfCommentsUserLastName;
   dynamic showListOfCommentsUserImage;
+  int showListOfCommentsUserAccountType;
 
-  APIRegularShowListOfCommentsExtendedUser({this.showListOfCommentsUserId, this.showListOfCommentsUserFirstName, this.showListOfCommentsUserLastName, this.showListOfCommentsUserImage});
+  APIRegularShowListOfCommentsExtendedUser({this.showListOfCommentsUserId, this.showListOfCommentsUserFirstName, this.showListOfCommentsUserLastName, this.showListOfCommentsUserImage, this.showListOfCommentsUserAccountType});
 
   factory APIRegularShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfCommentsExtendedUser(
@@ -78,6 +79,7 @@ class APIRegularShowListOfCommentsExtendedUser{
       showListOfCommentsUserFirstName: parsedJson['first_name'],
       showListOfCommentsUserLastName: parsedJson['last_name'],
       showListOfCommentsUserImage: parsedJson['image'],
+      showListOfCommentsUserAccountType: parsedJson['account_type'],
     );
   }
 }

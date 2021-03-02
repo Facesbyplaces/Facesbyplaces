@@ -10,23 +10,26 @@ import 'dart:ui';
 
 class HomeBLMUserProfile extends StatefulWidget{
   final int userId;
-  HomeBLMUserProfile({this.userId});
+  final int accountType;
+  HomeBLMUserProfile({this.userId, this.accountType});
 
-  HomeBLMUserProfileState createState() => HomeBLMUserProfileState(userId: userId);
+  HomeBLMUserProfileState createState() => HomeBLMUserProfileState(userId: userId, accountType: accountType);
 }
 
 class HomeBLMUserProfileState extends State<HomeBLMUserProfile>{
   final int userId;
-  HomeBLMUserProfileState({this.userId});
+  final int accountType;
+  HomeBLMUserProfileState({this.userId, this.accountType});
 
   Future<APIBLMShowUserInformation> showProfile;
 
   Future<APIBLMShowUserInformation> getProfileInformation() async{
-    return await apiBLMShowUserInformation(userId: userId);
+    return await apiBLMShowUserInformation(userId: userId, accountType: accountType);
   }
 
   void initState(){
     super.initState();
+    // print('The userId is $userId');
     showProfile = getProfileInformation();
   }
 

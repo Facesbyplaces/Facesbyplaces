@@ -10,19 +10,21 @@ import 'dart:ui';
 
 class HomeRegularUserProfile extends StatefulWidget{
   final int userId;
-  HomeRegularUserProfile({this.userId});
+  final int accountType;
+  HomeRegularUserProfile({this.userId, this.accountType});
 
-  HomeRegularUserProfileState createState() => HomeRegularUserProfileState(userId: userId);
+  HomeRegularUserProfileState createState() => HomeRegularUserProfileState(userId: userId, accountType: accountType);
 }
 
 class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   final int userId;
-  HomeRegularUserProfileState({this.userId});
+  final int accountType;
+  HomeRegularUserProfileState({this.userId, this.accountType});
 
   Future<APIRegularShowUserInformation> showProfile;
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
-    return await apiRegularShowUserInformation(userId: userId);
+    return await apiRegularShowUserInformation(userId: userId, accountType: accountType);
   }
 
   void initState(){

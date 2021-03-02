@@ -106,7 +106,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId, userId: userId,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
       },
       child: Container(
         padding: EdgeInsets.only(left: 10.0, right: 10.0,),

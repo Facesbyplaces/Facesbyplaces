@@ -36,8 +36,9 @@ class APIBLMShowProfileInformation{
   String showProfileInformationImage;
   String showProfileInformationEmail;
   bool showProfileInformationGuest;
+  int showProfileInformationAccountType;
 
-  APIBLMShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest});
+  APIBLMShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest, this.showProfileInformationAccountType});
 
   factory APIBLMShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -50,6 +51,7 @@ class APIBLMShowProfileInformation{
       showProfileInformationImage: newValue['image'],
       showProfileInformationEmail: newValue['email'],
       showProfileInformationGuest: newValue['guest'],
+      showProfileInformationAccountType: newValue['account_type'],
     );
   }
 }

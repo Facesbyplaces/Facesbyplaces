@@ -3,14 +3,15 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId}) async{
+Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId, int accountType}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=2',
+  final http.Response response = await http.get(
+    'http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

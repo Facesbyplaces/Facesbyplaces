@@ -149,8 +149,9 @@ class APIRegularShowOriginalPostMainExtendedPageCreator{
   String showOriginalPostPageCreatorEmail;
   String showOriginalPostPageCreatorUserName;
   dynamic showOriginalPostPageCreatorImage;
+  int showOriginalPostPageCreatorAccountType;
 
-  APIRegularShowOriginalPostMainExtendedPageCreator({this.showOriginalPostPageCreatorId, this.showOriginalPostPageCreatorFirstName, this.showOriginalPostPageCreatorLastName, this.showOriginalPostPageCreatorPhoneNumber, this.showOriginalPostPageCreatorEmail, this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage});
+  APIRegularShowOriginalPostMainExtendedPageCreator({this.showOriginalPostPageCreatorId, this.showOriginalPostPageCreatorFirstName, this.showOriginalPostPageCreatorLastName, this.showOriginalPostPageCreatorPhoneNumber, this.showOriginalPostPageCreatorEmail, this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage, this.showOriginalPostPageCreatorAccountType});
 
   factory APIRegularShowOriginalPostMainExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostMainExtendedPageCreator(
@@ -160,7 +161,8 @@ class APIRegularShowOriginalPostMainExtendedPageCreator{
       showOriginalPostPageCreatorPhoneNumber: parsedJson['phone_number'],
       showOriginalPostPageCreatorEmail: parsedJson['email'],
       showOriginalPostPageCreatorUserName: parsedJson['username'],
-      showOriginalPostPageCreatorImage: parsedJson['image']
+      showOriginalPostPageCreatorImage: parsedJson['image'],
+      showOriginalPostPageCreatorAccountType: parsedJson['account_type'],
     );
   }
 }

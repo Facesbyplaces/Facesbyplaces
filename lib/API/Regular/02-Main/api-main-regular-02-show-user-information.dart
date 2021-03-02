@@ -33,8 +33,9 @@ class APIRegularShowProfileInformation{
   String showProfileInformationImage;
   String showProfileInformationEmail;
   bool showProfileInformationGuest;
+  int showProfileInformationAccountType;
 
-  APIRegularShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest});
+  APIRegularShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest, this.showProfileInformationAccountType});
 
   factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -47,6 +48,7 @@ class APIRegularShowProfileInformation{
       showProfileInformationImage: newValue['image'],
       showProfileInformationEmail: newValue['email'],
       showProfileInformationGuest: newValue['guest'],
+      showProfileInformationAccountType: newValue['account_type'],
     );
   }
 }

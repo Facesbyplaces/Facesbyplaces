@@ -106,7 +106,8 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
     SizeConfig.init(context);
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: userId,)));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: userId,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
       },
       child: Container(
         padding: EdgeInsets.only(left: 10.0, right: 10.0,),
@@ -210,42 +211,48 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
             // SizedBox(height: 20,),
 
             numberOfTagged != 0
-            ? Row(
+            ? Column(
               children: [
-                Text('with'),
+                SizedBox(height: 20),
 
-                Container(
-                  child: Wrap(
-                    direction: Axis.vertical,
-                    spacing: 5.0,
-                    children: List.generate(
-                      numberOfTagged,
-                      (index) => GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index])));
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
-                            children: <TextSpan>[
-                              TextSpan(text: taggedFirstName[index],),
+                Row(
+                  children: [
+                    Text('with'),
 
-                              TextSpan(text: ' '),
+                    Container(
+                      child: Wrap(
+                        direction: Axis.vertical,
+                        spacing: 5.0,
+                        children: List.generate(
+                          numberOfTagged,
+                          (index) => GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index])));
+                            },
+                            child: RichText(
+                              text: TextSpan(
+                                style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
+                                children: <TextSpan>[
+                                  TextSpan(text: taggedFirstName[index],),
 
-                              TextSpan(text: taggedLastName[index],),
+                                  TextSpan(text: ' '),
 
-                              index < numberOfTagged - 1
-                              ? TextSpan(text: ',')
-                              : TextSpan(text: ''),
-                            ],
+                                  TextSpan(text: taggedLastName[index],),
+
+                                  index < numberOfTagged - 1
+                                  ? TextSpan(text: ',')
+                                  : TextSpan(text: ''),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       ),
+                      padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
+                      alignment: Alignment.centerLeft,
                     ),
-                  ),
-                  padding: EdgeInsets.only(left: 5.0, right: 5.0,), 
-                  alignment: Alignment.centerLeft,
-                ),
+                  ],
+                )
               ],
             )
             : Container(height: 0,),

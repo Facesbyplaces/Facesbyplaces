@@ -4,6 +4,8 @@ import 'dart:convert';
 
 Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}) async{
 
+  print('The post id is $postId');
+
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
@@ -69,8 +71,9 @@ class APIBLMShowListOfCommentsExtendedUser{
   String showListCommentsUserFirstName;
   String showListCommentsUserLastName;
   dynamic showListCommentsUserImage;
+  int showListCommentsUserAccountType;
 
-  APIBLMShowListOfCommentsExtendedUser({this.showListCommentsUserUserId, this.showListCommentsUserFirstName, this.showListCommentsUserLastName, this.showListCommentsUserImage});
+  APIBLMShowListOfCommentsExtendedUser({this.showListCommentsUserUserId, this.showListCommentsUserFirstName, this.showListCommentsUserLastName, this.showListCommentsUserImage, this.showListCommentsUserAccountType});
 
   factory APIBLMShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfCommentsExtendedUser(
@@ -78,6 +81,7 @@ class APIBLMShowListOfCommentsExtendedUser{
       showListCommentsUserFirstName: parsedJson['first_name'],
       showListCommentsUserLastName: parsedJson['last_name'],
       showListCommentsUserImage: parsedJson['image'],
+      showListCommentsUserAccountType: parsedJson['account_type'],
     );
   }
 }

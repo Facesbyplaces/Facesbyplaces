@@ -3,7 +3,6 @@ import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memoria
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/API/BLM/03-View-Memorial/api-view-memorial-blm-01-show-memorial-details.dart';
-import 'package:facesbyplaces/API/BLM/12-Show-Post/api-show-post-blm-01-show-original-post.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -45,11 +44,7 @@ class MiscBLMNotificationDisplayTemplate extends StatelessWidget{
 
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: postId, pageType: notificationType, newJoin: blmProfile.blmMemorial.memorialFollower,)));
         }else if(notificationType == 'Post'){
-          context.showLoaderOverlay();
-          var result = await apiBLMShowOriginalPost(postId: postId);                
-          context.hideLoaderOverlay();
-
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId, userId: result.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorId,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: postId)));
         }
       },
       leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),

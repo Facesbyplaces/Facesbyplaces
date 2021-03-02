@@ -45,9 +45,10 @@ class RegularOriginalComment{
   dynamic image;
   bool commentLikes;
   int commentNumberOfLikes;
+  int userAccountType;
   List<RegularOriginalReply> listOfReplies;
 
-  RegularOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.listOfReplies});
+  RegularOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.userAccountType, this.listOfReplies});
 }
 
 class RegularOriginalReply{
@@ -61,23 +62,27 @@ class RegularOriginalReply{
   dynamic image;
   bool replyLikes;
   int replyNumberOfLikes;
+  int userAccountType;
 
-  RegularOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes});
+  RegularOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes, this.userAccountType});
 }
 
 class HomeRegularShowOriginalPostComments extends StatefulWidget{
   final int postId;
-  final int userId;
-  HomeRegularShowOriginalPostComments({this.postId, this.userId});
+  // final int userId;
+  // HomeRegularShowOriginalPostComments({this.postId, this.userId});
+  HomeRegularShowOriginalPostComments({this.postId});
 
   @override
-  HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId, userId: userId);
+  // HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId, userId: userId);
+  HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId);
 }
 
 class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOriginalPostComments>{
   final int postId;
-  final int userId;
-  HomeRegularShowOriginalPostCommentsState({this.postId, this.userId});
+  // final int userId;
+  // HomeRegularShowOriginalPostCommentsState({this.postId, this.userId});
+  HomeRegularShowOriginalPostCommentsState({this.postId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
@@ -97,6 +102,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
   List<List<int>> repliesNumberOfLikes;
   int currentCommentId;
   String currentUserImage;
+  int currentUserId;
+  int currentAccountType;
   int numberOfLikes;
   int numberOfComments;
   GlobalKey profileKey = GlobalKey<HomeRegularShowOriginalPostCommentsState>();
@@ -114,7 +121,10 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
   void getProfilePicture() async{
     var getProfilePicture = await apiRegularShowProfileInformation();
+    // currentUserImage = getProfilePicture.showProfileInformationImage;
     currentUserImage = getProfilePicture.showProfileInformationImage;
+    currentUserId = getProfilePicture.showProfileInformationUserId;
+    currentAccountType = getProfilePicture.showProfileInformationAccountType;
   }
 
   void onLoading() async{
@@ -157,6 +167,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                 replyLikes: replyLikeStatus.showCommentOrReplyLikeStatus,
                 replyNumberOfLikes: replyLikeStatus.showCommentOrReplyNumberOfLikes,
                 image: newValue2.almRepliesList[j].showListOfRepliesUser.showListRepliesUserImage,
+                userAccountType: newValue2.almRepliesList[j].showListOfRepliesUser.showListOfCommentsUserAccountType,
               ),
             );
           }
@@ -182,7 +193,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             image: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserImage,
             commentLikes: commentLikeStatus.showCommentOrReplyLikeStatus,
             commentNumberOfLikes: commentLikeStatus.showCommentOrReplyNumberOfLikes,
-            listOfReplies: replies
+            listOfReplies: replies,
+            userAccountType: newValue1.almCommentsList[i].showListOfCommentsUser.showListOfCommentsUserAccountType,
           ),    
         );
         replies = [];
@@ -809,7 +821,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   originalPost.data.almPost.showOriginalPostPostTagged.length,
                                                   (index) => GestureDetector(
                                                     onTap: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
                                                     },
                                                     child: RichText(
                                                       text: TextSpan(
@@ -901,9 +913,9 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                         Expanded(
                                           child: GestureDetector(
                                             onTap: (){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].userId, accountType: comments[i].userAccountType,)));
                                             },
-                                            child: userId == comments[i].userId
+                                            child: currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType
                                             ? Text('You',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -1073,7 +1085,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       onTap: (){
                                                         Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
                                                       },
-                                                      child: userId == comments[i].listOfReplies[index].userId
+                                                      child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
                                                       ? Text('You',
                                                         style: TextStyle(
                                                           fontWeight: FontWeight.bold,

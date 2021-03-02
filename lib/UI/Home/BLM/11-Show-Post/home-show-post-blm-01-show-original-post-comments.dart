@@ -45,9 +45,10 @@ class BLMOriginalComment{
   dynamic image;
   bool commentLikes;
   int commentNumberOfLikes;
+  int userAccountType;
   List<BLMOriginalReply> listOfReplies;
 
-  BLMOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.listOfReplies});
+  BLMOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.userAccountType, this.listOfReplies});
 }
 
 class BLMOriginalReply{
@@ -61,23 +62,27 @@ class BLMOriginalReply{
   dynamic image;
   bool replyLikes;
   int replyNumberOfLikes;
+  int userAccountType;
 
-  BLMOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes});
+  BLMOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes, this.userAccountType});
 }
 
 class HomeBLMShowOriginalPostComments extends StatefulWidget{
   final int postId;
-  final int userId;
-  HomeBLMShowOriginalPostComments({this.postId, this.userId});
+  // final int userId;
+  // HomeBLMShowOriginalPostComments({this.postId, this.userId});
+  HomeBLMShowOriginalPostComments({this.postId});
 
   @override
-  HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState(postId: postId, userId: userId);
+  // HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState(postId: postId, userId: userId);
+  HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState(postId: postId);
 }
 
 class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPostComments>{
   final int postId;
-  final int userId;
-  HomeBLMShowOriginalPostCommentsState({this.postId, this.userId});
+  // final int userId;
+  // HomeBLMShowOriginalPostCommentsState({this.postId, this.userId});
+  HomeBLMShowOriginalPostCommentsState({this.postId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
@@ -97,6 +102,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   List<List<int>> repliesNumberOfLikes;
   int currentCommentId;
   String currentUserImage;
+  int currentUserId;
+  int currentAccountType;
   int numberOfLikes;
   int numberOfComments;
   GlobalKey profileKey = GlobalKey<HomeBLMShowOriginalPostCommentsState>();
@@ -115,6 +122,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   void getProfilePicture() async{
     var getProfilePicture = await apiBLMShowProfileInformation();
     currentUserImage = getProfilePicture.showProfileInformationImage;
+    currentUserId = getProfilePicture.showProfileInformationUserId;
+    currentAccountType = getProfilePicture.showProfileInformationAccountType;
   }
 
   void onLoading() async{
@@ -157,6 +166,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                 replyLikes: replyLikeStatus.showCommentOrReplyLikeStatus,
                 replyNumberOfLikes: replyLikeStatus.showCommentOrReplyNumberOfLikes,
                 image: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserImage,
+                userAccountType: newValue2.blmRepliesList[j].showListRepliesUser.showListRepliesUserAccountType,
               ),
             );
           }
@@ -182,7 +192,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
             image: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserImage,
             commentLikes: commentLikeStatus.showCommentOrReplyLikeStatus,
             commentNumberOfLikes: commentLikeStatus.showCommentOrReplyNumberOfLikes,
-            listOfReplies: replies
+            listOfReplies: replies,
+            userAccountType: newValue1.blmCommentsList[i].showListCommentsUser.showListCommentsUserAccountType,
           ),    
         );
         replies = [];
@@ -810,7 +821,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   originalPost.data.blmPost.showOriginalPostPostTagged.length,
                                                   (index) => GestureDetector(
                                                     onTap: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
                                                     },
                                                     child: RichText(
                                                       text: TextSpan(
@@ -902,9 +913,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                         Expanded(
                                           child: GestureDetector(
                                             onTap: (){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId)));
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].userId, accountType: comments[i].userAccountType,)));
                                             },
-                                            child: userId == comments[i].userId
+                                            child: currentUserId == comments[i].userId && currentAccountType == comments[i].userAccountType
                                             ? Text('You',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -1072,9 +1083,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: comments[i].listOfReplies[index].userAccountType,)));
                                                       },
-                                                      child: userId == comments[i].listOfReplies[index].userId
+                                                      child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
                                                       ? Text('You',
                                                         style: TextStyle(
                                                           fontWeight: FontWeight.bold,

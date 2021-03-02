@@ -69,8 +69,9 @@ class APIBLMShowListOfRepliesExtendedUser{
   String showListRepliesUserFirstName;
   String showListRepliesUserLastName;
   dynamic showListRepliesUserImage;
+  int showListRepliesUserAccountType;
 
-  APIBLMShowListOfRepliesExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage});
+  APIBLMShowListOfRepliesExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage, this.showListRepliesUserAccountType});
 
   factory APIBLMShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfRepliesExtendedUser(
@@ -78,6 +79,7 @@ class APIBLMShowListOfRepliesExtendedUser{
       showListRepliesUserFirstName: parsedJson['first_name'],
       showListRepliesUserLastName: parsedJson['last_name'],
       showListRepliesUserImage: parsedJson['image'],
+      showListRepliesUserAccountType: parsedJson['account_type'],
     );
   }
 }

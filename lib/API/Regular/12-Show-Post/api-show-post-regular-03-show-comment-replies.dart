@@ -69,8 +69,9 @@ class APIRegularShowListOfRepliesExtendedUser{
   String showListRepliesUserFirstName;
   String showListRepliesUserLastName;
   dynamic showListRepliesUserImage;
+  int showListOfCommentsUserAccountType;
 
-  APIRegularShowListOfRepliesExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage});
+  APIRegularShowListOfRepliesExtendedUser({this.showListRepliesUserUserId, this.showListRepliesUserFirstName, this.showListRepliesUserLastName, this.showListRepliesUserImage, this.showListOfCommentsUserAccountType});
 
   factory APIRegularShowListOfRepliesExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfRepliesExtendedUser(
@@ -78,6 +79,7 @@ class APIRegularShowListOfRepliesExtendedUser{
       showListRepliesUserFirstName: parsedJson['first_name'],
       showListRepliesUserLastName: parsedJson['last_name'],
       showListRepliesUserImage: parsedJson['image'],
+      showListOfCommentsUserAccountType: parsedJson['account_type'],
     );
   }
 }
