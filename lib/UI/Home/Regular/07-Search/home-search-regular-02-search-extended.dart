@@ -395,60 +395,63 @@ class HomeRegularPostState extends State<HomeRegularPost>{
               Column(
                 children: [
 
-                  Container(
-                    alignment: Alignment.center,
-                    height: 55,
-                    color: Color(0xffffffff),
-                    child: DefaultTabController(
-                      length: 4,
-                      child: TabBar(
-                        isScrollable: true,
-                        labelColor: Color(0xff04ECFF),
-                        unselectedLabelColor: Color(0xff000000),
-                        indicatorColor: Color(0xff04ECFF),
-                        onTap: (int number){
-                          setState(() {
-                            toggle = number;
-                          });
-                        },
-                        tabs: [
+                  IgnorePointer(
+                    ignoring: isGuestLoggedIn,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 55,
+                      color: Color(0xffffffff),
+                      child: DefaultTabController(
+                        length: 4,
+                        child: TabBar(
+                          isScrollable: true,
+                          labelColor: Color(0xff04ECFF),
+                          unselectedLabelColor: Color(0xff000000),
+                          indicatorColor: Color(0xff04ECFF),
+                          onTap: (int number){
+                            setState(() {
+                              toggle = number;
+                            });
+                          },
+                          tabs: [
 
-                          Center(
-                            child: Text('Post',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            Center(
+                              child: Text('Post',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
-                          ),
 
-                          Center(
-                            child: Text('Suggested',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            Center(
+                              child: Text('Suggested',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
-                          ),
 
-                          Center(
-                            child: Text('Nearby',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            Center(
+                              child: Text('Nearby',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
-                          ),
 
-                          Center(
-                            child: Text('BLM',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
+                            Center(
+                              child: Text('BLM',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -511,23 +514,20 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                   ),
 
                   Expanded(
-                    child: IgnorePointer(
-                      ignoring: isGuestLoggedIn,
-                      child: Container(
-                        child: isGuestLoggedIn
-                        ? BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                          child: MiscRegularLoginToContinue(),
-                        )
-                        : ((){
-                          switch(toggle){
-                            case 0: return searchPostExtended(); break;
-                            case 1: return searchSuggestedExtended(); break;
-                            case 2: return searchNearbyExtended(); break;
-                            case 3: return searchBLMExtended(); break;
-                          }
-                        }()),
-                      ),
+                    child: Container(
+                      child: isGuestLoggedIn
+                      ? BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: MiscRegularLoginToContinue(),
+                      )
+                      : ((){
+                        switch(toggle){
+                          case 0: return searchPostExtended(); break;
+                          case 1: return searchSuggestedExtended(); break;
+                          case 2: return searchNearbyExtended(); break;
+                          case 3: return searchBLMExtended(); break;
+                        }
+                      }()),
                     ),
                   ),
 

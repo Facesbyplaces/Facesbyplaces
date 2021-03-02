@@ -81,7 +81,7 @@ class MiscBLMLoginToContinue extends StatelessWidget{
 
             GestureDetector(
               onTap: (){
-                Navigator.of(context).pushNamedAndRemoveUntil('/blm/login', ModalRoute.withName('/blm/join'));
+                Navigator.of(context).pushNamedAndRemoveUntil('/login', ModalRoute.withName('/login'));
               },
               child: Text('Sign in or sign up to continue', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff4EC9D4)),),
             ),

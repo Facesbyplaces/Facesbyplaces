@@ -214,11 +214,11 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
     SizeConfig.init(context);
     return Scaffold(
       backgroundColor: Color(0xffffffff),
-      body: IgnorePointer(
-        ignoring: isGuestLoggedIn,
-        child: Stack(
-          children: [
-            SmartRefresher(
+      body: Stack(
+        children: [
+          IgnorePointer(
+            ignoring: isGuestLoggedIn,
+            child: SmartRefresher(
               enablePullDown: true,
               enablePullUp: true,
               header: MaterialClassicHeader(
@@ -1157,22 +1157,17 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                 ],
               ),
             ),
+          ),
 
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-              child: MiscRegularLoginToContinue(),
-            ),
-          ],
-        ),
-        // child: Container(
-        //   child: isGuestLoggedIn
-        //   ? BackdropFilter(
-        //     filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-        //     child: MiscRegularLoginToContinue(),
-        //   )
-        //   : 
-        // ),
-      ),  
+          isGuestLoggedIn
+          ? BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: MiscRegularLoginToContinue(),
+          )
+          : Container(height: 0),
+          
+        ],
+      ),
     );
   }
 }

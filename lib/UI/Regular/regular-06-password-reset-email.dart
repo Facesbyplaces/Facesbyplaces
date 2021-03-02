@@ -163,10 +163,13 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                             )
                           );
                         }else{
+                          context.showLoaderOverlay();
+                          
                           initBranchReferences();
-
                           FlutterBranchSdk.setIdentity('alm-user-forgot-password');
                           BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+
+                          context.hideLoaderOverlay();
                           
                           if(response.success){
                             context.showLoaderOverlay();

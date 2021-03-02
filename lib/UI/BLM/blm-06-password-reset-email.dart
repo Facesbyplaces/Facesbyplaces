@@ -166,10 +166,13 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                               )
                             );
                           }else{
-                            initBranchReferences();
+                            context.showLoaderOverlay();
 
+                            initBranchReferences();
                             FlutterBranchSdk.setIdentity('blm-user-forgot-password');
                             BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+
+                            context.hideLoaderOverlay();
                             
                             if(response.success){
                               context.showLoaderOverlay();
