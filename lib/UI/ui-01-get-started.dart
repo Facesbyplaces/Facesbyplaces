@@ -28,26 +28,26 @@ class PushNotificationService {
       _fcm.requestNotificationPermissions(IosNotificationSettings());
     }
 
-    // String token = await _fcm.getToken();
-    // print("FirebaseMessaging token: $token");
+    String token = await _fcm.getToken();
+    print("FirebaseMessaging token: $token");
 
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
-        // print("onMessage notification: $message");
+        print("onMessage notification: $message");
         showSimpleNotification(
           Container(child: Text(message['notification']['body'])),
           position: NotificationPosition.top,
         );
       },
       onLaunch: (Map<String, dynamic> message) async {
-        // print("onLaunch notification: $message");
+        print("onLaunch notification: $message");
         showSimpleNotification(
           Container(child: Text(message['notification']['body'])),
           position: NotificationPosition.top,
         );
       },
       onResume: (Map<String, dynamic> message) async {
-        // print("onResume notification: $message");
+        print("onResume notification: $message");
         showSimpleNotification(
           Container(child: Text(message['notification']['body'])),
           position: NotificationPosition.top,

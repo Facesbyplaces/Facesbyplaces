@@ -19,7 +19,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
-import 'package:maps/maps.dart';
+// import 'package:maps/maps.dart';
 import 'dart:ui';
 
 class RegularProfilePosts{
@@ -570,10 +570,10 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
                                                       SizedBox(width: 20,),
                                                       GestureDetector(
                                                         onTap: () async{
-                                                          final launcher = const GoogleMapsLauncher();
-                                                          await launcher.launch(
-                                                            geoPoint: GeoPoint(0.0, 0.0),
-                                                          );
+                                                          // final launcher = const GoogleMapsLauncher();
+                                                          // await launcher.launch(
+                                                          //   geoPoint: GeoPoint(0.0, 0.0),
+                                                          // );
                                                         },
                                                         child: Text(profile.data.almMemorial.showMemorialDetails.showMemorialDetailsCemetery,
                                                           style: TextStyle(

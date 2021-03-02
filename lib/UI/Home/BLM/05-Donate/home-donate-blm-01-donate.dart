@@ -138,6 +138,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
                     buttonColor: Color(0xff4EC9D4),
                     buttonText: 'Send Gift',
                     onPressed: () async{
+
                       // paymentToken = await StripePayment.paymentRequestWithNativePay(
                       //   androidPayOptions: AndroidPayPaymentRequest(
                       //     totalPrice: ((){

@@ -228,6 +228,39 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
+  - Braintree/Apple-Pay (4.34.0):
+    - Braintree/Core
+  - Braintree/Card (4.34.0):
+    - Braintree/Core
+  - Braintree/Core (4.34.0)
+  - Braintree/PaymentFlow (4.34.0):
+    - Braintree/Card
+    - Braintree/Core
+    - Braintree/PayPalOneTouch
+  - Braintree/PayPal (4.34.0):
+    - Braintree/Core
+    - Braintree/PayPalOneTouch
+  - Braintree/PayPalDataCollector (4.34.0):
+    - Braintree/Core
+    - Braintree/PayPalUtils
+  - Braintree/PayPalOneTouch (4.34.0):
+    - Braintree/Core
+    - Braintree/PayPalDataCollector
+    - Braintree/PayPalUtils
+  - Braintree/PayPalUtils (4.34.0)
+  - Braintree/UnionPay (4.34.0):
+    - Braintree/Card
+    - Braintree/Core
+  - BraintreeDropIn (8.1.0):
+    - BraintreeDropIn/DropIn (= 8.1.0)
+  - BraintreeDropIn/DropIn (8.1.0):
+    - Braintree/Card (~> 4.32)
+    - Braintree/Core (~> 4.32)
+    - Braintree/PaymentFlow (~> 4.32)
+    - Braintree/PayPal (~> 4.32)
+    - Braintree/UnionPay (~> 4.32)
+    - BraintreeDropIn/UIKit
+  - BraintreeDropIn/UIKit (8.1.0)
   - Branch (0.36.0)
   - camera (0.0.1):
     - Flutter
@@ -323,6 +356,11 @@ PODS:
     - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.0.0)
   - flutter_barcode_scanner (1.0.2):
+    - Flutter
+  - flutter_braintree (1.0.0):
+    - Braintree/Apple-Pay (~> 4.34.0)
+    - Braintree/PayPal (~> 4.34.0)
+    - BraintreeDropIn (= 8.1.0)
     - Flutter
   - flutter_branch_sdk (1.3.2):
     - Branch (~> 0.36.0)
@@ -458,6 +496,7 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_barcode_scanner (from `.symlinks/plugins/flutter_barcode_scanner/ios`)
+  - flutter_braintree (from `.symlinks/plugins/flutter_braintree/ios`)
   - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
@@ -482,6 +521,8 @@ SPEC REPOS:
     - abseil
     - AppAuth
     - BoringSSL-GRPC
+    - Braintree
+    - BraintreeDropIn
     - Branch
     - CocoaAsyncSocket
     - FBSDKCoreKit
@@ -529,6 +570,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_barcode_scanner:
     :path: ".symlinks/plugins/flutter_barcode_scanner/ios"
+  flutter_braintree:
+    :path: ".symlinks/plugins/flutter_braintree/ios"
   flutter_branch_sdk:
     :path: ".symlinks/plugins/flutter_branch_sdk/ios"
   flutter_keyboard_visibility:
@@ -572,6 +615,8 @@ SPEC CHECKSUMS:
   apple_maps_flutter: c59725efea39e13e703cde52a1d2b14866ad68a8
   better_player: a4383402f457e53720525888c0fc5d337ef6ba11
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  Braintree: 48154e70306eb3e6c81eaa87bbc5c5988c0d2784
+  BraintreeDropIn: fc3e96a8a2b5416e5e3a3beba119f0089713bc1e
   Branch: 8aebcb7a6465f19f9f4d315acced369ae078d3f2
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -591,6 +636,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_barcode_scanner: fc42adac0732eca7bd9d3d676b215bce5903f269
+  flutter_braintree: 993827357efe3a1a05f229f2e62fd5026b3a7f4b
   flutter_branch_sdk: ecbe8c173d747c9f8d18a74e72de96cc9159375f
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_login_facebook: 8dca6968e2f545124b447aebcea0327f870af1f3

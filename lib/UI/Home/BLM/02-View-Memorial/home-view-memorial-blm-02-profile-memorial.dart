@@ -19,7 +19,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
-import 'package:maps/maps.dart';
+// import 'package:maps/maps.dart';
 import 'dart:ui';
 
 class BLMProfilePosts{
@@ -571,10 +571,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       Expanded(
                                                         child: GestureDetector(
                                                           onTap: () async{
-                                                            final launcher = const GoogleMapsLauncher();
-                                                            await launcher.launch(
-                                                              geoPoint: GeoPoint(0.0, 0.0),
-                                                            );
+                                                            // final launcher = const GoogleMapsLauncher();
+                                                            // await launcher.launch(
+                                                            //   geoPoint: GeoPoint(0.0, 0.0),
+                                                            // );
                                                           },
                                                           child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsLocation,
                                                             style: TextStyle(
