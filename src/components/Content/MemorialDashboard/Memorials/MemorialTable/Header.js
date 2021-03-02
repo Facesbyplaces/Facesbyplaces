@@ -1,14 +1,15 @@
 import React from "react";
-
 import { useDispatch } from "react-redux";
-import { AddUserAction } from "../../../../../redux/actions";
+import { AddMemorialAction } from "../../../../../redux/actions";
 
-export default function Header() {
+export default function Header({ pageType }) {
   const dispatch = useDispatch();
+  console.log(pageType);
 
   const handleAddClick = (option) => {
     console.log(option);
-    dispatch(AddUserAction({ option }));
+    const type = pageType;
+    dispatch(AddMemorialAction({ option, type }));
   };
 
   return (

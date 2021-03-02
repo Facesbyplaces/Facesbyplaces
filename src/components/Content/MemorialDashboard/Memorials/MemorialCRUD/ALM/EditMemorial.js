@@ -65,21 +65,35 @@ export default function EditMemorial() {
 
   // Form Data Images
   const imageOrVideosSelectedHandler = (e) => {
-    setImagesOrVideosTemporaryImageDisplay(
-      URL.createObjectURL(e.target.files[0])
-    );
+    {
+      e.target.files[0]
+        ? setImagesOrVideosTemporaryImageDisplay(
+            URL.createObjectURL(e.target.files[0])
+          )
+        : console.log("No Images/Videos Attached.");
+    }
     setImagesOrVideosFilesSelected(e.target.files[0]);
     console.log("Images Or Videos", imagesOrVideosFilesSelected);
   };
   const profileImageSelectedHandler = (e) => {
-    setProfileImageTemporaryDisplay(URL.createObjectURL(e.target.files[0]));
+    {
+      e.target.files[0]
+        ? setProfileImageTemporaryDisplay(
+            URL.createObjectURL(e.target.files[0])
+          )
+        : console.log("No Profile Image Attached.");
+    }
     setProfileImageSelectedFile(e.target.files[0]);
-    console.log("Profile Image: ", profileImageSelectedFile);
   };
   const backgroundImageSelectedHandler = (e) => {
-    setBackgroundImageTemporaryDisplay(URL.createObjectURL(e.target.files[0]));
+    {
+      e.target.files[0]
+        ? setBackgroundImageTemporaryDisplay(
+            URL.createObjectURL(e.target.files[0])
+          )
+        : console.log("No Background Image Attached.");
+    }
     setBackgroundImageSelectedFile(e.target.files[0]);
-    // console.log(URL.createObjectURL(e.target.files[0]));
   };
 
   const uploadImage = (memorial) => {
@@ -123,64 +137,71 @@ export default function EditMemorial() {
             opacity: "1",
           }}
         >
-          <label
-            className="btn btn-lg btn-icon btn-hover-text-primary"
-            data-action="change"
-            data-toggle="tooltip"
-            title
-            data-original-title="Change avatar"
-            style={{
-              marginTop: "90px",
-              marginRight: "85px",
-            }}
-          >
-            <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
-              <svg
-                width="24px"
-                height="24px"
-                viewBox="0 0 24 24"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-              >
-                {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
-                <title>Stockholm-icons / Design / Edit</title>
-                <desc>Created with Sketch.</desc>
-                <defs />
-                <g
-                  id="Stockholm-icons-/-Design-/-Edit"
-                  stroke="none"
-                  strokeWidth={1}
-                  fill="none"
-                  fillRule="evenodd"
+          <div className="image-input image-input-outline image-input-circle">
+            <label
+              className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+              data-action="change"
+              data-toggle="tooltip"
+              title
+              data-original-title="Change avatar"
+            >
+              <i className="fa fa-pen icon-sm text-muted" />
+              <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
                 >
-                  <rect id="bound" x={0} y={0} width={24} height={24} />
-                  <path
-                    d="M8,17.9148182 L8,5.96685884 C8,5.56391781 8.16211443,5.17792052 8.44982609,4.89581508 L10.965708,2.42895648 C11.5426798,1.86322723 12.4640974,1.85620921 13.0496196,2.41308426 L15.5337377,4.77566479 C15.8314604,5.0588212 16,5.45170806 16,5.86258077 L16,17.9148182 C16,18.7432453 15.3284271,19.4148182 14.5,19.4148182 L9.5,19.4148182 C8.67157288,19.4148182 8,18.7432453 8,17.9148182 Z"
-                    id="Path-11"
-                    fill="#000000"
-                    fillRule="nonzero"
-                    transform="translate(12.000000, 10.707409) rotate(-135.000000) translate(-12.000000, -10.707409) "
-                  />
-                  <rect
-                    id="Rectangle"
-                    fill="#000000"
-                    opacity="0.3"
-                    x={5}
-                    y={20}
-                    width={15}
-                    height={2}
-                    rx={1}
-                  />
-                </g>
-              </svg>
-            </span>
-            <input
-              type="file"
-              accept=".png, .jpg, .jpeg"
-              onChange={imageOrVideosSelectedHandler}
-            />
-          </label>
+                  {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                  <title>Stockholm-icons / Navigation / Close</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs />
+                  <g
+                    id="Stockholm-icons-/-Navigation-/-Close"
+                    stroke="none"
+                    strokeWidth={1}
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <g
+                      id="Group"
+                      transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                      fill="#000000"
+                    >
+                      <rect
+                        id="Rectangle-185"
+                        x={0}
+                        y={7}
+                        width={16}
+                        height={2}
+                        rx={1}
+                      />
+                      <rect
+                        id="Rectangle-185-Copy"
+                        opacity="0.3"
+                        transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                        x={0}
+                        y={7}
+                        width={16}
+                        height={2}
+                        rx={1}
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </span>
+
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                onChange={imageOrVideosSelectedHandler}
+              />
+              <input type="hidden" name="profile_avatar_remove" />
+            </label>
+          </div>
         </div>
       </div>
     );
@@ -248,6 +269,7 @@ export default function EditMemorial() {
       });
   }, memorial.id);
 
+  console.log("Profile Image: ", profileImageSelectedFile);
   const handleSubmit = (e) => {
     // If Form Data empty
     const memorialBirthplace = birthPlace
@@ -296,9 +318,9 @@ export default function EditMemorial() {
       })
       .then((response) => {
         console.log(response.data);
-        uploadImage(response.data.memorial);
         setTimeout(() => {
           setLoading(false);
+          uploadImage(response.data.memorial);
         }, 1000);
         openModal();
       })
@@ -383,21 +405,33 @@ export default function EditMemorial() {
               </label>
             </div>
 
-            <div
-              className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
-              style={{
-                backgroundImage: memorial.backgroundImage
-                  ? `url( ${memorial.backgroundImage})`
-                  : backgroundImageTemporaryDisplay
-                  ? `url( ${backgroundImageTemporaryDisplay})`
-                  : `url( "assets/media/bg/bg-1.jpg" )`,
-                height: "350px",
-              }}
-            >
-              <div className="container">
-                <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+            {backgroundImageTemporaryDisplay || memorial.backgroundImage ? (
+              <div
+                className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+                style={{
+                  backgroundImage:
+                    `url( ${backgroundImageTemporaryDisplay})` ||
+                    `url( ${memorial.backgroundImage})`,
+                  height: "350px",
+                }}
+              >
+                <div className="container">
+                  <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div
+                className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+                style={{
+                  backgroundImage: `url( "assets/media/bg/bg-1.jpg" )`,
+                  height: "350px",
+                }}
+              >
+                <div className="container">
+                  <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+                </div>
+              </div>
+            )}
             {/*end::Hero*/}
             {/*begin::Section*/}
             <div className="container mt-n15 gutter-b">
@@ -417,16 +451,24 @@ export default function EditMemorial() {
                           }}
                         >
                           <div className="image-input image-input-outline image-input-circle">
-                            <div
-                              className="image-input-wrapper"
-                              style={{
-                                backgroundImage: memorial.profileImage
-                                  ? `url( ${memorial.profileImage})`
-                                  : profileImageTemporaryDisplay
-                                  ? `url( ${profileImageTemporaryDisplay})`
-                                  : `url( "assets/media/users/blank.png" )`,
-                              }}
-                            />
+                            {profileImageTemporaryDisplay ||
+                            memorial.profileImage ? (
+                              <div
+                                className="image-input-wrapper"
+                                style={{
+                                  backgroundImage:
+                                    `url( ${profileImageTemporaryDisplay})` ||
+                                    `url( ${memorial.profileImage})`,
+                                }}
+                              />
+                            ) : (
+                              <div
+                                className="image-input-wrapper"
+                                style={{
+                                  backgroundImage: `url( "assets/media/users/blank.png" )`,
+                                }}
+                              />
+                            )}
                             <label
                               className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                               data-action="change"

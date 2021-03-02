@@ -15,6 +15,7 @@ import { SuccessModal } from "../MemorialCRUD/SuccessModal";
 
 export default function MemorialsTable() {
   const [showModal, setShowModal] = useState(true);
+  const [pageType, setPageType] = useState(2);
   const { memorialTab } = useSelector(({ memorialTab }) => ({
     memorialTab: memorialTab,
   }));
@@ -50,8 +51,8 @@ export default function MemorialsTable() {
               return (
                 <div className="container">
                   <div className="card card-custom">
-                    <Header />
-                    <Body />
+                    <Header pageType={pageType} setPageType={setPageType} />
+                    <Body pageType={pageType} setPageType={setPageType} />
                   </div>
                 </div>
               );
@@ -81,8 +82,8 @@ export default function MemorialsTable() {
               return (
                 <div className="container">
                   <div className="card card-custom">
-                    <Header />
-                    <Body />
+                    <Header pageType={pageType} setPageType={setPageType} />
+                    <Body pageType={pageType} setPageType={setPageType} />
                   </div>
                 </div>
               );

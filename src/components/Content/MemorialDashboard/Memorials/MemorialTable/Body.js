@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import MemorialDataTable from "./MemorialDataTable";
+import { AddMemorialAction } from "../../../../../redux/actions";
 
-export default function Body() {
+export default function Body({ pageType, setPageType }) {
   const [search, setSearch] = useState(false);
   const [keywords, setKeywords] = useState([]);
-  const [pageType, setPageType] = useState(2);
 
   const handleClick = () => {
     setSearch(true);

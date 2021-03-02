@@ -299,9 +299,9 @@ export default function EditMemorial() {
       })
       .then((response) => {
         console.log(response.data);
-        uploadImage(response.data.blm);
         setTimeout(() => {
           setLoading(false);
+          uploadImage(response.data.blm);
         }, 1000);
         openModal();
       })
@@ -386,21 +386,33 @@ export default function EditMemorial() {
               </label>
             </div>
 
-            <div
-              className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
-              style={{
-                backgroundImage: memorial.backgroundImage
-                  ? `url( ${memorial.backgroundImage})`
-                  : backgroundImageTemporaryDisplay
-                  ? `url( ${backgroundImageTemporaryDisplay})`
-                  : `url( "assets/media/bg/bg-1.jpg" )`,
-                height: "350px",
-              }}
-            >
-              <div className="container">
-                <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+            {backgroundImageTemporaryDisplay || memorial.backgroundImage ? (
+              <div
+                className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+                style={{
+                  backgroundImage:
+                    `url( ${backgroundImageTemporaryDisplay})` ||
+                    `url( ${memorial.backgroundImage})`,
+                  height: "350px",
+                }}
+              >
+                <div className="container">
+                  <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div
+                className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+                style={{
+                  backgroundImage: `url( "assets/media/bg/bg-1.jpg" )`,
+                  height: "350px",
+                }}
+              >
+                <div className="container">
+                  <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+                </div>
+              </div>
+            )}
             {/*end::Hero*/}
             {/*begin::Section*/}
             <div className="container mt-n15 gutter-b">
@@ -420,16 +432,24 @@ export default function EditMemorial() {
                           }}
                         >
                           <div className="image-input image-input-outline image-input-circle">
-                            <div
-                              className="image-input-wrapper"
-                              style={{
-                                backgroundImage: memorial.profileImage
-                                  ? `url( ${memorial.profileImage})`
-                                  : profileImageTemporaryDisplay
-                                  ? `url( ${profileImageTemporaryDisplay})`
-                                  : `url( "assets/media/users/blank.png" )`,
-                              }}
-                            />
+                            {profileImageTemporaryDisplay ||
+                            memorial.profileImage ? (
+                              <div
+                                className="image-input-wrapper"
+                                style={{
+                                  backgroundImage:
+                                    `url( ${profileImageTemporaryDisplay})` ||
+                                    `url( ${memorial.profileImage})`,
+                                }}
+                              />
+                            ) : (
+                              <div
+                                className="image-input-wrapper"
+                                style={{
+                                  backgroundImage: `url( "assets/media/users/blank.png" )`,
+                                }}
+                              />
+                            )}
                             <label
                               className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                               data-action="change"

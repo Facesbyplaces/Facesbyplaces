@@ -74,6 +74,13 @@ export const EditMemorialAction = (memorial) => {
   };
 };
 
+export const AddMemorialAction = (option) => {
+  return {
+    type: "ADD_MEMORIAL",
+    data: option,
+  };
+};
+
 export const TableMemorialAction = () => {
   return {
     type: "TABLE_MEMORIAL",

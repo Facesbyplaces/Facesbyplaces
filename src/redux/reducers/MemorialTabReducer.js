@@ -17,7 +17,6 @@ export const MemorialTabReducer = persistReducer(
         localStorage.setItem("page", action.data.page);
         localStorage.setItem("tab", action.data.option);
         localStorage.setItem("pageType", action.data.type);
-        console.log(action.data);
 
         return action.data;
 
@@ -31,7 +30,8 @@ export const MemorialTabReducer = persistReducer(
 
       case "ADD_MEMORIAL":
         localStorage.setItem("tab", action.data.option);
-
+        localStorage.setItem("pageType", action.data.type);
+        console.log(action.data);
         return action.data;
 
       case "DELETE_MEMORIAL":
