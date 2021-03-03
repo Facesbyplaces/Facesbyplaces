@@ -47,6 +47,7 @@ export default function EditMemorial() {
   ] = useState(null);
 
   // Form Data
+  const [users, setUsers] = useState([]);
   const [location, setLocation] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [dateOfDeath, setDateOfDeath] = useState("");
@@ -150,6 +151,26 @@ export default function EditMemorial() {
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
+
+  useEffect(() => {
+    axios
+      .get(`/api/v1/admin/users`, { params: { page: 1 } })
+      .then((response) => {
+        setUsers(response.data.users);
+        console.log("Response: ", response.data.users);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, [users.id]);
+
+  const renderedUsers = users.map((user) =>
+    user.account_type == 1 ? (
+      <option value="volvo">{user.first_name}</option>
+    ) : (
+      console.log("Not a Blm User")
+    )
+  );
 
   const handleSubmit = (e) => {
     // console.log("Page Creator: ", pageCreator);
@@ -498,6 +519,36 @@ export default function EditMemorial() {
                             {/*end::Group*/}
                             <div className="separator separator-solid my-10" />
                             {/*begin::Row*/}
+
+                            <div className="row">
+                              <div className="col-9">
+                                <h6 className="text-dark font-weight-bold mb-10">
+                                  Memorial User:
+                                </h6>
+                              </div>
+                            </div>
+                            {/*end::Row*/}
+                            {/*begin::Group*/}
+                            <div className="form-group row">
+                              <label className="col-form-label col-3 text-lg-right text-left">
+                                User
+                              </label>
+                              <div className="col-9">
+                                <div className="input-group input-group-lg input-group-solid">
+                                  <select
+                                    id="users"
+                                    className="form-control form-control-lg form-control-solid"
+                                    name="users"
+                                    // value={email}
+                                  >
+                                    {renderedUsers}
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="separator separator-solid my-10" />
+                            {/*begin::Row*/}
+
                             <div className="row">
                               <div className="col-9">
                                 <h6 className="text-dark font-weight-bold mb-10">
