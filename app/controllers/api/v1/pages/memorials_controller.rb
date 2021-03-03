@@ -65,10 +65,16 @@ class Api::V1::Pages::MemorialsController < ApplicationController
 
             blmUsers.each do |user|
                 Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
+                title = "New Memorial Page"
+                message = "#{user().first_name} created a new page"
+                pushNotification(user.device_token, title, message)
             end
             
             almUsers.each do |user|
                 Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
+                title = "New Memorial Page"
+                message = "#{user().first_name} created a new page"
+                pushNotification(user.device_token, title, message)
             end
         else
             render json: {status: "#{check} is empty"}
@@ -286,6 +292,23 @@ class Api::V1::Pages::MemorialsController < ApplicationController
         end
     end
     
+    def pushNotification(tokens, title, message)
+        require 'fcm'
+
+        device_tokens = tokens
+        message = message
+        title = title
+
+        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        options = { notification: { 
+                        body: 'message',
+                        title: 'title',
+                    }
+                }
+        response = fcm_client.send(device_tokens, options)
+        puts response
+    end
+
     def memorial_params
         params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end

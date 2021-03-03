@@ -61,10 +61,16 @@ class Api::V1::Pages::BlmController < ApplicationController
 
                     blmUsers.each do |user|
                         Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
+                        title = "New Memorial Page"
+                        message = "#{user().first_name} created a new page"
+                        pushNotification(user.device_token, title, message)
                     end
 
                     almUsers.each do |user|
                         Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
+                        title = "New Memorial Page"
+                        message = "#{user().first_name} created a new page"
+                        pushNotification(user.device_token, title, message)
                     end
                 else
                     render json: {errors: relationship.errors}, status: 500
@@ -289,23 +295,21 @@ class Api::V1::Pages::BlmController < ApplicationController
         end
     end
 
-    def pushNotification(data)
+    def pushNotification(tokens, title, message)
         require 'fcm'
 
-        device_tokens = data.device_tokens
-        message = data.message
-        title = data.title
+        device_tokens = tokens
+        message = message
+        title = title
 
         fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
-        options = { priority: 'high',
-                    data: { message: message, title: title },
-                    notification: { body: 'message',
-                                    title: 'title',
-                                    }
+        options = { notification: { 
+                        body: 'message',
+                        title: 'title',
                     }
+                }
         response = fcm_client.send(device_tokens, options)
         puts response
-        render json: {response: response, status: :success}
     end
 
     def blm_params
