@@ -289,6 +289,25 @@ class Api::V1::Pages::BlmController < ApplicationController
         end
     end
 
+    def pushNotification(data)
+        require 'fcm'
+
+        device_tokens = data.device_tokens
+        message = data.message
+        title = data.title
+
+        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        options = { priority: 'high',
+                    data: { message: message, title: title },
+                    notification: { body: 'message',
+                                    title: 'title',
+                                    }
+                    }
+        response = fcm_client.send(device_tokens, options)
+        puts response
+        render json: {response: response, status: :success}
+    end
+
     def blm_params
         params.require(:blm).permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country,  :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end

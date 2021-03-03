@@ -17,6 +17,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         if @user
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
+          @user.update({ device_token: params[:device_token] })
           @user.save
           render json: { success: true, user:  @user, status: 200 }, status: 200
           super
@@ -27,6 +28,8 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user = AlmUser.new(sign_up_params)
           end
 
+          @user.update({ device_token: params[:device_token] })
+          @user.device_token = params[:device_token]
           @user.facebook_id = @user.facebook_id
           @user.hideBirthdate = false 
           @user.hideBirthplace = false 
@@ -76,6 +79,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:email] = @user.email
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
+          @user.update({ device_token: params[:device_token] })
           @user.save
           render json: { success: true, user:  @user, status: 200 }, status: 200
           super
@@ -95,6 +99,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             payload = validator.check(token, required_audience, required_audience)
             email = payload['email']
 
+            @user.update({ device_token: params[:device_token] })
             @user.hideBirthdate = false 
             @user.hideBirthplace = false 
             @user.hideEmail = false 
@@ -137,6 +142,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
           params[:email] = @user.email
           params[:password] = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
           @user.password = @user.password_confirmation = params[:password]
+          @user.update({ device_token: params[:device_token] })
           @user.save
           render json: { success: true, user:  @user, status: 200 }, status: 200
           super
@@ -148,6 +154,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
             @user = AlmUser.new(sign_up_params)
           end
 
+          @user.update({ device_token: params[:device_token] })
           @user.email = apple[:email]
           @user.hideBirthdate = false 
           @user.hideBirthplace = false 
@@ -195,6 +202,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
         end 
 
         if user.is_verified?
+          user.update({ device_token: params[:device_token] })
           render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
           super
         else
