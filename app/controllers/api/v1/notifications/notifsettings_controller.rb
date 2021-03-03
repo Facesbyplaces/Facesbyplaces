@@ -75,14 +75,38 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
         render json: {}, status: 200
     end
 
-    def push_notif
-        notification = user().notifications.where(read: false).first 
+    # def push_notif
+    #     notification = user().notifications.where(read: false).first 
 
-        render json: {notification: ActiveModel::SerializableResource.new(
-                                        notification, 
-                                        each_serializer: NotificationSerializer
-                                    )
-                    }, status: 200
+    #     render json: {notification: ActiveModel::SerializableResource.new(
+    #                                     notification, 
+    #                                     each_serializer: NotificationSerializer
+    #                                 )
+    #                 }, status: 200
+    # end
+
+    def pushNotification
+        require 'fcm'
+        def self.client
+            FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        end
+
+        def self.send(device_tokens, data)
+            begin
+              fcm       = pushNotification.client
+              options   = {
+                "notification": {
+                  "title": data[:title],
+                  "body": data[:body]
+                }
+              }
+        
+              response  = fcm.send(device_tokens, options)
+            rescue StandardError => err
+              puts        "\n-- PushNotification : Error --\n#{err}"
+              logger.info "\n-- PushNotification : Error --\n#{err}"
+            end
+        end
     end
 
     # Mark Notifications as read
