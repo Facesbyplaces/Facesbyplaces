@@ -2,16 +2,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<bool> apiRegularLogin({String email, String password}) async{
+Future<bool> apiRegularLogin({String email, String password, String deviceToken}) async{
 
   bool value = false;
 
   try{
-    final http.Response response = await http.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email',
+    final http.Response response = await http.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }
     );
+
+    print('The status code of login is ${response.statusCode}');
+    print('The status code of login is ${response.body}');
 
     if(response.statusCode == 200){
       var value = json.decode(response.body);

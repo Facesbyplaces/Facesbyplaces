@@ -1,3 +1,5 @@
+// import 'dart:io';
+
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
@@ -7,7 +9,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Regular/regular-06-password-reset-email.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+// import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -16,6 +20,8 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../ui-01-get-started.dart';
 
 class RegularLogin extends StatefulWidget{
 
@@ -26,6 +32,21 @@ class RegularLoginState extends State<RegularLogin>{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
+
+  // String newToken;
+
+  //   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // final pushNotificationService = PushNotificationService(_firebaseMessaging);
+  // pushNotificationService.initialise();
+
+  // static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // final pushNotificationService = PushNotificationService(_firebaseMessaging);
+
+  // void initState(){
+  //   super.initState();
+  //   pushNotificationService.initialise();
+  //   newToken = '';
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -464,7 +485,13 @@ class RegularLoginState extends State<RegularLogin>{
                           }else{
 
                             context.showLoaderOverlay();
-                            bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text);
+                            
+                            final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+                            final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                            pushNotificationService.initialise();
+                            String deviceToken = await pushNotificationService.fcm.getToken();
+                            bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text, deviceToken: deviceToken);
+                            
                             context.hideLoaderOverlay();
 
                             if(result){

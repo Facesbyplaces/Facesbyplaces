@@ -1,4 +1,3 @@
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
@@ -19,19 +18,23 @@ import 'dart:io';
 const double pi = 3.1415926535897932;
 
 class PushNotificationService {
-  final FirebaseMessaging _fcm;
+  final FirebaseMessaging fcm;
 
-  PushNotificationService(this._fcm);
+  PushNotificationService(this.fcm);
 
   Future initialise() async {
     if (Platform.isIOS) {
-      _fcm.requestNotificationPermissions(IosNotificationSettings());
+      fcm.requestNotificationPermissions(IosNotificationSettings());
     }
 
-    String token = await _fcm.getToken();
+    String token = await fcm.getToken();
     print("FirebaseMessaging token: $token");
 
-    _fcm.configure(
+    // bool newResult = await apiRegularNewNotifications(deviceToken: token, title: 'Sample title - FacesbyPlaces', body: 'Sample body - FacesbyPlaces');
+
+    // print('The notification result is $newResult');
+
+    fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage notification: $message");
         showSimpleNotification(
@@ -126,13 +129,8 @@ class UIGetStartedState extends State<UIGetStarted>{
     }
   }
 
-  pushNotifications() async{
-    await sendAndRetrieveMessage();
-  }
-
   void initState(){
     super.initState();
-    pushNotifications();
     pushNotificationService.initialise();
     listenDeepLinkData();
   }

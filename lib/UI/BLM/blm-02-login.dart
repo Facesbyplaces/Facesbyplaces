@@ -6,6 +6,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import '../ui-01-get-started.dart';
 import 'blm-06-password-reset-email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
@@ -430,7 +432,13 @@ class BLMLoginState extends State<BLMLogin>{
                           }else{
 
                             context.showLoaderOverlay();
-                            bool result = await apiBLMLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text);
+
+                            final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+                            final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                            pushNotificationService.initialise();
+                            String deviceToken = await pushNotificationService.fcm.getToken();
+                            bool result = await apiBLMLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text, deviceToken: deviceToken);
+                            
                             context.hideLoaderOverlay();
 
                             if(result){

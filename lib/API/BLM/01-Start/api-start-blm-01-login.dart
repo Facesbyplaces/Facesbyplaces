@@ -2,12 +2,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<bool> apiBLMLogin({String email, String password}) async{
+Future<bool> apiBLMLogin({String email, String password, String deviceToken}) async{
 
   bool value = false;
 
   try{
-    final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&password=$password&email=$email',
+    final http.Response response = await http.post('http://fbp.dev1.koda.ws/auth/sign_in?account_type=1&password=$password&email=$email&device_token=$deviceToken',
       headers: <String, String>{
         'Content-Type': 'application/json',
       }

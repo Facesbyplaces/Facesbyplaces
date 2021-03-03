@@ -5,6 +5,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_braintree/flutter_braintree.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
@@ -135,6 +136,30 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       color: Color(0xffffffff),
                     ), 
                     onPressed: () async{
+
+                      var request = BraintreeDropInRequest(
+                        tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
+                        collectDeviceData: true,
+                        googlePaymentRequest: BraintreeGooglePaymentRequest(
+                          totalPrice: '4.20',
+                          currencyCode: 'USD',
+                          billingAddressRequired: false,
+                        ),
+                        paypalRequest: BraintreePayPalRequest(
+                          
+                          amount: '4.20',
+                          displayName: 'Example company',
+                        ),
+                        cardEnabled: true,
+                      );
+
+                      BraintreeDropInResult result = await BraintreeDropIn.start(request);
+                      if (result != null) {
+                        print('The payment method nonce is ${result.paymentMethodNonce}');
+                      }
+
+                      print('The value of request is $request');
+                      print('The value of request is ${request.paypalRequest.displayName}');
 
                       // paymentToken = await StripePayment.paymentRequestWithNativePay(
                       //   androidPayOptions: AndroidPayPaymentRequest(

@@ -1,3 +1,4 @@
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
@@ -51,11 +52,15 @@ void main() async{
      GlobalLoaderOverlay(
       useDefaultLoading: false,
       overlayWidget: Container(
-        color: Colors.grey,
+        // color: Colors.grey,
         child: Center(
           child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
         ),
       ),
+      // overlayWidget: Center(
+      //   child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
+      // ),
+      overlayOpacity: 0.5,
       child: MaterialApp(
         title: 'Faces by Places',
         home: ((){
