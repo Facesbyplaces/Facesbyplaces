@@ -87,6 +87,9 @@ class Api::V1::Notifications::NotifsettingsController < ApplicationController
 
     def pushNotification
         require 'fcm'
+        
+        device_tokens = params[:device_tokens]
+
         def self.client
             FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
         end
