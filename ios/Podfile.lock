@@ -361,6 +361,8 @@ PODS:
   - flutter_branch_sdk (1.3.2):
     - Branch (~> 1.38.0)
     - Flutter
+  - flutter_inappwebview (0.0.1):
+    - Flutter
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
   - flutter_login_facebook (0.5.0):
@@ -490,6 +492,7 @@ DEPENDENCIES:
   - flutter_barcode_scanner (from `.symlinks/plugins/flutter_barcode_scanner/ios`)
   - flutter_braintree (from `.symlinks/plugins/flutter_braintree/ios`)
   - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
+  - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
   - fullscreen (from `.symlinks/plugins/fullscreen/ios`)
@@ -561,6 +564,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_braintree/ios"
   flutter_branch_sdk:
     :path: ".symlinks/plugins/flutter_branch_sdk/ios"
+  flutter_inappwebview:
+    :path: ".symlinks/plugins/flutter_inappwebview/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_login_facebook:
@@ -621,6 +626,7 @@ SPEC CHECKSUMS:
   flutter_barcode_scanner: fc42adac0732eca7bd9d3d676b215bce5903f269
   flutter_braintree: 993827357efe3a1a05f229f2e62fd5026b3a7f4b
   flutter_branch_sdk: e65cb8871bf27c1b4de86b560764314a0b3e1192
+  flutter_inappwebview: 69dfbac46157b336ffbec19ca6dfd4638c7bf189
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_login_facebook: 8dca6968e2f545124b447aebcea0327f870af1f3
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

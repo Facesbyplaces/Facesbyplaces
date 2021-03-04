@@ -76,6 +76,7 @@ dependencies:
   better_player: ^0.0.61
   fullscreen: ^1.0.2
   flutter_braintree: ^1.1.0+1
+  flutter_inappwebview: ^4.0.0+4
 
 dev_dependencies:
   flutter_test:

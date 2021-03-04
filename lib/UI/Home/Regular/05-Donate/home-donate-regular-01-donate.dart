@@ -137,17 +137,36 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                     ), 
                     onPressed: () async{
 
+                      print('The amount is $donateToggle');
+
                       var request = BraintreeDropInRequest(
                         tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
                         collectDeviceData: true,
                         googlePaymentRequest: BraintreeGooglePaymentRequest(
-                          totalPrice: '4.20',
+                          totalPrice: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99'; break;
+                              case 1: return '5.00'; break;
+                              case 2: return '15.00'; break;
+                              case 3: return '25.00'; break;
+                              case 4: return '50.00'; break;
+                              case 5: return '100.00'; break;
+                            }
+                          }()),
                           currencyCode: 'USD',
                           billingAddressRequired: false,
                         ),
                         paypalRequest: BraintreePayPalRequest(
-                          
-                          amount: '4.20',
+                          amount: ((){
+                            switch(donateToggle){
+                              case 0: return '0.99'; break;
+                              case 1: return '5.00'; break;
+                              case 2: return '15.00'; break;
+                              case 3: return '25.00'; break;
+                              case 4: return '50.00'; break;
+                              case 5: return '100.00'; break;
+                            }
+                          }()),
                           displayName: 'Example company',
                         ),
                         cardEnabled: true,
@@ -156,10 +175,16 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       BraintreeDropInResult result = await BraintreeDropIn.start(request);
                       if (result != null) {
                         print('The payment method nonce is ${result.paymentMethodNonce}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.description}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
+                        print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
+                        print('The payment method nonce is ${result.deviceData}');
                       }
 
                       print('The value of request is $request');
                       print('The value of request is ${request.paypalRequest.displayName}');
+                      print('The value of request is ${request.paypalRequest.amount}');
 
                       // paymentToken = await StripePayment.paymentRequestWithNativePay(
                       //   androidPayOptions: AndroidPayPaymentRequest(

@@ -51,16 +51,22 @@ void main() async{
   runApp(
      GlobalLoaderOverlay(
       useDefaultLoading: false,
-      overlayWidget: Container(
-        // color: Colors.grey,
-        child: Center(
-          child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
-        ),
-      ),
       // overlayWidget: Center(
-      //   child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
+      //   child: Container(
+      //     color: Colors.red,
+      //   ),
+      // ),
+      overlayWidget: Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
+      // overlayWidget: Container(
+      //   color: Colors.grey,
+      //   // child: Center(
+      //   //   child: SpinKitThreeBounce(color: Color(0xff000000), size: 50.0,),
+      //   // ),
+      //   // child: SpinKitThreeBounce(color: Color(0xff000000)),
+      //   child: Center(child: SpinKitThreeBounce(color: Color(0xff000000)),),
       // ),
       overlayOpacity: 0.5,
+      overlayColor: Colors.grey,
       child: MaterialApp(
         title: 'Faces by Places',
         home: ((){
