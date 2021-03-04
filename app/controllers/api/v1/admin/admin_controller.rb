@@ -222,6 +222,7 @@ class Api::V1::Admin::AdminController < ApplicationController
         }
         
     end
+
     # Show Memorial
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
@@ -368,10 +369,36 @@ class Api::V1::Admin::AdminController < ApplicationController
         render json: transaction
     end
 
+    def PushNotification(device_tokens, title, message)
+        require 'fcm'
+        puts        "\n-- Device Token : --\n#{device_tokens}"
+        logger.info "\n-- Device Token : --\n#{device_tokens}"
+
+        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        options = { notification: { 
+                        body: 'message',
+                        title: 'title',
+                    }
+                }
+        begin
+            response = fcm_client.send(device_tokens, options)
+        rescue StandardError => err
+            puts        "\n-- PushNotification : Error --\n#{err}"
+            logger.info "\n-- PushNotification : Error --\n#{err}"
+        end
+  
+        puts response
+    end
+
+
     private
 
     def editUser_params
         params.permit(:id, :account_type, :username, :first_name, :last_name, :phone_number)
+    end
+
+    def memorial_params
+        params.require(:memorial).permit(:name, :description, :birthplace, :dob, :rip, :cemetery, :country, :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end
 
     def memorial_images_params
