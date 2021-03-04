@@ -39,11 +39,27 @@ class Api::V1::Posts::CommentsController < ApplicationController
                         # check if user owns the post
                         if user == comment.post.account 
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #Push Notification
+                            device_token = user.device_token
+                            title = "FacesbyPlaces Notification"
+                            message = "#{user().first_name} commented on your post"
+                            PushNotification(device_token, title, message)
                         elsif comment.post.tagpeople.where(account: user).first
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #Push Notification
+                            device_token = user.device_token
+                            title = "FacesbyPlaces Notification"
+                            message = "#{user().first_name} commented on a post that you're tagged in"
+                            PushNotification(device_token, title, message)
                         else
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #Push Notification
+                            device_token = user.device_token
+                            title = "FacesbyPlaces Notification"
+                            message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
+                            PushNotification(device_token, title, message)
                         end
+
                     end
                 end
 
@@ -53,10 +69,25 @@ class Api::V1::Posts::CommentsController < ApplicationController
                         # check if user owns the post
                         if user == comment.post.account 
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #Push Notification
+                            device_token = user.device_token
+                            title = "FacesbyPlaces Notification"
+                            message = "#{user().first_name} commented on your post"
+                            PushNotification(device_token, title, message)
                         elsif comment.post.tagpeople.where(account: user).first
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #Push Notification
+                            device_token = user.device_token
+                            title = "FacesbyPlaces Notification"
+                            message = "#{user().first_name} commented on a post that you're tagged in"
+                            PushNotification(device_token, title, message)
                         else
                             Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.account.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                            #Push Notification
+                            device_token = user.device_token
+                            title = "FacesbyPlaces Notification"
+                            message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
+                            PushNotification(device_token, title, message)
                         end
                     end
                 end
@@ -69,10 +100,25 @@ class Api::V1::Posts::CommentsController < ApplicationController
                             # check if user owns the post
                             if user == comment.post.account 
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on your post", postId: comment.post.id, read: false, notif_type: 'Post')
+                                #Push Notification
+                                device_token = user.device_token
+                                title = "FacesbyPlaces Notification"
+                                message = "#{user().first_name} commented on your post"
+                                PushNotification(device_token, title, message)
                             elsif comment.post.tagpeople.where(account: user).first
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on a post that you're tagged in", postId: comment.post.id, read: false, notif_type: 'Post')
+                                #Push Notification
+                                device_token = user.device_token
+                                title = "FacesbyPlaces Notification"
+                                message = "#{user().first_name} commented on a post that you're tagged in"
+                                PushNotification(device_token, title, message)
                             else
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} commented on #{comment.post.user.first_name}'s post", postId: comment.post.id, read: false, notif_type: 'Post')
+                                #Push Notification
+                                device_token = user.device_token
+                                title = "FacesbyPlaces Notification"
+                                message = "#{user().first_name} commented on #{comment.post.account.first_name}'s post"
+                                PushNotification(device_token, title, message)
                             end
                         end
                     end
@@ -93,6 +139,11 @@ class Api::V1::Posts::CommentsController < ApplicationController
                 if user() != reply.comment.account
                     if reply.comment.account.notifsetting.postComments == true
                         Notification.create(recipient: reply.comment.account, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false, notif_type: 'Post')
+                        #Push Notification
+                        device_token = reply.comment.account.device_token
+                        title = "FacesbyPlaces Notification"
+                        message = "#{user().first_name} replied to your comment"
+                        PushNotification(device_token, title, message)
                     end
                 end
             else
@@ -100,17 +151,33 @@ class Api::V1::Posts::CommentsController < ApplicationController
                 if users.count == 0
                     if reply.comment.account.notifsetting.postComments == true
                         Notification.create(recipient: reply.comment.account, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false, notif_type: 'Post')
+                        #Push Notification
+                        device_token = reply.comment.account.device_token
+                        title = "FacesbyPlaces Notification"
+                        message = "#{user().first_name} replied to your comment"
+                        PushNotification(device_token, title, message)
                     end
                 else
                     users.each do |user|
                         if user.notifsetting.postComments == true
                             if reply.comment.account == user
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to your comment", postId: reply.comment.post.id, read: false, notif_type: 'Post')
+                                #Push Notification
+                                device_token = user.device_token
+                                title = "FacesbyPlaces Notification"
+                                message = "#{user().first_name} replied to your comment"
+                                PushNotification(device_token, title, message)
                             else
                                 Notification.create(recipient: user, actor: user(), action: "#{user().first_name} replied to a comment", postId: reply.comment.post.id, read: false, notif_type: 'Post')
+                                #Push Notification
+                                device_token = user.device_token
+                                title = "FacesbyPlaces Notification"
+                                message = "#{user().first_name} replied to a comment"
+                                PushNotification(device_token, title, message)
                             end
                         end
                     end
+                    
                 end
             end
 
@@ -240,6 +307,11 @@ class Api::V1::Posts::CommentsController < ApplicationController
             if like.commentable_type == "Comment"
                 if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
                     Notification.create(recipient: like.commentable.account, actor: user(), action: "#{user().first_name} liked your comment", postId: like.commentable.post.id, read: false, notif_type: 'Post')
+                    #Push Notification
+                    device_token = like.commentable.account.device_token
+                    title = "FacesbyPlaces Notification"
+                    message = "#{user().first_name} liked your comment"
+                    PushNotification(device_token, title, message)
                 end
             else
                 if like.commentable.account != user() && like.commentable.account.notifsetting.postLikes == true
@@ -265,5 +337,28 @@ class Api::V1::Posts::CommentsController < ApplicationController
             render json: {}, status: 404
         end
     end
+
+    def PushNotification(device_tokens, title, message)
+        require 'fcm'
+        puts        "\n-- Device Token : --\n#{device_tokens}"
+        logger.info "\n-- Device Token : --\n#{device_tokens}"
+
+        fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
+        options = { notification: { 
+                        body: 'message',
+                        title: 'title',
+                    }
+                }
+
+        begin
+            response = fcm_client.send(device_tokens, options)
+        rescue StandardError => err
+            puts        "\n-- PushNotification : Error --\n#{err}"
+            logger.info "\n-- PushNotification : Error --\n#{err}"
+        end
+
+        puts response
+    end
+
     
 end

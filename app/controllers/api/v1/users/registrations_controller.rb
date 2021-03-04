@@ -1,7 +1,7 @@
 class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsController
   
   def sign_up_params
-    params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password)
+    params.permit(:facebook_id, :google_id, :account_type, :first_name, :last_name, :phone_number, :email, :username, :password, :device_token)
   end
 
   def create
@@ -28,6 +28,7 @@ class Api::V1::Users::RegistrationsController < DeviseTokenAuth::RegistrationsCo
         @user.hideAddress = false 
         @user.hidePhonenumber = false 
         @user.is_verified = false
+        @user.update({ device_token: params[:device_token] })
         # @user.save!
         
 

@@ -58,20 +58,23 @@ class Api::V1::Pages::BlmController < ApplicationController
                     # Notify all Users
                     blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
                     almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
-
+                    
+                    blmUsersDeviceToken = []
                     blmUsers.each do |user|
                         Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-                        title = "New Memorial Page"
-                        message = "#{user().first_name} created a new page"
-                        pushNotification(user.device_token, title, message)
+                        blmUsersDeviceToken << user.device_token
                     end
 
+                    almUsersDeviceToken = []
                     almUsers.each do |user|
                         Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
-                        title = "New Memorial Page"
-                        message = "#{user().first_name} created a new page"
-                        pushNotification(user.device_token, title, message)
+                        almUsersDeviceToken << user.device_token
                     end
+
+                    device_tokens = almUsersDeviceToken + blmUsersDeviceToken
+                    title = "New Memorial Page"
+                    message = "#{user().first_name} created a new page"
+                    PushNotification(device_tokens, title, message)
                 else
                     render json: {errors: relationship.errors}, status: 500
                 end
@@ -287,20 +290,10 @@ class Api::V1::Pages::BlmController < ApplicationController
         }
     end
 
-    private
-
-    def verify_user_account_type
-        if user().account_type == 2
-            render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."}
-        end
-    end
-
-    def pushNotification(tokens, title, message)
+    def pushNotification(device_tokens, title, message)
         require 'fcm'
-
-        device_tokens = tokens
-        message = message
-        title = title
+        puts        "\n-- Device Token : --\n#{device_tokens}"
+        logger.info "\n-- Device Token : --\n#{device_tokens}"
 
         fcm_client = FCM.new(Rails.application.credentials.dig(:firebase, :server_key))
         options = { notification: { 
@@ -308,8 +301,23 @@ class Api::V1::Pages::BlmController < ApplicationController
                         title: 'title',
                     }
                 }
-        response = fcm_client.send(device_tokens, options)
+
+        begin
+            response = fcm_client.send(device_tokens, options)
+        rescue StandardError => err
+            puts        "\n-- PushNotification : Error --\n#{err}"
+            logger.info "\n-- PushNotification : Error --\n#{err}"
+        end
+
         puts response
+    end
+
+    private
+
+    def verify_user_account_type
+        if user().account_type == 2
+            render json: {status: "Oops! Looks like your account is not registered as Black Lives Matter account. Register to continue."}
+        end
     end
 
     def blm_params

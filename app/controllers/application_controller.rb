@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
         end
 
         def current_user
-            super || guest_user
+            super 
         end
       
         private
