@@ -18,29 +18,32 @@ export default function MemorialDataTable({
   const [memorials, setMemorials] = useState([]);
   const [blms, setBlms] = useState([]);
 
-  // const handleSearch = () => {
-  //   axios
-  //     .get(`/api/v1/admin/users/search`, {
-  //       params: { keywords: keywords, page: page },
-  //     })
-  //     .then((response) => {
-  //       setUsers(response.data.users);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //     });
-  //   setSearch(false);
-  // };
+  const handleSearch = () => {
+    axios
+      .get(`/api/v1/admin/search/memorial`, {
+        params: { keywords: keywords, page: page },
+      })
+      .then((response) => {
+        response.data.page_type == 2
+          ? setMemorials(response.data.memorials)
+          : setBlms(response.data.memorials);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    setSearch(false);
+  };
 
-  // {
-  //   search ? handleSearch() : console.log("Search", search);
-  // }
+  {
+    search ? handleSearch() : console.log("Search", search);
+  }
 
   useEffect(() => {
     fetchMemorials(page);
   }, [memorials.id]);
 
   const handleClick = (page) => {
+    console.log(search);
     setPage(page);
     setClicked(true);
     fetchMemorials(page);
@@ -78,12 +81,13 @@ export default function MemorialDataTable({
             <th className="pl-0" style={{ minWidth: "100px" }}>
               memorial id
             </th>
+            <th style={{ minWidth: "120px" }}>name</th>
             {pageType === 2 ? (
               <th style={{ minWidth: "120px" }}>birthplace</th>
             ) : (
               <th style={{ minWidth: "120px" }}>location</th>
             )}
-            <th style={{ minWidth: "150px" }}>name</th>
+            <th style={{ minWidth: "150px" }}>country</th>
             <th style={{ minWidth: "150px" }}>privacy</th>
             <th style={{ minWidth: "130px" }}>page type</th>
             <th className="pr-0 text-left" style={{ minWidth: "160px" }}>

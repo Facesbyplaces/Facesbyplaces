@@ -130,9 +130,7 @@ export default function EditMemorial() {
             height: "200px",
             width: "200px",
             backgroundColor: "#f3f6f9",
-            backgroundImage: imagesOrVideosTemporaryImageDisplay
-              ? `url(${imagesOrVideosTemporaryImageDisplay})`
-              : `url( ${iOV})`,
+            backgroundImage: `url( ${iOV})`,
             backgroundSize: "cover",
             opacity: "1",
           }}
@@ -319,8 +317,8 @@ export default function EditMemorial() {
       .then((response) => {
         console.log(response.data);
         setTimeout(() => {
-          setLoading(false);
           uploadImage(response.data.memorial);
+          setLoading(false);
         }, 1000);
         openModal();
       })

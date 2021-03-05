@@ -225,6 +225,22 @@ export default function ViewMemorial() {
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
+                          Relationship
+                        </label>
+                        <div className="col-9">
+                          <input
+                            className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                            type="relationship"
+                            name="relationship"
+                            defaultValue={memorial.relationship}
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      {/*end::Group*/}
+                      {/*begin::Group*/}
+                      <div className="form-group row">
+                        <label className="col-form-label col-3 text-lg-right text-left">
                           Description
                         </label>
                         <div className="col-9">

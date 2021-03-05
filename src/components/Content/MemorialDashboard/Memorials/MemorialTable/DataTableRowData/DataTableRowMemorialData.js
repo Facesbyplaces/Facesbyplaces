@@ -53,12 +53,17 @@ export default function DataTableRowMemorialData({
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {memorial.birthplace}
+          {memorial.name}
         </span>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {memorial.country}
+          {memorial.birthplace || memorial.details.birthplace}
+        </span>
+      </td>
+      <td className="pl-0 py-6">
+        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+          {memorial.country || memorial.details.country}
         </span>
       </td>
       <td>

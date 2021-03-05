@@ -49,12 +49,17 @@ export default function DataTableRowBlmData({ memorials, search, pageType }) {
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {memorial.location}
+          {memorial.name}
         </span>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {memorial.country}
+          {memorial.location || memorial.details.location}
+        </span>
+      </td>
+      <td className="pl-0 py-6">
+        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+          {memorial.country || memorial.details.country}
         </span>
       </td>
       <td>

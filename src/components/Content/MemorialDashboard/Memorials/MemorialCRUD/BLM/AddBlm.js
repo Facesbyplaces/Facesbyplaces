@@ -48,17 +48,18 @@ export default function EditMemorial() {
 
   // Form Data
   const [users, setUsers] = useState([]);
-  const [location, setLocation] = useState("");
+  const [user, setUser] = useState([]);
+  const [blmLocation, setBlmLocation] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [dateOfDeath, setDateOfDeath] = useState("");
-  const [precinct, setPrecinct] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [relationship, setRelationship] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [blmPrecinct, setBlmPrecinct] = useState("");
+  const [blmState, setBlmState] = useState("");
+  const [blmCountry, setBlmCountry] = useState("");
+  const [blmName, setBlmName] = useState("");
+  const [blmDescription, setBlmDescription] = useState("");
+  const [blmRelationship, setBlmRelationship] = useState("");
+  const [blmLatitude, setBlmLatitude] = useState("");
+  const [blmLongitude, setBlmLongitude] = useState("");
 
   // Form Data Images
   const imageOrVideosSelectedHandler = (e) => {
@@ -105,8 +106,12 @@ export default function EditMemorial() {
   };
 
   // Form Data Handlers
+  const handleUserChange = (e) => {
+    setUser(e.target.value);
+    console.log("User: ", e.target.value);
+  };
   const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+    setBlmLocation(e.target.value);
   };
   const handleDateOfBirthChange = (e) => {
     setDateOfBirth(e.target.value);
@@ -115,28 +120,28 @@ export default function EditMemorial() {
     setDateOfDeath(e.target.value);
   };
   const handlePrecinctChange = (e) => {
-    setPrecinct(e.target.value);
+    setBlmPrecinct(e.target.value);
   };
   const handleStateChange = (e) => {
-    setState(e.target.value);
+    setBlmState(e.target.value);
   };
   const handleCountryChange = (e) => {
-    setCountry(e.target.value);
+    setBlmCountry(e.target.value);
   };
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setBlmName(e.target.value);
   };
   const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+    setBlmDescription(e.target.value);
   };
   const handleRelationshipChange = (e) => {
-    setRelationship(e.target.value);
+    setBlmRelationship(e.target.value);
   };
   const handleLatitudeChange = (e) => {
-    setLatitude(e.target.value);
+    setBlmLatitude(e.target.value);
   };
   const handleLongitudeChange = (e) => {
-    setLongitude(e.target.value);
+    setBlmLongitude(e.target.value);
   };
 
   // Tab Data
@@ -153,27 +158,51 @@ export default function EditMemorial() {
   };
 
   useEffect(() => {
-    axios
-      .get(`/api/v1/admin/users`, { params: { page: 1 } })
-      .then((response) => {
-        setUsers(response.data.users);
-        console.log("Response: ", response.data.users);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    const u = [];
+    for (var i = 1; i < 11; i++) {
+      axios
+        .get(`/api/v1/admin/users`, { params: { page: i } })
+        .then((response) => {
+          u.push(response.data.users);
+          u.map((users) =>
+            users.length != 0 ? setUsers(users) : console.log("Empty array")
+          );
+          console.log(u);
+          console.log("Response: ", response.data.users);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
   }, [users.id]);
 
   const renderedUsers = users.map((user) =>
     user.account_type == 1 ? (
-      <option value="volvo">{user.first_name}</option>
+      <option value={user.id}>
+        {user.first_name} {user.last_name}
+      </option>
     ) : (
       console.log("Not a Blm User")
     )
   );
 
   const handleSubmit = (e) => {
-    // console.log("Page Creator: ", pageCreator);
+    const user_id = parseInt(user, 10);
+    const page_type = memorialTab.type;
+    const location = blmLocation;
+    const dob = dateOfBirth;
+    const rip = dateOfDeath;
+    const precinct = blmPrecinct;
+    const state = blmState;
+    const country = blmCountry;
+    const name = blmName;
+    const description = blmDescription;
+    const relationship = blmRelationship;
+    const latitude = blmLatitude;
+    const longitude = blmLongitude;
+
+    console.log("User ID: ", user_id);
+    console.log("Page Type: ", page_type);
     console.log("Location: ", location);
     console.log("Date of Birth: ", dateOfBirth);
     console.log("Date of Death: ", dateOfDeath);
@@ -185,33 +214,37 @@ export default function EditMemorial() {
     console.log("Relationship: ", relationship);
     console.log("Latitude: ", latitude);
     console.log("Longitude: ", longitude);
-    // setLoading(true);
-    // axios
-    //   .put(`/api/v1/admin/blm/${memorial.id}`, {
-    //     user_id: pageCreator,
-    //     location: memorialLocation,
-    //     dob: memorialDateOfBirth,
-    //     rip: memorialDateOfDeath,
-    //     precinct: memorialPrecinct,
-    //     country: memorialCountry,
-    //     name: pageName,
-    //     description: memorialDescription,
-    //     relationship: pageRelationship,
-    //     latitude: memorialLatitude,
-    //     longitude: memorialLongitude,
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //       uploadImage(response.data.blm);
-    //     }, 1000);
-    //     openModal();
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     setErrors(error.response);
-    //   });
+
+    setLoading(true);
+    axios
+      .post(`/api/v1/admin/memorials/add`, {
+        user_id,
+        page_type,
+        blm: {
+          location,
+          dob,
+          rip,
+          precinct,
+          country,
+          name,
+          description,
+          relationship,
+          latitude,
+          longitude,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setTimeout(() => {
+          uploadImage(response.data.blm);
+          setLoading(false);
+        }, 1000);
+        openModal();
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrors(error.response);
+      });
 
     e.preventDefault();
   };
@@ -539,8 +572,9 @@ export default function EditMemorial() {
                                     id="users"
                                     className="form-control form-control-lg form-control-solid"
                                     name="users"
-                                    // value={email}
+                                    onChange={handleUserChange}
                                   >
+                                    <option selected>Select a User</option>
                                     {renderedUsers}
                                   </select>
                                 </div>
@@ -589,19 +623,19 @@ export default function EditMemorial() {
                             </div>
                             {/*end::Group*/}
                             {/*begin::Group*/}
-                            {/* <div className="form-group row">
-                        <label className="col-form-label col-3 text-lg-right text-left">
-                          Relationship
-                        </label>
-                        <div className="col-9">
-                          <input
-                            className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                            type="relationship"
-                            name="relationship"
-                            onChange={handleRelationshipChange}
-                          />
-                        </div>
-                      </div> */}
+                            <div className="form-group row">
+                              <label className="col-form-label col-3 text-lg-right text-left">
+                                Relationship
+                              </label>
+                              <div className="col-9">
+                                <input
+                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                                  type="text"
+                                  name="relationship"
+                                  onChange={handleRelationshipChange}
+                                />
+                              </div>
+                            </div>
                             {/*end::Group*/}
                             {/*begin::Group*/}
                             <div className="form-group row">
@@ -637,9 +671,10 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="date"
+                                  name="dateOfBirth"
                                   onChange={handleDateOfBirthChange}
+                                  required
                                 />
                               </div>
                             </div>
@@ -652,9 +687,10 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="date"
+                                  name="dateOfDeath"
                                   onChange={handleDateOfDeathChange}
+                                  required
                                 />
                               </div>
                             </div>
@@ -678,8 +714,8 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="text"
+                                  name="location"
                                   onChange={handleLocationChange}
                                 />
                               </div>
@@ -693,8 +729,8 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="text"
+                                  name="precinct"
                                   onChange={handlePrecinctChange}
                                 />
                               </div>
@@ -708,8 +744,8 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="text"
+                                  name="state"
                                   onChange={handleStateChange}
                                 />
                               </div>
@@ -723,8 +759,8 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="text"
+                                  name="country"
                                   onChange={handleCountryChange}
                                 />
                               </div>
@@ -738,8 +774,8 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="text"
+                                  name="latitude"
                                   onChange={handleLatitudeChange}
                                 />
                               </div>
@@ -753,8 +789,8 @@ export default function EditMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="last_name"
-                                  name="last_name"
+                                  type="text"
+                                  name="longitude"
                                   onChange={handleLongitudeChange}
                                 />
                               </div>
