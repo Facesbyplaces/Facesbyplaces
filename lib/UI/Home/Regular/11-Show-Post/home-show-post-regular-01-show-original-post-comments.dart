@@ -931,9 +931,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                         Expanded(
                                           child: Align(
                                             alignment: Alignment.centerRight,
-                                            child: FlatButton.icon(
-                                              shape: CircleBorder(),
-                                              splashColor: Colors.transparent,
+                                            child: TextButton.icon(
                                               onPressed: () async{
                                                 if(commentsLikes[i] == true){
                                                   setState(() {
@@ -1101,9 +1099,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   Expanded(
                                                     child: Align(
                                                       alignment: Alignment.centerRight,
-                                                      child: FlatButton.icon(
-                                                        shape: CircleBorder(),
-                                                        splashColor: Colors.transparent,
+                                                      child: TextButton.icon(
                                                         onPressed: () async{
                                                           if(repliesLikes[i][index] == true){
                                                             setState(() {

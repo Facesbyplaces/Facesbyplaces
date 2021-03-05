@@ -69,15 +69,16 @@ void main() async{
       overlayColor: Colors.grey,
       child: MaterialApp(
         title: 'Faces by Places',
-        home: ((){
-          if(blmSession){
-            return HomeBLMScreen();
-          }else if(regularSession){
-            return HomeRegularScreen();
-          }else{
-            return UIGetStarted();
-          }
-        }()),
+        home: UIGetStarted(),
+        // home: ((){
+        //   if(blmSession){
+        //     return HomeBLMScreen();
+        //   }else if(regularSession){
+        //     return HomeRegularScreen();
+        //   }else{
+        //     return UIGetStarted();
+        //   }
+        // }()),
         builder: (context, widget) => ResponsiveWrapper.builder(
           BouncingScrollWrapper.builder(context, widget),
           maxWidth: 1200,

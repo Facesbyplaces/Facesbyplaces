@@ -1,5 +1,7 @@
 // import 'dart:io';
 
+import 'dart:io';
+
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
@@ -485,11 +487,16 @@ class RegularLoginState extends State<RegularLogin>{
                           }else{
 
                             context.showLoaderOverlay();
+
+                            String deviceToken = '';
+
+                            if(Platform.isIOS){
+                              final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+                              final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                              pushNotificationService.initialise();
+                              deviceToken = await pushNotificationService.fcm.getToken();
+                            }
                             
-                            final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-                            final pushNotificationService = PushNotificationService(_firebaseMessaging);
-                            pushNotificationService.initialise();
-                            String deviceToken = await pushNotificationService.fcm.getToken();
                             bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text, deviceToken: deviceToken);
                             
                             context.hideLoaderOverlay();

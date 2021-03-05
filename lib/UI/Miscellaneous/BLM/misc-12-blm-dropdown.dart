@@ -37,7 +37,7 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
   MiscBLMDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
 
-  final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
+  
 
   BranchUniversalObject buo;
   BranchLinkProperties lp;
@@ -205,7 +205,9 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
+
+                // FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
 
               }
             },
@@ -401,7 +403,7 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
               }
             },
           );

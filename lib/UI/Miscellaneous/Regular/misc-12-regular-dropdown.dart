@@ -206,7 +206,7 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
               }
             },
           );
@@ -404,7 +404,7 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                   print('Error : ${response.errorCode} - ${response.errorMessage}');
                 }
 
-                FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
+                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
               }
             },
           );

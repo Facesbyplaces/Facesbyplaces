@@ -931,9 +931,9 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                         Expanded(
                                           child: Align(
                                             alignment: Alignment.centerRight,
-                                            child: FlatButton.icon(
-                                              shape: CircleBorder(),
-                                              splashColor: Colors.transparent,
+                                            child: TextButton.icon(
+                                              // shape: CircleBorder(),
+                                              // splashColor: Colors.transparent,
                                               onPressed: () async{
                                                 if(commentsLikes[i] == true){
                                                   setState(() {
@@ -1101,9 +1101,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   Expanded(
                                                     child: Align(
                                                       alignment: Alignment.centerRight,
-                                                      child: FlatButton.icon(
-                                                        shape: CircleBorder(),
-                                                        splashColor: Colors.transparent,
+                                                      child: TextButton.icon(
                                                         onPressed: () async{
                                                           if(repliesLikes[i][index] == true){
                                                             setState(() {
