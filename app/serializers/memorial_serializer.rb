@@ -100,6 +100,8 @@ class MemorialSerializer < ActiveModel::Serializer
   def relationship
     if object.relationships.where(account: object.currentUser).first
       object.relationships.where(account: object.currentUser).first.relationship
+    elsif object.relationships.first
+      object.relationships.first.relationship
     end
   end
 

@@ -225,7 +225,7 @@ Rails.application.routes.draw do
         # all memorials
         get 'memorials', to: 'admin#allMemorials'
         # add memorials
-        # post 'memorials/add', to: 'admin#createMemorial'
+        post 'memorials/add', to: 'admin#createMemorial'
         # view memorial
         get 'memorials/:id/:page', to: 'admin#showMemorial'
         # update memorial

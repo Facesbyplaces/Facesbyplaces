@@ -223,6 +223,138 @@ class Api::V1::Admin::AdminController < ApplicationController
         
     end
 
+    def createMemorial
+        #IF MEMORIAL IS OF TYPE ALM
+        if params[:page_type].to_i == 2
+            memorial = Memorial.new(memorial_params)
+            # get user for associating them to a memorial
+            user = AlmUser.find(params[:user_id])
+    
+            # check if the params sent is valid or not
+            check = params_presence(params[:memorial])
+            if check == true
+                # set privacy to public
+                memorial.privacy = "public"
+                memorial.hideFamily = false
+                memorial.hideFriends = false
+                memorial.hideFollowers = false
+    
+                # save memorial
+                memorial.save
+    
+                # save the owner of the user
+                pageowner = Pageowner.new(account_type:  "AlmUser", account_id: user.id, view: 0)
+                memorial.pageowner = pageowner
+    
+                # save relationship of the user to the page
+                relationship = memorial.relationships.new(account: user, relationship: params[:relationship])
+                relationship.save 
+    
+                # Make the user as admin of the 
+                user.add_role "pageadmin", memorial
+                
+                # Tell the Mailer to send link to register stripe user account after save
+                redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+                client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+                SendStripeLinkMailer.send_memorial_link(redirect_uri, client_id, user(), memorial.id).deliver_now
+    
+                render json: {memorial: MemorialSerializer.new( memorial ).attributes, status: :created}
+    
+                # Notify all Users
+                blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true)
+                almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'AlmUser' AND notifsettings.account_id != #{user().id}")
+                
+                blmUsersDeviceToken = []
+                blmUsers.each do |user|
+                    Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
+                    blmUsersDeviceToken << user.device_token
+                end
+    
+                almUsersDeviceToken = []
+                almUsers.each do |user|
+                    Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: memorial.id, notif_type: 'Memorial')
+                    almUsersDeviceToken << user.device_token
+                end
+    
+                device_tokens = almUsersDeviceToken + blmUsersDeviceToken
+                title = "New Memorial Page"
+                message = "#{user().first_name} created a new page"
+                PushNotification(device_tokens, title, message)
+            else
+                render json: {status: "#{check} is empty"}
+            end
+        #IF MEMORIAL IS OF TYPE BLM    
+        elsif params[:page_type] == 1 || "1"
+            # create new blm page
+            blm = Blm.new(blm_params)
+            # get user for associating them to a memorial
+            user = User.find(params[:user_id])
+
+            # check if the params sent is valid or not
+            check = params_presence(params[:blm])
+            if check == true
+                # set privacy to public
+                blm.privacy = "public"
+                blm.hideFamily = false
+                blm.hideFriends = false
+                blm.hideFollowers = false
+    
+                # save blm
+                if blm.save 
+    
+                    # save the owner of the user
+                    pageowner = Pageowner.new(account_type:  "User", account_id: user().id, view: 0)
+                    blm.pageowner = pageowner
+    
+                    # save relationship of the user to the page
+                    relationship = blm.relationships.new(account: user, relationship: params[:relationship])
+                    if relationship.save 
+    
+                        # Make the user as admin of the 
+                        user.add_role "pageadmin", blm
+    
+                        # Tell the Mailer to send link to register stripe user account after save
+                        redirect_uri = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :redirect_uri)
+                        client_id = Rails.application.credentials.dig(:stripe, Rails.env.to_sym, :client_id)
+                        SendStripeLinkMailer.send_blm_link(redirect_uri, client_id, user(), blm.id).deliver_now
+                        
+                        render json: {blm: BlmSerializer.new( blm ).attributes, status: :created}
+    
+                        # Notify all Users
+                        blmUsers = User.joins(:notifsetting).where("notifsettings.newMemorial": true).where("notifsettings.account_type != 'User' AND notifsettings.account_id != #{user().id}")
+                        almUsers = AlmUser.joins(:notifsetting).where("notifsettings.newMemorial": true)
+                        
+                        blmUsersDeviceToken = []
+                        blmUsers.each do |user|
+                            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
+                            blmUsersDeviceToken << user.device_token
+                        end
+    
+                        almUsersDeviceToken = []
+                        almUsers.each do |user|
+                            Notification.create(recipient: user, actor: user(), read: false, action: "#{user().first_name} created a new page", postId: blm.id, notif_type: 'Blm')
+                            almUsersDeviceToken << user.device_token
+                        end
+    
+                        device_tokens = almUsersDeviceToken + blmUsersDeviceToken
+                        title = "New Memorial Page"
+                        message = "#{user().first_name} created a new page"
+                        PushNotification(device_tokens, title, message)
+                    else
+                        render json: {errors: relationship.errors}, status: 500
+                    end
+                else  
+                    render json: {errors: blm.errors}, status: 500
+                    blm.destroy
+                end
+            else
+                render json: {status: "#{check} is empty"}
+            end
+        else
+            puts params[:page_type].class
+        end
+    end
+
     # Show Memorial
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
@@ -303,15 +435,18 @@ class Api::V1::Admin::AdminController < ApplicationController
             itemsremaining = memorials.total_count - (params[:page].to_i * numberOfPage)
         end
 
+        page_type = ''
         memorials = memorials.collect do |memorial|
             if memorial.searchable_type == 'Blm'
                 memorial = Blm.find(memorial.searchable_id)
+                page_type = 1
                 ActiveModel::SerializableResource.new(
                     memorial, 
                     each_serializer: BlmSerializer
                 )
             else
                 memorial = Memorial.find(memorial.searchable_id)
+                page_type = 2
                 ActiveModel::SerializableResource.new(
                     memorial, 
                     each_serializer: MemorialSerializer
@@ -320,7 +455,8 @@ class Api::V1::Admin::AdminController < ApplicationController
         end
 
         render json: {  itemsremaining:  itemsremaining,
-                        memorials: memorials
+                        memorials: memorials,
+                        page_type: page_type,
                     }
     end
 
@@ -403,6 +539,10 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def memorial_images_params
         params.permit(:backgroundImage, :profileImage, imagesOrVideos: [])
+    end
+
+    def blm_params
+        params.require(:blm).permit(:name, :description, :location, :precinct, :dob, :rip, :state, :country,  :backgroundImage, :profileImage, :longitude, :latitude, imagesOrVideos: [])
     end
 
     def blm_images_params

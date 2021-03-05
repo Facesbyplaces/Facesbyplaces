@@ -66,4 +66,5 @@ gem 'haml', git: 'https://github.com/haml/haml'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'fcm', '~> 0.0.6'
+gem "braintree", "~> 3.2.0"
       
