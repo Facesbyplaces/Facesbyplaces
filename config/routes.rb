@@ -202,6 +202,8 @@ Rails.application.routes.draw do
 
       namespace :admin do
 
+        # all users without paginations
+        get 'users/selection', to: 'admin#usersSelection'
         # all users
         get 'users', to: 'admin#allUsers'
         # view user
@@ -213,6 +215,8 @@ Rails.application.routes.draw do
         # search user
         get 'users/search', to: 'admin#searchUsers'
 
+        # index post
+        get 'posts', to: 'admin#allPosts'
         # view post
         get 'posts/:id', to: 'admin#showPost'
         # remove post

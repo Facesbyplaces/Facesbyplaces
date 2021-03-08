@@ -290,7 +290,7 @@ class Api::V1::Pages::BlmController < ApplicationController
         }
     end
 
-    def pushNotification(device_tokens, title, message)
+    def PushNotification(device_tokens, title, message)
         require 'fcm'
         puts        "\n-- Device Token : --\n#{device_tokens}"
         logger.info "\n-- Device Token : --\n#{device_tokens}"

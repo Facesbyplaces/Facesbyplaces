@@ -3,7 +3,7 @@ class Api::V1::Posts::PostsController < ApplicationController
     before_action :set_up, only: [:create]
 
     def index  
-        posts = Post.where(accout: user())
+        posts = Post.where(account: user())
 
         posts = posts.page(params[:page]).per(numberOfPage)
         if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0

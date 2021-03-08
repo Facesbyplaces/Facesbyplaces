@@ -3,6 +3,15 @@ class Api::V1::Admin::AdminController < ApplicationController
     before_action :admin_only
 
     # USER
+    def usersSelection #for create memorial users selection
+        users = User.all.where.not(guest: true, username: "admin")
+        # _except(User.guest).order("users.id DESC")
+        alm_users = AlmUser.all
+
+        allUsers = users.order("users.id DESC") + alm_users.order("alm_users.id DESC")
+        render json: {success: true,  user: allUsers }, status: 200
+    end
+
     def allUsers
         users = User.all.where.not(guest: true, username: "admin")
         # _except(User.guest).order("users.id DESC")
@@ -134,6 +143,28 @@ class Api::V1::Admin::AdminController < ApplicationController
         render json: {status: "Email Sent"}
     end
 
+    # Post
+    # Index Posts
+    def allPosts  
+        posts = Post.all
+
+        posts = posts.page(params[:page]).per(numberOfPage)
+        if posts.total_count == 0 || (posts.total_count - (params[:page].to_i * numberOfPage)) < 0
+            itemsremaining = 0
+        elsif posts.total_count < numberOfPage
+            itemsremaining = posts.total_count 
+        else
+            itemsremaining = posts.total_count - (params[:page].to_i * numberOfPage)
+        end
+
+        render json: {  itemsremaining:  itemsremaining,
+                        posts: ActiveModel::SerializableResource.new(
+                                posts, 
+                                each_serializer: PostSerializer
+                            )
+                    }
+    end
+
     def showPost
         post = Post.find(params[:id])
 
@@ -170,8 +201,8 @@ class Api::V1::Admin::AdminController < ApplicationController
     end
     
     # Memorial
-        # Index Memorials
-     def allMemorials
+    # Index Memorials
+    def allMemorials
         # BLM Memorials
         blm_memorials = Blm.all
         #ALM Memorials
