@@ -29,9 +29,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      #Set Account ID Stripe
-      post 'payment_intent', to: 'payment_intent#set_payment_intent'
-      get 'stripe_connect', to: 'stripe_connect#success_stripe_connect'
+      
       
       namespace :users do 
         resources :verify, only: [:create]
@@ -316,6 +314,15 @@ Rails.application.routes.draw do
         # number of unread notifications
         get 'numOfUnread', to: 'notifsettings#numOfUnread'
       end
+
+      namespace :payments do 
+        #Set Account ID Stripe
+        post 'payment_intent', to: 'payment_intent#set_payment_intent'
+        get 'stripe_connect', to: 'stripe_connect#success_stripe_connect'
+        #Braintree Paypal
+        resources :paypal, only: [:new, :create, :show]
+      end
+
     end
   end
   
