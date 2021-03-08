@@ -38,8 +38,8 @@ export default function Navbar() {
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >
-                <a href="javascript:;" className="menu-link menu-toggle">
-                  <span className="menu-text">Crud</span>
+                <a href="/posts" className="menu-link menu-toggle">
+                  <span className="menu-text">Posts</span>
                   <span className="menu-desc" />
                   <i className="menu-arrow" />
                 </a>

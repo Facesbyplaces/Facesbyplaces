@@ -17,13 +17,13 @@ export default function Navbar() {
           >
             {/*begin::Header Nav*/}
             <ul className="menu-nav">
-              <li className="menu-item menu-item-active" aria-haspopup="true">
+              <li className="menu-item menu-item-submenu" aria-haspopup="true">
                 <a href="/users" className="menu-link">
                   <span className="menu-text">Users</span>
                 </a>
               </li>
               <li
-                className="menu-item menu-item-submenu menu-item-rel"
+                className="menu-item menu-item menu-item-rel"
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >
@@ -34,34 +34,12 @@ export default function Navbar() {
                 </a>
               </li>
               <li
-                className="menu-item menu-item-submenu menu-item-rel"
+                className="menu-item menu-item-active menu-item-rel"
                 data-menu-toggle="click"
                 aria-haspopup="true"
               >
                 <a href="/posts" className="menu-link menu-toggle">
                   <span className="menu-text">Posts</span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
-                </a>
-              </li>
-              <li
-                className="menu-item menu-item-submenu menu-item-rel"
-                data-menu-toggle="click"
-                aria-haspopup="true"
-              >
-                <a href="javascript:;" className="menu-link menu-toggle">
-                  <span className="menu-text">Apps</span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
-                </a>
-              </li>
-              <li
-                className="menu-item menu-item-submenu"
-                data-menu-toggle="click"
-                aria-haspopup="true"
-              >
-                <a href="javascript:;" className="menu-link menu-toggle">
-                  <span className="menu-text">Pages</span>
                   <span className="menu-desc" />
                   <i className="menu-arrow" />
                 </a>

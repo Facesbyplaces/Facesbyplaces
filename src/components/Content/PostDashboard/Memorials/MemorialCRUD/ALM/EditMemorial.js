@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "../../../../../../auxiliary/axios";
 import { SuccessModal } from "../SuccessModal";
 import HashLoader from "react-spinners/HashLoader";
@@ -8,7 +8,7 @@ import {
   ViewMemorialAction,
 } from "../../../../../../redux/actions";
 
-export default function AddMemorial() {
+export default function EditMemorial() {
   const dispatch = useDispatch();
   const { memorialTab } = useSelector(({ memorialTab }) => ({
     memorialTab: memorialTab,
@@ -16,6 +16,11 @@ export default function AddMemorial() {
   const [errors, setErrors] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Fetched Data
+  const [memorial, setMemorial] = useState([]);
+  const [memorialDetails, setMemorialDetails] = useState([]);
+  const [pageCreator, setPageCreator] = useState([]);
 
   // ProfileImage Variables
   const [
@@ -35,6 +40,8 @@ export default function AddMemorial() {
     setBackgroundImageSelectedFile,
   ] = useState(null);
   // ImageOrVideos Variables
+  const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState([]);
+  const [imagesOrVideos, setImagesOrVideos] = useState([]);
   const [
     imagesOrVideosTemporaryImageDisplay,
     setImagesOrVideosTemporaryImageDisplay,
@@ -42,21 +49,19 @@ export default function AddMemorial() {
   const [
     imagesOrVideosFilesSelected,
     setImagesOrVideosFilesSelected,
-  ] = useState([]);
+  ] = useState(null);
 
   // Form Data
-  const [users, setUsers] = useState([]); // users to be rendered
-  const [user, setUser] = useState([]); // user to associate a memorial
   const [birthPlace, setBirthPlace] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [dateOfDeath, setDateOfDeath] = useState("");
-  const [memorialCemetery, setMemorialCemetery] = useState("");
-  const [memorialCountry, setMemorialCountry] = useState("");
-  const [memorialName, setMemorialName] = useState("");
-  const [memorialDescription, setMemorialDescription] = useState("");
-  const [memorialRelationship, setMemorialRelationship] = useState("");
-  const [memorialLatitude, setMemorialLatitude] = useState("");
-  const [memorialLongitude, setMemorialLongitude] = useState("");
+  const [cemetery, setCemetery] = useState("");
+  const [country, setCountry] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [relationship, setRelationship] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
 
   // Form Data Images
   const imageOrVideosSelectedHandler = (e) => {
@@ -91,77 +96,6 @@ export default function AddMemorial() {
     setBackgroundImageSelectedFile(e.target.files[0]);
   };
 
-  // Form Data Handlers
-  const handleUserChange = (e) => {
-    setUser(e.target.value);
-    console.log("User: ", e.target.value);
-  };
-  const handleBirthPlaceChange = (e) => {
-    setBirthPlace(e.target.value);
-  };
-  const handleDateOfBirthChange = (e) => {
-    setDateOfBirth(e.target.value);
-  };
-  const handleDateOfDeathChange = (e) => {
-    setDateOfDeath(e.target.value);
-  };
-  const handleCemeteryChange = (e) => {
-    setMemorialCemetery(e.target.value);
-  };
-  const handleCountryChange = (e) => {
-    setMemorialCountry(e.target.value);
-  };
-  const handleNameChange = (e) => {
-    setMemorialName(e.target.value);
-  };
-  const handleDescriptionChange = (e) => {
-    setMemorialDescription(e.target.value);
-  };
-  const handleRelationshipChange = (e) => {
-    setMemorialRelationship(e.target.value);
-  };
-  const handleLatitudeChange = (e) => {
-    setMemorialLatitude(e.target.value);
-  };
-  const handleLongitudeChange = (e) => {
-    setMemorialLongitude(e.target.value);
-  };
-
-  // Tab Data
-  const handleTableClick = () => {
-    dispatch(TableMemorialAction());
-  };
-  const handleViewClick = (id, page, option, type) => {
-    dispatch(ViewMemorialAction({ id, page, option, type }));
-  };
-
-  // Modal
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
-
-  useEffect(() => {
-    axios
-      .get(`/api/v1/admin/users/selection`)
-      .then((response) => {
-        setUsers(response.data.user);
-        console.log("Response: ", response.data.user);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  }, [users.id]);
-
-  const renderedUsers = users.map((user) =>
-    user.account_type == 2 ? (
-      <option value={user.id}>
-        {user.first_name} {user.last_name}
-      </option>
-    ) : (
-      console.log("Not an Alm User")
-    )
-  );
-
   const uploadImage = (memorial) => {
     console.log("Images or Videos: ", imagesOrVideosFilesSelected);
     const formData = new FormData();
@@ -187,51 +121,198 @@ export default function AddMemorial() {
       });
   };
 
+  const renderedImagesOrVideos = imagesOrVideos.map((iOV) => {
+    return (
+      <div className="image-input image-input-empty image-input-outline pr-3 pb-3">
+        <div
+          className="card card-custom pb-3 card-stretch pr-3"
+          style={{
+            height: "200px",
+            width: "200px",
+            backgroundColor: "#f3f6f9",
+            backgroundImage: `url( ${iOV})`,
+            backgroundSize: "cover",
+            opacity: "1",
+          }}
+        >
+          <div className="image-input image-input-outline image-input-circle">
+            <label
+              className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+              data-action="change"
+              data-toggle="tooltip"
+              title
+              data-original-title="Change avatar"
+            >
+              <i className="fa fa-pen icon-sm text-muted" />
+              <span className="svg-icon svg-icon-xs svg-icon-light-secondary ml-3 mr-3">
+                <svg
+                  width="24px"
+                  height="24px"
+                  viewBox="0 0 24 24"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                >
+                  {/* Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch */}
+                  <title>Stockholm-icons / Navigation / Close</title>
+                  <desc>Created with Sketch.</desc>
+                  <defs />
+                  <g
+                    id="Stockholm-icons-/-Navigation-/-Close"
+                    stroke="none"
+                    strokeWidth={1}
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <g
+                      id="Group"
+                      transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)"
+                      fill="#000000"
+                    >
+                      <rect
+                        id="Rectangle-185"
+                        x={0}
+                        y={7}
+                        width={16}
+                        height={2}
+                        rx={1}
+                      />
+                      <rect
+                        id="Rectangle-185-Copy"
+                        opacity="0.3"
+                        transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) "
+                        x={0}
+                        y={7}
+                        width={16}
+                        height={2}
+                        rx={1}
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </span>
+
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                onChange={imageOrVideosSelectedHandler}
+              />
+              <input type="hidden" name="profile_avatar_remove" />
+            </label>
+          </div>
+        </div>
+      </div>
+    );
+  });
+
+  // Form Data Handlers
+  const handleBirthPlaceChange = (e) => {
+    setBirthPlace(e.target.value);
+  };
+  const handleDateOfBirthChange = (e) => {
+    setDateOfBirth(e.target.value);
+  };
+  const handleDateOfDeathChange = (e) => {
+    setDateOfDeath(e.target.value);
+  };
+  const handleCemeteryChange = (e) => {
+    setCemetery(e.target.value);
+  };
+  const handleCountryChange = (e) => {
+    setCountry(e.target.value);
+  };
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+  const handleRelationshipChange = (e) => {
+    setRelationship(e.target.value);
+  };
+  const handleLatitudeChange = (e) => {
+    setLatitude(e.target.value);
+  };
+  const handleLongitudeChange = (e) => {
+    setLongitude(e.target.value);
+  };
+
+  // Tab Data
+  const handleTableClick = () => {
+    dispatch(TableMemorialAction());
+  };
+  const handleViewClick = (id, page, option, type) => {
+    dispatch(ViewMemorialAction({ id, page, option, type }));
+  };
+
+  // Modal
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  useEffect(() => {
+    axios
+      .get(`/api/v1/admin/memorials/${memorialTab.id}/${memorialTab.page}`)
+      .then((response) => {
+        setMemorial(response.data.page);
+        setMemorialDetails(response.data.page.details);
+        response.data.page.imagesOrVideos
+          ? setImagesOrVideos(response.data.page.imagesOrVideos)
+          : setImagesOrVideosEmpty(true);
+        setPageCreator(response.data.page.page_creator.id);
+        console.log("Response: ", response.data);
+      })
+      .catch((error) => {
+        console.log(error.errors);
+      });
+  }, memorial.id);
+
+  console.log("Profile Image: ", profileImageSelectedFile);
   const handleSubmit = (e) => {
-    setLoading(true);
+    // If Form Data empty
+    const memorialBirthplace = birthPlace
+      ? birthPlace
+      : memorialDetails.birthplace;
+    const memorialDateOfBirth = dateOfBirth ? dateOfBirth : memorialDetails.dob;
+    const memorialDateOfDeath = dateOfDeath ? dateOfDeath : memorialDetails.rip;
+    const memorialCemetery = cemetery ? cemetery : memorialDetails.cemetery;
+    const memorialCountry = country ? country : memorialDetails.country;
+    const pageName = name ? name : memorial.name;
+    const memorialDescription = description
+      ? description
+      : memorialDetails.description;
+    const pageRelationship = relationship
+      ? relationship
+      : memorial.relationship;
+    const memorialLatitude = latitude ? latitude : memorialDetails.latitude;
+    const memorialLongitude = longitude ? longitude : memorialDetails.longitude;
 
-    const user_id = parseInt(user, 10);
-    const page_type = memorialTab.type;
-    const relationship = memorialRelationship;
-    const birthplace = birthPlace;
-    const dob = dateOfBirth;
-    const rip = dateOfDeath;
-    const cemetery = memorialCemetery;
-    const country = memorialCountry;
-    const name = memorialName;
-    const description = memorialDescription;
-    const latitude = memorialLatitude;
-    const longitude = memorialLongitude;
-
-    console.log("User ID: ", parseInt(user, 10));
-    console.log("Page Type: ", memorialTab.type);
-    console.log("Relationship: ", memorialRelationship);
-    console.log("Birthplace: ", birthPlace);
-    console.log("Date of Birth: ", dateOfBirth);
-    console.log("Date of Death: ", dateOfDeath);
+    console.log("Page Creator: ", pageCreator);
+    console.log("Birthplace: ", memorialBirthplace);
+    console.log("Date of Birth: ", memorialDateOfBirth);
+    console.log("Date of Death: ", memorialDateOfDeath);
     console.log("Cemetery: ", memorialCemetery);
     console.log("Country: ", memorialCountry);
-    console.log("Page Name: ", memorialName);
+    console.log("Page Name: ", pageName);
     console.log("Description: ", memorialDescription);
+    console.log("Relationship: ", pageRelationship);
     console.log("Latitude: ", memorialLatitude);
     console.log("Longitude: ", memorialLongitude);
+    setLoading(true);
 
     axios
-      .post(`/api/v1/admin/memorials/add`, {
-        user_id,
-        page_type,
-        relationship,
-        memorial: {
-          birthplace,
-          dob,
-          rip,
-          cemetery,
-          country,
-          name,
-          description,
-          latitude,
-          longitude,
-        },
+      .put(`/api/v1/admin/memorials/${memorial.id}`, {
+        user_id: pageCreator,
+        birthplace: memorialBirthplace,
+        dob: memorialDateOfBirth,
+        rip: memorialDateOfDeath,
+        cemetery: memorialCemetery,
+        country: memorialCountry,
+        name: pageName,
+        description: memorialDescription,
+        relationship: pageRelationship,
+        latitude: memorialLatitude,
+        longitude: memorialLongitude,
       })
       .then((response) => {
         console.log(response.data);
@@ -322,20 +403,33 @@ export default function AddMemorial() {
               </label>
             </div>
 
-            <div
-              className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
-              style={{
-                backgroundImage: backgroundImageTemporaryDisplay
-                  ? `url( ${backgroundImageTemporaryDisplay})`
-                  : `url( "assets/media/bg/bg-1.jpg" )`,
-                height: "350px",
-              }}
-            >
-              <div className="container">
-                <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+            {backgroundImageTemporaryDisplay || memorial.backgroundImage ? (
+              <div
+                className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+                style={{
+                  backgroundImage:
+                    `url( ${backgroundImageTemporaryDisplay})` ||
+                    `url( ${memorial.backgroundImage})`,
+                  height: "350px",
+                }}
+              >
+                <div className="container">
+                  <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+                </div>
               </div>
-            </div>
-
+            ) : (
+              <div
+                className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
+                style={{
+                  backgroundImage: `url( "assets/media/bg/bg-1.jpg" )`,
+                  height: "350px",
+                }}
+              >
+                <div className="container">
+                  <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+                </div>
+              </div>
+            )}
             {/*end::Hero*/}
             {/*begin::Section*/}
             <div className="container mt-n15 gutter-b">
@@ -355,15 +449,24 @@ export default function AddMemorial() {
                           }}
                         >
                           <div className="image-input image-input-outline image-input-circle">
-                            <div
-                              className="image-input-wrapper"
-                              style={{
-                                backgroundImage: profileImageTemporaryDisplay
-                                  ? `url( ${profileImageTemporaryDisplay})`
-                                  : `url( "assets/media/users/blank.png" )`,
-                              }}
-                            />
-
+                            {profileImageTemporaryDisplay ||
+                            memorial.profileImage ? (
+                              <div
+                                className="image-input-wrapper"
+                                style={{
+                                  backgroundImage:
+                                    `url( ${profileImageTemporaryDisplay})` ||
+                                    `url( ${memorial.profileImage})`,
+                                }}
+                              />
+                            ) : (
+                              <div
+                                className="image-input-wrapper"
+                                style={{
+                                  backgroundImage: `url( "assets/media/users/blank.png" )`,
+                                }}
+                              />
+                            )}
                             <label
                               className="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                               data-action="change"
@@ -440,14 +543,22 @@ export default function AddMemorial() {
                         <div className="card-header py-3 pl-5">
                           <div className="card-title align-items-start flex-column mb-2">
                             <h3 className="card-label font-weight-bolder text-dark">
-                              Add Memorial Information
+                              Edit Memorial Information
                             </h3>
 
                             <span className="text-muted font-weight-bold font-size-sm mt-1">
-                              Add user's memorial information
+                              Edit user's memorial information
                             </span>
                           </div>
                         </div>
+                      </div>
+                      <div className="pt-5 pl-15">
+                        <a
+                          className="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3"
+                          onClick={() => handleTableClick()}
+                        >
+                          back
+                        </a>
                       </div>
                       <div
                         className="tab-pane show active px-7"
@@ -468,6 +579,7 @@ export default function AddMemorial() {
                             {/*end::Row*/}
                             {/*begin::Row*/}
                             <div className="form-group row pl-4">
+                              {renderedImagesOrVideos}
                               <div className="image-input image-input-empty image-input-outline">
                                 <div
                                   className="card card-custom pb-3 card-stretch pr-3"
@@ -544,8 +656,7 @@ export default function AddMemorial() {
                                     </span>
                                     <input
                                       type="file"
-                                      accept=".png, .jpg, .jpeg, .mov, .mp4, .avi"
-                                      multiple
+                                      accept=".png, .jpg, .jpeg"
                                       onChange={imageOrVideosSelectedHandler}
                                     />
                                   </label>
@@ -553,35 +664,6 @@ export default function AddMemorial() {
                               </div>
                             </div>
                             {/*end::Group*/}
-                            <div className="separator separator-solid my-10" />
-                            {/*begin::Row*/}
-                            <div className="row">
-                              <div className="col-9">
-                                <h6 className="text-dark font-weight-bold mb-10">
-                                  Memorial User:
-                                </h6>
-                              </div>
-                            </div>
-                            {/*end::Row*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                User
-                              </label>
-                              <div className="col-9">
-                                <div className="input-group input-group-lg input-group-solid">
-                                  <select
-                                    id="users"
-                                    className="form-control form-control-lg form-control-solid"
-                                    name="users"
-                                    onChange={handleUserChange}
-                                  >
-                                    <option selected>Select a User</option>
-                                    {renderedUsers}
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
                             <div className="separator separator-solid my-10" />
                             {/*begin::Row*/}
                             <div className="row">
@@ -616,29 +698,31 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
+                                  type="username"
                                   name="username"
                                   onChange={handleNameChange}
-                                />
-                              </div>
-                            </div>
-                            {/* end::Group*/}
-                            {/*begin::Group*/}
-                            <div className="form-group row">
-                              <label className="col-form-label col-3 text-lg-right text-left">
-                                Relationship
-                              </label>
-                              <div className="col-9">
-                                <input
-                                  className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="relationship"
-                                  name="relationship"
-                                  onChange={handleRelationshipChange}
+                                  defaultValue={memorial.name}
                                 />
                               </div>
                             </div>
                             {/*end::Group*/}
-                            {/*begin::Group */}
+                            {/*begin::Group*/}
+                            {/* <div className="form-group row">
+                        <label className="col-form-label col-3 text-lg-right text-left">
+                          Relationship
+                        </label>
+                        <div className="col-9">
+                          <input
+                            className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                            type="relationship"
+                            name="relationship"
+                            onChange={handleRelationshipChange}
+                            defaultValue={memorial.relationship}
+                          />
+                        </div>
+                      </div> */}
+                            {/*end::Group*/}
+                            {/*begin::Group*/}
                             <div className="form-group row">
                               <label className="col-form-label col-3 text-lg-right text-left">
                                 Description
@@ -649,6 +733,7 @@ export default function AddMemorial() {
                                   id="exampleTextarea"
                                   rows={6}
                                   onChange={handleDescriptionChange}
+                                  defaultValue={memorialDetails.description}
                                 />
                               </div>
                             </div>
@@ -672,10 +757,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="date"
-                                  name="dateOfBirth"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleDateOfBirthChange}
-                                  required
+                                  defaultValue={memorialDetails.dob}
                                 />
                               </div>
                             </div>
@@ -688,10 +773,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="date"
-                                  name="dateOfDeath"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleDateOfDeathChange}
-                                  required
+                                  defaultValue={memorialDetails.rip}
                                 />
                               </div>
                             </div>
@@ -715,9 +800,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="birthplace"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleBirthPlaceChange}
+                                  defaultValue={memorialDetails.birthplace}
                                 />
                               </div>
                             </div>
@@ -730,9 +816,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="cemetery"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleCemeteryChange}
+                                  defaultValue={memorialDetails.cemetery}
                                 />
                               </div>
                             </div>
@@ -745,9 +832,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="country"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleCountryChange}
+                                  defaultValue={memorialDetails.country}
                                 />
                               </div>
                             </div>
@@ -760,9 +848,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="latitude"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleLatitudeChange}
+                                  defaultValue={memorialDetails.latitude}
                                 />
                               </div>
                             </div>
@@ -775,9 +864,10 @@ export default function AddMemorial() {
                               <div className="col-9">
                                 <input
                                   className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                                  type="text"
-                                  name="latitude"
+                                  type="last_name"
+                                  name="last_name"
                                   onChange={handleLongitudeChange}
+                                  defaultValue={memorialDetails.longitude}
                                 />
                               </div>
                             </div>
@@ -799,7 +889,14 @@ export default function AddMemorial() {
                                       </button>
                                       <a
                                         className="btn btn-secondary font-weight-bold"
-                                        onClick={() => handleTableClick()}
+                                        onClick={() =>
+                                          handleViewClick(
+                                            memorial.id,
+                                            memorial.page_type,
+                                            "v",
+                                            2
+                                          )
+                                        }
                                       >
                                         Cancel
                                       </a>

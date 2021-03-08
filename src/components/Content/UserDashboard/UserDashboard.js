@@ -12,7 +12,7 @@ import UsersTable from "./Users/UserTable/UsersTable";
 import Assets from "../../Assets";
 // import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
 
-const Dashboard = () => {
+const UserDashboard = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -75,4 +75,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserDashboard;

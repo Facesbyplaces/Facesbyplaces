@@ -8,12 +8,11 @@ import Navbar from "./Navbar/Navbar";
 import SideBar from "./SideBar/SideBar";
 import Topbar from "./Navbar/Topbar/Topbar";
 import Footer from "./Footer";
-import UsersTable from "./Memorials/MemorialTable/MemorialsTable";
 import Assets from "../../Assets";
-import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
+import PostTable from "./Memorials/PostTable/PostTable";
 // import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
 
-const MemorialDashboard = () => {
+const Dashboard = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -51,9 +50,7 @@ const MemorialDashboard = () => {
               {/*end::Header*/}
 
               {/*begin::Content*/}
-
-              <MemorialsTable />
-
+              <PostTable />
               {/*end::Content*/}
               <Footer />
             </div>
@@ -76,4 +73,4 @@ const MemorialDashboard = () => {
   );
 };
 
-export default MemorialDashboard;
+export default Dashboard;
