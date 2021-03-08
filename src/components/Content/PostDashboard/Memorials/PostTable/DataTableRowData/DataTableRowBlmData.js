@@ -53,12 +53,12 @@ export default function DataTableRowBlmData({ posts, search, pageType }) {
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {post.body}
+          {post.location}
         </span>
       </td>
       <td className="pl-0 py-6">
         <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-          {post.location}
+          {post.page.relationship}
         </span>
       </td>
       <td>

@@ -92,8 +92,8 @@ export default function PostDataTable({
               post id
             </th>
             <th style={{ minWidth: "120px" }}>page name</th>
-            <th style={{ minWidth: "120px" }}>body</th>
-            <th style={{ minWidth: "150px" }}>location</th>
+            <th style={{ minWidth: "120px" }}>location</th>
+            <th style={{ minWidth: "150px" }}>relationship</th>
             <th style={{ minWidth: "150px" }}>privacy</th>
             <th style={{ minWidth: "130px" }}>page type</th>
             <th className="pr-0 text-left" style={{ minWidth: "160px" }}>
