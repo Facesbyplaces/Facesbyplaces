@@ -1,4 +1,4 @@
-class Api::V1::StripeConnectController < ApplicationController
+class Api::V1::Payments::StripeConnectController < ApplicationController
 
     def success_stripe_connect
         response = Stripe::OAuth.token({

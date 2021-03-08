@@ -1,4 +1,4 @@
-class Api::V1::PaymentIntentController < ApplicationController
+class Api::V1::Payments::PaymentIntentController < ApplicationController
   before_action :check_user
     
     def set_payment_intent
