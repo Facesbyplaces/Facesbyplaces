@@ -20,18 +20,18 @@ import 'dart:io';
 
 class HomeBLMUserProfileDetails extends StatefulWidget{
   final int userId;
-  HomeBLMUserProfileDetails({this.userId});
+  HomeBLMUserProfileDetails({required this.userId});
   
   HomeBLMUserProfileDetailsState createState() => HomeBLMUserProfileDetailsState(userId: userId);
 }
 
 class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
   final int userId;
-  HomeBLMUserProfileDetailsState({this.userId});
+  HomeBLMUserProfileDetailsState({required this.userId});
 
-  Future showProfile;
+  Future<APIBLMShowProfileInformation>? showProfile;
   final picker = ImagePicker();
-  File profileImage;
+  File? profileImage;
 
   Future<APIBLMShowProfileInformation> getProfileInformation() async{
     return await apiBLMShowProfileInformation();
@@ -69,7 +69,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                 Container(height: SizeConfig.screenHeight, color: Color(0xffECF0F1),),
 
                 Container(
-                  height: SizeConfig.screenHeight / 2.5,
+                  height: SizeConfig.screenHeight! / 2.5,
                   child: Stack(
                     children: [
 
@@ -77,7 +77,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
 
                       Positioned(
                         bottom: 20,
-                        left: (SizeConfig.screenWidth / 2) - 120,
+                        left: (SizeConfig.screenWidth! / 2) - 120,
                         child: Badge(
                           position: BadgePosition.topEnd(top: 5, end: 15),
                           animationDuration: Duration(milliseconds: 300),
@@ -138,15 +138,16 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                             child: CircleAvatar(
                               radius: 120,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(profileImage != null){
-                                  return AssetImage(profileImage.path);
-                                }else if(profile.data.showProfileInformationImage != null && profile.data.showProfileInformationImage != ''){
-                                  return NetworkImage(profile.data.showProfileInformationImage);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
+                              backgroundImage: NetworkImage(profile.data!.showProfileInformationImage),
+                              // backgroundImage: ((){
+                              //   if(profileImage != null){
+                              //     return AssetImage(profileImage.path);
+                              //   }else if(profile.data.showProfileInformationImage != null && profile.data.showProfileInformationImage != ''){
+                              //     return NetworkImage(profile.data.showProfileInformationImage);
+                              //   }else{
+                              //     return AssetImage('assets/icons/app-icon.png');
+                              //   }
+                              // }()),
                             ),
                           ),
                         ),
@@ -179,13 +180,13 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                 ),
 
                 Positioned(
-                  top: SizeConfig.screenHeight / 2.5,
+                  top: SizeConfig.screenHeight! / 2.5,
                   child: Container(
                     width: SizeConfig.screenWidth,
                     child: Column(
                       children: [
                         Center(
-                          child: Text(profile.data.showProfileInformationFirstName + ' ' + profile.data.showProfileInformationLastName,
+                          child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -197,7 +198,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                         SizedBox(height: 20),
 
                         Center(
-                          child: Text(profile.data.showProfileInformationEmail,
+                          child: Text(profile.data!.showProfileInformationEmail,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -214,7 +215,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                 ),
 
                 SlidingUpPanel(
-                  maxHeight: SizeConfig.screenHeight / 1.5,
+                  maxHeight: SizeConfig.screenHeight! / 1.5,
                   panel: SingleChildScrollView(
                     physics: ClampingScrollPhysics(),
                     padding: EdgeInsets.only(left: 50.0, right: 50.0),
@@ -407,7 +408,7 @@ class HomeBLMUserProfileDetailsState extends State<HomeBLMUserProfileDetails>{
                             fontWeight: FontWeight.bold, 
                             color: Color(0xffffffff),
                           ),
-                          width: SizeConfig.screenWidth / 2,
+                          width: SizeConfig.screenWidth! / 2,
                           height: 45,
                           onPressed: () async{
 

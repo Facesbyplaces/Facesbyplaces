@@ -15,24 +15,24 @@ class BLMShowFriendsSettings{
   final String relationship;
   final int accountType;
 
-  BLMShowFriendsSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.accountType});
+  BLMShowFriendsSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
 }
 
 class HomeBLMPageFriends extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageFriends({this.memorialId});
+  HomeBLMPageFriends({required this.memorialId});
 
   HomeBLMPageFriendsState createState() => HomeBLMPageFriendsState(memorialId: memorialId);
 }
 
 class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
   final int memorialId;
-  HomeBLMPageFriendsState({this.memorialId});
+  HomeBLMPageFriendsState({required this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMShowFriendsSettings> friendsList;
-  int friendsItemsRemaining;
-  int page;
+  List<BLMShowFriendsSettings> friendsList = [];
+  int friendsItemsRemaining = 1;
+  int page = 1;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -71,9 +71,6 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
 
   void initState(){
     super.initState();
-    friendsItemsRemaining = 1;
-    friendsList = [];
-    page = 1;
     onLoading1();
   }
 
@@ -106,7 +103,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
           footer: CustomFooter(
             loadStyle: LoadStyle.ShowWhenLoading,
             builder: (BuildContext context, LoadStatus mode){
-              Widget body;
+              Widget body = Container();
               if(mode == LoadStatus.loading){
                 body = CircularProgressIndicator();
               }
@@ -126,7 +123,8 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                     CircleAvatar(
                       maxRadius: 40,
                       backgroundColor: Color(0xff888888),
-                      backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                      // backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                      backgroundImage: NetworkImage(friendsList[i].image),
                     ),
 
                     SizedBox(width: 25,),
@@ -147,7 +145,7 @@ class HomeBLMPageFriendsState extends State<HomeBLMPageFriends>{
                     SizedBox(width: 25,),
 
                     MaterialButton(
-                      minWidth: SizeConfig.screenWidth / 3.5,
+                      minWidth: SizeConfig.screenWidth! / 3.5,
                       padding: EdgeInsets.zero,
                       textColor: Color(0xffffffff),
                       splashColor: Color(0xff04ECFF),

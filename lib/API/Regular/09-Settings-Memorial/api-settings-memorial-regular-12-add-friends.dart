@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiRegularAddFriends({int memorialId, int userId, int accountType}) async{
+Future<bool> apiRegularAddFriends({required int memorialId, required int userId, required int accountType}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -9,7 +9,8 @@ Future<bool> apiRegularAddFriends({int memorialId, int userId, int accountType})
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
 
-  final http.Response response = await http.post('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend',
+  final http.Response response = await http.post(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pageadmin/addFriend', ''),
     headers: <String, String>{
       'access-token': getAccessToken,
       'uid': getUID,

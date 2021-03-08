@@ -1,3 +1,5 @@
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
+
 import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
 import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
@@ -24,39 +26,41 @@ class PushNotificationService {
 
   Future initialise() async {
     if (Platform.isIOS) {
-      fcm.requestNotificationPermissions(IosNotificationSettings());
+      // fcm.requestNotificationPermissions(IosNotificationSettings());
+      fcm.requestPermission();
     }
 
-    String token = await fcm.getToken();
+    // String token = await fcm.getToken();
+    String token = (await fcm.getToken())!;
     print("FirebaseMessaging token: $token");
 
     // bool newResult = await apiRegularNewNotifications(deviceToken: token, title: 'Sample title - FacesbyPlaces', body: 'Sample body - FacesbyPlaces');
 
     // print('The notification result is $newResult');
 
-    fcm.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        print("onMessage notification: $message");
-        showSimpleNotification(
-          Container(child: Text(message['notification']['body'])),
-          position: NotificationPosition.top,
-        );
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch notification: $message");
-        showSimpleNotification(
-          Container(child: Text(message['notification']['body'])),
-          position: NotificationPosition.top,
-        );
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume notification: $message");
-        showSimpleNotification(
-          Container(child: Text(message['notification']['body'])),
-          position: NotificationPosition.top,
-        );
-      },
-    );
+    // fcm.configure(
+    //   onMessage: (Map<String, dynamic> message) async {
+    //     print("onMessage notification: $message");
+    //     showSimpleNotification(
+    //       Container(child: Text(message['notification']['body'])),
+    //       position: NotificationPosition.top,
+    //     );
+    //   },
+    //   onLaunch: (Map<String, dynamic> message) async {
+    //     print("onLaunch notification: $message");
+    //     showSimpleNotification(
+    //       Container(child: Text(message['notification']['body'])),
+    //       position: NotificationPosition.top,
+    //     );
+    //   },
+    //   onResume: (Map<String, dynamic> message) async {
+    //     print("onResume notification: $message");
+    //     showSimpleNotification(
+    //       Container(child: Text(message['notification']['body'])),
+    //       position: NotificationPosition.top,
+    //     );
+    //   },
+    // );
   }
 }
 
@@ -67,8 +71,8 @@ class UIGetStarted extends StatefulWidget{
 
 class UIGetStartedState extends State<UIGetStarted>{
 
-  StreamSubscription<Map> streamSubscription;
-  static final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  StreamSubscription<Map>? streamSubscription;
+  static final FirebaseMessaging _firebaseMessaging = firebaseMessaging;
   final pushNotificationService = PushNotificationService(_firebaseMessaging);
 
   void listenDeepLinkData(){
@@ -86,7 +90,7 @@ class UIGetStartedState extends State<UIGetStarted>{
     });
   }
 
-  initUnit({String resetType}) async{
+  initUnit({required String resetType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if(login){
@@ -102,7 +106,7 @@ class UIGetStartedState extends State<UIGetStarted>{
   }
 
 
-  initUnitSharePost({int postId, bool likeStatus, int numberOfLikes, String pageType}) async{
+  initUnitSharePost({required int postId, required bool likeStatus, required int numberOfLikes, required String pageType}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if(login){
@@ -116,7 +120,7 @@ class UIGetStartedState extends State<UIGetStarted>{
     }
   }
 
-  initUnitShareMemorial({int memorialId, String pageType, bool follower}) async{
+  initUnitShareMemorial({required int memorialId, required String pageType, required bool follower}) async{
     bool login = await FlutterBranchSdk.isUserIdentified();
 
     if(login){
@@ -137,7 +141,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
   @override
   void dispose() {
-    streamSubscription.cancel();
+    streamSubscription!.cancel();
     super.dispose();
   }
 
@@ -158,7 +162,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                 Stack(
                   children: [
                     Container(
-                      height: SizeConfig.screenHeight / 2,
+                      height: SizeConfig.screenHeight! / 2,
                       child: Stack(
                         children: [
                           Positioned(
@@ -175,7 +179,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
                             child: Transform.rotate(
                               angle: -pi / 30,
                               child: Container(
@@ -188,7 +192,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
                             child: Container(
                               padding: EdgeInsets.all(5),
                               color: Color(0xffffffff),
@@ -210,7 +214,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
 
                           Positioned(
-                            left: SizeConfig.screenWidth / 7.5,
+                            left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: pi / 30,
                               child: Container(
@@ -222,8 +226,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
-                            left: SizeConfig.screenWidth / 7.5,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
+                            left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: 0,
                               child: Container(
@@ -236,8 +240,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
-                            left: SizeConfig.screenWidth / 7.5,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
+                            left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: pi / 30,
                               child: Container(
@@ -251,7 +255,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                           ),
                           Positioned(
                             bottom: 0,
-                            left: SizeConfig.screenWidth / 7.5,
+                            left: SizeConfig.screenWidth! / 7.5,
                             child: Transform.rotate(
                               angle: -pi / 80,
                               child: Container(
@@ -266,7 +270,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
 
                           Positioned(
-                            left: SizeConfig.screenWidth / 3.5,
+                            left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: -pi / 30,
                               child: Container(
@@ -279,8 +283,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
-                            left: SizeConfig.screenWidth / 3.5,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
+                            left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: 0,
                               child: Container(
@@ -293,8 +297,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
-                            left: SizeConfig.screenWidth / 3.5,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
+                            left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: pi / 30,
                               child: Container(
@@ -308,7 +312,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                           ),
                           Positioned(
                             bottom: 0,
-                            left: SizeConfig.screenWidth / 3.5,
+                            left: SizeConfig.screenWidth! / 3.5,
                             child: Transform.rotate(
                               angle: pi / 45,
                               child: Container(
@@ -323,7 +327,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
 
                           Positioned(
-                            right: SizeConfig.screenWidth / 3,
+                            right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: -pi / 30,
                               child: Container(
@@ -336,8 +340,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
-                            right: SizeConfig.screenWidth / 3,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
+                            right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: 0,
                               child: Container(
@@ -350,8 +354,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
-                            right: SizeConfig.screenWidth / 3,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
+                            right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: pi / 30,
                               child: Container(
@@ -365,7 +369,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                           ),
                           Positioned(
                             bottom: 0,
-                            right: SizeConfig.screenWidth / 3,
+                            right: SizeConfig.screenWidth! / 3,
                             child: Transform.rotate(
                               angle: pi / 50,
                               child: Container(
@@ -380,7 +384,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
 
                           Positioned(
-                            right: SizeConfig.screenWidth / 4.5,
+                            right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: -pi / 30,
                               child: Container(
@@ -393,8 +397,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
-                            right: SizeConfig.screenWidth / 4.5,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
+                            right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: 0,
                               child: Container(
@@ -407,8 +411,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
-                            right: SizeConfig.screenWidth / 4.5,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
+                            right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: 0,
                               child: Container(
@@ -422,7 +426,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                           ),
                           Positioned(
                             bottom: 0,
-                            right: SizeConfig.screenWidth / 4.5,
+                            right: SizeConfig.screenWidth! / 4.5,
                             child: Transform.rotate(
                               angle: -pi / 50,
                               child: Container(
@@ -437,7 +441,7 @@ class UIGetStartedState extends State<UIGetStarted>{
 
 
                           Positioned(
-                            right: SizeConfig.screenWidth / 10,
+                            right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: -pi / 30,
                               child: Container(
@@ -450,8 +454,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
-                            right: SizeConfig.screenWidth / 10,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
+                            right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: 0,
                               child: Container(
@@ -464,8 +468,8 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
-                            right: SizeConfig.screenWidth / 10,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
+                            right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: -pi / 12,
                               child: Container(
@@ -479,7 +483,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                           ),
                           Positioned(
                             bottom: 0,
-                            right: SizeConfig.screenWidth / 10,
+                            right: SizeConfig.screenWidth! / 10,
                             child: Transform.rotate(
                               angle: pi / 30,
                               child: Container(
@@ -507,7 +511,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            top: (SizeConfig.screenHeight / 2) / 4,
+                            top: (SizeConfig.screenHeight! / 2) / 4,
                             right: -20,
                             child: Transform.rotate(
                               angle: -pi / 30,
@@ -521,7 +525,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                             ),
                           ),
                           Positioned(
-                            bottom: (SizeConfig.screenHeight / 2) / 4,
+                            bottom: (SizeConfig.screenHeight! / 2) / 4,
                             right: -20,
                             child: Transform.rotate(
                               angle: -pi / 12,
@@ -556,7 +560,7 @@ class UIGetStartedState extends State<UIGetStarted>{
                         children: [
 
                           Container(
-                            height: SizeConfig.screenHeight / 2,
+                            height: SizeConfig.screenHeight! / 2,
                             child: Image.asset('assets/icons/logo.png', height: 200, width: 200,),
                           ),
 

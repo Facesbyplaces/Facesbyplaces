@@ -4,14 +4,17 @@ import 'dart:convert';
 import 'dart:async';
 
 final String serverToken = 'AAAAZak_Sp8:APA91bFUCfkKaLLzut34C_kectoUuxz1MChryr4QHEmvKgCFu9slX7GcKkeGMG8SjG1mDAkDNK7_ZJ8ri6S_uhxw8yL5rgxBfsfEDlE97g33ohejhhfP-xMXSYISXqZMOn_NTRp1J5Vv';
-final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+// final FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+final FirebaseMessaging firebaseMessaging = firebaseMessaging;
 
 Future<Map<String, dynamic>> sendAndRetrieveMessage() async {
-  await firebaseMessaging.requestNotificationPermissions(
-    const IosNotificationSettings(sound: true, badge: true, alert: true, provisional: false),
-  );
+  // await firebaseMessaging.requestNotificationPermissions(
+  //   const IosNotificationSettings(sound: true, badge: true, alert: true, provisional: false),
+  // );
+  await firebaseMessaging.requestPermission(sound: true, badge: true, alert: true, provisional: false);
 
-  final http.Response response = await http.post('https://fcm.googleapis.com/fcm/send',
+  final http.Response response = await http.post(
+    Uri.http('https://fcm.googleapis.com/fcm/send', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'Authorization': 'key=$serverToken',
@@ -33,7 +36,8 @@ Future<Map<String, dynamic>> sendAndRetrieveMessage() async {
     ),
   );
 
-  String token = await firebaseMessaging.getToken();
+  // String token = await firebaseMessaging.getToken();
+  String token = (await firebaseMessaging.getToken())!;
 
   print('The token is $token');
   print('The status code for push notifications is ${response.statusCode}');

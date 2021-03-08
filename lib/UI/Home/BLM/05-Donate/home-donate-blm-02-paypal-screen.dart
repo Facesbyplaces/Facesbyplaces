@@ -12,7 +12,7 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
 
-  InAppWebViewController webView;
+  InAppWebViewController? webView;
   String url = "";
   double progress = 0;
 
@@ -44,25 +44,25 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
             ),
           ),
           body: InAppWebView(
-            onReceivedHttpAuthRequest: (InAppWebViewController inAppController, HttpAuthChallenge authChallenge){
-              Future<HttpAuthResponse> newValue;
+            // onReceivedHttpAuthRequest: (InAppWebViewController inAppController, URLAuthenticationChallenge authChallenge){
+            //   Future<HttpAuthResponse> newValue;
 
-              print('The value of authChallenge is ${authChallenge.toJson}');
-              print('The value of authChallenge is ${authChallenge.toMap}');
-              print('The value of authChallenge is ${authChallenge.previousFailureCount}');
-              print('The value of authChallenge is ${authChallenge.protectionSpace}');
+            //   print('The value of authChallenge is ${authChallenge.toJson}');
+            //   print('The value of authChallenge is ${authChallenge.toMap}');
+            //   print('The value of authChallenge is ${authChallenge.protectionSpace}');
 
-              print('The value of inAppController is ${inAppController.android}');
-              print('The value of inAppController is ${inAppController.ios}');
-              print('The value of inAppController is ${inAppController.javaScriptHandlersMap}');
-              print('The value of inAppController is ${inAppController.webStorage}');
+            //   print('The value of inAppController is ${inAppController.android}');
+            //   print('The value of inAppController is ${inAppController.ios}');
+            //   print('The value of inAppController is ${inAppController.javaScriptHandlersMap}');
+            //   print('The value of inAppController is ${inAppController.webStorage}');
             
-              return newValue;
-            },
+            //   return newValue;
+            // },
             // initialUrl: URLRequest(
             //   url: Uri.parse("https://flutter.dev/")
             // ),
-            initialUrl: "https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com",
+            initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com')),
+            // initialUrl: "https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com",
             initialOptions: InAppWebViewGroupOptions(
               crossPlatform: InAppWebViewOptions(
               ),

@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({String keywords, int page}) async{
+Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String keywords, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,7 +33,7 @@ class APIRegularSearchBLMMemorialMain{
   int almItemsRemaining;
   List<APIRegularSearchBLMMemorialExtended> almMemorialList;
 
-  APIRegularSearchBLMMemorialMain({this.almItemsRemaining, this.almMemorialList});
+  APIRegularSearchBLMMemorialMain({required this.almItemsRemaining, required this.almMemorialList});
 
   factory APIRegularSearchBLMMemorialMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -50,7 +51,7 @@ class APIRegularSearchBLMMemorialExtended{
   int searchBLMMemorialId;
   APIRegularSearchBLMMemorialExtendedPage searchBLMMemorialPage;
 
-  APIRegularSearchBLMMemorialExtended({this.searchBLMMemorialId, this.searchBLMMemorialPage});
+  APIRegularSearchBLMMemorialExtended({required this.searchBLMMemorialId, required this.searchBLMMemorialPage});
 
   factory APIRegularSearchBLMMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchBLMMemorialExtended(
@@ -68,18 +69,18 @@ class APIRegularSearchBLMMemorialExtendedPage{
   dynamic searchBLMMemorialPageProfileImage;
   List<dynamic> searchBLMMemorialPageImagesOrVideos;
   String searchBLMMemorialPageRelationship;
-  APIRegularSearchBLMMemorialExtendedPageCreator searchBLMMemorialPagePageCreator;
+  // APIRegularSearchBLMMemorialExtendedPageCreator searchBLMMemorialPagePageCreator;
   bool searchBLMMemorialPageManage;
   bool searchBLMMemorialPageFamOrFriends;
   bool searchBLMMemorialPageFollower;
   String searchBLMMemorialPagePageType;
   String searchBLMMemorialPagePrivacy;
 
-  APIRegularSearchBLMMemorialExtendedPage({this.searchBLMMemorialPageId, this.searchBLMMemorialPageName, this.searchBLMMemorialPageDetails, this.searchBLMMemorialPageBackgroundImage, this.searchBLMMemorialPageProfileImage, this.searchBLMMemorialPageImagesOrVideos, this.searchBLMMemorialPageRelationship, this.searchBLMMemorialPagePageCreator, this.searchBLMMemorialPageManage, this.searchBLMMemorialPageFamOrFriends, this.searchBLMMemorialPageFollower, this.searchBLMMemorialPagePageType, this.searchBLMMemorialPagePrivacy});
+  APIRegularSearchBLMMemorialExtendedPage({required this.searchBLMMemorialPageId, required this.searchBLMMemorialPageName, required this.searchBLMMemorialPageDetails, required this.searchBLMMemorialPageBackgroundImage, required this.searchBLMMemorialPageProfileImage, required this.searchBLMMemorialPageImagesOrVideos, required this.searchBLMMemorialPageRelationship, required this.searchBLMMemorialPageManage, required this.searchBLMMemorialPageFamOrFriends, required this.searchBLMMemorialPageFollower, required this.searchBLMMemorialPagePageType, required this.searchBLMMemorialPagePrivacy});
 
   factory APIRegularSearchBLMMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
 
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -92,7 +93,7 @@ class APIRegularSearchBLMMemorialExtendedPage{
       searchBLMMemorialPageDetails: APIRegularSearchBLMMemorialExtendedPageDetails.fromJson(parsedJson['details']),
       searchBLMMemorialPageBackgroundImage: parsedJson['backgroundImage'],
       searchBLMMemorialPageProfileImage: parsedJson['profileImage'],
-      searchBLMMemorialPageImagesOrVideos: newList1,
+      searchBLMMemorialPageImagesOrVideos: newList1!,
       searchBLMMemorialPageRelationship: parsedJson['relationship'],
       // searchBLMMemorialPagePageCreator: APIRegularSearchBLMMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       searchBLMMemorialPageManage: parsedJson['manage'],
@@ -112,7 +113,7 @@ class APIRegularSearchBLMMemorialExtendedPageDetails{
   String searchBLMMemorialPageDetailsCemetery;
   String searchBLMMemorialPageDetailsCountry;
 
-  APIRegularSearchBLMMemorialExtendedPageDetails({this.searchBLMMemorialPageDetailsDescription, this.searchBLMMemorialPageDetailsBirthPlace, this.searchBLMMemorialPageDetailsDob, this.searchBLMMemorialPageDetailsRip, this.searchBLMMemorialPageDetailsCemetery, this.searchBLMMemorialPageDetailsCountry});
+  APIRegularSearchBLMMemorialExtendedPageDetails({required this.searchBLMMemorialPageDetailsDescription, required this.searchBLMMemorialPageDetailsBirthPlace, required this.searchBLMMemorialPageDetailsDob, required this.searchBLMMemorialPageDetailsRip, required this.searchBLMMemorialPageDetailsCemetery, required this.searchBLMMemorialPageDetailsCountry});
 
   factory APIRegularSearchBLMMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchBLMMemorialExtendedPageDetails(
@@ -135,7 +136,7 @@ class APIRegularSearchBLMMemorialExtendedPageCreator{
   String searchBLMMemorialPageCreatorUserName;
   dynamic searchBLMMemorialPageCreatorImage;
 
-  APIRegularSearchBLMMemorialExtendedPageCreator({this.searchBLMMemorialPageCreatorId, this.searchBLMMemorialPageCreatorFirstName, this.searchBLMMemorialPageCreatorLastName, this.searchBLMMemorialPageCreatorPhoneNumber, this.searchBLMMemorialPageCreatorEmail, this.searchBLMMemorialPageCreatorUserName, this.searchBLMMemorialPageCreatorImage});
+  APIRegularSearchBLMMemorialExtendedPageCreator({required this.searchBLMMemorialPageCreatorId, required this.searchBLMMemorialPageCreatorFirstName, required this.searchBLMMemorialPageCreatorLastName, required this.searchBLMMemorialPageCreatorPhoneNumber, required this.searchBLMMemorialPageCreatorEmail, required this.searchBLMMemorialPageCreatorUserName, required this.searchBLMMemorialPageCreatorImage});
 
   factory APIRegularSearchBLMMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchBLMMemorialExtendedPageCreator(

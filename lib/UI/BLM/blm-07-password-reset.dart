@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 
 class BLMPasswordReset extends StatefulWidget{
   final String resetToken;
-  BLMPasswordReset({this.resetToken});
+  BLMPasswordReset({required this.resetToken});
 
   BLMPasswordResetState createState() => BLMPasswordResetState(resetToken: resetToken);
 }
 
 class BLMPasswordResetState extends State<BLMPasswordReset>{
   final String resetToken;
-  BLMPasswordResetState({this.resetToken});
+  BLMPasswordResetState({required this.resetToken});
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -121,7 +121,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                         ),
                         onPressed: () async{
 
-                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -140,7 +140,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                                 },
                               )
                             );
-                          }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
+                          }else if(_key1.currentState!.controller.text != _key2.currentState!.controller.text){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -162,8 +162,8 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           }else{
                             context.showLoaderOverlay();
                             bool result = await apiBLMPasswordChange(
-                              password: _key1.currentState.controller.text, 
-                              passwordConfirmation: _key2.currentState.controller.text,
+                              password: _key1.currentState!.controller.text, 
+                              passwordConfirmation: _key2.currentState!.controller.text,
                               resetToken: resetToken,
                             );
                             context.hideLoaderOverlay();
@@ -211,7 +211,7 @@ class BLMPasswordResetState extends State<BLMPasswordReset>{
                           }
                           
                         },
-                        width: SizeConfig.screenWidth / 2, 
+                        width: SizeConfig.screenWidth! / 2, 
                         height: 45, 
                         buttonColor: Color(0xff04ECFF),
                       ),

@@ -1,5 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MiscBLMInputFieldTemplate extends StatefulWidget{
   final String displayText;
 
   MiscBLMInputFieldTemplate({
-    Key key,
+    required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
     this.obscureText = false, 
@@ -38,9 +39,9 @@ class MiscBLMInputFieldTemplateState extends State<MiscBLMInputFieldTemplate>{
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscBLMInputFieldTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
+  MiscBLMInputFieldTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
 
-  TextEditingController controller;
+  TextEditingController controller = TextEditingController();
 
   void initState(){
     super.initState();
@@ -80,7 +81,7 @@ class MiscBLMInputFieldMultiTextTemplate extends StatefulWidget{
   final Color backgroundColor;
 
   MiscBLMInputFieldMultiTextTemplate({
-    Key key,
+    required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
     this.type = TextInputType.text, 
@@ -101,7 +102,7 @@ class MiscBLMInputFieldMultiTextTemplateState extends State<MiscBLMInputFieldMul
   final bool readOnly;
   final Color backgroundColor;
 
-  MiscBLMInputFieldMultiTextTemplateState({this.labelText, this.labelTextStyle, this.type, this.maxLines, this.readOnly, this.backgroundColor});
+  MiscBLMInputFieldMultiTextTemplateState({required this.labelText, required this.labelTextStyle, required this.type, required this.maxLines, required this.readOnly, required this.backgroundColor});
 
   TextEditingController controller = TextEditingController();
 
@@ -148,7 +149,7 @@ class MiscBLMPhoneNumberTemplate extends StatefulWidget{
   final String displayText;
 
   MiscBLMPhoneNumberTemplate({
-    Key key,
+    required Key key,
     this.labelText = '',
     this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
     this.obscureText = false, 
@@ -172,9 +173,9 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
   final bool includeSuffixIcon;
   final String displayText;
 
-  MiscBLMPhoneNumberTemplateState({this.labelText, this.labelTextStyle, this.obscureText, this.type, this.maxLines, this.readOnly, this.includeSuffixIcon, this.displayText});
+  MiscBLMPhoneNumberTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
 
-  TextEditingController controller;
+  TextEditingController controller = TextEditingController();
   bool valid = false;  
 
   void initState(){
@@ -185,18 +186,8 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return InternationalPhoneNumberInput(
-      selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
-      textFieldController: controller,
-      onInputChanged: (PhoneNumber number){
-        print(number.phoneNumber);
-      },
-      onInputValidated: (bool value) {
-        setState(() {
-          valid = value;
-        });
-      },
-      inputDecoration: InputDecoration(
+    return IntlPhoneField(
+      decoration: InputDecoration(
         alignLabelWithHint: true,
         labelText: labelText,
         labelStyle: labelTextStyle,
@@ -207,6 +198,28 @@ class MiscBLMPhoneNumberTemplateState extends State<MiscBLMPhoneNumberTemplate>{
         ),
       ),
     );
+    // return InternationalPhoneNumberInput(
+    //   selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+    //   textFieldController: controller,
+    //   onInputChanged: (PhoneNumber number){
+    //     print(number.phoneNumber);
+    //   },
+    //   onInputValidated: (bool value) {
+    //     setState(() {
+    //       valid = value;
+    //     });
+    //   },
+    //   inputDecoration: InputDecoration(
+    //     alignLabelWithHint: true,
+    //     labelText: labelText,
+    //     labelStyle: labelTextStyle,
+    //     focusedBorder: UnderlineInputBorder(
+    //       borderSide: BorderSide(
+    //         color: Color(0xff000000),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -215,7 +228,7 @@ class MiscBLMInputFieldDropDown extends StatefulWidget{
   final String displayText;
 
   MiscBLMInputFieldDropDown({
-    Key key,
+    required Key key,
     this.displayText = 'Father',
   }) : super(key: key);
 
@@ -227,7 +240,7 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
 
   final String displayText;
 
-  MiscBLMInputFieldDropDownState({this.displayText});
+  MiscBLMInputFieldDropDownState({required this.displayText});
 
   List<String> relationship = ['Father', 'Mother', 'Sister', 'Brother', 'Aunt', 'Uncle', 'Nephew', 'Grandmother', 'Grandfather'];
   String currentSelection = 'Father';
@@ -254,9 +267,9 @@ class MiscBLMInputFieldDropDownState extends State<MiscBLMInputFieldDropDown>{
         child: DropdownButton<String>(
           value: currentSelection,
           isDense: true,
-          onChanged: (String newValue) {
+          onChanged: (String? newValue) {
             setState(() {
-              currentSelection = newValue;
+              currentSelection = newValue!;
             });
           },
           items: relationship.map((String value) {
@@ -276,7 +289,7 @@ class MiscBLMInputFieldSecurityQuestions extends StatefulWidget{
   final String displayText;
 
   MiscBLMInputFieldSecurityQuestions({
-    Key key,
+    required Key key,
     this.displayText = 'What\'s the name of your first dog?',
   }) : super(key: key);
 
@@ -288,7 +301,7 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
 
   final String displayText;
 
-  MiscBLMInputFieldSecurityQuestionsState({this.displayText});
+  MiscBLMInputFieldSecurityQuestionsState({required this.displayText});
 
   List<String> securityQuestions = [
     'What\'s the name of your first dog?', 
@@ -324,9 +337,9 @@ class MiscBLMInputFieldSecurityQuestionsState extends State<MiscBLMInputFieldSec
           ),
           value: currentSelection,
           isDense: true,
-          onChanged: (String newValue) {
+          onChanged: (String? newValue) {
             setState(() {
-              currentSelection = newValue;
+              currentSelection = newValue!;
             });
           },
           items: securityQuestions.map((String value) {
@@ -346,7 +359,7 @@ class MiscBLMInputFieldDateTimeTemplate extends StatefulWidget{
   final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscBLMInputFieldDateTimeTemplate({Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
+  MiscBLMInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
   MiscBLMInputFieldDateTimeTemplateState createState() => MiscBLMInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
 }
@@ -356,7 +369,7 @@ class MiscBLMInputFieldDateTimeTemplateState extends State<MiscBLMInputFieldDate
   final DateTimePickerType dateTimePickerType;
   final String displayText;
 
-  MiscBLMInputFieldDateTimeTemplateState({this.labelText, this.dateTimePickerType, this.displayText});
+  MiscBLMInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
 
   TextEditingController controller = TextEditingController();
 

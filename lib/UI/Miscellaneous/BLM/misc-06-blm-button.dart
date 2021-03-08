@@ -13,9 +13,9 @@ class MiscBLMButtonTemplate extends StatelessWidget{
   MiscBLMButtonTemplate({
     this.buttonText = 'Next',
     this.buttonTextStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w300,color: Color(0xffffffff),),
-    this.onPressed,
-    this.width,
-    this.height,
+    required this.onPressed,
+    required this.width,
+    required this.height,
     this.buttonColor = const Color(0xff2F353D),
   });
 
@@ -24,7 +24,8 @@ class MiscBLMButtonTemplate extends StatelessWidget{
     SizeConfig.init(context);
     return MaterialButton(
       padding: EdgeInsets.zero,
-      onPressed: onPressed,
+      // onPressed: onPressed,
+      onPressed: (){},
       child: Text(buttonText,
         style: buttonTextStyle,
       ),
@@ -49,9 +50,9 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
   MiscBLMButtonSignInWithTemplate({
     this.buttonText = '',
     this.buttonTextStyle = const TextStyle(fontSize: 16,fontWeight: FontWeight.w300, color: Color(0xff000000),),
-    this.onPressed,
-    this.width,
-    this.height,
+    required this.onPressed,
+    required this.width,
+    required this.height,
     this.buttonColor = const Color(0xff3A559F),
     this.image = 'assets/icons/facebook.png',
   });
@@ -60,7 +61,10 @@ class MiscBLMButtonSignInWithTemplate extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialButton(
       padding: EdgeInsets.zero,
-      onPressed: onPressed,
+      // onPressed: onPressed,
+      onPressed: (){
+        
+      },
       minWidth: width,
       height: height,
       child: Row(

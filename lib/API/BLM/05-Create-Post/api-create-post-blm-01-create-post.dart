@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
+Future<bool> apiBLMHomeCreatePost({required APIBLMCreatePost post}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -30,7 +30,8 @@ Future<bool> apiBLMHomeCreatePost({APIBLMCreatePost post}) async{
       'tag_people': tagPeopleValue,
     });
     
-    if(post.blmPostImagesOrVideos != null || post.blmPostImagesOrVideos != ['']){
+    // if(post.blmPostImagesOrVideos != null || post.blmPostImagesOrVideos != ['']){
+      if(post.blmPostImagesOrVideos != []){
       for(int i = 0; i < post.blmPostImagesOrVideos.length; i++){
         if(post.blmPostImagesOrVideos[i].path != null || post.blmPostImagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(post.blmPostImagesOrVideos[i].path, filename: post.blmPostImagesOrVideos[i].path);
@@ -70,14 +71,14 @@ class APIBLMCreatePost{
   List<BLMTaggedPeople> blmPostTagPeople;
   
   APIBLMCreatePost({
-    this.blmPostPageType,
-    this.blmPostPageId,
-    this.blmPostPostBody,
-    this.blmPostLocation,
-    this.blmPostImagesOrVideos,
-    this.blmPostLatitude,
-    this.blmPostLongitude,
-    this.blmPostTagPeople,
+    required this.blmPostPageType,
+    required this.blmPostPageId,
+    required this.blmPostPostBody,
+    required this.blmPostLocation,
+    required this.blmPostImagesOrVideos,
+    required this.blmPostLatitude,
+    required this.blmPostLongitude,
+    required this.blmPostTagPeople,
   });
 }
 
@@ -86,7 +87,7 @@ class BLMTaggedPeople{
   int accountType;
 
   BLMTaggedPeople({
-    this.userId,
-    this.accountType,
+    required this.userId,
+    required this.accountType,
   });
 }

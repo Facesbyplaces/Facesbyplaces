@@ -32,11 +32,12 @@ class UILogin01 extends StatelessWidget {
             SizedBox(height: 5),
 
             MiscStartButtonIconTemplate(
+              height: 50,
               buttonText: 'Speak for a loved one killed by law enforcement', 
               onPressed: (){
                 Navigator.pushNamed(context, '/blm/join');
               },
-              width: SizeConfig.screenWidth / 1.5,
+              width: SizeConfig.screenWidth! / 1.5,
               buttonTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),
               buttonColor: Color(0xffF2F2F2),
               image: Container(height: 20, child: Image.asset('assets/icons/fist.png'),),
@@ -53,7 +54,7 @@ class UILogin01 extends StatelessWidget {
               onPressed: (){
                 Navigator.pushNamed(context, '/regular/join');
               },
-              width: SizeConfig.screenWidth / 1.5,
+              width: SizeConfig.screenWidth! / 1.5,
               buttonTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),
               height: 35,
               buttonColor: Color(0xffE6FDFF),

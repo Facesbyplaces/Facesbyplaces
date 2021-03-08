@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({int userId}) async{
+Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({required int userId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -33,7 +34,7 @@ class APIBLMShowAccountDetails{
   String showAccountDetailsPhoneNumber;
   String showAccountDetailsQuestion;
   
-  APIBLMShowAccountDetails({this.showAccountDetailsFirstName, this.showAccountDetailsLastName, this.showAccountDetailsEmail, this.showAccountDetailsPhoneNumber, this.showAccountDetailsQuestion});
+  APIBLMShowAccountDetails({required this.showAccountDetailsFirstName, required this.showAccountDetailsLastName, required this.showAccountDetailsEmail, required this.showAccountDetailsPhoneNumber, required this.showAccountDetailsQuestion});
 
   factory APIBLMShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAccountDetails(

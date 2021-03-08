@@ -3,7 +3,7 @@ import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-search-blm-02-search-extended.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:geocoding/geocoding.dart';
+// import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMSearch extends StatefulWidget{
@@ -38,7 +38,7 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
                 Container(
-                  width: SizeConfig.screenWidth / 1.3,
+                  width: SizeConfig.screenWidth! / 1.3,
                   child: TextFormField(
                     onFieldSubmitted: (String keyword) async{
                       Location.Location location = new Location.Location();
@@ -76,13 +76,13 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                             onOkButtonPressed: () async{
                               permissionGranted = await location.requestPermission();
 
-                              context.showLoaderOverlay();
-                              Location.LocationData locationData = await location.getLocation();
-                              List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                              context.hideLoaderOverlay();
+                              // context.showLoaderOverlay();
+                              // Location.LocationData locationData = await location.getLocation();
+                              // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                              // context.hideLoaderOverlay();
 
-                              Navigator.pop(context);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                              // Navigator.pop(context);
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
                             },
                             onCancelButtonPressed: (){
                               Navigator.pop(context, true);
@@ -90,12 +90,12 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                           )
                         );
                       }else{
-                        context.showLoaderOverlay();
-                        Location.LocationData locationData = await location.getLocation();
-                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                        context.hideLoaderOverlay();
+                        // context.showLoaderOverlay();
+                        // Location.LocationData locationData = await location.getLocation();
+                        // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                        // context.hideLoaderOverlay();
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
                       }
                     },
                     decoration: InputDecoration(
@@ -154,12 +154,12 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                               )
                             );
                           }else{
-                            context.showLoaderOverlay();
-                            Location.LocationData locationData = await location.getLocation();
-                            List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                            context.hideLoaderOverlay();
+                            // context.showLoaderOverlay();
+                            // Location.LocationData locationData = await location.getLocation();
+                            // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                            // context.hideLoaderOverlay();
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
                           }
                         },
                         icon: Icon(Icons.search, color: Color(0xff888888),),
@@ -174,13 +174,13 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
+            height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Icon(Icons.search, color: Color(0xff4EC9D4), size: 240),
 
@@ -188,7 +188,7 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
 
                   Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
               ),
             ),

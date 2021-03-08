@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularAddMemorialAdmin({String pageType, int pageId, int userId}) async{
+Future<bool> apiRegularAddMemorialAdmin({required String pageType, required int pageId, required int userId}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

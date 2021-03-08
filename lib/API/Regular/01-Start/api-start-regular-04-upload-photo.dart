@@ -8,7 +8,7 @@ Future<bool> apiRegularUploadPhoto({dynamic image}) async{
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
-  int prefsUserID = sharedPrefs.getInt('regular-user-id');
+  int prefsUserID = sharedPrefs.getInt('regular-user-id')!;
   
   try{
     var dioRequest = Dio();

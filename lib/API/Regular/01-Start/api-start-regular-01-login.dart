@@ -2,12 +2,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<bool> apiRegularLogin({String email, String password, String deviceToken}) async{
+Future<bool> apiRegularLogin({required String email, required String password, required String deviceToken}) async{
 
   bool value = false;
 
   try{
-    final http.Response response = await http.post('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
+    final http.Response response = await http.post(
+      // 'http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
+      Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken', ''),
       headers: <String, String>{
         'Content-Type': 'application/json',
       }
@@ -24,9 +26,9 @@ Future<bool> apiRegularLogin({String email, String password, String deviceToken}
       final sharedPrefs = await SharedPreferences.getInstance();
 
       sharedPrefs.setInt('regular-user-id', userId);
-      sharedPrefs.setString('regular-access-token', response.headers['access-token']);
-      sharedPrefs.setString('regular-uid', response.headers['uid']);    
-      sharedPrefs.setString('regular-client', response.headers['client']);
+      sharedPrefs.setString('regular-access-token', response.headers['access-token']!);
+      sharedPrefs.setString('regular-uid', response.headers['uid']!);
+      sharedPrefs.setString('regular-client', response.headers['client']!);
       sharedPrefs.setBool('regular-user-session', true);
       sharedPrefs.setBool('user-guest-session', false);
 

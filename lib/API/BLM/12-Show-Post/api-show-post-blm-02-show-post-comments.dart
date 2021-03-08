@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}) async{
+Future<APIBLMShowListOfComments> apiBLMShowListOfComments({required int postId, required int page}) async{
 
   print('The post id is $postId');
 
@@ -11,7 +11,8 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({int postId, int page}
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,7 +33,7 @@ class APIBLMShowListOfComments{
   int blmItemsRemaining;
   List<APIBLMShowListOfCommentsExtended> blmCommentsList;
 
-  APIBLMShowListOfComments({this.blmItemsRemaining, this.blmCommentsList});
+  APIBLMShowListOfComments({required this.blmItemsRemaining, required this.blmCommentsList});
 
   factory APIBLMShowListOfComments.fromJson(Map<String, dynamic> parsedJson){
 
@@ -53,7 +54,7 @@ class APIBLMShowListOfCommentsExtended{
   String showListCommentsCommentBody;
   String showListCommentsCreatedAt;
 
-  APIBLMShowListOfCommentsExtended({this.showListCommentsCommentId, this.showListCommentsPostId, this.showListCommentsCommentBody, this.showListCommentsUser, this.showListCommentsCreatedAt});
+  APIBLMShowListOfCommentsExtended({required this.showListCommentsCommentId, required this.showListCommentsPostId, required this.showListCommentsCommentBody, required this.showListCommentsUser, required this.showListCommentsCreatedAt});
 
   factory APIBLMShowListOfCommentsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfCommentsExtended(
@@ -73,7 +74,7 @@ class APIBLMShowListOfCommentsExtendedUser{
   dynamic showListCommentsUserImage;
   int showListCommentsUserAccountType;
 
-  APIBLMShowListOfCommentsExtendedUser({this.showListCommentsUserUserId, this.showListCommentsUserFirstName, this.showListCommentsUserLastName, this.showListCommentsUserImage, this.showListCommentsUserAccountType});
+  APIBLMShowListOfCommentsExtendedUser({required this.showListCommentsUserUserId, required this.showListCommentsUserFirstName, required this.showListCommentsUserLastName, required this.showListCommentsUserImage, required this.showListCommentsUserAccountType});
 
   factory APIBLMShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfCommentsExtendedUser(

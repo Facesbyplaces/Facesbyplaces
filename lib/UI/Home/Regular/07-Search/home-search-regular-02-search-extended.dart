@@ -40,7 +40,7 @@ class RegularSearchMainPosts{
   bool famOrFriends;
   String relationship;
 
-  RegularSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  RegularSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class RegularSearchMainSuggested{
@@ -54,7 +54,7 @@ class RegularSearchMainSuggested{
   bool famOrFriends;
   String relationship;
 
-  RegularSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
+  RegularSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class RegularSearchMainNearby{
@@ -68,7 +68,7 @@ class RegularSearchMainNearby{
   bool famOrFriends;
   String relationship;
 
-  RegularSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
+  RegularSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class RegularSearchMainBLM{
@@ -82,7 +82,7 @@ class RegularSearchMainBLM{
   bool famOrFriends;
   String relationship;
 
-  RegularSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
+  RegularSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class HomeRegularPost extends StatefulWidget{
@@ -91,7 +91,7 @@ class HomeRegularPost extends StatefulWidget{
   final double latitude;
   final double longitude;
   final String currentLocation;
-  HomeRegularPost({this.keyword, this.newToggle, this.latitude, this.longitude, this.currentLocation});
+  HomeRegularPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
   HomeRegularPostState createState() => HomeRegularPostState(keyword: keyword, newToggle: newToggle, latitude: latitude, longitude: longitude, currentLocation: currentLocation);
 }
@@ -102,7 +102,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   final double latitude;
   final double longitude;
   final String currentLocation;
-  HomeRegularPostState({this.keyword, this.newToggle, this.latitude, this.longitude, this.currentLocation});
+  HomeRegularPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<RegularSearchMainPosts> feeds = [];
@@ -118,12 +118,12 @@ class HomeRegularPostState extends State<HomeRegularPost>{
   int page2 = 1;
   int page3 = 1;
   int page4 = 1;
-  int toggle;
+  int toggle = 0;
   int tabCount1 = 0;
   int tabCount2 = 0;
   int tabCount3 = 0;
   int tabCount4 = 0;
-  bool isGuestLoggedIn;
+  bool isGuestLoggedIn = false;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -352,7 +352,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
                 Container(
-                  width: SizeConfig.screenWidth / 1.3,
+                  width: SizeConfig.screenWidth! / 1.3,
                   child: TextFormField(
                     onChanged: (search){
                       
@@ -552,7 +552,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -588,16 +588,16 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             contents: [
               Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-              feeds[i].imagesOrVideos != null
+              feeds[i].imagesOrVideos != []
               ? Column(
                 children: [
                   SizedBox(height: 20),
 
                   Container(
                     child: ((){
-                      if(feeds[i].imagesOrVideos != null){
+                      if(feeds[i].imagesOrVideos != []){
                         if(feeds[i].imagesOrVideos.length == 1){
-                          if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
+                          if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                             return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -624,7 +624,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             crossAxisCount: 4,
                             itemCount: 2,
                             itemBuilder: (BuildContext context, int index) =>  
-                              lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                              lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -653,7 +653,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                             itemBuilder: (BuildContext context, int index) => 
                             ((){
                               if(index != 1){
-                                return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                                return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                     controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -672,7 +672,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               }else{
                                 return ((){
                                   if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return Stack(
                                         children: [
                                           BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
@@ -732,7 +732,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                       );
                                     }
                                   }else{
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                           controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -781,7 +781,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -789,7 +789,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
             Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
           ],
         ),
       ),
@@ -808,7 +808,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -831,6 +831,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             follower: suggested[i].follower,
             pageType: suggested[i].pageType,
             relationship: suggested[i].relationship,
+            famOrFriends: suggested[i].famOrFriends,
           );
         },
         separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
@@ -845,7 +846,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -853,7 +854,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
             Text('Suggested is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
         ),
       ),
@@ -872,7 +873,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -895,6 +896,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             follower: nearby[i].follower,
             pageType: nearby[i].pageType,
             relationship: nearby[i].relationship,
+            famOrFriends: nearby[i].famOrFriends,
           );
         },
         separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
@@ -909,7 +911,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -917,7 +919,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
             Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
         ),
       ),
@@ -936,7 +938,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -959,6 +961,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
             follower: blm[i].follower,
             pageType: blm[i].pageType,
             relationship: blm[i].relationship,
+            famOrFriends: blm[i].famOrFriends,
           );
         },
         separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
@@ -973,7 +976,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -981,7 +984,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
 
             Text('BLM is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
         ),
       ),

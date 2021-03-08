@@ -15,11 +15,8 @@ class BLMUploadPhoto extends StatefulWidget{
 
 class BLMUploadPhotoState extends State<BLMUploadPhoto>{
 
-  File image;
+  File? image;
   final picker = ImagePicker();
-
-  File temporaryFile;
-  
 
   Future getImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -75,8 +72,8 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                 
               },
               child: Container(
-                height: SizeConfig.screenWidth / 1.2,
-                width: SizeConfig.screenWidth / 1.2,
+                height: SizeConfig.screenWidth! / 1.2,
+                width: SizeConfig.screenWidth! / 1.2,
                 color: Color(0xffF9F8EE),
                 child: Column(
                   children: [
@@ -93,7 +90,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                             child: Container(
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: FileImage(image),
+                                  image: FileImage(image!),
                                 ),
                               ),
                             ),
@@ -180,7 +177,7 @@ class BLMUploadPhotoState extends State<BLMUploadPhoto>{
                   );
                 }
               }, 
-              width: SizeConfig.screenWidth / 2,
+              width: SizeConfig.screenWidth! / 2,
               height: 45,
               buttonColor: image != null
               ? Color(0xff04ECFF)

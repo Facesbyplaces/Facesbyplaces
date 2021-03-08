@@ -1,14 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiBLMModifyFollowPage({String pageType, int pageId, bool follow}) async{
+Future<bool> apiBLMModifyFollowPage({required String pageType, required int pageId, required bool follow}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   bool userSessionRegular = sharedPrefs.getBool('regular-user-session') ?? false;
   bool userSessionBLM = sharedPrefs.getBool('blm-user-session') ?? false;
-  String getAccessToken;
-  String getUID;
-  String getClient;
+  String? getAccessToken;
+  String? getUID;
+  String? getClient;
 
   if(userSessionRegular == true){
     getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -20,11 +20,12 @@ Future<bool> apiBLMModifyFollowPage({String pageType, int pageId, bool follow}) 
     getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   }
 
-  final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/followers',
+  final http.Response response = await http.put(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/followers', ''),
     headers: <String, String>{
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
+      'access-token': getAccessToken!,
+      'uid': getUID!,
+      'client': getClient!,
     },
     body: <String, dynamic>{
       'page_type': '$pageType',

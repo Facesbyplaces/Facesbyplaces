@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({int memorialId, int page}) async{
+Future<APIBLMConnectionListFriendsMain> apiBLMConnectionListFriends({required int memorialId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/friends/index?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMConnectionListFriendsMain{
   int blmItemsRemaining;
   List<APIBLMConnectionListFriendsExtended> blmFriendsList;
 
-  APIBLMConnectionListFriendsMain({this.blmItemsRemaining, this.blmFriendsList});
+  APIBLMConnectionListFriendsMain({required this.blmItemsRemaining, required this.blmFriendsList});
 
   factory APIBLMConnectionListFriendsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -48,7 +49,7 @@ class APIBLMConnectionListFriendsExtended{
   APIBLMConnectionListFriendsExtendedDetails connectionListFriendsUser;
   String connectionListFriendsRelationship;
 
-  APIBLMConnectionListFriendsExtended({this.connectionListFriendsUser, this.connectionListFriendsRelationship});
+  APIBLMConnectionListFriendsExtended({required this.connectionListFriendsUser, required this.connectionListFriendsRelationship});
 
   factory APIBLMConnectionListFriendsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtended(
@@ -66,7 +67,7 @@ class APIBLMConnectionListFriendsExtendedDetails{
   dynamic connectionListFriendsDetailsImage;
   int connectionListFriendsAccountType;
 
-  APIBLMConnectionListFriendsExtendedDetails({this.connectionListFriendsDetailsId, this.connectionListFriendsDetailsFirstName, this.connectionListFriendsDetailsLastName, this.connectionListFriendsDetailsImage, this.connectionListFriendsAccountType});
+  APIBLMConnectionListFriendsExtendedDetails({required this.connectionListFriendsDetailsId, required this.connectionListFriendsDetailsFirstName, required this.connectionListFriendsDetailsLastName, required this.connectionListFriendsDetailsImage, required this.connectionListFriendsAccountType});
 
   factory APIBLMConnectionListFriendsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFriendsExtendedDetails(

@@ -12,14 +12,14 @@ import 'package:flutter/material.dart';
 
 class HomeRegularUserUpdateDetails extends StatefulWidget{
   final int userId;
-  HomeRegularUserUpdateDetails({this.userId});
+  HomeRegularUserUpdateDetails({required this.userId});
 
   HomeRegularUserUpdateDetailsState createState() => HomeRegularUserUpdateDetailsState(userId: userId);
 }
 
 class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetails>{
   final int userId;
-  HomeRegularUserUpdateDetailsState({this.userId});
+  HomeRegularUserUpdateDetailsState({required this.userId});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -27,7 +27,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
   final GlobalKey<MiscRegularPhoneNumberTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
   final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
 
-  Future accountDetails;
+  Future<APIRegularShowAccountDetails>? accountDetails;
 
   void initState(){
     super.initState();
@@ -78,23 +78,23 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                   child: Column(
                     children: [
 
-                      MiscRegularInputFieldTemplate(key: _key1, labelText: 'First Name', displayText: details.data.showAccountDetailsFirstName,),
+                      MiscRegularInputFieldTemplate(key: _key1, labelText: 'First Name', displayText: details.data!.showAccountDetailsFirstName,),
 
                       SizedBox(height: 20,),
 
-                      MiscRegularInputFieldTemplate(key: _key2, labelText: 'Last Name', displayText: details.data.showAccountDetailsLastName,),
+                      MiscRegularInputFieldTemplate(key: _key2, labelText: 'Last Name', displayText: details.data!.showAccountDetailsLastName,),
 
                       SizedBox(height: 20,),
 
-                      MiscRegularInputFieldTemplate(key: _key3, labelText: 'Email Address', displayText: details.data.showAccountDetailsEmail, type: TextInputType.emailAddress,),
+                      MiscRegularInputFieldTemplate(key: _key3, labelText: 'Email Address', displayText: details.data!.showAccountDetailsEmail, type: TextInputType.emailAddress,),
 
                       SizedBox(height: 20,),
 
-                      MiscRegularPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
+                      MiscRegularPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data!.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                       SizedBox(height: 20,),
 
-                      MiscRegularInputFieldSecurityQuestions(key: _key5, displayText: details.data.showAccountDetailsQuestion,),
+                      MiscRegularInputFieldSecurityQuestions(key: _key5, displayText: details.data!.showAccountDetailsQuestion,),
 
                       SizedBox(height: 80,),
 
@@ -105,16 +105,16 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ),
-                        width: SizeConfig.screenWidth / 2,
+                        width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
                           if(
-                            details.data.showAccountDetailsFirstName != _key1.currentState.controller.text ||
-                            details.data.showAccountDetailsLastName !=  _key2.currentState.controller.text ||
-                            details.data.showAccountDetailsEmail != _key3.currentState.controller.text ||
-                            details.data.showAccountDetailsPhoneNumber != _key4.currentState.controller.text ||
-                            details.data.showAccountDetailsQuestion != _key5.currentState.currentSelection
+                            details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
+                            details.data!.showAccountDetailsLastName !=  _key2.currentState!.controller.text ||
+                            details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
+                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text ||
+                            details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -122,11 +122,11 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                               context.showLoaderOverlay();
                               bool result = await apiRegularUpdateAccountDetails(
-                                firstName: _key1.currentState.controller.text,
-                                lastName: _key2.currentState.controller.text,
-                                email: _key3.currentState.controller.text,
-                                phoneNumber: _key4.currentState.controller.text,
-                                question: _key5.currentState.currentSelection
+                                firstName: _key1.currentState!.controller.text,
+                                lastName: _key2.currentState!.controller.text,
+                                email: _key3.currentState!.controller.text,
+                                phoneNumber: _key4.currentState!.controller.text,
+                                question: _key5.currentState!.currentSelection
                               );
                               context.hideLoaderOverlay();
 

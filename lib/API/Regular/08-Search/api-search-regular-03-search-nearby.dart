@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({int page, double latitude, double longitude}) async{
+Future<APIRegularSearchNearbyMain> apiRegularSearchNearby({required int page, required double latitude, required double longitude}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/nearby?longitude=$longitude&latitude=$latitude&page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -34,7 +35,7 @@ class APIRegularSearchNearbyMain{
   List<APIRegularSearchNearbyExtended> blmList;
   List<APIRegularSearchNearbyExtended> memorialList;
 
-  APIRegularSearchNearbyMain({this.blmItemsRemaining, this.memorialItemsRemaining, this.blmList, this.memorialList});
+  APIRegularSearchNearbyMain({required this.blmItemsRemaining, required this.memorialItemsRemaining, required this.blmList, required this.memorialList});
 
   factory APIRegularSearchNearbyMain.fromJson(Map<String, dynamic> parsedJson){
     var newList1 = parsedJson['blm'] as List;
@@ -60,14 +61,14 @@ class APIRegularSearchNearbyExtended{
   dynamic searchNearbyProfileImage;
   dynamic searchNearbyImagesOrVideos;
   String searchNearbyRelationship;
-  APIRegularSearchNearbyExtendedPageCreator searchNearbyPageCreator;
+  // APIRegularSearchNearbyExtendedPageCreator searchNearbyPageCreator;
   bool searchNearbyManage;
   bool searchNearbyFamOrFriends;
   bool searchNearbyFollower;
   String searchNearbyPageType;
   String searchNearbyPrivacy;
 
-  APIRegularSearchNearbyExtended({this.searchNearbyId, this.searchNearbyName, this.searchNearbyDetails, this.searchNearbyBackgroundImage, this.searchNearbyProfileImage, this.searchNearbyImagesOrVideos, this.searchNearbyRelationship, this.searchNearbyPageCreator, this.searchNearbyManage, this.searchNearbyFamOrFriends, this.searchNearbyFollower, this.searchNearbyPageType, this.searchNearbyPrivacy});
+  APIRegularSearchNearbyExtended({required this.searchNearbyId, required this.searchNearbyName, required this.searchNearbyDetails, required this.searchNearbyBackgroundImage, required this.searchNearbyProfileImage, this.searchNearbyImagesOrVideos, required this.searchNearbyRelationship, required this.searchNearbyManage, required this.searchNearbyFamOrFriends, required this.searchNearbyFollower, required this.searchNearbyPageType, required this.searchNearbyPrivacy});
 
   factory APIRegularSearchNearbyExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchNearbyExtended(
@@ -97,7 +98,7 @@ class APIRegularSearchNearbyExtendedPageDetails{
   String searchNearbyPageDetailsState;
   String searchNearbyPageDetailsCountry;
 
-  APIRegularSearchNearbyExtendedPageDetails({this.searchNearbyPageDetailsDescription, this.searchNearbyPageDetailsLocation, this.searchNearbyPageDetailsPrecinct, this.searchNearbyPageDetailsDob, this.searchNearbyPageDetailsRip, this.searchNearbyPageDetailsState, this.searchNearbyPageDetailsCountry});
+  APIRegularSearchNearbyExtendedPageDetails({required this.searchNearbyPageDetailsDescription, required this.searchNearbyPageDetailsLocation, required this.searchNearbyPageDetailsPrecinct, required this.searchNearbyPageDetailsDob, required this.searchNearbyPageDetailsRip, required this.searchNearbyPageDetailsState, required this.searchNearbyPageDetailsCountry});
 
   factory APIRegularSearchNearbyExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchNearbyExtendedPageDetails(
@@ -121,7 +122,7 @@ class APIRegularSearchNearbyExtendedPageCreator{
   String serachNearbyPageCreatorUserName;
   dynamic serachNearbyPageCreatorImage;
 
-  APIRegularSearchNearbyExtendedPageCreator({this.serachNearbyPageCreatorId, this.serachNearbyPageCreatorFirstName, this.serachNearbyPageCreatorLastName, this.serachNearbyPageCreatorPhoneNumber, this.serachNearbyPageCreatorEmail, this.serachNearbyPageCreatorUserName, this.serachNearbyPageCreatorImage});
+  APIRegularSearchNearbyExtendedPageCreator({required this.serachNearbyPageCreatorId, required this.serachNearbyPageCreatorFirstName, required this.serachNearbyPageCreatorLastName, required this.serachNearbyPageCreatorPhoneNumber, required this.serachNearbyPageCreatorEmail, required this.serachNearbyPageCreatorUserName, required this.serachNearbyPageCreatorImage});
 
   factory APIRegularSearchNearbyExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchNearbyExtendedPageCreator(

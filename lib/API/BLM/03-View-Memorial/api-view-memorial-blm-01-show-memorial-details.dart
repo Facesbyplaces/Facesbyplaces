@@ -3,14 +3,15 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowMemorialMain> apiBLMShowMemorial({int memorialId}) async{
+Future<APIBLMShowMemorialMain> apiBLMShowMemorial({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -31,7 +32,7 @@ class APIBLMShowMemorialMain{
 
   APIBLMShowMemorialExtended blmMemorial;
 
-  APIBLMShowMemorialMain({this.blmMemorial});
+  APIBLMShowMemorialMain({required this.blmMemorial});
 
   factory APIBLMShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialMain(
@@ -57,7 +58,7 @@ class APIBLMShowMemorialExtended{
   int memorialFriendsCount;
   int memorialFollowersCount;
 
-  APIBLMShowMemorialExtended({this.memorialId, this.memorialName, this.memorialDetails, this.memorialBackgroundImage, this.memorialProfileImage, this.memorialImagesOrVideos, this.memorialRelationship, this.memorialPageCreator, this.memorialManage, this.memorialFamOrFriends, this.memorialFollower, this.memorialPostsCount, this.memorialFamilyCount, this.memorialFriendsCount, this.memorialFollowersCount});
+  APIBLMShowMemorialExtended({required this.memorialId, required this.memorialName, required this.memorialDetails, required this.memorialBackgroundImage, required this.memorialProfileImage, required this.memorialImagesOrVideos, required this.memorialRelationship, required this.memorialPageCreator, required this.memorialManage, required this.memorialFamOrFriends, required this.memorialFollower, required this.memorialPostsCount, required this.memorialFamilyCount, required this.memorialFriendsCount, required this.memorialFollowersCount});
 
   factory APIBLMShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -90,7 +91,7 @@ class APIBLMShowMemorialExtendedDetails{
   String memorialDetailsState;
   String memorialDetailsCountry;
 
-  APIBLMShowMemorialExtendedDetails({this.memorialDetailsDescription, this.memorialDetailsLocation, this.memorialDetailsPrecinct, this.memorialDetailsDob, this.memorialDetailsRip, this.memorialDetailsState, this.memorialDetailsCountry});
+  APIBLMShowMemorialExtendedDetails({required this.memorialDetailsDescription, required this.memorialDetailsLocation, required this.memorialDetailsPrecinct, required this.memorialDetailsDob, required this.memorialDetailsRip, required this.memorialDetailsState, required this.memorialDetailsCountry});
 
   factory APIBLMShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
 
@@ -120,7 +121,7 @@ class APIBLMShowMemorialExtendedPageCreator{
   String memorialPageCreatorUserName;
   dynamic memorialPageCreatorImage;
 
-  APIBLMShowMemorialExtendedPageCreator({this.memorialPageCreatorId, this.memorialPageCreatorFirstName, this.memorialPageCreatorLastName, this.memorialPageCreatorPhoneNumber, this.memorialPageCreatorEmail, this.memorialPageCreatorUserName, this.memorialPageCreatorImage,});
+  APIBLMShowMemorialExtendedPageCreator({required this.memorialPageCreatorId, required this.memorialPageCreatorFirstName, required this.memorialPageCreatorLastName, required this.memorialPageCreatorPhoneNumber, required this.memorialPageCreatorEmail, required this.memorialPageCreatorUserName, required this.memorialPageCreatorImage,});
 
   factory APIBLMShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowMemorialExtendedPageCreator(

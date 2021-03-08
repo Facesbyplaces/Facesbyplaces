@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularUpdatePageDetails({String name, String relationship, String dob, String rip, String country, String cemetery, int memorialId}) async{
+Future<bool> apiRegularUpdatePageDetails({required String name, required String relationship, required String dob, required String rip, required String country, required String cemetery, required int memorialId}) async{
 
   bool result = false;
 

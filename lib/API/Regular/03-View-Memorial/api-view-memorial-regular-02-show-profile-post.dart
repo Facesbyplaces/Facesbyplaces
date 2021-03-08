@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({int memorialId, int page}) async{
+Future<APIRegularHomeProfilePostMain> apiRegularProfilePost({required int memorialId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/page/Memorial/$memorialId?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIRegularHomeProfilePostMain{
   int almItemsRemaining;
   List<APIRegularHomeProfilePostExtended> almFamilyMemorialList;
 
-  APIRegularHomeProfilePostMain({this.almItemsRemaining, this.almFamilyMemorialList});
+  APIRegularHomeProfilePostMain({required this.almItemsRemaining, required this.almFamilyMemorialList});
 
   factory APIRegularHomeProfilePostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -57,11 +58,11 @@ class APIRegularHomeProfilePostExtended{
   int homeProfilePostNumberOfComments;
   bool homeProfilePostLikeStatus;
 
-  APIRegularHomeProfilePostExtended({this.homeProfilePostId, this.homeProfilePostPage, this.homeProfilePostBody, this.homeProfilePostLocation, this.homeProfilePostLatitude, this.homeProfilePostLongitude, this.homeProfilePostImagesOrVideos, this.homeProfilePostTagged, this.homeProfilePostCreatedAt, this.homeProfilePostNumberOfLikes, this.homeProfilePostNumberOfComments, this.homeProfilePostLikeStatus});
+  APIRegularHomeProfilePostExtended({required this.homeProfilePostId, required this.homeProfilePostPage, required this.homeProfilePostBody, required this.homeProfilePostLocation, required this.homeProfilePostLatitude, required this.homeProfilePostLongitude, required this.homeProfilePostImagesOrVideos, required this.homeProfilePostTagged, required this.homeProfilePostCreatedAt, required this.homeProfilePostNumberOfLikes, required this.homeProfilePostNumberOfComments, required this.homeProfilePostLikeStatus});
 
   factory APIRegularHomeProfilePostExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -78,7 +79,7 @@ class APIRegularHomeProfilePostExtended{
       homeProfilePostLocation: parsedJson['location'],
       homeProfilePostLatitude: parsedJson['latitude'],
       homeProfilePostLongitude: parsedJson['longitude'],
-      homeProfilePostImagesOrVideos: newList1,
+      homeProfilePostImagesOrVideos: newList1!,
       homeProfilePostTagged: taggedList,
       homeProfilePostCreatedAt: parsedJson['created_at'],
       homeProfilePostNumberOfLikes: parsedJson['numberOfLikes'],
@@ -103,7 +104,7 @@ class APIRegularHomeProfilePostExtendedPage{
   String homeProfilePostPagePageType;
   String homeProfilePostPagePrivacy;
 
-  APIRegularHomeProfilePostExtendedPage({this.homeProfilePostPageId, this.homeProfilePostPageName, this.homeProfilePostPageDetails, this.homeProfilePostPageBackgroundImage, this.homeProfilePostPageProfileImage, this.homeProfilePostPageImagesOrVideos, this.homeProfilePostPageRelationship, this.homeProfilePostPagePageCreator, this.homeProfilePostPageManage, this.homeProfilePostPageFamOrFriends, this.homeProfilePostPageFollower, this.homeProfilePostPagePageType, this.homeProfilePostPagePrivacy});
+  APIRegularHomeProfilePostExtendedPage({required this.homeProfilePostPageId, required this.homeProfilePostPageName, required this.homeProfilePostPageDetails, required this.homeProfilePostPageBackgroundImage, required this.homeProfilePostPageProfileImage, required this.homeProfilePostPageImagesOrVideos, required this.homeProfilePostPageRelationship, required this.homeProfilePostPagePageCreator, required this.homeProfilePostPageManage, required this.homeProfilePostPageFamOrFriends, required this.homeProfilePostPageFollower, required this.homeProfilePostPagePageType, required this.homeProfilePostPagePrivacy});
 
   factory APIRegularHomeProfilePostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPage(
@@ -132,7 +133,7 @@ class APIRegularHomeProfilePostExtendedPageDetails{
   String homeProfilePostPageDetailsCemetery;
   String homeProfilePostPageDetailsCountry;
 
-  APIRegularHomeProfilePostExtendedPageDetails({this.homeProfilePostPageDetailsDescription, this.homeProfilePostPageDetailsBirthPlace, this.homeProfilePostPageDetailsDob, this.homeProfilePostPageDetailsRip, this.homeProfilePostPageDetailsCemetery, this.homeProfilePostPageDetailsCountry});
+  APIRegularHomeProfilePostExtendedPageDetails({required this.homeProfilePostPageDetailsDescription, required this.homeProfilePostPageDetailsBirthPlace, required this.homeProfilePostPageDetailsDob, required this.homeProfilePostPageDetailsRip, required this.homeProfilePostPageDetailsCemetery, required this.homeProfilePostPageDetailsCountry});
 
   factory APIRegularHomeProfilePostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPageDetails(
@@ -155,7 +156,7 @@ class APIRegularHomeProfilePostExtendedPageCreator{
   String homeProfilePostPageCreatorUserName;
   dynamic homeProfilePostPageCreatorImage;
 
-  APIRegularHomeProfilePostExtendedPageCreator({this.homeProfilePostPageCreatorId, this.homeProfilePostPageCreatorFirstName, this.homeProfilePostPageCreatorLastName, this.homeProfilePostPageCreatorPhoneNumber, this.homeProfilePostPageCreatorEmail, this.homeProfilePostPageCreatorUserName, this.homeProfilePostPageCreatorImage});
+  APIRegularHomeProfilePostExtendedPageCreator({required this.homeProfilePostPageCreatorId, required this.homeProfilePostPageCreatorFirstName, required this.homeProfilePostPageCreatorLastName, required this.homeProfilePostPageCreatorPhoneNumber, required this.homeProfilePostPageCreatorEmail, required this.homeProfilePostPageCreatorUserName, required this.homeProfilePostPageCreatorImage});
 
   factory APIRegularHomeProfilePostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedPageCreator(
@@ -176,7 +177,7 @@ class APIRegularHomeProfilePostExtendedTagged{
   String homeProfilePostTaggedLastName;
   String homeProfilePostTaggedImage;
 
-  APIRegularHomeProfilePostExtendedTagged({this.homeProfilePostTaggedId, this.homeProfilePostTaggedFirstName, this.homeProfilePostTaggedLastName, this.homeProfilePostTaggedImage});
+  APIRegularHomeProfilePostExtendedTagged({required this.homeProfilePostTaggedId, required this.homeProfilePostTaggedFirstName, required this.homeProfilePostTaggedLastName, required this.homeProfilePostTaggedImage});
 
   factory APIRegularHomeProfilePostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeProfilePostExtendedTagged(

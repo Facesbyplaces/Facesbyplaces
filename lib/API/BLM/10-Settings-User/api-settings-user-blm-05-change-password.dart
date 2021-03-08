@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMChangePassword({String currentPassword, String newPassword}) async{
+Future<bool> apiBLMChangePassword({required String currentPassword, required String newPassword}) async{
 
   bool result = false;
 

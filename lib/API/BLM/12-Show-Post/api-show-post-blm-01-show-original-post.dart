@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({int postId}) async{
+Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({required int postId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/$postId',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/$postId', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -29,7 +30,7 @@ Future<APIBLMShowOriginalPostMain> apiBLMShowOriginalPost({int postId}) async{
 class APIBLMShowOriginalPostMain{
   APIBLMShowOriginalPostExtended blmPost;
   
-  APIBLMShowOriginalPostMain({this.blmPost});
+  APIBLMShowOriginalPostMain({required this.blmPost});
 
   factory APIBLMShowOriginalPostMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostMain(
@@ -52,11 +53,11 @@ class APIBLMShowOriginalPostExtended{
   int showOriginalPostNumberOfComments;
   bool showOriginalPostLikeStatus;
 
-  APIBLMShowOriginalPostExtended({this.showOriginalPostId, this.showOriginalPostPage, this.showOriginalPostBody, this.showOriginalPostLocation, this.showOriginalPostLatitude, this.showOriginalPostLongitude, this.showOriginalPostImagesOrVideos, this.showOriginalPostPostTagged, this.showOriginalPostCreateAt, this.showOriginalPostNumberOfLikes, this.showOriginalPostNumberOfComments, this.showOriginalPostLikeStatus});
+  APIBLMShowOriginalPostExtended({required this.showOriginalPostId, required this.showOriginalPostPage, required this.showOriginalPostBody, required this.showOriginalPostLocation, required this.showOriginalPostLatitude, required this.showOriginalPostLongitude, required this.showOriginalPostImagesOrVideos, required this.showOriginalPostPostTagged, required this.showOriginalPostCreateAt, required this.showOriginalPostNumberOfLikes, required this.showOriginalPostNumberOfComments, required this.showOriginalPostLikeStatus});
 
   factory APIBLMShowOriginalPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList;
+    List<dynamic>? newList;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -73,7 +74,7 @@ class APIBLMShowOriginalPostExtended{
       showOriginalPostLocation: parsedJson['location'],
       showOriginalPostLatitude: parsedJson['latitude'],
       showOriginalPostLongitude: parsedJson['longitude'],
-      showOriginalPostImagesOrVideos: newList,
+      showOriginalPostImagesOrVideos: newList!,
       showOriginalPostPostTagged: taggedList,
       showOriginalPostCreateAt: parsedJson['created_at'],
       showOriginalPostNumberOfLikes: parsedJson['numberOfLikes'],
@@ -98,7 +99,7 @@ class APIBLMShowOriginalPostExtendedPage{
   String showOriginalPostPagePageType;
   String showOriginalPostPagePrivacy;
 
-  APIBLMShowOriginalPostExtendedPage({this.showOriginalPostPageId, this.showOriginalPostPageName, this.showOriginalPostPageDetails, this.showOriginalPostPageBackgroundImage, this.showOriginalPostPageProfileImage, this.showOriginalPostPageImagesOrVideos, this.showOriginalPostPageRelationship, this.showOriginalPostPagePageCreator, this.showOriginalPostPageManage, this.showOriginalPostPageFamOrFriends, this.showOriginalPostPageFollower, this.showOriginalPostPagePageType, this.showOriginalPostPagePrivacy});
+  APIBLMShowOriginalPostExtendedPage({required this.showOriginalPostPageId, required this.showOriginalPostPageName, required this.showOriginalPostPageDetails, required this.showOriginalPostPageBackgroundImage, required this.showOriginalPostPageProfileImage, required this.showOriginalPostPageImagesOrVideos, required this.showOriginalPostPageRelationship, required this.showOriginalPostPagePageCreator, required this.showOriginalPostPageManage, required this.showOriginalPostPageFamOrFriends, required this.showOriginalPostPageFollower, required this.showOriginalPostPagePageType, required this.showOriginalPostPagePrivacy});
 
   factory APIBLMShowOriginalPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedPage(
@@ -127,7 +128,7 @@ class APIRegularShowOriginalPostExtendedPageDetails{
   String showOriginalPostPageDetailsCemetery;
   String showOriginalPostPageDetailsCountry;
 
-  APIRegularShowOriginalPostExtendedPageDetails({this.showOriginalPostPageDetailsDescription, this.showOriginalPostPageDetailsBirthPlace, this.showOriginalPostPageDetailsDob, this.showOriginalPostPageDetailsRip, this.showOriginalPostPageDetailsCemetery, this.showOriginalPostPageDetailsCountry});
+  APIRegularShowOriginalPostExtendedPageDetails({required this.showOriginalPostPageDetailsDescription, required this.showOriginalPostPageDetailsBirthPlace, required this.showOriginalPostPageDetailsDob, required this.showOriginalPostPageDetailsRip, required this.showOriginalPostPageDetailsCemetery, required this.showOriginalPostPageDetailsCountry});
 
   factory APIRegularShowOriginalPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowOriginalPostExtendedPageDetails(
@@ -151,7 +152,7 @@ class APIBLMShowOriginalPostExtendedPageCreator{
   dynamic showOriginalPostPageCreatorImage;
   int showOriginalPostPageCreatorAccountType;
 
-  APIBLMShowOriginalPostExtendedPageCreator({this.showOriginalPostPageCreatorId, this.showOriginalPostPageCreatorFirstName, this.showOriginalPostPageCreatorLastName, this.showOriginalPostPageCreatorPhoneNumber, this.showOriginalPostPageCreatorEmail, this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage, this.showOriginalPostPageCreatorAccountType});
+  APIBLMShowOriginalPostExtendedPageCreator({required this.showOriginalPostPageCreatorId, required this.showOriginalPostPageCreatorFirstName, required this.showOriginalPostPageCreatorLastName, required this.showOriginalPostPageCreatorPhoneNumber, required this.showOriginalPostPageCreatorEmail, required this.showOriginalPostPageCreatorUserName, this.showOriginalPostPageCreatorImage, required this.showOriginalPostPageCreatorAccountType});
 
   factory APIBLMShowOriginalPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedPageCreator(
@@ -173,7 +174,7 @@ class APIBLMShowOriginalPostExtendedTagged{
   String showOriginalPostTaggedLastName;
   String showOriginalPostTaggedImage;
 
-  APIBLMShowOriginalPostExtendedTagged({this.showOriginalPostTaggedId, this.showOriginalPostTaggedFirstName, this.showOriginalPostTaggedLastName, this.showOriginalPostTaggedImage});
+  APIBLMShowOriginalPostExtendedTagged({required this.showOriginalPostTaggedId, required this.showOriginalPostTaggedFirstName, required this.showOriginalPostTaggedLastName, required this.showOriginalPostTaggedImage});
 
   factory APIBLMShowOriginalPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOriginalPostExtendedTagged(

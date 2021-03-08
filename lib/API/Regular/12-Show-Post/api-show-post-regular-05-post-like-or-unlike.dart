@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularLikeOrUnlikePost({int postId, bool like}) async{
+Future<bool> apiRegularLikeOrUnlikePost({required int postId, required bool like}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

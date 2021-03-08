@@ -33,7 +33,7 @@ class BLMMainPagesPosts{
   bool famOrFriends;
   String relationship;
 
-  BLMMainPagesPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  BLMMainPagesPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class HomeBLMPostTab extends StatefulWidget{
@@ -44,17 +44,13 @@ class HomeBLMPostTab extends StatefulWidget{
 class HomeBLMPostTabState extends State<HomeBLMPostTab>{
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMMainPagesPosts> posts;
-  int itemRemaining;
-  int page;
-  int count;
+  List<BLMMainPagesPosts> posts = [];
+  int itemRemaining = 1;
+  int page = 1;
+  int count = 0;
 
   void initState(){
     super.initState();
-    itemRemaining = 1;
-    posts = [];
-    page = 1;
-    count = 0;
     onLoading();
   }
 
@@ -138,7 +134,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -175,16 +171,16 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                 contents: [
                   Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                  posts[i].imagesOrVideos != null
+                  posts[i].imagesOrVideos != []
                   ? Column(
                     children: [
                       SizedBox(height: 20),
 
                       Container(
                         child: ((){
-                          if(posts[i].imagesOrVideos != null){
+                          if(posts[i].imagesOrVideos != []){
                             if(posts[i].imagesOrVideos.length == 1){
-                              if(lookupMimeType(posts[i].imagesOrVideos[0]).contains('video') == true){
+                              if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                                 return Container(
                                   child: Stack(
                                     children: [
@@ -225,7 +221,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                                 crossAxisCount: 4,
                                 itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) =>  
-                                  lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
+                                  lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                   ? Container(
                                     child: Stack(
                                       children: [
@@ -268,7 +264,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                                 itemBuilder: (BuildContext context, int index) => 
                                 ((){
                                   if(index != 1){
-                                    return lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
+                                    return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                     ? Container(
                                       child: Stack(
                                         children: [
@@ -302,7 +298,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                                   }else{
                                     return ((){
                                       if(posts[i].imagesOrVideos.length - 3 > 0){
-                                        if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
+                                        if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                           return Stack(
                                             children: [
                                               Container(
@@ -377,7 +373,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
                                           );
                                         }
                                       }else{
-                                        if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
+                                        if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                           return Container(
                                             child: Stack(
                                               children: [
@@ -443,7 +439,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -451,7 +447,7 @@ class HomeBLMPostTabState extends State<HomeBLMPostTab>{
 
               Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],
           ),
         ),

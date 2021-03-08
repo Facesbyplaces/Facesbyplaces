@@ -48,7 +48,7 @@ class RegularOriginalComment{
   int userAccountType;
   List<RegularOriginalReply> listOfReplies;
 
-  RegularOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.userAccountType, this.listOfReplies});
+  RegularOriginalComment({required this.commentId, required this.postId, required this.userId, required this.commentBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.commentLikes, required this.commentNumberOfLikes, required this.userAccountType, required this.listOfReplies});
 }
 
 class RegularOriginalReply{
@@ -64,49 +64,63 @@ class RegularOriginalReply{
   int replyNumberOfLikes;
   int userAccountType;
 
-  RegularOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes, this.userAccountType});
+  RegularOriginalReply({required this.replyId, required this.commentId, required this.userId, required this.replyBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.replyLikes, required this.replyNumberOfLikes, required this.userAccountType});
 }
 
 class HomeRegularShowOriginalPostComments extends StatefulWidget{
   final int postId;
-  // final int userId;
-  // HomeRegularShowOriginalPostComments({this.postId, this.userId});
-  HomeRegularShowOriginalPostComments({this.postId});
+  HomeRegularShowOriginalPostComments({required this.postId});
 
   @override
-  // HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId, userId: userId);
   HomeRegularShowOriginalPostCommentsState createState() => HomeRegularShowOriginalPostCommentsState(postId: postId);
 }
 
 class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOriginalPostComments>{
   final int postId;
-  // final int userId;
-  // HomeRegularShowOriginalPostCommentsState({this.postId, this.userId});
-  HomeRegularShowOriginalPostCommentsState({this.postId});
+  HomeRegularShowOriginalPostCommentsState({required this.postId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
-  List<RegularOriginalComment> comments;
-  List<RegularOriginalReply> replies;
-  int itemRemaining;
-  int repliesRemaining;
-  int page1;
-  int count;
-  int numberOfReplies;
-  int page2;
-  List<bool> commentsLikes;
-  List<int> commentsNumberOfLikes;
-  bool isComment;
-  List<List<bool>> repliesLikes;
-  List<List<int>> repliesNumberOfLikes;
-  int currentCommentId;
-  String currentUserImage;
-  int currentUserId;
-  int currentAccountType;
-  int numberOfLikes;
-  int numberOfComments;
+  List<RegularOriginalComment> comments = [];
+  List<RegularOriginalReply> replies = [];
+  int itemRemaining = 1;
+  int repliesRemaining = 1;
+  int page1 = 1;
+  int count = 0;
+  int numberOfReplies = 0;
+  int page2 = 1;
+  List<bool> commentsLikes = [];
+  List<int> commentsNumberOfLikes = [];
+  bool isComment = true;
+  List<List<bool>> repliesLikes = [];
+  List<List<int>> repliesNumberOfLikes = [];
+  int currentCommentId = 1;
+  String currentUserImage = '';
+  int? currentUserId;
+  int currentAccountType = 1;
+  int numberOfLikes = 0;
+  int numberOfComments = 0;
   GlobalKey profileKey = GlobalKey<HomeRegularShowOriginalPostCommentsState>();
+
+
+  Future<APIRegularShowOriginalPostMain>? showOriginalPost;
+  bool likePost = false;
+  bool pressedLike = false;
+  int likesCount = 0;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
+  bool isGuestLoggedIn = true;
+
+  void initState(){
+    super.initState();
+    isGuest();
+    likesCount = numberOfLikes;
+    showOriginalPost = getOriginalPost(postId);
+    getProfilePicture();
+    getOriginalPostInformation();
+    onLoading();
+  }
   
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -121,7 +135,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
   void getProfilePicture() async{
     var getProfilePicture = await apiRegularShowProfileInformation();
-    // currentUserImage = getProfilePicture.showProfileInformationImage;
     currentUserImage = getProfilePicture.showProfileInformationImage;
     currentUserId = getProfilePicture.showProfileInformationUserId;
     currentAccountType = getProfilePicture.showProfileInformationAccountType;
@@ -211,16 +224,6 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     }
   }
 
-
-
-  Future showOriginalPost;
-  bool likePost;
-  bool pressedLike;
-  int likesCount;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  bool isGuestLoggedIn;
-
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     setState(() {
@@ -254,35 +257,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
-  void initState(){
-    super.initState();
-    isGuestLoggedIn = true;
-    isGuest();
-    pressedLike = false;
-    likesCount = numberOfLikes;
-    showOriginalPost = getOriginalPost(postId);
-    getProfilePicture();
-
-    itemRemaining = 1;
-    repliesRemaining = 1;
-    comments = [];
-    replies = [];
-    numberOfReplies = 0;
-    page1 = 1;
-    page2 = 1;
-    count = 0;
-    commentsLikes = [];
-    commentsNumberOfLikes = [];
-    repliesLikes = [];
-    repliesNumberOfLikes = [];
-    isComment = true;
-    numberOfLikes = 0;
-    numberOfComments = 0;
-    getOriginalPostInformation();
-    onLoading();
+    lp?.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -311,7 +286,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
               },
             ),
             actions: [
-              MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post',),
+              MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Alm'),
             ],
           ),
           backgroundColor: Color(0xffffffff),
@@ -331,7 +306,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                     footer: CustomFooter(
                       loadStyle: LoadStyle.ShowWhenLoading,
                       builder: (BuildContext context, LoadStatus mode){
-                        Widget body;
+                        Widget body = Container();
                         if(mode == LoadStatus.loading){
                           body = CircularProgressIndicator();
                         }
@@ -359,38 +334,42 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                         children: [
                                           GestureDetector(
                                             onTap: () async{
-                                              if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                              if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                 }else{
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                 }
                                               }else{
-                                                if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                                if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                 }else{
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                 }
                                               }
                                             },
-                                            child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
+                                            // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
+                                            child: CircleAvatar(
+                                              backgroundColor: Color(0xff888888),
+                                              backgroundImage: NetworkImage(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                            ),
                                           ),
                                           Expanded(
                                             child: Container(
                                               padding: EdgeInsets.only(left: 10.0),
                                               child: GestureDetector(
                                                 onTap: () async{
-                                                  if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                    if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                                  if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                    if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                     }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                     }
                                                   }else{
-                                                    if(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                                    if(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                     }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                     }
                                                   }
                                                 },
@@ -398,7 +377,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   children: [
                                                     Expanded(
                                                       child: Align(alignment: Alignment.bottomLeft,
-                                                        child: Text(originalPost.data.almPost.showOriginalPostPage.showOriginalPostPageName,
+                                                        child: Text(originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPageName,
                                                           overflow: TextOverflow.ellipsis,
                                                           style: TextStyle(
                                                             fontSize: 16,
@@ -411,7 +390,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                     Expanded(
                                                       child: Align(
                                                         alignment: Alignment.topLeft,
-                                                        child: Text(timeago.format(DateTime.parse(originalPost.data.almPost.showOriginalPostCreateAt)),
+                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.almPost.showOriginalPostCreateAt)),
                                                           maxLines: 1,
                                                           style: TextStyle(
                                                             fontSize: 14,
@@ -433,22 +412,22 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                     Container(
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       alignment: Alignment.centerLeft, 
-                                      child: Text(originalPost.data.almPost.showOriginalPostBody),
+                                      child: Text(originalPost.data!.almPost.showOriginalPostBody),
                                     ),
 
-                                    originalPost.data.almPost.showOriginalPostImagesOrVideos != null
+                                    originalPost.data!.almPost.showOriginalPostImagesOrVideos != []
                                     ? Column(
                                       children: [
                                         SizedBox(height: 20),
 
                                         Container(
                                           child: ((){
-                                            if(originalPost.data.almPost.showOriginalPostImagesOrVideos != null){
-                                              if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length == 1){
-                                                if(lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                            if(originalPost.data!.almPost.showOriginalPostImagesOrVideos != []){
+                                              if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 1){
+                                                if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                   return Container(
                                                     child: BetterPlayer.network(
-                                                      '${originalPost.data.almPost.showOriginalPostImagesOrVideos[0]}',
+                                                      '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[0]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                         aspectRatio: 16 / 9,
                                                       ),
@@ -458,13 +437,13 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   return Container(
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.contain,
-                                                      imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[0],
+                                                      imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[0],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                     ),
                                                   );
                                                 }
-                                              }else if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length == 2){
+                                              }else if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length == 2){
                                                 return StaggeredGridView.countBuilder(
                                                   padding: EdgeInsets.zero,
                                                   shrinkWrap: true,
@@ -499,11 +478,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     Expanded(
                                                                       child: CarouselSlider(
                                                                         items: List.generate(
-                                                                          originalPost.data.almPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                                          lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                                          originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                          lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true
                                                                           ? Container(
                                                                             child: BetterPlayer.network(
-                                                                              '${originalPost.data.almPost.showOriginalPostImagesOrVideos[next]}',
+                                                                              '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
                                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                                 ),
@@ -513,7 +492,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           )
                                                                           : CachedNetworkImage(
                                                                             fit: BoxFit.cover,
-                                                                            imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[next],
+                                                                            imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           ),
@@ -533,11 +512,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           },
                                                         );
                                                       },
-                                                      child: lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
+                                                      child: lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                       ? Container(
                                                         child: Stack(
                                                           children: [
-                                                          BetterPlayer.network('${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                          BetterPlayer.network('${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false
@@ -558,7 +537,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       )
                                                       : CachedNetworkImage(
                                                         fit: BoxFit.cover,
-                                                        imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
+                                                        imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       ),
@@ -604,11 +583,11 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                     Expanded(
                                                                       child: CarouselSlider(
                                                                         items: List.generate(
-                                                                          originalPost.data.almPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                                          lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                                          originalPost.data!.almPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                          lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true
                                                                           ? Container(
                                                                             child: BetterPlayer.network(
-                                                                              '${originalPost.data.almPost.showOriginalPostImagesOrVideos[next]}',
+                                                                              '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[next]}',
                                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                                 ),
@@ -618,7 +597,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                           )
                                                                           : CachedNetworkImage(
                                                                             fit: BoxFit.cover,
-                                                                            imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[next],
+                                                                            imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[next],
                                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           ),
@@ -640,12 +619,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                       },
                                                       child: ((){
                                                         if(index != 1){
-                                                          return lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
+                                                          return lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                           ? Container(
                                                             child: Stack(
                                                               children: [
                                                                 BetterPlayer.network(
-                                                                  '${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                  '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
@@ -666,21 +645,21 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                           )
                                                           : CachedNetworkImage(
                                                             fit: BoxFit.contain,
-                                                            imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
+                                                            imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                           );
                                                         }else{
                                                           return ((){
-                                                            if(originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
-                                                              if(lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                                            if(originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                              if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                 return Stack(
                                                                   children: [
                                                                     Container(
                                                                       child: Stack(
                                                                         children: [
                                                                           BetterPlayer.network(
-                                                                            '${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                            '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                                 showControls: false,
@@ -707,7 +686,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         radius: 25,
                                                                         backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                                         child: Text(
-                                                                          '${originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                          '${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}',
                                                                           style: TextStyle(
                                                                             fontSize: 40,
                                                                             fontWeight: FontWeight.bold,
@@ -723,7 +702,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                   children: [
                                                                     CachedNetworkImage(
                                                                       fit: BoxFit.contain,
-                                                                      imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
+                                                                      imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                     ),
@@ -735,7 +714,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                         radius: 25,
                                                                         backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                                         child: Text(
-                                                                          '${originalPost.data.almPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                          '${originalPost.data!.almPost.showOriginalPostImagesOrVideos.length - 3}',
                                                                           style: TextStyle(
                                                                             fontSize: 40,
                                                                             fontWeight: FontWeight.bold,
@@ -748,12 +727,12 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                                 );
                                                               }
                                                             }else{
-                                                              if(lookupMimeType(originalPost.data.almPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                                              if(lookupMimeType(originalPost.data!.almPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                 return Container(
                                                                   child: Stack(
                                                                     children: [
                                                                       BetterPlayer.network(
-                                                                        '${originalPost.data.almPost.showOriginalPostImagesOrVideos[index]}',
+                                                                        '${originalPost.data!.almPost.showOriginalPostImagesOrVideos[index]}',
                                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                             showControls: false,
@@ -776,7 +755,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                               }else{
                                                                 return CachedNetworkImage(
                                                                   fit: BoxFit.contain,
-                                                                  imageUrl: originalPost.data.almPost.showOriginalPostImagesOrVideos[index],
+                                                                  imageUrl: originalPost.data!.almPost.showOriginalPostImagesOrVideos[index],
                                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                 );
@@ -804,7 +783,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                     )
                                     : Container(color: Colors.red, height: 0,),
 
-                                    originalPost.data.almPost.showOriginalPostPostTagged.length != 0
+                                    originalPost.data!.almPost.showOriginalPostPostTagged.length != 0
                                     ? Column(
                                       children: [
                                         SizedBox(height: 20),
@@ -818,22 +797,22 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                 direction: Axis.vertical,
                                                 spacing: 5.0,
                                                 children: List.generate(
-                                                  originalPost.data.almPost.showOriginalPostPostTagged.length,
+                                                  originalPost.data!.almPost.showOriginalPostPostTagged.length,
                                                   (index) => GestureDetector(
                                                     onTap: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.almPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
                                                     },
                                                     child: RichText(
                                                       text: TextSpan(
                                                         style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                                         children: <TextSpan>[
-                                                          TextSpan(text: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
+                                                          TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
 
                                                           TextSpan(text: ' '),
 
-                                                          TextSpan(text: originalPost.data.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
+                                                          TextSpan(text: originalPost.data!.almPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
 
-                                                          index < originalPost.data.almPost.showOriginalPostPostTagged.length - 1
+                                                          index < originalPost.data!.almPost.showOriginalPostPostTagged.length - 1
                                                           ? TextSpan(text: ',')
                                                           : TextSpan(text: ''),
                                                         ],
@@ -905,7 +884,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                   comments.length, (i) => ListTile(
                                     visualDensity: VisualDensity(vertical: 4.0),
                                     leading: CircleAvatar(
-                                      backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                      backgroundImage: NetworkImage(comments[i].image),
                                       backgroundColor: Color(0xff888888),
                                     ),
                                     title: Row(
@@ -1073,7 +1052,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                               contentPadding: EdgeInsets.zero,
                                               visualDensity: VisualDensity(vertical: 4.0),
                                               leading: CircleAvatar(
-                                                backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
+                                                backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
                                                 backgroundColor: Color(0xff888888),
                                               ),
                                               title: Row(
@@ -1081,7 +1060,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId)));
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: comments[i].listOfReplies[index].userId, accountType: currentAccountType,)));
                                                       },
                                                       child: currentUserId == comments[i].listOfReplies[index].userId && currentAccountType == comments[i].listOfReplies[index].userAccountType
                                                       ? Text('You',
@@ -1253,7 +1232,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
 
-                              SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                              SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -1261,7 +1240,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
 
                               Text('Comment is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-                              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+                              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                             ],
                           ),
                         ),
@@ -1294,10 +1273,8 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
           children: [
             
             CircleAvatar(
-              backgroundColor: Color(0xff888888), 
-              backgroundImage: currentUserImage != null && currentUserImage != ''
-              ? NetworkImage(currentUserImage)
-              : AssetImage('assets/icons/app-icon.png'),
+              backgroundColor: Color(0xff888888),
+              backgroundImage: NetworkImage(currentUserImage),
             ),
 
             Expanded(
@@ -1398,7 +1375,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
     );
   }
 
-  showKeyboardEdit({bool isEdit, int editId}){ // isEdit - TRUE (COMMENT) | FALSE (REPLY)
+  showKeyboardEdit({required bool isEdit, required int editId}){ // isEdit - TRUE (COMMENT) | FALSE (REPLY)
     return SafeArea(
       top: false,
       child: Padding(
@@ -1408,9 +1385,7 @@ class HomeRegularShowOriginalPostCommentsState extends State<HomeRegularShowOrig
             
             CircleAvatar(
               backgroundColor: Color(0xff888888), 
-              backgroundImage: currentUserImage != null && currentUserImage != ''
-              ? NetworkImage(currentUserImage)
-              : AssetImage('assets/icons/app-icon.png'),
+              backgroundImage: NetworkImage(currentUserImage),
             ),
 
             Expanded(

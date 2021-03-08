@@ -249,7 +249,7 @@ class BLMJoin extends StatelessWidget {
 
                   Center(child: Text('Remembering the Victims', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff000000),),),),
 
-                  SizedBox(height: SizeConfig.blockSizeVertical * 5,),
+                  SizedBox(height: SizeConfig.blockSizeVertical! * 5,),
               
                   MiscBLMButtonTemplate(
                     buttonText: 'Join', 
@@ -261,7 +261,7 @@ class BLMJoin extends StatelessWidget {
                     onPressed: (){
                       Navigator.pushNamed(context, '/blm/login');
                     }, 
-                    width: SizeConfig.screenWidth / 2, 
+                    width: SizeConfig.screenWidth! / 2, 
                     height: 45,
                     buttonColor: Color(0xff4EC9D4),
                   ),

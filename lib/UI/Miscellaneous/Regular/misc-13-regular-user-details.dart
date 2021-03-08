@@ -15,19 +15,17 @@ import 'misc-04-regular-post.dart';
 
 class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget{
   final int userId;
-  MiscRegularUserProfileDraggableSwitchTabs({this.userId});
+  MiscRegularUserProfileDraggableSwitchTabs({required this.userId});
 
   MiscRegularUserProfileDraggableSwitchTabsState createState() => MiscRegularUserProfileDraggableSwitchTabsState(userId: userId);
 }
 
 class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUserProfileDraggableSwitchTabs>{
   final int userId;
-  MiscRegularUserProfileDraggableSwitchTabsState({this.userId});
+  MiscRegularUserProfileDraggableSwitchTabsState({required this.userId});
 
-  double height;
-  Offset position;
   int currentIndex = 0;
-  List<Widget> children;
+  List<Widget> children = [];
 
   @override
   void initState(){
@@ -44,7 +42,7 @@ class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUs
           print('Opened!');
         });
       },
-      maxHeight: SizeConfig.screenHeight / 1.5,
+      maxHeight: SizeConfig.screenHeight! / 1.5,
       header: Container(
         alignment: Alignment.center,
         width: SizeConfig.screenWidth,
@@ -66,7 +64,7 @@ class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUs
             tabs: [
 
               Container(
-                width: SizeConfig.screenWidth / 2.5,
+                width: SizeConfig.screenWidth! / 2.5,
                 child: Center(
                   child: Text('Post',
                     style: TextStyle(
@@ -78,7 +76,7 @@ class MiscRegularUserProfileDraggableSwitchTabsState extends State<MiscRegularUs
               ),
 
               Container(
-                width: SizeConfig.screenWidth / 2.5,
+                width: SizeConfig.screenWidth! / 2.5,
                 child: Center(
                   child: Text('Memorials',
                     style: TextStyle(
@@ -152,32 +150,28 @@ class RegularMiscDraggablePost{
   List<String> taggedImage;
   List<int> taggedId;
 
-  RegularMiscDraggablePost({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId});
+  RegularMiscDraggablePost({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId});
 }
 
 class MiscRegularDraggablePost extends StatefulWidget{
   final int userId;
-  MiscRegularDraggablePost({this.userId});
+  MiscRegularDraggablePost({required this.userId});
 
   MiscRegularDraggablePostState createState() => MiscRegularDraggablePostState(userId: userId);
 }
 
 class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
   final int userId;
-  MiscRegularDraggablePostState({this.userId});
+  MiscRegularDraggablePostState({required this.userId});
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularMiscDraggablePost> posts;
-  int itemRemaining;
-  int page;
-  int count;
+  List<RegularMiscDraggablePost> posts = [];
+  int itemRemaining = 1;
+  int page = 1;
+  int count = 0;
 
   void initState(){
     super.initState();
-    itemRemaining = 1;
-    posts = [];
-    page = 1;
-    count = 0;
     onLoading();
   }
 
@@ -259,7 +253,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -290,20 +284,24 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
               taggedFirstName: posts[i].taggedFirstName,
               taggedLastName: posts[i].taggedLastName,
               taggedId: posts[i].taggedId,
+
+              famOrFriends: false,
+              pageType: 'Alm',
+              relationship: 'Relationship',
               contents: [
 
                 Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                posts[i].imagesOrVideos != null
+                posts[i].imagesOrVideos != []
                 ? Column(
                   children: [
                     SizedBox(height: 20),
 
                     Container(
                       child: ((){
-                        if(posts[i].imagesOrVideos != null){
+                        if(posts[i].imagesOrVideos != []){
                           if(posts[i].imagesOrVideos.length == 1){
-                            if(lookupMimeType(posts[i].imagesOrVideos[0]).contains('video') == true){
+                            if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                               return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -330,7 +328,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                               crossAxisCount: 4,
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) =>  
-                                lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
+                                lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                     controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -359,7 +357,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                               itemBuilder: (BuildContext context, int index) => 
                               ((){
                                 if(index != 1){
-                                  return lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
+                                  return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                   ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                     betterPlayerConfiguration: BetterPlayerConfiguration(
                                       controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -378,7 +376,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                 }else{
                                   return ((){
                                     if(posts[i].imagesOrVideos.length - 3 > 0){
-                                      if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
+                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                         return Stack(
                                           children: [
                                             BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
@@ -438,7 +436,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
                                         );
                                       }
                                     }else{
-                                      if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
+                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                         return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                           betterPlayerConfiguration: BetterPlayerConfiguration(
                                             controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -488,7 +486,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -496,7 +494,7 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 
               Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
             ],
           ),
         ),
@@ -507,33 +505,26 @@ class MiscRegularDraggablePostState extends State<MiscRegularDraggablePost>{
 
 class MiscRegularDraggableMemorials extends StatefulWidget{
   final int userId;
-  MiscRegularDraggableMemorials({this.userId});
+  MiscRegularDraggableMemorials({required this.userId});
 
   MiscRegularDraggableMemorialsState createState() => MiscRegularDraggableMemorialsState(userId: userId);
 }
 
 class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemorials>{
   final int userId;
-  MiscRegularDraggableMemorialsState({this.userId});
+  MiscRegularDraggableMemorialsState({required this.userId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<Widget> finalMemorials;
-  int ownedItemsRemaining;
-  int followedItemsRemaining;
-  int page1;
-  int page2;
-  bool flag1;
-  int count;
+  List<Widget> finalMemorials = [];
+  int ownedItemsRemaining = 1;
+  int followedItemsRemaining = 1;
+  int page1 = 1;
+  int page2 = 1;
+  bool flag1 = false;
+  int count = 0;
 
   void initState(){
     super.initState();
-    finalMemorials = [];
-    ownedItemsRemaining = 1;
-    followedItemsRemaining = 1;
-    page1 = 1;
-    page2 = 1;
-    count = 0;
-    flag1 = false;
     addMemorials1();
     onLoading();
   }
@@ -674,7 +665,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
   Widget build(BuildContext context) {
     SizeConfig.init(context);
     return Container(
-      height: SizeConfig.screenHeight / 1.5,
+      height: SizeConfig.screenHeight! / 1.5,
       width: SizeConfig.screenWidth,
       child: count != 0
       ? SmartRefresher(
@@ -687,7 +678,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -714,7 +705,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -722,7 +713,7 @@ class MiscRegularDraggableMemorialsState extends State<MiscRegularDraggableMemor
 
               Text('Memorial is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight / 1.5) / 3,),
+              SizedBox(height: (SizeConfig.screenHeight! / 1.5) / 3,),
             ],
           ),
         ),

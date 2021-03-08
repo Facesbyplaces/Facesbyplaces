@@ -1,12 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiBLMVerifyEmail({String verificationCode}) async{
+Future<bool> apiBLMVerifyEmail({required String verificationCode}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
-  int prefsUserID = sharedPrefs.getInt('blm-user-id');
+  int prefsUserID = sharedPrefs.getInt('blm-user-id')!;
 
-  final http.Response response = await http.post('http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=1',
+  final http.Response response = await http.post(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/verify?user_id=$prefsUserID&verification_code=$verificationCode&account_type=1', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
     }

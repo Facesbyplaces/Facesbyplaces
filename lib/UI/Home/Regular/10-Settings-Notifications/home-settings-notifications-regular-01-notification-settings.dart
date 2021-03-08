@@ -18,7 +18,7 @@ class HomeRegularNotificationSettings extends StatefulWidget{
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  HomeRegularNotificationSettings({this.newMemorial, this.newActivities, this.postLikes, this.postComments, this.addFamily, this.addFriends, this.addAdmin});
+  HomeRegularNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
   @override
   HomeRegularNotificationSettingsState createState() => HomeRegularNotificationSettingsState(newMemorial: newMemorial, newActivities: newActivities, postLikes: postLikes, postComments: postComments, addFamily: addFamily, addFriends: addFriends, addAdmin: addAdmin);
@@ -32,15 +32,15 @@ class HomeRegularNotificationSettingsState extends State<HomeRegularNotification
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  HomeRegularNotificationSettingsState({this.newMemorial, this.newActivities, this.postLikes, this.postComments, this.addFamily, this.addFriends, this.addAdmin});
+  HomeRegularNotificationSettingsState({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
-  bool toggle1;
-  bool toggle2;
-  bool toggle3;
-  bool toggle4;
-  bool toggle5;
-  bool toggle6;
-  bool toggle7;
+  bool toggle1 = false;
+  bool toggle2 = false;
+  bool toggle3 = false;
+  bool toggle4 = false;
+  bool toggle5 = false;
+  bool toggle6 = false;
+  bool toggle7 = false;
 
   void initState(){
     super.initState();

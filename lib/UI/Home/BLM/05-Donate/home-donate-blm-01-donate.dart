@@ -10,7 +10,7 @@ class HomeBLMUserDonate extends StatefulWidget{
   final String pageType;
   final int pageId;
 
-  HomeBLMUserDonate({this.pageType, this.pageId});
+  HomeBLMUserDonate({required this.pageType, required this.pageId});
 
   HomeBLMUserDonateState createState() => HomeBLMUserDonateState(pageType: pageType, pageId: pageId);
 }
@@ -19,15 +19,14 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
   final String pageType;
   final int pageId;
 
-  HomeBLMUserDonateState({this.pageType, this.pageId});
+  HomeBLMUserDonateState({required this.pageType, required this.pageId});
 
-  int donateToggle;
+  int donateToggle = 0;
   // Token paymentToken;
 
   @override
   initState() {
     super.initState();
-    donateToggle = 0;
     // StripePayment.setOptions(StripeOptions(
     //   publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
     //   merchantId: "merchant.com.app.facesbyplaces", 
@@ -109,16 +108,18 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                                   SizedBox(height: 10,),
 
-                                  ((){
-                                    switch(index){
-                                      case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                    }
-                                  }()),
+                                  Container(
+                                    child: ((){
+                                      switch(index){
+                                        case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      }
+                                    }()),
+                                  ),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -231,7 +232,7 @@ class HomeBLMUserDonateState extends State<HomeBLMUserDonate>{
 
                     },
                     height: 45,
-                    width: SizeConfig.screenWidth / 2, 
+                    width: SizeConfig.screenWidth! / 2, 
                   ),
 
                   SizedBox(height: 20,),

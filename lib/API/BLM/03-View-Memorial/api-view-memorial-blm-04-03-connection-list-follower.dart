@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({int memorialId, int page}) async{
+Future<APIBLMConnectionListFollowersMain> apiBLMConnectionListFollowers({required int memorialId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/followers/index?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/followers/index?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMConnectionListFollowersMain{
   int blmItemsRemaining;
   List<APIBLMConnectionListFollowersExtendedDetails> blmFollowersList;
 
-  APIBLMConnectionListFollowersMain({this.blmItemsRemaining, this.blmFollowersList});
+  APIBLMConnectionListFollowersMain({required this.blmItemsRemaining, required this.blmFollowersList});
 
   factory APIBLMConnectionListFollowersMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -52,7 +53,7 @@ class APIBLMConnectionListFollowersExtendedDetails{
   dynamic connectionListFollowersImage;
   int connectionListFollowersAccountType;
 
-  APIBLMConnectionListFollowersExtendedDetails({this.connectionListFollowersId, this.connectionListFollowersFirstName, this.connectionListFollowersLastName, this.connectionListFollowersImage, this.connectionListFollowersAccountType});
+  APIBLMConnectionListFollowersExtendedDetails({required this.connectionListFollowersId, required this.connectionListFollowersFirstName, required this.connectionListFollowersLastName, required this.connectionListFollowersImage, required this.connectionListFollowersAccountType});
 
   factory APIBLMConnectionListFollowersExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMConnectionListFollowersExtendedDetails(

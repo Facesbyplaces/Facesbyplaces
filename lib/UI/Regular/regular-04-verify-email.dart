@@ -21,8 +21,8 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    String verificationCode = ModalRoute.of(context).settings.arguments;
-    controller.text = verificationCode;
+    // String verificationCode = ModalRoute.of(context).settings.arguments;
+    // controller.text = verificationCode;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -226,7 +226,7 @@ class RegularVerifyEmailState extends State<RegularVerifyEmail>{
                           }
 
                         }, 
-                        width: SizeConfig.screenWidth / 2, 
+                        width: SizeConfig.screenWidth! / 2, 
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                       ),

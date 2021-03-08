@@ -10,7 +10,7 @@ class HomeRegularReport extends StatelessWidget{
   final int postId;
   final String reportType;
 
-  HomeRegularReport({this.postId, this.reportType});
+  HomeRegularReport({required this.postId, required this.reportType});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscRegularInputFieldMultiTextTemplateState>();
@@ -70,12 +70,12 @@ class HomeRegularReport extends StatelessWidget{
                     fontWeight: FontWeight.bold, 
                     color: Color(0xffffffff),
                   ),
-                  width: SizeConfig.screenWidth / 2, 
+                  width: SizeConfig.screenWidth! / 2, 
                   height: 45, 
                   buttonColor: Color(0xff04ECFF), 
                   onPressed: () async{
 
-                    if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                    if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                       await showDialog(
                         context: context,
                         builder: (_) => 
@@ -97,7 +97,7 @@ class HomeRegularReport extends StatelessWidget{
                     }else{
 
                       context.showLoaderOverlay();
-                      bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
+                      bool result = await apiRegularReport(postId: postId, reportType: reportType, subject: _key1.currentState!.controller.text, body: _key2.currentState!.controller.text);
                       context.hideLoaderOverlay();
 
                       if(result){

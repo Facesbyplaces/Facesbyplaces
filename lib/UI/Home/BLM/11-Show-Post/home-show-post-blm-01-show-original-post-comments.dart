@@ -48,7 +48,7 @@ class BLMOriginalComment{
   int userAccountType;
   List<BLMOriginalReply> listOfReplies;
 
-  BLMOriginalComment({this.commentId, this.postId, this.userId, this.commentBody, this.createdAt, this.firstName, this.lastName, this.image, this.commentLikes, this.commentNumberOfLikes, this.userAccountType, this.listOfReplies});
+  BLMOriginalComment({required this.commentId, required this.postId, required this.userId, required this.commentBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.commentLikes, required this.commentNumberOfLikes, required this.userAccountType, required this.listOfReplies});
 }
 
 class BLMOriginalReply{
@@ -64,14 +64,14 @@ class BLMOriginalReply{
   int replyNumberOfLikes;
   int userAccountType;
 
-  BLMOriginalReply({this.replyId, this.commentId, this.userId, this.replyBody, this.createdAt, this.firstName, this.lastName, this.image, this.replyLikes, this.replyNumberOfLikes, this.userAccountType});
+  BLMOriginalReply({required this.replyId, required this.commentId, required this.userId, required this.replyBody, required this.createdAt, required this.firstName, required this.lastName, required this.image, required this.replyLikes, required this.replyNumberOfLikes, required this.userAccountType});
 }
 
 class HomeBLMShowOriginalPostComments extends StatefulWidget{
   final int postId;
   // final int userId;
   // HomeBLMShowOriginalPostComments({this.postId, this.userId});
-  HomeBLMShowOriginalPostComments({this.postId});
+  HomeBLMShowOriginalPostComments({required this.postId});
 
   @override
   // HomeBLMShowOriginalPostCommentsState createState() => HomeBLMShowOriginalPostCommentsState(postId: postId, userId: userId);
@@ -82,31 +82,49 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
   final int postId;
   // final int userId;
   // HomeBLMShowOriginalPostCommentsState({this.postId, this.userId});
-  HomeBLMShowOriginalPostCommentsState({this.postId});
+  HomeBLMShowOriginalPostCommentsState({required this.postId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
-  List<BLMOriginalComment> comments;
-  List<BLMOriginalReply> replies;
-  int itemRemaining;
-  int repliesRemaining;
-  int page1;
-  int count;
-  int numberOfReplies;
-  int page2;
-  List<bool> commentsLikes;
-  List<int> commentsNumberOfLikes;
-  bool isComment;
-  List<List<bool>> repliesLikes;
-  List<List<int>> repliesNumberOfLikes;
-  int currentCommentId;
-  String currentUserImage;
-  int currentUserId;
-  int currentAccountType;
-  int numberOfLikes;
-  int numberOfComments;
+  List<BLMOriginalComment> comments = [];
+  List<BLMOriginalReply> replies = [];
+  int itemRemaining = 1;
+  int repliesRemaining = 1;
+  int page1 = 1;
+  int count = 0;
+  int numberOfReplies = 0;
+  int page2 = 1;
+  List<bool> commentsLikes = [];
+  List<int> commentsNumberOfLikes = [];
+  bool isComment = true;
+  List<List<bool>> repliesLikes = [];
+  List<List<int>> repliesNumberOfLikes = [];
+  int currentCommentId = 1;
+  String currentUserImage = '';
+  int currentUserId = 1;
+  int currentAccountType = 1;
+  int numberOfLikes = 0;
+  int numberOfComments = 0;
   GlobalKey profileKey = GlobalKey<HomeBLMShowOriginalPostCommentsState>();
+
+  Future<APIBLMShowOriginalPostMain>? showOriginalPost;
+  bool likePost = false;
+  bool pressedLike = false;
+  int likesCount  = 0;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
+  bool isGuestLoggedIn = true;
+
+  void initState(){
+    super.initState();
+    isGuest();
+    likesCount = numberOfLikes;
+    showOriginalPost = getOriginalPost(postId);
+    getProfilePicture();
+    getOriginalPostInformation();
+    onLoading();
+  }
   
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -210,16 +228,6 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     }
   }
 
-
-
-  Future showOriginalPost;
-  bool likePost;
-  bool pressedLike;
-  int likesCount;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  bool isGuestLoggedIn;
-
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
     setState(() {
@@ -253,35 +261,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  }
-
-  void initState(){
-    super.initState();
-    isGuestLoggedIn = true;
-    isGuest();
-    pressedLike = false;
-    likesCount = numberOfLikes;
-    showOriginalPost = getOriginalPost(postId);
-    getProfilePicture();
-
-    itemRemaining = 1;
-    repliesRemaining = 1;
-    comments = [];
-    replies = [];
-    numberOfReplies = 0;
-    page1 = 1;
-    page2 = 1;
-    count = 0;
-    commentsLikes = [];
-    commentsNumberOfLikes = [];
-    repliesLikes = [];
-    repliesNumberOfLikes = [];
-    isComment = true;
-    numberOfLikes = 0;
-    numberOfComments = 0;
-    getOriginalPostInformation();
-    onLoading();
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -310,7 +290,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
               },
             ),
             actions: [
-              MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post',),
+              MiscBLMDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: 'Blm'),
             ],
           ),
           backgroundColor: Color(0xffffffff),
@@ -330,7 +310,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                     footer: CustomFooter(
                       loadStyle: LoadStyle.ShowWhenLoading,
                       builder: (BuildContext context, LoadStatus mode){
-                        Widget body;
+                        Widget body = Container();
                         if(mode == LoadStatus.loading){
                           body = CircularProgressIndicator();
                         }
@@ -358,38 +338,42 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                         children: [
                                           GestureDetector(
                                             onTap: () async{
-                                              if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                              if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                 }else{
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                 }
                                               }else{
-                                                if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                                if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false)));
                                                 }else{
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                 }
                                               }
                                             },
-                                            child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
+                                            // child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage != null ? NetworkImage(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage) : AssetImage('assets/icons/app-icon.png')),
+                                            child: CircleAvatar(
+                                              backgroundColor: Color(0xff888888), 
+                                              backgroundImage: NetworkImage(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageProfileImage),
+                                            ),
                                           ),
                                           Expanded(
                                             child: Container(
                                               padding: EdgeInsets.only(left: 10.0),
                                               child: GestureDetector(
                                                 onTap: () async{
-                                                  if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
-                                                    if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                                  if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType == 'Memorial'){
+                                                    if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                     }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                     }
                                                   }else{
-                                                    if(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageManage)));
+                                                    if(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage == true || originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFamOrFriends == true){
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, relationship: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageRelationship, managed: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageManage, newlyCreated: false,)));
                                                     }else{
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageId, pageType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageType, newJoin: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageFollower,)));
                                                     }
                                                   }
                                                 },
@@ -397,7 +381,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   children: [
                                                     Expanded(
                                                       child: Align(alignment: Alignment.bottomLeft,
-                                                        child: Text(originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPageName,
+                                                        child: Text(originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPageName,
                                                           overflow: TextOverflow.ellipsis,
                                                           style: TextStyle(
                                                             fontSize: 16,
@@ -410,7 +394,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                     Expanded(
                                                       child: Align(
                                                         alignment: Alignment.topLeft,
-                                                        child: Text(timeago.format(DateTime.parse(originalPost.data.blmPost.showOriginalPostCreateAt)),
+                                                        child: Text(timeago.format(DateTime.parse(originalPost.data!.blmPost.showOriginalPostCreateAt)),
                                                           maxLines: 1,
                                                           style: TextStyle(
                                                             fontSize: 14,
@@ -432,22 +416,22 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                     Container(
                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
                                       alignment: Alignment.centerLeft, 
-                                      child: Text(originalPost.data.blmPost.showOriginalPostBody),
+                                      child: Text(originalPost.data!.blmPost.showOriginalPostBody),
                                     ),
 
-                                    originalPost.data.blmPost.showOriginalPostImagesOrVideos != null
+                                    originalPost.data!.blmPost.showOriginalPostImagesOrVideos != []
                                     ? Column(
                                       children: [
                                         SizedBox(height: 20),
 
                                         Container(
                                           child: ((){
-                                            if(originalPost.data.blmPost.showOriginalPostImagesOrVideos != null){
-                                              if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 1){
-                                                if(lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                            if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos != []){
+                                              if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 1){
+                                                if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                   return Container(
                                                     child: BetterPlayer.network(
-                                                      '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]}',
+                                                      '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                         aspectRatio: 16 / 9,
                                                       ),
@@ -457,13 +441,13 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                   return Container(
                                                     child: CachedNetworkImage(
                                                       fit: BoxFit.contain,
-                                                      imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[0],
+                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0],
                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                     ),
                                                   );
                                                 }
-                                              }else if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length == 2){
+                                              }else if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length == 2){
                                                 return StaggeredGridView.countBuilder(
                                                   padding: EdgeInsets.zero,
                                                   shrinkWrap: true,
@@ -498,11 +482,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     Expanded(
                                                                       child: CarouselSlider(
                                                                         items: List.generate(
-                                                                          originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                                          lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                                          originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                          lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true
                                                                           ? Container(
                                                                             child: BetterPlayer.network(
-                                                                              '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                              '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
                                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                                 ),
@@ -512,7 +496,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           )
                                                                           : CachedNetworkImage(
                                                                             fit: BoxFit.cover,
-                                                                            imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                            imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           ),
@@ -532,11 +516,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           },
                                                         );
                                                       },
-                                                      child: lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
+                                                      child: lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                       ? Container(
                                                         child: Stack(
                                                           children: [
-                                                          BetterPlayer.network('${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                          BetterPlayer.network('${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                 showControls: false
@@ -558,7 +542,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       )
                                                       : CachedNetworkImage(
                                                         fit: BoxFit.cover,
-                                                        imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                        imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                       ),
@@ -604,11 +588,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                     Expanded(
                                                                       child: CarouselSlider(
                                                                         items: List.generate(
-                                                                          originalPost.data.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
-                                                                          lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]).contains('video') == true
+                                                                          originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length, (next) =>
+                                                                          lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next])?.contains('video') == true
                                                                           ? Container(
                                                                             child: BetterPlayer.network(
-                                                                              '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[next]}',
+                                                                              '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next]}',
                                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                                 ),
@@ -618,7 +602,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                           )
                                                                           : CachedNetworkImage(
                                                                             fit: BoxFit.cover,
-                                                                            imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[next],
+                                                                            imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[next],
                                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                           ),
@@ -640,12 +624,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                       },
                                                       child: ((){
                                                         if(index != 1){
-                                                          return lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]).contains('video') == true
+                                                          return lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index])?.contains('video') == true
                                                           ? Container(
                                                             child: Stack(
                                                               children: [
                                                                 BetterPlayer.network(
-                                                                  '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                  '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                     controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                       showControls: false,
@@ -666,21 +650,21 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                           )
                                                           : CachedNetworkImage(
                                                             fit: BoxFit.contain,
-                                                            imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                            imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                           );
                                                         }else{
                                                           return ((){
-                                                            if(originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
-                                                              if(lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                                            if(originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3 > 0){
+                                                              if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                 return Stack(
                                                                   children: [
                                                                     Container(
                                                                       child: Stack(
                                                                         children: [
                                                                           BetterPlayer.network(
-                                                                            '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                            '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                             betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                               controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                                 showControls: false,
@@ -707,7 +691,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         radius: 25,
                                                                         backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                                         child: Text(
-                                                                          '${originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                          '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
                                                                           style: TextStyle(
                                                                             fontSize: 40,
                                                                             fontWeight: FontWeight.bold,
@@ -723,7 +707,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                   children: [
                                                                     CachedNetworkImage(
                                                                       fit: BoxFit.contain,
-                                                                      imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                      imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                     ),
@@ -735,7 +719,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                         radius: 25,
                                                                         backgroundColor: Color(0xffffffff).withOpacity(.5),
                                                                         child: Text(
-                                                                          '${originalPost.data.blmPost.showOriginalPostImagesOrVideos.length - 3}',
+                                                                          '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos.length - 3}',
                                                                           style: TextStyle(
                                                                             fontSize: 40,
                                                                             fontWeight: FontWeight.bold,
@@ -748,12 +732,12 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                                 );
                                                               }
                                                             }else{
-                                                              if(lookupMimeType(originalPost.data.blmPost.showOriginalPostImagesOrVideos[0]).contains('video') == true){
+                                                              if(lookupMimeType(originalPost.data!.blmPost.showOriginalPostImagesOrVideos[0])?.contains('video') == true){
                                                                 return Container(
                                                                   child: Stack(
                                                                     children: [
                                                                       BetterPlayer.network(
-                                                                        '${originalPost.data.blmPost.showOriginalPostImagesOrVideos[index]}',
+                                                                        '${originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index]}',
                                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
                                                                             showControls: false,
@@ -776,7 +760,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                               }else{
                                                                 return CachedNetworkImage(
                                                                   fit: BoxFit.contain,
-                                                                  imageUrl: originalPost.data.blmPost.showOriginalPostImagesOrVideos[index],
+                                                                  imageUrl: originalPost.data!.blmPost.showOriginalPostImagesOrVideos[index],
                                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
                                                                 );
@@ -804,7 +788,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                     )
                                     : Container(color: Colors.red, height: 0,),
 
-                                    originalPost.data.blmPost.showOriginalPostPostTagged.length != 0
+                                    originalPost.data!.blmPost.showOriginalPostPostTagged.length != 0
                                     ? Column(
                                       children: [
                                         SizedBox(height: 20),
@@ -818,22 +802,22 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                                 direction: Axis.vertical,
                                                 spacing: 5.0,
                                                 children: List.generate(
-                                                  originalPost.data.blmPost.showOriginalPostPostTagged.length,
+                                                  originalPost.data!.blmPost.showOriginalPostPostTagged.length,
                                                   (index) => GestureDetector(
                                                     onTap: (){
-                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedId, accountType: originalPost.data!.blmPost.showOriginalPostPage.showOriginalPostPagePageCreator.showOriginalPostPageCreatorAccountType)));
                                                     },
                                                     child: RichText(
                                                       text: TextSpan(
                                                         style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff000000)),
                                                         children: <TextSpan>[
-                                                          TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
+                                                          TextSpan(text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedFirstName,),
 
                                                           TextSpan(text: ' '),
 
-                                                          TextSpan(text: originalPost.data.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
+                                                          TextSpan(text: originalPost.data!.blmPost.showOriginalPostPostTagged[index].showOriginalPostTaggedLastName,),
 
-                                                          index < originalPost.data.blmPost.showOriginalPostPostTagged.length - 1
+                                                          index < originalPost.data!.blmPost.showOriginalPostPostTagged.length - 1
                                                           ? TextSpan(text: ',')
                                                           : TextSpan(text: ''),
                                                         ],
@@ -905,7 +889,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                   comments.length, (i) => ListTile(
                                     visualDensity: VisualDensity(vertical: 4.0),
                                     leading: CircleAvatar(
-                                      backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                      // backgroundImage: comments[i].image != null ? NetworkImage(comments[i].image) : AssetImage('assets/icons/app-icon.png'),
+                                      backgroundImage: NetworkImage(comments[i].image),
                                       backgroundColor: Color(0xff888888),
                                     ),
                                     title: Row(
@@ -1075,7 +1060,8 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                                               contentPadding: EdgeInsets.zero,
                                               visualDensity: VisualDensity(vertical: 4.0),
                                               leading: CircleAvatar(
-                                                backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
+                                                // backgroundImage: comments[i].listOfReplies[index].image != null ? NetworkImage(comments[i].listOfReplies[index].image) : AssetImage('assets/icons/app-icon.png'),
+                                                backgroundImage: NetworkImage(comments[i].listOfReplies[index].image),
                                                 backgroundColor: Color(0xff888888),
                                               ),
                                               title: Row(
@@ -1255,7 +1241,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
 
-                              SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                              SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -1263,7 +1249,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
 
                               Text('Comment is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-                              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+                              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
                             ],
                           ),
                         ),
@@ -1296,10 +1282,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
           children: [
             
             CircleAvatar(
-              backgroundColor: Color(0xff888888), 
-              backgroundImage: currentUserImage != null && currentUserImage != ''
-              ? NetworkImage(currentUserImage)
-              : AssetImage('assets/icons/app-icon.png'),
+              backgroundColor: Color(0xff888888),
+              backgroundImage: NetworkImage(currentUserImage),
+              // backgroundImage: currentUserImage != null && currentUserImage != ''
+              // ? NetworkImage(currentUserImage)
+              // : AssetImage('assets/icons/app-icon.png'),
             ),
 
             Expanded(
@@ -1400,7 +1387,7 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
     );
   }
 
-  showKeyboardEdit({bool isEdit, int editId}){ // isEdit - TRUE (COMMENT) | FALSE (REPLY)
+  showKeyboardEdit({required bool isEdit, required int editId}){ // isEdit - TRUE (COMMENT) | FALSE (REPLY)
     return SafeArea(
       top: false,
       child: Padding(
@@ -1409,10 +1396,11 @@ class HomeBLMShowOriginalPostCommentsState extends State<HomeBLMShowOriginalPost
           children: [
             
             CircleAvatar(
-              backgroundColor: Color(0xff888888), 
-              backgroundImage: currentUserImage != null && currentUserImage != ''
-              ? NetworkImage(currentUserImage)
-              : AssetImage('assets/icons/app-icon.png'),
+              backgroundColor: Color(0xff888888),
+              backgroundImage: NetworkImage(currentUserImage),
+              // backgroundImage: currentUserImage != null && currentUserImage != ''
+              // ? NetworkImage(currentUserImage)
+              // : AssetImage('assets/icons/app-icon.png'),
             ),
 
             Expanded(

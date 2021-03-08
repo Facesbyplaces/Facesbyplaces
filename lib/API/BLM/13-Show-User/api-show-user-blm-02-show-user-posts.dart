@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({int userId, int page}) async{
+Future<APIBLMShowUsersPostsMain> apiBLMShowUserPosts({required int userId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMShowUsersPostsMain{
   int blmItemsRemaining;
   List<APIBLMShowUsersPostsExtended> blmFamilyMemorialList;
 
-  APIBLMShowUsersPostsMain({this.blmItemsRemaining, this.blmFamilyMemorialList,});
+  APIBLMShowUsersPostsMain({required this.blmItemsRemaining, required this.blmFamilyMemorialList,});
 
   factory APIBLMShowUsersPostsMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -57,11 +58,11 @@ class APIBLMShowUsersPostsExtended{
   int showUsersPostsNumberOfComments;
   bool showUsersPostsLikeStatus;
 
-  APIBLMShowUsersPostsExtended({this.showUsersPostsId, this.showUsersPostsPage, this.showUsersPostsBody, this.showUsersPostsLocation, this.showUsersPostsLatitude, this.showUsersPostsLongitude, this.showUsersPostsImagesOrVideos, this.showUsersPostsPostTagged, this.showUsersPostsCreateAt, this.showUsersPostsNumberOfLikes, this.showUsersPostsNumberOfComments, this.showUsersPostsLikeStatus});
+  APIBLMShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsLocation, required this.showUsersPostsLatitude, required this.showUsersPostsLongitude, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreateAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus});
 
   factory APIBLMShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -78,7 +79,7 @@ class APIBLMShowUsersPostsExtended{
       showUsersPostsLocation: parsedJson['location'],
       showUsersPostsLatitude: parsedJson['latitude'],
       showUsersPostsLongitude: parsedJson['longitude'],
-      showUsersPostsImagesOrVideos: newList1,
+      showUsersPostsImagesOrVideos: newList1!,
       showUsersPostsPostTagged: taggedList,
       showUsersPostsCreateAt: parsedJson['created_at'],
       showUsersPostsNumberOfLikes: parsedJson['numberOfLikes'],
@@ -102,7 +103,7 @@ class APIBLMShowUsersPostsExtendedPage{
   String showUsersPostsPagePageType;
   String showUsersPostsPagePrivacy;
 
-  APIBLMShowUsersPostsExtendedPage({this.showUsersPostsPageId, this.showUsersPostsPageName, this.showUsersPostsPageDetails, this.showUsersPostsPageBackgroundImage, this.showUsersPostsPageProfileImage, this.showUsersPostsPageImagesOrVideos, this.showUsersPostsPageRelationship, this.showUsersPostsPagePageCreator, this.showUsersPostsPageFollower, this.showUsersPostsPageManage, this.showUsersPostsPagePageType, this.showUsersPostsPagePrivacy});
+  APIBLMShowUsersPostsExtendedPage({required this.showUsersPostsPageId, required this.showUsersPostsPageName, required this.showUsersPostsPageDetails, required this.showUsersPostsPageBackgroundImage, required this.showUsersPostsPageProfileImage, required this.showUsersPostsPageImagesOrVideos, required this.showUsersPostsPageRelationship, required this.showUsersPostsPagePageCreator, required this.showUsersPostsPageFollower, required this.showUsersPostsPageManage, required this.showUsersPostsPagePageType, required this.showUsersPostsPagePrivacy});
 
   factory APIBLMShowUsersPostsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedPage(
@@ -130,7 +131,7 @@ class APIBLMShowUsersPostsExtendedPageDetails{
   String showUsersPostsPageDetailsCemetery;
   String showUsersPostsPageDetailsCountry;
 
-  APIBLMShowUsersPostsExtendedPageDetails({this.showUsersPostsPageDetailsDescription, this.showUsersPostsPageDetailsBirthPlace, this.showUsersPostsPageDetailsDob, this.showUsersPostsPageDetailsRip, this.showUsersPostsPageDetailsCemetery, this.showUsersPostsPageDetailsCountry});
+  APIBLMShowUsersPostsExtendedPageDetails({required this.showUsersPostsPageDetailsDescription, required this.showUsersPostsPageDetailsBirthPlace, required this.showUsersPostsPageDetailsDob, required this.showUsersPostsPageDetailsRip, required this.showUsersPostsPageDetailsCemetery, required this.showUsersPostsPageDetailsCountry});
 
   factory APIBLMShowUsersPostsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedPageDetails(
@@ -153,7 +154,7 @@ class APIBLMShowUsersPostsExtendedPageCreator{
   String showUsersPostsPageCreatorUserName;
   dynamic showUsersPostsPageCreatorImage;
 
-  APIBLMShowUsersPostsExtendedPageCreator({this.showUsersPostsPageCreatorId, this.showUsersPostsPageCreatorFirstName, this.showUsersPostsPageCreatorLastName, this.showUsersPostsPageCreatorPhoneNumber, this.showUsersPostsPageCreatorEmail, this.showUsersPostsPageCreatorUserName, this.showUsersPostsPageCreatorImage});
+  APIBLMShowUsersPostsExtendedPageCreator({required this.showUsersPostsPageCreatorId, required this.showUsersPostsPageCreatorFirstName, required this.showUsersPostsPageCreatorLastName, required this.showUsersPostsPageCreatorPhoneNumber, required this.showUsersPostsPageCreatorEmail, required this.showUsersPostsPageCreatorUserName, required this.showUsersPostsPageCreatorImage});
 
   factory APIBLMShowUsersPostsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedPageCreator(
@@ -174,7 +175,7 @@ class APIBLMShowUsersPostsExtendedTagged{
   String showUsersPostsTaggedLastName;
   String showUsersPostsTaggedImage;
 
-  APIBLMShowUsersPostsExtendedTagged({this.showUsersPostsTaggedId, this.showUsersPostsTaggedFirstName, this.showUsersPostsTaggedLastName, this.showUsersPostsTaggedImage});
+  APIBLMShowUsersPostsExtendedTagged({required this.showUsersPostsTaggedId, required this.showUsersPostsTaggedFirstName, required this.showUsersPostsTaggedLastName, required this.showUsersPostsTaggedImage});
 
   factory APIBLMShowUsersPostsExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUsersPostsExtendedTagged(

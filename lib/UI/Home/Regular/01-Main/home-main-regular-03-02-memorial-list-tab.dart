@@ -13,7 +13,7 @@ class RegularMainPagesMemorials{
   bool joined;
   String pageType;
 
-  RegularMainPagesMemorials({this.memorialId, this.memorialName, this.memorialDescription, this.managed, this.joined, this.pageType});
+  RegularMainPagesMemorials({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.managed, required this.joined, required this.pageType});
 }
 
 class HomeRegularManageTab extends StatefulWidget{
@@ -24,27 +24,18 @@ class HomeRegularManageTab extends StatefulWidget{
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<Widget> finalMemorials;
-  int memorialFamilyItemsRemaining;
-  int memorialFriendsItemsRemaining;
-  int blmFamilyItemsRemaining;
-  int blmFriendsItemsRemaining;
-  int page1;
-  int page2;
-  bool flag1;
-  int count;
+  List<Widget> finalMemorials = [];
+  int memorialFamilyItemsRemaining = 1;
+  int memorialFriendsItemsRemaining = 1;
+  int blmFamilyItemsRemaining = 1;
+  int blmFriendsItemsRemaining = 1;
+  int page1 = 1;
+  int page2 = 1;
+  bool flag1 = false;
+  int count = 0;
 
   void initState(){
     super.initState();
-    finalMemorials = [];
-    memorialFamilyItemsRemaining = 1;
-    memorialFriendsItemsRemaining = 1;
-    blmFamilyItemsRemaining = 1;
-    blmFriendsItemsRemaining = 1;
-    page1 = 1;
-    page2 = 1;
-    count = 0;
-    flag1 = false;
     addMemorials1();
     onLoading();
   }
@@ -264,7 +255,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -291,7 +282,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -299,7 +290,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
               Text('Memorial is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],
           ),
         ),

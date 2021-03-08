@@ -15,24 +15,24 @@ class BLMShowFamilySettings{
   final String relationship;
   final int accountType;
 
-  BLMShowFamilySettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.accountType});
+  BLMShowFamilySettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
 }
 
 class HomeBLMPageFamily extends StatefulWidget{
   final int memorialId;
-  HomeBLMPageFamily({this.memorialId});
+  HomeBLMPageFamily({required this.memorialId});
 
   HomeBLMPageFamilyState createState() => HomeBLMPageFamilyState(memorialId: memorialId);
 }
 
 class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
   final int memorialId;
-  HomeBLMPageFamilyState({this.memorialId});
+  HomeBLMPageFamilyState({required this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMShowFamilySettings> familyList;
-  int familyItemsRemaining;
-  int page;
+  List<BLMShowFamilySettings> familyList = [];
+  int familyItemsRemaining = 1;
+  int page = 1;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -71,9 +71,6 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
 
   void initState(){
     super.initState();
-    familyItemsRemaining = 1;
-    familyList = [];
-    page = 1;
     onLoading1();
   }
 
@@ -105,7 +102,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -125,7 +122,8 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                   CircleAvatar(
                     maxRadius: 40,
                     backgroundColor: Color(0xff888888),
-                    backgroundImage: familyList[i].image != null ? NetworkImage(familyList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                    // backgroundImage: familyList[i].image != null ? NetworkImage(familyList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                    backgroundImage: NetworkImage(familyList[i].image),
                   ),
 
                   SizedBox(width: 25,),
@@ -146,7 +144,7 @@ class HomeBLMPageFamilyState extends State<HomeBLMPageFamily>{
                   SizedBox(width: 25,),
 
                   MaterialButton(
-                    minWidth: SizeConfig.screenWidth / 3.5,
+                    minWidth: SizeConfig.screenWidth! / 3.5,
                     padding: EdgeInsets.zero,
                     textColor: Color(0xffffffff),
                     splashColor: Color(0xff04ECFF),

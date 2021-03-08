@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularHomeTabPostMain> apiRegularHomePostTab({int page}) async{
+Future<APIRegularHomeTabPostMain> apiRegularHomePostTab({required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/posts/?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIRegularHomeTabPostMain{
   int almItemsRemaining;
   List<APIRegularHomeTabPostExtended> familyMemorialList;
 
-  APIRegularHomeTabPostMain({this.almItemsRemaining, this.familyMemorialList});
+  APIRegularHomeTabPostMain({required this.almItemsRemaining, required this.familyMemorialList});
 
   factory APIRegularHomeTabPostMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -57,11 +58,11 @@ class APIRegularHomeTabPostExtended{
   int homeTabPostNumberOfComments;
   bool homeTabPostLikeStatus;
 
-  APIRegularHomeTabPostExtended({this.homeTabPostId, this.homeTabPostPage, this.homeTabPostBody, this.homeTabPostLocation, this.homeTabPostLatitude, this.homeTabPostLongitude, this.homeTabPostImagesOrVideos, this.homeTabPostPostTagged, this.homeTabPostCreateAt, this.homeTabPostNumberOfLikes, this.homeTabPostNumberOfComments, this.homeTabPostLikeStatus});
+  APIRegularHomeTabPostExtended({required this.homeTabPostId, required this.homeTabPostPage, required this.homeTabPostBody, required this.homeTabPostLocation, required this.homeTabPostLatitude, required this.homeTabPostLongitude, required this.homeTabPostImagesOrVideos, required this.homeTabPostPostTagged, required this.homeTabPostCreateAt, required this.homeTabPostNumberOfLikes, required this.homeTabPostNumberOfComments, required this.homeTabPostLikeStatus});
 
   factory APIRegularHomeTabPostExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -78,7 +79,7 @@ class APIRegularHomeTabPostExtended{
       homeTabPostLocation: parsedJson['location'],
       homeTabPostLatitude: parsedJson['latitude'],
       homeTabPostLongitude: parsedJson['longitude'],
-      homeTabPostImagesOrVideos: newList1,
+      homeTabPostImagesOrVideos: newList1!,
       homeTabPostPostTagged: taggedList,
       homeTabPostCreateAt: parsedJson['created_at'],
       homeTabPostNumberOfLikes: parsedJson['numberOfLikes'],
@@ -103,7 +104,7 @@ class APIRegularHomeTabPostExtendedPage{
   String homeTabPostPagePageType;
   String homeTabPostPagePrivacy;
 
-  APIRegularHomeTabPostExtendedPage({this.homeTabPostPageId, this.homeTabPostPageName, this.homeTabPostPageDetails, this.homeTabPostPageBackgroundImage, this.homeTabPostPageProfileImage, this.homeTabPostPageImagesOrVideos, this.homeTabPostPageRelationship, this.homeTabPostPagePageCreator, this.homeTabPostPageManage, this.homeTabPostPageFamOrFriends, this.homeTabPostPageFollower, this.homeTabPostPagePageType, this.homeTabPostPagePrivacy});
+  APIRegularHomeTabPostExtendedPage({required this.homeTabPostPageId, required this.homeTabPostPageName, required this.homeTabPostPageDetails, required this.homeTabPostPageBackgroundImage, required this.homeTabPostPageProfileImage, required this.homeTabPostPageImagesOrVideos, required this.homeTabPostPageRelationship, required this.homeTabPostPagePageCreator, required this.homeTabPostPageManage, required this.homeTabPostPageFamOrFriends, required this.homeTabPostPageFollower, required this.homeTabPostPagePageType, required this.homeTabPostPagePrivacy});
 
   factory APIRegularHomeTabPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabPostExtendedPage(
@@ -132,7 +133,7 @@ class APIRegularHomeTabPostExtendedPageDetails{
   String homeTabPostPageDetailsCemetery;
   String homeTabPostPageDetailsCountry;
 
-  APIRegularHomeTabPostExtendedPageDetails({this.homeTabPostPageDetailsDescription, this.homeTabPostPageDetailsBirthPlace, this.homeTabPostPageDetailsDob, this.homeTabPostPageDetailsRip, this.homeTabPostPageDetailsCemetery, this.homeTabPostPageDetailsCountry});
+  APIRegularHomeTabPostExtendedPageDetails({required this.homeTabPostPageDetailsDescription, required this.homeTabPostPageDetailsBirthPlace, required this.homeTabPostPageDetailsDob, required this.homeTabPostPageDetailsRip, required this.homeTabPostPageDetailsCemetery, required this.homeTabPostPageDetailsCountry});
 
   factory APIRegularHomeTabPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabPostExtendedPageDetails(
@@ -155,7 +156,7 @@ class APIRegularHomeTabPostExtendedPageCreator{
   String homeTabPostPageCreatorUserName;
   dynamic homeTabPostPageCreatorImage;
 
-  APIRegularHomeTabPostExtendedPageCreator({this.homeTabPostPageCreatorId, this.homeTabPostPageCreatorFirstName, this.homeTabPostPageCreatorLastName, this.homeTabPostPageCreatorPhoneNumber, this.homeTabPostPageCreatorEmail, this.homeTabPostPageCreatorUserName, this.homeTabPostPageCreatorImage});
+  APIRegularHomeTabPostExtendedPageCreator({required this.homeTabPostPageCreatorId, required this.homeTabPostPageCreatorFirstName, required this.homeTabPostPageCreatorLastName, required this.homeTabPostPageCreatorPhoneNumber, required this.homeTabPostPageCreatorEmail, required this.homeTabPostPageCreatorUserName, required this.homeTabPostPageCreatorImage});
 
   factory APIRegularHomeTabPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabPostExtendedPageCreator(
@@ -176,7 +177,7 @@ class APIRegularHomeTabPostExtendedTagged{
   String homeTabPostTabTaggedLastName;
   String homeTabPostTabTaggedImage;
 
-  APIRegularHomeTabPostExtendedTagged({this.homeTabPostTabTaggedId, this.homeTabPostTabTaggedFirstName, this.homeTabPostTabTaggedLastName, this.homeTabPostTabTaggedImage});
+  APIRegularHomeTabPostExtendedTagged({required this.homeTabPostTabTaggedId, required this.homeTabPostTabTaggedFirstName, required this.homeTabPostTabTaggedLastName, required this.homeTabPostTabTaggedImage});
 
   factory APIRegularHomeTabPostExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabPostExtendedTagged(

@@ -15,24 +15,24 @@ class RegularShowFamilySettings{
   final String relationship;
   final int accountType;
 
-  RegularShowFamilySettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.accountType});
+  RegularShowFamilySettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
 }
 
 class HomeRegularPageFamily extends StatefulWidget{
   final int memorialId;
-  HomeRegularPageFamily({this.memorialId});
+  HomeRegularPageFamily({required this.memorialId});
 
   HomeRegularPageFamilyState createState() => HomeRegularPageFamilyState(memorialId: memorialId);
 }
 
 class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
   final int memorialId;
-  HomeRegularPageFamilyState({this.memorialId});
+  HomeRegularPageFamilyState({required this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularShowFamilySettings> familyList;
-  int familyItemsRemaining;
-  int page;
+  List<RegularShowFamilySettings> familyList = [];
+  int familyItemsRemaining = 1;
+  int page = 1;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -45,47 +45,65 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
       var newValue = await apiRegularShowFamilySettings(memorialId: memorialId, page: page);
       context.hideLoaderOverlay();
 
-      if(newValue == null){
-        await showDialog(
-          context: context,
-          builder: (_) => 
-            AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-            entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Something went wrong. Please try again.',
-              textAlign: TextAlign.center,
-              style: TextStyle(),
-            ),
-            onlyOkButton: true,
-            buttonOkColor: Colors.red,
-            onOkButtonPressed: () {
-              Navigator.pop(context, true);
-            },
-          )
+      familyItemsRemaining = newValue.almItemsRemaining;
+
+      for(int i = 0; i < newValue.almFamilyList.length; i++){
+        familyList.add(
+          RegularShowFamilySettings(
+            userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId,
+            firstName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName,
+            lastName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName,
+            image: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage,
+            relationship: newValue.almFamilyList[i].showFamilySettingsRelationship,
+            accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType,
+          ),
         );
-      }else{
-        familyItemsRemaining = newValue.almItemsRemaining;
-
-        for(int i = 0; i < newValue.almFamilyList.length; i++){
-          familyList.add(
-            RegularShowFamilySettings(
-              userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId,
-              firstName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName,
-              lastName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName,
-              image: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage,
-              relationship: newValue.almFamilyList[i].showFamilySettingsRelationship,
-              accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType,
-            ),
-          );
-        }
-
-        if(mounted)
-        setState(() {});
-        page++;
-        
-        refreshController.loadComplete();
       }
+
+      refreshController.loadComplete();
+
+    //   if(newValue !=)){
+    //     await showDialog(
+    //       context: context,
+    //       builder: (_) => 
+    //         AssetGiffyDialog(
+    //         image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+    //         title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+    //         entryAnimation: EntryAnimation.DEFAULT,
+    //         description: Text('Something went wrong. Please try again.',
+    //           textAlign: TextAlign.center,
+    //           style: TextStyle(),
+    //         ),
+    //         onlyOkButton: true,
+    //         buttonOkColor: Colors.red,
+    //         onOkButtonPressed: () {
+    //           Navigator.pop(context, true);
+    //         },
+    //       )
+    //     );
+    //   }else{
+    //     familyItemsRemaining = newValue.almItemsRemaining;
+
+    //     for(int i = 0; i < newValue.almFamilyList.length; i++){
+    //       familyList.add(
+    //         RegularShowFamilySettings(
+    //           userId: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsId,
+    //           firstName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsFirstName,
+    //           lastName: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsLastName,
+    //           image: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsImage,
+    //           relationship: newValue.almFamilyList[i].showFamilySettingsRelationship,
+    //           accountType: newValue.almFamilyList[i].showFamilySettingsUser.showFamilySettingsDetailsAccountType,
+    //         ),
+    //       );
+    //     }
+
+    //     if(mounted)
+    //     setState(() {});
+    //     page++;
+        
+    //     refreshController.loadComplete();
+    //   }
+
     }else{
       refreshController.loadNoData();
     }
@@ -93,9 +111,6 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
   void initState(){
     super.initState();
-    familyItemsRemaining = 1;
-    familyList = [];
-    page = 1;
     onLoading1();
   }
 
@@ -127,7 +142,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -147,10 +162,8 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
 
                   CircleAvatar(
                     maxRadius: 40,
-                    backgroundColor: Color(0xff888888), 
-                    backgroundImage: familyList[i].image != null 
-                    ? NetworkImage(familyList[i].image) 
-                    : AssetImage('assets/icons/app-icon.png'),
+                    backgroundColor: Color(0xff888888),
+                    backgroundImage: NetworkImage(familyList[i].image),
                   ),
 
                   SizedBox(width: 25,),
@@ -171,7 +184,7 @@ class HomeRegularPageFamilyState extends State<HomeRegularPageFamily>{
                   SizedBox(width: 25,),
 
                   MaterialButton(
-                    minWidth: SizeConfig.screenWidth / 3.5,
+                    minWidth: SizeConfig.screenWidth! / 3.5,
                     padding: EdgeInsets.zero,
                     textColor: Color(0xffffffff),
                     splashColor: Color(0xff04ECFF),

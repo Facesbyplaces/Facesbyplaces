@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularAddComment({int postId, dynamic commentBody}) async{
+Future<bool> apiRegularAddComment({required int postId, required dynamic commentBody}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 
 class HomeRegularUserChangePassword extends StatefulWidget{
   final int userId;
-  HomeRegularUserChangePassword({this.userId});
+  HomeRegularUserChangePassword({required this.userId});
 
   HomeRegularUserChangePasswordState createState() => HomeRegularUserChangePasswordState(userId: userId);
 }
 
 class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePassword>{
   final int userId;
-  HomeRegularUserChangePasswordState({this.userId});
+  HomeRegularUserChangePasswordState({required this.userId});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -72,7 +72,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                     onPressed: () async{
 
                       context.showLoaderOverlay();
-                      bool result = await apiRegularChangePassword(currentPassword: _key1.currentState.controller.text, newPassword: _key2.currentState.controller.text);
+                      bool result = await apiRegularChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
                       context.hideLoaderOverlay();
 
                       if(result){
@@ -116,7 +116,7 @@ class HomeRegularUserChangePasswordState extends State<HomeRegularUserChangePass
                         );
                       }
                     }, 
-                    width: SizeConfig.screenWidth / 2,
+                    width: SizeConfig.screenWidth! / 2,
                     height: 45,
                     buttonColor: Color(0xff04ECFF),
                   ),

@@ -23,7 +23,7 @@ class HomeRegularUserOtherDetails extends StatefulWidget{
   final bool toggleEmail;
   final bool toggleNumber;
 
-  HomeRegularUserOtherDetails({this.userId, this.toggleBirthdate, this.toggleBirthplace, this.toggleAddress, this.toggleEmail, this.toggleNumber});
+  HomeRegularUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
   HomeRegularUserOtherDetailsState createState() => HomeRegularUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
 }
@@ -35,7 +35,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   final bool toggleAddress;
   final bool toggleEmail;
   final bool toggleNumber;
-  HomeRegularUserOtherDetailsState({this.userId, this.toggleBirthdate, this.toggleBirthplace, this.toggleAddress, this.toggleEmail, this.toggleNumber});
+  HomeRegularUserOtherDetailsState({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
   final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -43,12 +43,12 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularPhoneNumberTemplateState> _key5 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
 
-  Future otherDetails;
-  bool toggle1;
-  bool toggle2;
-  bool toggle3;
-  bool toggle4;
-  bool toggle5;
+  Future<APIRegularShowOtherDetails>? otherDetails;
+  bool toggle1 = false;
+  bool toggle2 = false;
+  bool toggle3 = false;
+  bool toggle4 = false;
+  bool toggle5 = false;
 
   void initState(){
     super.initState();
@@ -102,7 +102,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.showOtherDetailsBirthdate,),),
+                          Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
 
                           SizedBox(height: 20,),
 
@@ -126,7 +126,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.showOtherDetailsBirthplace,),),
+                          Expanded(child: MiscRegularInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data!.showOtherDetailsBirthplace,),),
 
                           SizedBox(height: 20,),
 
@@ -150,7 +150,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.showOtherDetailsAddress,),),
+                          Expanded(child: MiscRegularInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data!.showOtherDetailsAddress,),),
 
                           SizedBox(height: 20,),
 
@@ -173,7 +173,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.showOtherDetailsEmail, type: TextInputType.emailAddress,),),
+                          Expanded(child: MiscRegularInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data!.showOtherDetailsEmail, type: TextInputType.emailAddress,),),
 
                           SizedBox(height: 20,),
 
@@ -197,7 +197,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.showOtherDetailsPhoneNumber, type: TextInputType.phone),),
+                          Expanded(child: MiscRegularPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.showOtherDetailsPhoneNumber, type: TextInputType.phone),),
 
                           SizedBox(height: 20,),
 
@@ -229,11 +229,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                         onPressed: () async{
 
                           if(
-                            details.data.showOtherDetailsBirthdate != _key1.currentState.controller.text ||
-                            details.data.showOtherDetailsBirthplace !=  _key2.currentState.controller.text ||
-                            details.data.showOtherDetailsAddress != _key3.currentState.controller.text ||
-                            details.data.showOtherDetailsEmail != _key4.currentState.controller.text ||
-                            details.data.showOtherDetailsPhoneNumber != _key5.currentState.controller.text
+                            details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
+                            details.data!.showOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
+                            details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text ||
+                            details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
+                            details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -241,11 +241,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                               context.showLoaderOverlay();
 
                               bool result = await apiRegularUpdateOtherDetails(
-                                birthdate: _key1.currentState.controller.text,
-                                birthplace: _key2.currentState.controller.text,
-                                address: _key3.currentState.controller.text,
-                                email: _key4.currentState.controller.text,
-                                phoneNumber: _key5.currentState.controller.text,
+                                birthdate: _key1.currentState!.controller.text,
+                                birthplace: _key2.currentState!.controller.text,
+                                address: _key3.currentState!.controller.text,
+                                email: _key4.currentState!.controller.text,
+                                phoneNumber: _key5.currentState!.controller.text,
                               );
 
                               context.hideLoaderOverlay();
@@ -293,7 +293,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             }
                           }
                         }, 
-                        width: SizeConfig.screenWidth / 2,
+                        width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                       ),

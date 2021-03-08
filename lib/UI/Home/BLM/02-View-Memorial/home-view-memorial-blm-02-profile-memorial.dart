@@ -45,14 +45,14 @@ class BLMProfilePosts{
   bool famOrFriends;
   String relationship;
 
-  BLMProfilePosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  BLMProfilePosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class HomeBLMMemorialProfile extends StatefulWidget{
   final int memorialId;
   final String pageType;
   final bool newJoin;
-  HomeBLMMemorialProfile({this.memorialId, this.pageType, this.newJoin});
+  HomeBLMMemorialProfile({required this.memorialId, required this.pageType, required this.newJoin});
 
   HomeBLMMemorialProfileState createState() => HomeBLMMemorialProfileState(memorialId: memorialId, pageType: pageType, newJoin: newJoin);
 }
@@ -61,26 +61,26 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   final int memorialId;
   final String pageType;
   final bool newJoin;
-  HomeBLMMemorialProfileState({this.memorialId, this.pageType, this.newJoin});
+  HomeBLMMemorialProfileState({required this.memorialId, required this.pageType, required this.newJoin});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
   ScrollController scrollController = ScrollController();
-  List<BLMProfilePosts> posts;
-  Future showProfile;
-  int itemRemaining;
-  GlobalKey dataKey;
+  List<BLMProfilePosts> posts = [];
+  Future<APIBLMShowMemorialMain>? showProfile;
+  int itemRemaining = 1;
+  GlobalKey dataKey = GlobalKey<HomeBLMMemorialProfileState>();
   GlobalKey profileKey = GlobalKey<HomeBLMMemorialProfileState>();
-  int postCount;
-  bool empty;
-  bool join;
-  int page;
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-  bool isGuestLoggedIn;
+  int postCount = 0;
+  bool empty = true;
+  bool join = false;
+  int page = 1;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
+  bool isGuestLoggedIn = false;
 
-  BetterPlayerController betterPlayerController1;
-  BetterPlayerController betterPlayerController2;
+  BetterPlayerController? betterPlayerController1;
+  BetterPlayerController? betterPlayerController2;
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
@@ -153,7 +153,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
   Future<APIBLMShowMemorialMain> getProfileInformation(int memorialId) async{
     APIBLMShowMemorialMain newValue = await apiBLMShowMemorial(memorialId: memorialId);
     if(newValue.blmMemorial.memorialImagesOrVideos != null){
-      if(lookupMimeType(newValue.blmMemorial.memorialImagesOrVideos[0]).contains('video') == true){
+      if(lookupMimeType(newValue.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
         BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, '${newValue.blmMemorial.memorialImagesOrVideos[0]}');
         betterPlayerController1 = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 16 / 9,), betterPlayerDataSource: betterPlayerDataSource);
         betterPlayerController2 = BetterPlayerController(
@@ -191,20 +191,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
       stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   void initState(){
     super.initState();
-    isGuestLoggedIn = false;
     isGuest();
     join = newJoin;
-    posts = [];
-    itemRemaining = 1;
-    empty = true;
-    page = 1;
-    postCount = 0;
-    dataKey = GlobalKey();
     onLoading();
     showProfile = getProfileInformation(memorialId);
   }
@@ -228,7 +221,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
               footer: CustomFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
                 builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
+                  Widget body = Container();
                   if(mode == LoadStatus.loading){
                     body = CircularProgressIndicator();
                   }
@@ -253,11 +246,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                 children: [
 
                                   Container(
-                                    height: SizeConfig.screenHeight / 3,
+                                    height: SizeConfig.screenHeight! / 3,
                                     width: SizeConfig.screenWidth,
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
-                                      imageUrl: profile.data.blmMemorial.memorialBackgroundImage,
+                                      imageUrl: profile.data!.blmMemorial.memorialBackgroundImage,
                                       placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                       errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                     ),
@@ -266,7 +259,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   Column(
                                     children: [
 
-                                      Container(height: SizeConfig.screenHeight / 3.5, color: Colors.transparent,),
+                                      Container(height: SizeConfig.screenHeight! / 3.5, color: Colors.transparent,),
 
                                       Container(
                                         width: SizeConfig.screenWidth,
@@ -281,7 +274,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                             Center(
                                               child: Text(
-                                                profile.data.blmMemorial.memorialName,
+                                                profile.data!.blmMemorial.memorialName,
                                                 textAlign: TextAlign.center,
                                                 maxLines: 5,
                                                 overflow: TextOverflow.clip,
@@ -310,7 +303,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   SizedBox(width: 20,),
 
                                                   Expanded(
-                                                    child: Text('${profile.data.blmMemorial.memorialFollowersCount}',
+                                                    child: Text('${profile.data!.blmMemorial.memorialFollowersCount}',
                                                       style: TextStyle(
                                                         fontSize: 20,
                                                         fontWeight: FontWeight.bold,
@@ -327,13 +320,13 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                             Column(
                                               children: [
                                                 ((){
-                                                  if(profile.data.blmMemorial.memorialImagesOrVideos != null){
+                                                  if(profile.data!.blmMemorial.memorialImagesOrVideos != null){
                                                     return Container(
                                                       padding: EdgeInsets.only(left: 20.0, right: 20.0,),
                                                       width: SizeConfig.screenWidth,
                                                       height: 280,
                                                       child: BetterPlayer(
-                                                        controller: betterPlayerController1,
+                                                        controller: betterPlayerController1!,
                                                       ),
                                                     );
                                                   }else{
@@ -342,11 +335,11 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 }()),
 
                                                 ((){
-                                                  if(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != '' || profile.data.blmMemorial.memorialDetails.memorialDetailsDescription != null){
+                                                  if(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription != ''){
                                                     return Container(
                                                       alignment: Alignment.center,
                                                       padding: EdgeInsets.only(left: 20.0, right: 20.0),
-                                                      child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDescription,
+                                                      child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDescription,
                                                         textAlign: TextAlign.center,
                                                         style: TextStyle(
                                                           fontSize: 16,
@@ -449,7 +442,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             color: Color(0xffffffff),
                                                           ),
                                                         ),
-                                                        minWidth: SizeConfig.screenWidth / 2,
+                                                        minWidth: SizeConfig.screenWidth! / 2,
                                                         height: 45,
                                                         shape: StadiumBorder(),
                                                         color: join ? Color(0xff888888) : Color(0xff04ECFF),
@@ -464,8 +457,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         FlutterBranchSdk.setIdentity('blm-share-link');
 
                                                         BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                                                          buo: buo,
-                                                          linkProperties: lp,
+                                                          buo: buo!,
+                                                          linkProperties: lp!,
                                                           messageText: 'FacesbyPlaces App',
                                                           androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                                                           androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
@@ -518,7 +511,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       Icon(Icons.place, color: Color(0xff000000), size: 25,),
                                                       SizedBox(width: 20,),
                                                       Expanded(
-                                                        child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsPrecinct,
+                                                        child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsPrecinct,
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             color: Color(0xff000000),
@@ -535,7 +528,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       Icon(Icons.star, color: Color(0xff000000), size: 25,),
                                                       SizedBox(width: 20,),
                                                       Expanded(
-                                                        child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsDob,
+                                                        child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsDob,
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             color: Color(0xff000000),
@@ -552,7 +545,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       Image.asset('assets/icons/grave_logo.png', height: 25),
                                                       SizedBox(width: 20,),
                                                       Expanded(
-                                                        child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsRip,
+                                                        child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsRip,
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             color: Color(0xff000000),
@@ -576,7 +569,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             //   geoPoint: GeoPoint(0.0, 0.0),
                                                             // );
                                                           },
-                                                          child: Text(profile.data.blmMemorial.memorialDetails.memorialDetailsLocation,
+                                                          child: Text(profile.data!.blmMemorial.memorialDetails.memorialDetailsLocation,
                                                             style: TextStyle(
                                                               fontSize: 14,
                                                               color: Color(0xff3498DB),
@@ -600,12 +593,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   Expanded(
                                                     child: GestureDetector(
                                                       onTap: (){
-                                                        Scrollable.ensureVisible(dataKey.currentContext);
+                                                        Scrollable.ensureVisible(dataKey.currentContext!);
                                                       },
                                                       child: Column(
                                                         children: [
 
-                                                          Text('${profile.data.blmMemorial.memorialPostsCount}',
+                                                          Text('${profile.data!.blmMemorial.memorialPostsCount}',
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.bold,
@@ -635,7 +628,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       child: Column(
                                                         children: [
 
-                                                          Text('${profile.data.blmMemorial.memorialFamilyCount}',
+                                                          Text('${profile.data!.blmMemorial.memorialFamilyCount}',
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.bold,
@@ -664,7 +657,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data.blmMemorial.memorialFriendsCount}',
+                                                          Text('${profile.data!.blmMemorial.memorialFriendsCount}',
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.bold,
@@ -693,7 +686,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                       },
                                                       child: Column(
                                                         children: [
-                                                          Text('${profile.data.blmMemorial.memorialFollowersCount}',
+                                                          Text('${profile.data!.blmMemorial.memorialFollowersCount}',
                                                             style: TextStyle(
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.bold,
@@ -739,7 +732,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
                                                 SizedBox(height: 20,),
 
-                                                profile.data.blmMemorial.memorialImagesOrVideos != null
+                                                profile.data!.blmMemorial.memorialImagesOrVideos != null
                                                 ? Column(
                                                   children: [
                                                     Container(
@@ -751,10 +744,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         scrollDirection: Axis.horizontal,
                                                         itemBuilder: (context, index){
                                                           return ((){
-                                                            if(lookupMimeType(profile.data.blmMemorial.memorialImagesOrVideos[index]).contains('video') == true){
+                                                            if(lookupMimeType(profile.data!.blmMemorial.memorialImagesOrVideos[index])?.contains('video') == true){
                                                               return Container(
                                                                 child: BetterPlayer(
-                                                                  controller: betterPlayerController2,
+                                                                  controller: betterPlayerController2!,
                                                                 ),
                                                                 width: 100, 
                                                                 height: 100,
@@ -787,7 +780,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                               Expanded(
                                                                                 child: CachedNetworkImage(
                                                                                   fit: BoxFit.cover,
-                                                                                  imageUrl: profile.data.blmMemorial.memorialImagesOrVideos[index],
+                                                                                  imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
                                                                                   placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                                   errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                                 ),
@@ -807,7 +800,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                                   ),
                                                                   child: CachedNetworkImage(
                                                                     fit: BoxFit.cover,
-                                                                    imageUrl: profile.data.blmMemorial.memorialImagesOrVideos[index],
+                                                                    imageUrl: profile.data!.blmMemorial.memorialImagesOrVideos[index],
                                                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
                                                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover, scale: 1.0,),
                                                                   ),
@@ -819,7 +812,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                         separatorBuilder: (context, index){
                                                           return SizedBox(width: 20);
                                                         },
-                                                        itemCount: profile.data.blmMemorial.memorialImagesOrVideos.length,
+                                                        itemCount: profile.data!.blmMemorial.memorialImagesOrVideos.length,
                                                       ),
                                                     ),
 
@@ -869,12 +862,12 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                     height: Size.fromHeight(AppBar().preferredSize.height).height + (Size.fromHeight(AppBar().preferredSize.height).height / 2),
                                     child: Align(
                                       alignment: Alignment.centerRight,
-                                      child: MiscBLMDropDownMemorialTemplate(memorialName: profile.data.blmMemorial.memorialName, memorialId: memorialId, pageType: pageType, reportType: 'Blm',),
+                                      child: MiscBLMDropDownMemorialTemplate(memorialName: profile.data!.blmMemorial.memorialName, memorialId: memorialId, pageType: pageType, reportType: 'Blm',),
                                     ),
                                   ),
 
                                   Positioned(
-                                    top: SizeConfig.screenHeight / 5,
+                                    top: SizeConfig.screenHeight! / 5,
                                     child: Container(
                                       height: 140,
                                       width: SizeConfig.screenWidth,
@@ -890,7 +883,8 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                 child: CircleAvatar(
                                                   radius: 100,
                                                   backgroundColor: Color(0xff888888),
-                                                  backgroundImage: profile.data.blmMemorial.memorialProfileImage != null ? NetworkImage(profile.data.blmMemorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
+                                                  // backgroundImage: profile.data.blmMemorial.memorialProfileImage != null ? NetworkImage(profile.data.blmMemorial.memorialProfileImage) : AssetImage('assets/icons/app-icon.png'),
+                                                  backgroundImage: NetworkImage(profile.data!.blmMemorial.memorialProfileImage),
                                                 ),
                                               ),
                                             ),
@@ -949,16 +943,16 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                   contents: [
                                     Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                                    posts[i].imagesOrVideos != null
+                                    posts[i].imagesOrVideos != []
                                     ? Column(
                                       children: [
                                         SizedBox(height: 20),
                                         
                                         Container(
                                           child: ((){
-                                            if(posts[i].imagesOrVideos != null){
+                                            if(posts[i].imagesOrVideos != []){
                                               if(posts[i].imagesOrVideos.length == 1){
-                                                if(lookupMimeType(posts[i].imagesOrVideos[0]).contains('video') == true){
+                                                if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
                                                   return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
                                                     betterPlayerConfiguration: BetterPlayerConfiguration(
                                                       controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -985,7 +979,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   crossAxisCount: 4,
                                                   itemCount: 2,
                                                   itemBuilder: (BuildContext context, int index) =>  
-                                                    lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
+                                                    lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                     ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                       betterPlayerConfiguration: BetterPlayerConfiguration(
                                                         controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -1014,7 +1008,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                   itemBuilder: (BuildContext context, int index) => 
                                                   ((){
                                                     if(index != 1){
-                                                      return lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true
+                                                      return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
                                                       ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                                           controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -1033,7 +1027,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                     }else{
                                                       return ((){
                                                         if(posts[i].imagesOrVideos.length - 3 > 0){
-                                                          if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
+                                                          if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                                             return Stack(
                                                               children: [
                                                                 BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
@@ -1093,7 +1087,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                                                             );
                                                           }
                                                         }else{
-                                                          if(lookupMimeType(posts[i].imagesOrVideos[index]).contains('video') == true){
+                                                          if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
                                                             return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
                                                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                                                 controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -1137,10 +1131,10 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
                           MaterialButton(
                             padding: EdgeInsets.zero,
                             onPressed: () async{
-                              Scrollable.ensureVisible(profileKey.currentContext);
+                              Scrollable.ensureVisible(profileKey.currentContext!);
                             },
                             child: Icon(Icons.arrow_upward_rounded, color: Color(0xff4EC9D4,),),
-                            minWidth: SizeConfig.screenWidth / 2,
+                            minWidth: SizeConfig.screenWidth! / 2,
                             height: 45,
                             color: Color(0xffffffff),
                             shape: CircleBorder(),

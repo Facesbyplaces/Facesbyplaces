@@ -3,7 +3,7 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) async{
+Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -11,7 +11,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({int memorialId}) asyn
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,7 +32,7 @@ class APIRegularShowMemorialMain{
 
   APIRegularShowMemorialExtended almMemorial;
 
-  APIRegularShowMemorialMain({this.almMemorial});
+  APIRegularShowMemorialMain({required this.almMemorial});
 
   factory APIRegularShowMemorialMain.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowMemorialMain(
@@ -58,11 +58,11 @@ class APIRegularShowMemorialExtended{
   int showMemorialFriendsCount;
   int showMemorialFollowersCount;
 
-  APIRegularShowMemorialExtended({this.showMemorialId, this.showMemorialName, this.showMemorialDetails, this.showMemorialBackgroundImage, this.showMemorialProfileImage, this.showMemorialImagesOrVideos, this.showMemorialRelationship, this.showMemorialPageCreator, this.showMemorialManage, this.showMemorialFamOrFriends, this.showMemorialFollower, this.showMemorialPostsCount, this.showMemorialFamilyCount, this.showMemorialFriendsCount, this.showMemorialFollowersCount});
+  APIRegularShowMemorialExtended({required this.showMemorialId, required this.showMemorialName, required this.showMemorialDetails, required this.showMemorialBackgroundImage, required this.showMemorialProfileImage, required this.showMemorialImagesOrVideos, required this.showMemorialRelationship, required this.showMemorialPageCreator, required this.showMemorialManage, required this.showMemorialFamOrFriends, required this.showMemorialFollower, required this.showMemorialPostsCount, required this.showMemorialFamilyCount, required this.showMemorialFriendsCount, required this.showMemorialFollowersCount});
 
   factory APIRegularShowMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -75,7 +75,7 @@ class APIRegularShowMemorialExtended{
       showMemorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
       showMemorialBackgroundImage: parsedJson['backgroundImage'],
       showMemorialProfileImage: parsedJson['profileImage'],
-      showMemorialImagesOrVideos: newList1,
+      showMemorialImagesOrVideos: newList1!,
       showMemorialRelationship: parsedJson['relationship'],
       showMemorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showMemorialManage: parsedJson['manage'],
@@ -97,7 +97,7 @@ class APIRegularShowMemorialExtendedDetails{
   String showMemorialDetailsCemetery;
   String showMemorialDetailsCountry;
 
-  APIRegularShowMemorialExtendedDetails({this.showMemorialDetailsDescription, this.showMemorialDetailsBirthPlace, this.showMemorialDetailsDob, this.showMemorialDetailsRip, this.showMemorialDetailsCemetery, this.showMemorialDetailsCountry});
+  APIRegularShowMemorialExtendedDetails({required this.showMemorialDetailsDescription, required this.showMemorialDetailsBirthPlace, required this.showMemorialDetailsDob, required this.showMemorialDetailsRip, required this.showMemorialDetailsCemetery, required this.showMemorialDetailsCountry});
 
   factory APIRegularShowMemorialExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     String newDOB = parsedJson['dob'];
@@ -125,7 +125,7 @@ class APIRegularShowMemorialExtendedPageCreator{
   String showMemorialPageCreatorUserName;
   dynamic showMemorialPageCreatorImage;
 
-  APIRegularShowMemorialExtendedPageCreator({this.showMemorialPageCreatorId, this.showMemorialPageCreatorFirstName, this.showMemorialPageCreatorLastName, this.showMemorialPageCreatorPhoneNumber, this.showMemorialPageCreatorEmail, this.showMemorialPageCreatorUserName, this.showMemorialPageCreatorImage,});
+  APIRegularShowMemorialExtendedPageCreator({required this.showMemorialPageCreatorId, required this.showMemorialPageCreatorFirstName, required this.showMemorialPageCreatorLastName, required this.showMemorialPageCreatorPhoneNumber, required this.showMemorialPageCreatorEmail, required this.showMemorialPageCreatorUserName, required this.showMemorialPageCreatorImage,});
 
   factory APIRegularShowMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowMemorialExtendedPageCreator(

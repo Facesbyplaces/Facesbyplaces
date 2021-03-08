@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularChangePassword({String currentPassword, String newPassword}) async{
+Future<bool> apiRegularChangePassword({required String currentPassword, required String newPassword}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

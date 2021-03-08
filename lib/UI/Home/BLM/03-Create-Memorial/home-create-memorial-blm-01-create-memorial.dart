@@ -22,18 +22,18 @@ class BLMCreateMemorialValues{
   double latitude;
 
   BLMCreateMemorialValues({
-    this.blmName, 
-    this.description, 
-    this.location, 
-    this.dob, 
-    this.rip, 
-    this.state, 
-    this.country, 
-    this.precinct, 
-    this.relationship, 
-    this.imagesOrVideos, 
-    this.latitude, 
-    this.longitude,
+    required this.blmName, 
+    required this.description, 
+    required this.location, 
+    required this.dob, 
+    required this.rip, 
+    required this.state, 
+    required this.country, 
+    required this.precinct, 
+    required this.relationship, 
+    required this.imagesOrVideos, 
+    required this.latitude, 
+    required this.longitude,
   });
 }
 
@@ -184,7 +184,7 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                     MiscBLMButtonTemplate(
                       onPressed: () async{
 
-                        if(_key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState.controller.text == '' || _key7.currentState.controller.text == ''){
+                        if(_key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' || _key6.currentState!.controller.text == '' || _key7.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
@@ -206,20 +206,20 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                         }else{
                           Navigator.pushNamed(
                             context, '/home/blm/create-memorial-2',
-                            arguments: BLMCreateMemorialValues(
-                              relationship: _key1.currentState.currentSelection,
-                              location: _key2.currentState.controller.text,
-                              precinct: _key3.currentState.controller.text,
-                              dob: controller1.text,
-                              rip: controller2.text,
-                              country: _key6.currentState.controller.text,
-                              state: _key7.currentState.controller.text,
-                            ),
+                            // arguments: BLMCreateMemorialValues(
+                            //   relationship: _key1.currentState!.currentSelection,
+                            //   location: _key2.currentState!.controller.text,
+                            //   precinct: _key3.currentState!.controller.text,
+                            //   dob: controller1.text,
+                            //   rip: controller2.text,
+                            //   country: _key6.currentState!.controller.text,
+                            //   state: _key7.currentState!.controller.text,
+                            // ),
                           );
                         }
 
                       }, 
-                      width: SizeConfig.screenWidth / 2,
+                      width: SizeConfig.screenWidth! / 2,
                       height: 45,
                     ),
                   ],

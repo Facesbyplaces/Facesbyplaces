@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({int userId, int page}) async{
+Future<APIRegularShowUsersPostsMain> apiRegularShowUserPosts({required int userId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/posts?user_id=$userId&page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIRegularShowUsersPostsMain{
   int almItemsRemaining;
   List<APIRegularShowUsersPostsExtended> almFamilyMemorialList;
 
-  APIRegularShowUsersPostsMain({this.almItemsRemaining, this.almFamilyMemorialList});
+  APIRegularShowUsersPostsMain({required this.almItemsRemaining, required this.almFamilyMemorialList});
 
   factory APIRegularShowUsersPostsMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -57,11 +58,11 @@ class APIRegularShowUsersPostsExtended{
   int showUsersPostsNumberOfComments;
   bool showUsersPostsLikeStatus;
 
-  APIRegularShowUsersPostsExtended({this.showUsersPostsId, this.showUsersPostsPage, this.showUsersPostsBody, this.showUsersPostsLocation, this.showUsersPostsLatitude, this.showUsersPostsLongitude, this.showUsersPostsImagesOrVideos, this.showUsersPostsPostTagged, this.showUsersPostsCreatedAt, this.showUsersPostsNumberOfLikes, this.showUsersPostsNumberOfComments, this.showUsersPostsLikeStatus});
+  APIRegularShowUsersPostsExtended({required this.showUsersPostsId, required this.showUsersPostsPage, required this.showUsersPostsBody, required this.showUsersPostsLocation, required this.showUsersPostsLatitude, required this.showUsersPostsLongitude, required this.showUsersPostsImagesOrVideos, required this.showUsersPostsPostTagged, required this.showUsersPostsCreatedAt, required this.showUsersPostsNumberOfLikes, required this.showUsersPostsNumberOfComments, required this.showUsersPostsLikeStatus});
 
   factory APIRegularShowUsersPostsExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -78,7 +79,7 @@ class APIRegularShowUsersPostsExtended{
       showUsersPostsLocation: parsedJson['location'],
       showUsersPostsLatitude: parsedJson['latitude'],
       showUsersPostsLongitude: parsedJson['longitude'],
-      showUsersPostsImagesOrVideos: newList1,
+      showUsersPostsImagesOrVideos: newList1!,
       showUsersPostsPostTagged: taggedList,
       showUsersPostsCreatedAt: parsedJson['created_at'],
       showUsersPostsNumberOfLikes: parsedJson['numberOfLikes'],
@@ -102,7 +103,7 @@ class APIRegularShowUsersPostsExtendedPage{
   String showUsersPostsPagePageType;
   String showUsersPostsPagePrivacy;
 
-  APIRegularShowUsersPostsExtendedPage({this.showUsersPostsPageId, this.showUsersPostsPageName, this.showUsersPostsPageDetails, this.showUsersPostsPageBackgroundImage, this.showUsersPostsPageProfileImage, this.showUsersPostsPageImagesOrVideos, this.showUsersPostsPageRelationship, this.showUsersPostsPagePageCreator, this.showUsersPostsPageFollower, this.showUsersPostsPageManage, this.showUsersPostsPagePageType, this.showUsersPostsPagePrivacy});
+  APIRegularShowUsersPostsExtendedPage({required this.showUsersPostsPageId, required this.showUsersPostsPageName, required this.showUsersPostsPageDetails, required this.showUsersPostsPageBackgroundImage, required this.showUsersPostsPageProfileImage, required this.showUsersPostsPageImagesOrVideos, required this.showUsersPostsPageRelationship, required this.showUsersPostsPagePageCreator, required this.showUsersPostsPageFollower, required this.showUsersPostsPageManage, required this.showUsersPostsPagePageType, required this.showUsersPostsPagePrivacy});
 
   factory APIRegularShowUsersPostsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedPage(
@@ -130,7 +131,7 @@ class APIRegularShowUsersPostsExtendedPageDetails{
   String showUsersPostsPageDetailsCemetery;
   String showUsersPostsPageDetailsCountry;
 
-  APIRegularShowUsersPostsExtendedPageDetails({this.showUsersPostsPageDetailsDescription, this.showUsersPostsPageDetailsBirthPlace, this.showUsersPostsPageDetailsDob, this.showUsersPostsPageDetailsRip, this.showUsersPostsPageDetailsCemetery, this.showUsersPostsPageDetailsCountry});
+  APIRegularShowUsersPostsExtendedPageDetails({required this.showUsersPostsPageDetailsDescription, required this.showUsersPostsPageDetailsBirthPlace, required this.showUsersPostsPageDetailsDob, required this.showUsersPostsPageDetailsRip, required this.showUsersPostsPageDetailsCemetery, required this.showUsersPostsPageDetailsCountry});
 
   factory APIRegularShowUsersPostsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedPageDetails(
@@ -153,7 +154,7 @@ class APIRegularShowUsersPostsExtendedPageCreator{
   String showUsersPostsPageCreatorUserName;
   dynamic showUsersPostsPageCreatorImage;
 
-  APIRegularShowUsersPostsExtendedPageCreator({this.showUsersPostsPageCreatorId, this.showUsersPostsPageCreatorFirstName, this.showUsersPostsPageCreatorLastName, this.showUsersPostsPageCreatorPhoneNumber, this.showUsersPostsPageCreatorEmail, this.showUsersPostsPageCreatorUserName, this.showUsersPostsPageCreatorImage});
+  APIRegularShowUsersPostsExtendedPageCreator({required this.showUsersPostsPageCreatorId, required this.showUsersPostsPageCreatorFirstName, required this.showUsersPostsPageCreatorLastName, required this.showUsersPostsPageCreatorPhoneNumber, required this.showUsersPostsPageCreatorEmail, required this.showUsersPostsPageCreatorUserName, required this.showUsersPostsPageCreatorImage});
 
   factory APIRegularShowUsersPostsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedPageCreator(
@@ -174,7 +175,7 @@ class APIRegularShowUsersPostsExtendedTagged{
   String showUsersPostsTaggedLastName;
   String showUsersPostsTaggedImage;
 
-  APIRegularShowUsersPostsExtendedTagged({this.showUsersPostsTaggedId, this.showUsersPostsTaggedFirstName, this.showUsersPostsTaggedLastName, this.showUsersPostsTaggedImage});
+  APIRegularShowUsersPostsExtendedTagged({required this.showUsersPostsTaggedId, required this.showUsersPostsTaggedFirstName, required this.showUsersPostsTaggedLastName, required this.showUsersPostsTaggedImage});
 
   factory APIRegularShowUsersPostsExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUsersPostsExtendedTagged(

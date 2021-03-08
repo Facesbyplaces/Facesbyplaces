@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
   final int memorialId;
   final String relationship;
-  HomeRegularMemorialSettingsWithHidden({this.memorialId, this.relationship});
+  HomeRegularMemorialSettingsWithHidden({required this.memorialId, required this.relationship});
   
   HomeRegularMemorialSettingsWithHiddenState createState() => HomeRegularMemorialSettingsWithHiddenState(memorialId: memorialId, relationship: relationship);
 }
@@ -18,17 +18,12 @@ class HomeRegularMemorialSettingsWithHidden extends StatefulWidget{
 class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemorialSettingsWithHidden>{
   final int memorialId;
   final String relationship;
-  HomeRegularMemorialSettingsWithHiddenState({this.memorialId, this.relationship});
+  HomeRegularMemorialSettingsWithHiddenState({required this.memorialId, required this.relationship});
   
-  int toggle;
-  bool isSwitched1;
-  bool isSwitched2;
-  bool isSwitched3;
-  Future switchStatus;
+  int toggle = 0;
 
   void initState(){
     super.initState();
-    toggle = 0;
   }
 
   @override

@@ -15,8 +15,8 @@ class RegularPasswordResetEmail extends StatefulWidget{
 class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
   void initBranchReferences(){
     buo = BranchUniversalObject(
@@ -38,7 +38,7 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
       stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -117,14 +117,14 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                         fontWeight: FontWeight.bold, 
                         color: Color(0xffffffff),
                       ),
-                      width: SizeConfig.screenWidth / 2, 
+                      width: SizeConfig.screenWidth! / 2, 
                       height: 45,
                       buttonColor: Color(0xff04ECFF),
                       onPressed: () async{
 
-                        bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text);
+                        bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
 
-                        if(_key1.currentState.controller.text == ''){
+                        if(_key1.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
@@ -167,13 +167,13 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                           
                           initBranchReferences();
                           FlutterBranchSdk.setIdentity('alm-user-forgot-password');
-                          BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                          BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
 
                           context.hideLoaderOverlay();
                           
                           if(response.success){
                             context.showLoaderOverlay();
-                            bool result = await apiRegularPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
+                            bool result = await apiRegularPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
                             context.hideLoaderOverlay();
                             
                             if(result == true){
@@ -184,7 +184,7 @@ class RegularPasswordResetEmailState extends State<RegularPasswordResetEmail>{
                                   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                   entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('An email has been sent to ${_key1.currentState.controller.text} containing instructions for resetting your password.',
+                                  description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(),
                                   ),

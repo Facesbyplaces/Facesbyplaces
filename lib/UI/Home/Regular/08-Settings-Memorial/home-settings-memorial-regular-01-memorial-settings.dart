@@ -20,7 +20,7 @@ class HomeRegularMemorialSettings extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeRegularMemorialSettings({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeRegularMemorialSettings({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
   
   HomeRegularMemorialSettingsState createState() => HomeRegularMemorialSettingsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
@@ -31,20 +31,19 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeRegularMemorialSettingsState({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeRegularMemorialSettingsState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
   
-  int toggle;
-  bool isSwitched1;
-  bool isSwitched2;
-  bool isSwitched3;
-  Future switchStatus;
+  int toggle = 0;
+  bool isSwitched1 = false;
+  bool isSwitched2 = false;
+  bool isSwitched3 = false;
+  Future<bool>? switchStatus;
 
   void initState(){
     super.initState();
     isSwitched1 = switchFamily;
     isSwitched2 = switchFriends;
     isSwitched3 = switchFollowers;
-    toggle = 0;
   }
 
   @override

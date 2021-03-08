@@ -5,13 +5,13 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_braintree/flutter_braintree.dart';
+// import 'package:flutter_braintree/flutter_braintree.dart';
 
 class HomeRegularUserDonate extends StatefulWidget{
   final String pageType;
   final int pageId;
 
-  HomeRegularUserDonate({this.pageType, this.pageId});
+  HomeRegularUserDonate({required this.pageType, required this.pageId});
 
   HomeRegularUserDonateState createState() => HomeRegularUserDonateState(pageType: pageType, pageId: pageId);
 }
@@ -20,15 +20,14 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
   final String pageType;
   final int pageId;
 
-  HomeRegularUserDonateState({this.pageType, this.pageId});
+  HomeRegularUserDonateState({required this.pageType, required this.pageId});
 
-  int donateToggle;
+  int donateToggle = 0;
   // Token paymentToken;
 
   @override
   initState() {
     super.initState();
-    donateToggle = 0;
     // StripePayment.setOptions(
     //   StripeOptions(
     //     publishableKey: "pk_test_51Hp23FE1OZN8BRHat4PjzxlWArSwoTP4EYbuPjzgjZEA36wjmPVVT61dVnPvDv0OSks8MgIuALrt9TCzlgfU7lmP005FkfmAik", 
@@ -102,16 +101,18 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                                   SizedBox(height: 10),
 
-                                  ((){
-                                    switch(index){
-                                      case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                      case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
-                                    }
-                                  }()),
+                                  Container(
+                                    child: ((){
+                                      switch(index){
+                                        case 0: return Text('\$0.99', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 1: return Text('\$5.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 2: return Text('\$15.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 3: return Text('\$25.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 4: return Text('\$50.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                        case 5: return Text('\$100.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),); break;
+                                      }
+                                    }()),
+                                  ),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -139,52 +140,52 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
 
                       print('The amount is $donateToggle');
 
-                      var request = BraintreeDropInRequest(
-                        tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
-                        collectDeviceData: true,
-                        googlePaymentRequest: BraintreeGooglePaymentRequest(
-                          totalPrice: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99'; break;
-                              case 1: return '5.00'; break;
-                              case 2: return '15.00'; break;
-                              case 3: return '25.00'; break;
-                              case 4: return '50.00'; break;
-                              case 5: return '100.00'; break;
-                            }
-                          }()),
-                          currencyCode: 'USD',
-                          billingAddressRequired: false,
-                        ),
-                        paypalRequest: BraintreePayPalRequest(
-                          amount: ((){
-                            switch(donateToggle){
-                              case 0: return '0.99'; break;
-                              case 1: return '5.00'; break;
-                              case 2: return '15.00'; break;
-                              case 3: return '25.00'; break;
-                              case 4: return '50.00'; break;
-                              case 5: return '100.00'; break;
-                            }
-                          }()),
-                          displayName: 'Example company',
-                        ),
-                        cardEnabled: true,
-                      );
+                      // var request = BraintreeDropInRequest(
+                      //   tokenizationKey: 'sandbox_7bgm8qq9_8dgh8ybmnjb6x85h',
+                      //   collectDeviceData: true,
+                      //   googlePaymentRequest: BraintreeGooglePaymentRequest(
+                      //     totalPrice: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99'; break;
+                      //         case 1: return '5.00'; break;
+                      //         case 2: return '15.00'; break;
+                      //         case 3: return '25.00'; break;
+                      //         case 4: return '50.00'; break;
+                      //         case 5: return '100.00'; break;
+                      //       }
+                      //     }()),
+                      //     currencyCode: 'USD',
+                      //     billingAddressRequired: false,
+                      //   ),
+                      //   paypalRequest: BraintreePayPalRequest(
+                      //     amount: ((){
+                      //       switch(donateToggle){
+                      //         case 0: return '0.99'; break;
+                      //         case 1: return '5.00'; break;
+                      //         case 2: return '15.00'; break;
+                      //         case 3: return '25.00'; break;
+                      //         case 4: return '50.00'; break;
+                      //         case 5: return '100.00'; break;
+                      //       }
+                      //     }()),
+                      //     displayName: 'Example company',
+                      //   ),
+                      //   cardEnabled: true,
+                      // );
 
-                      BraintreeDropInResult result = await BraintreeDropIn.start(request);
-                      if (result != null) {
-                        print('The payment method nonce is ${result.paymentMethodNonce}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.description}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
-                        print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
-                        print('The payment method nonce is ${result.deviceData}');
-                      }
+                      // BraintreeDropInResult result = await BraintreeDropIn.start(request);
+                      // if (result != null) {
+                      //   print('The payment method nonce is ${result.paymentMethodNonce}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.description}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.isDefault}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.nonce}');
+                      //   print('The payment method nonce is ${result.paymentMethodNonce.typeLabel}');
+                      //   print('The payment method nonce is ${result.deviceData}');
+                      // }
 
-                      print('The value of request is $request');
-                      print('The value of request is ${request.paypalRequest.displayName}');
-                      print('The value of request is ${request.paypalRequest.amount}');
+                      // print('The value of request is $request');
+                      // print('The value of request is ${request.paypalRequest.displayName}');
+                      // print('The value of request is ${request.paypalRequest.amount}');
 
                       // paymentToken = await StripePayment.paymentRequestWithNativePay(
                       //   androidPayOptions: AndroidPayPaymentRequest(
@@ -277,7 +278,7 @@ class HomeRegularUserDonateState extends State<HomeRegularUserDonate>{
                       // }
 
                     }, 
-                    width: SizeConfig.screenWidth / 2, 
+                    width: SizeConfig.screenWidth! / 2, 
                     height: 45,
                   ),
 

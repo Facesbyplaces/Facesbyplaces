@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial blmMemorial}) async{
+Future<int> apiBLMCreateMemorial({required APIBLMCreateMemorial blmMemorial}) async{
   
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -27,11 +27,13 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial blmMemorial}) async{
       MapEntry('relationship', MultipartFile.fromString(blmMemorial.blmRelationship,),),
     ]);
 
-    if(blmMemorial.blmLatitude != null){
+    // if(blmMemorial.blmLatitude != null){
+      if(blmMemorial.blmLatitude != ''){
       MapEntry('blm[latitude]', MultipartFile.fromString(blmMemorial.blmLatitude,),);
     }
 
-    if(blmMemorial.blmLongitude != null){
+    // if(blmMemorial.blmLongitude != null){
+      if(blmMemorial.blmLongitude != ''){
       MapEntry('blm[longitude]', MultipartFile.fromString(blmMemorial.blmLongitude,),);
     }
 
@@ -45,7 +47,8 @@ Future<int> apiBLMCreateMemorial({APIBLMCreateMemorial blmMemorial}) async{
       formData.files.add(MapEntry('blm[profileImage]', file));
     }
     
-    if(blmMemorial.blmImagesOrVideos != null || blmMemorial.blmImagesOrVideos != ['']){
+    // if(blmMemorial.blmImagesOrVideos != null || blmMemorial.blmImagesOrVideos != ['']){
+      if(blmMemorial.blmImagesOrVideos != []){
       for(int i = 0; i < blmMemorial.blmImagesOrVideos.length; i++){
         if(blmMemorial.blmImagesOrVideos[i].path != null || blmMemorial.blmImagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(blmMemorial.blmImagesOrVideos[i].path, filename: blmMemorial.blmImagesOrVideos[i].path);
@@ -96,19 +99,19 @@ class APIBLMCreateMemorial{
   String blmLongitude;
 
   APIBLMCreateMemorial({
-    this.blmMemorialName, 
-    this.blmDescription, 
-    this.blmLocationOfIncident, 
-    this.blmDob, 
-    this.blmRip, 
-    this.blmState, 
-    this.blmCountry, 
-    this.blmPrecinct, 
-    this.blmRelationship, 
-    this.blmBackgroundImage, 
-    this.blmProfileImage, 
-    this.blmImagesOrVideos,
-    this.blmLatitude,
-    this.blmLongitude,
+    required this.blmMemorialName, 
+    required this.blmDescription, 
+    required this.blmLocationOfIncident, 
+    required this.blmDob, 
+    required this.blmRip, 
+    required this.blmState, 
+    required this.blmCountry, 
+    required this.blmPrecinct, 
+    required this.blmRelationship, 
+    required this.blmBackgroundImage, 
+    required this.blmProfileImage, 
+    required this.blmImagesOrVideos,
+    required this.blmLatitude,
+    required this.blmLongitude,
   });
 }

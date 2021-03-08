@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({int userId, int page}) async{
+Future<APIRegularShowUserMemorialsMain> apiRegularShowUserMemorials({required int userId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=2', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,7 +33,7 @@ class APIRegularShowUserMemorialsMain{
   List<APIRegularShowUserMemorialsExtended> almOwned;
   List<APIRegularShowUserMemorialsExtended> almFollowed;
 
-  APIRegularShowUserMemorialsMain({this.almOwnedItemsRemaining, this.almFollowedItemsRemaining, this.almOwned, this.almFollowed});
+  APIRegularShowUserMemorialsMain({required this.almOwnedItemsRemaining, required this.almFollowedItemsRemaining, required this.almOwned, required this.almFollowed});
 
   factory APIRegularShowUserMemorialsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -56,7 +57,7 @@ class APIRegularShowUserMemorialsExtended{
 
   APIRegularShowUserMemorialsExtendedPage showUserMemorialsPage;
 
-  APIRegularShowUserMemorialsExtended({this.showUserMemorialsPage});
+  APIRegularShowUserMemorialsExtended({required this.showUserMemorialsPage});
 
   factory APIRegularShowUserMemorialsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUserMemorialsExtended(
@@ -80,7 +81,7 @@ class APIRegularShowUserMemorialsExtendedPage{
   String showUserMemorialsPageType;
   String showUserMemorialsPagePrivacy;
 
-  APIRegularShowUserMemorialsExtendedPage({this.showUserMemorialsPageId, this.showUserMemorialsPageName, this.showUserMemorialsPageDetails, this.showUserMemorialsPageBackgroundImage, this.showUserMemorialsPageProfileImage, this.showUserMemorialsPageImagesOrVideos, this.showUserMemorialsPageRelationship, this.showUserMemorialsPageCreator, this.showUserMemorialsPageManage, this.showUserMemorialsPageFamOrFriends, this.showUserMemorialsPageFollower, this.showUserMemorialsPageType, this.showUserMemorialsPagePrivacy});
+  APIRegularShowUserMemorialsExtendedPage({required this.showUserMemorialsPageId, required this.showUserMemorialsPageName, required this.showUserMemorialsPageDetails, required this.showUserMemorialsPageBackgroundImage, required this.showUserMemorialsPageProfileImage, required this.showUserMemorialsPageImagesOrVideos, required this.showUserMemorialsPageRelationship, required this.showUserMemorialsPageCreator, required this.showUserMemorialsPageManage, required this.showUserMemorialsPageFamOrFriends, required this.showUserMemorialsPageFollower, required this.showUserMemorialsPageType, required this.showUserMemorialsPagePrivacy});
 
   factory APIRegularShowUserMemorialsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUserMemorialsExtendedPage(
@@ -106,7 +107,7 @@ class APIRegularShowUserMemorialsExtendedPageDetails{
   String showUserMemorialsPageDetailsDob;
   String showUserMemorialsPageDetailsRip;
 
-  APIRegularShowUserMemorialsExtendedPageDetails({this.showUserMemorialsPageDetailsDescription, this.showUserMemorialsPageDetailsDob, this.showUserMemorialsPageDetailsRip,});
+  APIRegularShowUserMemorialsExtendedPageDetails({required this.showUserMemorialsPageDetailsDescription, required this.showUserMemorialsPageDetailsDob, required this.showUserMemorialsPageDetailsRip,});
   
   factory APIRegularShowUserMemorialsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUserMemorialsExtendedPageDetails(
@@ -126,7 +127,7 @@ class APIRegularShowUserMemorialsExtendedPageCreator{
   String showUserMemorialsPageCreatorUserName;
   dynamic showUserMemorialsPageCreatorImage;
 
-  APIRegularShowUserMemorialsExtendedPageCreator({this.showUserMemorialsPageCreatorId, this.showUserMemorialsPageCreatorFirstName, this.showUserMemorialsPageCreatorLastName, this.showUserMemorialsPageCreatorPhoneNumber, this.showUserMemorialsPageCreatorEmail, this.showUserMemorialsPageCreatorUserName, this.showUserMemorialsPageCreatorImage});
+  APIRegularShowUserMemorialsExtendedPageCreator({required this.showUserMemorialsPageCreatorId, required this.showUserMemorialsPageCreatorFirstName, required this.showUserMemorialsPageCreatorLastName, required this.showUserMemorialsPageCreatorPhoneNumber, required this.showUserMemorialsPageCreatorEmail, required this.showUserMemorialsPageCreatorUserName, required this.showUserMemorialsPageCreatorImage});
 
   factory APIRegularShowUserMemorialsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowUserMemorialsExtendedPageCreator(

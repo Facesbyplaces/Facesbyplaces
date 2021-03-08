@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularUpdatePageImages({int memorialId, dynamic backgroundImage, dynamic profileImage}) async{
+Future<bool> apiRegularUpdatePageImages({required int memorialId, required dynamic backgroundImage, required dynamic profileImage}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

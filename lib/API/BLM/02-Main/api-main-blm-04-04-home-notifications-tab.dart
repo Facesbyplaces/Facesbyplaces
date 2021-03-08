@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({int page}) async{
+Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMHomeTabNotificationMain{
   int blmItemsRemaining;
   List<APIBLMHomeTabNotificationExtended> blmNotification;
 
-  APIBLMHomeTabNotificationMain({this.blmItemsRemaining, this.blmNotification});
+  APIBLMHomeTabNotificationMain({required this.blmItemsRemaining, required this.blmNotification});
 
   factory APIBLMHomeTabNotificationMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -55,7 +56,7 @@ class APIBLMHomeTabNotificationExtended{
   int homeTabNotificationPostId;
   String homeTabNotificationNotificationType;
 
-  APIBLMHomeTabNotificationExtended({this.homeTabNotificationId, this.homeTabNotificationCreatedAt, this.homeTabNotificationUpdatedAt, this.homeTabNotificationRecipientId, this.homeTabNotificationActor, this.homeTabNotificationRead, this.homeTabNotificationAction, this.homeTabNotificationPostId, this.homeTabNotificationNotificationType});
+  APIBLMHomeTabNotificationExtended({required this.homeTabNotificationId, required this.homeTabNotificationCreatedAt, required this.homeTabNotificationUpdatedAt, required this.homeTabNotificationRecipientId, required this.homeTabNotificationActor, required this.homeTabNotificationRead, required this.homeTabNotificationAction, required this.homeTabNotificationPostId, required this.homeTabNotificationNotificationType});
 
   factory APIBLMHomeTabNotificationExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -77,7 +78,7 @@ class APIBLMHomeTabNotificationExtendedActor{
   int homeTabNotificationActorId;
   String homeTabNotificationActorImage;
 
-  APIBLMHomeTabNotificationExtendedActor({this.homeTabNotificationActorId, this.homeTabNotificationActorImage});
+  APIBLMHomeTabNotificationExtendedActor({required this.homeTabNotificationActorId, required this.homeTabNotificationActorImage});
 
   factory APIBLMHomeTabNotificationExtendedActor.fromJson(Map<String, dynamic> parsedJson){
 

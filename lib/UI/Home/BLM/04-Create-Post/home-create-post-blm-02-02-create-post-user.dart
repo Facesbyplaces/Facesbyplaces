@@ -13,7 +13,7 @@ class BLMSearchUsers{
   int accountType;
   String image;
 
-  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.email, this.accountType, this.image});
+  BLMSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.email, required this.accountType, required this.image});
 }
 
 class HomeBLMCreatePostSearchUser extends StatefulWidget{
@@ -26,10 +26,10 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
-  List<BLMSearchUsers> users;
-  int itemRemaining;
-  bool empty;
-  int page;
+  List<BLMSearchUsers> users = [];
+  int itemRemaining = 1;
+  bool empty = true;
+  int page = 1;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -62,14 +62,6 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
     }else{
       refreshController.loadNoData();
     }
-  }
-
-  void initState(){
-    super.initState();
-    itemRemaining = 1;
-    empty = true;
-    users = [];
-    page = 1;
   }
 
   @override
@@ -145,14 +137,14 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
+            height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: empty
             ? SingleChildScrollView(
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
@@ -160,7 +152,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
 
                   Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
               ),
             )
@@ -177,7 +169,7 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                 footer: CustomFooter(
                   loadStyle: LoadStyle.ShowWhenLoading,
                   builder: (BuildContext context, LoadStatus mode){
-                    Widget body;
+                    Widget body = Container();
                     if(mode == LoadStatus.loading){
                       body = CircularProgressIndicator();
                     }
@@ -202,7 +194,8 @@ class HomeBLMCreatePostSearchUserState extends State<HomeBLMCreatePostSearchUser
                             CircleAvatar(
                               maxRadius: 40,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
+                              // backgroundImage: users[i].image != null ? NetworkImage(users[i].image) : AssetImage('assets/icons/app-icon.png'),
+                              backgroundImage: NetworkImage(users[i].image),
                             ),
 
                             SizedBox(width: 25,),

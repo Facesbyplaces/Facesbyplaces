@@ -17,7 +17,7 @@ class RegularTaggedUsers{
   int userId;
   int accountType;
 
-  RegularTaggedUsers({this.name, this.userId, this.accountType});
+  RegularTaggedUsers({required this.name, required this.userId, required this.accountType});
 }
 
 class RegularManagedPages{
@@ -25,13 +25,13 @@ class RegularManagedPages{
   int pageId;
   String image;
 
-  RegularManagedPages({this.name, this.pageId, this.image});
+  RegularManagedPages({required this.name, required this.pageId, required this.image});
 }
 
 class HomeRegularCreatePost extends StatefulWidget{
   final String name;
   final int memorialId;
-  HomeRegularCreatePost({this.name, this.memorialId});
+  HomeRegularCreatePost({required this.name, required this.memorialId});
 
   @override
   HomeRegularCreatePostState createState() => HomeRegularCreatePostState(name: name, memorialId: memorialId);
@@ -40,31 +40,27 @@ class HomeRegularCreatePost extends StatefulWidget{
 class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
   final String name;
   final int memorialId;
-  HomeRegularCreatePostState({this.name, this.memorialId});
+  HomeRegularCreatePostState({required this.name, required this.memorialId});
 
-  List<RegularManagedPages> managedPages;
-  String currentSelection;
-  int currentIdSelected;
-  Future listManagedPages;
+  List<RegularManagedPages> managedPages = [];
+  String currentSelection = '';
+  int currentIdSelected = 1;
   List<RegularTaggedUsers> users = [];
-  List<File> slideImages;
+  List<File> slideImages = [];
   TextEditingController controller = TextEditingController();
-  int maxLines;
+  int maxLines = 5;
 
-  File videoFile;
+  File videoFile = File('');
   final picker = ImagePicker();
-  BetterPlayerController betterPlayerController;
+  BetterPlayerController betterPlayerController = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 1 / 2, controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),),);
   String newLocation = '';
   String person = '';
-  int removeAttachment;
+  int removeAttachment = 0;
 
   void initState(){
     super.initState();
-    slideImages = [];
-    managedPages = [];
     currentSelection = name;
     currentIdSelected = memorialId;
-    removeAttachment = 0;
     getManagedPages();
   }
 
@@ -182,8 +178,8 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     almPageId: currentIdSelected,
                     almLocation: newLocation,
                     almImagesOrVideos: newFiles,
-                    almLatitude: locationData.latitude,
-                    almLongitude: locationData.longitude,
+                    almLatitude: locationData.latitude!,
+                    almLongitude: locationData.longitude!,
                     almTagPeople: userIds,
                   );
                   
@@ -249,9 +245,9 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                         child: DropdownButton<int>(
                           value: currentIdSelected,
                           isDense: true,
-                          onChanged: (int newValue) {
+                          onChanged: (int? newValue) {
                             setState(() {
-                              currentIdSelected = newValue;
+                              currentIdSelected = newValue!;
                             });
                           },
                           items: managedPages.map((RegularManagedPages value) {
@@ -260,7 +256,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                               
                               child: Row(
                                 children: [
-                                  CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),),
+                                  CircleAvatar(
+                                    backgroundColor: Color(0xff888888), 
+                                    backgroundImage: NetworkImage(value.image),
+                                  ),
 
                                   SizedBox(width: 20,),
 
@@ -378,7 +377,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                       removeAttachment = index;
                                     });
                                   },
-                                  child: lookupMimeType(slideImages[index].path).contains('video') == true
+                                  child: lookupMimeType(slideImages[index].path)?.contains('video') == true
                                   ? Container(
                                     width: 80,
                                     decoration: BoxDecoration(
@@ -512,7 +511,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                           child: GestureDetector(
                             onTap: () async{
                               
-                              var result = await Navigator.pushNamed(context, '/home/regular/create-post-user');
+                              RegularTaggedUsers? result = await Navigator.pushNamed(context, '/home/regular/create-post-user');
 
                               if(result != null){
                                 users.add(result);

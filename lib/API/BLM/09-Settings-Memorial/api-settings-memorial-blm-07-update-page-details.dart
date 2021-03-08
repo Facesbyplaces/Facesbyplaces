@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMUpdatePageDetails({int memorialId, String name, String description, String relationship, String location, String dob, String rip, String state, String country, String precinct}) async{
+Future<bool> apiBLMUpdatePageDetails({required int memorialId, required String name, required String description, required String relationship, required String location, required String dob, required String rip, required String state, required String country, required String precinct}) async{
 
   bool result = false;
 

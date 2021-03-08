@@ -114,8 +114,8 @@ void main() async{
           '/regular/upload-photo': (BuildContext context) => RegularUploadPhoto(), // ALM START
 
           '/home/blm': (BuildContext context) => HomeBLMScreen(),
-          '/home/blm/donation': (BuildContext context) => HomeBLMUserDonate(),
-          '/home/blm/create-post': (BuildContext context) => HomeBLMCreatePost(),
+          // '/home/blm/donation': (BuildContext context) => HomeBLMUserDonate(),
+          // '/home/blm/create-post': (BuildContext context) => HomeBLMCreatePost(),
           '/home/blm/create-post-user': (BuildContext context) => HomeBLMCreatePostSearchUser(),
           '/home/blm/create-post-location': (BuildContext context) => HomeBLMCreatePostSearchLocation(),
           '/home/blm/create-memorial': (BuildContext context) => HomeBLMCreateMemorial1(),
@@ -123,21 +123,21 @@ void main() async{
           '/home/blm/create-memorial-3': (BuildContext context) => HomeBLMCreateMemorial3(),
           '/home/blm/search': (BuildContext context) => HomeBLMSearch(),
           '/home/blm/donation-paypal': (BuildContext context) => HomeBLMPaypal(),
-          '/home/blm/profile-settings': (BuildContext context) => HomeBLMUserProfileDetails(),
-          '/home/blm/managed-profile': (BuildContext context) => HomeBLMProfile(), // BLM HOME SCREEN
+          // '/home/blm/profile-settings': (BuildContext context) => HomeBLMUserProfileDetails(),
+          // '/home/blm/managed-profile': (BuildContext context) => HomeBLMProfile(), // BLM HOME SCREEN
 
           '/home/regular': (BuildContext context) => HomeRegularScreen(),
-          '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
+          // '/home/regular/create-post': (BuildContext context) => HomeRegularCreatePost(),
           '/home/regular/create-post-user': (BuildContext context) => HomeRegularCreatePostSearchUser(),
           '/home/regular/create-post-location': (BuildContext context) => HomeRegularCreatePostSearchLocation(),
           '/home/regular/create-memorial': (BuildContext context) => HomeRegularCreateMemorial1(),
           '/home/regular/create-memorial-2': (BuildContext context) => HomeRegularCreateMemorial2(),
           '/home/regular/create-memorial-3': (BuildContext context) => HomeRegularCreateMemorial3(),
-          '/home/regular/notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
-          '/home/regular/donation': (BuildContext context) => HomeRegularUserDonate(),
+          // '/home/regular/notification-settings': (BuildContext context) => HomeRegularNotificationSettings(),
+          // '/home/regular/donation': (BuildContext context) => HomeRegularUserDonate(),
           '/home/regular/donation-paypal': (BuildContext context) => HomeRegularPaypal(),
           '/home/regular/search': (BuildContext context) => HomeRegularSearch(),
-          '/home/regular/profile-settings': (BuildContext context) => HomeRegularUserProfileDetails(), // ALM HOME SCREEN
+          // '/home/regular/profile-settings': (BuildContext context) => HomeRegularUserProfileDetails(), // ALM HOME SCREEN
 
         },
       ),

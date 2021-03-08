@@ -18,7 +18,7 @@ class HomeBLMNotificationSettings extends StatefulWidget{
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  HomeBLMNotificationSettings({this.newMemorial, this.newActivities, this.postLikes, this.postComments, this.addFamily, this.addFriends, this.addAdmin});
+  HomeBLMNotificationSettings({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
   @override
   HomeBLMNotificationSettingsState createState() => HomeBLMNotificationSettingsState(newMemorial: newMemorial, newActivities: newActivities, postLikes: postLikes, postComments: postComments, addFamily: addFamily, addFriends: addFriends, addAdmin: addAdmin);
@@ -32,15 +32,15 @@ class HomeBLMNotificationSettingsState extends State<HomeBLMNotificationSettings
   final bool addFamily;
   final bool addFriends;
   final bool addAdmin;
-  HomeBLMNotificationSettingsState({this.newMemorial, this.newActivities, this.postLikes, this.postComments, this.addFamily, this.addFriends, this.addAdmin});
+  HomeBLMNotificationSettingsState({required this.newMemorial, required this.newActivities, required this.postLikes, required this.postComments, required this.addFamily, required this.addFriends, required this.addAdmin});
 
-  bool toggle1;
-  bool toggle2;
-  bool toggle3;
-  bool toggle4;
-  bool toggle5;
-  bool toggle6;
-  bool toggle7;
+  bool toggle1 = false;
+  bool toggle2 = false;
+  bool toggle3 = false;
+  bool toggle4 = false;
+  bool toggle5 = false;
+  bool toggle6 = false;
+  bool toggle7 = false;
 
   void initState(){
     super.initState();

@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({int memorialId, int page}) async{
+Future<APIBLMShowFamilySettingsMain> apiBLMShowFamilySettings({required int memorialId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/family/index?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/family/index?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMShowFamilySettingsMain{
   int blmItemsRemaining;
   List<APIBLMShowFamilySettingsExtended> blmFamilyList;
 
-  APIBLMShowFamilySettingsMain({this.blmItemsRemaining, this.blmFamilyList});
+  APIBLMShowFamilySettingsMain({required this.blmItemsRemaining, required this.blmFamilyList});
 
   factory APIBLMShowFamilySettingsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -48,7 +49,7 @@ class APIBLMShowFamilySettingsExtended{
   APIBLMShowFamilySettingsExtendedDetails showFamilySettingsUser;
   String showFamilySettingsRelationship;
 
-  APIBLMShowFamilySettingsExtended({this.showFamilySettingsUser, this.showFamilySettingsRelationship});
+  APIBLMShowFamilySettingsExtended({required this.showFamilySettingsUser, required this.showFamilySettingsRelationship});
 
   factory APIBLMShowFamilySettingsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtended(
@@ -67,7 +68,7 @@ class APIBLMShowFamilySettingsExtendedDetails{
   String showFamilySettingsDetailsEmail;
   int showFamilySettingsDetailsAccountType;
 
-  APIBLMShowFamilySettingsExtendedDetails({this.showFamilySettingsDetailsId, this.showFamilySettingsDetailsFirstName, this.showFamilySettingsDetailsLastName, this.showFamilySettingsDetailsImage, this.showFamilySettingsDetailsEmail, this.showFamilySettingsDetailsAccountType});
+  APIBLMShowFamilySettingsExtendedDetails({required this.showFamilySettingsDetailsId, required this.showFamilySettingsDetailsFirstName, required this.showFamilySettingsDetailsLastName, required this.showFamilySettingsDetailsImage, required this.showFamilySettingsDetailsEmail, required this.showFamilySettingsDetailsAccountType});
 
   factory APIBLMShowFamilySettingsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowFamilySettingsExtendedDetails(

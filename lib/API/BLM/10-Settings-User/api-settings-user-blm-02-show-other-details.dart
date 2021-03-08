@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({int userId}) async{
+Future<APIBLMShowOtherDetails> apiBLMShowOtherDetails({required int userId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId&account_type=1',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId&account_type=1', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -33,7 +34,7 @@ class APIBLMShowOtherDetails{
   String blmShowOtherDetailsAddress;
   String blmShowOtherDetailsPhoneNumber;
 
-  APIBLMShowOtherDetails({this.blmShowOtherDetailsBirthdate, this.blmShowOtherDetailsBirthplace, this.blmShowOtherDetailsEmail, this.blmShowOtherDetailsAddress, this.blmShowOtherDetailsPhoneNumber});
+  APIBLMShowOtherDetails({required this.blmShowOtherDetailsBirthdate, required this.blmShowOtherDetailsBirthplace, required this.blmShowOtherDetailsEmail, required this.blmShowOtherDetailsAddress, required this.blmShowOtherDetailsPhoneNumber});
 
   factory APIBLMShowOtherDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowOtherDetails(

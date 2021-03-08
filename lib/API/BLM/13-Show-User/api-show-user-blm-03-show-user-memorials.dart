@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({int userId, int page}) async{
+Future<APIBLMShowUserMemorialsMain> apiBLMShowUserMemorials({required int userId, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=1',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/memorials?user_id=$userId&page=$page&account_type=1', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,7 +33,7 @@ class APIBLMShowUserMemorialsMain{
   List<APIBLMShowUserMemorialsExtended> blmOwned;
   List<APIBLMShowUserMemorialsExtended> blmFollowed;
 
-  APIBLMShowUserMemorialsMain({this.blmOwnedItemsRemaining, this.blmFollowedItemsRemaining, this.blmOwned, this.blmFollowed});
+  APIBLMShowUserMemorialsMain({required this.blmOwnedItemsRemaining, required this.blmFollowedItemsRemaining, required this.blmOwned, required this.blmFollowed});
 
   factory APIBLMShowUserMemorialsMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -56,7 +57,7 @@ class APIBLMShowUserMemorialsExtended{
 
   APIBLMShowUserMemorialsExtendedPage showUserMemorialsPage;
 
-  APIBLMShowUserMemorialsExtended({this.showUserMemorialsPage});
+  APIBLMShowUserMemorialsExtended({required this.showUserMemorialsPage});
 
   factory APIBLMShowUserMemorialsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtended(
@@ -80,7 +81,7 @@ class APIBLMShowUserMemorialsExtendedPage{
   String showUserMemorialsPageType;
   String showUserMemorialsPagePrivacy;
 
-  APIBLMShowUserMemorialsExtendedPage({this.showUserMemorialsPageId, this.showUserMemorialsPageName, this.showUserMemorialsPageDetails, this.showUserMemorialsPageBackgroundImage, this.showUserMemorialsPageProfileImage, this.showUserMemorialsPageImagesOrVideos, this.showUserMemorialsPageRelationship, this.showUserMemorialsPageCreator, this.showUserMemorialsPageManage, this.showUserMemorialsPageFamOrFriends, this.showUserMemorialsPageFollower, this.showUserMemorialsPageType, this.showUserMemorialsPagePrivacy});
+  APIBLMShowUserMemorialsExtendedPage({required this.showUserMemorialsPageId, required this.showUserMemorialsPageName, required this.showUserMemorialsPageDetails, required this.showUserMemorialsPageBackgroundImage, required this.showUserMemorialsPageProfileImage, required this.showUserMemorialsPageImagesOrVideos, required this.showUserMemorialsPageRelationship, required this.showUserMemorialsPageCreator, required this.showUserMemorialsPageManage, required this.showUserMemorialsPageFamOrFriends, required this.showUserMemorialsPageFollower, required this.showUserMemorialsPageType, required this.showUserMemorialsPagePrivacy});
 
   factory APIBLMShowUserMemorialsExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPage(
@@ -106,7 +107,7 @@ class APIBLMShowUserMemorialsExtendedPageDetails{
   String showUserMemorialsPageDetailsDob;
   String showUserMemorialsPageDetailsRip;
 
-  APIBLMShowUserMemorialsExtendedPageDetails({this.showUserMemorialsPageDetailsDescription, this.showUserMemorialsPageDetailsDob, this.showUserMemorialsPageDetailsRip,});
+  APIBLMShowUserMemorialsExtendedPageDetails({required this.showUserMemorialsPageDetailsDescription, required this.showUserMemorialsPageDetailsDob, required this.showUserMemorialsPageDetailsRip,});
   
   factory APIBLMShowUserMemorialsExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPageDetails(
@@ -126,7 +127,7 @@ class APIBLMShowUserMemorialsExtendedPageCreator{
   String showUserMemorialsPageCreatorUserName;
   dynamic showUserMemorialsPageCreatorImage;
 
-  APIBLMShowUserMemorialsExtendedPageCreator({this.showUserMemorialsPageCreatorId, this.showUserMemorialsPageCreatorFirstName, this.showUserMemorialsPageCreatorLastName, this.showUserMemorialsPageCreatorPhoneNumber, this.showUserMemorialsPageCreatorEmail, this.showUserMemorialsPageCreatorUserName, this.showUserMemorialsPageCreatorImage});
+  APIBLMShowUserMemorialsExtendedPageCreator({required this.showUserMemorialsPageCreatorId, required this.showUserMemorialsPageCreatorFirstName, required this.showUserMemorialsPageCreatorLastName, required this.showUserMemorialsPageCreatorPhoneNumber, required this.showUserMemorialsPageCreatorEmail, required this.showUserMemorialsPageCreatorUserName, required this.showUserMemorialsPageCreatorImage});
 
   factory APIBLMShowUserMemorialsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowUserMemorialsExtendedPageCreator(

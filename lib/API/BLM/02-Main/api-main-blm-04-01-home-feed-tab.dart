@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({int page}) async{
+Future<APIBLMHomeTabFeedMain> apiBLMHomeFeedTab({required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMHomeTabFeedMain{
   int blmItemsRemaining;
   List<APIBLMHomeTabFeedExtended> blmFamilyMemorialList;
 
-  APIBLMHomeTabFeedMain({this.blmFamilyMemorialList, this.blmItemsRemaining});
+  APIBLMHomeTabFeedMain({required this.blmFamilyMemorialList, required this.blmItemsRemaining});
 
   factory APIBLMHomeTabFeedMain.fromJson(Map<String, dynamic> parsedJson){
     var newList = parsedJson['posts'] as List;
@@ -57,11 +58,11 @@ class APIBLMHomeTabFeedExtended{
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
 
-  APIBLMHomeTabFeedExtended({this.homeTabFeedId, this.homeTabFeedPage, this.homeTabFeedBody, this.homeTabFeedLocation, this.homeTabFeedLatitude, this.homeTabFeedLongitude, this.homeTabFeedImagesOrVideos, this.homeTabFeedPostTagged, this.homeTabFeedCreatedAt, this.homeTabFeedNumberOfLikes, this.homeTabFeedNumberOfComments, this.homeTabFeedLikeStatus});
+  APIBLMHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedLocation, required this.homeTabFeedLatitude, required this.homeTabFeedLongitude, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreatedAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIBLMHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
-    List<dynamic> newList1;
+    List<dynamic>? newList1;
 
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
@@ -78,7 +79,7 @@ class APIBLMHomeTabFeedExtended{
       homeTabFeedLocation: parsedJson['location'],
       homeTabFeedLatitude: parsedJson['latitude'],
       homeTabFeedLongitude: parsedJson['longitude'],
-      homeTabFeedImagesOrVideos: newList1,
+      homeTabFeedImagesOrVideos: newList1!,
       homeTabFeedPostTagged: taggedList,
       homeTabFeedCreatedAt: parsedJson['created_at'],
       homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],
@@ -103,7 +104,7 @@ class APIBLMHomeTabFeedExtendedPage{
   String homeTabFeedPagePageType;
   String homeTabFeedPagePrivacy;
 
-  APIBLMHomeTabFeedExtendedPage({this.homeTabFeedPageId, this.homeTabFeedPageName, this.homeTabFeedPageDetails, this.homeTabFeedPageBackgroundImage, this.homeTabFeedPageProfileImage, this.homeTabFeedPageImagesOrVideos, this.homeTabFeedPageRelationship, this.homeTabFeedPagePageCreator, this.homeTabFeedPageManage, this.homeTabFeedPageFamOrFriends, this.homeTabFeedPageFollower, this.homeTabFeedPagePageType, this.homeTabFeedPagePrivacy});
+  APIBLMHomeTabFeedExtendedPage({required this.homeTabFeedPageId, required this.homeTabFeedPageName, required this.homeTabFeedPageDetails, required this.homeTabFeedPageBackgroundImage, required this.homeTabFeedPageProfileImage, required this.homeTabFeedPageImagesOrVideos, required this.homeTabFeedPageRelationship, required this.homeTabFeedPagePageCreator, required this.homeTabFeedPageManage, required this.homeTabFeedPageFamOrFriends, required this.homeTabFeedPageFollower, required this.homeTabFeedPagePageType, required this.homeTabFeedPagePrivacy});
 
   factory APIBLMHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabFeedExtendedPage(
@@ -132,7 +133,7 @@ class APIBLMHomeTabFeedExtendedPageDetails{
   String homeTabFeedPageDetailsCemetery;
   String homeTabFeedPageDetailsCountry;
 
-  APIBLMHomeTabFeedExtendedPageDetails({this.homeTabFeedPageDetailsDescription, this.homeTabFeedPageDetailsBirthPlace, this.homeTabFeedPageDetailsDob, this.homeTabFeedPageDetailsRip, this.homeTabFeedPageDetailsCemetery, this.homeTabFeedPageDetailsCountry});
+  APIBLMHomeTabFeedExtendedPageDetails({required this.homeTabFeedPageDetailsDescription, required this.homeTabFeedPageDetailsBirthPlace, required this.homeTabFeedPageDetailsDob, required this.homeTabFeedPageDetailsRip, required this.homeTabFeedPageDetailsCemetery, required this.homeTabFeedPageDetailsCountry});
 
   factory APIBLMHomeTabFeedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabFeedExtendedPageDetails(
@@ -155,7 +156,7 @@ class APIBLMHomeTabFeedExtendedPageCreator{
   String homeTabFeedPageCreatorUserName;
   dynamic homeTabFeedPageCreatorImage;
 
-  APIBLMHomeTabFeedExtendedPageCreator({this.homeTabFeedPageCreatorId, this.homeTabFeedPageCreatorFirstName, this.homeTabFeedPageCreatorLastName, this.homeTabFeedPageCreatorPhoneNumber, this.homeTabFeedPageCreatorEmail, this.homeTabFeedPageCreatorUserName, this.homeTabFeedPageCreatorImage});
+  APIBLMHomeTabFeedExtendedPageCreator({required this.homeTabFeedPageCreatorId, required this.homeTabFeedPageCreatorFirstName, required this.homeTabFeedPageCreatorLastName, required this.homeTabFeedPageCreatorPhoneNumber, required this.homeTabFeedPageCreatorEmail, required this.homeTabFeedPageCreatorUserName, required this.homeTabFeedPageCreatorImage});
 
   factory APIBLMHomeTabFeedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabFeedExtendedPageCreator(
@@ -176,7 +177,7 @@ class APIBLMHomeTabFeedExtendedTagged{
   String homeTabFeedTaggedLastName;
   String homeTabFeedTaggedImage;
 
-  APIBLMHomeTabFeedExtendedTagged({this.homeTabFeedTaggedId, this.homeTabFeedTaggedFirstName, this.homeTabFeedTaggedLastName, this.homeTabFeedTaggedImage});
+  APIBLMHomeTabFeedExtendedTagged({required this.homeTabFeedTaggedId, required this.homeTabFeedTaggedFirstName, required this.homeTabFeedTaggedLastName, required this.homeTabFeedTaggedImage});
 
   factory APIBLMHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabFeedExtendedTagged(

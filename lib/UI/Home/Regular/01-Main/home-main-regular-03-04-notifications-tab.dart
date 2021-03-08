@@ -10,7 +10,6 @@ class RegularMainPagesNotifications{
   int id;
   String createdAt;
   String updatedAt;
-  int recipientId;
   int actorId;
   String actorImage;
   bool read;
@@ -18,7 +17,7 @@ class RegularMainPagesNotifications{
   int postId;
   String notificationType;
 
-  RegularMainPagesNotifications({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.actorImage, this.read, this.action, this.postId, this.notificationType});
+  RegularMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
 }
 
 class HomeRegularNotificationsTab extends StatefulWidget{
@@ -29,17 +28,13 @@ class HomeRegularNotificationsTab extends StatefulWidget{
 class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab>{
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularMainPagesNotifications> notifications;
-  int itemRemaining;
-  int page;
-  int count;
+  List<RegularMainPagesNotifications> notifications = [];
+  int itemRemaining = 1;
+  int page = 1;
+  int count = 0;
 
   void initState(){
     super.initState();
-    notifications = [];
-    itemRemaining = 1;
-    count = 0;
-    page = 1;
     onLoading();
   }
 
@@ -101,7 +96,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -135,7 +130,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -143,7 +138,7 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
 
               Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],
           ),
         ),

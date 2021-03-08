@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({int memorialId}) async{
+Future<APIBLMShowPageImagesMain> apiBLMShowPageImages({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/editImages',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId/editImages', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMShowPageImagesMain{
 
   APIBLMShowPageImagesExtended blmMemorial;
 
-  APIBLMShowPageImagesMain({this.blmMemorial});
+  APIBLMShowPageImagesMain({required this.blmMemorial});
 
   factory APIBLMShowPageImagesMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageImagesMain(
@@ -49,7 +50,7 @@ class APIBLMShowPageImagesExtended{
   String showPageImagesRelationship;
   APIBLMShowPageImagesExtendedPageCreator showPageImagesPageCreator;
 
-  APIBLMShowPageImagesExtended({this.showPageImagesId, this.showPageImagesName, this.showPageImagesDetails, this.showPageImagesBackgroundImage, this.showPageImagesProfileImage, this.showPageImagesImagesOrVideos, this.showPageImagesRelationship, this.showPageImagesPageCreator});
+  APIBLMShowPageImagesExtended({required this.showPageImagesId, required this.showPageImagesName, required this.showPageImagesDetails, required this.showPageImagesBackgroundImage, required this.showPageImagesProfileImage, required this.showPageImagesImagesOrVideos, required this.showPageImagesRelationship, required this.showPageImagesPageCreator});
 
   factory APIBLMShowPageImagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageImagesExtended(
@@ -74,7 +75,7 @@ class APIBLMShowPageImagesExtendedDetails{
   String showPageImagesDetailsState;
   String showPageImagesDetailsCountry;
 
-  APIBLMShowPageImagesExtendedDetails({this.showPageImagesDetailsDescription, this.showPageImagesDetailsLocation, this.showPageImagesDetailsPrecinct, this.showPageImagesDetailsDob, this.showPageImagesDetailsRip, this.showPageImagesDetailsState, this.showPageImagesDetailsCountry});
+  APIBLMShowPageImagesExtendedDetails({required this.showPageImagesDetailsDescription, required this.showPageImagesDetailsLocation, required this.showPageImagesDetailsPrecinct, required this.showPageImagesDetailsDob, required this.showPageImagesDetailsRip, required this.showPageImagesDetailsState, required this.showPageImagesDetailsCountry});
 
   factory APIBLMShowPageImagesExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageImagesExtendedDetails(
@@ -98,7 +99,7 @@ class APIBLMShowPageImagesExtendedPageCreator{
   String showPageImagesPageCreatorUserName;
   dynamic showPageImagesPageCreatorImage;
 
-  APIBLMShowPageImagesExtendedPageCreator({this.showPageImagesPageCreatorId, this.showPageImagesPageCreatorFirstName, this.showPageImagesPageCreatorLastName, this.showPageImagesPageCreatorPhoneNumber, this.showPageImagesPageCreatorEmail, this.showPageImagesPageCreatorUserName, this.showPageImagesPageCreatorImage});
+  APIBLMShowPageImagesExtendedPageCreator({required this.showPageImagesPageCreatorId, required this.showPageImagesPageCreatorFirstName, required this.showPageImagesPageCreatorLastName, required this.showPageImagesPageCreatorPhoneNumber, required this.showPageImagesPageCreatorEmail, required this.showPageImagesPageCreatorUserName, required this.showPageImagesPageCreatorImage});
 
   factory APIBLMShowPageImagesExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageImagesExtendedPageCreator(

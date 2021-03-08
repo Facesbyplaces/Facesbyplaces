@@ -2,10 +2,10 @@ import 'package:facesbyplaces/UI/Home/Regular/06-Report/home-report-regular-01-r
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-02-bloc-regular-misc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:full_screen_menu/full_screen_menu.dart';
+// import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+// import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class MiscRegularDropDownTemplate extends StatefulWidget{
   final String reportType;
   final String pageType;
 
-  MiscRegularDropDownTemplate({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
+  MiscRegularDropDownTemplate({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
   MiscRegularDropDownTemplateState createState() => MiscRegularDropDownTemplateState(postId: postId, likePost: likePost, likesCount: likesCount, reportType: reportType, pageType: pageType);
 }
@@ -35,14 +35,13 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
   final String reportType;
   final String pageType;
 
-  MiscRegularDropDownTemplateState({this.postId, this.likePost, this.likesCount, this.reportType, this.pageType});
+  MiscRegularDropDownTemplateState({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
   GlobalKey qrKey = new GlobalKey();
-
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
   void initBranchShare(){
     buo = BranchUniversalObject(
@@ -66,23 +65,23 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   Future<void> shareQRCode() async {
     try {
-      RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
-      var image = await boundary.toImage();
-      ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
-      Uint8List pngBytes = byteData.buffer.asUint8List();
+      // RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
+      // var image = await boundary.toImage();
+      // ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
+      // Uint8List pngBytes = byteData.buffer.asUint8List();
 
-      final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/qr-image.png').create();
-      await file.writeAsBytes(pngBytes);
+      // final tempDir = await getTemporaryDirectory();
+      // final file = await new File('${tempDir.path}/qr-image.png').create();
+      // await file.writeAsBytes(pngBytes);
 
-      print(pngBytes);
+      // print(pngBytes);
 
-      Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the post from FacesbyPlaces');
+      // Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the post from FacesbyPlaces');
 
     } catch(e) {
       print(e.toString());
@@ -112,16 +111,16 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
                 ),
               );
             }).toList(),
-            onChanged: (String listValue) async{
-              dropDownList = listValue;
+            onChanged: (String? listValue) async{
+              dropDownList = listValue!;
               if(dropDownList == 'Share'){
                 initBranchShare();
 
                 FlutterBranchSdk.setIdentity('alm-share-link');
 
                 BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                  buo: buo,
-                  linkProperties: lp,
+                  buo: buo!,
+                  linkProperties: lp!,
                   messageText: 'FacesbyPlaces App',
                   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
@@ -136,69 +135,69 @@ class MiscRegularDropDownTemplateState extends State<MiscRegularDropDownTemplate
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: postId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-$pageType'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
+                // String qrData = 'Post-$postId-${likePost == true ? 1 : 0}-$likesCount-$pageType'; // 'link-category' - 'post-id' - 'fase/true = 0/1' - 'number-of-likes' - 'account-type'
 
-                FullScreenMenu.show(
-                  context,
-                  backgroundColor: Color(0xffffffff),
-                  items: [
-                    Center(
-                      child: Container(
-                        height: SizeConfig.screenHeight - 400,
-                        child: RepaintBoundary(
-                          key: qrKey,
-                          child: QrImage(
-                            data: qrData,
-                            version: QrVersions.auto,
-                            size: 320,
-                            gapless: false,
-                          ),
-                        ),
-                      ),
-                    ),
+                // FullScreenMenu.show(
+                //   context,
+                //   backgroundColor: Color(0xffffffff),
+                //   items: [
+                //     Center(
+                //       child: Container(
+                //         height: SizeConfig.screenHeight - 400,
+                //         child: RepaintBoundary(
+                //           key: qrKey,
+                //           child: QrImage(
+                //             data: qrData,
+                //             version: QrVersions.auto,
+                //             size: 320,
+                //             gapless: false,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
 
-                    Column(
-                      children: [
-                        Text('FacesbyPlaces Post',
-                          style: TextStyle(
-                            fontSize: 20, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xff000000),
-                          ), 
-                        ),
+                //     Column(
+                //       children: [
+                //         Text('FacesbyPlaces Post',
+                //           style: TextStyle(
+                //             fontSize: 20, 
+                //             fontWeight: FontWeight.bold, 
+                //             color: Color(0xff000000),
+                //           ), 
+                //         ),
 
-                        Text('QR Code',
-                          style: TextStyle(
-                            fontSize: 20, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xff000000),
-                          ), 
-                        ),
+                //         Text('QR Code',
+                //           style: TextStyle(
+                //             fontSize: 20, 
+                //             fontWeight: FontWeight.bold, 
+                //             color: Color(0xff000000),
+                //           ), 
+                //         ),
 
-                      ],
-                    ),
+                //       ],
+                //     ),
 
-                    MiscRegularButtonTemplate(
-                      buttonText: 'Share',
-                      buttonTextStyle: TextStyle(
-                        fontSize: 16, 
-                        fontWeight: FontWeight.bold, 
-                        color: Color(0xffffffff),
-                      ),
-                      width: SizeConfig.screenWidth / 2,
-                      height: 45,
-                      buttonColor: Color(0xff04ECFF), 
-                      onPressed: () async{
-                        await shareQRCode();
-                      },
-                    ),
-                  ],
-                );
+                //     MiscRegularButtonTemplate(
+                //       buttonText: 'Share',
+                //       buttonTextStyle: TextStyle(
+                //         fontSize: 16, 
+                //         fontWeight: FontWeight.bold, 
+                //         color: Color(0xffffffff),
+                //       ),
+                //       width: SizeConfig.screenWidth / 2,
+                //       height: 45,
+                //       buttonColor: Color(0xff04ECFF), 
+                //       onPressed: () async{
+                //         await shareQRCode();
+                //       },
+                //     ),
+                //   ],
+                // );
               }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('alm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
                 if (response.success) {
                   print('Link generated: ${response.result}');
                 } else {
@@ -222,7 +221,7 @@ class MiscRegularDropDownMemorialTemplate extends StatefulWidget{
   final String pageType;
   final String reportType;
 
-  MiscRegularDropDownMemorialTemplate({this.memorialName, this.memorialId, this.pageType, this.reportType});
+  MiscRegularDropDownMemorialTemplate({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
 
   MiscRegularDropDownMemorialTemplateState createState() => MiscRegularDropDownMemorialTemplateState(memorialName: memorialName, memorialId: memorialId, pageType: pageType, reportType: reportType);
 }
@@ -233,15 +232,13 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
   final String pageType;
   final String reportType;
 
-  MiscRegularDropDownMemorialTemplateState({this.memorialName, this.memorialId, this.pageType, this.reportType});
+  MiscRegularDropDownMemorialTemplateState({required this.memorialName, required this.memorialId, required this.pageType, required this.reportType});
 
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
-
-  File shareImage;
-
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
+  File? shareImage;
   GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
@@ -264,23 +261,23 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   Future<void> shareQRCode() async {
     try {
-      RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
-      var image = await boundary.toImage();
-      ByteData byteData = await image.toByteData(format: ImageByteFormat.png);
-      Uint8List pngBytes = byteData.buffer.asUint8List();
+      // RenderRepaintBoundary boundary = qrKey.currentContext.findRenderObject();
+      // var image = await boundary.toImage();
+      // ByteData byteData = (await image.toByteData(format: ImageByteFormat.png))!;
+      // Uint8List pngBytes = byteData.buffer.asUint8List();
 
-      final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/qr-image.png').create();
-      await file.writeAsBytes(pngBytes);
+      // final tempDir = await getTemporaryDirectory();
+      // final file = await new File('${tempDir.path}/qr-image.png').create();
+      // await file.writeAsBytes(pngBytes);
 
-      print(pngBytes);
+      // print(pngBytes);
 
-      Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
+      // Share.shareFiles(['${tempDir.path}/qr-image.png'], text: 'Scan this QR Code to check the memorial of $memorialName');
 
     } catch(e) {
       print(e.toString());
@@ -310,16 +307,16 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
                 ),
               );
             }).toList(),
-            onChanged: (String listValue) async{
-              dropDownList = listValue;
+            onChanged: (String? listValue) async{
+              dropDownList = listValue!;
               if(dropDownList == 'Share'){
                 initBranchShare();
 
                 FlutterBranchSdk.setIdentity('alm-share-link');
 
                 BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                  buo: buo,
-                  linkProperties: lp,
+                  buo: buo!,
+                  linkProperties: lp!,
                   messageText: 'FacesbyPlaces App',
                   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
@@ -334,69 +331,69 @@ class MiscRegularDropDownMemorialTemplateState extends State<MiscRegularDropDown
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularReport(postId: memorialId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
-                String qrData = 'Memorial-$memorialId-$pageType'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
+                // String qrData = 'Memorial-$memorialId-$pageType'; // 'link-category' - 'link-type-of-account' - 'link-type-of-account'
 
-                FullScreenMenu.show(
-                  context,
-                  backgroundColor: Color(0xffffffff),
-                  items: [
-                    Center(
-                      child: Container(
-                        height: SizeConfig.screenHeight - 400,
-                        child: RepaintBoundary(
-                          key: qrKey,
-                          child: QrImage(
-                            data: qrData,
-                            version: QrVersions.auto,
-                            size: 320,
-                            gapless: false,
-                          ),
-                        ),
-                      ),
-                    ),
+                // FullScreenMenu.show(
+                //   context,
+                //   backgroundColor: Color(0xffffffff),
+                //   items: [
+                //     Center(
+                //       child: Container(
+                //         height: SizeConfig.screenHeight - 400,
+                //         child: RepaintBoundary(
+                //           key: qrKey,
+                //           child: QrImage(
+                //             data: qrData,
+                //             version: QrVersions.auto,
+                //             size: 320,
+                //             gapless: false,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
 
-                    Column(
-                      children: [
-                        Text('$memorialName',
-                          style: TextStyle(
-                            fontSize: 20, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xff000000),
-                          ), 
-                        ),
+                //     Column(
+                //       children: [
+                //         Text('$memorialName',
+                //           style: TextStyle(
+                //             fontSize: 20, 
+                //             fontWeight: FontWeight.bold, 
+                //             color: Color(0xff000000),
+                //           ), 
+                //         ),
 
-                        Text('QR Code',
-                          style: TextStyle(
-                            fontSize: 20, 
-                            fontWeight: FontWeight.bold, 
-                            color: Color(0xff000000),
-                          ), 
-                        ),
+                //         Text('QR Code',
+                //           style: TextStyle(
+                //             fontSize: 20, 
+                //             fontWeight: FontWeight.bold, 
+                //             color: Color(0xff000000),
+                //           ), 
+                //         ),
 
-                      ],
-                    ),
+                //       ],
+                //     ),
 
-                    MiscRegularButtonTemplate(
-                      buttonText: 'Share',
-                      buttonTextStyle: TextStyle(
-                        fontSize: 16, 
-                        fontWeight: FontWeight.bold, 
-                        color: Color(0xffffffff),
-                      ),
-                      width: SizeConfig.screenWidth / 2,
-                      height: 45,
-                      buttonColor: Color(0xff04ECFF),
-                      onPressed: () async{
-                        await shareQRCode();
-                      },
-                    ),
-                  ],
-                );
+                //     MiscRegularButtonTemplate(
+                //       buttonText: 'Share',
+                //       buttonTextStyle: TextStyle(
+                //         fontSize: 16, 
+                //         fontWeight: FontWeight.bold, 
+                //         color: Color(0xffffffff),
+                //       ),
+                //       width: SizeConfig.screenWidth / 2,
+                //       height: 45,
+                //       buttonColor: Color(0xff04ECFF),
+                //       onPressed: () async{
+                //         await shareQRCode();
+                //       },
+                //     ),
+                //   ],
+                // );
               }else{
                 initBranchShare();
                 FlutterBranchSdk.setIdentity('alm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
                 if (response.success) {
                   print('Link generated: ${response.result}');
                 } else {

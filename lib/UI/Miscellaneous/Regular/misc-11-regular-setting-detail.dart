@@ -9,7 +9,7 @@ class MiscRegularSettingDetailTemplate extends StatelessWidget{
   final Color backgroundColor;
 
   MiscRegularSettingDetailTemplate({
-    this.onTap,
+    required this.onTap,
     this.titleDetail = 'Page Details',
     this.contentDetail = 'Update page details',
     this.backgroundColor = const Color(0xffffffff),
@@ -19,7 +19,10 @@ class MiscRegularSettingDetailTemplate extends StatelessWidget{
   Widget build(BuildContext context){
     SizeConfig.init(context);
     return GestureDetector(
-      onTap: onTap,
+      // onTap: onTap
+      onTap: (){
+
+      },
       child: Container(
         height: 80,
         color: backgroundColor,

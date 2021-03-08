@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 
 class RegularPasswordReset extends StatefulWidget{
   final String resetToken;
-  RegularPasswordReset({this.resetToken});
+  RegularPasswordReset({required this.resetToken});
 
   RegularPasswordResetState createState() => RegularPasswordResetState(resetToken: resetToken);
 }
 
 class RegularPasswordResetState extends State<RegularPasswordReset>{
   final String resetToken;
-  RegularPasswordResetState({this.resetToken});
+  RegularPasswordResetState({required this.resetToken});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -123,7 +123,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                         ),
                         onPressed: () async{
 
-                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -142,7 +142,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                                 },
                               )
                             );
-                          }else if(_key1.currentState.controller.text != _key2.currentState.controller.text){
+                          }else if(_key1.currentState!.controller.text != _key2.currentState!.controller.text){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -164,8 +164,8 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                           }else{
                             context.showLoaderOverlay();
                             bool result = await apiRegularPasswordChange(
-                              password: _key1.currentState.controller.text, 
-                              passwordConfirmation: _key2.currentState.controller.text,
+                              password: _key1.currentState!.controller.text, 
+                              passwordConfirmation: _key2.currentState!.controller.text,
                               resetToken: resetToken,
                             );
                             context.hideLoaderOverlay();
@@ -213,7 +213,7 @@ class RegularPasswordResetState extends State<RegularPasswordReset>{
                           }
                           
                         },
-                        width: SizeConfig.screenWidth / 2, 
+                        width: SizeConfig.screenWidth! / 2, 
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                       ),

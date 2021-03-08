@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({int page}) async{
+Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -32,7 +33,7 @@ class APIRegularSearchSuggestedMain{
   int almItemsRemaining;
   List<APIRegularSearchSuggestedExtended> almSearchSuggestedPages;
 
-  APIRegularSearchSuggestedMain({this.almItemsRemaining, this.almSearchSuggestedPages});
+  APIRegularSearchSuggestedMain({required this.almItemsRemaining, required this.almSearchSuggestedPages});
 
   factory APIRegularSearchSuggestedMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -50,7 +51,7 @@ class APIRegularSearchSuggestedExtended{
   int searchSuggestedId;
   APIRegularSearchSuggestedExtendedPage searchSuggestedPage;
 
-  APIRegularSearchSuggestedExtended({this.searchSuggestedId, this.searchSuggestedPage});
+  APIRegularSearchSuggestedExtended({required this.searchSuggestedId, required this.searchSuggestedPage});
 
   factory APIRegularSearchSuggestedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -76,7 +77,7 @@ class APIRegularSearchSuggestedExtendedPage{
   String searchSuggestedPagePageType;
   String searchSuggestedPagePrivacy;
 
-  APIRegularSearchSuggestedExtendedPage({this.searchSuggestedPageId, this.searchSuggestedPageName, this.searchSuggestedPageDetails, this.searchSuggestedPageBackgroundImage, this.searchSuggestedPageProfileImage, this.searchSuggestedPageImagesOrVideos, this.searchSuggestedPageRelationship, this.searchSuggestedPagePageCreator, this.searchSuggestedPageManage, this.searchSuggestedPageFamOrFriends, this.searchSuggestedPageFollower, this.searchSuggestedPagePageType, this.searchSuggestedPagePrivacy});
+  APIRegularSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageBackgroundImage, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageImagesOrVideos, required this.searchSuggestedPageRelationship, required this.searchSuggestedPagePageCreator, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType, required this.searchSuggestedPagePrivacy});
 
   factory APIRegularSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPage(
@@ -106,7 +107,7 @@ class APIRegularSearchSuggestedExtendedPageDetails{
   String searchSuggestedPageDetailsState;
   String searchSuggestedPageDetailsCountry;
 
-  APIRegularSearchSuggestedExtendedPageDetails({this.searchSuggestedPageDetailsDescription, this.searchSuggestedPageDetailsLocation, this.searchSuggestedPageDetailsPrecinct, this.searchSuggestedPageDetailsDob, this.searchSuggestedPageDetailsRip, this.searchSuggestedPageDetailsState, this.searchSuggestedPageDetailsCountry});
+  APIRegularSearchSuggestedExtendedPageDetails({required this.searchSuggestedPageDetailsDescription, required this.searchSuggestedPageDetailsLocation, required this.searchSuggestedPageDetailsPrecinct, required this.searchSuggestedPageDetailsDob, required this.searchSuggestedPageDetailsRip, required this.searchSuggestedPageDetailsState, required this.searchSuggestedPageDetailsCountry});
 
   factory APIRegularSearchSuggestedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPageDetails(
@@ -130,7 +131,7 @@ class APIRegularSearchSuggestedExtendedPageCreator{
   String serachSuggestedPageCreatorUserName;
   dynamic serachSuggestedPageCreatorImage;
 
-  APIRegularSearchSuggestedExtendedPageCreator({this.serachSuggestedPageCreatorId, this.serachSuggestedPageCreatorFirstName, this.serachSuggestedPageCreatorLastName, this.serachSuggestedPageCreatorPhoneNumber, this.serachSuggestedPageCreatorEmail, this.serachSuggestedPageCreatorUserName, this.serachSuggestedPageCreatorImage});
+  APIRegularSearchSuggestedExtendedPageCreator({required this.serachSuggestedPageCreatorId, required this.serachSuggestedPageCreatorFirstName, required this.serachSuggestedPageCreatorLastName, required this.serachSuggestedPageCreatorPhoneNumber, required this.serachSuggestedPageCreatorEmail, required this.serachSuggestedPageCreatorUserName, required this.serachSuggestedPageCreatorImage});
 
   factory APIRegularSearchSuggestedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPageCreator(

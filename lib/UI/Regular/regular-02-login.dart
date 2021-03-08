@@ -6,6 +6,7 @@ import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-01-login.da
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-06-sign-in-google.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
@@ -125,7 +126,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   fontWeight: FontWeight.w300, 
                                   color: Color(0xffffffff),
                                 ),
-                                width: SizeConfig.screenWidth / 1.5, 
+                                width: SizeConfig.screenWidth! / 1.5, 
                                 height: 45,
                                 onPressed: () async{
 
@@ -141,10 +142,10 @@ class RegularLoginState extends State<RegularLogin>{
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
 
-                                    FacebookUserProfile profile = await fb.getUserProfile();
-                                    String email = await fb.getUserEmail();
-                                    String image = await fb.getProfileImageUrl(width: 50, height: 50);
-                                    FacebookAccessToken token = await fb.accessToken;
+                                    FacebookUserProfile profile = (await fb.getUserProfile())!;
+                                    String email = (await fb.getUserEmail())!;
+                                    String image = (await fb.getProfileImageUrl(width: 50, height: 50))!;
+                                    FacebookAccessToken token = (await fb.accessToken)!;
 
                                     bool apiResult = await apiRegularSignInWithFacebook(
                                       firstName: profile.firstName.toString(), 
@@ -194,12 +195,12 @@ class RegularLoginState extends State<RegularLogin>{
                                       context.showLoaderOverlay();
                                       
                                       bool apiResult = await apiRegularSignInWithFacebook(
-                                        firstName: profile.firstName.toString(), 
+                                        firstName: profile!.firstName.toString(), 
                                         lastName: profile.lastName.toString(), 
-                                        email: email, 
+                                        email: email!, 
                                         username: email,
-                                        facebookId: result.accessToken.token,
-                                        image: image,
+                                        facebookId: result.accessToken!.token,
+                                        image: image!,
                                       );
                                       context.hideLoaderOverlay();
 
@@ -226,7 +227,7 @@ class RegularLoginState extends State<RegularLogin>{
                                   fontWeight: FontWeight.w300, 
                                   color: Color(0xff000000),
                                 ),
-                                width: SizeConfig.screenWidth / 1.5, 
+                                width: SizeConfig.screenWidth! / 1.5, 
                                 height: 45,
                                 image: 'assets/icons/google.png',
                                 onPressed: () async {
@@ -245,16 +246,17 @@ class RegularLoginState extends State<RegularLogin>{
 
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
-                                    var accountSignedIn = await googleSignIn.signInSilently();
-                                    var auth = await googleSignIn.currentUser.authentication;
+                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
+                                    // GoogleSignInAccount? auth = await googleSignIn.currentUser.authentication;
+                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
                                     
                                     bool result = await apiRegularSignInWithGoogle(
-                                      firstName: accountSignedIn.displayName, 
+                                      firstName: accountSignedIn!.displayName!, 
                                       lastName: '', 
                                       email: accountSignedIn.email, 
                                       username: accountSignedIn.email,
-                                      googleId: auth.idToken,
-                                      image: accountSignedIn.photoUrl,
+                                      googleId: auth.idToken!,
+                                      image: accountSignedIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -282,17 +284,17 @@ class RegularLoginState extends State<RegularLogin>{
                                     }
 
                                   }else{
-                                    GoogleSignInAccount signIn = await googleSignIn.signIn();
-                                    var auth = await googleSignIn.currentUser.authentication;
+                                    GoogleSignInAccount? signIn = await googleSignIn.signIn();
+                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
 
                                     context.showLoaderOverlay();
                                     bool result = await apiRegularSignInWithGoogle(
-                                      firstName: signIn.displayName, 
+                                      firstName: signIn!.displayName!, 
                                       lastName: '',
                                       email: signIn.email, 
                                       username: signIn.email,
-                                      googleId: auth.idToken,
-                                      image: signIn.photoUrl,
+                                      googleId: auth.idToken!,
+                                      image: signIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -332,7 +334,7 @@ class RegularLoginState extends State<RegularLogin>{
                       SignInWithAppleButton(
                         height: 45,
                         onPressed: () async {
-                          final credential = await SignInWithApple.getAppleIDCredential(
+                          AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
                             scopes: [
                               AppleIDAuthorizationScopes.email,
                               AppleIDAuthorizationScopes.fullName,
@@ -340,7 +342,7 @@ class RegularLoginState extends State<RegularLogin>{
                           );
 
                           context.showLoaderOverlay();
-                          bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
+                          bool result = await apiRegularSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
                           context.hideLoaderOverlay();
 
                           if(result == true){
@@ -438,15 +440,15 @@ class RegularLoginState extends State<RegularLogin>{
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ),
-                        width: SizeConfig.screenWidth / 2, 
+                        width: SizeConfig.screenWidth! / 2, 
                         height: 45,
                         buttonColor: Color(0xff4EC9D4),
                         onPressed: () async{
                           
                           bool validEmail = false;
-                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
+                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text );
 
-                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -491,13 +493,13 @@ class RegularLoginState extends State<RegularLogin>{
                             String deviceToken = '';
 
                             if(Platform.isIOS){
-                              final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+                              final FirebaseMessaging _firebaseMessaging = firebaseMessaging;
                               final pushNotificationService = PushNotificationService(_firebaseMessaging);
                               pushNotificationService.initialise();
-                              deviceToken = await pushNotificationService.fcm.getToken();
+                              deviceToken = (await pushNotificationService.fcm.getToken())!;
                             }
                             
-                            bool result = await apiRegularLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text, deviceToken: deviceToken);
+                            bool result = await apiRegularLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                             
                             context.hideLoaderOverlay();
 

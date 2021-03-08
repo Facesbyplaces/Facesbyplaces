@@ -5,7 +5,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-regular-01-create-memorial.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -18,12 +18,12 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController();
-  VideoPlayerController videoPlayerController;
+  // VideoPlayerController videoPlayerController;
   List<File> slideImages = [];
   int toggle = 0;
-  File videoFile;
-  File imageFile;
-  File newFile;
+  File? videoFile;
+  File? imageFile;
+  File? newFile;
   final picker = ImagePicker();
 
   Future getVideo() async{
@@ -31,12 +31,12 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
     if(pickedFile != null){
       setState(() {
         videoFile = File(pickedFile.path);
-        videoPlayerController = VideoPlayerController.file(videoFile)
-        ..initialize().then((_){
-          setState(() {
-            videoPlayerController.play();
-          });
-        });
+        // videoPlayerController = VideoPlayerController.file(videoFile)
+        // ..initialize().then((_){
+        //   setState(() {
+        //     videoPlayerController.play();
+        //   });
+        // });
       });
     }
   }
@@ -53,7 +53,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    RegularCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
+    // RegularCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
     return WillPopScope(
       onWillPop: () async{
         return Navigator.canPop(context);
@@ -170,7 +170,7 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
 
                     MiscRegularButtonTemplate(
                       onPressed: () async{
-                        if(_key1.currentState.controller.text == ''){
+                        if(_key1.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
@@ -192,19 +192,19 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                         }else{
                           List<File> newFiles = [];
 
-                          if(videoFile != null){
-                            newFiles.add(videoFile);
+                          if(videoFile != File('')){
+                            newFiles.add(videoFile!);
                           }
 
-                          if(slideImages != null){
+                          if(slideImages != []){
                             newFiles.addAll(slideImages);
                           }
 
-                          newValue.description = controllerStory.text;
-                          newValue.memorialName = _key1.currentState.controller.text;
-                          newValue.imagesOrVideos = newFiles;
+                          // newValue.description = controllerStory.text;
+                          // newValue.memorialName = _key1.currentState!.controller.text;
+                          // newValue.imagesOrVideos = newFiles;
 
-                          Navigator.pushNamed(context, '/home/regular/create-memorial-3', arguments: newValue);
+                          // Navigator.pushNamed(context, '/home/regular/create-memorial-3', arguments: newValue);
                         }
                       }, 
                       width: 150,
@@ -268,35 +268,35 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                 border: Border.all(color: Color(0xff000000),),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: videoFile == null 
-              ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
-              : GestureDetector(
-                onTap: (){
-                  if(videoPlayerController.value.isPlaying){
-                    videoPlayerController.pause();
-                  }else{
-                    videoPlayerController.play();
-                  }
+              // child: videoFile == null 
+              // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
+              // : GestureDetector(
+              //   onTap: (){
+              //     if(videoPlayerController.value.isPlaying){
+              //       videoPlayerController.pause();
+              //     }else{
+              //       videoPlayerController.play();
+              //     }
                   
-                },
-                onDoubleTap: () async{
-                  await getVideo();
-                },
-                child: AspectRatio(
-                  aspectRatio: videoPlayerController.value.aspectRatio,
-                  child: VideoPlayer(videoPlayerController),
-                ),
-              ),
+              //   },
+              //   onDoubleTap: () async{
+              //     await getVideo();
+              //   },
+              //   child: AspectRatio(
+              //     aspectRatio: videoPlayerController.value.aspectRatio,
+              //     child: VideoPlayer(videoPlayerController),
+              //   ),
+              // ),
             ),
           ),
 
-          videoFile != null
+          videoFile != File('')
           ? Positioned(
             right: 0,
             child: IconButton(
               iconSize: 25,
               onPressed: (){
-                videoFile.delete();
+                videoFile!.delete();
 
                 setState(() {
                   

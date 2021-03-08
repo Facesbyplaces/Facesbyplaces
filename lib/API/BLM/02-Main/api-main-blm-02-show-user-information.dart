@@ -9,7 +9,8 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/image_show', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -38,7 +39,7 @@ class APIBLMShowProfileInformation{
   bool showProfileInformationGuest;
   int showProfileInformationAccountType;
 
-  APIBLMShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest, this.showProfileInformationAccountType});
+  APIBLMShowProfileInformation({required this.showProfileInformationUserId, required this.showProfileInformationFirstName, required this.showProfileInformationLastName, required this.showProfileInformationImage, required this.showProfileInformationEmail, required this.showProfileInformationGuest, required this.showProfileInformationAccountType});
 
   factory APIBLMShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 

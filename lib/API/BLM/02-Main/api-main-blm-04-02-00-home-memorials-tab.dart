@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({int page}) async{
+Future<APIBLMHomeTabMemorialMain> apiBLMHomeMemorialsTab({required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/memorials?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -31,7 +32,7 @@ class APIBLMHomeTabMemorialMain{
   APIBLMHomeTabMemorialExtended blmFamilyMemorialList;
   APIBLMHomeTabMemorialExtended blmFriendsMemorialList;
 
-  APIBLMHomeTabMemorialMain({this.blmFamilyMemorialList, this.blmFriendsMemorialList});
+  APIBLMHomeTabMemorialMain({required this.blmFamilyMemorialList, required this.blmFriendsMemorialList});
 
   factory APIBLMHomeTabMemorialMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -50,7 +51,7 @@ class APIBLMHomeTabMemorialExtended{
   List<APIBLMHomeTabMemorialExtendedPage> blmHomeTabMemorialPage;
   List<APIBLMHomeTabMemorialExtendedPage> memorialHomeTabMemorialPage;
 
-  APIBLMHomeTabMemorialExtended({this.blmHomeTabMemorialPage, this.memorialHomeTabMemorialPage, this.blmHomeTabMemorialFamilyItemsRemaining, this.memorialHomeTabMemorialFamilyItemsRemaining, this.blmHomeTabMemorialFriendsItemsRemaining, this.memorialHomeTabMemorialFriendsItemsRemaining});
+  APIBLMHomeTabMemorialExtended({required this.blmHomeTabMemorialPage, required this.memorialHomeTabMemorialPage, required this.blmHomeTabMemorialFamilyItemsRemaining, required this.memorialHomeTabMemorialFamilyItemsRemaining, required this.blmHomeTabMemorialFriendsItemsRemaining, required this.memorialHomeTabMemorialFriendsItemsRemaining});
 
   factory APIBLMHomeTabMemorialExtended.fromJson(Map<String, dynamic> parsedJson){
 
@@ -86,7 +87,7 @@ class APIBLMHomeTabMemorialExtendedPage{
   String blmHomeTabMemorialPagePageType;
   String blmHomeTabMemorialPagePrivacy;
 
-  APIBLMHomeTabMemorialExtendedPage({this.blmHomeTabMemorialPageId, this.blmHomeTabMemorialPageName, this.blmHomeTabMemorialPageDetails, this.blmHomeTabMemorialPageBackgroundImage, this.blmHomeTabMemorialPageProfileImage, this.blmHomeTabMemorialPageImagesOrVideos, this.blmHomeTabMemorialPageRelationship, this.blmHomeTabMemorialPagePageCreator, this.blmHomeTabMemorialPageManage, this.blmHomeTabMemorialPageFamOrFriends, this.blmHomeTabMemorialPageFollower, this.blmHomeTabMemorialPagePageType, this.blmHomeTabMemorialPagePrivacy});
+  APIBLMHomeTabMemorialExtendedPage({required this.blmHomeTabMemorialPageId, required this.blmHomeTabMemorialPageName, required this.blmHomeTabMemorialPageDetails, required this.blmHomeTabMemorialPageBackgroundImage, required this.blmHomeTabMemorialPageProfileImage, required this.blmHomeTabMemorialPageImagesOrVideos, required this.blmHomeTabMemorialPageRelationship, required this.blmHomeTabMemorialPagePageCreator, required this.blmHomeTabMemorialPageManage, required this.blmHomeTabMemorialPageFamOrFriends, required this.blmHomeTabMemorialPageFollower, required this.blmHomeTabMemorialPagePageType, required this.blmHomeTabMemorialPagePrivacy});
 
   factory APIBLMHomeTabMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabMemorialExtendedPage(
@@ -115,7 +116,7 @@ class APIBLMHomeTabMemorialExtendedPageDetails{
   String blmHomeTabMemorialPageDetailsCemetery;
   String blmHomeTabMemorialPageDetailsCountry;
 
-  APIBLMHomeTabMemorialExtendedPageDetails({this.blmHomeTabMemorialPageDetailsDescription, this.blmHomeTabMemorialPageDetailsBirthPlace, this.blmHomeTabMemorialPageDetailsDob, this.blmHomeTabMemorialPageDetailsRip, this.blmHomeTabMemorialPageDetailsCemetery, this.blmHomeTabMemorialPageDetailsCountry});
+  APIBLMHomeTabMemorialExtendedPageDetails({required this.blmHomeTabMemorialPageDetailsDescription, required this.blmHomeTabMemorialPageDetailsBirthPlace, required this.blmHomeTabMemorialPageDetailsDob, required this.blmHomeTabMemorialPageDetailsRip, required this.blmHomeTabMemorialPageDetailsCemetery, required this.blmHomeTabMemorialPageDetailsCountry});
 
   factory APIBLMHomeTabMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabMemorialExtendedPageDetails(
@@ -138,7 +139,7 @@ class APIBLMHomeTabMemorialExtendedPageCreator{
   String blmHomeTabMemorialPageCreatorUserName;
   dynamic blmHomeTabMemorialPageCreatorImage;
 
-  APIBLMHomeTabMemorialExtendedPageCreator({this.blmHomeTabMemorialPageCreatorId, this.blmHomeTabMemorialPageCreatorFirstName, this.blmHomeTabMemorialPageCreatorLastName, this.blmHomeTabMemorialPageCreatorPhoneNumber, this.blmHomeTabMemorialPageCreatorEmail, this.blmHomeTabMemorialPageCreatorUserName, this.blmHomeTabMemorialPageCreatorImage});
+  APIBLMHomeTabMemorialExtendedPageCreator({required this.blmHomeTabMemorialPageCreatorId, required this.blmHomeTabMemorialPageCreatorFirstName, required this.blmHomeTabMemorialPageCreatorLastName, required this.blmHomeTabMemorialPageCreatorPhoneNumber, required this.blmHomeTabMemorialPageCreatorEmail, required this.blmHomeTabMemorialPageCreatorUserName, required this.blmHomeTabMemorialPageCreatorImage});
 
   factory APIBLMHomeTabMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMHomeTabMemorialExtendedPageCreator(

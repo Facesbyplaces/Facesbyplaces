@@ -4,6 +4,7 @@ import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-google.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
+import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
@@ -32,8 +33,8 @@ class BLMLoginState extends State<BLMLogin>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
   void initBranchReferences(){
     buo = BranchUniversalObject(
@@ -55,7 +56,7 @@ class BLMLoginState extends State<BLMLogin>{
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -121,18 +122,18 @@ class BLMLoginState extends State<BLMLogin>{
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
 
-                                    FacebookUserProfile profile = await fb.getUserProfile();
-                                    String email = await fb.getUserEmail();
-                                    String image = await fb.getProfileImageUrl(width: 50, height: 50);
-                                    FacebookAccessToken token = await fb.accessToken;
+                                    FacebookUserProfile? profile = await fb.getUserProfile();
+                                    String? email = await fb.getUserEmail();
+                                    String? image = await fb.getProfileImageUrl(width: 50, height: 50);
+                                    FacebookAccessToken? token = await fb.accessToken;
 
                                     bool apiResult = await apiBLMSignInWithFacebook(
-                                      firstName: profile.firstName.toString(), 
+                                      firstName: profile!.firstName.toString(), 
                                       lastName: profile.lastName.toString(), 
-                                      email: email, 
+                                      email: email!,
                                       username: email,
-                                      facebookId: token.token,
-                                      image: image
+                                      facebookId: token!.token,
+                                      image: image!,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -174,12 +175,12 @@ class BLMLoginState extends State<BLMLogin>{
                                       context.showLoaderOverlay();
                                       
                                       bool apiResult = await apiBLMSignInWithFacebook(
-                                        firstName: profile.firstName.toString(), 
-                                        lastName: profile.lastName.toString(), 
-                                        email: email, 
+                                        firstName: '${profile!.firstName}',
+                                        lastName: '${profile.lastName}',
+                                        email: email!,
                                         username: email,
-                                        facebookId: result.accessToken.token,
-                                        image: image,
+                                        facebookId: result.accessToken!.token,
+                                        image: image!,
                                       );
                                       context.hideLoaderOverlay();
 
@@ -191,7 +192,7 @@ class BLMLoginState extends State<BLMLogin>{
                                     }
                                   }
                                 }, 
-                                width: SizeConfig.screenWidth / 1.5, 
+                                width: SizeConfig.screenWidth! / 1.5, 
                                 height: 45,
                               ),
                             ),
@@ -224,16 +225,16 @@ class BLMLoginState extends State<BLMLogin>{
 
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
-                                    var accountSignedIn = await googleSignIn.signInSilently();
-                                    var auth = await googleSignIn.currentUser.authentication;
+                                    GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
+                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
                                     
                                     bool result = await apiBLMSignInWithGoogle(
-                                      firstName: accountSignedIn.displayName, 
+                                      firstName: accountSignedIn!.displayName!,
                                       lastName: '', 
                                       email: accountSignedIn.email, 
                                       username: accountSignedIn.email,
-                                      googleId: auth.idToken,
-                                      image: accountSignedIn.photoUrl,
+                                      googleId: auth.idToken!,
+                                      image: accountSignedIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -261,17 +262,17 @@ class BLMLoginState extends State<BLMLogin>{
                                     }
 
                                   }else{
-                                    GoogleSignInAccount signIn = await googleSignIn.signIn();
-                                    var auth = await googleSignIn.currentUser.authentication;
+                                    GoogleSignInAccount? signIn = await googleSignIn.signIn();
+                                    GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
 
                                     context.showLoaderOverlay();
                                     bool result = await apiBLMSignInWithGoogle(
-                                      firstName: signIn.displayName, 
+                                      firstName: signIn!.displayName!, 
                                       lastName: '',
                                       email: signIn.email, 
                                       username: signIn.email,
-                                      googleId: auth.idToken,
-                                      image: signIn.photoUrl,
+                                      googleId: auth.idToken!,
+                                      image: signIn.photoUrl!,
                                     );
                                     context.hideLoaderOverlay();
 
@@ -300,7 +301,7 @@ class BLMLoginState extends State<BLMLogin>{
                                   }
 
                                 }, 
-                                width: SizeConfig.screenWidth / 1.5, 
+                                width: SizeConfig.screenWidth! / 1.5, 
                                 height: 45,
                                 image: 'assets/icons/google.png',
                               ),
@@ -314,7 +315,7 @@ class BLMLoginState extends State<BLMLogin>{
                       SignInWithAppleButton(
                         onPressed: () async {
 
-                          final credential = await SignInWithApple.getAppleIDCredential(
+                          AuthorizationCredentialAppleID credential = await SignInWithApple.getAppleIDCredential(
                             scopes: [
                               AppleIDAuthorizationScopes.email,
                               AppleIDAuthorizationScopes.fullName,
@@ -322,7 +323,7 @@ class BLMLoginState extends State<BLMLogin>{
                           );
 
                           context.showLoaderOverlay();
-                          bool result = await apiBLMSignInWithApple(userIdentification: credential.userIdentifier, identityToken: credential.identityToken);
+                          bool result = await apiBLMSignInWithApple(userIdentification: credential.userIdentifier!, identityToken: credential.identityToken!);
                           context.hideLoaderOverlay();
 
                           if(result == true){
@@ -391,9 +392,9 @@ class BLMLoginState extends State<BLMLogin>{
                         ), 
                         onPressed: () async{
                           bool validEmail = false;
-                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text );
+                          validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text );
 
-                          if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                          if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -443,13 +444,13 @@ class BLMLoginState extends State<BLMLogin>{
                             String deviceToken = '';
 
                             if(Platform.isIOS){
-                              final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+                              final FirebaseMessaging _firebaseMessaging = firebaseMessaging;
                               final pushNotificationService = PushNotificationService(_firebaseMessaging);
                               pushNotificationService.initialise();
-                              deviceToken = await pushNotificationService.fcm.getToken();
+                              deviceToken = (await pushNotificationService.fcm.getToken())!;
                             }
                             
-                            bool result = await apiBLMLogin(email: _key1.currentState.controller.text, password: _key2.currentState.controller.text, deviceToken: deviceToken);
+                            bool result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                             
                             context.hideLoaderOverlay();
 
@@ -477,7 +478,7 @@ class BLMLoginState extends State<BLMLogin>{
                             }
                           }
                         }, 
-                        width: SizeConfig.screenWidth / 2, 
+                        width: SizeConfig.screenWidth! / 2, 
                         height: 45,
                         buttonColor: Color(0xff4EC9D4),
                       ),

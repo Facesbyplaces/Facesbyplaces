@@ -31,19 +31,19 @@ import 'dart:async';
 
 class HomeRegularScreenExtended extends StatefulWidget{
   final int newToggleBottom;
-  HomeRegularScreenExtended({this.newToggleBottom});
+  HomeRegularScreenExtended({required this.newToggleBottom});
 
   HomeRegularScreenExtendedState createState() => HomeRegularScreenExtendedState(newToggleBottom: newToggleBottom);
 }
 
 class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
   final int newToggleBottom;
-  HomeRegularScreenExtendedState({this.newToggleBottom});
+  HomeRegularScreenExtendedState({required this.newToggleBottom});
 
-  int toggleBottom;
-  List<bool> bottomTab;
-  Future drawerSettings;
-  int unreadNotifications;
+  int toggleBottom = 0;
+  List<bool> bottomTab = [true, false, false, false];
+  Future<APIRegularShowProfileInformation>? drawerSettings;
+  int unreadNotifications = 0;
   String _scanBarcode = 'Error';
 
   Future<APIRegularShowProfileInformation> getDrawerInformation() async{
@@ -113,7 +113,6 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
   void initState(){
     super.initState();
-    unreadNotifications = 0;
     getUnreadNotifications();
     toggleBottom = newToggleBottom;
     bottomTab = toggleBottom ==  0 ? [true, false, false, false] : [false, true, false, false];
@@ -146,13 +145,14 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                       return IconButton(
                         icon: CircleAvatar(
                           backgroundColor: Color(0xff888888),
-                          backgroundImage: ((){
-                            if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
-                              return NetworkImage(profileImage.data.showProfileInformationImage);
-                            }else{
-                              return AssetImage('assets/icons/app-icon.png');
-                            }
-                          }()),
+                          backgroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                          // backgroundImage: ((){
+                          //   if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
+                          //     return NetworkImage(profileImage.data.showProfileInformationImage);
+                          //   }else{
+                          //     return AssetImage('assets/icons/app-icon.png');
+                          //   }
+                          // }()),
                         ),
                         onPressed: () async{
                           Scaffold.of(context).openDrawer();
@@ -191,14 +191,16 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
               SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscRegularBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-              ((){
-                switch(toggleBottom){
-                  case 0: return HomeRegularFeedTab(); break;
-                  case 1: return HomeRegularManageTab(); break;
-                  case 2: return HomeRegularPostTab(); break;
-                  case 3: return HomeRegularNotificationsTab(); break;
-                }
-              }()),
+              Container(
+                child: ((){
+                  switch(toggleBottom){
+                    case 0: return HomeRegularFeedTab();
+                    case 1: return HomeRegularManageTab();
+                    case 2: return HomeRegularPostTab();
+                    case 3: return HomeRegularNotificationsTab();
+                  }
+                }()),
+              ),
 
             ],
           ),
@@ -224,7 +226,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                 children: [
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Icon(MdiIcons.fire,),
@@ -235,7 +237,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   ),
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Icon(MdiIcons.graveStone),
@@ -246,7 +248,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   ),
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Icon(MdiIcons.post),
@@ -257,7 +259,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                   ),
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Badge(
@@ -314,7 +316,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
             future: drawerSettings,
             builder: (context, manageDrawer){
               if(manageDrawer.hasData){
-                if(manageDrawer.data.showProfileInformationGuest != true){
+                if(manageDrawer.data!.showProfileInformationGuest != true){
                   return Drawer(
                     child: Container(
                       alignment: Alignment.topCenter,
@@ -328,18 +330,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
+                              backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                              // backgroundImage: ((){
+                              //   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                              //     return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                              //   }else{
+                              //     return AssetImage('assets/icons/app-icon.png');
+                              //   }
+                              // }()),
                             ),
 
                             SizedBox(height: 20),
 
-                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                             SizedBox(height: 45),
 
@@ -365,7 +368,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             GestureDetector(
                               onTap: () async{
                                 context.showLoaderOverlay();
-                                APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data.showProfileInformationUserId);
+                                APIRegularShowNotificationStatus result = await apiRegularShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
                                 context.hideLoaderOverlay();
 
                                 Navigator.pop(context);
@@ -386,7 +389,7 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
 
                             GestureDetector(
                               onTap: () async{
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                               },
                               child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
@@ -460,18 +463,19 @@ class HomeRegularScreenExtendedState extends State<HomeRegularScreenExtended>{
                             CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
+                              backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                              // backgroundImage: ((){
+                              //   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                              //     return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                              //   }else{
+                              //     return AssetImage('assets/icons/app-icon.png');
+                              //   }
+                              // }()),
                             ),
 
                             SizedBox(height: 20,),
 
-                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                             SizedBox(height: 45,),
 

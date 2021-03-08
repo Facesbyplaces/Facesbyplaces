@@ -16,13 +16,13 @@ class BLMConnectionListItem{
   final String image;
   final String relationship;
 
-  BLMConnectionListItem({this.id, this.accountType, this.firstName, this.lastName, this.image, this.relationship});
+  BLMConnectionListItem({required this.id, required this.accountType, required this.firstName, required this.lastName, required this.image, required this.relationship});
 }
 
 class HomeBLMConnectionList extends StatefulWidget{
   final int memorialId;
   final int newToggle;
-  HomeBLMConnectionList({this.memorialId, this.newToggle});
+  HomeBLMConnectionList({required this.memorialId, required this.newToggle});
 
   HomeBLMConnectionListState createState() => HomeBLMConnectionListState(memorialId: memorialId, newToggle: newToggle);
 }
@@ -30,22 +30,22 @@ class HomeBLMConnectionList extends StatefulWidget{
 class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   final int memorialId;
   final int newToggle;
-  HomeBLMConnectionListState({this.memorialId, this.newToggle});
+  HomeBLMConnectionListState({required this.memorialId, required this.newToggle});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMConnectionListItem> listsFamily;
-  List<BLMConnectionListItem> listsFriends;
-  List<BLMConnectionListItem> listsFollowers;
-  List<BLMConnectionListItem> searches;
-  bool onSearch;
-  Future connectionListFamily;
-  int itemRemaining1;
-  int itemRemaining2;
-  int itemRemaining3;
-  int page1;
-  int page2;
-  int page3;
-  int toggle;
+  List<BLMConnectionListItem> listsFamily = [];
+  List<BLMConnectionListItem> listsFriends = [];
+  List<BLMConnectionListItem> listsFollowers = [];
+  List<BLMConnectionListItem> searches = [];
+  bool onSearch = false;
+  Future? connectionListFamily;
+  int itemRemaining1 = 1;
+  int itemRemaining2 = 1;
+  int itemRemaining3 = 1;
+  int page1 = 1;
+  int page2 = 1;
+  int page3 = 1;
+  int toggle = 0;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -101,6 +101,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             firstName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsFirstName,
             lastName: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsLastName,
             image: newValue.blmFriendsList[i].connectionListFriendsUser.connectionListFriendsDetailsImage,
+            relationship: 'Friend',
           ),    
         );
       }
@@ -132,6 +133,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
             firstName: newValue.blmFollowersList[i].connectionListFollowersFirstName,
             lastName: newValue.blmFollowersList[i].connectionListFollowersLastName,
             image: newValue.blmFollowersList[i].connectionListFollowersImage,
+            relationship: 'Follower',
           ),    
         );
       }
@@ -150,17 +152,6 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
   void initState(){
     super.initState();
     toggle = newToggle;
-    listsFamily = [];
-    listsFriends = [];
-    listsFollowers = [];
-    searches = [];
-    onSearch = false;
-    itemRemaining1 = 1;
-    itemRemaining2 = 1;
-    itemRemaining3 = 1;
-    page1 = 1;
-    page2 = 1;
-    page3 = 1;
     onLoading1();
     onLoading2();
     onLoading3();
@@ -222,9 +213,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                 focusColor: Color(0xffffffff),
                 hintText: ((){
                   switch(toggle){
-                    case 0: return 'Search Family'; break;
-                    case 1: return 'Search Friends'; break;
-                    case 2: return 'Search Followers'; break;
+                    case 0: return 'Search Family';
+                    case 1: return 'Search Friends';
+                    case 2: return 'Search Followers';
                   }
                 }()),
                 hintStyle: TextStyle(fontSize: 16,),
@@ -307,9 +298,9 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
               Expanded(
                 child: ((){
                   switch(toggle){
-                    case 0: return connectionListFamilyWidget(); break;
-                    case 1: return connectionListFriendsWidget(); break;
-                    case 2: return connectionListFollowersWidget(); break;
+                    case 0: return connectionListFamilyWidget();
+                    case 1: return connectionListFriendsWidget();
+                    case 2: return connectionListFollowersWidget();
                   }
                 }()),
               ),
@@ -333,7 +324,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -357,32 +348,34 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                     onTap: (){
                       if(onSearch){
                         if(searches[index].accountType == 1){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType,)));
                         }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                         }
                       }else{
                         if(listsFamily[index].accountType == 1){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
                         }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFamily[index].id, accountType: listsFamily[index].accountType)));
                         }
                       }
                     },
                     child: onSearch
                     ? CircleAvatar(
                       radius: 40,
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: searches[index].image != null && searches[index].image != ''
-                      ? NetworkImage(searches[index].image) 
-                      : AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: NetworkImage(searches[index].image),
+                      // backgroundImage: searches[index].image != null && searches[index].image != ''
+                      // ? NetworkImage(searches[index].image)
+                      // : AssetImage('assets/icons/app-icon.png'),
                     )
                     : CircleAvatar(
                       radius: 40,
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
-                      ? NetworkImage(listsFamily[index].image) 
-                      : AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: NetworkImage(listsFamily[index].image),
+                      // backgroundImage: listsFamily[index].image != null && listsFamily[index].image != ''
+                      // ? NetworkImage(listsFamily[index].image)
+                      // : AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
                 ),
@@ -412,7 +405,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -436,32 +429,34 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                     onTap: (){
                       if(onSearch){
                         if(searches[index].accountType == 1){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                         }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                         }
                       }else{
                         if(listsFriends[index].accountType == 1){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
                         }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFriends[index].id, accountType: listsFriends[index].accountType)));
                         }
                       }
                     },
                     child: onSearch
                     ? CircleAvatar(
                       radius: 40,
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: searches[index].image != null && searches[index].image != ''
-                      ? NetworkImage(searches[index].image) 
-                      : AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: NetworkImage(searches[index].image),
+                      // backgroundImage: searches[index].image != null && searches[index].image != ''
+                      // ? NetworkImage(searches[index].image) 
+                      // : AssetImage('assets/icons/app-icon.png'),
                     )
                     : CircleAvatar(
                       radius: 40,
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
-                      ? NetworkImage(listsFriends[index].image) 
-                      : AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: NetworkImage(listsFriends[index].image),
+                      // backgroundImage: listsFriends[index].image != null && listsFriends[index].image != ''
+                      // ? NetworkImage(listsFriends[index].image) 
+                      // : AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
                 ),
@@ -489,7 +484,7 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -513,32 +508,34 @@ class HomeBLMConnectionListState extends State<HomeBLMConnectionList>{
                     onTap: (){
                       if(onSearch){
                         if(searches[index].accountType == 1){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                         }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: searches[index].id, accountType: searches[index].accountType)));
                         }
                       }else{
                         if(listsFollowers[index].accountType == 1){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
                         }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfile(userId: listsFollowers[index].id, accountType: listsFollowers[index].accountType)));
                         }
                       }
                     },
                     child: onSearch
                     ? CircleAvatar(
                       radius: 40,
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: searches[index].image != null && searches[index].image != ''
-                      ? NetworkImage(searches[index].image) 
-                      : AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: NetworkImage(searches[index].image),
+                      // backgroundImage: searches[index].image != null && searches[index].image != ''
+                      // ? NetworkImage(searches[index].image) 
+                      // : AssetImage('assets/icons/app-icon.png'),
                     )
                     : CircleAvatar(
                       radius: 40,
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
-                      ? NetworkImage(listsFollowers[index].image) 
-                      : AssetImage('assets/icons/app-icon.png'),
+                      backgroundColor: Color(0xff888888),
+                      backgroundImage: NetworkImage(listsFollowers[index].image),
+                      // backgroundImage: listsFollowers[index].image != null && listsFollowers[index].image != ''
+                      // ? NetworkImage(listsFollowers[index].image) 
+                      // : AssetImage('assets/icons/app-icon.png'),
                     ),
                   ),
                 ),

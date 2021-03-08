@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 class HomeRegularPageDetails extends StatefulWidget{
 
   final int memorialId;
-  HomeRegularPageDetails({this.memorialId});
+  HomeRegularPageDetails({required this.memorialId});
 
   HomeRegularPageDetailsState createState() => HomeRegularPageDetailsState(memorialId: memorialId);
 }
@@ -22,7 +22,7 @@ class HomeRegularPageDetails extends StatefulWidget{
 class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
 
   final int memorialId;
-  HomeRegularPageDetailsState({this.memorialId});
+  HomeRegularPageDetailsState({required this.memorialId});
 
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldDropDownState> _key2 = GlobalKey<MiscRegularInputFieldDropDownState>();
@@ -31,7 +31,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
   final GlobalKey<MiscRegularInputFieldTemplateState> _key5 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key6 = GlobalKey<MiscRegularInputFieldTemplateState>();
 
-  Future futureMemorialSettings;
+  Future<APIRegularShowPageDetailsMain>? futureMemorialSettings;
 
   void initState(){
     super.initState();
@@ -80,27 +80,27 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                         physics: ClampingScrollPhysics(),
                         children: [
 
-                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data.almMemorial.showPageDetailsName),
+                          MiscRegularInputFieldTemplate(key: _key1, labelText: 'Page Name', displayText: memorialSettings.data!.almMemorial.showPageDetailsName),
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldDropDown(key: _key2, displayText: memorialSettings.data.almMemorial.showPageDetailsRelationship),
+                          MiscRegularInputFieldDropDown(key: _key2, displayText: memorialSettings.data!.almMemorial.showPageDetailsRelationship),
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob),
+                          MiscRegularInputFieldDateTimeTemplate(key: _key3, labelText: 'DOB', displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob),
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip),
+                          MiscRegularInputFieldDateTimeTemplate(key: _key4, labelText: 'RIP', displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip),
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldTemplate(key: _key5, labelText: 'Country', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry),
+                          MiscRegularInputFieldTemplate(key: _key5, labelText: 'Country', displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry),
 
                           SizedBox(height: 20,),
 
-                          MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery', displayText: memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery),
+                          MiscRegularInputFieldTemplate(key: _key6, labelText: 'Cemetery', displayText: memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery),
 
                           SizedBox(height: 80,),
 
@@ -114,24 +114,24 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                             onPressed: () async{
 
                               if(
-                                memorialSettings.data.almMemorial.showPageDetailsName != _key1.currentState.controller.text ||
-                                memorialSettings.data.almMemorial.showPageDetailsRelationship != _key2.currentState.currentSelection ||
-                                convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key3.currentState.controller.text) ||
-                                convertDate(memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key4.currentState.controller.text) ||
-                                memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry !=  _key5.currentState.controller.text ||
-                                memorialSettings.data.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery !=  _key6.currentState.controller.text
+                                memorialSettings.data!.almMemorial.showPageDetailsName != _key1.currentState!.controller.text ||
+                                memorialSettings.data!.almMemorial.showPageDetailsRelationship != _key2.currentState!.currentSelection ||
+                                convertDate(memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key3.currentState!.controller.text) ||
+                                convertDate(memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key4.currentState!.controller.text) ||
+                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry !=  _key5.currentState!.controller.text ||
+                                memorialSettings.data!.almMemorial.showPageDetailsDetails.showPageDetailsDetailsCemetery !=  _key6.currentState!.controller.text
                               ){
                                 bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                                 if(confirmResult){
                                   context.showLoaderOverlay();
                                   bool result = await apiRegularUpdatePageDetails(
-                                    name: _key1.currentState.controller.text,
-                                    relationship: _key2.currentState.currentSelection,
-                                    dob: convertDate(_key3.currentState.controller.text),
-                                    rip: convertDate(_key4.currentState.controller.text),
-                                    country: _key5.currentState.controller.text,
-                                    cemetery: _key6.currentState.controller.text,
+                                    name: _key1.currentState!.controller.text,
+                                    relationship: _key2.currentState!.currentSelection,
+                                    dob: convertDate(_key3.currentState!.controller.text),
+                                    rip: convertDate(_key4.currentState!.controller.text),
+                                    country: _key5.currentState!.controller.text,
+                                    cemetery: _key6.currentState!.controller.text,
                                     memorialId: memorialId,
                                   );
                                   context.hideLoaderOverlay();
@@ -156,7 +156,7 @@ class HomeRegularPageDetailsState extends State<HomeRegularPageDetails>{
                                       )
                                     );
 
-                                    Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true,));
+                                    Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.almMemorial.showPageDetailsRelationship));
                                     Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                                   }else{
                                     await showDialog(

@@ -47,7 +47,7 @@ class RegularRegister extends StatelessWidget{
               ),
 
               Container(
-                height: SizeConfig.screenHeight / 6, 
+                height: SizeConfig.screenHeight! / 6, 
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover, 
@@ -58,7 +58,7 @@ class RegularRegister extends StatelessWidget{
 
               Column(
                 children: [
-                  SizedBox(height: SizeConfig.screenHeight / 6),
+                  SizedBox(height: SizeConfig.screenHeight! / 6),
 
                   Expanded(
                     child: SingleChildScrollView(
@@ -155,9 +155,9 @@ class RegularRegister extends StatelessWidget{
                             ),
                             onPressed: () async{
                               bool validEmail = false;
-                              validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState.controller.text );
+                              validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
 
-                              if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
+                              if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
@@ -195,7 +195,7 @@ class RegularRegister extends StatelessWidget{
                                     },
                                   )
                                 );
-                              }else if(!_key3.currentState.valid){
+                              }else if(!_key3.currentState!.valid){
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
@@ -216,12 +216,12 @@ class RegularRegister extends StatelessWidget{
                                 );
                               }else{
                                 APIRegularAccountRegistration account = APIRegularAccountRegistration(
-                                  firstName: _key1.currentState.controller.text, 
-                                  lastName: _key2.currentState.controller.text,
-                                  phoneNumber: _key3.currentState.controller.text,
-                                  email: _key4.currentState.controller.text,
-                                  username: _key5.currentState.controller.text,
-                                  password: _key6.currentState.controller.text,
+                                  firstName: _key1.currentState!.controller.text, 
+                                  lastName: _key2.currentState!.controller.text,
+                                  phoneNumber: _key3.currentState!.controller.text,
+                                  email: _key4.currentState!.controller.text,
+                                  username: _key5.currentState!.controller.text,
+                                  password: _key6.currentState!.controller.text,
                                 );
 
                                 context.showLoaderOverlay();
@@ -230,7 +230,7 @@ class RegularRegister extends StatelessWidget{
 
                                 if(result == 'Success'){
                                   final sharedPrefs = await SharedPreferences.getInstance();
-                                  String verificationCode = sharedPrefs.getString('regular-verification-code');
+                                  String verificationCode = sharedPrefs.getString('regular-verification-code')!;
                                   Navigator.pushNamed(context, '/regular/verify-email', arguments: verificationCode);
                                 }else{
                                   await showDialog(
@@ -255,7 +255,7 @@ class RegularRegister extends StatelessWidget{
                               }
 
                             }, 
-                            width: SizeConfig.screenWidth / 2, 
+                            width: SizeConfig.screenWidth! / 2, 
                             height: 45,
                             buttonColor: Color(0xff04ECFF),
                           ),

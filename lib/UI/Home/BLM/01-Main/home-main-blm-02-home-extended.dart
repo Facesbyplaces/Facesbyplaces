@@ -31,20 +31,19 @@ import 'dart:async';
 
 class HomeBLMScreenExtended extends StatefulWidget{
   final int newToggleBottom;
-  HomeBLMScreenExtended({this.newToggleBottom});
+  HomeBLMScreenExtended({required this.newToggleBottom});
 
   HomeBLMScreenExtendedState createState() => HomeBLMScreenExtendedState(newToggleBottom: newToggleBottom);
 }
 
 class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   final int newToggleBottom;
-  HomeBLMScreenExtendedState({this.newToggleBottom});
+  HomeBLMScreenExtendedState({required this.newToggleBottom});
 
-  int toggleBottom;
-  List<bool> bottomTab;
-  Future drawerSettings;
-  int unreadNotifications;
-
+  int toggleBottom = 0;
+  List<bool> bottomTab = [true, false, false, false];
+  Future<APIBLMShowProfileInformation>? drawerSettings;
+  int unreadNotifications = 0;
   String _scanBarcode = 'Error';
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async{
@@ -114,7 +113,6 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
   void initState(){
     super.initState();
-    unreadNotifications = 0;
     getUnreadNotifications();
     toggleBottom = newToggleBottom;
     bottomTab = toggleBottom ==  0 ? [true, false, false, false] : [false, true, false, false];
@@ -147,13 +145,14 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                       return IconButton(
                         icon: CircleAvatar(
                           backgroundColor: Color(0xff888888),
-                          backgroundImage: ((){
-                            if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
-                              return NetworkImage(profileImage.data.showProfileInformationImage);
-                            }else{
-                              return AssetImage('assets/icons/app-icon.png');
-                            }
-                          }()),
+                          backgroundImage: NetworkImage(profileImage.data!.showProfileInformationImage),
+                          // backgroundImage: ((){
+                          //   if(profileImage.data.showProfileInformationImage != null && profileImage.data.showProfileInformationImage != ''){
+                          //     return NetworkImage(profileImage.data.showProfileInformationImage);
+                          //   }else{
+                          //     return AssetImage('assets/icons/app-icon.png');
+                          //   }
+                          // }()),
                         ),
                         onPressed: () async{
                           Scaffold.of(context).openDrawer();
@@ -192,14 +191,16 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
               SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-              ((){
-                switch(toggleBottom){
-                  case 0: return HomeBLMFeedTab(); break;
-                  case 1: return HomeBLMManageTab(); break;
-                  case 2: return HomeBLMPostTab(); break;
-                  case 3: return HomeBLMNotificationsTab(); break;
-                }
-              }()),
+              Container(
+                child: ((){
+                  switch(toggleBottom){
+                    case 0: return HomeBLMFeedTab();
+                    case 1: return HomeBLMManageTab();
+                    case 2: return HomeBLMPostTab();
+                    case 3: return HomeBLMNotificationsTab();
+                  }
+                }()),
+              ),
             ],
           ),
           floatingActionButton: FloatingActionButton(
@@ -224,7 +225,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                 children: [
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Icon(MdiIcons.fire,),
@@ -235,7 +236,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   ),
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Icon(MdiIcons.graveStone),
@@ -246,7 +247,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   ),
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Icon(MdiIcons.post),
@@ -257,7 +258,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                   ),
 
                   Container(
-                    width: SizeConfig.screenWidth / 4,
+                    width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
                         Badge(
@@ -313,7 +314,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
             future: drawerSettings,
             builder: (context, manageDrawer){
               if(manageDrawer.hasData){
-                if(manageDrawer.data.showProfileInformationGuest != true){
+                if(manageDrawer.data!.showProfileInformationGuest != true){
                   return Drawer(
                     child: Container(
                       alignment: Alignment.topCenter,
@@ -327,18 +328,19 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
+                              backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                              // backgroundImage: ((){
+                              //   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                              //     return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                              //   }else{
+                              //     return AssetImage('assets/icons/app-icon.png');
+                              //   }
+                              // }()),
                             ),
 
                             SizedBox(height: 20),
 
-                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                             SizedBox(height: 45),
 
@@ -364,7 +366,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             GestureDetector(
                               onTap: () async{
                                 context.showLoaderOverlay();
-                                APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data.showProfileInformationUserId);
+                                APIBLMShowNotificationStatus result = await apiBLMShowNotificationStatus(userId: manageDrawer.data!.showProfileInformationUserId);
                                 context.hideLoaderOverlay();
 
                                 Navigator.pop(context);
@@ -385,7 +387,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
                             GestureDetector(
                               onTap: () async{
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data.showProfileInformationUserId)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: manageDrawer.data!.showProfileInformationUserId)));
                               },
                               child: Text('Profile Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200, color: Color(0xffffffff),),),
                             ),
@@ -459,18 +461,19 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                             CircleAvatar(
                               radius: 100,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
-                                  return NetworkImage(manageDrawer.data.showProfileInformationImage);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
+                              backgroundImage: NetworkImage(manageDrawer.data!.showProfileInformationImage),
+                              // backgroundImage: ((){
+                              //   if(manageDrawer.data.showProfileInformationImage != null && manageDrawer.data.showProfileInformationImage != ''){
+                              //     return NetworkImage(manageDrawer.data.showProfileInformationImage);
+                              //   }else{
+                              //     return AssetImage('assets/icons/app-icon.png');
+                              //   }
+                              // }()),
                             ),
 
                             SizedBox(height: 20),
 
-                            Text(manageDrawer.data.showProfileInformationFirstName + ' ' + manageDrawer.data.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
+                            Text(manageDrawer.data!.showProfileInformationFirstName + ' ' + manageDrawer.data!.showProfileInformationLastName, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xffffffff),),),
 
                             SizedBox(height: 45),
 

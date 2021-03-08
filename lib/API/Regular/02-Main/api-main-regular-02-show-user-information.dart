@@ -9,7 +9,8 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/image_show', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -35,7 +36,7 @@ class APIRegularShowProfileInformation{
   bool showProfileInformationGuest;
   int showProfileInformationAccountType;
 
-  APIRegularShowProfileInformation({this.showProfileInformationUserId, this.showProfileInformationFirstName, this.showProfileInformationLastName, this.showProfileInformationImage, this.showProfileInformationEmail, this.showProfileInformationGuest, this.showProfileInformationAccountType});
+  APIRegularShowProfileInformation({required this.showProfileInformationUserId, required this.showProfileInformationFirstName, required this.showProfileInformationLastName, required this.showProfileInformationImage, required this.showProfileInformationEmail, required this.showProfileInformationGuest, required this.showProfileInformationAccountType});
 
   factory APIRegularShowProfileInformation.fromJson(Map<String, dynamic> parsedJson){
 

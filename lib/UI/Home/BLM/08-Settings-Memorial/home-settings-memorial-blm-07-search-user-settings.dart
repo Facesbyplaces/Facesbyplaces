@@ -19,13 +19,13 @@ class BLMSearchUsers{
   final String email;
   final int accountType;
 
-  BLMSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email, this.accountType});
+  BLMSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
 }
 
 class HomeBLMSearchUser extends StatefulWidget{
   final bool isFamily;
   final int memorialId;
-  HomeBLMSearchUser({this.isFamily, this.memorialId});
+  HomeBLMSearchUser({required this.isFamily, required this.memorialId});
 
   @override
   HomeBLMSearchUserState createState() => HomeBLMSearchUserState(isFamily: isFamily, memorialId: memorialId);
@@ -34,33 +34,15 @@ class HomeBLMSearchUser extends StatefulWidget{
 class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
   final bool isFamily;
   final int memorialId;
-  HomeBLMSearchUserState({this.isFamily, this.memorialId});
+  HomeBLMSearchUserState({required this.isFamily, required this.memorialId});
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
-  List<BLMSearchUsers> users;
-  int itemRemaining;
-  String keywords;
-  bool empty;
-  int page;
-
-  void initState(){
-    super.initState();
-    users = [];
-    empty = true;
-    page = 1;
-    itemRemaining = 1;
-    keywords = '';
-  }
-
-  String convertDate(String input){
-    DateTime dateTime = DateTime.parse(input);
-
-    final y = dateTime.year.toString().padLeft(4, '0');
-    final m = dateTime.month.toString().padLeft(2, '0');
-    final d = dateTime.day.toString().padLeft(2, '0');
-    return '$d/$m/$y';
-  }
+  List<BLMSearchUsers> users = [];
+  int itemRemaining = 1;
+  String keywords = '';
+  bool empty = true;
+  int page = 1;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -119,7 +101,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                     child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                   ),
                   Container(
-                    width: SizeConfig.screenWidth / 1.3,
+                    width: SizeConfig.screenWidth! / 1.3,
                     child: TextFormField(
                       onChanged: (newPlaces){
                         setState(() {
@@ -194,7 +176,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
+            height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: empty
             ? SingleChildScrollView(
@@ -202,7 +184,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
               padding: EdgeInsets.zero,
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
@@ -210,7 +192,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
 
                   Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
               ),
             )
@@ -226,7 +208,7 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                 footer: CustomFooter(
                   loadStyle: LoadStyle.ShowWhenLoading,
                   builder: (BuildContext context, LoadStatus mode){
-                    Widget body;
+                    Widget body = Container();
                     if(mode == LoadStatus.loading){
                       body = CircularProgressIndicator();
                     }
@@ -311,7 +293,8 @@ class HomeBLMSearchUserState extends State<HomeBLMSearchUser>{
                             CircleAvatar(
                               maxRadius: 40,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
+                              // backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
+                              backgroundImage: NetworkImage(users[index].image),
                             ),
 
                             SizedBox(width: 25,),

@@ -10,14 +10,8 @@ class HomeRegularCreatePostSearchLocation extends StatefulWidget{
 class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePostSearchLocation>{
   
   TextEditingController controller = TextEditingController();
-  List<String> places;
-  bool empty;
-
-  void initState(){
-    super.initState();
-    places = [];
-    empty = true;
-  }
+  List<String> places = [];
+  bool empty = true;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +77,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Icon(Icons.place_rounded, size: 240, color: Color(0xff888888),),
 
@@ -91,7 +85,7 @@ class HomeRegularCreatePostSearchLocationState extends State<HomeRegularCreatePo
 
                   Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
               ),
             )

@@ -18,7 +18,7 @@ import 'dart:io';
 class HomeBLMMemorialPageImage extends StatefulWidget{
 
   final int memorialId;
-  HomeBLMMemorialPageImage({this.memorialId});
+  HomeBLMMemorialPageImage({required this.memorialId});
 
   HomeBLMMemorialPageImageState createState() => HomeBLMMemorialPageImageState(memorialId: memorialId);
 }
@@ -26,14 +26,14 @@ class HomeBLMMemorialPageImage extends StatefulWidget{
 class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
   final int memorialId;
-  HomeBLMMemorialPageImageState({this.memorialId});
+  HomeBLMMemorialPageImageState({required this.memorialId});
 
   final List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
-  int backgroundImageToggle;
+  int backgroundImageToggle  = 0;
   final picker = ImagePicker();
-  File backgroundImage;
-  File profileImage;
-  Future futureMemorialSettings;
+  File? backgroundImage;
+  File? profileImage;
+  Future<APIBLMShowPageImagesMain>? futureMemorialSettings;
 
   Future getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -60,7 +60,6 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
   void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(memorialId);
-    backgroundImageToggle = 0;
   }
 
   @override
@@ -105,11 +104,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: backgroundImage != null
-                            ? AssetImage(backgroundImage.path)
-                            : CachedNetworkImageProvider(
-                              memorialImageSettings.data.blmMemorial.showPageImagesBackgroundImage.toString(),
-                            ),
+                            image: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesBackgroundImage}'),
+                            // image: backgroundImage != null
+                            // ? AssetImage(backgroundImage.path)
+                            // : CachedNetworkImageProvider(
+                            //   memorialImageSettings.data.blmMemorial.showPageImagesBackgroundImage.toString(),
+                            // ),
                           ),
                         ),
                         child: Stack(
@@ -128,11 +128,12 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                     child: CircleAvatar(
                                       radius: 50,
                                       backgroundColor: Color(0xff888888),
-                                      backgroundImage: profileImage != null
-                                      ? AssetImage(profileImage.path)
-                                      : CachedNetworkImageProvider(
-                                        memorialImageSettings.data.blmMemorial.showPageImagesProfileImage.toString()
-                                      ),
+                                      backgroundImage: CachedNetworkImageProvider('${memorialImageSettings.data!.blmMemorial.showPageImagesProfileImage}'),
+                                      // backgroundImage: profileImage != null
+                                      // ? AssetImage(profileImage.path)
+                                      // : CachedNetworkImageProvider(
+                                      //   memorialImageSettings.data.blmMemorial.showPageImagesProfileImage.toString()
+                                      // ),
                                     ),
                                   ),
                                 ),
@@ -141,7 +142,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
 
                             Positioned(
                               bottom: 40,
-                              left: SizeConfig.screenWidth / 2,
+                              left: SizeConfig.screenWidth! / 2,
                               child: CircleAvatar(
                                 radius: 25,
                                 backgroundColor: Color(0xffffffff),
@@ -311,7 +312,7 @@ class HomeBLMMemorialPageImageState extends State<HomeBLMMemorialPageImage>{
                                 )
                               );
 
-                              Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true,));
+                              Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.blmMemorial.showPageImagesRelationship,));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/blm'));
                             }else{
                               await showDialog(

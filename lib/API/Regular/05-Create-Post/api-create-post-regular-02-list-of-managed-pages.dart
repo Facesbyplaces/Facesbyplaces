@@ -9,7 +9,8 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -29,7 +30,7 @@ Future<APIRegularShowListOfManagedPages> apiRegularShowListOfManagedPages() asyn
 class APIRegularShowListOfManagedPages{
   List<APIRegularShowListOfManagedPagesExtended> almPagesList;
 
-  APIRegularShowListOfManagedPages({this.almPagesList});
+  APIRegularShowListOfManagedPages({required this.almPagesList});
 
   factory APIRegularShowListOfManagedPages.fromJson(Map<String, dynamic> parsedJson){
 
@@ -48,7 +49,7 @@ class APIRegularShowListOfManagedPagesExtended{
   String showListOfManagedPagesName;
   dynamic showListOfManagedPagesProfileImage;
 
-  APIRegularShowListOfManagedPagesExtended({this.showListOfManagedPagesId, this.showListOfManagedPagesName, this.showListOfManagedPagesProfileImage});
+  APIRegularShowListOfManagedPagesExtended({required this.showListOfManagedPagesId, required this.showListOfManagedPagesName, required this.showListOfManagedPagesProfileImage});
 
   factory APIRegularShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfManagedPagesExtended(

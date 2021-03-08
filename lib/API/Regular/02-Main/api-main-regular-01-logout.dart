@@ -8,7 +8,8 @@ Future<bool> apiRegularLogout() async{
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.delete('http://fbp.dev1.koda.ws/alm_auth/sign_out',
+  final http.Response response = await http.delete(
+    Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_out', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

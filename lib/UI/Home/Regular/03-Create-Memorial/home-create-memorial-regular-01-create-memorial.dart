@@ -21,17 +21,17 @@ class RegularCreateMemorialValues{
   double latitude;
 
   RegularCreateMemorialValues({
-    this.memorialName, 
-    this.description, 
-    this.birthplace, 
-    this.dob, 
-    this.rip, 
-    this.cemetery, 
-    this.country,  
-    this.relationship, 
-    this.imagesOrVideos, 
-    this.latitude, 
-    this.longitude,
+    required this.memorialName, 
+    required this.description, 
+    required this.birthplace, 
+    required this.dob, 
+    required this.rip, 
+    required this.cemetery, 
+    required this.country,  
+    required this.relationship, 
+    required this.imagesOrVideos, 
+    required this.latitude, 
+    required this.longitude,
   });
 }
 
@@ -176,7 +176,7 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                     MiscRegularButtonTemplate(
                       onPressed: () async{
 
-                        if(_key2.currentState.controller.text == '' || controller1.text == '' || controller2.text == '' ||  _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
+                        if(_key2.currentState!.controller.text == '' || controller1.text == '' || controller2.text == '' ||  _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                           await showDialog(
                             context: context,
                             builder: (_) => 
@@ -197,20 +197,20 @@ class HomeRegularCreateMemorial1State extends State<HomeRegularCreateMemorial1>{
                           );
                         }else{
 
-                          Navigator.pushNamed(context, '/home/regular/create-memorial-2', 
-                            arguments: RegularCreateMemorialValues(
-                              relationship: _key1.currentState.currentSelection,
-                              birthplace: _key2.currentState.controller.text,
-                              dob: controller1.text,
-                              rip: controller2.text,
-                              cemetery: _key5.currentState.controller.text,
-                              country: _key6.currentState.controller.text,
-                            ),
-                          );
+                          // Navigator.pushNamed(context, '/home/regular/create-memorial-2', 
+                          //   arguments: RegularCreateMemorialValues(
+                          //     relationship: _key1.currentState!.currentSelection,
+                          //     birthplace: _key2.currentState!.controller.text,
+                          //     dob: controller1.text,
+                          //     rip: controller2.text,
+                          //     cemetery: _key5.currentState!.controller.text,
+                          //     country: _key6.currentState!.controller.text,
+                          //   ),
+                          // );
                         }
 
                       }, 
-                      width: SizeConfig.screenWidth / 2,
+                      width: SizeConfig.screenWidth! / 2,
                       height: 45,
                     ),
 

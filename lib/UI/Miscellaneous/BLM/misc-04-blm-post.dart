@@ -32,7 +32,7 @@ class MiscBLMPost extends StatefulWidget{
   final bool famOrFriends;
   final String relationship;
 
-  MiscBLMPost({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  MiscBLMPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 
   MiscBLMPostState createState() => MiscBLMPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
 }
@@ -59,15 +59,14 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
   final bool famOrFriends;
   final String relationship;
 
-  MiscBLMPostState({this.contents, this.userId, this.postId, this.memorialId, this.profileImage, this.memorialName = '', this.timeCreated = '', this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  MiscBLMPostState({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 
-  Future profileFollowing;
-  bool likePost;
-  bool pressedLike;
-  int likesCount;
+  bool likePost = false;
+  bool pressedLike = false;
+  int likesCount = 0;
 
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
   void initBranchShare(){
     buo = BranchUniversalObject(
@@ -91,13 +90,12 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   void initState(){
     super.initState();
     likePost = likeStatus;
-    pressedLike = false;
     likesCount = numberOfLikes;
   }
 
@@ -136,19 +134,23 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                     onTap: () async{
                       if(pageType == 'Memorial'){
                         if(managed == true || famOrFriends == true){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
                         }else{
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
                         }
                       }else{
                         if(managed == true || famOrFriends == true){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
                         }else{
                           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
                         }
                       }
                     },
-                    child: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
+                    child: CircleAvatar(
+                      backgroundColor: Color(0xff888888), 
+                      // backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png'),
+                      backgroundImage: NetworkImage(profileImage),
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -157,13 +159,13 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                         onTap: (){
                           if(pageType == 'Memorial'){
                             if(managed == true || famOrFriends == true){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
                             }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
                             }
                           }else{
                             if(managed == true || famOrFriends == true){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
                             }else{
                               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
                             }
@@ -227,7 +229,7 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                           numberOfTagged,
                           (index) => GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index])));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfile(userId: taggedId[index], accountType: pageType == 'BLM' ? 1 : 2)));
                             },
                             child: RichText(
                               text: TextSpan(
@@ -310,8 +312,8 @@ class MiscBLMPostState extends State<MiscBLMPost> with WidgetsBindingObserver{
                         FlutterBranchSdk.setIdentity('blm-share-link');
 
                         BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                          buo: buo,
-                          linkProperties: lp,
+                          buo: buo!,
+                          linkProperties: lp!,
                           messageText: 'FacesbyPlaces App',
                           androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
                           androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'

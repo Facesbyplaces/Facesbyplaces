@@ -15,7 +15,7 @@ class RegularUploadPhoto extends StatefulWidget{
 
 class RegularUploadPhotoState extends State<RegularUploadPhoto>{
 
-  File image;
+  File? image;
   final picker = ImagePicker();
 
   Future getImage() async{
@@ -80,8 +80,8 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 
               },
               child: Container(
-                height: SizeConfig.screenWidth / 1.2,
-                width: SizeConfig.screenWidth / 1.2,
+                height: SizeConfig.screenWidth! / 1.2,
+                width: SizeConfig.screenWidth! / 1.2,
                 color: Color(0xffF9F8EE),
                 child: Column(
                   children: [
@@ -99,7 +99,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                               child: Container(
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: FileImage(image),
+                                    image: FileImage(image!),
                                   ),
                                 ),
                               ),
@@ -141,7 +141,7 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                 fontWeight: FontWeight.bold, 
                 color: Color(0xffffffff),
               ),
-              width: SizeConfig.screenWidth / 2,
+              width: SizeConfig.screenWidth! / 2,
               height: 45,
               buttonColor: Color(0xff04ECFF),
               onPressed: () async{

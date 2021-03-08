@@ -18,7 +18,7 @@ import 'dart:io';
 class HomeRegularMemorialPageImage extends StatefulWidget{
 
   final int memorialId;
-  HomeRegularMemorialPageImage({this.memorialId});
+  HomeRegularMemorialPageImage({required this.memorialId});
 
   HomeRegularMemorialPageImageState createState() => HomeRegularMemorialPageImageState(memorialId: memorialId);
 }
@@ -26,14 +26,14 @@ class HomeRegularMemorialPageImage extends StatefulWidget{
 class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageImage>{
 
   final int memorialId;
-  HomeRegularMemorialPageImageState({this.memorialId});
+  HomeRegularMemorialPageImageState({required this.memorialId});
 
   List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
-  int backgroundImageToggle;
+  int backgroundImageToggle = 0;
   final picker = ImagePicker();
-  File backgroundImage;
-  File profileImage;
-  Future<APIRegularShowPageImagesMain> futureMemorialSettings;
+  File backgroundImage = File('');
+  File profileImage = File('');
+  Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
 
   Future getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -60,7 +60,6 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   void initState(){
     super.initState();
     futureMemorialSettings = getMemorialSettings(memorialId);
-    backgroundImageToggle = 0;
   }
 
   @override
@@ -105,11 +104,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: backgroundImage != null
-                            ? AssetImage(backgroundImage.path)
-                            : CachedNetworkImageProvider(
-                              memorialImageSettings.data.almMemorial.showPageImagesBackgroundImage.toString(),
-                            ),
+                            image: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage}')
                           ),
                         ),
                         child: Stack(
@@ -128,11 +123,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                     child: CircleAvatar(
                                       radius: 50,
                                       backgroundColor: Color(0xff888888),
-                                      backgroundImage: profileImage != null
-                                      ? AssetImage(profileImage.path)
-                                      : CachedNetworkImageProvider(
-                                        memorialImageSettings.data.almMemorial.showPageImagesProfileImage.toString()
-                                      ),
+                                      backgroundImage: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesProfileImage}'),
                                     ),
                                   ),
                                 ),
@@ -141,7 +132,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
 
                             Positioned(
                               bottom: 40,
-                              left: SizeConfig.screenWidth / 2,
+                              left: SizeConfig.screenWidth! / 2,
                               child: CircleAvatar(
                                 radius: 25,
                                 backgroundColor: Color(0xffffffff),
@@ -286,7 +277,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         ),
                         onPressed: () async{
 
-                          if(profileImage != null || backgroundImage != null){
+                          if(profileImage != File('') || backgroundImage != File('')){
                             context.showLoaderOverlay();
                             bool result = await apiRegularUpdatePageImages(memorialId: memorialId, backgroundImage: backgroundImage, profileImage: profileImage);
                             context.hideLoaderOverlay();
@@ -311,7 +302,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                                 )
                               );
 
-                              Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true,));
+                              Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                             }else{
                               await showDialog(

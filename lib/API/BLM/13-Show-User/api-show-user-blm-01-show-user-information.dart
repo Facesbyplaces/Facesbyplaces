@@ -3,7 +3,7 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId, int accountType}) async{
+Future<APIBLMShowUserInformation> apiBLMShowUserInformation({required int userId, required int accountType}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
@@ -11,8 +11,7 @@ Future<APIBLMShowUserInformation> apiBLMShowUserInformation({int userId, int acc
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    // 'http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=1',
-    'http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -43,7 +42,7 @@ class APIBLMShowUserInformation{
   String showUserInformationContactNumber;
   String showUserInformationImage;
   
-  APIBLMShowUserInformation({this.showUserInformationId, this.showUserInformationFirstName, this.showUserInformationLastName, this.showUserInformationBirthdate, this.showUserInformationBirthplace, this.showUserInformationHomeAddress, this.showUserInformationEmailAddress, this.showUserInformationContactNumber, this.showUserInformationImage});
+  APIBLMShowUserInformation({required this.showUserInformationId, required this.showUserInformationFirstName, required this.showUserInformationLastName, required this.showUserInformationBirthdate, required this.showUserInformationBirthplace, required this.showUserInformationHomeAddress, required this.showUserInformationEmailAddress, required this.showUserInformationContactNumber, required this.showUserInformationImage});
 
   factory APIBLMShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
 
@@ -59,6 +58,7 @@ class APIBLMShowUserInformation{
     }
 
     return APIBLMShowUserInformation(
+      showUserInformationId: parsedJson['id'],
       showUserInformationFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
       showUserInformationLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
       showUserInformationBirthdate: newBirthdate,

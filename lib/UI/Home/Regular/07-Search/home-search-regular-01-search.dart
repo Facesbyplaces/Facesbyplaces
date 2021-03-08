@@ -3,7 +3,7 @@ import 'home-search-regular-02-search-extended.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
 import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:geocoding/geocoding.dart';
+// import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularSearch extends StatelessWidget{
@@ -33,7 +33,7 @@ class HomeRegularSearch extends StatelessWidget{
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
                 Container(
-                  width: SizeConfig.screenWidth / 1.3,
+                  width: SizeConfig.screenWidth! / 1.3,
                   child: TextFormField(
                     controller: controller,
                     onFieldSubmitted: (String keyword) async{
@@ -64,15 +64,15 @@ class HomeRegularSearch extends StatelessWidget{
                             ),
                             buttonOkColor: Colors.green,
                             onOkButtonPressed: () async{
-                              permissionGranted = await location.requestPermission();
+                              // permissionGranted = await location.requestPermission();
 
-                              context.showLoaderOverlay();
-                              Location.LocationData locationData = await location.getLocation();
-                              List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                              context.hideLoaderOverlay();
+                              // context.showLoaderOverlay();
+                              // Location.LocationData locationData = await location.getLocation();
+                              // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                              // context.hideLoaderOverlay();
 
-                              Navigator.pop(context);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                              // Navigator.pop(context);
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
                             },
                             onCancelButtonPressed: (){
                               Navigator.pop(context, true);
@@ -80,12 +80,12 @@ class HomeRegularSearch extends StatelessWidget{
                           )
                         );
                       }else{
-                        context.showLoaderOverlay();
-                        Location.LocationData locationData = await location.getLocation();
-                        List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                        context.hideLoaderOverlay();
+                        // context.showLoaderOverlay();
+                        // Location.LocationData locationData = await location.getLocation();
+                        // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                        // context.hideLoaderOverlay();
 
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
                       }
                     },
                     decoration: InputDecoration(
@@ -144,12 +144,12 @@ class HomeRegularSearch extends StatelessWidget{
                               )
                             );
                           }else{
-                            context.showLoaderOverlay();
-                            Location.LocationData locationData = await location.getLocation();
-                            List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                            context.hideLoaderOverlay();
+                            // context.showLoaderOverlay();
+                            // Location.LocationData locationData = await location.getLocation();
+                            // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                            // context.hideLoaderOverlay();
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude, longitude: locationData.longitude, currentLocation: placemarks[0].name,)));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularPost(keyword: controller.text, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
                           }
                         },
                         icon: Icon(Icons.search, color: Color(0xff888888),),
@@ -164,13 +164,13 @@ class HomeRegularSearch extends StatelessWidget{
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
+            height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: SingleChildScrollView(
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Icon(Icons.search, color: Color(0xff4EC9D4), size: 240),
 
@@ -178,7 +178,7 @@ class HomeRegularSearch extends StatelessWidget{
 
                   Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: Text('Enter a memorial page name to start searching', textAlign: TextAlign.center, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
               ),
             ),

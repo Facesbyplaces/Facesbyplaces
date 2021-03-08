@@ -10,7 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 
@@ -37,7 +37,7 @@ class RegularMainPagesFeeds{
   bool famOrFriends;
   String relationship;
 
-  RegularMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfComments, this.numberOfLikes, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  RegularMainPagesFeeds({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class HomeRegularFeedTab extends StatefulWidget{
@@ -48,12 +48,18 @@ class HomeRegularFeedTab extends StatefulWidget{
 class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularMainPagesFeeds> feeds;
-  int itemRemaining;
-  int page;
-  int count;
-  VideoPlayerController videoPlayerController;
-  bool isGuestLoggedIn;
+  List<RegularMainPagesFeeds> feeds = [];
+  int itemRemaining = 1;
+  int page = 1;
+  int count = 0;
+  // VideoPlayerController? videoPlayerController;
+  bool isGuestLoggedIn = false;
+
+  void initState(){
+    super.initState();
+    isGuest();
+    onLoading();
+  }
 
   void isGuest() async{
     final sharedPrefs = await SharedPreferences.getInstance();
@@ -123,17 +129,6 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     }
   }
 
-  void initState(){
-    super.initState();
-    isGuestLoggedIn = false;
-    isGuest();
-    itemRemaining = 1;
-    feeds = [];
-    page = 1;
-    count = 0;
-    onLoading();
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -148,7 +143,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -184,16 +179,16 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             contents: [
               Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-              feeds[i].imagesOrVideos != null
+              feeds[i].imagesOrVideos != []
               ? Column(
                 children: [
                   SizedBox(height: 20),
 
                   Container(
                     child: ((){
-                      if(feeds[i].imagesOrVideos != null){
+                      if(feeds[i].imagesOrVideos != []){
                         if(feeds[i].imagesOrVideos.length == 1){
-                          if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
+                          if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                             return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -220,7 +215,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             crossAxisCount: 4,
                             itemCount: 2,
                             itemBuilder: (BuildContext context, int index) =>  
-                              lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                              lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -249,7 +244,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                             itemBuilder: (BuildContext context, int index) => 
                             ((){
                               if(index != 1){
-                                return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                                return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                     controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -268,7 +263,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                               }else{
                                 return ((){
                                   if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return Stack(
                                         children: [
                                           BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
@@ -328,7 +323,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
                                       );
                                     }
                                   }else{
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                           controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -450,7 +445,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
             onPressed: (){
               Navigator.pushNamed(context, '/home/regular/create-memorial');
             }, 
-            width: SizeConfig.screenWidth / 2, 
+            width: SizeConfig.screenWidth! / 2, 
             height: 45,
             buttonColor: Color(0xff04ECFF),
           ),

@@ -23,7 +23,7 @@ class HomeBLMUserOtherDetails extends StatefulWidget{
   final bool toggleEmail;
   final bool toggleNumber;
 
-  HomeBLMUserOtherDetails({this.userId, this.toggleBirthdate, this.toggleBirthplace, this.toggleAddress, this.toggleEmail, this.toggleNumber});
+  HomeBLMUserOtherDetails({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
   HomeBLMUserOtherDetailsState createState() => HomeBLMUserOtherDetailsState(userId: userId, toggleBirthdate: toggleBirthdate, toggleBirthplace: toggleBirthplace, toggleAddress: toggleAddress, toggleEmail: toggleEmail, toggleNumber: toggleNumber);
 }
@@ -35,7 +35,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
   final bool toggleAddress;
   final bool toggleEmail;
   final bool toggleNumber;
-  HomeBLMUserOtherDetailsState({this.userId, this.toggleBirthdate, this.toggleBirthplace, this.toggleAddress, this.toggleEmail, this.toggleNumber});
+  HomeBLMUserOtherDetailsState({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
   final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -43,12 +43,12 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMPhoneNumberTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
 
-  Future otherDetails;
-  bool toggle1;
-  bool toggle2;
-  bool toggle3;
-  bool toggle4;
-  bool toggle5;
+  Future<APIBLMShowOtherDetails>? otherDetails;
+  bool toggle1 = false;
+  bool toggle2 = false;
+  bool toggle3 = false;
+  bool toggle4 = false;
+  bool toggle5 = false;
 
   void initState(){
     super.initState();
@@ -102,7 +102,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data.blmShowOtherDetailsBirthdate,),),
+                          Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.blmShowOtherDetailsBirthdate,),),
 
                           SizedBox(width: 20,),
 
@@ -126,7 +126,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data.blmShowOtherDetailsBirthplace,),),
+                          Expanded(child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Birthplace', displayText: details.data!.blmShowOtherDetailsBirthplace,),),
 
                           SizedBox(width: 20,),
 
@@ -150,7 +150,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data.blmShowOtherDetailsAddress,),),
+                          Expanded(child: MiscBLMInputFieldTemplate(key: _key3, labelText: 'Home Address', displayText: details.data!.blmShowOtherDetailsAddress,),),
 
                           SizedBox(width: 20,),
 
@@ -174,7 +174,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data.blmShowOtherDetailsEmail, type: TextInputType.emailAddress,),),
+                          Expanded(child: MiscBLMInputFieldTemplate(key: _key4, labelText: 'Email', displayText: details.data!.blmShowOtherDetailsEmail, type: TextInputType.emailAddress,),),
 
                           SizedBox(width: 20,),
 
@@ -198,7 +198,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),),
+                          Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),),
 
                           SizedBox(width: 20,),
 
@@ -227,17 +227,17 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ),
-                        width: SizeConfig.screenWidth / 2,
+                        width: SizeConfig.screenWidth! / 2,
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
 
                           if(
-                            details.data.blmShowOtherDetailsBirthdate != _key1.currentState.controller.text ||
-                            details.data.blmShowOtherDetailsBirthplace !=  _key2.currentState.controller.text ||
-                            details.data.blmShowOtherDetailsAddress != _key3.currentState.controller.text ||
-                            details.data.blmShowOtherDetailsEmail != _key4.currentState.controller.text ||
-                            details.data.blmShowOtherDetailsPhoneNumber != _key5.currentState.controller.text
+                            details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text ||
+                            details.data!.blmShowOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
+                            details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text ||
+                            details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text ||
+                            details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -245,11 +245,11 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                               context.showLoaderOverlay();
                               bool result = await apiBLMUpdateOtherDetails(
-                                birthdate: _key1.currentState.controller.text,
-                                birthplace: _key2.currentState.controller.text,
-                                address: _key3.currentState.controller.text,
-                                email: _key4.currentState.controller.text,
-                                phoneNumber: _key5.currentState.controller.text,
+                                birthdate: _key1.currentState!.controller.text,
+                                birthplace: _key2.currentState!.controller.text,
+                                address: _key3.currentState!.controller.text,
+                                email: _key4.currentState!.controller.text,
+                                phoneNumber: _key5.currentState!.controller.text,
                               );
                               context.hideLoaderOverlay();
 

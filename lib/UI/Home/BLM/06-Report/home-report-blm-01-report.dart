@@ -10,7 +10,7 @@ class HomeBLMReport extends StatelessWidget{
   final int postId;
   final String reportType;
 
-  HomeBLMReport({this.postId, this.reportType});
+  HomeBLMReport({required this.postId, required this.reportType});
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldMultiTextTemplateState> _key2 = GlobalKey<MiscBLMInputFieldMultiTextTemplateState>();
@@ -72,12 +72,12 @@ class HomeBLMReport extends StatelessWidget{
                       fontWeight: FontWeight.bold, 
                       color: Color(0xffffffff),
                     ),
-                    width: SizeConfig.screenWidth / 2, 
+                    width: SizeConfig.screenWidth! / 2, 
                     height: 45, 
                     buttonColor: Color(0xff04ECFF),
                     onPressed: () async{
 
-                      if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == ''){
+                      if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
                         await showDialog(
                           context: context,
                           builder: (_) => 
@@ -99,7 +99,7 @@ class HomeBLMReport extends StatelessWidget{
                       }else{
 
                         context.showLoaderOverlay();
-                        bool result = await apiBLMReport(postId: postId, reportType: reportType, subject: _key1.currentState.controller.text, body: _key2.currentState.controller.text);
+                        bool result = await apiBLMReport(postId: postId, reportType: reportType, subject: _key1.currentState!.controller.text, body: _key2.currentState!.controller.text);
                         context.hideLoaderOverlay();
 
                         if(result){

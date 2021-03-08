@@ -10,14 +10,8 @@ class HomeBLMCreatePostSearchLocation extends StatefulWidget{
 class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearchLocation>{
   
   TextEditingController controller = TextEditingController();
-  List<String> places;
-  bool empty;
-
-  void initState(){
-    super.initState();
-    places = [];
-    empty = true;
-  }
+  List<String> places = [];
+  bool empty = true;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +77,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
               physics: ClampingScrollPhysics(),
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Icon(Icons.place_rounded, size: 240, color: Color(0xff888888),),
 
@@ -91,7 +85,7 @@ class HomeBLMCreatePostSearchLocationState extends State<HomeBLMCreatePostSearch
 
                   Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
                 ],
               ),
             )

@@ -9,7 +9,8 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/listPages/show', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -29,7 +30,7 @@ Future<APIBLMShowListOfManagedPages> apiBLMShowListOfManagedPages() async{
 class APIBLMShowListOfManagedPages{
   List<APIBLMShowListOfManagedPagesExtended> blmPagesList;
 
-  APIBLMShowListOfManagedPages({this.blmPagesList});
+  APIBLMShowListOfManagedPages({required this.blmPagesList});
 
   factory APIBLMShowListOfManagedPages.fromJson(Map<String, dynamic> parsedJson){
 
@@ -47,7 +48,7 @@ class APIBLMShowListOfManagedPagesExtended{
   String blmManagedPagesName;
   dynamic blmManagedPagesProfileImage;
 
-  APIBLMShowListOfManagedPagesExtended({this.blmManagedPagesId, this.blmManagedPagesName, this.blmManagedPagesProfileImage});
+  APIBLMShowListOfManagedPagesExtended({required this.blmManagedPagesId, required this.blmManagedPagesName, required this.blmManagedPagesProfileImage});
 
   factory APIBLMShowListOfManagedPagesExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowListOfManagedPagesExtended(

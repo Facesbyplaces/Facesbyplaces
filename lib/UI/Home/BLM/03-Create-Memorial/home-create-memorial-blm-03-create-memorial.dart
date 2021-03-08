@@ -22,11 +22,11 @@ class HomeBLMCreateMemorial3 extends StatefulWidget{
 
 class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
-  File backgroundImage;
-  File profileImage;
+  File? backgroundImage;
+  File? profileImage;
   final picker = ImagePicker();
   List<String> backgroundImages = ['assets/icons/profile_post1.png', 'assets/icons/profile_post2.png', 'assets/icons/profile_post3.png', 'assets/icons/profile_post4.png'];
-  int backgroundImageToggle;
+  int backgroundImageToggle = 0;
 
   Future getProfileImage() async{
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -49,7 +49,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    BLMCreateMemorialValues newValue = ModalRoute.of(context).settings.arguments;
+    // BLMCreateMemorialValues? newValue = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Cry out for the Victims', maxLines: 2, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff))),
@@ -86,7 +86,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: backgroundImage != null
-                      ? AssetImage(backgroundImage.path)
+                      ? AssetImage(backgroundImage!.path)
                       : AssetImage('assets/icons/profile_post1.png'),
                     ),
                   ),
@@ -106,7 +106,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
                               child: CircleAvatar(
                                 radius: 60,
                                 backgroundImage: profileImage != null
-                                ? AssetImage(profileImage.path)
+                                ? AssetImage(profileImage!.path)
                                 : AssetImage('assets/icons/cover-icon.png'),
                               ),
                             ),
@@ -116,7 +116,7 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       Positioned(
                         bottom: 40,
-                        left: SizeConfig.screenWidth / 2,
+                        left: SizeConfig.screenWidth! / 2,
                         child: CircleAvatar(
                           radius: 25,
                           backgroundColor: Color(0xffffffff),
@@ -305,29 +305,29 @@ class HomeBLMCreateMemorial3State extends State<HomeBLMCreateMemorial3>{
 
                       Location.LocationData locationData = await location.getLocation();
 
-                      APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
-                        blmRelationship: newValue.relationship,
-                        blmLocationOfIncident: newValue.location,
-                        blmPrecinct: newValue.precinct,
-                        blmDob: convertDate(newValue.dob),
-                        blmRip: convertDate(newValue.rip),
-                        blmCountry: newValue.country,
-                        blmState: newValue.state,
-                        blmMemorialName: newValue.blmName,
-                        blmDescription: newValue.description,
-                        blmBackgroundImage: backgroundImage,
-                        blmProfileImage: profileImage,
-                        blmImagesOrVideos: newValue.imagesOrVideos,
-                        blmLatitude: locationData.latitude.toString(),
-                        blmLongitude: locationData.longitude.toString()
-                      );
+                      // APIBLMCreateMemorial memorial = APIBLMCreateMemorial(
+                      //   blmRelationship: newValue.relationship,
+                      //   blmLocationOfIncident: newValue.location,
+                      //   blmPrecinct: newValue.precinct,
+                      //   blmDob: convertDate(newValue.dob),
+                      //   blmRip: convertDate(newValue.rip),
+                      //   blmCountry: newValue.country,
+                      //   blmState: newValue.state,
+                      //   blmMemorialName: newValue.blmName,
+                      //   blmDescription: newValue.description,
+                      //   blmBackgroundImage: backgroundImage,
+                      //   blmProfileImage: profileImage,
+                      //   blmImagesOrVideos: newValue.imagesOrVideos,
+                      //   blmLatitude: locationData.latitude.toString(),
+                      //   blmLongitude: locationData.longitude.toString()
+                      // );
 
-                      context.showLoaderOverlay();
-                      int result = await apiBLMCreateMemorial(blmMemorial: memorial);
-                      context.hideLoaderOverlay();
+                      // context.showLoaderOverlay();
+                      // int result = await apiBLMCreateMemorial(blmMemorial: memorial);
+                      // context.hideLoaderOverlay();
 
-                      Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true,));
-                      Navigator.pushReplacement(context, newRoute);
+                      // Route newRoute = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: result, managed: true, newlyCreated: true, relationship: newValue.relationship,));
+                      // Navigator.pushReplacement(context, newRoute);
                     }
                     
                   },

@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiRegularHideEmail({bool hide}) async{
+Future<bool> apiRegularHideEmail({required bool hide}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -10,7 +10,8 @@ Future<bool> apiRegularHideEmail({bool hide}) async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideEmail?hide=$hide',
+    final http.Response response = await http.put(
+      Uri.http('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideEmail?hide=$hide', ''),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

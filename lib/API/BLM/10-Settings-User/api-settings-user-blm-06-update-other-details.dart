@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiBLMUpdateOtherDetails({String birthdate, String birthplace, String email, String address, String phoneNumber}) async{
+Future<bool> apiBLMUpdateOtherDetails({required String birthdate, required String birthplace, required String email, required String address, required String phoneNumber}) async{
 
   bool result = false;
 
@@ -12,7 +12,8 @@ Future<bool> apiBLMUpdateOtherDetails({String birthdate, String birthplace, Stri
 
   try{
 
-    final http.Response response = await http.put('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber',
+    final http.Response response = await http.put(
+      Uri.http('http://fbp.dev1.koda.ws/api/v1/users/updateOtherInfos?birthdate=$birthdate&birthplace=$birthplace&email=$email&address=$address&phone_number=$phoneNumber', ''),
       headers: <String, String>{
         'access-token': getAccessToken,
         'uid': getUID,

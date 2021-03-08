@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 
 class HomeBLMUserChangePassword extends StatefulWidget{
   final int userId;
-  HomeBLMUserChangePassword({this.userId});
+  HomeBLMUserChangePassword({required this.userId});
 
   HomeBLMUserChangePasswordState createState() => HomeBLMUserChangePasswordState(userId: userId);
 }
 
 class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
   final int userId;
-  HomeBLMUserChangePasswordState({this.userId});
+  HomeBLMUserChangePasswordState({required this.userId});
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -68,13 +68,13 @@ class HomeBLMUserChangePasswordState extends State<HomeBLMUserChangePassword>{
                     fontWeight: FontWeight.bold, 
                     color: Color(0xffffffff),
                   ),
-                  width: SizeConfig.screenWidth / 2,
+                  width: SizeConfig.screenWidth! / 2,
                   height: 45,
                   buttonColor: Color(0xff04ECFF),
                   onPressed: () async{
 
                     context.showLoaderOverlay();
-                    bool result = await apiBLMChangePassword(currentPassword: _key1.currentState.controller.text, newPassword: _key2.currentState.controller.text);
+                    bool result = await apiBLMChangePassword(currentPassword: _key1.currentState!.controller.text, newPassword: _key2.currentState!.controller.text);
                     context.hideLoaderOverlay();
 
                     if(result){

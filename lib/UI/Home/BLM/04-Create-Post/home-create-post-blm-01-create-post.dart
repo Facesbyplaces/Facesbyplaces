@@ -7,7 +7,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:mime/mime.dart';
@@ -18,7 +18,7 @@ class BLMTaggedUsers{
   int userId;
   int accountType;
 
-  BLMTaggedUsers({this.name, this.userId, this.accountType});
+  BLMTaggedUsers({required this.name, required this.userId, required this.accountType});
 }
 
 class BLMManagedPages{
@@ -26,13 +26,13 @@ class BLMManagedPages{
   int pageId;
   String image;
 
-  BLMManagedPages({this.name, this.pageId, this.image});
+  BLMManagedPages({required this.name, required this.pageId, required this.image});
 }
 
 class HomeBLMCreatePost extends StatefulWidget{
   final String name;
   final int memorialId;
-  HomeBLMCreatePost({this.name, this.memorialId});
+  HomeBLMCreatePost({required this.name, required this.memorialId});
 
   @override
   HomeBLMCreatePostState createState() => HomeBLMCreatePostState(name: name, memorialId: memorialId);
@@ -41,30 +41,17 @@ class HomeBLMCreatePost extends StatefulWidget{
 class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   final String name;
   final int memorialId;
-  HomeBLMCreatePostState({this.name, this.memorialId});
+  HomeBLMCreatePostState({required this.name, required this.memorialId});
 
-  List<BLMManagedPages> managedPages;
-  String currentSelection;
-  int currentIdSelected;
-  Future listManagedPages;
+  List<BLMManagedPages> managedPages = [];
+  String currentSelection = '';
+  int currentIdSelected = 0;
   List<BLMTaggedUsers> users = [];
-  List<File> slideImages;
+  List<File> slideImages = [];
   TextEditingController controller = TextEditingController();
-  int maxLines;
-  int removeAttachment;
-  BetterPlayerController betterPlayerController;
-
-  void initState(){
-    super.initState();
-    slideImages = [];
-    managedPages = [];
-    currentSelection = name;
-    currentIdSelected = memorialId;
-    maxLines = 5;
-    removeAttachment = 0;
-    getManagedPages();
-  }
-
+  int maxLines = 5;
+  int removeAttachment = 0 ;
+  BetterPlayerController? betterPlayerController;
 
   void getManagedPages() async{
     context.showLoaderOverlay();
@@ -83,9 +70,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     setState(() {});
   }
 
-  File videoFile;
+  File? videoFile;
   final picker = ImagePicker();
-  VideoPlayerController videoPlayerController;
+  // VideoPlayerController videoPlayerController;
   String newLocation = '';
   String person = '';
 
@@ -96,12 +83,12 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
         slideImages.add(File(pickedFile.path));
 
         videoFile = File(pickedFile.path);
-        videoPlayerController = VideoPlayerController.file(videoFile)
-        ..initialize().then((_){
-          setState(() {
-            videoPlayerController.play();
-          });
-        });
+        // videoPlayerController = VideoPlayerController.file(videoFile)
+        // ..initialize().then((_){
+        //   setState(() {
+        //     videoPlayerController.play();
+        //   });
+        // });
       });
     }
   }
@@ -115,11 +102,18 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
     }
   }
 
-  @override
-  void dispose() {
-    videoPlayerController.dispose();
-    super.dispose();
+  void initState(){
+    super.initState();
+    currentSelection = name;
+    currentIdSelected = memorialId;
+    getManagedPages();
   }
+
+  // @override
+  // void dispose() {
+  //   videoPlayerController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -188,8 +182,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     blmPostPageId: currentIdSelected,
                     blmPostLocation: newLocation,
                     blmPostImagesOrVideos: newFiles,
-                    blmPostLatitude: locationData.latitude,
-                    blmPostLongitude: locationData.longitude,
+                    blmPostLatitude: locationData.latitude!,
+                    blmPostLongitude: locationData.longitude!,
                     blmPostTagPeople: userIds,
                   );
                   
@@ -255,9 +249,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                         child: DropdownButton<int>(
                           value: currentIdSelected,
                           isDense: true,
-                          onChanged: (int newValue) {
+                          onChanged: (int? newValue) {
                             setState(() {
-                              currentIdSelected = newValue;
+                              currentIdSelected = newValue!;
                             });
                           },
                           items: managedPages.map((BLMManagedPages value) {
@@ -268,7 +262,8 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                 children: [
                                   CircleAvatar(
                                     backgroundColor: Color(0xff888888),
-                                    backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
+                                    // backgroundImage: value.image != null ? NetworkImage(value.image) : AssetImage('assets/icons/app-icon.png'),
+                                    backgroundImage: NetworkImage(value.image),
                                   ),
 
                                   SizedBox(width: 20,),
@@ -390,9 +385,9 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                       removeAttachment = index;
                                     });
                                   },
-                                  child: lookupMimeType(slideImages[index].path).contains('video') == true
+                                  child: lookupMimeType(slideImages[index].path)?.contains('video') == true
                                   ? BetterPlayer(
-                                    controller: betterPlayerController,
+                                    controller: betterPlayerController!,
                                   )
                                   : Container(
                                     width: 80,
@@ -481,7 +476,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                           child: GestureDetector(
                             onTap: () async{
                               
-                              var result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
+                              BLMTaggedUsers? result = await Navigator.pushNamed(context, '/home/blm/create-post-user');
 
                               if(result != null){
                                 users.add(result);

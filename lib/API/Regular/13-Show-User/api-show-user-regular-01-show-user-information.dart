@@ -3,7 +3,7 @@ import 'package:date_time_format/date_time_format.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId, int accountType}) async{
+Future<APIRegularShowUserInformation> apiRegularShowUserInformation({required int userId, required int accountType}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
@@ -11,7 +11,7 @@ Future<APIRegularShowUserInformation> apiRegularShowUserInformation({int userId,
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    'http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType',
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/showDetails?user_id=$userId&account_type=$accountType', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -39,7 +39,7 @@ class APIRegularShowUserInformation{
   String showUserInformationContactNumber;
   String showUserInformationImage;
   
-  APIRegularShowUserInformation({this.showUserInformationId, this.showUserInformationFirstName, this.showUserInformationLastName, this.showUserInformationBirthdate, this.showUserInformationBirthplace, this.showUserInformationHomeAddress, this.showUserInformationEmailAddress, this.showUserInformationContactNumber, this.showUserInformationImage});
+  APIRegularShowUserInformation({required this.showUserInformationId, required this.showUserInformationFirstName, required this.showUserInformationLastName, required this.showUserInformationBirthdate, required this.showUserInformationBirthplace, required this.showUserInformationHomeAddress, required this.showUserInformationEmailAddress, required this.showUserInformationContactNumber, required this.showUserInformationImage});
 
   factory APIRegularShowUserInformation.fromJson(Map<String, dynamic> parsedJson){
 

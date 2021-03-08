@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class HomeBLMMemorialSettingsWithHidden extends StatefulWidget{
   final int memorialId;
   final String relationship;
-  HomeBLMMemorialSettingsWithHidden({this.memorialId, this.relationship});
+  HomeBLMMemorialSettingsWithHidden({required this.memorialId, required this.relationship});
   
   HomeBLMMemorialSettingsWithHiddenState createState() => HomeBLMMemorialSettingsWithHiddenState(memorialId: memorialId, relationship: relationship);
 }
@@ -18,13 +18,9 @@ class HomeBLMMemorialSettingsWithHidden extends StatefulWidget{
 class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettingsWithHidden>{
   final int memorialId;
   final String relationship;
-  HomeBLMMemorialSettingsWithHiddenState({this.memorialId, this.relationship});
+  HomeBLMMemorialSettingsWithHiddenState({required this.memorialId, required this.relationship});
   
-  int toggle;
-  bool isSwitched1;
-  bool isSwitched2;
-  bool isSwitched3;
-  Future switchStatus;
+  int toggle = 0;
 
   void initState(){
     super.initState();
@@ -91,8 +87,8 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
             child: Container(
               child: ((){
                 switch(toggle){
-                  case 0: return settingsTab1(memorialId); break;
-                  case 1: return settingsTab2(memorialId); break;
+                  case 0: return settingsTab1(memorialId);
+                  case 1: return settingsTab2(memorialId);
                 }
               }()),
             ),

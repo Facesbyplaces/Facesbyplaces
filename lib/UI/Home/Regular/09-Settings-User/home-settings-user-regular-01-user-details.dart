@@ -23,18 +23,18 @@ import 'dart:io';
 
 class HomeRegularUserProfileDetails extends StatefulWidget{
   final int userId;
-  HomeRegularUserProfileDetails({this.userId});
+  HomeRegularUserProfileDetails({required this.userId});
   
   HomeRegularUserProfileDetailsState createState() => HomeRegularUserProfileDetailsState(userId: userId);
 }
 
 class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDetails>{
   final int userId;
-  HomeRegularUserProfileDetailsState({this.userId});
+  HomeRegularUserProfileDetailsState({required this.userId});
 
-  Future showProfile;
+  Future<APIRegularShowProfileInformation>? showProfile;
   final picker = ImagePicker();
-  File profileImage;
+  File profileImage = File('');
 
   Future<APIRegularShowProfileInformation> getProfileInformation() async{
     return await apiRegularShowProfileInformation();
@@ -72,7 +72,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                 Container(height: SizeConfig.screenHeight, color: Color(0xffECF0F1),),
 
                 Container(
-                  height: SizeConfig.screenHeight / 2.5,
+                  height: SizeConfig.screenHeight! / 2.5,
                   child: Stack(
                     children: [
 
@@ -80,7 +80,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
 
                       Positioned(
                         bottom: 50,
-                        left: (SizeConfig.screenWidth / 2) - 120,
+                        left: (SizeConfig.screenWidth! / 2) - 120,
                         child: Badge(
                           position: BadgePosition.topEnd(top: 5, end: 15),
                           animationDuration: Duration(milliseconds: 300),
@@ -142,15 +142,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             child: CircleAvatar(
                               radius: 120,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: ((){
-                                if(profileImage != null){
-                                  return AssetImage(profileImage.path);
-                                }else if(profile.data.showProfileInformationImage != null && profile.data.showProfileInformationImage != ''){
-                                  return NetworkImage(profile.data.showProfileInformationImage);
-                                }else{
-                                  return AssetImage('assets/icons/app-icon.png');
-                                }
-                              }()),
+                              backgroundImage: NetworkImage(profile.data!.showProfileInformationImage),
                             ),
                           ),
                         ),
@@ -183,13 +175,13 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                 ),
 
                 Positioned(
-                  top: SizeConfig.screenHeight / 2.5,
+                  top: SizeConfig.screenHeight! / 2.5,
                   child: Container(
                     width: SizeConfig.screenWidth,
                     child: Column(
                       children: [
                         Center(
-                          child: Text(profile.data.showProfileInformationFirstName + ' ' + profile.data.showProfileInformationLastName,
+                          child: Text(profile.data!.showProfileInformationFirstName + ' ' + profile.data!.showProfileInformationLastName,
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -201,7 +193,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                         SizedBox(height: 20),
 
                         Center(
-                          child: Text(profile.data.showProfileInformationEmail,
+                          child: Text(profile.data!.showProfileInformationEmail,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -218,7 +210,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                 ),
 
                 SlidingUpPanel(
-                  maxHeight: SizeConfig.screenHeight / 1.5,
+                  maxHeight: SizeConfig.screenHeight! / 1.5,
                   panel: SingleChildScrollView(
                     physics: ClampingScrollPhysics(),
                     padding: EdgeInsets.only(left: 50.0, right: 50.0),
@@ -416,7 +408,7 @@ class HomeRegularUserProfileDetailsState extends State<HomeRegularUserProfileDet
                             fontWeight: FontWeight.bold, 
                             color: Color(0xffffffff),
                           ),
-                          width: SizeConfig.screenWidth / 2,
+                          width: SizeConfig.screenWidth! / 2,
                           height: 45,
                           onPressed: () async{
 

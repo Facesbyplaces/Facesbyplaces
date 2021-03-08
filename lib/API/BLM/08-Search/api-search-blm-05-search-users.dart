@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchUsersMain> apiBLMSearchUsers({String keywords, int page}) async{
+Future<APIBLMSearchUsersMain> apiBLMSearchUsers({required String keywords, required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
   
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/users?page=$page&keywords=$keywords', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMSearchUsersMain{
   int blmItemsRemaining;
   List<APIBLMSearchUsersExtended> blmUsers;
 
-  APIBLMSearchUsersMain({this.blmItemsRemaining, this.blmUsers});
+  APIBLMSearchUsersMain({required this.blmItemsRemaining, required this.blmUsers});
 
   factory APIBLMSearchUsersMain.fromJson(Map<String, dynamic> parsedJson){
     var newValue = parsedJson['users'] as List;
@@ -51,7 +52,7 @@ class APIBLMSearchUsersExtended{
   int searchUsersAccountType;
   String searchUsersImage;
 
-  APIBLMSearchUsersExtended({this.searchUsersUserId, this.searchUsersFirstName, this.searchUsersLastName, this.searchUsersEmail, this.searchUsersAccountType, this.searchUsersImage});
+  APIBLMSearchUsersExtended({required this.searchUsersUserId, required this.searchUsersFirstName, required this.searchUsersLastName, required this.searchUsersEmail, required this.searchUsersAccountType, required this.searchUsersImage});
 
   factory APIBLMSearchUsersExtended.fromJson(Map<String, dynamic> parsedJson){
 

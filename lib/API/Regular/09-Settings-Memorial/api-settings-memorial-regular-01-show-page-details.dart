@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({int memorialId}) async{
+Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -29,7 +30,7 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({int memorialId}
 class APIRegularShowPageDetailsMain{
 
   APIRegularShowPageDetailsExtended almMemorial;
-  APIRegularShowPageDetailsMain({this.almMemorial});
+  APIRegularShowPageDetailsMain({required this.almMemorial});
 
   factory APIRegularShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsMain(
@@ -48,7 +49,7 @@ class APIRegularShowPageDetailsExtended{
   String showPageDetailsRelationship;
   APIRegularShowPageDetailsExtendedPageCreator showPageDetailsPageCreator;
 
-  APIRegularShowPageDetailsExtended({this.showPageDetailsId, this.showPageDetailsName, this.showPageDetailsDetails, this.showPageDetailsBackgroundImage, this.showPageDetailsProfileImage, this.showPageDetailsImagesOrVideos, this.showPageDetailsRelationship, this.showPageDetailsPageCreator});
+  APIRegularShowPageDetailsExtended({required this.showPageDetailsId, required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsBackgroundImage, required this.showPageDetailsProfileImage, required this.showPageDetailsImagesOrVideos, required this.showPageDetailsRelationship, required this.showPageDetailsPageCreator});
 
   factory APIRegularShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtended(
@@ -72,7 +73,7 @@ class APIRegularShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsState;
   String showPageDetailsDetailsCountry;
 
-  APIRegularShowPageDetailsExtendedDetails({this.showPageDetailsDetailsDescription, this.showPageDetailsDetailsCemetery, this.showPageDetailsDetailsDob, this.showPageDetailsDetailsRip, this.showPageDetailsDetailsState, this.showPageDetailsDetailsCountry});
+  APIRegularShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsCemetery, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsState, required this.showPageDetailsDetailsCountry});
 
   factory APIRegularShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedDetails(
@@ -95,7 +96,7 @@ class APIRegularShowPageDetailsExtendedPageCreator{
   String showPageDetailsPageCreatorUserName;
   dynamic showPageDetailsPageCreatorImage;
 
-  APIRegularShowPageDetailsExtendedPageCreator({this.showPageDetailsPageCreatorId, this.showPageDetailsPageCreatorFirstName, this.showPageDetailsPageCreatorLastName, this.showPageDetailsPageCreatorPhoneNumber, this.showPageDetailsPageCreatorEmail, this.showPageDetailsPageCreatorUserName, this.showPageDetailsPageCreatorImage});
+  APIRegularShowPageDetailsExtendedPageCreator({required this.showPageDetailsPageCreatorId, required this.showPageDetailsPageCreatorFirstName, required this.showPageDetailsPageCreatorLastName, required this.showPageDetailsPageCreatorPhoneNumber, required this.showPageDetailsPageCreatorEmail, required this.showPageDetailsPageCreatorUserName, required this.showPageDetailsPageCreatorImage});
 
   factory APIRegularShowPageDetailsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedPageCreator(

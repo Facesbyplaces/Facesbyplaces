@@ -15,24 +15,24 @@ class RegularShowFriendsSettings{
   final String relationship;
   final int accountType;
 
-  RegularShowFriendsSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.accountType});
+  RegularShowFriendsSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.accountType});
 }
 
 class HomeRegularPageFriends extends StatefulWidget{
   final int memorialId;
-  HomeRegularPageFriends({this.memorialId});
+  HomeRegularPageFriends({required this.memorialId});
 
   HomeRegularPageFriendsState createState() => HomeRegularPageFriendsState(memorialId: memorialId);
 }
 
 class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
   final int memorialId;
-  HomeRegularPageFriendsState({this.memorialId});
+  HomeRegularPageFriendsState({required this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularShowFriendsSettings> friendsList;
-  int friendsItemsRemaining;
-  int page;
+  List<RegularShowFriendsSettings> friendsList = [];
+  int friendsItemsRemaining = 1;
+  int page = 1;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -45,47 +45,68 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
       var newValue = await apiRegularShowFriendsSettings(memorialId: memorialId, page: page);
       context.hideLoaderOverlay();
 
-      if(newValue == null){
-        await showDialog(
-          context: context,
-          builder: (_) => 
-            AssetGiffyDialog(
-            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-            title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-            entryAnimation: EntryAnimation.DEFAULT,
-            description: Text('Something went wrong. Please try again.',
-              textAlign: TextAlign.center,
-              style: TextStyle(),
-            ),
-            onlyOkButton: true,
-            buttonOkColor: Colors.red,
-            onOkButtonPressed: () {
-              Navigator.pop(context, true);
-            },
-          )
+      friendsItemsRemaining = newValue.almItemsRemaining;
+
+      for(int i = 0; i < newValue.almFriendsList.length; i++){
+        friendsList.add(
+          RegularShowFriendsSettings(
+            userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId,
+            firstName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName,
+            lastName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName,
+            image: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,
+            relationship: newValue.almFriendsList[i].showFriendsSettingsRelationship,
+            accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType,
+          ),
         );
-      }else{
-        friendsItemsRemaining = newValue.almItemsRemaining;
-
-        for(int i = 0; i < newValue.almFriendsList.length; i++){
-          friendsList.add(
-            RegularShowFriendsSettings(
-              userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId,
-              firstName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName,
-              lastName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName,
-              image: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,
-              relationship: newValue.almFriendsList[i].showFriendsSettingsRelationship,
-              accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType,
-            ),
-          );
-        }
-
-        if(mounted)
-        setState(() {});
-        page++;
-        
-        refreshController.loadComplete();
       }
+
+      if(mounted)
+      setState(() {});
+      page++;
+      
+      refreshController.loadComplete();
+
+      // if(newValue == APIRegularShowFriendsSettingsMain()){
+      //   await showDialog(
+      //     context: context,
+      //     builder: (_) => 
+      //       AssetGiffyDialog(
+      //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+      //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+      //       entryAnimation: EntryAnimation.DEFAULT,
+      //       description: Text('Something went wrong. Please try again.',
+      //         textAlign: TextAlign.center,
+      //         style: TextStyle(),
+      //       ),
+      //       onlyOkButton: true,
+      //       buttonOkColor: Colors.red,
+      //       onOkButtonPressed: () {
+      //         Navigator.pop(context, true);
+      //       },
+      //     )
+      //   );
+      // }else{
+      //   friendsItemsRemaining = newValue.almItemsRemaining;
+
+      //   for(int i = 0; i < newValue.almFriendsList.length; i++){
+      //     friendsList.add(
+      //       RegularShowFriendsSettings(
+      //         userId: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsId,
+      //         firstName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsFirstName,
+      //         lastName: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsLastName,
+      //         image: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsImage,
+      //         relationship: newValue.almFriendsList[i].showFriendsSettingsRelationship,
+      //         accountType: newValue.almFriendsList[i].showFriendsSettingsUser.showFriendsSettingsDetailsAccountType,
+      //       ),
+      //     );
+      //   }
+
+      //   if(mounted)
+      //   setState(() {});
+      //   page++;
+        
+      //   refreshController.loadComplete();
+      // }
     }else{
       refreshController.loadNoData();
     }
@@ -93,9 +114,6 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
 
   void initState(){
     super.initState();
-    friendsItemsRemaining = 1;
-    friendsList = [];
-    page = 1; 
     onLoading1();
   }
 
@@ -127,7 +145,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -147,7 +165,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                   CircleAvatar(
                     maxRadius: 40,
                     backgroundColor: Color(0xff888888),
-                    backgroundImage: friendsList[i].image != null ? NetworkImage(friendsList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                    backgroundImage: NetworkImage(friendsList[i].image),
                   ),
 
                   SizedBox(width: 25,),
@@ -168,7 +186,7 @@ class HomeRegularPageFriendsState extends State<HomeRegularPageFriends>{
                   SizedBox(width: 25,),
 
                   MaterialButton(
-                    minWidth: SizeConfig.screenWidth / 3.5,
+                    minWidth: SizeConfig.screenWidth! / 3.5,
                     padding: EdgeInsets.zero,
                     textColor: Color(0xffffffff),
                     splashColor: Color(0xff04ECFF),

@@ -16,8 +16,8 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
 
-  BranchUniversalObject buo;
-  BranchLinkProperties lp;
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
   void initBranchReferences(){
     buo = BranchUniversalObject(
@@ -39,7 +39,7 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
         stage: 'new share',
       tags: ['one', 'two', 'three']
     );
-    lp.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   @override
@@ -120,14 +120,14 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
                         ),
-                        width: SizeConfig.screenWidth / 2, 
+                        width: SizeConfig.screenWidth! / 2, 
                         height: 45, 
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
 
-                          bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState.controller.text);
+                          bool validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text);
 
-                          if(_key1.currentState.controller.text == ''){
+                          if(_key1.currentState!.controller.text == ''){
                             await showDialog(
                               context: context,
                               builder: (_) => 
@@ -170,13 +170,13 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
 
                             initBranchReferences();
                             FlutterBranchSdk.setIdentity('blm-user-forgot-password');
-                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+                            BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
 
                             context.hideLoaderOverlay();
                             
                             if(response.success){
                               context.showLoaderOverlay();
-                              bool result = await apiBLMPasswordReset(email: _key1.currentState.controller.text, redirectLink: response.result);
+                              bool result = await apiBLMPasswordReset(email: _key1.currentState!.controller.text, redirectLink: response.result);
                               context.hideLoaderOverlay();
                               
                               if(result == true){
@@ -187,7 +187,7 @@ class BLMPasswordResetEmailState extends State<BLMPasswordResetEmail>{
                                     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
                                     title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
                                     entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('An email has been sent to ${_key1.currentState.controller.text} containing instructions for resetting your password.',
+                                    description: Text('An email has been sent to ${_key1.currentState!.controller.text} containing instructions for resetting your password.',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(),
                                     ),

@@ -1,14 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> apiRegularDonate({String pageType, int pageId, double amount, String token}) async{
+Future<bool> apiRegularDonate({required String pageType, required int pageId, required double amount, required String token}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('regular-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.post('http://fbp.dev1.koda.ws/api/v1/payment_intent',
+  final http.Response response = await http.post(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/payment_intent', ''),
     headers: <String, String>{
       'access-token': getAccessToken,
       'uid': getUID,

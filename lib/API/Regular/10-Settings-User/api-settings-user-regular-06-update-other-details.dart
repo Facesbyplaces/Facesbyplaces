@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularUpdateOtherDetails({String birthdate, String birthplace, String email, String address, String phoneNumber}) async{
+Future<bool> apiRegularUpdateOtherDetails({required String birthdate, required String birthplace, required String email, required String address, required String phoneNumber}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

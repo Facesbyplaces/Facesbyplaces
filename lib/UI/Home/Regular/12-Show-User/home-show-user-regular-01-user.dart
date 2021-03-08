@@ -11,7 +11,7 @@ import 'dart:ui';
 class HomeRegularUserProfile extends StatefulWidget{
   final int userId;
   final int accountType;
-  HomeRegularUserProfile({this.userId, this.accountType});
+  HomeRegularUserProfile({required this.userId, required this.accountType});
 
   HomeRegularUserProfileState createState() => HomeRegularUserProfileState(userId: userId, accountType: accountType);
 }
@@ -19,9 +19,9 @@ class HomeRegularUserProfile extends StatefulWidget{
 class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
   final int userId;
   final int accountType;
-  HomeRegularUserProfileState({this.userId, this.accountType});
+  HomeRegularUserProfileState({required this.userId, required this.accountType});
 
-  Future<APIRegularShowUserInformation> showProfile;
+  Future<APIRegularShowUserInformation>? showProfile;
 
   Future<APIRegularShowUserInformation> getProfileInformation() async{
     return await apiRegularShowUserInformation(userId: userId, accountType: accountType);
@@ -46,7 +46,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                 Container(height: SizeConfig.screenHeight, color: Color(0xffffffff),),
 
                 Container(
-                  height: SizeConfig.screenHeight / 2.5,
+                  height: SizeConfig.screenHeight! / 2.5,
                   child: Stack(
                     children: [
 
@@ -55,7 +55,11 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                       Container(
                         padding: EdgeInsets.only(bottom: 20.0),
                         alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(radius: 100, backgroundColor: Color(0xff888888), backgroundImage: profile.data.showUserInformationImage != null ? NetworkImage(profile.data.showUserInformationImage) : AssetImage('assets/icons/app-icon.png')),
+                        child: CircleAvatar(
+                          radius: 100, 
+                          backgroundColor: Color(0xff888888), 
+                          backgroundImage: NetworkImage(profile.data!.showUserInformationImage)
+                        ),
                       ),
 
                     ],
@@ -86,12 +90,12 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                 ),
 
                 Positioned(
-                  top: SizeConfig.screenHeight / 2.5,
+                  top: SizeConfig.screenHeight! / 2.5,
                   child: Container(
                     width: SizeConfig.screenWidth,
                     child: Column(
                       children: [
-                        Text('${profile.data.showUserInformationFirstName + ' ' + profile.data.showUserInformationLastName}',
+                        Text('${profile.data!.showUserInformationFirstName + ' ' + profile.data!.showUserInformationLastName}',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -101,7 +105,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
 
                         SizedBox(height: 20,),
 
-                        Text('${profile.data.showUserInformationEmailAddress}',
+                        Text('${profile.data!.showUserInformationEmailAddress}',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
@@ -144,7 +148,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.showUserInformationBirthdate}',
+                                    child: Text('${profile.data!.showUserInformationBirthdate}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Color(0xff000000),
@@ -175,7 +179,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.showUserInformationBirthplace}',
+                                    child: Text('${profile.data!.showUserInformationBirthplace}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Color(0xff000000),
@@ -206,7 +210,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.showUserInformationHomeAddress}',
+                                    child: Text('${profile.data!.showUserInformationHomeAddress}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Color(0xff000000),
@@ -237,7 +241,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.showUserInformationEmailAddress}',
+                                    child: Text('${profile.data!.showUserInformationEmailAddress}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Color(0xff000000),
@@ -268,7 +272,7 @@ class HomeRegularUserProfileState extends State<HomeRegularUserProfile>{
                                     ),
                                   ),
                                   Expanded(
-                                    child: Text('${profile.data.showUserInformationContactNumber}',
+                                    child: Text('${profile.data!.showUserInformationContactNumber}',
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Color(0xff000000),

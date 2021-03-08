@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
+Future<bool> apiRegularHomeCreatePost({required APIRegularCreatePost post}) async{
 
   bool result = false;
 
@@ -31,7 +31,8 @@ Future<bool> apiRegularHomeCreatePost({APIRegularCreatePost post}) async{
       'tag_people': tagPeopleValue,
     });
 
-    if(post.almImagesOrVideos != null || post.almImagesOrVideos != ['']){
+    // if(post.almImagesOrVideos != null || post.almImagesOrVideos != ['']){
+      if(post.almImagesOrVideos != []){
       for(int i = 0; i < post.almImagesOrVideos.length; i++){
         if(post.almImagesOrVideos[i].path != null || post.almImagesOrVideos != ['']){
           var file = await dio.MultipartFile.fromFile(post.almImagesOrVideos[i].path, filename: post.almImagesOrVideos[i].path);
@@ -72,14 +73,14 @@ class APIRegularCreatePost{
   List<RegularTaggedPeople> almTagPeople;
   
   APIRegularCreatePost({
-    this.almPageType,
-    this.almPageId, 
-    this.almPostBody,
-    this.almLocation,
-    this.almImagesOrVideos, 
-    this.almLatitude,
-    this.almLongitude, 
-    this.almTagPeople,
+    required this.almPageType,
+    required this.almPageId, 
+    required this.almPostBody,
+    required this.almLocation,
+    required this.almImagesOrVideos, 
+    required this.almLatitude,
+    required this.almLongitude, 
+    required this.almTagPeople,
   });
 }
 
@@ -88,7 +89,7 @@ class RegularTaggedPeople{
   int accountType;
 
   RegularTaggedPeople({
-    this.userId,
-    this.accountType,
+    required this.userId,
+    required this.accountType,
   });
 }

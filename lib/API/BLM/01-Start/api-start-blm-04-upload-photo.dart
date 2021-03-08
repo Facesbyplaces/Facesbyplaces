@@ -8,7 +8,7 @@ Future<bool> apiBLMUploadPhoto({dynamic image}) async{
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-  int prefsUserID = sharedPrefs.getInt('blm-user-id');
+  int prefsUserID = sharedPrefs.getInt('blm-user-id')!;
 
   try{
 

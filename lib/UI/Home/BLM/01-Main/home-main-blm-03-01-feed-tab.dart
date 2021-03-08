@@ -36,7 +36,7 @@ class BLMMainPagesFeeds{
   bool famOrFriends;
   String relationship;
 
-  BLMMainPagesFeeds({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.joined, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  BLMMainPagesFeeds({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.joined, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class HomeBLMFeedTab extends StatefulWidget{
@@ -47,20 +47,15 @@ class HomeBLMFeedTab extends StatefulWidget{
 class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMMainPagesFeeds> feeds;
-  int itemRemaining;
-  int page;
-  int count;
-  bool isGuestLoggedIn;
+  List<BLMMainPagesFeeds> feeds = [];
+  int itemRemaining = 1;
+  int page = 1;
+  int count = 0;
+  bool isGuestLoggedIn = false;
 
   void initState(){
     super.initState();
-    isGuestLoggedIn = false;
     isGuest();
-    page = 1;
-    itemRemaining = 1;
-    count = 0;
-    feeds = [];
     onLoading();
   }
 
@@ -146,7 +141,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -182,16 +177,16 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
             contents: [
               Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody,),),
 
-              feeds[i].imagesOrVideos != null
+              feeds[i].imagesOrVideos != []
               ? Column(
                 children: [
                   SizedBox(height: 20,),
 
                   Container(
                     child: ((){
-                      if(feeds[i].imagesOrVideos != null){
+                      if(feeds[i].imagesOrVideos != []){
                         if(feeds[i].imagesOrVideos.length == 1){
-                          if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
+                          if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                             return Container(
                               child: Stack(
                                 children: [
@@ -232,7 +227,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                             crossAxisCount: 4,
                             itemCount: 2,
                             itemBuilder: (BuildContext context, int index) =>  
-                              lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                              lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? Container(
                                 child: Stack(
                                   children: [
@@ -275,7 +270,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                             itemBuilder: (BuildContext context, int index) => 
                             ((){
                               if(index != 1){
-                                return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                                return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                                 ? Container(
                                   child: Stack(
                                     children: [
@@ -309,7 +304,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                               }else{
                                 return ((){
                                   if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return Stack(
                                         children: [
                                           Container(
@@ -384,7 +379,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
                                       );
                                     }
                                   }else{
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return Container(
                                         child: Stack(
                                           children: [
@@ -518,7 +513,7 @@ class HomeBLMFeedTabState extends State<HomeBLMFeedTab>{
             onPressed: (){
               Navigator.pushNamed(context, '/home/blm/create-memorial');
             }, 
-            width: SizeConfig.screenWidth / 2, 
+            width: SizeConfig.screenWidth! / 2, 
             height: 45,
             buttonColor: Color(0xff000000),
           ),

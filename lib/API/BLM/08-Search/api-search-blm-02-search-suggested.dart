@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({int page}) async{
+Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -33,7 +34,7 @@ class APIBLMSearchSuggestedMain{
   int blmItemsRemaining;
   List<APIBLMSearchSuggestedExtended> blmPages;
 
-  APIBLMSearchSuggestedMain({this.blmItemsRemaining, this.blmPages});
+  APIBLMSearchSuggestedMain({required this.blmItemsRemaining, required this.blmPages});
 
   factory APIBLMSearchSuggestedMain.fromJson(Map<String, dynamic> parsedJson){
 
@@ -51,7 +52,7 @@ class APIBLMSearchSuggestedExtended{
   int searchSuggestedId;
   APIBLMSearchSuggestedExtendedPage searchSuggestedPage;
 
-  APIBLMSearchSuggestedExtended({this.searchSuggestedId, this.searchSuggestedPage});
+  APIBLMSearchSuggestedExtended({required this.searchSuggestedId, required this.searchSuggestedPage});
 
   factory APIBLMSearchSuggestedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -77,7 +78,7 @@ class APIBLMSearchSuggestedExtendedPage{
   String searchSuggestedPagePageType;
   String searchSuggestedPagePrivacy;
 
-  APIBLMSearchSuggestedExtendedPage({this.searchSuggestedPageId, this.searchSuggestedPageName, this.searchSuggestedPageDetails, this.searchSuggestedPageBackgroundImage, this.searchSuggestedPageProfileImage, this.searchSuggestedPageImagesOrVideos, this.searchSuggestedPageRelationship, this.searchSuggestedPagePageCreator, this.searchSuggestedPageManage, this.searchSuggestedPageFamOrFriends, this.searchSuggestedPageFollower, this.searchSuggestedPagePageType, this.searchSuggestedPagePrivacy});
+  APIBLMSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageBackgroundImage, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageImagesOrVideos, required this.searchSuggestedPageRelationship, required this.searchSuggestedPagePageCreator, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType, required this.searchSuggestedPagePrivacy});
 
   factory APIBLMSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedExtendedPage(
@@ -107,7 +108,7 @@ class APIBLMSearchSuggestedPageDetails{
   String searchSuggestedPageDetailsState;
   String searchSuggestedPageDetailsCountry;
 
-  APIBLMSearchSuggestedPageDetails({this.searchSuggestedPageDetailsDescription, this.searchSuggestedPageDetailsLocation, this.searchSuggestedPageDetailsPrecinct, this.searchSuggestedPageDetailsDob, this.searchSuggestedPageDetailsRip, this.searchSuggestedPageDetailsState, this.searchSuggestedPageDetailsCountry});
+  APIBLMSearchSuggestedPageDetails({required this.searchSuggestedPageDetailsDescription, required this.searchSuggestedPageDetailsLocation, required this.searchSuggestedPageDetailsPrecinct, required this.searchSuggestedPageDetailsDob, required this.searchSuggestedPageDetailsRip, required this.searchSuggestedPageDetailsState, required this.searchSuggestedPageDetailsCountry});
 
   factory APIBLMSearchSuggestedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedPageDetails(
@@ -131,7 +132,7 @@ class APIBLMSearchSuggestedExtendedPageCreator{
   String searchSuggestedPageCreatorUserName;
   dynamic searchSuggestedPageCreatorImage;
 
-  APIBLMSearchSuggestedExtendedPageCreator({this.searchSuggestedPageCreatorId, this.searchSuggestedPageCreatorFirstName, this.searchSuggestedPageCreatorLastName, this.searchSuggestedPageCreatorPhoneNumber, this.searchSuggestedPageCreatorEmail, this.searchSuggestedPageCreatorUserName, this.searchSuggestedPageCreatorImage});
+  APIBLMSearchSuggestedExtendedPageCreator({required this.searchSuggestedPageCreatorId, required this.searchSuggestedPageCreatorFirstName, required this.searchSuggestedPageCreatorLastName, required this.searchSuggestedPageCreatorPhoneNumber, required this.searchSuggestedPageCreatorEmail, required this.searchSuggestedPageCreatorUserName, required this.searchSuggestedPageCreatorImage});
 
   factory APIBLMSearchSuggestedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedExtendedPageCreator(

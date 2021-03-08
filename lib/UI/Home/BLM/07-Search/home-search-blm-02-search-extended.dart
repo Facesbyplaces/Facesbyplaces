@@ -40,7 +40,7 @@ class BLMSearchMainPosts{
   bool famOrFriends;
   String relationship;
 
-  BLMSearchMainPosts({this.userId, this.postId, this.memorialId, this.memorialName, this.timeCreated, this.postBody, this.profileImage, this.imagesOrVideos, this.managed, this.follower, this.numberOfLikes, this.numberOfComments, this.likeStatus, this.numberOfTagged, this.taggedFirstName, this.taggedLastName, this.taggedImage, this.taggedId, this.pageType, this.famOrFriends, this.relationship});
+  BLMSearchMainPosts({required this.userId, required this.postId, required this.memorialId, required this.memorialName, required this.timeCreated, required this.postBody, required this.profileImage, required this.imagesOrVideos, required this.managed, required this.follower, required this.numberOfLikes, required this.numberOfComments, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedImage, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class BLMSearchMainSuggested{
@@ -54,7 +54,7 @@ class BLMSearchMainSuggested{
   bool famOrFriends;
   String relationship;
 
-  BLMSearchMainSuggested({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
+  BLMSearchMainSuggested({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class BLMSearchMainNearby{
@@ -68,7 +68,7 @@ class BLMSearchMainNearby{
   bool famOrFriends;
   String relationship;
 
-  BLMSearchMainNearby({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
+  BLMSearchMainNearby({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 class BLMSearchMainBLM{
@@ -82,7 +82,7 @@ class BLMSearchMainBLM{
   bool famOrFriends;
   String relationship;
 
-  BLMSearchMainBLM({this.memorialId, this.memorialName, this.memorialDescription, this.image, this.managed, this.follower, this.pageType, this.famOrFriends, this.relationship});
+  BLMSearchMainBLM({required this.memorialId, required this.memorialName, required this.memorialDescription, required this.image, required this.managed, required this.follower, required this.pageType, required this.famOrFriends, required this.relationship});
 }
 
 
@@ -92,7 +92,7 @@ class HomeBLMPost extends StatefulWidget{
   final double latitude;
   final double longitude;
   final String currentLocation;
-  HomeBLMPost({this.keyword, this.newToggle, this.latitude, this.longitude, this.currentLocation});
+  HomeBLMPost({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
   HomeBLMPostState createState() => HomeBLMPostState(keyword: keyword, newToggle: newToggle, latitude: latitude, longitude: longitude, currentLocation: currentLocation);
 }
@@ -103,7 +103,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   final double latitude;
   final double longitude;
   final String currentLocation;
-  HomeBLMPostState({this.keyword, this.newToggle, this.latitude, this.longitude, this.currentLocation});
+  HomeBLMPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
   List<BLMSearchMainPosts> feeds = [];
@@ -119,12 +119,12 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   int page2 = 1;
   int page3 = 1;
   int page4 = 1;
-  int toggle;
+  int toggle = 0;
   int tabCount1 = 0;
   int tabCount2 = 0;
   int tabCount3 = 0;
   int tabCount4 = 0;
-  bool isGuestLoggedIn;
+  bool isGuestLoggedIn = false;
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -321,7 +321,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void initState(){
     super.initState();
-    isGuestLoggedIn = false;
     isGuest();
     toggle = newToggle;
     onLoading1();
@@ -353,7 +352,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
                 Container(
-                  width: SizeConfig.screenWidth / 1.3,
+                  width: SizeConfig.screenWidth! / 1.3,
                   child: TextFormField(
                     onChanged: (search){
                       
@@ -460,8 +459,8 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                   Container(
                     child: ((){
                       switch(toggle){
-                        case 0: return Container(height: 20,); break;
-                        case 1: return Container(height: 20,); break;
+                        case 0: return Container(height: 20,);
+                        case 1: return Container(height: 20,);
                         case 2: return 
                         Container(
                           height: 40,
@@ -476,7 +475,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 SizedBox(width: 20,),
 
                                 ((){
-                                  if(currentLocation != null || currentLocation != ''){
+                                  if(currentLocation != ''){
                                     return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12),);
                                   }else{
                                     return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
@@ -485,7 +484,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               ],
                             ),
                           ),
-                        ); break;
+                        );
                         case 3: return 
                         Container(
                           height: 40,
@@ -500,7 +499,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                 SizedBox(width: 20,),
 
                                 ((){
-                                  if(currentLocation != null || currentLocation != ''){
+                                  if(currentLocation != ''){
                                     return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }else{
                                     return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
@@ -509,7 +508,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               ],
                             ),
                           ),
-                        ); break;
+                        );
                       }
                     }()),
                   ),
@@ -523,10 +522,10 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                       )
                       : ((){
                         switch(toggle){
-                          case 0: return searchPostExtended(); break;
-                          case 1: return searchSuggestedExtended(); break;
-                          case 2: return searchNearbyExtended(); break;
-                          case 3: return searchBLMExtended(); break;
+                          case 0: return searchPostExtended();
+                          case 1: return searchSuggestedExtended();
+                          case 2: return searchNearbyExtended();
+                          case 3: return searchBLMExtended();
                         }
                       }()),
                     ),
@@ -553,7 +552,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -589,16 +588,16 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             contents: [
               Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-              feeds[i].imagesOrVideos != null
+              feeds[i].imagesOrVideos != []
               ? Column(
                 children: [
                   SizedBox(height: 20),
 
                   Container(
                     child: ((){
-                      if(feeds[i].imagesOrVideos != null){
+                      if(feeds[i].imagesOrVideos != []){
                         if(feeds[i].imagesOrVideos.length == 1){
-                          if(lookupMimeType(feeds[i].imagesOrVideos[0]).contains('video') == true){
+                          if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
                             return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
                               betterPlayerConfiguration: BetterPlayerConfiguration(
                                 controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -625,7 +624,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             crossAxisCount: 4,
                             itemCount: 2,
                             itemBuilder: (BuildContext context, int index) =>  
-                              lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                              lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                               ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                 betterPlayerConfiguration: BetterPlayerConfiguration(
                                   controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -654,7 +653,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                             itemBuilder: (BuildContext context, int index) => 
                             ((){
                               if(index != 1){
-                                return lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true
+                                return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
                                 ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                   betterPlayerConfiguration: BetterPlayerConfiguration(
                                     controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -673,7 +672,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                               }else{
                                 return ((){
                                   if(feeds[i].imagesOrVideos.length - 3 > 0){
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return Stack(
                                         children: [
                                           BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
@@ -733,7 +732,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
                                       );
                                     }
                                   }else{
-                                    if(lookupMimeType(feeds[i].imagesOrVideos[index]).contains('video') == true){
+                                    if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
                                       return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
                                         betterPlayerConfiguration: BetterPlayerConfiguration(
                                           controlsConfiguration: BetterPlayerControlsConfiguration(
@@ -782,7 +781,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -790,7 +789,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Text('Post is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 55 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 55 - kToolbarHeight) / 4,),
           ],
         ),
       ),
@@ -809,7 +808,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -832,6 +831,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             follower: suggested[i].follower,
             pageType: suggested[i].pageType,
             relationship: suggested[i].relationship,
+            famOrFriends: suggested[i].famOrFriends,
           );
         },
         separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
@@ -846,7 +846,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -854,7 +854,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Text('Suggested is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
         ),
       ),
@@ -873,7 +873,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -896,6 +896,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             follower: nearby[i].follower,
             pageType: nearby[i].pageType,
             relationship: nearby[i].relationship,
+            famOrFriends: nearby[i].famOrFriends,
           );
         },
         separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
@@ -910,7 +911,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -918,7 +919,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Text('Nearby is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
         ),
       ),
@@ -937,7 +938,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       footer: CustomFooter(
         loadStyle: LoadStyle.ShowWhenLoading,
         builder: (BuildContext context, LoadStatus mode){
-          Widget body;
+          Widget body = Container();
           if(mode == LoadStatus.loading){
             body = CircularProgressIndicator();
           }
@@ -960,6 +961,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             follower: blm[i].follower,
             pageType: blm[i].pageType,
             relationship: blm[i].relationship,
+            famOrFriends: blm[i].famOrFriends,
           );
         },
         separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
@@ -974,7 +976,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
 
             Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -982,7 +984,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
             Text('BLM is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-            SizedBox(height: (SizeConfig.screenHeight - 75 - kToolbarHeight) / 4,),
+            SizedBox(height: (SizeConfig.screenHeight! - 75 - kToolbarHeight) / 4,),
           ],
         ),
       ),

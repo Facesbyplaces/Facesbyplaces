@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiBLMUpdateUserProfilePicture({dynamic image, int userId}) async{
+Future<bool> apiBLMUpdateUserProfilePicture({required dynamic image, required int userId}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

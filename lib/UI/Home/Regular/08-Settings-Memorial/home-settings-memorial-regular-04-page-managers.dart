@@ -15,27 +15,33 @@ class RegularShowAdminSettings{
   final String relationship;
   final String email;
 
-  RegularShowAdminSettings({this.userId, this.firstName, this.lastName, this.image, this.relationship, this.email});
+  RegularShowAdminSettings({required this.userId, required this.firstName, required this.lastName, required this.image, required this.relationship, required this.email});
 }
 
 class HomeRegularPageManagers extends StatefulWidget{
   final int memorialId;
-  HomeRegularPageManagers({this.memorialId});
+  HomeRegularPageManagers({required this.memorialId});
 
   HomeRegularPageManagersState createState() => HomeRegularPageManagersState(memorialId: memorialId);
 }
 
 class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
   final int memorialId;
-  HomeRegularPageManagersState({this.memorialId});
+  HomeRegularPageManagersState({required this.memorialId});
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<RegularShowAdminSettings> adminList;
-  List<RegularShowAdminSettings> familyList;
-  int adminItemsRemaining;
-  int familyItemsRemaining;
-  int page1;
-  int page2;
+  List<RegularShowAdminSettings> adminList = [];
+  List<RegularShowAdminSettings> familyList = [];
+  int adminItemsRemaining = 1;
+  int familyItemsRemaining = 1;
+  int page1 = 1;
+  int page2 = 1;
+
+  void initState(){
+    super.initState();
+    onLoading1();
+    onLoading2();
+  }
 
   void onRefresh() async{
     await Future.delayed(Duration(milliseconds: 1000));
@@ -128,19 +134,6 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
     }
   }
 
-
-  void initState(){
-    super.initState();
-    adminList = [];
-    familyList = [];
-    adminItemsRemaining = 1;
-    familyItemsRemaining = 1;
-    page1 = 1;
-    page2 = 1;
-    onLoading1();
-    onLoading2();
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -170,7 +163,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               footer: CustomFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
                 builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
+                  Widget body = Container();
                   if(mode == LoadStatus.loading){
                     body = CircularProgressIndicator();
                   }
@@ -190,7 +183,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                         CircleAvatar(
                           radius: 40,
                           backgroundColor: Color(0xff888888), 
-                          backgroundImage: adminList[i].image != null ? NetworkImage(adminList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                          backgroundImage: NetworkImage(adminList[i].image),
                         ),
 
                         SizedBox(width: 25,),
@@ -211,7 +204,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                         SizedBox(width: 25,),
 
                         MaterialButton(
-                          minWidth: SizeConfig.screenWidth / 3.5,
+                          minWidth: SizeConfig.screenWidth! / 3.5,
                           padding: EdgeInsets.zero,
                           textColor: Color(0xffffffff),
                           splashColor: Color(0xffE74C3C),
@@ -262,7 +255,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
               footer: CustomFooter(
                 loadStyle: LoadStyle.ShowWhenLoading,
                 builder: (BuildContext context, LoadStatus mode){
-                  Widget body;
+                  Widget body = Container();
                   if(mode == LoadStatus.loading){
                     body = CircularProgressIndicator();
                   }
@@ -283,7 +276,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                         CircleAvatar(
                           radius: 40,
                           backgroundColor: Color(0xff888888), 
-                          backgroundImage: familyList[i].image != null ? NetworkImage(familyList[i].image) : AssetImage('assets/icons/app-icon.png'),
+                          backgroundImage: NetworkImage(familyList[i].image),
                         ),
 
                         SizedBox(width: 25,),
@@ -305,7 +298,7 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
                         SizedBox(width: 25,),
 
                         MaterialButton(
-                          minWidth: SizeConfig.screenWidth / 3.5,
+                          minWidth: SizeConfig.screenWidth! / 3.5,
                           padding: EdgeInsets.zero,
                           textColor: Color(0xffffffff),
                           splashColor: Color(0xff04ECFF),

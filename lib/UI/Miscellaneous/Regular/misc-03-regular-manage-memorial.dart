@@ -22,16 +22,16 @@ class MiscRegularManageMemorialTab extends StatefulWidget{
   final String relationship;
 
   MiscRegularManageMemorialTab({
-    this.index, 
+    required this.index, 
     this.memorialName = '',
     this.description = '',
-    this.image,
-    this.memorialId,
-    this.managed,
-    this.follower,
-    this.famOrFriends,
-    this.pageType,
-    this.relationship,
+    required this.image,
+    required this.memorialId,
+    required this.managed,
+    required this.follower,
+    required this.famOrFriends,
+    required this.pageType,
+    required this.relationship,
   });
 
   MiscRegularManageMemorialTabState createState() => MiscRegularManageMemorialTabState(index: index, memorialName: memorialName, description: description, image: image, memorialId: memorialId, managed: managed, follower: follower, famOrFriends: famOrFriends, pageType: pageType, relationship: relationship);
@@ -51,20 +51,20 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
   final String relationship;
 
   MiscRegularManageMemorialTabState({
-    this.index, 
-    this.memorialName,
-    this.description,
-    this.image,
-    this.memorialId,
-    this.managed,
-    this.follower,
-    this.famOrFriends,
-    this.pageType,
-    this.relationship,
+    required this.index, 
+    required this.memorialName,
+    required this.description,
+    required this.image,
+    required this.memorialId,
+    required this.managed,
+    required this.follower,
+    required this.famOrFriends,
+    required this.pageType,
+    required this.relationship,
   });
 
-  bool manageButton;
-  bool followButton;
+  bool manageButton = false;
+  bool followButton = false;
 
   void initState(){
     super.initState();
@@ -79,13 +79,13 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
       onTap: () async{
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
           }else{
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
           }
         }else{
           if(managed == true || famOrFriends == true){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
           }else{
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: follower,)));
           }
@@ -98,7 +98,8 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
           leading: CircleAvatar(
             radius: 30,
             backgroundColor: Color(0xff888888), 
-            backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
+            // backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
+            backgroundImage: NetworkImage(image),
           ),
           title: Text(memorialName,
             overflow: TextOverflow.ellipsis,

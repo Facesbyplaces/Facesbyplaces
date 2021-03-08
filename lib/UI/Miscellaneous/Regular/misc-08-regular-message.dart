@@ -38,7 +38,7 @@ class MiscRegularErrorMessageTemplate extends StatelessWidget{
                   color: Color(0xffffffff),
                 ),
               ),
-              minWidth: SizeConfig.screenWidth / 2,
+              minWidth: SizeConfig.screenWidth! / 2,
               height: 45,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
               color: Colors.grey,

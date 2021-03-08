@@ -10,7 +10,6 @@ class BLMMainPagesNotifications{
   int id;
   String createdAt;
   String updatedAt;
-  int recipientId;
   int actorId;
   String actorImage;
   bool read;
@@ -18,7 +17,7 @@ class BLMMainPagesNotifications{
   int postId;
   String notificationType;
 
-  BLMMainPagesNotifications({this.id, this.createdAt, this.updatedAt, this.recipientId, this.actorId, this.actorImage, this.read, this.action, this.postId, this.notificationType});
+  BLMMainPagesNotifications({required this.id, required this.createdAt, required this.updatedAt, required this.actorId, required this.actorImage, required this.read, required this.action, required this.postId, required this.notificationType});
 }
 
 class HomeBLMNotificationsTab extends StatefulWidget{
@@ -29,17 +28,13 @@ class HomeBLMNotificationsTab extends StatefulWidget{
 class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
   RefreshController refreshController = RefreshController(initialRefresh: true);
-  List<BLMMainPagesNotifications> notifications;
-  int itemRemaining;
-  int page;
-  int count;
+  List<BLMMainPagesNotifications> notifications = [];
+  int itemRemaining = 1;
+  int page = 1;
+  int count = 0;
 
   void initState(){
     super.initState();
-    notifications = [];
-    itemRemaining = 1;
-    count = 0;
-    page = 1;
     onLoading();
   }
 
@@ -101,7 +96,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
         footer: CustomFooter(
           loadStyle: LoadStyle.ShowWhenLoading,
           builder: (BuildContext context, LoadStatus mode){
-            Widget body;
+            Widget body = Container();
             if(mode == LoadStatus.loading){
               body = CircularProgressIndicator();
             }
@@ -137,7 +132,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
 
               Image.asset('assets/icons/app-icon.png', height: 250, width: 250,),
 
@@ -145,7 +140,7 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
 
               Text('Notification is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xffB1B1B1),),),
 
-              SizedBox(height: (SizeConfig.screenHeight - 85 - kToolbarHeight) / 3.5,),
+              SizedBox(height: (SizeConfig.screenHeight! - 85 - kToolbarHeight) / 3.5,),
             ],
           ),
         ),

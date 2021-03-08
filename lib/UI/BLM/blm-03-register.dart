@@ -38,11 +38,11 @@ class BLMRegister extends StatelessWidget{
 
               SingleChildScrollView(physics: NeverScrollableScrollPhysics(), child: Container(height: SizeConfig.screenHeight, child: MiscBLMBackgroundTemplate(image: AssetImage('assets/icons/background2.png'),),),),
 
-              Container(height: SizeConfig.screenHeight / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background-blm.png'),),),),
+              Container(height: SizeConfig.screenHeight! / 6, decoration: BoxDecoration(image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/icons/background-blm.png'),),),),
 
               Column(
                 children: [
-                  SizedBox(height: SizeConfig.screenHeight / 6,),
+                  SizedBox(height: SizeConfig.screenHeight! / 6,),
 
                   Expanded(
                     child: Container(
@@ -85,9 +85,9 @@ class BLMRegister extends StatelessWidget{
                               ), 
                               onPressed: () async{
                                 bool validEmail = false;
-                                validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState.controller.text );
+                                validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key4.currentState!.controller.text );
 
-                                if(_key1.currentState.controller.text == '' || _key2.currentState.controller.text == '' || _key3.currentState.controller.text == '' || _key4.currentState.controller.text == '' || _key5.currentState.controller.text == '' || _key6.currentState.controller.text == ''){
+                                if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == '' || _key3.currentState!.controller.text == '' || _key4.currentState!.controller.text == '' || _key5.currentState!.controller.text == '' || _key6.currentState!.controller.text == ''){
                                   await showDialog(
                                     context: context,
                                     builder: (_) => 
@@ -125,7 +125,7 @@ class BLMRegister extends StatelessWidget{
                                       },
                                     )
                                   );
-                                }else if(!_key3.currentState.valid){
+                                }else if(!_key3.currentState!.valid){
                                   await showDialog(
                                     context: context,
                                     builder: (_) => 
@@ -147,12 +147,12 @@ class BLMRegister extends StatelessWidget{
                                 }else{
 
                                   APIBLMAccountRegistration account = APIBLMAccountRegistration(
-                                    firstName: _key1.currentState.controller.text, 
-                                    lastName: _key2.currentState.controller.text,
-                                    phoneNumber: _key3.currentState.controller.text,
-                                    email: _key4.currentState.controller.text,
-                                    username: _key5.currentState.controller.text,
-                                    password: _key6.currentState.controller.text,
+                                    firstName: _key1.currentState!.controller.text, 
+                                    lastName: _key2.currentState!.controller.text,
+                                    phoneNumber: _key3.currentState!.controller.text,
+                                    email: _key4.currentState!.controller.text,
+                                    username: _key5.currentState!.controller.text,
+                                    password: _key6.currentState!.controller.text,
                                   );
 
                                   context.showLoaderOverlay();
@@ -161,7 +161,7 @@ class BLMRegister extends StatelessWidget{
 
                                   if(result == 'Success'){
                                     final sharedPrefs = await SharedPreferences.getInstance();
-                                    String verificationCode = sharedPrefs.getString('blm-verification-code');
+                                    String verificationCode = sharedPrefs.getString('blm-verification-code')!;
                                     Navigator.pushNamed(context, '/blm/verify-email', arguments: verificationCode);
                                   }else{
                                     await showDialog(
@@ -186,7 +186,7 @@ class BLMRegister extends StatelessWidget{
                                 }
 
                               }, 
-                              width: SizeConfig.screenWidth / 2,
+                              width: SizeConfig.screenWidth! / 2,
                               height: 45,
                               buttonColor: Color(0xff000000),
                             ),

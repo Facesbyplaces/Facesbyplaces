@@ -17,11 +17,11 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
 
   MiscRegularNotificationDisplayTemplate({
     this.imageIcon = '',
-    this.notification,
-    this.dateCreated,
-    this.postId,
-    this.notificationType,
-    this.readStatus,
+    required this.notification,
+    required this.dateCreated,
+    required this.postId,
+    required this.notificationType,
+    required this.readStatus,
   });
 
   @override
@@ -48,7 +48,11 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
         }
       },
-      leading: CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png')),
+      leading: CircleAvatar(
+        backgroundColor: Color(0xff888888), 
+        // backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png'),
+        backgroundImage: NetworkImage(imageIcon),
+      ),
       title: Text(notification, style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
       subtitle: Text(dateCreated),
     );

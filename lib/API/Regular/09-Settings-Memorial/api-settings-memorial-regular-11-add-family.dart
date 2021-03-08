@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart';
 
-Future<bool> apiRegularAddFamily({int memorialId, int userId, String relationship, int accountType}) async{
+Future<bool> apiRegularAddFamily({required int memorialId, required int userId, required String relationship, required int accountType}) async{
 
   bool result = false;
   final sharedPrefs = await SharedPreferences.getInstance();

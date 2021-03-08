@@ -2,14 +2,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({int memorialId}) async{
+Future<APIBLMShowPageDetailsMain> apiBLMShowPageDetails({required int memorialId}) async{
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId',
+  final http.Response response = await http.get(
+    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/blm/$memorialId', ''),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -30,7 +31,7 @@ class APIBLMShowPageDetailsMain{
 
   APIBLMShowPageDetailsExtended blmMemorial;
 
-  APIBLMShowPageDetailsMain({this.blmMemorial});
+  APIBLMShowPageDetailsMain({required this.blmMemorial});
 
   factory APIBLMShowPageDetailsMain.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsMain(
@@ -50,7 +51,7 @@ class APIBLMShowPageDetailsExtended{
   String showPageDetailsRelationship;
   APIBLMShowPageDetailsExtendedPageCreator showPageDetailsPageCreator;
 
-  APIBLMShowPageDetailsExtended({this.showPageDetailsId, this.showPageDetailsName, this.showPageDetailsDetails, this.showPageDetailsBackgroundImage, this.showPageDetailsProfileImage, this.showPageDetailsImagesOrVideos, this.showPageDetailsRelationship, this.showPageDetailsPageCreator});
+  APIBLMShowPageDetailsExtended({required this.showPageDetailsId, required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsBackgroundImage, required this.showPageDetailsProfileImage, required this.showPageDetailsImagesOrVideos, required this.showPageDetailsRelationship, required this.showPageDetailsPageCreator});
 
   factory APIBLMShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtended(
@@ -76,7 +77,7 @@ class APIBLMShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsState;
   String showPageDetailsDetailsCountry;
 
-  APIBLMShowPageDetailsExtendedDetails({this.showPageDetailsDetailsDescription, this.showPageDetailsDetailsLocation, this.showPageDetailsDetailsPrecinct, this.showPageDetailsDetailsDob, this.showPageDetailsDetailsRip, this.showPageDetailsDetailsState, this.showPageDetailsDetailsCountry});
+  APIBLMShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsLocation, required this.showPageDetailsDetailsPrecinct, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsState, required this.showPageDetailsDetailsCountry});
 
   factory APIBLMShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedDetails(
@@ -100,7 +101,7 @@ class APIBLMShowPageDetailsExtendedPageCreator{
   String showPageDetailsPageCreatorUserName;
   dynamic showPageDetailsPageCreatorImage;
 
-  APIBLMShowPageDetailsExtendedPageCreator({this.showPageDetailsPageCreatorId, this.showPageDetailsPageCreatorFirstName, this.showPageDetailsPageCreatorLastName, this.showPageDetailsPageCreatorPhoneNumber, this.showPageDetailsPageCreatorEmail, this.showPageDetailsPageCreatorUserName, this.showPageDetailsPageCreatorImage});
+  APIBLMShowPageDetailsExtendedPageCreator({required this.showPageDetailsPageCreatorId, required this.showPageDetailsPageCreatorFirstName, required this.showPageDetailsPageCreatorLastName, required this.showPageDetailsPageCreatorPhoneNumber, required this.showPageDetailsPageCreatorEmail, required this.showPageDetailsPageCreatorUserName, required this.showPageDetailsPageCreatorImage});
 
   factory APIBLMShowPageDetailsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowPageDetailsExtendedPageCreator(

@@ -19,13 +19,13 @@ class RegularSearchUsers{
   final String email;
   final int accountType;
 
-  RegularSearchUsers({this.userId, this.firstName, this.lastName, this.image, this.email, this.accountType});
+  RegularSearchUsers({required this.userId, required this.firstName, required this.lastName, required this.image, required this.email, required this.accountType});
 }
 
 class HomeRegularSearchUser extends StatefulWidget{
   final bool isFamily;
   final int memorialId;
-  HomeRegularSearchUser({this.isFamily, this.memorialId});
+  HomeRegularSearchUser({required this.isFamily, required this.memorialId});
 
   @override
   HomeRegularSearchUserState createState() => HomeRegularSearchUserState(isFamily: isFamily, memorialId: memorialId);
@@ -34,23 +34,18 @@ class HomeRegularSearchUser extends StatefulWidget{
 class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
   final bool isFamily;
   final int memorialId;
-  HomeRegularSearchUserState({this.isFamily, this.memorialId});
+  HomeRegularSearchUserState({required this.isFamily, required this.memorialId});
   
   RefreshController refreshController = RefreshController(initialRefresh: true);
   TextEditingController controller = TextEditingController();
-  List<RegularSearchUsers> users;
-  int itemRemaining;
-  String keywords;
-  bool empty;
-  int page;
+  List<RegularSearchUsers> users = [];
+  int itemRemaining = 1;
+  String keywords = '';
+  bool empty = true;
+  int page = 1;
 
   void initState(){
     super.initState();
-    users = [];
-    empty = true;
-    page = 1;
-    itemRemaining = 1;
-    keywords = '';
   }
 
   String convertDate(String input){
@@ -118,7 +113,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                   child: IconButton(icon: Icon(Icons.arrow_back, color: Color(0xffffffff),), onPressed: (){Navigator.pop(context);},),
                 ),
                 Container(
-                  width: SizeConfig.screenWidth / 1.3,
+                  width: SizeConfig.screenWidth! / 1.3,
                   child: TextFormField(
                     onChanged: (newPlaces){
                       setState(() {
@@ -192,7 +187,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
             backgroundColor: Color(0xff04ECFF),
           ),
           body: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
+            height: SizeConfig.screenHeight! - kToolbarHeight,
             width: SizeConfig.screenWidth,
             child: empty
             ? SingleChildScrollView(
@@ -200,7 +195,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
               padding: EdgeInsets.zero,
               child: Column(
                 children: [
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                   Image.asset('assets/icons/search-user.png', height: 240, width: 240,),
 
@@ -208,7 +203,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
 
                   Text('Search a location to add on your post', style: TextStyle(fontSize: 16, color: Color(0xff000000),),),
 
-                  SizedBox(height: (SizeConfig.screenHeight - kToolbarHeight) / 3.5,),
+                  SizedBox(height: (SizeConfig.screenHeight! - kToolbarHeight) / 3.5,),
 
                 ],
               ),
@@ -225,7 +220,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                 footer: CustomFooter(
                   loadStyle: LoadStyle.ShowWhenLoading,
                   builder: (BuildContext context, LoadStatus mode){
-                    Widget body;
+                    Widget body = Container();
                     if(mode == LoadStatus.loading){
                       body = CircularProgressIndicator();
                     }
@@ -310,7 +305,7 @@ class HomeRegularSearchUserState extends State<HomeRegularSearchUser>{
                             CircleAvatar(
                               maxRadius: 40,
                               backgroundColor: Color(0xff888888),
-                              backgroundImage: users[index].image != null ? NetworkImage(users[index].image) : AssetImage('assets/icons/app-icon.png'),
+                              backgroundImage: NetworkImage(users[index].image),
                             ),
 
                             SizedBox(width: 25,),

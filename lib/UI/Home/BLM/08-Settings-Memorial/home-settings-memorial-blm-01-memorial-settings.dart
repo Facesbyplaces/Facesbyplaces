@@ -21,7 +21,7 @@ class HomeBLMMemorialSettings extends StatefulWidget{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeBLMMemorialSettings({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeBLMMemorialSettings({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
   
   HomeBLMMemorialSettingsState createState() => HomeBLMMemorialSettingsState(memorialId: memorialId, memorialName: memorialName, switchFamily: switchFamily, switchFriends: switchFriends, switchFollowers: switchFollowers);
 }
@@ -32,20 +32,19 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
   final bool switchFamily;
   final bool switchFriends;
   final bool switchFollowers;
-  HomeBLMMemorialSettingsState({this.memorialId, this.memorialName, this.switchFamily, this.switchFriends, this.switchFollowers});
+  HomeBLMMemorialSettingsState({required this.memorialId, required this.memorialName, required this.switchFamily, required this.switchFriends, required this.switchFollowers});
   
-  int toggle;
-  bool isSwitched1;
-  bool isSwitched2;
-  bool isSwitched3;
-  Future switchStatus;
+  int toggle = 0;
+  bool isSwitched1 = false;
+  bool isSwitched2 = false;
+  bool isSwitched3 = false;
+  Future? switchStatus;
 
   void initState(){
     super.initState();
     isSwitched1 = switchFamily;
     isSwitched2 = switchFriends;
     isSwitched3 = switchFollowers;
-    toggle = 0;
   }
 
   @override
@@ -74,7 +73,7 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
         ],
         child: SingleChildScrollView(
           child: Container(
-            height: SizeConfig.screenHeight - kToolbarHeight,
+            height: SizeConfig.screenHeight! - kToolbarHeight,
             child: Column(
               children: [
                 Container(
@@ -120,8 +119,8 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                   child: Container(
                     child: ((){
                       switch(toggle){
-                        case 0: return settingsTab1(memorialId); break;
-                        case 1: return settingsTab2(memorialId); break;
+                        case 0: return settingsTab1(memorialId);
+                        case 1: return settingsTab2(memorialId);
                       }
                     }()),
                   ),

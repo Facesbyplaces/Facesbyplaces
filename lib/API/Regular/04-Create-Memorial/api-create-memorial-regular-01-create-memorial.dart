@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 
-Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
+Future<int> apiRegularCreateMemorial({required APIRegularCreateMemorial memorial}) async{
   
   int result = 0;
   final sharedPrefs = await SharedPreferences.getInstance();
@@ -25,11 +25,11 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
       MapEntry('relationship', MultipartFile.fromString(memorial.almRelationship,),),
     ]);
 
-    if(memorial.almLatitude != null){
+    if(memorial.almLatitude != ''){
       MapEntry('memorial[latitude]', MultipartFile.fromString(memorial.almLatitude,),);
     }
 
-    if(memorial.almLongitude != null){
+    if(memorial.almLongitude != ''){
       MapEntry('memorial[longitude]', MultipartFile.fromString(memorial.almLongitude,),);
     }
 
@@ -43,7 +43,8 @@ Future<int> apiRegularCreateMemorial({APIRegularCreateMemorial memorial}) async{
       formData.files.add(MapEntry('memorial[profileImage]', file));
     }
     
-    if(memorial.almImagesOrVideos != null || memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
+    // if(memorial.almImagesOrVideos != null || memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
+    if(memorial.almImagesOrVideos != [''] || memorial.almImagesOrVideos != [null]){
 
       for(int i = 0; i < memorial.almImagesOrVideos.length; i++){
         if(memorial.almImagesOrVideos[i].path != null || memorial.almImagesOrVideos != ['']){
@@ -94,18 +95,18 @@ class APIRegularCreateMemorial{
   String almLongitude;
 
   APIRegularCreateMemorial({
-    this.almMemorialName, 
-    this.almDescription, 
-    this.almBirthPlace, 
-    this.almDob, 
-    this.almRip, 
-    this.almCemetery,
-    this.almCountry, 
-    this.almRelationship, 
-    this.almBackgroundImage, 
-    this.almProfileImage, 
-    this.almLatitude,
-    this.almImagesOrVideos,
-    this.almLongitude,
+    required this.almMemorialName, 
+    required this.almDescription, 
+    required this.almBirthPlace, 
+    required this.almDob, 
+    required this.almRip, 
+    required this.almCemetery,
+    required this.almCountry, 
+    required this.almRelationship, 
+    required this.almBackgroundImage, 
+    required this.almProfileImage, 
+    required this.almLatitude,
+    required this.almImagesOrVideos,
+    required this.almLongitude,
   });
 }
