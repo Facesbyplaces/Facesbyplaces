@@ -131,7 +131,7 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def contactUser
         message = params[:message]
-        if params[:account_type] == '1'
+        if params[:account_type] == '1' || 1
             userEmail = User.find(params[:id]).email
         else
             userEmail = AlmUser.find(params[:id]).email
