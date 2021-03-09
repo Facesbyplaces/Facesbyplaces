@@ -18,7 +18,7 @@ export const TokenValidation = (token_valid) => {
     data: token_valid,
   };
 };
-
+// USER
 export const AddUserAction = (option) => {
   return {
     type: "VIEW_USER",
@@ -53,6 +53,7 @@ export const TableUserAction = () => {
   };
 };
 
+// MEMORIAL
 export const DeleteMemorialAction = (memorial) => {
   return {
     type: "DELETE_MEMORIAL",
@@ -84,5 +85,40 @@ export const AddMemorialAction = (option) => {
 export const TableMemorialAction = () => {
   return {
     type: "TABLE_MEMORIAL",
+  };
+};
+
+// POST
+export const DeletePostAction = (post) => {
+  return {
+    type: "DELETE_POST",
+    data: post,
+  };
+};
+
+export const ViewPostAction = (post) => {
+  return {
+    type: "VIEW_POST",
+    data: post,
+  };
+};
+
+export const EditPostAction = (post) => {
+  return {
+    type: "EDIT_POST",
+    data: post,
+  };
+};
+
+export const AddPostAction = (option) => {
+  return {
+    type: "ADD_POST",
+    data: option,
+  };
+};
+
+export const TablePostAction = () => {
+  return {
+    type: "TABLE_post",
   };
 };

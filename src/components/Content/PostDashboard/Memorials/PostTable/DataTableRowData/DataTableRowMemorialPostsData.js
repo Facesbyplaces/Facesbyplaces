@@ -5,29 +5,33 @@ import HashLoader from "react-spinners/HashLoader";
 
 import { useDispatch } from "react-redux";
 import {
-  ViewMemorialAction,
-  EditMemorialAction,
-  DeleteMemorialAction,
+  ViewPostAction,
+  EditPostAction,
+  DeletePostAction,
 } from "../../../../../../redux/actions";
 
-export default function DataTableRowMemorialData({ posts, search, pageType }) {
+export default function DataTableRowMemorialPostsData({
+  posts,
+  search,
+  pageType,
+}) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
 
   console.log(posts);
 
-  const handleViewClick = (id, page, option, type) => {
+  const handleViewClick = (id, option, type) => {
     console.log(id, option);
-    dispatch(ViewMemorialAction({ id, page, option, type }));
+    dispatch(ViewPostAction({ id, option, type }));
   };
 
-  const handleEditClick = (id, page, option, type) => {
-    dispatch(EditMemorialAction({ id, page, option, type }));
+  const handleEditClick = (id, option, type) => {
+    dispatch(EditPostAction({ id, option, type }));
   };
 
-  const handleDeleteClick = (id, page, option) => {
-    dispatch(DeleteMemorialAction({ id, page, option }));
+  const handleDeleteClick = (id, option) => {
+    dispatch(DeletePostAction({ id, option }));
     setShowModal((prev) => !prev);
   };
 
@@ -88,7 +92,7 @@ export default function DataTableRowMemorialData({ posts, search, pageType }) {
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() => handleViewClick(post.id, page_type, "v", 2)}
+          onClick={() => handleViewClick(post.id, "v", 2)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}

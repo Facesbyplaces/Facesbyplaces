@@ -44,28 +44,6 @@ export default function Navbar() {
                   <i className="menu-arrow" />
                 </a>
               </li>
-              <li
-                className="menu-item menu-item-submenu menu-item-rel"
-                data-menu-toggle="click"
-                aria-haspopup="true"
-              >
-                <a href="javascript:;" className="menu-link menu-toggle">
-                  <span className="menu-text">Apps</span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
-                </a>
-              </li>
-              <li
-                className="menu-item menu-item-submenu"
-                data-menu-toggle="click"
-                aria-haspopup="true"
-              >
-                <a href="javascript:;" className="menu-link menu-toggle">
-                  <span className="menu-text">Pages</span>
-                  <span className="menu-desc" />
-                  <i className="menu-arrow" />
-                </a>
-              </li>
             </ul>
             {/*end::Header Nav*/}
           </div>

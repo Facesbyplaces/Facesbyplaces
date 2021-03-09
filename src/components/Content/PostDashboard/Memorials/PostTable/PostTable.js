@@ -16,8 +16,8 @@ import { SuccessModal } from "../MemorialCRUD/SuccessModal";
 export default function MemorialsTable() {
   const [showModal, setShowModal] = useState(true);
   const [pageType, setPageType] = useState(2);
-  const { memorialTab } = useSelector(({ memorialTab }) => ({
-    memorialTab: memorialTab,
+  const { postTab } = useSelector(({ postTab }) => ({
+    postTab: postTab,
   }));
 
   return (
@@ -26,8 +26,8 @@ export default function MemorialsTable() {
       id="kt_content"
     >
       {(() => {
-        if (memorialTab.type === 2) {
-          switch (memorialTab.option) {
+        if (postTab.type === 2) {
+          switch (postTab.option) {
             case "v":
               return <ViewMemorial />;
             case "e":
@@ -58,7 +58,7 @@ export default function MemorialsTable() {
               );
           }
         } else {
-          switch (memorialTab.option) {
+          switch (postTab.option) {
             case "v":
               return <ViewBlm />;
             case "e":

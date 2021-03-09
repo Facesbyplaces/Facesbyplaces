@@ -4,12 +4,14 @@ import axios from "../../../../../auxiliary/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { TableUserAction } from "../../../../../redux/actions";
 import EditUser from "./EditUser";
+import { ContactUser } from "./ContactUser";
 
 export default function User() {
   const dispatch = useDispatch();
   const [user, setUser] = useState([]);
   const [image, setImage] = useState(null);
   const [profile, setProfile] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,
   }));
@@ -232,6 +234,21 @@ export default function User() {
                           </span>
                           {user.phone_number}
                         </a>
+                      </div>
+                      <div className="d-flex flex-wrap mt-2">
+                        <div className="my-lg-0 my-3">
+                          <a
+                            className="btn btn-md btn-light-warning font-weight-bolder text-uppercase mr-3"
+                            onClick={() => setShowModal((prev) => !prev)}
+                          >
+                            contact user
+                          </a>
+                        </div>
+                        <ContactUser
+                          user={user}
+                          showModal={showModal}
+                          setShowModal={setShowModal}
+                        />
                       </div>
                     </div>
                   </div>

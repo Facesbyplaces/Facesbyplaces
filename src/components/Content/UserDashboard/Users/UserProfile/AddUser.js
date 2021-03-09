@@ -19,7 +19,6 @@ export default function AddUser() {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const { tab } = useSelector(({ tab }) => ({
     tab: tab,

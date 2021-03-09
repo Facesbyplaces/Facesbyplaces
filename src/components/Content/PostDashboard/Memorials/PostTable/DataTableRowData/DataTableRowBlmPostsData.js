@@ -10,7 +10,7 @@ import {
   DeleteMemorialAction,
 } from "../../../../../../redux/actions";
 
-export default function DataTableRowBlmData({ posts, search, pageType }) {
+export default function DataTableRowBlmPostsData({ posts, search, pageType }) {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";

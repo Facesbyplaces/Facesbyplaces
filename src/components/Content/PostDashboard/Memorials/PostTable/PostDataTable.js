@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../../../auxiliary/axios";
 //Data Table
-import DataTableRowMemorialData from "./DataTableRowData/DataTableRowMemorialData";
-import DataTableRowBlmData from "./DataTableRowData/DataTableRowBlmData";
+import DataTableRowMemorialPostsData from "./DataTableRowData/DataTableRowMemorialPostsData";
+import DataTableRowBlmPostsData from "./DataTableRowData/DataTableRowBlmPostsData";
 //Loader
 import HashLoader from "react-spinners/HashLoader";
 
@@ -122,13 +122,13 @@ export default function PostDataTable({
             </tr>
           </tbody>
         ) : pageType == 2 ? (
-          <DataTableRowMemorialData
+          <DataTableRowMemorialPostsData
             posts={memorialPosts}
             search={search}
             pageType={pageType}
           />
         ) : (
-          <DataTableRowBlmData
+          <DataTableRowBlmPostsData
             posts={blmPosts}
             search={search}
             pageType={pageType}

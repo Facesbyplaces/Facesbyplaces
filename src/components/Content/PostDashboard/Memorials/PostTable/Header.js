@@ -18,7 +18,7 @@ export default function Header({ pageType }) {
         <h3 className="card-label">
           Posts Datatable
           <span className="d-block text-muted pt-2 font-size-sm">
-            List of Posts
+            List of ALM and BLM Memorial posts
           </span>
         </h3>
       </div>
