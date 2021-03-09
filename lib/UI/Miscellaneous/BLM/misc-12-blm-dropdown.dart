@@ -1,12 +1,12 @@
 import 'package:facesbyplaces/UI/Home/BLM/06-Report/home-report-blm-01-report.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc-blm-misc.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // import 'package:full_screen_menu/full_screen_menu.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
-import 'package:clipboard/clipboard.dart';
+// import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -37,33 +37,33 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
 
   MiscBLMDropDownTemplateState({required this.postId, required this.likePost, required this.likesCount, required this.reportType, required this.pageType});
 
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
+  // BranchUniversalObject? buo;
+  // BranchLinkProperties? lp;
   GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Post')
-        ..addCustomMetadata('link-post-id', postId)
-        ..addCustomMetadata('link-like-status', likePost)
-        ..addCustomMetadata('link-number-of-likes', likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Blm')
-    );
+    // buo = BranchUniversalObject(
+    //   canonicalIdentifier: 'FacesbyPlaces',
+    //   title: 'FacesbyPlaces Link',
+    //   imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+    //   contentDescription: 'FacesbyPlaces link to the app',
+    //   keywords: ['FacesbyPlaces', 'Share', 'Link'],
+    //   publiclyIndex: true,
+    //   locallyIndex: true,
+    //   contentMetadata: BranchContentMetaData()
+    //     ..addCustomMetadata('link-category', 'Post')
+    //     ..addCustomMetadata('link-post-id', postId)
+    //     ..addCustomMetadata('link-like-status', likePost)
+    //     ..addCustomMetadata('link-number-of-likes', likesCount)
+    //     ..addCustomMetadata('link-type-of-account', 'Blm')
+    // );
 
-    lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    // lp = BranchLinkProperties(
+    //     feature: 'sharing',
+    //     stage: 'new share',
+    //   tags: ['one', 'two', 'three']
+    // );
+    // lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   Future<void> shareQRCode() async {
@@ -112,24 +112,24 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
             onChanged: (String? listValue) async{
               dropDownList = listValue!;
               if(dropDownList == 'Share'){
-                initBranchShare();
+                // initBranchShare();
 
-                FlutterBranchSdk.setIdentity('blm-share-link');
+                // FlutterBranchSdk.setIdentity('blm-share-link');
 
-                BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                  buo: buo!,
-                  linkProperties: lp!,
-                  messageText: 'FacesbyPlaces App',
-                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                );
+                // BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                //   buo: buo!,
+                //   linkProperties: lp!,
+                //   messageText: 'FacesbyPlaces App',
+                //   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                //   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                // );
 
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                } else {
-                  FlutterBranchSdk.logout();
-                  print('Error : ${response.errorCode} - ${response.errorMessage}');
-                }
+                // if (response.success) {
+                //   print('Link generated: ${response.result}');
+                // } else {
+                //   FlutterBranchSdk.logout();
+                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                // }
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: postId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
@@ -192,20 +192,20 @@ class MiscBLMDropDownTemplateState extends State<MiscBLMDropDownTemplate>{
                 //   ],
                 // );
               }else{
-                initBranchShare();
-                FlutterBranchSdk.setIdentity('blm-share-copied-link');
+                // initBranchShare();
+                // FlutterBranchSdk.setIdentity('blm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                } else {
-                  FlutterBranchSdk.logout();
-                  print('Error : ${response.errorCode} - ${response.errorMessage}');
-                }
+                // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                // if (response.success) {
+                //   print('Link generated: ${response.result}');
+                // } else {
+                //   FlutterBranchSdk.logout();
+                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                // }
 
 
-                // FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
-                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
+                // // FlutterClipboard.copy(response.result).then((value) => Scaffold.of(context).showSnackBar(snackBar));
+                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
 
               }
             },
@@ -238,31 +238,31 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
 
   final snackBar = SnackBar(content: Text('Link copied!'), backgroundColor: Color(0xff4EC9D4), duration: Duration(seconds: 2), behavior: SnackBarBehavior.floating,);
 
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
+  // BranchUniversalObject? buo;
+  // BranchLinkProperties? lp;
   GlobalKey qrKey = new GlobalKey();
 
   void initBranchShare(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Memorial')
-        ..addCustomMetadata('link-memorial-id', memorialId)
-        ..addCustomMetadata('link-type-of-account', pageType)
-    );
+    // buo = BranchUniversalObject(
+    //   canonicalIdentifier: 'FacesbyPlaces',
+    //   title: 'FacesbyPlaces Link',
+    //   imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+    //   contentDescription: 'FacesbyPlaces link to the app',
+    //   keywords: ['FacesbyPlaces', 'Share', 'Link'],
+    //   publiclyIndex: true,
+    //   locallyIndex: true,
+    //   contentMetadata: BranchContentMetaData()
+    //     ..addCustomMetadata('link-category', 'Memorial')
+    //     ..addCustomMetadata('link-memorial-id', memorialId)
+    //     ..addCustomMetadata('link-type-of-account', pageType)
+    // );
 
-    lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    // lp = BranchLinkProperties(
+    //     feature: 'sharing',
+    //     stage: 'new share',
+    //   tags: ['one', 'two', 'three']
+    // );
+    // lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   Future<void> shareQRCode() async {
@@ -311,23 +311,23 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
             onChanged: (String? listValue) async{
               dropDownList = listValue!;
               if(dropDownList == 'Share'){
-                initBranchShare();
+                // initBranchShare();
 
-                FlutterBranchSdk.setIdentity('blm-share-link');
+                // FlutterBranchSdk.setIdentity('blm-share-link');
 
-                BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                  buo: buo!,
-                  linkProperties: lp!,
-                  messageText: 'FacesbyPlaces App',
-                  androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                  androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                );
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                } else {
-                  FlutterBranchSdk.logout();
-                  print('Error : ${response.errorCode} - ${response.errorMessage}');
-                }
+                // BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                //   buo: buo!,
+                //   linkProperties: lp!,
+                //   messageText: 'FacesbyPlaces App',
+                //   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                //   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                // );
+                // if (response.success) {
+                //   print('Link generated: ${response.result}');
+                // } else {
+                //   FlutterBranchSdk.logout();
+                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                // }
               }else if(dropDownList == 'Report'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMReport(postId: memorialId, reportType: reportType,)));
               }else if(dropDownList == 'QR Code'){
@@ -390,18 +390,18 @@ class MiscBLMDropDownMemorialTemplateState extends State<MiscBLMDropDownMemorial
                 //   ],
                 // );
               }else{
-                initBranchShare();
-                FlutterBranchSdk.setIdentity('blm-share-copied-link');
+                // initBranchShare();
+                // FlutterBranchSdk.setIdentity('blm-share-copied-link');
 
-                BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
-                if (response.success) {
-                  print('Link generated: ${response.result}');
-                } else {
-                  FlutterBranchSdk.logout();
-                  print('Error : ${response.errorCode} - ${response.errorMessage}');
-                }
+                // BranchResponse response = await FlutterBranchSdk.getShortUrl(buo: buo!, linkProperties: lp!);
+                // if (response.success) {
+                //   print('Link generated: ${response.result}');
+                // } else {
+                //   FlutterBranchSdk.logout();
+                //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                // }
 
-                FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
+                // FlutterClipboard.copy(response.result).then((value) => ScaffoldMessenger(child: Text('Link copied!'),));
               }
             },
           );

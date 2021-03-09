@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-04-home-notifications-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-10-regular-notification-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class HomeRegularNotificationsTab extends StatefulWidget{
 
 class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab>{
 
-  RefreshController refreshController = RefreshController(initialRefresh: true);
+  // RefreshController refreshController = RefreshController(initialRefresh: true);
   List<RegularMainPagesNotifications> notifications = [];
   int itemRemaining = 1;
   int page = 1;
@@ -38,10 +38,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
     onLoading();
   }
 
-  void onRefresh() async{
-    await Future.delayed(Duration(milliseconds: 1000));
-    refreshController.refreshCompleted();
-  }
+  // void onRefresh() async{
+  //   await Future.delayed(Duration(milliseconds: 1000));
+  //   refreshController.refreshCompleted();
+  // }
 
   void onLoading() async{
     if(itemRemaining != 0){
@@ -72,10 +72,10 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
       setState(() {});
       page++;
       
-      refreshController.loadComplete();
+      // refreshController.loadComplete();
       
     }else{
-      refreshController.loadNoData();
+      // refreshController.loadNoData();
     }
   }
 
@@ -86,42 +86,43 @@ class HomeRegularNotificationsTabState extends State<HomeRegularNotificationsTab
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: true,
-        header: MaterialClassicHeader(
-          color: Color(0xffffffff),
-          backgroundColor: Color(0xff4EC9D4),
-        ),
-        footer: CustomFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-          builder: (BuildContext context, LoadStatus mode){
-            Widget body = Container();
-            if(mode == LoadStatus.loading){
-              body = CircularProgressIndicator();
-            }
-            return Center(child: body);
-          },
-        ),
-        controller: refreshController,
-        onRefresh: onRefresh,
-        onLoading: onLoading,
-        child: ListView.separated(
-          physics: ClampingScrollPhysics(),
-          itemBuilder: (c, i) {
-            return MiscRegularNotificationDisplayTemplate(
-              imageIcon: notifications[i].actorImage,
-              postId: notifications[i].postId,
-              notification: notifications[i].action,
-              dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
-              notificationType: notifications[i].notificationType,
-              readStatus: notifications[i].read,
-            );
-          },
-          separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-          itemCount: notifications.length,
-        ),
-      )
+      ? Container()
+      // ? SmartRefresher(
+      //   enablePullDown: true,
+      //   enablePullUp: true,
+      //   header: MaterialClassicHeader(
+      //     color: Color(0xffffffff),
+      //     backgroundColor: Color(0xff4EC9D4),
+      //   ),
+      //   footer: CustomFooter(
+      //     loadStyle: LoadStyle.ShowWhenLoading,
+      //     builder: (BuildContext context, LoadStatus mode){
+      //       Widget body = Container();
+      //       if(mode == LoadStatus.loading){
+      //         body = CircularProgressIndicator();
+      //       }
+      //       return Center(child: body);
+      //     },
+      //   ),
+      //   controller: refreshController,
+      //   onRefresh: onRefresh,
+      //   onLoading: onLoading,
+      //   child: ListView.separated(
+      //     physics: ClampingScrollPhysics(),
+      //     itemBuilder: (c, i) {
+      //       return MiscRegularNotificationDisplayTemplate(
+      //         imageIcon: notifications[i].actorImage,
+      //         postId: notifications[i].postId,
+      //         notification: notifications[i].action,
+      //         dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
+      //         notificationType: notifications[i].notificationType,
+      //         readStatus: notifications[i].read,
+      //       );
+      //     },
+      //     separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
+      //     itemCount: notifications.length,
+      //   ),
+      // )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

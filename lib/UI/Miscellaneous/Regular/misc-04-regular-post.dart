@@ -6,7 +6,7 @@ import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regula
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-12-regular-dropdown.dart';
@@ -65,32 +65,32 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   bool pressedLike = false;
   int likesCount = 0;
 
-  BranchUniversalObject? buo;
-  BranchLinkProperties? lp;
+  // BranchUniversalObject? buo;
+  // BranchLinkProperties? lp;
 
   void initBranchShare(){
-    buo = BranchUniversalObject(
-      canonicalIdentifier: 'FacesbyPlaces',
-      title: 'FacesbyPlaces Link',
-      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-      contentDescription: 'FacesbyPlaces link to the app',
-      keywords: ['FacesbyPlaces', 'Share', 'Link'],
-      publiclyIndex: true,
-      locallyIndex: true,
-      contentMetadata: BranchContentMetaData()
-        ..addCustomMetadata('link-category', 'Post')
-        ..addCustomMetadata('link-post-id', postId)
-        ..addCustomMetadata('link-like-status', likePost)
-        ..addCustomMetadata('link-number-of-likes', likesCount)
-        ..addCustomMetadata('link-type-of-account', 'Memorial')
-    );
+    // buo = BranchUniversalObject(
+    //   canonicalIdentifier: 'FacesbyPlaces',
+    //   title: 'FacesbyPlaces Link',
+    //   imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+    //   contentDescription: 'FacesbyPlaces link to the app',
+    //   keywords: ['FacesbyPlaces', 'Share', 'Link'],
+    //   publiclyIndex: true,
+    //   locallyIndex: true,
+    //   contentMetadata: BranchContentMetaData()
+    //     ..addCustomMetadata('link-category', 'Post')
+    //     ..addCustomMetadata('link-post-id', postId)
+    //     ..addCustomMetadata('link-like-status', likePost)
+    //     ..addCustomMetadata('link-number-of-likes', likesCount)
+    //     ..addCustomMetadata('link-type-of-account', 'Memorial')
+    // );
 
-    lp = BranchLinkProperties(
-        feature: 'sharing',
-        stage: 'new share',
-      tags: ['one', 'two', 'three']
-    );
-    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    // lp = BranchLinkProperties(
+    //     feature: 'sharing',
+    //     stage: 'new share',
+    //   tags: ['one', 'two', 'three']
+    // );
+    // lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
 
   void initState(){
@@ -310,24 +310,24 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                   Expanded(
                     child: GestureDetector(
                       onTap: () async{
-                        initBranchShare();
+                        // initBranchShare();
 
-                        FlutterBranchSdk.setIdentity('alm-share-link');
+                        // FlutterBranchSdk.setIdentity('alm-share-link');
 
-                        BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                          buo: buo!,
-                          linkProperties: lp!,
-                          messageText: 'FacesbyPlaces App',
-                          androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                          androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                        );
+                        // BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                        //   buo: buo!,
+                        //   linkProperties: lp!,
+                        //   messageText: 'FacesbyPlaces App',
+                        //   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                        //   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                        // );
 
-                        if (response.success) {
-                          print('The post id is $postId');
-                        } else {
-                          FlutterBranchSdk.logout();
-                          print('Error : ${response.errorCode} - ${response.errorMessage}');
-                        }
+                        // if (response.success) {
+                        //   print('The post id is $postId');
+                        // } else {
+                        //   FlutterBranchSdk.logout();
+                        //   print('Error : ${response.errorCode} - ${response.errorMessage}');
+                        // }
 
                       },
                       child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),

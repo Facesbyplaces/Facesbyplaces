@@ -12,7 +12,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-user-regular-01-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularUserOtherDetails extends StatefulWidget{
@@ -37,7 +37,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   final bool toggleNumber;
   HomeRegularUserOtherDetailsState({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
+  // final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
@@ -102,7 +102,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
+                          // Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
 
                           SizedBox(height: 20,),
 
@@ -229,7 +229,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                         onPressed: () async{
 
                           if(
-                            details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
+                            // details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
                             details.data!.showOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
                             details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text ||
                             details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
@@ -241,7 +241,8 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                               context.showLoaderOverlay();
 
                               bool result = await apiRegularUpdateOtherDetails(
-                                birthdate: _key1.currentState!.controller.text,
+                                // birthdate: _key1.currentState!.controller.text,
+                                birthdate: '1/1/2021',
                                 birthplace: _key2.currentState!.controller.text,
                                 address: _key3.currentState!.controller.text,
                                 email: _key4.currentState!.controller.text,
@@ -254,40 +255,42 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Successfully updated the other details.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: Colors.green,
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  )
+                                  Container()
+                                  //   AssetGiffyDialog(
+                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //   entryAnimation: EntryAnimation.DEFAULT,
+                                  //   description: Text('Successfully updated the other details.',
+                                  //     textAlign: TextAlign.center,
+                                  //     style: TextStyle(),
+                                  //   ),
+                                  //   onlyOkButton: true,
+                                  //   buttonOkColor: Colors.green,
+                                  //   onOkButtonPressed: () {
+                                  //     Navigator.pop(context, true);
+                                  //   },
+                                  // )
                                 );
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
                               }else{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  )
+                                  Container()
+                                  //   AssetGiffyDialog(
+                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //   entryAnimation: EntryAnimation.DEFAULT,
+                                  //   description: Text('Something went wrong. Please try again.',
+                                  //     textAlign: TextAlign.center,
+                                  //     style: TextStyle(),
+                                  //   ),
+                                  //   onlyOkButton: true,
+                                  //   buttonOkColor: Colors.red,
+                                  //   onOkButtonPressed: () {
+                                  //     Navigator.pop(context, true);
+                                  //   },
+                                  // )
                                 );
                               }
                             }

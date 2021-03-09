@@ -6,10 +6,20 @@ Future<bool> apiRegularLogin({required String email, required String password, r
 
   bool value = false;
 
+  print('The email in api is $email');
+  print('The password in api is $password');
+  print('The deviceToken in api is $deviceToken');
+
   try{
     final http.Response response = await http.post(
       // 'http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken',
-      Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken', ''),
+      // Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken', ''),
+      // Uri.http('fbp.dev1.koda.ws', '/alm_auth/sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken'),
+      Uri.http('fbp.dev1.koda.ws', '/alm_auth/sign_in', {'account_type' : '2', 'email': '$email', 'password' : '$password', 'device_token' : '$deviceToken'}),
+
+      // sign_in?account_type=2&password=$password&email=$email&device_token=$deviceToken
+
+      // Uri.http("example.org", "/path", { "q" : "dart" });
       headers: <String, String>{
         'Content-Type': 'application/json',
       }

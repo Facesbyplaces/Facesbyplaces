@@ -8,7 +8,7 @@ import 'home-create-memorial-regular-01-create-memorial.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -275,23 +275,24 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                       await showDialog(
                         context: context,
                         builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('FacesbyPlaces needs to access the location for the memorial to be located. Do you wish to turn it on?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(),
-                          ),
-                          buttonOkColor: Colors.green,
-                          onOkButtonPressed: () async{
-                            permissionGranted = await location.requestPermission();
-                            Navigator.pop(context, true);
-                          },
-                          onCancelButtonPressed: (){
-                            Navigator.pop(context, true);
-                          },
-                        )
+                        Container()
+                        //   AssetGiffyDialog(
+                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        //   entryAnimation: EntryAnimation.DEFAULT,
+                        //   description: Text('FacesbyPlaces needs to access the location for the memorial to be located. Do you wish to turn it on?',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(),
+                        //   ),
+                        //   buttonOkColor: Colors.green,
+                        //   onOkButtonPressed: () async{
+                        //     permissionGranted = await location.requestPermission();
+                        //     Navigator.pop(context, true);
+                        //   },
+                        //   onCancelButtonPressed: (){
+                        //     Navigator.pop(context, true);
+                        //   },
+                        // )
                       );
                     }else{
                       if(profileImage == null){

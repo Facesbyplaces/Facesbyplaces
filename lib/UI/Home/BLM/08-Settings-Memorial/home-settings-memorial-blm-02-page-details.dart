@@ -8,7 +8,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Configurations/date-conversion.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMPageDetails extends StatefulWidget{
@@ -28,8 +28,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldDropDownState> _key3 = GlobalKey<MiscBLMInputFieldDropDownState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key5 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
-  final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key6 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
+  // final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key5 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
+  // final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key6 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key7 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key8 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key9 = GlobalKey<MiscBLMInputFieldTemplateState>();
@@ -100,11 +100,11 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
 
                             SizedBox(height: 20,),
 
-                            MiscBLMInputFieldDateTimeTemplate(key: _key5, labelText: 'DOB', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,),
+                            // MiscBLMInputFieldDateTimeTemplate(key: _key5, labelText: 'DOB', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob,),
 
                             SizedBox(height: 20,),
 
-                            MiscBLMInputFieldDateTimeTemplate(key: _key6, labelText: 'RIP', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip,),
+                            // MiscBLMInputFieldDateTimeTemplate(key: _key6, labelText: 'RIP', displayText: memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip,),
 
                             SizedBox(height: 20,),
 
@@ -137,8 +137,8 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDescription !=  _key2.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsRelationship != _key3.currentState!.currentSelection ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsLocation != _key4.currentState!.controller.text ||
-                                  convertDate(memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key5.currentState!.controller.text) ||
-                                  convertDate(memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key6.currentState!.controller.text) ||
+                                  // convertDate(memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsDob) != convertDate(_key5.currentState!.controller.text) ||
+                                  // convertDate(memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsRip) != convertDate(_key6.currentState!.controller.text) ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsState != _key7.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsCountry != _key8.currentState!.controller.text ||
                                   memorialSettings.data!.blmMemorial.showPageDetailsDetails.showPageDetailsDetailsPrecinct != _key9.currentState!.controller.text
@@ -154,8 +154,10 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       description: _key2.currentState!.controller.text,
                                       relationship: _key3.currentState!.currentSelection,
                                       location: _key4.currentState!.controller.text ,
-                                      dob: convertDate(_key5.currentState!.controller.text),
-                                      rip: convertDate(_key6.currentState!.controller.text),
+                                      // dob: convertDate(_key5.currentState!.controller.text),
+                                      // rip: convertDate(_key6.currentState!.controller.text),
+                                      dob: '1/1/2021',
+                                      rip: '1/1/2021',
                                       state: _key7.currentState!.controller.text,
                                       country: _key8.currentState!.controller.text,
                                       precinct: _key9.currentState!.controller.text,
@@ -167,20 +169,21 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Successfully updated the account details.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.green,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
+                                        Container()
+                                        //   AssetGiffyDialog(
+                                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        //   entryAnimation: EntryAnimation.DEFAULT,
+                                        //   description: Text('Successfully updated the account details.',
+                                        //     textAlign: TextAlign.center,
+                                        //     style: TextStyle(),
+                                        //   ),
+                                        //   onlyOkButton: true,
+                                        //   buttonOkColor: Colors.green,
+                                        //   onOkButtonPressed: () {
+                                        //     Navigator.pop(context, true);
+                                        //   },
+                                        // )
                                       );
 
                                       Route route = MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialSettings.data!.blmMemorial.showPageDetailsRelationship,));
@@ -190,20 +193,21 @@ class HomeBLMPageDetailsState extends State<HomeBLMPageDetails>{
                                       await showDialog(
                                         context: context,
                                         builder: (_) => 
-                                          AssetGiffyDialog(
-                                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                          entryAnimation: EntryAnimation.DEFAULT,
-                                          description: Text('Something went wrong. Please try again.',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(),
-                                          ),
-                                          onlyOkButton: true,
-                                          buttonOkColor: Colors.red,
-                                          onOkButtonPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                        )
+                                        Container()
+                                        //   AssetGiffyDialog(
+                                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                        //   entryAnimation: EntryAnimation.DEFAULT,
+                                        //   description: Text('Something went wrong. Please try again.',
+                                        //     textAlign: TextAlign.center,
+                                        //     style: TextStyle(),
+                                        //   ),
+                                        //   onlyOkButton: true,
+                                        //   buttonOkColor: Colors.red,
+                                        //   onOkButtonPressed: () {
+                                        //     Navigator.pop(context, true);
+                                        //   },
+                                        // )
                                       );
                                     }
                                   }

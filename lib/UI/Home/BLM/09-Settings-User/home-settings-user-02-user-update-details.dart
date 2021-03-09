@@ -7,7 +7,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-settings-user-01-user-details.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserUpdateDetails extends StatefulWidget{
@@ -134,40 +134,42 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Successfully updated the account details.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: Colors.green,
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  )
+                                  Container()
+                                  //   AssetGiffyDialog(
+                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //   entryAnimation: EntryAnimation.DEFAULT,
+                                  //   description: Text('Successfully updated the account details.',
+                                  //     textAlign: TextAlign.center,
+                                  //     style: TextStyle(),
+                                  //   ),
+                                  //   onlyOkButton: true,
+                                  //   buttonOkColor: Colors.green,
+                                  //   onOkButtonPressed: () {
+                                  //     Navigator.pop(context, true);
+                                  //   },
+                                  // )
                                 );
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
                               }else{
                                 await showDialog(
                                   context: context,
                                   builder: (_) => 
-                                    AssetGiffyDialog(
-                                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                    entryAnimation: EntryAnimation.DEFAULT,
-                                    description: Text('Something went wrong. Please try again.',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(),
-                                    ),
-                                    onlyOkButton: true,
-                                    buttonOkColor: Colors.red,
-                                    onOkButtonPressed: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  )
+                                  Container()
+                                  //   AssetGiffyDialog(
+                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                  //   entryAnimation: EntryAnimation.DEFAULT,
+                                  //   description: Text('Something went wrong. Please try again.',
+                                  //     textAlign: TextAlign.center,
+                                  //     style: TextStyle(),
+                                  //   ),
+                                  //   onlyOkButton: true,
+                                  //   buttonOkColor: Colors.red,
+                                  //   onOkButtonPressed: () {
+                                  //     Navigator.pop(context, true);
+                                  //   },
+                                  // )
                                 );
                               }
                             }

@@ -4,12 +4,12 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:better_player/better_player.dart';
+// import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 // import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+// import 'package:badges/badges.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
 
@@ -51,7 +51,7 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
   TextEditingController controller = TextEditingController();
   int maxLines = 5;
   int removeAttachment = 0 ;
-  BetterPlayerController? betterPlayerController;
+  // BetterPlayerController? betterPlayerController;
 
   void getManagedPages() async{
     context.showLoaderOverlay();
@@ -196,20 +196,21 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                     await showDialog(
                       context: context,
                       builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(),
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: Colors.red,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
+                      Container()
+                      //   AssetGiffyDialog(
+                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //   entryAnimation: EntryAnimation.DEFAULT,
+                      //   description: Text('Something went wrong. Please try again.',
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(),
+                      //   ),
+                      //   onlyOkButton: true,
+                      //   buttonOkColor: Colors.red,
+                      //   onOkButtonPressed: () {
+                      //     Navigator.pop(context, true);
+                      //   },
+                      // )
                     );
                   }
 
@@ -386,9 +387,10 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                     });
                                   },
                                   child: lookupMimeType(slideImages[index].path)?.contains('video') == true
-                                  ? BetterPlayer(
-                                    controller: betterPlayerController!,
-                                  )
+                                  // ? BetterPlayer(
+                                  //   controller: betterPlayerController!,
+                                  // )
+                                  ? Container()
                                   : Container(
                                     width: 80,
                                     decoration: BoxDecoration(
@@ -423,13 +425,13 @@ class HomeBLMCreatePostState extends State<HomeBLMCreatePost>{
                                               slideImages.removeAt(index);
                                             });
                                           },
-                                          child: Badge(
-                                            position: BadgePosition.topEnd(top: 0, end: 0),
-                                            animationDuration: Duration(milliseconds: 300),
-                                            animationType: BadgeAnimationType.fade,
-                                            badgeColor: Color(0xff000000),
-                                            badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
-                                          ),
+                                          // child: Badge(
+                                          //   position: BadgePosition.topEnd(top: 0, end: 0),
+                                          //   animationDuration: Duration(milliseconds: 300),
+                                          //   animationType: BadgeAnimationType.fade,
+                                          //   badgeColor: Color(0xff000000),
+                                          //   badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
+                                          // ),
                                         )
                                         : Container(height: 0),
                                       ],

@@ -1,8 +1,8 @@
 // import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:date_time_picker/date_time_picker.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:date_time_picker/date_time_picker.dart';
+// import 'package:intl_phone_field/intl_phone_field.dart';
+// import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -121,28 +121,29 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return IntlPhoneField(
-      // selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
-      // textFieldController: controller,
-      // onInputChanged: (PhoneNumber number){
-      //   print(number.phoneNumber);
-      // },
-      // onInputValidated: (bool value) {
-      //   setState(() {
-      //     valid = value;
-      //   });
-      // },
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: labelTextStyle,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-        ),
-      ),
-    );
+    return Container();
+    // return IntlPhoneField(
+    //   // selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
+    //   // textFieldController: controller,
+    //   // onInputChanged: (PhoneNumber number){
+    //   //   print(number.phoneNumber);
+    //   // },
+    //   // onInputValidated: (bool value) {
+    //   //   setState(() {
+    //   //     valid = value;
+    //   //   });
+    //   // },
+    //   decoration: InputDecoration(
+    //     alignLabelWithHint: true,
+    //     labelText: labelText,
+    //     labelStyle: labelTextStyle,
+    //     focusedBorder: UnderlineInputBorder(
+    //       borderSide: BorderSide(
+    //         color: Color(0xff000000),
+    //       ),
+    //     ),
+    //   ),
+    // );
     // return InternationalPhoneNumberInput(
     //   selectorConfig: SelectorConfig(selectorType: PhoneInputSelectorType.BOTTOM_SHEET, showFlags: false,),
     //   textFieldController: controller,
@@ -433,50 +434,50 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
   }
 }
 
-class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
+// class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
 
-  final String labelText;
-  final DateTimePickerType dateTimePickerType;
-  final String displayText;
+//   final String labelText;
+//   final DateTimePickerType dateTimePickerType;
+//   final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
+//   MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
-  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
-}
+//   MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
+// }
 
-class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
-  final String labelText;
-  final DateTimePickerType dateTimePickerType;
-  final String displayText;
+// class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
+//   final String labelText;
+//   final DateTimePickerType dateTimePickerType;
+//   final String displayText;
 
-  MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
+//   MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
 
-  TextEditingController controller = TextEditingController();
+//   TextEditingController controller = TextEditingController();
 
-  void initState(){
-    super.initState();
-    controller = TextEditingController(text: displayText);
-  }
+//   void initState(){
+//     super.initState();
+//     controller = TextEditingController(text: displayText);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    SizeConfig.init(context);
-    return DateTimePicker(
-      type: dateTimePickerType,
-      controller: controller,
-      cursorColor: Color(0xff000000),
-      firstDate: DateTime(1000),
-      lastDate: DateTime.now(),
-      decoration: InputDecoration(
-        alignLabelWithHint: true,
-        labelText: labelText,
-        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Color(0xff000000),
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     SizeConfig.init(context);
+//     return DateTimePicker(
+//       type: dateTimePickerType,
+//       controller: controller,
+//       cursorColor: Color(0xff000000),
+//       firstDate: DateTime(1000),
+//       lastDate: DateTime.now(),
+//       decoration: InputDecoration(
+//         alignLabelWithHint: true,
+//         labelText: labelText,
+//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+//         focusedBorder: UnderlineInputBorder(
+//           borderSide: BorderSide(
+//             color: Color(0xff000000),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

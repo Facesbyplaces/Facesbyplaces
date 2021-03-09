@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+// import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class HomeBLMPaypal extends StatefulWidget{
 
@@ -12,7 +12,7 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
 
-  InAppWebViewController? webView;
+  // InAppWebViewController? webView;
   String url = "";
   double progress = 0;
 
@@ -43,55 +43,55 @@ class HomeBLMPaypalState extends State<HomeBLMPaypal>{
               },
             ),
           ),
-          body: InAppWebView(
-            // onReceivedHttpAuthRequest: (InAppWebViewController inAppController, URLAuthenticationChallenge authChallenge){
-            //   Future<HttpAuthResponse> newValue;
+          // body: InAppWebView(
+          //   // onReceivedHttpAuthRequest: (InAppWebViewController inAppController, URLAuthenticationChallenge authChallenge){
+          //   //   Future<HttpAuthResponse> newValue;
 
-            //   print('The value of authChallenge is ${authChallenge.toJson}');
-            //   print('The value of authChallenge is ${authChallenge.toMap}');
-            //   print('The value of authChallenge is ${authChallenge.protectionSpace}');
+          //   //   print('The value of authChallenge is ${authChallenge.toJson}');
+          //   //   print('The value of authChallenge is ${authChallenge.toMap}');
+          //   //   print('The value of authChallenge is ${authChallenge.protectionSpace}');
 
-            //   print('The value of inAppController is ${inAppController.android}');
-            //   print('The value of inAppController is ${inAppController.ios}');
-            //   print('The value of inAppController is ${inAppController.javaScriptHandlersMap}');
-            //   print('The value of inAppController is ${inAppController.webStorage}');
+          //   //   print('The value of inAppController is ${inAppController.android}');
+          //   //   print('The value of inAppController is ${inAppController.ios}');
+          //   //   print('The value of inAppController is ${inAppController.javaScriptHandlersMap}');
+          //   //   print('The value of inAppController is ${inAppController.webStorage}');
             
-            //   return newValue;
-            // },
-            // initialUrl: URLRequest(
-            //   url: Uri.parse("https://flutter.dev/")
-            // ),
-            initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com')),
-            // initialUrl: "https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com",
-            initialOptions: InAppWebViewGroupOptions(
-              crossPlatform: InAppWebViewOptions(
-              ),
-              ios: IOSInAppWebViewOptions(
+          //   //   return newValue;
+          //   // },
+          //   // initialUrl: URLRequest(
+          //   //   url: Uri.parse("https://flutter.dev/")
+          //   // ),
+          //   initialUrlRequest: URLRequest(url: Uri.parse('https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com')),
+          //   // initialUrl: "https://www.sandbox.paypal.com/connect?flowEntry=static&scope=openid profile email&client_id=AdFMd7tGZjQMPhTpOiEZSkK7SYmBAoAY71Mrdjbe9g_JVrlY0_0Df-ncKw4wl__YXNBn15PtdGiQNuUT&response_type=code&redirect_uri=https://www.google.com",
+          //   initialOptions: InAppWebViewGroupOptions(
+          //     crossPlatform: InAppWebViewOptions(
+          //     ),
+          //     ios: IOSInAppWebViewOptions(
 
-              ),
-              // android: AndroidInAppWebViewOptions(
-              //   useHybridComposition: true
-              // )
-            ),
-            onWebViewCreated: (InAppWebViewController controller) {
-              webView = controller;
-            },
-            onLoadStart: (controller, url) {
-              setState(() {
-                this.url = url?.toString() ?? '';
-              });
-            },
-            onLoadStop: (controller, url) async {
-              setState(() {
-                this.url = url?.toString() ?? '';
-              });
-            },
-            onProgressChanged: (controller, progress) {
-              setState(() {
-                this.progress = progress / 100;
-              });
-            },
-          ),
+          //     ),
+          //     // android: AndroidInAppWebViewOptions(
+          //     //   useHybridComposition: true
+          //     // )
+          //   ),
+          //   onWebViewCreated: (InAppWebViewController controller) {
+          //     webView = controller;
+          //   },
+          //   onLoadStart: (controller, url) {
+          //     setState(() {
+          //       this.url = url?.toString() ?? '';
+          //     });
+          //   },
+          //   onLoadStop: (controller, url) async {
+          //     setState(() {
+          //       this.url = url?.toString() ?? '';
+          //     });
+          //   },
+          //   onProgressChanged: (controller, progress) {
+          //     setState(() {
+          //       this.progress = progress / 100;
+          //     });
+          //   },
+          // ),
 
           // body: SingleChildScrollView(
           //   padding: EdgeInsets.only(left: 20.0, right: 20.0),

@@ -5,14 +5,14 @@ import 'package:facesbyplaces/API/BLM/09-Settings-Memorial/api-settings-memorial
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-11-blm-setting-detail.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+// import 'package:responsive_framework/responsive_framework.dart';
 import 'home-settings-memorial-blm-02-page-details.dart';
 import 'home-settings-memorial-blm-03-update-memorial-image.dart';
 import 'home-settings-memorial-blm-04-page-managers.dart';
 import 'home-settings-memorial-blm-05-page-family.dart';
 import 'home-settings-memorial-blm-06-page-friends.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMMemorialSettings extends StatefulWidget{
@@ -62,74 +62,74 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
           },
         ),
       ),
-      body: ResponsiveWrapper(
-        maxWidth: SizeConfig.screenWidth,
-        defaultScale: true,
-        breakpoints: [
-          ResponsiveBreakpoint.resize(480, name: MOBILE),
-          ResponsiveBreakpoint.autoScale(800, name: TABLET),
-          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-          ResponsiveBreakpoint.autoScale(2460, name: '4K'),
-        ],
-        child: SingleChildScrollView(
-          child: Container(
-            height: SizeConfig.screenHeight! - kToolbarHeight,
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  width: SizeConfig.screenWidth,
-                  height: 70,
-                  child: DefaultTabController(
-                    length: 2,
-                    child: TabBar(
-                      labelColor: Color(0xff04ECFF),
-                      unselectedLabelColor: Color(0xff000000),
-                      indicatorColor: Color(0xff04ECFF),
-                      onTap: (int index){
-                        setState(() {
-                          toggle = index;
-                        });
-                      },
-                      tabs: [
+      // body: ResponsiveWrapper(
+      //   maxWidth: SizeConfig.screenWidth,
+      //   defaultScale: true,
+      //   breakpoints: [
+      //     ResponsiveBreakpoint.resize(480, name: MOBILE),
+      //     ResponsiveBreakpoint.autoScale(800, name: TABLET),
+      //     ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+      //     ResponsiveBreakpoint.autoScale(2460, name: '4K'),
+      //   ],
+      //   child: SingleChildScrollView(
+      //     child: Container(
+      //       height: SizeConfig.screenHeight! - kToolbarHeight,
+      //       child: Column(
+      //         children: [
+      //           Container(
+      //             alignment: Alignment.centerLeft,
+      //             width: SizeConfig.screenWidth,
+      //             height: 70,
+      //             child: DefaultTabController(
+      //               length: 2,
+      //               child: TabBar(
+      //                 labelColor: Color(0xff04ECFF),
+      //                 unselectedLabelColor: Color(0xff000000),
+      //                 indicatorColor: Color(0xff04ECFF),
+      //                 onTap: (int index){
+      //                   setState(() {
+      //                     toggle = index;
+      //                   });
+      //                 },
+      //                 tabs: [
 
-                        Center(
-                          child: Text('Page',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
+      //                   Center(
+      //                     child: Text('Page',
+      //                       style: TextStyle(
+      //                         fontSize: 16,
+      //                         fontWeight: FontWeight.w400,
+      //                       ),
+      //                     ),
+      //                   ),
 
-                        Center(child: Text('Privacy',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
+      //                   Center(child: Text('Privacy',
+      //                       style: TextStyle(
+      //                         fontSize: 16,
+      //                         fontWeight: FontWeight.w400,
+      //                       ),
+      //                     ),
+      //                   ),
 
-                      ],
-                    ),
-                  ),
-                ),
+      //                 ],
+      //               ),
+      //             ),
+      //           ),
 
-                Expanded(
-                  child: Container(
-                    child: ((){
-                      switch(toggle){
-                        case 0: return settingsTab1(memorialId);
-                        case 1: return settingsTab2(memorialId);
-                      }
-                    }()),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      //           Expanded(
+      //             child: Container(
+      //               child: ((){
+      //                 switch(toggle){
+      //                   case 0: return settingsTab1(memorialId);
+      //                   case 1: return settingsTab2(memorialId);
+      //                 }
+      //               }()),
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 
@@ -213,20 +213,21 @@ class HomeBLMMemorialSettingsState extends State<HomeBLMMemorialSettings>{
                 await showDialog(
                   context: context,
                   builder: (_) => 
-                    AssetGiffyDialog(
-                    image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                    title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                    entryAnimation: EntryAnimation.DEFAULT,
-                    description: Text('Something went wrong. Please try again.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(),
-                    ),
-                    onlyOkButton: true,
-                    buttonOkColor: Colors.red,
-                    onOkButtonPressed: () {
-                      Navigator.pop(context, true);
-                    },
-                  )
+                  Container()
+                  //   AssetGiffyDialog(
+                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                  //   entryAnimation: EntryAnimation.DEFAULT,
+                  //   description: Text('Something went wrong. Please try again.',
+                  //     textAlign: TextAlign.center,
+                  //     style: TextStyle(),
+                  //   ),
+                  //   onlyOkButton: true,
+                  //   buttonOkColor: Colors.red,
+                  //   onOkButtonPressed: () {
+                  //     Navigator.pop(context, true);
+                  //   },
+                  // )
                 );
               }
             }

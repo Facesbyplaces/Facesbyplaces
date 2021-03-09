@@ -1,7 +1,7 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class HomeBLMManageTab extends StatefulWidget{
 
 class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
-  RefreshController refreshController = RefreshController(initialRefresh: true);
+  // RefreshController refreshController = RefreshController(initialRefresh: true);
   List<Widget> finalMemorials = [];
   int blmFamilyItemsRemaining = 1;
   int blmFriendsItemsRemaining = 1;
@@ -40,10 +40,10 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     onLoading();
   }
 
-  void onRefresh() async{
-    await Future.delayed(Duration(milliseconds: 1000));
-    refreshController.refreshCompleted();
-  }
+  // void onRefresh() async{
+  //   await Future.delayed(Duration(milliseconds: 1000));
+  //   refreshController.refreshCompleted();
+  // }
 
   void addMemorials1(){
     finalMemorials.add(
@@ -169,7 +169,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       } 
     }
 
-    refreshController.loadComplete();
+    // refreshController.loadComplete();
 
   }
 
@@ -236,7 +236,7 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       page2++;
     }
-    refreshController.loadComplete();
+    // refreshController.loadComplete();
   }
 
   @override
@@ -245,35 +245,36 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: true,
-        header: MaterialClassicHeader(
-          color: Color(0xffffffff),
-          backgroundColor: Color(0xff4EC9D4),
-        ),
-        footer: CustomFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-          builder: (BuildContext context, LoadStatus mode){
-            Widget body = Container();
-            if(mode == LoadStatus.loading){
-              body = CircularProgressIndicator();
-            }
-            return Center(child: body);
-          },
-        ),
-        controller: refreshController,
-        onRefresh: onRefresh,
-        onLoading: onLoading,
-        child: ListView.separated(
-          physics: ClampingScrollPhysics(),
-          itemBuilder: (c, i) {
-            return finalMemorials[i];
-          },
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-          itemCount: finalMemorials.length,
-        ),
-      )
+      ? Container()
+      // ? SmartRefresher(
+      //   enablePullDown: true,
+      //   enablePullUp: true,
+      //   header: MaterialClassicHeader(
+      //     color: Color(0xffffffff),
+      //     backgroundColor: Color(0xff4EC9D4),
+      //   ),
+      //   footer: CustomFooter(
+      //     loadStyle: LoadStyle.ShowWhenLoading,
+      //     builder: (BuildContext context, LoadStatus mode){
+      //       Widget body = Container();
+      //       if(mode == LoadStatus.loading){
+      //         body = CircularProgressIndicator();
+      //       }
+      //       return Center(child: body);
+      //     },
+      //   ),
+      //   controller: refreshController,
+      //   onRefresh: onRefresh,
+      //   onLoading: onLoading,
+      //   child: ListView.separated(
+      //     physics: ClampingScrollPhysics(),
+      //     itemBuilder: (c, i) {
+      //       return finalMemorials[i];
+      //     },
+      //     separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+      //     itemCount: finalMemorials.length,
+      //   ),
+      // )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

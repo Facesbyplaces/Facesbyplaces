@@ -3,10 +3,10 @@ import 'package:facesbyplaces/API/BLM/13-Show-User/api-show-user-blm-03-show-use
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:sliding_up_panel/sliding_up_panel.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:better_player/better_player.dart';
+// import 'package:better_player/better_player.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
@@ -36,88 +36,89 @@ class MiscBLMUserProfileDraggableSwitchTabsState extends State<MiscBLMUserProfil
   @override
   Widget build(BuildContext context){
     SizeConfig.init(context);
-    return SlidingUpPanel(
-      onPanelOpened: (){
-        setState(() {
-          print('Opened!');
-        });
-      },
-      header: Container(
-        alignment: Alignment.center,
-        width: SizeConfig.screenWidth,
-        height: 70,
-        child: DefaultTabController(
-          length: 2,
-          initialIndex: currentIndex,
-          child: TabBar(
-            isScrollable: false,
-            labelColor: Color(0xff04ECFF),
-            unselectedLabelColor: Color(0xffCDEAEC),
-            indicatorColor: Color(0xff04ECFF),
-            onTap: (int number){
-              setState(() {
-                currentIndex = number;
-              });
-            },
-            tabs: [
+    return Container();
+    // return SlidingUpPanel(
+    //   onPanelOpened: (){
+    //     setState(() {
+    //       print('Opened!');
+    //     });
+    //   },
+    //   header: Container(
+    //     alignment: Alignment.center,
+    //     width: SizeConfig.screenWidth,
+    //     height: 70,
+    //     child: DefaultTabController(
+    //       length: 2,
+    //       initialIndex: currentIndex,
+    //       child: TabBar(
+    //         isScrollable: false,
+    //         labelColor: Color(0xff04ECFF),
+    //         unselectedLabelColor: Color(0xffCDEAEC),
+    //         indicatorColor: Color(0xff04ECFF),
+    //         onTap: (int number){
+    //           setState(() {
+    //             currentIndex = number;
+    //           });
+    //         },
+    //         tabs: [
 
-              Container(
-                width: SizeConfig.screenWidth! / 2.5,
-                child: Center(
-                  child: Text('Post',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
+    //           Container(
+    //             width: SizeConfig.screenWidth! / 2.5,
+    //             child: Center(
+    //               child: Text('Post',
+    //                 style: TextStyle(
+    //                   fontSize: 16,
+    //                   fontWeight: FontWeight.w400,
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
 
-              Container(
-                width: SizeConfig.screenWidth! / 2.5,
-                child: Center(
-                  child: Text('Memorials',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
+    //           Container(
+    //             width: SizeConfig.screenWidth! / 2.5,
+    //             child: Center(
+    //               child: Text('Memorials',
+    //                 style: TextStyle(
+    //                   fontSize: 16,
+    //                   fontWeight: FontWeight.w400,
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
 
-            ],
-          ),
-        ),
-      ),
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(50.0),
-        topRight: Radius.circular(50.0),
-      ),
-      panel: Column(
-        children: [
-          Container(width: SizeConfig.screenWidth, height: 70,), // SERVES AS THE SPACE FOR THE CONTENT TO BE SHOW
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    //   borderRadius: BorderRadius.only(
+    //     topLeft: Radius.circular(50.0),
+    //     topRight: Radius.circular(50.0),
+    //   ),
+    //   panel: Column(
+    //     children: [
+    //       Container(width: SizeConfig.screenWidth, height: 70,), // SERVES AS THE SPACE FOR THE CONTENT TO BE SHOW
 
-          Expanded(
-            child: Container(
-              child: IndexedStack(
-                index: currentIndex,
-                children: children,
-              ),
-            ),
-          ),
+    //       Expanded(
+    //         child: Container(
+    //           child: IndexedStack(
+    //             index: currentIndex,
+    //             children: children,
+    //           ),
+    //         ),
+    //       ),
 
-        ],
-      ),
-      collapsed: Container(
-        decoration: BoxDecoration(
-          color: Color(0xffffffff),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50.0),
-            topRight: Radius.circular(50.0),
-          ),
-        ),
-      ),
-    );
+    //     ],
+    //   ),
+    //   collapsed: Container(
+    //     decoration: BoxDecoration(
+    //       color: Color(0xffffffff),
+    //       borderRadius: BorderRadius.only(
+    //         topLeft: Radius.circular(50.0),
+    //         topRight: Radius.circular(50.0),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -155,7 +156,7 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
   final int userId;
   MiscBLMDraggablePostState({required this.userId});
   
-  RefreshController refreshController = RefreshController(initialRefresh: true);
+  // RefreshController refreshController = RefreshController(initialRefresh: true);
   List<BLMMiscDraggablePost> posts = [];
   int itemRemaining = 1;
   int page = 1;
@@ -166,10 +167,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
     onLoading();
   }
 
-  void onRefresh() async{
-    await Future.delayed(Duration(milliseconds: 1000));
-    refreshController.refreshCompleted();
-  }
+  // void onRefresh() async{
+  //   await Future.delayed(Duration(milliseconds: 1000));
+  //   refreshController.refreshCompleted();
+  // }
 
   void onLoading() async{
     if(itemRemaining != 0){
@@ -219,10 +220,10 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
       setState(() {});
       page++;
       
-      refreshController.loadComplete();
+      // refreshController.loadComplete();
       context.hideLoaderOverlay();
     }else{
-      refreshController.loadNoData();
+      // refreshController.loadNoData();
     }
   }
 
@@ -232,241 +233,242 @@ class MiscBLMDraggablePostState extends State<MiscBLMDraggablePost>{
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: true,
-        header: MaterialClassicHeader(
-          color: Color(0xffffffff),
-          backgroundColor: Color(0xff4EC9D4),
-        ),
-        footer: CustomFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-          builder: (BuildContext context, LoadStatus mode){
-            Widget body = Container();
-            if(mode == LoadStatus.loading){
-              body = CircularProgressIndicator();
-            }
-            return Center(child: body);
-          },
-        ),
-        controller: refreshController,
-        onRefresh: onRefresh,
-        onLoading: onLoading,
-        child: ListView.separated(
-          padding: EdgeInsets.all(10.0),
-          physics: ClampingScrollPhysics(),
-          shrinkWrap: true,
-          itemBuilder: (c, i) {
-            return MiscBLMPost(
-              userId: posts[i].userId,
-              postId: posts[i].postId,
-              memorialId: posts[i].memorialId,
-              memorialName: posts[i].memorialName,
-              timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
-              managed: posts[i].managed,
-              joined: posts[i].joined,
-              profileImage: posts[i].profileImage,
-              numberOfComments: posts[i].numberOfComments,
-              numberOfLikes: posts[i].numberOfLikes,
-              likeStatus: posts[i].likeStatus,
-              numberOfTagged: posts[i].numberOfTagged,
-              taggedFirstName: posts[i].taggedFirstName,
-              taggedLastName: posts[i].taggedLastName,
-              taggedId: posts[i].taggedId,
+      ? Container()
+      // ? SmartRefresher(
+      //   enablePullDown: true,
+      //   enablePullUp: true,
+      //   header: MaterialClassicHeader(
+      //     color: Color(0xffffffff),
+      //     backgroundColor: Color(0xff4EC9D4),
+      //   ),
+      //   footer: CustomFooter(
+      //     loadStyle: LoadStyle.ShowWhenLoading,
+      //     builder: (BuildContext context, LoadStatus mode){
+      //       Widget body = Container();
+      //       if(mode == LoadStatus.loading){
+      //         body = CircularProgressIndicator();
+      //       }
+      //       return Center(child: body);
+      //     },
+      //   ),
+      //   controller: refreshController,
+      //   onRefresh: onRefresh,
+      //   onLoading: onLoading,
+      //   child: ListView.separated(
+      //     padding: EdgeInsets.all(10.0),
+      //     physics: ClampingScrollPhysics(),
+      //     shrinkWrap: true,
+      //     itemBuilder: (c, i) {
+      //       return MiscBLMPost(
+      //         userId: posts[i].userId,
+      //         postId: posts[i].postId,
+      //         memorialId: posts[i].memorialId,
+      //         memorialName: posts[i].memorialName,
+      //         timeCreated: timeago.format(DateTime.parse(posts[i].timeCreated)),
+      //         managed: posts[i].managed,
+      //         joined: posts[i].joined,
+      //         profileImage: posts[i].profileImage,
+      //         numberOfComments: posts[i].numberOfComments,
+      //         numberOfLikes: posts[i].numberOfLikes,
+      //         likeStatus: posts[i].likeStatus,
+      //         numberOfTagged: posts[i].numberOfTagged,
+      //         taggedFirstName: posts[i].taggedFirstName,
+      //         taggedLastName: posts[i].taggedLastName,
+      //         taggedId: posts[i].taggedId,
 
-              famOrFriends: false,
-              pageType: 'Blm',
-              relationship: 'Relationship',
-              contents: [
+      //         famOrFriends: false,
+      //         pageType: 'Blm',
+      //         relationship: 'Relationship',
+      //         contents: [
 
-                Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+      //           Container(alignment: Alignment.centerLeft, child: Text(posts[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-                posts[i].imagesOrVideos != []
-                ? Column(
-                  children: [
-                    SizedBox(height: 20),
+      //           posts[i].imagesOrVideos != []
+      //           ? Column(
+      //             children: [
+      //               SizedBox(height: 20),
 
-                    Container(
-                      child: ((){
-                        if(posts[i].imagesOrVideos != []){
-                          if(posts[i].imagesOrVideos.length == 1){
-                            if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
-                              return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
-                                betterPlayerConfiguration: BetterPlayerConfiguration(
-                                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                                    showControls: false,
-                                  ),
-                                  aspectRatio: 16 / 9,
-                                ),
-                              );
-                            }else{
-                              return Container(
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  imageUrl: posts[i].imagesOrVideos[0],
-                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                ),
-                              );
-                            }
-                          }else if(posts[i].imagesOrVideos.length == 2){
-                            return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 2,
-                              itemBuilder: (BuildContext context, int index) =>  
-                                lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                                ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                  betterPlayerConfiguration: BetterPlayerConfiguration(
-                                    controlsConfiguration: BetterPlayerControlsConfiguration(
-                                      showControls: false,
-                                    ),
-                                    aspectRatio: 16 / 9,
-                                  ),
-                                )
-                                : CachedNetworkImage(
-                                  fit: BoxFit.contain,
-                                  imageUrl: posts[i].imagesOrVideos[index],
-                                  placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                  errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                ),
-                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-                              mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
-                            );
-                          }else{
-                            return StaggeredGridView.countBuilder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              crossAxisCount: 4,
-                              itemCount: 3,
-                              itemBuilder: (BuildContext context, int index) => 
-                              ((){
-                                if(index != 1){
-                                  return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
-                                  ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                    betterPlayerConfiguration: BetterPlayerConfiguration(
-                                      controlsConfiguration: BetterPlayerControlsConfiguration(
-                                        showControls: false,
-                                      ),
-                                      aspectRatio: 16 / 9,
-                                    ),
-                                  )
-                                  : CachedNetworkImage(
-                                    fit: BoxFit.contain,
-                                    imageUrl: posts[i].imagesOrVideos[index],
-                                    placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                    errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                  );
+      //               Container(
+      //                 child: ((){
+      //                   if(posts[i].imagesOrVideos != []){
+      //                     if(posts[i].imagesOrVideos.length == 1){
+      //                       if(lookupMimeType(posts[i].imagesOrVideos[0])?.contains('video') == true){
+      //                         return BetterPlayer.network('${posts[i].imagesOrVideos[0]}',
+      //                           betterPlayerConfiguration: BetterPlayerConfiguration(
+      //                             controlsConfiguration: BetterPlayerControlsConfiguration(
+      //                               showControls: false,
+      //                             ),
+      //                             aspectRatio: 16 / 9,
+      //                           ),
+      //                         );
+      //                       }else{
+      //                         return Container(
+      //                           child: CachedNetworkImage(
+      //                             fit: BoxFit.contain,
+      //                             imageUrl: posts[i].imagesOrVideos[0],
+      //                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+      //                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+      //                           ),
+      //                         );
+      //                       }
+      //                     }else if(posts[i].imagesOrVideos.length == 2){
+      //                       return StaggeredGridView.countBuilder(
+      //                         padding: EdgeInsets.zero,
+      //                         shrinkWrap: true,
+      //                         physics: NeverScrollableScrollPhysics(),
+      //                         crossAxisCount: 4,
+      //                         itemCount: 2,
+      //                         itemBuilder: (BuildContext context, int index) =>  
+      //                           lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+      //                           ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+      //                             betterPlayerConfiguration: BetterPlayerConfiguration(
+      //                               controlsConfiguration: BetterPlayerControlsConfiguration(
+      //                                 showControls: false,
+      //                               ),
+      //                               aspectRatio: 16 / 9,
+      //                             ),
+      //                           )
+      //                           : CachedNetworkImage(
+      //                             fit: BoxFit.contain,
+      //                             imageUrl: posts[i].imagesOrVideos[index],
+      //                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+      //                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+      //                           ),
+      //                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+      //                         mainAxisSpacing: 4.0,
+      //                         crossAxisSpacing: 4.0,
+      //                       );
+      //                     }else{
+      //                       return StaggeredGridView.countBuilder(
+      //                         padding: EdgeInsets.zero,
+      //                         shrinkWrap: true,
+      //                         physics: NeverScrollableScrollPhysics(),
+      //                         crossAxisCount: 4,
+      //                         itemCount: 3,
+      //                         itemBuilder: (BuildContext context, int index) => 
+      //                         ((){
+      //                           if(index != 1){
+      //                             return lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true
+      //                             ? BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+      //                               betterPlayerConfiguration: BetterPlayerConfiguration(
+      //                                 controlsConfiguration: BetterPlayerControlsConfiguration(
+      //                                   showControls: false,
+      //                                 ),
+      //                                 aspectRatio: 16 / 9,
+      //                               ),
+      //                             )
+      //                             : CachedNetworkImage(
+      //                               fit: BoxFit.contain,
+      //                               imageUrl: posts[i].imagesOrVideos[index],
+      //                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+      //                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+      //                             );
                                   
-                                }else{
-                                  return ((){
-                                    if(posts[i].imagesOrVideos.length - 3 > 0){
-                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                        return Stack(
-                                          children: [
-                                            BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                              betterPlayerConfiguration: BetterPlayerConfiguration(
-                                                controlsConfiguration: BetterPlayerControlsConfiguration(
-                                                  showControls: false,
-                                                ),
-                                                aspectRatio: 16 / 9,
-                                              ),
-                                            ),
+      //                           }else{
+      //                             return ((){
+      //                               if(posts[i].imagesOrVideos.length - 3 > 0){
+      //                                 if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+      //                                   return Stack(
+      //                                     children: [
+      //                                       BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+      //                                         betterPlayerConfiguration: BetterPlayerConfiguration(
+      //                                           controlsConfiguration: BetterPlayerControlsConfiguration(
+      //                                             showControls: false,
+      //                                           ),
+      //                                           aspectRatio: 16 / 9,
+      //                                         ),
+      //                                       ),
 
-                                            Container(color: Colors.black.withOpacity(0.5),),
+      //                                       Container(color: Colors.black.withOpacity(0.5),),
 
-                                            Center(
-                                              child: CircleAvatar(
-                                                radius: 25,
-                                                backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xffffffff),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }else{
-                                        return Stack(
-                                          children: [
-                                            CachedNetworkImage(
-                                              fit: BoxFit.contain,
-                                              imageUrl: posts[i].imagesOrVideos[index],
-                                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                            ),
+      //                                       Center(
+      //                                         child: CircleAvatar(
+      //                                           radius: 25,
+      //                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
+      //                                           child: Text(
+      //                                             '${posts[i].imagesOrVideos.length - 3}',
+      //                                             style: TextStyle(
+      //                                               fontSize: 40,
+      //                                               fontWeight: FontWeight.bold,
+      //                                               color: Color(0xffffffff),
+      //                                             ),
+      //                                           ),
+      //                                         ),
+      //                                       ),
+      //                                     ],
+      //                                   );
+      //                                 }else{
+      //                                   return Stack(
+      //                                     children: [
+      //                                       CachedNetworkImage(
+      //                                         fit: BoxFit.contain,
+      //                                         imageUrl: posts[i].imagesOrVideos[index],
+      //                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+      //                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+      //                                       ),
 
-                                            Container(color: Colors.black.withOpacity(0.5),),
+      //                                       Container(color: Colors.black.withOpacity(0.5),),
 
-                                            Center(
-                                              child: CircleAvatar(
-                                                radius: 25,
-                                                backgroundColor: Color(0xffffffff).withOpacity(.5),
-                                                child: Text(
-                                                  '${posts[i].imagesOrVideos.length - 3}',
-                                                  style: TextStyle(
-                                                    fontSize: 40,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color(0xffffffff),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }
-                                    }else{
-                                      if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
-                                        return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
-                                          betterPlayerConfiguration: BetterPlayerConfiguration(
-                                            controlsConfiguration: BetterPlayerControlsConfiguration(
-                                              showControls: false,
-                                            ),
-                                            aspectRatio: 16 / 9,
-                                          ),
-                                        );
-                                      }else{
-                                        return CachedNetworkImage(
-                                          fit: BoxFit.contain,
-                                          imageUrl: posts[i].imagesOrVideos[index],
-                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-                                        );
-                                      }
-                                    }
-                                  }());
-                                }
-                              }()),
-                              staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-                              mainAxisSpacing: 4.0,
-                              crossAxisSpacing: 4.0,
-                            );
-                          }
-                        }else{
-                          return Container(height: 0,);
-                        }
-                      }()),
-                    ),
+      //                                       Center(
+      //                                         child: CircleAvatar(
+      //                                           radius: 25,
+      //                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
+      //                                           child: Text(
+      //                                             '${posts[i].imagesOrVideos.length - 3}',
+      //                                             style: TextStyle(
+      //                                               fontSize: 40,
+      //                                               fontWeight: FontWeight.bold,
+      //                                               color: Color(0xffffffff),
+      //                                             ),
+      //                                           ),
+      //                                         ),
+      //                                       ),
+      //                                     ],
+      //                                   );
+      //                                 }
+      //                               }else{
+      //                                 if(lookupMimeType(posts[i].imagesOrVideos[index])?.contains('video') == true){
+      //                                   return BetterPlayer.network('${posts[i].imagesOrVideos[index]}',
+      //                                     betterPlayerConfiguration: BetterPlayerConfiguration(
+      //                                       controlsConfiguration: BetterPlayerControlsConfiguration(
+      //                                         showControls: false,
+      //                                       ),
+      //                                       aspectRatio: 16 / 9,
+      //                                     ),
+      //                                   );
+      //                                 }else{
+      //                                   return CachedNetworkImage(
+      //                                     fit: BoxFit.contain,
+      //                                     imageUrl: posts[i].imagesOrVideos[index],
+      //                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+      //                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+      //                                   );
+      //                                 }
+      //                               }
+      //                             }());
+      //                           }
+      //                         }()),
+      //                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+      //                         mainAxisSpacing: 4.0,
+      //                         crossAxisSpacing: 4.0,
+      //                       );
+      //                     }
+      //                   }else{
+      //                     return Container(height: 0,);
+      //                   }
+      //                 }()),
+      //               ),
                     
-                  ],
-                )
-                : Container(height: 0),
-              ]
-            );
-          },
-          separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
-          itemCount: posts.length,
-        ),
-      )
+      //             ],
+      //           )
+      //           : Container(height: 0),
+      //         ]
+      //       );
+      //     },
+      //     separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
+      //     itemCount: posts.length,
+      //   ),
+      // )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(
@@ -503,7 +505,7 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
   final int userId;
   MiscBLMDraggableMemorialsState({required this.userId});
 
-  RefreshController refreshController = RefreshController(initialRefresh: true);
+  // RefreshController refreshController = RefreshController(initialRefresh: true);
   List<Widget> finalMemorials = [];
   int ownedItemsRemaining = 1;
   int followedItemsRemaining = 1;
@@ -518,10 +520,10 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
     onLoading();
   }
 
-  void onRefresh() async{
-    await Future.delayed(Duration(milliseconds: 1000));
-    refreshController.refreshCompleted();
-  }
+  // void onRefresh() async{
+  //   await Future.delayed(Duration(milliseconds: 1000));
+  //   refreshController.refreshCompleted();
+  // }
 
   void addMemorials1(){
     finalMemorials.add(
@@ -611,10 +613,10 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
         onLoading();
       }
 
-      refreshController.loadComplete();
+      // refreshController.loadComplete();
       
     }else{
-      refreshController.loadNoData();
+      // refreshController.loadNoData();
     }    
   }
 
@@ -649,9 +651,9 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       setState(() {});
       page2++;
 
-      refreshController.loadComplete();
+      // refreshController.loadComplete();
     }else{
-      refreshController.loadNoData();
+      // refreshController.loadNoData();
     }
   }
 
@@ -662,35 +664,36 @@ class MiscBLMDraggableMemorialsState extends State<MiscBLMDraggableMemorials>{
       height: SizeConfig.screenHeight! / 1.5,
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? SmartRefresher(
-        enablePullDown: true,
-        enablePullUp: true,
-        header: MaterialClassicHeader(
-          color: Color(0xffffffff),
-          backgroundColor: Color(0xff4EC9D4),
-        ),
-        footer: CustomFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-          builder: (BuildContext context, LoadStatus mode){
-            Widget body = Container();
-            if(mode == LoadStatus.loading){
-              body = CircularProgressIndicator();
-            }
-            return Center(child: body);
-          },
-        ),
-        controller: refreshController,
-        onRefresh: onRefresh,
-        onLoading: onLoading,
-        child: ListView.separated(
-          physics: ClampingScrollPhysics(),
-          itemBuilder: (c, i) {
-            return finalMemorials[i];
-          },
-          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-          itemCount: finalMemorials.length,
-        ),
-      )
+      ? Container()
+      // ? SmartRefresher(
+      //   enablePullDown: true,
+      //   enablePullUp: true,
+      //   header: MaterialClassicHeader(
+      //     color: Color(0xffffffff),
+      //     backgroundColor: Color(0xff4EC9D4),
+      //   ),
+      //   footer: CustomFooter(
+      //     loadStyle: LoadStyle.ShowWhenLoading,
+      //     builder: (BuildContext context, LoadStatus mode){
+      //       Widget body = Container();
+      //       if(mode == LoadStatus.loading){
+      //         body = CircularProgressIndicator();
+      //       }
+      //       return Center(child: body);
+      //     },
+      //   ),
+      //   controller: refreshController,
+      //   onRefresh: onRefresh,
+      //   onLoading: onLoading,
+      //   child: ListView.separated(
+      //     physics: ClampingScrollPhysics(),
+      //     itemBuilder: (c, i) {
+      //       return finalMemorials[i];
+      //     },
+      //     separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+      //     itemCount: finalMemorials.length,
+      //   ),
+      // )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

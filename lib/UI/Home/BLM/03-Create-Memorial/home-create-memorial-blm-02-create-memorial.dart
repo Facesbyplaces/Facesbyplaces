@@ -3,8 +3,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-blm-01-create-memorial.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
-import 'package:better_player/better_player.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -18,7 +18,7 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   TextEditingController controllerStory = TextEditingController();
-  BetterPlayerController? videoPlayerController;
+  // BetterPlayerController? videoPlayerController;
   List<File> slideImages = [];
   int toggle = 0;
   File? videoFile;
@@ -31,17 +31,17 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
     if(pickedFile != null){
       setState(() {
         videoFile = File(pickedFile.path);
-        BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.file, videoFile!.path);
-        videoPlayerController = BetterPlayerController(
-          BetterPlayerConfiguration(
-            autoPlay: true,
-            controlsConfiguration: BetterPlayerControlsConfiguration(
-              showControls: false,
-            ),
-            aspectRatio: 1 / 2,
-          ), 
-          betterPlayerDataSource: betterPlayerDataSource, 
-        );
+        // BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.file, videoFile!.path);
+        // videoPlayerController = BetterPlayerController(
+        //   BetterPlayerConfiguration(
+        //     autoPlay: true,
+        //     controlsConfiguration: BetterPlayerControlsConfiguration(
+        //       showControls: false,
+        //     ),
+        //     aspectRatio: 1 / 2,
+        //   ), 
+        //   betterPlayerDataSource: betterPlayerDataSource, 
+        // );
         // videoPlayerController = VideoPlayerController.file(videoFile)
         // ..initialize().then((_){
         //   setState(() {
@@ -185,20 +185,21 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                           await showDialog(
                             context: context,
                             builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
+                            Container()
+                            //   AssetGiffyDialog(
+                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            //   entryAnimation: EntryAnimation.DEFAULT,
+                            //   description: Text('Please complete the form before submitting.',
+                            //     textAlign: TextAlign.center,
+                            //     style: TextStyle(),
+                            //   ),
+                            //   onlyOkButton: true,
+                            //   buttonOkColor: Colors.red,
+                            //   onOkButtonPressed: () {
+                            //     Navigator.pop(context, true);
+                            //   },
+                            // )
                           );
                         }else{
                           List<File> newFiles = [];
@@ -279,14 +280,15 @@ class HomeBLMCreateMemorial2State extends State<HomeBLMCreateMemorial2>{
                 border: Border.all(color: Color(0xff000000),),
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: BetterPlayer.file(videoFile!.path,
-                betterPlayerConfiguration: BetterPlayerConfiguration(
-                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                    showControls: false,
-                  ),
-                  aspectRatio: 16 / 9,
-                ),
-              ),
+              // child: BetterPlayer.file(videoFile!.path,
+              //   betterPlayerConfiguration: BetterPlayerConfiguration(
+              //     controlsConfiguration: BetterPlayerControlsConfiguration(
+              //       showControls: false,
+              //     ),
+              //     aspectRatio: 16 / 9,
+              //   ),
+              // ),
+
               // child: videoFile == null 
               // ? Icon(Icons.upload_rounded, color: Color(0xff888888), size: 160,)
               // : GestureDetector(

@@ -23,7 +23,8 @@ import 'UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
 import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 import 'UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -43,6 +44,7 @@ import 'UI/ui-02-login.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   final sharedPrefs = await SharedPreferences.getInstance();
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;
@@ -69,30 +71,32 @@ void main() async{
       overlayColor: Colors.grey,
       child: MaterialApp(
         title: 'Faces by Places',
-        home: UIGetStarted(),
-        // home: ((){
-        //   if(blmSession){
-        //     return HomeBLMScreen();
-        //   }else if(regularSession){
-        //     return HomeRegularScreen();
-        //   }else{
-        //     return UIGetStarted();
-        //   }
-        // }()),
-        builder: (context, widget) => ResponsiveWrapper.builder(
-          BouncingScrollWrapper.builder(context, widget),
-          maxWidth: 1200,
-          minWidth: 450,
-          defaultScale: true,
-          breakpoints: [
-            ResponsiveBreakpoint.resize(450, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-            ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(2460, name: "4K"),
-          ],
-          background: Container(color: Color(0xFFF5F5F5))
-        ),
+        // home: UIGetStarted(),
+        home: ((){
+          if(blmSession){
+            // return HomeBLMScreen();
+            return UIGetStarted();
+          }else if(regularSession){
+            // return HomeRegularScreen();
+            return UIGetStarted();
+          }else{
+            return UIGetStarted();
+          }
+        }()),
+        // builder: (context, widget) => ResponsiveWrapper.builder(
+        //   BouncingScrollWrapper.builder(context, widget),
+        //   maxWidth: 1200,
+        //   minWidth: 450,
+        //   defaultScale: true,
+        //   breakpoints: [
+        //     ResponsiveBreakpoint.resize(450, name: MOBILE),
+        //     ResponsiveBreakpoint.autoScale(800, name: TABLET),
+        //     ResponsiveBreakpoint.autoScale(1000, name: TABLET),
+        //     ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+        //     ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+        //   ],
+        //   background: Container(color: Color(0xFFF5F5F5))
+        // ),
         theme: ThemeData(
           accentColor: Color(0xff4EC9D4),
           cardColor: Color(0xffffffff),

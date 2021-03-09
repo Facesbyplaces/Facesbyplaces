@@ -10,14 +10,14 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-01-show-unread-notifications.dart';
 import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-read-unread-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+// import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+// import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home-main-blm-03-01-feed-tab.dart';
 import 'home-main-blm-03-02-memorial-list-tab.dart';
@@ -26,7 +26,7 @@ import 'home-main-blm-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+// import 'package:badges/badges.dart';
 import 'dart:async';
 
 class HomeBLMScreenExtended extends StatefulWidget{
@@ -60,55 +60,55 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
 
   Future<void> scanQR() async {
     String barcodeScanRes;
-    try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
-      print(barcodeScanRes);
-    } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
-    }
+    // try {
+    //   barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
+    //   print(barcodeScanRes);
+    // } on PlatformException {
+    //   barcodeScanRes = 'Failed to get platform version.';
+    // }
 
-    if (!mounted) return;
+    // if (!mounted) return;
 
-    setState(() {
-      _scanBarcode = barcodeScanRes;
-    });
+    // setState(() {
+    //   _scanBarcode = barcodeScanRes;
+    // });
 
-    List<dynamic> newValue = _scanBarcode.split('-');
+    // List<dynamic> newValue = _scanBarcode.split('-');
 
-    if(_scanBarcode != 'Error'){
-      if(newValue[0] == 'Memorial'){
-        if(newValue[2] == 'Blm'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
-        }
-      }else{
-        if(newValue[4] == 'Blm'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]),)));
-        }else{
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
-        }
-      }
-    }else{
-      await showDialog(
-        context: context,
-        builder: (_) => 
-          AssetGiffyDialog(
-          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-          entryAnimation: EntryAnimation.DEFAULT,
-          description: Text('Something went wrong. Please try again.',
-            textAlign: TextAlign.center,
-            style: TextStyle(),
-          ),
-          onlyOkButton: true,
-          buttonOkColor: Colors.red,
-          onOkButtonPressed: () {
-            Navigator.pop(context, true);
-          },
-        )
-      );
-    }
+    // if(_scanBarcode != 'Error'){
+    //   if(newValue[0] == 'Memorial'){
+    //     if(newValue[2] == 'Blm'){
+    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+    //     }else{
+    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: int.parse(newValue[1]), pageType: newValue[2], newJoin: false,)));
+    //     }
+    //   }else{
+    //     if(newValue[4] == 'Blm'){
+    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMShowOriginalPostComments(postId: int.parse(newValue[1]),)));
+    //     }else{
+    //       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: int.parse(newValue[1]))));
+    //     }
+    //   }
+    // }else{
+    //   await showDialog(
+    //     context: context,
+    //     builder: (_) => 
+    //       AssetGiffyDialog(
+    //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+    //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+    //       entryAnimation: EntryAnimation.DEFAULT,
+    //       description: Text('Something went wrong. Please try again.',
+    //         textAlign: TextAlign.center,
+    //         style: TextStyle(),
+    //       ),
+    //       onlyOkButton: true,
+    //       buttonOkColor: Colors.red,
+    //       onOkButtonPressed: () {
+    //         Navigator.pop(context, true);
+    //       },
+    //     )
+    //   );
+    // }
   }
 
   void initState(){
@@ -228,7 +228,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Icon(MdiIcons.fire,),
+                        // Icon(MdiIcons.fire,),
+                        Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Feed', style: TextStyle(fontSize: 12,),),
                       ],
@@ -239,7 +240,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Icon(MdiIcons.graveStone),
+                        // Icon(MdiIcons.graveStone),
+                        Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Memorials', style: TextStyle(fontSize: 12,),),
                       ],
@@ -250,7 +252,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Icon(MdiIcons.post),
+                        // Icon(MdiIcons.post),
+                        Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Post', style: TextStyle(fontSize: 12,),),
                       ],
@@ -261,14 +264,15 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        Badge(
-                          position: BadgePosition.topEnd(top: 0, end: -10),
-                          animationDuration: Duration(milliseconds: 300),
-                          animationType: BadgeAnimationType.fade,
-                          badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                          badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
-                          child: Icon(MdiIcons.heart),
-                        ),
+                        Icon(Icons.fireplace),
+                        // Badge(
+                        //   position: BadgePosition.topEnd(top: 0, end: -10),
+                        //   animationDuration: Duration(milliseconds: 300),
+                        //   animationType: BadgeAnimationType.fade,
+                        //   badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
+                        //   badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
+                        //   child: Icon(MdiIcons.heart),
+                        // ),
                         SizedBox(height: 5),
                         Text('Notification', style: TextStyle(fontSize: 12,),),
                       ],
@@ -421,20 +425,21 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                                   await showDialog(
                                     context: context,
                                     builder: (_) => 
-                                      AssetGiffyDialog(
-                                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      entryAnimation: EntryAnimation.DEFAULT,
-                                      description: Text('Something went wrong. Please try again.',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(),
-                                      ),
-                                      onlyOkButton: true,
-                                      buttonOkColor: Colors.red,
-                                      onOkButtonPressed: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    )
+                                    Container()
+                                    //   AssetGiffyDialog(
+                                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                    //   entryAnimation: EntryAnimation.DEFAULT,
+                                    //   description: Text('Something went wrong. Please try again.',
+                                    //     textAlign: TextAlign.center,
+                                    //     style: TextStyle(),
+                                    //   ),
+                                    //   onlyOkButton: true,
+                                    //   buttonOkColor: Colors.red,
+                                    //   onOkButtonPressed: () {
+                                    //     Navigator.pop(context, true);
+                                    //   },
+                                    // )
                                   );
                                 }
                                 

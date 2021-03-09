@@ -3,7 +3,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-backgroun
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-create-memorial-regular-01-create-memorial.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
@@ -174,20 +174,21 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                           await showDialog(
                             context: context,
                             builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
+                            Container()
+                            //   AssetGiffyDialog(
+                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            //   entryAnimation: EntryAnimation.DEFAULT,
+                            //   description: Text('Please complete the form before submitting.',
+                            //     textAlign: TextAlign.center,
+                            //     style: TextStyle(),
+                            //   ),
+                            //   onlyOkButton: true,
+                            //   buttonOkColor: Colors.red,
+                            //   onOkButtonPressed: () {
+                            //     Navigator.pop(context, true);
+                            //   },
+                            // )
                           );
                         }else{
                           List<File> newFiles = [];

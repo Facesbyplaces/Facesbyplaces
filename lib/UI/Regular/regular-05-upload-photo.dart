@@ -4,7 +4,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -157,20 +157,21 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                     await showDialog(
                       context: context,
                       builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(),
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: Colors.red,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
+                      Container()
+                      //   AssetGiffyDialog(
+                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //   entryAnimation: EntryAnimation.DEFAULT,
+                      //   description: Text('Something went wrong. Please try again.',
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(),
+                      //   ),
+                      //   onlyOkButton: true,
+                      //   buttonOkColor: Colors.red,
+                      //   onOkButtonPressed: () {
+                      //     Navigator.pop(context, true);
+                      //   },
+                      // )
                     );
                   }
 
@@ -178,20 +179,21 @@ class RegularUploadPhotoState extends State<RegularUploadPhoto>{
                   await showDialog(
                     context: context,
                     builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Please upload a photo.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: true,
-                      buttonOkColor: Colors.red,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                    )
+                    Container()
+                    //   AssetGiffyDialog(
+                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    //   entryAnimation: EntryAnimation.DEFAULT,
+                    //   description: Text('Please upload a photo.',
+                    //     textAlign: TextAlign.center,
+                    //     style: TextStyle(),
+                    //   ),
+                    //   onlyOkButton: true,
+                    //   buttonOkColor: Colors.red,
+                    //   onOkButtonPressed: () {
+                    //     Navigator.pop(context, true);
+                    //   },
+                    // )
                   );
                 }
               },

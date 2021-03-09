@@ -2,8 +2,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:date_time_picker/date_time_picker.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:date_time_picker/date_time_picker.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -108,68 +108,68 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
 
                     SizedBox(height: 20,),
 
-                    DateTimePicker(
-                      type: DateTimePickerType.date,
-                      controller: controller1,
-                      cursorColor: Color(0xff000000),
-                      firstDate: DateTime(1000),
-                      lastDate: DateTime.now(),
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'DOB',
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                      selectableDayPredicate: (date) {
+                    // DateTimePicker(
+                    //   type: DateTimePickerType.date,
+                    //   controller: controller1,
+                    //   cursorColor: Color(0xff000000),
+                    //   firstDate: DateTime(1000),
+                    //   lastDate: DateTime.now(),
+                    //   decoration: InputDecoration(
+                    //     alignLabelWithHint: true,
+                    //     labelText: 'DOB',
+                    //     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                    //     focusedBorder: UnderlineInputBorder(
+                    //       borderSide: BorderSide(
+                    //         color: Color(0xff000000),
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   selectableDayPredicate: (date) {
 
-                        if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
-                          return true;
-                        }else{
-                          return false;
-                        }
-                      },
-                      onChanged: (changed){
-                        setState(() {
-                          dob = DateTime.parse(changed);
-                        });
-                      },
-                    ),
+                    //     if(date.isBefore(rip)  || date.isAtSameMomentAs(rip)){
+                    //       return true;
+                    //     }else{
+                    //       return false;
+                    //     }
+                    //   },
+                    //   onChanged: (changed){
+                    //     setState(() {
+                    //       dob = DateTime.parse(changed);
+                    //     });
+                    //   },
+                    // ),
 
                     SizedBox(height: 20,),
 
-                    DateTimePicker(
-                      type: DateTimePickerType.date,
-                      controller: controller2,
-                      cursorColor: Color(0xff000000),
-                      firstDate: DateTime(1000),
-                      lastDate: DateTime.now(),
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        labelText: 'RIP',
-                        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                      ),
-                      selectableDayPredicate: (date) {
-                        if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
-                          return true;
-                        }else{
-                          return false;
-                        }
-                      },
-                      onChanged: (changed){
-                        setState(() {
-                          rip = DateTime.parse(changed);
-                        });
-                      },
-                    ),
+                    // DateTimePicker(
+                    //   type: DateTimePickerType.date,
+                    //   controller: controller2,
+                    //   cursorColor: Color(0xff000000),
+                    //   firstDate: DateTime(1000),
+                    //   lastDate: DateTime.now(),
+                    //   decoration: InputDecoration(
+                    //     alignLabelWithHint: true,
+                    //     labelText: 'RIP',
+                    //     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+                    //     focusedBorder: UnderlineInputBorder(
+                    //       borderSide: BorderSide(
+                    //         color: Color(0xff000000),
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   selectableDayPredicate: (date) {
+                    //     if(date.isAfter(dob) || date.isAtSameMomentAs(dob)){
+                    //       return true;
+                    //     }else{
+                    //       return false;
+                    //     }
+                    //   },
+                    //   onChanged: (changed){
+                    //     setState(() {
+                    //       rip = DateTime.parse(changed);
+                    //     });
+                    //   },
+                    // ),
 
                     SizedBox(height: 20,),
 
@@ -188,20 +188,21 @@ class HomeBLMCreateMemorial1State extends State<HomeBLMCreateMemorial1>{
                           await showDialog(
                             context: context,
                             builder: (_) => 
-                              AssetGiffyDialog(
-                              image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              entryAnimation: EntryAnimation.DEFAULT,
-                              description: Text('Please complete the form before submitting.',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(),
-                              ),
-                              onlyOkButton: true,
-                              buttonOkColor: Colors.red,
-                              onOkButtonPressed: () {
-                                Navigator.pop(context, true);
-                              },
-                            )
+                            Container()
+                            //   AssetGiffyDialog(
+                            //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                            //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                            //   entryAnimation: EntryAnimation.DEFAULT,
+                            //   description: Text('Please complete the form before submitting.',
+                            //     textAlign: TextAlign.center,
+                            //     style: TextStyle(),
+                            //   ),
+                            //   onlyOkButton: true,
+                            //   buttonOkColor: Colors.red,
+                            //   onOkButtonPressed: () {
+                            //     Navigator.pop(context, true);
+                            //   },
+                            // )
                           );
                         }else{
                           Navigator.pushNamed(

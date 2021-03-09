@@ -6,7 +6,7 @@ import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-01-leave-page.d
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-02-follow-page.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class MiscBLMManageMemorialTab extends StatefulWidget{
@@ -131,22 +131,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   bool confirmResult = await showDialog(
                     context: context,
                     builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Are you sure you want to leave this page?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: false,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                      onCancelButtonPressed: () {
-                        Navigator.pop(context, false);
-                      },
-                    )
+                    Container()
+                    //   AssetGiffyDialog(
+                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    //   entryAnimation: EntryAnimation.DEFAULT,
+                    //   description: Text('Are you sure you want to leave this page?',
+                    //     textAlign: TextAlign.center,
+                    //     style: TextStyle(),
+                    //   ),
+                    //   onlyOkButton: false,
+                    //   onOkButtonPressed: () {
+                    //     Navigator.pop(context, true);
+                    //   },
+                    //   onCancelButtonPressed: () {
+                    //     Navigator.pop(context, false);
+                    //   },
+                    // )
                   );
 
                   if(confirmResult){
@@ -161,20 +162,21 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       await showDialog(
                         context: context,
                         builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(),
-                          ),
-                          onlyOkButton: true,
-                          buttonOkColor: Colors.red,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
+                        Container()
+                        //   AssetGiffyDialog(
+                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        //   entryAnimation: EntryAnimation.DEFAULT,
+                        //   description: Text('Something went wrong. Please try again.',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(),
+                        //   ),
+                        //   onlyOkButton: true,
+                        //   buttonOkColor: Colors.red,
+                        //   onOkButtonPressed: () {
+                        //     Navigator.pop(context, true);
+                        //   },
+                        // )
                       );
                     }
                   }
@@ -198,22 +200,23 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                   bool confirmResult = await showDialog(
                     context: context,
                     builder: (_) => 
-                      AssetGiffyDialog(
-                      image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                      title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                      entryAnimation: EntryAnimation.DEFAULT,
-                      description: Text('Are you sure you want to leave this page?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(),
-                      ),
-                      onlyOkButton: false,
-                      onOkButtonPressed: () {
-                        Navigator.pop(context, true);
-                      },
-                      onCancelButtonPressed: () {
-                        Navigator.pop(context, false);
-                      },
-                    )
+                    Container()
+                    //   AssetGiffyDialog(
+                    //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                    //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                    //   entryAnimation: EntryAnimation.DEFAULT,
+                    //   description: Text('Are you sure you want to leave this page?',
+                    //     textAlign: TextAlign.center,
+                    //     style: TextStyle(),
+                    //   ),
+                    //   onlyOkButton: false,
+                    //   onOkButtonPressed: () {
+                    //     Navigator.pop(context, true);
+                    //   },
+                    //   onCancelButtonPressed: () {
+                    //     Navigator.pop(context, false);
+                    //   },
+                    // )
                   );
 
                   if(confirmResult){
@@ -228,20 +231,21 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                       await showDialog(
                         context: context,
                         builder: (_) => 
-                          AssetGiffyDialog(
-                          image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                          title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                          entryAnimation: EntryAnimation.DEFAULT,
-                          description: Text('Something went wrong. Please try again.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(),
-                          ),
-                          onlyOkButton: true,
-                          buttonOkColor: Colors.red,
-                          onOkButtonPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                        )
+                        Container()
+                        //   AssetGiffyDialog(
+                        //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                        //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                        //   entryAnimation: EntryAnimation.DEFAULT,
+                        //   description: Text('Something went wrong. Please try again.',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(),
+                        //   ),
+                        //   onlyOkButton: true,
+                        //   buttonOkColor: Colors.red,
+                        //   onOkButtonPressed: () {
+                        //     Navigator.pop(context, true);
+                        //   },
+                        // )
                       );
                     }
                   }
@@ -271,20 +275,21 @@ class MiscBLMManageMemorialTabState extends State<MiscBLMManageMemorialTab>{
                     await showDialog(
                       context: context,
                       builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(),
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: Colors.red,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
+                      Container()
+                      //   AssetGiffyDialog(
+                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //   entryAnimation: EntryAnimation.DEFAULT,
+                      //   description: Text('Something went wrong. Please try again.',
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(),
+                      //   ),
+                      //   onlyOkButton: true,
+                      //   buttonOkColor: Colors.red,
+                      //   onOkButtonPressed: () {
+                      //     Navigator.pop(context, true);
+                      //   },
+                      // )
                     );
                   }
                 },

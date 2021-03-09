@@ -2,7 +2,7 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:location/location.dart' as Location;
 import 'package:loader_overlay/loader_overlay.dart';
 import 'home-search-blm-02-search-extended.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 // import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 
@@ -64,30 +64,31 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                         await showDialog(
                           context: context,
                           builder: (_) => 
-                            AssetGiffyDialog(
-                            image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            entryAnimation: EntryAnimation.DEFAULT,
-                            description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(),
-                            ),
-                            buttonOkColor: Colors.green,
-                            onOkButtonPressed: () async{
-                              permissionGranted = await location.requestPermission();
+                          Container()
+                          //   AssetGiffyDialog(
+                          //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                          //   title: Text('Confirm', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                          //   entryAnimation: EntryAnimation.DEFAULT,
+                          //   description: Text('FacesbyPlaces needs to access the location to locate for memorials. Do you wish to turn it on?',
+                          //     textAlign: TextAlign.center,
+                          //     style: TextStyle(),
+                          //   ),
+                          //   buttonOkColor: Colors.green,
+                          //   onOkButtonPressed: () async{
+                          //     permissionGranted = await location.requestPermission();
 
-                              // context.showLoaderOverlay();
-                              // Location.LocationData locationData = await location.getLocation();
-                              // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
-                              // context.hideLoaderOverlay();
+                          //     // context.showLoaderOverlay();
+                          //     // Location.LocationData locationData = await location.getLocation();
+                          //     // List<Placemark> placemarks = await placemarkFromCoordinates(locationData.latitude, locationData.longitude);
+                          //     // context.hideLoaderOverlay();
 
-                              // Navigator.pop(context);
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
-                            },
-                            onCancelButtonPressed: (){
-                              Navigator.pop(context, true);
-                            },
-                          )
+                          //     // Navigator.pop(context);
+                          //     // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMPost(keyword: keyword, newToggle: 0, latitude: locationData.latitude!, longitude: locationData.longitude!, currentLocation: placemarks[0].name,)));
+                          //   },
+                          //   onCancelButtonPressed: (){
+                          //     Navigator.pop(context, true);
+                          //   },
+                          // )
                         );
                       }else{
                         // context.showLoaderOverlay();
@@ -138,20 +139,21 @@ class HomeBLMSearchState extends State<HomeBLMSearch>{
                             await showDialog(
                               context: context,
                               builder: (_) => 
-                                AssetGiffyDialog(
-                                image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                entryAnimation: EntryAnimation.DEFAULT,
-                                description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(),
-                                ),
-                                onlyOkButton: true,
-                                buttonOkColor: Colors.red,
-                                onOkButtonPressed: () {
-                                  Navigator.pop(context, true);
-                                },
-                              )
+                              Container()
+                              //   AssetGiffyDialog(
+                              //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                              //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                              //   entryAnimation: EntryAnimation.DEFAULT,
+                              //   description: Text('FacesbyPlaces needs to access the location. Turn on the access on the settings.',
+                              //     textAlign: TextAlign.center,
+                              //     style: TextStyle(),
+                              //   ),
+                              //   onlyOkButton: true,
+                              //   buttonOkColor: Colors.red,
+                              //   onOkButtonPressed: () {
+                              //     Navigator.pop(context, true);
+                              //   },
+                              // )
                             );
                           }else{
                             // context.showLoaderOverlay();

@@ -4,11 +4,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:location/location.dart' as Location;
-import 'package:better_player/better_player.dart';
+// import 'package:better_player/better_player.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+// import 'package:badges/badges.dart';
 import 'package:mime/mime.dart';
 import 'dart:io';
 
@@ -52,7 +52,7 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
 
   File videoFile = File('');
   final picker = ImagePicker();
-  BetterPlayerController betterPlayerController = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 1 / 2, controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),),);
+  // BetterPlayerController betterPlayerController = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 1 / 2, controlsConfiguration: BetterPlayerControlsConfiguration(showControls: false,),),);
   String newLocation = '';
   String person = '';
   int removeAttachment = 0;
@@ -88,16 +88,16 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
       setState(() {
         slideImages.add(File(pickedFile.path));
         videoFile = File(pickedFile.path);
-        BetterPlayerDataSource betterPlayerDataSource =BetterPlayerDataSource(BetterPlayerDataSourceType.file, '${pickedFile.path}');
-        betterPlayerController = BetterPlayerController(
-          BetterPlayerConfiguration(
-            aspectRatio: 1 / 2,
-            controlsConfiguration: BetterPlayerControlsConfiguration(
-              showControls: false,
-            ),
-          ), 
-          betterPlayerDataSource: betterPlayerDataSource,
-        );
+        // BetterPlayerDataSource betterPlayerDataSource =BetterPlayerDataSource(BetterPlayerDataSourceType.file, '${pickedFile.path}');
+        // betterPlayerController = BetterPlayerController(
+        //   BetterPlayerConfiguration(
+        //     aspectRatio: 1 / 2,
+        //     controlsConfiguration: BetterPlayerControlsConfiguration(
+        //       showControls: false,
+        //     ),
+        //   ), 
+        //   betterPlayerDataSource: betterPlayerDataSource,
+        // );
       });
     }
   }
@@ -192,20 +192,21 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                     await showDialog(
                       context: context,
                       builder: (_) => 
-                        AssetGiffyDialog(
-                        image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                        title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                        entryAnimation: EntryAnimation.DEFAULT,
-                        description: Text('Something went wrong. Please try again.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(),
-                        ),
-                        onlyOkButton: true,
-                        buttonOkColor: Colors.red,
-                        onOkButtonPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                      )
+                      Container()
+                      //   AssetGiffyDialog(
+                      //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                      //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                      //   entryAnimation: EntryAnimation.DEFAULT,
+                      //   description: Text('Something went wrong. Please try again.',
+                      //     textAlign: TextAlign.center,
+                      //     style: TextStyle(),
+                      //   ),
+                      //   onlyOkButton: true,
+                      //   buttonOkColor: Colors.red,
+                      //   onOkButtonPressed: () {
+                      //     Navigator.pop(context, true);
+                      //   },
+                      // )
                     );
                   }
 
@@ -387,9 +388,10 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                     ),
                                     child: Stack(
                                       children: [
-                                        BetterPlayer(
-                                          controller: betterPlayerController,
-                                        ),
+                                        // BetterPlayer(
+                                        //   controller: betterPlayerController,
+                                        // ),
+                                        
                                         
                                         Center(
                                           child: CircleAvatar(
@@ -412,13 +414,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                               slideImages.removeAt(index);
                                             });
                                           },
-                                          child: Badge(
-                                            position: BadgePosition.topEnd(top: 0, end: 0),
-                                            animationDuration: Duration(milliseconds: 300),
-                                            animationType: BadgeAnimationType.fade,
-                                            badgeColor: Color(0xff000000),
-                                            badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
-                                          ),
+                                          // child: Badge(
+                                          //   position: BadgePosition.topEnd(top: 0, end: 0),
+                                          //   animationDuration: Duration(milliseconds: 300),
+                                          //   animationType: BadgeAnimationType.fade,
+                                          //   badgeColor: Color(0xff000000),
+                                          //   badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
+                                          // ),
                                         )
                                         : Container(height: 0),
                                       ],
@@ -458,13 +460,13 @@ class HomeRegularCreatePostState extends State<HomeRegularCreatePost>{
                                               slideImages.removeAt(index);
                                             });
                                           },
-                                          child: Badge(
-                                            position: BadgePosition.topEnd(top: 0, end: 0),
-                                            animationDuration: Duration(milliseconds: 300),
-                                            animationType: BadgeAnimationType.fade,
-                                            badgeColor: Color(0xff000000),
-                                            badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
-                                          ),
+                                          // child: Badge(
+                                          //   position: BadgePosition.topEnd(top: 0, end: 0),
+                                          //   animationDuration: Duration(milliseconds: 300),
+                                          //   animationType: BadgeAnimationType.fade,
+                                          //   badgeColor: Color(0xff000000),
+                                          //   badgeContent: Icon(Icons.close, color: Color(0xffffffff),),
+                                          // ),
                                         )
                                         : Container(height: 0),
                                       ],

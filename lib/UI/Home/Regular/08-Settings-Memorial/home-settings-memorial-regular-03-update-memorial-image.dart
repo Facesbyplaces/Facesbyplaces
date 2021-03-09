@@ -9,7 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
+// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
@@ -286,20 +286,21 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               await showDialog(
                                 context: context,
                                 builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Successfully updated the account details.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.green,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
+                                Container()
+                                //   AssetGiffyDialog(
+                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                //   entryAnimation: EntryAnimation.DEFAULT,
+                                //   description: Text('Successfully updated the account details.',
+                                //     textAlign: TextAlign.center,
+                                //     style: TextStyle(),
+                                //   ),
+                                //   onlyOkButton: true,
+                                //   buttonOkColor: Colors.green,
+                                //   onOkButtonPressed: () {
+                                //     Navigator.pop(context, true);
+                                //   },
+                                // )
                               );
 
                               Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage));
@@ -308,20 +309,21 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               await showDialog(
                                 context: context,
                                 builder: (_) => 
-                                  AssetGiffyDialog(
-                                  image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  entryAnimation: EntryAnimation.DEFAULT,
-                                  description: Text('Something went wrong. Please try again.',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(),
-                                  ),
-                                  onlyOkButton: true,
-                                  buttonOkColor: Colors.red,
-                                  onOkButtonPressed: () {
-                                    Navigator.pop(context, true);
-                                  },
-                                )
+                                Container()
+                                //   AssetGiffyDialog(
+                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+                                //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+                                //   entryAnimation: EntryAnimation.DEFAULT,
+                                //   description: Text('Something went wrong. Please try again.',
+                                //     textAlign: TextAlign.center,
+                                //     style: TextStyle(),
+                                //   ),
+                                //   onlyOkButton: true,
+                                //   buttonOkColor: Colors.red,
+                                //   onOkButtonPressed: () {
+                                //     Navigator.pop(context, true);
+                                //   },
+                                // )
                               );
                             }
                           }

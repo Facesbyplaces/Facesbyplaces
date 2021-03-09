@@ -5,7 +5,7 @@ class MiscRegularButtonTemplate extends StatelessWidget{
 
   final String buttonText;
   final TextStyle buttonTextStyle;
-  final Function onPressed;
+  final Function() onPressed;
   final double width;
   final double height;
   final Color buttonColor;
@@ -24,8 +24,7 @@ class MiscRegularButtonTemplate extends StatelessWidget{
     SizeConfig.init(context);
     return MaterialButton(
       padding: EdgeInsets.zero,
-      // onPressed: onPressed,
-      onPressed: (){},
+      onPressed: onPressed,
       child: Text(buttonText,
         style: buttonTextStyle,
       ),
@@ -41,7 +40,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
 
   final String buttonText;
   final TextStyle buttonTextStyle;
-  final Function onPressed;
+  final Function() onPressed;
   final double width;
   final double height;
   final Color buttonColor;
@@ -61,8 +60,7 @@ class MiscRegularButtonSignInWithTemplate extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialButton(
       padding: EdgeInsets.zero,
-      // onPressed: onPressed,
-      onPressed: (){},
+      onPressed: onPressed,
       minWidth: width,
       height: height,
       child: Row(
