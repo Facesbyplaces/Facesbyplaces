@@ -3,16 +3,16 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:facesbyplaces/Bloc/bloc-01-bloc-blm-misc.dart';
 // import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // import 'package:full_screen_menu/full_screen_menu.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
 // import 'package:clipboard/clipboard.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
-import 'misc-06-blm-button.dart';
-import 'dart:typed_data';
-import 'dart:io';
+// import 'package:share/share.dart';
+// import 'misc-06-blm-button.dart';
+// import 'dart:typed_data';
+// import 'dart:io';
 import 'dart:ui';
 
 class MiscBLMDropDownTemplate extends StatefulWidget{

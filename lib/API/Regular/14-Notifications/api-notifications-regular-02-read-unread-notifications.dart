@@ -9,7 +9,8 @@ Future<bool> apiRegularReadUnreadNotifications() async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/read', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/read', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/read',),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

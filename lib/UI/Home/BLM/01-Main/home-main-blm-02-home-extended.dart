@@ -1,9 +1,9 @@
-import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
 import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
-import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-01-logout.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-02-show-user-information.dart';
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-03-show-notifications-settings.dart';
@@ -24,7 +24,7 @@ import 'home-main-blm-03-02-memorial-list-tab.dart';
 import 'home-main-blm-03-03-post-tab.dart';
 import 'home-main-blm-03-04-notifications-tab.dart';
 import '../../../ui-01-get-started.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 // import 'package:badges/badges.dart';
 import 'dart:async';
@@ -44,7 +44,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   List<bool> bottomTab = [true, false, false, false];
   Future<APIBLMShowProfileInformation>? drawerSettings;
   int unreadNotifications = 0;
-  String _scanBarcode = 'Error';
+  // String _scanBarcode = 'Error';
 
   Future<APIBLMShowProfileInformation> getDrawerInformation() async{
     return await apiBLMShowProfileInformation();
@@ -59,7 +59,7 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
   }
 
   Future<void> scanQR() async {
-    String barcodeScanRes;
+    // String barcodeScanRes;
     // try {
     //   barcodeScanRes = await FlutterBarcodeScanner.scanBarcode("#ff6666", "Cancel", true, ScanMode.QR);
     //   print(barcodeScanRes);

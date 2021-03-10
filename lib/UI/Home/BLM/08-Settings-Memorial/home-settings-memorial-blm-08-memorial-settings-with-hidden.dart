@@ -159,7 +159,7 @@ class HomeBLMMemorialSettingsWithHiddenState extends State<HomeBLMMemorialSettin
           onTap: () async{
             String choice = await showDialog(context: (context), builder: (build) => MiscBLMRelationshipFromDialog());
 
-            if(choice != null){
+            if(choice != ''){
               bool result = await apiBLMMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
               if(result == true){

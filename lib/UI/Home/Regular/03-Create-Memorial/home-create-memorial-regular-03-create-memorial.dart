@@ -1,12 +1,12 @@
-import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
-import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial-regular-01-create-memorial.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-01-managed-memorial.dart';
+// import 'package:facesbyplaces/API/Regular/04-Create-Memorial/api-create-memorial-regular-01-create-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:facesbyplaces/Configurations/date-conversion.dart';
-import 'home-create-memorial-regular-01-create-memorial.dart';
+// import 'package:facesbyplaces/Configurations/date-conversion.dart';
+// import 'home-create-memorial-regular-01-create-memorial.dart';
 import 'package:location/location.dart' as Location;
-import 'package:loader_overlay/loader_overlay.dart';
+// import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
@@ -85,7 +85,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: backgroundImage != null
+                      image: backgroundImage != File('')
                       ? AssetImage(backgroundImage.path)
                       : AssetImage('assets/icons/profile_post1.png'),
                     ),
@@ -295,7 +295,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         // )
                       );
                     }else{
-                      if(profileImage == null){
+                      if(profileImage == File('')){
                         final ByteData bytes = await rootBundle.load('assets/icons/cover-icon.png');
                         final Uint8List list = bytes.buffer.asUint8List();
 
@@ -308,7 +308,7 @@ class HomeRegularCreateMemorial3State extends State<HomeRegularCreateMemorial3>{
                         });
                       }
 
-                      Location.LocationData locationData = await location.getLocation();
+                      // Location.LocationData locationData = await location.getLocation();
 
                       // APIRegularCreateMemorial memorial = APIRegularCreateMemorial(
                       //   almRelationship: newValue.relationship,

@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +22,6 @@ class HomeRegularManageTab extends StatefulWidget{
 
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
   List<Widget> finalMemorials = [];
   int memorialFamilyItemsRemaining = 1;
   int memorialFriendsItemsRemaining = 1;
@@ -40,10 +38,17 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     onLoading();
   }
   
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }
+  Future<void> onRefresh() async{
+    if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0 && flag1 == false){
+      addMemorials2();
+      setState(() {
+        flag1 = true;
+      });
+      onLoading();
+    }else{
+      onLoading();
+    }
+  }
 
   void addMemorials1(){
     finalMemorials.add(
@@ -89,7 +94,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
   }
 
   void onLoading() async{
-
     if(flag1 == false){
       onLoading1();
     }else{
@@ -105,6 +109,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       context.hideLoaderOverlay();
 
       memorialFamilyItemsRemaining = newValue.almFamilyMemorialList.memorialHomeTabMemorialFamilyItemsRemaining;
+
       count = count + newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length;
 
       for(int i = 0; i < newValue.almFamilyMemorialList.memorialHomeTabMemorialPage.length; i++){
@@ -123,15 +128,10 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           ),
         );
       }
-
-      if(mounted)
-      setState(() {});
-      page1++;
     }
 
-    page1 = 1;
-
     if(blmFamilyItemsRemaining != 0){
+
       context.showLoaderOverlay();
       var newValue = await apiRegularHomeMemorialsTab(page: page1);
       context.hideLoaderOverlay();
@@ -155,21 +155,12 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           ),
         );
       }
-
-      if(mounted)
-      setState(() {});
-      page1++;
-
-      if(blmFamilyItemsRemaining == 0){
-        addMemorials2();
-        setState(() {
-          flag1 = true;
-        });
-        onLoading();
-      } 
     }
 
-    // refreshController.loadComplete();
+    if(mounted)
+    setState(() {});
+    page1++;
+
   }
 
   void onLoading2() async{
@@ -198,13 +189,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
           ),
         );
       }
-
-      if(mounted)
-      setState(() {});
-      page2++;
     }
-
-    page2 = 1;
 
     if(blmFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
@@ -235,8 +220,6 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       setState(() {});
       page2++;
     }
-
-    // refreshController.loadComplete();
   }
 
   @override
@@ -245,36 +228,16 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? Container()
-      // ? SmartRefresher(
-      //   enablePullDown: true,
-      //   enablePullUp: true,
-      //   header: MaterialClassicHeader(
-      //     color: Color(0xffffffff),
-      //     backgroundColor: Color(0xff4EC9D4),
-      //   ),
-      //   footer: CustomFooter(
-      //     loadStyle: LoadStyle.ShowWhenLoading,
-      //     builder: (BuildContext context, LoadStatus mode){
-      //       Widget body = Container();
-      //       if(mode == LoadStatus.loading){
-      //         body = CircularProgressIndicator();
-      //       }
-      //       return Center(child: body);
-      //     },
-      //   ),
-      //   controller: refreshController,
-      //   onRefresh: onRefresh,
-      //   onLoading: onLoading,
-      //   child: ListView.separated(
-      //     physics: ClampingScrollPhysics(),
-      //     itemBuilder: (c, i) {
-      //       return finalMemorials[i];
-      //     },
-      //     separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
-      //     itemCount: finalMemorials.length,
-      //   ),
-      // )
+      ? RefreshIndicator(
+        onRefresh: onRefresh,
+        child: ListView.separated(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          physics: ClampingScrollPhysics(),
+          itemCount: finalMemorials.length,
+          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          itemBuilder: (c, i) => finalMemorials[i],
+        )
+      )
       : SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Container(

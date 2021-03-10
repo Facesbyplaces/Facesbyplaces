@@ -2,16 +2,16 @@
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-02-show-user-posts.dart';
 import 'package:facesbyplaces/API/Regular/13-Show-User/api-show-user-regular-03-show-user-memorials.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:mime/mime.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+// import 'package:mime/mime.dart';
 // import 'package:sliding_up_panel/sliding_up_panel.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:timeago/timeago.dart' as timeago;
+// import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 import 'misc-03-regular-manage-memorial.dart';
-import 'misc-04-regular-post.dart';
+// import 'misc-04-regular-post.dart';
 
 class MiscRegularUserProfileDraggableSwitchTabs extends StatefulWidget{
   final int userId;

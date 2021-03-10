@@ -10,7 +10,7 @@ Future<APIRegularHomeTabFeedMain> apiRegularHomeFeedTab({required int page}) asy
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/feed/?page=$page', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/mainpages/feed/', {'page' : '$page',}),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -79,7 +79,7 @@ class APIRegularHomeTabFeedExtended{
       homeTabFeedLocation: parsedJson['location'],
       homeTabFeedLatitude: parsedJson['latitude'],
       homeTabFeedLongitude: parsedJson['longitude'],
-      homeTabFeedImagesOrVideos: newList1!,
+      homeTabFeedImagesOrVideos: newList1 != null ? newList1 : [],
       homeTabFeedPostTagged: taggedList,
       homeTabFeedCreateAt: parsedJson['created_at'],
       homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],

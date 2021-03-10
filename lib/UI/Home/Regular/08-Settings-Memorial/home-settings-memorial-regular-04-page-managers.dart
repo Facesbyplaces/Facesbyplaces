@@ -1,6 +1,6 @@
 import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-03-show-admin-settings.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-09-add-admin.dart';
-import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-10-remove-admin.dart';
+// import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-09-add-admin.dart';
+// import 'package:facesbyplaces/API/Regular/09-Settings-Memorial/api-settings-memorial-regular-10-remove-admin.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -50,52 +50,52 @@ class HomeRegularPageManagersState extends State<HomeRegularPageManagers>{
 
   void onLoading1() async{
     if(adminItemsRemaining != 0){
-      context.showLoaderOverlay();
-      var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page1);
-      context.hideLoaderOverlay();
+      // context.showLoaderOverlay();
+      // var newValue = await apiRegularShowAdminSettings(memorialId: memorialId, page: page1);
+      // context.hideLoaderOverlay();
 
-      if(newValue == null){
-        await showDialog(
-          context: context,
-          builder: (_) => 
-          Container()
-          //   AssetGiffyDialog(
-          //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-          //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-          //   entryAnimation: EntryAnimation.DEFAULT,
-          //   description: Text('Something went wrong. Please try again.',
-          //     textAlign: TextAlign.center,
-          //     style: TextStyle(),
-          //   ),
-          //   onlyOkButton: true,
-          //   buttonOkColor: Colors.red,
-          //   onOkButtonPressed: () {
-          //     Navigator.pop(context, true);
-          //   },
-          // )
-        );
-      }else{
-        adminItemsRemaining = newValue.almAdminItemsRemaining;
+      // if(newValue == null){
+      //   await showDialog(
+      //     context: context,
+      //     builder: (_) => 
+      //     Container()
+      //     //   AssetGiffyDialog(
+      //     //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
+      //     //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
+      //     //   entryAnimation: EntryAnimation.DEFAULT,
+      //     //   description: Text('Something went wrong. Please try again.',
+      //     //     textAlign: TextAlign.center,
+      //     //     style: TextStyle(),
+      //     //   ),
+      //     //   onlyOkButton: true,
+      //     //   buttonOkColor: Colors.red,
+      //     //   onOkButtonPressed: () {
+      //     //     Navigator.pop(context, true);
+      //     //   },
+      //     // )
+      //   );
+      // }else{
+      //   adminItemsRemaining = newValue.almAdminItemsRemaining;
 
-        for(int i = 0; i < newValue.almAdminList.length; i++){
-          adminList.add(
-            RegularShowAdminSettings(
-              userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
-              firstName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
-              lastName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
-              image: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
-              relationship: newValue.almAdminList[i].showAdminsSettingsRelationship,
-              email: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
-            ),
-          );
-        }
+      //   for(int i = 0; i < newValue.almAdminList.length; i++){
+      //     adminList.add(
+      //       RegularShowAdminSettings(
+      //         userId: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserId,
+      //         firstName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserFirstName,
+      //         lastName: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserLastName,
+      //         image: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserImage,
+      //         relationship: newValue.almAdminList[i].showAdminsSettingsRelationship,
+      //         email: newValue.almAdminList[i].showAdminsSettingsUser.showAdminsSettingsUserEmail,
+      //       ),
+      //     );
+      //   }
 
-        if(mounted)
-        setState(() {});
-        page1++;
+      //   if(mounted)
+      //   setState(() {});
+      //   page1++;
         
-        // refreshController.loadComplete();
-      }
+      //   // refreshController.loadComplete();
+      // }
 
       
     }else{

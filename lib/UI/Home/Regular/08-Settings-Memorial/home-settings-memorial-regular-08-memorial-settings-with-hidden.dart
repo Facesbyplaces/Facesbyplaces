@@ -86,8 +86,8 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
             child: Container(
               child: ((){
                 switch(toggle){
-                  case 0: return settingsTab1(memorialId); break;
-                  case 1: return settingsTab2(memorialId); break;
+                  case 0: return settingsTab1(memorialId);
+                  case 1: return settingsTab2(memorialId);
                 }
               }()),
             ),
@@ -158,7 +158,7 @@ class HomeRegularMemorialSettingsWithHiddenState extends State<HomeRegularMemori
           onTap: () async{
             String choice = await showDialog(context: (context), builder: (build) => MiscRegularRelationshipFromDialog());
 
-            if(choice != null){
+            if(choice != ''){
               bool result = await apiRegularMemorialSetRelationship(memorialId: memorialId, relationship: choice);
 
               if(result == true){

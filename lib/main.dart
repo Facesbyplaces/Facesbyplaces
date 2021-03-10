@@ -3,26 +3,26 @@ import 'UI/Home/Regular/01-Main/home-main-regular-01-home.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-01-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-02-create-memorial.dart';
 import 'UI/Home/Regular/03-Create-Memorial/home-create-memorial-regular-03-create-memorial.dart';
-import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
+// import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-01-create-post.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-01-create-post-location.dart';
 import 'UI/Home/Regular/04-Create-Post/home-create-post-regular-02-02-create-post-user.dart';
-import 'UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
+// import 'UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'UI/Home/Regular/05-Donate/home-donate-regular-02-paypal-screen.dart';
 import 'UI/Home/Regular/07-Search/home-search-regular-01-search.dart';
-import 'UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
-import 'UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
+// import 'UI/Home/Regular/09-Settings-User/home-settings-user-regular-01-user-details.dart';
+// import 'UI/Home/Regular/10-Settings-Notifications/home-settings-notifications-regular-01-notification-settings.dart';
 import 'UI/Home/BLM/01-Main/home-main-blm-01-home.dart';
-import 'UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
+// import 'UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-01-managed-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-01-create-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-02-create-memorial.dart';
 import 'UI/Home/BLM/03-Create-Memorial/home-create-memorial-blm-03-create-memorial.dart';
-import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
+// import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-01-create-post.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-01-create-post-location.dart';
 import 'UI/Home/BLM/04-Create-Post/home-create-post-blm-02-02-create-post-user.dart';
-import 'UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
+// import 'UI/Home/BLM/05-Donate/home-donate-blm-01-donate.dart';
 import 'UI/Home/BLM/05-Donate/home-donate-blm-02-paypal-screen.dart';
 import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
-import 'UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
+// import 'UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,11 +74,9 @@ void main() async{
         // home: UIGetStarted(),
         home: ((){
           if(blmSession){
-            // return HomeBLMScreen();
-            return UIGetStarted();
+            return HomeBLMScreen();
           }else if(regularSession){
-            // return HomeRegularScreen();
-            return UIGetStarted();
+            return HomeRegularScreen();
           }else{
             return UIGetStarted();
           }

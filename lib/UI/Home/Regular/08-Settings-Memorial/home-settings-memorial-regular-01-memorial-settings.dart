@@ -107,8 +107,8 @@ class HomeRegularMemorialSettingsState extends State<HomeRegularMemorialSettings
             child: Container(
               child: ((){
                 switch(toggle){
-                  case 0: return settingsTab1(memorialId); break;
-                  case 1: return settingsTab2(memorialId); break;
+                  case 0: return settingsTab1(memorialId);
+                  case 1: return settingsTab2(memorialId);
                 }
               }()),
             ),

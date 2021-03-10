@@ -10,7 +10,9 @@ Future<int> apiRegularShowUnreadNotifications() async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/numOfUnread', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/numOfUnread',),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

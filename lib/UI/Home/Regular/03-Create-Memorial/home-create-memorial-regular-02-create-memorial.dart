@@ -2,7 +2,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-01-regular-input-fie
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'home-create-memorial-regular-01-create-memorial.dart';
+// import 'home-create-memorial-regular-01-create-memorial.dart';
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 // import 'package:video_player/video_player.dart';
@@ -155,9 +155,9 @@ class HomeRegularCreateMemorial2State extends State<HomeRegularCreateMemorial2>{
                     Container(
                       child: ((){
                         switch(toggle){
-                          case 0: return shareStory1(); break;
-                          case 1: return shareStory2(); break;
-                          case 2: return shareStory3(); break;
+                          case 0: return shareStory1();
+                          case 1: return shareStory2();
+                          case 2: return shareStory3();
                         }
                       }()),
                     ),

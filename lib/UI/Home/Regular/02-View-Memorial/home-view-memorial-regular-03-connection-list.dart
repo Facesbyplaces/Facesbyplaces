@@ -1,8 +1,8 @@
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-01-connection-list-family.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-02-connection-list-friends.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-04-03-connection-list-followers.dart';
-import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
-import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
+// import 'package:facesbyplaces/UI/Home/BLM/12-Show-User/home-show-user-blm-01-user.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -213,9 +213,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
                 focusColor: Color(0xffffffff),
                 hintText: ((){
                   switch(toggle){
-                    case 0: return 'Search Family'; break;
-                    case 1: return 'Search Friends'; break;
-                    case 2: return 'Search Followers'; break;
+                    case 0: return 'Search Family';
+                    case 1: return 'Search Friends';
+                    case 2: return 'Search Followers';
                   }
                 }()),
                 hintStyle: TextStyle(fontSize: 16,),
@@ -298,9 +298,9 @@ class HomeRegularConnectionListState extends State<HomeRegularConnectionList>{
               Expanded(
                 child: ((){
                   switch(toggle){
-                    case 0: return connectionListFamilyWidget(); break;
-                    case 1: return connectionListFriendsWidget(); break;
-                    case 2: return connectionListFollowersWidget(); break;
+                    case 0: return connectionListFamilyWidget();
+                    case 1: return connectionListFriendsWidget();
+                    case 2: return connectionListFollowersWidget();
                   }
                 }()),
               ),

@@ -11,7 +11,8 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/pages/memorials/$memorialId',),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -19,6 +20,9 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
       'client': getClient,
     }
   );
+
+  print('The status code of show memorial is ${response.statusCode}');
+  print('The status code of show memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);

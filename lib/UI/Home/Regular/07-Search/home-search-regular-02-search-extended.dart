@@ -2,19 +2,19 @@ import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-02-search
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-03-search-nearby.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-01-search-posts.dart';
 import 'package:facesbyplaces/API/Regular/08-Search/api-search-regular-04-search-blm.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-03-regular-manage-memorial.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 // import 'package:better_player/better_player.dart';
-import 'package:timeago/timeago.dart' as timeago;
+// import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
-import 'package:mime/mime.dart';
+// import 'package:mime/mime.dart';
 import 'dart:ui';
 
 class RegularSearchMainPosts{
@@ -459,8 +459,8 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                   Container(
                     child: ((){
                       switch(toggle){
-                        case 0: return Container(height: 20,); break;
-                        case 1: return Container(height: 20,); break;
+                        case 0: return Container(height: 20,);
+                        case 1: return Container(height: 20,);
                         case 2: return 
                         Container(
                           height: 40,
@@ -475,7 +475,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 SizedBox(width: 20,),
 
                                 ((){
-                                  if(currentLocation != null || currentLocation != ''){
+                                  if(currentLocation != ''){
                                     return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }else{
                                     return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
@@ -484,7 +484,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               ],
                             ),
                           ),
-                        ); break;
+                        );
                         case 3: return 
                         Container(
                           height: 40,
@@ -499,7 +499,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                                 SizedBox(width: 20,),
 
                                 ((){
-                                  if(currentLocation != null || currentLocation != ''){
+                                  if(currentLocation != ''){
                                     return Text(currentLocation, style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
                                   }else{
                                     return Text('', style: TextStyle(color: Color(0xff000000), fontSize: 12,),);
@@ -508,7 +508,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                               ],
                             ),
                           ),
-                        ); break;
+                        );
                       }
                     }()),
                   ),
@@ -522,10 +522,10 @@ class HomeRegularPostState extends State<HomeRegularPost>{
                       )
                       : ((){
                         switch(toggle){
-                          case 0: return searchPostExtended(); break;
-                          case 1: return searchSuggestedExtended(); break;
-                          case 2: return searchNearbyExtended(); break;
-                          case 3: return searchBLMExtended(); break;
+                          case 0: return searchPostExtended();
+                          case 1: return searchSuggestedExtended();
+                          case 2: return searchNearbyExtended();
+                          case 3: return searchBLMExtended();
                         }
                       }()),
                     ),

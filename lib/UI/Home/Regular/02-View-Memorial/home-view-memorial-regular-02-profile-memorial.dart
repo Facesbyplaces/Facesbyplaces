@@ -1,21 +1,21 @@
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-02-show-profile-post.dart';
 import 'package:facesbyplaces/API/Regular/03-View-Memorial/api-view-memorial-regular-01-show-memorial-details.dart';
-import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
-import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
+// import 'package:facesbyplaces/API/Regular/02-Main/api-main-regular-04-02-02-follow-page.dart';
+// import 'package:facesbyplaces/UI/Home/Regular/05-Donate/home-donate-regular-01-donate.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-08-regular-message.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
-import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-dropdown.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-04-regular-post.dart';
+// import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-12-regular-dropdown.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home-view-memorial-regular-03-connection-list.dart';
+// import 'home-view-memorial-regular-03-connection-list.dart';
 // import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+// import 'package:flutter_spinkit/flutter_spinkit.dart';
+// import 'package:loader_overlay/loader_overlay.dart';
 // import 'package:better_player/better_player.dart';
-import 'package:timeago/timeago.dart' as timeago;
+// import 'package:timeago/timeago.dart' as timeago;
 // import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
@@ -152,7 +152,7 @@ class HomeRegularMemorialProfileState extends State<HomeRegularMemorialProfile>{
 
   Future<APIRegularShowMemorialMain> getProfileInformation(int memorialId) async{
     APIRegularShowMemorialMain newValue = await apiRegularShowMemorial(memorialId: memorialId);
-    if(newValue.almMemorial.showMemorialImagesOrVideos != null){
+    if(newValue.almMemorial.showMemorialImagesOrVideos != []){
       if(lookupMimeType(newValue.almMemorial.showMemorialImagesOrVideos[0])?.contains('video') == true){
         // BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, '${newValue.almMemorial.showMemorialImagesOrVideos[0]}');
         // betterPlayerController1 = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 16 / 9,), betterPlayerDataSource: betterPlayerDataSource);

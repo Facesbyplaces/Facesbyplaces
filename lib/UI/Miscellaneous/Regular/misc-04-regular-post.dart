@@ -6,18 +6,17 @@ import 'package:facesbyplaces/UI/Home/Regular/11-Show-Post/home-show-post-regula
 import 'package:facesbyplaces/UI/Home/Regular/12-Show-User/home-show-user-regular-01-user.dart';
 import 'package:facesbyplaces/API/Regular/12-Show-Post/api-show-post-regular-05-post-like-or-unlike.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'misc-12-regular-dropdown.dart';
-import 'dart:async';
 
 class MiscRegularPost extends StatefulWidget{
   final List<Widget> contents;
   final int userId;
   final int postId;
   final int memorialId;
-  final dynamic profileImage;
+  final String profileImage;
   final String memorialName;
   final String timeCreated;
   final bool managed;
@@ -33,7 +32,7 @@ class MiscRegularPost extends StatefulWidget{
   final bool famOrFriends;
   final String relationship;
 
-  MiscRegularPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  MiscRegularPost({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, required this.memorialName, this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
 
   MiscRegularPostState createState() => MiscRegularPostState(contents: contents, userId: userId, postId: postId, memorialId: memorialId, profileImage: profileImage, memorialName: memorialName, timeCreated: timeCreated, managed: managed, joined: joined, numberOfComments: numberOfComments, numberOfLikes: numberOfLikes, likeStatus: likeStatus, numberOfTagged: numberOfTagged, taggedFirstName: taggedFirstName, taggedLastName: taggedLastName, taggedId: taggedId, pageType: pageType, famOrFriends: famOrFriends, relationship: relationship);
 }
@@ -43,7 +42,7 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   final int userId;
   final int postId;
   final int memorialId;
-  final dynamic profileImage;
+  final String profileImage;
   final String memorialName;
   final String timeCreated;
   final bool managed;
@@ -59,39 +58,41 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
   final bool famOrFriends;
   final String relationship;
 
-  MiscRegularPostState({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, this.memorialName = '', this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+  MiscRegularPostState({required this.contents, required this.userId, required this.postId, required this.memorialId, required this.profileImage, required this.memorialName, this.timeCreated = '', required this.managed, required this.joined, required this.numberOfComments, required this.numberOfLikes, required this.likeStatus, required this.numberOfTagged, required this.taggedFirstName, required this.taggedLastName, required this.taggedId, required this.pageType, required this.famOrFriends, required this.relationship});
+
+  BranchUniversalObject? buo;
+  BranchLinkProperties? lp;
 
   bool likePost = false;
   bool pressedLike = false;
   int likesCount = 0;
 
-  // BranchUniversalObject? buo;
-  // BranchLinkProperties? lp;
-
   void initBranchShare(){
-    // buo = BranchUniversalObject(
-    //   canonicalIdentifier: 'FacesbyPlaces',
-    //   title: 'FacesbyPlaces Link',
-    //   imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-    //   contentDescription: 'FacesbyPlaces link to the app',
-    //   keywords: ['FacesbyPlaces', 'Share', 'Link'],
-    //   publiclyIndex: true,
-    //   locallyIndex: true,
-    //   contentMetadata: BranchContentMetaData()
-    //     ..addCustomMetadata('link-category', 'Post')
-    //     ..addCustomMetadata('link-post-id', postId)
-    //     ..addCustomMetadata('link-like-status', likePost)
-    //     ..addCustomMetadata('link-number-of-likes', likesCount)
-    //     ..addCustomMetadata('link-type-of-account', 'Memorial')
-    // );
 
-    // lp = BranchLinkProperties(
-    //     feature: 'sharing',
-    //     stage: 'new share',
-    //   tags: ['one', 'two', 'three']
-    // );
-    // lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
+    buo = BranchUniversalObject(
+      canonicalIdentifier: 'FacesbyPlaces',
+      title: 'FacesbyPlaces Link',
+      imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
+      contentDescription: 'FacesbyPlaces link to the app',
+      keywords: ['FacesbyPlaces', 'Share', 'Link'],
+      publiclyIndex: true,
+      locallyIndex: true,
+      contentMetadata: BranchContentMetaData()
+        ..addCustomMetadata('link-category', 'Post')
+        ..addCustomMetadata('link-post-id', postId)
+        ..addCustomMetadata('link-like-status', likePost)
+        ..addCustomMetadata('link-number-of-likes', likesCount)
+        ..addCustomMetadata('link-type-of-account', 'Memorial')
+    );
+
+    lp = BranchLinkProperties(
+        feature: 'sharing',
+        stage: 'new share',
+      tags: ['one', 'two', 'three']
+    );
+    lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
   }
+
 
   void initState(){
     super.initState();
@@ -125,90 +126,27 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 65,
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () async{
-
-                      if(pageType == 'Memorial'){
-                        if(managed == true || famOrFriends == true){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                        }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                        }
-                      }else{
-                        if(managed == true || famOrFriends == true){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                        }else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                        }
-                      }
-                      
-                    },
-                    // child: CircleAvatar(
-                    //   backgroundColor: Color(0xff888888), 
-                    //   backgroundImage: profileImage != null ? NetworkImage(profileImage) : AssetImage('assets/icons/app-icon.png')),
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xff888888), 
-                      backgroundImage: NetworkImage(profileImage),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: GestureDetector(
-                        onTap: (){
-                          if(pageType == 'Memorial'){
-                            if(managed == true || famOrFriends == true){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                            }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                            }
-                          }else{
-                            if(managed == true || famOrFriends == true){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
-                            }else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
-                            }
-                          }
-                        },
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Align(alignment: Alignment.bottomLeft,
-                                child: Text(memorialName,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(timeCreated,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xffaaaaaa)
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: pageType,),
-                ],
-              ),
+            ListTile(
+              onTap: (){
+                if(pageType == 'Memorial'){
+                  if(managed == true || famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
+                  }else{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                  }
+                }else{
+                  if(managed == true || famOrFriends == true){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
+                  }else{
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMMemorialProfile(memorialId: memorialId, pageType: pageType, newJoin: joined,)));
+                  }
+                }
+              },
+              contentPadding: EdgeInsets.zero,
+              leading: profileImage != '' ? CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(profileImage)) : CircleAvatar(backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png')),
+              title: Text(memorialName, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xff000000),),),
+              subtitle: Text(timeCreated, maxLines: 1, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xffaaaaaa),),),
+              trailing: MiscRegularDropDownTemplate(postId: postId, likePost: likePost, likesCount: likesCount, reportType: 'Post', pageType: pageType,),
             ),
 
             Column(children: contents,),
@@ -260,81 +198,69 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
             )
             : Container(height: 0,),
 
-            Container(
-              height: 65,
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () async{
-                      
-                      setState(() {
-                        likePost = !likePost;
+            Row(
+              children: [
+                TextButton.icon(
+                  onPressed: () async{
+                    setState(() {
+                      likePost = !likePost;
 
-                        if(likePost == true){
-                          pressedLike = true;
-                          likesCount++;
-                        }else{
-                          pressedLike = false;
-                          likesCount--;
-                        }
-                      });
+                      if(likePost == true){
+                        pressedLike = true;
+                        likesCount++;
+                      }else{
+                        pressedLike = false;
+                        likesCount--;
+                      }
+                    });
 
-                      await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
+                    await apiRegularLikeOrUnlikePost(postId: postId, like: likePost);
+                  },
+                  // Color(0xff04ECFF)
+                  // Color(0xffE74C3C)
+                  // Color(0xff4EC9D4)
+                  icon: likePost == true ? Icon(Icons.favorite, color: Color(0xffE74C3C), size: 25) : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C), size: 25),
+                  label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                ),
 
+                SizedBox(width: 20),
+
+                TextButton.icon(
+                  onPressed: () async{
+                    
+                  },
+                  icon: Icon(Icons.comment_rounded, color: Color(0xff4EC9D4), size: 25),
+                  label: Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
+                ),
+
+                Expanded(
+                  child: IconButton(
+                    alignment: Alignment.centerRight,
+                    splashColor: Colors.transparent,
+                    icon: CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: Color(0xffffffff)),),
+                    onPressed: () async{
+                      initBranchShare();
+
+                      FlutterBranchSdk.setIdentity('alm-share-link');
+
+                      BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                        buo: buo!,
+                        linkProperties: lp!,
+                        messageText: 'FacesbyPlaces App',
+                        androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                        androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                      );
+
+                      if (response.success) {
+                        print('The post id is $postId');
+                      } else {
+                        FlutterBranchSdk.logout();
+                        // print('Error : ${response.errorCode} - ${response.errorMessage}');
+                      }
                     },
-                    child: Row(
-                      children: [
-                        likePost == true
-                        ? Icon(Icons.favorite, color: Color(0xffE74C3C),)
-                        : Icon(Icons.favorite_border_outlined, color: Color(0xffE74C3C),),
-
-                        SizedBox(width: 10),
-
-                        Text('$likesCount', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
-
-                      ],
-                    ),
                   ),
-
-                  SizedBox(width: 20),
-
-                  Row(
-                    children: [
-                      Image.asset('assets/icons/comment_logo.png', width: 25, height: 25,),
-
-                      SizedBox(width: 10),
-
-                      Text('$numberOfComments', style: TextStyle(fontSize: 14, color: Color(0xff000000),),),
-                    ],
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () async{
-                        // initBranchShare();
-
-                        // FlutterBranchSdk.setIdentity('alm-share-link');
-
-                        // BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                        //   buo: buo!,
-                        //   linkProperties: lp!,
-                        //   messageText: 'FacesbyPlaces App',
-                        //   androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                        //   androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                        // );
-
-                        // if (response.success) {
-                        //   print('The post id is $postId');
-                        // } else {
-                        //   FlutterBranchSdk.logout();
-                        //   print('Error : ${response.errorCode} - ${response.errorMessage}');
-                        // }
-
-                      },
-                      child: Align(alignment: Alignment.centerRight, child: Image.asset('assets/icons/share_logo.png', width: 50, height: 50,),),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
 
           ],

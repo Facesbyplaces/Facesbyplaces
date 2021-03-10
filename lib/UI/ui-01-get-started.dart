@@ -1,9 +1,8 @@
-import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
-
-import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
-import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
-import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
+// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
+// import 'Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
+// import 'Home/Regular/11-Show-Post/home-show-post-regular-01-show-original-post-comments.dart';
+// import 'Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
+// import 'Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,10 +10,10 @@ import 'Miscellaneous/Start/misc-01-start-button.dart';
 import 'Miscellaneous/Start/misc-02-start-background.dart';
 // import 'package:overlay_support/overlay_support.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'Regular/regular-07-password-reset.dart';
-import 'BLM/blm-07-password-reset.dart';
+// import 'Regular/regular-07-password-reset.dart';
+// import 'BLM/blm-07-password-reset.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -73,8 +72,8 @@ class UIGetStarted extends StatefulWidget{
 class UIGetStartedState extends State<UIGetStarted>{
 
   // StreamSubscription<Map>? streamSubscription;
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-  PushNotificationService? pushNotificationService;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // PushNotificationService? pushNotificationService;
 
   // void listenDeepLinkData(){
   //   streamSubscription = FlutterBranchSdk.initSession().listen((data) {
@@ -134,12 +133,12 @@ class UIGetStartedState extends State<UIGetStarted>{
   //   }
   // }
 
-  void initState(){
-    super.initState();
-    PushNotificationService(_firebaseMessaging);
-    pushNotificationService!.initialise();
-    // listenDeepLinkData();
-  }
+  // void initState(){
+  //   super.initState();
+  //   PushNotificationService(_firebaseMessaging);
+  //   pushNotificationService!.initialise();
+  //   // listenDeepLinkData();
+  // }
 
   // @override
   // void dispose() {

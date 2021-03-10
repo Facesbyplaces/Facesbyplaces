@@ -77,6 +77,9 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
     SizeConfig.init(context);
     return GestureDetector(
       onTap: () async{
+        print('The memorial id is $memorialId');
+        print('The relationship is $relationship');
+        print('The managed is $managed');
         if(pageType == 'Memorial'){
           if(managed == true || famOrFriends == true){
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, relationship: relationship, managed: managed, newlyCreated: false,)));
@@ -95,12 +98,7 @@ class MiscRegularManageMemorialTabState extends State<MiscRegularManageMemorialT
         height: 80,
         color: Color(0xffffffff),
         child: ListTile(
-          leading: CircleAvatar(
-            radius: 30,
-            backgroundColor: Color(0xff888888), 
-            // backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/icons/app-icon.png'),
-            backgroundImage: NetworkImage(image),
-          ),
+          leading: image != '' ? CircleAvatar(radius: 30, backgroundColor: Color(0xff888888), backgroundImage: NetworkImage(image)) : CircleAvatar(radius: 30, backgroundColor: Color(0xff888888), backgroundImage: AssetImage('assets/icons/app-icon.png')),
           title: Text(memorialName,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
