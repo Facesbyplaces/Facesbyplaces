@@ -171,6 +171,36 @@ class Api::V1::Admin::AdminController < ApplicationController
         render json: PostSerializer.new( post ).attributes
     end
 
+    def editPost
+        post = Post.find(params[:id])
+        
+        # check if data sent is empty or not
+        check = params_presence(params)
+        if check == true
+            # Update memorial details
+            post.update(post_params)
+
+            return render json: {post: PostSerializer.new( post ).attributes, status: "Post Updated"}
+        else
+            return render json: {error: "#{check} is empty"}
+        end
+    end
+
+    def editImageOrVideosPost
+        post = Post.find(params[:id])
+        
+        # check if data sent is empty or not
+        check = params_presence(params)
+        if check == true
+            # Update memorial details
+            post.update(post_image_params)
+
+            return render json: {post: PostSerializer.new( post ).attributes, status: "Post Images or Videos Updated"}
+        else
+            return render json: {error: "#{check} is empty"}
+        end
+    end
+
     def deletePost
         post = Post.find(params[:id])
         post.destroy 
@@ -253,7 +283,7 @@ class Api::V1::Admin::AdminController < ApplicationController
         }
         
     end
-
+    # Create Memorial
     def createMemorial
         #IF MEMORIAL IS OF TYPE ALM
         if params[:page_type].to_i == 2
@@ -385,7 +415,6 @@ class Api::V1::Admin::AdminController < ApplicationController
             puts params[:page_type].class
         end
     end
-
     # Show Memorial
     def showMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
@@ -415,6 +444,7 @@ class Api::V1::Admin::AdminController < ApplicationController
             return render json: {error: "#{check} is empty"}
         end
     end
+    # Update Memorial Images
     def updateMemorialImages
         memorial = Memorial.find(params[:id])
 
@@ -424,7 +454,7 @@ class Api::V1::Admin::AdminController < ApplicationController
             return render json: {status: 'Error'}
         end
     end
-    
+    # BLM
     # Update BLM
     def updateBlm
         blm = Blm.find(params[:id])
@@ -443,6 +473,7 @@ class Api::V1::Admin::AdminController < ApplicationController
             return render json: {error: "#{check} is empty"}
         end
     end
+    # Update BLM Images
     def updateBlmImages
         blm = Blm.find(params[:id])
         
@@ -453,7 +484,7 @@ class Api::V1::Admin::AdminController < ApplicationController
             return render json: {status: 'Error'}
         end
     end 
-
+    # Search Memorial
     def searchMemorial
         memorials = PgSearch.multisearch(params[:keywords]).where(searchable_type: ['Memorial', 'Blm'])
         
@@ -490,7 +521,7 @@ class Api::V1::Admin::AdminController < ApplicationController
                         page_type: page_type,
                     }
     end
-
+    # Delete Memorial
     def deleteMemorial
         memorial = Pageowner.where(page_id: params[:id]).where(page_type: params[:page]).first
         if memorial
@@ -562,6 +593,14 @@ class Api::V1::Admin::AdminController < ApplicationController
 
     def editUser_params
         params.permit(:id, :account_type, :username, :first_name, :last_name, :phone_number)
+    end
+
+    def post_params
+        params.require(:post).permit(:page_type, :page_id, :body, :location, :longitude, :latitude)
+    end
+
+    def post_image_params
+        params.permit(imagesOrVideos: [])
     end
 
     def memorial_params

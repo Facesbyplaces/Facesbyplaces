@@ -217,6 +217,10 @@ Rails.application.routes.draw do
 
         # index post
         get 'posts', to: 'admin#allPosts'
+        # edit post
+        put 'posts/edit/:id', to: 'admin#editPost'
+        # edit post image
+        put 'posts/image/:id', to: 'admin#editImageOrVideosPost'
         # view post
         get 'posts/:id', to: 'admin#showPost'
         # remove post

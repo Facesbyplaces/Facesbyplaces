@@ -203,7 +203,7 @@ class Api::V1::Users::SessionsController < DeviseTokenAuth::SessionsController
 
         if user.is_verified?
           user.update({ device_token: params[:device_token] })
-          render json: { success: true, user:  UserSerializer.new( user ).attributes, status: 200 }, status: 200
+          render json: { success: true, user:  UserSerializer.new( user ).attributes }, status: 200
           super
         else
           render json: {
