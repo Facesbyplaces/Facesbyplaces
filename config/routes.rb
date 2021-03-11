@@ -217,10 +217,16 @@ Rails.application.routes.draw do
 
         # index post
         get 'posts', to: 'admin#allPosts'
+        # add post
+        post 'posts/create', to: 'admin#createPost'
         # edit post
         put 'posts/edit/:id', to: 'admin#editPost'
         # edit post image
         put 'posts/image/:id', to: 'admin#editImageOrVideosPost'
+        # index memorial post
+        get 'posts/memorials', to: 'admin#memorialSelection'
+        # index memorial post page admins
+        get 'posts/pageAdmins', to: 'admin#pageAdmins'
         # view post
         get 'posts/:id', to: 'admin#showPost'
         # remove post
