@@ -9,8 +9,7 @@ import SideBar from "./SideBar/SideBar";
 import Topbar from "./Navbar/Topbar/Topbar";
 import Footer from "./Footer";
 import Assets from "../../Assets";
-import PostTable from "./Memorials/PostTable/PostTable";
-// import MemorialsTable from "./Memorials/MemorialTable/MemorialsTable";
+import PostTable from "./Posts/PostTable/PostTable";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);

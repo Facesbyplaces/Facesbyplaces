@@ -67,7 +67,7 @@ export default function PostDataTable({
         setMemorialPosts(memorials);
         // setPosts(response.data.posts);
 
-        console.log("Response: ", response.data.posts);
+        // console.log("Response: ", response.data.posts);
       })
       .catch((error) => {
         console.log(error.response);

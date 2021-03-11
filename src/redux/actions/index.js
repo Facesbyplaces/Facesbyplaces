@@ -119,6 +119,6 @@ export const AddPostAction = (option) => {
 
 export const TablePostAction = () => {
   return {
-    type: "TABLE_post",
+    type: "TABLE_POST",
   };
 };

@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../../auxiliary/axios";
+import axios from "../../../../../auxiliary/axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  TableMemorialAction,
-  EditMemorialAction,
-} from "../../../../../../redux/actions";
+import { TablePostAction, EditPostAction } from "../../../../../redux/actions";
 
-export default function ViewMemorial() {
+export default function ViewPost() {
+  var dateFormat = require("dateformat");
   const dispatch = useDispatch();
-  const [memorial, setMemorial] = useState([]);
-  const [memorialDetails, setMemorialDetails] = useState([]);
+  const [post, setPost] = useState([]);
+  const [postPage, setPostPage] = useState([]);
   const [imagesOrVideos, setImagesOrVideos] = useState([]);
   const [imagesOrVideosEmpty, setImagesOrVideosEmpty] = useState(false);
-  const { memorialTab } = useSelector(({ memorialTab }) => ({
-    memorialTab: memorialTab,
+  const { postTab } = useSelector(({ postTab }) => ({
+    postTab: postTab,
   }));
 
   const handleTableClick = () => {
-    dispatch(TableMemorialAction());
+    dispatch(TablePostAction());
   };
 
-  const handleEditClick = (id, page, option, type) => {
-    dispatch(EditMemorialAction({ id, page, option, type }));
+  const handleEditClick = (id, option, type) => {
+    console.log(id, option, type);
+    dispatch(EditPostAction({ id, option, type }));
   };
 
   const renderedImagesOrVideos = imagesOrVideos.map((iOV) => {
@@ -54,25 +53,25 @@ export default function ViewMemorial() {
 
   useEffect(() => {
     axios
-      .get(`/api/v1/admin/memorials/${memorialTab.id}/${memorialTab.page}`)
+      .get(`/api/v1/admin/posts/${postTab.id}`)
       .then((response) => {
-        setMemorial(response.data.page);
-        setMemorialDetails(response.data.page.details);
-        response.data.page.imagesOrVideos
-          ? setImagesOrVideos(response.data.page.imagesOrVideos)
+        setPost(response.data);
+        setPostPage(response.data.page);
+        response.data.imagesOrVideos
+          ? setImagesOrVideos(response.data.imagesOrVideos)
           : setImagesOrVideosEmpty(true);
         console.log("Response: ", response.data);
       })
       .catch((error) => {
         console.log(error.errors);
       });
-  }, memorial.id);
+  }, post.id);
 
   return (
-    <div className="d-flex flex-column flex-column-fluid">
+    <div className="d-flex flex-column flex-column-fluid mt-25">
       {/*begin::Entry*/}
       {/*begin::Hero*/}
-      <div
+      {/* <div
         className="d-flex flex-row-fluid bgi-size-cover bgi-position-top"
         style={{
           backgroundImage: memorial.backgroundImage
@@ -82,9 +81,9 @@ export default function ViewMemorial() {
         }}
       >
         <div className="container">
-          <div className="d-flex justify-content-between align-items-center pt-25 pb-35"></div>
+          <div className="d-flex justify-content-between align-items-center pt-25 pb-35" />
         </div>
-      </div>
+      </div> */}
       {/*end::Hero*/}
       {/*begin::Section*/}
       <div className="container mt-n15 gutter-b">
@@ -93,7 +92,7 @@ export default function ViewMemorial() {
             <form className="form">
               <div className="tab-content">
                 {/*begin::Group*/}
-                <div className="form-group mt-n15 row">
+                {/* <div className="form-group mt-n15 row">
                   <div
                     className="col-10 pl-15"
                     style={{
@@ -120,18 +119,18 @@ export default function ViewMemorial() {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/*end::Group*/}
                 {/*begin::Tab*/}
                 <div className="tab-pane show active px-7 mt-5">
                   <div className="card-header py-3 pl-5">
                     <div className="card-title align-items-start flex-column mb-2">
                       <h3 className="card-label font-weight-bolder text-dark">
-                        BLM Information
+                        Post Information
                       </h3>
 
                       <span className="text-muted font-weight-bold font-size-sm mt-1">
-                        User's memorial information
+                        User's post information
                       </span>
                     </div>
                   </div>
@@ -185,7 +184,7 @@ export default function ViewMemorial() {
                       <div className="row">
                         <div className="col-9">
                           <h6 className="text-dark font-weight-bold mb-10">
-                            Memorial Info:
+                            Memorial Post Info:
                           </h6>
                         </div>
                       </div>
@@ -209,14 +208,14 @@ export default function ViewMemorial() {
                           </div> */}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
-                          Page Name
+                          Memorial Name
                         </label>
                         <div className="col-9">
                           <input
                             className="form-control form-control-lg border-0 placeholder-dark-75"
                             type="username"
                             name="username"
-                            defaultValue={memorial.name}
+                            defaultValue={postPage.name}
                             disabled
                           />
                         </div>
@@ -225,89 +224,53 @@ export default function ViewMemorial() {
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
-                          Relationship
+                          Page Type
                         </label>
                         <div className="col-9">
-                          <input
-                            className="form-control form-control-lg form-control-solid placeholder-dark-75"
-                            type="relationship"
-                            name="relationship"
-                            defaultValue={memorial.relationship}
-                            disabled
-                          />
+                          <div
+                            className="btn-group btn-group-toggle"
+                            data-toggle="buttons"
+                          >
+                            {postPage.page_type === "Memorial" ? (
+                              <button
+                                type="button"
+                                className={"btn active btn-outline-info mr-2"}
+                                style={{ width: "206px" }}
+                              >
+                                ALM
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                className={"btn btn-outline-info mr-2"}
+                                style={{ width: "206px" }}
+                                disabled
+                              >
+                                ALM
+                              </button>
+                            )}
+                            {postPage.page_type === "Blm" ? (
+                              <button
+                                type="button"
+                                className={"btn active btn-outline-info mr-2"}
+                                style={{ width: "206px" }}
+                              >
+                                Blm
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                className={"btn btn-outline-info mr-2"}
+                                style={{ width: "206px" }}
+                                disabled
+                              >
+                                Blm
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </div>
                       {/*end::Group*/}
-                      {/*begin::Group*/}
-                      <div className="form-group row">
-                        <label className="col-form-label col-3 text-lg-right text-left">
-                          Description
-                        </label>
-                        <div className="col-9">
-                          <textarea
-                            className="form-control form-control-solid form-control-lg"
-                            id="exampleTextarea"
-                            rows={6}
-                            defaultValue={memorialDetails.description}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      {/*end::Group*/}
-                      <div className="separator separator-solid my-10" />
-
-                      {/*begin::Row*/}
-                      <div className="row">
-                        <div className="col-9">
-                          <h6 className="text-dark font-weight-bold mb-10">
-                            Memorial Dates:
-                          </h6>
-                        </div>
-                      </div>
-                      {/*end::Row*/}
-                      {/*begin::Group*/}
-                      <div className="form-group row">
-                        <label className="col-form-label col-3 text-lg-right text-left">
-                          Date of Birth
-                        </label>
-                        <div className="col-9">
-                          <input
-                            className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.dob}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      {/*end::Group*/}
-                      {/*begin::Group*/}
-                      <div className="form-group row">
-                        <label className="col-form-label col-3 text-lg-right text-left">
-                          Date of Death
-                        </label>
-                        <div className="col-9">
-                          <input
-                            className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.rip}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      {/*end::Group*/}
-                      <div className="separator separator-solid my-10" />
-
-                      {/*begin::Row*/}
-                      <div className="row">
-                        <div className="col-9">
-                          <h6 className="text-dark font-weight-bold mb-10">
-                            Memorial Places:
-                          </h6>
-                        </div>
-                      </div>
-                      {/*end::Row*/}
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
@@ -315,10 +278,10 @@ export default function ViewMemorial() {
                         </label>
                         <div className="col-9">
                           <input
-                            className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.location}
+                            className="form-control form-control-lg form-control-solid placeholder-dark-75"
+                            type="relationship"
+                            name="relationship"
+                            defaultValue={post.location}
                             disabled
                           />
                         </div>
@@ -327,62 +290,41 @@ export default function ViewMemorial() {
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
-                          Precinct
+                          Body
                         </label>
                         <div className="col-9">
-                          <input
-                            className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.precinct}
+                          <textarea
+                            className="form-control form-control-solid form-control-lg"
+                            id="exampleTextarea"
+                            rows={6}
+                            defaultValue={post.body}
                             disabled
                           />
                         </div>
                       </div>
                       {/*end::Group*/}
-                      {/*begin::Group*/}
-                      <div className="form-group row">
-                        <label className="col-form-label col-3 text-lg-right text-left">
-                          State
-                        </label>
+                      <div className="separator separator-solid my-10" />
+
+                      {/*begin::Row*/}
+                      <div className="row">
                         <div className="col-9">
-                          <input
-                            className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.state}
-                            disabled
-                          />
+                          <h6 className="text-dark font-weight-bold mb-10">
+                            Other Memorial Post Infos:
+                          </h6>
                         </div>
                       </div>
-                      {/*end::Group*/}
+                      {/*end::Row*/}
                       {/*begin::Group*/}
                       <div className="form-group row">
                         <label className="col-form-label col-3 text-lg-right text-left">
-                          Country
+                          Lattitude
                         </label>
                         <div className="col-9">
                           <input
                             className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.country}
-                            disabled
-                          />
-                        </div>
-                      </div>
-                      {/*end::Group*/}
-                      {/*begin::Group*/}
-                      <div className="form-group row">
-                        <label className="col-form-label col-3 text-lg-right text-left">
-                          Latitude
-                        </label>
-                        <div className="col-9">
-                          <input
-                            className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.latitude}
+                            type="text"
+                            name="latitude"
+                            defaultValue={post.latitude}
                             disabled
                           />
                         </div>
@@ -396,9 +338,27 @@ export default function ViewMemorial() {
                         <div className="col-9">
                           <input
                             className="form-control form-control-lg border-0 placeholder-dark-75"
-                            type="last_name"
-                            name="last_name"
-                            defaultValue={memorialDetails.longitude}
+                            type="text"
+                            name="longitude"
+                            defaultValue={post.longitude}
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      {/*end::Group*/}
+                      {/*begin::Group*/}
+                      <div className="form-group row">
+                        <label className="col-form-label col-3 text-lg-right text-left">
+                          Date Created
+                        </label>
+                        <div className="col-9">
+                          <input
+                            className="form-control form-control-lg border-0 placeholder-dark-75"
+                            name="created-at"
+                            defaultValue={dateFormat(
+                              post.created_at,
+                              "mmmm d, yyyy"
+                            )}
                             disabled
                           />
                         </div>
@@ -417,12 +377,7 @@ export default function ViewMemorial() {
                                 <a
                                   className="btn btn-success btn-md btn-block font-weight-bold mr-2"
                                   onClick={() =>
-                                    handleEditClick(
-                                      memorial.id,
-                                      memorial.page_type,
-                                      "e",
-                                      1
-                                    )
+                                    handleEditClick(post.id, "e", 2)
                                   }
                                 >
                                   Edit

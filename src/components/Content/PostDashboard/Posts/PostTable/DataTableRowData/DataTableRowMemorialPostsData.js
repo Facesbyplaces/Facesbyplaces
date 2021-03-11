@@ -19,7 +19,7 @@ export default function DataTableRowMemorialPostsData({
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
 
-  console.log(posts);
+  console.log("Memorial: ", posts);
 
   const handleViewClick = (id, option, type) => {
     console.log(id, option);
@@ -27,6 +27,7 @@ export default function DataTableRowMemorialPostsData({
   };
 
   const handleEditClick = (id, option, type) => {
+    console.log(id, option, type);
     dispatch(EditPostAction({ id, option, type }));
   };
 
@@ -130,7 +131,7 @@ export default function DataTableRowMemorialPostsData({
         {/* Edit Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-          onClick={() => handleEditClick(post.id, page_type, "e", 2)}
+          onClick={() => handleEditClick(post.id, "e", 2)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}

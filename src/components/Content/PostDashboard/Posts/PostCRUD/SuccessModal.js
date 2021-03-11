@@ -1,45 +1,42 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  TableMemorialAction,
-  ViewMemorialAction,
-} from "../../../../../redux/actions";
+import { TablePostAction, ViewPostAction } from "../../../../../redux/actions";
 
 export const SuccessModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
-  const { memorialTab } = useSelector(({ memorialTab }) => ({
-    memorialTab: memorialTab,
+  const { postTab } = useSelector(({ postTab }) => ({
+    postTab: postTab,
   }));
 
   const handleAdd = () => {
     console.log("ADD");
     setShowModal((prev) => !prev);
-    dispatch(TableMemorialAction());
+    dispatch(TablePostAction());
   };
   const handleDelete = () => {
     console.log("DELETE");
     setShowModal((prev) => !prev);
-    dispatch(TableMemorialAction());
+    dispatch(TablePostAction());
   };
-  const handleEdit = (id, page, type) => {
+  const handleEdit = (id, option1, type) => {
     console.log("EDIT");
     const option = "v";
     setShowModal((prev) => !prev);
-    dispatch(ViewMemorialAction({ id, page, option, type }));
+    dispatch(ViewPostAction({ id, option, type }));
   };
 
-  const handleActionClick = (id, page, type) => {
-    switch (memorialTab.option) {
+  const handleActionClick = (id, option, type) => {
+    switch (postTab.option) {
       case "a":
         return handleAdd();
       case "d":
         return handleDelete();
       case "e":
-        return handleEdit(id, page, type);
+        return handleEdit(id, option, type);
     }
   };
 
-  console.log("Action: ", memorialTab.option);
+  console.log("Action: ", postTab.option);
 
   return (
     <>
@@ -95,25 +92,25 @@ export const SuccessModal = ({ showModal, setShowModal }) => {
                   {
                     a: (
                       <h5 className="modal-dialog">
-                        You have successfully added a memorial.
+                        You have successfully added a post.
                       </h5>
                     ),
                     v: (
                       <h5 className="modal-dialog">
-                        You have successfully edited a memorial.
+                        You have successfully edited a post.
                       </h5>
                     ),
                     e: (
                       <h5 className="modal-dialog">
-                        You have successfully edited a memorial.
+                        You have successfully edited a post.
                       </h5>
                     ),
                     d: (
                       <h5 className="modal-dialog">
-                        You have successfully deleted a memorial.
+                        You have successfully deleted a post.
                       </h5>
                     ),
-                  }[memorialTab.option]
+                  }[postTab.option]
                 }
               </div>
               <div className="modal-footer">
@@ -123,11 +120,7 @@ export const SuccessModal = ({ showModal, setShowModal }) => {
                   style={{ width: "200px" }}
                   data-dismiss="modal"
                   onClick={() =>
-                    handleActionClick(
-                      memorialTab.id,
-                      memorialTab.page,
-                      memorialTab.type
-                    )
+                    handleActionClick(postTab.id, postTab.option, postTab.type)
                   }
                 >
                   Okay

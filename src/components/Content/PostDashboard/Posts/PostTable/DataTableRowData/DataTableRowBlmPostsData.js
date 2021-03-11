@@ -5,9 +5,9 @@ import HashLoader from "react-spinners/HashLoader";
 
 import { useDispatch } from "react-redux";
 import {
-  ViewMemorialAction,
-  EditMemorialAction,
-  DeleteMemorialAction,
+  ViewPostAction,
+  EditPostAction,
+  DeletePostAction,
 } from "../../../../../../redux/actions";
 
 export default function DataTableRowBlmPostsData({ posts, search, pageType }) {
@@ -15,18 +15,20 @@ export default function DataTableRowBlmPostsData({ posts, search, pageType }) {
   const dispatch = useDispatch();
   const page_type = pageType === 2 ? "Memorial" : "Blm";
 
-  console.log(posts);
-  const handleViewClick = (id, page, option, type) => {
+  console.log("Blm: ", posts);
+
+  const handleViewClick = (id, option, type) => {
     console.log(id, option);
-    dispatch(ViewMemorialAction({ id, page, option, type }));
+    dispatch(ViewPostAction({ id, option, type }));
   };
 
-  const handleEditClick = (id, page, option, type) => {
-    dispatch(EditMemorialAction({ id, page, option, type }));
+  const handleEditClick = (id, option, type) => {
+    console.log(id, option, type);
+    dispatch(EditPostAction({ id, option, type }));
   };
 
-  const handleDeleteClick = (id, page, option) => {
-    dispatch(DeleteMemorialAction({ id, page, option }));
+  const handleDeleteClick = (id, option) => {
+    dispatch(DeletePostAction({ id, option }));
     setShowModal((prev) => !prev);
   };
 
@@ -87,7 +89,7 @@ export default function DataTableRowBlmPostsData({ posts, search, pageType }) {
         {/* View User Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm"
-          onClick={() => handleViewClick(post.id, page_type, "v", 1)}
+          onClick={() => handleViewClick(post.id, "v", 1)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg*/}
@@ -126,7 +128,7 @@ export default function DataTableRowBlmPostsData({ posts, search, pageType }) {
         {/* Edit Icon */}
         <a
           className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-          onClick={() => handleEditClick(post.id, page_type, "e", 1)}
+          onClick={() => handleEditClick(post.id, "e", 1)}
         >
           <span className="svg-icon svg-icon-md svg-icon-primary">
             {/*begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg*/}

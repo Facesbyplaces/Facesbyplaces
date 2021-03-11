@@ -1,6 +1,6 @@
 import React, { useState, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { DeleteMemorialAction } from "../../../../../../redux/actions";
+import { DeletePostAction } from "../../../../../../redux/actions";
 import axios from "../../../../../../auxiliary/axios";
 
 //Loader
@@ -9,23 +9,21 @@ import HashLoader from "react-spinners/HashLoader";
 export const DeleteModal = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { memorialTab } = useSelector(({ memorialTab }) => ({
-    memorialTab: memorialTab,
+  const { postTab } = useSelector(({ postTab }) => ({
+    postTab: postTab,
   }));
 
   const handleDeleteMemorial = (id, page, option) => {
     setLoading(true);
-    console.log("ID: ", memorialTab.id);
-    console.log("Account Type: ", memorialTab.page);
+    console.log("ID: ", postTab.id);
     axios
-      .delete(`/api/v1/admin/memorials/${memorialTab.id}/${memorialTab.page}`, {
-        id: memorialTab.id,
-        page: memorialTab.page,
+      .delete(`/api/v1/admin/posts/${postTab.id}`, {
+        id: postTab.id,
       })
       .then((response) => {
         console.log(response.data);
         setLoading(false);
-        dispatch(DeleteMemorialAction({ id, page, option }));
+        dispatch(DeletePostAction({ id, page, option }));
       })
       .catch((error) => {
         console.log(error.response);
@@ -89,8 +87,8 @@ export const DeleteModal = ({ showModal, setShowModal }) => {
                 </div>
                 <div className="modal-body">
                   <h5 className="modal-dialog">
-                    Do you really want to delete this memorial? This process
-                    cannot be undone.
+                    Do you really want to delete this post? This process cannot
+                    be undone.
                   </h5>
                 </div>
                 <div className="modal-footer">

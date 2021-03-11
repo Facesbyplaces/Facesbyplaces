@@ -154,8 +154,8 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
                   </div>
                 ) : (
                   <div className="modal-content">
-                    <div className="modal-body">
-                      <form className="form" onSubmit={handleSubmit}>
+                    <form className="form" onSubmit={handleSubmit}>
+                      <div className="modal-body">
                         <div className="tab-content">
                           {/*begin::Tab*/}
                           <div
@@ -350,8 +350,8 @@ export const ContactUser = ({ user, showModal, setShowModal }) => {
                           </div>
                         </div>
                         {/*end::Footer*/}
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 )}
               </>
