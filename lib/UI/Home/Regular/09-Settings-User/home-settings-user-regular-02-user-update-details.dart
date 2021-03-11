@@ -7,7 +7,6 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-user-regular-01-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularUserUpdateDetails extends StatefulWidget{

@@ -10,7 +10,7 @@ Future<APIRegularShowNotificationStatus> apiRegularShowNotificationStatus({requi
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/notifSettingsStatus',),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,

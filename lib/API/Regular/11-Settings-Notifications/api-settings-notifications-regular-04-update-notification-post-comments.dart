@@ -11,7 +11,7 @@ Future<bool> apiRegularUpdateNotificationPostComments({required bool hide}) asyn
 
   try{
     final http.Response response = await http.put(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/postComments?setting=$hide', ''),
+      Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/postComments', {'setting' : '$hide',}),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,

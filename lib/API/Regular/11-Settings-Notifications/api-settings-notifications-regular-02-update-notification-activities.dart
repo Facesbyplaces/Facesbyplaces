@@ -11,7 +11,7 @@ Future<bool> apiRegularUpdateNotificationActivities({required bool hide}) async{
 
   try{
     final http.Response response = await http.put(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/newActivities?setting=$hide', ''),
+      Uri.http('fbp.dev1.koda.ws', '/api/v1/notifications/newActivities', {'setting' : '$hide',}),
       headers: <String, String>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
