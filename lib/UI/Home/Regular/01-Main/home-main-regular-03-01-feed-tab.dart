@@ -45,16 +45,34 @@ class HomeRegularFeedTab extends StatefulWidget{
 
 class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
   
+  ScrollController scrollController = ScrollController();
   List<RegularMainPagesFeeds> feeds = [];
-  int itemRemaining = 1;
-  int page = 1;
-  int count = 0;
   bool isGuestLoggedIn = false;
+  int itemRemaining = 1;
+  int count = 0;
+  int page = 1;
 
   void initState(){
     super.initState();
     isGuest();
     onLoading();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(itemRemaining != 0){
+          setState(() {
+            onLoading();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   Future<void> onRefresh() async{
@@ -129,6 +147,7 @@ class HomeRegularFeedTabState extends State<HomeRegularFeedTab>{
     ? RefreshIndicator(
       onRefresh: onRefresh,
       child: ListView.separated(
+        controller: scrollController,
         padding: EdgeInsets.all(10.0),
         physics: ClampingScrollPhysics(),
         itemCount: count,

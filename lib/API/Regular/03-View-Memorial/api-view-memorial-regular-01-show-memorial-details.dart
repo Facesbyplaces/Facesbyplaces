@@ -22,7 +22,7 @@ Future<APIRegularShowMemorialMain> apiRegularShowMemorial({required int memorial
   );
 
   print('The status code of show memorial is ${response.statusCode}');
-  print('The status code of show memorial is ${response.body}');
+  // print('The status code of show memorial is ${response.body}');
 
   if(response.statusCode == 200){
     var newValue = json.decode(response.body);
@@ -71,6 +71,8 @@ class APIRegularShowMemorialExtended{
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
       newList1 = List<dynamic>.from(list);
+    }else{
+      newList1 = [];
     }
 
     return APIRegularShowMemorialExtended(
@@ -79,7 +81,7 @@ class APIRegularShowMemorialExtended{
       showMemorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
       showMemorialBackgroundImage: parsedJson['backgroundImage'],
       showMemorialProfileImage: parsedJson['profileImage'],
-      showMemorialImagesOrVideos: newList1!,
+      showMemorialImagesOrVideos: newList1,
       showMemorialRelationship: parsedJson['relationship'],
       showMemorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showMemorialManage: parsedJson['manage'],

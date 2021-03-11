@@ -21,7 +21,8 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
   }
 
   final http.Response response = await http.put(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/followers', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/followers', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/followers',),
     headers: <String, String>{
       'access-token': getAccessToken!,
       'uid': getUID!,
@@ -33,6 +34,8 @@ Future<bool> apiRegularModifyFollowPage({required String pageType, required int 
       'follow': '$follow',
     }
   );
+
+  print('The status code is ${response.statusCode}');
 
   if(response.statusCode == 200){
     return true;

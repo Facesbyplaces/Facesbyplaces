@@ -71,6 +71,8 @@ class APIRegularHomeProfilePostExtended{
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
       newList1 = List<dynamic>.from(list);
+    }else{
+      newList1 = [];
     }
 
     var newList2 = parsedJson['tag_people'] as List;
@@ -83,7 +85,7 @@ class APIRegularHomeProfilePostExtended{
       homeProfilePostLocation: parsedJson['location'],
       homeProfilePostLatitude: parsedJson['latitude'],
       homeProfilePostLongitude: parsedJson['longitude'],
-      homeProfilePostImagesOrVideos: newList1!,
+      homeProfilePostImagesOrVideos: newList1,
       homeProfilePostTagged: taggedList,
       homeProfilePostCreatedAt: parsedJson['created_at'],
       homeProfilePostNumberOfLikes: parsedJson['numberOfLikes'],

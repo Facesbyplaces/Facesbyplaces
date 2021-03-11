@@ -10,7 +10,8 @@ Future<APIRegularSearchPostMain> apiRegularSearchPosts({required String keywords
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/posts?page=$page&keywords=$keywords', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/search/posts', {'page' : '$page', 'keywords': '$keywords'}),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -81,7 +82,7 @@ class APIRegularSearchPostExtended{
       searchPostLocation: parsedJson['location'],
       searchPostLatitude: parsedJson['latitude'],
       searchPostLongitude: parsedJson['longitude'],
-      searchPostImagesOrVideos: newList1!,
+      searchPostImagesOrVideos: newList1 != null ? newList1 : [],
       searchPostPostTagged: taggedList,
       searchPostCreateAt: parsedJson['created_at'],
       searchPostNumberOfLikes: parsedJson['numberOfLikes'],
@@ -94,7 +95,6 @@ class APIRegularSearchPostExtended{
 class APIRegularSearchPostExtendedPage{
   int searchPostPageId;
   String searchPostPageName;
-  APIRegularSearchPostExtendedPageDetails searchPostPageDetails;
   dynamic searchPostPageBackgroundImage;
   dynamic searchPostPageProfileImage;
   dynamic searchPostPageImagesOrVideos;
@@ -106,13 +106,12 @@ class APIRegularSearchPostExtendedPage{
   String searchPostPagePageType;
   String searchPostPagePrivacy;
 
-  APIRegularSearchPostExtendedPage({required this.searchPostPageId, required this.searchPostPageName, required this.searchPostPageDetails, required this.searchPostPageBackgroundImage, required this.searchPostPageProfileImage, required this.searchPostPageImagesOrVideos, required this.searchPostPageRelationship, required this.searchPostPagePageCreator, required this.searchPostPageManage, required this.searchPostPageFamOrFriends, required this.searchPostPageFollower, required this.searchPostPagePageType, required this.searchPostPagePrivacy});
+  APIRegularSearchPostExtendedPage({required this.searchPostPageId, required this.searchPostPageName, required this.searchPostPageBackgroundImage, required this.searchPostPageProfileImage, required this.searchPostPageImagesOrVideos, required this.searchPostPageRelationship, required this.searchPostPagePageCreator, required this.searchPostPageManage, required this.searchPostPageFamOrFriends, required this.searchPostPageFollower, required this.searchPostPagePageType, required this.searchPostPagePrivacy});
 
   factory APIRegularSearchPostExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPage(
       searchPostPageId: parsedJson['id'],
       searchPostPageName: parsedJson['name'],
-      searchPostPageDetails: APIRegularSearchPostExtendedPageDetails.fromJson(parsedJson['details']),
       searchPostPageBackgroundImage: parsedJson['backgroundImage'],
       searchPostPageProfileImage: parsedJson['profileImage'],
       searchPostPageImagesOrVideos: parsedJson['imagesOrVideos'],
@@ -127,48 +126,13 @@ class APIRegularSearchPostExtendedPage{
   }
 }
 
-class APIRegularSearchPostExtendedPageDetails{
-  String searchPostPageDetailsDescription;
-  String searchPostPageDetailsBirthPlace;
-  String searchPostPageDetailsDob;
-  String searchPostPageDetailsRip;
-  String searchPostPageDetailsCemetery;
-  String searchPostPageDetailsCountry;
-
-  APIRegularSearchPostExtendedPageDetails({required this.searchPostPageDetailsDescription, required this.searchPostPageDetailsBirthPlace, required this.searchPostPageDetailsDob, required this.searchPostPageDetailsRip, required this.searchPostPageDetailsCemetery, required this.searchPostPageDetailsCountry});
-
-  factory APIRegularSearchPostExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularSearchPostExtendedPageDetails(
-      searchPostPageDetailsDescription: parsedJson['description'],
-      searchPostPageDetailsBirthPlace: parsedJson['birthplace'],
-      searchPostPageDetailsDob: parsedJson['dob'],
-      searchPostPageDetailsRip: parsedJson['rip'],
-      searchPostPageDetailsCemetery: parsedJson['cemetery'],
-      searchPostPageDetailsCountry: parsedJson['country'],
-    );
-  }
-}
-
 class APIRegularSearchPostExtendedPageCreator{
   int searchPostPageCreatorId;
-  String searchPostPageCreatorFirstName;
-  String searchPostPageCreatorLastName;
-  String searchPostPageCreatorPhoneNumber;
-  String searchPostPageCreatorEmail;
-  String searchPostPageCreatorUserName;
-  dynamic searchPostPageCreatorImage;
-
-  APIRegularSearchPostExtendedPageCreator({required this.searchPostPageCreatorId, required this.searchPostPageCreatorFirstName, required this.searchPostPageCreatorLastName, required this.searchPostPageCreatorPhoneNumber, required this.searchPostPageCreatorEmail, required this.searchPostPageCreatorUserName, required this.searchPostPageCreatorImage});
+  APIRegularSearchPostExtendedPageCreator({required this.searchPostPageCreatorId});
 
   factory APIRegularSearchPostExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchPostExtendedPageCreator(
       searchPostPageCreatorId: parsedJson['id'],
-      searchPostPageCreatorFirstName: parsedJson['first_name'],
-      searchPostPageCreatorLastName: parsedJson['last_name'],
-      searchPostPageCreatorPhoneNumber: parsedJson['phone_number'],
-      searchPostPageCreatorEmail: parsedJson['email'],
-      searchPostPageCreatorUserName: parsedJson['username'],
-      searchPostPageCreatorImage: parsedJson['image']
     );
   }
 }

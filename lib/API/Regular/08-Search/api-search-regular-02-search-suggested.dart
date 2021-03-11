@@ -10,7 +10,8 @@ Future<APIRegularSearchSuggestedMain> apiRegularSearchSuggested({required int pa
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/search/suggested/', {'page' : '$page',}),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -66,82 +67,38 @@ class APIRegularSearchSuggestedExtendedPage{
   int searchSuggestedPageId;
   String searchSuggestedPageName;
   APIRegularSearchSuggestedExtendedPageDetails searchSuggestedPageDetails;
-  dynamic searchSuggestedPageBackgroundImage;
-  dynamic searchSuggestedPageProfileImage;
-  dynamic searchSuggestedPageImagesOrVideos;
+  String searchSuggestedPageProfileImage;
   String searchSuggestedPageRelationship;
-  APIRegularSearchSuggestedExtendedPageCreator searchSuggestedPagePageCreator;
   bool searchSuggestedPageManage;
   bool searchSuggestedPageFamOrFriends;
   bool searchSuggestedPageFollower;
   String searchSuggestedPagePageType;
-  String searchSuggestedPagePrivacy;
 
-  APIRegularSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageBackgroundImage, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageImagesOrVideos, required this.searchSuggestedPageRelationship, required this.searchSuggestedPagePageCreator, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType, required this.searchSuggestedPagePrivacy});
+  APIRegularSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageRelationship, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType});
 
   factory APIRegularSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPage(
       searchSuggestedPageId: parsedJson['id'],
-      searchSuggestedPageName: parsedJson['name'],
+      searchSuggestedPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
       searchSuggestedPageDetails: APIRegularSearchSuggestedExtendedPageDetails.fromJson(parsedJson['details']),
-      searchSuggestedPageBackgroundImage: parsedJson['backgroundImage'],
-      searchSuggestedPageProfileImage: parsedJson['profileImage'],
-      searchSuggestedPageImagesOrVideos: parsedJson['imagesOrVideos'],
-      searchSuggestedPageRelationship: parsedJson['relationship'],
-      searchSuggestedPagePageCreator: APIRegularSearchSuggestedExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchSuggestedPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      searchSuggestedPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       searchSuggestedPageManage: parsedJson['manage'],
       searchSuggestedPageFamOrFriends: parsedJson['famOrFriends'],
       searchSuggestedPageFollower: parsedJson['follower'],
-      searchSuggestedPagePageType: parsedJson['page_type'],
-      searchSuggestedPagePrivacy: parsedJson['privacy'],
+      searchSuggestedPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
 
 class APIRegularSearchSuggestedExtendedPageDetails{
   String searchSuggestedPageDetailsDescription;
-  String searchSuggestedPageDetailsLocation;
-  String searchSuggestedPageDetailsPrecinct;
-  String searchSuggestedPageDetailsDob;
-  String searchSuggestedPageDetailsRip;
-  String searchSuggestedPageDetailsState;
-  String searchSuggestedPageDetailsCountry;
 
-  APIRegularSearchSuggestedExtendedPageDetails({required this.searchSuggestedPageDetailsDescription, required this.searchSuggestedPageDetailsLocation, required this.searchSuggestedPageDetailsPrecinct, required this.searchSuggestedPageDetailsDob, required this.searchSuggestedPageDetailsRip, required this.searchSuggestedPageDetailsState, required this.searchSuggestedPageDetailsCountry});
+  APIRegularSearchSuggestedExtendedPageDetails({required this.searchSuggestedPageDetailsDescription});
 
   factory APIRegularSearchSuggestedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchSuggestedExtendedPageDetails(
-      searchSuggestedPageDetailsDescription: parsedJson['description'],
-      searchSuggestedPageDetailsLocation: parsedJson['location'],
-      searchSuggestedPageDetailsPrecinct: parsedJson['precinct'],
-      searchSuggestedPageDetailsDob: parsedJson['dob'],
-      searchSuggestedPageDetailsRip: parsedJson['rip'],
-      searchSuggestedPageDetailsState: parsedJson['state'],
-      searchSuggestedPageDetailsCountry: parsedJson['country'],
-    );
-  }
-}
-
-class APIRegularSearchSuggestedExtendedPageCreator{
-  int serachSuggestedPageCreatorId;
-  String serachSuggestedPageCreatorFirstName;
-  String serachSuggestedPageCreatorLastName;
-  String serachSuggestedPageCreatorPhoneNumber;
-  String serachSuggestedPageCreatorEmail;
-  String serachSuggestedPageCreatorUserName;
-  dynamic serachSuggestedPageCreatorImage;
-
-  APIRegularSearchSuggestedExtendedPageCreator({required this.serachSuggestedPageCreatorId, required this.serachSuggestedPageCreatorFirstName, required this.serachSuggestedPageCreatorLastName, required this.serachSuggestedPageCreatorPhoneNumber, required this.serachSuggestedPageCreatorEmail, required this.serachSuggestedPageCreatorUserName, required this.serachSuggestedPageCreatorImage});
-
-  factory APIRegularSearchSuggestedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularSearchSuggestedExtendedPageCreator(
-      serachSuggestedPageCreatorId: parsedJson['id'],
-      serachSuggestedPageCreatorFirstName: parsedJson['first_name'],
-      serachSuggestedPageCreatorLastName: parsedJson['last_name'],
-      serachSuggestedPageCreatorPhoneNumber: parsedJson['phone_number'],
-      serachSuggestedPageCreatorEmail: parsedJson['email'],
-      serachSuggestedPageCreatorUserName: parsedJson['username'],
-      serachSuggestedPageCreatorImage: parsedJson['image']
+      searchSuggestedPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
     );
   }
 }

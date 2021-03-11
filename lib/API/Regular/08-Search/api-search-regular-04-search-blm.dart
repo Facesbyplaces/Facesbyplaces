@@ -10,7 +10,8 @@ Future<APIRegularSearchBLMMemorialMain> apiRegularSearchBLM({required String key
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/api/v1/search/memorials?keywords=$keywords&page=blm&page=$page', ''),
+    Uri.http('fbp.dev1.koda.ws', '/api/v1/search/memorials', {'page' : '$page', 'keywords': '$keywords'}),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -65,88 +66,39 @@ class APIRegularSearchBLMMemorialExtendedPage{
   int searchBLMMemorialPageId;
   String searchBLMMemorialPageName;
   APIRegularSearchBLMMemorialExtendedPageDetails searchBLMMemorialPageDetails;
-  dynamic searchBLMMemorialPageBackgroundImage;
-  dynamic searchBLMMemorialPageProfileImage;
-  List<dynamic> searchBLMMemorialPageImagesOrVideos;
+  String searchBLMMemorialPageProfileImage;
   String searchBLMMemorialPageRelationship;
-  // APIRegularSearchBLMMemorialExtendedPageCreator searchBLMMemorialPagePageCreator;
   bool searchBLMMemorialPageManage;
   bool searchBLMMemorialPageFamOrFriends;
   bool searchBLMMemorialPageFollower;
   String searchBLMMemorialPagePageType;
-  String searchBLMMemorialPagePrivacy;
 
-  APIRegularSearchBLMMemorialExtendedPage({required this.searchBLMMemorialPageId, required this.searchBLMMemorialPageName, required this.searchBLMMemorialPageDetails, required this.searchBLMMemorialPageBackgroundImage, required this.searchBLMMemorialPageProfileImage, required this.searchBLMMemorialPageImagesOrVideos, required this.searchBLMMemorialPageRelationship, required this.searchBLMMemorialPageManage, required this.searchBLMMemorialPageFamOrFriends, required this.searchBLMMemorialPageFollower, required this.searchBLMMemorialPagePageType, required this.searchBLMMemorialPagePrivacy});
+  APIRegularSearchBLMMemorialExtendedPage({required this.searchBLMMemorialPageId, required this.searchBLMMemorialPageName, required this.searchBLMMemorialPageDetails, required this.searchBLMMemorialPageProfileImage, required this.searchBLMMemorialPageRelationship, required this.searchBLMMemorialPageManage, required this.searchBLMMemorialPageFamOrFriends, required this.searchBLMMemorialPageFollower, required this.searchBLMMemorialPagePageType});
 
   factory APIRegularSearchBLMMemorialExtendedPage.fromJson(Map<String, dynamic> parsedJson){
-
-    List<dynamic>? newList1;
-
-    if(parsedJson['imagesOrVideos'] != null){
-      var list = parsedJson['imagesOrVideos'];
-      newList1 = List<dynamic>.from(list);
-    }
 
     return APIRegularSearchBLMMemorialExtendedPage(
       searchBLMMemorialPageId: parsedJson['id'],
       searchBLMMemorialPageName: parsedJson['name'],
       searchBLMMemorialPageDetails: APIRegularSearchBLMMemorialExtendedPageDetails.fromJson(parsedJson['details']),
-      searchBLMMemorialPageBackgroundImage: parsedJson['backgroundImage'],
-      searchBLMMemorialPageProfileImage: parsedJson['profileImage'],
-      searchBLMMemorialPageImagesOrVideos: newList1!,
-      searchBLMMemorialPageRelationship: parsedJson['relationship'],
-      // searchBLMMemorialPagePageCreator: APIRegularSearchBLMMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchBLMMemorialPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      searchBLMMemorialPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       searchBLMMemorialPageManage: parsedJson['manage'],
       searchBLMMemorialPageFamOrFriends: parsedJson['famOrFriends'],
       searchBLMMemorialPageFollower: parsedJson['follower'],
-      searchBLMMemorialPagePageType: parsedJson['page_type'],
-      searchBLMMemorialPagePrivacy: parsedJson['privacy'],
+      searchBLMMemorialPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
 
 class APIRegularSearchBLMMemorialExtendedPageDetails{
   String searchBLMMemorialPageDetailsDescription;
-  String searchBLMMemorialPageDetailsBirthPlace;
-  String searchBLMMemorialPageDetailsDob;
-  String searchBLMMemorialPageDetailsRip;
-  String searchBLMMemorialPageDetailsCemetery;
-  String searchBLMMemorialPageDetailsCountry;
 
-  APIRegularSearchBLMMemorialExtendedPageDetails({required this.searchBLMMemorialPageDetailsDescription, required this.searchBLMMemorialPageDetailsBirthPlace, required this.searchBLMMemorialPageDetailsDob, required this.searchBLMMemorialPageDetailsRip, required this.searchBLMMemorialPageDetailsCemetery, required this.searchBLMMemorialPageDetailsCountry});
+  APIRegularSearchBLMMemorialExtendedPageDetails({required this.searchBLMMemorialPageDetailsDescription});
 
   factory APIRegularSearchBLMMemorialExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularSearchBLMMemorialExtendedPageDetails(
-      searchBLMMemorialPageDetailsDescription: parsedJson['description'],
-      searchBLMMemorialPageDetailsBirthPlace: parsedJson['birthplace'],
-      searchBLMMemorialPageDetailsDob: parsedJson['dob'],
-      searchBLMMemorialPageDetailsRip: parsedJson['rip'],
-      searchBLMMemorialPageDetailsCemetery: parsedJson['cemetery'],
-      searchBLMMemorialPageDetailsCountry: parsedJson['country'],
-    );
-  }
-}
-
-class APIRegularSearchBLMMemorialExtendedPageCreator{
-  int searchBLMMemorialPageCreatorId;
-  String searchBLMMemorialPageCreatorFirstName;
-  String searchBLMMemorialPageCreatorLastName;
-  String searchBLMMemorialPageCreatorPhoneNumber;
-  String searchBLMMemorialPageCreatorEmail;
-  String searchBLMMemorialPageCreatorUserName;
-  dynamic searchBLMMemorialPageCreatorImage;
-
-  APIRegularSearchBLMMemorialExtendedPageCreator({required this.searchBLMMemorialPageCreatorId, required this.searchBLMMemorialPageCreatorFirstName, required this.searchBLMMemorialPageCreatorLastName, required this.searchBLMMemorialPageCreatorPhoneNumber, required this.searchBLMMemorialPageCreatorEmail, required this.searchBLMMemorialPageCreatorUserName, required this.searchBLMMemorialPageCreatorImage});
-
-  factory APIRegularSearchBLMMemorialExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularSearchBLMMemorialExtendedPageCreator(
-      searchBLMMemorialPageCreatorId: parsedJson['id'],
-      searchBLMMemorialPageCreatorFirstName: parsedJson['first_name'],
-      searchBLMMemorialPageCreatorLastName: parsedJson['last_name'],
-      searchBLMMemorialPageCreatorPhoneNumber: parsedJson['phone_number'],
-      searchBLMMemorialPageCreatorEmail: parsedJson['email'],
-      searchBLMMemorialPageCreatorUserName: parsedJson['username'],
-      searchBLMMemorialPageCreatorImage: parsedJson['image']
+      searchBLMMemorialPageDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
     );
   }
 }
