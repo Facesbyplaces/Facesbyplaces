@@ -19,25 +19,32 @@ export default function PostDataTable({
   const [memorialPosts, setMemorialPosts] = useState([]);
   const [blmPosts, setBlmPosts] = useState([]);
 
-  // const handleSearch = () => {
-  //   axios
-  //     .get(`/api/v1/admin/search/memorial`, {
-  //       params: { keywords: keywords, page: page },
-  //     })
-  //     .then((response) => {
-  //       response.data.page_type == 2
-  //         ? setMemorials(response.data.memorials)
-  //         : setBlms(response.data.memorials);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //     });
-  //   setSearch(false);
-  // };
+  const handleSearch = () => {
+    axios
+      .get(`/api/v1/admin/search/post`, {
+        params: { keywords: keywords, page: page },
+      })
+      .then((response) => {
+        console.log(response.data.posts);
+        const memorialsPost = [];
+        const blmsPost = [];
+        response.data.posts.map((post) =>
+          post.page.page_type === "Memorial"
+            ? memorialsPost.push(post)
+            : blmsPost.push(post)
+        );
+        setMemorialPosts(memorialsPost);
+        setBlmPosts(blmsPost);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    setSearch(false);
+  };
 
-  // {
-  //   search ? handleSearch() : console.log("Search", search);
-  // }
+  {
+    search ? handleSearch() : console.log("Search", search);
+  }
 
   useEffect(() => {
     fetchPosts(page);
@@ -65,7 +72,7 @@ export default function PostDataTable({
         );
         setBlmPosts(blms);
         setMemorialPosts(memorials);
-        // setPosts(response.data.posts);
+        setPosts(response.data.posts);
 
         // console.log("Response: ", response.data.posts);
       })
@@ -127,9 +134,15 @@ export default function PostDataTable({
             search={search}
             pageType={pageType}
           />
-        ) : (
+        ) : pageType == 1 ? (
           <DataTableRowBlmPostsData
             posts={blmPosts}
+            search={search}
+            pageType={pageType}
+          />
+        ) : (
+          <DataTableRowMemorialPostsData
+            posts={posts}
             search={search}
             pageType={pageType}
           />

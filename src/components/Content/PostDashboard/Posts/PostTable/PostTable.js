@@ -13,7 +13,7 @@ import { SuccessModal } from "../PostCRUD/SuccessModal";
 
 export default function PostTable() {
   const [showModal, setShowModal] = useState(true);
-  const [pageType, setPageType] = useState(2);
+  const [pageType, setPageType] = useState(0);
   const { postTab } = useSelector(({ postTab }) => ({
     postTab: postTab,
   }));

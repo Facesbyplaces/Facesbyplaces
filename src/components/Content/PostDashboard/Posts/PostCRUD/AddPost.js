@@ -50,15 +50,15 @@ export default function AddPost() {
     console.log("Images Or Videos", imagesOrVideosFilesSelected);
   };
 
-  const uploadImage = () => {
+  const uploadImage = (postId) => {
     console.log("Images or Videos: ", imagesOrVideosFilesSelected);
     const formData = new FormData();
     imagesOrVideosFilesSelected
       ? formData.append("imagesOrVideos[]", imagesOrVideosFilesSelected)
       : console.log("No Images or Videos Uploaded");
-    formData.append("id", postTab.id);
+    formData.append("id", postId);
     axios
-      .put(`/api/v1/admin/posts/image/${postTab.id}`, formData)
+      .put(`/api/v1/admin/posts/image/${postId}`, formData)
       .then((response) => {
         console.log(response.data);
       })
@@ -156,6 +156,7 @@ export default function AddPost() {
     // console.log("Location: ", location);
     // console.log("Latitude: ", latitude);
     // console.log("Longitude: ", longitude);
+    // console.log("ImagesOrVideos: ", imagesOrVideosFilesSelected);
     setLoading(true);
 
     axios
@@ -174,7 +175,7 @@ export default function AddPost() {
       .then((response) => {
         console.log(response.data);
         setTimeout(() => {
-          // uploadImage();
+          uploadImage(response.data.post.id);
           setLoading(false);
         }, 1000);
         openModal();

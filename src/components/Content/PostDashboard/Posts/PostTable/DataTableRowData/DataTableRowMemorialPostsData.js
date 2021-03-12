@@ -85,9 +85,15 @@ export default function DataTableRowMemorialPostsData({
         )}
       </td>
       <td>
-        <span className="label label-lg label-light-warning label-inline">
-          ALM
-        </span>
+        {post.page.page_type === "Memorial" ? (
+          <span className="label label-lg label-light-warning label-inline">
+            ALM
+          </span>
+        ) : (
+          <span className="label label-lg label-light-primary label-inline">
+            BLM
+          </span>
+        )}
       </td>
       <td className="pr-2 text-left">
         {/* View User Icon */}

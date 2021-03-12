@@ -61,7 +61,7 @@ export default function Body({ pageType, setPageType }) {
                   className={`btn btn-outline-warning ${
                     pageType === 2 ? "active" : ""
                   }`}
-                  style={{ width: "84px" }}
+                  style={{ width: "56px" }}
                   onClick={() => setPageType(2)}
                 >
                   <input type="radio" name="options" />
@@ -69,9 +69,22 @@ export default function Body({ pageType, setPageType }) {
                 </label>
                 <label
                   className={`btn btn-outline-warning ${
+                    pageType === 0 ? "active" : ""
+                  }`}
+                  style={{ width: "56px" }}
+                >
+                  <input
+                    type="radio"
+                    name="options"
+                    onClick={() => setPageType(0)}
+                  />
+                  ALL
+                </label>
+                <label
+                  className={`btn btn-outline-warning ${
                     pageType === 1 ? "active" : ""
                   }`}
-                  style={{ width: "84px" }}
+                  style={{ width: "56px" }}
                 >
                   <input
                     type="radio"
