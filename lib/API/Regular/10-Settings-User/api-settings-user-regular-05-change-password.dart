@@ -10,8 +10,8 @@ Future<bool> apiRegularChangePassword({required String currentPassword, required
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData.files.addAll([
       MapEntry('current_password', MultipartFile.fromString(currentPassword),),

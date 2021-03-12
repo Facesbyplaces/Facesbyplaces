@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
 
 Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() async{
 
@@ -9,23 +10,44 @@ Future<APIRegularShowProfileInformation> apiRegularShowProfileInformation() asyn
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    // Uri.http('http://fbp.dev1.koda.ws/api/v1/users/image_show', ''),
-    Uri.http('fbp.dev1.koda.ws', '/api/v1/users/image_show',),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/image_show',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
 
+  print('The status code of other details is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowProfileInformation.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowProfileInformation.fromJson(newData);
   }else{
-    throw Exception('Failed to get the user information');
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
+
+  // final http.Response response = await http.get(
+  //   // Uri.http('http://fbp.dev1.koda.ws/api/v1/users/image_show', ''),
+  //   Uri.http('fbp.dev1.koda.ws', '/api/v1/users/image_show',),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIRegularShowProfileInformation.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the user information');
+  // }
 }
 
 class APIRegularShowProfileInformation{

@@ -3,6 +3,9 @@ import 'package:facesbyplaces/Configurations/size_configuration.dart';
 // import 'package:date_time_picker/date_time_picker.dart';
 // import 'package:intl_phone_field/intl_phone_field.dart';
 // import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 class MiscRegularInputFieldTemplate extends StatefulWidget{
@@ -434,50 +437,176 @@ class MiscRegularInputFieldSecurityQuestionsState extends State<MiscRegularInput
   }
 }
 
-// class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
+class MiscRegularInputFieldDateTimeTemplate extends StatefulWidget{
 
-//   final String labelText;
-//   final DateTimePickerType dateTimePickerType;
-//   final String displayText;
+  final String labelText;
+  final DateTimePickerType dateTimePickerType;
+  final String displayText;
 
-//   MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
+  MiscRegularInputFieldDateTimeTemplate({required Key key, this.labelText = '', this.dateTimePickerType = DateTimePickerType.date, this.displayText = ''}) : super(key: key);
 
-//   MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
-// }
+  MiscRegularInputFieldDateTimeTemplateState createState() => MiscRegularInputFieldDateTimeTemplateState(labelText: labelText, dateTimePickerType: dateTimePickerType, displayText: displayText);
+}
 
-// class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
-//   final String labelText;
-//   final DateTimePickerType dateTimePickerType;
-//   final String displayText;
+class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputFieldDateTimeTemplate>{
+  final String labelText;
+  final DateTimePickerType dateTimePickerType;
+  final String displayText;
 
-//   MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
+  MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
 
-//   TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController();
 
-//   void initState(){
-//     super.initState();
-//     controller = TextEditingController(text: displayText);
-//   }
+  void initState(){
+    super.initState();
+    controller = TextEditingController(text: displayText);
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     SizeConfig.init(context);
-//     return DateTimePicker(
-//       type: dateTimePickerType,
-//       controller: controller,
-//       cursorColor: Color(0xff000000),
-//       firstDate: DateTime(1000),
-//       lastDate: DateTime.now(),
-//       decoration: InputDecoration(
-//         alignLabelWithHint: true,
-//         labelText: labelText,
-//         labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
-//         focusedBorder: UnderlineInputBorder(
-//           borderSide: BorderSide(
-//             color: Color(0xff000000),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return DateTimePicker(
+      type: dateTimePickerType,
+      controller: controller,
+      cursorColor: Color(0xff000000),
+      firstDate: DateTime(1000),
+      lastDate: DateTime.now(),
+      decoration: InputDecoration(
+        alignLabelWithHint: true,
+        labelText: labelText,
+        labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff000000),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class MiscRegularPhoneNumberPickerTemplate extends StatefulWidget{
+  final String labelText;
+  final TextStyle labelTextStyle;
+  final bool obscureText;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final bool includeSuffixIcon;
+  final String displayText;
+
+  MiscRegularPhoneNumberPickerTemplate({
+    required Key key,
+    this.labelText = '',
+    this.labelTextStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+    this.obscureText = false, 
+    this.type = TextInputType.text, 
+    this.maxLines = 1, 
+    this.readOnly = false,
+    this.includeSuffixIcon = false,
+    this.displayText = '',
+  }) : super(key: key);
+  
+  MiscRegularPhoneNumberPickerTemplateState createState() => MiscRegularPhoneNumberPickerTemplateState(labelText: labelText, labelTextStyle: labelTextStyle, obscureText: obscureText, type: type, maxLines: maxLines, readOnly: readOnly, includeSuffixIcon: includeSuffixIcon, displayText: displayText);
+}
+
+class MiscRegularPhoneNumberPickerTemplateState extends State<MiscRegularPhoneNumberPickerTemplate>{
+  final String labelText;
+  final TextStyle labelTextStyle;
+  final bool obscureText;
+  final TextInputType type;
+  final int maxLines;
+  final bool readOnly;
+  final bool includeSuffixIcon;
+  final String displayText;
+
+  MiscRegularPhoneNumberPickerTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
+
+  TextEditingController controller1 = TextEditingController(text: '+1');
+  TextEditingController controller2 = TextEditingController(text: '');
+
+  var globalPhoneType = PhoneNumberType.mobile;
+  var globalPhoneFormat = PhoneNumberFormat.international;
+
+  String get overrideCountryCode {
+    if (controller1.text.isNotEmpty) {
+      try {
+        return CountryManager().countries.firstWhere((element) => element.phoneCode == controller1.text.replaceAll(RegExp(r'[^\d]+'), '')).countryCode;
+      } catch (_) {
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
+  void initState(){
+    super.initState();
+    controller2 = TextEditingController(text: displayText);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: 50,
+          child: TextFormField(
+            onTap: (){
+            showCountryPicker(
+              context: context,
+              showPhoneCode: true,
+              onSelect: (Country country) {
+                setState(() {
+                  controller1.text = '+${country.phoneCode}';
+                });
+              },
+            );
+            },
+            readOnly: true,
+            controller: controller1,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey,),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+          ),
+        ),
+
+        SizedBox(width: 20,),
+        
+        Expanded(
+          child: TextFormField(
+            // textAlign: TextAlign.,
+            keyboardType: TextInputType.phone,
+            controller: controller2,
+            cursorColor: Color(0xff000000),
+            decoration: InputDecoration(
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xff000000),
+                ),
+              ),
+            ),
+            
+            inputFormatters: [
+              LibPhonenumberTextFormatter(
+                phoneNumberType: globalPhoneType,
+                phoneNumberFormat: globalPhoneFormat,
+                overrideSkipCountryCode: overrideCountryCode,
+              ),
+            ],
+          ),
+        ),
+
+      ],
+    );
+  }
+}

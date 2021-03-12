@@ -5,6 +5,7 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-user-regular-01-user-details.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
   final GlobalKey<MiscRegularInputFieldTemplateState> _key1 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberPickerTemplateState> _key4 = GlobalKey<MiscRegularPhoneNumberPickerTemplateState>();
   final GlobalKey<MiscRegularInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscRegularInputFieldSecurityQuestionsState>();
 
   Future<APIRegularShowAccountDetails>? accountDetails;
@@ -89,7 +90,7 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
 
                       SizedBox(height: 20,),
 
-                      MiscRegularPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data!.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
+                      MiscRegularPhoneNumberPickerTemplate(key: _key4, labelText: 'Phone Number', displayText: details.data!.showAccountDetailsPhoneNumber,),
 
                       SizedBox(height: 20,),
 
@@ -108,11 +109,12 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
+
                           if(
                             details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
                             details.data!.showAccountDetailsLastName !=  _key2.currentState!.controller.text ||
                             details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
-                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text ||
+                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller2.text ||
                             details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -124,51 +126,23 @@ class HomeRegularUserUpdateDetailsState extends State<HomeRegularUserUpdateDetai
                                 firstName: _key1.currentState!.controller.text,
                                 lastName: _key2.currentState!.controller.text,
                                 email: _key3.currentState!.controller.text,
-                                phoneNumber: _key4.currentState!.controller.text,
+                                phoneNumber: _key4.currentState!.controller2.text,
                                 question: _key5.currentState!.currentSelection
                               );
                               context.hideLoaderOverlay();
 
                               if(result){
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Successfully updated the account details.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.green,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Success',
+                                  message: 'Successfully updated the account details.',
                                 );
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
                               }else{
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Something went wrong. Please try again.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Error',
+                                  message: 'Something went wrong. Please try again.',
                                 );
                               }
                             }

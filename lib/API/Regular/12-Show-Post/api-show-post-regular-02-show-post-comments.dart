@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int postId, required int page}) async{
 
@@ -9,21 +8,23 @@ Future<APIRegularShowListOfComments> apiRegularShowListOfComments({required int 
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowListOfComments.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowListOfComments.fromJson(newData);
   }else{
-    throw Exception('Failed to get the lists.');
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
 }
 
@@ -59,8 +60,8 @@ class APIRegularShowListOfCommentsExtended{
       showListOfCommentsCommentId: parsedJson['id'],
       showListOfCommentsPostId: parsedJson['post_id'],
       showListOfCommentsUser: APIRegularShowListOfCommentsExtendedUser.fromJson(parsedJson['user']),
-      showListOfCommentsCommentBody: parsedJson['body'],
-      showListOfCommentsCreatedAt: parsedJson['created_at'],
+      showListOfCommentsCommentBody: parsedJson['body'] != null ? parsedJson['body'] : '',
+      showListOfCommentsCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
     );
   }
 }
@@ -69,7 +70,7 @@ class APIRegularShowListOfCommentsExtendedUser{
   int showListOfCommentsUserId;
   String showListOfCommentsUserFirstName;
   String showListOfCommentsUserLastName;
-  dynamic showListOfCommentsUserImage;
+  String showListOfCommentsUserImage;
   int showListOfCommentsUserAccountType;
 
   APIRegularShowListOfCommentsExtendedUser({required this.showListOfCommentsUserId, required this.showListOfCommentsUserFirstName, required this.showListOfCommentsUserLastName, required this.showListOfCommentsUserImage, required this.showListOfCommentsUserAccountType});
@@ -77,9 +78,9 @@ class APIRegularShowListOfCommentsExtendedUser{
   factory APIRegularShowListOfCommentsExtendedUser.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowListOfCommentsExtendedUser(
       showListOfCommentsUserId: parsedJson['id'],
-      showListOfCommentsUserFirstName: parsedJson['first_name'],
-      showListOfCommentsUserLastName: parsedJson['last_name'],
-      showListOfCommentsUserImage: parsedJson['image'],
+      showListOfCommentsUserFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showListOfCommentsUserLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showListOfCommentsUserImage: parsedJson['image'] != null ? parsedJson['image'] : '',
       showListOfCommentsUserAccountType: parsedJson['account_type'],
     );
   }

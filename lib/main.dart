@@ -25,6 +25,7 @@ import 'UI/Home/BLM/07-Search/home-search-blm-01-search.dart';
 // import 'UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:responsive_framework/responsive_framework.dart';
+import 'package:flutter_libphonenumber/flutter_libphonenumber.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -45,6 +46,7 @@ import 'UI/ui-02-login.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FlutterLibphonenumber().init();
 
   final sharedPrefs = await SharedPreferences.getInstance();
   final blmSession = sharedPrefs.getBool('blm-user-session') ?? false;

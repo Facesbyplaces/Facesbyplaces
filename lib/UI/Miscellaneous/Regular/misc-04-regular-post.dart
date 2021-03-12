@@ -234,31 +234,33 @@ class MiscRegularPostState extends State<MiscRegularPost> with WidgetsBindingObs
                 ),
 
                 Expanded(
-                  child: IconButton(
-                    alignment: Alignment.centerRight,
-                    splashColor: Colors.transparent,
-                    icon: CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: Color(0xffffffff)),),
-                    onPressed: () async{
-                      initBranchShare();
+                  child: Container(),
+                ),
 
-                      FlutterBranchSdk.setIdentity('alm-share-link');
+                IconButton(
+                  alignment: Alignment.centerRight,
+                  splashColor: Colors.transparent,
+                  icon: CircleAvatar(backgroundColor: Color(0xff4EC9D4), child: Icon(Icons.share_rounded, color: Color(0xffffffff)),),
+                  onPressed: () async{
+                    initBranchShare();
 
-                      BranchResponse response = await FlutterBranchSdk.showShareSheet(
-                        buo: buo!,
-                        linkProperties: lp!,
-                        messageText: 'FacesbyPlaces App',
-                        androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
-                        androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
-                      );
+                    FlutterBranchSdk.setIdentity('alm-share-link');
 
-                      if (response.success) {
-                        print('The post id is $postId');
-                      } else {
-                        FlutterBranchSdk.logout();
-                        // print('Error : ${response.errorCode} - ${response.errorMessage}');
-                      }
-                    },
-                  ),
+                    BranchResponse response = await FlutterBranchSdk.showShareSheet(
+                      buo: buo!,
+                      linkProperties: lp!,
+                      messageText: 'FacesbyPlaces App',
+                      androidMessageTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations',
+                      androidSharingTitle: 'FacesbyPlaces - Create a memorial page for loved ones by sharing stories, special events and photos of special occasions. Keeping their memories alive for generations'
+                    );
+
+                    if (response.success) {
+                      print('The post id is $postId');
+                    } else {
+                      FlutterBranchSdk.logout();
+                      // print('Error : ${response.errorCode} - ${response.errorMessage}');
+                    }
+                  },
                 ),
               ],
             ),

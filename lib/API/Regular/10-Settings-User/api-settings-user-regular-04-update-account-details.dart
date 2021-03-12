@@ -10,8 +10,8 @@ Future<bool> apiRegularUpdateAccountDetails({required String firstName, required
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData.files.addAll([
       MapEntry('first_name', MultipartFile.fromString(firstName),),

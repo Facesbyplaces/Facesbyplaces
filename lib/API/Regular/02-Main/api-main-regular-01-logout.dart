@@ -1,4 +1,6 @@
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 Future<bool> apiRegularLogout() async{
@@ -9,7 +11,8 @@ Future<bool> apiRegularLogout() async{
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   final http.Response response = await http.delete(
-    Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_out', ''),
+    // Uri.http('http://fbp.dev1.koda.ws/alm_auth/sign_out', ''),
+    Uri.http('fbp.dev1.koda.ws', '/alm_auth/sign_out',),
     headers: <String, String>{
       'Content-Type': 'application/json',
       'access-token': getAccessToken,
@@ -17,6 +20,8 @@ Future<bool> apiRegularLogout() async{
       'client': getClient,
     }
   );
+
+  print('The status code of logout is ${response.statusCode}');
 
   if(response.statusCode == 200){
 
@@ -33,6 +38,18 @@ Future<bool> apiRegularLogout() async{
     sharedPrefs.remove('regular-user-session');
 
     sharedPrefs.remove('user-guest-session');
+
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: [
+        'profile',
+        'email',
+        'openid'
+      ],
+    );
+    await googleSignIn.signOut();
+
+    FacebookLogin fb = FacebookLogin();
+    await fb.logOut();
 
     return true;
   }else{

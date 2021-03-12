@@ -37,11 +37,11 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
   final bool toggleNumber;
   HomeRegularUserOtherDetailsState({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  // final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
+  final GlobalKey<MiscRegularInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscRegularInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key2 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key3 = GlobalKey<MiscRegularInputFieldTemplateState>();
   final GlobalKey<MiscRegularInputFieldTemplateState> _key4 = GlobalKey<MiscRegularInputFieldTemplateState>();
-  final GlobalKey<MiscRegularPhoneNumberTemplateState> _key5 = GlobalKey<MiscRegularPhoneNumberTemplateState>();
+  final GlobalKey<MiscRegularPhoneNumberPickerTemplateState> _key5 = GlobalKey<MiscRegularPhoneNumberPickerTemplateState>();
 
   Future<APIRegularShowOtherDetails>? otherDetails;
   bool toggle1 = false;
@@ -102,7 +102,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          // Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
+                          Expanded(child: MiscRegularInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.showOtherDetailsBirthdate,),),
 
                           SizedBox(height: 20,),
 
@@ -197,7 +197,8 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          Expanded(child: MiscRegularPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.showOtherDetailsPhoneNumber, type: TextInputType.phone),),
+                          // MiscRegularPhoneNumberPickerTemplate(key: _key4, labelText: 'Phone Number', displayText: details.data!.showAccountDetailsPhoneNumber,),
+                          Expanded(child: MiscRegularPhoneNumberPickerTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.showOtherDetailsPhoneNumber, type: TextInputType.phone),),
 
                           SizedBox(height: 20,),
 
@@ -233,7 +234,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                             details.data!.showOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
                             details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text ||
                             details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
-                            details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller.text
+                            details.data!.showOtherDetailsPhoneNumber != _key5.currentState!.controller2.text
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscRegularConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
@@ -246,7 +247,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                                 birthplace: _key2.currentState!.controller.text,
                                 address: _key3.currentState!.controller.text,
                                 email: _key4.currentState!.controller.text,
-                                phoneNumber: _key5.currentState!.controller.text,
+                                phoneNumber: _key5.currentState!.controller2.text,
                               );
 
                               context.hideLoaderOverlay();

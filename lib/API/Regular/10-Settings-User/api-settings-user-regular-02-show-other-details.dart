@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int userId}) async{
 
@@ -9,21 +8,25 @@ Future<APIRegularShowOtherDetails> apiRegularShowOtherDetails({required int user
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getOtherInfos?user_id=$userId',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
 
+  print('The status code of other details is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowOtherDetails.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowOtherDetails.fromJson(newData);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
 }
 
@@ -46,5 +49,3 @@ class APIRegularShowOtherDetails{
     );
   }
 }
-
-

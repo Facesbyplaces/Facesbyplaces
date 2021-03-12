@@ -10,8 +10,8 @@ Future<bool> apiRegularUpdateUserProfilePicture({required dynamic image, require
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
   try{
-    var dioRequest = Dio();
-    var formData = FormData();
+    Dio dioRequest = Dio();
+    FormData formData = FormData();
 
     formData = FormData.fromMap({
       'image': await MultipartFile.fromFile(image.path, filename: image.path),
