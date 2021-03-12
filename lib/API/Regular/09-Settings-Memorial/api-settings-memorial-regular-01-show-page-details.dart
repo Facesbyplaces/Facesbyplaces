@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int memorialId}) async{
 
@@ -9,21 +8,25 @@ Future<APIRegularShowPageDetailsMain> apiRegularShowPageDetails({required int me
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
 
+  print('The page details is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowPageDetailsMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowPageDetailsMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the events');
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
 }
 
@@ -40,27 +43,17 @@ class APIRegularShowPageDetailsMain{
 }
 
 class APIRegularShowPageDetailsExtended{
-  int showPageDetailsId;
   String showPageDetailsName;
   APIRegularShowPageDetailsExtendedDetails showPageDetailsDetails;
-  dynamic showPageDetailsBackgroundImage;
-  dynamic showPageDetailsProfileImage;
-  dynamic showPageDetailsImagesOrVideos;
   String showPageDetailsRelationship;
-  APIRegularShowPageDetailsExtendedPageCreator showPageDetailsPageCreator;
 
-  APIRegularShowPageDetailsExtended({required this.showPageDetailsId, required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsBackgroundImage, required this.showPageDetailsProfileImage, required this.showPageDetailsImagesOrVideos, required this.showPageDetailsRelationship, required this.showPageDetailsPageCreator});
+  APIRegularShowPageDetailsExtended({required this.showPageDetailsName, required this.showPageDetailsDetails, required this.showPageDetailsRelationship});
 
   factory APIRegularShowPageDetailsExtended.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtended(
-      showPageDetailsId: parsedJson['id'],
-      showPageDetailsName: parsedJson['name'],
+      showPageDetailsName: parsedJson['name'] != null ? parsedJson['name'] : '',
       showPageDetailsDetails: APIRegularShowPageDetailsExtendedDetails.fromJson(parsedJson['details']),
-      showPageDetailsBackgroundImage: parsedJson['backgroundImage'],
-      showPageDetailsProfileImage: parsedJson['profileImage'],
-      showPageDetailsImagesOrVideos: parsedJson['imagesOrVideos'],
-      showPageDetailsRelationship: parsedJson['relationship'],
-      showPageDetailsPageCreator: APIRegularShowPageDetailsExtendedPageCreator.fromJson(parsedJson['page_creator'])
+      showPageDetailsRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
     );
   }
 }
@@ -70,43 +63,17 @@ class APIRegularShowPageDetailsExtendedDetails{
   String showPageDetailsDetailsCemetery;
   String showPageDetailsDetailsDob;
   String showPageDetailsDetailsRip;
-  String showPageDetailsDetailsState;
   String showPageDetailsDetailsCountry;
 
-  APIRegularShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsCemetery, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsState, required this.showPageDetailsDetailsCountry});
+  APIRegularShowPageDetailsExtendedDetails({required this.showPageDetailsDetailsDescription, required this.showPageDetailsDetailsCemetery, required this.showPageDetailsDetailsDob, required this.showPageDetailsDetailsRip, required this.showPageDetailsDetailsCountry});
 
   factory APIRegularShowPageDetailsExtendedDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularShowPageDetailsExtendedDetails(
-      showPageDetailsDetailsDescription: parsedJson['description'],
-      showPageDetailsDetailsCemetery: parsedJson['cemetery'],
-      showPageDetailsDetailsDob: parsedJson['dob'],
-      showPageDetailsDetailsRip: parsedJson['rip'],
-      showPageDetailsDetailsState: parsedJson['state'],
-      showPageDetailsDetailsCountry: parsedJson['country'],
-    );
-  }
-}
-
-class APIRegularShowPageDetailsExtendedPageCreator{
-  int showPageDetailsPageCreatorId;
-  String showPageDetailsPageCreatorFirstName;
-  String showPageDetailsPageCreatorLastName;
-  String showPageDetailsPageCreatorPhoneNumber;
-  String showPageDetailsPageCreatorEmail;
-  String showPageDetailsPageCreatorUserName;
-  dynamic showPageDetailsPageCreatorImage;
-
-  APIRegularShowPageDetailsExtendedPageCreator({required this.showPageDetailsPageCreatorId, required this.showPageDetailsPageCreatorFirstName, required this.showPageDetailsPageCreatorLastName, required this.showPageDetailsPageCreatorPhoneNumber, required this.showPageDetailsPageCreatorEmail, required this.showPageDetailsPageCreatorUserName, required this.showPageDetailsPageCreatorImage});
-
-  factory APIRegularShowPageDetailsExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularShowPageDetailsExtendedPageCreator(
-      showPageDetailsPageCreatorId: parsedJson['id'],
-      showPageDetailsPageCreatorFirstName: parsedJson['first_name'],
-      showPageDetailsPageCreatorLastName: parsedJson['last_name'],
-      showPageDetailsPageCreatorPhoneNumber: parsedJson['phone_number'],
-      showPageDetailsPageCreatorEmail: parsedJson['email'],
-      showPageDetailsPageCreatorUserName: parsedJson['username'],
-      showPageDetailsPageCreatorImage: parsedJson['image']
+      showPageDetailsDetailsDescription: parsedJson['description'] != null ? parsedJson['description'] : '',
+      showPageDetailsDetailsCemetery: parsedJson['cemetery'] != null ? parsedJson['cemetery'] : '',
+      showPageDetailsDetailsDob: parsedJson['dob'] != null ? parsedJson['dob'] : '',
+      showPageDetailsDetailsRip: parsedJson['rip'] != null ? parsedJson['rip'] : '',
+      showPageDetailsDetailsCountry: parsedJson['country'] != null ? parsedJson['country'] : '',
     );
   }
 }

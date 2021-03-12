@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memorialId}) async{
 
@@ -9,22 +8,42 @@ Future<APIRegularShowSwitchStatus> apiRegularShowSwitchStatus({required int memo
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId',
+    options: Options(
+      headers: <String, dynamic>{
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),
   );
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIRegularShowSwitchStatus.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    print('The first name is ${response.data}');
+    return APIRegularShowSwitchStatus.fromJson(newData);
   }else{
-    throw Exception('Failed to get the lists.');
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/pageadmin/hideStatus/Memorial/$memorialId', ''),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIRegularShowSwitchStatus.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the lists.');
+  // }
 }
 
 class APIRegularShowSwitchStatus{

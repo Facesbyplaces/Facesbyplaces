@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required int memorialId, required int page}) async{
 
@@ -9,28 +8,49 @@ Future<APIRegularShowAdminsSettingsMain> apiRegularShowAdminSettings({required i
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  APIRegularShowAdminsSettingsMain? returnValue;
+  // APIRegularShowAdminsSettingsMain? returnValue;
 
-  try{
-    final http.Response response = await http.get(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId', ''),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
+  // try{
+  //   final http.Response response = await http.get(
+  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId', ''),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json',
+  //       'access-token': getAccessToken,
+  //       'uid': getUID,
+  //       'client': getClient,
+  //     }
+  //   );
+
+  //   if(response.statusCode == 200){
+  //     var newValue = json.decode(response.body);
+  //     returnValue = APIRegularShowAdminsSettingsMain.fromJson(newValue);
+  //   }
+  // }catch(e){
+  //   throw Exception('$e');
+  // }
+
+  // return returnValue!;
+
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/adminIndex/index?page=$page&page_id=$memorialId',
+    options: Options(
+      headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       }
-    );
+    ),
+  );
 
-    if(response.statusCode == 200){
-      var newValue = json.decode(response.body);
-      returnValue = APIRegularShowAdminsSettingsMain.fromJson(newValue);
-    }
-  }catch(e){
-    throw Exception('$e');
+  print('The page admin settings is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowAdminsSettingsMain.fromJson(newData);
+  }else{
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
-
-  return returnValue!;
 }
 
 class APIRegularShowAdminsSettingsMain{

@@ -48,9 +48,6 @@ class APIRegularHomeTabFeedExtended{
   int homeTabFeedId;
   APIRegularHomeTabFeedExtendedPage homeTabFeedPage;
   String homeTabFeedBody;
-  String homeTabFeedLocation;
-  double homeTabFeedLatitude;
-  double homeTabFeedLongitude;
   List<dynamic> homeTabFeedImagesOrVideos;
   List<APIRegularHomeTabFeedExtendedTagged> homeTabFeedPostTagged;
   String homeTabFeedCreateAt;
@@ -58,7 +55,7 @@ class APIRegularHomeTabFeedExtended{
   int homeTabFeedNumberOfComments;
   bool homeTabFeedLikeStatus;
 
-  APIRegularHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedLocation, required this.homeTabFeedLatitude, required this.homeTabFeedLongitude, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreateAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
+  APIRegularHomeTabFeedExtended({required this.homeTabFeedId, required this.homeTabFeedPage, required this.homeTabFeedBody, required this.homeTabFeedImagesOrVideos, required this.homeTabFeedPostTagged, required this.homeTabFeedCreateAt, required this.homeTabFeedNumberOfLikes, required this.homeTabFeedNumberOfComments, required this.homeTabFeedLikeStatus});
 
   factory APIRegularHomeTabFeedExtended.fromJson(Map<String, dynamic> parsedJson){
     
@@ -75,13 +72,10 @@ class APIRegularHomeTabFeedExtended{
     return APIRegularHomeTabFeedExtended(
       homeTabFeedId: parsedJson['id'],
       homeTabFeedPage: APIRegularHomeTabFeedExtendedPage.fromJson(parsedJson['page']),
-      homeTabFeedBody: parsedJson['body'],
-      homeTabFeedLocation: parsedJson['location'],
-      homeTabFeedLatitude: parsedJson['latitude'],
-      homeTabFeedLongitude: parsedJson['longitude'],
+      homeTabFeedBody: parsedJson['body'] != null ? parsedJson['body'] : '',
       homeTabFeedImagesOrVideos: newList1 != null ? newList1 : [],
       homeTabFeedPostTagged: taggedList,
-      homeTabFeedCreateAt: parsedJson['created_at'],
+      homeTabFeedCreateAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
       homeTabFeedNumberOfLikes: parsedJson['numberOfLikes'],
       homeTabFeedNumberOfComments: parsedJson['numberOfComments'],
       homeTabFeedLikeStatus: parsedJson['likeStatus'],
@@ -92,81 +86,39 @@ class APIRegularHomeTabFeedExtended{
 class APIRegularHomeTabFeedExtendedPage{
   int homeTabFeedPageId;
   String homeTabFeedPageName;
-  APIRegularHomeTabFeedExtendedPageDetails homeTabFeedPageDetails;
-  dynamic homeTabFeedPageBackgroundImage;
-  dynamic homeTabFeedPageProfileImage;
-  dynamic homeTabFeedPageImagesOrVideos;
+  String homeTabFeedPageProfileImage;
   String homeTabFeedPageRelationship;
   APIRegularHomeTabFeedExtendedPageCreator homeTabFeedPagePageCreator;
   bool homeTabFeedPageManage;
   bool homeTabFeedPageFamOrFriends;
   bool homeTabFeedPageFollower;
   String homeTabFeedPagePageType;
-  String homeTabFeedPagePrivacy;
 
-  APIRegularHomeTabFeedExtendedPage({required this.homeTabFeedPageId, required this.homeTabFeedPageName, required this.homeTabFeedPageDetails, required this.homeTabFeedPageBackgroundImage, required this.homeTabFeedPageProfileImage, required this.homeTabFeedPageImagesOrVideos, required this.homeTabFeedPageRelationship, required this.homeTabFeedPagePageCreator, required this.homeTabFeedPageFollower, required this.homeTabFeedPageManage, required this.homeTabFeedPageFamOrFriends, required this.homeTabFeedPagePageType, required this.homeTabFeedPagePrivacy});
+  APIRegularHomeTabFeedExtendedPage({required this.homeTabFeedPageId, required this.homeTabFeedPageName, required this.homeTabFeedPageProfileImage, required this.homeTabFeedPageRelationship, required this.homeTabFeedPagePageCreator, required this.homeTabFeedPageFollower, required this.homeTabFeedPageManage, required this.homeTabFeedPageFamOrFriends, required this.homeTabFeedPagePageType});
 
   factory APIRegularHomeTabFeedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPage(
       homeTabFeedPageId: parsedJson['id'],
-      homeTabFeedPageName: parsedJson['name'],
-      homeTabFeedPageDetails: APIRegularHomeTabFeedExtendedPageDetails.fromJson(parsedJson['details']),
-      homeTabFeedPageBackgroundImage: parsedJson['backgroundImage'],
-      homeTabFeedPageProfileImage: parsedJson['profileImage'],
-      homeTabFeedPageImagesOrVideos: parsedJson['imagesOrVideos'],
-      homeTabFeedPageRelationship: parsedJson['relationship'],
+      homeTabFeedPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
+      homeTabFeedPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      homeTabFeedPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       homeTabFeedPagePageCreator: APIRegularHomeTabFeedExtendedPageCreator.fromJson(parsedJson['page_creator']),
       homeTabFeedPageFollower: parsedJson['follower'],
       homeTabFeedPageManage: parsedJson['manage'],
       homeTabFeedPageFamOrFriends: parsedJson['famOrFriends'],
-      homeTabFeedPagePageType: parsedJson['page_type'],
-      homeTabFeedPagePrivacy: parsedJson['privacy'],
-    );
-  }
-}
-
-class APIRegularHomeTabFeedExtendedPageDetails{
-  String homeTabFeedPageDetailsDescription;
-  String homeTabFeedPageDetailsBirthPlace;
-  String homeTabFeedPageDetailsDob;
-  String homeTabFeedPageDetailsRip;
-  String homeTabFeedPageDetailsCemetery;
-  String homeTabFeedPageDetailsCountry;
-
-  APIRegularHomeTabFeedExtendedPageDetails({required this.homeTabFeedPageDetailsDescription, required this.homeTabFeedPageDetailsBirthPlace, required this.homeTabFeedPageDetailsDob, required this.homeTabFeedPageDetailsRip, required this.homeTabFeedPageDetailsCemetery, required this.homeTabFeedPageDetailsCountry});
-
-  factory APIRegularHomeTabFeedExtendedPageDetails.fromJson(Map<String, dynamic> parsedJson){
-    return APIRegularHomeTabFeedExtendedPageDetails(
-      homeTabFeedPageDetailsDescription: parsedJson['description'],
-      homeTabFeedPageDetailsBirthPlace: parsedJson['birthplace'],
-      homeTabFeedPageDetailsDob: parsedJson['dob'],
-      homeTabFeedPageDetailsRip: parsedJson['rip'],
-      homeTabFeedPageDetailsCemetery: parsedJson['cemetery'],
-      homeTabFeedPageDetailsCountry: parsedJson['country'],
+      homeTabFeedPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
 
 class APIRegularHomeTabFeedExtendedPageCreator{
   int homeTabFeedPageCreatorId;
-  String homeTabFeedPageCreatorFirstName;
-  String homeTabFeedPageCreatorLastName;
-  String homeTabFeedPageCreatorPhoneNumber;
-  String homeTabFeedPageCreatorEmail;
-  String homeTabFeedPageCreatorUserName;
-  dynamic homeTabFeedPageCreatorImage;
 
-  APIRegularHomeTabFeedExtendedPageCreator({required this.homeTabFeedPageCreatorId, required this.homeTabFeedPageCreatorFirstName, required this.homeTabFeedPageCreatorLastName, required this.homeTabFeedPageCreatorPhoneNumber, required this.homeTabFeedPageCreatorEmail, required this.homeTabFeedPageCreatorUserName, required this.homeTabFeedPageCreatorImage});
+  APIRegularHomeTabFeedExtendedPageCreator({required this.homeTabFeedPageCreatorId});
 
   factory APIRegularHomeTabFeedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedPageCreator(
       homeTabFeedPageCreatorId: parsedJson['id'],
-      homeTabFeedPageCreatorFirstName: parsedJson['first_name'],
-      homeTabFeedPageCreatorLastName: parsedJson['last_name'],
-      homeTabFeedPageCreatorPhoneNumber: parsedJson['phone_number'],
-      homeTabFeedPageCreatorEmail: parsedJson['email'],
-      homeTabFeedPageCreatorUserName: parsedJson['username'],
-      homeTabFeedPageCreatorImage: parsedJson['image']
     );
   }
 }
@@ -182,9 +134,9 @@ class APIRegularHomeTabFeedExtendedTagged{
   factory APIRegularHomeTabFeedExtendedTagged.fromJson(Map<String, dynamic> parsedJson){
     return APIRegularHomeTabFeedExtendedTagged(
       homeTabFeedTaggedId: parsedJson['id'],
-      homeTabFeedTaggedFirstName: parsedJson['first_name'],
-      homeTabFeedTaggedLastName: parsedJson['last_name'],
-      homeTabFeedTaggedImage: parsedJson['image']
+      homeTabFeedTaggedFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      homeTabFeedTaggedLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      homeTabFeedTaggedImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required int memorialId, required int page}) async{
 
@@ -9,28 +8,49 @@ Future<APIRegularShowFamilySettingsMain> apiRegularShowFamilySettings({required 
   String getUID = sharedPrefs.getString('regular-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('regular-client') ?? 'empty';
 
-  APIRegularShowFamilySettingsMain? returnValue;
+  // APIRegularShowFamilySettingsMain? returnValue;
 
-  try{
-    final http.Response response = await http.get(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page', ''),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
+  // try{
+  //   final http.Response response = await http.get(
+  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page', ''),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json',
+  //       'access-token': getAccessToken,
+  //       'uid': getUID,
+  //       'client': getClient,
+  //     }
+  //   );
+
+  //   if(response.statusCode == 200){
+  //     var newValue = json.decode(response.body);
+  //     return APIRegularShowFamilySettingsMain.fromJson(newValue);
+  //   }
+  // }catch(e){
+  //   throw Exception('$e');
+  // }
+
+  // return returnValue!;
+
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/pages/memorials/$memorialId/family/index?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       }
-    );
+    ),
+  );
 
-    if(response.statusCode == 200){
-      var newValue = json.decode(response.body);
-      return APIRegularShowFamilySettingsMain.fromJson(newValue);
-    }
-  }catch(e){
-    throw Exception('$e');
+  print('The page admin settings is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIRegularShowFamilySettingsMain.fromJson(newData);
+  }else{
+    throw Exception('Error occurred: ${response.statusMessage}');
   }
-
-  return returnValue!;
 }
 
 class APIRegularShowFamilySettingsMain{

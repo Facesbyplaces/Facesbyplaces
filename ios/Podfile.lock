@@ -319,6 +319,8 @@ PODS:
   - flutter_branch_sdk (1.3.2):
     - Branch (~> 1.39.0)
     - Flutter
+  - flutter_keyboard_visibility (0.0.1):
+    - Flutter
   - flutter_libphonenumber (0.0.1):
     - Flutter
     - PhoneNumberKit/PhoneNumberKitCore (~> 3.3.3)
@@ -438,6 +440,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_barcode_scanner (from `.symlinks/plugins/flutter_barcode_scanner/ios`)
   - flutter_branch_sdk (from `.symlinks/plugins/flutter_branch_sdk/ios`)
+  - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_libphonenumber (from `.symlinks/plugins/flutter_libphonenumber/ios`)
   - flutter_login_facebook (from `.symlinks/plugins/flutter_login_facebook/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
@@ -498,6 +501,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_barcode_scanner/ios"
   flutter_branch_sdk:
     :path: ".symlinks/plugins/flutter_branch_sdk/ios"
+  flutter_keyboard_visibility:
+    :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_libphonenumber:
     :path: ".symlinks/plugins/flutter_libphonenumber/ios"
   flutter_login_facebook:
@@ -546,6 +551,7 @@ SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_barcode_scanner: 49cd22fac3304077a6c1672f63bee4a2572ffd85
   flutter_branch_sdk: 81dc6de699f84f074ddae8806feb97b4bc9ac315
+  flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_libphonenumber: 6a23afdf063b34d1e53e6dbd6c6bc905d18e8e46
   flutter_login_facebook: 8dca6968e2f545124b447aebcea0327f870af1f3
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

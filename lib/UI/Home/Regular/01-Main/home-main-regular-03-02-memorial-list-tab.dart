@@ -22,6 +22,7 @@ class HomeRegularManageTab extends StatefulWidget{
 
 class HomeRegularManageTabState extends State<HomeRegularManageTab>{
 
+  ScrollController scrollController = ScrollController();
   List<Widget> finalMemorials = [];
   int memorialFamilyItemsRemaining = 1;
   int memorialFriendsItemsRemaining = 1;
@@ -36,11 +37,27 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     super.initState();
     addMemorials1();
     onLoading();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
+          setState(() {
+            onLoading();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
   
   Future<void> onRefresh() async{
     if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0 && flag1 == false){
-      addMemorials2();
       setState(() {
         flag1 = true;
       });
@@ -161,6 +178,10 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
     setState(() {});
     page1++;
 
+    if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
+      addMemorials2();
+    }
+
   }
 
   void onLoading2() async{
@@ -231,6 +252,7 @@ class HomeRegularManageTabState extends State<HomeRegularManageTab>{
       ? RefreshIndicator(
         onRefresh: onRefresh,
         child: ListView.separated(
+          controller: scrollController,
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
           physics: ClampingScrollPhysics(),
           itemCount: finalMemorials.length,

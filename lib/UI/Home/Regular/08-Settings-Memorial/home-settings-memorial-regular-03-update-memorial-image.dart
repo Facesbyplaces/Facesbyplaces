@@ -5,11 +5,11 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-06-regular-button.da
 import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-07-regular-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:typed_data';
@@ -31,8 +31,8 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
   List<String> backgroundImages = ['assets/icons/alm-background1.png', 'assets/icons/alm-background3.png', 'assets/icons/alm-background4.png', 'assets/icons/alm-background5.png'];
   int backgroundImageToggle = 0;
   final picker = ImagePicker();
-  File backgroundImage = File('');
-  File profileImage = File('');
+  File? backgroundImage;
+  File? profileImage;
   Future<APIRegularShowPageImagesMain>? futureMemorialSettings;
 
   Future getProfileImage() async{
@@ -102,10 +102,15 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                         height: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
+                          image: backgroundImage != null
+                          ? DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('${backgroundImage!.path}'),
+                          )
+                          : DecorationImage(
                             fit: BoxFit.cover,
                             image: CachedNetworkImageProvider('${memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage}')
-                          ),
+                          )
                         ),
                         child: Stack(
                           children: [
@@ -178,6 +183,7 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                               if(index == 4){
                                 return GestureDetector(
                                   onTap: () async{
+                                    print('lkajsdf');
                                     setState(() {
                                       backgroundImageToggle = index;
                                     });
@@ -283,47 +289,18 @@ class HomeRegularMemorialPageImageState extends State<HomeRegularMemorialPageIma
                             context.hideLoaderOverlay();
 
                             if(result){
-                              await showDialog(
+                              await showOkAlertDialog(
                                 context: context,
-                                builder: (_) => 
-                                Container()
-                                //   AssetGiffyDialog(
-                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   description: Text('Successfully updated the account details.',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(),
-                                //   ),
-                                //   onlyOkButton: true,
-                                //   buttonOkColor: Colors.green,
-                                //   onOkButtonPressed: () {
-                                //     Navigator.pop(context, true);
-                                //   },
-                                // )
+                                title: 'Success',
+                                message: 'Successfully updated the account details.'
                               );
-
                               Route route = MaterialPageRoute(builder: (context) => HomeRegularProfile(memorialId: memorialId, managed: true, newlyCreated: false, relationship: memorialImageSettings.data!.almMemorial.showPageImagesBackgroundImage));
                               Navigator.of(context).pushAndRemoveUntil(route, ModalRoute.withName('/home/regular'));
                             }else{
-                              await showDialog(
+                              await showOkAlertDialog(
                                 context: context,
-                                builder: (_) => 
-                                Container()
-                                //   AssetGiffyDialog(
-                                //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                //   entryAnimation: EntryAnimation.DEFAULT,
-                                //   description: Text('Something went wrong. Please try again.',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(),
-                                //   ),
-                                //   onlyOkButton: true,
-                                //   buttonOkColor: Colors.red,
-                                //   onOkButtonPressed: () {
-                                //     Navigator.pop(context, true);
-                                //   },
-                                // )
+                                title: 'Error',
+                                message: 'Something went wrong. Please try again.'
                               );
                             }
                           }
