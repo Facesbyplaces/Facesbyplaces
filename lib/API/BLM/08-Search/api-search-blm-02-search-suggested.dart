@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) async{
 
@@ -9,24 +8,26 @@ Future<APIBLMSearchSuggestedMain> apiBLMSearchSuggested({required int page}) asy
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/search/suggested/?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
-  print('The status code of suggested in blm is ${response.statusCode}');
-  print('The status body of suggested in blm is ${response.body}');
+  print('The status code of feed is ${response.statusCode}');
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMSearchSuggestedMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMSearchSuggestedMain.fromJson(newData);
   }else{
-    throw Exception('Failed to get the feed');
+    throw Exception('Failed to get the suggested');
   }
 }
 
@@ -67,82 +68,38 @@ class APIBLMSearchSuggestedExtendedPage{
   int searchSuggestedPageId;
   String searchSuggestedPageName;
   APIBLMSearchSuggestedPageDetails searchSuggestedPageDetails;
-  dynamic searchSuggestedPageBackgroundImage;
-  dynamic searchSuggestedPageProfileImage;
-  dynamic searchSuggestedPageImagesOrVideos;
+  String searchSuggestedPageProfileImage;
   String searchSuggestedPageRelationship;
-  APIBLMSearchSuggestedExtendedPageCreator searchSuggestedPagePageCreator;
   bool searchSuggestedPageManage;
   bool searchSuggestedPageFamOrFriends;
   bool searchSuggestedPageFollower;
   String searchSuggestedPagePageType;
-  String searchSuggestedPagePrivacy;
 
-  APIBLMSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageBackgroundImage, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageImagesOrVideos, required this.searchSuggestedPageRelationship, required this.searchSuggestedPagePageCreator, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType, required this.searchSuggestedPagePrivacy});
+  APIBLMSearchSuggestedExtendedPage({required this.searchSuggestedPageId, required this.searchSuggestedPageName, required this.searchSuggestedPageDetails, required this.searchSuggestedPageProfileImage, required this.searchSuggestedPageRelationship, required this.searchSuggestedPageManage, required this.searchSuggestedPageFamOrFriends, required this.searchSuggestedPageFollower, required this.searchSuggestedPagePageType});
 
   factory APIBLMSearchSuggestedExtendedPage.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedExtendedPage(
       searchSuggestedPageId: parsedJson['id'],
-      searchSuggestedPageName: parsedJson['name'],
+      searchSuggestedPageName: parsedJson['name'] != null ? parsedJson['name'] : '',
       searchSuggestedPageDetails: APIBLMSearchSuggestedPageDetails.fromJson(parsedJson['details']),
-      searchSuggestedPageBackgroundImage: parsedJson['backgroundImage'],
-      searchSuggestedPageProfileImage: parsedJson['profileImage'],
-      searchSuggestedPageImagesOrVideos: parsedJson['imagesOrVideos'],
-      searchSuggestedPageRelationship: parsedJson['relationship'],
-      searchSuggestedPagePageCreator: APIBLMSearchSuggestedExtendedPageCreator.fromJson(parsedJson['page_creator']),
+      searchSuggestedPageProfileImage: parsedJson['profileImage'] != null ? parsedJson['profileImage'] : '',
+      searchSuggestedPageRelationship: parsedJson['relationship'] != null ? parsedJson['relationship'] : '',
       searchSuggestedPageManage: parsedJson['manage'],
       searchSuggestedPageFamOrFriends: parsedJson['famOrFriends'],
       searchSuggestedPageFollower: parsedJson['follower'],
-      searchSuggestedPagePageType: parsedJson['page_type'],
-      searchSuggestedPagePrivacy: parsedJson['privacy'],
+      searchSuggestedPagePageType: parsedJson['page_type'] != null ? parsedJson['page_type'] : '',
     );
   }
 }
 
 class APIBLMSearchSuggestedPageDetails{
   String searchSuggestedPageDetailsDescription;
-  String searchSuggestedPageDetailsLocation;
-  String searchSuggestedPageDetailsPrecinct;
-  String searchSuggestedPageDetailsDob;
-  String searchSuggestedPageDetailsRip;
-  String searchSuggestedPageDetailsState;
-  String searchSuggestedPageDetailsCountry;
 
-  APIBLMSearchSuggestedPageDetails({required this.searchSuggestedPageDetailsDescription, required this.searchSuggestedPageDetailsLocation, required this.searchSuggestedPageDetailsPrecinct, required this.searchSuggestedPageDetailsDob, required this.searchSuggestedPageDetailsRip, required this.searchSuggestedPageDetailsState, required this.searchSuggestedPageDetailsCountry});
+  APIBLMSearchSuggestedPageDetails({required this.searchSuggestedPageDetailsDescription});
 
   factory APIBLMSearchSuggestedPageDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMSearchSuggestedPageDetails(
       searchSuggestedPageDetailsDescription: parsedJson['description'],
-      searchSuggestedPageDetailsLocation: parsedJson['location'],
-      searchSuggestedPageDetailsPrecinct: parsedJson['precinct'],
-      searchSuggestedPageDetailsDob: parsedJson['dob'],
-      searchSuggestedPageDetailsRip: parsedJson['rip'],
-      searchSuggestedPageDetailsState: parsedJson['state'],
-      searchSuggestedPageDetailsCountry: parsedJson['country'],
-    );
-  }
-}
-
-class APIBLMSearchSuggestedExtendedPageCreator{
-  int searchSuggestedPageCreatorId;
-  String searchSuggestedPageCreatorFirstName;
-  String searchSuggestedPageCreatorLastName;
-  String searchSuggestedPageCreatorPhoneNumber;
-  String searchSuggestedPageCreatorEmail;
-  String searchSuggestedPageCreatorUserName;
-  dynamic searchSuggestedPageCreatorImage;
-
-  APIBLMSearchSuggestedExtendedPageCreator({required this.searchSuggestedPageCreatorId, required this.searchSuggestedPageCreatorFirstName, required this.searchSuggestedPageCreatorLastName, required this.searchSuggestedPageCreatorPhoneNumber, required this.searchSuggestedPageCreatorEmail, required this.searchSuggestedPageCreatorUserName, required this.searchSuggestedPageCreatorImage});
-
-  factory APIBLMSearchSuggestedExtendedPageCreator.fromJson(Map<String, dynamic> parsedJson){
-    return APIBLMSearchSuggestedExtendedPageCreator(
-      searchSuggestedPageCreatorId: parsedJson['id'],
-      searchSuggestedPageCreatorFirstName: parsedJson['first_name'],
-      searchSuggestedPageCreatorLastName: parsedJson['last_name'],
-      searchSuggestedPageCreatorPhoneNumber: parsedJson['phone_number'],
-      searchSuggestedPageCreatorEmail: parsedJson['email'],
-      searchSuggestedPageCreatorUserName: parsedJson['username'],
-      searchSuggestedPageCreatorImage: parsedJson['image']
     );
   }
 }

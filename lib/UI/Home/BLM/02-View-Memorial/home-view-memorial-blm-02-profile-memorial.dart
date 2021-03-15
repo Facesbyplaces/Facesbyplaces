@@ -118,7 +118,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
           userId: newValue.blmFamilyMemorialList[i].profilePostPage.profilePagePageCreator.profilePageCreatorId, 
           postId: newValue.blmFamilyMemorialList[i].profilePostId,
           memorialId: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageId,
-          timeCreated: newValue.blmFamilyMemorialList[i].profilePostCreateAt,
+          timeCreated: newValue.blmFamilyMemorialList[i].profilePostCreatedAt,
           memorialName: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageName,
           postBody: newValue.blmFamilyMemorialList[i].profilePostBody,
           profileImage: newValue.blmFamilyMemorialList[i].profilePostPage.profilePageProfileImage,
@@ -152,7 +152,7 @@ class HomeBLMMemorialProfileState extends State<HomeBLMMemorialProfile>{
 
   Future<APIBLMShowMemorialMain> getProfileInformation(int memorialId) async{
     APIBLMShowMemorialMain newValue = await apiBLMShowMemorial(memorialId: memorialId);
-    if(newValue.blmMemorial.memorialImagesOrVideos != null){
+    if(newValue.blmMemorial.memorialImagesOrVideos != []){
       if(lookupMimeType(newValue.blmMemorial.memorialImagesOrVideos[0])?.contains('video') == true){
         // BetterPlayerDataSource betterPlayerDataSource = BetterPlayerDataSource(BetterPlayerDataSourceType.network, '${newValue.blmMemorial.memorialImagesOrVideos[0]}');
         // betterPlayerController1 = BetterPlayerController(BetterPlayerConfiguration(aspectRatio: 16 / 9,), betterPlayerDataSource: betterPlayerDataSource);

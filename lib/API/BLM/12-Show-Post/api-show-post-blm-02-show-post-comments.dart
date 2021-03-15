@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIBLMShowListOfComments> apiBLMShowListOfComments({required int postId, required int page}) async{
 
@@ -11,22 +10,44 @@ Future<APIBLMShowListOfComments> apiBLMShowListOfComments({required int postId, 
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of feed is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowListOfComments.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMShowListOfComments.fromJson(newData);
   }else{
     throw Exception('Failed to get the comments.');
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/posts/index/comments/$postId?page=$page', ''),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIBLMShowListOfComments.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the comments.');
+  // }
 }
 
 class APIBLMShowListOfComments{

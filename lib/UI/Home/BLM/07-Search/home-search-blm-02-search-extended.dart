@@ -2,19 +2,21 @@ import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-01-search-posts.d
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-04-search-blm.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-03-search-nearby.dart';
 import 'package:facesbyplaces/API/BLM/08-Search/api-search-blm-02-search-suggested.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 // import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
 // import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-04-blm-post.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-08-blm-message.dart';
-// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
-// import 'package:better_player/better_player.dart';
-// import 'package:timeago/timeago.dart' as timeago;
+import 'package:better_player/better_player.dart';
+import 'package:timeago/timeago.dart' as timeago;
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-// import 'package:mime/mime.dart';
+import 'package:mime/mime.dart';
 import 'dart:ui';
 
 class BLMSearchMainPosts{
@@ -106,6 +108,11 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   HomeBLMPostState({required this.keyword, required this.newToggle, required this.latitude, required this.longitude, required this.currentLocation});
 
   // RefreshController refreshController = RefreshController(initialRefresh: true);
+
+  ScrollController scrollController1 = ScrollController();
+  ScrollController scrollController2 = ScrollController();
+  ScrollController scrollController3 = ScrollController();
+  ScrollController scrollController4 = ScrollController();
   List<BLMSearchMainPosts> feeds = [];
   List<BLMSearchMainSuggested> suggested = [];
   List<BLMSearchMainNearby> nearby = [];
@@ -126,15 +133,36 @@ class HomeBLMPostState extends State<HomeBLMPost>{
   int tabCount4 = 0;
   bool isGuestLoggedIn = false;
 
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }
+  Future<void> onRefresh1() async{
+    setState(() {
+      onLoading1();
+    });
+  }
+
+  Future<void> onRefresh2() async{
+    setState(() {
+      onLoading2();
+    });
+  }
+
+  Future<void> onRefresh3() async{
+    setState(() {
+      onLoading3();
+    });
+  }
+
+  Future<void> onRefresh4() async{
+    setState(() {
+      onLoading4();
+    });
+  }
 
   void onLoading1() async{
 
     if(postItemRemaining != 0){
+      context.showLoaderOverlay();
       var newValue = await apiBLMSearchPosts(keywords: keyword, page: page1);
+      context.hideLoaderOverlay();
       postItemRemaining = newValue.blmItemsRemaining;
       tabCount1 = tabCount1 + newValue.blmSearchPostList.length;
 
@@ -156,7 +184,7 @@ class HomeBLMPostState extends State<HomeBLMPost>{
             userId: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageCreator.searchPostPageCreatorCreatorId, 
             postId: newValue.blmSearchPostList[i].searchPostPostId,
             memorialId: newValue.blmSearchPostList[i].searchPostPage.searchPostPagePageId,
-            timeCreated: newValue.blmSearchPostList[i].searchPostCreateAt,
+            timeCreated: newValue.blmSearchPostList[i].searchPostCreatedAt,
             memorialName: newValue.blmSearchPostList[i].searchPostPage.searchPostPageName,
             postBody: newValue.blmSearchPostList[i].searchPostBody,
             profileImage: newValue.blmSearchPostList[i].searchPostPage.searchPostPageProfileImage,
@@ -181,16 +209,14 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       if(mounted)
       setState(() {});
       page1++;
-      
-      // refreshController.loadComplete();
-    }else{
-      // refreshController.loadNoData();
     }
   }
 
   void onLoading2() async{
     if(suggestedItemRemaining != 0){
+      context.showLoaderOverlay();
       var newValue = await apiBLMSearchSuggested(page: page2);
+      context.hideLoaderOverlay();
       suggestedItemRemaining = newValue.blmItemsRemaining;
       tabCount2 = tabCount2 + newValue.blmPages.length;
 
@@ -213,17 +239,15 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       if(mounted)
       setState(() {});
       page2++;
-      
-      // refreshController.loadComplete();
-    }else{
-      // refreshController.loadNoData();
     }
   }
  
   void onLoading3() async{
     if(nearbyBlmItemsRemaining != 0){
 
+      context.showLoaderOverlay();
       var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
+      context.hideLoaderOverlay();
       nearbyBlmItemsRemaining = newValue.blmItemsRemaining;
       tabCount3 = tabCount3 + newValue.blmList.length;
 
@@ -251,8 +275,9 @@ class HomeBLMPostState extends State<HomeBLMPost>{
     page3 = 1;
     
     if(nearbyMemorialItemsRemaining != 0){
-
+      context.showLoaderOverlay();
       var newValue = await apiBLMSearchNearby(page: page3, latitude: latitude, longitude: longitude);
+      context.hideLoaderOverlay();
       nearbyMemorialItemsRemaining = newValue.memorialItemsRemaining;
       tabCount3 = tabCount3 + newValue.memorialList.length;
       
@@ -276,13 +301,13 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       setState(() {});
       page3++;
     }
-
-    // refreshController.loadComplete();
   } 
 
   void onLoading4() async{
     if(blmItemRemaining != 0){
+      context.showLoaderOverlay();
       var newValue = await apiBLMSearchBLM(page: page4, keywords: keyword);
+      context.hideLoaderOverlay();
       blmItemRemaining = newValue.blmItemsRemaining;
       tabCount4 = tabCount4 + newValue.blmMemorialList.length;
 
@@ -305,10 +330,6 @@ class HomeBLMPostState extends State<HomeBLMPost>{
       if(mounted)
       setState(() {});
       page4++;
-      
-      // refreshController.loadComplete();
-    }else{
-      // refreshController.loadNoData();
     }
   }
 
@@ -321,12 +342,81 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   void initState(){
     super.initState();
+    isGuestLoggedIn = false;
     isGuest();
     toggle = newToggle;
     onLoading1();
     onLoading2();
     onLoading3();
     onLoading4();
+    scrollController1.addListener(() {
+      if (scrollController1.position.pixels == scrollController1.position.maxScrollExtent) {
+        if(postItemRemaining != 0){
+          setState(() {
+            onLoading1();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController2.addListener(() {
+      if (scrollController2.position.pixels == scrollController2.position.maxScrollExtent) {
+        if(suggestedItemRemaining != 0){
+          setState(() {
+            onLoading2();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more suggested memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController3.addListener(() {
+      if (scrollController3.position.pixels == scrollController3.position.maxScrollExtent) {
+        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
+          setState(() {
+            onLoading3();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more nearby memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
+    scrollController4.addListener(() {
+      if (scrollController4.position.pixels == scrollController4.position.maxScrollExtent) {
+        if(nearbyBlmItemsRemaining != 0 && nearbyMemorialItemsRemaining != 0){
+          setState(() {
+            onLoading4();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more BLM memorials to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
   @override
@@ -542,238 +632,213 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchPostExtended(){
     return tabCount1 != 0
-    ? Container()
-    // ? SmartRefresher(
-    //   enablePullDown: true,
-    //   enablePullUp: true,
-    //   header: MaterialClassicHeader(
-    //     color: Color(0xffffffff),
-    //     backgroundColor: Color(0xff4EC9D4),
-    //   ),
-    //   footer: CustomFooter(
-    //     loadStyle: LoadStyle.ShowWhenLoading,
-    //     builder: (BuildContext context, LoadStatus mode){
-    //       Widget body = Container();
-    //       if(mode == LoadStatus.loading){
-    //         body = CircularProgressIndicator();
-    //       }
-    //       return Center(child: body);
-    //     },
-    //   ),
-    //   controller: refreshController,
-    //   onRefresh: onRefresh,
-    //   onLoading: onLoading1,
-    //   child: ListView.separated(
-    //     padding: EdgeInsets.all(10.0),
-    //     physics: ClampingScrollPhysics(),
-    //     itemBuilder: (c, i) {
-    //       return MiscBLMPost(
-    //         userId: feeds[i].userId,
-    //         postId: feeds[i].postId,
-    //         memorialId: feeds[i].memorialId,
-    //         memorialName: feeds[i].memorialName,
-    //         timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
-    //         managed: feeds[i].managed,
-    //         joined: feeds[i].follower,
-    //         profileImage: feeds[i].profileImage,
-    //         numberOfComments: feeds[i].numberOfComments,
-    //         numberOfLikes: feeds[i].numberOfLikes,
-    //         likeStatus: feeds[i].likeStatus,
-    //         numberOfTagged: feeds[i].numberOfTagged,
-    //         taggedFirstName: feeds[i].taggedFirstName,
-    //         taggedLastName: feeds[i].taggedLastName,
-    //         taggedId: feeds[i].taggedId,
-    //         pageType: feeds[i].pageType,
-    //         famOrFriends: feeds[i].famOrFriends,
-    //         relationship: feeds[i].relationship,
-    //         contents: [
-    //           Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
+    ? RefreshIndicator(
+      onRefresh: onRefresh1,
+      child: ListView.separated(
+        controller: scrollController1,
+        padding: EdgeInsets.all(10.0),
+        physics: ClampingScrollPhysics(),
+        itemCount: feeds.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) {
+          return MiscBLMPost(
+            userId: feeds[i].userId,
+            postId: feeds[i].postId,
+            memorialId: feeds[i].memorialId,
+            memorialName: feeds[i].memorialName,
+            timeCreated: timeago.format(DateTime.parse(feeds[i].timeCreated)),
+            managed: feeds[i].managed,
+            joined: feeds[i].follower,
+            profileImage: feeds[i].profileImage,
+            numberOfComments: feeds[i].numberOfComments,
+            numberOfLikes: feeds[i].numberOfLikes,
+            likeStatus: feeds[i].likeStatus,
+            numberOfTagged: feeds[i].numberOfTagged,
+            taggedFirstName: feeds[i].taggedFirstName,
+            taggedLastName: feeds[i].taggedLastName,
+            taggedId: feeds[i].taggedId,
+            pageType: feeds[i].pageType,
+            famOrFriends: feeds[i].famOrFriends,
+            relationship: feeds[i].relationship,
+            contents: [
+              Container(alignment: Alignment.centerLeft, child: Text(feeds[i].postBody, overflow: TextOverflow.ellipsis, maxLines: 5,),),
 
-    //           feeds[i].imagesOrVideos != []
-    //           ? Column(
-    //             children: [
-    //               SizedBox(height: 20),
+              feeds[i].imagesOrVideos.isNotEmpty
+              ? Column(
+                children: [
+                  SizedBox(height: 20),
 
-    //               Container(
-    //                 child: ((){
-    //                   if(feeds[i].imagesOrVideos != []){
-    //                     if(feeds[i].imagesOrVideos.length == 1){
-    //                       if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
-    //                         return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
-    //                           betterPlayerConfiguration: BetterPlayerConfiguration(
-    //                             controlsConfiguration: BetterPlayerControlsConfiguration(
-    //                               showControls: false,
-    //                             ),
-    //                             aspectRatio: 16 / 9,
-    //                           ),
-    //                         );
-    //                       }else{
-    //                         return Container(
-    //                           child: CachedNetworkImage(
-    //                             fit: BoxFit.contain,
-    //                             imageUrl: feeds[i].imagesOrVideos[0],
-    //                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-    //                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-    //                           ),
-    //                         );
-    //                       }
-    //                     }else if(feeds[i].imagesOrVideos.length == 2){
-    //                       return StaggeredGridView.countBuilder(
-    //                         padding: EdgeInsets.zero,
-    //                         shrinkWrap: true,
-    //                         physics: NeverScrollableScrollPhysics(),
-    //                         crossAxisCount: 4,
-    //                         itemCount: 2,
-    //                         itemBuilder: (BuildContext context, int index) =>  
-    //                           lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-    //                           ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-    //                             betterPlayerConfiguration: BetterPlayerConfiguration(
-    //                               controlsConfiguration: BetterPlayerControlsConfiguration(
-    //                                 showControls: false,
-    //                               ),
-    //                               aspectRatio: 16 / 9,
-    //                             ),
-    //                           )
-    //                           : CachedNetworkImage(
-    //                             fit: BoxFit.contain,
-    //                             imageUrl: feeds[i].imagesOrVideos[index],
-    //                             placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-    //                             errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-    //                           ),
-    //                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
-    //                         mainAxisSpacing: 4.0,
-    //                         crossAxisSpacing: 4.0,
-    //                       );
-    //                     }else{
-    //                       return StaggeredGridView.countBuilder(
-    //                         padding: EdgeInsets.zero,
-    //                         shrinkWrap: true,
-    //                         physics: NeverScrollableScrollPhysics(),
-    //                         crossAxisCount: 4,
-    //                         itemCount: 3,
-    //                         itemBuilder: (BuildContext context, int index) => 
-    //                         ((){
-    //                           if(index != 1){
-    //                             return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
-    //                             ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-    //                               betterPlayerConfiguration: BetterPlayerConfiguration(
-    //                                 controlsConfiguration: BetterPlayerControlsConfiguration(
-    //                                   showControls: false,
-    //                                 ),
-    //                                 aspectRatio: 16 / 9,
-    //                               ),
-    //                             )
-    //                             : CachedNetworkImage(
-    //                               fit: BoxFit.contain,
-    //                               imageUrl: feeds[i].imagesOrVideos[index],
-    //                               placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-    //                               errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-    //                             );
-                                
-    //                           }else{
-    //                             return ((){
-    //                               if(feeds[i].imagesOrVideos.length - 3 > 0){
-    //                                 if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
-    //                                   return Stack(
-    //                                     children: [
-    //                                       BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-    //                                         betterPlayerConfiguration: BetterPlayerConfiguration(
-    //                                           controlsConfiguration: BetterPlayerControlsConfiguration(
-    //                                             showControls: false,
-    //                                           ),
-    //                                           aspectRatio: 16 / 9,
-    //                                         ),
-    //                                       ),
+                  Container(
+                    child: ((){
+                      if(feeds[i].imagesOrVideos.length == 1){
+                        if(lookupMimeType(feeds[i].imagesOrVideos[0])?.contains('video') == true){
+                          return BetterPlayer.network('${feeds[i].imagesOrVideos[0]}',
+                            betterPlayerConfiguration: BetterPlayerConfiguration(
+                              controlsConfiguration: BetterPlayerControlsConfiguration(
+                                showControls: false,
+                              ),
+                              aspectRatio: 16 / 9,
+                            ),
+                          );
+                        }else{
+                          return CachedNetworkImage(
+                            fit: BoxFit.contain,
+                            imageUrl: feeds[i].imagesOrVideos[0],
+                            placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                            errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                          );
+                        }
+                      }else if(feeds[i].imagesOrVideos.length == 2){
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 2,
+                          itemBuilder: (BuildContext context, int index) =>  
+                            lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                            ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                              betterPlayerConfiguration: BetterPlayerConfiguration(
+                                controlsConfiguration: BetterPlayerControlsConfiguration(
+                                  showControls: false,
+                                ),
+                                aspectRatio: 16 / 9,
+                              ),
+                            )
+                            : CachedNetworkImage(
+                              fit: BoxFit.contain,
+                              imageUrl: feeds[i].imagesOrVideos[index],
+                              placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                              errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                            ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        );
+                      }else{
+                        return StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 4,
+                          itemCount: 3,
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          itemBuilder: (BuildContext context, int index) => ((){
+                            if(index != 1){
+                              return lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true
+                              ? BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                betterPlayerConfiguration: BetterPlayerConfiguration(
+                                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                                    showControls: false,
+                                  ),
+                                  aspectRatio: 16 / 9,
+                                ),
+                              )
+                              : CachedNetworkImage(
+                                fit: BoxFit.contain,
+                                imageUrl: feeds[i].imagesOrVideos[index],
+                                placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                              );
+                            }else{
+                              return ((){
+                                if(feeds[i].imagesOrVideos.length - 3 > 0){
+                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return Stack(
+                                      children: [
+                                        BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                          betterPlayerConfiguration: BetterPlayerConfiguration(
+                                            controlsConfiguration: BetterPlayerControlsConfiguration(
+                                              showControls: false,
+                                            ),
+                                            aspectRatio: 16 / 9,
+                                          ),
+                                        ),
 
-    //                                       Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: Colors.black.withOpacity(0.5),),
 
-    //                                       Center(
-    //                                         child: CircleAvatar(
-    //                                           radius: 25,
-    //                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
-    //                                           child: Text(
-    //                                             '${feeds[i].imagesOrVideos.length - 3}',
-    //                                             style: TextStyle(
-    //                                               fontSize: 40,
-    //                                               fontWeight: FontWeight.bold,
-    //                                               color: Color(0xffffffff),
-    //                                             ),
-    //                                           ),
-    //                                         ),
-    //                                       ),
-    //                                     ],
-    //                                   );
-    //                                 }else{
-    //                                   return Stack(
-    //                                     children: [
-    //                                       CachedNetworkImage(
-    //                                         fit: BoxFit.fill,
-    //                                         imageUrl: feeds[i].imagesOrVideos[index],
-    //                                         placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-    //                                         errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-    //                                       ),
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${feeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }else{
+                                    return Stack(
+                                      children: [
+                                        CachedNetworkImage(
+                                          fit: BoxFit.fill,
+                                          imageUrl: feeds[i].imagesOrVideos[index],
+                                          placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                          errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                        ),
 
-    //                                       Container(color: Colors.black.withOpacity(0.5),),
+                                        Container(color: Colors.black.withOpacity(0.5),),
 
-    //                                       Center(
-    //                                         child: CircleAvatar(
-    //                                           radius: 25,
-    //                                           backgroundColor: Color(0xffffffff).withOpacity(.5),
-    //                                           child: Text(
-    //                                             '${feeds[i].imagesOrVideos.length - 3}',
-    //                                             style: TextStyle(
-    //                                               fontSize: 40,
-    //                                               fontWeight: FontWeight.bold,
-    //                                               color: Color(0xffffffff),
-    //                                             ),
-    //                                           ),
-    //                                         ),
-    //                                       ),
-    //                                     ],
-    //                                   );
-    //                                 }
-    //                               }else{
-    //                                 if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
-    //                                   return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
-    //                                     betterPlayerConfiguration: BetterPlayerConfiguration(
-    //                                       controlsConfiguration: BetterPlayerControlsConfiguration(
-    //                                         showControls: false,
-    //                                       ),
-    //                                       aspectRatio: 16 / 9,
-    //                                     ),
-    //                                   );
-    //                                 }else{
-    //                                   return CachedNetworkImage(
-    //                                     fit: BoxFit.fill,
-    //                                     imageUrl: feeds[i].imagesOrVideos[index],
-    //                                     placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
-    //                                     errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
-    //                                   );
-    //                                 }
-    //                               }
-    //                             }());
-    //                           }
-    //                         }()),
-    //                         staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 1 : 2),
-    //                         mainAxisSpacing: 4.0,
-    //                         crossAxisSpacing: 4.0,
-    //                       );
-    //                     }
-    //                   }else{
-    //                     return Container(height: 0,);
-    //                   }
-    //                 }()),
-    //               ),
-    //             ],
-    //           )
-    //           : Container(height: 0),
-    //         ],
-    //       );
-    //     },
-    //     separatorBuilder: (c, i) => Divider(height: 20, color: Colors.transparent),
-    //     itemCount: feeds.length,
-    //   ),
-    // )
+                                        Center(
+                                          child: CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor: Color(0xffffffff).withOpacity(.5),
+                                            child: Text(
+                                              '${feeds[i].imagesOrVideos.length - 3}',
+                                              style: TextStyle(
+                                                fontSize: 40,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                }else{
+                                  if(lookupMimeType(feeds[i].imagesOrVideos[index])?.contains('video') == true){
+                                    return BetterPlayer.network('${feeds[i].imagesOrVideos[index]}',
+                                      betterPlayerConfiguration: BetterPlayerConfiguration(
+                                        controlsConfiguration: BetterPlayerControlsConfiguration(
+                                          showControls: false,
+                                        ),
+                                        aspectRatio: 16 / 9,
+                                      ),
+                                    );
+                                  }else{
+                                    return CachedNetworkImage(
+                                      fit: BoxFit.fill,
+                                      imageUrl: feeds[i].imagesOrVideos[index],
+                                      placeholder: (context, url) => Center(child: CircularProgressIndicator(),),
+                                      errorWidget: (context, url, error) => Image.asset('assets/icons/cover-icon.png', fit: BoxFit.contain, scale: 1.0,),
+                                    );
+                                  }
+                                }
+                              }());
+                            }
+                          }()),
+                        );
+                      }
+                    }()),
+                  ),
+                ],
+              )
+              : Container(height: 0),
+
+            ],
+          );
+        }
+      ),
+    )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Container(
@@ -799,47 +864,29 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchSuggestedExtended(){
     return tabCount2 != 0
-    ? Container()
-    // ? SmartRefresher(
-    //   enablePullDown: true,
-    //   enablePullUp: true,
-    //   header: MaterialClassicHeader(
-    //     color: Color(0xffffffff),
-    //     backgroundColor: Color(0xff4EC9D4),
-    //   ),
-    //   footer: CustomFooter(
-    //     loadStyle: LoadStyle.ShowWhenLoading,
-    //     builder: (BuildContext context, LoadStatus mode){
-    //       Widget body = Container();
-    //       if(mode == LoadStatus.loading){
-    //         body = CircularProgressIndicator();
-    //       }
-    //       return Center(child: body);
-    //     },
-    //   ),
-    //   controller: refreshController,
-    //   onRefresh: onRefresh,
-    //   onLoading: onLoading2,
-    //   child: ListView.separated(
-    //     physics: ClampingScrollPhysics(),
-    //     itemBuilder: (c, i) {
-    //       return MiscBLMManageMemorialTab(
-    //         index: i,
-    //         memorialName: suggested[i].memorialName,
-    //         description: suggested[i].memorialDescription,
-    //         image: suggested[i].image,
-    //         memorialId: suggested[i].memorialId,
-    //         managed: suggested[i].managed,
-    //         follower: suggested[i].follower,
-    //         pageType: suggested[i].pageType,
-    //         relationship: suggested[i].relationship,
-    //         famOrFriends: suggested[i].famOrFriends,
-    //       );
-    //     },
-    //     separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-    //     itemCount: suggested.length,
-    //   ),
-    // )
+    ? RefreshIndicator(
+      onRefresh: onRefresh2,
+      child: ListView.separated(
+        controller: scrollController2,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: suggested.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+          MiscBLMManageMemorialTab(
+          index: i,
+          memorialName: suggested[i].memorialName,
+          description: suggested[i].memorialDescription,
+          image: suggested[i].image,
+          memorialId: suggested[i].memorialId,
+          managed: suggested[i].managed,
+          follower: suggested[i].follower,
+          pageType: suggested[i].pageType,
+          relationship: suggested[i].relationship,
+          famOrFriends: suggested[i].famOrFriends,
+        ),
+      )
+    )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Container(
@@ -865,47 +912,29 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchNearbyExtended(){
     return tabCount3 != 0
-    ? Container()
-    // ? SmartRefresher(
-    //   enablePullDown: true,
-    //   enablePullUp: true,
-    //   header: MaterialClassicHeader(
-    //     color: Color(0xffffffff),
-    //     backgroundColor: Color(0xff4EC9D4),
-    //   ),
-    //   footer: CustomFooter(
-    //     loadStyle: LoadStyle.ShowWhenLoading,
-    //     builder: (BuildContext context, LoadStatus mode){
-    //       Widget body = Container();
-    //       if(mode == LoadStatus.loading){
-    //         body = CircularProgressIndicator();
-    //       }
-    //       return Center(child: body);
-    //     },
-    //   ),
-    //   controller: refreshController,
-    //   onRefresh: onRefresh,
-    //   onLoading: onLoading3,
-    //   child: ListView.separated(
-    //     physics: ClampingScrollPhysics(),
-    //     itemBuilder: (c, i) {
-    //       return MiscBLMManageMemorialTab(
-    //         index: i,
-    //         memorialName: nearby[i].memorialName,
-    //         description: nearby[i].memorialDescription,
-    //         image: nearby[i].image,
-    //         memorialId: nearby[i].memorialId,
-    //         managed: nearby[i].managed,
-    //         follower: nearby[i].follower,
-    //         pageType: nearby[i].pageType,
-    //         relationship: nearby[i].relationship,
-    //         famOrFriends: nearby[i].famOrFriends,
-    //       );
-    //     },
-    //     separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-    //     itemCount: nearby.length,
-    //   ),
-    // )
+    ? RefreshIndicator(
+      onRefresh: onRefresh3,
+      child: ListView.separated(
+        controller: scrollController3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: nearby.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+          MiscBLMManageMemorialTab(
+          index: i,
+          memorialName: nearby[i].memorialName,
+          description: nearby[i].memorialDescription,
+          image: nearby[i].image,
+          memorialId: nearby[i].memorialId,
+          managed: nearby[i].managed,
+          follower: nearby[i].follower,
+          pageType: nearby[i].pageType,
+          relationship: nearby[i].relationship,
+          famOrFriends: nearby[i].famOrFriends,
+        ),
+      )
+    )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Container(
@@ -931,47 +960,29 @@ class HomeBLMPostState extends State<HomeBLMPost>{
 
   searchBLMExtended(){
     return tabCount4 != 0
-    ? Container()
-    // ? SmartRefresher(
-    //   enablePullDown: true,
-    //   enablePullUp: true,
-    //   header: MaterialClassicHeader(
-    //     color: Color(0xffffffff),
-    //     backgroundColor: Color(0xff4EC9D4),
-    //   ),
-    //   footer: CustomFooter(
-    //     loadStyle: LoadStyle.ShowWhenLoading,
-    //     builder: (BuildContext context, LoadStatus mode){
-    //       Widget body = Container();
-    //       if(mode == LoadStatus.loading){
-    //         body = CircularProgressIndicator();
-    //       }
-    //       return Center(child: body);
-    //     },
-    //   ),
-    //   controller: refreshController,
-    //   onRefresh: onRefresh,
-    //   onLoading: onLoading4,
-    //   child: ListView.separated(
-    //     physics: ClampingScrollPhysics(),
-    //     itemBuilder: (c, i) {
-    //       return MiscBLMManageMemorialTab(
-    //         index: i,
-    //         memorialName: blm[i].memorialName,
-    //         description: blm[i].memorialDescription,
-    //         image: blm[i].image,
-    //         memorialId: blm[i].memorialId,
-    //         managed: blm[i].managed,
-    //         follower: blm[i].follower,
-    //         pageType: blm[i].pageType,
-    //         relationship: blm[i].relationship,
-    //         famOrFriends: blm[i].famOrFriends,
-    //       );
-    //     },
-    //     separatorBuilder: (c, i) => Divider(height: 5, color: Colors.transparent),
-    //     itemCount: blm.length,
-    //   ),
-    // )
+    ? RefreshIndicator(
+      onRefresh: onRefresh3,
+      child: ListView.separated(
+        controller: scrollController3,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+        physics: ClampingScrollPhysics(),
+        itemCount: blm.length,
+        separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+        itemBuilder: (c, i) => 
+        MiscBLMManageMemorialTab(
+          index: i,
+          memorialName: blm[i].memorialName,
+          description: blm[i].memorialDescription,
+          image: blm[i].image,
+          memorialId: blm[i].memorialId,
+          managed: blm[i].managed,
+          follower: blm[i].follower,
+          pageType: blm[i].pageType,
+          relationship: blm[i].relationship,
+          famOrFriends: blm[i].famOrFriends,
+        ),
+      )
+    )
     : SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Container(

@@ -374,7 +374,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('No more posts to show'),
+              content: Text('No more suggested memorials to show'),
               duration: Duration(seconds: 1),
               backgroundColor: Color(0xff4EC9D4),
             ),
@@ -391,7 +391,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('No more posts to show'),
+              content: Text('No more nearby memorials to show'),
               duration: Duration(seconds: 1),
               backgroundColor: Color(0xff4EC9D4),
             ),
@@ -408,7 +408,7 @@ class HomeRegularPostState extends State<HomeRegularPost>{
         }else{
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('No more posts to show'),
+              content: Text('No more BLM memorials to show'),
               duration: Duration(seconds: 1),
               backgroundColor: Color(0xff4EC9D4),
             ),

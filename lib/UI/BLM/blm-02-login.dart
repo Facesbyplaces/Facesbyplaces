@@ -365,7 +365,7 @@ class BLMLoginState extends State<BLMLogin>{
                             print('The result is $result');
 
                             if(result){
-                              Navigator.pushReplacementNamed(context, '/home/regular');
+                              Navigator.pushReplacementNamed(context, '/home/blm');
                             }else{
                               await showOkAlertDialog(
                                 context: context,

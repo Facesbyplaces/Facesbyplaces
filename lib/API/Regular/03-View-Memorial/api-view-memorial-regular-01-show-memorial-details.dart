@@ -71,8 +71,6 @@ class APIRegularShowMemorialExtended{
     if(parsedJson['imagesOrVideos'] != null){
       var list = parsedJson['imagesOrVideos'];
       newList1 = List<dynamic>.from(list);
-    }else{
-      newList1 = [];
     }
 
     return APIRegularShowMemorialExtended(
@@ -81,7 +79,7 @@ class APIRegularShowMemorialExtended{
       showMemorialDetails: APIRegularShowMemorialExtendedDetails.fromJson(parsedJson['details']),
       showMemorialBackgroundImage: parsedJson['backgroundImage'],
       showMemorialProfileImage: parsedJson['profileImage'],
-      showMemorialImagesOrVideos: newList1,
+      showMemorialImagesOrVideos: newList1 != null ? newList1 : [],
       showMemorialRelationship: parsedJson['relationship'],
       showMemorialPageCreator: APIRegularShowMemorialExtendedPageCreator.fromJson(parsedJson['page_creator']),
       showMemorialManage: parsedJson['manage'],
