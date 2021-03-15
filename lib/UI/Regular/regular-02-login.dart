@@ -139,11 +139,10 @@ class RegularLoginState extends State<RegularLogin>{
                                     if(apiResult == true){
                                       Navigator.pushReplacementNamed(context, '/home/regular');
                                     }else{
-                                      await showOkCancelAlertDialog(
+                                      await showOkAlertDialog(
                                         context: context,
                                         title: 'Error',
                                         message: 'Invalid email or password. Please try again.',
-                                        isDestructiveAction: true,
                                       );
                                     }
 
@@ -214,7 +213,6 @@ class RegularLoginState extends State<RegularLogin>{
                                   if(isLoggedIn == true){
                                     context.showLoaderOverlay();
                                     GoogleSignInAccount? accountSignedIn = await googleSignIn.signInSilently();
-                                    // GoogleSignInAccount? auth = await googleSignIn.currentUser.authentication;
                                     GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
                                     
                                     bool result = await apiRegularSignInWithGoogle(
@@ -237,7 +235,6 @@ class RegularLoginState extends State<RegularLogin>{
                                         isDestructiveAction: true,
                                       );
                                     }
-
                                   }else{
                                     GoogleSignInAccount? signIn = await googleSignIn.signIn();
                                     GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
@@ -256,11 +253,10 @@ class RegularLoginState extends State<RegularLogin>{
                                     if(result == true){
                                       Navigator.pushReplacementNamed(context, '/home/regular');
                                     }else{
-                                      await showOkCancelAlertDialog(
+                                      await showOkAlertDialog(
                                         context: context,
                                         title: 'Error',
                                         message: 'Invalid email or password. Please try again.',
-                                        isDestructiveAction: true,
                                       );
                                     }
                                   }
@@ -291,11 +287,10 @@ class RegularLoginState extends State<RegularLogin>{
                           if(result == true){
                             Navigator.pushReplacementNamed(context, '/home/regular');
                           }else{
-                            await showOkCancelAlertDialog(
+                            await showOkAlertDialog(
                               context: context,
                               title: 'Error',
                               message: 'Invalid email or password. Please try again.',
-                              isDestructiveAction: true,
                             );
                           }
                         },
@@ -319,11 +314,6 @@ class RegularLoginState extends State<RegularLogin>{
                           key: _key1, 
                           labelText: 'Email Address', 
                           type: TextInputType.emailAddress,
-                          labelTextStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400, 
-                            color: Colors.grey,
-                          ),
                         ),
                       ),
 
@@ -336,11 +326,6 @@ class RegularLoginState extends State<RegularLogin>{
                           labelText: 'Password', 
                           type: TextInputType.text, 
                           obscureText: true,
-                          labelTextStyle: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400, 
-                            color: Colors.grey,
-                          ),
                         ),
                       ),
 
@@ -380,30 +365,25 @@ class RegularLoginState extends State<RegularLogin>{
                           validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text );
 
                           if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                            await showOkCancelAlertDialog(
+                            await showOkAlertDialog(
                               context: context,
                               title: 'Error',
                               message: 'Please complete the form before submitting.',
-                              isDestructiveAction: true,
                             );
                           }else if(!validEmail){
-                            await showOkCancelAlertDialog(
+                            await showOkAlertDialog(
                               context: context,
                               title: 'Error',
                               message: 'Invalid email address. Please try again.',
-                              isDestructiveAction: true,
                             );
                           }else{
 
-                            // context.showLoaderOverlay();
+                            context.showLoaderOverlay();
 
                             String deviceToken = '';
-                            // FirebaseMessaging _firebaseMessaging = ;
-                            
                             final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
                             final pushNotificationService = PushNotificationService(_firebaseMessaging);
                             pushNotificationService.initialise();
-                            // deviceToken = (await pushNotificationService.fcm.getToken())!;
                             deviceToken = (await pushNotificationService.fcm.getToken())!;
 
                             print('The text 1 is ${_key1.currentState!.controller.text}');
@@ -418,11 +398,10 @@ class RegularLoginState extends State<RegularLogin>{
                             if(result){
                               Navigator.pushReplacementNamed(context, '/home/regular');
                             }else{
-                              await showOkCancelAlertDialog(
+                              await showOkAlertDialog(
                                 context: context,
                                 title: 'Error',
                                 message: 'Invalid email, password or type of account. Please try again.',
-                                isDestructiveAction: true,
                               );
                             }
                           }

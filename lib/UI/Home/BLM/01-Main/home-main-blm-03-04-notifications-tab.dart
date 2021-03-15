@@ -1,9 +1,10 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-04-home-notifications-tab.dart';
 // import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-10-blm-notification-display.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:timeago/timeago.dart' as timeago;
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
 
 class BLMMainPagesNotifications{
@@ -36,6 +37,12 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
   void initState(){
     super.initState();
     onLoading();
+  }
+
+  Future<void> onRefresh() async{
+    setState(() {
+      onLoading();
+    });
   }
 
   // void onRefresh() async{
@@ -72,10 +79,6 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
       setState(() {});
       page++;
       
-      // refreshController.loadComplete();
-      
-    }else{
-      // refreshController.loadNoData();
     }
   }
 
@@ -86,7 +89,25 @@ class HomeBLMNotificationsTabState extends State<HomeBLMNotificationsTab>{
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? Container()
+      ? RefreshIndicator(
+        onRefresh: onRefresh,
+        child: ListView.separated(
+          physics: ClampingScrollPhysics(),
+          itemCount: count,
+          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          itemBuilder: (c, i) {
+            return MiscBLMNotificationDisplayTemplate(
+              imageIcon: notifications[i].actorImage,
+              postId: notifications[i].postId,
+              notification: notifications[i].action,
+              dateCreated: timeago.format(DateTime.parse(notifications[i].createdAt)),
+              notificationType: notifications[i].notificationType,
+              readStatus: notifications[i].read,
+            );
+          },
+        )
+      )
+      // ? Container()
       // ? SmartRefresher(
       //   enablePullDown: true,
       //   enablePullUp: true,

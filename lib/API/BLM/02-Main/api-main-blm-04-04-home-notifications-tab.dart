@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({required int page}) async{
 
@@ -8,20 +7,25 @@ Future<APIBLMHomeTabNotificationMain> apiBLMHomeNotificationsTab({required int p
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
-  
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/mainpages/notifications/?page=$page',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of feed is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMHomeTabNotificationMain.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMHomeTabNotificationMain.fromJson(newData);
   }else{
     throw Exception('Failed to get the notifications');
   }
@@ -62,14 +66,14 @@ class APIBLMHomeTabNotificationExtended{
 
     return APIBLMHomeTabNotificationExtended(
       homeTabNotificationId: parsedJson['id'],
-      homeTabNotificationCreatedAt: parsedJson['created_at'],
-      homeTabNotificationUpdatedAt: parsedJson['updated_at'],
+      homeTabNotificationCreatedAt: parsedJson['created_at'] != null ? parsedJson['created_at'] : '',
+      homeTabNotificationUpdatedAt: parsedJson['updated_at'] != null ? parsedJson['updated_at'] : '',
       homeTabNotificationRecipientId: parsedJson['recipient_id'],
       homeTabNotificationActor: APIBLMHomeTabNotificationExtendedActor.fromJson(parsedJson['actor']),
       homeTabNotificationRead: parsedJson['read'],
-      homeTabNotificationAction: parsedJson['action'],
+      homeTabNotificationAction: parsedJson['action'] != null ? parsedJson['action'] : '',
       homeTabNotificationPostId: parsedJson['postId'],
-      homeTabNotificationNotificationType: parsedJson['notif_type'],
+      homeTabNotificationNotificationType: parsedJson['notif_type'] != null ? parsedJson['notif_type'] : '',
     );
   }
 }
@@ -84,7 +88,7 @@ class APIBLMHomeTabNotificationExtendedActor{
 
     return APIBLMHomeTabNotificationExtendedActor(
       homeTabNotificationActorId: parsedJson['id'],
-      homeTabNotificationActorImage: parsedJson['image'],
+      homeTabNotificationActorImage: parsedJson['image'] != null ? parsedJson['image'] : '',
     );
   }
 }

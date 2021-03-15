@@ -1,6 +1,9 @@
+
+
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
 
@@ -9,22 +12,25 @@ Future<APIBLMShowProfileInformation> apiBLMShowProfileInformation() async{
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/image_show', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/image_show', 
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
-  print('The status code of user information is ${response.statusCode}');
-  print('The status body of user information is ${response.body}');
+  print('The status code of user is ${response.statusCode}');
+
 
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowProfileInformation.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMShowProfileInformation.fromJson(newData);
   }else{
     throw Exception('Failed to get the user information');
   }

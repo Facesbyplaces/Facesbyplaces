@@ -1,7 +1,6 @@
 import 'package:facesbyplaces/API/BLM/02-Main/api-main-blm-04-02-00-home-memorials-tab.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-03-blm-manage-memorial.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +22,7 @@ class HomeBLMManageTab extends StatefulWidget{
 
 class HomeBLMManageTabState extends State<HomeBLMManageTab>{
 
-  // RefreshController refreshController = RefreshController(initialRefresh: true);
+  ScrollController scrollController = ScrollController();
   List<Widget> finalMemorials = [];
   int blmFamilyItemsRemaining = 1;
   int blmFriendsItemsRemaining = 1;
@@ -38,12 +37,36 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     super.initState();
     addMemorials1();
     onLoading();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        if(blmFamilyItemsRemaining != 0 && memorialFamilyItemsRemaining != 0 && blmFamilyItemsRemaining != 0 && blmFriendsItemsRemaining != 0){
+          setState(() {
+            onLoading();
+          });
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('No more posts to show'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Color(0xff4EC9D4),
+            ),
+          );
+        }
+      }
+    });
   }
 
-  // void onRefresh() async{
-  //   await Future.delayed(Duration(milliseconds: 1000));
-  //   refreshController.refreshCompleted();
-  // }
+  Future<void> onRefresh() async{
+    if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0 && flag1 == false){
+      setState(() {
+        flag1 = true;
+      });
+      onLoading();
+    }else{
+      onLoading();
+    }
+  }
+
 
   void addMemorials1(){
     finalMemorials.add(
@@ -124,12 +147,12 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         );
       }
 
-      if(mounted)
-      setState(() {});
-      page1++;
+      // if(mounted)
+      // setState(() {});
+      // page1++;
     }
 
-    page1 = 1;
+    // page1 = 1;
 
     if(memorialFamilyItemsRemaining != 0){
       context.showLoaderOverlay();
@@ -160,13 +183,17 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
       setState(() {});
       page1++;
 
-      if(memorialFamilyItemsRemaining == 0){
+      // if(memorialFamilyItemsRemaining == 0){
+      //   addMemorials2();
+      //   setState(() {
+      //     flag1 = true;
+      //   });
+      //   onLoading();
+      // } 
+
+      if(blmFamilyItemsRemaining == 0 && memorialFamilyItemsRemaining == 0){
         addMemorials2();
-        setState(() {
-          flag1 = true;
-        });
-        onLoading();
-      } 
+      }
     }
 
     // refreshController.loadComplete();
@@ -200,12 +227,12 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
         );
       }
 
-      if(mounted)
-      setState(() {});
-      page2++;
+      // if(mounted)
+      // setState(() {});
+      // page2++;
     }
 
-    page2 = 1;
+    // page2 = 1;
 
     if(memorialFriendsItemsRemaining != 0){
       context.showLoaderOverlay();
@@ -245,7 +272,18 @@ class HomeBLMManageTabState extends State<HomeBLMManageTab>{
     return Container(
       width: SizeConfig.screenWidth,
       child: count != 0
-      ? Container()
+      ? RefreshIndicator(
+        onRefresh: onRefresh,
+        child: ListView.separated(
+          controller: scrollController,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 0),
+          physics: ClampingScrollPhysics(),
+          itemCount: finalMemorials.length,
+          separatorBuilder: (c, i) => Divider(height: 10, color: Colors.transparent),
+          itemBuilder: (c, i) => finalMemorials[i],
+        )
+      )
+      // ? Container()
       // ? SmartRefresher(
       //   enablePullDown: true,
       //   enablePullUp: true,

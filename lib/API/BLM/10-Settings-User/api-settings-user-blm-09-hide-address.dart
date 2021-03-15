@@ -1,34 +1,56 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiBLMHideAddress({required bool hide}) async{
-
-  bool result = false;
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  try{
-    final http.Response response = await http.put(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideAddress?hide=$hide', ''),
-      headers: <String, String>{
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideAddress?hide=$hide',
+    options: Options(
+      headers: <String, dynamic>{
         'Content-Type': 'application/json',
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       }
-    );
+    ),  
+  );
 
-    if(response.statusCode == 200){
-      result = true;
-    }
-      
-  }catch(e){
-    print('Error in settings hide address: $e');
-    result = false;
+  print('The status code of hide address is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
 
-  return result;
+
+  // try{
+  //   final http.Response response = await http.put(
+  //     Uri.http('http://fbp.dev1.koda.ws/api/v1/users/hideOrUnhideAddress?hide=$hide', ''),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json',
+  //       'access-token': getAccessToken,
+  //       'uid': getUID,
+  //       'client': getClient,
+  //     }
+  //   );
+
+  //   print('The status code of hide address is ${response.statusCode}');
+
+  //   if(response.statusCode == 200){
+  //     result = true;
+  //   }
+      
+  // }catch(e){
+  //   print('Error in settings hide address: $e');
+  //   result = false;
+  // }
+
+  // return result;
 }

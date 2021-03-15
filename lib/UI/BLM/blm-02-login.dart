@@ -1,26 +1,23 @@
-// import 'dart:io';
-// import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
+import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-01-login.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-05-sign-in-with-facebook.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-06-sign-in-with-google.dart';
 import 'package:facesbyplaces/API/BLM/01-Start/api-start-blm-07-sign-in-with-apple.dart';
-// import 'package:facesbyplaces/API/Regular/01-Start/api-start-regular-11-push-notifications.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
-// import '../ui-01-get-started.dart';
 import 'blm-06-password-reset-email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import '../ui-01-get-started.dart';
 
 class BLMLogin extends StatefulWidget{
 
@@ -31,32 +28,6 @@ class BLMLoginState extends State<BLMLogin>{
 
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
-
-  // BranchUniversalObject? buo;
-  // BranchLinkProperties? lp;
-
-  // void initBranchReferences(){
-  //   buo = BranchUniversalObject(
-  //     canonicalIdentifier: 'FacesbyPlaces',
-  //     title: 'FacesbyPlaces Link',
-  //     imageUrl: 'https://i.picsum.photos/id/866/200/300.jpg?hmac=rcadCENKh4rD6MAp6V_ma-AyWv641M4iiOpe1RyFHeI',
-  //     contentDescription: 'FacesbyPlaces link to the app',
-  //     keywords: ['FacesbyPlaces', 'Link', 'App'],
-  //     publiclyIndex: true,
-  //     locallyIndex: true,
-  //     contentMetadata: BranchContentMetaData()
-  //       ..addCustomMetadata('custom_string', 'fbp-link')
-  //       ..addCustomMetadata('reset-type', 'Blm')
-  //   );
-
-  //   lp = BranchLinkProperties(
-  //       channel: 'facebook',
-  //       feature: 'sharing',
-  //       stage: 'new share',
-  //     tags: ['one', 'two', 'three']
-  //   );
-  //   lp!.addControlParam('url', 'https://4n5z1.test-app.link/qtdaGGTx3cb?bnc_validate=true');
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -139,24 +110,11 @@ class BLMLoginState extends State<BLMLogin>{
                                     if(apiResult == true){
                                       Navigator.pushReplacementNamed(context, '/home/blm');
                                     }else{
-                                      // await showDialog(
-                                      //   context: context,
-                                      //   builder: (_) => 
-                                      //     AssetGiffyDialog(
-                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //     title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      //     entryAnimation: EntryAnimation.DEFAULT,
-                                      //     description: Text('Invalid email or password. Please try again.',
-                                      //       textAlign: TextAlign.center,
-                                      //       style: TextStyle(),
-                                      //     ),
-                                      //     onlyOkButton: true,
-                                      //     buttonOkColor: Colors.red,
-                                      //     onOkButtonPressed: () {
-                                      //       Navigator.pop(context, true);
-                                      //     },
-                                      //   )
-                                      // );
+                                      await showOkAlertDialog(
+                                        context: context,
+                                        title: 'Error',
+                                        message: 'Invalid email or password. Please try again.',
+                                      );
                                     }
 
                                   }else{
@@ -206,10 +164,12 @@ class BLMLoginState extends State<BLMLogin>{
                                   fontSize: 14,
                                   fontWeight: FontWeight.w300, 
                                   color: Color(0xff000000),
-                                ), 
+                                ),
+                                width: SizeConfig.screenWidth! / 1.5, 
+                                height: 45,
+                                image: 'assets/icons/google.png',
                                 onPressed: () async{
-
-                                GoogleSignIn googleSignIn = GoogleSignIn(
+                                  GoogleSignIn googleSignIn = GoogleSignIn(
                                     scopes: [
                                       'profile',
                                       'email',
@@ -240,26 +200,12 @@ class BLMLoginState extends State<BLMLogin>{
                                     if(result == true){
                                       Navigator.pushReplacementNamed(context, '/home/blm');
                                     }else{
-                                      // await showDialog(
-                                      //   context: context,
-                                      //   builder: (_) => 
-                                      //     AssetGiffyDialog(
-                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //     title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      //     entryAnimation: EntryAnimation.DEFAULT,
-                                      //     description: Text('Invalid email or password. Please try again.',
-                                      //       textAlign: TextAlign.center,
-                                      //       style: TextStyle(),
-                                      //     ),
-                                      //     onlyOkButton: true,
-                                      //     buttonOkColor: Colors.red,
-                                      //     onOkButtonPressed: () {
-                                      //       Navigator.pop(context, true);
-                                      //     },
-                                      //   )
-                                      // );
+                                      await showOkAlertDialog(
+                                        context: context,
+                                        title: 'Error',
+                                        message: 'Invalid email or password. Please try again.',
+                                      );
                                     }
-
                                   }else{
                                     GoogleSignInAccount? signIn = await googleSignIn.signIn();
                                     GoogleSignInAuthentication? auth = await googleSignIn.currentUser!.authentication;
@@ -278,31 +224,15 @@ class BLMLoginState extends State<BLMLogin>{
                                     if(result == true){
                                       Navigator.pushReplacementNamed(context, '/home/blm');
                                     }else{
-                                      // await showDialog(
-                                      //   context: context,
-                                      //   builder: (_) => 
-                                      //     AssetGiffyDialog(
-                                      //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                      //     title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                      //     entryAnimation: EntryAnimation.DEFAULT,
-                                      //     description: Text('Invalid email or password. Please try again.',
-                                      //       textAlign: TextAlign.center,
-                                      //       style: TextStyle(),
-                                      //     ),
-                                      //     onlyOkButton: true,
-                                      //     buttonOkColor: Colors.red,
-                                      //     onOkButtonPressed: () {
-                                      //       Navigator.pop(context, true);
-                                      //     },
-                                      //   )
-                                      // );
+                                      await showOkAlertDialog(
+                                        context: context,
+                                        title: 'Error',
+                                        message: 'Invalid email or password. Please try again.',
+                                      );
                                     }
                                   }
 
-                                }, 
-                                width: SizeConfig.screenWidth! / 1.5, 
-                                height: 45,
-                                image: 'assets/icons/google.png',
+                                },
                               ),
                             ),
                           ],
@@ -328,24 +258,11 @@ class BLMLoginState extends State<BLMLogin>{
                           if(result == true){
                             Navigator.pushReplacementNamed(context, '/home/blm');
                           }else{
-                            // await showDialog(
-                            //   context: context,
-                            //   builder: (_) => 
-                            //     AssetGiffyDialog(
-                            //     image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //     title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //     entryAnimation: EntryAnimation.DEFAULT,
-                            //     description: Text('Invalid email or password. Please try again.',
-                            //       textAlign: TextAlign.center,
-                            //       style: TextStyle(),
-                            //     ),
-                            //     onlyOkButton: true,
-                            //     buttonOkColor: Colors.red,
-                            //     onOkButtonPressed: () {
-                            //       Navigator.pop(context, true);
-                            //     },
-                            //   )
-                            // );
+                            await showOkAlertDialog(
+                              context: context,
+                              title: 'Error',
+                              message: 'Invalid email or password. Please try again.',
+                            );
                           }
 
                         },
@@ -354,13 +271,37 @@ class BLMLoginState extends State<BLMLogin>{
 
                       SizedBox(height: 40),
 
-                      Center(child: Text('or log in with email', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300, color: Color(0xff000000),),),),
+                      Center(
+                        child: Text(
+                          'or log in with email', 
+                          style: TextStyle(
+                            fontSize: 14, 
+                            fontWeight: FontWeight.w300, 
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
 
-                      Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key1, labelText: 'Email Address', type: TextInputType.emailAddress,),),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0), 
+                        child: MiscBLMInputFieldTemplate(
+                          key: _key1, 
+                          labelText: 'Email Address', 
+                          type: TextInputType.emailAddress,
+                        ),
+                      ),
 
                       SizedBox(height: 20),
 
-                      Padding(padding: EdgeInsets.only(left: 20.0, right: 20.0), child: MiscBLMInputFieldTemplate(key: _key2, labelText: 'Password', type: TextInputType.text, obscureText: true,),),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20.0, right: 20.0), 
+                        child: MiscBLMInputFieldTemplate(
+                          key: _key2, 
+                          labelText: 'Password', 
+                          type: TextInputType.text, 
+                          obscureText: true,
+                        ),
+                      ),
 
                       SizedBox(height: 20),
 
@@ -388,100 +329,53 @@ class BLMLoginState extends State<BLMLogin>{
                           fontSize: 16,
                           fontWeight: FontWeight.bold, 
                           color: Color(0xffffffff),
-                        ), 
+                        ),
+                        width: SizeConfig.screenWidth! / 2, 
+                        height: 45,
+                        buttonColor: Color(0xff4EC9D4),
                         onPressed: () async{
                           bool validEmail = false;
                           validEmail = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(_key1.currentState!.controller.text );
 
                           if(_key1.currentState!.controller.text == '' || _key2.currentState!.controller.text == ''){
-                            await showDialog(
+                            await showOkAlertDialog(
                               context: context,
-                              builder: (_) => 
-                              Container()
-                              //   AssetGiffyDialog(
-                              //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              //   entryAnimation: EntryAnimation.DEFAULT,
-                              //   description: Text('Please complete the form before submitting.',
-                              //     textAlign: TextAlign.center,
-                              //     style: TextStyle(),
-                              //   ),
-                              //   onlyOkButton: true,
-                              //   buttonOkColor: Colors.red,
-                              //   onOkButtonPressed: () {
-                              //     Navigator.pop(context, true);
-                              //   },
-                              // )
+                              title: 'Error',
+                              message: 'Please complete the form before submitting.',
                             );
                           }else if(!validEmail){
-                            await showDialog(
+                            await showOkAlertDialog(
                               context: context,
-                              builder: (_) => 
-                              Container()
-                              //   AssetGiffyDialog(
-                              //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                              //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                              //   entryAnimation: EntryAnimation.DEFAULT,
-                              //   description: Text('Invalid email address. Please try again.',
-                              //     textAlign: TextAlign.center,
-                              //     style: TextStyle(),
-                              //   ),
-                              //   onlyOkButton: true,
-                              //   buttonOkColor: Colors.red,
-                              //   onOkButtonPressed: () {
-                              //     Navigator.pop(context, true);
-                              //   },
-                              // )
+                              title: 'Error',
+                              message: 'Invalid email address. Please try again.',
                             );
                           }else{
+                            context.showLoaderOverlay();
 
-                            // context.showLoaderOverlay();
+                            String deviceToken = '';
+                            final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+                            final pushNotificationService = PushNotificationService(_firebaseMessaging);
+                            pushNotificationService.initialise();
+                            deviceToken = (await pushNotificationService.fcm.getToken())!;
 
-                            // // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-                            // // final pushNotificationService = PushNotificationService(_firebaseMessaging);
-                            // // pushNotificationService.initialise();
-                            // // String deviceToken = await pushNotificationService.fcm.getToken();
-
-                            // String deviceToken = '';
-
-                            // if(Platform.isIOS){
-                            //   final FirebaseMessaging _firebaseMessaging = firebaseMessaging;
-                            //   final pushNotificationService = PushNotificationService(_firebaseMessaging);
-                            //   pushNotificationService.initialise();
-                            //   deviceToken = (await pushNotificationService.fcm.getToken())!;
-                            // }
+                            bool result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
                             
-                            // bool result = await apiBLMLogin(email: _key1.currentState!.controller.text, password: _key2.currentState!.controller.text, deviceToken: deviceToken);
-                            
-                            // context.hideLoaderOverlay();
+                            context.hideLoaderOverlay();
 
-                            // if(result){
-                            //   Navigator.pushReplacementNamed(context, '/home/blm');
-                            // }else{
-                            //   await showDialog(
-                            //     context: context,
-                            //     builder: (_) => 
-                            //       AssetGiffyDialog(
-                            //       image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                            //       title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                            //       entryAnimation: EntryAnimation.DEFAULT,
-                            //       description: Text('Invalid email, password or type of account. Please try again.',
-                            //         textAlign: TextAlign.center,
-                            //         style: TextStyle(),
-                            //       ),
-                            //       onlyOkButton: true,
-                            //       buttonOkColor: Colors.red,
-                            //       onOkButtonPressed: () {
-                            //         Navigator.pop(context, true);
-                            //       },
-                            //     )
-                            //   );
-                            // }
+                            print('The result is $result');
+
+                            if(result){
+                              Navigator.pushReplacementNamed(context, '/home/regular');
+                            }else{
+                              await showOkAlertDialog(
+                                context: context,
+                                title: 'Error',
+                                message: 'Invalid email, password or type of account. Please try again.',
+                              );
+                            }
                           }
-                        }, 
-                        width: SizeConfig.screenWidth! / 2, 
-                        height: 45,
-                        buttonColor: Color(0xff4EC9D4),
+
+                        },
                       ),
 
                       SizedBox(height: 40),

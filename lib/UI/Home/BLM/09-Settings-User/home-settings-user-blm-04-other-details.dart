@@ -10,9 +10,9 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'home-settings-user-blm-01-user-details.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'home-settings-user-01-user-details.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserOtherDetails extends StatefulWidget{
@@ -37,11 +37,11 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
   final bool toggleNumber;
   HomeBLMUserOtherDetailsState({required this.userId, required this.toggleBirthdate, required this.toggleBirthplace, required this.toggleAddress, required this.toggleEmail, required this.toggleNumber});
 
-  // final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
+  final GlobalKey<MiscBLMInputFieldDateTimeTemplateState> _key1 = GlobalKey<MiscBLMInputFieldDateTimeTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key4 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberPickerTemplateState> _key5 = GlobalKey<MiscBLMPhoneNumberPickerTemplateState>();
 
   Future<APIBLMShowOtherDetails>? otherDetails;
   bool toggle1 = false;
@@ -102,7 +102,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          // Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.blmShowOtherDetailsBirthdate,),),
+                          Expanded(child: MiscBLMInputFieldDateTimeTemplate(key: _key1, labelText: 'Birthdate', displayText: details.data!.blmShowOtherDetailsBirthdate,),),
 
                           SizedBox(width: 20,),
 
@@ -198,7 +198,7 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
 
                       Row(
                         children: [
-                          Expanded(child: MiscBLMPhoneNumberTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),),
+                          Expanded(child: MiscBLMPhoneNumberPickerTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.blmShowOtherDetailsPhoneNumber, type: TextInputType.phone),),
 
                           SizedBox(width: 20,),
 
@@ -232,69 +232,53 @@ class HomeBLMUserOtherDetailsState extends State<HomeBLMUserOtherDetails>{
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
 
+                          print('The birthdate is ${details.data!.blmShowOtherDetailsBirthdate}');
+                          print('The birthplace is ${details.data!.blmShowOtherDetailsBirthplace}');
+                          print('The address is ${details.data!.blmShowOtherDetailsAddress}');
+                          print('The email is ${details.data!.blmShowOtherDetailsEmail}');
+                          print('The phoneNumber is ${details.data!.blmShowOtherDetailsPhoneNumber}');
+
+                          print('The birthdate is ${_key1.currentState!.controller.text}');
+                          print('The birthplace is ${_key2.currentState!.controller.text}');
+                          print('The address is ${_key3.currentState!.controller.text}');
+                          print('The email is ${_key4.currentState!.controller.text}');
+                          print('The phoneNumber is ${_key5.currentState!.controller2.text}');
+
                           if(
-                            // details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text ||
+                            details.data!.blmShowOtherDetailsBirthdate != _key1.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsAddress != _key3.currentState!.controller.text ||
                             details.data!.blmShowOtherDetailsEmail != _key4.currentState!.controller.text ||
-                            details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller.text
+                            details.data!.blmShowOtherDetailsPhoneNumber != _key5.currentState!.controller2.text
                           ){
+                            print('test');
+
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
 
                             if(confirmResult){
 
                               context.showLoaderOverlay();
                               bool result = await apiBLMUpdateOtherDetails(
-                                // birthdate: _key1.currentState!.controller.text,
-                                birthdate: '1/1/2021',
+                                birthdate: _key1.currentState!.controller.text,
                                 birthplace: _key2.currentState!.controller.text,
                                 address: _key3.currentState!.controller.text,
                                 email: _key4.currentState!.controller.text,
-                                phoneNumber: _key5.currentState!.controller.text,
+                                phoneNumber: _key5.currentState!.controller2.text,
                               );
                               context.hideLoaderOverlay();
 
                               if(result){
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Successfully updated the other details.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.green,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Success',
+                                  message: 'Successfully updated the other details.',
                                 );
-
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
                               }else{
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Something went wrong. Please try again.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Error',
+                                  message: 'Something went wrong. Please try again.',
                                 );
                               }
                             }

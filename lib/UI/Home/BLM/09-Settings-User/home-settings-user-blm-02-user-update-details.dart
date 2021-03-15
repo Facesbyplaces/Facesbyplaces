@@ -4,10 +4,10 @@ import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-01-blm-input-field.dart'
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-02-blm-dialog.dart';
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-06-blm-button.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'home-settings-user-01-user-details.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
+import 'home-settings-user-blm-01-user-details.dart';
 import 'package:flutter/material.dart';
 
 class HomeBLMUserUpdateDetails extends StatefulWidget{
@@ -24,7 +24,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
   final GlobalKey<MiscBLMInputFieldTemplateState> _key1 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key2 = GlobalKey<MiscBLMInputFieldTemplateState>();
   final GlobalKey<MiscBLMInputFieldTemplateState> _key3 = GlobalKey<MiscBLMInputFieldTemplateState>();
-  final GlobalKey<MiscBLMPhoneNumberTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberTemplateState>();
+  final GlobalKey<MiscBLMPhoneNumberPickerTemplateState> _key4 = GlobalKey<MiscBLMPhoneNumberPickerTemplateState>();
   final GlobalKey<MiscBLMInputFieldSecurityQuestionsState> _key5 = GlobalKey<MiscBLMInputFieldSecurityQuestionsState>();
 
   Future<APIBLMShowAccountDetails>? accountDetails;
@@ -90,7 +90,7 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
 
                       SizedBox(height: 20,),
 
-                      MiscBLMPhoneNumberTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data!.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
+                      MiscBLMPhoneNumberPickerTemplate(key: _key4, labelText: 'Mobile Number', displayText: details.data!.showAccountDetailsPhoneNumber, type: TextInputType.phone, labelTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey)),
 
                       SizedBox(height: 20,),
 
@@ -109,11 +109,12 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                         height: 45,
                         buttonColor: Color(0xff04ECFF),
                         onPressed: () async{
+                          
                           if(
                             details.data!.showAccountDetailsFirstName != _key1.currentState!.controller.text ||
                             details.data!.showAccountDetailsLastName !=  _key2.currentState!.controller.text ||
                             details.data!.showAccountDetailsEmail != _key3.currentState!.controller.text ||
-                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller.text || 
+                            details.data!.showAccountDetailsPhoneNumber != _key4.currentState!.controller2.text || 
                             details.data!.showAccountDetailsQuestion != _key5.currentState!.currentSelection
                           ){
                             bool confirmResult = await showDialog(context: (context), builder: (build) => MiscBLMConfirmDialog(title: 'Confirm', content: 'Do you want to save the changes?', confirmColor_1: Color(0xff04ECFF), confirmColor_2: Color(0xffFF0000),));
@@ -125,51 +126,23 @@ class HomeBLMUserUpdateDetailsState extends State<HomeBLMUserUpdateDetails>{
                                 firstName: _key1.currentState!.controller.text,
                                 lastName: _key2.currentState!.controller.text,
                                 email: _key3.currentState!.controller.text,
-                                phoneNumber: _key4.currentState!.controller.text,
+                                phoneNumber: _key4.currentState!.controller2.text,
                                 question: _key5.currentState!.currentSelection,
                               );
                               context.hideLoaderOverlay();
 
                               if(result){
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Successfully updated the account details.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.green,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Success',
+                                  message: 'Successfully updated the account details.',
                                 );
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeBLMUserProfileDetails(userId: userId,)));
                               }else{
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Something went wrong. Please try again.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Error',
+                                  message: 'Something went wrong. Please try again.',
                                 );
                               }
                             }

@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIBLMShowNotificationStatus> apiBLMShowNotificationStatus({required int userId}) async{
 
@@ -9,21 +8,26 @@ Future<APIBLMShowNotificationStatus> apiBLMShowNotificationStatus({required int 
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/notifications/notifSettingsStatus',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of notification settings is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowNotificationStatus.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMShowNotificationStatus.fromJson(newData);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Failed to get the notification settings');
   }
 }
 

@@ -1,5 +1,5 @@
 // import 'package:facesbyplaces/UI/Home/BLM/02-View-Memorial/home-view-memorial-blm-02-profile-memorial.dart';
-import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-01-user-details.dart';
+import 'package:facesbyplaces/UI/Home/BLM/09-Settings-User/home-settings-user-blm-01-user-details.dart';
 import 'package:facesbyplaces/UI/Home/BLM/10-Settings-Notifications/home-settings-notifications-blm-01-notification-settings.dart';
 // import 'package:facesbyplaces/UI/Home/BLM/11-Show-Post/home-show-post-blm-01-show-original-post-comments.dart';
 // import 'package:facesbyplaces/UI/Home/Regular/02-View-Memorial/home-view-memorial-regular-02-profile-memorial.dart';
@@ -12,6 +12,7 @@ import 'package:facesbyplaces/API/BLM/14-Notifications/api-notifications-blm-02-
 import 'package:facesbyplaces/UI/Miscellaneous/BLM/misc-07-blm-background.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 // import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -228,8 +229,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        // Icon(MdiIcons.fire,),
-                        Icon(Icons.fireplace),
+                        Icon(MdiIcons.fire,),
+                        // Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Feed', style: TextStyle(fontSize: 12,),),
                       ],
@@ -240,8 +241,8 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        // Icon(MdiIcons.graveStone),
-                        Icon(Icons.fireplace),
+                        Icon(MdiIcons.graveStone),
+                        // Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Memorials', style: TextStyle(fontSize: 12,),),
                       ],
@@ -252,29 +253,56 @@ class HomeBLMScreenExtendedState extends State<HomeBLMScreenExtended>{
                     width: SizeConfig.screenWidth! / 4,
                     child: Column(
                       children: [
-                        // Icon(MdiIcons.post),
-                        Icon(Icons.fireplace),
+                        Icon(MdiIcons.post),
+                        // Icon(Icons.fireplace),
                         SizedBox(height: 5),
                         Text('Post', style: TextStyle(fontSize: 12,),),
                       ],
                     ),
                   ),
 
+                  // Container(
+                  //   width: SizeConfig.screenWidth! / 4,
+                  //   child: Column(
+                  //     children: [
+                  //       Icon(Icons.fireplace),
+                  //       // Badge(
+                  //       //   position: BadgePosition.topEnd(top: 0, end: -10),
+                  //       //   animationDuration: Duration(milliseconds: 300),
+                  //       //   animationType: BadgeAnimationType.fade,
+                  //       //   badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
+                  //       //   badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
+                  //       //   child: Icon(MdiIcons.heart),
+                  //       // ),
+                  //       SizedBox(height: 5),
+                  //       Text('Notification', style: TextStyle(fontSize: 12,),),
+                  //     ],
+                  //   ),
+                  // ),
+
                   Container(
                     width: SizeConfig.screenWidth! / 4,
-                    child: Column(
+                    child: Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Icon(Icons.fireplace),
-                        // Badge(
-                        //   position: BadgePosition.topEnd(top: 0, end: -10),
-                        //   animationDuration: Duration(milliseconds: 300),
-                        //   animationType: BadgeAnimationType.fade,
-                        //   badgeColor: unreadNotifications == 0 ? Color(0xff888888) : Colors.red,
-                        //   badgeContent: unreadNotifications >= 10 ? Text('10+', style: TextStyle(color: Colors.white, fontSize: 10),) : Text('$unreadNotifications', style: TextStyle(color: Colors.white, fontSize: 12),),
-                        //   child: Icon(MdiIcons.heart),
-                        // ),
-                        SizedBox(height: 5),
-                        Text('Notification', style: TextStyle(fontSize: 12,),),
+                        Column(
+                          children: <Widget>[
+                            Icon(MdiIcons.heart),
+                            SizedBox(height: 5),
+                            Text('Notification', style: TextStyle(fontSize: 12,),),
+                          ],
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 20,
+                          child: CircleAvatar(
+                            radius: 12,
+                            backgroundColor: Colors.red,
+                            child: Text(unreadNotifications > 99 ? '99+' : '$unreadNotifications', 
+                              style: TextStyle(color: Color(0xffffffff), fontSize: 12),
+                            )
+                          ),
+                        )
                       ],
                     ),
                   ),

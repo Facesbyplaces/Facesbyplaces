@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 
 Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({required int userId}) async{
 
@@ -9,22 +8,44 @@ Future<APIBLMShowAccountDetails> apiBLMShowAccountDetails({required int userId})
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  final http.Response response = await http.get(
-    Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1', ''),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'access-token': getAccessToken,
-      'uid': getUID,
-      'client': getClient,
-    }
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.get('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1',
+    options: Options(
+      headers: <String, dynamic>{
+        'Content-Type': 'application/json',
+        'access-token': getAccessToken,
+        'uid': getUID,
+        'client': getClient,
+      }
+    ),  
   );
 
+  print('The status code of user is ${response.statusCode}');
+
   if(response.statusCode == 200){
-    var newValue = json.decode(response.body);
-    return APIBLMShowAccountDetails.fromJson(newValue);
+    var newData = Map<String, dynamic>.from(response.data);
+    return APIBLMShowAccountDetails.fromJson(newData);
   }else{
-    throw Exception('Failed to get the post');
+    throw Exception('Failed to get the account details');
   }
+
+  // final http.Response response = await http.get(
+  //   Uri.http('http://fbp.dev1.koda.ws/api/v1/users/getDetails?user_id=$userId&account_type=1', ''),
+  //   headers: <String, String>{
+  //     'Content-Type': 'application/json',
+  //     'access-token': getAccessToken,
+  //     'uid': getUID,
+  //     'client': getClient,
+  //   }
+  // );
+
+  // if(response.statusCode == 200){
+  //   var newValue = json.decode(response.body);
+  //   return APIBLMShowAccountDetails.fromJson(newValue);
+  // }else{
+  //   throw Exception('Failed to get the post');
+  // }
 }
 
 class APIBLMShowAccountDetails{
@@ -38,11 +59,11 @@ class APIBLMShowAccountDetails{
 
   factory APIBLMShowAccountDetails.fromJson(Map<String, dynamic> parsedJson){
     return APIBLMShowAccountDetails(
-      showAccountDetailsFirstName: parsedJson['first_name'],
-      showAccountDetailsLastName: parsedJson['last_name'],
-      showAccountDetailsEmail: parsedJson['email'],
-      showAccountDetailsPhoneNumber: parsedJson['phone_number'],
-      showAccountDetailsQuestion: parsedJson['question'],
+      showAccountDetailsFirstName: parsedJson['first_name'] != null ? parsedJson['first_name'] : '',
+      showAccountDetailsLastName: parsedJson['last_name'] != null ? parsedJson['last_name'] : '',
+      showAccountDetailsEmail: parsedJson['email'] != null ? parsedJson['email'] : '',
+      showAccountDetailsPhoneNumber: parsedJson['phone_number'] != null ? parsedJson['phone_number'] : '',
+      showAccountDetailsQuestion: parsedJson['question'] != null ? parsedJson['question'] : '',
     );
   }
 }

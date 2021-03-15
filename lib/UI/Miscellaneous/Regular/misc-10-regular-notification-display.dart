@@ -48,10 +48,14 @@ class MiscRegularNotificationDisplayTemplate extends StatelessWidget{
           Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularShowOriginalPostComments(postId: postId)));
         }
       },
-      leading: CircleAvatar(
+      leading: imageIcon != ''
+      ? CircleAvatar(
         backgroundColor: Color(0xff888888), 
-        // backgroundImage: imageIcon != null && imageIcon != '' ? NetworkImage(imageIcon) : AssetImage('assets/icons/app-icon.png'),
         backgroundImage: NetworkImage(imageIcon),
+      )
+      : CircleAvatar(
+        backgroundColor: Color(0xff888888), 
+        backgroundImage: AssetImage('assets/icons/app-icon.png'),
       ),
       title: Text(notification, style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),),
       subtitle: Text(dateCreated),

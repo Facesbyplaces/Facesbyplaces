@@ -1,34 +1,30 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 Future<bool> apiBLMUpdateNotificationAddAdmin({required bool hide}) async{
-
-  bool result = false;
 
   final sharedPrefs = await SharedPreferences.getInstance();
   String getAccessToken = sharedPrefs.getString('blm-access-token') ?? 'empty';
   String getUID = sharedPrefs.getString('blm-uid') ?? 'empty';
   String getClient = sharedPrefs.getString('blm-client') ?? 'empty';
 
-  try{
-    final http.Response response = await http.put(
-      Uri.http('http://fbp.dev1.koda.ws/api/v1/notifications/addAdmin?setting=$hide', ''),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
+  Dio dioRequest = Dio();
+
+  var response = await dioRequest.put('http://fbp.dev1.koda.ws/api/v1/notifications/addAdmin?setting=$hide',
+    options: Options(
+      headers: <String, dynamic>{
         'access-token': getAccessToken,
         'uid': getUID,
         'client': getClient,
       }
-    );
+    ),  
+  );
 
-    if(response.statusCode == 200){
-      result = true;
-    }
-      
-  }catch(e){
-    print('Error in notification update add admin: $e');
-    result = false;
+  print('The status code of update notification 7 is ${response.statusCode}');
+
+  if(response.statusCode == 200){
+    return true;
+  }else{
+    return false;
   }
-
-  return result;
 }

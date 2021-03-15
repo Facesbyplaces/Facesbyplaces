@@ -45,7 +45,7 @@ class MiscRegularInputFieldTemplateState extends State<MiscRegularInputFieldTemp
 
   MiscRegularInputFieldTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: '');
 
   void initState(){
     super.initState();
@@ -113,7 +113,7 @@ class MiscRegularPhoneNumberTemplateState extends State<MiscRegularPhoneNumberTe
 
   MiscRegularPhoneNumberTemplateState({required this.labelText, required this.labelTextStyle, required this.obscureText, required this.type, required this.maxLines, required this.readOnly, required this.includeSuffixIcon, required this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: '');
   bool valid = false;
 
   void initState(){
@@ -204,7 +204,7 @@ class MiscRegularInputFieldMultiTextTemplateState extends State<MiscRegularInput
 
   MiscRegularInputFieldMultiTextTemplateState({required this.labelText, required this.labelTextStyle, required this.type, required this.maxLines, required this.readOnly, required this.backgroundColor});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +269,7 @@ class MiscRegularInputFieldMultiTextPostTemplateState extends State<MiscRegularI
 
   MiscRegularInputFieldMultiTextPostTemplateState({required this.labelText, required this.labelTextStyle, required this.type, required this.maxLines, required this.readOnly, required this.backgroundColor});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -455,7 +455,7 @@ class MiscRegularInputFieldDateTimeTemplateState extends State<MiscRegularInputF
 
   MiscRegularInputFieldDateTimeTemplateState({required this.labelText, required this.dateTimePickerType, required this.displayText});
 
-  TextEditingController controller = TextEditingController();
+  TextEditingController controller = TextEditingController(text: '');
 
   void initState(){
     super.initState();

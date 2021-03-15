@@ -11,8 +11,8 @@ import 'package:facesbyplaces/UI/Miscellaneous/Regular/misc-02-regular-dialog.da
 import 'package:facesbyplaces/Configurations/size_configuration.dart';
 import 'home-settings-user-regular-01-user-details.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-// import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeRegularUserOtherDetails extends StatefulWidget{
@@ -197,7 +197,6 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
 
                       Row(
                         children: [
-                          // MiscRegularPhoneNumberPickerTemplate(key: _key4, labelText: 'Phone Number', displayText: details.data!.showAccountDetailsPhoneNumber,),
                           Expanded(child: MiscRegularPhoneNumberPickerTemplate(key: _key5, labelText: 'Contact Number', displayText: details.data!.showOtherDetailsPhoneNumber, type: TextInputType.phone),),
 
                           SizedBox(height: 20,),
@@ -230,7 +229,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                         onPressed: () async{
 
                           if(
-                            // details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
+                            details.data!.showOtherDetailsBirthdate != _key1.currentState!.controller.text ||
                             details.data!.showOtherDetailsBirthplace !=  _key2.currentState!.controller.text ||
                             details.data!.showOtherDetailsAddress != _key3.currentState!.controller.text ||
                             details.data!.showOtherDetailsEmail != _key4.currentState!.controller.text ||
@@ -242,8 +241,7 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                               context.showLoaderOverlay();
 
                               bool result = await apiRegularUpdateOtherDetails(
-                                // birthdate: _key1.currentState!.controller.text,
-                                birthdate: '1/1/2021',
+                                birthdate: _key1.currentState!.controller.text,
                                 birthplace: _key2.currentState!.controller.text,
                                 address: _key3.currentState!.controller.text,
                                 email: _key4.currentState!.controller.text,
@@ -253,45 +251,17 @@ class HomeRegularUserOtherDetailsState extends State<HomeRegularUserOtherDetails
                               context.hideLoaderOverlay();
 
                               if(result){
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Success', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Successfully updated the other details.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.green,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Success',
+                                  message: 'Successfully updated the other details.',
                                 );
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomeRegularUserProfileDetails(userId: userId,)));
                               }else{
-                                await showDialog(
+                                await showOkAlertDialog(
                                   context: context,
-                                  builder: (_) => 
-                                  Container()
-                                  //   AssetGiffyDialog(
-                                  //   image: Image.asset('assets/icons/cover-icon.png', fit: BoxFit.cover,),
-                                  //   title: Text('Error', textAlign: TextAlign.center, style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),),
-                                  //   entryAnimation: EntryAnimation.DEFAULT,
-                                  //   description: Text('Something went wrong. Please try again.',
-                                  //     textAlign: TextAlign.center,
-                                  //     style: TextStyle(),
-                                  //   ),
-                                  //   onlyOkButton: true,
-                                  //   buttonOkColor: Colors.red,
-                                  //   onOkButtonPressed: () {
-                                  //     Navigator.pop(context, true);
-                                  //   },
-                                  // )
+                                  title: 'Error',
+                                  message: 'Something went wrong. Please try again.',
                                 );
                               }
                             }
