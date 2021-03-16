@@ -6,12 +6,14 @@ import { AuthReducer } from "../redux/reducers/AuthReducer";
 import { TabReducer } from "./reducers/TabReducer";
 import { MemorialTabReducer } from "./reducers/MemorialTabReducer";
 import { PostTabReducer } from "./reducers/PostTabReducer";
+import { ReportTabReducer } from "./reducers/ReportTabReducer";
 
 const rootReducer = combineReducers({
   auth_data: AuthReducer,
   tab: TabReducer,
   memorialTab: MemorialTabReducer,
   postTab: PostTabReducer,
+  reportTab: ReportTabReducer,
 });
 
 const store = createStore(

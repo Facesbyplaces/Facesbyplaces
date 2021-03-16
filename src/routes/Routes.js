@@ -15,6 +15,7 @@ import { Home } from "../components/Home";
 import UserDashboard from "../components/Content/UserDashboard/UserDashboard";
 import MemorialDashboard from "../components/Content/MemorialDashboard/MemorialDashboard";
 import PostDashboard from "../components/Content/PostDashboard/PostDashboard";
+import ReportDashboard from "../components/Content/ReportDashboard/ReportDashboard";
 
 export const Routes = withRouter(({ history }) => {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ export const Routes = withRouter(({ history }) => {
             <Route exact path="/users" component={UserDashboard} />
             <Route exact path="/memorials" component={MemorialDashboard} />
             <Route exact path="/posts" component={PostDashboard} />
+            <Route exact path="/reports" component={ReportDashboard} />
           </>
         ) : (
           <Redirect to="/admin" />

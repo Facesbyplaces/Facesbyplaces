@@ -155,7 +155,6 @@ export default function EditPost() {
   });
 
   // Form Data Handlers
-
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };

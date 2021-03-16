@@ -144,8 +144,8 @@ export default function AddMemorial() {
     axios
       .get(`/api/v1/admin/users/selection`)
       .then((response) => {
-        setUsers(response.data.user);
-        console.log("Response: ", response.data.user);
+        setUsers(response.data.users);
+        console.log("Response: ", response.data.users);
       })
       .catch((error) => {
         console.log(error.response);

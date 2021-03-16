@@ -44,6 +44,11 @@ export default function Navbar() {
                   <i className="menu-arrow" />
                 </a>
               </li>
+              <li className="menu-item menu-item-submenu" aria-haspopup="true">
+                <a href="/reports" className="menu-link">
+                  <span className="menu-text">Reports</span>
+                </a>
+              </li>
             </ul>
             {/*end::Header Nav*/}
           </div>

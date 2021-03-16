@@ -122,3 +122,38 @@ export const TablePostAction = () => {
     type: "TABLE_POST",
   };
 };
+
+// REPORT
+export const DeleteReportAction = (report) => {
+  return {
+    type: "DELETE_REPORT",
+    data: report,
+  };
+};
+
+export const ViewReportAction = (report) => {
+  return {
+    type: "VIEW_REPORT",
+    data: report,
+  };
+};
+
+export const EditReportAction = (report) => {
+  return {
+    type: "EDIT_REPORT",
+    data: report,
+  };
+};
+
+export const AddReportAction = (option) => {
+  return {
+    type: "ADD_REPORT",
+    data: option,
+  };
+};
+
+export const TableReportAction = () => {
+  return {
+    type: "TABLE_REPORT",
+  };
+};

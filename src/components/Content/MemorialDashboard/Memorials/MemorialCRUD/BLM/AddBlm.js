@@ -158,22 +158,15 @@ export default function EditMemorial() {
   };
 
   useEffect(() => {
-    const u = [];
-    for (var i = 1; i < 11; i++) {
-      axios
-        .get(`/api/v1/admin/users`, { params: { page: i } })
-        .then((response) => {
-          u.push(response.data.users);
-          u.map((users) =>
-            users.length != 0 ? setUsers(users) : console.log("Empty array")
-          );
-          console.log(u);
-          console.log("Response: ", response.data.users);
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    }
+    axios
+      .get(`/api/v1/admin/users/selection`)
+      .then((response) => {
+        setUsers(response.data.users);
+        console.log("Response: ", response.data.users);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   }, [users.id]);
 
   const renderedUsers = users.map((user) =>

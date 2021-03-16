@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { AddPostAction } from "../../../../../redux/actions";
+import { AddReportAction } from "../../../../../redux/actions";
 
 export default function Header({ pageType }) {
   const dispatch = useDispatch();
@@ -9,16 +9,16 @@ export default function Header({ pageType }) {
   const handleAddClick = (option) => {
     console.log(option);
     const type = pageType;
-    dispatch(AddPostAction({ option, type }));
+    dispatch(AddReportAction({ option, type }));
   };
 
   return (
     <div className="card-header flex-wrap border-0 pt-6 pb-0">
       <div className="card-title">
         <h3 className="card-label">
-          Posts Datatable
+          Reports Datatable
           <span className="d-block text-muted pt-2 font-size-sm">
-            List of ALM and BLM Memorial posts
+            List of ALM, BLM memorials' and Posts' reports.
           </span>
         </h3>
       </div>
@@ -26,7 +26,6 @@ export default function Header({ pageType }) {
         {/*begin::Button*/}
         <a
           className="btn btn-primary font-weight-bolder"
-          style={{ width: "167px" }}
           onClick={() => handleAddClick("a")}
         >
           <span className="svg-icon svg-icon-md">
@@ -51,7 +50,7 @@ export default function Header({ pageType }) {
             </svg>
             {/*end::Svg Icon*/}
           </span>
-          Create Post
+          Create Report
         </a>
         {/*end::Button*/}
       </div>
